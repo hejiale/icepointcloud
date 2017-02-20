@@ -1,0 +1,1 @@
+../../../SNWeChatSDK/SDK/WechatAuthSDK.h

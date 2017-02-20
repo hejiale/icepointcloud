@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="IPCFilterGlassesView">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EnB-PJ-DfA">
+                    <rect key="frame" x="538" y="0.0" width="230" height="1024"/>
+                    <subviews>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="cse-oY-n5d">
+                            <rect key="frame" x="0.0" y="0.0" width="230" height="1024"/>
+                            <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.098099512411347511" colorSpace="custom" customColorSpace="sRGB"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ltz-nq-egs">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="iN0-l3-epB" id="3Tr-ts-Gsz"/>
+                                <outlet property="delegate" destination="iN0-l3-epB" id="uzd-D5-dNO"/>
+                            </connections>
+                        </collectionView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="cse-oY-n5d" firstAttribute="top" secondItem="EnB-PJ-DfA" secondAttribute="top" id="5SW-i2-8ZD"/>
+                        <constraint firstAttribute="bottom" secondItem="cse-oY-n5d" secondAttribute="bottom" id="8az-4O-vdl"/>
+                        <constraint firstItem="cse-oY-n5d" firstAttribute="leading" secondItem="EnB-PJ-DfA" secondAttribute="leading" id="E7X-ou-LEg"/>
+                        <constraint firstAttribute="trailing" secondItem="cse-oY-n5d" secondAttribute="trailing" id="cgF-s0-MoN"/>
+                        <constraint firstAttribute="width" constant="230" id="sSd-4b-KQ2"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="EnB-PJ-DfA" secondAttribute="bottom" id="HLv-Ye-akM"/>
+                <constraint firstItem="EnB-PJ-DfA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="aLy-VQ-kqF"/>
+                <constraint firstAttribute="trailing" secondItem="EnB-PJ-DfA" secondAttribute="trailing" id="cKl-p3-jPJ"/>
+                <constraint firstItem="EnB-PJ-DfA" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" multiplier="1.5" id="gkr-FQ-c7d"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="gkr-FQ-c7d"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="leftBgView" destination="sw4-f6-kIX" id="cEN-6a-y3L"/>
+                <outlet property="leftClassTableView" destination="Vfz-O4-C6R" id="pjt-3x-M4z"/>
+                <outlet property="rightValueCollectionView" destination="cse-oY-n5d" id="NLK-Qt-9y3"/>
+                <outlet property="rightView" destination="EnB-PJ-DfA" id="NBM-mK-bQh"/>
+            </connections>
+            <point key="canvasLocation" x="443" y="-68"/>
+        </view>
+        <view contentMode="scaleToFill" id="sw4-f6-kIX">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vfz-O4-C6R">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="U29-q3-XRW"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="aQJ-Kw-kXE"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Vfz-O4-C6R" secondAttribute="trailing" id="1WU-QT-wVX"/>
+                <constraint firstItem="Vfz-O4-C6R" firstAttribute="leading" secondItem="sw4-f6-kIX" secondAttribute="leading" id="TkI-gf-Lo3"/>
+                <constraint firstAttribute="bottom" secondItem="Vfz-O4-C6R" secondAttribute="bottom" id="tmz-wO-vev"/>
+                <constraint firstItem="Vfz-O4-C6R" firstAttribute="top" secondItem="sw4-f6-kIX" secondAttribute="top" id="xAw-LW-HYy"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="1127" y="-68"/>
+        </view>
+    </objects>
+</document>

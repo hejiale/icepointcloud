@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCEmptyAlertView">
+            <connections>
+                <outlet property="alertImageView" destination="wmF-zk-e89" id="w1x-JN-Ohh"/>
+                <outlet property="alertLabel" destination="ae5-RC-kBz" id="Ukp-7f-gjE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-zk-e89">
+                    <rect key="frame" x="225" y="225" width="150" height="150"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="150" id="UNY-dB-ODD"/>
+                        <constraint firstAttribute="width" constant="150" id="ubT-Dr-5Kk"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ae5-RC-kBz">
+                    <rect key="frame" x="0.0" y="380" width="600" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="4Px-97-HDz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wmF-zk-e89" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="0hV-3L-drv"/>
+                <constraint firstItem="ae5-RC-kBz" firstAttribute="top" secondItem="wmF-zk-e89" secondAttribute="bottom" constant="5" id="MfX-Bq-XbN"/>
+                <constraint firstItem="wmF-zk-e89" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="c0g-YI-nay"/>
+                <constraint firstAttribute="trailing" secondItem="ae5-RC-kBz" secondAttribute="trailing" id="eKP-Mi-rzE"/>
+                <constraint firstItem="wmF-zk-e89" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="kOy-AG-s1G"/>
+                <constraint firstItem="wmF-zk-e89" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="mde-sc-cTM"/>
+                <constraint firstItem="ae5-RC-kBz" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vOS-a3-I7z"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="0hV-3L-drv"/>
+                    <exclude reference="c0g-YI-nay"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

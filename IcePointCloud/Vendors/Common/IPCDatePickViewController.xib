@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCDatePickViewController">
+            <connections>
+                <outlet property="datePickerView" destination="sdW-2y-AJH" id="0gm-6A-tva"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <datePicker contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="sdW-2y-AJH">
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <date key="date" timeIntervalSinceReferenceDate="490851883.45254701">
+                        <!--2016-07-22 03:44:43 +0000-->
+                    </date>
+                </datePicker>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eef-Ui-LEt">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Rjv-ah-9bO"/>
+                    </constraints>
+                    <items>
+                        <barButtonItem title="返回" id="cgD-4r-njA">
+                            <connections>
+                                <action selector="cancelAction:" destination="-1" id="pkO-LR-3dk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem systemItem="flexibleSpace" id="Xwu-dd-Th0"/>
+                        <barButtonItem title="保存" id="nFc-Ud-mY3">
+                            <connections>
+                                <action selector="saveAction:" destination="-1" id="7WD-v2-MUD"/>
+                            </connections>
+                        </barButtonItem>
+                    </items>
+                </toolbar>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="sdW-2y-AJH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="8x9-fi-J4e"/>
+                <constraint firstAttribute="bottom" secondItem="sdW-2y-AJH" secondAttribute="bottom" id="Bpv-K9-de4"/>
+                <constraint firstItem="sdW-2y-AJH" firstAttribute="top" secondItem="eef-Ui-LEt" secondAttribute="bottom" id="FBc-Ih-cnn"/>
+                <constraint firstAttribute="trailing" secondItem="sdW-2y-AJH" secondAttribute="trailing" id="YJT-Ux-59n"/>
+                <constraint firstAttribute="trailing" secondItem="eef-Ui-LEt" secondAttribute="trailing" id="baZ-tQ-niv"/>
+                <constraint firstItem="eef-Ui-LEt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pNZ-B2-7nO"/>
+                <constraint firstItem="sdW-2y-AJH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="phO-QU-Xe2"/>
+                <constraint firstItem="eef-Ui-LEt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vhQ-Z6-0p8"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="8x9-fi-J4e"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>

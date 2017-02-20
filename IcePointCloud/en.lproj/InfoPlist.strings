@@ -1,0 +1,11 @@
+/* Localized versions of Info.plist keys */
+
+
+"ErrorFaceImage"="Face feature was detected, please select a new photo";
+"Icepointcloud"="Icepointcloud";
+"EmptyCustomer"="No search to the relevant customer information!";
+"ClearSearchButton"="Remove search history";
+"NullResults"="No results";
+"EndLoad"="All loaded!";
+"ErrorSphCyl"="Please select a mirror ball and cylindrical lens parameters specifications";
+"ErrorNetwork"="Connect to the server is unusual, please try again later!";

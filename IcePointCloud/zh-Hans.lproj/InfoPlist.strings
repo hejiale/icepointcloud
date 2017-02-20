@@ -1,0 +1,11 @@
+/* Localized versions of Info.plist keys */
+
+
+"ErrorFaceImage"="未检测到人脸特征,请重新选取新的照片";
+"Icepointcloud"="冰点云";
+"EmptyCustomer"="未搜索到相关客户信息!";
+"ClearSearchButton"="清除搜索历史记录";
+"NullResults"="暂无结果";
+"EndLoad"="全部加载完成!";
+"ErrorSphCyl"="请选择球镜参数和柱镜参数规格";
+"ErrorNetwork"="连接服务器异常,请稍后重试!";

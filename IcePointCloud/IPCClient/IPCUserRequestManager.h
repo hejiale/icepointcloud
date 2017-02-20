@@ -1,0 +1,63 @@
+//
+//  IPCUserRequestManager.h
+//  IcePointCloud
+//
+//  Created by mac on 2016/12/30.
+//  Copyright © 2016年 Doray. All rights reserved.
+//
+
+#import "IPCRequestManager.h"
+
+@interface IPCUserRequestManager : IPCRequestManager
+
+/**
+ *  LOGIN
+ *
+ *  @param userName
+ *  @param password
+ *  @param success
+ *  @param failure
+ */
++ (void)userLoginWithUserName:(NSString *)userName
+                     Password:(NSString *)password
+                 SuccessBlock:(void (^)(id responseValue))success
+                 FailureBlock:(void (^)(NSError * error))failure;
+
+/**
+ *  LOGOUT
+ *
+ *  @param success
+ *  @param failure
+ */
++ (void)userLogoutWithSuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ *  UPDATE USER INFO
+ *
+ *  @param userName
+ *  @param phone
+ *  @param isUserName
+ *  @param success
+ *  @param failure
+ */
++ (void)updatePersonInfoWithUserName:(NSString *)userName
+                               Phone:(NSString *)phone
+                        SuccessBlock:(void (^)(id responseValue))success
+                        FailureBlock:(void (^)(NSError * error))failure;
+
+/**
+ *  UPDATE PASSWORD
+ *
+ *  @param oldPassword
+ *  @param updatePassword
+ *  @param success
+ *  @param failure
+ */
++ (void)updatePasswordWithOldPassword:(NSString *)oldPassword
+                       UpdatePassword:(NSString *)updatePassword
+                         SuccessBlock:(void (^)(id responseValue))success
+                         FailureBlock:(void (^)(NSError * error))failure;
+
+@end

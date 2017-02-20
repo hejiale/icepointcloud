@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="158" id="KGk-i7-Jjw" customClass="IPCHistoryOptometryCell">
+            <rect key="frame" x="0.0" y="0.0" width="578" height="158"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="578" height="157.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxh-Ml-ewc">
+                        <rect key="frame" x="230" y="114.5" width="300" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="fe6-tO-lfo"/>
+                            <constraint firstAttribute="width" constant="300" id="ieP-2m-FgQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s0C-4m-poJ">
+                        <rect key="frame" x="48" y="54" width="50" height="50"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="IRc-r9-LIx"/>
+                            <constraint firstAttribute="width" constant="50" id="bY2-1g-w8u"/>
+                        </constraints>
+                        <state key="normal" image="icon_choose_disable"/>
+                        <state key="selected" image="icon_choose"/>
+                        <connections>
+                            <action selector="selectOptometryAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YHw-8U-chv"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="s0C-4m-poJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hbs-Le-lZs"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Sxh-Ml-ewc" secondAttribute="bottom" constant="15" id="jKg-xm-wdC"/>
+                    <constraint firstItem="s0C-4m-poJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="kLr-1g-aQ5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Sxh-Ml-ewc" secondAttribute="trailing" constant="40" id="yXt-Up-ID6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLabel" destination="Sxh-Ml-ewc" id="KE1-hg-fRy"/>
+                <outlet property="selectButton" destination="s0C-4m-poJ" id="Pys-AS-Vpu"/>
+            </connections>
+            <point key="canvasLocation" x="584" y="436"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_choose" width="22" height="22"/>
+        <image name="icon_choose_disable" width="22" height="22"/>
+    </resources>
+</document>

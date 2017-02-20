@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" contentMode="scaleToFill" reuseIdentifier="GlasslistCollectionViewCellIdentifier" id="gTV-IL-0wX" customClass="IPCGlasslistCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="331" height="250"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="331" height="250"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba3-fr-oCi">
+                        <rect key="frame" x="285" y="209" width="26" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="Qs7-Ib-VDz"/>
+                            <constraint firstAttribute="width" constant="26" id="aEo-us-EKZ"/>
+                        </constraints>
+                        <state key="normal" image="icon_add">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="icon_add"/>
+                        <connections>
+                            <action selector="addCartAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="5n1-87-ure"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3223" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjp-2f-ED0">
+                        <rect key="frame" x="20" y="215" width="60" height="15"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="7NU-XB-VpP"/>
+                            <constraint firstAttribute="height" constant="15" id="mUc-Sk-2ne"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT7-2e-guu">
+                        <rect key="frame" x="265" y="209" width="20" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="26" id="8cT-RG-PTz"/>
+                            <constraint firstAttribute="width" constant="20" id="esf-lJ-bek"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-Dd-6ZV">
+                        <rect key="frame" x="285" y="209" width="26" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="DmV-gM-bWp"/>
+                            <constraint firstAttribute="height" constant="26" id="Phb-1Z-q5J"/>
+                        </constraints>
+                        <state key="normal" image="icon_subtract">
+                            <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected" image="icon_subtract"/>
+                        <connections>
+                            <action selector="reduceCartAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="4ur-Hi-Ken"/>
+                        </connections>
+                    </button>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3A-bO-jTo">
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="140"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="140" id="o8X-Td-61a"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="vMo-SC-ueA"/>
+                        </connections>
+                    </scrollView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIP-c3-VGM">
+                        <rect key="frame" x="20" y="140" width="291" height="20"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Djy-mQ-nGY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="YIP-c3-VGM" firstAttribute="top" secondItem="I3A-bO-jTo" secondAttribute="bottom" id="4nU-u2-vOT"/>
+                <constraint firstItem="I3A-bO-jTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BoE-Nq-Ma9"/>
+                <constraint firstAttribute="trailing" secondItem="ba3-fr-oCi" secondAttribute="trailing" constant="20" id="Cge-ga-qXG"/>
+                <constraint firstAttribute="bottom" secondItem="tjp-2f-ED0" secondAttribute="bottom" constant="20" id="H0O-nV-rGF"/>
+                <constraint firstItem="tjp-2f-ED0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="H6Z-Kn-5Ia"/>
+                <constraint firstItem="ba3-fr-oCi" firstAttribute="leading" secondItem="zT7-2e-guu" secondAttribute="trailing" id="MBC-eJ-21E"/>
+                <constraint firstItem="ldI-Dd-6ZV" firstAttribute="leading" secondItem="zT7-2e-guu" secondAttribute="trailing" id="Q9P-sh-bPh"/>
+                <constraint firstAttribute="bottom" secondItem="ba3-fr-oCi" secondAttribute="bottom" constant="15" id="QCn-kz-KUH"/>
+                <constraint firstAttribute="bottom" secondItem="zT7-2e-guu" secondAttribute="bottom" constant="15" id="WCo-kU-arb"/>
+                <constraint firstItem="I3A-bO-jTo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WZJ-Kx-dWK"/>
+                <constraint firstAttribute="bottom" secondItem="ldI-Dd-6ZV" secondAttribute="bottom" constant="15" id="ciU-CD-im0"/>
+                <constraint firstAttribute="trailing" secondItem="YIP-c3-VGM" secondAttribute="trailing" constant="20" id="lw4-Ug-Hey"/>
+                <constraint firstAttribute="trailing" secondItem="I3A-bO-jTo" secondAttribute="trailing" id="q9T-N1-BqF"/>
+                <constraint firstItem="YIP-c3-VGM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="xQa-mT-emw"/>
+            </constraints>
+            <size key="customSize" width="331" height="277"/>
+            <connections>
+                <outlet property="addCartButton" destination="ba3-fr-oCi" id="rQh-YD-U60"/>
+                <outlet property="cartNumLabel" destination="zT7-2e-guu" id="3kh-Wd-b18"/>
+                <outlet property="imageScrollView" destination="I3A-bO-jTo" id="0WR-8c-d5a"/>
+                <outlet property="labelHeightConstraint" destination="Djy-mQ-nGY" id="g3j-2i-V8U"/>
+                <outlet property="priceLabel" destination="tjp-2f-ED0" id="2yG-Y4-QN9"/>
+                <outlet property="productNameLabel" destination="YIP-c3-VGM" id="Op2-gM-og1"/>
+                <outlet property="reduceButton" destination="ldI-Dd-6ZV" id="omf-xL-EM3"/>
+                <outlet property="reduceButtonLeading" destination="Q9P-sh-bPh" id="B9k-sZ-oVq"/>
+            </connections>
+            <point key="canvasLocation" x="595.5" y="492"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="icon_add" width="27" height="27"/>
+        <image name="icon_subtract" width="27" height="27"/>
+    </resources>
+</document>
