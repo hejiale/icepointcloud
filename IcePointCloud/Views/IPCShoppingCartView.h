@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ShoppingCartView : UIView
+@interface IPCShoppingCartView : UIView
 
 - (void)show;
 
