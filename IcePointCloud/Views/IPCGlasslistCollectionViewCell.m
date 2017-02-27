@@ -88,7 +88,8 @@
             }else{
                 [self.addCartButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
             }
-            if (_glasses.isBatch || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType)) {
+            if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType))
+            {
                 if (cartCount >= _glasses.stock) {
                     [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
                 }else{
@@ -99,7 +100,8 @@
             }
         }else{
             [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-            if (_glasses.isBatch || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType)) {
+            if ((([self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
+            {
                 [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
             }else{
                 [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract_disable"] forState:UIControlStateNormal];
@@ -124,7 +126,7 @@
 #pragma mark //Clicked Events
 - (IBAction)addCartAction:(id)sender {
     __weak typeof (self) weakSelf = self;
-    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType))
+    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || ([self.glasses filterType] == IPCTopFilterTypeContactLenses && self.glasses.stock == 0))
     {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
@@ -136,7 +138,8 @@
 }
 
 - (IBAction)reduceCartAction:(id)sender {
-    if (self.glasses.isBatch || (self.glasses.solutionType && [self.glasses filterType] == IPCTopFilterTypeAccessory)) {
+    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || ([self.glasses filterType] == IPCTopFilterTypeContactLenses && self.glasses.stock == 0))
+    {
         if ([self.delegate respondsToSelector:@selector(editBatchParameter:)]) {
             [self.delegate editBatchParameter:self];
         }

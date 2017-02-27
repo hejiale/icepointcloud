@@ -239,73 +239,59 @@
     [self updateUI];
 }
 
-#pragma mark //UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.cartItemViewCellMode tableView:tableView numberOfRowsInSection:section IsPay:NO];
-}
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return  [self.cartItemViewCellMode tableView:tableView cellForRowAtIndexPath:indexPath IsPay:NO];
-}
-
-#pragma mark //UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row];
-    return [self.cartItemViewCellMode cartItemProductCellHeight:item];
-}
 
 #pragma mark //NSNotification Methods
 //In the shopping cart price or quantity changes
-- (void)didItemUnitCountChange{
-    [self updateUI];
-}
+//- (void)didItemUnitCountChange{
+//    [self updateUI];
+//}
 
 //In the shopping cart properties expand
-- (void)didItemExpandingStateChange:(NSNotification *)notification{
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[notification.userInfo[@"row"] integerValue] inSection:[IPCPayOrderMode sharedManager].isOrder ? 4 : 0];
-    if ([IPCPayOrderMode sharedManager].isOrder) {
-        [self.payOrderView reloadData];
-    }else{
-        [self.glassListView reloadData];
-        [self.glassListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-    }
-}
+//- (void)didItemExpandingStateChange:(NSNotification *)notification{
+//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[notification.userInfo[@"row"] integerValue] inSection:[IPCPayOrderMode sharedManager].isOrder ? 4 : 0];
+//    if ([IPCPayOrderMode sharedManager].isOrder) {
+//        [self.payOrderView reloadData];
+//    }else{
+//        [self.glassListView reloadData];
+//        [self.glassListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//    }
+//}
 
 //In the shopping cart add judgment contact lenses
-- (void)addContactLens:(NSNotification *)notification{
-    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[notification.userInfo[@"row"] integerValue] inSection:0];
-    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row];
-    if (cartItem) {
-        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
-            [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
-                if (! hasStock) {
-                    [IPCUIKit showError:@"当前选择护理液数量大于库存数"];
-                }else{
-                    [[IPCShoppingCart sharedCart] plusItem:cartItem];
-                    [self updateUI];
-                }
-            }];
-        }else{
-            if ([self.cartViewMode judgeContactLensStock:cartItem]) {
-                [IPCUIKit showError:@"当前选择隐形眼镜镜片数量大于库存数"];
-            }else{
-                [[IPCShoppingCart sharedCart] plusItem:cartItem];
-                [self updateUI];
-            }
-        }
-    }
-}
+//- (void)addContactLens:(NSNotification *)notification{
+//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[notification.userInfo[@"row"] integerValue] inSection:0];
+//    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row];
+//    if (cartItem) {
+//        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
+//            [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
+//                if (! hasStock) {
+//                    [IPCUIKit showError:@"当前选择护理液数量大于库存数"];
+//                }else{
+//                    [[IPCShoppingCart sharedCart] plusItem:cartItem];
+//                    [self updateUI];
+//                }
+//            }];
+//        }else{
+//            if ([self.cartViewMode judgeContactLensStock:cartItem]) {
+//                [IPCUIKit showError:@"当前选择隐形眼镜镜片数量大于库存数"];
+//            }else{
+//                [[IPCShoppingCart sharedCart] plusItem:cartItem];
+//                [self updateUI];
+//            }
+//        }
+//    }
+//}
 
-- (void)closePayOrderPage{
-    __weak typeof (self) weakSelf = self;
-    [IPCUIKit showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [[IPCPayOrderMode sharedManager] clearData];
-        [strongSelf updateUI];
-        [strongSelf.payOrderView removeFromSuperview];self.payOrderView = nil;
-    }];
-}
+//- (void)closePayOrderPage{
+//    __weak typeof (self) weakSelf = self;
+//    [IPCUIKit showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
+//        __strong typeof (weakSelf) strongSelf = weakSelf;
+//        [[IPCPayOrderMode sharedManager] clearData];
+//        [strongSelf updateUI];
+//        [strongSelf.payOrderView removeFromSuperview];self.payOrderView = nil;
+//    }];
+//}
 
 - (void)didReceiveMemoryWarning
 {

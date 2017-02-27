@@ -74,7 +74,7 @@ typedef void(^UpdateOrderBlock)();
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 4)
-        return [self.cartItemViewCellMode tableView:tableView numberOfRowsInSection:section IsPay:YES];
+        return [self.cartItemViewCellMode tableView:tableView numberOfRowsInSection:section];
     else if (section == 0)
         return 1;
     return 2;
@@ -144,7 +144,7 @@ typedef void(^UpdateOrderBlock)();
             return cell;
         }
     }else if(indexPath.section == 4){
-        return [self.cartItemViewCellMode tableView:tableView cellForRowAtIndexPath:indexPath IsPay:YES];
+        return [self.cartItemViewCellMode tableView:tableView cellForRowAtIndexPath:indexPath IsEditState:NO];
     }else if(indexPath.section == 5){
         if (indexPath.row == 0) {
             IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];

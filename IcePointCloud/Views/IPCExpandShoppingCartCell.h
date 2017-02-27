@@ -11,15 +11,9 @@
 
 @interface IPCExpandShoppingCartCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageLeftPadding;
-
-@property (nonatomic) BOOL   isInOrder;
 @property (nonatomic, strong) IPCShoppingCartItem * cartItem;
 
-- (void)setCartItem:(IPCShoppingCartItem *)cartItem
-              Count:(void(^)())count
-             Expand:(void(^)())expand
-               Cart:(void(^)())cart;
+- (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
 
 @end
 

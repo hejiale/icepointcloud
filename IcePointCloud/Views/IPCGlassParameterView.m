@@ -37,7 +37,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 }
 //Lens  ReadingLens
 @property (strong, nonatomic) IBOutlet UIView *normalLensView;
-@property (weak, nonatomic) IBOutlet UILabel  *parameterTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *normalLensImageView;
+@property (weak, nonatomic) IBOutlet UILabel *normalLensNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *normalLensPriceLabel;
 @property (weak, nonatomic) IBOutlet UIView   *leftParameterView;
 @property (weak, nonatomic) IBOutlet UIView   *rightParameterView;
 @property (weak, nonatomic) IBOutlet UILabel *leftTitleLabel;
@@ -52,6 +54,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 @property (strong, nonatomic) IBOutlet UITableView *parameterTableView;
 //ContactLens
 @property (strong, nonatomic) IBOutlet UIView *contactLensView;
+@property (weak, nonatomic) IBOutlet UIImageView *contactImageView;
+@property (weak, nonatomic) IBOutlet UILabel *contactNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *contactPriceLabel;
 @property (weak, nonatomic) IBOutlet UIView *contactDegreeView;
 @property (weak, nonatomic) IBOutlet UILabel *contactDegreeLabel;
 @property (weak, nonatomic) IBOutlet UIView *contactBatchNumView;
@@ -67,6 +72,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 @property (weak, nonatomic) IBOutlet UIButton *contactCancelButton;
 //Accessory
 @property (strong, nonatomic) IBOutlet UIView *accessoryView;
+@property (weak, nonatomic) IBOutlet UIImageView *accessoryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *accessoryNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *accessoryPriceLabel;
 @property (weak, nonatomic) IBOutlet UIView *accessoryBatchNumView;
 @property (weak, nonatomic) IBOutlet UILabel *accessoryBatchNumLabel;
 @property (weak, nonatomic) IBOutlet UIView *accessoryKindNumView;
@@ -78,19 +86,28 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 @property (weak, nonatomic) IBOutlet UIButton *accessoryplusButton;
 @property (weak, nonatomic) IBOutlet UIButton *accessorySureButton;
 @property (weak, nonatomic) IBOutlet UIButton *accessoryCancelButton;
-@property (strong, nonatomic) IPCGlassParameterViewMode * parameterViewMode;
-//Batch None Stock
+//Contact Batch None Stock
 @property (strong, nonatomic) IBOutlet UIView *batchNoneStockView;
+@property (weak, nonatomic) IBOutlet UIImageView *preContactImageView;
+@property (weak, nonatomic) IBOutlet UILabel *preContactNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *preContactPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *batchNoneStockSureBtn;
 @property (weak, nonatomic) IBOutlet UIButton *batchNoneStockCancelBtn;
 @property (weak, nonatomic) IBOutlet UIView *batchNoneDegreeView;
-@property (weak, nonatomic) IBOutlet UIView *selectOpenView;
 @property (weak, nonatomic) IBOutlet UILabel *batchNoneDegreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *batchNoneNumLabel;
 @property (weak, nonatomic) IBOutlet UIButton *batchNonePlusButton;
 @property (weak, nonatomic) IBOutlet UIButton *batchNoneMinusButton;
+//Accessory Batch None Stock
+@property (strong, nonatomic) IBOutlet UIView *accessoryNoneStockView;
+@property (weak, nonatomic) IBOutlet UIImageView *preAccessoryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *preAccessoryNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *preAccessoryPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *preAccessoryNumLabel;
+@property (weak, nonatomic) IBOutlet UIButton *preAccessorySureButton;
+@property (weak, nonatomic) IBOutlet UIButton *preAccessoryCancelButton;
 
-
+@property (strong, nonatomic) IPCGlassParameterViewMode * parameterViewMode;
 @property (assign, nonatomic) ContactLenSpecType contactSpecType;
 @property (copy, nonatomic) void(^CompleteBlock)();
 
@@ -117,6 +134,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         [self.contactLensView addBorder:10 Width:0];
         [self.accessoryView addBorder:10 Width:0];
         [self.batchNoneStockView addBorder:10 Width:0];
+        [self.accessoryNoneStockView addBorder:10 Width:0];
         
         [self.leftParameterView addBorder:5 Width:0.7];
         [self.rightParameterView addBorder:5 Width:0.7];
@@ -131,21 +149,29 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         
         [self.contactDateView addBorder:5 Width:0.7];
         [self.accessoryDateView addBorder:5 Width:0.7];
+        [self.contactImageView addBorder:5 Width:0.7];
+        [self.preContactImageView addBorder:5 Width:0.7];
+        [self.accessoryImageView addBorder:5 Width:0.7];
+        [self.normalLensImageView addBorder:5 Width:0.7];
+        [self.preAccessoryImageView addBorder:5 Width:0.7];
         
         [self.contactSureButton setBackgroundColor:COLOR_RGB_BLUE];
         [self.lensSureButton setBackgroundColor:COLOR_RGB_BLUE];
         [self.accessorySureButton setBackgroundColor:COLOR_RGB_BLUE];
         [self.batchNoneStockSureBtn setBackgroundColor:COLOR_RGB_BLUE];
+        [self.preAccessorySureButton setBackgroundColor:COLOR_RGB_BLUE];
         
         [self.contactSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
         [self.lensSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
         [self.accessorySureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
         [self.batchNoneStockSureBtn addSignleCorner:UIRectCornerBottomLeft Size:10];
+        [self.preAccessorySureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
         
         [self.lensCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];
         [self.contactCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];
         [self.accessoryCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];
         [self.batchNoneStockCancelBtn addSignleCorner:UIRectCornerBottomRight Size:10];
+        [self.preAccessoryCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];;
     }
     return self;
 }
@@ -156,9 +182,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     
     if (_glasses) {
         if (_glasses.stock <= 0)isOpenBooking = YES;
-        
-        [self.parameterTitle setText:[_glasses glassPropertyName]];
-        
+
         if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
             [self.leftTitleLabel setText:@"度数"];
             [self.rightParameterView setHidden:YES];
@@ -202,7 +226,11 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
             [self loadBatchContactLensView];
         }
     }else{
-        [self loadBatchAccessoryView];
+        if(isOpenBooking){
+            [self loadAccessoryNoneStockView];
+        }else{
+            [self loadBatchAccessoryView];
+        }
     }
 }
 
@@ -213,6 +241,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.centerY.equalTo(self.mas_centerY).with.offset(0);
     }];
+    [self.normalLensImageView setImageURL:self.glasses.thumbImage.imageURL];
+    [self.normalLensNameLabel setText:self.glasses.glassName];
+    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
 }
 
 - (void)loadBatchContactLensView{
@@ -221,6 +252,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.centerY.equalTo(self.mas_centerY).with.offset(0);
     }];
+    [self.contactImageView setImageURL:self.glasses.thumbImage.imageURL];
+    [self.contactNameLabel setText:self.glasses.glassName];
+    [self.contactPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
 }
 
 - (void)loadBatchAccessoryView{
@@ -229,6 +263,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.centerY.equalTo(self.mas_centerY).with.offset(0);
     }];
+    [self.accessoryImageView setImageURL:self.glasses.thumbImage.imageURL];
+    [self.accessoryNameLabel setText:self.glasses.glassName];
+    [self.accessoryPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
     [self queryAccessorySpecification];
 }
 
@@ -239,6 +276,21 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.centerY.equalTo(self.mas_centerY).with.offset(0);
     }];
+    [self.preContactImageView setImageURL:self.glasses.thumbImage.imageURL];
+    [self.preContactNameLabel setText:self.glasses.glassName];
+    [self.preContactPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+}
+
+- (void)loadAccessoryNoneStockView{
+    [self addSubview:self.accessoryNoneStockView];
+    [self.accessoryNoneStockView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(0);
+        make.centerY.equalTo(self.mas_centerY).with.offset(0);
+    }];
+    [self. preAccessoryImageView  setImageURL:self.glasses.thumbImage.imageURL];
+    [self.preAccessoryNameLabel setText:self.glasses.glassName];
+    [self.preAccessoryPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+    [self.preAccessoryNumLabel setText:[NSString stringWithFormat:@"%ld",[self cartItemAccessory].count]];
 }
 
 - (void)showParameterTableView:(UITapGestureRecognizer *)sender InView:(UIView *)contentView
@@ -261,33 +313,18 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     __weak typeof (self) weakSelf = self;
     if ([_glasses filterType] == IPCTopFilterTypeContactLenses)
     {
-        if (isOpenBooking) {
-            [[[RACSignal combineLatest:@[RACObserve(self, self.batchNoneDegreeLabel.text),RACObserve(self, self.batchNoneNumLabel.text)] reduce:^id(NSString *degree,NSString *cartNum){
-                return  @(degree.length > 0 && [cartNum integerValue] > 0);
-            }] distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                if (valid.boolValue) {
-                    [strongSelf.batchNoneStockSureBtn setEnabled:YES];
-                    strongSelf.batchNoneStockSureBtn.alpha = 1;
-                }else{
-                    [strongSelf.batchNoneStockSureBtn setEnabled:NO];
-                    strongSelf.batchNoneStockSureBtn.alpha = 0.5;
-                }
-            }];
-        }else{
-            [[[RACSignal combineLatest:@[RACObserve(self, self.contactDegreeLabel.text),RACObserve(self, self.contactBatchNumLabel.text),RACObserve(self, self.contactKindNumLabel.text),RACObserve(self, self.contactDateLabel.text),RACObserve(self, self.contactCartNumLabel.text)] reduce:^id(NSString *degree,NSString *batchNum,NSString * kind,NSString *date,NSString *cartNum){
-                return  @(degree.length && batchNum.length && kind.length && date.length && [cartNum integerValue] > 0);
-            }] distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                if (valid.boolValue) {
-                    [strongSelf.contactSureButton setEnabled:YES];
-                    strongSelf.contactSureButton.alpha = 1;
-                }else{
-                    [strongSelf.contactSureButton setEnabled:NO];
-                    strongSelf.contactSureButton.alpha = 0.5;
-                }
-            }];
-        }
+        [[[RACSignal combineLatest:@[RACObserve(self, self.contactDegreeLabel.text),RACObserve(self, self.contactBatchNumLabel.text),RACObserve(self, self.contactKindNumLabel.text),RACObserve(self, self.contactDateLabel.text),RACObserve(self, self.contactCartNumLabel.text)] reduce:^id(NSString *degree,NSString *batchNum,NSString * kind,NSString *date,NSString *cartNum){
+            return  @(degree.length && batchNum.length && kind.length && date.length && [cartNum integerValue] > 0);
+        }] distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            if (valid.boolValue) {
+                [strongSelf.contactSureButton setEnabled:YES];
+                strongSelf.contactSureButton.alpha = 1;
+            }else{
+                [strongSelf.contactSureButton setEnabled:NO];
+                strongSelf.contactSureButton.alpha = 0.5;
+            }
+        }];
     }else if ([_glasses filterType] == IPCTopFilterTypeAccessory){
         [[[RACSignal combineLatest:@[RACObserve(self, self.accessoryBatchNumLabel.text), RACObserve(self, self.accessoryKindNumLabel.text), RACObserve(self, self.accessoryDateLabel.text),RACObserve(self, self.accessoryCartNumLabel.text)] reduce:^id(NSString *batchNum,NSString * kind,NSString *date,NSString *cartNum){
             return @(batchNum.length && kind.length && date.length && [cartNum integerValue] > 0);
@@ -454,7 +491,12 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",(long)[self cartItemReadingLens].count]];
     }else{
         [self addLensToCart];
-        [self.accessoryCartNumLabel setText:[NSString stringWithFormat:@"%ld",(long)[self cartItemAccessory].count]];
+        if (isOpenBooking) {
+            [self.preAccessoryNumLabel setText:[NSString stringWithFormat:@"%ld",(long)[self cartItemAccessory].count]];
+        }else{
+            [self.accessoryCartNumLabel setText:[NSString stringWithFormat:@"%ld",(long)[self cartItemAccessory].count]];
+        }
+        
         [self reloadAccessoryStatus];
     }
 }
@@ -469,7 +511,8 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
                                         BatchNum:nil
                                          KindNum:nil
                                     ValidityDate:nil
-                                       ContactID:nil];
+                                       ContactID:nil
+                                   IsOpenBooking:NO];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         [[IPCShoppingCart sharedCart] addGlasses:self.glasses
                                              Sph:nil
@@ -479,27 +522,56 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
                                         BatchNum:nil
                                          KindNum:nil
                                     ValidityDate:nil
-                                       ContactID:nil];
+                                       ContactID:nil
+                                   IsOpenBooking:NO];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                             Sph:nil
-                                             Cyl:nil
-                                   ReadingDegree:nil
-                                   ContactDegree:self.contactDegreeLabel.text
-                                        BatchNum:self.contactBatchNumLabel.text
-                                         KindNum:self.contactKindNumLabel.text
-                                    ValidityDate:self.contactDateLabel.text
-                                       ContactID:currentContactDegreeID];
+        if (isOpenBooking) {
+            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
+                                                 Sph:nil
+                                                 Cyl:nil
+                                       ReadingDegree:nil
+                                       ContactDegree:self.batchNoneDegreeLabel.text
+                                            BatchNum:nil
+                                             KindNum:nil
+                                        ValidityDate:nil
+                                           ContactID:nil
+                                       IsOpenBooking:YES];
+        }else{
+            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
+                                                 Sph:nil
+                                                 Cyl:nil
+                                       ReadingDegree:nil
+                                       ContactDegree:self.contactDegreeLabel.text
+                                            BatchNum:self.contactBatchNumLabel.text
+                                             KindNum:self.contactKindNumLabel.text
+                                        ValidityDate:self.contactDateLabel.text
+                                           ContactID:currentContactDegreeID
+                                       IsOpenBooking:NO];
+        }
     }else{
-        [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                             Sph:nil
-                                             Cyl:nil
-                                   ReadingDegree:nil
-                                   ContactDegree:nil
-                                        BatchNum:self.accessoryBatchNumLabel.text
-                                         KindNum:self.accessoryKindNumLabel.text
-                                    ValidityDate:self.accessoryDateLabel.text
-                                       ContactID:nil];
+        if (isOpenBooking) {
+            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
+                                                 Sph:nil
+                                                 Cyl:nil
+                                       ReadingDegree:nil
+                                       ContactDegree:nil
+                                            BatchNum:nil
+                                             KindNum:nil
+                                        ValidityDate:nil
+                                           ContactID:nil
+                                       IsOpenBooking:YES];
+        }else{
+            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
+                                                 Sph:nil
+                                                 Cyl:nil
+                                       ReadingDegree:nil
+                                       ContactDegree:nil
+                                            BatchNum:self.accessoryBatchNumLabel.text
+                                             KindNum:self.accessoryKindNumLabel.text
+                                        ValidityDate:self.accessoryDateLabel.text
+                                           ContactID:nil
+                                       IsOpenBooking:NO];
+        }
     }
 }
 
@@ -519,6 +591,27 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         self.CompleteBlock();
 }
 
+//Select PreSell Method
+- (IBAction)onPreSellAction:(id)sender {
+//    if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
+//        [self.contactLensView removeFromSuperview];
+//        [self loadBatchNoneStockView];
+//    }else{
+//        [self.accessoryView removeFromSuperview];
+//        [self loadAccessoryNoneStockView];
+//    }
+}
+
+- (IBAction)onNormalSellAction:(id)sender {
+//    if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
+//        [self.batchNoneStockView removeFromSuperview];
+//        [self loadBatchContactLensView];
+//    }else{
+//        [self.accessoryNoneStockView removeFromSuperview];
+//        [self loadBatchAccessoryView];
+//    }
+}
+
 #pragma mark //Query Shopping Cart Item
 - (IPCShoppingCartItem *)cartItemLens{
     IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] batchItemForGlasses:self.glasses Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00" Cyl:self.rightParameterLabel.text.length ?  self.rightParameterLabel.text : @"0.00" ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:NO];
@@ -531,6 +624,10 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 }
 
 - (IPCShoppingCartItem *)cartItemContactLens{
+    if (isOpenBooking) {
+        IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] batchItemForGlasses:self.glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:self.batchNoneDegreeLabel.text BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:isOpenBooking];
+        return item;
+    }
     IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] batchItemForGlasses:self.glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:self.contactDegreeLabel.text BatchNum:self.contactBatchNumLabel.text KindNum:self.contactKindNumLabel.text ValidityDate:self.contactDateLabel.text IsOpenBooking:isOpenBooking];
     return item;
 }

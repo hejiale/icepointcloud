@@ -12,6 +12,7 @@
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *degreeWidthConstraint;
+
 @property (copy, nonatomic) IPCShoppingCartItem * cartItem;
 @property (copy, nonatomic) void(^ReloadBlcok)();
 
@@ -44,13 +45,30 @@
         }else if ([_cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass){
             if (_cartItem.batchReadingDegree.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.batchReadingDegree]];
-        }else{
-            if (_cartItem.contactDegree.length)
-                [self.degreeLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.contactDegree]];
-            if (_cartItem.batchNum.length)
-                [self.batchNumLabel setText:[NSString stringWithFormat:@"批次号：%@",_cartItem.batchNum]];
-            if (_cartItem.kindNum.length && _cartItem.validityDate.length)
-                [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
+        }else if([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses){
+            if (_cartItem.isPreSell) {
+                if (_cartItem.contactDegree.length){
+                    [self.noneContactDegreeLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.contactDegree]];
+                    CGFloat width = [self.noneContactDegreeLabel.text jk_sizeWithFont:self.noneContactDegreeLabel.font constrainedToHeight:self.noneContactDegreeLabel.jk_height].width;
+                    self.noneContactDegreeWidth.constant = width;
+                }
+            }else{
+                if (_cartItem.contactDegree.length)
+                    [self.degreeLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.contactDegree]];
+                if (_cartItem.batchNum.length)
+                    [self.batchNumLabel setText:[NSString stringWithFormat:@"批次号：%@",_cartItem.batchNum]];
+                if (_cartItem.kindNum.length && _cartItem.validityDate.length)
+                    [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
+            }
+        }else if ([_cartItem.glasses filterType] == IPCTopFilterTypeAccessory){
+            if (_cartItem.isPreSell) {
+                
+            }else{
+                if (_cartItem.batchNum.length)
+                    [self.batchNumLabel setText:[NSString stringWithFormat:@"批次号：%@",_cartItem.batchNum]];
+                if (_cartItem.kindNum.length && _cartItem.validityDate.length)
+                    [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
+            }
         }
         [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.count]stringValue]];
     }
@@ -64,26 +82,29 @@
         [self.addButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
     }else{
         [self.addButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-        if ([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [_cartItem.glasses filterType] == IPCTopFilterTypeAccessory)
+        if (([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [_cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && !_cartItem.isPreSell)
             [self.addButton setUserInteractionEnabled:hasStock];
     }
 }
 
 - (void)reloadParameterLabelStatus{
     if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens || [_cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass) {
-        [self.degreeLabel setHidden:YES];
-        [self.batchNumLabel setHidden:YES];
-        [self.kindNumLabel setHidden:YES];
         [self.parameterLabel setHidden:NO];
         self.batchHeight.constant = 0;
         self.degreeHeight.constant = 0;
     }else{
-        [self.degreeLabel setHidden:NO];
-        [self.batchNumLabel setHidden:NO];
-        [self.kindNumLabel setHidden:NO];
-        [self.parameterLabel setHidden:YES];
-        self.batchHeight.constant = 20;
-        self.degreeHeight.constant = 20;
+        if (_cartItem.isPreSell) {
+            [self.noneContactDegreeLabel setHidden:NO];
+            [self.noneContactSellImage setHidden:NO];
+            self.batchHeight.constant = 0;
+            self.degreeHeight.constant = 0;
+        }else{
+            [self.degreeLabel setHidden:NO];
+            [self.batchNumLabel setHidden:NO];
+            [self.kindNumLabel setHidden:NO];
+            self.batchHeight.constant = 20;
+            self.degreeHeight.constant = 20;
+        }
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
             self.degreeWidthConstraint.constant = 0;
         }

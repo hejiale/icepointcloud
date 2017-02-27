@@ -8,12 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol IPCCartItemViewCellModeDelegate;
 @interface IPCCartItemViewCellMode : NSObject
+
+@property (assign, nonatomic) id<IPCCartItemViewCellModeDelegate>delegate;
 
 - (CGFloat)cartItemProductCellHeight:(IPCShoppingCartItem *)item;
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  IsPay:(BOOL)isPay;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath IsPay:(BOOL)isPay;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath IsEditState:(BOOL)isEdit;
+
+@end
+
+@protocol IPCCartItemViewCellModeDelegate <NSObject>
+
+- (void)reloadShoppingCartUI;
 
 @end

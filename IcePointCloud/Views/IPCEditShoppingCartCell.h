@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCShoppingCartItem.h"
 
 @interface IPCEditShoppingCartCell : UITableViewCell
+
+@property (nonatomic, strong) IPCShoppingCartItem * cartItem;
+- (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
 
 @end

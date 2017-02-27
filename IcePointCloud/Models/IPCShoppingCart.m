@@ -110,14 +110,15 @@
 
 - (void)addGlasses:(IPCGlasses *)glasses
 {
-    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil];
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO];
 }
 
 
 - (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID IsOpenBooking:(BOOL)isOpenBooking
 {
     IPCShoppingCartItem *item = nil;
-    if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType)) {
+    if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses) && glasses.stock == 0)
+    {
         item = [self batchItemForGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:readingDegree ContactDegree:contactDegree BatchNum:batchNum KindNum:kindNum ValidityDate:date IsOpenBooking:isOpenBooking];
     }else{
         item = [self normalItemForGlasses:glasses];
@@ -136,7 +137,8 @@
             default:
                 break;
         }
-        if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType)) {
+        if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses && glasses.stock == 0))
+        {
             nci.batchSph = sph;
             nci.bacthCyl = cyl;
             nci.contactDegree = contactDegree;
@@ -145,6 +147,7 @@
             nci.batchNum = batchNum;
             nci.validityDate = date;
             nci.contactLensID = contactID;
+            nci.isPreSell = isOpenBooking;
         }
         nci.glasses = glasses;
         nci.count   = 1;
@@ -275,8 +278,10 @@
                         return ci;
                 }
             }else{
-                if ([batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
-                    return ci;
+                if (!isOpenBooking)
+                    if ([batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
+                        return ci;
+                return ci;
             }
         }
     return nil;

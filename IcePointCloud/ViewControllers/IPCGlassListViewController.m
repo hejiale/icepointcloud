@@ -212,6 +212,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self startAnimationWithStartPoint:startPoint EndPoint:endPoint];
 }
 
+- (void)reload{
+    [self.glassListCollectionView reloadData];
+}
+
 #pragma mark //UICollectionViewDataSoure
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;

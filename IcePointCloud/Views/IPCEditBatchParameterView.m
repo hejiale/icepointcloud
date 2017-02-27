@@ -15,6 +15,15 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 
 @property (weak, nonatomic) IBOutlet UIView *editParameterView;
 @property (weak, nonatomic) IBOutlet UITableView *parameterTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *glassImageView;
+@property (weak, nonatomic) IBOutlet UILabel *glassNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *glassPriceLabel;
+@property (weak, nonatomic) IBOutlet UIView *editNoneAccessoryView;
+@property (weak, nonatomic) IBOutlet UIImageView *noneAccessoryImageView;
+@property (weak, nonatomic) IBOutlet UILabel *noneAccessoryNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noneAccessoryPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noneAccessoryCartNumLbl;
+
 @property (strong, nonatomic) IPCGlasses * currentGlass;
 @property (strong, nonatomic) IPCBatchParameterList * batchParameterList;
 @property (strong, nonatomic) NSMutableArray<IPCContactLenSpecList *> * contactSpecificationArray;
@@ -37,7 +46,16 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         [self addSubview:parameterBgView];
         
         [self.editParameterView addBorder:8 Width:0];
+        [self.editNoneAccessoryView addBorder:8 Width:0];
         [self.parameterTableView setTableFooterView:[[UIView alloc]init]];
+        [self.glassImageView addBorder:5 Width:0.7];
+        [self.noneAccessoryImageView addBorder:5 Width:0.7];
+        [self.glassImageView setImageURL:[NSURL URLWithString:glasses.thumbImage.imageURL]];
+        [self.noneAccessoryImageView setImageURL:[NSURL URLWithString:glasses.thumbImage.imageURL]];
+        [self.glassNameLabel setText:glasses.glassName];
+        [self.noneAccessoryNameLabel setText:glasses.glassName];
+        [self.glassPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
+        [self.noneAccessoryPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
         
         [IPCUIKit show];
         if (glasses){
@@ -47,13 +65,29 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
                 [self queryBatchReadingDegreeRequest];
             }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
                 __block NSMutableArray<NSString *> * contactLensIDs = [[NSMutableArray alloc]init];
-                [[[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (! [contactLensIDs containsObject:obj.contactLensID])
-                        [contactLensIDs addObject:obj.contactLensID];
-                }];
-                [self  getContactLensSpecification:contactLensIDs];
+                if (glasses.stock > 0) {
+                    [[[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                        if (!obj.isPreSell) {
+                            if (! [contactLensIDs containsObject:obj.contactLensID])
+                                [contactLensIDs addObject:obj.contactLensID];
+                        }
+                    }];
+                }
+                if (contactLensIDs.count > 0){
+                    [self  getContactLensSpecification:contactLensIDs];
+                }else{
+                    [self.parameterTableView reloadData];
+                    [IPCUIKit hiden];
+                }
             }else{
                 [self queryAccessoryStock];
+            }
+            
+            if (([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) && glasses.stock <= 0) {
+                [self.editNoneAccessoryView setHidden:NO];
+                [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
+            }else{
+                [self.editParameterView setHidden:NO];
             }
         }
     }
@@ -65,6 +99,11 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     if (!_contactSpecificationArray)
         _contactSpecificationArray = [[NSMutableArray alloc]init];
     return _contactSpecificationArray;
+}
+
+- (IPCShoppingCartItem *)cartItemAccessory{
+    IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] batchItemForGlasses:self.currentGlass Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:YES];
+    return item;
 }
 
 
@@ -125,6 +164,20 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         self.DismissBlock();
 }
 
+- (IBAction)reduceNoneAccessoryCartAction:(id)sender {
+    [[IPCShoppingCart sharedCart] removeGlasses:self.currentGlass];
+    [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
+    if ([self cartItemAccessory].count == 0) {
+        if (self.DismissBlock)
+            self.DismissBlock();
+    }
+}
+
+- (IBAction)addNoneAccessoryCartAction:(id)sender {
+    [[IPCShoppingCart sharedCart] addGlasses:self.currentGlass];
+    [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
+}
+
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass].count;
@@ -162,7 +215,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.currentGlass filterType] == IPCTopFilterTypeContactLenses || [self.currentGlass filterType] == IPCTopFilterTypeAccessory)
+    if (([self.currentGlass filterType] == IPCTopFilterTypeContactLenses && self.currentGlass.stock > 0) || [self.currentGlass filterType] == IPCTopFilterTypeAccessory)
         return 60;
     return 45;
 }

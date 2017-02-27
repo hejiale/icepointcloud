@@ -120,7 +120,6 @@
         make.width.mas_equalTo(16);
         make.right.equalTo(self.menusView.mas_right).with.offset(-68);
     }];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateShoppingCartBarTitle) name:IPCShoppingCartCountKey object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMenuCartAction) name:IPCNotificationShoppingCartChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearSearchwordAction) name:IPClearSearchwordNotification object:nil];
 }
@@ -343,17 +342,11 @@
         [self.filterButton setHidden:YES];
     }
     
-    if (selectedIndex == 3) {
-        [self updateShoppingCartBarTitle];
-    }else if(selectedIndex == 1){
+    if(selectedIndex == 1){
         [self.titleLabel setText:@"验光"];
     }else{
         [self.titleLabel setText:@""];
     }
-}
-
-- (void)updateShoppingCartBarTitle{
-    [self.titleLabel setText:[NSString stringWithFormat:@"购物车（选中%ld件商品）", (long)[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
 }
 
 

@@ -11,6 +11,6 @@
 
 - (void)addTryNotifications;
 - (void)clearNotifications;
-
+- (void)reload;
 
 @end

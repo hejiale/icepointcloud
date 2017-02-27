@@ -35,6 +35,7 @@
 @property (nonatomic, copy) NSString * batchNum;//Batch stealth batch number
 @property (nonatomic, copy) NSString * kindNum;//Batch invisible kind
 @property (nonatomic, copy) NSString * validityDate;//Batch stealth is valid
+@property (nonatomic, assign) BOOL     isPreSell;
 
 - (double)totalPrice;
 - (NSDictionary *)paramtersJSONForOrderRequest;

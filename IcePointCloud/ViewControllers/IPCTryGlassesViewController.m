@@ -793,6 +793,10 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCTryFilterProductNotification object:nil];
 }
 
+- (void)reload{
+    [self.productCollectionView reloadData];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

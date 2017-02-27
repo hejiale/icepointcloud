@@ -8,8 +8,10 @@
 
 #import "IPCCartItemViewCellMode.h"
 #import "IPCExpandShoppingCartCell.h"
+#import "IPCEditShoppingCartCell.h"
 
 static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
+static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartCellIdentifier";
 
 @implementation IPCCartItemViewCellMode
 
@@ -32,31 +34,43 @@ static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellI
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section  IsPay:(BOOL)isPay{
-    return isPay ? [[IPCShoppingCart sharedCart] selectedItemsCount] : [[IPCShoppingCart sharedCart] itemsCount];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return  [[IPCShoppingCart sharedCart] itemsCount];
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath IsPay:(BOOL)isPay
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath IsEditState:(BOOL)isEdit
 {
-    IPCExpandShoppingCartCell * cell = [tableView dequeueReusableCellWithIdentifier:kNewShoppingCartItemName];
-    if (!cell) {
-        cell = [[UINib nibWithNibName:@"IPCExpandShoppingCartCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+    if (isEdit) {
+        IPCEditShoppingCartCell * cell = [tableView dequeueReusableCellWithIdentifier:kEditShoppingCartCellIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCEditShoppingCartCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }
+        IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+        if (cartItem) {
+            [cell setCartItem:cartItem Reload:^{
+                if ([self.delegate respondsToSelector:@selector(reloadShoppingCartUI)]) {
+                    [self.delegate reloadShoppingCartUI];
+                }
+            }];
+        }
+        return cell;
+    }else{
+        IPCExpandShoppingCartCell * cell = [tableView dequeueReusableCellWithIdentifier:kNewShoppingCartItemName];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCExpandShoppingCartCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }
+        IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+        
+        if (cartItem){
+            [cell setCartItem:cartItem Reload:^{
+                if ([self.delegate respondsToSelector:@selector(reloadShoppingCartUI)]) {
+                    [self.delegate reloadShoppingCartUI];
+                }
+            }];
+        }
+        return cell;
     }
-    IPCShoppingCartItem * cartItem = isPay ? [[IPCShoppingCart sharedCart] selectedItemAtIndex:indexPath.row] : [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row];
-    
-    if (cartItem){
-        [cell setIsInOrder:isPay];
-        [cell setCartItem:cartItem
-                    Count:^{
-                        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:@"IPCCartUnitCountChange" object:nil];
-                    } Expand:^{
-                        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:@"IPCCartExpandStateChange" object:nil userInfo:@{@"row":@(indexPath.row)}];
-                    } Cart:^{
-                        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:@"IPCCartAddContactLensChange" object:nil userInfo:@{@"row":@(indexPath.row)}];
-                    }];
-    }
-    return cell;
 }
 
 @end

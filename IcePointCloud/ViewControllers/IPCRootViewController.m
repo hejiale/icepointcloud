@@ -15,7 +15,7 @@
 #import "IPCPersonBaseView.h"
 #import "IPCUpdatePasswordView.h"
 #import "IPCQRCodeView.h"
-#import "ShoppingCartView.h"
+#import "IPCShoppingCartView.h"
 
 @interface IPCRootViewController ()<IPCRootMenuViewControllerDelegate>
 
@@ -35,7 +35,6 @@
     
     _productVC = [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-//    IPCShoppingCartViewController *shoppingCartVC = [[IPCShoppingCartViewController alloc] initWithNibName:@"IPCShoppingCartViewController" bundle:nil];
     IPCCustomerViewController * userInfoVC = [[IPCCustomerViewController alloc]initWithNibName:@"IPCCustomerViewController" bundle:nil];
     [self setViewControllers:@[_productVC, userInfoVC,_tryVC]];
 }
@@ -52,6 +51,7 @@
             [obj removeFromSuperview];
     }];
     [self.backgroundView removeFromSuperview];
+    [self.productVC reload];
 }
 
 - (void)removeAllNotifications{
@@ -105,7 +105,7 @@
     [self.view bringSubviewToFront:self.backgroundView];
     __weak typeof (self) weakSelf = self;
     
-    ShoppingCartView * cartView = [UIView jk_loadInstanceFromNibWithName:@"ShoppingCartView" owner:self];
+    IPCShoppingCartView * cartView = [UIView jk_loadInstanceFromNibWithName:@"IPCShoppingCartView" owner:self];
     [cartView setFrame:CGRectMake(self.backgroundView.jk_width, 0, cartView.jk_width, cartView.jk_height)];
     [self.backgroundView addSubview:cartView];
     [cartView show];

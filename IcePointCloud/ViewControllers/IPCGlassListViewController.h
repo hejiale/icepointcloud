@@ -12,5 +12,5 @@
 
 - (void)addNotifications;
 - (void)clearNotifications;
-
+- (void)reload;
 @end
