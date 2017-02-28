@@ -8,11 +8,15 @@
 
 #import "IPCShoppingCartView.h"
 #import "IPCCartViewMode.h"
-#import "IPCCartItemViewCellMode.h"
+#import "IPCExpandShoppingCartCell.h"
+#import "IPCEditShoppingCartCell.h"
+
+static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
+static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartCellIdentifier";
 
 typedef  void(^DismissBlock)();
 
-@interface IPCShoppingCartView ()<UITableViewDelegate,UITableViewDataSource,IPCCartItemViewCellModeDelegate>
+@interface IPCShoppingCartView ()<UITableViewDelegate,UITableViewDataSource,IPCEditShoppingCartCellDelegate>
 {
     BOOL   isEditStatus;
 }
@@ -25,7 +29,6 @@ typedef  void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
 @property (copy, nonatomic) DismissBlock dismissBlock;
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
-@property (strong, nonatomic) IPCCartItemViewCellMode * cartItemViewCellMode;
 
 @end
 
@@ -54,8 +57,6 @@ typedef  void(^DismissBlock)();
 
 - (void)commitUI{
     self.cartViewMode = [[IPCCartViewMode alloc]init];
-    self.cartItemViewCellMode = [[IPCCartItemViewCellMode alloc]init];
-    self.cartItemViewCellMode.delegate = self;
     [self updateCartUI];
     [[IPCClient sharedClient] cancelAllRequest];
     [self.cartViewMode reloadContactLensStock];
@@ -109,12 +110,38 @@ typedef  void(^DismissBlock)();
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.cartItemViewCellMode tableView:tableView numberOfRowsInSection:section];
+    return  [[IPCShoppingCart sharedCart] itemsCount];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return  [self.cartItemViewCellMode tableView:tableView cellForRowAtIndexPath:indexPath IsEditState:isEditStatus];
+    if (isEditStatus) {
+        IPCEditShoppingCartCell * cell = [tableView dequeueReusableCellWithIdentifier:kEditShoppingCartCellIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCEditShoppingCartCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell.delegate = self;
+        }
+        IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+        if (cartItem) {
+            [cell setCartItem:cartItem Reload:^{
+                [self updateCartUI];
+            }];
+        }
+        return cell;
+    }else{
+        IPCExpandShoppingCartCell * cell = [tableView dequeueReusableCellWithIdentifier:kNewShoppingCartItemName];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCExpandShoppingCartCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }
+        IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+        
+        if (cartItem){
+            [cell setCartItem:cartItem Reload:^{
+                [self updateCartUI];
+            }];
+        }
+        return cell;
+    }
 }
 
 #pragma mark //UITableViewDelegate
@@ -122,9 +149,36 @@ typedef  void(^DismissBlock)();
     return 135;
 }
 
-#pragma mark //IPCCartItemViewCellModeDelegate
-- (void)reloadShoppingCartUI{
-    [self updateCartUI];
+#pragma mark //IPCEditShoppingCartCellDelegate
+- (void)chooseParameter:(IPCEditShoppingCartCell *)cell{
+    NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
+    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+    
 }
+
+- (void)judgeStock:(IPCEditShoppingCartCell *)cell{
+    NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
+    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+    if (cartItem) {
+        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
+            [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
+                if (! hasStock) {
+                    [IPCUIKit showError:@"当前选择护理液数量大于库存数"];
+                }else{
+                    [[IPCShoppingCart sharedCart] plusItem:cartItem];
+                    [self updateCartUI];
+                }
+            }];
+        }else{
+            if ([self.cartViewMode judgeContactLensStock:cartItem]) {
+                [IPCUIKit showError:@"当前选择隐形眼镜镜片数量大于库存数"];
+            }else{
+                [[IPCShoppingCart sharedCart] plusItem:cartItem];
+                [self updateCartUI];
+            }
+        }
+    }
+}
+
 
 @end

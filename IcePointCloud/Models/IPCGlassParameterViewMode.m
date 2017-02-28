@@ -56,19 +56,21 @@
 
 - (void)getContactLensSpecification:(NSString *)contactLensID CompleteBlock:(void(^)())complete
 {
-    [IPCUIKit show];
-    [IPCBatchRequestManager queryContactGlassBatchSpecification:@[contactLensID]
-                                                   SuccessBlock:^(id responseValue)
-     {
-         IPCContactLenSpecList * contactSpecification = [[IPCContactLenSpecList alloc]initWithResponseObject:responseValue ContactLensID:contactLensID];
-         _contactLensMode = [[IPCContactLensMode alloc]initWithResponseObject:contactSpecification.parameterList];
-         if (complete) {
-             complete();
-         }
-         [IPCUIKit hiden];
-     } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
-     }];
+    if (contactLensID) {
+        [IPCUIKit show];
+        [IPCBatchRequestManager queryContactGlassBatchSpecification:@[contactLensID]
+                                                       SuccessBlock:^(id responseValue)
+         {
+             IPCContactLenSpecList * contactSpecification = [[IPCContactLenSpecList alloc]initWithResponseObject:responseValue ContactLensID:contactLensID];
+             _contactLensMode = [[IPCContactLensMode alloc]initWithResponseObject:contactSpecification.parameterList];
+             if (complete) {
+                 complete();
+             }
+             [IPCUIKit hiden];
+         } FailureBlock:^(NSError *error) {
+             [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         }];
+    }
 }
 
 - (void)getAccessorySpecification:(NSString *)glassID CompleteBlock:(void(^)())complete

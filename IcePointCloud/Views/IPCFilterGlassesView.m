@@ -88,20 +88,20 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 #pragma mark //CLicked Events
 - (void)show
 {
-    [self.leftBgView setFrame:CGRectMake(self.jk_width, 0, self.jk_width-self.rightView.jk_width, self.jk_height)];
-    [self addSubview:self.leftBgView];
-    [self sendSubviewToBack:self.leftBgView];
+    [self.rightView setFrame:CGRectMake(0, 0, self.rightView.jk_width, self.jk_height)];
+    [self addSubview:self.rightView];
+    [self sendSubviewToBack:self.rightView];
     
-    [UIView animateWithDuration:0.6f animations:^{
+    [UIView animateWithDuration:0.8f animations:^{
         CGRect frame    = self.frame;
-        frame.origin.x -= self.jk_width;
+        frame.origin.x += self.jk_width;
         self.frame      = frame;
     } completion:^(BOOL finished) {
         if (finished) {
-            [UIView animateWithDuration:0.2f animations:^{
-                CGRect   rect  = self.leftBgView.frame;
-                rect.origin.x -= self.jk_width;
-                self.leftBgView.frame = rect;
+            [UIView animateWithDuration:0.1f animations:^{
+                CGRect   rect  = self.rightView.frame;
+                rect.origin.x += self.leftBgView.jk_width;
+                self.rightView.frame = rect;
             } completion:nil];
         }
     }];
@@ -112,7 +112,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 {
     [UIView animateWithDuration:0.3f animations:^{
         CGRect rect    = self.frame;
-        rect.origin.x += self.jk_width;
+        rect.origin.x -= self.jk_width;
         self.frame     = rect;
     } completion:^(BOOL finished) {
         completed();

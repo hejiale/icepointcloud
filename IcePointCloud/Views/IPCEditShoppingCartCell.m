@@ -51,7 +51,9 @@
     if ([self.cartItem.glasses filterType] == IPCTopFIlterTypeFrames || [self.cartItem.glasses filterType] == IPCTopFilterTypeSunGlasses) {
         [self.glassesNameLbl setText:self.cartItem.glasses.glassName];
         [self.arrowImage setHidden:YES];
-    }else{
+    }
+    if (self.cartItem.glasses.isBatch || ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType) || ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.stock == 0) || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
+    {
         [self.glassesNameLbl setText:@"参数设置"];
         [self.arrowImage setHidden:NO];
     }
@@ -84,6 +86,9 @@
     if (([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch) || ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType))
     {
         //判断库存
+        if ([self.delegate respondsToSelector:@selector(judgeStock:)]) {
+            [self.delegate judgeStock:self];
+        }
     }else{
         [[IPCShoppingCart sharedCart] plusItem:self.cartItem];
     }
@@ -99,5 +104,14 @@
     }
 }
 
+
+
+- (IBAction)onChooseParameterAction:(id)sender {
+    if (!self.arrowImage.isHidden) {
+        if ([self.delegate respondsToSelector:@selector(chooseParameter:)]) {
+            [self.delegate chooseParameter:self];
+        }
+    }
+}
 
 @end

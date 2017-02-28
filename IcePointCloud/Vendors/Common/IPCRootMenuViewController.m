@@ -16,14 +16,10 @@
 @property (strong, nonatomic)  UIImageView * coverLine;
 @property (strong, nonatomic)  UIView   * menusView;
 @property (strong, nonatomic)  UIImageView *logoImageView;
-@property (strong, nonatomic)  UIButton * searchButton;
 @property (strong, nonatomic)  UIButton * filterButton;
 @property (strong, nonatomic)  UILabel  * titleLabel;
-@property (strong, nonatomic)  UILabel  * searchLabel;
 @property (strong, nonatomic)  UIView   * bageView;
 @property (strong, nonatomic) UILabel   * bageLabel;
-@property (copy, nonatomic) NSString * productKeyword;
-@property (copy, nonatomic) NSString * tryKeyword;
 
 @end
 
@@ -41,9 +37,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _productKeyword = [[NSString alloc]init];
-    _tryKeyword = [[NSString alloc]init];
-    
     [self.view setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.menuBarView];
     [self.view addSubview:self.contentView];
@@ -52,9 +45,6 @@
     [self.menuBarView addSubview:self.menusView];
     [self setMenuButtons];
     [self.menuBarView addSubview:self.logoImageView];
-    [self.menuBarView addSubview:self.searchButton];
-    [self.searchButton addSubview:self.searchLabel];
-    [self.searchButton bringSubviewToFront:self.searchLabel];
     [self.menuBarView addSubview:self.filterButton];
     [self.menuBarView addSubview:self.titleLabel];
     [self.menusView addSubview:self.bageView];
@@ -79,8 +69,8 @@
         make.height.mas_equalTo(5.5);
     }];
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.menuBarView.mas_left).with.offset(5);
-        make.top.equalTo(self.menuBarView.mas_top).with.offset(30);
+        make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
+        make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(-9);
         make.width.mas_equalTo(92);
         make.height.mas_equalTo(35);
     }];
@@ -90,14 +80,8 @@
         make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(0);
         make.width.mas_equalTo(275);
     }];
-    [self.searchButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.logoImageView.mas_right).with.offset(20);
-        make.top.equalTo(self.menuBarView.mas_top).with.offset(25);
-        make.width.mas_equalTo(301);
-        make.height.mas_equalTo(38);
-    }];
     [self.filterButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.searchButton.mas_right).with.offset(5);
+        make.left.equalTo(self.menuBarView.mas_left).with.offset(5);
         make.top.equalTo(self.menuBarView.mas_top).with.offset(25);
         make.width.mas_equalTo(38);
         make.height.mas_equalTo(38);
@@ -107,12 +91,6 @@
         make.top.equalTo(self.menuBarView.mas_top).with.offset(35);
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(20);
-    }];
-    [self.searchLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.searchButton.mas_left).with.offset(40);
-        make.top.equalTo(self.searchButton.mas_top).with.offset(0);
-        make.bottom.equalTo(self.searchButton.mas_bottom).with.offset(0);
-        make.right.equalTo(self.searchButton.mas_right).with.offset(20);
     }];
     [self.bageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.menusView.mas_top).with.offset(22);
@@ -180,17 +158,6 @@
     }
 }
 
-- (UIButton *)searchButton{
-    if (!_searchButton) {
-        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_searchButton setBackgroundColor:[UIColor clearColor]];
-        [_searchButton setFrame:CGRectZero];
-        [_searchButton setImage:[UIImage imageNamed:@"icon_seach"] forState:UIControlStateNormal];
-        [_searchButton addTarget:self action:@selector(searchProductAction) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _searchButton;
-}
-
 - (UIButton *)filterButton{
     if (!_filterButton) {
         _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -212,17 +179,6 @@
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     }
     return _titleLabel;
-}
-
-
-- (UILabel *)searchLabel{
-    if (!_searchLabel) {
-        _searchLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        [_searchLabel setBackgroundColor:[UIColor clearColor]];
-        [_searchLabel setTextColor:[UIColor darkGrayColor]];
-        [_searchLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
-    }
-    return _searchLabel;
 }
 
 - (UIView *)bageView{
@@ -291,7 +247,7 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    if (selectedIndex != _selectedIndex && selectedIndex < [self.viewControllers count]-1)
+    if (selectedIndex != _selectedIndex && selectedIndex < [self.viewControllers count])
     {
         UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex];
         [self addChildViewController:selectedViewController];
@@ -330,15 +286,10 @@
 - (void)updateTopView:(NSInteger)selectedIndex
 {
     if (selectedIndex == 0 || selectedIndex == 2) {
-        [self.searchButton setHidden:NO];
         [self.filterButton setHidden:NO];
-        if (selectedIndex == 0) {
-            [self.searchLabel setText:self.productKeyword];
-        }else if (selectedIndex == 2){
-            [self.searchLabel setText:self.tryKeyword];
-        }
+        [self.logoImageView setHidden:NO];
     }else{
-        [self.searchButton setHidden:YES];
+        [self.logoImageView setHidden:YES];
         [self.filterButton setHidden:YES];
     }
     
@@ -393,27 +344,27 @@
 - (void)searchProductAction{
     IPCSearchViewController * searchVC = [[IPCSearchViewController alloc] initWithNibName:@"IPCSearchViewController" bundle:nil];
     [searchVC setDelegate:self];
-    if (_selectedIndex == 0) {
-        searchVC.currentSearchword = self.productKeyword;
-    }else if (_selectedIndex == 2){
-        searchVC.currentSearchword = self.tryKeyword;
-    }
+//    if (_selectedIndex == 0) {
+//        searchVC.currentSearchword = self.productKeyword;
+//    }else if (_selectedIndex == 2){
+//        searchVC.currentSearchword = self.tryKeyword;
+//    }
     [self presentViewController:searchVC animated:YES completion:nil];
 }
 
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword
 {
-    if (keyword.length == 0) {
-        self.searchLabel.text = @"";
-    } else {
-        self.searchLabel.text = keyword;
-    }
-    if (_selectedIndex == 0) {
-        self.productKeyword = keyword;
-    }else if (_selectedIndex == 2){
-        self.tryKeyword = keyword;
-    }
+//    if (keyword.length == 0) {
+//        self.searchLabel.text = @"";
+//    } else {
+//        self.searchLabel.text = keyword;
+//    }
+//    if (_selectedIndex == 0) {
+//        self.productKeyword = keyword;
+//    }else if (_selectedIndex == 2){
+//        self.tryKeyword = keyword;
+//    }
     if (self.selectedIndex == 0) {
         [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCHomeSearchProductNotification object:nil userInfo:@{IPCSearchKeyWord:keyword}];
     }else if (self.selectedIndex == 2){
@@ -433,13 +384,13 @@
 }
 
 - (void)clearSearchwordAction{
-    [self.searchLabel setText:@""];
-    
-    if (_selectedIndex == 0) {
-        self.productKeyword = @"";
-    }else if (_selectedIndex == 2){
-        self.tryKeyword = @"";
-    }
+//    [self.searchLabel setText:@""];
+//    
+//    if (_selectedIndex == 0) {
+//        self.productKeyword = @"";
+//    }else if (_selectedIndex == 2){
+//        self.tryKeyword = @"";
+//    }
 }
 
 - (void)didReceiveMemoryWarning {

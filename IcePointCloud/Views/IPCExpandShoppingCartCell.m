@@ -21,8 +21,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *unitPriceButtonWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
-
-
 @property (copy, nonatomic) void(^ReloadBlock)();
 
 
@@ -46,31 +44,6 @@
     _cartItem = cartItem;
     self.ReloadBlock = reload;
     [self.checkBtn setSelected:_cartItem.selected];
-    
-    
-    //    if ([cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
-    //        [self.parameterLabel setTextColor:[UIColor lightGrayColor]];
-    //        [self.parameterLabel setFont:[UIFont systemFontOfSize:11 weight:UIFontWeightThin]];
-    //        [self.contactDegreeLabel setHidden:NO];[self.contactBatchNumLabel setHidden:NO];
-    //        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
-    //            self.degreeWidthConstraint.constant = 0;
-    //        }
-    //    }else{
-    //        [self.parameterLabel setTextColor:[UIColor darkGrayColor]];
-    //        [self.parameterLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
-    //        [self.contactDegreeLabel setHidden:YES];[self.contactBatchNumLabel setHidden:YES];
-    //    }
-    
-    //    if ([self isExpandable]) {
-    //        self.mainView.hidden = !_cartItem.expanded;
-    //        [self.separatorView setHidden:NO];
-    //        self.seperatorHeight.constant = 25;
-    //        [self constructUI];
-    //    }else{
-    //        self.seperatorHeight.constant = 0;
-    //        [self.separatorView setHidden:YES];
-    //        [self.mainView setHidden:YES];
-    //    }
     
     IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
     if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
@@ -102,23 +75,6 @@
     }
     self.glassNameHeight.constant = nameHeight;
     [self loadContactLensBatchSpecification:nameHeight];
-    
-    //    if ([cartItem.glasses filterType] == IPCTopFilterTypeLens) {
-    //        if (cartItem.batchSph.length && cartItem.bacthCyl.length)
-    //            [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",cartItem.batchSph,cartItem.bacthCyl]];
-    //    }else if([cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [cartItem.glasses filterType] == IPCTopFilterTypeAccessory){
-    //        if (cartItem.contactDegree.length)
-    //            [self.contactDegreeLabel setText:[NSString stringWithFormat:@"度数: %@",cartItem.contactDegree]];
-    //        if (cartItem.batchNum.length)
-    //            [self.contactBatchNumLabel setText:[NSString stringWithFormat:@"批次号: %@",cartItem.batchNum]];
-    //        if (cartItem.kindNum.length && cartItem.validityDate.length)
-    //            [self.parameterLabel setText:[NSString stringWithFormat:@"准字号：%@   有效期：%@",cartItem.kindNum,cartItem.validityDate]];
-    //    }else if([cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass){
-    //        if (cartItem.batchReadingDegree.length)
-    //            [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",cartItem.batchReadingDegree]];
-    //    }
-    //
-    //    [self updateUIByCount];
 }
 
 
@@ -187,7 +143,7 @@
                 [specificationView addSubview:valueLbl];
             }
         }
-    }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.isBatch){
+    }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType){
         if (!self.cartItem.isPreSell) {
             CGFloat halfWidth = specificationView.jk_width/2;
             NSArray * titleArray = @[@"批次号",@"有效期",@"准字号"];

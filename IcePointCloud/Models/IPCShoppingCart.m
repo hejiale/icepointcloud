@@ -271,17 +271,21 @@
                     return ci;
             }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
                 if (isOpenBooking) {
-                    if ([contactDegree isEqualToString:ci.contactDegree])
+                    if ([contactDegree isEqualToString:ci.contactDegree] && ci.isPreSell)
                         return ci;
                 }else{
                     if ([contactDegree isEqualToString:ci.contactDegree] && [batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
                         return ci;
                 }
             }else{
-                if (!isOpenBooking)
+                if (!isOpenBooking){
                     if ([batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
                         return ci;
-                return ci;
+                }else{
+                    if (ci.isPreSell) {
+                        return ci;
+                    }
+                }
             }
         }
     return nil;
