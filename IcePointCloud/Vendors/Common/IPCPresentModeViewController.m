@@ -24,21 +24,22 @@
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
     
+    
     BOOL isPresenting = [toVC isKindOfClass:[IPCPresentModeViewController class]];
     
     if (isPresenting) {
-        toVC.view.alpha = 0;
-        
         [[transitionContext containerView] addSubview:toVC.view];
         
         CGRect fullFrame = [transitionContext initialFrameForViewController:fromVC];
-        toVC.view.frame = fullFrame;
+        toVC.view.frame = CGRectMake(0, -fullFrame.size.height, fullFrame.size.width, fullFrame.size.height);
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
-                             toVC.view.alpha = 1;
+                             CGRect rect = toVC.view.frame;
+                             rect.origin.y += toVC.view.jk_height;
+                             toVC.view.frame = rect;
                          } completion:^(BOOL finished) {
                              if (finished) {
                                  [transitionContext completeTransition:YES];
@@ -49,7 +50,8 @@
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
-                             fromVC.view.alpha = 0;
+                             
+                             
                          } completion:^(BOOL finished) {
                              if (finished) {
                                  [transitionContext completeTransition:YES];

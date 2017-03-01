@@ -36,42 +36,6 @@
 @implementation IPCShoppingCartViewController
 
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.cartViewMode = [[IPCCartViewMode alloc]init];
-    self.cartItemViewCellMode = [[IPCCartItemViewCellMode alloc]init];
-    [[IPCPayOrderMode sharedManager] clearData];
-    
-    [self.glassListView setTableFooterView:[[UIView alloc]init]];
-    self.glassListView.emptyAlertImage = @"exception_cart";
-    self.glassListView.emptyAlertTitle = @"您的购物车空空的,请前去选取眼镜!";
-    
-    [self.checkoutBtn setBackgroundColor:COLOR_RGB_BLUE];
-    [self.checkoutConfirmBtn setBackgroundColor:COLOR_RGB_BLUE];
-    [self.deleteButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
-    [self.totalPriceLbl setTextColor:COLOR_RGB_RED];
-    [self.cartBottomView addTopLine];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self updateUI];
-    [[IPCClient sharedClient] cancelAllRequest];
-    [self.cartViewMode reloadContactLensStock];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didItemUnitCountChange) name:@"IPCCartUnitCountChange" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didItemExpandingStateChange:) name:@"IPCCartExpandStateChange" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addContactLens:) name:@"IPCCartAddContactLensChange" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closePayOrderPage) name:@"IPCCloseOrderChange" object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
 
 
 #pragma mark //Offer Order
@@ -120,27 +84,7 @@
     [self.view bringSubviewToFront:self.employeView];
 }
 
-#pragma mark //Clicked Events
-- (IBAction)onSelectAllBtnTapped:(UIButton *)sender
-{
-    [sender setSelected:!sender.selected];
-    [self.cartViewMode changeAllCartItemSelected:sender.selected];
-    [self updateUI];
-}
 
-- (IBAction)onDeleteBtnTapped:(id)sender
-{
-    __weak typeof (self) weakSelf = self;
-    if (! [self.cartViewMode shoppingCartIsEmpty]) {
-        [IPCUIKit showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:self Done:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [[IPCShoppingCart sharedCart] removeSelectCartItem];
-            [strongSelf updateUI];
-        }];
-    }else{
-        [IPCUIKit showError:@"未选中任何商品!"];
-    }
-}
 
 
 - (IBAction)onCheckoutBtnTapped:(id)sender
@@ -150,11 +94,10 @@
         if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && [IPCCurrentCustomerOpometry sharedManager].currentAddress &&[IPCCurrentCustomerOpometry sharedManager].currentOpometry)
         {
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf reloadButtonState:YES];
             [strongSelf loadPayOrderView];
         }else{
             [IPCUIKit showAlert:@"冰点云" Message:@"请先前去验光页面选择客户验光信息!" Owner:self Done:^{
-                [IPCUIKit pushToRootIndex:1];
+                [IPCUIKit pushToRootIndex:2];
             }];
         }
     }else{
@@ -193,7 +136,6 @@
 #pragma mark //Reload cart State
 - (void)updateUI
 {
-    [self reloadButtonState:NO];
     [self updateTotalPrice];
     [self.employeView removeFromSuperview];
     [self.selectAllBtn setSelected:[self.cartViewMode judgeCartItemSelectState]];
@@ -216,82 +158,18 @@
     [self.totalPriceLbl setAttributedText:[IPCUIKit subStringWithText:totalPrice BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor blackColor]]];
 }
 
-- (void)reloadButtonState:(BOOL)isOrder{
-    [IPCPayOrderMode sharedManager].isOrder = isOrder;
-    [self.checkoutBtn setHidden:isOrder];
-    [self.selectAllBtn setHidden:isOrder];
-    [self.deleteButton setHidden:isOrder];
-    [self.checkoutConfirmBtn setHidden:!isOrder];
-    [self.glassListView setHidden:isOrder];
-    [self.glassListView reloadData];
-}
 
 - (void)successPayOrder{
     [[IPCShoppingCart sharedCart] removeSelectCartItem];
     [[IPCCurrentCustomerOpometry sharedManager] clearData];
     [self.checkoutConfirmBtn jk_hideIndicator];
-    [self changeToCart];
-}
-
-- (void)changeToCart{
-    [[IPCPayOrderMode sharedManager] clearData];
-    [self.payOrderView removeFromSuperview];self.payOrderView = nil;
-    [self updateUI];
 }
 
 
 
-#pragma mark //NSNotification Methods
-//In the shopping cart price or quantity changes
-//- (void)didItemUnitCountChange{
-//    [self updateUI];
-//}
 
-//In the shopping cart properties expand
-//- (void)didItemExpandingStateChange:(NSNotification *)notification{
-//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[notification.userInfo[@"row"] integerValue] inSection:[IPCPayOrderMode sharedManager].isOrder ? 4 : 0];
-//    if ([IPCPayOrderMode sharedManager].isOrder) {
-//        [self.payOrderView reloadData];
-//    }else{
-//        [self.glassListView reloadData];
-//        [self.glassListView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//    }
-//}
 
-//In the shopping cart add judgment contact lenses
-//- (void)addContactLens:(NSNotification *)notification{
-//    NSIndexPath * indexPath = [NSIndexPath indexPathForRow:[notification.userInfo[@"row"] integerValue] inSection:0];
-//    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row];
-//    if (cartItem) {
-//        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
-//            [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
-//                if (! hasStock) {
-//                    [IPCUIKit showError:@"当前选择护理液数量大于库存数"];
-//                }else{
-//                    [[IPCShoppingCart sharedCart] plusItem:cartItem];
-//                    [self updateUI];
-//                }
-//            }];
-//        }else{
-//            if ([self.cartViewMode judgeContactLensStock:cartItem]) {
-//                [IPCUIKit showError:@"当前选择隐形眼镜镜片数量大于库存数"];
-//            }else{
-//                [[IPCShoppingCart sharedCart] plusItem:cartItem];
-//                [self updateUI];
-//            }
-//        }
-//    }
-//}
 
-//- (void)closePayOrderPage{
-//    __weak typeof (self) weakSelf = self;
-//    [IPCUIKit showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
-//        __strong typeof (weakSelf) strongSelf = weakSelf;
-//        [[IPCPayOrderMode sharedManager] clearData];
-//        [strongSelf updateUI];
-//        [strongSelf.payOrderView removeFromSuperview];self.payOrderView = nil;
-//    }];
-//}
 
 - (void)didReceiveMemoryWarning
 {

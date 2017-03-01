@@ -656,7 +656,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc] initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
         detailVC.glasses  = self.glassListViewMode.glassesList[indexPath.row];
         [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-            [IPCUIKit pushToRootIndex:3];
+            [IPCUIKit pushToRootIndex:4];
             [detailVC.navigationController popToRootViewControllerAnimated:NO];
         }];
         [self.navigationController pushViewController:detailVC animated:YES];
@@ -666,7 +666,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (void)chooseParameter:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productCollectionView indexPathForCell:cell];
-        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Complete:^{
+        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  IsCart:NO Complete:^{
             [self.productCollectionView reloadData];
         }];
         self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];

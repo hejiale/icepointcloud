@@ -140,6 +140,13 @@
                         <outlet property="delegate" destination="iN0-l3-epB" id="x2x-LI-g87"/>
                     </connections>
                 </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cover" translatesAutoresizingMaskIntoConstraints="NO" id="qHN-1G-gVq">
+                    <rect key="frame" x="0.0" y="70" width="400" height="5.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5.5" id="TlZ-hz-xFb"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -148,9 +155,12 @@
                 <constraint firstAttribute="bottom" secondItem="E3E-SG-Act" secondAttribute="bottom" id="52i-hk-ly5"/>
                 <constraint firstAttribute="trailing" secondItem="E3E-SG-Act" secondAttribute="trailing" id="5IF-cC-xvD"/>
                 <constraint firstItem="Pso-uY-QqM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HqE-b9-rIN"/>
+                <constraint firstItem="qHN-1G-gVq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ODH-rH-ZSK"/>
                 <constraint firstAttribute="trailing" secondItem="ys0-Lo-IuG" secondAttribute="trailing" id="Vt1-O6-vsa"/>
                 <constraint firstAttribute="bottom" secondItem="ys0-Lo-IuG" secondAttribute="bottom" constant="50" id="XRr-Sa-CUx"/>
                 <constraint firstItem="E3E-SG-Act" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hUL-sw-x2y"/>
+                <constraint firstAttribute="trailing" secondItem="qHN-1G-gVq" secondAttribute="trailing" id="i9I-l3-cKf"/>
+                <constraint firstItem="qHN-1G-gVq" firstAttribute="top" secondItem="Pso-uY-QqM" secondAttribute="bottom" id="lOi-DW-XwD"/>
                 <constraint firstItem="ys0-Lo-IuG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oH4-fZ-msb"/>
                 <constraint firstItem="E3E-SG-Act" firstAttribute="top" secondItem="ys0-Lo-IuG" secondAttribute="bottom" id="wxU-fu-x5C"/>
                 <constraint firstItem="ys0-Lo-IuG" firstAttribute="top" secondItem="Pso-uY-QqM" secondAttribute="bottom" id="xHY-zC-55g"/>
@@ -171,5 +181,6 @@
     <resources>
         <image name="common_btn_check" width="23" height="23"/>
         <image name="common_btn_check_selected" width="23" height="23"/>
+        <image name="icon_cover" width="1024" height="5"/>
     </resources>
 </document>

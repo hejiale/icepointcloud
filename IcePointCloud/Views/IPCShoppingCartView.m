@@ -10,6 +10,7 @@
 #import "IPCCartViewMode.h"
 #import "IPCExpandShoppingCartCell.h"
 #import "IPCEditShoppingCartCell.h"
+#import "IPCGlassParameterView.h"
 
 static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
 static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartCellIdentifier";
@@ -27,6 +28,7 @@ typedef  void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
+@property (strong, nonatomic) UIView * coverView;
 @property (copy, nonatomic) DismissBlock dismissBlock;
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 
@@ -36,12 +38,20 @@ typedef  void(^DismissBlock)();
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    
+    [self addLeftLine];
     [self.settlementButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.cartListTableView setTableFooterView:[[UIView alloc]init]];
     self.cartListTableView.emptyAlertImage = @"exception_cart";
     self.cartListTableView.emptyAlertTitle = @"您的购物车空空的,请前去选取眼镜!";
     [self.cartBottomView addTopLine];
+}
+
+- (UIView *)coverView{
+    if (!_coverView) {
+        _coverView = [[UIView alloc]initWithFrame:self.bounds];
+        [_coverView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.2]];
+    }
+    return _coverView;
 }
 
 - (void)show
@@ -151,8 +161,18 @@ typedef  void(^DismissBlock)();
 
 #pragma mark //IPCEditShoppingCartCellDelegate
 - (void)chooseParameter:(IPCEditShoppingCartCell *)cell{
+    [self addSubview:self.coverView];
+    
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+    
+    IPCGlassParameterView * parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  IsCart:YES Complete:^{
+        [parameterView removeFromSuperview];
+        [self.coverView removeFromSuperview];
+    }];
+    parameterView.glasses = cartItem.glasses;
+    [[UIApplication sharedApplication].keyWindow addSubview:parameterView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:parameterView];
     
 }
 

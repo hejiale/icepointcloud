@@ -19,7 +19,7 @@ static NSString * const filterValueIdentifier = @"FilterValueCollectionViewCellI
 static NSString * const priceRandIdentifier = @"PriceRangeTableViewCellIdentifier";
 static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 
-@interface IPCFilterGlassesView()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate,IPCTagCollectionLayoutDelegate,PriceRangeTableViewCellDelegate>
+@interface IPCFilterGlassesView()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate,IPCTagCollectionLayoutDelegate>
 {
     NSArray * sectionTitles;
     BOOL       isFilter;
@@ -29,6 +29,8 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIView                 *rightView;
 @property (weak, nonatomic) IBOutlet UICollectionView *rightValueCollectionView;
 @property (weak, nonatomic) IBOutlet UIView                *leftBgView;
+@property (weak, nonatomic) IBOutlet UIButton *completeButton;
+
 @property (strong, nonatomic) IPCChooseCategoryView      *categoryView;
 @property (strong, nonatomic) UIView                           *topChooseView;
 @property (strong, nonatomic) NSMutableArray<UIButton *>     *allButtonsArray;
@@ -50,6 +52,8 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     [super awakeFromNib];
     
     chooseCellHeight = 100;
+    self.completeButton.layer.cornerRadius = 20;
+    [self.completeButton setBackgroundColor:COLOR_RGB_BLUE];
     
     sectionTitles = @[@"类目",@"属性",@"价格区间"];
     self.allButtonsArray = [[NSMutableArray alloc]init];
@@ -128,6 +132,28 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
         }
     }];
 }
+
+
+- (IBAction)onFilterProductWithPriceAction:(id)sender {
+    IPCPriceRangeTableViewCell * cell = (IPCPriceRangeTableViewCell *)[self.leftClassTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2]];
+    NSString * startPrice = [cell.startPriceTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString * endPrice = [cell.endPriceTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if ([startPrice doubleValue] < 0)startPrice = @"";
+    if ([endPrice doubleValue] < 0)endPrice = @"";
+    
+    if ([endPrice doubleValue] > 0) {
+        if ([startPrice doubleValue] > [endPrice doubleValue]) {
+            [IPCUIKit showError:@"输入起始金额有误!"];
+            return;
+        }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(filterProductsPrice:EndPrice:)]) {
+        [self.delegate filterProductsPrice:[startPrice doubleValue]  EndPrice:[endPrice doubleValue]];
+    }
+}
+
 
 #pragma mark //Obtain the selected filter
 - (NSArray *)getAllChooseValue
@@ -254,7 +280,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
         IPCPriceRangeTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:priceRandIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPriceRangeTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            cell.delegate = self;
         }
         if ([self.dataSource respondsToSelector:@selector(startPrice)]) {
             [cell.startPriceTextField setText:[self.dataSource startPrice]];
@@ -318,7 +343,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == sectionTitles.count - 1)
-        return 180;
+        return 80;
     if ((indexPath.section == 1 && indexPath.row == 0) && [[[self.dataSource filterKeySource] allValues] count] > 0) {
         return self.topChooseView.jk_height;
     }
@@ -345,14 +370,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
         [self.rightValueCollectionView reloadData];
     }
 }
-
-#pragma mark //PriceRangeTableViewCellDelegate
-- (void)reloadPriceRangProducts:(double)startPirce EndPrice:(double)endPrice{
-    if ([self.delegate respondsToSelector:@selector(filterProductsPrice:EndPrice:)]) {
-        [self.delegate filterProductsPrice:startPirce EndPrice:endPrice];
-    }
-}
-
 
 #pragma mark //UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

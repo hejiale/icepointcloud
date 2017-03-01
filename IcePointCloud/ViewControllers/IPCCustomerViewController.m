@@ -155,7 +155,7 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
 
 #pragma mark //NSNotification Events
 - (void)pushToCartAction{
-    [IPCUIKit pushToRootIndex:3];
+    [IPCUIKit pushToRootIndex:4];
 }
 
 #pragma mark //UITableViewDataSource

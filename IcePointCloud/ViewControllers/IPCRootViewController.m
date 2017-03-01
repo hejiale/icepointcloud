@@ -92,9 +92,9 @@
 {
     [self removeAllNotifications];
     
-    if (tabBarController.selectedIndex == 0) {
+    if (tabBarController.selectedIndex == 1) {
         [self.productVC addNotifications];
-    }else if (tabBarController.selectedIndex == 2){
+    }else if (tabBarController.selectedIndex == 3){
         [self.tryVC addTryNotifications];
     }
 }
@@ -140,25 +140,6 @@
     }];
 }
 
-
-- (void)judgeIsCheckoutOrder:(NSInteger)index{
-    if ([self.selectedViewController isKindOfClass:[IPCShoppingCartViewController class]] && self.selectedViewController)
-    {
-        __weak typeof (self) weakSelf = self;
-        IPCShoppingCartViewController * currentCartVC = (IPCShoppingCartViewController *)self.selectedViewController;
-        if ([IPCPayOrderMode sharedManager].isOrder) {
-            [IPCUIKit showAlert:@"冰点云" Message:@"您正在购买眼镜的过程中，如果离开当前页面，购买记录将丢失，确定离开吗？" Owner:self Done:^{
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                [currentCartVC changeToCart];
-                [strongSelf setSelectedIndex:index];
-            }];
-        }else{
-            [self setSelectedIndex:index];
-        }
-    }else{
-        [self setSelectedIndex:index];
-    }
-}
 
 - (void)judgeIsInsertNewCustomer:(NSInteger)index{
     if ([self.selectedViewController isKindOfClass:[IPCCustomerViewController class]] && self.selectedViewController)

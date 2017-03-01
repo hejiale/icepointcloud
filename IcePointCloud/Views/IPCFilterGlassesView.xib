@@ -27,11 +27,27 @@
                                 <outlet property="delegate" destination="iN0-l3-epB" id="tR0-27-5rg"/>
                             </connections>
                         </tableView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UTe-eI-3L7">
+                            <rect key="frame" x="15" y="550" width="230" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="ZuC-7M-qo9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <state key="normal" title="完成">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onFilterProductWithPriceAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="S2n-z4-rIa"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="uax-uO-DMr" secondAttribute="bottom" constant="60" id="Ota-IF-3IQ"/>
+                        <constraint firstAttribute="trailing" secondItem="UTe-eI-3L7" secondAttribute="trailing" constant="15" id="6dw-zK-GJE"/>
+                        <constraint firstItem="UTe-eI-3L7" firstAttribute="top" secondItem="uax-uO-DMr" secondAttribute="bottom" constant="10" id="HN2-iS-p0p"/>
+                        <constraint firstItem="UTe-eI-3L7" firstAttribute="leading" secondItem="EnB-PJ-DfA" secondAttribute="leading" constant="15" id="bOS-ua-5ZO"/>
                         <constraint firstAttribute="trailing" secondItem="uax-uO-DMr" secondAttribute="trailing" id="eto-GG-6hr"/>
+                        <constraint firstAttribute="bottom" secondItem="UTe-eI-3L7" secondAttribute="bottom" constant="10" id="gtS-ML-5sH"/>
                         <constraint firstAttribute="width" constant="260" id="sSd-4b-KQ2"/>
                         <constraint firstItem="uax-uO-DMr" firstAttribute="top" secondItem="EnB-PJ-DfA" secondAttribute="top" id="t2s-WR-uBW"/>
                         <constraint firstItem="uax-uO-DMr" firstAttribute="leading" secondItem="EnB-PJ-DfA" secondAttribute="leading" id="uTp-oz-V5V"/>
@@ -52,6 +68,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="completeButton" destination="UTe-eI-3L7" id="I2l-V0-e2S"/>
                 <outlet property="leftBgView" destination="EnB-PJ-DfA" id="Lo1-3A-kxn"/>
                 <outlet property="leftClassTableView" destination="uax-uO-DMr" id="ABc-Sq-cyP"/>
                 <outlet property="rightValueCollectionView" destination="mBK-T2-UOf" id="Fft-zX-UXZ"/>

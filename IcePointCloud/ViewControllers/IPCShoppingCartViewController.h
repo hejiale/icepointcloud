@@ -10,6 +10,4 @@
 
 @interface IPCShoppingCartViewController : UIViewController
 
-- (void)changeToCart;
-
 @end

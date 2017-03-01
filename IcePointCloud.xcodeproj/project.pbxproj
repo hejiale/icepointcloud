@@ -739,17 +739,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		042EF1B41DDD953400EEC744 /* ViewMode */ = {
-			isa = PBXGroup;
-			children = (
-				042EF1AE1DDD4F7C00EEC744 /* IPCCartViewMode.h */,
-				042EF1AF1DDD4F7C00EEC744 /* IPCCartViewMode.m */,
-				042EF1B11DDD55E100EEC744 /* IPCCartItemViewCellMode.h */,
-				042EF1B21DDD55E100EEC744 /* IPCCartItemViewCellMode.m */,
-			);
-			name = ViewMode;
-			sourceTree = "<group>";
-		};
 		04443C561D23CAA300596519 /* FilterProduct */ = {
 			isa = PBXGroup;
 			children = (
@@ -774,26 +763,10 @@
 				0444C7461D9CEBD600553032 /* IPCContactLenSpecList.m */,
 				044E4BBC1E1CF36A00C7C9C3 /* IPCAccessorySpecList.h */,
 				044E4BBD1E1CF36A00C7C9C3 /* IPCAccessorySpecList.m */,
+				04F3DAA31DE3DD6C00AA3868 /* IPCGlassParameterViewMode.h */,
+				04F3DAA41DE3DD6C00AA3868 /* IPCGlassParameterViewMode.m */,
 			);
 			name = Batch;
-			sourceTree = "<group>";
-		};
-		044E0EC81E03C00D00FD2525 /* ViewMode */ = {
-			isa = PBXGroup;
-			children = (
-				044E0EC91E03C02E00FD2525 /* IPCCustomerDetailViewMode.h */,
-				044E0ECA1E03C02E00FD2525 /* IPCCustomerDetailViewMode.m */,
-			);
-			name = ViewMode;
-			sourceTree = "<group>";
-		};
-		04542C821DDA9E2B005B5CCA /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				04542C831DDA9E54005B5CCA /* IPCGlassListViewMode.h */,
-				04542C841DDA9E54005B5CCA /* IPCGlassListViewMode.m */,
-			);
-			name = ViewModel;
 			sourceTree = "<group>";
 		};
 		046332441D49E98F000B4940 /* SkinCare */ = {
@@ -854,6 +827,21 @@
 			name = ProductDetail;
 			sourceTree = "<group>";
 		};
+		046BBEB91E6696720086BE08 /* order */ = {
+			isa = PBXGroup;
+			children = (
+				04C9F7A01DEE9C1B001258B2 /* IPCPayOrderMode.h */,
+				04C9F7A11DEE9C1B001258B2 /* IPCPayOrderMode.m */,
+				9E5E2C6119E4C05300017172 /* IPCOrder.h */,
+				9E5E2C6219E4C05300017172 /* IPCOrder.m */,
+				04C9F7AE1DEEC05A001258B2 /* IPCEmployeList.h */,
+				04C9F7AF1DEEC05A001258B2 /* IPCEmployeList.m */,
+				04D9D48B1E1F7416003092D0 /* IPCEmploye.h */,
+				04D9D48C1E1F7416003092D0 /* IPCEmploye.m */,
+			);
+			name = order;
+			sourceTree = "<group>";
+		};
 		046CF1411E5FDE3F0098B6BF /* shoppingCart */ = {
 			isa = PBXGroup;
 			children = (
@@ -892,7 +880,6 @@
 		0485F3F91D3491C200A42DE3 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				044E0EC81E03C00D00FD2525 /* ViewMode */,
 				0492B64F1D2A48E600A70A3C /* IPCCustomerViewController.h */,
 				0492B6501D2A48E600A70A3C /* IPCCustomerViewController.m */,
 				0492B6511D2A48E600A70A3C /* IPCCustomerViewController.xib */,
@@ -909,20 +896,22 @@
 		0485F4051D34BD4300A42DE3 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				0485F40B1D34BE1700A42DE3 /* IPCOptometryList.h */,
-				0485F40C1D34BE1700A42DE3 /* IPCOptometryList.m */,
+				047D3FC81D43479300638526 /* IPCCurrentCustomerOpometry.h */,
+				047D3FC91D43479300638526 /* IPCCurrentCustomerOpometry.m */,
+				0470ADB31D409233003AF4F4 /* IPCCustomerAddressList.h */,
+				0470ADB41D409233003AF4F4 /* IPCCustomerAddressList.m */,
+				044E0EC91E03C02E00FD2525 /* IPCCustomerDetailViewMode.h */,
+				044E0ECA1E03C02E00FD2525 /* IPCCustomerDetailViewMode.m */,
 				0485F4021D34A72800A42DE3 /* IPCCustomerList.h */,
 				0485F4031D34A72800A42DE3 /* IPCCustomerList.m */,
 				0470AD9F1D406E6D003AF4F4 /* IPCCustomerOrderList.h */,
 				0470ADA01D406E6D003AF4F4 /* IPCCustomerOrderList.m */,
-				0470ADB31D409233003AF4F4 /* IPCCustomerAddressList.h */,
-				0470ADB41D409233003AF4F4 /* IPCCustomerAddressList.m */,
-				047F69751D41FFF900AA4C0F /* IPCDetailCustomer.h */,
-				047F69761D41FFF900AA4C0F /* IPCDetailCustomer.m */,
 				047F695E1D41B10900AA4C0F /* IPCCustomOrderDetailList.h */,
 				047F695F1D41B10900AA4C0F /* IPCCustomOrderDetailList.m */,
-				047D3FC81D43479300638526 /* IPCCurrentCustomerOpometry.h */,
-				047D3FC91D43479300638526 /* IPCCurrentCustomerOpometry.m */,
+				047F69751D41FFF900AA4C0F /* IPCDetailCustomer.h */,
+				047F69761D41FFF900AA4C0F /* IPCDetailCustomer.m */,
+				0485F40B1D34BE1700A42DE3 /* IPCOptometryList.h */,
+				0485F40C1D34BE1700A42DE3 /* IPCOptometryList.m */,
 			);
 			name = Customer;
 			sourceTree = "<group>";
@@ -943,6 +932,8 @@
 		0485F4071D34BD7D00A42DE3 /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				04542C831DDA9E54005B5CCA /* IPCGlassListViewMode.h */,
+				04542C841DDA9E54005B5CCA /* IPCGlassListViewMode.m */,
 				04760B081D3C80A1003A4E16 /* IPCGetGlassesListResult.h */,
 				04760B091D3C80A1003A4E16 /* IPCGetGlassesListResult.m */,
 				0492B64C1D29F8E000A70A3C /* IPCGlassesImage.h */,
@@ -956,18 +947,14 @@
 		0485F4081D34BDA500A42DE3 /* Cart */ = {
 			isa = PBXGroup;
 			children = (
+				042EF1AE1DDD4F7C00EEC744 /* IPCCartViewMode.h */,
+				042EF1AF1DDD4F7C00EEC744 /* IPCCartViewMode.m */,
+				042EF1B11DDD55E100EEC744 /* IPCCartItemViewCellMode.h */,
+				042EF1B21DDD55E100EEC744 /* IPCCartItemViewCellMode.m */,
 				04EAF91C1D531A4300A4A66F /* IPCShoppingCart.h */,
 				04EAF91D1D531A4300A4A66F /* IPCShoppingCart.m */,
 				9E9C684A1B92E47F00695FED /* IPCShoppingCartItem.h */,
 				9E9C684B1B92E47F00695FED /* IPCShoppingCartItem.m */,
-				04C9F7A01DEE9C1B001258B2 /* IPCPayOrderMode.h */,
-				04C9F7A11DEE9C1B001258B2 /* IPCPayOrderMode.m */,
-				9E5E2C6119E4C05300017172 /* IPCOrder.h */,
-				9E5E2C6219E4C05300017172 /* IPCOrder.m */,
-				04C9F7AE1DEEC05A001258B2 /* IPCEmployeList.h */,
-				04C9F7AF1DEEC05A001258B2 /* IPCEmployeList.m */,
-				04D9D48B1E1F7416003092D0 /* IPCEmploye.h */,
-				04D9D48C1E1F7416003092D0 /* IPCEmploye.m */,
 			);
 			name = Cart;
 			sourceTree = "<group>";
@@ -1012,7 +999,6 @@
 		04924AF31D6AC0D7006D7374 /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				04542C821DDA9E2B005B5CCA /* ViewModel */,
 				9E5C85801B60DDFB00A879BB /* IPCGlassListViewController.h */,
 				9E5C85811B60DDFB00A879BB /* IPCGlassListViewController.m */,
 				9E5C85821B60DDFB00A879BB /* IPCGlassListViewController.xib */,
@@ -1083,7 +1069,6 @@
 		04A2020C1D7FDF3200F2A681 /* Shoppingcart */ = {
 			isa = PBXGroup;
 			children = (
-				042EF1B41DDD953400EEC744 /* ViewMode */,
 				9E6A7730198BAEA60043985B /* IPCShoppingCartViewController.h */,
 				9E6A7731198BAEA60043985B /* IPCShoppingCartViewController.m */,
 				9E6A7732198BAEA60043985B /* IPCShoppingCartViewController.xib */,
@@ -1261,11 +1246,10 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		04A4154E1D7D203D0093FF6E /* Batch */ = {
+		04A4154E1D7D203D0093FF6E /* BatchParameter */ = {
 			isa = PBXGroup;
 			children = (
 				046439D61E0A502A00291FDB /* cell */,
-				04F3DAA21DE3DD4900AA3868 /* ViewMode */,
 				04EC1A731D6BEBDE00E9A9F7 /* IPCGlassParameterView.h */,
 				04EC1A741D6BEBDE00E9A9F7 /* IPCGlassParameterView.m */,
 				04EC1A781D6BEBED00E9A9F7 /* IPCGlassParameterView.xib */,
@@ -1273,7 +1257,7 @@
 				04A415451D7D093F0093FF6E /* IPCEditBatchParameterView.m */,
 				04A415471D7D094F0093FF6E /* IPCEditBatchParameterView.xib */,
 			);
-			name = Batch;
+			name = BatchParameter;
 			sourceTree = "<group>";
 		};
 		04B1D1F91D867B6100D9B865 /* AssetLibrary */ = {
@@ -1511,15 +1495,6 @@
 			name = Share;
 			sourceTree = "<group>";
 		};
-		04F3DAA21DE3DD4900AA3868 /* ViewMode */ = {
-			isa = PBXGroup;
-			children = (
-				04F3DAA31DE3DD6C00AA3868 /* IPCGlassParameterViewMode.h */,
-				04F3DAA41DE3DD6C00AA3868 /* IPCGlassParameterViewMode.m */,
-			);
-			name = ViewMode;
-			sourceTree = "<group>";
-		};
 		9E03C2C81978D5D5007389D0 = {
 			isa = PBXGroup;
 			children = (
@@ -1619,16 +1594,16 @@
 		9E981F1D197B779B00019E2F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				046CF1411E5FDE3F0098B6BF /* shoppingCart */,
 				04B1D2091D867D8D00D9B865 /* Asset */,
-				04A4154E1D7D203D0093FF6E /* Batch */,
+				04A4154E1D7D203D0093FF6E /* BatchParameter */,
 				0470ADA51D407042003AF4F4 /* Customer */,
 				04443C561D23CAA300596519 /* FilterProduct */,
 				04C34CC41E0140D500979001 /* HcdGuideView */,
+				04A202101D7FDFC300F2A681 /* Order */,
 				04CBD9601D582C7600C7CAA4 /* Person */,
 				049753B71D4AF49C00E6579F /* Product */,
 				046497811D483E6300137A3E /* ProductDetail */,
-				04A202101D7FDFC300F2A681 /* Order */,
+				046CF1411E5FDE3F0098B6BF /* shoppingCart */,
 				04C555411D1B78C80083496D /* TakeGlasses */,
 			);
 			path = Views;
@@ -1642,6 +1617,7 @@
 				0485F4081D34BDA500A42DE3 /* Cart */,
 				0485F4051D34BD4300A42DE3 /* Customer */,
 				0485F4091D34BDBF00A42DE3 /* FilterProduct */,
+				046BBEB91E6696720086BE08 /* order */,
 				0485F4071D34BD7D00A42DE3 /* Product */,
 				04F3C4F01D890B6A00BB3098 /* Share */,
 				0485F40A1D34BDD400A42DE3 /* TryGlass */,
@@ -1656,13 +1632,13 @@
 				046439D81E0A50D600291FDB /* Main */,
 				04924AF31D6AC0D7006D7374 /* Product */,
 				04A2020E1D7FDF5800F2A681 /* TryGlasses */,
-				04A2020C1D7FDF3200F2A681 /* Shoppingcart */,
 				04DBFAF41E5BD5E90044B352 /* PayOrder */,
 				0485F3F91D3491C200A42DE3 /* Customer */,
 				04A2020D1D7FDF4600F2A681 /* Search */,
 				04A2021B1D801A5B00F2A681 /* Lanuch */,
 				048C213A1D34F89800EC4214 /* Login */,
 				046332441D49E98F000B4940 /* SkinCare */,
+				04A2020C1D7FDF3200F2A681 /* Shoppingcart */,
 				04A2020F1D7FDF8A00F2A681 /* Help */,
 			);
 			path = ViewControllers;

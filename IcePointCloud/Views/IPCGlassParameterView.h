@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) IPCGlasses * glasses;
 
-- (instancetype)initWithFrame:(CGRect)frame Complete:(void(^)())complete;
+- (instancetype)initWithFrame:(CGRect)frame IsCart:(BOOL)isCart Complete:(void (^)())complete;
 
 @end
 
