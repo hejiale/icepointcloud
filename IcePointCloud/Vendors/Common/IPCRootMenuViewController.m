@@ -218,8 +218,8 @@
 
 - (UIViewController *)selectedViewController
 {
-    if (self.selectedIndex < [self.viewControllers count])
-        return [self.viewControllers objectAtIndex:self.selectedIndex];
+    if (self.selectedIndex < [self.viewControllers count] + 1 && self.selectedIndex > 0)
+        return [self.viewControllers objectAtIndex:self.selectedIndex -1];
     return nil;
 }
 

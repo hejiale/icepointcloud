@@ -48,14 +48,14 @@
     
     self.glassesNameLbl.text = _cartItem.glasses.glassName;
     [self.cartCountLabel setText:[NSString stringWithFormat:@"%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]]];
-    if ([self.cartItem.glasses filterType] == IPCTopFIlterTypeFrames || [self.cartItem.glasses filterType] == IPCTopFilterTypeSunGlasses) {
-        [self.glassesNameLbl setText:self.cartItem.glasses.glassName];
-        [self.arrowImage setHidden:YES];
-    }
-    if (self.cartItem.glasses.isBatch || ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType) || ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.stock == 0) || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
+    
+    if (self.cartItem.glasses.isBatch || ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType && !self.cartItem.isPreSell) || ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.stock == 0) || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
     {
         [self.glassesNameLbl setText:@"参数设置"];
         [self.arrowImage setHidden:NO];
+    }else{
+        [self.arrowImage setHidden:YES];
+        [self.glassesNameLbl setText:self.cartItem.glasses.glassName];
     }
     if (self.cartItem.isPreSell) {
         [self.preSellImage setHidden:NO];

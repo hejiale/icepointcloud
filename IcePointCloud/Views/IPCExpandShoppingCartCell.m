@@ -43,6 +43,7 @@
 {
     _cartItem = cartItem;
     self.ReloadBlock = reload;
+    [self.checkBtn setHidden:self.isOrder];
     [self.checkBtn setSelected:_cartItem.selected];
     
     IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
@@ -191,50 +192,6 @@
 
 
 #pragma mark //Clicked Events
-//- (void)onButtonTapped:(UIButton *)sender
-//{
-//    sender.selected = !sender.selected;
-//    [self updateBorderForButtonSelection:sender];
-//
-//    NSMutableArray *selected = [NSMutableArray new];
-//
-//    UIView *parent = sender.superview;
-//    for (UIButton *btn in parent.subviews) {
-//        if ([btn isKindOfClass:[UIButton class]]) {
-//
-//            BOOL handled = NO;
-//
-//            if (parent.tag == 103) {
-//                if ([[sender titleForState:UIControlStateNormal] isEqual:@"无"] && sender.selected) {
-//                    if (btn != sender) {
-//                        btn.selected = NO;
-//                        [self updateBorderForButtonSelection:btn];
-//                        handled = YES;
-//                    }
-//                } else if (![[sender titleForState:UIControlStateNormal] isEqual:@"无"] && sender.selected) {
-//                    if ([[btn titleForState:UIControlStateNormal] isEqual:@"无"] && btn.selected) {
-//                        btn.selected = NO;
-//                        [self updateBorderForButtonSelection:btn];
-//                        handled = YES;
-//                    }
-//                }
-//            }
-//
-//            if (!handled) {
-//                if (btn != sender) {
-//                    if (![self supportMultipleChoiceForTag:parent.tag]) {
-//                        btn.selected = NO;
-//                        [self updateBorderForButtonSelection:btn];
-//                    }
-//                }
-//            }
-//            if (btn.selected)[selected addObject:[btn titleForState:UIControlStateNormal]];
-//        }
-//    }
-//
-
-
-
 - (IBAction)onCheckBtnTapped:(id)sender{
     self.cartItem.selected = !self.cartItem.selected;
     if (self.ReloadBlock) {

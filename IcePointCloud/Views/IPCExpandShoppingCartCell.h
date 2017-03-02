@@ -12,6 +12,7 @@
 @interface IPCExpandShoppingCartCell : UITableViewCell
 
 @property (nonatomic, strong) IPCShoppingCartItem * cartItem;
+@property (nonatomic, assign) BOOL  isOrder;
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
 

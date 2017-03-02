@@ -21,10 +21,6 @@
     self = [super init];
     if (self) {
         self.glasses = glasses;
-        
-        if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-            [self queryBatchContactDegreeRequest];
-        }
     }
     return self;
 }

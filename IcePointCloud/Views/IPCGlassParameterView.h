@@ -11,6 +11,7 @@
 @interface IPCGlassParameterView : UIView
 
 @property (nonatomic, copy) IPCGlasses * glasses;
+@property (nonatomic, copy) IPCShoppingCartItem * cartItem;
 
 - (instancetype)initWithFrame:(CGRect)frame IsCart:(BOOL)isCart Complete:(void (^)())complete;
 

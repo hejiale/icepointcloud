@@ -10,6 +10,6 @@
 
 @interface IPCShoppingCartView : UIView
 
-- (void)show;
+- (void)showWithPay:(void(^)())pay;
 
 @end

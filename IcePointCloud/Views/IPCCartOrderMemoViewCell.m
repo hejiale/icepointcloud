@@ -19,8 +19,9 @@
     __weak typeof(self) weakSelf = self;
     [self.memoTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        make.left.equalTo(strongSelf.contentView.mas_left).with.offset(45);
+        make.left.equalTo(strongSelf.contentView.mas_left).with.offset(130);
         make.right.equalTo(strongSelf.contentView.mas_right).with.offset(-45);
+        make.centerY.equalTo(strongSelf.contentView.mas_centerY);
         make.height.mas_equalTo(@80);
     }];
 }

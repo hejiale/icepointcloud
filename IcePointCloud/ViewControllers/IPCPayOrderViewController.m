@@ -1,12 +1,13 @@
 //
-//  IPCPayOrderView.m
+//  IPCPayOrderViewController.m
 //  IcePointCloud
 //
-//  Created by mac on 2016/11/17.
-//  Copyright © 2016年 Doray. All rights reserved.
+//  Created by mac on 2017/3/2.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCPayOrderView.h"
+#import "IPCPayOrderViewController.h"
+#import "IPCExpandShoppingCartCell.h"
 #import "IPCHistoryOptometryCell.h"
 #import "IPCCustomerAddressListCell.h"
 #import "IPCOrderTopTableViewCell.h"
@@ -16,7 +17,10 @@
 #import "IPCCartItemViewCellMode.h"
 #import "IPCOrderPayTypeCell.h"
 #import "IPCOrderPayStyleCell.h"
+#import "IPCEmployeListView.h"
+#import "IPCPaySuccessView.h"
 
+static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
 static NSString * const ContactIdentifier    = @"ShoppingCustomerCellIdentifier";
 static NSString * const opometryIdentifier = @"HistoryOptometryCellIdentifier";
 static NSString * const addressIdentifier    = @"CustomerAddressListCellIdentifier";
@@ -25,45 +29,68 @@ static NSString * const memoIdentifier       = @"OrderMemoViewCellIdentifier";
 static NSString * const payTypeIdentifier   = @"IPCOrderPayTypeCellIdentifier";
 static NSString * const payStyleIdentifier   = @"IPCOrderPayStyleCellIdentifier";
 
-typedef void(^SelectEmployeBlock)();
-typedef void(^UpdateOrderBlock)();
-
-@interface IPCPayOrderView()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIButton *payButton;
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 
-@property (strong, nonatomic) IPCCartItemViewCellMode * cartItemViewCellMode;
-@property (copy, nonatomic) SelectEmployeBlock selectEmployeBlock;
-@property (copy, nonatomic) UpdateOrderBlock  updateBlock;
+@property (strong, nonatomic) IPCEmployeListView * employeView;
+@property (strong, nonatomic) IPCPaySuccessView  * paySuccessView;
+
 
 @end
 
-@implementation IPCPayOrderView
+@implementation IPCPayOrderViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
+    [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
+    [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
+    [self.bottomView addTopLine];
+    [self.payButton setBackgroundColor:COLOR_RGB_BLUE];
+    [self updateTotalPrice];
+}
 
 
-- (instancetype)initWithFrame:(CGRect)frame SelectEmploye:(void(^)())selectEmploye UpdateOrder:(void (^)())updateOrder
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.selectEmployeBlock = selectEmploye;
-        self.updateBlock = updateOrder;
-        self.cartItemViewCellMode = [[IPCCartItemViewCellMode alloc]init];
-        
-        UIView * payView = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderView" owner:self];
-        [payView setFrame:frame];
-        [self addSubview:payView];
-        
-        [[[IPCShoppingCart sharedCart] selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-            item.expanded = NO;
-        }];
-    }
-    return self;
+#pragma mark //Set UI
+- (void)loadEmployeView{
+    __weak typeof (self) weakSelf = self;
+    self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.employeView removeFromSuperview];self.employeView = nil;
+        [strongSelf.payOrderTableView reloadData];
+        [strongSelf updateTotalPrice];
+    }];
+    [self.view addSubview:self.employeView];
+    [self.view bringSubviewToFront:self.employeView];
 }
 
 
 #pragma mark //Clicked Events
-- (void)reloadData{
-    [self.payOrderTableView reloadData];
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (IBAction)onPayOrderAction:(id)sender {
+    if (! [IPCPayOrderMode sharedManager].currentEmploye) {
+        [IPCUIKit showError:@"请先选择员工"];
+    }else if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeNone) {
+        [IPCUIKit showError:@"请选择支付方式"];
+    }else if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeNone){
+        [IPCUIKit showError:@"请选择结算方式"];
+    }else if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment && [IPCPayOrderMode sharedManager].prepaidAmount <= 0){
+        [IPCUIKit showError:@"请输入预付金额"];
+    }else{
+        
+    }
+}
+
+- (void)updateTotalPrice{
+    [self.totalPriceLabel setAttributedText:[IPCUIKit subStringWithText:[NSString stringWithFormat:@"合计：￥%.f", [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]] BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor blackColor]]];
 }
 
 #pragma mark //UITableViewDataSource
@@ -74,8 +101,8 @@ typedef void(^UpdateOrderBlock)();
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 4)
-        return [self.cartItemViewCellMode tableView:tableView numberOfRowsInSection:section];
-    else if (section == 0)
+        return  [[IPCShoppingCart sharedCart] selectedItemsCount];
+    else if (section == 0 || section == 1)
         return 1;
     return 2;
 }
@@ -90,21 +117,12 @@ typedef void(^UpdateOrderBlock)();
         cell.currentCustomer = [IPCCurrentCustomerOpometry sharedManager].currentCustomer;
         return cell;
     }else if (indexPath.section == 1){
-        if (indexPath.row == 0) {
-            IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell.topTitleLabel setText:@"订单备注"];
-            return cell;
-        }else{
-            IPCCartOrderMemoViewCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCartOrderMemoViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell.memoTextView setText:[IPCPayOrderMode sharedManager].orderMemo];
-            return cell;
+        IPCCartOrderMemoViewCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCCartOrderMemoViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
+        [cell.memoTextView setText:[IPCPayOrderMode sharedManager].orderMemo];
+        return cell;
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
             IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -144,14 +162,23 @@ typedef void(^UpdateOrderBlock)();
             return cell;
         }
     }else if(indexPath.section == 4){
-        return [self.cartItemViewCellMode tableView:tableView cellForRowAtIndexPath:indexPath IsEditState:NO];
+        IPCExpandShoppingCartCell * cell = [tableView dequeueReusableCellWithIdentifier:kNewShoppingCartItemName];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCExpandShoppingCartCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }
+        IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedItemAtIndex:indexPath.row] ;
+        if (cartItem){
+            [cell setIsOrder:YES];
+            [cell setCartItem:cartItem Reload:nil];
+        }
+        return cell;
     }else if(indexPath.section == 5){
         if (indexPath.row == 0) {
             IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell.topTitleLabel setText:@"选择支付方式"];
+            [cell.topTitleLabel setText:@"员工打折"];
             return cell;
         }else{
             IPCOrderPayTypeCell * cell = [tableView dequeueReusableCellWithIdentifier:payTypeIdentifier];
@@ -159,12 +186,9 @@ typedef void(^UpdateOrderBlock)();
                 cell = [[UINib nibWithNibName:@"IPCOrderPayTypeCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell updateUI:^{
-                if (self.selectEmployeBlock)
-                    self.selectEmployeBlock();
+                [self loadEmployeView];
             } Update:^{
-                if (self.updateBlock) {
-                    self.updateBlock();
-                }
+                
             }];
             return cell;
         }
@@ -191,21 +215,20 @@ typedef void(^UpdateOrderBlock)();
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 4) {
-        IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] selectedItemAtIndex:indexPath.row];
-        return [self.cartItemViewCellMode cartItemProductCellHeight:item];
-    }else if (indexPath.section == 0){
+    if (indexPath.section == 0){
         return 280;
     }else if (indexPath.section == 2 && indexPath.row > 0){
         return 180;
-    }else if (indexPath.section == 1 && indexPath.row > 0){
+    }else if (indexPath.section == 1){
         return 100;
     }else if (indexPath.section == 5 && indexPath.row > 0){
-        return 195;
+        return 60;
     }else if (indexPath.section == 6 && indexPath.row > 0){
         return 155;
     }else if (indexPath.section == 3 && indexPath.row > 0){
         return 70;
+    }else if (indexPath.section == 4) {
+        return 135;
     }
     return 50;
 }
@@ -232,6 +255,12 @@ typedef void(^UpdateOrderBlock)();
     UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, section == 4 ? 0 : 8)];
     [footView setBackgroundColor:[UIColor clearColor]];
     return footView;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

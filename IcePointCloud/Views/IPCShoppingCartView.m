@@ -15,7 +15,7 @@
 static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
 static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartCellIdentifier";
 
-typedef  void(^DismissBlock)();
+typedef  void(^PayBlock)();
 
 @interface IPCShoppingCartView ()<UITableViewDelegate,UITableViewDataSource,IPCEditShoppingCartCellDelegate>
 {
@@ -29,7 +29,7 @@ typedef  void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
 @property (strong, nonatomic) UIView * coverView;
-@property (copy, nonatomic) DismissBlock dismissBlock;
+@property (copy, nonatomic) PayBlock payBlock;
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 
 @end
@@ -54,8 +54,10 @@ typedef  void(^DismissBlock)();
     return _coverView;
 }
 
-- (void)show
+- (void)showWithPay:(void (^)())pay
 {
+    self.payBlock = pay;
+    
     [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.frame;
         frame.origin.x -= self.jk_width;
@@ -88,7 +90,14 @@ typedef  void(^DismissBlock)();
 }
 
 - (IBAction)onSettlementAction:(id)sender {
-    
+    __weak typeof (self) weakSelf = self;
+    if ( ! [self.cartViewMode shoppingCartIsEmpty]){
+        if (self.payBlock) {
+            self.payBlock();
+        }
+    }else{
+        [IPCUIKit showError:@"购物车中未选中任何商品!"];
+    }
 }
 
 - (IBAction)onSelectAllAction:(UIButton *)sender {
@@ -170,7 +179,7 @@ typedef  void(^DismissBlock)();
         [parameterView removeFromSuperview];
         [self.coverView removeFromSuperview];
     }];
-    parameterView.glasses = cartItem.glasses;
+    parameterView.cartItem = cartItem;
     [[UIApplication sharedApplication].keyWindow addSubview:parameterView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:parameterView];
     

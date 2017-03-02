@@ -15,23 +15,23 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 @implementation IPCCartItemViewCellMode
 
-- (CGFloat)cartItemProductCellHeight:(IPCShoppingCartItem *)item
-{
-    if (item.expanded) {
-        switch ([item.glasses filterType]) {
-            case IPCTopFilterTypeCustomized:
-                return 410;
-            case IPCTopFilterTypeLens:
-                return 305;
-            default:
-                break;
-        }
-    }else{
-        if ([item.glasses filterType] == IPCTopFilterTypeCustomized || [item.glasses filterType] == IPCTopFilterTypeLens)
-            return 155;
-    }
-    return 128;
-}
+//- (CGFloat)cartItemProductCellHeight:(IPCShoppingCartItem *)item
+//{
+//    if (item.expanded) {
+//        switch ([item.glasses filterType]) {
+//            case IPCTopFilterTypeCustomized:
+//                return 410;
+//            case IPCTopFilterTypeLens:
+//                return 305;
+//            default:
+//                break;
+//        }
+//    }else{
+//        if ([item.glasses filterType] == IPCTopFilterTypeCustomized || [item.glasses filterType] == IPCTopFilterTypeLens)
+//            return 155;
+//    }
+//    return 128;
+//}
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

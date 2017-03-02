@@ -64,5 +64,10 @@
  */
 - (void)postChangedNotification;
 
+/**
+    replace new cart item
+ */
+- (void)replaceNewCartItem:(IPCShoppingCartItem *)newCartItem OldCartItem:(IPCShoppingCartItem *)oldCartItem;
+
 
 @end

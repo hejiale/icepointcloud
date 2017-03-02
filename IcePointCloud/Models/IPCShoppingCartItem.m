@@ -14,12 +14,6 @@
 {
     self = [super init];
     if (self) {
-        self.IOROptions     = [NSMutableArray new];
-        self.lensTypes      = [NSMutableArray new];
-        self.lensFuncs      = [NSMutableArray new];
-        self.thickenOptions = [NSMutableArray new];
-        self.thinnerOptions = [NSMutableArray new];
-        self.shiftOptions   = [NSMutableArray new];
     }
     return self;
 }
@@ -68,7 +62,7 @@
     if (self.batchReadingDegree.length)
         [attrs setObject:self.batchReadingDegree forKey:@"degree"];
     
-
+    
     if (self.contactDegree.length)
         [attrs setObject:self.contactDegree forKey:@"degree"];
     
@@ -84,23 +78,23 @@
         [attrs setObject:self.validityDate forKey:@"expireDate"];
     }
     
-    if (self.IOROptions.count)
-        attrs[@"refraction"] = [self.IOROptions componentsJoinedByString:@","];
+    if (self.IOROptions.length)
+        attrs[@"refraction"] = self.IOROptions;
     
-    if (self.lensTypes.count)
-        attrs[@"orderLensType"] = [self.lensTypes componentsJoinedByString:@","];
+    if (self.lensTypes.length)
+        attrs[@"orderLensType"] = self.lensTypes;
     
-    if (self.lensFuncs.count)
-        attrs[@"orderLensFunction"] = [self.lensFuncs componentsJoinedByString:@","];
+    if (self.lensFuncs.length)
+        attrs[@"orderLensFunction"] = self.lensFuncs;
     
-    if (self.thickenOptions.count)
-        attrs[@"addThickness"] = [self.thickenOptions componentsJoinedByString:@","];
+    if (self.thickenOptions.length)
+        attrs[@"addThickness"] = self.thickenOptions;
     
-    if (self.thinnerOptions.count)
-        attrs[@"isThinLens"] = [self.thinnerOptions componentsJoinedByString:@","];
+    if (self.thinnerOptions.length)
+        attrs[@"isThinLens"] = self.thinnerOptions;
     
-    if (self.shiftOptions.count)
-        attrs[@"moveCenter"] = [self.shiftOptions componentsJoinedByString:@","];
+    if (self.shiftOptions.length)
+        attrs[@"moveCenter"] = self.shiftOptions;
     
     if (self.remarks.length)
         attrs[@"memo"] = self.remarks;

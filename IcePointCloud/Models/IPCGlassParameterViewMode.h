@@ -16,6 +16,7 @@
 
 - (instancetype)initWithGlasses:(IPCGlasses *)glasses;
 
+- (void)queryBatchContactDegreeRequest;
 - (void)getContactLensSpecification:(NSString *)degreeID CompleteBlock:(void(^)())complete;
 - (void)getAccessorySpecification:(NSString *)glassID CompleteBlock:(void(^)())complete;
 

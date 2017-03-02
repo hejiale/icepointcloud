@@ -322,6 +322,12 @@
 }
 
 
+- (void)replaceNewCartItem:(IPCShoppingCartItem *)newCartItem OldCartItem:(IPCShoppingCartItem *)oldCartItem
+{
+    NSInteger index = [self.itemList indexOfObject:oldCartItem];
+    [self.itemList replaceObjectAtIndex:index withObject:newCartItem];
+}
+
 
 
 @end

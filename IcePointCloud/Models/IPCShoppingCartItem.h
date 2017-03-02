@@ -10,18 +10,17 @@
 
 @interface IPCShoppingCartItem : NSObject
 
-@property (nonatomic, strong) NSMutableArray<NSString *> *IOROptions;
-@property (nonatomic, strong) NSMutableArray<NSString *> *lensTypes;
-@property (nonatomic, strong) NSMutableArray<NSString *> *lensFuncs;
-@property (nonatomic, strong) NSMutableArray<NSString *> *thickenOptions;
-@property (nonatomic, strong) NSMutableArray<NSString *> *thinnerOptions;
-@property (nonatomic, strong) NSMutableArray<NSString *> *shiftOptions;
+@property (nonatomic, copy) NSString  *IOROptions;//折射率
+@property (nonatomic, copy) NSString  *lensTypes;//镜片类型
+@property (nonatomic, copy) NSString  *lensFuncs;//镜片功能
+@property (nonatomic, copy) NSString  *thickenOptions;//加厚
+@property (nonatomic, copy) NSString  *thinnerOptions;//美薄
+@property (nonatomic, copy) NSString  *shiftOptions;//移心
 
 @property (nonatomic, strong) IPCGlasses *glasses;
 @property (nonatomic, assign) NSInteger   count;
 @property (nonatomic, assign) BOOL        selected;
 @property (nonatomic, assign) double      unitPrice;
-@property (nonatomic, assign) BOOL        expanded;
 @property (nonatomic, copy)   NSString   *remarks;//note
 
 /**

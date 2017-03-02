@@ -16,12 +16,14 @@
 #import "IPCUpdatePasswordView.h"
 #import "IPCQRCodeView.h"
 #import "IPCShoppingCartView.h"
+#import "IPCPayOrderViewController.h"
 
 @interface IPCRootViewController ()<IPCRootMenuViewControllerDelegate>
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
 @property (strong, nonatomic) IBOutlet UIView *backgroundView;
+@property (strong, nonatomic) IPCShoppingCartView * cartView;
 
 @end
 
@@ -87,6 +89,19 @@
     [[IPCAppManager sharedManager] logout];
 }
 
+- (void)pushToPayOrderViewController{
+    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && [IPCCurrentCustomerOpometry sharedManager].currentAddress &&[IPCCurrentCustomerOpometry sharedManager].currentOpometry)
+    {
+        IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+        [self.navigationController pushViewController:payOrderVC animated:YES];
+    }else{
+        [IPCUIKit showAlert:@"冰点云" Message:@"请先前去验光页面选择客户验光信息!" Owner:self Done:^{
+            [self removeAllSubViews];
+            [self setSelectedIndex:2];
+        }];
+    }
+}
+
 #pragma mark //RootMenuViewControllerDelegate
 - (void)tabBarController:(IPCRootMenuViewController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
@@ -105,10 +120,13 @@
     [self.view bringSubviewToFront:self.backgroundView];
     __weak typeof (self) weakSelf = self;
     
-    IPCShoppingCartView * cartView = [UIView jk_loadInstanceFromNibWithName:@"IPCShoppingCartView" owner:self];
-    [cartView setFrame:CGRectMake(self.backgroundView.jk_width, 0, cartView.jk_width, cartView.jk_height)];
-    [self.backgroundView addSubview:cartView];
-    [cartView show];
+    _cartView = [UIView jk_loadInstanceFromNibWithName:@"IPCShoppingCartView" owner:self];
+    [_cartView setFrame:CGRectMake(self.backgroundView.jk_width, 0, _cartView.jk_width, _cartView.jk_height)];
+    [self.backgroundView addSubview:_cartView];
+    [_cartView showWithPay:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf pushToPayOrderViewController];
+    }];
 }
 
 - (void)showPersonView{
