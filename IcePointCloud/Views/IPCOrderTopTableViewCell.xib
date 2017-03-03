@@ -27,12 +27,22 @@
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mib-J8-sbl">
+                        <rect key="frame" x="40" y="58" width="240" height="1"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.19702482876712329" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="EeM-xj-rnf"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="mib-J8-sbl" secondAttribute="trailing" constant="40" id="5N8-9X-6ae"/>
                     <constraint firstItem="4yw-YA-82n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="C9C-Mr-nGX"/>
                     <constraint firstAttribute="trailingMargin" secondItem="4yw-YA-82n" secondAttribute="trailing" id="FAX-8n-yW5"/>
                     <constraint firstItem="4yw-YA-82n" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="NOW-16-biW"/>
                     <constraint firstItem="4yw-YA-82n" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="bNa-NZ-DeC"/>
+                    <constraint firstAttribute="bottom" secondItem="mib-J8-sbl" secondAttribute="bottom" id="lQu-Vm-sbp"/>
+                    <constraint firstItem="mib-J8-sbl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="pii-L0-CHl"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">

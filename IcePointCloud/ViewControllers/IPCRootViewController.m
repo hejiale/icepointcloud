@@ -8,7 +8,6 @@
 
 #import "IPCRootViewController.h"
 #import "IPCTryGlassesViewController.h"
-#import "IPCShoppingCartViewController.h"
 #import "IPCHelpViewController.h"
 #import "IPCGlassListViewController.h"
 #import "IPCCustomerViewController.h"

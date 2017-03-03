@@ -14,6 +14,7 @@
                 <outlet property="bottomView" destination="mGz-xH-dOR" id="cKz-vO-TNv"/>
                 <outlet property="payButton" destination="J9w-eU-FKc" id="iw4-gC-mB7"/>
                 <outlet property="payOrderTableView" destination="Fy7-Yr-o0G" id="fyl-p2-lpZ"/>
+                <outlet property="topView" destination="aeg-GO-cSb" id="4BK-E5-RAh"/>
                 <outlet property="totalPriceLabel" destination="kUl-ua-8Fg" id="TQw-4f-ZoT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,8 +26,9 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fy7-Yr-o0G">
                     <rect key="frame" x="0.0" y="70" width="1024" height="638"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.051637414383561647" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.045911245810684918" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="1lV-e0-oMi"/>
                         <outlet property="delegate" destination="-1" id="Tnm-Fq-U48"/>
@@ -41,7 +43,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="GrC-5H-2fL"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="确认购买">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>

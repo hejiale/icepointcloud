@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCOrderPayTypeCell : UITableViewCell<UITextFieldDelegate>
+@interface IPCOrderPayTypeCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *employeTextField;
 @property (weak, nonatomic) IBOutlet UISwitch *employeSwitch;
 
-- (void)updateUI:(void(^)())employe Update:(void(^)())update;
+- (void)updateUIWithEmployee:(void(^)())employe Update:(void(^)())update;
 
 @end

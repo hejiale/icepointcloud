@@ -131,8 +131,28 @@ typedef NS_ENUM(NSInteger, IPCOrderPayType){
     /**
      *  INSTALLMENT
      */
-    IPCOrderPayTypeInstallment
+    IPCOrderPayTypeInstallment,
 };
+
+/**
+ *  PreSell PAY TYPE
+ */
+typedef NS_ENUM(NSInteger, IPCOrderPreSellPayType){
+    /**
+     *  NONE
+     */
+    IPCOrderPreSellPayTypeNone,
+    /**
+     *  PRESELL PAY AMOUNT
+     */
+    IPCOrderPreSellPayTypeAmount,
+    /**
+     *  PRESELL INSTALLMENT
+     */
+    IPCOrderPreSellPayTypellInstallment
+};
+
+
 
 /**
  *  PAY STYLE

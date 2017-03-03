@@ -91,8 +91,8 @@ typedef void(^DismissBlock)();
     IPCEmploye * employe = self.employeList.employeArray[indexPath.row];
     if (employe) {
         [IPCPayOrderMode sharedManager].currentEmploye = employe;
-        [IPCPayOrderMode sharedManager].employeAmount = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice];
-        [IPCPayOrderMode sharedManager].discountAmount = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] *([IPCPayOrderMode sharedManager].currentEmploye.discount/100);
+        [IPCPayOrderMode sharedManager].employeAmount = [[IPCShoppingCart sharedCart] selectedNormalSellGlassesTotalPrice] *([IPCPayOrderMode sharedManager].currentEmploye.discount/100);
+        [IPCPayOrderMode sharedManager].preEmployeAmount = [[IPCShoppingCart sharedCart] selectedPreSellGlassesTotalPrice] *([IPCPayOrderMode sharedManager].currentEmploye.discount/100);
     }
     if (self.dismissBlock)
         self.dismissBlock();

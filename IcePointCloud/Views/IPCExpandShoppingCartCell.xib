@@ -146,6 +146,7 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="checkBtn" destination="yTW-la-plE" id="8jH-F4-U6Y"/>
+                <outlet property="countLabelWidth" destination="HLR-ap-sHl" id="MJo-hE-h99"/>
                 <outlet property="countLbl" destination="Ljk-K3-9sM" id="sxi-wZ-zR8"/>
                 <outlet property="glassNameHeight" destination="Kbl-uZ-ljK" id="9cl-pN-OG8"/>
                 <outlet property="glassesImgView" destination="U8U-48-ede" id="kyp-OI-2Xg"/>

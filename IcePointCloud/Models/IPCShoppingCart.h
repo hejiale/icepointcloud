@@ -20,6 +20,8 @@
  */
 - (NSInteger)itemsCount;
 - (NSInteger)selectedItemsCount;
+- (NSInteger)selectNormalItemsCount;
+- (NSInteger)selectedPreSellItemsCount;
 - (NSInteger)selectedGlassesCount;
 - (NSInteger)allGlassesCount;
 - (NSUInteger)itemsCount:(IPCShoppingCartItem *)cartItem;
@@ -28,10 +30,13 @@
  *    Calculate the total price shopping cart selected goods
  */
 - (double)selectedGlassesTotalPrice;
+- (double)selectedPreSellGlassesTotalPrice;
+- (double)selectedNormalSellGlassesTotalPrice;
 /**
  *   The selected shopping cart of goods
  */
 - (NSArray<IPCShoppingCartItem *> *)selectCartItems;
+- (NSArray<IPCShoppingCartItem *>*)selectPreSellCartItems;
 /**
  *    Remove the shopping cart
  */
@@ -58,6 +63,8 @@
 - (IPCShoppingCartItem *)batchItemForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl  ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date IsOpenBooking:(BOOL)isOpenBooking;
 - (IPCShoppingCartItem *)itemAtIndex:(NSInteger)index;
 - (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index;
+- (IPCShoppingCartItem *)selectedNormalSelltemAtIndex:(NSInteger)index;
+- (IPCShoppingCartItem *)selectedPreSelltemAtIndex:(NSInteger)index;
 - (NSArray<IPCShoppingCartItem *> *)batchParameterList:(IPCGlasses *)glasses;
 /**
  *   Send the shopping cart number change notification

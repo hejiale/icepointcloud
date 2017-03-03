@@ -22,7 +22,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *unitPriceButtonWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
 @property (copy, nonatomic) void(^ReloadBlock)();
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *countLabelWidth;
 
 @end
 
@@ -45,6 +45,11 @@
     self.ReloadBlock = reload;
     [self.checkBtn setHidden:self.isOrder];
     [self.checkBtn setSelected:_cartItem.selected];
+    if (self.isOrder) {
+        self.countLabelWidth.constant = 45;
+    }else{
+        self.countLabelWidth.constant = 5;
+    }
     
     IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
     if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];

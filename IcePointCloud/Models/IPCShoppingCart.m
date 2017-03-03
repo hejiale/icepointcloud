@@ -35,6 +35,14 @@
     return [self selectCartItems].count;
 }
 
+- (NSInteger)selectNormalItemsCount{
+    return [self selectNormalSellCartItems].count;
+}
+
+- (NSInteger)selectedPreSellItemsCount{
+    return [self selectPreSellCartItems].count;
+}
+
 - (NSInteger)selectedGlassesCount
 {
     NSInteger count = 0;
@@ -77,9 +85,41 @@
     return price;
 }
 
+
+- (double)selectedPreSellGlassesTotalPrice
+{
+    double price = 0;
+    for (IPCShoppingCartItem *ci in [self selectPreSellCartItems]) {
+        price += ci.totalPrice;
+    }
+    return price;
+}
+
+
+- (double)selectedNormalSellGlassesTotalPrice
+{
+    double price = 0;
+    for (IPCShoppingCartItem *ci in [self selectNormalSellCartItems]) {
+        price += ci.totalPrice;
+    }
+    return price;
+}
+
 - (NSArray<IPCShoppingCartItem *>*)selectCartItems{
     return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return [evaluatedObject selected];
+    }]];
+}
+
+- (NSArray<IPCShoppingCartItem *>*)selectPreSellCartItems{
+    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return [evaluatedObject selected] && [evaluatedObject isPreSell];
+    }]];
+}
+
+- (NSArray<IPCShoppingCartItem *>*)selectNormalSellCartItems{
+    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return [evaluatedObject selected] && ![evaluatedObject isPreSell];
     }]];
 }
 
@@ -94,6 +134,16 @@
 - (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index
 {
     return [self selectCartItems][index];
+}
+
+- (IPCShoppingCartItem *)selectedNormalSelltemAtIndex:(NSInteger)index
+{
+    return [self selectNormalSellCartItems][index];
+}
+
+- (IPCShoppingCartItem *)selectedPreSelltemAtIndex:(NSInteger)index
+{
+    return [self selectPreSellCartItems][index];
 }
 
 /**
