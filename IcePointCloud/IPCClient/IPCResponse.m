@@ -17,7 +17,7 @@
         if ([responseData isKindOfClass:[NSDictionary class]]){
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {
-//                DDLogInfo(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
+                NSLog(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
                 if (complete) {
                     if (responseData[kIPCNetworkResult]) {
                         complete(responseData[kIPCNetworkResult]);

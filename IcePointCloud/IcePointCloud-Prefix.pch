@@ -37,7 +37,7 @@
 #import "YYKit.h"
 #import "JKCategories.h"
 //#import "UMMobClick/MobClick.h"
-#import <JSPatchPlatform/JSPatch.h>
+//#import <JSPatchPlatform/JSPatch.h>
 //#import "DDLogger.h"
 #import "ReactiveCocoa.h"
 #import "RealReachability.h"
