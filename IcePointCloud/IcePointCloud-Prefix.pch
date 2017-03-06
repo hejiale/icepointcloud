@@ -36,9 +36,9 @@
 #import "iflyMSC/IFlyFaceSDK.h"
 #import "YYKit.h"
 #import "JKCategories.h"
-#import "UMMobClick/MobClick.h"
+//#import "UMMobClick/MobClick.h"
 #import <JSPatchPlatform/JSPatch.h>
-#import "DDLogger.h"
+//#import "DDLogger.h"
 #import "ReactiveCocoa.h"
 #import "RealReachability.h"
 //Head File

@@ -17,13 +17,13 @@
     if (self) {
         [self checkNetwork];
         [self checkVersion];
-        [self enableLog];
+        //        [self enableLog];
         [self enableFace];
         [self enableSkin];
-        [self enableUMeng];
+        //        [self enableUMeng];
         [self enableKeyboard];
         [self enableLondPress];
-        [self hotPatch];
+//        [self hotPatch];
         [self bindWechat];
     }
     return self;
@@ -61,10 +61,10 @@
 /**
  *  Integrated UM error analysis tools
  */
-- (void)enableUMeng{
-    UMConfigInstance.appKey = IPCUMengKey;
-    [MobClick startWithConfigure:UMConfigInstance];
-}
+//- (void)enableUMeng{
+//    UMConfigInstance.appKey = IPCUMengKey;
+//    [MobClick startWithConfigure:UMConfigInstance];
+//}
 
 /**
  *  Face Detector
@@ -97,20 +97,20 @@
 /**
  *  Set Log
  */
-- (void)enableLog{
-    NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
-    [[DDLoggerClient sharedInstance] startLogWithCacheDirectory:docDir fileName:@"log.txt"];
-}
+//- (void)enableLog{
+//    NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+//    [[DDLoggerClient sharedInstance] startLogWithCacheDirectory:docDir fileName:@"log.txt"];
+//}
 
 
 /**
  *  JSPatch  hot patch
  */
-- (void)hotPatch{
-    [JSPatch startWithAppKey:IPCJSPatchKey];
-    [JSPatch sync];
-    //    [JSPatch testScriptInBundle];
-}
+//- (void)hotPatch{
+//    [JSPatch startWithAppKey:IPCJSPatchKey];
+//    [JSPatch sync];
+//    [JSPatch testScriptInBundle];
+//}
 
 #pragma mark //WXApiDelegate
 - (void)onReq:(BaseReq *)req

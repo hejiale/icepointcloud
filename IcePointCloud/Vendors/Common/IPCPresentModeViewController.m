@@ -21,9 +21,10 @@
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext
 {
+    if (!transitionContext)return;
+    
     UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
     UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-    
     
     BOOL isPresenting = [toVC isKindOfClass:[IPCPresentModeViewController class]];
     

@@ -49,7 +49,7 @@
     }else{
         [query setObject:@[] forKey:kAPIInnerParamsKey];
     }
-    DDLogInfo(@"-----request parameter %@",query);
+//    DDLogInfo(@"-----request parameter %@",query);
     
     NSDictionary * requestParameter = @{kAPIQueryKey: [query JSONString],
                               kAPIParamDeviceToken:[IPCAppManager sharedManager].profile.deviceToken.length ? [IPCAppManager sharedManager].profile.deviceToken : @""};

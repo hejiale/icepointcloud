@@ -14,10 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - DDLogger (1.2.3):
-    - ICTextView (~> 2.0.1)
   - GPUImage (0.1.7)
-  - ICTextView (2.0.1)
   - IQKeyboardManager (4.0.8)
   - JKCategories (1.5)
   - JSONKit-NoWarning (1.2)
@@ -52,7 +49,6 @@ PODS:
     - GPUImage (~> 0.1.6)
   - TuSDK/ImageGeeV1 (2.6.1)
   - TuSDK/ImageGeeV2 (2.6.1)
-  - UMengAnalytics-NO-IDFA (4.1.9)
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
@@ -60,7 +56,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - DDLogger
   - GPUImage
   - IQKeyboardManager
   - JKCategories
@@ -75,15 +70,12 @@ DEPENDENCIES:
   - SNWeChatSDK
   - SVProgressHUD
   - TuSDK
-  - UMengAnalytics-NO-IDFA
   - YYKit
   - ZYCornerRadius
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  DDLogger: 584634a2068ab105c5b2bbdaa3d293d6fcc8adbf
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
-  ICTextView: 937aca5dd49e39e9cca41ababe8c55bf99c634fc
   IQKeyboardManager: 1a8189fa153bf09044355ee0ad36826f6767e7f7
   JKCategories: 863f4c7ed2d521ee6bf72ceea97948da23bb5af4
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
@@ -99,10 +91,9 @@ SPEC CHECKSUMS:
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TuSDK: d3527e14607d2ddff3aa30b10bdfcde8a05cccfa
-  UMengAnalytics-NO-IDFA: 985292af177111685325c90c321094172b95d2cb
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 2c071c8374d167d400c785cc4d36aaccf3ea654e
+PODFILE CHECKSUM: 92a12123d0d07dacc6859dacdcc8d865eef64fc9
 
 COCOAPODS: 1.0.1

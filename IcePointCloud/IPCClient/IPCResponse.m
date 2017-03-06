@@ -17,7 +17,7 @@
         if ([responseData isKindOfClass:[NSDictionary class]]){
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {
-                DDLogInfo(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
+//                DDLogInfo(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
                 if (complete) {
                     if (responseData[kIPCNetworkResult]) {
                         complete(responseData[kIPCNetworkResult]);
@@ -40,7 +40,7 @@
 + (NSError *)parseErrorResponse:(id)responseValue
 {
     IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];
-    DDLogError(@"----request Local Error message %@",errorMessage.message);
+//    DDLogError(@"----request Local Error message %@",errorMessage.message);
     
     if (errorMessage){
         if (errorMessage.code == kIPCServiceErrorCode){

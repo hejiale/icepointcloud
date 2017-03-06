@@ -151,7 +151,7 @@
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCListLoginHistoryKey];
         [NSUserDefaults jk_setObject:historyData forKey:IPCListLoginHistoryKey];
         //统计活跃帐号
-        [MobClick profileSignInWithPUID:userName];
+//        [MobClick profileSignInWithPUID:userName];/
     }
 }
 

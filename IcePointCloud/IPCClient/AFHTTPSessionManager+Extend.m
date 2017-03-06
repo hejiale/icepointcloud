@@ -57,7 +57,7 @@
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
-        DDLogError(@"-------Service Error  %@",error.localizedDescription);
+//        DDLogError(@"-------Service Error  %@",error.localizedDescription);
         if (failure)
             failure([NSError errorWithDomain:NSCocoaErrorDomain code:error.code userInfo:@{kIPCNetworkErrorMessage:error.localizedDescription}], task);
         
