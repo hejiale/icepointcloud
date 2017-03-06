@@ -784,6 +784,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 #pragma mark //Adding/removing notice ----------------------------------------------------------------------------
 - (void)addTryNotifications{
+    [self clearNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchProductAction:) name:IPCTrySearchProductNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(filterProductAction:) name:IPCTryFilterProductNotification object:nil];
 }
@@ -794,9 +795,14 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 - (void)reload{
-    [self.productCollectionView reloadData];
+    [self.refreshHeader beginRefreshing];
 }
 
+- (void)rootRefresh{
+    [self.glassListViewMode.filterValue clear];
+    self.glassListViewMode.currentType = IPCTopFIlterTypeFrames;
+    [self.refreshHeader beginRefreshing];
+}
 
 - (void)didReceiveMemoryWarning
 {

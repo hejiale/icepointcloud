@@ -8,8 +8,10 @@
 
 #import "IPCGlassParameterView.h"
 #import "IPCGlassParameterViewMode.h"
+#import "IPCBatchParameterCell.h"
 
 static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
+
 
 typedef NS_ENUM(NSInteger, ContactLenSpecType){
     ContactLenSpecTypeDegree,
@@ -36,6 +38,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     NSInteger    currentAccessoryStock;
     BOOL           isOpenBooking;
     NSArray   *   customsizedArray;
+    NSMutableArray<NSString *> * customsizedLensFunArray;
 }
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
@@ -160,6 +163,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
                              @[@"是", @"否"],
                              @[@"0", @"+1", @"+2", @"+3", @"+4"],
                              @[@"0", @"5", @"6", @"7", @"8", @"9"]];
+        customsizedLensFunArray  = [[NSMutableArray alloc]init];
         
         UIView *mainView = [UIView jk_loadInstanceFromNibWithName:@"IPCGlassParameterView" owner:self];
         [mainView setFrame:frame];
@@ -812,8 +816,9 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         [self.accessoryDateLabel setText:self.cartItem.validityDate];
         [self queryAccessorySpecification:NO];
     }else{
+        [customsizedLensFunArray addObjectsFromArray:self.cartItem.lensFuncsArray];
         [self.refractionLabel setText:self.cartItem.IOROptions];
-        [self.lensFunctionLabel setText:self.cartItem.lensFuncs];
+        [self.lensFunctionLabel setText:[self.cartItem.lensFuncsArray componentsJoinedByString:@","]];
         [self.lensStyleLabel setText:self.cartItem.lensTypes];
         [self.thinLabel setText:self.cartItem.thinnerOptions];
         [self.upsetLabel setText:self.cartItem.thickenOptions];
@@ -884,28 +889,13 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     }
     
     if ([self.glasses filterType] == IPCTopFilterTypeCustomized) {
-        switch (self.customsizedType) {
-            case 0:
-                self.cartItem.IOROptions = self.refractionLabel.text;
-                break;
-            case 1:
-                self.cartItem.lensFuncs = self.lensFunctionLabel.text;
-                break;
-            case 2:
-                self.cartItem.lensTypes = self.lensStyleLabel.text;
-                break;
-            case 3:
-                self.cartItem.thinnerOptions = self.thinLabel.text;
-                break;
-            case 4:
-                self.cartItem.thickenOptions = self.upsetLabel.text;
-                break;
-            case 5:
-                self.cartItem.shiftOptions = self.moveHeartLabel.text;
-                break;
-            default:
-                break;
-        }
+        self.cartItem.IOROptions = self.refractionLabel.text;
+        [self.cartItem.lensFuncsArray removeAllObjects];
+        [self.cartItem.lensFuncsArray addObjectsFromArray:customsizedLensFunArray];
+        self.cartItem.lensTypes = self.lensStyleLabel.text;
+        self.cartItem.thinnerOptions = self.thinLabel.text;
+        self.cartItem.thickenOptions = self.upsetLabel.text;
+        self.cartItem.shiftOptions = self.moveHeartLabel.text;
     }else if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass){
         self.cartItem.batchReadingDegree = self.leftParameterLabel.text;
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens){
@@ -1007,46 +997,50 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    IPCBatchParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell = [[UINib nibWithNibName:@"IPCBatchParameterCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        [cell.textLabel setText:isLeft ? [IPCAppManager batchSphs][indexPath.row] : [IPCAppManager batchCyls][indexPath.row]];
+        [cell.parameterLabel setText:isLeft ? [IPCAppManager batchSphs][indexPath.row] : [IPCAppManager batchCyls][indexPath.row]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [cell.textLabel setText:[IPCAppManager batchReadingDegrees][indexPath.row]];
+        [cell.parameterLabel setText:[IPCAppManager batchReadingDegrees][indexPath.row]];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
         if (self.contactSpecType == ContactLenSpecTypeDegree) {
             if ([self.batchNoneStockView superview]) {
-                [cell.textLabel setText:[IPCAppManager batchDegrees][indexPath.row]];
+                [cell.parameterLabel setText:[IPCAppManager batchDegrees][indexPath.row]];
             }else{
                 BatchParameterObject * parameter = self.parameterViewMode.contactDegreeList[indexPath.row];
                 if (parameter) {
-                    [cell.textLabel setText:parameter.degree];
+                    [cell.parameterLabel setText:parameter.degree];
                 }
             }
         }else if (self.contactSpecType == ContactLenSpecTypeBatchNum){
-            [cell.textLabel setText:[self.parameterViewMode batchNumArray][indexPath.row]];
+            [cell.parameterLabel setText:[self.parameterViewMode batchNumArray][indexPath.row]];
         }else if (self.contactSpecType == ContactLenSpecTypeKindNum){
-            [cell.textLabel setText:[self.parameterViewMode kindNumArray:self.contactBatchNumLabel.text][indexPath.row]];
+            [cell.parameterLabel setText:[self.parameterViewMode kindNumArray:self.contactBatchNumLabel.text][indexPath.row]];
         }else{
             NSDictionary * dateDic = [self.parameterViewMode validityDateArray:self.contactBatchNumLabel.text KindNum:self.contactKindNumLabel.text][indexPath.row];
-            [cell.textLabel setText:dateDic[@"expireDate"]];
+            [cell.parameterLabel setText:dateDic[@"expireDate"]];
         }
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory)
     {
         if (self.contactSpecType == ContactLenSpecTypeBatchNum){
-            [cell.textLabel setText:[self.parameterViewMode accessoryBatchNumArray][indexPath.row]];
+            [cell.parameterLabel setText:[self.parameterViewMode accessoryBatchNumArray][indexPath.row]];
         }else if (self.contactSpecType == ContactLenSpecTypeKindNum){
-            [cell.textLabel setText:[self.parameterViewMode accessoryKindNumArray:self.accessoryBatchNumLabel.text][indexPath.row]];
+            [cell.parameterLabel setText:[self.parameterViewMode accessoryKindNumArray:self.accessoryBatchNumLabel.text][indexPath.row]];
         }else{
-            [cell.textLabel setText:[self.parameterViewMode accessoryValidityDateArray:self.accessoryBatchNumLabel.text KindNum:self.accessoryKindNumLabel.text][indexPath.row]];
+            [cell.parameterLabel setText:[self.parameterViewMode accessoryValidityDateArray:self.accessoryBatchNumLabel.text KindNum:self.accessoryKindNumLabel.text][indexPath.row]];
         }
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
-        [cell.textLabel setText:array[indexPath.row]];
+        [cell.parameterLabel setText:array[indexPath.row]];
+       [cell.selectImageView setHidden:YES];
+        [customsizedLensFunArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([array[indexPath.row] isEqualToString:obj]) {
+                [cell.selectImageView setHidden:NO];
+            }
+        }];
     }
     return cell;
 }
@@ -1103,8 +1097,14 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
             case 0:
                 [self.refractionLabel setText:array[indexPath.row]];
                 break;
-            case 1:
-                [self.lensFunctionLabel setText:array[indexPath.row]];
+            case 1:{
+                if ([customsizedLensFunArray containsObject:array[indexPath.row]]) {
+                    [customsizedLensFunArray removeObject:array[indexPath.row]];
+                }else{
+                    [customsizedLensFunArray addObject:array[indexPath.row]];
+                }
+                [self.lensFunctionLabel setText:[customsizedLensFunArray componentsJoinedByString:@","]];
+            }
                 break;
             case 2:
                 [self.lensStyleLabel setText:array[indexPath.row]];

@@ -17,17 +17,15 @@
 @property (nonatomic, readwrite, assign) NSUInteger selectedIndex;
 @property (nonatomic, assign) id<IPCRootMenuViewControllerDelegate>delegate;
 
-
 @end
 
 @protocol IPCRootMenuViewControllerDelegate <NSObject>
 
 @optional
 - (void)tabBarController:(IPCRootMenuViewController *)tabBarController didSelectViewController:(UIViewController *)viewController;
-- (BOOL)tabBarController:(IPCRootMenuViewController *)tabBarController shouldSelectViewController:(UIViewController *)viewController;
+- (void)tabBarControllerNoneChange:(IPCRootMenuViewController *)tabBarController;
 - (void)showShoppingCartView;
 - (void)showPersonView;//According to personal center page
-- (void)judgeIsCheckoutOrder:(NSInteger)index;//Judge whether the current is to place an order
 - (void)judgeIsInsertNewCustomer:(NSInteger)index;
 
 @end

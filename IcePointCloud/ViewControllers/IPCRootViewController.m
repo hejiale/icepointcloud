@@ -55,10 +55,6 @@
     [self.productVC reload];
 }
 
-- (void)removeAllNotifications{
-    [self.productVC clearNotifications];
-    [self.tryVC clearNotifications];
-}
 
 #pragma mark //Show Methods
 - (void)showUpdateViewController{
@@ -104,12 +100,18 @@
 #pragma mark //RootMenuViewControllerDelegate
 - (void)tabBarController:(IPCRootMenuViewController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    [self removeAllNotifications];
-    
     if (tabBarController.selectedIndex == 1) {
         [self.productVC addNotifications];
     }else if (tabBarController.selectedIndex == 3){
         [self.tryVC addTryNotifications];
+    }
+}
+
+- (void)tabBarControllerNoneChange:(IPCRootMenuViewController *)tabBarController{
+    if (tabBarController.selectedIndex == 1) {
+        [self.productVC rootRefresh];
+    }else if (tabBarController.selectedIndex == 3){
+        [self.tryVC rootRefresh];
     }
 }
 

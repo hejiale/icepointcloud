@@ -249,32 +249,36 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    if (selectedIndex != _selectedIndex && selectedIndex < 4 && selectedIndex > 0)
+    if ( selectedIndex < 4 && selectedIndex > 0)
     {
-        UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
-        [self addChildViewController:selectedViewController];
-        
-        selectedViewController.view.frame = self.contentView.bounds;
-        [self.contentView addSubview:selectedViewController.view];
-        [self.contentView sendSubviewToBack:selectedViewController.view];
-        [selectedViewController didMoveToParentViewController:self];
-        
-        if (_selectedIndex != NSNotFound)
-        {
-            UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
-            [previousViewController.view removeFromSuperview];
-            [previousViewController removeFromParentViewController];
+        if (selectedIndex != _selectedIndex) {
+            UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
+            [self addChildViewController:selectedViewController];
+            
+            selectedViewController.view.frame = self.contentView.bounds;
+            [self.contentView addSubview:selectedViewController.view];
+            [self.contentView sendSubviewToBack:selectedViewController.view];
+            [selectedViewController didMoveToParentViewController:self];
+            
+            if (_selectedIndex != NSNotFound)
+            {
+                UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
+                [previousViewController.view removeFromSuperview];
+                [previousViewController removeFromParentViewController];
+            }
+            
+            _selectedIndex = selectedIndex;
+            
+            [self updateSidebar];
+            [self updateTopView:selectedIndex];
+            
+            if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
+                [self.delegate tabBarController:self didSelectViewController:selectedViewController];
+        }else{
+            if ([self.delegate respondsToSelector:@selector(tabBarControllerNoneChange:)])
+                [self.delegate tabBarControllerNoneChange:self];
         }
-        
-        _selectedIndex = selectedIndex;
-        
-        [self updateSidebar];
-        [self updateTopView:selectedIndex];
-        
-        if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
-            [self.delegate tabBarController:self didSelectViewController:selectedViewController];
-    }else if (selectedIndex == 0)
-    {
+    }else if (selectedIndex == 0){
         [self searchProductAction];
     }else if(selectedIndex == 4){
         if ([self.delegate respondsToSelector:@selector(showShoppingCartView)]) {

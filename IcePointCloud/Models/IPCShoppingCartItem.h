@@ -12,7 +12,7 @@
 
 @property (nonatomic, copy) NSString  *IOROptions;//折射率
 @property (nonatomic, copy) NSString  *lensTypes;//镜片类型
-@property (nonatomic, copy) NSString  *lensFuncs;//镜片功能
+@property (nonatomic, strong) NSMutableArray  *lensFuncsArray;//镜片功能
 @property (nonatomic, copy) NSString  *thickenOptions;//加厚
 @property (nonatomic, copy) NSString  *thinnerOptions;//美薄
 @property (nonatomic, copy) NSString  *shiftOptions;//移心

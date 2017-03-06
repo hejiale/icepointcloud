@@ -213,9 +213,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)reload{
-    [self.glassListCollectionView reloadData];
+    [self.refreshHeader beginRefreshing ];
 }
 
+- (void)rootRefresh{
+    [self.glassListViewMode.filterValue clear];
+    self.glassListViewMode.currentType = IPCTopFIlterTypeFrames;
+    [self.refreshHeader beginRefreshing];
+}
 #pragma mark //UICollectionViewDataSoure
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
@@ -292,6 +297,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //NSNotification
 - (void)addNotifications{
+    [self clearNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFilterProducts) name:IPCHomeFilterProductNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchProducts:) name:IPCHomeSearchProductNotification object:nil];
 }

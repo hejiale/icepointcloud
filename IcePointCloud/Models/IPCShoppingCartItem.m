@@ -14,6 +14,7 @@
 {
     self = [super init];
     if (self) {
+        self.lensFuncsArray = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -84,8 +85,8 @@
     if (self.lensTypes.length)
         attrs[@"orderLensType"] = self.lensTypes;
     
-    if (self.lensFuncs.length)
-        attrs[@"orderLensFunction"] = self.lensFuncs;
+    if (self.lensFuncsArray.count)
+        attrs[@"orderLensFunction"] = [self.lensFuncsArray componentsJoinedByString:@","];
     
     if (self.thickenOptions.length)
         attrs[@"addThickness"] = self.thickenOptions;

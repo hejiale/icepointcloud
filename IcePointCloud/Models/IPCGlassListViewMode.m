@@ -140,7 +140,7 @@
     self.reloadFilterUnCloseBlock = reloadUnClose;
     
     _glassesView = [UIView jk_loadInstanceFromNibWithName:@"IPCFilterGlassesView" owner:owner];
-    [_glassesView setFrame:CGRectMake(-490, 0, 490, backgroundView.jk_height)];
+    [_glassesView setFrame:CGRectMake(-_glassesView.jk_width, 0, _glassesView.jk_width, backgroundView.jk_height)];
     [_glassesView setDataSource:self];
     [_glassesView setDelegate:self];
     [backgroundView addSubview:_glassesView];

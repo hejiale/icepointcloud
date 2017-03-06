@@ -10,7 +10,7 @@
 @interface IPCTryGlassesViewController : UIViewController
 
 - (void)addTryNotifications;
-- (void)clearNotifications;
 - (void)reload;
+- (void)rootRefresh;
 
 @end

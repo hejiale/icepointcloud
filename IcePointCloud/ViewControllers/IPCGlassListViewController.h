@@ -11,6 +11,7 @@
 @interface IPCGlassListViewController : UIViewController
 
 - (void)addNotifications;
-- (void)clearNotifications;
 - (void)reload;
+- (void)rootRefresh;
+
 @end

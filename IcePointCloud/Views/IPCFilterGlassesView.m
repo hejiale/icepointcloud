@@ -92,6 +92,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 #pragma mark //CLicked Events
 - (void)show
 {
+    self.alpha = 0.5;
     [self.rightView setFrame:CGRectMake(0, 0, self.rightView.jk_width, self.jk_height)];
     [self addSubview:self.rightView];
     [self sendSubviewToBack:self.rightView];
@@ -100,6 +101,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
         CGRect frame    = self.frame;
         frame.origin.x += self.jk_width;
         self.frame      = frame;
+        self.alpha = 1;  
     } completion:^(BOOL finished) {
         if (finished) {
             [UIView animateWithDuration:0.1f animations:^{
