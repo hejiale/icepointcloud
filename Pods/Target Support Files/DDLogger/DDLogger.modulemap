@@ -1,6 +1,0 @@
-framework module DDLogger {
-  umbrella header "DDLogger-umbrella.h"
-
-  export *
-  module * { export * }
-}
