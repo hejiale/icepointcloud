@@ -190,11 +190,9 @@ typedef NS_ENUM(NSInteger, IPCPayStyleType){
 //Account Key
 #define IPCWeixinAppID                 @"wx94ce99b4ee7c5356"
 #define IPCWeixinAppSecret           @"12a16d241dfcc9133783f4e3e8a47c59"
-#define IPCBugtagsAppKey             @"bc5e03a0ac6b39abd4329d2771e2b493"
 #define IPCTuSdkKey                      @"2107c2f9f27e3f7b-00-yzbvp1"
-#define IPCUMengKey                     @"57d8bc47e0f55af7090039fb"
 #define IPCIflyFaceDetectorKey       @"5774da82"
-#define IPCJSPatchKey                     @"7d94628d1e075448"
+
 
 
 #endif /* IPCCore_h */

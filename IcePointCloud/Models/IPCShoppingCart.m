@@ -157,14 +157,20 @@
     [self postChangedNotification];
 }
 
-
-- (void)addGlasses:(IPCGlasses *)glasses
-{
-    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO];
+- (void)plusGlass:(IPCGlasses *)glass{
+    if (glass) {
+        [self addGlasses:glass Count:1];
+    }
 }
 
 
-- (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID IsOpenBooking:(BOOL)isOpenBooking
+- (void)addGlasses:(IPCGlasses *)glasses  Count:(NSInteger)count
+{
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:count];
+}
+
+
+- (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID IsOpenBooking:(BOOL)isOpenBooking Count:(NSInteger)count
 {
     IPCShoppingCartItem *item = nil;
     if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses) && glasses.stock == 0)
@@ -175,18 +181,9 @@
     }
     
     if (item) {
-        item.count += 1;
+        item.count += count;
     } else {
         IPCShoppingCartItem *nci = [[IPCShoppingCartItem alloc]init];
-        switch ([glasses filterType]) {
-            case IPCTopFilterTypeLens:
-                nci.thickenOptions = [NSMutableArray arrayWithArray:@[@"0"]];
-                nci.thinnerOptions = [NSMutableArray arrayWithArray:@[@"否"]];
-                nci.shiftOptions   = [NSMutableArray arrayWithArray:@[@"0"]];
-                break;
-            default:
-                break;
-        }
         if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses && glasses.stock == 0))
         {
             nci.batchSph = sph;
@@ -200,7 +197,7 @@
             nci.isPreSell = isOpenBooking;
         }
         nci.glasses = glasses;
-        nci.count   = 1;
+        nci.count   = count;
         [self.itemList addObject:nci];
     }
     [self postChangedNotification];
@@ -260,6 +257,15 @@
         }
     }
     [self postChangedNotification];
+}
+
+- (void)reduceGlass:(IPCGlasses *)glass{
+    if (glass) {
+        IPCShoppingCartItem * item = [self normalItemForGlasses:glass];
+        if (item) {
+            [self reduceItem:item];
+        }
+    }
 }
 
 /**

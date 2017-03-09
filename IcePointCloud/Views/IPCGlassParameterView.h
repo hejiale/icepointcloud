@@ -13,7 +13,7 @@
 @property (nonatomic, copy) IPCGlasses * glasses;
 @property (nonatomic, copy) IPCShoppingCartItem * cartItem;
 
-- (instancetype)initWithFrame:(CGRect)frame IsCart:(BOOL)isCart Complete:(void (^)())complete;
+- (instancetype)initWithFrame:(CGRect)frame Complete:(void (^)())complete;
 
 @end
 

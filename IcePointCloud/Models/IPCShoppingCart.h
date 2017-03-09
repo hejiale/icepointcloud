@@ -44,12 +44,14 @@
 - (void)removeItem:(IPCShoppingCartItem *)item;
 - (void)removeSelectCartItem;
 - (void)reduceItem:(IPCShoppingCartItem *)cartItem;
-- (void)plusItem:(IPCShoppingCartItem *)cartItem;
+- (void)reduceGlass:(IPCGlasses *)glass;
 /**
  *     Add a shopping cart
  */
-- (void)addGlasses:(IPCGlasses *)glasses;
-- (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID IsOpenBooking:(BOOL)isOpenBooking;
+- (void)addGlasses:(IPCGlasses *)glasses  Count:(NSInteger)count;
+- (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID IsOpenBooking:(BOOL)isOpenBooking Count:(NSInteger)count;
+- (void)plusItem:(IPCShoppingCartItem *)cartItem;
+- (void)plusGlass:(IPCGlasses *)glass;
 /**
  *    Remove glasses category shopping cart items accordingly
  */

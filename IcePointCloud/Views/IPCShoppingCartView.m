@@ -31,6 +31,7 @@ typedef  void(^PayBlock)();
 @property (strong, nonatomic) UIView * coverView;
 @property (copy, nonatomic) PayBlock payBlock;
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
+@property (strong, nonatomic) IPCGlassParameterView * parameterView;
 
 @end
 
@@ -175,13 +176,13 @@ typedef  void(^PayBlock)();
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
     
-    IPCGlassParameterView * parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  IsCart:YES Complete:^{
-        [parameterView removeFromSuperview];
+    _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+        [_parameterView removeFromSuperview];
         [self.coverView removeFromSuperview];
     }];
-    parameterView.cartItem = cartItem;
-    [[UIApplication sharedApplication].keyWindow addSubview:parameterView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:parameterView];
+    _parameterView.cartItem = cartItem;
+    [[UIApplication sharedApplication].keyWindow addSubview:_parameterView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_parameterView];
     
 }
 

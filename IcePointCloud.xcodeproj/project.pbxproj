@@ -21,7 +21,6 @@
 		042402011D87AA6400E1DD1A /* IPCEditFilterSampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042402001D87AA6400E1DD1A /* IPCEditFilterSampleController.m */; };
 		0424025A1D87F26400E1DD1A /* IPCOnlineFaceDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 042402591D87F26400E1DD1A /* IPCOnlineFaceDetector.m */; };
 		042EF1B01DDD4F7C00EEC744 /* IPCCartViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF1AF1DDD4F7C00EEC744 /* IPCCartViewMode.m */; };
-		042EF1B31DDD55E100EEC744 /* IPCCartItemViewCellMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF1B21DDD55E100EEC744 /* IPCCartItemViewCellMode.m */; };
 		04378D681D90F45900E37096 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04378D671D90F45900E37096 /* AdSupport.framework */; };
 		04378D6D1D90F55E00E37096 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04378D6C1D90F55E00E37096 /* CFNetwork.framework */; };
 		04378D6F1D90F56800E37096 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04378D6E1D90F56800E37096 /* CoreFoundation.framework */; };
@@ -302,8 +301,6 @@
 		042402591D87F26400E1DD1A /* IPCOnlineFaceDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOnlineFaceDetector.m; sourceTree = "<group>"; };
 		042EF1AE1DDD4F7C00EEC744 /* IPCCartViewMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCartViewMode.h; path = IcePointCloud/Models/IPCCartViewMode.h; sourceTree = SOURCE_ROOT; };
 		042EF1AF1DDD4F7C00EEC744 /* IPCCartViewMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCartViewMode.m; path = IcePointCloud/Models/IPCCartViewMode.m; sourceTree = SOURCE_ROOT; };
-		042EF1B11DDD55E100EEC744 /* IPCCartItemViewCellMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCartItemViewCellMode.h; path = IcePointCloud/Models/IPCCartItemViewCellMode.h; sourceTree = SOURCE_ROOT; };
-		042EF1B21DDD55E100EEC744 /* IPCCartItemViewCellMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCartItemViewCellMode.m; path = IcePointCloud/Models/IPCCartItemViewCellMode.m; sourceTree = SOURCE_ROOT; };
 		04378D671D90F45900E37096 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		04378D6C1D90F55E00E37096 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		04378D6E1D90F56800E37096 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -982,8 +979,6 @@
 			children = (
 				042EF1AE1DDD4F7C00EEC744 /* IPCCartViewMode.h */,
 				042EF1AF1DDD4F7C00EEC744 /* IPCCartViewMode.m */,
-				042EF1B11DDD55E100EEC744 /* IPCCartItemViewCellMode.h */,
-				042EF1B21DDD55E100EEC744 /* IPCCartItemViewCellMode.m */,
 				04EAF91C1D531A4300A4A66F /* IPCShoppingCart.h */,
 				04EAF91D1D531A4300A4A66F /* IPCShoppingCart.m */,
 				9E9C684A1B92E47F00695FED /* IPCShoppingCartItem.h */,
@@ -1989,7 +1984,6 @@
 				04443C5F1D23CAF800596519 /* IPCFilterValueCollectionViewCell.m in Sources */,
 				0492B6521D2A48E600A70A3C /* IPCCustomerViewController.m in Sources */,
 				04C680231DF1254D008B0F80 /* IPCOrderPayStyleCell.m in Sources */,
-				042EF1B31DDD55E100EEC744 /* IPCCartItemViewCellMode.m in Sources */,
 				04A202181D7FE4DB00F2A681 /* IPCPresentModeViewController.m in Sources */,
 				043B87571DBDF6F300AFB858 /* IPCOrderProductPriceCell.m in Sources */,
 				044E4BBE1E1CF36A00C7C9C3 /* IPCAccessorySpecList.m in Sources */,

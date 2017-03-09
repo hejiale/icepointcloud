@@ -174,7 +174,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 }
 
 - (IBAction)addNoneAccessoryCartAction:(id)sender {
-    [[IPCShoppingCart sharedCart] addGlasses:self.currentGlass];
+    [[IPCShoppingCart sharedCart] plusGlass:self.currentGlass];
     [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
 }
 

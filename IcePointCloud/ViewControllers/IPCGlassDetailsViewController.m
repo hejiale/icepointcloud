@@ -233,14 +233,14 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
         if ( ([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory) && _glasses.stock == 0) {
             [IPCUIKit showError:@"暂无库存，请重新选择!"];
         }else{
-            self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  IsCart:NO Complete:^{
+            self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
                 [self reloadCartView];
             }];
             self.parameterView.glasses = _glasses;
             [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
         }
     }else{
-        [[IPCShoppingCart sharedCart] addGlasses:_glasses];
+        [[IPCShoppingCart sharedCart] addGlasses:_glasses Count:1];
         [self successAddCartMethod];
     }
 }

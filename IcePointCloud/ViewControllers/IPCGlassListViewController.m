@@ -269,7 +269,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)chooseParameter:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
-        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  IsCart:NO Complete:^{
+        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
             [self.glassListCollectionView reloadData];
         }];
         self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];

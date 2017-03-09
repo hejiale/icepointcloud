@@ -151,7 +151,7 @@
 
 - (void)addCartAnimation{
     if (self.glasses) {
-        [[IPCShoppingCart sharedCart] addGlasses:self.glasses];
+        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
     
