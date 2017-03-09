@@ -594,80 +594,38 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 #pragma mark //加入购物车
 - (void)addLensToCart{
     if ([_glasses filterType] == IPCTopFilterTypeLens) {
-        [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                             Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
-                                             Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
-                                   ReadingDegree:self.leftParameterLabel.text
-                                   ContactDegree:self.leftParameterLabel.text
-                                        BatchNum:nil
-                                         KindNum:nil
-                                    ValidityDate:nil
-                                       ContactID:nil
-                                   IsOpenBooking:NO
-                                           Count:[self.lensNumLabel.text integerValue]];
+        [[IPCShoppingCart sharedCart] addLensWithGlasses:self.glasses
+                                                     Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
+                                                     Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
+                                                   Count:[self.lensNumLabel.text integerValue]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                             Sph:nil
-                                             Cyl:nil
-                                   ReadingDegree:self.leftParameterLabel.text
-                                   ContactDegree:nil
-                                        BatchNum:nil
-                                         KindNum:nil
-                                    ValidityDate:nil
-                                       ContactID:nil
-                                   IsOpenBooking:NO
-                                           Count:[self.lensNumLabel.text integerValue]];
+        [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:self.glasses
+                                                  ReadingDegree:self.leftParameterLabel.text
+                                                          Count:[self.lensNumLabel.text integerValue]];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
         if ([self.batchNoneStockView superview]) {
-            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                                 Sph:nil
-                                                 Cyl:nil
-                                       ReadingDegree:nil
-                                       ContactDegree:self.batchNoneDegreeLabel.text
-                                            BatchNum:nil
-                                             KindNum:nil
-                                        ValidityDate:nil
-                                           ContactID:nil
-                                       IsOpenBooking:YES
-                                               Count:[self.batchNoneNumLabel.text integerValue]];
+            [[IPCShoppingCart sharedCart] addPreSellContactLensWithGlasses:self.glasses
+                                                             ContactDegree:self.batchNoneDegreeLabel.text
+                                                                     Count:[self.batchNoneNumLabel.text integerValue]];
         }else{
-            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                                 Sph:nil
-                                                 Cyl:nil
-                                       ReadingDegree:nil
-                                       ContactDegree:self.contactDegreeLabel.text
-                                            BatchNum:self.contactBatchNumLabel.text
-                                             KindNum:self.contactKindNumLabel.text
-                                        ValidityDate:self.contactDateLabel.text
-                                           ContactID:currentContactDegreeID
-                                       IsOpenBooking:NO
-                                               Count:[self.contactCartNumLabel.text integerValue]];
+            [[IPCShoppingCart sharedCart] addContactLensWithGlasses:self.glasses
+                                                      ContactDegree:self.contactDegreeLabel.text
+                                                           BatchNum:self.contactBatchNumLabel.text
+                                                            KindNum:self.contactKindNumLabel.text
+                                                       ValidityDate:self.contactDateLabel.text
+                                                          ContactID:currentContactDegreeID
+                                                              Count:[self.contactCartNumLabel.text integerValue]];
         }
     }else{
         if ([self.accessoryNoneStockView superview]) {
-            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                                 Sph:nil
-                                                 Cyl:nil
-                                       ReadingDegree:nil
-                                       ContactDegree:nil
-                                            BatchNum:nil
-                                             KindNum:nil
-                                        ValidityDate:nil
-                                           ContactID:nil
-                                       IsOpenBooking:YES
-                                               Count:[self.preAccessoryNumLabel.text integerValue]];
+            [[IPCShoppingCart sharedCart] addPreSellAccessoryWithGlasses:self.glasses
+                                                                   Count:[self.preAccessoryNumLabel.text integerValue]];
         }else{
-            [[IPCShoppingCart sharedCart] addGlasses:self.glasses
-                                                 Sph:nil
-                                                 Cyl:nil
-                                       ReadingDegree:nil
-                                       ContactDegree:nil
-                                            BatchNum:self.accessoryBatchNumLabel.text
-                                             KindNum:self.accessoryKindNumLabel.text
-                                        ValidityDate:self.accessoryDateLabel.text
-                                           ContactID:nil
-                                       IsOpenBooking:NO
-                                               Count:[self.accessoryCartNumLabel.text integerValue]];
+            [[IPCShoppingCart sharedCart] addAccessoryWithGlasses:self.glasses
+                                                         BatchNum:self.accessoryBatchNumLabel.text
+                                                          KindNum:self.accessoryKindNumLabel.text
+                                                     ValidityDate:self.accessoryDateLabel.text
+                                                            Count:[self.accessoryCartNumLabel.text integerValue]];
         }
     }
 }

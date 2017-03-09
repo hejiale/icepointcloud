@@ -240,7 +240,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
             [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
         }
     }else{
-        [[IPCShoppingCart sharedCart] addGlasses:_glasses Count:1];
+        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         [self successAddCartMethod];
     }
 }

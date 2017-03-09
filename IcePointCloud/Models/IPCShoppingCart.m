@@ -159,14 +159,40 @@
 
 - (void)plusGlass:(IPCGlasses *)glass{
     if (glass) {
-        [self addGlasses:glass Count:1];
+        [self plusGlass:glass];
     }
 }
 
 
-- (void)addGlasses:(IPCGlasses *)glasses  Count:(NSInteger)count
+- (void)addLensWithGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl Count:(NSInteger)count
 {
-    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:count];
+    [self addGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:count];
+}
+
+- (void)addReadingLensWithGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree  Count:(NSInteger)count
+{
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:readingDegree ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:count];
+}
+
+- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID Count:(NSInteger)count
+{
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:batchNum KindNum:kindNum ValidityDate:date ContactID:contactID IsOpenBooking:NO Count:count];
+}
+
+- (void)addAccessoryWithGlasses:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date Count:(NSInteger)count
+{
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:batchNum KindNum:kindNum ValidityDate:date ContactID:nil IsOpenBooking:NO Count:count];
+}
+
+
+- (void)addPreSellContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree Count:(NSInteger)count
+{
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:YES Count:count];
+}
+
+- (void)addPreSellAccessoryWithGlasses:(IPCGlasses *)glasses Count:(NSInteger)count
+{
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:YES Count:count];
 }
 
 
