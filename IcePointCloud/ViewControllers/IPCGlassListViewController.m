@@ -213,7 +213,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)reload{
-    [self.refreshHeader beginRefreshing ];
+    [self.glassListCollectionView reloadData];
 }
 
 - (void)rootRefresh{

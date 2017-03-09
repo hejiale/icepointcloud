@@ -795,7 +795,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 - (void)reload{
-    [self.refreshHeader beginRefreshing];
+    [self.productCollectionView reloadData];
 }
 
 - (void)rootRefresh{

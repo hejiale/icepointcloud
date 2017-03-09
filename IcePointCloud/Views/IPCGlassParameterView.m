@@ -412,70 +412,14 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     }
 }
 
-//Refresh Sure Button Status
-- (void)refreshSureButtonStatus{
-    if (self.cartItem)return;
-    
-    __weak typeof (self) weakSelf = self;
-    if ([_glasses filterType] == IPCTopFilterTypeAccessory){
-        [[[RACSignal combineLatest:@[RACObserve(self, self.accessoryBatchNumLabel.text), RACObserve(self, self.accessoryKindNumLabel.text), RACObserve(self, self.accessoryDateLabel.text),RACObserve(self, self.accessoryCartNumLabel.text)] reduce:^id(NSString *batchNum,NSString * kind,NSString *date,NSString *cartNum){
-            return @(batchNum.length && kind.length && date.length && [cartNum integerValue] > 0);
-        }] distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            if (valid.boolValue) {
-                [strongSelf.accessorySureButton setEnabled:YES];
-                strongSelf.accessorySureButton.alpha = 1;
-            }else{
-                [strongSelf.accessorySureButton setEnabled:NO];
-                strongSelf.accessorySureButton.alpha = 0.5;
-            }
-        }];
-    }else{
-        [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum){
-            return  @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
-        }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            if (valid.boolValue) {
-                [strongSelf.lensSureButton setEnabled:YES];
-                strongSelf.lensSureButton.alpha = 1;
-            }else{
-                [strongSelf.lensSureButton setEnabled:NO];
-                strongSelf.lensSureButton.alpha = 0.5;
-            }
-        }];
-    }
-}
-
-- (void)refreshContactLensSureStatus{
-    if (self.cartItem)return;
-    
-    if ([self.batchNoneStockView superview]) {
-        if (self.batchNoneDegreeLabel.text.length && [self.batchNoneNumLabel.text integerValue] > 0) {
-            [self.batchNoneStockSureBtn setEnabled:YES];
-            self.batchNoneStockSureBtn.alpha = 1;
-        }else{
-            [self.batchNoneStockSureBtn setEnabled:NO];
-            self.batchNoneStockSureBtn.alpha = 0.5;
-        }
-    }else{
-        if (self.contactDegreeLabel.text.length && self.contactBatchNumLabel.text.length && self.contactKindNumLabel.text.length && self.contactDateLabel.text.length && [self.contactCartNumLabel.text integerValue] > 0) {
-            [self.contactSureButton setEnabled:YES];
-            self.contactSureButton.alpha = 1;
-        }else{
-            [self.contactSureButton setEnabled:NO];
-            self.contactSureButton.alpha = 0.5;
-        }
-    }
-}
-
 #pragma mark //Clicked Events
 - (IBAction)completeAction:(id)sender {
     if (self.cartItem) {
         [self updateCartParameter];
     }else{
         [self addLensToCart];
+        [self removeCover];
     }
-    [self removeCover];
 }
 
 - (IBAction)cancelAddAction:(id)sender {
@@ -867,24 +811,14 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     if (!self.cartItem)return;
     
     if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        if ([self cartItemContactLens].count > currentDegreeStock && currentDegreeStock > 0) {
-            self.contactSureButton.enabled = NO;
-            self.contactSureButton.alpha = 0.5;
-            [IPCUIKit showError:@"暂无库存"];
+        if (self.cartItem.count > currentDegreeStock && currentDegreeStock > 0) {
+            [IPCUIKit showError:@"暂无库存,请重新选择"];
             return;
-        }else{
-            self.contactSureButton.enabled = YES;
-            self.contactSureButton.alpha = 0.5;
         }
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory){
-        if ([self cartItemAccessory].count > currentAccessoryStock && currentAccessoryStock > 0) {
-            self.accessorySureButton.enabled = NO;
-            self.accessorySureButton.alpha = 0.5;
-            [IPCUIKit showError:@"暂无库存"];
+        if (self.cartItem.count > currentAccessoryStock && currentAccessoryStock > 0) {
+            [IPCUIKit showError:@"暂无库存,请重新选择"];
             return;
-        }else{
-            self.accessorySureButton.enabled = YES;
-            self.accessorySureButton.alpha = 0.5;
         }
     }
     
@@ -915,9 +849,66 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         self.cartItem.kindNum = self.accessoryKindNumLabel.text;
         self.cartItem.validityDate = self.accessoryDateLabel.text;
     }
+    [self removeCover];
 }
 
 #pragma mark //Reload Lens Parameter View Status
+//Refresh Sure Button Status
+- (void)refreshSureButtonStatus{
+    if (self.cartItem)return;
+    
+    __weak typeof (self) weakSelf = self;
+    if ([_glasses filterType] == IPCTopFilterTypeAccessory){
+        [[[RACSignal combineLatest:@[RACObserve(self, self.accessoryBatchNumLabel.text), RACObserve(self, self.accessoryKindNumLabel.text), RACObserve(self, self.accessoryDateLabel.text),RACObserve(self, self.accessoryCartNumLabel.text)] reduce:^id(NSString *batchNum,NSString * kind,NSString *date,NSString *cartNum){
+            return @(batchNum.length && kind.length && date.length && [cartNum integerValue] > 0);
+        }] distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            if (valid.boolValue) {
+                [strongSelf.accessorySureButton setEnabled:YES];
+                strongSelf.accessorySureButton.alpha = 1;
+            }else{
+                [strongSelf.accessorySureButton setEnabled:NO];
+                strongSelf.accessorySureButton.alpha = 0.5;
+            }
+        }];
+    }else{
+        [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum){
+            return  @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
+        }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            if (valid.boolValue) {
+                [strongSelf.lensSureButton setEnabled:YES];
+                strongSelf.lensSureButton.alpha = 1;
+            }else{
+                [strongSelf.lensSureButton setEnabled:NO];
+                strongSelf.lensSureButton.alpha = 0.5;
+            }
+        }];
+    }
+}
+
+- (void)refreshContactLensSureStatus{
+    if (self.cartItem)return;
+    
+    if ([self.batchNoneStockView superview]) {
+        if (self.batchNoneDegreeLabel.text.length && [self.batchNoneNumLabel.text integerValue] > 0) {
+            [self.batchNoneStockSureBtn setEnabled:YES];
+            self.batchNoneStockSureBtn.alpha = 1;
+        }else{
+            [self.batchNoneStockSureBtn setEnabled:NO];
+            self.batchNoneStockSureBtn.alpha = 0.5;
+        }
+    }else{
+        if (self.contactDegreeLabel.text.length && self.contactBatchNumLabel.text.length && self.contactKindNumLabel.text.length && self.contactDateLabel.text.length && [self.contactCartNumLabel.text integerValue] > 0) {
+            [self.contactSureButton setEnabled:YES];
+            self.contactSureButton.alpha = 1;
+        }else{
+            [self.contactSureButton setEnabled:NO];
+            self.contactSureButton.alpha = 0.5;
+        }
+    }
+}
+
 //Refresh the lens or relaxing increase or decrease in a shopping cart button state
 - (void)reloadLensCartStatus
 {
