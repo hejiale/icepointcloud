@@ -116,6 +116,7 @@
 }
 
 - (void)showShoppingCartView{
+    [self.productVC removeCover];[self.tryVC removeAllPopView];
     [self.view addSubview:self.backgroundView];
     [self.backgroundView setFrame:self.view.bounds];
     [self.view bringSubviewToFront:self.backgroundView];
@@ -131,6 +132,7 @@
 }
 
 - (void)showPersonView{
+    [self.productVC removeCover];[self.tryVC removeAllPopView];
     [self.view addSubview:self.backgroundView];
     [self.backgroundView setFrame:self.view.bounds]; 
     [self.view bringSubviewToFront:self.backgroundView];

@@ -73,45 +73,16 @@
                                     <constraint firstAttribute="width" constant="100" id="wQ0-bp-tS5"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qpV-sX-QMv" customClass="IPCImageTextButton">
-                                <rect key="frame" x="150" y="89" width="100" height="15"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQh-If-xpo">
+                                <rect key="frame" x="150" y="84" width="70" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="pCs-zV-Gb2"/>
-                                    <constraint firstAttribute="width" constant="100" id="vCI-kE-iZi"/>
+                                    <constraint firstAttribute="height" constant="20" id="29k-lb-KEH"/>
+                                    <constraint firstAttribute="width" constant="70" id="z8s-1G-vNd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                <state key="normal" image="icon_cart__price_edit">
-                                    <color key="titleColor" red="1" green="0.61216042029999995" blue="0.17357420270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onEditPriceActiom:" destination="kFC-ef-115" eventType="touchUpInside" id="Tr7-kG-wk1"/>
-                                </connections>
-                            </button>
-                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vJl-J9-XL1">
-                                <rect key="frame" x="150" y="84" width="80" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="AYf-Nx-PAN"/>
-                                    <constraint firstAttribute="height" constant="20" id="yFq-XQ-Cfy"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                <connections>
-                                    <outlet property="delegate" destination="kFC-ef-115" id="AId-aK-vVp"/>
-                                </connections>
-                            </textField>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X0L-AK-hBZ">
-                                <rect key="frame" x="230" y="84" width="50" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="9YI-fI-Tln"/>
-                                    <constraint firstAttribute="height" constant="20" id="RGN-kH-L5B"/>
-                                </constraints>
-                                <state key="normal" image="icon_tick"/>
-                                <connections>
-                                    <action selector="onEditPriceSureAction:" destination="kFC-ef-115" eventType="touchUpInside" id="AF4-QV-zLX"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                <color key="textColor" red="1" green="0.61216042029999995" blue="0.17357420270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -119,17 +90,13 @@
                             <constraint firstAttribute="trailing" secondItem="Ljk-K3-9sM" secondAttribute="trailing" constant="5" id="HLR-ap-sHl"/>
                             <constraint firstItem="o36-OD-XmA" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="JIf-wA-oea"/>
                             <constraint firstItem="Ljk-K3-9sM" firstAttribute="leading" secondItem="RWX-6h-3Da" secondAttribute="trailing" id="MGL-UI-g4R"/>
-                            <constraint firstItem="qpV-sX-QMv" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="Oh7-4Z-cFn"/>
                             <constraint firstItem="yTW-la-plE" firstAttribute="leading" secondItem="VrM-56-AOB" secondAttribute="leading" constant="15" id="Xfg-je-Qty"/>
-                            <constraint firstItem="X0L-AK-hBZ" firstAttribute="bottom" secondItem="vJl-J9-XL1" secondAttribute="bottom" id="Zfm-AY-3zC"/>
+                            <constraint firstItem="iQh-If-xpo" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="cc5-93-VhS"/>
                             <constraint firstItem="o36-OD-XmA" firstAttribute="top" secondItem="U8U-48-ede" secondAttribute="top" id="cog-6A-IcI"/>
                             <constraint firstItem="yTW-la-plE" firstAttribute="top" secondItem="VrM-56-AOB" secondAttribute="top" constant="48" id="dEB-sL-Xp9"/>
-                            <constraint firstItem="vJl-J9-XL1" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="ekt-ts-EvA"/>
-                            <constraint firstItem="vJl-J9-XL1" firstAttribute="bottom" secondItem="U8U-48-ede" secondAttribute="bottom" id="haU-yT-CJH"/>
-                            <constraint firstItem="qpV-sX-QMv" firstAttribute="bottom" secondItem="U8U-48-ede" secondAttribute="bottom" id="j1F-HM-e4Y"/>
-                            <constraint firstItem="X0L-AK-hBZ" firstAttribute="leading" secondItem="vJl-J9-XL1" secondAttribute="trailing" id="mUh-yd-BTd"/>
                             <constraint firstItem="Ljk-K3-9sM" firstAttribute="bottom" secondItem="RWX-6h-3Da" secondAttribute="bottom" id="s86-NO-fzm"/>
                             <constraint firstItem="U8U-48-ede" firstAttribute="centerY" secondItem="VrM-56-AOB" secondAttribute="centerY" id="vqC-QX-kC7"/>
+                            <constraint firstItem="iQh-If-xpo" firstAttribute="bottom" secondItem="U8U-48-ede" secondAttribute="bottom" id="xIF-ij-VKy"/>
                             <constraint firstItem="Ljk-K3-9sM" firstAttribute="bottom" secondItem="U8U-48-ede" secondAttribute="bottom" id="xzL-gW-Sic"/>
                             <constraint firstItem="U8U-48-ede" firstAttribute="leading" secondItem="yTW-la-plE" secondAttribute="trailing" constant="10" id="zF3-SS-lot"/>
                         </constraints>
@@ -153,10 +120,7 @@
                 <outlet property="glassesNameLbl" destination="o36-OD-XmA" id="zN8-fO-pwI"/>
                 <outlet property="mainContentView" destination="VrM-56-AOB" id="Zvy-uy-z1U"/>
                 <outlet property="preSellImage" destination="RWX-6h-3Da" id="enP-pp-8QT"/>
-                <outlet property="priceSureButton" destination="X0L-AK-hBZ" id="KOY-nF-mb3"/>
-                <outlet property="priceTextField" destination="vJl-J9-XL1" id="wby-Bi-mMU"/>
-                <outlet property="unitPriceButton" destination="qpV-sX-QMv" id="seJ-tb-BFr"/>
-                <outlet property="unitPriceButtonWidth" destination="vCI-kE-iZi" id="0nr-cn-NGn"/>
+                <outlet property="unitPriceLabel" destination="iQh-If-xpo" id="Zg4-ZF-KiX"/>
             </connections>
             <point key="canvasLocation" x="469" y="523"/>
         </tableViewCell>
@@ -164,8 +128,6 @@
     <resources>
         <image name="common_btn_check" width="23" height="23"/>
         <image name="common_btn_check_selected" width="23" height="23"/>
-        <image name="icon_cart__price_edit" width="19" height="19"/>
-        <image name="icon_tick" width="16" height="10"/>
         <image name="preSell_selected" width="100" height="24"/>
     </resources>
 </document>

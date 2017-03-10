@@ -183,7 +183,7 @@ typedef  void(^PayBlock)();
     _parameterView.cartItem = cartItem;
     [[UIApplication sharedApplication].keyWindow addSubview:_parameterView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_parameterView];
-    
+    [_parameterView show];
 }
 
 - (void)judgeStock:(IPCEditShoppingCartCell *)cell{

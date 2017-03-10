@@ -14,6 +14,7 @@
 @property (nonatomic, copy) IPCShoppingCartItem * cartItem;
 
 - (instancetype)initWithFrame:(CGRect)frame Complete:(void (^)())complete;
+- (void)show;
 
 @end
 

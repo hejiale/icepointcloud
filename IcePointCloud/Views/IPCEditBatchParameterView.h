@@ -13,5 +13,6 @@
 - (instancetype)initWithFrame:(CGRect)frame
                       Glasses:(IPCGlasses *)glasses
                       Dismiss:(void(^)())dismiss;
+- (void)show;
 
 @end

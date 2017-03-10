@@ -32,15 +32,17 @@
         [[transitionContext containerView] addSubview:toVC.view];
         
         CGRect fullFrame = [transitionContext initialFrameForViewController:fromVC];
-        toVC.view.frame = CGRectMake(0, -fullFrame.size.height, fullFrame.size.width, fullFrame.size.height);
+        toVC.view.frame = CGRectMake(0, 0, fullFrame.size.width, 0);
+        toVC.view.alpha = 0;
         
         [UIView animateWithDuration:[self transitionDuration:transitionContext]
                               delay:0
                             options:UIViewAnimationOptionCurveEaseInOut
                          animations:^{
                              CGRect rect = toVC.view.frame;
-                             rect.origin.y += toVC.view.jk_height;
+                             rect.size.height += fullFrame.size.height;
                              toVC.view.frame = rect;
+                             toVC.view.alpha = 1;
                          } completion:^(BOOL finished) {
                              if (finished) {
                                  [transitionContext completeTransition:YES];

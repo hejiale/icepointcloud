@@ -671,6 +671,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         }];
         self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];
         [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+        [self.parameterView show];
     }
 }
 

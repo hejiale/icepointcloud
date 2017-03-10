@@ -159,7 +159,7 @@
 
 - (void)plusGlass:(IPCGlasses *)glass{
     if (glass) {
-        [self plusGlass:glass];
+        [self addGlasses:glass Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:1];
     }
 }
 
@@ -331,16 +331,37 @@
     return nil;
 }
 
-/**
- *  Bulk commodities
- *
- *  The lens          Mirror mirror ball column parameters
- *
- *  Reading glasses    degree
- *
- *  Contact lense    degree    Batch no、kind no、The period of validity
- *
- */
+- (IPCShoppingCartItem *)batchLensForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl
+{
+    return [self batchItemForGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:NO];
+}
+
+- (IPCShoppingCartItem *)readingLensForGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree
+{
+    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:readingDegree ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:NO];
+}
+
+- (IPCShoppingCartItem *)contactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date
+{
+    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:batchNum KindNum:kindNum ValidityDate:date IsOpenBooking:NO];
+}
+
+- (IPCShoppingCartItem *)preSellcontactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree
+{
+    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:YES];
+}
+
+- (IPCShoppingCartItem *)preSellAccessoryForGlass:(IPCGlasses *)glasses
+{
+    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:YES];
+}
+
+
+- (IPCShoppingCartItem *)batchAccessoryForGlass:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date
+{
+    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:batchNum KindNum:kindNum ValidityDate:date IsOpenBooking:NO];
+}
+
 - (IPCShoppingCartItem *)batchItemForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl  ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date IsOpenBooking:(BOOL)isOpenBooking
 {
     for (IPCShoppingCartItem *ci in self.itemList)
@@ -402,14 +423,5 @@
     }
     return itemArray;
 }
-
-
-- (void)replaceNewCartItem:(IPCShoppingCartItem *)newCartItem OldCartItem:(IPCShoppingCartItem *)oldCartItem
-{
-    NSInteger index = [self.itemList indexOfObject:oldCartItem];
-    [self.itemList replaceObjectAtIndex:index withObject:newCartItem];
-}
-
-
 
 @end

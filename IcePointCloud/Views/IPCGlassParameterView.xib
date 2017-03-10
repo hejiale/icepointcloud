@@ -440,12 +440,12 @@
         </view>
         <tapGestureRecognizer id="aub-vB-mYY">
             <connections>
-                <action selector="leftChooseParameterAction:" destination="-1" id="GF8-0e-P3t"/>
+                <action selector="normalLensParameterAction:" destination="-1" id="eaX-iG-Dfl"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="xm5-Cd-Jaq">
             <connections>
-                <action selector="rightChooseParameterAction:" destination="-1" id="jgh-Bz-p48"/>
+                <action selector="normalLensParameterAction:" destination="-1" id="LFg-mI-SfJ"/>
             </connections>
         </tapGestureRecognizer>
         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="e4p-Qs-vwi">

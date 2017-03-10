@@ -13,5 +13,6 @@
 - (void)addNotifications;
 - (void)reload;
 - (void)rootRefresh;
+- (void)removeCover;
 
 @end

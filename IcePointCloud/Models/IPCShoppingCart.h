@@ -61,27 +61,27 @@
  *    Remove glasses category shopping cart items accordingly
  */
 - (void)removeGlasses:(IPCGlasses *)glasse;
-- (void)removeGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date IsOpenBooking:(BOOL)isOpenBooking;
 - (void)clear;
 /**
  *   To obtain the corresponding glasses category shopping cart items
  */
 - (IPCShoppingCartItem *)normalItemForGlasses:(IPCGlasses *)glasses;
-- (IPCShoppingCartItem *)batchItemForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl  ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date IsOpenBooking:(BOOL)isOpenBooking;
+- (IPCShoppingCartItem *)batchLensForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl;
+- (IPCShoppingCartItem *)readingLensForGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree;
+- (IPCShoppingCartItem *)preSellcontactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree;
+- (IPCShoppingCartItem *)contactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date;
+- (IPCShoppingCartItem *)preSellAccessoryForGlass:(IPCGlasses *)glasses;
+- (IPCShoppingCartItem *)batchAccessoryForGlass:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date;
+
 - (IPCShoppingCartItem *)itemAtIndex:(NSInteger)index;
 - (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index;
 - (IPCShoppingCartItem *)selectedNormalSelltemAtIndex:(NSInteger)index;
 - (IPCShoppingCartItem *)selectedPreSelltemAtIndex:(NSInteger)index;
+
 - (NSArray<IPCShoppingCartItem *> *)batchParameterList:(IPCGlasses *)glasses;
 /**
  *   Send the shopping cart number change notification
  */
 - (void)postChangedNotification;
-
-/**
-    replace new cart item
- */
-- (void)replaceNewCartItem:(IPCShoppingCartItem *)newCartItem OldCartItem:(IPCShoppingCartItem *)oldCartItem;
-
 
 @end

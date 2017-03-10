@@ -98,7 +98,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 
 - (UIView *)specHostView{
     if (!_specHostView) {
-        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(43, 0, self.view.jk_width, 0)];
+        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(43, 0, SCREEN_WIDTH-50, 0)];
         [_specHostView setBackgroundColor:[UIColor clearColor]];
     }
     return _specHostView;
@@ -107,7 +107,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 - (void)buildSpecificationViews
 {
     CGFloat yMargin   = 35;
-    CGFloat lblWidth  = (self.specHostView.jk_width-70)/3;
+    CGFloat lblWidth  = self.specHostView.jk_width/3;
     
     NSArray<NSString *> *keys = [self.glasses displayFields].allKeys;
     NSInteger numOfRows = ceil(keys.count / 3);
@@ -131,7 +131,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 
 - (UIWebView *)productDetailWebView{
     if (!_productDetailWebView) {
-        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, self.detailTableView.jk_width, 0)];
+        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH-40, 0)];
         [_productDetailWebView setBackgroundColor:[UIColor clearColor]];
         _productDetailWebView.delegate = self;
         _productDetailWebView.scrollView.scrollEnabled = NO;
@@ -238,6 +238,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
             }];
             self.parameterView.glasses = _glasses;
             [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+            [self.parameterView show];
         }
     }else{
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];

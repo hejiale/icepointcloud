@@ -274,6 +274,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         }];
         self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];
         [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+        [self.parameterView show];
     }
 }
 
@@ -287,6 +288,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.glassListCollectionView reloadData];
         }];
         [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
+        [self.editParameterView show];
     }
 }
 

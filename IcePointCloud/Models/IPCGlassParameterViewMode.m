@@ -16,11 +16,13 @@
 
 @implementation IPCGlassParameterViewMode
 
-- (instancetype)initWithGlasses:(IPCGlasses *)glasses
+- (instancetype)initWithGlasses:(IPCGlasses *)glasses IsPreSell:(BOOL)isPreSell
 {
     self = [super init];
     if (self) {
         self.glasses = glasses;
+        if ([self.glasses filterType] == IPCTopFilterTypeContactLenses && !isPreSell)
+            [self queryBatchContactDegreeRequest];
     }
     return self;
 }
@@ -44,7 +46,6 @@
          [batchParameterList.parameterList enumerateObjectsUsingBlock:^(BatchParameterObject * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
              [self.contactDegreeList addObject:obj];
          }];
-         [IPCUIKit hiden];
      } FailureBlock:^(NSError *error) {
          [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
@@ -53,7 +54,6 @@
 - (void)getContactLensSpecification:(NSString *)contactLensID CompleteBlock:(void(^)())complete
 {
     if (contactLensID) {
-        [IPCUIKit show];
         [IPCBatchRequestManager queryContactGlassBatchSpecification:@[contactLensID]
                                                        SuccessBlock:^(id responseValue)
          {
@@ -62,7 +62,6 @@
              if (complete) {
                  complete();
              }
-             [IPCUIKit hiden];
          } FailureBlock:^(NSError *error) {
              [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
          }];
@@ -71,7 +70,6 @@
 
 - (void)getAccessorySpecification:(NSString *)glassID CompleteBlock:(void(^)())complete
 {
-    [IPCUIKit show];
     [IPCBatchRequestManager queryAccessoryBatchSpecification:glassID
                                                 SuccessBlock:^(id responseValue)
      {
@@ -79,7 +77,6 @@
          if (complete) {
              complete();
          }
-         [IPCUIKit hiden];
      } FailureBlock:^(NSError *error) {
          [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];

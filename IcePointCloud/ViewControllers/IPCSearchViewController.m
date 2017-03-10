@@ -39,8 +39,12 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     self.searchTableView.emptyAlertTitle = @"暂无搜索历史!";
     self.searchTableView.emptyAlertImage = @"exception_search";
     [self.keywordHistory addObjectsFromArray:[IPCAppManager sharedManager].localProductsHistory];
-    [self.keywordTf becomeFirstResponder];
     [self.keywordTf setText:self.currentSearchword];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [self.keywordTf becomeFirstResponder];
 }
 
 - (NSMutableArray<NSString *> *)keywordHistory{

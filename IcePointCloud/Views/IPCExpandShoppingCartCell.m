@@ -11,15 +11,12 @@
 @interface IPCExpandShoppingCartCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
-@property (nonatomic, weak) IBOutlet IPCImageTextButton * unitPriceButton;
+@property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UIButton *checkBtn;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (weak, nonatomic) IBOutlet UIImageView *preSellImage;
-@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
-@property (weak, nonatomic) IBOutlet UIButton *priceSureButton;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *unitPriceButtonWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
 @property (copy, nonatomic) void(^ReloadBlock)();
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *countLabelWidth;
@@ -34,7 +31,6 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     [self.glassesImgView addBorder:3 Width:1];
-    [self.priceTextField addBorder:3 Width:1];
 }
 
 
@@ -56,17 +52,13 @@
     
     self.glassesNameLbl.text = _cartItem.glasses.glassName;
     self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
-    NSString * unitPriceStr = [NSString stringWithFormat:@"￥%.f", _cartItem.unitPrice];
-    [self.unitPriceButton setTitle:unitPriceStr forState:UIControlStateNormal];
-    CGFloat unitPriceWidth = [unitPriceStr jk_sizeWithFont:self.unitPriceButton.titleLabel.font constrainedToHeight:self.unitPriceButton.jk_height].width;
-    self.unitPriceButtonWidth.constant = unitPriceWidth + 20;
-    [self.unitPriceButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentLeft];
+    [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.unitPrice]];
+    
     if (self.cartItem.isPreSell) {
         [self.preSellImage setHidden:NO];
     }else{
         [self.preSellImage setHidden:YES];
     }
-    [self.priceTextField setText:[NSString stringWithFormat:@"%.f", _cartItem.unitPrice]];
     
     CGFloat nameHeight = [self.glassesNameLbl.text jk_sizeWithFont:self.glassesNameLbl.font constrainedToWidth:self.glassesNameLbl.jk_width].height;
     if ((([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch) && !self.cartItem.isPreSell)
@@ -84,29 +76,6 @@
 }
 
 
-- (IBAction)onEditPriceActiom:(UIButton *)sender {
-    [sender setHidden:YES];
-    [self.priceTextField setHidden:NO];
-    [self.priceSureButton setHidden:NO];
-}
-
-
-- (IBAction)onEditPriceSureAction:(id)sender {
-    [self.unitPriceButton setHidden:NO];
-    [self.priceTextField setHidden:YES];
-    [self.priceSureButton setHidden:YES];
-    [self.priceTextField endEditing:YES];
-    NSString * str = [self.priceTextField.text jk_trimmingWhitespace];
-    double price = [str doubleValue];
-    if (price > 0) {
-        self.cartItem.unitPrice = price;
-        
-        if (self.ReloadBlock) {
-            self.ReloadBlock();
-        }
-    }
-}
-
 #pragma mark //UITextField Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (![IPCCommon judgeIsNumber:string])return NO;
@@ -115,7 +84,7 @@
 
 #pragma mark //Set UI
 - (void)loadContactLensBatchSpecification:(CGFloat)height{
-    UIView * specificationView = [[UIView alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right + 10, self.glassesNameLbl.jk_top+height+5, self.jk_width - self.glassesImgView.jk_right - 10, 30)];
+    UIView * specificationView = [[UIView alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right + 10, self.glassesNameLbl.jk_top+height+10, self.jk_width - self.glassesImgView.jk_right - 10, 30)];
     [self.mainContentView addSubview:specificationView];
     
     if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch) {
