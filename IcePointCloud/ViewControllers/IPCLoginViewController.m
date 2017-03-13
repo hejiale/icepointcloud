@@ -36,6 +36,10 @@
 {
     [super viewDidLoad];
 
+    [self.usernameTf addBorder:5 Width:0.5];
+    [self.passwordTf addBorder:5 Width:0.5];
+    [IPCUIKit textFieldLeftSpace:10 InTextField:self.usernameTf];
+    [IPCUIKit textFieldLeftSpace:10 InTextField:self.passwordTf];
     [self.loginButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.loginButton addSignleCorner:UIRectCornerAllCorners Size:5];
     [IPCUIKit clearAutoCorrection:self.loginBgView];
@@ -150,8 +154,6 @@
         NSData *historyData  = [NSKeyedArchiver archivedDataWithRootObject:self.loginHistory];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCListLoginHistoryKey];
         [NSUserDefaults jk_setObject:historyData forKey:IPCListLoginHistoryKey];
-        //统计活跃帐号
-//        [MobClick profileSignInWithPUID:userName];/
     }
 }
 

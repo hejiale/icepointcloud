@@ -141,6 +141,13 @@
     [textField setRightViewMode:UITextFieldViewModeAlways];
 }
 
++ (void)textFieldLeftSpace:(double)spaceWidth InTextField:(UITextField *)textField{
+    UIView * spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, spaceWidth, textField.jk_height)];
+    [spaceView setBackgroundColor:[UIColor clearColor]];
+    [textField setLeftView:spaceView];
+    [textField setLeftViewMode:UITextFieldViewModeAlways];
+}
+
 #pragma mark//TabBar Push Methods
 + (void)pushToRootIndex:(NSInteger)index{
     UIViewController * rootNavigation = [UIApplication sharedApplication].keyWindow.rootViewController;

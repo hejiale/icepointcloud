@@ -43,6 +43,8 @@
                  InTextField:(nonnull UITextField *)textField
                       OnView:(nonnull UIView *)onView;
 
++ (void)textFieldLeftSpace:(double)spaceWidth InTextField:(UITextField *)textField;
+
 + (void)pushToRootIndex:(NSInteger)index;
 
 + (UIViewController *)rootViewcontroller;
