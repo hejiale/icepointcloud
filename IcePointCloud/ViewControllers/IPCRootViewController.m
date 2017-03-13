@@ -127,8 +127,6 @@
         }else{
             [self setSelectedIndex:index];
         }
-    }else{
-        [self setSelectedIndex:index];
     }
 }
 

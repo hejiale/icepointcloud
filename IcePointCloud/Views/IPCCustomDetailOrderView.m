@@ -23,37 +23,35 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
 
 @interface IPCCustomDetailOrderView()<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIView *orderDetailBgView;
+@property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightConstraint;
+
 @property (strong, nonatomic)  IPCCustomOrderDetailList * detailOrder;
 @property (copy,  nonatomic) void(^ProductDetailBlock)(IPCGlasses *glass);
 @property (copy,  nonatomic) void(^DismissBlock)();
 @property (nonatomic, copy) NSString * currentOrderNum;
-@property (nonatomic, assign) BOOL  isSale;
 
 @end
 
 @implementation IPCCustomDetailOrderView
 
-- (instancetype)initWithFrame:(CGRect)frame OrderNum:(NSString *)orderNum IsForSale:(BOOL)isForSale ProductDetail:(void(^)(IPCGlasses *glass))product Dismiss:(void(^)())dismiss
+- (instancetype)initWithFrame:(CGRect)frame OrderNum:(NSString *)orderNum ProductDetail:(void(^)(IPCGlasses *glass))product Dismiss:(void(^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
         UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCCustomDetailOrderView" owner:self];
         [view setFrame:frame];
         [self addSubview: view];
-        if (isForSale) {
-            [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
-        }else{
-            
-        }
-        
+ 
         self.ProductDetailBlock = product;
         self.DismissBlock = dismiss;
         self.currentOrderNum = orderNum;
-        self.isSale = isForSale;
-        [IPCUIKit show];
+        
+        [self addSubview:self.orderDetailBgView];
+        [self.orderDetailBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.mas_right).offset(-self.orderDetailBgView.jk_width);
+            make.top.mas_equalTo(self.mas_top).offset(0);
+        }];
         
         if ([self.currentOrderNum integerValue] > 0) {
             [self performSelectorOnMainThread:@selector(queryOrderDetail) withObject:nil waitUntilDone:YES];
@@ -62,10 +60,35 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
+}
+
+- (void)show
+{
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect frame = self.orderDetailBgView.frame;
+        frame.origin.x -= self.orderDetailBgView.jk_width;
+        self.orderDetailBgView.frame = frame;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 - (IBAction)dismissViewAction:(id)sender {
-    if (self.DismissBlock) {
-        self.DismissBlock();
-    }
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect frame = self.orderDetailBgView.frame;
+        frame.origin.x += self.orderDetailBgView.jk_width;
+        self.orderDetailBgView.frame = frame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (self.DismissBlock) {
+                self.DismissBlock();
+            }
+        }
+    }];
 }
 
 #pragma mark //Request Data

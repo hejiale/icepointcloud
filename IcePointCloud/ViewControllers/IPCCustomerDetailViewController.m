@@ -162,7 +162,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)loadOrderDetailView:(IPCCustomerOrderMode *)orderObject{
     [self.view endEditing:YES];
     __weak typeof (self) weakSelf = self;
-    self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:self.view.bounds OrderNum:orderObject.orderCode  IsForSale:(orderObject.type == @"FOR_SALES" ? YES: NO) ProductDetail:^(IPCGlasses *glass) {
+    self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:self.view.bounds OrderNum:orderObject.orderCode  ProductDetail:^(IPCGlasses *glass) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf pushToProductDetailViewController:glass];
     } Dismiss:^{
@@ -171,6 +171,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }];
     [self.view addSubview:self.detailOrderView];
     [self.view bringSubviewToFront:self.detailOrderView];
+    [self.detailOrderView show];
 }
 
 #pragma mark //ClickEvents
