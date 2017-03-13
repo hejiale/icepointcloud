@@ -8,11 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCUpdatePasswordView : UIView<UITableViewDelegate,UITableViewDataSource>
-
-@property (weak, nonatomic) IBOutlet UITableView *updateTableView;
-@property (weak, nonatomic) IBOutlet UIButton *sureButton;
-@property (copy, nonatomic) void(^CloseBlock)(void);
+@interface IPCUpdatePasswordView : UIView
 
 - (void)showWithClose:(void(^)())closeBlock;
 

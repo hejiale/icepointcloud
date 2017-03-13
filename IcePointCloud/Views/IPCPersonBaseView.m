@@ -19,11 +19,27 @@ static NSString * const titleIdentifier = @"PersonTitleCellIdentifier";
 static NSString * const QRCodeIdentifier= @"PersonQRCodeCellIdentifier";
 static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 
-@interface IPCPersonBaseView()<IPCPersonInputCellDelegate>
+@interface IPCPersonBaseView()<IPCPersonInputCellDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *personTableView;
+@property (weak, nonatomic) IBOutlet UIButton *logouOutButton;
+@property (copy, nonatomic) void(^LogoutBlock)();
+@property (copy, nonatomic) void(^UpdateBlock)();
+@property (copy, nonatomic) void(^QRCodeBlock)();
+@property (copy, nonatomic) void(^HelpBlock)();
 
 @end
 
 @implementation IPCPersonBaseView
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCPersonBaseView" owner:self];
+        [self addSubview:view];
+    }
+    return self;
+}
 
 #pragma mark //Request Data
 - (void)updateUserInfo:(NSString *)userName Mobile:(NSString *)mobile
@@ -52,22 +68,14 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 }
 
 #pragma mark //Clicked Events
-- (IBAction)backAction:(id)sender {
-    if (self.CloseBlock) {
-        self.CloseBlock();
-    }
-}
-
 - (IBAction)logoutAction:(id)sender {
     [IPCUIKit show];
     [self logoutRequest];
 }
 
-- (void)showWithClose:(void(^)())close Logout:(void(^)())logout ShowLibrary:(void (^)())libraryBlock UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode HelpBlock:(void (^)())help
+- (void)showWithLogout:(void(^)())logout UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode HelpBlock:(void (^)())help
 {
-    self.CloseBlock   = close;
     self.LogoutBlock  = logout;
-    self.LibraryBlock = libraryBlock;
     self.UpdateBlock  = update;
     self.QRCodeBlock  = qrcode;
     self.HelpBlock    = help;
@@ -75,11 +83,28 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     [self.logouOutButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.personTableView setTableFooterView:[[UIView alloc]init]];
     
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.frame;
         frame.origin.x -= self.jk_width;
         self.frame = frame;
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)dismiss:(void(^)())complete
+{
+    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect frame = self.frame;
+        frame.origin.x += self.jk_width;
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (complete) {
+                complete();
+            }
+        }
+    }];
 }
 
 - (void)updateUserInfo:(NSIndexPath *)indexPath Cell:(IPCPersonInputCell *)cell{

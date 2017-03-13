@@ -8,22 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCPersonBaseView : UIView<UITableViewDataSource,UITableViewDelegate>
+@interface IPCPersonBaseView : UIView
 
-@property (weak, nonatomic) IBOutlet UITableView *personTableView;
-@property (weak, nonatomic) IBOutlet UIButton *logouOutButton;
-@property (copy, nonatomic) void(^LogoutBlock)(void);
-@property (copy, nonatomic) void(^CloseBlock)(void);
-@property (copy, nonatomic) void(^LibraryBlock)(void);
-@property (copy, nonatomic) void(^UpdateBlock)(void);
-@property (copy, nonatomic) void(^QRCodeBlock)(void);
-@property (copy, nonatomic) void(^HelpBlock)(void);
+- (void)showWithLogout:(void(^)())logout
+           UpdateBlock:(void(^)())update
+           QRCodeBlock:(void(^)())qrcode
+             HelpBlock:(void(^)())help;
 
-- (void)showWithClose:(void(^)())close
-               Logout:(void(^)())logout
-          ShowLibrary:(void(^)())libraryBlock
-          UpdateBlock:(void(^)())update
-          QRCodeBlock:(void(^)())qrcode
-            HelpBlock:(void(^)())help;;
+- (void)dismiss:(void(^)())complete;
 
 @end

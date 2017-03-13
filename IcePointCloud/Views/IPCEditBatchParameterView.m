@@ -94,32 +94,43 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 
 #pragma mark //Clicked Events
 - (void)show{
-    [UIView beginAnimations:@"imageViewBig" context:nil];
-    [UIView setAnimationDuration:0.3];
-    CGAffineTransform newTransform =  CGAffineTransformConcat(self.editContentView.transform,  CGAffineTransformInvert(self.editContentView.transform));
-    [self.editContentView setTransform:newTransform];
-    self.editContentView.alpha = 1.0;
-    [UIView commitAnimations];
+    [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGAffineTransform newTransform =  CGAffineTransformConcat(self.editContentView.transform,  CGAffineTransformInvert(self.editContentView.transform));
+        [self.editContentView setTransform:newTransform];
+        self.editContentView.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 
 - (IBAction)closeAction:(id)sender {
-    if (self.DismissBlock)
-        self.DismissBlock();
+    [self removeCover];
 }
 
 - (IBAction)reduceNoneAccessoryCartAction:(id)sender {
     [[IPCShoppingCart sharedCart] removeGlasses:self.editParameterMode.currentGlass];
     [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
     if ([self cartItemAccessory].count == 0) {
-        if (self.DismissBlock)
-            self.DismissBlock();
+        [self removeCover];
     }
 }
 
 - (IBAction)addNoneAccessoryCartAction:(id)sender {
     [[IPCShoppingCart sharedCart] plusGlass:self.editParameterMode.currentGlass];
     [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
+}
+
+- (void)removeCover{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGAffineTransform transform = CGAffineTransformScale(self.editContentView.transform, 0.3, 0.3);
+        [self.editContentView setTransform:transform];
+        self.editContentView.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (self.DismissBlock)self.DismissBlock();
+        }
+    }];
 }
 
 #pragma mark //UITableViewDataSource

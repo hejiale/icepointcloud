@@ -249,9 +249,9 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    if ( selectedIndex < 4 && selectedIndex > 0)
+    if ( selectedIndex > 0)
     {
-        if (selectedIndex != _selectedIndex) {
+        if (selectedIndex != _selectedIndex && selectedIndex < 4) {
             UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
             [self addChildViewController:selectedViewController];
             
@@ -275,19 +275,11 @@
             if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
                 [self.delegate tabBarController:self didSelectViewController:selectedViewController];
         }else{
-            if ([self.delegate respondsToSelector:@selector(tabBarControllerNoneChange:)])
-                [self.delegate tabBarControllerNoneChange:self];
+            if ([self.delegate respondsToSelector:@selector(tabBarControllerNoneChange:TabBarIndex:)])
+                [self.delegate tabBarControllerNoneChange:self TabBarIndex:selectedIndex];
         }
     }else if (selectedIndex == 0){
         [self searchProductAction];
-    }else if(selectedIndex == 4){
-        if ([self.delegate respondsToSelector:@selector(showShoppingCartView)]) {
-            [self.delegate showShoppingCartView];
-        }
-    }else if(selectedIndex == 5){
-        if ([self.delegate respondsToSelector:@selector(showPersonView)]) {
-            [self.delegate showPersonView];
-        }
     }
 }
 

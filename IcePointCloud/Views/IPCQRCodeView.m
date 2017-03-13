@@ -10,6 +10,15 @@
 
 @implementation IPCQRCodeView
 
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCQRCodeView" owner:self];
+        [self addSubview:view];
+    }
+    return self;
+}
+
 - (void)showWithClose:(void (^)())closeBlock
 {
     self.CloseBlock = closeBlock;
@@ -27,9 +36,17 @@
 
 
 - (IBAction)closeAction:(id)sender {
-    if (self.CloseBlock) {
-        self.CloseBlock();
-    }
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect frame = self.frame;
+        frame.origin.x += self.jk_width;
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (self.CloseBlock) {
+                self.CloseBlock();
+            }
+        }
+    }];
 }
 
 @end

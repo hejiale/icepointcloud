@@ -307,7 +307,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
             [self loadBatchAccessoryView];
         }
     }
-    CGAffineTransform transform = CGAffineTransformScale(self.parameterContentView.transform, 0.2, 0.2);
+    CGAffineTransform transform = CGAffineTransformScale(self.parameterContentView.transform, 0.3, 0.3);
     [self.parameterContentView setTransform:transform];
     
     [self refreshSureButtonStatus];
@@ -424,14 +424,14 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 
 #pragma mark //Clicked Events
 - (void)show{
-    [UIView beginAnimations:@"imageViewBig" context:nil];
-    [UIView setAnimationDuration:0.3];
-    CGAffineTransform newTransform =  CGAffineTransformConcat(self.parameterContentView.transform,  CGAffineTransformInvert(self.parameterContentView.transform));
-    [self.parameterContentView setTransform:newTransform];
-    self.parameterContentView.alpha = 1.0;
-    [UIView commitAnimations];
+    [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGAffineTransform newTransform =  CGAffineTransformConcat(self.parameterContentView.transform,  CGAffineTransformInvert(self.parameterContentView.transform));
+        [self.parameterContentView setTransform:newTransform];
+        self.parameterContentView.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
-
 
 - (IBAction)completeAction:(id)sender {
     if (self.cartItem) {
@@ -652,9 +652,17 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 
 //Remove page
 - (void)removeCover{
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self removeFromSuperview];
-    if (self.CompleteBlock)self.CompleteBlock();
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGAffineTransform transform = CGAffineTransformScale(self.parameterContentView.transform, 0.3, 0.3);
+        [self.parameterContentView setTransform:transform];
+        self.parameterContentView.alpha = 0;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self removeFromSuperview];
+            if (self.CompleteBlock)self.CompleteBlock();
+        }
+    }];
 }
 
 #pragma mark //预售切换

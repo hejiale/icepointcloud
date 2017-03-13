@@ -11,5 +11,6 @@
 @interface IPCShoppingCartView : UIView
 
 - (void)showWithPay:(void(^)())pay;
+- (void)dismiss:(void(^)())complete;
 
 @end

@@ -15,8 +15,6 @@
 static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
 static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartCellIdentifier";
 
-typedef  void(^PayBlock)();
-
 @interface IPCShoppingCartView ()<UITableViewDelegate,UITableViewDataSource,IPCEditShoppingCartCellDelegate>
 {
     BOOL   isEditStatus;
@@ -29,7 +27,7 @@ typedef  void(^PayBlock)();
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
 @property (strong, nonatomic) UIView * coverView;
-@property (copy, nonatomic) PayBlock payBlock;
+@property (copy, nonatomic) void(^PayBlock)();
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
 
@@ -37,8 +35,20 @@ typedef  void(^PayBlock)();
 
 @implementation IPCShoppingCartView
 
-- (void)awakeFromNib{
-    [super awakeFromNib];
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCShoppingCartView" owner:self];
+        [self addSubview:view];
+    }
+    return self;
+}
+
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
     [self addLeftLine];
     [self.settlementButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.cartListTableView setTableFooterView:[[UIView alloc]init]];
@@ -59,12 +69,27 @@ typedef  void(^PayBlock)();
 {
     self.payBlock = pay;
     
-    [UIView animateWithDuration:0.5f animations:^{
+    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.frame;
         frame.origin.x -= self.jk_width;
         self.frame = frame;
     } completion:^(BOOL finished) {
         [self commitUI];
+    }];
+}
+
+- (void)dismiss:(void(^)())complete
+{
+    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        CGRect frame = self.frame;
+        frame.origin.x += self.jk_width;
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (complete) {
+                complete();
+            }
+        }
     }];
 }
 
@@ -93,8 +118,8 @@ typedef  void(^PayBlock)();
 - (IBAction)onSettlementAction:(id)sender {
     __weak typeof (self) weakSelf = self;
     if ( ! [self.cartViewMode shoppingCartIsEmpty]){
-        if (self.payBlock) {
-            self.payBlock();
+        if (self.PayBlock) {
+            self.PayBlock();
         }
     }else{
         [IPCUIKit showError:@"购物车中未选中任何商品!"];
