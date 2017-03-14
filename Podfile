@@ -19,7 +19,7 @@ pod 'GPUImage'
 pod 'TuSDK'
 pod 'JKCategories'
 pod 'YYKit'
-pod 'ReactiveCocoa'
+pod 'ReactiveCocoa', '~> 4.2.2’
 pod 'RealReachability'
 pod 'MJRefresh'
 end

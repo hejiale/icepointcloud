@@ -1,5 +1,7 @@
 #import <UIKit/UIKit.h>
 
+#import "HiddenRootViewController.h"
+#import "HideableWindow.h"
 #import "OBDragDrop.h"
 #import "OBDragDropManager.h"
 #import "OBDragDropProtocol.h"

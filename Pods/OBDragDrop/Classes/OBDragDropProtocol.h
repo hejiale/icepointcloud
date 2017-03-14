@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-typedef enum {
+typedef NS_ENUM(NSUInteger, OBDropAction)
+{
   OBDropActionNone = 0,
   OBDropActionCopy = 1,
   OBDropActionMove = 2,
   OBDropActionDelete = 3,
-} OBDropAction;
+};
 
 
 @class OBOvum;
@@ -46,6 +47,9 @@ typedef enum {
 // Called regardless of whether the ovum drop was successful or cancelled
 -(void) ovumDragEnded:(OBOvum*)ovum;
 
+// If this delegate method is implemented, OBDragDropManager will not automatically animate the returning of the ovum to the source
+-(void)handleReturningToSourceAnimationForOvum:(OBOvum*)ovum completion:(void (^)(void))completion;
+
 @end
 
 
@@ -73,8 +77,8 @@ typedef enum {
 
 @protocol OBDragDropGestureRecognizer <NSObject>
 
-@property (nonatomic, retain) OBOvum *ovum;
-@property (nonatomic, assign) id<OBOvumSource> ovumSource;
+@property (nonatomic, strong) OBOvum *ovum;
+@property (nonatomic, weak) id<OBOvumSource> ovumSource;
 
 @end
 

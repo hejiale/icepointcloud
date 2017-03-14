@@ -34,7 +34,7 @@
 /**
  *  获取选中的单元格列表
  *
- *  @return
+ *  @return gridCellData
  */
 - (NSMutableArray<GeeV2TSPhotosGridCellData *> *)getSelectedItem;
 @end
@@ -63,6 +63,11 @@
  *  显示相机单元格，点击后请求打开相机 (默认: true)
  */
 @property (nonatomic) BOOL displayCameraCell;
+
+/**
+ *  照片排序字段 默认根据创建时间排序 ( lsqAssetSortKeyModificationDate 类型 iOS8以上可用)
+ */
+@property (nonatomic,assign) lsqAssetSortKeyType photosSortKeyType;
 
 /**
  *  当前选中相册组

@@ -10,6 +10,8 @@
 #import "UIView+OBDropZone.h"
 #import "UIGestureRecognizer+OBDragDrop.h"
 #import "OBLongPressDragDropGestureRecognizer.h"
+#import "HideableWindow.h"
+#import "HiddenRootViewController.h"
 
 
 @implementation OBOvum
@@ -22,6 +24,7 @@
 
 @synthesize dragView;
 @synthesize dragViewInitialCenter;
+@synthesize dragViewInitialSize;
 
 @synthesize isCentered;
 @synthesize shouldScale;
@@ -59,6 +62,7 @@
 @end
 
 
+#define OBDRAGDROPMANAGER_IS_IOS7_OR_EARLIER (NSFoundationVersionNumber < NSFoundationVersionNumber_iOS_8_0)
 
 @implementation OBDragDropManager
 
@@ -82,13 +86,16 @@
   self = [super init];
   if (self)
   {
-    __weak id __self = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidChangeStatusBarOrientationNotification
-                                                      object:[UIApplication sharedApplication]
-                                                       queue:[NSOperationQueue mainQueue]
-                                                  usingBlock:^(NSNotification *notification) {
-                                                    [__self handleApplicationOrientationChange:notification];
-                                                  }];
+    if (OBDRAGDROPMANAGER_IS_IOS7_OR_EARLIER)
+    {
+      __weak id __self = self;
+      [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidChangeStatusBarOrientationNotification
+                                                                                                        object:[UIApplication sharedApplication]
+                                                                                                           queue:[NSOperationQueue mainQueue]
+                                                                                                  usingBlock:^(NSNotification *notification) {
+                                                                                                      [__self handleApplicationOrientationChange:notification];
+                                                                                                  }];
+    }
   }
   return self;
 }
@@ -96,8 +103,10 @@
 
 -(void) dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:[UIApplication sharedApplication]];
-
+  if (OBDRAGDROPMANAGER_IS_IOS7_OR_EARLIER)
+  {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:[UIApplication sharedApplication]];
+  }
 }
 
 
@@ -133,12 +142,29 @@
     [self.overlayWindow removeFromSuperview];
     self.overlayWindow = nil;
   }
-
-  self.overlayWindow = [[UIWindow alloc] initWithFrame:mainWindow.frame];
+  
+  self.overlayWindow = [[HideableWindow alloc] initWithFrame:mainWindow.frame];
   self.overlayWindow.windowLevel = UIWindowLevelAlert;
   self.overlayWindow.hidden = YES;
   self.overlayWindow.userInteractionEnabled = NO;
-  self.overlayWindow.transform = [self transformForOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+  if (OBDRAGDROPMANAGER_IS_IOS7_OR_EARLIER)
+  {
+    self.overlayWindow.transform = [self transformForOrientation:[[UIApplication sharedApplication] statusBarOrientation]];
+  }
+  else
+  {
+    UIViewController *rootViewController = self.overlayWindow.rootViewController;
+    if (rootViewController)
+      self.overlayWindow.rootViewController = [[HiddenRootViewController alloc] initWithStatusBarStyle:rootViewController.preferredStatusBarStyle
+                                                                                             animation:rootViewController.preferredStatusBarUpdateAnimation
+                                                                                                hidden:rootViewController.prefersStatusBarHidden];
+    else if (mainWindow.rootViewController)
+      self.overlayWindow.rootViewController = [[HiddenRootViewController alloc] initWithStatusBarStyle:mainWindow.rootViewController.preferredStatusBarStyle
+                                                                                             animation:mainWindow.rootViewController.preferredStatusBarUpdateAnimation
+                                                                                                hidden:mainWindow.rootViewController.prefersStatusBarHidden];
+    else
+      self.overlayWindow.rootViewController = [HiddenRootViewController new];
+  }
 }
 
 
@@ -231,18 +257,33 @@
 
 -(void) animateOvumReturningToSource:(OBOvum*)ovum
 {
-  CGPoint dragViewInitialCenter = ovum.dragViewInitialCenter;
-  UIView *dragView = ovum.dragView;
+    if([ovum.source respondsToSelector:@selector(handleReturningToSourceAnimationForOvum:completion:)]) {
+        
+        UIView *dragView = ovum.dragView;
+        
+        [ovum.source handleReturningToSourceAnimationForOvum:ovum completion:^{
+            
+            [dragView removeFromSuperview];
+            overlayWindow.hidden = YES;
+        }];
+    }
+    else {
+        
+        CGPoint dragViewInitialCenter = ovum.dragViewInitialCenter;
+        UIView *dragView = ovum.dragView;
+        
+        [UIView animateWithDuration:0.25 animations:^{
+            dragView.center = dragViewInitialCenter;
+            //dragView.transform = CGAffineTransformMakeScale(0.01, 0.01);
+            dragView.transform = CGAffineTransformIdentity;
+            //dragView.alpha = 0.0;
+        } completion:^(BOOL finished) {
+            [dragView removeFromSuperview];
+            overlayWindow.hidden = YES;
+        }];
+    }
+    
 
-  [UIView animateWithDuration:0.25 animations:^{
-    dragView.center = dragViewInitialCenter;
-    //dragView.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    dragView.transform = CGAffineTransformIdentity;
-    //dragView.alpha = 0.0;
-  } completion:^(BOOL finished) {
-    [dragView removeFromSuperview];
-    overlayWindow.hidden = YES;
-  }];
 }
 
 
@@ -290,8 +331,10 @@
     if (![self ovumRecognizerShouldHandleTouch:recognizer]) {
         return;
     }
-    
-    
+
+  // Update window visibility asap to adjust its rootViewController orientation
+  overlayWindow.hidden = NO;
+
   UIWindow *hostWindow = recognizer.view.window;
   CGPoint locationInHostWindow = [recognizer locationInView:hostWindow];
   CGPoint locationInOverlayWindow = [recognizer locationInView:overlayWindow];
@@ -324,10 +367,10 @@
       dragView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.33];
     }
 
-    overlayWindow.hidden = NO;
     [overlayWindow addSubview:dragView];
     recognizer.ovum.dragView = dragView;
     recognizer.ovum.dragViewInitialCenter = dragView.center;
+    recognizer.ovum.dragViewInitialSize = dragView.frame.size;
 
     if (!recognizer.ovum.isCentered)
     {
@@ -363,7 +406,10 @@
     if ([ovumSource respondsToSelector:@selector(ovumDragWillBegin:)])
       [ovumSource ovumDragWillBegin:recognizer.ovum];
 
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:recognizer.ovum, OBOvumDictionaryKey, nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              recognizer.ovum, OBOvumDictionaryKey,
+                              recognizer, OBGestureRecognizerDictionaryKey,
+                              nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:OBDragDropManagerWillBeginDragNotification object:self userInfo:userInfo];
   } else if (recognizer.state == UIGestureRecognizerStateChanged)
   {
@@ -371,64 +417,7 @@
     UIView *dragView = ovum.dragView;
 
     // New center point for drag view without any modification because of the scale of initial offsets between touch and drag view center.
-    CGPoint newCenter = locationInOverlayWindow;
-    
-    if (!recognizer.ovum.isCentered)
-    {
-      // If chosen apply initial offset to the new location.
-      newCenter.x = newCenter.x - recognizer.ovum.offsetOvumAndTouch.x * recognizer.ovum.scale;
-      newCenter.y = newCenter.y - recognizer.ovum.offsetOvumAndTouch.y * recognizer.ovum.scale;
-    }
-    
-    if (recognizer.ovum.shouldScale)
-    {
-      // This is the average location of the location of all touches in the gesture.
-      CGPoint newCentroid = locationInOverlayWindow;
-      NSUInteger numberOfTouches = recognizer.numberOfTouches;
-      
-      // If number of touches changes we need to recalculate the shift between the last
-      // gesture centroid and the new gesture one to avoid the image being recentered.
-      if (prevNumberOfTouches != numberOfTouches)
-      {
-        recognizer.ovum.shiftPinchCentroid = CGPointMake(prevPinchCentroid.x - newCentroid.x + recognizer.ovum.shiftPinchCentroid.x * recognizer.ovum.scale,
-                                                         prevPinchCentroid.y - newCentroid.y + recognizer.ovum.shiftPinchCentroid.y * recognizer.ovum.scale);
-        recognizer.ovum.offsetOvumAndTouch = CGPointMake(recognizer.ovum.offsetOvumAndTouch.x * recognizer.ovum.scale,
-                                                         recognizer.ovum.offsetOvumAndTouch.y * recognizer.ovum.scale);
-        
-        if (numberOfTouches == 1)
-        { // If the gestures continues with one finger all the scale variables are reseted.
-          initialDistance = 0;
-          initialFrame = dragView.frame;
-          recognizer.ovum.scale = 1.0;
-        }
-      }
-      
-      // And update the current state for the next iteration check
-      prevPinchCentroid = newCentroid;
-      prevNumberOfTouches = numberOfTouches;
-            
-      // This is the transformation for rescaling the image and it needs two fingers at least.
-      if (numberOfTouches > 1)
-      {
-        CGPoint firstTouchLocation = [recognizer locationOfTouch:0 inView:overlayWindow];
-        CGFloat newDistance = [self distanceFrom:newCentroid to:firstTouchLocation];
-        
-        if (initialDistance == 0)
-          initialDistance = newDistance;
-        
-        CGFloat aScale = newDistance / initialDistance;
-        recognizer.ovum.scale = aScale;
-        
-        CGAffineTransform transform = CGAffineTransformIdentity;
-        transform = CGAffineTransformScale(transform, recognizer.ovum.scale, recognizer.ovum.scale);
-        dragView.frame = CGRectApplyAffineTransform(initialFrame, transform);
-      }
-      
-      // And finally recentered depending on the shifting touch and the original offset.
-      newCenter.x = newCenter.x + recognizer.ovum.shiftPinchCentroid.x * recognizer.ovum.scale;
-      newCenter.y = newCenter.y + recognizer.ovum.shiftPinchCentroid.y * recognizer.ovum.scale;
-    }
-    
+    CGPoint newCenter = [self applyRecenteringTo:locationInOverlayWindow withRecognizer:recognizer];
     dragView.center = newCenter;
 
     [self handleOvumMove:ovum inWindow:hostWindow atLocation:locationInHostWindow];
@@ -451,24 +440,13 @@
       UIView *handlingView = [self findDropZoneHandlerInWindow:hostWindow atLocation:locationInHostWindow];
       CGPoint locationInView = [hostWindow convertPoint:locationInHostWindow toView:handlingView];
 
-      CGPoint newCenter = locationInView;
-      
-      if (!recognizer.ovum.isCentered)
-      {
-        newCenter.x = newCenter.x - recognizer.ovum.offsetOvumAndTouch.x * recognizer.ovum.scale;
-        newCenter.y = newCenter.y - recognizer.ovum.offsetOvumAndTouch.y * recognizer.ovum.scale;
-      }
-
-      if (recognizer.ovum.shouldScale)
-      {
-        newCenter.x = newCenter.x + recognizer.ovum.shiftPinchCentroid.x * recognizer.ovum.scale;
-        newCenter.y = newCenter.y + recognizer.ovum.shiftPinchCentroid.y * recognizer.ovum.scale;
-      }
-      
-      [dropZone ovumDropped:ovum inView:handlingView atLocation:newCenter];
+      CGPoint newCenter = [self applyRecenteringTo:locationInOverlayWindow withRecognizer:recognizer];
 
       // For use in blocks below
       UIView *dragView = ovum.dragView;
+      dragView.center = newCenter;
+
+      [dropZone ovumDropped:ovum inView:handlingView atLocation:locationInView];
 
       if ([dropZone respondsToSelector:@selector(handleDropAnimationForOvum:withDragView:dragDropManager:)])
       {
@@ -499,7 +477,10 @@
 
     [self cleanupOvum:ovum];
 
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:recognizer.ovum, OBOvumDictionaryKey, nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              recognizer.ovum, OBOvumDictionaryKey,
+                              recognizer, OBGestureRecognizerDictionaryKey,
+                              nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:OBDragDropManagerDidEndDragNotification object:self userInfo:userInfo];
     
     // Reset the ovum recognizer
@@ -510,6 +491,12 @@
   {
     // Handle the case where an ovum isn't dropped on a drop target
     OBOvum *ovum = recognizer.ovum;
+    
+    // The gesture can be canceled while the ovum is on top of a target (user taps the home or power button during the drag).
+    // In which case the correct action is OBDropActionNone as the gesture wasn't completed.
+    if (ovum.dropAction != OBDropActionNone)
+      ovum.dropAction = OBDropActionNone;
+    
     UIView *handlingView = ovum.currentDropHandlingView;
     CGPoint locationInView = [hostWindow convertPoint:locationInHostWindow toView:handlingView];
 
@@ -521,13 +508,82 @@
 
     [self cleanupOvum:ovum];
 
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:recognizer.ovum, OBOvumDictionaryKey, nil];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              recognizer.ovum, OBOvumDictionaryKey,
+                              recognizer, OBGestureRecognizerDictionaryKey,
+                              nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:OBDragDropManagerDidEndDragNotification object:self userInfo:userInfo];
     
     // Reset the ovum recognizer
     recognizer.ovum = nil;
   }
 }
+
+
+-(CGPoint) applyRecenteringTo:(CGPoint)location withRecognizer:(UIGestureRecognizer *)recognizer
+{
+  CGPoint newCenter = location;
+  UIView *dragView = recognizer.ovum.dragView;
+
+  if (!recognizer.ovum.isCentered)
+  {
+    // If chosen apply initial offset to the new location.
+    newCenter.x = newCenter.x - recognizer.ovum.offsetOvumAndTouch.x * recognizer.ovum.scale;
+    newCenter.y = newCenter.y - recognizer.ovum.offsetOvumAndTouch.y * recognizer.ovum.scale;
+  }
+
+  if (recognizer.ovum.shouldScale)
+  {
+    // This is the average location of the location of all touches in the gesture.
+    CGPoint newCentroid = location;
+    NSUInteger numberOfTouches = recognizer.numberOfTouches;
+
+    // If number of touches changes we need to recalculate the shift between the last
+    // gesture centroid and the new gesture one to avoid the image being recentered.
+    if (prevNumberOfTouches != numberOfTouches)
+    {
+      recognizer.ovum.shiftPinchCentroid = CGPointMake(prevPinchCentroid.x - newCentroid.x + recognizer.ovum.shiftPinchCentroid.x * recognizer.ovum.scale,
+                                                       prevPinchCentroid.y - newCentroid.y + recognizer.ovum.shiftPinchCentroid.y * recognizer.ovum.scale);
+      recognizer.ovum.offsetOvumAndTouch = CGPointMake(recognizer.ovum.offsetOvumAndTouch.x * recognizer.ovum.scale,
+                                                       recognizer.ovum.offsetOvumAndTouch.y * recognizer.ovum.scale);
+
+      if (numberOfTouches == 1)
+      { // If the gestures continues with one finger all the scale variables are reseted.
+        initialDistance = 0;
+        initialFrame = dragView.frame;
+        recognizer.ovum.scale = 1.0;
+      }
+    }
+
+    // And update the current state for the next iteration check
+    prevPinchCentroid = newCentroid;
+    prevNumberOfTouches = numberOfTouches;
+
+    // This is the transformation for rescaling the image and it needs two fingers at least.
+    if (numberOfTouches > 1)
+    {
+      CGPoint firstTouchLocation = [recognizer locationOfTouch:0 inView:overlayWindow];
+      CGFloat newDistance = [self distanceFrom:newCentroid to:firstTouchLocation];
+
+      if (initialDistance == 0)
+        initialDistance = newDistance;
+
+      CGFloat aScale = newDistance / initialDistance;
+      recognizer.ovum.scale = aScale;
+
+      CGAffineTransform transform = CGAffineTransformIdentity;
+      transform = CGAffineTransformScale(transform, recognizer.ovum.scale, recognizer.ovum.scale);
+      dragView.frame = CGRectApplyAffineTransform(initialFrame, transform);
+    }
+
+    // And finally recentered depending on the shifting touch and the original offset.
+    newCenter.x = newCenter.x + recognizer.ovum.shiftPinchCentroid.x * recognizer.ovum.scale;
+    newCenter.y = newCenter.y + recognizer.ovum.shiftPinchCentroid.y * recognizer.ovum.scale;
+  }
+
+  return newCenter;
+}
+
 
 -(BOOL) ovumRecognizerShouldHandleTouch:(UIGestureRecognizer <OBDragDropGestureRecognizer>*)recognizer {
     if (recognizer.state == UIGestureRecognizerStateBegan) {

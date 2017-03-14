@@ -16,6 +16,7 @@
 #define OBDragDropManagerDidEndDragNotification @"OBDragDropManagerDidEndDrag"
 
 #define OBOvumDictionaryKey @"ovum"
+#define OBGestureRecognizerDictionaryKey @"recognizer"
 
 // OBOvum represents a data object that is being dragged around a UI window, named
 // after the g-speak equivalent within the Ovipositor infrastructure.
@@ -47,6 +48,7 @@
 @property (nonatomic, weak) UIView *currentDropHandlingView;
 @property (nonatomic, strong) UIView *dragView;
 @property (nonatomic, assign) CGPoint dragViewInitialCenter;
+@property (nonatomic, assign) CGSize dragViewInitialSize;
 @property (nonatomic, assign) BOOL isCentered;
 @property (nonatomic, assign) BOOL shouldScale;
 
