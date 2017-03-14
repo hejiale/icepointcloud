@@ -24,11 +24,6 @@ PODS:
   - OBDragDrop (1.0.3)
   - ReactiveCocoa (4.2.2):
     - Result (~> 2.0)
-  - RealReachability (1.1.8):
-    - RealReachability/Connection (= 1.1.8)
-    - RealReachability/Ping (= 1.1.8)
-  - RealReachability/Connection (1.1.8)
-  - RealReachability/Ping (1.1.8)
   - Result (2.1.3)
   - SNWeChatSDK (1.7.5)
   - SVProgressHUD (2.1.2)
@@ -58,7 +53,6 @@ DEPENDENCIES:
   - MJRefresh
   - OBDragDrop
   - ReactiveCocoa (~> 4.2.2)
-  - RealReachability
   - SNWeChatSDK
   - SVProgressHUD
   - TuSDK
@@ -76,7 +70,6 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   OBDragDrop: 827cd5cecede6b5320b18106e3695f030900d8cf
   ReactiveCocoa: 72263e7ac0770c274617ccd345e01049d0ca38ae
-  RealReachability: e6c8a2bbffa316006e8c282efc1ee2567d61a920
   Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
@@ -84,6 +77,6 @@ SPEC CHECKSUMS:
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: a3e1cd27a1ca2551bb54a708742c4d4c529e019f
+PODFILE CHECKSUM: 91732b222ec22b4bfefaa42512f86e0db89568cb
 
 COCOAPODS: 1.0.1
