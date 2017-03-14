@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCTryGlassesViewController">
@@ -47,7 +51,7 @@
                                         <constraint firstAttribute="height" constant="21" id="iHR-bc-Qb2"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对比" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHn-vI-avD">
@@ -57,18 +61,18 @@
                                         <constraint firstAttribute="width" constant="42" id="p0Q-FG-Gvs"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RwU-zi-wli">
                                     <rect key="frame" x="306" y="5" width="40" height="40"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="RFF-Mf-xJX"/>
                                         <constraint firstAttribute="width" constant="40" id="lek-jf-SYU"/>
                                     </constraints>
                                     <state key="normal" image="icon_share">
-                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="onShareBtnTapped:" destination="-1" eventType="touchUpInside" id="LxR-wg-tyG"/>
@@ -76,16 +80,16 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmP-cc-CMv">
                                     <rect key="frame" x="366" y="5" width="40" height="40"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="9AZ-lK-HVS"/>
                                         <constraint firstAttribute="height" constant="40" id="g8L-vZ-1tk"/>
                                     </constraints>
                                     <state key="normal" image="match_top_btn_del">
-                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="selected">
-                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="onDeleteBtnTapped:" destination="-1" eventType="touchUpInside" id="O08-Rn-Zu7"/>
@@ -93,13 +97,13 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aGI-mv-LLK">
                                     <rect key="frame" x="426" y="5" width="40" height="40"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="MCP-wx-USy"/>
                                         <constraint firstAttribute="width" constant="40" id="gOo-0D-uyS"/>
                                     </constraints>
                                     <state key="normal" image="match_top_btn_models">
-                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="onModelsBtnTapped:" destination="-1" eventType="touchUpInside" id="SlJ-mw-DHw"/>
@@ -107,20 +111,20 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="369-Pi-ySz">
                                     <rect key="frame" x="486" y="5" width="40" height="40"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="Sru-b8-ZOe"/>
                                         <constraint firstAttribute="height" constant="40" id="oty-0K-Rac"/>
                                     </constraints>
                                     <state key="normal" image="match_top_btn_camera">
-                                        <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="onCameraBtnTapped:" destination="-1" eventType="touchUpInside" id="CgC-M2-S3r"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.20475953014184398" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20475953014184398" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="bmP-cc-CMv" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="0hm-Em-haS"/>
                                 <constraint firstAttribute="height" constant="50" id="8KR-r8-xcg"/>
@@ -139,11 +143,11 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rV0-Dn-hOT">
                             <rect key="frame" x="0.0" y="0.0" width="531" height="698"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="rV0-Dn-hOT" secondAttribute="trailing" id="Lhf-CL-3GS"/>
                         <constraint firstAttribute="trailing" secondItem="pAq-87-Q7I" secondAttribute="trailing" id="YCG-3v-NW0"/>
@@ -157,7 +161,7 @@
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="07k-sM-L60">
                     <rect key="frame" x="0.0" y="55" width="493" height="643"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jAr-RF-Oeb">
                         <size key="itemSize" width="50" height="50"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -176,10 +180,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="246.5" height="48"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                             <state key="normal" title="热门推荐">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="onChooseRecommendedAction:" destination="-1" eventType="touchUpInside" id="c3L-DC-1ts"/>
@@ -189,10 +193,10 @@
                             <rect key="frame" x="246" y="0.0" width="246.5" height="48"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                             <state key="normal" title="热销排行">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="0.4039215686" green="0.69803921570000005" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="onChooseSelledAction:" destination="-1" eventType="touchUpInside" id="6OA-uN-sgP"/>
@@ -200,7 +204,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-om-If4">
                             <rect key="frame" x="10" y="48" width="200" height="2"/>
-                            <color key="backgroundColor" red="0.4039215686" green="0.69803921570000005" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="aqA-zO-R2r"/>
                                 <constraint firstAttribute="width" constant="200" id="dKr-bb-rih"/>
@@ -208,14 +212,14 @@
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y0S-fg-3tu">
                             <rect key="frame" x="246" y="12" width="1" height="26"/>
-                            <color key="backgroundColor" white="0.66666666666666663" alpha="0.29698581560283688" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.29698581560283688" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="0.5" id="3i7-MD-HDU"/>
                             </constraints>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Y0S-fg-3tu" firstAttribute="centerX" secondItem="xtk-pY-3gF" secondAttribute="centerX" id="3eh-Ob-dNS"/>
                         <constraint firstItem="dTG-om-If4" firstAttribute="top" secondItem="iZQ-dN-yr3" secondAttribute="bottom" id="7zB-mP-wSV"/>
@@ -235,13 +239,13 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyj-54-ihf">
                     <rect key="frame" x="227" y="650" width="38" height="38"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="38" id="Gq3-a5-HfF"/>
                         <constraint firstAttribute="height" constant="38" id="d7U-CG-hmE"/>
                     </constraints>
                     <state key="normal" image="icon_scrolls_to_top">
-                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="goToTopAction:" destination="-1" eventType="touchUpInside" id="pc1-35-ESF"/>
@@ -264,7 +268,6 @@
                 <constraint firstAttribute="bottom" secondItem="dKs-wG-0L7" secondAttribute="bottom" id="vU1-sF-7p1"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="RAf-5R-8ba" userLabel="ModelsPicker">
@@ -280,7 +283,7 @@
                         <constraint firstAttribute="width" constant="150" id="Sbr-xU-ccX"/>
                     </constraints>
                     <state key="normal" image="model1_pick">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onModelPhotoTapped:" destination="-1" eventType="touchUpInside" id="RGu-bo-Pn5"/>
@@ -292,7 +295,7 @@
                         <constraint firstAttribute="width" constant="150" id="LWE-ZA-8da"/>
                     </constraints>
                     <state key="normal" image="model2_pick">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onModelPhotoTapped:" destination="-1" eventType="touchUpInside" id="Afj-aL-eX0"/>
@@ -304,14 +307,14 @@
                         <constraint firstAttribute="width" constant="150" id="k2y-Jf-eu8"/>
                     </constraints>
                     <state key="normal" image="model3_pick">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onModelPhotoTapped:" destination="-1" eventType="touchUpInside" id="nhN-UI-859"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="znP-Or-tZf" firstAttribute="top" secondItem="RAf-5R-8ba" secondAttribute="top" constant="25" id="8ju-iG-L3v"/>
                 <constraint firstItem="dIq-aq-0hA" firstAttribute="top" secondItem="RAf-5R-8ba" secondAttribute="top" constant="25" id="AtR-by-6fV"/>
@@ -344,15 +347,15 @@
                     <rect key="frame" x="0.0" y="0.0" width="135" height="70"/>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                     <state key="normal" title="删除照片">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="onConfirmDeleteBtnTapped:" destination="-1" eventType="touchUpInside" id="KVd-OS-Ls9"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="LYo-LK-PCm" secondAttribute="bottom" id="2lL-vx-0r9"/>
                 <constraint firstAttribute="trailing" secondItem="LYo-LK-PCm" secondAttribute="trailing" id="5Hv-lK-qdt"/>
@@ -370,12 +373,12 @@
             <point key="canvasLocation" x="64.5" y="-254"/>
         </view>
         <view contentMode="scaleToFill" id="3fo-8h-0hp">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hi3-Ri-HxP">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <gestureRecognizers/>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="nR5-fD-Lzj" appends="YES" id="OaZ-F8-NMQ"/>
@@ -393,8 +396,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1629" y="268"/>
         </view>
         <view contentMode="scaleToFill" id="uyA-aR-3T6">
@@ -403,7 +404,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wGK-JQ-GRN" customClass="IPCImageTextButton">
                     <rect key="frame" x="380" y="363" width="90" height="106"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="106" id="egd-ZF-rn6"/>
                         <constraint firstAttribute="width" constant="90" id="v2c-Vf-SVt"/>
@@ -416,7 +417,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dVd-4Q-55W" customClass="IPCImageTextButton">
                     <rect key="frame" x="554" y="363.5" width="90" height="106"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="106" id="To3-tM-RHO"/>
                         <constraint firstAttribute="width" constant="90" id="roz-D2-j4f"/>
@@ -428,7 +429,7 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.30200022163120566" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.30200022163120566" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="wGK-JQ-GRN" firstAttribute="leading" secondItem="uyA-aR-3T6" secondAttribute="leading" constant="380" id="EbK-lN-3bH"/>
                 <constraint firstItem="dVd-4Q-55W" firstAttribute="centerY" secondItem="uyA-aR-3T6" secondAttribute="centerY" id="Irf-Ni-LBJ"/>
@@ -438,7 +439,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1656" y="-728.5"/>
         </view>
@@ -462,4 +462,9 @@
         <image name="model2_pick" width="149" height="191"/>
         <image name="model3_pick" width="149" height="191"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

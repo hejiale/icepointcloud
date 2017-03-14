@@ -31,11 +31,10 @@
     return self;
 }
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self.usernameTf addBorder:5 Width:0.5];
     [self.passwordTf addBorder:5 Width:0.5];
     [IPCUIKit textFieldLeftSpace:10 InTextField:self.usernameTf];
@@ -43,7 +42,7 @@
     [self.loginButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.loginButton addSignleCorner:UIRectCornerAllCorners Size:5];
     [IPCUIKit clearAutoCorrection:self.loginBgView];
-    
+
     if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {
         [self.usernameTf setText:[NSUserDefaults jk_stringForKey:IPCUserNameKey]];
     }

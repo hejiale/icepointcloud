@@ -223,30 +223,6 @@
     return nil;
 }
 
-- (void)setSelectedViewController:(UIViewController *)selectedViewController
-{
-    NSInteger index = [self.viewControllers indexOfObject:selectedViewController];
-    if (index != NSNotFound) {
-        self.selectedIndex = [self.viewControllers indexOfObject:selectedViewController] + 1;
-    } else {
-        [self addChildViewController:selectedViewController];
-        selectedViewController.view.frame = self.contentView.bounds;
-        [self.contentView addSubview:selectedViewController.view];
-        [self.contentView sendSubviewToBack:selectedViewController.view];
-        [selectedViewController didMoveToParentViewController:self];
-        
-        if (_selectedIndex != NSNotFound)
-        {
-            UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex - 1];
-            [previousViewController.view removeFromSuperview];
-            [previousViewController removeFromParentViewController];
-        }
-        
-        if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
-            [self.delegate tabBarController:self didSelectViewController:selectedViewController];
-    }
-}
-
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
     if ( selectedIndex > 0)

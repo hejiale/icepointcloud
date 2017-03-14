@@ -24,12 +24,12 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vaX-eJ-jL4">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="vaX-eJ-jL4">
                     <rect key="frame" x="0.0" y="70" width="1024" height="643"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.099983377659574463" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.096520390070921988" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.049014841700670352" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.04694312123530555" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="separatorInset" minX="48" minY="0.0" maxX="48" maxY="0.0"/>
-                    <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.095495345744680854" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.045382974169338376" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="HDt-AV-uUI"/>
                         <outlet property="delegate" destination="-1" id="Xns-JI-5td"/>

@@ -49,7 +49,6 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
     [self.keywordHistory addObjectsFromArray:[IPCAppManager sharedManager].localCustomerHistory];
     
     CGFloat itemWidth = (self.customerCollectionView.jk_width - 40)/3;
-    
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(itemWidth, 110);
     layout.minimumInteritemSpacing = 20;

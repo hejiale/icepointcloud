@@ -38,7 +38,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIView *topOperationBar;
 @property (strong, nonatomic) IBOutlet UIView *bgTapView;
 @property (weak, nonatomic) IBOutlet UIView *compareBgView;
-@property (strong, nonatomic) IBOutlet IPCSingleModeView * signleModeView;
+@property (strong, nonatomic)  IPCSingleModeView * signleModeView;
 @property (strong, nonatomic) IBOutlet UIView *sortProductView;
 @property (weak, nonatomic) IBOutlet UIButton *recommendedButton;
 @property (weak, nonatomic) IBOutlet UIButton *sellButton;
