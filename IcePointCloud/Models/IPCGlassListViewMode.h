@@ -49,7 +49,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 
 @property (nonatomic, strong) NSMutableArray<IPCGlasses *>   *glassesList;
 @property (nonatomic, strong) IPCFilterDataSourceResult   * filterDataSource;
-@property (strong, nonatomic) IPCFilterTypeMode                          *filterValue;
+@property (strong, nonatomic) IPCFilterTypeMode               *filterValue;
 
 @property (nonatomic, copy) NSString *  searchWord;
 @property (nonatomic) NSInteger   currentPage;
@@ -57,9 +57,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic) IPCTopFilterType   currentType;
 
 - (void)reloadGlassListDataWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
-
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
-
 - (void)loadFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 
 @end

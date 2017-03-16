@@ -242,9 +242,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
             [IPCUIKit hiden];
         });
     });
-    
 }
-
 
 - (void)loadMoreTableView{
     self.glassListViewMode.currentPage++;
@@ -275,10 +273,8 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 #pragma mark //NSNotification Methods ----------------------------------------------------------------------------
 - (void)filterProductAction:(id)sender {
-    if (self.recommendedButton.selected){
-        [IPCUIKit showError:@"暂无热门推荐的商品分类参数"];
-        return;
-    }
+    if (self.recommendedButton.selected)return;
+    
     __weak typeof (self) weakSelf = self;
     if ([self.glassListViewMode.filterView superview]) {
         [self removeAllPopView];

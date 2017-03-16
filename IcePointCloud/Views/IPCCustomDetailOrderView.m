@@ -47,12 +47,6 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
         self.DismissBlock = dismiss;
         self.currentOrderNum = orderNum;
         
-        [self addSubview:self.orderDetailBgView];
-        [self.orderDetailBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.mas_right).offset(-self.orderDetailBgView.jk_width);
-            make.top.mas_equalTo(self.mas_top).offset(0);
-        }];
-        
         if ([self.currentOrderNum integerValue] > 0) {
             [self performSelectorOnMainThread:@selector(queryOrderDetail) withObject:nil waitUntilDone:YES];
         }
@@ -64,6 +58,15 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
     [super layoutSubviews];
     
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
+    self.orderDetailTableView.isHiden = YES;
+    self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
+    self.orderDetailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
+    
+    [self addSubview:self.orderDetailBgView];
+    [self.orderDetailBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.mas_right).offset(-self.orderDetailBgView.jk_width);
+        make.top.mas_equalTo(self.mas_top).offset(0);
+    }];
 }
 
 - (void)show

@@ -58,6 +58,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.cancelButton addTopLine];
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+    self.detailTableView.isHiden = YES;
+    self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
+    self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
     [self.sureButton setBackgroundColor:COLOR_RGB_BLUE];
     [self commitUI];
 }
