@@ -700,6 +700,7 @@
 		CB1234F01E762D9100AB29DF /* IPCRootBarMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRootBarMenuView.h; sourceTree = "<group>"; };
 		CB1234F11E762D9100AB29DF /* IPCRootBarMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRootBarMenuView.m; sourceTree = "<group>"; };
 		CB1234F31E762D9A00AB29DF /* IPCRootBarMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCRootBarMenuView.xib; sourceTree = "<group>"; };
+		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		CB404B0E1E7285E4005673CD /* IPCEditBatchParameterMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditBatchParameterMode.h; sourceTree = "<group>"; };
 		CB404B0F1E7285E4005673CD /* IPCEditBatchParameterMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditBatchParameterMode.m; sourceTree = "<group>"; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
@@ -1536,6 +1537,7 @@
 		9E03C2D31978D5D5007389D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */,
 				0479F29A1E09205900816E02 /* JavaScriptCore.framework */,
 				04C34CBE1E012BB300979001 /* StoreKit.framework */,
 				0460CE1A1DF8054E00700A18 /* WebKit.framework */,
@@ -1721,6 +1723,7 @@
 				9E03C2CF1978D5D5007389D0 /* Resources */,
 				D5F17C898DE7BB15308DDB46 /* [CP] Embed Pods Frameworks */,
 				450D4B81BC2D0260C0CC0479 /* [CP] Copy Pods Resources */,
+				CB158E211E790AE60015A4C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1930,7 +1933,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		C6808539EDC5251273D29E10 /* [CP] Check Pods Manifest.lock */ = {
@@ -1945,8 +1948,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		CB158E211E790AE60015A4C9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		D5F17C898DE7BB15308DDB46 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2270,6 +2286,7 @@
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2316,6 +2333,7 @@
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

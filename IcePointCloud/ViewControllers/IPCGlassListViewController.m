@@ -19,7 +19,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (weak, nonatomic)   IBOutlet UICollectionView               *glassListCollectionView;
-@property (strong, nonatomic) IBOutlet UIView                              *backGroudView;
 @property (strong, nonatomic) IPCGlassParameterView                  *parameterView;
 @property (strong, nonatomic) IPCEditBatchParameterView           *editParameterView;
 @property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
@@ -74,8 +73,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self removeCover];
 }
 
-
-
 #pragma mark //Set UI
 - (MJRefreshBackStateFooter *)refreshHeader{
     if (!_refreshHeader){
@@ -88,14 +85,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if (!_refreshFooter)
         _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTableView)];
     return _refreshFooter;
-}
-
-- (void)addBackgroundView{
-    if ([self.backGroudView superview])[self removeCover];
-    
-    [self.backGroudView setFrame:self.view.bounds];
-    [self.view addSubview:self.backGroudView];
-    [self.view bringSubviewToFront:self.backGroudView];
 }
 
 
@@ -164,11 +153,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //NSNotificationCenter Events
 - (void)onFilterProducts{
-    if ([self.glassListViewMode.glassesView superview]) {
+    if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
-        [self addBackgroundView];
         __weak typeof (self) weakSelf = self;
+        [self addBackgroundViewWithAlpha:0.2 Complete:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf removeCover];
+        }];
         [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
@@ -188,17 +180,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 
 #pragma mark //Clicked Events
-- (IBAction)tapBgAction{
-    [self removeCover];
-}
-
 - (void)removeCover
 {
     __weak typeof (self) weakSelf = self;
-    if ([self.backGroudView superview] && self.glassListViewMode.glassesView) {
-        [self.glassListViewMode.glassesView closeCompletion:^{
+    if ([self.backGroudView superview] && self.glassListViewMode.filterView) {
+        [self.glassListViewMode.filterView closeCompletion:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.glassListViewMode.glassesView removeFromSuperview];strongSelf.glassListViewMode.glassesView = nil;
+            [strongSelf.glassListViewMode.filterView removeFromSuperview];strongSelf.glassListViewMode.filterView = nil;
             [strongSelf.backGroudView removeFromSuperview];
         }];
     }

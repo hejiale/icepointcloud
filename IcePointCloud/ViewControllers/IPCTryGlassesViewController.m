@@ -36,7 +36,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 @property (nonatomic, weak) IBOutlet UIButton *photoDeleteBtn;
 @property (nonatomic, weak) IBOutlet UIButton *cameraBtn;
 @property (weak, nonatomic) IBOutlet UIView *topOperationBar;
-@property (strong, nonatomic) IBOutlet UIView *bgTapView;
 @property (weak, nonatomic) IBOutlet UIView *compareBgView;
 @property (strong, nonatomic)  IPCSingleModeView * signleModeView;
 @property (strong, nonatomic) IBOutlet UIView *sortProductView;
@@ -57,7 +56,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
 @property (strong, nonatomic) IPCGlassListViewMode  *glassListViewMode;
 @property (nonatomic, strong) NSMutableArray<IPCMatchItem *> *matchItems;
-@property (nonatomic, strong) IPCOfflineFaceDetector        * offlineFaceDetector;
+@property (nonatomic, strong) IPCOfflineFaceDetector  * offlineFaceDetector;
 
 @end
 
@@ -183,14 +182,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 #pragma mark //Set UI ----------------------------------------------------------------------------
-- (void)showBgView:(CGFloat)alpha
-{
-    if ([self.bgTapView superview] || self.bgTapView != nil)[self removeAllPopView];
-    [self.bgTapView setFrame:self.view.bounds];
-    [self.bgTapView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:alpha]];
-    [self.view addSubview:self.bgTapView];
-}
-
 - (UIVisualEffectView *)blurBgView{
     if (!_blurBgView)
         _blurBgView = [IPCUIKit showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeAllPopView)];
@@ -289,11 +280,13 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         return;
     }
     __weak typeof (self) weakSelf = self;
-    if ([self.glassListViewMode.glassesView superview]) {
+    if ([self.glassListViewMode.filterView superview]) {
         [self removeAllPopView];
     }else{
-        [self showBgView:0.2];
-        [self.glassListViewMode loadFilterCategory:self InView:self.bgTapView ReloadClose:^{
+        [self addBackgroundViewWithAlpha:0.2 Complete:^{
+            [self removeAllPopView];
+        }];
+        [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeAllPopView];
             [strongSelf.refreshHeader beginRefreshing];
@@ -333,17 +326,13 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 //Clean bg cover methods
-- (IBAction)tapHidenBgViewAction:(id)sender {
-    [self removeAllPopView];
-}
-
 - (void)removeAllPopView{
     [self.shareButtonView removeFromSuperview];
     [self.photoDeleteConfirmView removeFromSuperview];
     [self.modelsPicker removeFromSuperview];
-    [self.bgTapView removeFromSuperview];
+    [self.backGroudView removeFromSuperview];
     [self.blurBgView removeFromSuperview];
-    [self.glassListViewMode.glassesView removeFromSuperview];
+    [self.glassListViewMode.filterView removeFromSuperview];
 }
 
 //Add a shopping cart animation
@@ -357,7 +346,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 //signle show or compare show methods
 - (void)switchPressed:(id)sender {
-    if ([self.bgTapView superview])
+    if ([self.backGroudView superview])
         [self removeAllPopView];
     
     if (self.compareSwitch.isOn) {
@@ -370,13 +359,15 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Choose delete method
 - (IBAction)onDeleteBtnTapped:(UIButton *)sender
 {
-    if ([self.bgTapView superview]) {
+    if ([self.backGroudView superview]) {
         [self removeAllPopView];
     }else{
-        [self showBgView:0];
-        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.bgTapView].origin.x-50;
+        [self addBackgroundViewWithAlpha:0 Complete:^{
+            [self removeAllPopView];
+        }];
+        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x-50;
         [self.photoDeleteConfirmView setFrame:CGRectMake(x, self.topOperationBar.jk_bottom, 135, 70)];
-        [self.bgTapView addSubview:self.photoDeleteConfirmView];
+        [self.backGroudView addSubview:self.photoDeleteConfirmView];
     }
 }
 
@@ -398,17 +389,18 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Choose Model Method
 - (IBAction)onModelsBtnTapped:(UIButton *)sender
 {
-    if ([self.bgTapView superview]) {
+    if ([self.backGroudView superview]) {
         [self removeAllPopView];
     }else{
-        [self showBgView:0];
-        
-        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.bgTapView].origin.x - self.modelsPicker.jk_width + 75;
+        [self addBackgroundViewWithAlpha:0 Complete:^{
+            [self removeAllPopView];
+        }];
+        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x - self.modelsPicker.jk_width + 75;
         self.modelsPicker.layer.anchorPoint = CGPointMake(0.9, 0);
         [self.modelsPicker setFrame:CGRectMake(x, self.topOperationBar.jk_bottom, self.modelsPicker.jk_width, self.modelsPicker.jk_height)];
         self.modelsPicker.alpha = 0;
         self.modelsPicker.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-        [self.bgTapView addSubview:self.modelsPicker];
+        [self.backGroudView addSubview:self.modelsPicker];
         
         [UIView animateWithDuration:0.3f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.modelsPicker.alpha = 1.f;
@@ -424,7 +416,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Click model head image
 - (IBAction)onModelPhotoTapped:(UIButton *)sender
 {
-    if ([self.bgTapView superview])[self removeAllPopView];
+    if ([self.backGroudView superview])[self removeAllPopView];
     
     IPCMatchItem *mi = self.matchItems[0];
     if (mi.photoType == IPCPhotoTypeModel && mi.modelType == index) return;
@@ -450,17 +442,18 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Share Tryglass Image
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
-    [self showBgView:0.2];
-    
-    _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.bgTapView.jk_width,80 ) Chat:^{
+    [self addBackgroundViewWithAlpha:0.2 Complete:^{
+        [self removeAllPopView];
+    }];
+    _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.backGroudView.jk_width,80 ) Chat:^{
         [self shareToWechat:WXSceneSession];
     } Line:^{
         [self shareToWechat:WXSceneTimeline];
     } Favorite:^{
         [self shareToWechat:WXSceneFavorite];
     }];
-    [self.bgTapView addSubview:_shareButtonView];
-    [self.bgTapView bringSubviewToFront:_shareButtonView];
+    [self.backGroudView addSubview:_shareButtonView];
+    [self.backGroudView bringSubviewToFront:_shareButtonView];
     [_shareButtonView show];
 }
 

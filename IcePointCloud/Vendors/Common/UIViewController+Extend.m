@@ -8,6 +8,8 @@
 
 #import "UIViewController+Extend.h"
 
+static char const *  coverViewIdentifier = "coverViewIdentifier";
+
 @implementation UIViewController (Extend)
 
 - (void)setNavigationTitle:(NSString *)title
@@ -55,5 +57,30 @@
 - (void)removeFromLayer:(CALayer *)layerAnimation{
     [layerAnimation removeFromSuperlayer];
 }
+
+- (void)addBackgroundViewWithAlpha:(CGFloat)alpha Complete:(void (^)())completed
+{
+    self.backGroudView = [[UIView alloc]initWithFrame:self.view.bounds];
+    [self.backGroudView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:self.backGroudView];
+    [self.view bringSubviewToFront:self.backGroudView];
+    [self.backGroudView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
+        if (completed)completed();
+    }];
+    
+    UIImageView * coverView = [[UIImageView alloc]initWithFrame:self.backGroudView.bounds];
+    [coverView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:alpha]];
+    [self.backGroudView addSubview:coverView];
+}
+
+- (void)setBackGroudView:(UIView *)backGroudView{
+    objc_setAssociatedObject(self,coverViewIdentifier , backGroudView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (UIView *)backGroudView{
+    return objc_getAssociatedObject(self, coverViewIdentifier);
+}
+
+
 
 @end

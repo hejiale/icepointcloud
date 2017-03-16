@@ -14,13 +14,13 @@ pod 'MJExtension'
 pod 'OBDragDrop'
 pod 'SNWeChatSDK'
 pod 'ZYCornerRadius'
-pod 'SVProgressHUD'
 pod 'GPUImage'
 pod 'TuSDK'
 pod 'JKCategories'
 pod 'YYKit'
 pod 'ReactiveCocoa', '~> 4.2.2’
 pod 'MJRefresh'
+pod 'SVProgressHUD'
 end
 
 target "IcePointCloudTests" do

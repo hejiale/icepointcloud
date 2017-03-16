@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCTryGlassesViewController">
             <connections>
-                <outlet property="bgTapView" destination="3fo-8h-0hp" id="IqR-C9-Qgf"/>
                 <outlet property="bottomImageView" destination="dTG-om-If4" id="Zf7-Nt-79a"/>
                 <outlet property="cameraBgView" destination="uyA-aR-3T6" id="vC0-Qm-MTy"/>
                 <outlet property="cameraBtn" destination="369-Pi-ySz" id="fsd-wI-hXh"/>
@@ -372,32 +371,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="64.5" y="-254"/>
         </view>
-        <view contentMode="scaleToFill" id="3fo-8h-0hp">
-            <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hi3-Ri-HxP">
-                    <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <gestureRecognizers/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="nR5-fD-Lzj" appends="YES" id="OaZ-F8-NMQ"/>
-                    </connections>
-                </imageView>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <gestureRecognizers/>
-            <constraints>
-                <constraint firstItem="Hi3-Ri-HxP" firstAttribute="leading" secondItem="3fo-8h-0hp" secondAttribute="leading" id="1K0-Ug-C8a"/>
-                <constraint firstAttribute="bottom" secondItem="Hi3-Ri-HxP" secondAttribute="bottom" id="J9C-h1-5gf"/>
-                <constraint firstAttribute="trailing" secondItem="Hi3-Ri-HxP" secondAttribute="trailing" id="e7B-eJ-ufo"/>
-                <constraint firstItem="Hi3-Ri-HxP" firstAttribute="top" secondItem="3fo-8h-0hp" secondAttribute="top" id="oEC-oE-vYl"/>
-            </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
-            <point key="canvasLocation" x="1629" y="268"/>
-        </view>
         <view contentMode="scaleToFill" id="uyA-aR-3T6">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="833"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -442,11 +415,6 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="1656" y="-728.5"/>
         </view>
-        <tapGestureRecognizer id="nR5-fD-Lzj">
-            <connections>
-                <action selector="tapHidenBgViewAction:" destination="-1" id="eOF-jJ-ulf"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="icon_scrolls_to_top" width="52" height="52"/>
@@ -464,7 +432,7 @@
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedOrientationMetrics key="orientation" orientation="landscapeRight"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>

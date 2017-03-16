@@ -11,9 +11,12 @@
 
 @interface UIViewController (Extend)
 
+@property (nonatomic, strong) UIView *  backGroudView;
+
 - (void)setNavigationTitle:(NSString *)title;
 
 -(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
 
+- (void)addBackgroundViewWithAlpha:(CGFloat)alpha Complete:(void(^)())completed;
 
 @end

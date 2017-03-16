@@ -85,8 +85,8 @@
          __strong typeof (weakSelf) strongSelf = weakSelf;
          strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:strongSelf.isTrying];
-         if (strongSelf.glassesView)
-             [strongSelf.glassesView reloadFilterView];
+         if (strongSelf.filterView)
+             [strongSelf.filterView reloadFilterView];
          
          if (strongSelf.filterSuccessBlock)
              strongSelf.filterSuccessBlock(nil);
@@ -139,13 +139,13 @@
     self.reloadFilterCloseBlock = reloadClose;
     self.reloadFilterUnCloseBlock = reloadUnClose;
     
-    _glassesView = [UIView jk_loadInstanceFromNibWithName:@"IPCFilterGlassesView" owner:owner];
-    [_glassesView setFrame:CGRectMake(-_glassesView.jk_width, 0, _glassesView.jk_width, backgroundView.jk_height)];
-    [_glassesView setDataSource:self];
-    [_glassesView setDelegate:self];
-    [backgroundView addSubview:_glassesView];
-    [_glassesView show];
-    [_glassesView reloadFilterView];
+    _filterView = [UIView jk_loadInstanceFromNibWithName:@"IPCFilterGlassesView" owner:owner];
+    [_filterView setFrame:CGRectMake(-_filterView.jk_width, 0, _filterView.jk_width, backgroundView.jk_height)];
+    [_filterView setDataSource:self];
+    [_filterView setDelegate:self];
+    [backgroundView addSubview:_filterView];
+    [_filterView show];
+    [_filterView reloadFilterView];
 }
 
 

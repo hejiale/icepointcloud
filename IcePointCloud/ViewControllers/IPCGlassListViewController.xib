@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCGlassListViewController">
             <connections>
-                <outlet property="backGroudView" destination="xMf-58-VIr" id="NQN-R8-cSo"/>
                 <outlet property="glassListCollectionView" destination="1va-Bf-15V" id="Lh7-VE-UM4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -47,37 +46,5 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="479" y="394"/>
         </view>
-        <view contentMode="scaleToFill" id="xMf-58-VIr">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="600"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qlr-jf-DDd">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="600"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.19744570035460993" colorSpace="custom" customColorSpace="sRGB"/>
-                    <gestureRecognizers/>
-                    <connections>
-                        <outletCollection property="gestureRecognizers" destination="5Rr-Zy-sCL" appends="YES" id="tmW-7m-pl0"/>
-                    </connections>
-                </imageView>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <gestureRecognizers/>
-            <constraints>
-                <constraint firstItem="qlr-jf-DDd" firstAttribute="top" secondItem="xMf-58-VIr" secondAttribute="top" id="OeW-Ww-rqo"/>
-                <constraint firstAttribute="bottom" secondItem="qlr-jf-DDd" secondAttribute="bottom" id="jQU-SJ-OhI"/>
-                <constraint firstAttribute="trailing" secondItem="qlr-jf-DDd" secondAttribute="trailing" id="tuy-3m-4xZ"/>
-                <constraint firstItem="qlr-jf-DDd" firstAttribute="leading" secondItem="xMf-58-VIr" secondAttribute="leading" id="yfP-rl-HPi"/>
-            </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1609" y="137"/>
-        </view>
-        <tapGestureRecognizer id="5Rr-Zy-sCL">
-            <connections>
-                <action selector="tapBgAction" destination="-1" id="d3C-My-vNe"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
 </document>

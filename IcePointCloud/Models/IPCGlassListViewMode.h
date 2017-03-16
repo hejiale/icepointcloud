@@ -45,7 +45,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, copy) ReloadFilterCloseBlock    reloadFilterCloseBlock;
 @property (nonatomic, copy) ReloadFilterUnCloseBlock    reloadFilterUnCloseBlock;
 
-@property (strong, nonatomic) IPCFilterGlassesView   *glassesView;
+@property (strong, nonatomic) IPCFilterGlassesView   * filterView;
 
 @property (nonatomic, strong) NSMutableArray<IPCGlasses *>   *glassesList;
 @property (nonatomic, strong) IPCFilterDataSourceResult   * filterDataSource;
