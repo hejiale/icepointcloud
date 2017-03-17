@@ -209,9 +209,7 @@
 - (void)setViewControllers:(NSArray *)viewControllers
 {
     _viewControllers = [viewControllers copy];
-    
     _selectedIndex = NSNotFound;
-    
     self.selectedIndex = [viewControllers count] > 0 ? 1 : INT_MAX;
 }
 
@@ -233,7 +231,7 @@
             
             selectedViewController.view.frame = self.contentView.bounds;
             [self.contentView addSubview:selectedViewController.view];
-            [self.contentView sendSubviewToBack:selectedViewController.view];
+            [self.contentView bringSubviewToFront:selectedViewController.view];
             [selectedViewController didMoveToParentViewController:self];
             
             if (_selectedIndex != NSNotFound)

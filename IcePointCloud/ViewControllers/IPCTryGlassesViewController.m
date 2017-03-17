@@ -160,6 +160,8 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 - (void)initCompareModeView
 {
+    [self.compareBgView removeAllSubviews];
+    
     if ([self.compareBgView.subviews count] == 0) {
         __weak typeof (self) weakSelf = self;
         [self.matchItems enumerateObjectsUsingBlock:^(IPCMatchItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -507,16 +509,12 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     //Face recognition eye position
     self.faceRecognition = [[IPCOnlineFaceDetector alloc]initWithFaceFrame:^(CGPoint position, CGSize size) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.signleModeView updateFaceUI:position :size];
-        for (IPCCompareItemView * item in strongSelf.compareBgView.subviews)
-            [item updateFaceUI:position :size];
+        [strongSelf updateModelFace:position Size:size];
     } Error:^(IFlySpeechError *error) {
         if (error) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
-                [strongSelf.signleModeView updateFaceUI:CGPointMake(rect.origin.x, rect.origin.y) :rect.size];
-                for (IPCCompareItemView * item in strongSelf.compareBgView.subviews)
-                    [item updateFaceUI:CGPointMake(rect.origin.x, rect.origin.y) :rect.size];
+                [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
                 [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
             }];
@@ -526,6 +524,13 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     }];
     [self.faceRecognition postFaceRequest:image];
     [self changeCameraImage:image];
+}
+
+- (void)updateModelFace:(CGPoint)position Size:(CGSize)size
+{
+    [self.signleModeView updateFaceUI:position :size];
+    for (IPCCompareItemView * item in self.compareBgView.subviews)
+        [item updateFaceUI:position :size];
 }
 
 //Modify the model photos
@@ -552,22 +557,15 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (void)switchToCompareMode
 {
     [self initCompareModeView];
-    
-    for (IPCCompareItemView * item in self.compareBgView.subviews) {
-        item.hidden = YES;
-        item.transform = CGAffineTransformIdentity;
-        item.center = item.originalCenter;
-        [item updateItem:NO];
-    }
-    
+
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[activeMatchItemIndex];
     
-    CGRect frame = self.signleModeView.frame;
-    self.signleModeView.layer.anchorPoint = targetItemView.singleModeViewAnchorPoint;
-    self.signleModeView.frame = frame;
+    CGRect frame = targetItemView.frame;
+    targetItemView.layer.anchorPoint = targetItemView.singleModeViewAnchorPoint;
+    targetItemView.frame = frame;
     
-    [UIView animateWithDuration:.2 delay:0 options:0 animations:^{
-        self.signleModeView.transform = CGAffineTransformScale(self.signleModeView.transform, 0.5, 0.5);
+    [UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        targetItemView.transform = CGAffineTransformScale(targetItemView.transform, 1, 1);
     } completion:^(BOOL finished) {
         if (finished) {
             [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -575,15 +573,14 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
                 obj.hidden = NO;
             }];
             
-            [UIView animateWithDuration:2 animations:^{
-                self.signleModeView.alpha = 0;
-                self.signleModeView.hidden = YES;
-            }];
-            
             [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
+                [UIView animateWithDuration:.2 delay:.1 * idx options:UIViewAnimationOptionCurveEaseInOut animations:^{
                     obj.alpha = 1;
-                } completion:nil];
+                } completion:^(BOOL finished) {
+                    if (finished) {
+                        self.signleModeView.hidden = YES;
+                    }
+                }];
             }];
         }
     }];

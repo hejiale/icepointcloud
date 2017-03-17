@@ -36,8 +36,8 @@
 {
     if (self.currentPage == 0)[self.glassesList removeAllObjects];
     self.completeBlock = complete;
-
-    [self getGlassesListInfoWithPage:self.currentPage Keyword:self.searchWord ClassType:[[IPCAppManager sharedManager]classType:self.currentType] SearchType:[self.filterValue getStoreFilterSource] StartPrice:self.filterValue.currentStartPirce EndPrice:self.filterValue.currentEndPrice];
+    
+    [self getGlassesListInfoWithPage:self.currentPage ClassType:[[IPCAppManager sharedManager]classType:self.currentType] SearchType:[self.filterValue getStoreFilterSource] StartPrice:self.filterValue.currentStartPirce EndPrice:self.filterValue.currentEndPrice];
 }
 
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess
@@ -48,7 +48,6 @@
 
 #pragma mark //Request Data
 - (void)getGlassesListInfoWithPage:(NSInteger)page
-                           Keyword:(NSString *)word
                          ClassType:(NSString *)classType
                         SearchType:(NSString *)searchType
                         StartPrice:(double)startPrice
@@ -56,7 +55,7 @@
 {
     __weak typeof (self) weakSelf = self;
     [IPCGoodsRequestManager queryFilterGlassesListWithPage:page
-                                                SearchWord:word
+                                                SearchWord:self.searchWord
                                                  ClassType:classType
                                                 SearchType:searchType
                                                 StartPrice:startPrice

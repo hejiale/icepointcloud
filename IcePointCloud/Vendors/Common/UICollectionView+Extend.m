@@ -55,7 +55,7 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
     
     for (NSInteger i = 0; i <= sections; i ++) {
         NSInteger rows = [dataSource collectionView:self numberOfItemsInSection:sections];
-        if (rows > 0 && rows) {
+        if (rows > 0) {
             isEmpty = NO;
         }
     }

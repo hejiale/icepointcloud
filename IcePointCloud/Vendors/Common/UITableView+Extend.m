@@ -53,7 +53,7 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
     
     for (NSInteger i = 0; i <= sections; i ++) {
         NSInteger rows = [self.dataSource tableView:self numberOfRowsInSection:sections];
-        if (rows > 0 && rows) {
+        if (rows > 0) {
             isEmpty = NO;
         }
     }

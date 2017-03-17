@@ -113,34 +113,36 @@
     [self amplificationLargeModelView];
 }
 
-- (void)amplificationLargeModelView{
+- (void)amplificationLargeModelView
+{
     [self.superview.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj != self) {
-            [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
-                obj.alpha = 0;
-            } completion:nil];
-        }
+        obj.alpha = 0;
+        obj.transform = CGAffineTransformIdentity;
+        obj.hidden = YES;
     }];
     
-    CGRect parentFrame = self.superview.frame;
     
-    [UIView animateWithDuration:.2 delay:.2 options:0 animations:^{
-        self.transform = CGAffineTransformScale(self.transform, 2.0, 2.0);
-        self.center = CGPointMake(parentFrame.size.width / 2, parentFrame.size.height / 2);
+    
+    CGRect frame = self.parentSingleModeView.frame;
+    self.parentSingleModeView.layer.anchorPoint = [self singleModeViewAnchorPoint];
+    self.parentSingleModeView.frame = frame;
+    
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.parentSingleModeView.alpha = 1;
+        self.parentSingleModeView.hidden = NO;
+        self.parentSingleModeView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         if (finished) {
-            self.parentSingleModeView.alpha = 0;
+//            self.hidden = YES;
+//            self.transform = CGAffineTransformIdentity;
+//            
+//            
+//            
             self.parentSingleModeView.transform = CGAffineTransformIdentity;
-            self.parentSingleModeView.hidden = NO;
-            
+
             if (self.delegate && [self.delegate respondsToSelector:@selector(didAnimateToSingleMode:withIndex:)])
                 [self.delegate didAnimateToSingleMode:self withIndex:self.tag];
             
-            [UIView animateWithDuration:.3 animations:^{
-                self.alpha = 0;
-                self.parentSingleModeView.alpha = 1;
-            } completion:^(BOOL finished) {
-            }];
         }
     }];
 }
