@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCOrderTopTableViewCell : UITableViewCell
+@interface IPCPayOrderTitleCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *topTitleLabel;
 

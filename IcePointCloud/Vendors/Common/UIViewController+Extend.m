@@ -64,13 +64,15 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
     [self.backGroudView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:self.backGroudView];
     [self.view bringSubviewToFront:self.backGroudView];
-    [self.backGroudView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
-        if (completed)completed();
-    }];
     
     UIImageView * coverView = [[UIImageView alloc]initWithFrame:self.backGroudView.bounds];
     [coverView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:alpha]];
+    [coverView setUserInteractionEnabled:YES];
     [self.backGroudView addSubview:coverView];
+    
+    [coverView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
+        if (completed)completed();
+    }];
 }
 
 - (void)setBackGroudView:(UIView *)backGroudView{

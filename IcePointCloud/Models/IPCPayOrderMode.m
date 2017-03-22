@@ -31,7 +31,7 @@
     [IPCPayOrderMode sharedManager].isSelectEmploye = NO;
     [IPCPayOrderMode sharedManager].payStyleName = nil;
     [IPCPayOrderMode sharedManager].isOrder = NO;
-    [IPCPayOrderMode sharedManager].prePayType = IPCOrderPreSellPayTypeNone;
+//    [IPCPayOrderMode sharedManager].prePayType = IPCOrderPreSellPayTypeNone;
     [IPCPayOrderMode sharedManager].preEmployeAmount = 0;
     [IPCPayOrderMode sharedManager].preSellPrepaidAmount = 0;
     

@@ -46,6 +46,7 @@
     [self loadRequest:parameters RequestMethod:@"bizadmin.brushedSaveSalesOrder" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
+//***************预售**************//
 + (void)saveNewPreSalesOrderWithRequestCustomerID:(NSString *)customerID
                                        OpometryID:(NSString *)opometryID
                                         AddressID:(NSString *)addressID

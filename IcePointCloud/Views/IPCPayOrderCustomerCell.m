@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCCartOrderCustomerCell.h"
+#import "IPCPayOrderCustomerCell.h"
 
-@implementation IPCCartOrderCustomerCell
+@implementation IPCPayOrderCustomerCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,7 +19,7 @@
         make.left.equalTo(self.mainView.mas_left).with.offset(40);
         make.top.equalTo(self.mainView.mas_top).with.offset(64);
         make.width.mas_equalTo(139);
-        make.height.mas_equalTo(192);
+        make.height.mas_equalTo(194);
     }];
 }
 
@@ -29,12 +29,7 @@
     // Configure the view for the selected state
 }
 
-
-- (IBAction)closeAction:(id)sender {
-    [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:@"IPCCloseOrderChange" object:nil];
-}
-
-
+#pragma mark //Set UI
 - (UIImageView *)userPhotoImageView{
     if (!_userPhotoImageView) {
         _userPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -47,16 +42,15 @@
     _currentCustomer = currentCustomer;
     
     if (_currentCustomer) {
-        [self.userNameTextField setText:_currentCustomer.customerName];
-        [self.phoneTextField setText:_currentCustomer.customerPhone];
-        [self.birthdayTextField setText:_currentCustomer.birthday];
-        [self.ageTextFiled setText:_currentCustomer.age];
-        [self.mailTextField setText:_currentCustomer.email];
-        [self.genderTextField setText:[IPCCommon formatGender:_currentCustomer.contactorGengerString]];
+        [self.userNameLabel setText:_currentCustomer.customerName];
+        [self.phoneLabel setText:_currentCustomer.customerPhone];
+        [self.mailLabel setText:_currentCustomer.email];
+     
+        NSString * gender = [IPCCommon formatGender:_currentCustomer.contactorGengerString];
         
-        if ([self.genderTextField.text isEqualToString:@"男"] || [self.genderTextField.text isEqualToString:@"未设置"]) {
+        if ([gender isEqualToString:@"男"] || [gender isEqualToString:@"未设置"]) {
             [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_male@2x"]];
-        }else if ([self.genderTextField.text isEqualToString:@"女"]){
+        }else if ([gender isEqualToString:@"女"]){
             [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_female@2x"]];
         }
     }

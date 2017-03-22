@@ -125,12 +125,27 @@
 
 #pragma mark //Clicked Events
 - (IBAction)addCartAction:(id)sender {
+    //---------------******预售添加参数*******----------------//
+//    __weak typeof (self) weakSelf = self;
+//    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || ([self.glasses filterType] == IPCTopFilterTypeContactLenses && self.glasses.stock == 0))
+//    {
+//        __strong typeof (weakSelf) strongSelf = weakSelf;
+//        if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
+//            [strongSelf.delegate chooseParameter:strongSelf];
+//        }
+//    }else{
+//        [self addCartAnimation];
+//    }
     __weak typeof (self) weakSelf = self;
-    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || ([self.glasses filterType] == IPCTopFilterTypeContactLenses && self.glasses.stock == 0))
+    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType))
     {
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
-            [strongSelf.delegate chooseParameter:strongSelf];
+        if (([strongSelf.glasses filterType] == IPCTopFilterTypeContactLenses && strongSelf.glasses.stock == 0) || ([strongSelf.glasses filterType] == IPCTopFilterTypeAccessory && strongSelf.glasses.stock == 0)) {
+            [IPCUIKit showError:@"暂无库存，请重新选择!"];
+        }else{
+            if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
+                [strongSelf.delegate chooseParameter:strongSelf];
+            }
         }
     }else{
         [self addCartAnimation];

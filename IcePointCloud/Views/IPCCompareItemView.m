@@ -121,8 +121,6 @@
         obj.hidden = YES;
     }];
     
-    
-    
     CGRect frame = self.parentSingleModeView.frame;
     self.parentSingleModeView.layer.anchorPoint = [self singleModeViewAnchorPoint];
     self.parentSingleModeView.frame = frame;
@@ -133,16 +131,10 @@
         self.parentSingleModeView.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished) {
         if (finished) {
-//            self.hidden = YES;
-//            self.transform = CGAffineTransformIdentity;
-//            
-//            
-//            
             self.parentSingleModeView.transform = CGAffineTransformIdentity;
 
             if (self.delegate && [self.delegate respondsToSelector:@selector(didAnimateToSingleMode:withIndex:)])
                 [self.delegate didAnimateToSingleMode:self withIndex:self.tag];
-            
         }
     }];
 }

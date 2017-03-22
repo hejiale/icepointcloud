@@ -10,9 +10,8 @@
 #import "IPCExpandShoppingCartCell.h"
 #import "IPCHistoryOptometryCell.h"
 #import "IPCCustomerAddressListCell.h"
-#import "IPCOrderTopTableViewCell.h"
-#import "IPCCartOrderMemoViewCell.h"
-#import "IPCCartOrderCustomerCell.h"
+#import "IPCPayOrderTitleCell.h"
+#import "IPCPayOrderCustomerCell.h"
 #import "IPCExpandShoppingCartCell.h"
 #import "IPCOrderPayTypeCell.h"
 #import "IPCOrderPayStyleCell.h"
@@ -31,7 +30,7 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
 @implementation IPCPayOrderViewPreSellCellMode
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 10;
+    return 9;
 }
 
 
@@ -49,24 +48,17 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0){
-        IPCCartOrderCustomerCell * cell = [tableView dequeueReusableCellWithIdentifier:ContactIdentifier];
+        IPCPayOrderCustomerCell * cell = [tableView dequeueReusableCellWithIdentifier:ContactIdentifier];
         if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCCartOrderCustomerCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell = [[UINib nibWithNibName:@"IPCPayOrderCustomerCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         cell.currentCustomer = [IPCCurrentCustomerOpometry sharedManager].currentCustomer;
         return cell;
     }else if (indexPath.section == 1){
-        IPCCartOrderMemoViewCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCCartOrderMemoViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        }
-        [cell.memoTextView setText:[IPCPayOrderMode sharedManager].orderMemo];
-        return cell;
-    }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
-            IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCPayOrderTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.topTitleLabel setText:@"历史验光单信息"];
             return cell;
@@ -81,9 +73,9 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
         }
     }else if(indexPath.section == 3){
         if (indexPath.row == 0) {
-            IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCPayOrderTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.topTitleLabel setText:@"收货地址信息"];
             return cell;
@@ -113,15 +105,14 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
         }
         
         if (cartItem){
-            [cell setIsOrder:YES];
             [cell setCartItem:cartItem Reload:nil];
         }
         return cell;
     }else if (indexPath.section == 5 || indexPath.section == 7){
         if (indexPath.row == 0) {
-            IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCPayOrderTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.topTitleLabel setText:@"支付方式"];
             return cell;
@@ -144,9 +135,9 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
         }
     }else if(indexPath.section == 8){
         if (indexPath.row == 0) {
-            IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCPayOrderTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.topTitleLabel setText:@"员工打折"];
             return cell;
@@ -168,9 +159,9 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
         }
     }else{
         if (indexPath.row == 0) {
-            IPCOrderTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCPayOrderTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.topTitleLabel setText:@"选择结算方式"];
             return cell;

@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCOrderTopTableViewCell.h"
+#import "IPCPayOrderTitleCell.h"
 
-@implementation IPCOrderTopTableViewCell
+@implementation IPCPayOrderTitleCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -27,7 +27,7 @@
 
 @property (nonatomic,assign) IPCPayStyleType             payStyle;
 @property (nonatomic,assign) IPCOrderPayType            payType;
-@property (nonatomic,assign) IPCOrderPreSellPayType  prePayType;
+//@property (nonatomic,assign) IPCOrderPreSellPayType  prePayType;
 
 - (void)clearData;
 

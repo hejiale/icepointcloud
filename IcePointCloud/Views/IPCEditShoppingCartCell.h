@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) IPCShoppingCartItem * cartItem;
 @property (nonatomic, assign) id<IPCEditShoppingCartCellDelegate>delegate;
+
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
 
 @end
