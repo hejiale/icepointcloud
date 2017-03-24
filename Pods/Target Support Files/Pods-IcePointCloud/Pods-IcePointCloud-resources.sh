@@ -86,6 +86,11 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "TuSDK/Localization/En.lproj"
   install_resource "TuSDK/Localization/zh-Hant.lproj"
 fi
+if [[ "$CONFIGURATION" == "TestRelease" ]]; then
+  install_resource "TuSDK/Localization/Base.lproj"
+  install_resource "TuSDK/Localization/En.lproj"
+  install_resource "TuSDK/Localization/zh-Hant.lproj"
+fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

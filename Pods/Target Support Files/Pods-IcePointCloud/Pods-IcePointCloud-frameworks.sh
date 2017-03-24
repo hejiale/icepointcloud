@@ -120,6 +120,22 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/YYKit/YYKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ZYCornerRadius/ZYCornerRadius.framework"
 fi
+if [[ "$CONFIGURATION" == "TestRelease" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GPUImage/GPUImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/IQKeyboardManager/IQKeyboardManager.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JKCategories/JKCategories.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/JSONKit-NoWarning/JSONKit_NoWarning.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJExtension/MJExtension.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MJRefresh/MJRefresh.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/OBDragDrop/OBDragDrop.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ReactiveCocoa/ReactiveCocoa.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Result/Result.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SVProgressHUD/SVProgressHUD.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/YYKit/YYKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ZYCornerRadius/ZYCornerRadius.framework"
+fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
 fi

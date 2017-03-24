@@ -259,8 +259,12 @@
 		CB1234F21E762D9100AB29DF /* IPCRootBarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1234F11E762D9100AB29DF /* IPCRootBarMenuView.m */; };
 		CB1234F41E762D9A00AB29DF /* IPCRootBarMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1234F31E762D9A00AB29DF /* IPCRootBarMenuView.xib */; };
 		CB404B101E7285E4005673CD /* IPCEditBatchParameterMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB404B0F1E7285E4005673CD /* IPCEditBatchParameterMode.m */; };
+		CB4C82EE1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C82ED1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift */; };
+		CB4C82F81E84B8FF0072D4F4 /* SwiftMonkey.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB4C82E41E84B8780072D4F4 /* SwiftMonkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
+		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
+		CB7EF48B1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */; };
 		CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */; };
 		CB9211591E824CE000FD4EDC /* IPCPayOrderProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */; };
 		E35277251B301C48004E245C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35277241B301C48004E245C /* AssetsLibrary.framework */; };
@@ -275,7 +279,48 @@
 			remoteGlobalIDString = 9E03C2D01978D5D5007389D0;
 			remoteInfo = IcePointCloud;
 		};
+		CB4C82E31E84B8780072D4F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = OBJ_16;
+			remoteInfo = SwiftMonkey;
+		};
+		CB4C82E51E84B8780072D4F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CB4C82CB1E84B7EC0072D4F4;
+			remoteInfo = MonkeyForOCUIMonkeyTests;
+		};
+		CB4C82F01E84B8AF0072D4F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E03C2C91978D5D5007389D0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E03C2D01978D5D5007389D0;
+			remoteInfo = IcePointCloud;
+		};
+		CB4C82F51E84B8BE0072D4F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = OBJ_17;
+			remoteInfo = SwiftMonkey;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CB4C82F71E84B8ED0072D4F4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CB4C82F81E84B8FF0072D4F4 /* SwiftMonkey.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		040174D21D8F8D6F00C21A92 /* IPCShareChatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCShareChatView.h; sourceTree = "<group>"; };
@@ -626,6 +671,7 @@
 		04F8D4E51DE81E5500C572B3 /* IPCCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomButton.h; sourceTree = "<group>"; };
 		04F8D4E61DE81E5500C572B3 /* IPCCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomButton.m; sourceTree = "<group>"; };
 		04F98DBE1D6D720600C97474 /* IPCSingleModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSingleModeView.xib; sourceTree = "<group>"; };
+		0594E2CBFA962B68974A2571 /* Pods-IcePointCloud.testrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.testrelease.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.testrelease.xcconfig"; sourceTree = "<group>"; };
 		05C97962CD653FAA996B65D3 /* Pods-IcePointCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.debug.xcconfig"; sourceTree = "<group>"; };
 		11AEF3CAB0A74E7D7989020F /* Pods-IcePointCloudTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloudTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloudTests/Pods-IcePointCloudTests.release.xcconfig"; sourceTree = "<group>"; };
 		17EAF28B7B4662891D543E85 /* Pods-IcePointCloudTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloudTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloudTests/Pods-IcePointCloudTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -694,15 +740,23 @@
 		9EFAC1F519D6E71A00C1EFBF /* IPCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRequest.m; sourceTree = "<group>"; };
 		9EFAC1FA19D6E8F700C1EFBF /* IPCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCError.h; sourceTree = "<group>"; };
 		9EFAC1FB19D6E8F700C1EFBF /* IPCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCError.m; sourceTree = "<group>"; };
+		BF26672DE267EDD850D9C0A2 /* Pods-IcePointCloudTests.testrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloudTests.testrelease.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloudTests/Pods-IcePointCloudTests.testrelease.xcconfig"; sourceTree = "<group>"; };
 		CB1234F01E762D9100AB29DF /* IPCRootBarMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRootBarMenuView.h; sourceTree = "<group>"; };
 		CB1234F11E762D9100AB29DF /* IPCRootBarMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRootBarMenuView.m; sourceTree = "<group>"; };
 		CB1234F31E762D9A00AB29DF /* IPCRootBarMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCRootBarMenuView.xib; sourceTree = "<group>"; };
 		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		CB404B0E1E7285E4005673CD /* IPCEditBatchParameterMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditBatchParameterMode.h; sourceTree = "<group>"; };
 		CB404B0F1E7285E4005673CD /* IPCEditBatchParameterMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditBatchParameterMode.m; sourceTree = "<group>"; };
+		CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMonkey.xcodeproj; path = SwiftMonkey/SwiftMonkey.xcodeproj; sourceTree = "<group>"; };
+		CB4C82EB1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeyForOCUIMonkeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB4C82ED1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyForOCUIMonkeyTests.swift; sourceTree = "<group>"; };
+		CB4C82EF1E84B8AF0072D4F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
+		CB7EF4871E83A020003F7995 /* IPCPayOrderPayTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderPayTypeView.h; sourceTree = "<group>"; };
+		CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderPayTypeView.m; sourceTree = "<group>"; };
+		CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderPayTypeView.xib; sourceTree = "<group>"; };
 		CB9211551E824CE000FD4EDC /* IPCPayOrderProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderProductCell.h; sourceTree = "<group>"; };
 		CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderProductCell.m; sourceTree = "<group>"; };
 		CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderProductCell.xib; sourceTree = "<group>"; };
@@ -746,6 +800,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9741E702A9B8997F42586CAB /* Pods_IcePointCloudTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB4C82E81E84B8AF0072D4F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,6 +1185,9 @@
 				044E0ECC1E03CDC500FD2525 /* IPCPaySuccessView.h */,
 				044E0ECD1E03CDC500FD2525 /* IPCPaySuccessView.m */,
 				044E0ECF1E03CDD500FD2525 /* IPCPaySuccessView.xib */,
+				CB7EF4871E83A020003F7995 /* IPCPayOrderPayTypeView.h */,
+				CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */,
+				CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */,
 				04C9F7A81DEEB146001258B2 /* cell */,
 			);
 			name = PayOrder;
@@ -1492,8 +1556,10 @@
 		9E03C2C81978D5D5007389D0 = {
 			isa = PBXGroup;
 			children = (
+				CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */,
 				9E03C2DA1978D5D5007389D0 /* IcePointCloud */,
 				9E03C2F91978D5D5007389D0 /* IcePointCloudTests */,
+				CB4C82EC1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests */,
 				9E03C2D31978D5D5007389D0 /* Frameworks */,
 				9E03C2D21978D5D5007389D0 /* Products */,
 				B576EA134300537B2DAAFDD3 /* Pods */,
@@ -1505,6 +1571,7 @@
 			children = (
 				9E03C2D11978D5D5007389D0 /* IcePointCloud.app */,
 				9E03C2F21978D5D5007389D0 /* IcePointCloudTests.xctest */,
+				CB4C82EB1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1669,6 +1736,8 @@
 				D57A18F14EE64419E926539B /* Pods-IcePointCloud.release.xcconfig */,
 				17EAF28B7B4662891D543E85 /* Pods-IcePointCloudTests.debug.xcconfig */,
 				11AEF3CAB0A74E7D7989020F /* Pods-IcePointCloudTests.release.xcconfig */,
+				0594E2CBFA962B68974A2571 /* Pods-IcePointCloud.testrelease.xcconfig */,
+				BF26672DE267EDD850D9C0A2 /* Pods-IcePointCloudTests.testrelease.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1683,6 +1752,24 @@
 				046CF1411E5FDE3F0098B6BF /* shoppingCart */,
 			);
 			name = MenuView;
+			sourceTree = "<group>";
+		};
+		CB4C82DF1E84B8770072D4F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB4C82E41E84B8780072D4F4 /* SwiftMonkey.framework */,
+				CB4C82E61E84B8780072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB4C82EC1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				CB4C82ED1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift */,
+				CB4C82EF1E84B8AF0072D4F4 /* Info.plist */,
+			);
+			path = MonkeyForOCUIMonkeyTests;
 			sourceTree = "<group>";
 		};
 		CB9211541E82157400FD4EDC /* payOrder */ = {
@@ -1739,7 +1826,6 @@
 				9E03C2CF1978D5D5007389D0 /* Resources */,
 				D5F17C898DE7BB15308DDB46 /* [CP] Embed Pods Frameworks */,
 				450D4B81BC2D0260C0CC0479 /* [CP] Copy Pods Resources */,
-				CB158E211E790AE60015A4C9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1771,6 +1857,26 @@
 			productReference = 9E03C2F21978D5D5007389D0 /* IcePointCloudTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		CB4C82EA1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB4C82F21E84B8AF0072D4F4 /* Build configuration list for PBXNativeTarget "MonkeyForOCUIMonkeyTests" */;
+			buildPhases = (
+				CB4C82E71E84B8AF0072D4F4 /* Sources */,
+				CB4C82E81E84B8AF0072D4F4 /* Frameworks */,
+				CB4C82E91E84B8AF0072D4F4 /* Resources */,
+				CB4C82F71E84B8ED0072D4F4 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB4C82F61E84B8BE0072D4F4 /* PBXTargetDependency */,
+				CB4C82F11E84B8AF0072D4F4 /* PBXTargetDependency */,
+			);
+			name = MonkeyForOCUIMonkeyTests;
+			productName = MonkeyForOCUIMonkeyTests;
+			productReference = CB4C82EB1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1778,6 +1884,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftMigration = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Doray;
 				TargetAttributes = {
@@ -1793,6 +1900,12 @@
 					9E03C2F11978D5D5007389D0 = {
 						TestTargetID = 9E03C2D01978D5D5007389D0;
 					};
+					CB4C82EA1E84B8AF0072D4F4 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = TV2UGXUC6A;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9E03C2D01978D5D5007389D0;
+					};
 				};
 			};
 			buildConfigurationList = 9E03C2CC1978D5D5007389D0 /* Build configuration list for PBXProject "IcePointCloud" */;
@@ -1805,13 +1918,37 @@
 			mainGroup = 9E03C2C81978D5D5007389D0;
 			productRefGroup = 9E03C2D21978D5D5007389D0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CB4C82DF1E84B8770072D4F4 /* Products */;
+					ProjectRef = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9E03C2D01978D5D5007389D0 /* IcePointCloud */,
 				9E03C2F11978D5D5007389D0 /* IcePointCloudTests */,
+				CB4C82EA1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CB4C82E41E84B8780072D4F4 /* SwiftMonkey.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftMonkey.framework;
+			remoteRef = CB4C82E31E84B8780072D4F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CB4C82E61E84B8780072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MonkeyForOCUIMonkeyTests.xctest;
+			remoteRef = CB4C82E51E84B8780072D4F4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9E03C2CF1978D5D5007389D0 /* Resources */ = {
@@ -1855,6 +1992,7 @@
 				04C34CCD1E01419800979001 /* TuSDK.bundle in Resources */,
 				0472C1641D35CA9900C52F86 /* IPCPriceRangeTableViewCell.xib in Resources */,
 				04A202201D801A8A00F2A681 /* IPCLanuchViewController.xib in Resources */,
+				CB7EF48B1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib in Resources */,
 				044E0EC71E03B88400FD2525 /* IPCCustomDetailOrderView.xib in Resources */,
 				04CBD9651D58316D00C7CAA4 /* IPCPersonBaseView.xib in Resources */,
 				0446067F1E68079B00C9FFCF /* IPCPayOrderViewController.xib in Resources */,
@@ -1898,6 +2036,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		9E03C2F01978D5D5007389D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB4C82E91E84B8AF0072D4F4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1966,19 +2111,6 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
-		};
-		CB158E211E790AE60015A4C9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 		D5F17C898DE7BB15308DDB46 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2097,6 +2229,7 @@
 				044E0EBB1E03AA4A00FD2525 /* IPCEditAddressView.m in Sources */,
 				04760B101D3C80B0003A4E16 /* IPCSimpleUserResult.m in Sources */,
 				04CBD98B1D586D3C00C7CAA4 /* IPCUpdatePasswordView.m in Sources */,
+				CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */,
 				04F3C4F31D890B8500BB3098 /* IPCShareManager.m in Sources */,
 				0485F4041D34A72800A42DE3 /* IPCCustomerList.m in Sources */,
 				0424025A1D87F26400E1DD1A /* IPCOnlineFaceDetector.m in Sources */,
@@ -2185,6 +2318,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CB4C82E71E84B8AF0072D4F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB4C82EE1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2192,6 +2333,16 @@
 			isa = PBXTargetDependency;
 			target = 9E03C2D01978D5D5007389D0 /* IcePointCloud */;
 			targetProxy = 9E03C2F71978D5D5007389D0 /* PBXContainerItemProxy */;
+		};
+		CB4C82F11E84B8AF0072D4F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E03C2D01978D5D5007389D0 /* IcePointCloud */;
+			targetProxy = CB4C82F01E84B8AF0072D4F4 /* PBXContainerItemProxy */;
+		};
+		CB4C82F61E84B8BE0072D4F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftMonkey;
+			targetProxy = CB4C82F51E84B8BE0072D4F4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2218,6 +2369,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = NO;
+				CustomAppBundleld = com.IcePointCloud.Pos;
+				CustomProductName = "冰点云Test";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2265,6 +2418,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = YES;
+				CustomAppBundleld = com.IcePointCloud.Pos;
+				CustomProductName = "冰点云";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2302,11 +2457,14 @@
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IcePointCloud/IcePointCloud-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2349,11 +2507,15 @@
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
 					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IcePointCloud/IcePointCloud-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					CONFIGU,
+				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2379,7 +2541,6 @@
 		};
 		9E03C3071978D5D5007389D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 17EAF28B7B4662891D543E85 /* Pods-IcePointCloudTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IcePointCloud.app/IcePointCloud";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2417,7 +2578,6 @@
 		};
 		9E03C3081978D5D5007389D0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11AEF3CAB0A74E7D7989020F /* Pods-IcePointCloudTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IcePointCloud.app/IcePointCloud";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2449,6 +2609,198 @@
 			};
 			name = Release;
 		};
+		CB4C82F31E84B8AF0072D4F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TV2UGXUC6A;
+				INFOPLIST_FILE = MonkeyForOCUIMonkeyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = icepoint.MonkeyForOCUIMonkeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c524837e-9058-46a0-85bd-298de81fd4f5";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = IcePointCloud;
+			};
+			name = Debug;
+		};
+		CB4C82F41E84B8AF0072D4F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TV2UGXUC6A;
+				INFOPLIST_FILE = MonkeyForOCUIMonkeyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = icepoint.MonkeyForOCUIMonkeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c524837e-9058-46a0-85bd-298de81fd4f5";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = IcePointCloud;
+			};
+			name = Release;
+		};
+		CB4C82FB1E84E3100072D4F4 /* TestRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
+				COPY_PHASE_STRIP = YES;
+				CustomAppBundleld = com.IcePointCloud.Pos;
+				CustomProductName = "冰点云Beta";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PROVISIONING_PROFILE = "8909db52-f3b8-473b-ac97-b207233ee161";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = TestRelease;
+		};
+		CB4C82FC1E84E3100072D4F4 /* TestRelease */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0594E2CBFA962B68974A2571 /* Pods-IcePointCloud.testrelease.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
+				DEVELOPMENT_TEAM = TV2UGXUC6A;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/IcePointCloud/Vendors",
+					"$(PROJECT_DIR)/IcePointCloud/lib",
+					"$(inherited)",
+					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IcePointCloud/IcePointCloud-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					CONFIGU,
+				);
+				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/UIAlertView-Blocks\"",
+					./IcePointCloud/Vendors/GPUImage/Source/iOS,
+					./IcePointCloud/Vendors/GPUImage/Source,
+				);
+				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a114a0de-a0e1-478f-868a-e226b4319e63";
+				PROVISIONING_PROFILE_SPECIFIER = HocIcePointCloud;
+				SWIFT_VERSION = 2.3;
+				WRAPPER_EXTENSION = app;
+			};
+			name = TestRelease;
+		};
+		CB4C82FD1E84E3100072D4F4 /* TestRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IcePointCloud.app/IcePointCloud";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IcePointCloud/IcePointCloud-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/JSONKit-NoWarning\"",
+					"\"${PODS_ROOT}/Headers/Public/LBBlurredImage\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/MJRefresh\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/UIAlertView-Blocks\"",
+				);
+				INFOPLIST_FILE = "IcePointCloudTests/IcePointCloudTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "cn.Doray.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = TestRelease;
+		};
+		CB4C82FE1E84E3100072D4F4 /* TestRelease */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TV2UGXUC6A;
+				INFOPLIST_FILE = MonkeyForOCUIMonkeyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = icepoint.MonkeyForOCUIMonkeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c524837e-9058-46a0-85bd-298de81fd4f5";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = IcePointCloud;
+			};
+			name = TestRelease;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2457,6 +2809,7 @@
 			buildConfigurations = (
 				9E03C3011978D5D5007389D0 /* Debug */,
 				9E03C3021978D5D5007389D0 /* Release */,
+				CB4C82FB1E84E3100072D4F4 /* TestRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2466,6 +2819,7 @@
 			buildConfigurations = (
 				9E03C3041978D5D5007389D0 /* Debug */,
 				9E03C3051978D5D5007389D0 /* Release */,
+				CB4C82FC1E84E3100072D4F4 /* TestRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2475,6 +2829,17 @@
 			buildConfigurations = (
 				9E03C3071978D5D5007389D0 /* Debug */,
 				9E03C3081978D5D5007389D0 /* Release */,
+				CB4C82FD1E84E3100072D4F4 /* TestRelease */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB4C82F21E84B8AF0072D4F4 /* Build configuration list for PBXNativeTarget "MonkeyForOCUIMonkeyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB4C82F31E84B8AF0072D4F4 /* Debug */,
+				CB4C82F41E84B8AF0072D4F4 /* Release */,
+				CB4C82FE1E84E3100072D4F4 /* TestRelease */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

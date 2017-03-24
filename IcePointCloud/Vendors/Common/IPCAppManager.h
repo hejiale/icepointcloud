@@ -78,4 +78,5 @@ extern NSString *const IPCShoppingCartCountKey;
  */
 + (NSString *)orderStatus:(NSString *)status;
 
+
 @end

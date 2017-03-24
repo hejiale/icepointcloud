@@ -67,7 +67,7 @@ static NSString *const NetworkResponseCache = @"NetworkResponseCache";
 - (NSString *)cacheKeyWithRequestMethod:(NSString *)requestMethod Parameters:(id)parameter UserID:(NSString *)userID
 {
     //Different userID to login every time to save the user's network corresponding cached data
-    NSMutableString *cacheKey = [[NSMutableString alloc]initWithFormat:@"%@_%@_%@_%@",[self jk_version],IPC_DevelopmentAPI_URL,requestMethod,userID ? userID : @""];
+    NSMutableString *cacheKey = [[NSMutableString alloc]initWithFormat:@"%@_%@_%@_%@",[self jk_version],IPC_ProductAPI_URL,requestMethod,userID ? userID : @""];
     
     if (parameter != nil) {
         if ([parameter isKindOfClass:[NSDictionary class]] || [parameter isKindOfClass:[NSArray class]]) {

@@ -35,8 +35,6 @@ typedef NS_ENUM(NSUInteger, IPCRequestCache){
     IPCRequestCacheEnable
 };
 
-
-
 static NSInteger const  kIPCServiceErrorCode   =  490;
 static NSString * const kIPCNetworkResult       =  @"result";
 static NSString * const kIPCNetworkError         =  @"error";
@@ -46,8 +44,13 @@ static NSString * const kIPCErrorNetworkAlertMessage = @"请检查您的设备->
 /**
  *  The  client url
  */
-#define   IPC_DevelopmentAPI_URL       @"http://dev.icepointcloud.com/gateway/api/jsonrpc.jsp"
-#define   IPC_ProductAPI_URL                @"http://icepointcloud.com/gateway/api/jsonrpc.jsp"
+#ifdef DEVELOP
+#define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com/gateway/api/jsonrpc.jsp"
+#elif UAT
+#define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com/gateway/api/jsonrpc.jsp"
+#else
+#define   IPC_ProductAPI_URL       @"http://icepointcloud.com/gateway/api/jsonrpc.jsp"
+#endif
 
 
 #import   "IPCRequestManager.h"

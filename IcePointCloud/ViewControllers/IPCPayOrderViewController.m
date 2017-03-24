@@ -9,6 +9,7 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCEmployeListView.h"
 #import "IPCPaySuccessView.h"
+#import "IPCPayOrderPayTypeView.h"
 //***************预售**************//
 //#import "IPCPayOrderViewPreSellCellMode.h"
 #import "IPCPayOrderViewNormalSellCellMode.h"
@@ -95,6 +96,11 @@
 
 
 - (IBAction)onPayOrderAction:(id)sender {
+    IPCPayOrderPayTypeView * payTypeView = [[IPCPayOrderPayTypeView alloc]init];
+    [self.view addSubview:payTypeView];
+    [self.view bringSubviewToFront:payTypeView];
+    
+    
 //    if (! [IPCPayOrderMode sharedManager].currentEmploye) {
 //        [IPCUIKit showError:@"请先选择员工"];
 //    }else if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeNone || [IPCPayOrderMode sharedManager].prePayType == IPCOrderPreSellPayTypeNone)

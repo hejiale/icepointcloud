@@ -47,27 +47,27 @@ typedef  void(^DismissBlock)();
 
 #pragma mark //Request Method
 - (void)saveNewOpometryRequest{
-    [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:self.customerID
-                                                         Distance:[self.optometryView subString:10]
-                                                          SphLeft:[self.optometryView subString:5]
-                                                         SphRight:[self.optometryView subString:0]
-                                                          CylLeft:[self.optometryView subString:6]
-                                                         CylRight:[self.optometryView subString:1]
-                                                         AxisLeft:[self.optometryView subString:7]
-                                                        AxisRight:[self.optometryView subString:2]
-                                                          AddLeft:[self.optometryView subString:8]
-                                                         AddRight:[self.optometryView subString:3]
-                                              CorrectedVisionLeft:[self.optometryView subString:9]
-                                             CorrectedVisionRight:[self.optometryView subString:4]
-                                                     SuccessBlock:^(id responseValue)
-     {
-         if (self.completeBlock) {
-             self.completeBlock();
-         }
-         [IPCUIKit showSuccess:@"新建验光单成功!"];
-     } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
-     }];
+//    [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:self.customerID
+//                                                         Distance:[self.optometryView subString:10]
+//                                                          SphLeft:[self.optometryView subString:5]
+//                                                         SphRight:[self.optometryView subString:0]
+//                                                          CylLeft:[self.optometryView subString:6]
+//                                                         CylRight:[self.optometryView subString:1]
+//                                                         AxisLeft:[self.optometryView subString:7]
+//                                                        AxisRight:[self.optometryView subString:2]
+//                                                          AddLeft:[self.optometryView subString:8]
+//                                                         AddRight:[self.optometryView subString:3]
+//                                              CorrectedVisionLeft:[self.optometryView subString:9]
+//                                             CorrectedVisionRight:[self.optometryView subString:4]
+//                                                     SuccessBlock:^(id responseValue)
+//     {
+//         if (self.completeBlock) {
+//             self.completeBlock();
+//         }
+//         [IPCUIKit showSuccess:@"新建验光单成功!"];
+//     } FailureBlock:^(NSError *error) {
+//         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+//     }];
 }
 
 #pragma mark //Set UI

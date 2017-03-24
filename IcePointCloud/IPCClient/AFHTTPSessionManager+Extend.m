@@ -66,21 +66,21 @@
     
     if (requestType == IPCRequestTypeGet)
     {
-        urlSessionDataTask = [self GET:IPC_DevelopmentAPI_URL
+        urlSessionDataTask = [self GET:IPC_ProductAPI_URL
                             parameters:request.requestParameter
                               progress:nil
                                success:successCall
                                failure:failureCall];
     }else if (requestType == IPCRequestTypePost)
     {
-        urlSessionDataTask = [self POST:IPC_DevelopmentAPI_URL
+        urlSessionDataTask = [self POST:IPC_ProductAPI_URL
                              parameters:request.requestParameter
                                progress:nil
                                 success:successCall
                                 failure:failureCall];
     }else if (requestType == IPCRequestTypeUpload)
     {
-        urlSessionDataTask = [self POST:IPC_DevelopmentAPI_URL
+        urlSessionDataTask = [self POST:IPC_ProductAPI_URL
                              parameters:request.requestParameter
               constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData)
                               {
