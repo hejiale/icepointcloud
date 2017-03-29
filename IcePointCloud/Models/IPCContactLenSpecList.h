@@ -11,8 +11,8 @@
 @class IPCContactLenSpec;
 @interface IPCContactLenSpecList : NSObject
 
-@property (nonatomic, copy) NSString * contactLensID;
-@property (nonatomic, copy) NSString * degree;
+@property (nonatomic, copy, readwrite) NSString * contactLensID;
+@property (nonatomic, copy, readwrite) NSString * degree;
 @property (nonatomic, strong) NSMutableArray<IPCContactLenSpec *> * parameterList;
 
 - (instancetype)initWithResponseObject:(id)responseObject ContactLensID:(NSString *)contactLensID;
@@ -21,9 +21,9 @@
 
 @interface IPCContactLenSpec : NSObject
 
-@property (nonatomic, copy) NSString *   approvalNumber;
-@property (nonatomic, copy) NSString *   batchNumber;
-@property (nonatomic, copy) NSString *   expireDate;
-@property (nonatomic, assign) NSInteger bizStock;
+@property (nonatomic, copy, readonly) NSString *   approvalNumber;
+@property (nonatomic, copy, readonly) NSString *   batchNumber;
+@property (nonatomic, copy, readonly) NSString *   expireDate;
+@property (nonatomic, assign, readonly) NSInteger bizStock;
 
 @end

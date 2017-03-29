@@ -20,12 +20,12 @@
 
 @interface IPCCustomerOrderMode : NSObject
 
-@property (nonatomic, copy) NSString * orderID;
-@property (nonatomic, copy) NSString * orderCode;
-@property (nonatomic, copy) NSString * orderDate;
-@property (nonatomic, copy) NSString * orderStatus;
-@property (nonatomic, assign) double   orderPrice;
-@property (nonatomic, copy) NSString * type;
+@property (nonatomic, copy, readonly) NSString * orderID;
+@property (nonatomic, copy, readonly) NSString * orderCode;
+@property (nonatomic, copy, readonly) NSString * orderDate;
+@property (nonatomic, copy, readonly) NSString * orderStatus;
+@property (nonatomic, assign, readonly) double   orderPrice;
+@property (nonatomic, copy, readonly) NSString * type;
 
 @end
 

@@ -20,20 +20,20 @@
 
 @interface IPCCustomerOrderInfo : NSObject
 
-@property (nonatomic, copy) NSString *  customerName;
-@property (nonatomic, copy) NSString *  customerMobilePhone;
-@property (nonatomic, copy) NSString *  customerAddress;
-@property (nonatomic, copy) NSString *  status;
-@property (nonatomic, copy) NSString *  orderCode;
-@property (nonatomic, assign) double    totalPrice;
-@property (nonatomic, copy) NSString *  orderNumber;
-@property (nonatomic, copy) NSString *  orderTime;
-@property (nonatomic, copy) NSString *  operatorName;
-@property (nonatomic, copy) NSString *  finishTime;
-@property (nonatomic, copy) NSString *  dispatchTime;
-@property (nonatomic, copy) NSString *  remark;
-@property (nonatomic, assign) double   beforeDiscountPrice;
-@property (nonatomic, assign) double   deposit;//Prepaid amount
+@property (nonatomic, copy, readonly) NSString *  customerName;
+@property (nonatomic, copy, readonly) NSString *  customerMobilePhone;
+@property (nonatomic, copy, readonly) NSString *  customerAddress;
+@property (nonatomic, copy, readonly) NSString *  status;
+@property (nonatomic, copy, readonly) NSString *  orderCode;
+@property (nonatomic, assign, readonly) double    totalPrice;
+@property (nonatomic, copy, readonly) NSString *  orderNumber;
+@property (nonatomic, copy, readonly) NSString *  orderTime;
+@property (nonatomic, copy, readonly) NSString *  operatorName;
+@property (nonatomic, copy, readonly) NSString *  finishTime;
+@property (nonatomic, copy, readonly) NSString *  dispatchTime;
+@property (nonatomic, copy, readonly) NSString *  remark;
+@property (nonatomic, assign, readonly) double   beforeDiscountPrice;
+@property (nonatomic, assign, readonly) double   deposit;//Prepaid amount
 
 @end
 

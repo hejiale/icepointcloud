@@ -11,11 +11,11 @@
 
 @interface IPCMatchItem : NSObject
 
-@property (nonatomic, strong) IPCGlasses *glass;
-@property (nonatomic) IPCModelType modelType;
-@property (nonatomic) CGPoint position;
-@property (nonatomic) CGFloat scale;
-@property (nonatomic, strong) UIImage *frontialPhoto;//Taken a positive figure
-@property (nonatomic) IPCPhotoType photoType;
+@property (nonatomic, strong, readwrite) IPCGlasses *glass;
+@property (nonatomic, assign, readwrite) IPCModelType modelType;
+@property (nonatomic, assign, readwrite) CGPoint position;
+@property (nonatomic, assign, readwrite) CGFloat scale;
+@property (nonatomic, strong, readwrite) UIImage *frontialPhoto;//Taken a positive figure
+@property (nonatomic, assign, readwrite) IPCPhotoType photoType;
 
 @end

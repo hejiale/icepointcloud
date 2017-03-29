@@ -12,9 +12,9 @@
 
 @property (nonatomic) IPCGlassesImageType type;
 
-@property (nonatomic, copy)   NSString *imageURL;
-@property (nonatomic, assign) NSInteger width;
-@property (nonatomic, assign) NSInteger height;
+@property (nonatomic, copy, readonly)   NSString *imageURL;
+@property (nonatomic, assign, readonly) NSInteger width;
+@property (nonatomic, assign, readonly) NSInteger height;
 
 
 @end

@@ -11,55 +11,55 @@
 
 @interface IPCGlasses : NSObject
 
-@property (nonatomic, strong) IPCGlassesImage *profileDisplayImage;
-@property (nonatomic, strong) IPCGlassesImage *frontialDisplayImage;
-@property (nonatomic, strong) IPCGlassesImage *frontialTryOnImage;
-@property (nonatomic, strong) IPCGlassesImage *degreeAngleImage;
-@property (nonatomic, strong) IPCGlassesImage *thumbImage;
+@property (nonatomic, strong, readwrite) IPCGlassesImage *profileDisplayImage;
+@property (nonatomic, strong, readwrite) IPCGlassesImage *frontialDisplayImage;
+@property (nonatomic, strong, readwrite) IPCGlassesImage *frontialTryOnImage;
+@property (nonatomic, strong, readwrite) IPCGlassesImage *degreeAngleImage;
+@property (nonatomic, strong, readwrite) IPCGlassesImage *thumbImage;
 
-@property (nonatomic, copy) NSString * glassName;//name
-@property (nonatomic, copy) NSString * glassesID;// id
-@property (nonatomic, copy) NSString * glassCode;//Commodity item no
-@property (nonatomic, copy) NSString * detailLinkURl;//Details about the link
+@property (nonatomic, copy, readonly) NSString * glassName;//name
+@property (nonatomic, copy, readonly) NSString * glassesID;// id
+@property (nonatomic, copy, readonly) NSString * glassCode;//Commodity item no
+@property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 
-@property (nonatomic, copy) NSString * lensTypeName;//The lens type
-@property (nonatomic, copy) NSString * glassTypeName;//Frame type
+@property (nonatomic, copy, readonly) NSString * lensTypeName;//The lens type
+@property (nonatomic, copy, readonly) NSString * glassTypeName;//Frame type
 
-@property (nonatomic,assign) NSInteger stock;//inventory
-@property (nonatomic, copy) NSString * supplierName;//supplier
+@property (nonatomic,assign, readonly) NSInteger stock;//inventory
+@property (nonatomic, copy, readonly) NSString * supplierName;//supplier
 
-@property (nonatomic, copy) NSString * brand;//brand
-@property (nonatomic, copy) NSString * color;//color
-@property (nonatomic, copy) NSString * style;//style
-@property (nonatomic, assign) double   price;//Recommended retail price
-@property (nonatomic, assign) double   prodPrice;//The actual price
-@property (nonatomic, copy) NSString * frameColor;//Frame color
-@property (nonatomic, copy) NSString * lensColor;//Lens color
-@property (nonatomic, copy) NSString * function;//function
-@property (nonatomic, copy) NSString * lensType;//The lens piece type
-@property (nonatomic, copy) NSString * material;//The material
-@property (nonatomic, copy) NSString * pd;//pd
-@property (nonatomic, copy) NSString * border;//A border
-@property (nonatomic, copy) NSString * refractiveIndex;//The refractive index
-@property (nonatomic, copy) NSString * membraneLayer;//Membrane layer
-@property (nonatomic, copy) NSString * sph;//SPH
-@property (nonatomic, copy) NSString * cyl;//CYL
-@property (nonatomic, copy) NSString * cycle;//cycle
-@property (nonatomic, copy) NSString * specification;//specifications
-@property (nonatomic, copy) NSString * degree;//degree
-@property (nonatomic, copy) NSString * batchDegree;//batchdegree
-@property (nonatomic, copy) NSString * baseOfArc;//The base of arc
-@property (nonatomic, copy) NSString * watercontent;//The water content
-@property (nonatomic, copy) NSString * type;//type
-@property (nonatomic, copy) NSString * version;//version
-@property (nonatomic, assign) NSInteger productCount;//The order quantity
-@property (nonatomic, copy) NSString * thumbnailURL;//Thumbnail url
-@property (nonatomic, assign) BOOL  isBatch;//Whether the batch
-@property (nonatomic, assign) BOOL  isTryOn;//If you can try
-@property (nonatomic, copy) NSString * approvalNumber;//A kind
-@property (nonatomic, copy) NSString * batchNumber;//Batch no.
-@property (nonatomic, copy) NSString * expireDate;//The period of validity
-@property (nonatomic, assign) BOOL     solutionType;
+@property (nonatomic, copy, readonly) NSString * brand;//brand
+@property (nonatomic, copy, readonly) NSString * color;//color
+@property (nonatomic, copy, readonly) NSString * style;//style
+@property (nonatomic, assign, readonly) double   price;//Recommended retail price
+@property (nonatomic, assign, readonly) double   prodPrice;//The actual price
+@property (nonatomic, copy, readonly) NSString * frameColor;//Frame color
+@property (nonatomic, copy, readonly) NSString * lensColor;//Lens color
+@property (nonatomic, copy, readonly) NSString * function;//function
+@property (nonatomic, copy, readonly) NSString * lensType;//The lens piece type
+@property (nonatomic, copy, readonly) NSString * material;//The material
+@property (nonatomic, copy, readonly) NSString * pd;//pd
+@property (nonatomic, copy, readonly) NSString * border;//A border
+@property (nonatomic, copy, readonly) NSString * refractiveIndex;//The refractive index
+@property (nonatomic, copy, readonly) NSString * membraneLayer;//Membrane layer
+@property (nonatomic, copy, readonly) NSString * sph;//SPH
+@property (nonatomic, copy, readonly) NSString * cyl;//CYL
+@property (nonatomic, copy, readonly) NSString * cycle;//cycle
+@property (nonatomic, copy, readonly) NSString * specification;//specifications
+@property (nonatomic, copy, readonly) NSString * degree;//degree
+@property (nonatomic, copy, readonly) NSString * batchDegree;//batchdegree
+@property (nonatomic, copy, readonly) NSString * baseOfArc;//The base of arc
+@property (nonatomic, copy, readonly) NSString * watercontent;//The water content
+@property (nonatomic, copy, readonly) NSString * type;//type
+@property (nonatomic, copy, readonly) NSString * version;//version
+@property (nonatomic, assign, readonly) NSInteger productCount;//The order quantity
+@property (nonatomic, copy, readonly) NSString * thumbnailURL;//Thumbnail url
+@property (nonatomic, assign, readonly) BOOL  isBatch;//Whether the batch
+@property (nonatomic, assign, readonly) BOOL  isTryOn;//If you can try
+@property (nonatomic, copy, readonly) NSString * approvalNumber;//A kind
+@property (nonatomic, copy, readonly) NSString * batchNumber;//Batch no.
+@property (nonatomic, copy, readonly) NSString * expireDate;//The period of validity
+@property (nonatomic, assign, readonly) BOOL     solutionType;
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (NSURL *)imageURL;

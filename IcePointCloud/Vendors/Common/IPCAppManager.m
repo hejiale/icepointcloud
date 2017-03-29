@@ -155,11 +155,15 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
 
 + (NSArray<NSString *> *)batchCyls{
     NSMutableArray * cylArray = [[NSMutableArray alloc]init];
-    float startCyl = 0.25;
+    float startCyl = 6.25;
     
     while (startCyl > -6) {
         startCyl -= 0.25;
-        [cylArray addObject:[NSString stringWithFormat:@"%.2f",startCyl]];
+        if (startCyl > 0) {
+            [cylArray addObject:[NSString stringWithFormat:@"+%.2f",startCyl]];
+        }else{
+            [cylArray addObject:[NSString stringWithFormat:@"%.2f",startCyl]];
+        }
     }
     return cylArray;
 }

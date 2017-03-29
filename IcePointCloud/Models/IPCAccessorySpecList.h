@@ -21,7 +21,7 @@
 
 @interface IPCAccessoryBatchNum : NSObject
 
-@property (nonatomic, copy) NSString *   batchNumber;
+@property (nonatomic, copy, readwrite) NSString *   batchNumber;
 @property (nonatomic, strong) NSMutableArray<IPCAccessoryKindNum *> * kindNumArray;
 
 
@@ -29,15 +29,15 @@
 
 @interface IPCAccessoryKindNum : NSObject
 
-@property (nonatomic, copy) NSString *  kindNum;
+@property (nonatomic, copy, readwrite) NSString *  kindNum;
 @property (nonatomic, strong) NSMutableArray<IPCAccessoryExpireDate *> * expireDateArray;
 
 @end
 
 @interface IPCAccessoryExpireDate: NSObject
 
-@property (nonatomic, copy) NSString * expireDate;
-@property (nonatomic, assign) NSInteger  stock;
+@property (nonatomic, copy, readonly) NSString * expireDate;
+@property (nonatomic, assign, readonly) NSInteger  stock;
 
 @end
 

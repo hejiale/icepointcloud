@@ -8,9 +8,9 @@
 
 @interface IPCUser : NSObject
 
-@property (nonatomic, copy) NSString *userID;
-@property (nonatomic, copy) NSString *contactName;
-@property (nonatomic, copy) NSString *contactMobilePhone;
+@property (nonatomic, copy, readonly) NSString *userID;
+@property (nonatomic, copy, readwrite) NSString *contactName;
+@property (nonatomic, copy, readwrite) NSString *contactMobilePhone;
 
 
 @end

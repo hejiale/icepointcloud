@@ -20,10 +20,10 @@
 
 @interface BatchParameterObject : NSObject
 
-@property (copy, nonatomic)   NSString  * batchID;
-@property (copy, nonatomic)   NSString  * sph;
-@property (copy, nonatomic)   NSString  * cyl;
-@property (copy, nonatomic)   NSString  * degree;
-@property (assign, nonatomic) NSInteger   bizStock;
+@property (copy, nonatomic, readonly)   NSString  * batchID;
+@property (copy, nonatomic, readonly)   NSString  * sph;
+@property (copy, nonatomic, readonly)   NSString  * cyl;
+@property (copy, nonatomic, readonly)   NSString  * degree;
+@property (assign, nonatomic, readonly) NSInteger   bizStock;
 
 @end

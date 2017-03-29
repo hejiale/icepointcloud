@@ -17,6 +17,8 @@
         if ([responseData isKindOfClass:[NSDictionary class]]){
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {
+//                NSLog(@"-----json %@",[responseData jk_JSONString]);
+                
                 NSLog(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
                 if (complete) {
                     if (responseData[kIPCNetworkResult]) {

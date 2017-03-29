@@ -9,7 +9,7 @@
 
 @interface IPCSimpleUserResult : NSObject
 
-@property (nonatomic, copy) NSString *userID;
-@property (nonatomic, copy) NSString *photoURL;
+@property (nonatomic, copy, readonly) NSString *userID;
+@property (nonatomic, copy, readonly) NSString *photoURL;
 
 @end

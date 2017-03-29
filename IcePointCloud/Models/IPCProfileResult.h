@@ -10,11 +10,11 @@
 
 @interface IPCProfileResult : NSObject
 
-@property (nonatomic, strong) IPCUser *user;
-@property (nonatomic, copy) NSString *token;
-@property (nonatomic, copy) NSString *company;
-@property (nonatomic, copy) NSString *QRCodeURL;
-@property (nonatomic, copy) NSString *headImageURL;
-@property (nonatomic, copy) NSString *deviceToken;
+@property (nonatomic, strong, readwrite) IPCUser *user;
+@property (nonatomic, copy, readonly) NSString *token;
+@property (nonatomic, copy, readonly) NSString *company;
+@property (nonatomic, copy, readonly) NSString *QRCodeURL;
+@property (nonatomic, copy, readonly) NSString *headImageURL;
+@property (nonatomic, copy, readonly) NSString *deviceToken;
 
 @end

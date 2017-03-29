@@ -20,20 +20,20 @@
 
 @interface IPCOptometryMode : NSObject
 
-@property (nonatomic, copy) NSString * optometryID;
-@property (nonatomic, copy) NSString * cylRight;
-@property (nonatomic, copy) NSString * axisRight;
-@property (nonatomic, copy) NSString * addRight;
-@property (nonatomic, copy) NSString * distance;//pd
-@property (nonatomic, copy) NSString * cylLeft;
-@property (nonatomic, copy) NSString * axisLeft;
-@property (nonatomic, copy) NSString * addLeft;
-@property (nonatomic, copy) NSString * correctedVisionRight;
-@property (nonatomic, copy) NSString * refraction;//The refractive index
-@property (nonatomic, copy) NSString * correctedVisionLeft;
-@property (nonatomic, copy) NSString * sphLeft;
-@property (nonatomic, copy) NSString * sphRight;
-@property (nonatomic, copy) NSString * insertDate;//insert time
+@property (nonatomic, copy, readonly) NSString * optometryID;
+@property (nonatomic, copy, readonly) NSString * cylRight;
+@property (nonatomic, copy, readonly) NSString * axisRight;
+@property (nonatomic, copy, readonly) NSString * addRight;
+@property (nonatomic, copy, readonly) NSString * distance;//pd
+@property (nonatomic, copy, readonly) NSString * cylLeft;
+@property (nonatomic, copy, readonly) NSString * axisLeft;
+@property (nonatomic, copy, readonly) NSString * addLeft;
+@property (nonatomic, copy, readonly) NSString * correctedVisionRight;
+@property (nonatomic, copy, readonly) NSString * refraction;//The refractive index
+@property (nonatomic, copy, readonly) NSString * correctedVisionLeft;
+@property (nonatomic, copy, readonly) NSString * sphLeft;
+@property (nonatomic, copy, readonly) NSString * sphRight;
+@property (nonatomic, copy, readonly) NSString * insertDate;//insert time
 
 
 @end
