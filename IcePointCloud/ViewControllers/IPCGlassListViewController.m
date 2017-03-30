@@ -65,7 +65,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.glassListCollectionView reloadData];
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

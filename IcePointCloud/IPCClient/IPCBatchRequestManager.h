@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCRequestManager.h"
+#import "IPCRequest.h"
 
-@interface IPCBatchRequestManager : IPCRequestManager
+@interface IPCBatchRequestManager : IPCRequest
 
 /**
  *  QUERY BATCH LENS STOCK

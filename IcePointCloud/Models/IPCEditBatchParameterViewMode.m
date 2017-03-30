@@ -6,15 +6,15 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCEditBatchParameterMode.h"
+#import "IPCEditBatchParameterViewMode.h"
 
-@interface IPCEditBatchParameterMode()
+@interface IPCEditBatchParameterViewMode()
 
 @property (copy, nonatomic) void(^UpdateBlock)();
 
 @end
 
-@implementation IPCEditBatchParameterMode
+@implementation IPCEditBatchParameterViewMode
 
 - (instancetype)initWithGlasses:(IPCGlasses *)glass UpdateUI:(void(^)())update
 {

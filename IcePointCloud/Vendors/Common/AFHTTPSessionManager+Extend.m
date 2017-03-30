@@ -11,7 +11,7 @@
 @implementation AFHTTPSessionManager (Extend)
 
 
-- (NSURLSessionDataTask *)sendRequestWithParams:(IPCRequest *)request
+- (NSURLSessionDataTask *)sendRequestWithParams:(IPCJoinRequest *)request
                                          UserID:(NSString *)userID
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName

@@ -58,7 +58,7 @@
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
     
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 #pragma mark //ClickEvents

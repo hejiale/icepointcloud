@@ -1,60 +1,39 @@
 //
-//  IPCRequest.m
+//  IPCRequestManager.m
 //  IcePointCloud
 //
-//  Created by mac on 9/27/14.
-//  Copyright (c) 2014 Doray. All rights reserved.
+//  Created by mac on 16/6/22.
+//  Copyright © 2016年 Doray. All rights reserved.
 //
 
 #import "IPCRequest.h"
 
-/**
- *  Port parameters
- */
-#define    kAPIParamFormatKey             @"jsonrpc"
-#define    kAPIParamMethodKey            @"method"
-#define    kAPIParamIDKey                    @"id"
-#define    kAPIInnerParamsKey              @"params"
-#define    kAPIQueryKey                        @"query"
-#define    kAPIParamOSTypeValue         @"ios"
-#define    kAPIParamFormatValue          @"2.0"
-#define    kAPIParamDeviceToken          @"access_token"
-
 @implementation IPCRequest
 
-
-- (instancetype)initWithRequestMethod:(NSString *)requestMethod Parameter:(id)parameter
+#pragma mark //POST REQUEST
++ (void)loadRequest:(id)parameters
+      RequestMethod:(NSString *)requestMethod
+        RequestType:(IPCRequestType)requestType
+        CacheEnable:(IPCRequestCache)cacheEnable
+       SuccessBlock:(void (^)(id responseValue))success
+       FailureBlock:(void (^)(NSError *error))failure
 {
-    self = [super init];
-    if (self) {
-        self.requestMethod    = requestMethod;
-        self.parameters          = parameter;
-        [self buildRequestParameters];
-    }
-    return self;
+    IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
+    [[IPCHttpRequest sharedClient] sendRequestWithParams:request RequestType:requestType CacheEnable:cacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
-
-- (void)buildRequestParameters
+#pragma mark //UPLOAD IMAGE
++ (void)uploadImageWithImageName:(NSString *)imageName
+                       ImageData:(NSData *)imageData
+                      Parameters:(id)parameters
+                   RequestMethod:(NSString *)requestMethod
+                    SuccessBlock:(void (^)(id responseValue))success
+                   ProgressBlock:(void (^)(NSProgress *))uploadProgress
+                    FailureBlock:(void (^)(NSError *error))failure
 {
-    NSMutableDictionary *query = [NSMutableDictionary dictionaryWithDictionary:@{kAPIParamFormatKey: kAPIParamFormatValue,
-                                                                                                                                kAPIParamMethodKey: self.requestMethod,
-                                                                                                                                kAPIParamIDKey: [NSString jk_UUIDTimestamp]
-                                                                                                                               }];
-    if (self.parameters) {
-        if ([self.parameters isKindOfClass:[NSArray class]])
-            [query setObject:self.parameters forKey:kAPIInnerParamsKey];
-        else
-            [query setObject:@[self.parameters] forKey:kAPIInnerParamsKey];
-    }else{
-        [query setObject:@[] forKey:kAPIInnerParamsKey];
-    }
-    NSLog(@"-----request parameter %@",query);
+    IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
+    [[IPCHttpRequest sharedClient] uploadImageWithParams:request image:imageData imageName:imageName SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
     
-    NSDictionary * requestParameter = @{kAPIQueryKey: [query JSONString],
-                              kAPIParamDeviceToken:[IPCAppManager sharedManager].profile.deviceToken.length ? [IPCAppManager sharedManager].profile.deviceToken : @""};
-    self.requestParameter = requestParameter;
 }
-
 
 @end

@@ -1,25 +1,25 @@
 //
-//  IPCClient.m
+//  IPCHttpRequest.m
 //  IcePointCloud
 //
 //  Created by mac on 9/27/14.
 //  Copyright (c) 2014 Doray. All rights reserved.
 //
 
-#import "IPCClient.h"
+#import "IPCHttpRequest.h"
 
-@interface IPCClient()
+@interface IPCHttpRequest()
 
 @property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *>  *  allTasks;
 
 @end
 
-@implementation IPCClient
+@implementation IPCHttpRequest
 
 
-+ (IPCClient *)sharedClient{
++ (IPCHttpRequest *)sharedClient{
     static dispatch_once_t token;
-    static IPCClient *_client;
+    static IPCHttpRequest *_client;
     dispatch_once(&token, ^{
         _client = [[self alloc] init];
     });
@@ -34,7 +34,7 @@
 }
 
 
-- (void)sendRequestWithParams:(IPCRequest *)request
+- (void)sendRequestWithParams:(IPCJoinRequest *)request
                   RequestType:(IPCRequestType)requestType
                   CacheEnable:(IPCRequestCache)cacheEnable
                  SuccessBlock:(void (^)(id responseValue))success
@@ -44,7 +44,7 @@
 }
 
 
-- (void)uploadImageWithParams:(IPCRequest *)request
+- (void)uploadImageWithParams:(IPCJoinRequest *)request
                         image:(NSData *)imageData
                     imageName:(NSString *)imageName
                  SuccessBlock:(void (^)(id responseValue))success
@@ -56,7 +56,7 @@
 
 
 #pragma mark //AFNetworking Request Method
-- (void)callRequestWithParams:(IPCRequest *)request
+- (void)callRequestWithParams:(IPCJoinRequest *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
                   RequestType:(IPCRequestType)requestType

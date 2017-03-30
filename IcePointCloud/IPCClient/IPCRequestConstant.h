@@ -53,13 +53,13 @@ static NSString * const kIPCErrorNetworkAlertMessage = @"请检查您的设备->
 #endif
 
 
-#import   "IPCRequestManager.h"
+#import   "IPCRequest.h"
 #import   "IPCUserRequestManager.h"
 #import   "IPCGoodsRequestManager.h"
 #import   "IPCCustomerRequestManager.h"
 #import   "IPCBatchRequestManager.h"
 #import   "IPCPayOrderRequestManager.h"
-#import   "IPCClient.h"
+#import   "IPCHttpRequest.h"
 #import   "IPCResponse.h"
 #import   "IPCNetworkCache.h"
 #import   "IPCError.h"

@@ -206,7 +206,7 @@
 
 
 #pragma mark //Update SelectViewController
-- (void)setViewControllers:(NSArray *)viewControllers
+- (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers
 {
     _viewControllers = [viewControllers copy];
     _selectedIndex = NSNotFound;

@@ -12,7 +12,7 @@
 
 @interface IPCTabBarViewController : UIViewController
 
-@property (nonatomic, readwrite, copy)   NSArray *viewControllers;
+@property (nonatomic, readwrite, copy)   NSArray<UIViewController *> *viewControllers;
 @property (nonatomic, readwrite, assign) UIViewController *selectedViewController;
 @property (nonatomic, readwrite, assign) NSUInteger selectedIndex;
 @property (nonatomic, assign) id<IPCRootMenuViewControllerDelegate>delegate;

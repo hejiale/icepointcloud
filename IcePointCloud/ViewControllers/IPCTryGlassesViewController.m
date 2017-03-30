@@ -125,7 +125,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self.productCollectionView reloadData];
     if ([self.matchItems count] == 0 || [self.compareBgView.subviews count] == 0)[self initMatchItems];
 }

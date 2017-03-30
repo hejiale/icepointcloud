@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCEditBatchParameterMode : NSObject
+@interface IPCEditBatchParameterViewMode : NSObject
 
 @property (strong, nonatomic) IPCGlasses * currentGlass;
 @property (strong, nonatomic) IPCBatchParameterList * batchParameterList;

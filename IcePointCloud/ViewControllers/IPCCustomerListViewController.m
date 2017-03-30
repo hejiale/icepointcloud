@@ -65,7 +65,7 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 

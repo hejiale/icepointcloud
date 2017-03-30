@@ -1,9 +1,9 @@
 //
-//  IPCRequest.h
+//  IPCRequestManager.h
 //  IcePointCloud
 //
-//  Created by mac on 9/27/14.
-//  Copyright (c) 2014 Doray. All rights reserved.
+//  Created by mac on 16/6/22.
+//  Copyright © 2016年 Doray. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,25 +11,41 @@
 @interface IPCRequest : NSObject
 
 /**
- *  REQUEST METHODS
+ Post Or Get Request
+
+ @param parameters
+ @param requestMethod
+ @param requestType
+ @param cacheEnable
+ @param success
+ @param failure
  */
-@property (copy, nonatomic,) NSString * requestMethod;
-/**
- *  REQUEST PARAMETERS
- */
-@property (copy, nonatomic)  NSString * parameters;
-/**
- *  REQUEST ADD PARAMETERS
- */
-@property (nonatomic, strong) NSDictionary * requestParameter;
++ (void)loadRequest:(id)parameters
+      RequestMethod:(NSString *)requestMethod
+        RequestType:(IPCRequestType)requestType
+        CacheEnable:(IPCRequestCache)cacheEnable
+       SuccessBlock:(void (^)(id responseValue))success
+       FailureBlock:(void (^)(NSError *error))failure;
+
 
 /**
- *
- *  @param requestMethod
- *  @param parameter
- *
- *  @return 
+ Upload Image Request
+
+ @param imageName
+ @param imageData
+ @param parameters
+ @param requestMethod
+ @param success
+ @param uploadProgress
+ @param failure 
  */
-- (instancetype)initWithRequestMethod:(NSString *)requestMethod Parameter:(id)parameter;
++ (void)uploadImageWithImageName:(NSString *)imageName
+                       ImageData:(NSData *)imageData
+                      Parameters:(id)parameters
+                   RequestMethod:(NSString *)requestMethod
+                    SuccessBlock:(void (^)(id responseValue))success
+                   ProgressBlock:(void (^)(NSProgress *))uploadProgress
+                    FailureBlock:(void (^)(NSError *error))failure;
+
 
 @end

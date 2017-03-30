@@ -7,7 +7,7 @@
 //
 
 #import "IPCEditBatchParameterView.h"
-#import "IPCEditBatchParameterMode.h"
+#import "IPCEditBatchParameterViewMode.h"
 #import "IPCEditParameterCell.h"
 
 static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
@@ -25,7 +25,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 @property (weak, nonatomic) IBOutlet UILabel *noneAccessoryNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noneAccessoryPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noneAccessoryCartNumLbl;
-@property (strong, nonatomic) IPCEditBatchParameterMode * editParameterMode;
+@property (strong, nonatomic) IPCEditBatchParameterViewMode * editParameterMode;
 @property (copy, nonatomic) void(^DismissBlock)();
 
 @end
@@ -37,7 +37,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     self = [super initWithFrame:frame];
     if (self) {
         self.DismissBlock = dismiss;
-        self.editParameterMode = [[IPCEditBatchParameterMode alloc]initWithGlasses:glasses UpdateUI:^{
+        self.editParameterMode = [[IPCEditBatchParameterViewMode alloc]initWithGlasses:glasses UpdateUI:^{
             [self.parameterTableView reloadData];
         }];
      

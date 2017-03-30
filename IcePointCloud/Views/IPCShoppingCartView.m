@@ -96,7 +96,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 - (void)commitUI{
     self.cartViewMode = [[IPCCartViewMode alloc]init];
     [self updateCartUI];
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self.cartViewMode reloadContactLensStock];
 }
 

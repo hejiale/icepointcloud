@@ -7,7 +7,7 @@
 //
 
 #import "IPCGlassParameterView.h"
-#import "IPCGlassParameterViewMode.h"
+#import "IPCBatchParameterViewMode.h"
 #import "IPCBatchParameterCell.h"
 
 static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
@@ -143,7 +143,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 @property (weak, nonatomic) IBOutlet UILabel *thinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *upsetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moveHeartLabel;
-@property (strong, nonatomic) IPCGlassParameterViewMode * parameterViewMode;
+@property (strong, nonatomic) IPCBatchParameterViewMode * parameterViewMode;
 @property (assign, nonatomic) ContactLenSpecType contactSpecType;
 @property (assign, nonatomic) NSInteger   customsizedType;
 @property (copy, nonatomic) void(^CompleteBlock)();
@@ -288,7 +288,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         [self.leftTitleLabel setText:@"球镜/SPH"];
         [self.rightParameterView setHidden:NO];
     }else{
-        self.parameterViewMode = [[IPCGlassParameterViewMode alloc]initWithGlasses:_glasses IsPreSell:isOpenBooking];
+        self.parameterViewMode = [[IPCBatchParameterViewMode alloc]initWithGlasses:_glasses IsPreSell:isOpenBooking];
     }
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) {
         [self loadBatchNormalLensView];

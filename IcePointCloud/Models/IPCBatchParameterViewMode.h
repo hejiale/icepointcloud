@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCGlassParameterViewMode : NSObject
+@interface IPCBatchParameterViewMode : NSObject
 
 @property (strong, nonatomic) NSMutableArray<BatchParameterObject *> * contactDegreeList;
 @property (strong, nonatomic) IPCContactLensMode * contactLensMode;

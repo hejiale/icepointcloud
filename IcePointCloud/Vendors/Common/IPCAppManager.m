@@ -64,7 +64,7 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
     [IPCAppManager sharedManager].profile = nil;
     [[IPCCurrentCustomerOpometry sharedManager]clearData];
     [[IPCShoppingCart sharedCart] clear];
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [[[UIApplication sharedApplication].keyWindow subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [[UIApplication sharedApplication].keyWindow setRootViewController:[[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil]];

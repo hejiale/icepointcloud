@@ -72,7 +72,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (void)commitUI{
     [IPCUIKit show];
-    [[IPCClient sharedClient] cancelAllRequest];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
     self.customerViewMode.customerID = self.customer.customerID;
     self.customerViewMode.customerPhone = self.customer.customerPhone;

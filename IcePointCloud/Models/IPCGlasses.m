@@ -39,13 +39,14 @@
 - (NSURL *)imageURL
 {
     NSString *URLStr = nil;
-    IPCGlassesImage *gp = [self imageWithType:IPCGlassesImageTypeThumb];
-    if (gp) {
-        URLStr = gp.imageURL;
+    IPCGlassesImage * glassImage = [self imageWithType:IPCGlassesImageTypeThumb];
+    if (glassImage) {
+        URLStr = glassImage.imageURL;
     } else {
-        gp = [self imageWithType:IPCGlassesImageTypeFrontialNormal];
-        if (gp)
-            URLStr = gp.imageURL;
+        glassImage = [self imageWithType:IPCGlassesImageTypeFrontialNormal];
+        if (glassImage){
+            URLStr = glassImage.imageURL;
+        }
     }
     
     if (URLStr)return [NSURL URLWithString:URLStr];

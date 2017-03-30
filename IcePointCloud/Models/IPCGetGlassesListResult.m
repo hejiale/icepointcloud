@@ -16,10 +16,13 @@
         [self.glassesList removeAllObjects];
         
         if ([responseValue isKindOfClass:[NSDictionary class]]) {
-            if ([responseValue[@"list"] isKindOfClass:[NSArray class]]) {
-                [responseValue[@"list"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    IPCGlasses * glasses = [IPCGlasses mj_objectWithKeyValues:obj];
-                    [self.glassesList addObject:glasses];
+            id listValue = responseValue[@"list"];
+            if ([listValue isKindOfClass:[NSArray class]] && listValue) {
+                [listValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ( ![obj isKindOfClass:[NSNull class]]) {
+                        IPCGlasses * glasses = [IPCGlasses mj_objectWithKeyValues:obj];
+                        [self.glassesList addObject:glasses];
+                    }
                 }];
             }
         }

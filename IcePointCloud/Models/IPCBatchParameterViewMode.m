@@ -6,15 +6,15 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCGlassParameterViewMode.h"
+#import "IPCBatchParameterViewMode.h"
 
-@interface IPCGlassParameterViewMode()
+@interface IPCBatchParameterViewMode()
 
 @property (nonatomic, strong) IPCGlasses * glasses;
 
 @end
 
-@implementation IPCGlassParameterViewMode
+@implementation IPCBatchParameterViewMode
 
 - (instancetype)initWithGlasses:(IPCGlasses *)glasses IsPreSell:(BOOL)isPreSell
 {

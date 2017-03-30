@@ -1,5 +1,5 @@
 //
-//  IPCClient.h
+//  IPCHttpRequest.h
 //  IcePointCloud
 //
 //  Created by mac on 9/27/14.
@@ -7,13 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCRequest.h"
+#import "IPCJoinRequest.h"
 
 
-@interface IPCClient : NSObject
+@interface IPCHttpRequest : NSObject
 
 
-+ (IPCClient *)sharedClient;
++ (IPCHttpRequest *)sharedClient;
 
 
 /**
@@ -25,7 +25,7 @@
  *  @param success
  *  @param failure
  */
-- (void)sendRequestWithParams:(IPCRequest *)request
+- (void)sendRequestWithParams:(IPCJoinRequest *)request
                   RequestType:(IPCRequestType)requestType
                   CacheEnable:(IPCRequestCache)cacheEnable
                  SuccessBlock:(void (^)(id responseValue))success
@@ -40,7 +40,7 @@
  *  @param uploadProgress
  *  @param failure
  */
-- (void)uploadImageWithParams:(IPCRequest *)request
+- (void)uploadImageWithParams:(IPCJoinRequest *)request
                         image:(NSData *)imageData
                     imageName:(NSString *)imageName
                  SuccessBlock:(void (^)(id responseValue))success
