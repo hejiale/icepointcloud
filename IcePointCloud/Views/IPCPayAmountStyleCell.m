@@ -35,63 +35,30 @@
     [self.payAmountButton setSelected:NO];
     [self.prePayAmountButton setSelected:NO];
     
-    if (self.isPreSell) {
-//        switch ([IPCPayOrderMode sharedManager].prePayType) {
-//            case IPCOrderPreSellPayTypeAmount:
-//                [self.payAmountButton setSelected:YES];
-//                break;
-//            case IPCOrderPreSellPayTypellInstallment:
-//                [self.prePayAmountButton setSelected:YES];
-//                break;
-//            default:
-//                break;
-//        }
-    }else{
-        switch ([IPCPayOrderMode sharedManager].payType) {
-            case IPCOrderPayTypePayAmount:
-                [self.payAmountButton setSelected:YES];
-                break;
-            case IPCOrderPayTypeInstallment:
-                [self.prePayAmountButton setSelected:YES];
-                break;
-            default:
-                break;
-        }
+    switch ([IPCPayOrderMode sharedManager].payType) {
+        case IPCOrderPayTypePayAmount:
+            [self.payAmountButton setSelected:YES];
+            break;
+        case IPCOrderPayTypeInstallment:
+            [self.prePayAmountButton setSelected:YES];
+            break;
+        default:
+            break;
     }
     
-    
-    if (self.isPreSell) {
-        //***************预售**************//
-//        if ([IPCPayOrderMode sharedManager].currentEmploye && [IPCPayOrderMode sharedManager].isSelectEmploye) {
-//            if ([IPCPayOrderMode sharedManager].preEmployeAmount > 0 && [IPCPayOrderMode sharedManager].prePayType == IPCOrderPreSellPayTypeAmount)
-//            {
-//                [self.amountLabel setText:[NSString stringWithFormat:@"￥%.f",[IPCPayOrderMode sharedManager].preEmployeAmount]];
-//            }
-//        }else{
-//            [self.amountLabel setText:[NSString stringWithFormat:@"￥%.f",[[IPCShoppingCart sharedCart] selectedPreSellGlassesTotalPrice]]];
-//        }
-//        
-//        if ([IPCPayOrderMode sharedManager].preSellPrepaidAmount > 0){
-//            [self.prePayAmountTextField setText:[NSString stringWithFormat:@"%.f",[IPCPayOrderMode sharedManager].preSellPrepaidAmount]];
-//        }else{
-//            [self.prePayAmountTextField setText:@""];
-//        }
+    if ([IPCPayOrderMode sharedManager].currentEmploye && [IPCPayOrderMode sharedManager].isSelectEmploye) {
+        if ([IPCPayOrderMode sharedManager].employeAmount > 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount)
+        {
+            [self.amountLabel setText:[NSString stringWithFormat:@"￥%.f",[IPCPayOrderMode sharedManager].employeAmount]];
+        }
     }else{
-        //全款类商品
-        if ([IPCPayOrderMode sharedManager].currentEmploye && [IPCPayOrderMode sharedManager].isSelectEmploye) {
-            if ([IPCPayOrderMode sharedManager].employeAmount > 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount)
-            {
-                [self.amountLabel setText:[NSString stringWithFormat:@"￥%.f",[IPCPayOrderMode sharedManager].employeAmount]];
-            }
-        }else{
-            [self.amountLabel setText:[NSString stringWithFormat:@"￥%.f",[[IPCShoppingCart sharedCart] selectedNormalSellGlassesTotalPrice]]];
-        }
+        [self.amountLabel setText:[NSString stringWithFormat:@"￥%.f",[[IPCShoppingCart sharedCart] selectedNormalSellGlassesTotalPrice]]];
+    }
     
-        if ([IPCPayOrderMode sharedManager].prepaidAmount > 0){
-            [self.prePayAmountTextField setText:[NSString stringWithFormat:@"%.f",[IPCPayOrderMode sharedManager].prepaidAmount]];
-        }else{
-            [self.prePayAmountTextField setText:@""];
-        }
+    if ([IPCPayOrderMode sharedManager].prepaidAmount > 0){
+        [self.prePayAmountTextField setText:[NSString stringWithFormat:@"%.f",[IPCPayOrderMode sharedManager].prepaidAmount]];
+    }else{
+        [self.prePayAmountTextField setText:@""];
     }
 }
 
@@ -99,11 +66,7 @@
 #pragma mark //Clicked Events
 - (IBAction)payAmountAction:(UIButton *)sender {
     if (! sender.selected) {
-        if (self.isPreSell) {
-//            [IPCPayOrderMode sharedManager].prePayType = IPCOrderPreSellPayTypeAmount;
-        }else{
-            [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
-        }
+        [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
         
         if (self.UpdateOrderBlock)
             self.UpdateOrderBlock();
@@ -112,11 +75,7 @@
 
 - (IBAction)payPreAmountAction:(UIButton *)sender {
     if (! sender.selected) {
-        if (self.isPreSell) {
-//            [IPCPayOrderMode sharedManager].prePayType = IPCOrderPreSellPayTypellInstallment;
-        }else{
-            [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypeInstallment;
-        }
+        [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypeInstallment;
         
         if (self.UpdateOrderBlock)
             self.UpdateOrderBlock();
@@ -145,32 +104,16 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if (textField.text.length && [textField.text doubleValue] > 0){
         if ([IPCPayOrderMode sharedManager].currentEmploye && [IPCPayOrderMode sharedManager].isSelectEmploye) {
-            if (self.isPreSell) {
-//                if ([textField.text doubleValue] > [IPCPayOrderMode sharedManager].preEmployeAmount){
-//                    [IPCUIKit showError:@"输入的预售金额大于打折金额!"];
-//                }else{
-//                    [IPCPayOrderMode sharedManager].preSellPrepaidAmount = [textField.text doubleValue];
-//                }
+            if ([textField.text doubleValue] > [IPCPayOrderMode sharedManager].employeAmount){
+                [IPCUIKit showError:@"输入的金额大于打折金额!"];
             }else{
-                if ([textField.text doubleValue] > [IPCPayOrderMode sharedManager].employeAmount){
-                    [IPCUIKit showError:@"输入的金额大于打折金额!"];
-                }else{
-                    [IPCPayOrderMode sharedManager].prepaidAmount = [textField.text doubleValue];
-                }
+                [IPCPayOrderMode sharedManager].prepaidAmount = [textField.text doubleValue];
             }
         }else{
-            if (self.isPreSell) {
-//                if ([textField.text doubleValue] > [[IPCShoppingCart sharedCart] selectedPreSellGlassesTotalPrice]){
-//                    [IPCUIKit showError:@"输入的金额大于预售订单总价!"];
-//                }else{
-//                    [IPCPayOrderMode sharedManager].preSellPrepaidAmount = [textField.text doubleValue];
-//                }
+            if ([textField.text doubleValue] > [[IPCShoppingCart sharedCart] selectedNormalSellGlassesTotalPrice]){
+                [IPCUIKit showError:@"输入的金额大于订单总价!"];
             }else{
-                if ([textField.text doubleValue] > [[IPCShoppingCart sharedCart] selectedNormalSellGlassesTotalPrice]){
-                    [IPCUIKit showError:@"输入的金额大于订单总价!"];
-                }else{
-                    [IPCPayOrderMode sharedManager].prepaidAmount = [textField.text doubleValue];
-                }
+                [IPCPayOrderMode sharedManager].prepaidAmount = [textField.text doubleValue];
             }
         }
         if (self.UpdateOrderBlock)

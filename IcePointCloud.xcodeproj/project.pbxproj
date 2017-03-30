@@ -1042,8 +1042,8 @@
 		04A2020B1D7FDEF700F2A681 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				04924AF61D6AC87E006D7374 /* HeaderFile.h */,
 				04A433E21DED7C4A00B520D2 /* IPCCore.h */,
+				04924AF61D6AC87E006D7374 /* HeaderFile.h */,
 				9EA7CF4F19CB1F0B00001C18 /* IPCAppManager.h */,
 				9EA7CF5019CB1F0B00001C18 /* IPCAppManager.m */,
 				04C34CC01E01405800979001 /* IPCCheckVersion.h */,
@@ -1832,21 +1832,45 @@
 			name = HTTP_Service;
 			sourceTree = "<group>";
 		};
-		CB9211541E82157400FD4EDC /* PayOrder */ = {
+		CB9187311E8CFE8600D59487 /* Employee */ = {
 			isa = PBXGroup;
 			children = (
-				CB92115B1E82594300FD4EDC /* 预售待定 */,
-				04186E0B1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.h */,
-				04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */,
-				04186E0E1E693D8000758646 /* IPCPayOrderViewCellDelegate.h */,
-				04C9F7A01DEE9C1B001258B2 /* IPCPayOrderMode.h */,
-				04C9F7A11DEE9C1B001258B2 /* IPCPayOrderMode.m */,
-				9E5E2C6119E4C05300017172 /* IPCOrder.h */,
-				9E5E2C6219E4C05300017172 /* IPCOrder.m */,
 				04C9F7AE1DEEC05A001258B2 /* IPCEmployeList.h */,
 				04C9F7AF1DEEC05A001258B2 /* IPCEmployeList.m */,
 				04D9D48B1E1F7416003092D0 /* IPCEmploye.h */,
 				04D9D48C1E1F7416003092D0 /* IPCEmploye.m */,
+			);
+			name = Employee;
+			sourceTree = "<group>";
+		};
+		CB9187321E8CFE9800D59487 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				04186E0E1E693D8000758646 /* IPCPayOrderViewCellDelegate.h */,
+				04186E0B1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.h */,
+				04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */,
+				CB92115B1E82594300FD4EDC /* 预售待定 */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		CB9187331E8CFEAB00D59487 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				04C9F7A01DEE9C1B001258B2 /* IPCPayOrderMode.h */,
+				04C9F7A11DEE9C1B001258B2 /* IPCPayOrderMode.m */,
+				9E5E2C6119E4C05300017172 /* IPCOrder.h */,
+				9E5E2C6219E4C05300017172 /* IPCOrder.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		CB9211541E82157400FD4EDC /* PayOrder */ = {
+			isa = PBXGroup;
+			children = (
+				CB9187311E8CFE8600D59487 /* Employee */,
+				CB9187331E8CFEAB00D59487 /* Order */,
+				CB9187321E8CFE9800D59487 /* ViewModel */,
 			);
 			name = PayOrder;
 			sourceTree = "<group>";

@@ -37,28 +37,6 @@
                            SuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure;
 
-//***************预售**************//
-/**
- Save New PreSalesOrder
- 
- @param customerID
- @param opometryID
- @param addressID
- @param remark
- @param totalAmount
- @param preSellPayAmount
- @param success
- @param failure
- */
-+ (void)saveNewPreSalesOrderWithRequestCustomerID:(NSString *)customerID
-                                       OpometryID:(NSString *)opometryID
-                                        AddressID:(NSString *)addressID
-                                      OrderRemark:(NSString *)remark
-                                      TotalAmount:(double) totalAmount
-                                 PreSellPayAmount:(double)preSellPayAmount
-                                     SuccessBlock:(void (^)(id responseValue))success
-                                     FailureBlock:(void (^)(NSError * error))failure;
-
 
 /**
  *  QUERY EMPLOYE
