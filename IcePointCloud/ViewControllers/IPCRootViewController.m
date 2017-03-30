@@ -93,7 +93,7 @@
 }
 
 #pragma mark //RootMenuViewControllerDelegate
-- (void)tabBarController:(IPCRootMenuViewController *)tabBarController didSelectViewController:(UIViewController *)viewController
+- (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     if (tabBarController.selectedIndex == 1) {
         [self.productVC addNotifications];
@@ -102,7 +102,7 @@
     }
 }
 
-- (void)tabBarControllerNoneChange:(IPCRootMenuViewController *)tabBarController TabBarIndex:(NSInteger)tabBarIndex
+- (void)tabBarControllerNoneChange:(IPCTabBarViewController *)tabBarController TabBarIndex:(NSInteger)tabBarIndex
 {
     if (tabBarIndex == 1) {
         [self.productVC rootRefresh];

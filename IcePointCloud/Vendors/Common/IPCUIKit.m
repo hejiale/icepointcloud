@@ -112,7 +112,7 @@
     if ([rootNavigation isKindOfClass:[UINavigationController class]]) {
         UINavigationController * rootNav = (UINavigationController *)rootNavigation;
         UIViewController * rootVC = rootNav.viewControllers[0];
-        if ([rootVC isKindOfClass:[IPCRootMenuViewController class]]) {
+        if ([rootVC isKindOfClass:[IPCRootViewController class]]) {
             return rootVC;
         }
     }

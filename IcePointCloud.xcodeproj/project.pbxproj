@@ -145,7 +145,6 @@
 		04A84FB41D50B0AB005D92AB /* IPCPayOrderCustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A84FB21D50B0AB005D92AB /* IPCPayOrderCustomerCell.xib */; };
 		04AD9C851DE2DB93001EB959 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AD9C841DE2DB93001EB959 /* MapKit.framework */; };
 		04B1D1EC1D8634D800D9B865 /* IPCDefineCameraBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1D1EB1D8634D800D9B865 /* IPCDefineCameraBaseComponent.m */; };
-		04B1D1FC1D867B7F00D9B865 /* IPCPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1D1FB1D867B7F00D9B865 /* IPCPhotoPickerViewController.m */; };
 		04B1D2001D867C9C00D9B865 /* IPCPhotoDatas.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1D1FF1D867C9C00D9B865 /* IPCPhotoDatas.m */; };
 		04B1D2021D867CC800D9B865 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B1D2011D867CC800D9B865 /* Photos.framework */; };
 		04B1D2071D867D5500D9B865 /* IPCPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1D2041D867D5500D9B865 /* IPCPhoto.m */; };
@@ -204,7 +203,7 @@
 		04D8954E1DD981B7005E678C /* IPCContactLensMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8954D1DD981B7005E678C /* IPCContactLensMode.m */; };
 		04D9D48D1E1F7416003092D0 /* IPCEmploye.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9D48C1E1F7416003092D0 /* IPCEmploye.m */; };
 		04EAF91E1D531A4300A4A66F /* IPCShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF91D1D531A4300A4A66F /* IPCShoppingCart.m */; };
-		04EAF9251D5323D200A4A66F /* IPCRootMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF9231D5323D200A4A66F /* IPCRootMenuViewController.m */; };
+		04EAF9251D5323D200A4A66F /* IPCTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF9231D5323D200A4A66F /* IPCTabBarViewController.m */; };
 		04EB43971D42190600027B42 /* IPCCustomerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB43951D42190600027B42 /* IPCCustomerDetailCell.m */; };
 		04EB43981D42190600027B42 /* IPCCustomerDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB43961D42190600027B42 /* IPCCustomerDetailCell.xib */; };
 		04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC1A741D6BEBDE00E9A9F7 /* IPCGlassParameterView.m */; };
@@ -264,6 +263,7 @@
 		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
 		CB7EF48B1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */; };
 		CB9187161E8CB29400D59487 /* UITextField+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9187151E8CB29400D59487 /* UITextField+Extend.m */; };
+		CB91871C1E8CCA9000D59487 /* IPCPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB91871B1E8CCA9000D59487 /* IPCPhotoPickerViewController.m */; };
 		CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */; };
 		CB9211591E824CE000FD4EDC /* IPCPayOrderProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */; };
 		E35277251B301C48004E245C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35277241B301C48004E245C /* AssetsLibrary.framework */; };
@@ -501,8 +501,6 @@
 		04AD9C841DE2DB93001EB959 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		04B1D1EA1D8634D800D9B865 /* IPCDefineCameraBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDefineCameraBaseComponent.h; sourceTree = "<group>"; };
 		04B1D1EB1D8634D800D9B865 /* IPCDefineCameraBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDefineCameraBaseComponent.m; sourceTree = "<group>"; };
-		04B1D1FA1D867B7F00D9B865 /* IPCPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPhotoPickerViewController.h; sourceTree = "<group>"; };
-		04B1D1FB1D867B7F00D9B865 /* IPCPhotoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPhotoPickerViewController.m; sourceTree = "<group>"; };
 		04B1D1FE1D867C9C00D9B865 /* IPCPhotoDatas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPhotoDatas.h; sourceTree = "<group>"; };
 		04B1D1FF1D867C9C00D9B865 /* IPCPhotoDatas.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPhotoDatas.m; sourceTree = "<group>"; };
 		04B1D2011D867CC800D9B865 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
@@ -604,8 +602,8 @@
 		04D9D48C1E1F7416003092D0 /* IPCEmploye.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEmploye.m; sourceTree = "<group>"; };
 		04EAF91C1D531A4300A4A66F /* IPCShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCShoppingCart.h; sourceTree = "<group>"; };
 		04EAF91D1D531A4300A4A66F /* IPCShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCShoppingCart.m; sourceTree = "<group>"; };
-		04EAF9221D5323D200A4A66F /* IPCRootMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRootMenuViewController.h; sourceTree = "<group>"; };
-		04EAF9231D5323D200A4A66F /* IPCRootMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRootMenuViewController.m; sourceTree = "<group>"; };
+		04EAF9221D5323D200A4A66F /* IPCTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTabBarViewController.h; sourceTree = "<group>"; };
+		04EAF9231D5323D200A4A66F /* IPCTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTabBarViewController.m; sourceTree = "<group>"; };
 		04EB43941D42190600027B42 /* IPCCustomerDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerDetailCell.h; sourceTree = "<group>"; };
 		04EB43951D42190600027B42 /* IPCCustomerDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerDetailCell.m; sourceTree = "<group>"; };
 		04EB43961D42190600027B42 /* IPCCustomerDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomerDetailCell.xib; sourceTree = "<group>"; };
@@ -713,6 +711,8 @@
 		CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderPayTypeView.xib; sourceTree = "<group>"; };
 		CB9187141E8CB29400D59487 /* UITextField+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extend.h"; sourceTree = "<group>"; };
 		CB9187151E8CB29400D59487 /* UITextField+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extend.m"; sourceTree = "<group>"; };
+		CB91871A1E8CCA9000D59487 /* IPCPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPhotoPickerViewController.h; path = IcePointCloud/Vendors/Common/IPCPhotoPickerViewController.h; sourceTree = SOURCE_ROOT; };
+		CB91871B1E8CCA9000D59487 /* IPCPhotoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPhotoPickerViewController.m; path = IcePointCloud/Vendors/Common/IPCPhotoPickerViewController.m; sourceTree = SOURCE_ROOT; };
 		CB9211551E824CE000FD4EDC /* IPCPayOrderProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderProductCell.h; sourceTree = "<group>"; };
 		CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderProductCell.m; sourceTree = "<group>"; };
 		CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderProductCell.xib; sourceTree = "<group>"; };
@@ -824,7 +824,6 @@
 				042402001D87AA6400E1DD1A /* IPCEditFilterSampleController.m */,
 				04B1D1EA1D8634D800D9B865 /* IPCDefineCameraBaseComponent.h */,
 				04B1D1EB1D8634D800D9B865 /* IPCDefineCameraBaseComponent.m */,
-				04B1D1F91D867B6100D9B865 /* AssetLibrary */,
 			);
 			name = SkinCare;
 			sourceTree = "<group>";
@@ -855,14 +854,15 @@
 			name = cell;
 			sourceTree = "<group>";
 		};
-		046439D81E0A50D600291FDB /* Main */ = {
+		046439D81E0A50D600291FDB /* Root */ = {
 			isa = PBXGroup;
 			children = (
 				04CBD9591D582A4C00C7CAA4 /* IPCRootViewController.h */,
 				04CBD95A1D582A4C00C7CAA4 /* IPCRootViewController.m */,
 				04CBD95B1D582A4C00C7CAA4 /* IPCRootViewController.xib */,
 			);
-			name = Main;
+			name = Root;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		046497811D483E6300137A3E /* ProductDetail */ = {
@@ -1218,20 +1218,10 @@
 		04A202151D7FE42600F2A681 /* CustomViewController */ = {
 			isa = PBXGroup;
 			children = (
-				047F69701D41CFE900AA4C0F /* IPCDataPickViewController.h */,
-				047F69711D41CFE900AA4C0F /* IPCDataPickViewController.m */,
-				047F69721D41CFE900AA4C0F /* IPCDataPickViewController.xib */,
-				047F696B1D41CE2400AA4C0F /* IPCDatePickViewController.h */,
-				047F696C1D41CE2400AA4C0F /* IPCDatePickViewController.m */,
-				047F696D1D41CE2400AA4C0F /* IPCDatePickViewController.xib */,
-				042401F61D878FA100E1DD1A /* IPCNavigationViewController.h */,
-				042401F71D878FA100E1DD1A /* IPCNavigationViewController.m */,
-				04A202161D7FE4DB00F2A681 /* IPCPresentModeViewController.h */,
-				04A202171D7FE4DB00F2A681 /* IPCPresentModeViewController.m */,
-				04EAF9221D5323D200A4A66F /* IPCRootMenuViewController.h */,
-				04EAF9231D5323D200A4A66F /* IPCRootMenuViewController.m */,
-				042401F91D87919000E1DD1A /* IPCRotatingViewController.h */,
-				042401FA1D87919000E1DD1A /* IPCRotatingViewController.m */,
+				04B1D1F91D867B6100D9B865 /* AssetLibrary */,
+				CB9187171E8CB62700D59487 /* PickVC */,
+				CB9187181E8CB63500D59487 /* RootVC */,
+				CB9187191E8CB64F00D59487 /* TabBarVC */,
 			);
 			name = CustomViewController;
 			sourceTree = "<group>";
@@ -1251,6 +1241,7 @@
 			children = (
 				9E03C2E31978D5D5007389D0 /* IPCAppDelegate.h */,
 				9E03C2E41978D5D5007389D0 /* IPCAppDelegate.m */,
+				046439D81E0A50D600291FDB /* Root */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -1272,10 +1263,11 @@
 		04B1D1F91D867B6100D9B865 /* AssetLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				04B1D1FA1D867B7F00D9B865 /* IPCPhotoPickerViewController.h */,
-				04B1D1FB1D867B7F00D9B865 /* IPCPhotoPickerViewController.m */,
+				CB91871A1E8CCA9000D59487 /* IPCPhotoPickerViewController.h */,
+				CB91871B1E8CCA9000D59487 /* IPCPhotoPickerViewController.m */,
 			);
 			name = AssetLibrary;
+			path = ../../ViewControllers;
 			sourceTree = "<group>";
 		};
 		04B1D1FD1D867C8400D9B865 /* Asset */ = {
@@ -1620,16 +1612,13 @@
 		9EC3C5A4198672AD00C07396 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				046439D81E0A50D600291FDB /* Main */,
 				04924AF31D6AC0D7006D7374 /* Product */,
 				04A2020E1D7FDF5800F2A681 /* TryGlasses */,
 				0485F3F91D3491C200A42DE3 /* Customer */,
-				04A2020D1D7FDF4600F2A681 /* Search */,
-				04A2021B1D801A5B00F2A681 /* Lanuch */,
-				048C213A1D34F89800EC4214 /* Login */,
-				046332441D49E98F000B4940 /* SkinCare */,
 				0446067A1E68055E00C9FFCF /* PayOrder */,
-				04A2020F1D7FDF8A00F2A681 /* Help */,
+				04A2020D1D7FDF4600F2A681 /* Search */,
+				048C213A1D34F89800EC4214 /* Login */,
+				CB91871D1E8CCAD200D59487 /* Other */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1699,6 +1688,51 @@
 				04A703011D38E1BA008675DA /* IPCSwitch.m */,
 			);
 			name = CustomView;
+			sourceTree = "<group>";
+		};
+		CB9187171E8CB62700D59487 /* PickVC */ = {
+			isa = PBXGroup;
+			children = (
+				047F69701D41CFE900AA4C0F /* IPCDataPickViewController.h */,
+				047F69711D41CFE900AA4C0F /* IPCDataPickViewController.m */,
+				047F69721D41CFE900AA4C0F /* IPCDataPickViewController.xib */,
+				047F696B1D41CE2400AA4C0F /* IPCDatePickViewController.h */,
+				047F696C1D41CE2400AA4C0F /* IPCDatePickViewController.m */,
+				047F696D1D41CE2400AA4C0F /* IPCDatePickViewController.xib */,
+			);
+			name = PickVC;
+			sourceTree = "<group>";
+		};
+		CB9187181E8CB63500D59487 /* RootVC */ = {
+			isa = PBXGroup;
+			children = (
+				042401F91D87919000E1DD1A /* IPCRotatingViewController.h */,
+				042401FA1D87919000E1DD1A /* IPCRotatingViewController.m */,
+				042401F61D878FA100E1DD1A /* IPCNavigationViewController.h */,
+				042401F71D878FA100E1DD1A /* IPCNavigationViewController.m */,
+				04A202161D7FE4DB00F2A681 /* IPCPresentModeViewController.h */,
+				04A202171D7FE4DB00F2A681 /* IPCPresentModeViewController.m */,
+			);
+			name = RootVC;
+			sourceTree = "<group>";
+		};
+		CB9187191E8CB64F00D59487 /* TabBarVC */ = {
+			isa = PBXGroup;
+			children = (
+				04EAF9221D5323D200A4A66F /* IPCTabBarViewController.h */,
+				04EAF9231D5323D200A4A66F /* IPCTabBarViewController.m */,
+			);
+			name = TabBarVC;
+			sourceTree = "<group>";
+		};
+		CB91871D1E8CCAD200D59487 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				046332441D49E98F000B4940 /* SkinCare */,
+				04A2020F1D7FDF8A00F2A681 /* Help */,
+				04A2021B1D801A5B00F2A681 /* Lanuch */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		CB9211541E82157400FD4EDC /* PayOrder */ = {
@@ -2119,7 +2153,6 @@
 				04C9F79E1DEE9410001258B2 /* IPCPayOrderTitleCell.m in Sources */,
 				04443C511D23C89300596519 /* IPCFilterGlassesView.m in Sources */,
 				047349F61D4F16E0001B60D9 /* IPCRefreshAnimationHeader.m in Sources */,
-				04B1D1FC1D867B7F00D9B865 /* IPCPhotoPickerViewController.m in Sources */,
 				044099501E0283D900254157 /* UIImage+Face.m in Sources */,
 				0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */,
 				044A91AD1E56943A00C9DF1A /* IPCShoppingCartView.m in Sources */,
@@ -2148,7 +2181,7 @@
 				042401FB1D87919000E1DD1A /* IPCRotatingViewController.m in Sources */,
 				04CBD95C1D582A4C00C7CAA4 /* IPCRootViewController.m in Sources */,
 				04B1D2001D867C9C00D9B865 /* IPCPhotoDatas.m in Sources */,
-				04EAF9251D5323D200A4A66F /* IPCRootMenuViewController.m in Sources */,
+				04EAF9251D5323D200A4A66F /* IPCTabBarViewController.m in Sources */,
 				047D3FBB1D4300FB00638526 /* IPCOrderProductCell.m in Sources */,
 				04EB43971D42190600027B42 /* IPCCustomerDetailCell.m in Sources */,
 				04A415461D7D093F0093FF6E /* IPCEditBatchParameterView.m in Sources */,
@@ -2164,6 +2197,7 @@
 				047F69601D41B10900AA4C0F /* IPCCustomOrderDetailList.m in Sources */,
 				042401F81D878FA100E1DD1A /* IPCNavigationViewController.m in Sources */,
 				04A065A11D2231C100A62291 /* IPCGlasslistCollectionViewCell.m in Sources */,
+				CB91871C1E8CCA9000D59487 /* IPCPhotoPickerViewController.m in Sources */,
 				047D3FCA1D43479300638526 /* IPCCurrentCustomerOpometry.m in Sources */,
 				04CBD9911D58808A00C7CAA4 /* IPCQRCodeView.m in Sources */,
 				04BF935B1E165DD100D14A14 /* IPCGoodsRequestManager.m in Sources */,

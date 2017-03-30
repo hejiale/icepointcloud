@@ -54,7 +54,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     __weak typeof (self) weakSelf = self;
     if ([IPCUIKit rootViewcontroller]) {
-        IPCRootMenuViewController * rootVC = (IPCRootMenuViewController *)[IPCUIKit rootViewcontroller];
+        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCUIKit rootViewcontroller];
         [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];

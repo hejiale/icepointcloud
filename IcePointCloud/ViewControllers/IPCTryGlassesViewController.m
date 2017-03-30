@@ -116,7 +116,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self.refreshHeader beginRefreshing];
     
     if ([IPCUIKit rootViewcontroller]) {
-        IPCRootMenuViewController * rootVC = (IPCRootMenuViewController *)[IPCUIKit rootViewcontroller];
+        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCUIKit rootViewcontroller];
         [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
             [self removeAllPopView];
         }];

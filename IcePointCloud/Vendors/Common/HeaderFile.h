@@ -26,7 +26,7 @@
 /**
  *  ViewController
  */
-#import "IPCRootMenuViewController.h"
+#import "IPCTabBarViewController.h"
 #import "IPCRootViewController.h"
 #import "IPCDataPickViewController.h"
 #import "IPCDatePickViewController.h"

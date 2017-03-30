@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCRootViewController : IPCRootMenuViewController
+@interface IPCRootViewController : IPCTabBarViewController
 
 @end

@@ -10,7 +10,7 @@
 
 @protocol IPCRootMenuViewControllerDelegate;
 
-@interface IPCRootMenuViewController : UIViewController
+@interface IPCTabBarViewController : UIViewController
 
 @property (nonatomic, readwrite, copy)   NSArray *viewControllers;
 @property (nonatomic, readwrite, assign) UIViewController *selectedViewController;
@@ -22,8 +22,8 @@
 @protocol IPCRootMenuViewControllerDelegate <NSObject>
 
 @optional
-- (void)tabBarController:(IPCRootMenuViewController *)tabBarController didSelectViewController:(UIViewController *)viewController;
-- (void)tabBarControllerNoneChange:(IPCRootMenuViewController *)tabBarController TabBarIndex:(NSInteger)tabBarIndex;
+- (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectViewController:(UIViewController *)viewController;
+- (void)tabBarControllerNoneChange:(IPCTabBarViewController *)tabBarController TabBarIndex:(NSInteger)tabBarIndex;
 - (void)judgeIsInsertNewCustomer:(NSInteger)index;
 
 @end

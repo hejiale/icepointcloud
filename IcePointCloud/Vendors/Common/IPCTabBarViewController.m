@@ -6,10 +6,10 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCRootMenuViewController.h"
+#import "IPCTabBarViewController.h"
 #import "IPCSearchViewController.h"
 
-@interface IPCRootMenuViewController ()<IPCSearchViewControllerDelegate>
+@interface IPCTabBarViewController ()<IPCSearchViewControllerDelegate>
 
 @property (strong, nonatomic)  UIView  *  contentView;
 @property (strong, nonatomic)  UIView   * menuBarView;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation IPCRootMenuViewController
+@implementation IPCTabBarViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
