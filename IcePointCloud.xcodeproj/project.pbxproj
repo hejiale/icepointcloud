@@ -259,8 +259,6 @@
 		CB1234F21E762D9100AB29DF /* IPCRootBarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1234F11E762D9100AB29DF /* IPCRootBarMenuView.m */; };
 		CB1234F41E762D9A00AB29DF /* IPCRootBarMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1234F31E762D9A00AB29DF /* IPCRootBarMenuView.xib */; };
 		CB404B101E7285E4005673CD /* IPCEditBatchParameterMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB404B0F1E7285E4005673CD /* IPCEditBatchParameterMode.m */; };
-		CB4C82EE1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4C82ED1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift */; };
-		CB4C82F81E84B8FF0072D4F4 /* SwiftMonkey.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = CB4C82E41E84B8780072D4F4 /* SwiftMonkey.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
 		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
@@ -279,33 +277,12 @@
 			remoteGlobalIDString = 9E03C2D01978D5D5007389D0;
 			remoteInfo = IcePointCloud;
 		};
-		CB4C82E31E84B8780072D4F4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = OBJ_16;
-			remoteInfo = SwiftMonkey;
-		};
-		CB4C82E51E84B8780072D4F4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CB4C82CB1E84B7EC0072D4F4;
-			remoteInfo = MonkeyForOCUIMonkeyTests;
-		};
 		CB4C82F01E84B8AF0072D4F4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9E03C2C91978D5D5007389D0 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9E03C2D01978D5D5007389D0;
 			remoteInfo = IcePointCloud;
-		};
-		CB4C82F51E84B8BE0072D4F4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = OBJ_17;
-			remoteInfo = SwiftMonkey;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -316,7 +293,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CB4C82F81E84B8FF0072D4F4 /* SwiftMonkey.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,10 +723,7 @@
 		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		CB404B0E1E7285E4005673CD /* IPCEditBatchParameterMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditBatchParameterMode.h; sourceTree = "<group>"; };
 		CB404B0F1E7285E4005673CD /* IPCEditBatchParameterMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditBatchParameterMode.m; sourceTree = "<group>"; };
-		CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftMonkey.xcodeproj; path = SwiftMonkey/SwiftMonkey.xcodeproj; sourceTree = "<group>"; };
 		CB4C82EB1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MonkeyForOCUIMonkeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CB4C82ED1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonkeyForOCUIMonkeyTests.swift; sourceTree = "<group>"; };
-		CB4C82EF1E84B8AF0072D4F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
@@ -1556,10 +1529,8 @@
 		9E03C2C81978D5D5007389D0 = {
 			isa = PBXGroup;
 			children = (
-				CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */,
 				9E03C2DA1978D5D5007389D0 /* IcePointCloud */,
 				9E03C2F91978D5D5007389D0 /* IcePointCloudTests */,
-				CB4C82EC1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests */,
 				9E03C2D31978D5D5007389D0 /* Frameworks */,
 				9E03C2D21978D5D5007389D0 /* Products */,
 				B576EA134300537B2DAAFDD3 /* Pods */,
@@ -1754,24 +1725,6 @@
 			name = MenuView;
 			sourceTree = "<group>";
 		};
-		CB4C82DF1E84B8770072D4F4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CB4C82E41E84B8780072D4F4 /* SwiftMonkey.framework */,
-				CB4C82E61E84B8780072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CB4C82EC1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests */ = {
-			isa = PBXGroup;
-			children = (
-				CB4C82ED1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift */,
-				CB4C82EF1E84B8AF0072D4F4 /* Info.plist */,
-			);
-			path = MonkeyForOCUIMonkeyTests;
-			sourceTree = "<group>";
-		};
 		CB9211541E82157400FD4EDC /* payOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -1869,7 +1822,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				CB4C82F61E84B8BE0072D4F4 /* PBXTargetDependency */,
 				CB4C82F11E84B8AF0072D4F4 /* PBXTargetDependency */,
 			);
 			name = MonkeyForOCUIMonkeyTests;
@@ -1918,12 +1870,6 @@
 			mainGroup = 9E03C2C81978D5D5007389D0;
 			productRefGroup = 9E03C2D21978D5D5007389D0 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = CB4C82DF1E84B8770072D4F4 /* Products */;
-					ProjectRef = CB4C82DE1E84B8770072D4F4 /* SwiftMonkey.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				9E03C2D01978D5D5007389D0 /* IcePointCloud */,
@@ -1932,23 +1878,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		CB4C82E41E84B8780072D4F4 /* SwiftMonkey.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftMonkey.framework;
-			remoteRef = CB4C82E31E84B8780072D4F4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		CB4C82E61E84B8780072D4F4 /* MonkeyForOCUIMonkeyTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = MonkeyForOCUIMonkeyTests.xctest;
-			remoteRef = CB4C82E51E84B8780072D4F4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9E03C2CF1978D5D5007389D0 /* Resources */ = {
@@ -2322,7 +2251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB4C82EE1E84B8AF0072D4F4 /* MonkeyForOCUIMonkeyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2338,11 +2266,6 @@
 			isa = PBXTargetDependency;
 			target = 9E03C2D01978D5D5007389D0 /* IcePointCloud */;
 			targetProxy = CB4C82F01E84B8AF0072D4F4 /* PBXContainerItemProxy */;
-		};
-		CB4C82F61E84B8BE0072D4F4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftMonkey;
-			targetProxy = CB4C82F51E84B8BE0072D4F4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2541,6 +2464,7 @@
 		};
 		9E03C3071978D5D5007389D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17EAF28B7B4662891D543E85 /* Pods-IcePointCloudTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IcePointCloud.app/IcePointCloud";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2578,6 +2502,7 @@
 		};
 		9E03C3081978D5D5007389D0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 11AEF3CAB0A74E7D7989020F /* Pods-IcePointCloudTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IcePointCloud.app/IcePointCloud";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2748,6 +2673,7 @@
 		};
 		CB4C82FD1E84E3100072D4F4 /* TestRelease */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF26672DE267EDD850D9C0A2 /* Pods-IcePointCloudTests.testrelease.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IcePointCloud.app/IcePointCloud";
 				FRAMEWORK_SEARCH_PATHS = (
