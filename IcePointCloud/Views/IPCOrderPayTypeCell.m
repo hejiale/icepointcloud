@@ -25,7 +25,7 @@ typedef void(^UpdateBlock)();
     // Initialization code
     
     [self.employeSwitch setOnTintColor:COLOR_RGB_BLUE];
-    [IPCUIKit textFieldRightButton:self Action:@selector(showEmployeAction) InTextField:self.employeTextField OnView:self.contentView];
+    [self.employeTextField setRightButton:self Action:@selector(showEmployeAction) OnView:self.contentView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

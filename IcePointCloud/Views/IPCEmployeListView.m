@@ -40,7 +40,7 @@ typedef void(^DismissBlock)();
         self.employeTableView.emptyAlertImage = @"exception_search";
         self.employeTableView.emptyAlertTitle = @"没有搜索到该员工";
         
-        [IPCUIKit textFieldLeftImageView:@"text_searchIcon" InTextField:self.searchTextField];
+        [self.searchTextField setLeftImageView:@"text_searchIcon"];
         [IPCUIKit show];
         [self queryEmploye];
     }

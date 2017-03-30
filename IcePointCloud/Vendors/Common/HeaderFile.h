@@ -58,6 +58,7 @@
 #import "UITableView+Extend.h"
 #import "UICollectionView+Extend.h"
 #import "UIView+GestureRecognizerBlock.h"
+#import "UITextField+Extend.h"
 
 
 #endif /* HeaderFile_h */

@@ -66,8 +66,8 @@
     [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj setUserInteractionEnabled:YES];
     }];
-    [IPCUIKit textFieldRightButton:self Action:@selector(showGenderPickViewAction) InTextField:self.genderTextField OnView:self.mainView];
-    [IPCUIKit textFieldRightButton:self Action:@selector(showDatePickViewAction) InTextField:self.birthdayTextField OnView:self.mainView];
+    [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.mainView];
+    [self.birthdayTextField setRightButton:self Action:@selector(showDatePickViewAction) OnView:self.mainView];
 }
 
 

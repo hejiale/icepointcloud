@@ -91,62 +91,7 @@
 }
 
 #pragma mark //UITextField Add RightView
-+ (void)textFieldLeftImageView:(NSString *)imageName InTextField:(UITextField *)textField
-{
-    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, textField.jk_height, textField.jk_height)];
-    [leftView setBackgroundColor:[UIColor clearColor]];
-    
-    UIImageView * leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 15, 15)];
-    [leftImageView setImage:[UIImage imageNamed:imageName]];
-    [leftImageView setCenter:leftView.center];
-    [leftView addSubview:leftImageView];
-    
-    [textField setLeftView:leftView];
-    [textField setLeftViewMode:UITextFieldViewModeAlways];
-}
 
-
-+ (void)textFieldRightView:(id)target Action:(SEL)action InTextField:(UITextField *)textField
-{
-    UIButton * chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [chooseButton setFrame:CGRectMake(0, 0, 40, 40)];
-    [chooseButton setImage:[UIImage imageNamed:@"icon_right_down_btn"] forState:UIControlStateNormal];
-    [chooseButton setBackgroundColor:[UIColor clearColor]];
-    [chooseButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    
-    [textField setRightView:chooseButton];
-    [textField setRightViewMode:UITextFieldViewModeAlways];
-}
-
-
-+ (void)textFieldRightButton:(id)target Action:(SEL)action InTextField:(UITextField *)textField OnView:(UIView *)onView
-{
-    UIButton * chooseButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [chooseButton setFrame:textField.frame];
-    [chooseButton setBackgroundColor:[UIColor clearColor]];
-    [chooseButton addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-    [onView addSubview:chooseButton];
-    
-    UIView * rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, textField.jk_height)];
-    [rightView setBackgroundColor:[UIColor clearColor]];
-    
-    UIImageView * rightImage = [[UIImageView alloc]initWithFrame:CGRectMake(10, rightView.jk_height/2-6, 12, 12)];
-    [rightImage setImage:[UIImage imageNamed:@"icon_right_down_btn"]];
-    rightImage.contentMode = UIViewContentModeScaleAspectFit;
-    [rightImage setBackgroundColor:[UIColor clearColor]];
-    [rightView addSubview:rightImage];
-    
-    [textField setUserInteractionEnabled:NO];
-    [textField setRightView:rightView];
-    [textField setRightViewMode:UITextFieldViewModeAlways];
-}
-
-+ (void)textFieldLeftSpace:(double)spaceWidth InTextField:(UITextField *)textField{
-    UIView * spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, spaceWidth, textField.jk_height)];
-    [spaceView setBackgroundColor:[UIColor clearColor]];
-    [textField setLeftView:spaceView];
-    [textField setLeftViewMode:UITextFieldViewModeAlways];
-}
 
 #pragma mark//TabBar Push Methods
 + (void)pushToRootIndex:(NSInteger)index{

@@ -31,20 +31,6 @@
                                      Font:(nonnull UIFont *)font
                                     Color:(nonnull UIColor *)color;
 
-+ (void)textFieldLeftImageView:(NSString *)imageName
-                   InTextField:(UITextField *)textField;
-
-+ (void)textFieldRightView:(nullable id)target
-                    Action:(nonnull SEL)action
-               InTextField:(nonnull UITextField *)textField;
-
-+ (void)textFieldRightButton:(nullable id)target
-                      Action:(nonnull SEL)action
-                 InTextField:(nonnull UITextField *)textField
-                      OnView:(nonnull UIView *)onView;
-
-+ (void)textFieldLeftSpace:(double)spaceWidth InTextField:(UITextField *)textField;
-
 + (void)pushToRootIndex:(NSInteger)index;
 
 + (UIViewController *)rootViewcontroller;

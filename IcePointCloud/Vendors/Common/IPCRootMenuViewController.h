@@ -24,8 +24,6 @@
 @optional
 - (void)tabBarController:(IPCRootMenuViewController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 - (void)tabBarControllerNoneChange:(IPCRootMenuViewController *)tabBarController TabBarIndex:(NSInteger)tabBarIndex;
-- (void)showShoppingCartView;
-- (void)showPersonView;//According to personal center page
 - (void)judgeIsInsertNewCustomer:(NSInteger)index;
 
 @end

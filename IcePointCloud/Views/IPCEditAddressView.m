@@ -43,7 +43,7 @@ typedef  void(^DismissBlock)();
         self.editAddressView.layer.cornerRadius = 10;
         [self.saveAddressButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
         [IPCUIKit clearAutoCorrection:self.editAddressView];
-        [IPCUIKit textFieldRightButton:self Action:@selector(showGenderPickerAction) InTextField:self.genderTextField OnView:self.editAddressView];
+        [self.genderTextField setRightButton:self Action:@selector(showGenderPickerAction) OnView:self.editAddressView];
         
         RAC(self.saveAddressButton,enabled) = [RACSignal combineLatest:@[self.contactTextField.rac_textSignal,self.phoneTextField.rac_textSignal,self.addressTextField.rac_textSignal,RACObserve(self, self.genderTextField.text)] reduce:^id(NSString *contactName,NSString *phone,NSString *address,NSString *gender){
             return @(contactName.length && phone.length && address.length && gender.length);

@@ -37,8 +37,8 @@
     
     [self.usernameTf addBorder:5 Width:0.5];
     [self.passwordTf addBorder:5 Width:0.5];
-    [IPCUIKit textFieldLeftSpace:10 InTextField:self.usernameTf];
-    [IPCUIKit textFieldLeftSpace:10 InTextField:self.passwordTf];
+    [self.usernameTf setLeftSpace:10];
+    [self.passwordTf setLeftSpace:10];
     [self.loginButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.loginButton addSignleCorner:UIRectCornerAllCorners Size:5];
     [IPCUIKit clearAutoCorrection:self.loginBgView];
@@ -54,8 +54,9 @@
         self.loginHistory = [[NSMutableArray alloc]init];
     }
     
-    if ([self.loginHistory count] > 0)
-        [IPCUIKit textFieldRightView:self Action:@selector(chooseLoginUserAction:) InTextField:self.usernameTf];
+    if ([self.loginHistory count] > 0){
+        [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
+    }
     
     [[IPCClient sharedClient] cancelAllRequest];
 }
