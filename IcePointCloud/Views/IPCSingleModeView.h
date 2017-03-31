@@ -11,7 +11,7 @@
 
 @interface IPCSingleModeView : UIView<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IPCMatchItem *matchItem;
+@property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
 
 //Update the model picture
 - (void)updateModelPhoto;

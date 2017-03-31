@@ -41,7 +41,6 @@
                             <state key="normal" image="icon_shrinkscreen">
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
-                            <state key="selected" image="cp_btn_more_selected"/>
                             <connections>
                                 <action selector="scaleAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="7ry-Dq-9kt"/>
                             </connections>
@@ -131,7 +130,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="cp_btn_more_selected" width="17" height="4"/>
         <image name="icon_shrinkscreen" width="22" height="22"/>
     </resources>
 </document>

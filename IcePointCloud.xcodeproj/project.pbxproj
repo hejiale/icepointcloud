@@ -2371,7 +2371,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = NO;
-				CustomAppBundleld = com.IcePointCloud.Pos;
+				CustomAppBundleld = com.IcePointCloud.Pos.Test;
 				CustomProductName = "冰点云Test";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -2480,10 +2480,10 @@
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos.Test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "80067c3b-66d4-4879-8824-d06d338b7b44";
-				PROVISIONING_PROFILE_SPECIFIER = IcePointCloudDevelopment;
+				PROVISIONING_PROFILE = "1c93d522-4622-4ca5-9c19-c0db7d24be93";
+				PROVISIONING_PROFILE_SPECIFIER = icePointCloudTest;
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2633,7 +2633,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = YES;
-				CustomAppBundleld = com.IcePointCloud.Pos;
+				CustomAppBundleld = com.IcePointCloud.Pos.Beta;
 				CustomProductName = "冰点云Beta";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2694,10 +2694,10 @@
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
+				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos.Beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "a114a0de-a0e1-478f-868a-e226b4319e63";
-				PROVISIONING_PROFILE_SPECIFIER = HocIcePointCloud;
+				PROVISIONING_PROFILE = "d30bf3a4-dfb6-4472-b401-7a7ae2be12f4";
+				PROVISIONING_PROFILE_SPECIFIER = icePointCloudBetaHoc;
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};

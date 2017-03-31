@@ -29,9 +29,8 @@
 @synthesize delegate = _delegate;
 
 
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
+- (void)layoutSubviews{
+    [super layoutSubviews];
     
     [self addLeftLine];
     

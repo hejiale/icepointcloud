@@ -26,14 +26,9 @@
 @implementation IPCSingleModeView
 
 
-- (void)awakeFromNib{
-    [super awakeFromNib];
-    [self commitInitUI];
-}
-
-
-- (void)commitInitUI
-{
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
     [self addLeftLine];
     [self addSubview:self.glassesView];
     [self.glassesView addSubview:self.glassImageView];
@@ -47,7 +42,7 @@
         rotationRecognizer.rotation = 0;
     }];
     
-
+    
     [self.glassesView addPanGestureActionWithDelegate:self Block:^(UIGestureRecognizer *gestureRecoginzer) {
         UIPanGestureRecognizer * panGesture = (UIPanGestureRecognizer *)gestureRecoginzer;
         CGPoint translation = [panGesture translationInView:self];

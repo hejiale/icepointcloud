@@ -13,11 +13,11 @@
 @protocol CompareItemViewDelegate;
 @interface IPCCompareItemView : UIView
 
-@property (nonatomic, strong) UIView * parentSingleModeView;
-@property (nonatomic, assign) CGPoint origin;
-@property (nonatomic, assign) CGPoint originalCenter;
-@property (nonatomic, assign) CGPoint singleModeViewAnchorPoint;
-@property (nonatomic, strong) IPCMatchItem *matchItem;
+@property (nonatomic, strong, readwrite) UIView * parentSingleModeView;
+@property (nonatomic, assign, readwrite) CGPoint origin;
+@property (nonatomic, assign, readwrite) CGPoint originalCenter;
+@property (nonatomic, assign, readwrite) CGPoint singleModeViewAnchorPoint;
+@property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
 
 @property (nonatomic, weak) id<CompareItemViewDelegate> delegate;
 

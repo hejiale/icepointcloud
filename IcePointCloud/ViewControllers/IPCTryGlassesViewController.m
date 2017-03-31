@@ -443,13 +443,14 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self addBackgroundViewWithAlpha:0.2 Complete:^{
         [self removeAllPopView];
     }];
-    _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.backGroudView.jk_width,80 ) Chat:^{
-        [self shareToWechat:WXSceneSession];
-    } Line:^{
-        [self shareToWechat:WXSceneTimeline];
-    } Favorite:^{
-        [self shareToWechat:WXSceneFavorite];
-    }];
+    _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.backGroudView.jk_width,80 )
+                                                         Chat:^{
+                                                             [self shareToWechat:WXSceneSession];
+                                                         } Line:^{
+                                                             [self shareToWechat:WXSceneTimeline];
+                                                         } Favorite:^{
+                                                             [self shareToWechat:WXSceneFavorite];
+                                                         }];
     [self.backGroudView addSubview:_shareButtonView];
     [self.backGroudView bringSubviewToFront:_shareButtonView];
     [_shareButtonView show];
@@ -557,7 +558,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (void)switchToCompareMode
 {
     [self initCompareModeView];
-
+    
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[activeMatchItemIndex];
     
     CGRect frame = targetItemView.frame;
