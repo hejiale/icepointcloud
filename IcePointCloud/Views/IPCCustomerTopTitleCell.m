@@ -28,9 +28,9 @@
     // Configure the view for the selected state
 }
 
-- (IPCImageTextButton *)titleButton{
+- (IPCStaticImageTextButton *)titleButton{
     if (!_titleButton) {
-        _titleButton = [IPCImageTextButton buttonWithType:UIButtonTypeCustom];
+        _titleButton = [IPCStaticImageTextButton buttonWithType:UIButtonTypeCustom];
         [_titleButton setFrame:CGRectMake(40, 32, 0, 20)];
         [_titleButton setBackgroundColor:[UIColor clearColor]];
         [_titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -48,7 +48,7 @@
     self.titleButton.jk_width = width + 18 + (isShow ? 18 : 0);
     
     if (isShow){
-        [self.titleButton setImage:[UIImage imageNamed:@"icon_insert-1"] forState:UIControlStateNormal];
+        [self.titleButton setImage:[UIImage imageNamed:@"icon_insert"] forState:UIControlStateNormal];
         [self.titleButton setImgTextDistance:20];
         [self.titleButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentLeft];
     }

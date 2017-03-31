@@ -13,7 +13,7 @@
 @class IPCAccessoryExpireDate;
 @interface IPCAccessorySpecList : NSObject
 
-@property (nonatomic, strong) NSMutableArray<IPCAccessoryBatchNum *> * parameterList;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCAccessoryBatchNum *> * parameterList;
 
 - (instancetype)initWithResponseObject:(id)responseObject;
 
@@ -22,7 +22,7 @@
 @interface IPCAccessoryBatchNum : NSObject
 
 @property (nonatomic, copy, readwrite) NSString *   batchNumber;
-@property (nonatomic, strong) NSMutableArray<IPCAccessoryKindNum *> * kindNumArray;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCAccessoryKindNum *> * kindNumArray;
 
 
 @end
@@ -30,7 +30,7 @@
 @interface IPCAccessoryKindNum : NSObject
 
 @property (nonatomic, copy, readwrite) NSString *  kindNum;
-@property (nonatomic, strong) NSMutableArray<IPCAccessoryExpireDate *> * expireDateArray;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCAccessoryExpireDate *> * expireDateArray;
 
 @end
 

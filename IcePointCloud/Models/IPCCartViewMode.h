@@ -11,8 +11,8 @@
 
 @interface IPCCartViewMode : NSObject
 
-@property (strong, nonatomic) NSMutableArray<IPCContactLenSpecList *> * contactSpecificationArray;
-@property (strong, nonatomic) IPCAccessorySpecList * accessorySpecification;
+@property (strong, nonatomic, readwrite) NSMutableArray<IPCContactLenSpecList *> * contactSpecificationArray;
+@property (strong, nonatomic, readwrite) IPCAccessorySpecList * accessorySpecification;
 
 /**
  *  Contact lenses for inventory

@@ -1,14 +1,14 @@
 //
-//  UIView+Extend.h
+//  UIView+Border.h
 //  IcePointCloud
 //
-//  Created by mac on 16/8/10.
-//  Copyright © 2016年 Doray. All rights reserved.
+//  Created by gerry on 2017/3/31.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Extend)
+@interface UIView (Border)
 
 - (void)addTopLine;
 - (void)addBottomLine;

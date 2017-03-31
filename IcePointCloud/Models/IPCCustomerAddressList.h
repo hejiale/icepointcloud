@@ -11,7 +11,7 @@
 @class IPCCustomerAddressMode;
 @interface IPCCustomerAddressList : NSObject
 
-@property (nonatomic, strong) NSMutableArray<IPCCustomerAddressMode *> * list;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomerAddressMode *> * list;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 

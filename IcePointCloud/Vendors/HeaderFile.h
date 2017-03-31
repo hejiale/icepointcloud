@@ -19,8 +19,8 @@
 #import "IPCAppManager.h"
 #import "IPCRefreshAnimationHeader.h"
 #import "IPCRefreshAnimationFooter.h"
-#import "IPCImageTextButton.h"
-#import "IPCCustomButton.h"
+#import "IPCStaticImageTextButton.h"
+#import "IPCDynamicImageTextButton.h"
 #import "IPCEmptyAlertView.h"
 #import "IPCAlertController.h"
 /**
@@ -54,9 +54,9 @@
  */
 #import "UIViewController+Extend.h"
 #import "UIImage+Face.h"
-#import "UIView+Extend.h"
-#import "UITableView+Extend.h"
-#import "UICollectionView+Extend.h"
+#import "UIView+Border.h"
+#import "UITableView+Alert.h"
+#import "UICollectionView+Alert.h"
 #import "UIView+GestureRecognizerBlock.h"
 #import "UITextField+Extend.h"
 

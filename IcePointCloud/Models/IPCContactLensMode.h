@@ -10,7 +10,7 @@
 
 @interface IPCContactLensMode : NSObject
 
-@property (nonatomic, strong) NSMutableArray<NSDictionary *> * batchArray;
+@property (nonatomic, strong, readwrite) NSMutableArray<NSDictionary *> * batchArray;
 
 - (instancetype)initWithResponseObject:(NSArray<IPCContactLenSpec *> *)specificationArray;
 

@@ -45,15 +45,15 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, copy) ReloadFilterCloseBlock    reloadFilterCloseBlock;
 @property (nonatomic, copy) ReloadFilterUnCloseBlock    reloadFilterUnCloseBlock;
 
-@property (strong, nonatomic) IPCFilterGlassesView   * filterView;
+@property (strong, nonatomic, readwrite) IPCFilterGlassesView   * filterView;
 
-@property (nonatomic, strong) NSMutableArray<IPCGlasses *>   *glassesList;
-@property (nonatomic, strong) IPCFilterDataSourceResult   * filterDataSource;
-@property (strong, nonatomic) IPCFilterTypeMode               *filterValue;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *>   *glassesList;
+@property (nonatomic, strong, readwrite) IPCFilterDataSourceResult   * filterDataSource;
+@property (strong, nonatomic, readwrite) IPCFilterTypeMode               *filterValue;
 
-@property (nonatomic, copy) NSString *  searchWord;
-@property (nonatomic) NSInteger   currentPage;
-@property (nonatomic) BOOL    isTrying;
+@property (nonatomic, copy, readwrite) NSString *  searchWord;
+@property (nonatomic, assign, readwrite) NSInteger   currentPage;
+@property (nonatomic, assign, readwrite) BOOL    isTrying;
 @property (nonatomic) IPCTopFilterType   currentType;
 
 - (void)reloadGlassListDataWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;

@@ -19,7 +19,7 @@
  *  @param URL
  *  @param parameters 
  */
-- (void)setHttpCache:(id)httpData RequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters UserID:(NSString *)userID;
+- (void)setHttpCache:(id)httpData RequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters;
 
 /**
  *   ADD (URL、PARAMETERS、USERID)   QUERY CACHE
@@ -27,7 +27,7 @@
  *  @param URL
  *  @param parameters
  */
-- (id)httpCacheForRequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters  UserID:(NSString *)userID;
+- (id)httpCacheForRequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters;
 
 
 /**
@@ -44,7 +44,7 @@
 /**
  *  REMOVE SPECIFIED CACHE
  */
-- (void)removeCacheForRequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters  UserID:(NSString *)userID;
+- (void)removeCacheForRequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters;
 
 
 

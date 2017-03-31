@@ -17,7 +17,7 @@ typedef enum {
     UIButtonTitleWithImageAlignmentRight    // title is right
 } UIButtonTitleWithImageAlignment;
 
-@interface IPCImageTextButton : UIButton
+@interface IPCStaticImageTextButton : UIButton
 
 
 @property (nonatomic) CGFloat imgTextDistance;  // distance between image and title, default is 5

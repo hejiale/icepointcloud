@@ -44,8 +44,8 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 #pragma mark //Request Data
 - (void)updateUserInfo:(NSString *)userName Mobile:(NSString *)mobile
 {
-    [IPCUserRequestManager updatePersonInfoWithUserName:userName.length?userName:[IPCAppManager sharedManager].profile.user.contactName
-                                                  Phone:mobile.length?mobile:[IPCAppManager sharedManager].profile.user.contactMobilePhone
+    [IPCUserRequestManager updatePersonInfoWithUserName:userName ? : [IPCAppManager sharedManager].profile.user.contactName
+                                                  Phone:mobile ? : [IPCAppManager sharedManager].profile.user.contactMobilePhone
                                            SuccessBlock:^(id responseValue){
                                                [[IPCAppManager sharedManager].profile.user setContactName:userName];
                                                [[IPCAppManager sharedManager].profile.user setContactMobilePhone:mobile];
@@ -112,9 +112,11 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     NSString * inputPhoneText = [cell.inputTextField.text jk_trimmingWhitespace];
     
     if (indexPath.row == 0) {
-        [self updateUserInfo:inputNameText.length ? inputNameText : [IPCAppManager sharedManager].profile.user.contactName Mobile:[IPCAppManager sharedManager].profile.user.contactMobilePhone];
+        [self updateUserInfo:inputNameText ?  : [IPCAppManager sharedManager].profile.user.contactName
+                      Mobile:[IPCAppManager sharedManager].profile.user.contactMobilePhone];
     }else{
-        [self updateUserInfo:[IPCAppManager sharedManager].profile.user.contactName Mobile:inputPhoneText.length ? inputPhoneText : [IPCAppManager sharedManager].profile.user.contactMobilePhone];
+        [self updateUserInfo:[IPCAppManager sharedManager].profile.user.contactName
+                      Mobile:inputPhoneText ?  : [IPCAppManager sharedManager].profile.user.contactMobilePhone];
     }
 }
 
@@ -200,6 +202,9 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0;
+    }
     return 5;
 }
 

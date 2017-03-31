@@ -67,12 +67,22 @@
                                 <outlet property="delegate" destination="-1" id="ccc-v8-Mju"/>
                             </connections>
                         </tableView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cover" translatesAutoresizingMaskIntoConstraints="NO" id="ZXg-oT-mRu">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="5"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="5.5" id="1XH-BA-1XE"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.095772384751773049" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="APE-u7-V3f" firstAttribute="leading" secondItem="8Xu-7e-aJe" secondAttribute="leading" id="8Ee-YR-NEh"/>
                         <constraint firstAttribute="bottom" secondItem="APE-u7-V3f" secondAttribute="bottom" id="LN9-dY-Kgt"/>
+                        <constraint firstItem="ZXg-oT-mRu" firstAttribute="top" secondItem="8Xu-7e-aJe" secondAttribute="top" id="TxO-zY-9vx"/>
+                        <constraint firstItem="ZXg-oT-mRu" firstAttribute="leading" secondItem="8Xu-7e-aJe" secondAttribute="leading" id="ZWb-o0-xFF"/>
                         <constraint firstAttribute="trailing" secondItem="APE-u7-V3f" secondAttribute="trailing" id="btF-FI-Ayz"/>
+                        <constraint firstAttribute="trailing" secondItem="ZXg-oT-mRu" secondAttribute="trailing" id="oQI-oI-sZy"/>
                         <constraint firstItem="APE-u7-V3f" firstAttribute="top" secondItem="8Xu-7e-aJe" secondAttribute="top" id="zrS-jv-aAe"/>
                     </constraints>
                 </view>
@@ -96,4 +106,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon_cover" width="1024" height="5"/>
+    </resources>
 </document>

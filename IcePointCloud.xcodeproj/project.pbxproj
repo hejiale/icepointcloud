@@ -235,14 +235,11 @@
 		CB5CC47A1E8E00500091D0FD /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4741E8E00500091D0FD /* IPCReachability.m */; };
 		CB5CC48B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */; };
 		CB5CC48C1E8E00830091D0FD /* IPCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */; };
-		CB5CC48D1E8E00830091D0FD /* UICollectionView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4801E8E00830091D0FD /* UICollectionView+Extend.m */; };
 		CB5CC48E1E8E00830091D0FD /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4821E8E00830091D0FD /* UIImage+Face.m */; };
-		CB5CC48F1E8E00830091D0FD /* UITableView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4841E8E00830091D0FD /* UITableView+Extend.m */; };
 		CB5CC4901E8E00830091D0FD /* UITextField+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */; };
-		CB5CC4911E8E00830091D0FD /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4881E8E00830091D0FD /* UIView+Extend.m */; };
 		CB5CC4921E8E00830091D0FD /* UIView+GestureRecognizerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */; };
-		CB5CC4991E8E00B70091D0FD /* IPCCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4941E8E00B70091D0FD /* IPCCustomButton.m */; };
-		CB5CC49A1E8E00B70091D0FD /* IPCImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4961E8E00B70091D0FD /* IPCImageTextButton.m */; };
+		CB5CC4991E8E00B70091D0FD /* IPCDynamicImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4941E8E00B70091D0FD /* IPCDynamicImageTextButton.m */; };
+		CB5CC49A1E8E00B70091D0FD /* IPCStaticImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4961E8E00B70091D0FD /* IPCStaticImageTextButton.m */; };
 		CB5CC49B1E8E00B70091D0FD /* IPCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */; };
 		CB5CC49E1E8E00D60091D0FD /* IPCPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC49D1E8E00D60091D0FD /* IPCPhotoPickerViewController.m */; };
 		CB5CC4A51E8E00EA0091D0FD /* IPCDataPickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4A01E8E00EA0091D0FD /* IPCDataPickViewController.m */; };
@@ -258,6 +255,9 @@
 		CB5CC4BC1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4BA1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m */; };
 		CB5CC4BF1E8E01670091D0FD /* UIViewController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */; };
 		CB5CC4C21E8E019F0091D0FD /* IPCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4C11E8E019F0091D0FD /* IPCUser.m */; };
+		CB5CC4C51E8E23F00091D0FD /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4C41E8E23F00091D0FD /* UIView+Border.m */; };
+		CB5CC4C81E8E245B0091D0FD /* UITableView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4C71E8E245B0091D0FD /* UITableView+Alert.m */; };
+		CB5CC4CB1E8E24B20091D0FD /* UICollectionView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
 		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
@@ -660,22 +660,16 @@
 		CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AFHTTPSessionManager+Extend.m"; path = "IcePointCloud/Vendors/AFHTTPSessionManager+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CB5CC47D1E8E00830091D0FD /* IPCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCAlertController.h; path = IcePointCloud/Vendors/IPCAlertController.h; sourceTree = SOURCE_ROOT; };
 		CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCAlertController.m; path = IcePointCloud/Vendors/IPCAlertController.m; sourceTree = SOURCE_ROOT; };
-		CB5CC47F1E8E00830091D0FD /* UICollectionView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+Extend.h"; path = "IcePointCloud/Vendors/UICollectionView+Extend.h"; sourceTree = SOURCE_ROOT; };
-		CB5CC4801E8E00830091D0FD /* UICollectionView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+Extend.m"; path = "IcePointCloud/Vendors/UICollectionView+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CB5CC4811E8E00830091D0FD /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Face.h"; path = "IcePointCloud/Vendors/UIImage+Face.h"; sourceTree = SOURCE_ROOT; };
 		CB5CC4821E8E00830091D0FD /* UIImage+Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Face.m"; path = "IcePointCloud/Vendors/UIImage+Face.m"; sourceTree = SOURCE_ROOT; };
-		CB5CC4831E8E00830091D0FD /* UITableView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Extend.h"; path = "IcePointCloud/Vendors/UITableView+Extend.h"; sourceTree = SOURCE_ROOT; };
-		CB5CC4841E8E00830091D0FD /* UITableView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Extend.m"; path = "IcePointCloud/Vendors/UITableView+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CB5CC4851E8E00830091D0FD /* UITextField+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extend.h"; path = "IcePointCloud/Vendors/UITextField+Extend.h"; sourceTree = SOURCE_ROOT; };
 		CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extend.m"; path = "IcePointCloud/Vendors/UITextField+Extend.m"; sourceTree = SOURCE_ROOT; };
-		CB5CC4871E8E00830091D0FD /* UIView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extend.h"; path = "IcePointCloud/Vendors/UIView+Extend.h"; sourceTree = SOURCE_ROOT; };
-		CB5CC4881E8E00830091D0FD /* UIView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extend.m"; path = "IcePointCloud/Vendors/UIView+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CB5CC4891E8E00830091D0FD /* UIView+GestureRecognizerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+GestureRecognizerBlock.h"; path = "IcePointCloud/Vendors/UIView+GestureRecognizerBlock.h"; sourceTree = SOURCE_ROOT; };
 		CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+GestureRecognizerBlock.m"; path = "IcePointCloud/Vendors/UIView+GestureRecognizerBlock.m"; sourceTree = SOURCE_ROOT; };
-		CB5CC4931E8E00B70091D0FD /* IPCCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCustomButton.h; path = IcePointCloud/Vendors/IPCCustomButton.h; sourceTree = SOURCE_ROOT; };
-		CB5CC4941E8E00B70091D0FD /* IPCCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCustomButton.m; path = IcePointCloud/Vendors/IPCCustomButton.m; sourceTree = SOURCE_ROOT; };
-		CB5CC4951E8E00B70091D0FD /* IPCImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCImageTextButton.h; path = IcePointCloud/Vendors/IPCImageTextButton.h; sourceTree = SOURCE_ROOT; };
-		CB5CC4961E8E00B70091D0FD /* IPCImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCImageTextButton.m; path = IcePointCloud/Vendors/IPCImageTextButton.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4931E8E00B70091D0FD /* IPCDynamicImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCDynamicImageTextButton.h; path = IcePointCloud/Vendors/IPCDynamicImageTextButton.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4941E8E00B70091D0FD /* IPCDynamicImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCDynamicImageTextButton.m; path = IcePointCloud/Vendors/IPCDynamicImageTextButton.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4951E8E00B70091D0FD /* IPCStaticImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCStaticImageTextButton.h; path = IcePointCloud/Vendors/IPCStaticImageTextButton.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4961E8E00B70091D0FD /* IPCStaticImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCStaticImageTextButton.m; path = IcePointCloud/Vendors/IPCStaticImageTextButton.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4971E8E00B70091D0FD /* IPCSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCSwitch.h; path = IcePointCloud/Vendors/IPCSwitch.h; sourceTree = SOURCE_ROOT; };
 		CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCSwitch.m; path = IcePointCloud/Vendors/IPCSwitch.m; sourceTree = SOURCE_ROOT; };
 		CB5CC49C1E8E00D60091D0FD /* IPCPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPhotoPickerViewController.h; path = IcePointCloud/Vendors/IPCPhotoPickerViewController.h; sourceTree = SOURCE_ROOT; };
@@ -703,6 +697,12 @@
 		CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extend.m"; path = "IcePointCloud/Vendors/UIViewController+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CB5CC4C01E8E019F0091D0FD /* IPCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUser.h; sourceTree = "<group>"; };
 		CB5CC4C11E8E019F0091D0FD /* IPCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUser.m; sourceTree = "<group>"; };
+		CB5CC4C31E8E23F00091D0FD /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Border.h"; path = "IcePointCloud/Vendors/UIView+Border.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4C41E8E23F00091D0FD /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Border.m"; path = "IcePointCloud/Vendors/UIView+Border.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4C61E8E245B0091D0FD /* UITableView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Alert.h"; path = "IcePointCloud/Vendors/UITableView+Alert.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4C71E8E245B0091D0FD /* UITableView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Alert.m"; path = "IcePointCloud/Vendors/UITableView+Alert.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4C91E8E24B20091D0FD /* UICollectionView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+Alert.h"; path = "IcePointCloud/Vendors/UICollectionView+Alert.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+Alert.m"; path = "IcePointCloud/Vendors/UICollectionView+Alert.m"; sourceTree = SOURCE_ROOT; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
@@ -1039,13 +1039,13 @@
 			isa = PBXGroup;
 			children = (
 				CB5CC4671E8E00500091D0FD /* HeaderFile.h */,
+				CB5CC46E1E8E00500091D0FD /* IPCCore.h */,
 				CB5CC4681E8E00500091D0FD /* IPCAppManager.h */,
 				CB5CC4691E8E00500091D0FD /* IPCAppManager.m */,
 				CB5CC46A1E8E00500091D0FD /* IPCCheckVersion.h */,
 				CB5CC46B1E8E00500091D0FD /* IPCCheckVersion.m */,
 				CB5CC46C1E8E00500091D0FD /* IPCCommon.h */,
 				CB5CC46D1E8E00500091D0FD /* IPCCommon.m */,
-				CB5CC46E1E8E00500091D0FD /* IPCCore.h */,
 				CB5CC46F1E8E00500091D0FD /* IPCCustomUI.h */,
 				CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */,
 				CB5CC4711E8E00500091D0FD /* IPCPlatformService.h */,
@@ -1408,16 +1408,16 @@
 				CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */,
 				CB5CC47D1E8E00830091D0FD /* IPCAlertController.h */,
 				CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */,
-				CB5CC47F1E8E00830091D0FD /* UICollectionView+Extend.h */,
-				CB5CC4801E8E00830091D0FD /* UICollectionView+Extend.m */,
+				CB5CC4C91E8E24B20091D0FD /* UICollectionView+Alert.h */,
+				CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */,
 				CB5CC4811E8E00830091D0FD /* UIImage+Face.h */,
 				CB5CC4821E8E00830091D0FD /* UIImage+Face.m */,
-				CB5CC4831E8E00830091D0FD /* UITableView+Extend.h */,
-				CB5CC4841E8E00830091D0FD /* UITableView+Extend.m */,
+				CB5CC4C61E8E245B0091D0FD /* UITableView+Alert.h */,
+				CB5CC4C71E8E245B0091D0FD /* UITableView+Alert.m */,
 				CB5CC4851E8E00830091D0FD /* UITextField+Extend.h */,
 				CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */,
-				CB5CC4871E8E00830091D0FD /* UIView+Extend.h */,
-				CB5CC4881E8E00830091D0FD /* UIView+Extend.m */,
+				CB5CC4C31E8E23F00091D0FD /* UIView+Border.h */,
+				CB5CC4C41E8E23F00091D0FD /* UIView+Border.m */,
 				CB5CC4891E8E00830091D0FD /* UIView+GestureRecognizerBlock.h */,
 				CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */,
 				CB5CC4BD1E8E01670091D0FD /* UIViewController+Extend.h */,
@@ -1631,10 +1631,10 @@
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				CB5CC4931E8E00B70091D0FD /* IPCCustomButton.h */,
-				CB5CC4941E8E00B70091D0FD /* IPCCustomButton.m */,
-				CB5CC4951E8E00B70091D0FD /* IPCImageTextButton.h */,
-				CB5CC4961E8E00B70091D0FD /* IPCImageTextButton.m */,
+				CB5CC4931E8E00B70091D0FD /* IPCDynamicImageTextButton.h */,
+				CB5CC4941E8E00B70091D0FD /* IPCDynamicImageTextButton.m */,
+				CB5CC4951E8E00B70091D0FD /* IPCStaticImageTextButton.h */,
+				CB5CC4961E8E00B70091D0FD /* IPCStaticImageTextButton.m */,
 				CB5CC4971E8E00B70091D0FD /* IPCSwitch.h */,
 				CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */,
 				0449ECD51DC9AF3300C2CCB0 /* IPCEmptyAlertView.h */,
@@ -2195,7 +2195,6 @@
 				0470AD9A1D40590C003AF4F4 /* IPCEditOptometryView.m in Sources */,
 				04CB1B081D470FF300B19A96 /* IPCCustomerBottomCell.m in Sources */,
 				04F3DAA51DE3DD6C00AA3868 /* IPCBatchParameterViewMode.m in Sources */,
-				CB5CC4911E8E00830091D0FD /* UIView+Extend.m in Sources */,
 				04BF935E1E165E1200D14A14 /* IPCCustomerRequestManager.m in Sources */,
 				0470AD931D405345003AF4F4 /* IPCCustomerBaseInfoCell.m in Sources */,
 				9E9C682F1B8F43B300695FED /* IPCExpandShoppingCartCell.m in Sources */,
@@ -2213,7 +2212,7 @@
 				04B1E4B81D24AFD900CDDB5D /* IPCFilterTypeMode.m in Sources */,
 				CB5CC4B11E8E01040091D0FD /* IPCRotatingViewController.m in Sources */,
 				04CBD97E1D585BBD00C7CAA4 /* IPCPersonQRCodeCell.m in Sources */,
-				CB5CC49A1E8E00B70091D0FD /* IPCImageTextButton.m in Sources */,
+				CB5CC49A1E8E00B70091D0FD /* IPCStaticImageTextButton.m in Sources */,
 				9E5E2C6319E4C05300017172 /* IPCOrder.m in Sources */,
 				9E03CEFA1989694700B69825 /* IPCTryGlassesViewController.m in Sources */,
 				04CBD9851D58619700C7CAA4 /* IPCPersonMenuCell.m in Sources */,
@@ -2234,22 +2233,23 @@
 				9E9C684C1B92E47F00695FED /* IPCShoppingCartItem.m in Sources */,
 				0472C1631D35CA9900C52F86 /* IPCPriceRangeTableViewCell.m in Sources */,
 				9ECE98921B7DDFF800A13C8F /* IPCSearchItemTableViewCell.m in Sources */,
-				CB5CC48D1E8E00830091D0FD /* UICollectionView+Extend.m in Sources */,
 				04F6B2A11DEC367A00626A53 /* IPCOfflineFaceDetector.m in Sources */,
 				CB5CC4A51E8E00EA0091D0FD /* IPCDataPickViewController.m in Sources */,
 				044E0ECB1E03C02E00FD2525 /* IPCCustomerDetailViewMode.m in Sources */,
-				CB5CC4991E8E00B70091D0FD /* IPCCustomButton.m in Sources */,
+				CB5CC4991E8E00B70091D0FD /* IPCDynamicImageTextButton.m in Sources */,
 				0446067E1E68079B00C9FFCF /* IPCPayOrderViewController.m in Sources */,
 				04CBD96B1D5852A200C7CAA4 /* IPCPersonHeadCell.m in Sources */,
 				04C8C8F81DF8FBDD006EDB7E /* IPCNetworkCache.m in Sources */,
 				04443C631D23D70300596519 /* IPCTagCollectionLayout.m in Sources */,
 				9E0A837419ECB8B300703A28 /* IPCHelpViewController.m in Sources */,
+				CB5CC4C51E8E23F00091D0FD /* UIView+Border.m in Sources */,
 				0483BDF31D45D60400B0E24A /* IPCCustomerTopTitleCell.m in Sources */,
 				04CBD9701D5856FE00C7CAA4 /* IPCPersonInputCell.m in Sources */,
 				04186E051E69011C00758646 /* IPCPayAmountStyleCell.m in Sources */,
 				0470ADB11D407C24003AF4F4 /* IPCHistoryOrderCell.m in Sources */,
 				04BF93641E165F0C00D14A14 /* IPCPayOrderRequestManager.m in Sources */,
 				044E0EBB1E03AA4A00FD2525 /* IPCEditAddressView.m in Sources */,
+				CB5CC4C81E8E245B0091D0FD /* UITableView+Alert.m in Sources */,
 				04760B101D3C80B0003A4E16 /* IPCSimpleUserResult.m in Sources */,
 				04CBD98B1D586D3C00C7CAA4 /* IPCUpdatePasswordView.m in Sources */,
 				CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */,
@@ -2290,6 +2290,7 @@
 				CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */,
 				04F8D4E01DE7E0B800C572B3 /* LibraryTypeTableViewCell.m in Sources */,
 				04F50A2F1D3F887C00AF73D8 /* IPCCustomerCollectionViewCell.m in Sources */,
+				CB5CC4CB1E8E24B20091D0FD /* UICollectionView+Alert.m in Sources */,
 				04CBD95C1D582A4C00C7CAA4 /* IPCRootViewController.m in Sources */,
 				04B1D2001D867C9C00D9B865 /* IPCPhotoDatas.m in Sources */,
 				047D3FBB1D4300FB00638526 /* IPCOrderProductCell.m in Sources */,
@@ -2302,7 +2303,6 @@
 				04A4154C1D7D0BDE0093FF6E /* IPCEditParameterCell.m in Sources */,
 				CB5CC4B41E8E01170091D0FD /* IPCTabBarViewController.m in Sources */,
 				04B1D2071D867D5500D9B865 /* IPCPhoto.m in Sources */,
-				CB5CC48F1E8E00830091D0FD /* UITableView+Extend.m in Sources */,
 				042402011D87AA6400E1DD1A /* IPCEditFilterSampleController.m in Sources */,
 				9E03C2E11978D5D5007389D0 /* main.m in Sources */,
 				CB5CC4BC1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m in Sources */,
@@ -2458,7 +2458,6 @@
 					"$(PROJECT_DIR)/IcePointCloud/Vendors",
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2508,7 +2507,6 @@
 					"$(PROJECT_DIR)/IcePointCloud/Vendors",
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2673,7 +2671,6 @@
 					"$(PROJECT_DIR)/IcePointCloud/Vendors",
 					"$(PROJECT_DIR)/IcePointCloud/lib",
 					"$(inherited)",
-					"$(PROJECT_DIR)/IcePointCloud/Vendors/Common",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

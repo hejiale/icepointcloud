@@ -36,11 +36,13 @@ extern NSString *const IPCShoppingCartCountKey;
 @interface IPCAppManager : NSObject
 
 @property (nonatomic, strong)    IPCProfileResult * profile;
-@property (nonatomic, strong)    NSString  *  pushRegisterID;
 
 
 + (IPCAppManager *)sharedManager;
 
+/**
+ *  Glasses Property Class Type
+ */
 - (NSString *)classType:(IPCTopFilterType)type;
 /**
  *  Log out

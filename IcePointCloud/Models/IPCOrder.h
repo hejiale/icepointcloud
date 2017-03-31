@@ -14,6 +14,6 @@
 @property (nonatomic, copy, readonly) NSString *alipayPhotoURL;
 @property (nonatomic, copy, readonly) NSString *wechatURL;
 @property (nonatomic, copy, readonly) NSString *status;
-@property (nonatomic, assign) double  totalPrice;
+@property (nonatomic, assign, readwrite) double  totalPrice;
 
 @end

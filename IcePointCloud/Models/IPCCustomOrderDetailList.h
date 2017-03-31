@@ -11,8 +11,8 @@
 @class IPCCustomerOrderInfo;
 @interface IPCCustomOrderDetailList : NSObject
 
-@property (nonatomic, strong) NSMutableArray<IPCGlasses *> * products;
-@property (nonatomic, strong) IPCCustomerOrderInfo  *  orderInfo;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> * products;
+@property (nonatomic, strong, readwrite) IPCCustomerOrderInfo  *  orderInfo;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 

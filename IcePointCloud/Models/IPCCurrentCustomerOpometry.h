@@ -12,9 +12,9 @@
 
 + (IPCCurrentCustomerOpometry *)sharedManager;
 
-@property (nonatomic, strong) IPCDetailCustomer * currentCustomer;
-@property (nonatomic, strong) IPCCustomerAddressMode  * currentAddress;
-@property (nonatomic, strong) IPCOptometryMode     * currentOpometry;
+@property (nonatomic, strong, readwrite) IPCDetailCustomer * currentCustomer;
+@property (nonatomic, strong, readwrite) IPCCustomerAddressMode  * currentAddress;
+@property (nonatomic, strong, readwrite) IPCOptometryMode     * currentOpometry;
 
 - (void)clearData;
 

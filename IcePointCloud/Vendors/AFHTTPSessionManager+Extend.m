@@ -12,7 +12,6 @@
 
 
 - (NSURLSessionDataTask *)sendRequestWithParams:(IPCJoinRequest *)request
-                                         UserID:(NSString *)userID
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName
                                     RequestType:(IPCRequestType)requestType
@@ -35,9 +34,9 @@
         [IPCResponse parseResponseData:responseObject Complete:^(id responseValue)
          {
              if (cacheEnable == IPCRequestCacheEnable) {
-                 [[IPCNetworkCache sharedCache] setHttpCache:responseValue RequestMethod:request.requestMethod parameters:request.parameters UserID:userID];
+                 [[IPCNetworkCache sharedCache] setHttpCache:responseValue RequestMethod:request.requestMethod parameters:request.parameters];
              }else{
-                 [[IPCNetworkCache sharedCache] removeCacheForRequestMethod:request.requestMethod parameters:request.parameters UserID:userID];
+                 [[IPCNetworkCache sharedCache] removeCacheForRequestMethod:request.requestMethod parameters:request.parameters];
              }
              if (success)
                  success(responseValue, task);

@@ -14,7 +14,6 @@
  Send Request
 
  @param request
- @param userID
  @param imageData
  @param imageName
  @param requestType
@@ -25,7 +24,6 @@
  @return 
  */
 - (NSURLSessionDataTask *)sendRequestWithParams:(IPCJoinRequest *)request
-                                         UserID:(NSString *)userID
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName
                                     RequestType:(IPCRequestType)requestType

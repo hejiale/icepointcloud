@@ -1,12 +1,12 @@
 //
-//  UITableView+Extend.m
+//  UITableView+Alert.m
 //  IcePointCloud
 //
-//  Created by mac on 2016/12/13.
-//  Copyright © 2016年 Doray. All rights reserved.
+//  Created by gerry on 2017/3/31.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "UITableView+Extend.h"
+#import "UITableView+Alert.h"
 
 static char const *  emptyAlertViewKey = "EmptyAlertViewKey";
 static char const *  emptyAlertTitleKey =  "EmptyAlertTitleKey";
@@ -14,7 +14,7 @@ static char const *  emptyAlertImageKey = "EmptyAlertImageKey";
 static char const *  errorNetworkKey = "ErrorNetworkKey";
 static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 
-@implementation UITableView (Extend)
+@implementation UITableView (Alert)
 
 + (void)load{
     static dispatch_once_t onceToken;

@@ -13,23 +13,23 @@
 /**
    Asset resource
  */
-@property (nonatomic, strong) PHAsset *asset;
+@property (nonatomic, strong, readwrite) PHAsset *asset;
 /**
    Origin Size Image
  */
-@property (nonatomic, strong) UIImage *originImage;
+@property (nonatomic, strong, readwrite) UIImage *originImage;
 /**
    Asset filePath
  */
-@property (nonatomic, strong) NSURL *imageUrl;
+@property (nonatomic, strong, readwrite) NSURL *imageUrl;
 /**
    Asset save time
  */
-@property (nonatomic, copy)   NSDate *createDate;
+@property (nonatomic, copy, readwrite)   NSDate *createDate;
 /**
    Judge asset is selected
  */
-@property (nonatomic, assign) BOOL isSelect;
+@property (nonatomic, assign, readwrite) BOOL isSelect;
 
 +(UIImage *) fetchThumbImageWithAsset:(PHAsset *)asset;
 

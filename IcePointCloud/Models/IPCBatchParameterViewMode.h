@@ -10,9 +10,9 @@
 
 @interface IPCBatchParameterViewMode : NSObject
 
-@property (strong, nonatomic) NSMutableArray<BatchParameterObject *> * contactDegreeList;
-@property (strong, nonatomic) IPCContactLensMode * contactLensMode;
-@property (strong, nonatomic) IPCAccessorySpecList * accessorySpecification;
+@property (strong, nonatomic, readwrite) NSMutableArray<BatchParameterObject *> * contactDegreeList;
+@property (strong, nonatomic, readwrite) IPCContactLensMode * contactLensMode;
+@property (strong, nonatomic, readwrite) IPCAccessorySpecList * accessorySpecification;
 
 - (instancetype)initWithGlasses:(IPCGlasses *)glasses IsPreSell:(BOOL)isPreSell;
 

@@ -11,7 +11,7 @@
 
 @interface IPCPayOrderViewNormalSellCellMode : NSObject
 
-@property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;
+@property (nonatomic, assign, readwrite) id<IPCPayOrderViewCellDelegate>delegate;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;

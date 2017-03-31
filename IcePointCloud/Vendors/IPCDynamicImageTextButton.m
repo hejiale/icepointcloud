@@ -6,11 +6,11 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCCustomButton.h"
+#import "IPCDynamicImageTextButton.h"
 
 #define ImageIndexButtonWidth     5
 
-@interface IPCCustomButton()
+@interface IPCDynamicImageTextButton()
 
 @property (nonatomic, strong) UILabel * titleLabel;
 @property (nonatomic, strong) UIImageView * imageView;
@@ -20,7 +20,7 @@
 
 @end
 
-@implementation IPCCustomButton
+@implementation IPCDynamicImageTextButton
 
 - (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];

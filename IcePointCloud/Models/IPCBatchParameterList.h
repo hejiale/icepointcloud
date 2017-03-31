@@ -12,7 +12,7 @@
 
 @interface IPCBatchParameterList : NSObject
 
-@property (nonatomic, strong) NSMutableArray<BatchParameterObject *> * parameterList;
+@property (nonatomic, strong, readwrite) NSMutableArray<BatchParameterObject *> * parameterList;
 
 - (instancetype)initWithResponseObject:(id)responseObject;
 

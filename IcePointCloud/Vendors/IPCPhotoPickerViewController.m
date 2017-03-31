@@ -22,7 +22,7 @@
 @property (strong, nonatomic) UICollectionView *picsCollection;
 @property (strong, nonatomic) UIBarButtonItem *backBtn;
 @property (strong, nonatomic) IPCPhotoDatas *datas;
-@property (strong, nonatomic) IPCCustomButton * button;
+@property (strong, nonatomic) IPCDynamicImageTextButton * button;
 @property (copy,    nonatomic) void(^CompleteImageBlock)(UIImage *image);
 
 @end
@@ -148,9 +148,9 @@
     }
 }
 
-- (IPCCustomButton *)button{
+- (IPCDynamicImageTextButton *)button{
     if (!_button) {
-        _button = [[IPCCustomButton alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
+        _button = [[IPCDynamicImageTextButton alloc]initWithFrame:CGRectMake(0, 0, 200, 40)];
         [_button setImage:[UIImage imageNamed:@"icon_bar__down_arrow"] forState:UIControlStateNormal];
         [_button setImage:[UIImage imageNamed:@"icon_bar__up_arrow"] forState:UIControlStateSelected];
         [_button setTitleColor:[UIColor darkGrayColor]];

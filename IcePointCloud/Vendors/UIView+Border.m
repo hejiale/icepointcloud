@@ -1,14 +1,14 @@
 //
-//  UIView+Extend.m
+//  UIView+Border.m
 //  IcePointCloud
 //
-//  Created by mac on 16/8/10.
-//  Copyright © 2016年 Doray. All rights reserved.
+//  Created by gerry on 2017/3/31.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "UIView+Extend.h"
+#import "UIView+Border.h"
 
-@implementation UIView (Extend)
+@implementation UIView (Border)
 
 - (void)addTopLine{
     [self jk_addTopBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.3] width:0.7];

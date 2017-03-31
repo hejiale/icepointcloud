@@ -7,14 +7,14 @@
 //
 
 #import "IPCShareChatView.h"
-#import "IPCImageTextButton.h"
+#import "IPCStaticImageTextButton.h"
 
 @interface IPCShareChatView()
 
 @property (strong, nonatomic) IBOutlet UIView *shareButtonView;
-@property (weak, nonatomic) IBOutlet IPCImageTextButton *wechatButton;
-@property (weak, nonatomic) IBOutlet IPCImageTextButton *chatLineButton;
-@property (weak, nonatomic) IBOutlet IPCImageTextButton *chatMarkButton;
+@property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *wechatButton;
+@property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *chatLineButton;
+@property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *chatMarkButton;
 
 @property (nonatomic, copy) void(^ChatBlock)(void);
 @property (nonatomic, copy) void(^LineBlock)(void);
@@ -47,13 +47,15 @@
 
 
 - (void)show{
-    [UIView animateWithDuration:0.4f animations:^{
+    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.shareButtonView.frame;
         frame.origin.y += self.jk_height;
         self.shareButtonView.frame = frame;
         
         self.shareButtonView.alpha = 1;
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 

@@ -11,10 +11,10 @@
 
 @interface IPCPhotoListModel : NSObject
 
-@property (assign, nonatomic) NSInteger count;
-@property (strong, nonatomic) PHAsset *lastObject;
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) PHAssetCollection *assetCollection;
-@property (strong, nonatomic) NSArray<IPCPhoto *> * assetArray;
+@property (assign, nonatomic, readwrite) NSInteger count;
+@property (strong, nonatomic, readwrite) PHAsset *lastObject;
+@property (strong, nonatomic, readwrite) NSString *title;
+@property (strong, nonatomic, readwrite) PHAssetCollection *assetCollection;
+@property (strong, nonatomic, readwrite) NSArray<IPCPhoto *> * assetArray;
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright © 2015年 Doray. All rights reserved.
 //
 
-#import "IPCImageTextButton.h"
+#import "IPCStaticImageTextButton.h"
 #import "Masonry.h"
-@implementation IPCImageTextButton
+@implementation IPCStaticImageTextButton
 
 
 -(instancetype)init

@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, IPCCustomButtonAlignment) {
 };
 
 
-@interface IPCCustomButton : UIView
+@interface IPCDynamicImageTextButton : UIView
 
 @property(nonatomic,getter=isSelected) BOOL selected;  
 

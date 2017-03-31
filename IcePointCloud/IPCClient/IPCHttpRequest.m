@@ -66,22 +66,22 @@
                  FailureBlock:(void (^)(NSError * error))failure
 {
     //Access to the cache read cache used when no network or network error
-    NSString * userID = [IPCAppManager sharedManager].profile.user.userID;
-    id cache = [[IPCNetworkCache sharedCache] httpCacheForRequestMethod:request.requestMethod parameters:request.parameters UserID:userID];
+    id cache = [[IPCNetworkCache sharedCache] httpCacheForRequestMethod:request.requestMethod parameters:request.parameters];
     
     AFNetworkReachabilityStatus status = [IPCReachability manager].currentNetStatus;
     
     if (status == AFNetworkReachabilityStatusUnknown || status == AFNetworkReachabilityStatusNotReachable) {
         if (cache && IPCRequestCacheEnable) {
-            if (success)
+            if (success){
                 success(cache);
+            }
         }else{
-            if (failure)
+            if (failure){
                 failure([NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorNotConnectedToInternet userInfo:@{kIPCNetworkErrorMessage:kIPCErrorNetworkAlertMessage}]);
+            }
         }
     }else{
         NSURLSessionDataTask * urlSessionDataTask = [[AFHTTPSessionManager manager] sendRequestWithParams:request
-                                                                                                   UserID:userID
                                                                                                 ImageData:imageData
                                                                                                 ImageName:imageName
                                                                                               RequestType:requestType
@@ -104,17 +104,21 @@
                                                          [self.allTasks removeObject:task];
                                                      }];
         
-        if (urlSessionDataTask)[self.allTasks addObject:urlSessionDataTask];
+        if (urlSessionDataTask){
+            [self.allTasks addObject:urlSessionDataTask];
+        }
     }
 }
 
 
 - (void)cancelAllRequest
 {
-    [self.allTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
-        [task cancel];
-    }];
-    [self.allTasks removeAllObjects];
+    if (self.allTasks && self.allTasks.count) {
+        [self.allTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
+            [task cancel];
+        }];
+        [self.allTasks removeAllObjects];
+    }
 }
 
 

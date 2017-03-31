@@ -52,7 +52,7 @@
     NSLog(@"-----request parameter %@",query);
     
     NSDictionary * requestParameter = @{kAPIQueryKey: [query JSONString],
-                              kAPIParamDeviceToken:[IPCAppManager sharedManager].profile.deviceToken.length ? [IPCAppManager sharedManager].profile.deviceToken : @""};
+                              kAPIParamDeviceToken:[IPCAppManager sharedManager].profile.deviceToken ?  : @""};
     self.requestParameter = requestParameter;
 }
 

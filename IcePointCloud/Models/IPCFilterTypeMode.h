@@ -10,8 +10,8 @@
 
 @interface IPCFilterTypeMode : NSObject
 
-@property (assign, nonatomic) double  currentStartPirce;//The starting price
-@property (assign, nonatomic) double  currentEndPrice;//End of the price
+@property (assign, nonatomic, readwrite) double  currentStartPirce;//The starting price
+@property (assign, nonatomic, readwrite) double  currentEndPrice;//End of the price
 
 - (NSDictionary *)getStoreFilterSource;
 - (void)storeFilterSource:(NSString *)filterName Key:(NSString *)filterKey;

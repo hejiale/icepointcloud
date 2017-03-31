@@ -10,7 +10,7 @@
 
 @interface IPCGetGlassesListResult : NSObject
 
-@property (nonatomic, strong) NSMutableArray<IPCGlasses *> *glassesList;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *glassesList;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 

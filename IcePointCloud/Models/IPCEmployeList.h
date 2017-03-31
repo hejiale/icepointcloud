@@ -11,7 +11,7 @@
 
 @interface IPCEmployeList : NSObject
 
-@property (nonatomic, strong) NSMutableArray<IPCEmploye *> * employeArray;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCEmploye *> * employeArray;
 
 - (instancetype)initWithResponseObject:(id)responseObject;
 

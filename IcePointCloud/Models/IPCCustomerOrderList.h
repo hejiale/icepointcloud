@@ -11,8 +11,8 @@
 @class IPCCustomerOrderMode;
 @interface IPCCustomerOrderList : NSObject
 
-@property (nonatomic, strong) NSMutableArray<IPCCustomerOrderMode *> * list;
-@property (nonatomic, assign) NSInteger  totalCount;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomerOrderMode *> * list;
+@property (nonatomic, assign, readwrite) NSInteger  totalCount;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 

@@ -1,14 +1,14 @@
 //
-//  UITableView+Extend.h
+//  UICollectionView+Alert.h
 //  IcePointCloud
 //
-//  Created by mac on 2016/12/13.
-//  Copyright © 2016年 Doray. All rights reserved.
+//  Created by gerry on 2017/3/31.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface UITableView (Extend)
+@interface UICollectionView (Alert)
 
 @property (nonatomic, strong) IPCEmptyAlertView * emptyAlertView;
 @property (nonatomic, strong) IPCEmptyAlertView * errorNetworkAlertView;

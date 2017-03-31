@@ -13,7 +13,7 @@
 
 + (IPCShoppingCart *)sharedCart;
 
-@property (nonatomic, strong) NSMutableArray<IPCShoppingCartItem *> *itemList;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCShoppingCartItem *> *itemList;
 
 /**
  *    To obtain the corresponding number of shopping cart
