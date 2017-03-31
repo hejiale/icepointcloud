@@ -61,7 +61,7 @@
         [self.imageScrollView setContentOffset:CGPointZero];
         self.imagePageControl.numberOfPages = images.count;
         
-        [self.priceLabel setAttributedText:[IPCUIKit subStringWithText:[NSString stringWithFormat:@"￥%.f",glasses.price] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",glasses.price] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
         
         [self.productNameLabel setText:_glasses.glassName];
         CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
@@ -141,7 +141,7 @@
     {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (([strongSelf.glasses filterType] == IPCTopFilterTypeContactLenses && strongSelf.glasses.stock == 0) || ([strongSelf.glasses filterType] == IPCTopFilterTypeAccessory && strongSelf.glasses.stock == 0)) {
-            [IPCUIKit showError:@"暂无库存，请重新选择!"];
+            [IPCCustomUI showError:@"暂无库存，请重新选择!"];
         }else{
             if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
                 [strongSelf.delegate chooseParameter:strongSelf];

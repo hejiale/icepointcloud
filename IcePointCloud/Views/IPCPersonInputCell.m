@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [IPCUIKit clearAutoCorrection:self.contentView];
+    [IPCCustomUI clearAutoCorrection:self.contentView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

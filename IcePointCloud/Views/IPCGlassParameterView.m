@@ -492,7 +492,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
                 break;
         }
         if (self.contactSpecType != ContactLenSpecTypeDegree &&  !self.contactDegreeLabel.text.length) {
-            [IPCUIKit showError:@"请先选择度数!"];
+            [IPCCustomUI showError:@"请先选择度数!"];
             return;
         }
         if (!self.parameterViewMode.contactDegreeList.count && !isOpenBooking)return;
@@ -782,12 +782,12 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     
     if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
         if (self.cartItem.count > currentDegreeStock && currentDegreeStock > 0) {
-            [IPCUIKit showError:@"暂无库存,请重新选择"];
+            [IPCCustomUI showError:@"暂无库存,请重新选择"];
             return;
         }
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory){
         if (self.cartItem.count > currentAccessoryStock && currentAccessoryStock > 0) {
-            [IPCUIKit showError:@"暂无库存,请重新选择"];
+            [IPCCustomUI showError:@"暂无库存,请重新选择"];
             return;
         }
     }

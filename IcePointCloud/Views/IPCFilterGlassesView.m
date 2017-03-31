@@ -144,7 +144,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     
     if ([endPrice doubleValue] > 0) {
         if ([startPrice doubleValue] > [endPrice doubleValue]) {
-            [IPCUIKit showError:@"输入起始金额有误!"];
+            [IPCCustomUI showError:@"输入起始金额有误!"];
             return;
         }
     }

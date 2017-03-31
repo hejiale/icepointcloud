@@ -193,7 +193,7 @@
 - (void)onCapturePhoto:(UIButton *)sender;
 {
     if (!_camera) return;
-    [IPCUIKit show];
+    [IPCCustomUI show];
     [_camera captureImage];
 }
 
@@ -310,7 +310,7 @@
         _preview.alpha = 1;
     } completion:^(BOOL finished) {
         if (finished) {
-            [IPCUIKit hiden];
+            [IPCCustomUI hiden];
             
             if (self.OutImageBlock)
                 self.OutImageBlock(image);

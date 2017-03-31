@@ -125,9 +125,9 @@
             IPCContactLenSpecList * contactSpecification = [[IPCContactLenSpecList alloc]initWithResponseObject:responseValue ContactLensID:obj];
             [self.contactSpecificationArray addObject:contactSpecification];
         }];
-        [IPCUIKit hiden];
+        [IPCCustomUI hiden];
     } FailureBlock:^(NSError *error) {
-        [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+        [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
     }];
 }
 
@@ -142,14 +142,14 @@
              complete([self accessoryCartStock:cartItem]);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
 
 - (void)offerOrderWithCashBlock:(void(^)())cash EbuyBlock:(void(^)(IPCOrder *result))ebuy Failed:(void(^)())failed
 {
-    [IPCUIKit show];
+    [IPCCustomUI show];
     [IPCPayOrderRequestManager offerOrderWithRequestCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
                                                     OpometryID:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID
                                                      AddressID:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID
@@ -164,16 +164,16 @@
          if ([[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CASH"] || [[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CARD"])  {
              if (cash)
                  cash();
-             [IPCUIKit showSuccess:@"请前去现金或刷卡支付订单!"];
+             [IPCCustomUI showSuccess:@"请前去现金或刷卡支付订单!"];
          }else{
              IPCOrder *result = [IPCOrder mj_objectWithKeyValues:responseValue];
              if (result)
                  if (ebuy)
                      ebuy(result);
-             [IPCUIKit hiden];
+             [IPCCustomUI hiden];
          }
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
          if (failed) {
              failed();
          }

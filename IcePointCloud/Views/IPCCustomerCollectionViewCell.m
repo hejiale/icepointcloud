@@ -18,16 +18,16 @@
     [self addSubview:self.customImageView];
     [self.customImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left).with.offset(10);
-        make.top.equalTo(self.mas_top).with.offset(10);
-        make.width.mas_equalTo(90);
-        make.height.mas_equalTo(90);
+        make.centerY.equalTo(self.mas_centerY).offset(0);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(100);
     }];
 }
 
 - (UIImageView *)customImageView{
     if (!_customImageView) {
         _customImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [_customImageView zy_cornerRadiusAdvance:45.f rectCornerType:UIRectCornerAllCorners];
+        [_customImageView zy_cornerRadiusAdvance:50.f rectCornerType:UIRectCornerAllCorners];
     }
     return _customImageView;
 }
@@ -40,9 +40,9 @@
         [self.customerPhoneLabel setText:[NSString stringWithFormat:@"电话: %@",_currentCustomer.customerPhone]];
         
         if ([_currentCustomer.gender isEqualToString:@"MALE"] || [_currentCustomer.gender isEqualToString:@"NOTSET"]) {
-            [self.customImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_head_male"]];
+            [self.customImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_male"]];
         }else if ([_currentCustomer.gender isEqualToString:@"FEMALE"]){
-            [self.customImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_head_female"]];
+            [self.customImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_female"]];
         }
     }
 }

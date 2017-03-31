@@ -30,7 +30,7 @@
         make.width.mas_equalTo(180);
         make.height.mas_equalTo(247);
     }];
-    [IPCUIKit clearAutoCorrection:self.mainView];
+    [IPCCustomUI clearAutoCorrection:self.mainView];
 }
 
 - (UIImageView *)userPhotoImageView{
@@ -54,9 +54,9 @@
         [self.memoTextView setText:_currentCustomer.remark];
         [self.genderTextField setText:[IPCCommon formatGender:_currentCustomer.contactorGengerString]];
         if ([self.genderTextField.text isEqualToString:@"男"] || [self.genderTextField.text isEqualToString:@"未设置"]) {
-            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_male@2x"]];
+            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_male"]];
         }else if ([self.genderTextField.text isEqualToString:@"女"]){
-            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_female@2x"]];
+            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_female"]];
         }
     }
 }
@@ -155,7 +155,7 @@
             self.currentCustomer.email = str;
         }else if ([textField isEqual:self.phoneTextField]) {
             if (![IPCCommon checkTelNumber:str]) {
-                [IPCUIKit showError:@"请输入有效的手机号码!"];
+                [IPCCustomUI showError:@"请输入有效的手机号码!"];
                 [textField setText:@""];
             }else{
                 self.currentCustomer.customerPhone = str;

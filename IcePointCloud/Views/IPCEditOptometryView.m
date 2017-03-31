@@ -45,7 +45,7 @@
             }else{
                 [lensView addSubview:[self createLensView:CGRectMake(28 + 30, 0, itemWidth + 100, lensView.jk_height) Label:[lensItems lastObject] Enabled:isCanEdit Tag:10 InputText:self.allOptometryInfo.count ? self.allOptometryInfo[10] : @""]];
             }
-            [IPCUIKit clearAutoCorrection:lensView];
+            [IPCCustomUI clearAutoCorrection:lensView];
         }
     }
     return self;

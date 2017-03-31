@@ -34,7 +34,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 {
     [super viewDidLoad];
     
-    [IPCUIKit clearAutoCorrection:self.topSearchView];
+    [IPCCustomUI clearAutoCorrection:self.topSearchView];
     [self.searchTableView setTableFooterView:[[UIView alloc]init]];
     self.searchTableView.emptyAlertTitle = @"暂无搜索历史!";
     self.searchTableView.emptyAlertImage = @"exception_search";

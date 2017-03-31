@@ -70,7 +70,7 @@
         IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
         [self.navigationController pushViewController:payOrderVC animated:YES];
     }else{
-        [IPCUIKit showAlert:@"冰点云" Message:@"请先前去验光页面选择客户验光信息!" Owner:self Done:^{
+        [IPCCustomUI showAlert:@"冰点云" Message:@"请先前去验光页面选择客户验光信息!" Owner:self Done:^{
             [self setSelectedIndex:2];
         }];
     }
@@ -119,7 +119,7 @@
         __weak typeof (self) weakSelf = self;
         IPCCustomerViewController * currentUserVC = (IPCCustomerViewController *)self.selectedViewController;
         if (currentUserVC.isInserting) {
-            [IPCUIKit showAlert:@"冰点云" Message:@"您正在新增验光数据，如果点击确定，客户验光记录将丢失，确定清空吗？" Owner:self Done:^{
+            [IPCCustomUI showAlert:@"冰点云" Message:@"您正在新增验光数据，如果点击确定，客户验光记录将丢失，确定清空吗？" Owner:self Done:^{
                 __strong typeof (weakSelf) strongSelf = weakSelf;
                 [currentUserVC toExitInsertCustomer];
                 [strongSelf setSelectedIndex:index];

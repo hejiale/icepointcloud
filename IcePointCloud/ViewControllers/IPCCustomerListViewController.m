@@ -42,7 +42,7 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
     // Do any additional setup after loading the view from its nib.
     
     searchWord = @"";
-    [IPCUIKit clearAutoCorrection:self.topSearchView];
+    [IPCCustomUI clearAutoCorrection:self.topSearchView];
     [self.searchHistoryTableView setTableFooterView:[[UIView alloc]init]];
     self.searchHistoryTableView.emptyAlertTitle = @"暂无搜索历史!";
     self.searchHistoryTableView.emptyAlertImage = @"exception_search";
@@ -79,7 +79,7 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
 
 #pragma mark //Request Data
 - (void)queryCustomerInfo{
-    [IPCUIKit show];
+    [IPCCustomUI show];
     [self.searchHistoryTableView setHidden:YES];
     [self.customerCollectionView setHidden:NO];
     
@@ -88,9 +88,9 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
      {
          _customerList = [[IPCCustomerList alloc]initWithResponseValue:responseValue];
          [self.customerCollectionView reloadData];
-         [IPCUIKit hiden];
+         [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
          [self.customerCollectionView reloadData];
      }];
 }

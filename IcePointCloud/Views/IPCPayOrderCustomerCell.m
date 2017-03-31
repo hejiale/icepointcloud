@@ -49,9 +49,9 @@
         NSString * gender = [IPCCommon formatGender:_currentCustomer.contactorGengerString];
         
         if ([gender isEqualToString:@"男"] || [gender isEqualToString:@"未设置"]) {
-            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_male@2x"]];
+            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_male"]];
         }else if ([gender isEqualToString:@"女"]){
-            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_female@2x"]];
+            [self.userPhotoImageView setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url] placeholder:[UIImage imageNamed:@"icon_female"]];
         }
     }
 }

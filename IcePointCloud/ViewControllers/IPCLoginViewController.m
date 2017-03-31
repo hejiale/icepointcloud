@@ -41,7 +41,7 @@
     [self.passwordTf setLeftSpace:10];
     [self.loginButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.loginButton addSignleCorner:UIRectCornerAllCorners Size:5];
-    [IPCUIKit clearAutoCorrection:self.loginBgView];
+    [IPCCustomUI clearAutoCorrection:self.loginBgView];
 
     if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {
         [self.usernameTf setText:[NSUserDefaults jk_stringForKey:IPCUserNameKey]];
@@ -95,11 +95,11 @@
     NSString *password = [self.passwordTf.text jk_trimmingWhitespace];
     
     if (!username.length){
-        [IPCUIKit showError:@"登录帐号不能为空"];
+        [IPCCustomUI showError:@"登录帐号不能为空"];
         return;
     }
     if (!password.length) {
-        [IPCUIKit showError:@"登录密码不能为空"];
+        [IPCCustomUI showError:@"登录密码不能为空"];
         return;
     }
     [self.loginButton jk_showIndicator];
@@ -120,7 +120,7 @@
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+        [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
     }];
 }
 

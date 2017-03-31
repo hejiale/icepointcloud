@@ -32,7 +32,7 @@
         
         [WXApi sendReq:req];
     } else {
-        [IPCUIKit showError:@"请安装最新版本的微信后重试"];
+        [IPCCustomUI showError:@"请安装最新版本的微信后重试"];
     }
 }
 

@@ -102,9 +102,9 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
      {
          _detailOrder = [[IPCCustomOrderDetailList alloc]initWithResponseValue:responseValue];
          [self.orderDetailTableView reloadData];
-         [IPCUIKit hiden];
+         [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 

@@ -10,14 +10,11 @@
 		040174D41D8F8D6F00C21A92 /* IPCShareChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040174D31D8F8D6F00C21A92 /* IPCShareChatView.m */; };
 		040174D61D8F8D7F00C21A92 /* IPCShareChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040174D51D8F8D7F00C21A92 /* IPCShareChatView.xib */; };
 		0401B0FF1D7D3B4D0061C8A9 /* IPCBatchParameterList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401B0FE1D7D3B4D0061C8A9 /* IPCBatchParameterList.m */; };
-		04031E291E0CB38400C2A913 /* UIView+GestureRecognizerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 04031E281E0CB38400C2A913 /* UIView+GestureRecognizerBlock.m */; };
 		04186E051E69011C00758646 /* IPCPayAmountStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186E031E69011C00758646 /* IPCPayAmountStyleCell.m */; };
 		04186E061E69011C00758646 /* IPCPayAmountStyleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04186E041E69011C00758646 /* IPCPayAmountStyleCell.xib */; };
 		04186E0A1E6919B800758646 /* IPCPayOrderViewPreSellCellMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186E091E6919B800758646 /* IPCPayOrderViewPreSellCellMode.m */; };
 		04186E0D1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */; };
 		0421BE601D80FC39002C4FE4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0421BE5F1D80FC39002C4FE4 /* AVFoundation.framework */; };
-		042401F81D878FA100E1DD1A /* IPCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042401F71D878FA100E1DD1A /* IPCNavigationViewController.m */; };
-		042401FB1D87919000E1DD1A /* IPCRotatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042401FA1D87919000E1DD1A /* IPCRotatingViewController.m */; };
 		042402011D87AA6400E1DD1A /* IPCEditFilterSampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042402001D87AA6400E1DD1A /* IPCEditFilterSampleController.m */; };
 		0424025A1D87F26400E1DD1A /* IPCOnlineFaceDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 042402591D87F26400E1DD1A /* IPCOnlineFaceDetector.m */; };
 		042EF1B01DDD4F7C00EEC744 /* IPCCartViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 042EF1AF1DDD4F7C00EEC744 /* IPCCartViewMode.m */; };
@@ -31,7 +28,6 @@
 		04378D791D90F59F00E37096 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04378D781D90F59F00E37096 /* Security.framework */; };
 		043B87571DBDF6F300AFB858 /* IPCOrderProductPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 043B87551DBDF6F300AFB858 /* IPCOrderProductPriceCell.m */; };
 		043B87581DBDF6F300AFB858 /* IPCOrderProductPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043B87561DBDF6F300AFB858 /* IPCOrderProductPriceCell.xib */; };
-		044099501E0283D900254157 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = 0440994F1E0283D900254157 /* UIImage+Face.m */; };
 		04443C511D23C89300596519 /* IPCFilterGlassesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443C501D23C89300596519 /* IPCFilterGlassesView.m */; };
 		04443C551D23C8A800596519 /* IPCFilterGlassesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04443C541D23C8A800596519 /* IPCFilterGlassesView.xib */; };
 		04443C5A1D23CADA00596519 /* IPCFilterClassViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04443C581D23CADA00596519 /* IPCFilterClassViewCell.m */; };
@@ -79,7 +75,6 @@
 		0470AD931D405345003AF4F4 /* IPCCustomerBaseInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470AD911D405345003AF4F4 /* IPCCustomerBaseInfoCell.m */; };
 		0470AD941D405345003AF4F4 /* IPCCustomerBaseInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0470AD921D405345003AF4F4 /* IPCCustomerBaseInfoCell.xib */; };
 		0470AD9A1D40590C003AF4F4 /* IPCEditOptometryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470AD991D40590C003AF4F4 /* IPCEditOptometryView.m */; };
-		0470AD9D1D406573003AF4F4 /* UIViewController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470AD9C1D406573003AF4F4 /* UIViewController+Extend.m */; };
 		0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470ADA01D406E6D003AF4F4 /* IPCCustomerOrderList.m */; };
 		0470ADAC1D407183003AF4F4 /* IPCHistoryOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0470ADAA1D407183003AF4F4 /* IPCHistoryOptometryCell.m */; };
 		0470ADAD1D407183003AF4F4 /* IPCHistoryOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0470ADAB1D407183003AF4F4 /* IPCHistoryOptometryCell.xib */; };
@@ -92,12 +87,6 @@
 		0472C1641D35CA9900C52F86 /* IPCPriceRangeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0472C1621D35CA9900C52F86 /* IPCPriceRangeTableViewCell.xib */; };
 		0472C1701D360F1500C52F86 /* IPCLoginHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472C16E1D360F1500C52F86 /* IPCLoginHistoryViewController.m */; };
 		0472C1711D360F1500C52F86 /* IPCLoginHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0472C16F1D360F1500C52F86 /* IPCLoginHistoryViewController.xib */; };
-		0472D9631D24D21B005B32E7 /* IPCImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0472D9621D24D21B005B32E7 /* IPCImageTextButton.m */; };
-		047349F01D4EDF88001B60D9 /* icon_female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047349EC1D4EDF88001B60D9 /* icon_female@2x.png */; };
-		047349F21D4EDF88001B60D9 /* icon_male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047349EE1D4EDF88001B60D9 /* icon_male@2x.png */; };
-		047349F61D4F16E0001B60D9 /* IPCRefreshAnimationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 047349F51D4F16E0001B60D9 /* IPCRefreshAnimationHeader.m */; };
-		047349FC1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = 047349FB1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.m */; };
-		0475724D1E1B373D00151EEA /* IPCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0475724C1E1B373D00151EEA /* IPCAlertController.m */; };
 		04760B0A1D3C80A1003A4E16 /* IPCGetGlassesListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 04760B091D3C80A1003A4E16 /* IPCGetGlassesListResult.m */; };
 		04760B0F1D3C80B0003A4E16 /* IPCProfileResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 04760B0C1D3C80B0003A4E16 /* IPCProfileResult.m */; };
 		04760B101D3C80B0003A4E16 /* IPCSimpleUserResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 04760B0E1D3C80B0003A4E16 /* IPCSimpleUserResult.m */; };
@@ -111,10 +100,6 @@
 		047D3FC11D43039400638526 /* IPCOrderDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047D3FBF1D43039400638526 /* IPCOrderDetailInfoCell.xib */; };
 		047D3FCA1D43479300638526 /* IPCCurrentCustomerOpometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D3FC91D43479300638526 /* IPCCurrentCustomerOpometry.m */; };
 		047F69601D41B10900AA4C0F /* IPCCustomOrderDetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F695F1D41B10900AA4C0F /* IPCCustomOrderDetailList.m */; };
-		047F696E1D41CE2400AA4C0F /* IPCDatePickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F696C1D41CE2400AA4C0F /* IPCDatePickViewController.m */; };
-		047F696F1D41CE2400AA4C0F /* IPCDatePickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047F696D1D41CE2400AA4C0F /* IPCDatePickViewController.xib */; };
-		047F69731D41CFE900AA4C0F /* IPCDataPickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F69711D41CFE900AA4C0F /* IPCDataPickViewController.m */; };
-		047F69741D41CFE900AA4C0F /* IPCDataPickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047F69721D41CFE900AA4C0F /* IPCDataPickViewController.xib */; };
 		047F69771D41FFF900AA4C0F /* IPCDetailCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F69761D41FFF900AA4C0F /* IPCDetailCustomer.m */; };
 		047FCA781D2B72B500775045 /* IPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 047FCA771D2B72B500775045 /* IPCResponse.m */; };
 		0482B0CC1D596F990099AFD3 /* IPCQRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0482B0CB1D596F990099AFD3 /* IPCQRCodeView.xib */; };
@@ -122,7 +107,6 @@
 		0483BDF41D45D60400B0E24A /* IPCCustomerTopTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0483BDF21D45D60400B0E24A /* IPCCustomerTopTitleCell.xib */; };
 		0485F4041D34A72800A42DE3 /* IPCCustomerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485F4031D34A72800A42DE3 /* IPCCustomerList.m */; };
 		0485F40D1D34BE1700A42DE3 /* IPCOptometryList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485F40C1D34BE1700A42DE3 /* IPCOptometryList.m */; };
-		048A15F21D5B1931003FD88F /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A15F11D5B1931003FD88F /* UIView+Extend.m */; };
 		048BC3271D2F4CA5007F7EE7 /* IPCCustomerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048BC3251D2F4CA5007F7EE7 /* IPCCustomerListViewController.m */; };
 		048BC3281D2F4CA5007F7EE7 /* IPCCustomerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048BC3261D2F4CA5007F7EE7 /* IPCCustomerListViewController.xib */; };
 		0492B64E1D29F8E000A70A3C /* IPCGlassesImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492B64D1D29F8E000A70A3C /* IPCGlassesImage.m */; };
@@ -130,14 +114,12 @@
 		0492B6531D2A48E600A70A3C /* IPCCustomerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492B6511D2A48E600A70A3C /* IPCCustomerViewController.xib */; };
 		04A065A11D2231C100A62291 /* IPCGlasslistCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A0659F1D2231C100A62291 /* IPCGlasslistCollectionViewCell.m */; };
 		04A065A21D2231C100A62291 /* IPCGlasslistCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A065A01D2231C100A62291 /* IPCGlasslistCollectionViewCell.xib */; };
-		04A202181D7FE4DB00F2A681 /* IPCPresentModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A202171D7FE4DB00F2A681 /* IPCPresentModeViewController.m */; };
 		04A2021F1D801A8A00F2A681 /* IPCLanuchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A2021D1D801A8A00F2A681 /* IPCLanuchViewController.m */; };
 		04A202201D801A8A00F2A681 /* IPCLanuchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A2021E1D801A8A00F2A681 /* IPCLanuchViewController.xib */; };
 		04A415461D7D093F0093FF6E /* IPCEditBatchParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A415451D7D093F0093FF6E /* IPCEditBatchParameterView.m */; };
 		04A415481D7D094F0093FF6E /* IPCEditBatchParameterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A415471D7D094F0093FF6E /* IPCEditBatchParameterView.xib */; };
 		04A4154C1D7D0BDE0093FF6E /* IPCEditParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4154A1D7D0BDE0093FF6E /* IPCEditParameterCell.m */; };
 		04A4154D1D7D0BDE0093FF6E /* IPCEditParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A4154B1D7D0BDE0093FF6E /* IPCEditParameterCell.xib */; };
-		04A703021D38E1BA008675DA /* IPCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A703011D38E1BA008675DA /* IPCSwitch.m */; };
 		04A84FAE1D509BBC005D92AB /* IPCOrderDetailMemoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A84FAC1D509BBC005D92AB /* IPCOrderDetailMemoCell.m */; };
 		04A84FAF1D509BBC005D92AB /* IPCOrderDetailMemoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A84FAD1D509BBC005D92AB /* IPCOrderDetailMemoCell.xib */; };
 		04A84FB31D50B0AB005D92AB /* IPCPayOrderCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A84FB11D50B0AB005D92AB /* IPCPayOrderCustomerCell.m */; };
@@ -152,19 +134,12 @@
 		04B1E4B81D24AFD900CDDB5D /* IPCFilterTypeMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1E4B71D24AFD900CDDB5D /* IPCFilterTypeMode.m */; };
 		04B35DB01DE67ADF00281B71 /* OrderDetailTopTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B35DAE1DE67ADF00281B71 /* OrderDetailTopTableViewCell.m */; };
 		04B35DB11DE67ADF00281B71 /* OrderDetailTopTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B35DAF1DE67ADF00281B71 /* OrderDetailTopTableViewCell.xib */; };
-		04BBE8DB1DFFD9F9008A59DA /* UITableView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBE8DA1DFFD9F9008A59DA /* UITableView+Extend.m */; };
-		04BBE8DE1DFFDA17008A59DA /* UICollectionView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBE8DD1DFFDA17008A59DA /* UICollectionView+Extend.m */; };
 		04BDB5CF1D38C44500F2D446 /* IPCChooseCategoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BDB5CE1D38C44500F2D446 /* IPCChooseCategoryView.m */; };
-		04BF93551E16445D00D14A14 /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF93541E16445D00D14A14 /* IPCPlatformService.m */; };
 		04BF93581E16597400D14A14 /* IPCUserRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF93571E16597400D14A14 /* IPCUserRequestManager.m */; };
 		04BF935B1E165DD100D14A14 /* IPCGoodsRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF935A1E165DD100D14A14 /* IPCGoodsRequestManager.m */; };
 		04BF935E1E165E1200D14A14 /* IPCCustomerRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF935D1E165E1200D14A14 /* IPCCustomerRequestManager.m */; };
 		04BF93611E165EB800D14A14 /* IPCBatchRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF93601E165EB800D14A14 /* IPCBatchRequestManager.m */; };
 		04BF93641E165F0C00D14A14 /* IPCPayOrderRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BF93631E165F0C00D14A14 /* IPCPayOrderRequestManager.m */; };
-		04C34CC21E01405800979001 /* IPCCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C34CC11E01405800979001 /* IPCCheckVersion.m */; };
-		04C34CC91E0140D500979001 /* IPCGuideViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C34CC61E0140D500979001 /* IPCGuideViewCell.m */; };
-		04C34CCA1E0140D500979001 /* IPCGuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C34CC81E0140D500979001 /* IPCGuideViewManager.m */; };
-		04C34CCD1E01419800979001 /* TuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 04C34CCC1E01419800979001 /* TuSDK.bundle */; };
 		04C680231DF1254D008B0F80 /* IPCOrderPayStyleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C680211DF1254D008B0F80 /* IPCOrderPayStyleCell.m */; };
 		04C680241DF1254D008B0F80 /* IPCOrderPayStyleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C680221DF1254D008B0F80 /* IPCOrderPayStyleCell.xib */; };
 		04C7C8E81D7818F10012AE6B /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C7C8E71D7818F10012AE6B /* AddressBook.framework */; };
@@ -201,7 +176,6 @@
 		04D8954E1DD981B7005E678C /* IPCContactLensMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8954D1DD981B7005E678C /* IPCContactLensMode.m */; };
 		04D9D48D1E1F7416003092D0 /* IPCEmploye.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D9D48C1E1F7416003092D0 /* IPCEmploye.m */; };
 		04EAF91E1D531A4300A4A66F /* IPCShoppingCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF91D1D531A4300A4A66F /* IPCShoppingCart.m */; };
-		04EAF9251D5323D200A4A66F /* IPCTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EAF9231D5323D200A4A66F /* IPCTabBarViewController.m */; };
 		04EB43971D42190600027B42 /* IPCCustomerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB43951D42190600027B42 /* IPCCustomerDetailCell.m */; };
 		04EB43981D42190600027B42 /* IPCCustomerDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EB43961D42190600027B42 /* IPCCustomerDetailCell.xib */; };
 		04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC1A741D6BEBDE00E9A9F7 /* IPCGlassParameterView.m */; };
@@ -214,7 +188,6 @@
 		04F8D4E01DE7E0B800C572B3 /* LibraryTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D4DE1DE7E0B800C572B3 /* LibraryTypeTableViewCell.m */; };
 		04F8D4E11DE7E0B800C572B3 /* LibraryTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F8D4DF1DE7E0B800C572B3 /* LibraryTypeTableViewCell.xib */; };
 		04F8D4E41DE801FF00C572B3 /* IPCLibraryTypeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D4E31DE801FF00C572B3 /* IPCLibraryTypeTableView.m */; };
-		04F8D4E71DE81E5500C572B3 /* IPCCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F8D4E61DE81E5500C572B3 /* IPCCustomButton.m */; };
 		04F98DBF1D6D720600C97474 /* IPCSingleModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F98DBE1D6D720600C97474 /* IPCSingleModeView.xib */; };
 		9741E702A9B8997F42586CAB /* Pods_IcePointCloudTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5AEA0BBB9FDC80B063BCBC /* Pods_IcePointCloudTests.framework */; };
 		9E03C2E11978D5D5007389D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E03C2E01978D5D5007389D0 /* main.m */; };
@@ -225,8 +198,6 @@
 		9E0A837419ECB8B300703A28 /* IPCHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0A837219ECB8B300703A28 /* IPCHelpViewController.m */; };
 		9E0A837519ECB8B300703A28 /* IPCHelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E0A837319ECB8B300703A28 /* IPCHelpViewController.xib */; };
 		9E15729919F858DD00EC93D1 /* IPCHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAC1F219D6E2D000C1EFBF /* IPCHttpRequest.m */; };
-		9E15B7D01B6BBCA1007ACF65 /* IPCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E15B7CF1B6BBCA1007ACF65 /* IPCUser.m */; };
-		9E18E8A7199C25D10085704B /* IPCUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E18E8A6199C25D10085704B /* IPCUIKit.m */; };
 		9E18E8AD199D30CD0085704B /* IPCSingleModeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E18E8AC199D30CD0085704B /* IPCSingleModeView.m */; };
 		9E5C85831B60DDFB00A879BB /* IPCGlassListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E5C85811B60DDFB00A879BB /* IPCGlassListViewController.m */; };
 		9E5C85841B60DDFB00A879BB /* IPCGlassListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E5C85821B60DDFB00A879BB /* IPCGlassListViewController.xib */; };
@@ -239,7 +210,6 @@
 		9E9C684C1B92E47F00695FED /* IPCShoppingCartItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E9C684B1B92E47F00695FED /* IPCShoppingCartItem.m */; };
 		9E9F173119AF14AD00B4F4CE /* IPCLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E9F173019AF14AD00B4F4CE /* IPCLoginViewController.xib */; };
 		9EA3537D197AB827005960AD /* IPCGlasses.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA3537C197AB827005960AD /* IPCGlasses.m */; };
-		9EA7CF5119CB1F0B00001C18 /* IPCAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA7CF5019CB1F0B00001C18 /* IPCAppManager.m */; };
 		9EC3C5A8198672D900C07396 /* IPCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC3C5A6198672D900C07396 /* IPCLoginViewController.m */; };
 		9ECE988B1B7DD8E000A13C8F /* IPCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ECE98891B7DD8E000A13C8F /* IPCSearchViewController.m */; };
 		9ECE988C1B7DD8E000A13C8F /* IPCSearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9ECE988A1B7DD8E000A13C8F /* IPCSearchViewController.xib */; };
@@ -248,7 +218,6 @@
 		9EF32093199318EA004FC5B9 /* IPCCompareItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EF32092199318EA004FC5B9 /* IPCCompareItemView.xib */; };
 		9EF3209619931EE7004FC5B9 /* IPCCompareItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3209519931EE7004FC5B9 /* IPCCompareItemView.m */; };
 		9EF32099199334DB004FC5B9 /* IPCMatchItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF32098199334DB004FC5B9 /* IPCMatchItem.m */; };
-		9EF3209D19933620004FC5B9 /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3209C19933620004FC5B9 /* IPCCommon.m */; };
 		9EF39A241B28053200CEE1D3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF39A231B28053200CEE1D3 /* CoreVideo.framework */; };
 		9EF39A2C1B28054F00CEE1D3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF39A2B1B28054F00CEE1D3 /* CoreImage.framework */; };
 		9EFAC1F619D6E71A00C1EFBF /* IPCJoinRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAC1F519D6E71A00C1EFBF /* IPCJoinRequest.m */; };
@@ -256,14 +225,43 @@
 		CB1234F21E762D9100AB29DF /* IPCRootBarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1234F11E762D9100AB29DF /* IPCRootBarMenuView.m */; };
 		CB1234F41E762D9A00AB29DF /* IPCRootBarMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1234F31E762D9A00AB29DF /* IPCRootBarMenuView.xib */; };
 		CB404B101E7285E4005673CD /* IPCEditBatchParameterViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB404B0F1E7285E4005673CD /* IPCEditBatchParameterViewMode.m */; };
+		CB5CC4651E8DFFB50091D0FD /* IPCGuideViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4621E8DFFB50091D0FD /* IPCGuideViewCell.m */; };
+		CB5CC4661E8DFFB50091D0FD /* IPCGuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4641E8DFFB50091D0FD /* IPCGuideViewManager.m */; };
+		CB5CC4751E8E00500091D0FD /* IPCAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4691E8E00500091D0FD /* IPCAppManager.m */; };
+		CB5CC4761E8E00500091D0FD /* IPCCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC46B1E8E00500091D0FD /* IPCCheckVersion.m */; };
+		CB5CC4771E8E00500091D0FD /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC46D1E8E00500091D0FD /* IPCCommon.m */; };
+		CB5CC4781E8E00500091D0FD /* IPCCustomUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */; };
+		CB5CC4791E8E00500091D0FD /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */; };
+		CB5CC47A1E8E00500091D0FD /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4741E8E00500091D0FD /* IPCReachability.m */; };
+		CB5CC48B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */; };
+		CB5CC48C1E8E00830091D0FD /* IPCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */; };
+		CB5CC48D1E8E00830091D0FD /* UICollectionView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4801E8E00830091D0FD /* UICollectionView+Extend.m */; };
+		CB5CC48E1E8E00830091D0FD /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4821E8E00830091D0FD /* UIImage+Face.m */; };
+		CB5CC48F1E8E00830091D0FD /* UITableView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4841E8E00830091D0FD /* UITableView+Extend.m */; };
+		CB5CC4901E8E00830091D0FD /* UITextField+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */; };
+		CB5CC4911E8E00830091D0FD /* UIView+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4881E8E00830091D0FD /* UIView+Extend.m */; };
+		CB5CC4921E8E00830091D0FD /* UIView+GestureRecognizerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */; };
+		CB5CC4991E8E00B70091D0FD /* IPCCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4941E8E00B70091D0FD /* IPCCustomButton.m */; };
+		CB5CC49A1E8E00B70091D0FD /* IPCImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4961E8E00B70091D0FD /* IPCImageTextButton.m */; };
+		CB5CC49B1E8E00B70091D0FD /* IPCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */; };
+		CB5CC49E1E8E00D60091D0FD /* IPCPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC49D1E8E00D60091D0FD /* IPCPhotoPickerViewController.m */; };
+		CB5CC4A51E8E00EA0091D0FD /* IPCDataPickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4A01E8E00EA0091D0FD /* IPCDataPickViewController.m */; };
+		CB5CC4A61E8E00EA0091D0FD /* IPCDataPickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB5CC4A11E8E00EA0091D0FD /* IPCDataPickViewController.xib */; };
+		CB5CC4A71E8E00EA0091D0FD /* IPCDatePickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4A31E8E00EA0091D0FD /* IPCDatePickViewController.m */; };
+		CB5CC4A81E8E00EA0091D0FD /* IPCDatePickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB5CC4A41E8E00EA0091D0FD /* IPCDatePickViewController.xib */; };
+		CB5CC4AF1E8E01040091D0FD /* IPCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4AA1E8E01040091D0FD /* IPCNavigationViewController.m */; };
+		CB5CC4B01E8E01040091D0FD /* IPCPresentModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */; };
+		CB5CC4B11E8E01040091D0FD /* IPCRotatingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4AE1E8E01040091D0FD /* IPCRotatingViewController.m */; };
+		CB5CC4B41E8E01170091D0FD /* IPCTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4B31E8E01170091D0FD /* IPCTabBarViewController.m */; };
+		CB5CC4B61E8E01220091D0FD /* TuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */; };
+		CB5CC4BB1E8E012D0091D0FD /* IPCRefreshAnimationFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4B81E8E012D0091D0FD /* IPCRefreshAnimationFooter.m */; };
+		CB5CC4BC1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4BA1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m */; };
+		CB5CC4BF1E8E01670091D0FD /* UIViewController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */; };
+		CB5CC4C21E8E019F0091D0FD /* IPCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4C11E8E019F0091D0FD /* IPCUser.m */; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
 		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
 		CB7EF48B1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */; };
-		CB9187161E8CB29400D59487 /* UITextField+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9187151E8CB29400D59487 /* UITextField+Extend.m */; };
-		CB91871C1E8CCA9000D59487 /* IPCPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB91871B1E8CCA9000D59487 /* IPCPhotoPickerViewController.m */; };
-		CB91872C1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB91872B1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.m */; };
-		CB91872F1E8CFAF300D59487 /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB91872E1E8CFAF300D59487 /* IPCReachability.m */; };
 		CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */; };
 		CB9211591E824CE000FD4EDC /* IPCPayOrderProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */; };
 		E35277251B301C48004E245C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35277241B301C48004E245C /* AssetsLibrary.framework */; };
@@ -286,8 +284,6 @@
 		040174D51D8F8D7F00C21A92 /* IPCShareChatView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCShareChatView.xib; sourceTree = "<group>"; };
 		0401B0FD1D7D3B4D0061C8A9 /* IPCBatchParameterList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterList.h; sourceTree = "<group>"; };
 		0401B0FE1D7D3B4D0061C8A9 /* IPCBatchParameterList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterList.m; sourceTree = "<group>"; };
-		04031E271E0CB38400C2A913 /* UIView+GestureRecognizerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GestureRecognizerBlock.h"; sourceTree = "<group>"; };
-		04031E281E0CB38400C2A913 /* UIView+GestureRecognizerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GestureRecognizerBlock.m"; sourceTree = "<group>"; };
 		04186E021E69011C00758646 /* IPCPayAmountStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayAmountStyleCell.h; sourceTree = "<group>"; };
 		04186E031E69011C00758646 /* IPCPayAmountStyleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayAmountStyleCell.m; sourceTree = "<group>"; };
 		04186E041E69011C00758646 /* IPCPayAmountStyleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayAmountStyleCell.xib; sourceTree = "<group>"; };
@@ -297,10 +293,6 @@
 		04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPayOrderViewNormalSellCellMode.m; path = ../ViewControllers/IPCPayOrderViewNormalSellCellMode.m; sourceTree = "<group>"; };
 		04186E0E1E693D8000758646 /* IPCPayOrderViewCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderViewCellDelegate.h; sourceTree = "<group>"; };
 		0421BE5F1D80FC39002C4FE4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		042401F61D878FA100E1DD1A /* IPCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCNavigationViewController.h; sourceTree = "<group>"; };
-		042401F71D878FA100E1DD1A /* IPCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCNavigationViewController.m; sourceTree = "<group>"; };
-		042401F91D87919000E1DD1A /* IPCRotatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRotatingViewController.h; sourceTree = "<group>"; };
-		042401FA1D87919000E1DD1A /* IPCRotatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRotatingViewController.m; sourceTree = "<group>"; };
 		042401FF1D87AA6400E1DD1A /* IPCEditFilterSampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditFilterSampleController.h; sourceTree = "<group>"; };
 		042402001D87AA6400E1DD1A /* IPCEditFilterSampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditFilterSampleController.m; sourceTree = "<group>"; };
 		042402581D87F26400E1DD1A /* IPCOnlineFaceDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOnlineFaceDetector.h; sourceTree = "<group>"; };
@@ -318,8 +310,6 @@
 		043B87541DBDF6F300AFB858 /* IPCOrderProductPriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderProductPriceCell.h; sourceTree = "<group>"; };
 		043B87551DBDF6F300AFB858 /* IPCOrderProductPriceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderProductPriceCell.m; sourceTree = "<group>"; };
 		043B87561DBDF6F300AFB858 /* IPCOrderProductPriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderProductPriceCell.xib; sourceTree = "<group>"; };
-		0440994E1E0283D900254157 /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
-		0440994F1E0283D900254157 /* UIImage+Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Face.m"; sourceTree = "<group>"; };
 		04443C4F1D23C89300596519 /* IPCFilterGlassesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCFilterGlassesView.h; sourceTree = "<group>"; };
 		04443C501D23C89300596519 /* IPCFilterGlassesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCFilterGlassesView.m; sourceTree = "<group>"; };
 		04443C541D23C8A800596519 /* IPCFilterGlassesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCFilterGlassesView.xib; sourceTree = "<group>"; };
@@ -390,8 +380,6 @@
 		0470AD921D405345003AF4F4 /* IPCCustomerBaseInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomerBaseInfoCell.xib; sourceTree = "<group>"; };
 		0470AD981D40590C003AF4F4 /* IPCEditOptometryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditOptometryView.h; sourceTree = "<group>"; };
 		0470AD991D40590C003AF4F4 /* IPCEditOptometryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditOptometryView.m; sourceTree = "<group>"; };
-		0470AD9B1D406573003AF4F4 /* UIViewController+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extend.h"; sourceTree = "<group>"; };
-		0470AD9C1D406573003AF4F4 /* UIViewController+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extend.m"; sourceTree = "<group>"; };
 		0470AD9F1D406E6D003AF4F4 /* IPCCustomerOrderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerOrderList.h; sourceTree = "<group>"; };
 		0470ADA01D406E6D003AF4F4 /* IPCCustomerOrderList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerOrderList.m; sourceTree = "<group>"; };
 		0470ADA91D407183003AF4F4 /* IPCHistoryOptometryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCHistoryOptometryCell.h; sourceTree = "<group>"; };
@@ -411,16 +399,6 @@
 		0472C16D1D360F1500C52F86 /* IPCLoginHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCLoginHistoryViewController.h; sourceTree = "<group>"; };
 		0472C16E1D360F1500C52F86 /* IPCLoginHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCLoginHistoryViewController.m; sourceTree = "<group>"; };
 		0472C16F1D360F1500C52F86 /* IPCLoginHistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCLoginHistoryViewController.xib; sourceTree = "<group>"; };
-		0472D9611D24D21B005B32E7 /* IPCImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCImageTextButton.h; sourceTree = "<group>"; };
-		0472D9621D24D21B005B32E7 /* IPCImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCImageTextButton.m; sourceTree = "<group>"; };
-		047349EC1D4EDF88001B60D9 /* icon_female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_female@2x.png"; sourceTree = "<group>"; };
-		047349EE1D4EDF88001B60D9 /* icon_male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_male@2x.png"; sourceTree = "<group>"; };
-		047349F41D4F16E0001B60D9 /* IPCRefreshAnimationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRefreshAnimationHeader.h; sourceTree = "<group>"; };
-		047349F51D4F16E0001B60D9 /* IPCRefreshAnimationHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRefreshAnimationHeader.m; sourceTree = "<group>"; };
-		047349FA1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRefreshAnimationFooter.h; sourceTree = "<group>"; };
-		047349FB1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRefreshAnimationFooter.m; sourceTree = "<group>"; };
-		0475724B1E1B373D00151EEA /* IPCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCAlertController.h; sourceTree = "<group>"; };
-		0475724C1E1B373D00151EEA /* IPCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCAlertController.m; sourceTree = "<group>"; };
 		04760B081D3C80A1003A4E16 /* IPCGetGlassesListResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGetGlassesListResult.h; sourceTree = "<group>"; };
 		04760B091D3C80A1003A4E16 /* IPCGetGlassesListResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGetGlassesListResult.m; sourceTree = "<group>"; };
 		04760B0B1D3C80B0003A4E16 /* IPCProfileResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCProfileResult.h; sourceTree = "<group>"; };
@@ -443,12 +421,6 @@
 		047D3FC91D43479300638526 /* IPCCurrentCustomerOpometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCurrentCustomerOpometry.m; sourceTree = "<group>"; };
 		047F695E1D41B10900AA4C0F /* IPCCustomOrderDetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomOrderDetailList.h; sourceTree = "<group>"; };
 		047F695F1D41B10900AA4C0F /* IPCCustomOrderDetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomOrderDetailList.m; sourceTree = "<group>"; };
-		047F696B1D41CE2400AA4C0F /* IPCDatePickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDatePickViewController.h; sourceTree = "<group>"; };
-		047F696C1D41CE2400AA4C0F /* IPCDatePickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDatePickViewController.m; sourceTree = "<group>"; };
-		047F696D1D41CE2400AA4C0F /* IPCDatePickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCDatePickViewController.xib; sourceTree = "<group>"; };
-		047F69701D41CFE900AA4C0F /* IPCDataPickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDataPickViewController.h; sourceTree = "<group>"; };
-		047F69711D41CFE900AA4C0F /* IPCDataPickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDataPickViewController.m; sourceTree = "<group>"; };
-		047F69721D41CFE900AA4C0F /* IPCDataPickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCDataPickViewController.xib; sourceTree = "<group>"; };
 		047F69751D41FFF900AA4C0F /* IPCDetailCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDetailCustomer.h; sourceTree = "<group>"; };
 		047F69761D41FFF900AA4C0F /* IPCDetailCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDetailCustomer.m; sourceTree = "<group>"; };
 		047FCA761D2B72B500775045 /* IPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCResponse.h; sourceTree = "<group>"; };
@@ -462,12 +434,9 @@
 		0485F40B1D34BE1700A42DE3 /* IPCOptometryList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOptometryList.h; sourceTree = "<group>"; };
 		0485F40C1D34BE1700A42DE3 /* IPCOptometryList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOptometryList.m; sourceTree = "<group>"; };
 		04870F7D1D70050C009F3574 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = IcePointCloud/lib/iflyMSC.framework; sourceTree = "<group>"; };
-		048A15F01D5B1931003FD88F /* UIView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extend.h"; sourceTree = "<group>"; };
-		048A15F11D5B1931003FD88F /* UIView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extend.m"; sourceTree = "<group>"; };
 		048BC3241D2F4CA5007F7EE7 /* IPCCustomerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerListViewController.h; sourceTree = "<group>"; };
 		048BC3251D2F4CA5007F7EE7 /* IPCCustomerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerListViewController.m; sourceTree = "<group>"; };
 		048BC3261D2F4CA5007F7EE7 /* IPCCustomerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomerListViewController.xib; sourceTree = "<group>"; };
-		04924AF61D6AC87E006D7374 /* HeaderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderFile.h; sourceTree = "<group>"; };
 		0492B64C1D29F8E000A70A3C /* IPCGlassesImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGlassesImage.h; sourceTree = "<group>"; };
 		0492B64D1D29F8E000A70A3C /* IPCGlassesImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGlassesImage.m; sourceTree = "<group>"; };
 		0492B64F1D2A48E600A70A3C /* IPCCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerViewController.h; sourceTree = "<group>"; };
@@ -476,8 +445,6 @@
 		04A0659E1D2231C100A62291 /* IPCGlasslistCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGlasslistCollectionViewCell.h; sourceTree = "<group>"; };
 		04A0659F1D2231C100A62291 /* IPCGlasslistCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGlasslistCollectionViewCell.m; sourceTree = "<group>"; };
 		04A065A01D2231C100A62291 /* IPCGlasslistCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCGlasslistCollectionViewCell.xib; sourceTree = "<group>"; };
-		04A202161D7FE4DB00F2A681 /* IPCPresentModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPresentModeViewController.h; sourceTree = "<group>"; };
-		04A202171D7FE4DB00F2A681 /* IPCPresentModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPresentModeViewController.m; sourceTree = "<group>"; };
 		04A2021C1D801A8A00F2A681 /* IPCLanuchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCLanuchViewController.h; sourceTree = "<group>"; };
 		04A2021D1D801A8A00F2A681 /* IPCLanuchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCLanuchViewController.m; sourceTree = "<group>"; };
 		04A2021E1D801A8A00F2A681 /* IPCLanuchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCLanuchViewController.xib; sourceTree = "<group>"; };
@@ -487,9 +454,6 @@
 		04A415491D7D0BDE0093FF6E /* IPCEditParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditParameterCell.h; sourceTree = "<group>"; };
 		04A4154A1D7D0BDE0093FF6E /* IPCEditParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditParameterCell.m; sourceTree = "<group>"; };
 		04A4154B1D7D0BDE0093FF6E /* IPCEditParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCEditParameterCell.xib; sourceTree = "<group>"; };
-		04A433E21DED7C4A00B520D2 /* IPCCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCore.h; sourceTree = "<group>"; };
-		04A703001D38E1BA008675DA /* IPCSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSwitch.h; sourceTree = "<group>"; };
-		04A703011D38E1BA008675DA /* IPCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSwitch.m; sourceTree = "<group>"; };
 		04A84FAB1D509BBC005D92AB /* IPCOrderDetailMemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailMemoCell.h; sourceTree = "<group>"; };
 		04A84FAC1D509BBC005D92AB /* IPCOrderDetailMemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailMemoCell.m; sourceTree = "<group>"; };
 		04A84FAD1D509BBC005D92AB /* IPCOrderDetailMemoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailMemoCell.xib; sourceTree = "<group>"; };
@@ -513,14 +477,8 @@
 		04B35DAD1DE67ADF00281B71 /* OrderDetailTopTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderDetailTopTableViewCell.h; sourceTree = "<group>"; };
 		04B35DAE1DE67ADF00281B71 /* OrderDetailTopTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderDetailTopTableViewCell.m; sourceTree = "<group>"; };
 		04B35DAF1DE67ADF00281B71 /* OrderDetailTopTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderDetailTopTableViewCell.xib; sourceTree = "<group>"; };
-		04BBE8D91DFFD9F9008A59DA /* UITableView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extend.h"; sourceTree = "<group>"; };
-		04BBE8DA1DFFD9F9008A59DA /* UITableView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extend.m"; sourceTree = "<group>"; };
-		04BBE8DC1DFFDA17008A59DA /* UICollectionView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Extend.h"; sourceTree = "<group>"; };
-		04BBE8DD1DFFDA17008A59DA /* UICollectionView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Extend.m"; sourceTree = "<group>"; };
 		04BDB5CD1D38C44500F2D446 /* IPCChooseCategoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCChooseCategoryView.h; sourceTree = "<group>"; };
 		04BDB5CE1D38C44500F2D446 /* IPCChooseCategoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCChooseCategoryView.m; sourceTree = "<group>"; };
-		04BF93531E16445D00D14A14 /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPlatformService.h; sourceTree = "<group>"; };
-		04BF93541E16445D00D14A14 /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPlatformService.m; sourceTree = "<group>"; };
 		04BF93561E16597400D14A14 /* IPCUserRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUserRequestManager.h; sourceTree = "<group>"; };
 		04BF93571E16597400D14A14 /* IPCUserRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUserRequestManager.m; sourceTree = "<group>"; };
 		04BF93591E165DD100D14A14 /* IPCGoodsRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGoodsRequestManager.h; sourceTree = "<group>"; };
@@ -532,14 +490,6 @@
 		04BF93621E165F0C00D14A14 /* IPCPayOrderRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderRequestManager.h; sourceTree = "<group>"; };
 		04BF93631E165F0C00D14A14 /* IPCPayOrderRequestManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderRequestManager.m; sourceTree = "<group>"; };
 		04C34CBE1E012BB300979001 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		04C34CC01E01405800979001 /* IPCCheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCheckVersion.h; sourceTree = "<group>"; };
-		04C34CC11E01405800979001 /* IPCCheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCheckVersion.m; sourceTree = "<group>"; };
-		04C34CC51E0140D500979001 /* IPCGuideViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGuideViewCell.h; sourceTree = "<group>"; };
-		04C34CC61E0140D500979001 /* IPCGuideViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGuideViewCell.m; sourceTree = "<group>"; };
-		04C34CC71E0140D500979001 /* IPCGuideViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGuideViewManager.h; sourceTree = "<group>"; };
-		04C34CC81E0140D500979001 /* IPCGuideViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGuideViewManager.m; sourceTree = "<group>"; };
-		04C34CCB1E01411900979001 /* IPCGuideConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGuideConstant.h; sourceTree = "<group>"; };
-		04C34CCC1E01419800979001 /* TuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TuSDK.bundle; sourceTree = "<group>"; };
 		04C680201DF1254D008B0F80 /* IPCOrderPayStyleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderPayStyleCell.h; sourceTree = "<group>"; };
 		04C680211DF1254D008B0F80 /* IPCOrderPayStyleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderPayStyleCell.m; sourceTree = "<group>"; };
 		04C680221DF1254D008B0F80 /* IPCOrderPayStyleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderPayStyleCell.xib; sourceTree = "<group>"; };
@@ -598,8 +548,6 @@
 		04D9D48C1E1F7416003092D0 /* IPCEmploye.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEmploye.m; sourceTree = "<group>"; };
 		04EAF91C1D531A4300A4A66F /* IPCShoppingCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCShoppingCart.h; sourceTree = "<group>"; };
 		04EAF91D1D531A4300A4A66F /* IPCShoppingCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCShoppingCart.m; sourceTree = "<group>"; };
-		04EAF9221D5323D200A4A66F /* IPCTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTabBarViewController.h; sourceTree = "<group>"; };
-		04EAF9231D5323D200A4A66F /* IPCTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTabBarViewController.m; sourceTree = "<group>"; };
 		04EB43941D42190600027B42 /* IPCCustomerDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerDetailCell.h; sourceTree = "<group>"; };
 		04EB43951D42190600027B42 /* IPCCustomerDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerDetailCell.m; sourceTree = "<group>"; };
 		04EB43961D42190600027B42 /* IPCCustomerDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomerDetailCell.xib; sourceTree = "<group>"; };
@@ -620,8 +568,6 @@
 		04F8D4DF1DE7E0B800C572B3 /* LibraryTypeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LibraryTypeTableViewCell.xib; path = IcePointCloud/Views/LibraryTypeTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		04F8D4E21DE801FF00C572B3 /* IPCLibraryTypeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCLibraryTypeTableView.h; path = IcePointCloud/Views/IPCLibraryTypeTableView.h; sourceTree = SOURCE_ROOT; };
 		04F8D4E31DE801FF00C572B3 /* IPCLibraryTypeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCLibraryTypeTableView.m; path = IcePointCloud/Views/IPCLibraryTypeTableView.m; sourceTree = SOURCE_ROOT; };
-		04F8D4E51DE81E5500C572B3 /* IPCCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomButton.h; sourceTree = "<group>"; };
-		04F8D4E61DE81E5500C572B3 /* IPCCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomButton.m; sourceTree = "<group>"; };
 		04F98DBE1D6D720600C97474 /* IPCSingleModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSingleModeView.xib; sourceTree = "<group>"; };
 		0594E2CBFA962B68974A2571 /* Pods-IcePointCloud.testrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.testrelease.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.testrelease.xcconfig"; sourceTree = "<group>"; };
 		05C97962CD653FAA996B65D3 /* Pods-IcePointCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -644,10 +590,6 @@
 		9E0A837119ECB8B300703A28 /* IPCHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCHelpViewController.h; sourceTree = "<group>"; };
 		9E0A837219ECB8B300703A28 /* IPCHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCHelpViewController.m; sourceTree = "<group>"; };
 		9E0A837319ECB8B300703A28 /* IPCHelpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCHelpViewController.xib; sourceTree = "<group>"; };
-		9E15B7CE1B6BBCA1007ACF65 /* IPCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCUser.h; path = ../Vendors/Common/IPCUser.h; sourceTree = "<group>"; };
-		9E15B7CF1B6BBCA1007ACF65 /* IPCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCUser.m; path = ../Vendors/Common/IPCUser.m; sourceTree = "<group>"; };
-		9E18E8A5199C25D10085704B /* IPCUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUIKit.h; sourceTree = "<group>"; };
-		9E18E8A6199C25D10085704B /* IPCUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUIKit.m; sourceTree = "<group>"; };
 		9E18E8AB199D30CD0085704B /* IPCSingleModeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSingleModeView.h; sourceTree = "<group>"; };
 		9E18E8AC199D30CD0085704B /* IPCSingleModeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSingleModeView.m; sourceTree = "<group>"; };
 		9E5C85801B60DDFB00A879BB /* IPCGlassListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGlassListViewController.h; sourceTree = "<group>"; };
@@ -667,8 +609,6 @@
 		9E9F173019AF14AD00B4F4CE /* IPCLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCLoginViewController.xib; sourceTree = "<group>"; };
 		9EA3537B197AB827005960AD /* IPCGlasses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGlasses.h; sourceTree = "<group>"; };
 		9EA3537C197AB827005960AD /* IPCGlasses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGlasses.m; sourceTree = "<group>"; };
-		9EA7CF4F19CB1F0B00001C18 /* IPCAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCAppManager.h; sourceTree = "<group>"; };
-		9EA7CF5019CB1F0B00001C18 /* IPCAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCAppManager.m; sourceTree = "<group>"; };
 		9EC3C5A5198672D900C07396 /* IPCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCLoginViewController.h; sourceTree = "<group>"; };
 		9EC3C5A6198672D900C07396 /* IPCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCLoginViewController.m; sourceTree = "<group>"; };
 		9ECE98881B7DD8E000A13C8F /* IPCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSearchViewController.h; sourceTree = "<group>"; };
@@ -682,8 +622,6 @@
 		9EF3209519931EE7004FC5B9 /* IPCCompareItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCompareItemView.m; sourceTree = "<group>"; };
 		9EF32097199334DB004FC5B9 /* IPCMatchItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCMatchItem.h; sourceTree = "<group>"; };
 		9EF32098199334DB004FC5B9 /* IPCMatchItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCMatchItem.m; sourceTree = "<group>"; };
-		9EF3209B19933620004FC5B9 /* IPCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCommon.h; sourceTree = "<group>"; };
-		9EF3209C19933620004FC5B9 /* IPCCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCommon.m; sourceTree = "<group>"; };
 		9EF39A231B28053200CEE1D3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		9EF39A2B1B28054F00CEE1D3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		9EFAC1F119D6E2D000C1EFBF /* IPCHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCHttpRequest.h; sourceTree = "<group>"; };
@@ -699,20 +637,78 @@
 		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		CB404B0E1E7285E4005673CD /* IPCEditBatchParameterViewMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditBatchParameterViewMode.h; sourceTree = "<group>"; };
 		CB404B0F1E7285E4005673CD /* IPCEditBatchParameterViewMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditBatchParameterViewMode.m; sourceTree = "<group>"; };
+		CB5CC4601E8DFFB50091D0FD /* IPCGuideConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCGuideConstant.h; path = IcePointCloud/Views/IPCGuideConstant.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4611E8DFFB50091D0FD /* IPCGuideViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCGuideViewCell.h; path = IcePointCloud/Views/IPCGuideViewCell.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4621E8DFFB50091D0FD /* IPCGuideViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCGuideViewCell.m; path = IcePointCloud/Views/IPCGuideViewCell.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4631E8DFFB50091D0FD /* IPCGuideViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCGuideViewManager.h; path = IcePointCloud/Views/IPCGuideViewManager.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4641E8DFFB50091D0FD /* IPCGuideViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCGuideViewManager.m; path = IcePointCloud/Views/IPCGuideViewManager.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4671E8E00500091D0FD /* HeaderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeaderFile.h; path = IcePointCloud/Vendors/HeaderFile.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4681E8E00500091D0FD /* IPCAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCAppManager.h; path = IcePointCloud/Vendors/IPCAppManager.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4691E8E00500091D0FD /* IPCAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCAppManager.m; path = IcePointCloud/Vendors/IPCAppManager.m; sourceTree = SOURCE_ROOT; };
+		CB5CC46A1E8E00500091D0FD /* IPCCheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCheckVersion.h; path = IcePointCloud/Vendors/IPCCheckVersion.h; sourceTree = SOURCE_ROOT; };
+		CB5CC46B1E8E00500091D0FD /* IPCCheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCheckVersion.m; path = IcePointCloud/Vendors/IPCCheckVersion.m; sourceTree = SOURCE_ROOT; };
+		CB5CC46C1E8E00500091D0FD /* IPCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCommon.h; path = IcePointCloud/Vendors/IPCCommon.h; sourceTree = SOURCE_ROOT; };
+		CB5CC46D1E8E00500091D0FD /* IPCCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCommon.m; path = IcePointCloud/Vendors/IPCCommon.m; sourceTree = SOURCE_ROOT; };
+		CB5CC46E1E8E00500091D0FD /* IPCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCore.h; path = IcePointCloud/Vendors/IPCCore.h; sourceTree = SOURCE_ROOT; };
+		CB5CC46F1E8E00500091D0FD /* IPCCustomUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCustomUI.h; path = IcePointCloud/Vendors/IPCCustomUI.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCustomUI.m; path = IcePointCloud/Vendors/IPCCustomUI.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4711E8E00500091D0FD /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPlatformService.h; path = IcePointCloud/Vendors/IPCPlatformService.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPlatformService.m; path = IcePointCloud/Vendors/IPCPlatformService.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4731E8E00500091D0FD /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCReachability.h; path = IcePointCloud/Vendors/IPCReachability.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4741E8E00500091D0FD /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCReachability.m; path = IcePointCloud/Vendors/IPCReachability.m; sourceTree = SOURCE_ROOT; };
+		CB5CC47B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AFHTTPSessionManager+Extend.h"; path = "IcePointCloud/Vendors/AFHTTPSessionManager+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AFHTTPSessionManager+Extend.m"; path = "IcePointCloud/Vendors/AFHTTPSessionManager+Extend.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC47D1E8E00830091D0FD /* IPCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCAlertController.h; path = IcePointCloud/Vendors/IPCAlertController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCAlertController.m; path = IcePointCloud/Vendors/IPCAlertController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC47F1E8E00830091D0FD /* UICollectionView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+Extend.h"; path = "IcePointCloud/Vendors/UICollectionView+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4801E8E00830091D0FD /* UICollectionView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+Extend.m"; path = "IcePointCloud/Vendors/UICollectionView+Extend.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4811E8E00830091D0FD /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Face.h"; path = "IcePointCloud/Vendors/UIImage+Face.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4821E8E00830091D0FD /* UIImage+Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Face.m"; path = "IcePointCloud/Vendors/UIImage+Face.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4831E8E00830091D0FD /* UITableView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+Extend.h"; path = "IcePointCloud/Vendors/UITableView+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4841E8E00830091D0FD /* UITableView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+Extend.m"; path = "IcePointCloud/Vendors/UITableView+Extend.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4851E8E00830091D0FD /* UITextField+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+Extend.h"; path = "IcePointCloud/Vendors/UITextField+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+Extend.m"; path = "IcePointCloud/Vendors/UITextField+Extend.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4871E8E00830091D0FD /* UIView+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Extend.h"; path = "IcePointCloud/Vendors/UIView+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4881E8E00830091D0FD /* UIView+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Extend.m"; path = "IcePointCloud/Vendors/UIView+Extend.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4891E8E00830091D0FD /* UIView+GestureRecognizerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+GestureRecognizerBlock.h"; path = "IcePointCloud/Vendors/UIView+GestureRecognizerBlock.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+GestureRecognizerBlock.m"; path = "IcePointCloud/Vendors/UIView+GestureRecognizerBlock.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4931E8E00B70091D0FD /* IPCCustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCustomButton.h; path = IcePointCloud/Vendors/IPCCustomButton.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4941E8E00B70091D0FD /* IPCCustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCustomButton.m; path = IcePointCloud/Vendors/IPCCustomButton.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4951E8E00B70091D0FD /* IPCImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCImageTextButton.h; path = IcePointCloud/Vendors/IPCImageTextButton.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4961E8E00B70091D0FD /* IPCImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCImageTextButton.m; path = IcePointCloud/Vendors/IPCImageTextButton.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4971E8E00B70091D0FD /* IPCSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCSwitch.h; path = IcePointCloud/Vendors/IPCSwitch.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCSwitch.m; path = IcePointCloud/Vendors/IPCSwitch.m; sourceTree = SOURCE_ROOT; };
+		CB5CC49C1E8E00D60091D0FD /* IPCPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPhotoPickerViewController.h; path = IcePointCloud/Vendors/IPCPhotoPickerViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC49D1E8E00D60091D0FD /* IPCPhotoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPhotoPickerViewController.m; path = IcePointCloud/Vendors/IPCPhotoPickerViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC49F1E8E00EA0091D0FD /* IPCDataPickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCDataPickViewController.h; path = IcePointCloud/Vendors/IPCDataPickViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4A01E8E00EA0091D0FD /* IPCDataPickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCDataPickViewController.m; path = IcePointCloud/Vendors/IPCDataPickViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4A11E8E00EA0091D0FD /* IPCDataPickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IPCDataPickViewController.xib; path = IcePointCloud/Vendors/IPCDataPickViewController.xib; sourceTree = SOURCE_ROOT; };
+		CB5CC4A21E8E00EA0091D0FD /* IPCDatePickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCDatePickViewController.h; path = IcePointCloud/Vendors/IPCDatePickViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4A31E8E00EA0091D0FD /* IPCDatePickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCDatePickViewController.m; path = IcePointCloud/Vendors/IPCDatePickViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4A41E8E00EA0091D0FD /* IPCDatePickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IPCDatePickViewController.xib; path = IcePointCloud/Vendors/IPCDatePickViewController.xib; sourceTree = SOURCE_ROOT; };
+		CB5CC4A91E8E01040091D0FD /* IPCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCNavigationViewController.h; path = IcePointCloud/Vendors/IPCNavigationViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4AA1E8E01040091D0FD /* IPCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCNavigationViewController.m; path = IcePointCloud/Vendors/IPCNavigationViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4AB1E8E01040091D0FD /* IPCPresentModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPresentModeViewController.h; path = IcePointCloud/Vendors/IPCPresentModeViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPresentModeViewController.m; path = IcePointCloud/Vendors/IPCPresentModeViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4AD1E8E01040091D0FD /* IPCRotatingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCRotatingViewController.h; path = IcePointCloud/Vendors/IPCRotatingViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4AE1E8E01040091D0FD /* IPCRotatingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCRotatingViewController.m; path = IcePointCloud/Vendors/IPCRotatingViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4B21E8E01170091D0FD /* IPCTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCTabBarViewController.h; path = IcePointCloud/Vendors/IPCTabBarViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4B31E8E01170091D0FD /* IPCTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCTabBarViewController.m; path = IcePointCloud/Vendors/IPCTabBarViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TuSDK.bundle; path = IcePointCloud/Vendors/TuSDK.bundle; sourceTree = SOURCE_ROOT; };
+		CB5CC4B71E8E012D0091D0FD /* IPCRefreshAnimationFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCRefreshAnimationFooter.h; path = IcePointCloud/Vendors/IPCRefreshAnimationFooter.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4B81E8E012D0091D0FD /* IPCRefreshAnimationFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCRefreshAnimationFooter.m; path = IcePointCloud/Vendors/IPCRefreshAnimationFooter.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4B91E8E012D0091D0FD /* IPCRefreshAnimationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCRefreshAnimationHeader.h; path = IcePointCloud/Vendors/IPCRefreshAnimationHeader.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4BA1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCRefreshAnimationHeader.m; path = IcePointCloud/Vendors/IPCRefreshAnimationHeader.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4BD1E8E01670091D0FD /* UIViewController+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIViewController+Extend.h"; path = "IcePointCloud/Vendors/UIViewController+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+Extend.m"; path = "IcePointCloud/Vendors/UIViewController+Extend.m"; sourceTree = SOURCE_ROOT; };
+		CB5CC4C01E8E019F0091D0FD /* IPCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUser.h; sourceTree = "<group>"; };
+		CB5CC4C11E8E019F0091D0FD /* IPCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUser.m; sourceTree = "<group>"; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
 		CB7EF4871E83A020003F7995 /* IPCPayOrderPayTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderPayTypeView.h; sourceTree = "<group>"; };
 		CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderPayTypeView.m; sourceTree = "<group>"; };
 		CB7EF48A1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderPayTypeView.xib; sourceTree = "<group>"; };
-		CB9187141E8CB29400D59487 /* UITextField+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extend.h"; sourceTree = "<group>"; };
-		CB9187151E8CB29400D59487 /* UITextField+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extend.m"; sourceTree = "<group>"; };
-		CB91871A1E8CCA9000D59487 /* IPCPhotoPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPhotoPickerViewController.h; path = IcePointCloud/Vendors/Common/IPCPhotoPickerViewController.h; sourceTree = SOURCE_ROOT; };
-		CB91871B1E8CCA9000D59487 /* IPCPhotoPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPhotoPickerViewController.m; path = IcePointCloud/Vendors/Common/IPCPhotoPickerViewController.m; sourceTree = SOURCE_ROOT; };
-		CB91872A1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPSessionManager+Extend.h"; sourceTree = "<group>"; };
-		CB91872B1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+Extend.m"; sourceTree = "<group>"; };
-		CB91872D1E8CFAF300D59487 /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCReachability.h; sourceTree = "<group>"; };
-		CB91872E1E8CFAF300D59487 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
 		CB9211551E824CE000FD4EDC /* IPCPayOrderProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderProductCell.h; sourceTree = "<group>"; };
 		CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderProductCell.m; sourceTree = "<group>"; };
 		CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderProductCell.xib; sourceTree = "<group>"; };
@@ -921,8 +917,8 @@
 				04760B0C1D3C80B0003A4E16 /* IPCProfileResult.m */,
 				04760B0D1D3C80B0003A4E16 /* IPCSimpleUserResult.h */,
 				04760B0E1D3C80B0003A4E16 /* IPCSimpleUserResult.m */,
-				9E15B7CE1B6BBCA1007ACF65 /* IPCUser.h */,
-				9E15B7CF1B6BBCA1007ACF65 /* IPCUser.m */,
+				CB5CC4C01E8E019F0091D0FD /* IPCUser.h */,
+				CB5CC4C11E8E019F0091D0FD /* IPCUser.m */,
 			);
 			name = UserInfo;
 			sourceTree = "<group>";
@@ -1042,20 +1038,20 @@
 		04A2020B1D7FDEF700F2A681 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				04A433E21DED7C4A00B520D2 /* IPCCore.h */,
-				04924AF61D6AC87E006D7374 /* HeaderFile.h */,
-				9EA7CF4F19CB1F0B00001C18 /* IPCAppManager.h */,
-				9EA7CF5019CB1F0B00001C18 /* IPCAppManager.m */,
-				04C34CC01E01405800979001 /* IPCCheckVersion.h */,
-				04C34CC11E01405800979001 /* IPCCheckVersion.m */,
-				9EF3209B19933620004FC5B9 /* IPCCommon.h */,
-				9EF3209C19933620004FC5B9 /* IPCCommon.m */,
-				04BF93531E16445D00D14A14 /* IPCPlatformService.h */,
-				04BF93541E16445D00D14A14 /* IPCPlatformService.m */,
-				9E18E8A5199C25D10085704B /* IPCUIKit.h */,
-				9E18E8A6199C25D10085704B /* IPCUIKit.m */,
-				CB91872D1E8CFAF300D59487 /* IPCReachability.h */,
-				CB91872E1E8CFAF300D59487 /* IPCReachability.m */,
+				CB5CC4671E8E00500091D0FD /* HeaderFile.h */,
+				CB5CC4681E8E00500091D0FD /* IPCAppManager.h */,
+				CB5CC4691E8E00500091D0FD /* IPCAppManager.m */,
+				CB5CC46A1E8E00500091D0FD /* IPCCheckVersion.h */,
+				CB5CC46B1E8E00500091D0FD /* IPCCheckVersion.m */,
+				CB5CC46C1E8E00500091D0FD /* IPCCommon.h */,
+				CB5CC46D1E8E00500091D0FD /* IPCCommon.m */,
+				CB5CC46E1E8E00500091D0FD /* IPCCore.h */,
+				CB5CC46F1E8E00500091D0FD /* IPCCustomUI.h */,
+				CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */,
+				CB5CC4711E8E00500091D0FD /* IPCPlatformService.h */,
+				CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */,
+				CB5CC4731E8E00500091D0FD /* IPCReachability.h */,
+				CB5CC4741E8E00500091D0FD /* IPCReachability.m */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -1169,10 +1165,10 @@
 		04A202141D7FE3EC00F2A681 /* Refresh */ = {
 			isa = PBXGroup;
 			children = (
-				047349FA1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.h */,
-				047349FB1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.m */,
-				047349F41D4F16E0001B60D9 /* IPCRefreshAnimationHeader.h */,
-				047349F51D4F16E0001B60D9 /* IPCRefreshAnimationHeader.m */,
+				CB5CC4B71E8E012D0091D0FD /* IPCRefreshAnimationFooter.h */,
+				CB5CC4B81E8E012D0091D0FD /* IPCRefreshAnimationFooter.m */,
+				CB5CC4B91E8E012D0091D0FD /* IPCRefreshAnimationHeader.h */,
+				CB5CC4BA1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m */,
 			);
 			name = Refresh;
 			sourceTree = "<group>";
@@ -1225,8 +1221,8 @@
 		04B1D1F91D867B6100D9B865 /* AssetLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				CB91871A1E8CCA9000D59487 /* IPCPhotoPickerViewController.h */,
-				CB91871B1E8CCA9000D59487 /* IPCPhotoPickerViewController.m */,
+				CB5CC49C1E8E00D60091D0FD /* IPCPhotoPickerViewController.h */,
+				CB5CC49D1E8E00D60091D0FD /* IPCPhotoPickerViewController.m */,
 			);
 			name = AssetLibrary;
 			path = ../../ViewControllers;
@@ -1312,11 +1308,11 @@
 		04C34CC41E0140D500979001 /* GuideView */ = {
 			isa = PBXGroup;
 			children = (
-				04C34CCB1E01411900979001 /* IPCGuideConstant.h */,
-				04C34CC51E0140D500979001 /* IPCGuideViewCell.h */,
-				04C34CC61E0140D500979001 /* IPCGuideViewCell.m */,
-				04C34CC71E0140D500979001 /* IPCGuideViewManager.h */,
-				04C34CC81E0140D500979001 /* IPCGuideViewManager.m */,
+				CB5CC4601E8DFFB50091D0FD /* IPCGuideConstant.h */,
+				CB5CC4611E8DFFB50091D0FD /* IPCGuideViewCell.h */,
+				CB5CC4621E8DFFB50091D0FD /* IPCGuideViewCell.m */,
+				CB5CC4631E8DFFB50091D0FD /* IPCGuideViewManager.h */,
+				CB5CC4641E8DFFB50091D0FD /* IPCGuideViewManager.m */,
 			);
 			name = GuideView;
 			path = HcdGuideView;
@@ -1400,7 +1396,7 @@
 		04EADDA41DC72DA70025AAE0 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				04C34CCC1E01419800979001 /* TuSDK.bundle */,
+				CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -1408,24 +1404,24 @@
 		04EAF91B1D53199D00A4A66F /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				CB91872A1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.h */,
-				CB91872B1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.m */,
-				0475724B1E1B373D00151EEA /* IPCAlertController.h */,
-				0475724C1E1B373D00151EEA /* IPCAlertController.m */,
-				0440994E1E0283D900254157 /* UIImage+Face.h */,
-				0440994F1E0283D900254157 /* UIImage+Face.m */,
-				0470AD9B1D406573003AF4F4 /* UIViewController+Extend.h */,
-				0470AD9C1D406573003AF4F4 /* UIViewController+Extend.m */,
-				048A15F01D5B1931003FD88F /* UIView+Extend.h */,
-				048A15F11D5B1931003FD88F /* UIView+Extend.m */,
-				04BBE8D91DFFD9F9008A59DA /* UITableView+Extend.h */,
-				04BBE8DA1DFFD9F9008A59DA /* UITableView+Extend.m */,
-				04BBE8DC1DFFDA17008A59DA /* UICollectionView+Extend.h */,
-				04BBE8DD1DFFDA17008A59DA /* UICollectionView+Extend.m */,
-				04031E271E0CB38400C2A913 /* UIView+GestureRecognizerBlock.h */,
-				04031E281E0CB38400C2A913 /* UIView+GestureRecognizerBlock.m */,
-				CB9187141E8CB29400D59487 /* UITextField+Extend.h */,
-				CB9187151E8CB29400D59487 /* UITextField+Extend.m */,
+				CB5CC47B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.h */,
+				CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */,
+				CB5CC47D1E8E00830091D0FD /* IPCAlertController.h */,
+				CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */,
+				CB5CC47F1E8E00830091D0FD /* UICollectionView+Extend.h */,
+				CB5CC4801E8E00830091D0FD /* UICollectionView+Extend.m */,
+				CB5CC4811E8E00830091D0FD /* UIImage+Face.h */,
+				CB5CC4821E8E00830091D0FD /* UIImage+Face.m */,
+				CB5CC4831E8E00830091D0FD /* UITableView+Extend.h */,
+				CB5CC4841E8E00830091D0FD /* UITableView+Extend.m */,
+				CB5CC4851E8E00830091D0FD /* UITextField+Extend.h */,
+				CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */,
+				CB5CC4871E8E00830091D0FD /* UIView+Extend.h */,
+				CB5CC4881E8E00830091D0FD /* UIView+Extend.m */,
+				CB5CC4891E8E00830091D0FD /* UIView+GestureRecognizerBlock.h */,
+				CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */,
+				CB5CC4BD1E8E01670091D0FD /* UIViewController+Extend.h */,
+				CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1500,7 +1496,7 @@
 				9E981F1D197B779B00019E2F /* Views */,
 				9EA3537A197AB815005960AD /* Models */,
 				9EFAC1F019D6E24A00C1EFBF /* IPCClient */,
-				9EF3209A19933609004FC5B9 /* Common */,
+				9EF3209A19933609004FC5B9 /* Vendors */,
 				9E03C2DB1978D5D5007389D0 /* Supporting Files */,
 			);
 			path = IcePointCloud;
@@ -1509,8 +1505,6 @@
 		9E03C2DB1978D5D5007389D0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				047349EC1D4EDF88001B60D9 /* icon_female@2x.png */,
-				047349EE1D4EDF88001B60D9 /* icon_male@2x.png */,
 				9E03C2EC1978D5D5007389D0 /* Images.xcassets */,
 				9E03C2DC1978D5D5007389D0 /* IcePointCloud-Info.plist */,
 				9E03C2E01978D5D5007389D0 /* main.m */,
@@ -1585,7 +1579,7 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		9EF3209A19933609004FC5B9 /* Common */ = {
+		9EF3209A19933609004FC5B9 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
 				04EAF91B1D53199D00A4A66F /* Category */,
@@ -1595,7 +1589,7 @@
 				04EADDA41DC72DA70025AAE0 /* Lib */,
 				04A202141D7FE3EC00F2A681 /* Refresh */,
 			);
-			name = Common;
+			name = Vendors;
 			path = Vendors/Common;
 			sourceTree = "<group>";
 		};
@@ -1637,15 +1631,15 @@
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				04F8D4E51DE81E5500C572B3 /* IPCCustomButton.h */,
-				04F8D4E61DE81E5500C572B3 /* IPCCustomButton.m */,
+				CB5CC4931E8E00B70091D0FD /* IPCCustomButton.h */,
+				CB5CC4941E8E00B70091D0FD /* IPCCustomButton.m */,
+				CB5CC4951E8E00B70091D0FD /* IPCImageTextButton.h */,
+				CB5CC4961E8E00B70091D0FD /* IPCImageTextButton.m */,
+				CB5CC4971E8E00B70091D0FD /* IPCSwitch.h */,
+				CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */,
 				0449ECD51DC9AF3300C2CCB0 /* IPCEmptyAlertView.h */,
 				0449ECD61DC9AF3300C2CCB0 /* IPCEmptyAlertView.m */,
 				0449ECD81DC9AF4800C2CCB0 /* IPCEmptyAlertView.xib */,
-				0472D9611D24D21B005B32E7 /* IPCImageTextButton.h */,
-				0472D9621D24D21B005B32E7 /* IPCImageTextButton.m */,
-				04A703001D38E1BA008675DA /* IPCSwitch.h */,
-				04A703011D38E1BA008675DA /* IPCSwitch.m */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -1653,12 +1647,12 @@
 		CB9187171E8CB62700D59487 /* PickVC */ = {
 			isa = PBXGroup;
 			children = (
-				047F69701D41CFE900AA4C0F /* IPCDataPickViewController.h */,
-				047F69711D41CFE900AA4C0F /* IPCDataPickViewController.m */,
-				047F69721D41CFE900AA4C0F /* IPCDataPickViewController.xib */,
-				047F696B1D41CE2400AA4C0F /* IPCDatePickViewController.h */,
-				047F696C1D41CE2400AA4C0F /* IPCDatePickViewController.m */,
-				047F696D1D41CE2400AA4C0F /* IPCDatePickViewController.xib */,
+				CB5CC49F1E8E00EA0091D0FD /* IPCDataPickViewController.h */,
+				CB5CC4A01E8E00EA0091D0FD /* IPCDataPickViewController.m */,
+				CB5CC4A11E8E00EA0091D0FD /* IPCDataPickViewController.xib */,
+				CB5CC4A21E8E00EA0091D0FD /* IPCDatePickViewController.h */,
+				CB5CC4A31E8E00EA0091D0FD /* IPCDatePickViewController.m */,
+				CB5CC4A41E8E00EA0091D0FD /* IPCDatePickViewController.xib */,
 			);
 			name = PickVC;
 			sourceTree = "<group>";
@@ -1666,12 +1660,12 @@
 		CB9187181E8CB63500D59487 /* RootVC */ = {
 			isa = PBXGroup;
 			children = (
-				042401F91D87919000E1DD1A /* IPCRotatingViewController.h */,
-				042401FA1D87919000E1DD1A /* IPCRotatingViewController.m */,
-				042401F61D878FA100E1DD1A /* IPCNavigationViewController.h */,
-				042401F71D878FA100E1DD1A /* IPCNavigationViewController.m */,
-				04A202161D7FE4DB00F2A681 /* IPCPresentModeViewController.h */,
-				04A202171D7FE4DB00F2A681 /* IPCPresentModeViewController.m */,
+				CB5CC4A91E8E01040091D0FD /* IPCNavigationViewController.h */,
+				CB5CC4AA1E8E01040091D0FD /* IPCNavigationViewController.m */,
+				CB5CC4AB1E8E01040091D0FD /* IPCPresentModeViewController.h */,
+				CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */,
+				CB5CC4AD1E8E01040091D0FD /* IPCRotatingViewController.h */,
+				CB5CC4AE1E8E01040091D0FD /* IPCRotatingViewController.m */,
 			);
 			name = RootVC;
 			sourceTree = "<group>";
@@ -1679,8 +1673,8 @@
 		CB9187191E8CB64F00D59487 /* TabBarVC */ = {
 			isa = PBXGroup;
 			children = (
-				04EAF9221D5323D200A4A66F /* IPCTabBarViewController.h */,
-				04EAF9231D5323D200A4A66F /* IPCTabBarViewController.m */,
+				CB5CC4B21E8E01170091D0FD /* IPCTabBarViewController.h */,
+				CB5CC4B31E8E01170091D0FD /* IPCTabBarViewController.m */,
 			);
 			name = TabBarVC;
 			sourceTree = "<group>";
@@ -1991,7 +1985,6 @@
 			files = (
 				0449ECD91DC9AF4800C2CCB0 /* IPCEmptyAlertView.xib in Resources */,
 				04F50A301D3F887C00AF73D8 /* IPCCustomerCollectionViewCell.xib in Resources */,
-				047F69741D41CFE900AA4C0F /* IPCDataPickViewController.xib in Resources */,
 				CB9211591E824CE000FD4EDC /* IPCPayOrderProductCell.xib in Resources */,
 				0472C1711D360F1500C52F86 /* IPCLoginHistoryViewController.xib in Resources */,
 				04CBD9711D5856FE00C7CAA4 /* IPCPersonInputCell.xib in Resources */,
@@ -2011,19 +2004,17 @@
 				0470ADBD1D4093E2003AF4F4 /* IPCCustomerAddressListCell.xib in Resources */,
 				04A065A21D2231C100A62291 /* IPCGlasslistCollectionViewCell.xib in Resources */,
 				043B87581DBDF6F300AFB858 /* IPCOrderProductPriceCell.xib in Resources */,
+				CB5CC4A61E8E00EA0091D0FD /* IPCDataPickViewController.xib in Resources */,
 				0483BDF41D45D60400B0E24A /* IPCCustomerTopTitleCell.xib in Resources */,
 				047D3FB71D42FE9600638526 /* IPCOrderDetailContactCell.xib in Resources */,
 				0464978D1D4886F800137A3E /* IPCProductDetailTopTableViewCell.xib in Resources */,
 				0470AD941D405345003AF4F4 /* IPCCustomerBaseInfoCell.xib in Resources */,
 				0492B6531D2A48E600A70A3C /* IPCCustomerViewController.xib in Resources */,
 				04CBD98E1D586D7900C7CAA4 /* IPCUpdatePasswordView.xib in Resources */,
-				047349F21D4EDF88001B60D9 /* icon_male@2x.png in Resources */,
 				04A84FAF1D509BBC005D92AB /* IPCOrderDetailMemoCell.xib in Resources */,
-				047F696F1D41CE2400AA4C0F /* IPCDatePickViewController.xib in Resources */,
 				04CB1B091D470FF300B19A96 /* IPCCustomerBottomCell.xib in Resources */,
 				9E03C2ED1978D5D5007389D0 /* Images.xcassets in Resources */,
 				04186E061E69011C00758646 /* IPCPayAmountStyleCell.xib in Resources */,
-				04C34CCD1E01419800979001 /* TuSDK.bundle in Resources */,
 				0472C1641D35CA9900C52F86 /* IPCPriceRangeTableViewCell.xib in Resources */,
 				04A202201D801A8A00F2A681 /* IPCLanuchViewController.xib in Resources */,
 				CB7EF48B1E83A02F003F7995 /* IPCPayOrderPayTypeView.xib in Resources */,
@@ -2039,12 +2030,12 @@
 				04CBD9861D58619700C7CAA4 /* IPCPersonMenuCell.xib in Resources */,
 				04A415481D7D094F0093FF6E /* IPCEditBatchParameterView.xib in Resources */,
 				9ECE988C1B7DD8E000A13C8F /* IPCSearchViewController.xib in Resources */,
+				CB5CC4A81E8E00EA0091D0FD /* IPCDatePickViewController.xib in Resources */,
 				9E9C68301B8F43B300695FED /* IPCExpandShoppingCartCell.xib in Resources */,
 				9E5C858B1B60E5D300A879BB /* IPCGlassDetailsViewController.xib in Resources */,
 				04CBD95D1D582A4C00C7CAA4 /* IPCRootViewController.xib in Resources */,
 				046CF1461E5FE0B00098B6BF /* IPCEditShoppingCartCell.xib in Resources */,
 				9E5C85841B60DDFB00A879BB /* IPCGlassListViewController.xib in Resources */,
-				047349F01D4EDF88001B60D9 /* icon_female@2x.png in Resources */,
 				0470ADAD1D407183003AF4F4 /* IPCHistoryOptometryCell.xib in Resources */,
 				9EF32093199318EA004FC5B9 /* IPCCompareItemView.xib in Resources */,
 				04CBD97F1D585BBD00C7CAA4 /* IPCPersonQRCodeCell.xib in Resources */,
@@ -2066,6 +2057,7 @@
 				04CBD96C1D5852A200C7CAA4 /* IPCPersonHeadCell.xib in Resources */,
 				CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */,
 				04C9F79F1DEE9410001258B2 /* IPCPayOrderTitleCell.xib in Resources */,
+				CB5CC4B61E8E01220091D0FD /* TuSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2177,34 +2169,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				044E0EC51E03B86D00FD2525 /* IPCCustomDetailOrderView.m in Sources */,
-				04C34CCA1E0140D500979001 /* IPCGuideViewManager.m in Sources */,
 				04B1D1EC1D8634D800D9B865 /* IPCDefineCameraBaseComponent.m in Sources */,
-				047F696E1D41CE2400AA4C0F /* IPCDatePickViewController.m in Sources */,
+				CB5CC4751E8E00500091D0FD /* IPCAppManager.m in Sources */,
 				CB1234F21E762D9100AB29DF /* IPCRootBarMenuView.m in Sources */,
 				9E5C85831B60DDFB00A879BB /* IPCGlassListViewController.m in Sources */,
-				04BBE8DB1DFFD9F9008A59DA /* UITableView+Extend.m in Sources */,
+				CB5CC48E1E8E00830091D0FD /* UIImage+Face.m in Sources */,
 				04186E0A1E6919B800758646 /* IPCPayOrderViewPreSellCellMode.m in Sources */,
 				9EF3209619931EE7004FC5B9 /* IPCCompareItemView.m in Sources */,
-				04C34CC91E0140D500979001 /* IPCGuideViewCell.m in Sources */,
 				0470ADB51D409233003AF4F4 /* IPCCustomerAddressList.m in Sources */,
 				04EAF91E1D531A4300A4A66F /* IPCShoppingCart.m in Sources */,
 				046497871D483EBD00137A3E /* IPCProductDetailTableViewCell.m in Sources */,
 				04BF93611E165EB800D14A14 /* IPCBatchRequestManager.m in Sources */,
-				9E15B7D01B6BBCA1007ACF65 /* IPCUser.m in Sources */,
+				CB5CC4AF1E8E01040091D0FD /* IPCNavigationViewController.m in Sources */,
+				CB5CC4661E8DFFB50091D0FD /* IPCGuideViewManager.m in Sources */,
 				040174D41D8F8D6F00C21A92 /* IPCShareChatView.m in Sources */,
 				0470AD8C1D4052BF003AF4F4 /* IPCCustomerDetailViewController.m in Sources */,
 				CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */,
+				CB5CC4651E8DFFB50091D0FD /* IPCGuideViewCell.m in Sources */,
 				04443C5F1D23CAF800596519 /* IPCFilterValueCollectionViewCell.m in Sources */,
 				0492B6521D2A48E600A70A3C /* IPCCustomerViewController.m in Sources */,
 				04C680231DF1254D008B0F80 /* IPCOrderPayStyleCell.m in Sources */,
-				04A202181D7FE4DB00F2A681 /* IPCPresentModeViewController.m in Sources */,
 				043B87571DBDF6F300AFB858 /* IPCOrderProductPriceCell.m in Sources */,
 				044E4BBE1E1CF36A00C7C9C3 /* IPCAccessorySpecList.m in Sources */,
 				9EC3C5A8198672D900C07396 /* IPCLoginViewController.m in Sources */,
 				0470AD9A1D40590C003AF4F4 /* IPCEditOptometryView.m in Sources */,
 				04CB1B081D470FF300B19A96 /* IPCCustomerBottomCell.m in Sources */,
 				04F3DAA51DE3DD6C00AA3868 /* IPCBatchParameterViewMode.m in Sources */,
-				047F69731D41CFE900AA4C0F /* IPCDataPickViewController.m in Sources */,
+				CB5CC4911E8E00830091D0FD /* UIView+Extend.m in Sources */,
 				04BF935E1E165E1200D14A14 /* IPCCustomerRequestManager.m in Sources */,
 				0470AD931D405345003AF4F4 /* IPCCustomerBaseInfoCell.m in Sources */,
 				9E9C682F1B8F43B300695FED /* IPCExpandShoppingCartCell.m in Sources */,
@@ -2216,15 +2207,17 @@
 				04542C851DDA9E54005B5CCA /* IPCGlassListViewMode.m in Sources */,
 				9E15729919F858DD00EC93D1 /* IPCHttpRequest.m in Sources */,
 				047F69771D41FFF900AA4C0F /* IPCDetailCustomer.m in Sources */,
+				CB5CC4791E8E00500091D0FD /* IPCPlatformService.m in Sources */,
 				0401B0FF1D7D3B4D0061C8A9 /* IPCBatchParameterList.m in Sources */,
 				0449ECD71DC9AF3300C2CCB0 /* IPCEmptyAlertView.m in Sources */,
 				04B1E4B81D24AFD900CDDB5D /* IPCFilterTypeMode.m in Sources */,
+				CB5CC4B11E8E01040091D0FD /* IPCRotatingViewController.m in Sources */,
 				04CBD97E1D585BBD00C7CAA4 /* IPCPersonQRCodeCell.m in Sources */,
+				CB5CC49A1E8E00B70091D0FD /* IPCImageTextButton.m in Sources */,
 				9E5E2C6319E4C05300017172 /* IPCOrder.m in Sources */,
 				9E03CEFA1989694700B69825 /* IPCTryGlassesViewController.m in Sources */,
 				04CBD9851D58619700C7CAA4 /* IPCPersonMenuCell.m in Sources */,
 				0464978C1D4886F800137A3E /* IPCProductDetailTopTableViewCell.m in Sources */,
-				0472D9631D24D21B005B32E7 /* IPCImageTextButton.m in Sources */,
 				044E0EC01E03B2CE00FD2525 /* IPCCustomEditOptometryView.m in Sources */,
 				047FCA781D2B72B500775045 /* IPCResponse.m in Sources */,
 				04C9F7B01DEEC05A001258B2 /* IPCEmployeList.m in Sources */,
@@ -2236,14 +2229,18 @@
 				04CBD9771D585A0900C7CAA4 /* IPCPersonTitleCell.m in Sources */,
 				042EF1B01DDD4F7C00EEC744 /* IPCCartViewMode.m in Sources */,
 				04BF93581E16597400D14A14 /* IPCUserRequestManager.m in Sources */,
+				CB5CC4C21E8E019F0091D0FD /* IPCUser.m in Sources */,
+				CB5CC48C1E8E00830091D0FD /* IPCAlertController.m in Sources */,
 				9E9C684C1B92E47F00695FED /* IPCShoppingCartItem.m in Sources */,
 				0472C1631D35CA9900C52F86 /* IPCPriceRangeTableViewCell.m in Sources */,
 				9ECE98921B7DDFF800A13C8F /* IPCSearchItemTableViewCell.m in Sources */,
+				CB5CC48D1E8E00830091D0FD /* UICollectionView+Extend.m in Sources */,
 				04F6B2A11DEC367A00626A53 /* IPCOfflineFaceDetector.m in Sources */,
+				CB5CC4A51E8E00EA0091D0FD /* IPCDataPickViewController.m in Sources */,
 				044E0ECB1E03C02E00FD2525 /* IPCCustomerDetailViewMode.m in Sources */,
+				CB5CC4991E8E00B70091D0FD /* IPCCustomButton.m in Sources */,
 				0446067E1E68079B00C9FFCF /* IPCPayOrderViewController.m in Sources */,
 				04CBD96B1D5852A200C7CAA4 /* IPCPersonHeadCell.m in Sources */,
-				9EA7CF5119CB1F0B00001C18 /* IPCAppManager.m in Sources */,
 				04C8C8F81DF8FBDD006EDB7E /* IPCNetworkCache.m in Sources */,
 				04443C631D23D70300596519 /* IPCTagCollectionLayout.m in Sources */,
 				9E0A837419ECB8B300703A28 /* IPCHelpViewController.m in Sources */,
@@ -2259,82 +2256,77 @@
 				04F3C4F31D890B8500BB3098 /* IPCShareManager.m in Sources */,
 				0485F4041D34A72800A42DE3 /* IPCCustomerList.m in Sources */,
 				0424025A1D87F26400E1DD1A /* IPCOnlineFaceDetector.m in Sources */,
-				04C34CC21E01405800979001 /* IPCCheckVersion.m in Sources */,
 				045A61F41D1A3BA10053ADD8 /* IPCRequest.m in Sources */,
-				04F8D4E71DE81E5500C572B3 /* IPCCustomButton.m in Sources */,
-				04031E291E0CB38400C2A913 /* UIView+GestureRecognizerBlock.m in Sources */,
+				CB5CC4921E8E00830091D0FD /* UIView+GestureRecognizerBlock.m in Sources */,
+				CB5CC4B01E8E01040091D0FD /* IPCPresentModeViewController.m in Sources */,
 				04A2021F1D801A8A00F2A681 /* IPCLanuchViewController.m in Sources */,
 				046332481D49FDBE000B4940 /* IPCCustomerBaseOpometryCell.m in Sources */,
 				0472C1701D360F1500C52F86 /* IPCLoginHistoryViewController.m in Sources */,
+				CB5CC4761E8E00500091D0FD /* IPCCheckVersion.m in Sources */,
 				04B1D20C1D867DA500D9B865 /* IPCPhotoPickerCell.m in Sources */,
+				CB5CC4771E8E00500091D0FD /* IPCCommon.m in Sources */,
 				0470ADAC1D407183003AF4F4 /* IPCHistoryOptometryCell.m in Sources */,
 				04C9F7A51DEEAC73001258B2 /* IPCEmployeListView.m in Sources */,
 				04186E0D1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m in Sources */,
 				04C9F79E1DEE9410001258B2 /* IPCPayOrderTitleCell.m in Sources */,
 				04443C511D23C89300596519 /* IPCFilterGlassesView.m in Sources */,
-				CB91872C1E8CFAB000D59487 /* AFHTTPSessionManager+Extend.m in Sources */,
-				047349F61D4F16E0001B60D9 /* IPCRefreshAnimationHeader.m in Sources */,
-				044099501E0283D900254157 /* UIImage+Face.m in Sources */,
 				0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */,
 				044A91AD1E56943A00C9DF1A /* IPCShoppingCartView.m in Sources */,
-				04BF93551E16445D00D14A14 /* IPCPlatformService.m in Sources */,
-				9E18E8A7199C25D10085704B /* IPCUIKit.m in Sources */,
 				047D3FC01D43039400638526 /* IPCOrderDetailInfoCell.m in Sources */,
 				04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */,
-				0475724D1E1B373D00151EEA /* IPCAlertController.m in Sources */,
+				CB5CC4901E8E00830091D0FD /* UITextField+Extend.m in Sources */,
 				9EFAC1FC19D6E8F700C1EFBF /* IPCError.m in Sources */,
-				CB91872F1E8CFAF300D59487 /* IPCReachability.m in Sources */,
 				04BDB5CF1D38C44500F2D446 /* IPCChooseCategoryView.m in Sources */,
+				CB5CC49B1E8E00B70091D0FD /* IPCSwitch.m in Sources */,
 				044E0ECE1E03CDC500FD2525 /* IPCPaySuccessView.m in Sources */,
-				047349FC1D4F18A5001B60D9 /* IPCRefreshAnimationFooter.m in Sources */,
 				04C9F7991DEE706C001258B2 /* IPCOrderPayTypeCell.m in Sources */,
-				9EF3209D19933620004FC5B9 /* IPCCommon.m in Sources */,
 				CB404B101E7285E4005673CD /* IPCEditBatchParameterViewMode.m in Sources */,
 				0444C7471D9CEBD600553032 /* IPCContactLenSpecList.m in Sources */,
-				0470AD9D1D406573003AF4F4 /* UIViewController+Extend.m in Sources */,
 				04D8954E1DD981B7005E678C /* IPCContactLensMode.m in Sources */,
 				9E03C2E51978D5D5007389D0 /* IPCAppDelegate.m in Sources */,
+				CB5CC4BF1E8E01670091D0FD /* UIViewController+Extend.m in Sources */,
 				9E18E8AD199D30CD0085704B /* IPCSingleModeView.m in Sources */,
 				046CF1451E5FE0B00098B6BF /* IPCEditShoppingCartCell.m in Sources */,
 				CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */,
 				04F8D4E01DE7E0B800C572B3 /* LibraryTypeTableViewCell.m in Sources */,
-				04BBE8DE1DFFDA17008A59DA /* UICollectionView+Extend.m in Sources */,
 				04F50A2F1D3F887C00AF73D8 /* IPCCustomerCollectionViewCell.m in Sources */,
-				042401FB1D87919000E1DD1A /* IPCRotatingViewController.m in Sources */,
 				04CBD95C1D582A4C00C7CAA4 /* IPCRootViewController.m in Sources */,
 				04B1D2001D867C9C00D9B865 /* IPCPhotoDatas.m in Sources */,
-				04EAF9251D5323D200A4A66F /* IPCTabBarViewController.m in Sources */,
 				047D3FBB1D4300FB00638526 /* IPCOrderProductCell.m in Sources */,
 				04EB43971D42190600027B42 /* IPCCustomerDetailCell.m in Sources */,
 				04A415461D7D093F0093FF6E /* IPCEditBatchParameterView.m in Sources */,
 				9ECE988B1B7DD8E000A13C8F /* IPCSearchViewController.m in Sources */,
 				046404351D3CCE3D0005FAE3 /* IPCChooseCategoryCell.m in Sources */,
-				04A703021D38E1BA008675DA /* IPCSwitch.m in Sources */,
 				0470ADBC1D4093E2003AF4F4 /* IPCCustomerAddressListCell.m in Sources */,
 				04760B131D3C80C2003A4E16 /* IPCFilterDataSourceResult.m in Sources */,
 				04A4154C1D7D0BDE0093FF6E /* IPCEditParameterCell.m in Sources */,
+				CB5CC4B41E8E01170091D0FD /* IPCTabBarViewController.m in Sources */,
 				04B1D2071D867D5500D9B865 /* IPCPhoto.m in Sources */,
+				CB5CC48F1E8E00830091D0FD /* UITableView+Extend.m in Sources */,
 				042402011D87AA6400E1DD1A /* IPCEditFilterSampleController.m in Sources */,
 				9E03C2E11978D5D5007389D0 /* main.m in Sources */,
+				CB5CC4BC1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m in Sources */,
 				047F69601D41B10900AA4C0F /* IPCCustomOrderDetailList.m in Sources */,
-				042401F81D878FA100E1DD1A /* IPCNavigationViewController.m in Sources */,
 				04A065A11D2231C100A62291 /* IPCGlasslistCollectionViewCell.m in Sources */,
-				CB91871C1E8CCA9000D59487 /* IPCPhotoPickerViewController.m in Sources */,
+				CB5CC49E1E8E00D60091D0FD /* IPCPhotoPickerViewController.m in Sources */,
 				047D3FCA1D43479300638526 /* IPCCurrentCustomerOpometry.m in Sources */,
 				04CBD9911D58808A00C7CAA4 /* IPCQRCodeView.m in Sources */,
 				04BF935B1E165DD100D14A14 /* IPCGoodsRequestManager.m in Sources */,
+				CB5CC48B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m in Sources */,
 				9EF32099199334DB004FC5B9 /* IPCMatchItem.m in Sources */,
 				04C9F7AC1DEEB6F3001258B2 /* IPCEmployeListCell.m in Sources */,
+				CB5CC4781E8E00500091D0FD /* IPCCustomUI.m in Sources */,
+				CB5CC4A71E8E00EA0091D0FD /* IPCDatePickViewController.m in Sources */,
 				04760B0A1D3C80A1003A4E16 /* IPCGetGlassesListResult.m in Sources */,
-				048A15F21D5B1931003FD88F /* UIView+Extend.m in Sources */,
-				CB9187161E8CB29400D59487 /* UITextField+Extend.m in Sources */,
 				04760B0F1D3C80B0003A4E16 /* IPCProfileResult.m in Sources */,
 				048BC3271D2F4CA5007F7EE7 /* IPCCustomerListViewController.m in Sources */,
 				04CBD9631D582CCA00C7CAA4 /* IPCPersonBaseView.m in Sources */,
 				04F8D4E41DE801FF00C572B3 /* IPCLibraryTypeTableView.m in Sources */,
 				0485F40D1D34BE1700A42DE3 /* IPCOptometryList.m in Sources */,
+				CB5CC4BB1E8E012D0091D0FD /* IPCRefreshAnimationFooter.m in Sources */,
 				9EFAC1F619D6E71A00C1EFBF /* IPCJoinRequest.m in Sources */,
 				047D3FB61D42FE9600638526 /* IPCOrderDetailContactCell.m in Sources */,
+				CB5CC47A1E8E00500091D0FD /* IPCReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

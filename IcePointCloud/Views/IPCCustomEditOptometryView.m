@@ -64,9 +64,9 @@ typedef  void(^DismissBlock)();
 //         if (self.completeBlock) {
 //             self.completeBlock();
 //         }
-//         [IPCUIKit showSuccess:@"新建验光单成功!"];
+//         [IPCCustomUI showSuccess:@"新建验光单成功!"];
 //     } FailureBlock:^(NSError *error) {
-//         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+//         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
 //     }];
 }
 

@@ -31,9 +31,9 @@
     CGFloat beforeWidth = [beforePriceText jk_widthWithFont:self.beforePriceLabel.font constrainedToHeight:self.beforePriceLabel.jk_height];
 //    CGFloat afterWith = [afterPriceText jk_widthWithFont:self.afterPriceLabel.font constrainedToHeight:self.afterPriceLabel.jk_height];
     
-    [self.beforePriceLabel setAttributedText:[IPCUIKit subStringWithText:beforePriceText BeginRang:3 Rang:beforePriceText.length - 3 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
+    [self.beforePriceLabel setAttributedText:[IPCCustomUI subStringWithText:beforePriceText BeginRang:3 Rang:beforePriceText.length - 3 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
     
-//    [self.afterPriceLabel setAttributedText:[IPCUIKit subStringWithText:afterPriceText BeginRang:5 Rang:afterPriceText.length - 5 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
+//    [self.afterPriceLabel setAttributedText:[IPCCustomUI subStringWithText:afterPriceText BeginRang:5 Rang:afterPriceText.length - 5 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
     
     self.beforePriceWidth.constant = beforeWidth + 10;
 //    self.afterPriceWidth.constant = afterWith + 20;

@@ -32,8 +32,8 @@
         make.width.mas_equalTo(180);
         make.height.mas_equalTo(247);
     }];
-    [self.userPhotoImageView setImage:[UIImage imageNamed:@"icon_male@2x"]];
-    [IPCUIKit clearAutoCorrection:self.mainView];
+    [self.userPhotoImageView setImage:[UIImage imageNamed:@"icon_male"]];
+    [IPCCustomUI clearAutoCorrection:self.mainView];
 }
 
 - (UIImageView *)userPhotoImageView{
@@ -149,7 +149,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isEqual:self.phoneTextField]) {
         if (![IPCCommon checkTelNumber:[textField.text jk_trimmingWhitespace]]) {
-            [IPCUIKit showError:@"请输入有效的手机号码!"];
+            [IPCCustomUI showError:@"请输入有效的手机号码!"];
             [textField setText:@""];
         }
     }

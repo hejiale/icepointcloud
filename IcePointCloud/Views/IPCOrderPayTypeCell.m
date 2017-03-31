@@ -53,7 +53,7 @@ typedef void(^UpdateBlock)();
             self.updateBlock();
     }else{
         [sender setOn:NO animated:NO];
-        [IPCUIKit showError:@"请先选择员工号"];
+        [IPCCustomUI showError:@"请先选择员工号"];
     }
 }
 

@@ -223,7 +223,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
-    [IPCUIKit showSuccess:@"添加购物车成功!"];
+    [IPCCustomUI showSuccess:@"添加购物车成功!"];
     [self reloadCartView];
 }
 
@@ -231,7 +231,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
     if ((([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
     {
         if ( ([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory) && _glasses.stock == 0) {
-            [IPCUIKit showError:@"暂无库存，请重新选择!"];
+            [IPCCustomUI showError:@"暂无库存，请重新选择!"];
         }else{
             self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
                 [self reloadCartView];

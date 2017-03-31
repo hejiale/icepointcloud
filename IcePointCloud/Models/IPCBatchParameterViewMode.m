@@ -47,7 +47,7 @@
              [self.contactDegreeList addObject:obj];
          }];
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -63,7 +63,7 @@
                  complete();
              }
          } FailureBlock:^(NSError *error) {
-             [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+             [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
          }];
     }
 }
@@ -78,7 +78,7 @@
              complete();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 

@@ -53,8 +53,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.refreshHeader beginRefreshing];
     
     __weak typeof (self) weakSelf = self;
-    if ([IPCUIKit rootViewcontroller]) {
-        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCUIKit rootViewcontroller];
+    if ([IPCCustomUI rootViewcontroller]) {
+        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCCustomUI rootViewcontroller];
         [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
@@ -92,7 +92,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)beginReloadTableView{
     self.glassListViewMode.currentPage = 0;
     self.glassListCollectionView.mj_footer.hidden = NO;
-    [IPCUIKit show];
+    [IPCCustomUI show];
     __weak typeof (self) weakSelf = self;
     
     dispatch_group_t group = dispatch_group_create();
@@ -120,7 +120,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.glassListCollectionView reloadData];
             [strongSelf.refreshHeader endRefreshing];
             [strongSelf.refreshFooter endRefreshing];
-            [IPCUIKit hiden];
+            [IPCCustomUI hiden];
         });
     });
 }
@@ -140,7 +140,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.glassListViewMode reloadGlassListDataWithComplete:^(LSRefreshDataStatus status, NSError *error){
         if (status == IPCRefreshError && error) {
             if (error.code != NSURLErrorNotConnectedToInternet) {
-                [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+                [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
             }
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             self.glassListCollectionView.mj_footer.hidden = YES;
@@ -247,7 +247,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
         detailVC.glasses  = self.glassListViewMode.glassesList[indexPath.row];
         [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-            [IPCUIKit pushToRootIndex:4];
+            [IPCCustomUI pushToRootIndex:4];
             [detailVC.navigationController popToRootViewControllerAnimated:NO];
         }];
         [self.navigationController pushViewController:detailVC animated:YES];

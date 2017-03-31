@@ -68,7 +68,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -91,7 +91,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -113,7 +113,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -129,13 +129,13 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
 - (void)updateUserInfo:(void(^)())completeBlock Failure:(void(^)())failure
 {
-    [IPCUIKit show];
+    [IPCCustomUI show];
     [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.customerID
                                                  CustomerName:self.detailCustomer.customerName
                                                   CustomPhone:self.detailCustomer.customerPhone
@@ -164,10 +164,10 @@
                  *stop = YES;
              }
          }];
-         [IPCUIKit hiden];
+         [IPCCustomUI hiden];
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
          if (failure)failure();
      }];
 }

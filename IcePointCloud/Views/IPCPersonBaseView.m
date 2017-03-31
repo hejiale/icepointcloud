@@ -51,7 +51,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                                                [[IPCAppManager sharedManager].profile.user setContactMobilePhone:mobile];
                                                [self.personTableView reloadData];
                                            }FailureBlock:^(NSError *error) {
-                                               [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+                                               [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
                                            }];
 }
 
@@ -59,17 +59,17 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (void)logoutRequest
 {
     [IPCUserRequestManager userLogoutWithSuccessBlock:^(id responseValue) {
-        [IPCUIKit hiden];
+        [IPCCustomUI hiden];
         if (self.LogoutBlock)
             self.LogoutBlock();
     } FailureBlock:^(NSError *error) {
-        [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+        [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
     }];
 }
 
 #pragma mark //Clicked Events
 - (IBAction)logoutAction:(id)sender {
-    [IPCUIKit show];
+    [IPCCustomUI show];
     [self logoutRequest];
 }
 
@@ -236,7 +236,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             YYImageCache *cache = [YYWebImageManager sharedManager].cache;
             [cache.memoryCache removeAllObjects];
             [cache.diskCache removeAllObjects];
-            [IPCUIKit showSuccess:@"缓存清理成功"];
+            [IPCCustomUI showSuccess:@"缓存清理成功"];
         }
     }
 }

@@ -86,11 +86,11 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
                                                ContactAddress:self.insertTextArray[6]
                                                  SuccessBlock:^(id responseValue)
      {
-         [IPCUIKit showSuccess:@"新建用户成功!"];
+         [IPCCustomUI showSuccess:@"新建用户成功!"];
          [self.insertTextArray removeAllObjects];self.insertTextArray = nil;
          [self.userInfoTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -147,15 +147,15 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
 
 - (void)reloadGenderImage{
     if ([[self baseInfoCell].genderTextField.text isEqualToString:@"男"] || [[self baseInfoCell].genderTextField.text isEqualToString:@"未设置"]) {
-        [[self baseInfoCell].userPhotoImageView setImageWithURL:nil placeholder:[UIImage imageNamed:@"icon_male@2x"]];
+        [[self baseInfoCell].userPhotoImageView setImageWithURL:nil placeholder:[UIImage imageNamed:@"icon_male"]];
     }else if ([[self baseInfoCell].genderTextField.text isEqualToString:@"女"]){
-        [[self baseInfoCell].userPhotoImageView setImageWithURL:nil placeholder:[UIImage imageNamed:@"icon_female@2x"]];
+        [[self baseInfoCell].userPhotoImageView setImageWithURL:nil placeholder:[UIImage imageNamed:@"icon_female"]];
     }
 }
 
 #pragma mark //NSNotification Events
 - (void)pushToCartAction{
-    [IPCUIKit pushToRootIndex:4];
+    [IPCCustomUI pushToRootIndex:4];
 }
 
 #pragma mark //UITableViewDataSource
@@ -197,7 +197,7 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
             if ([self baseInfoCell].userNameTextField.text.length && [self baseInfoCell].phoneTextField.text.length && [self baseInfoCell].addressTextView.text.length){
                 [self saveNewCustomerRequest];
             }else{
-                [IPCUIKit showError:@"请将必填项填写完整!"];
+                [IPCCustomUI showError:@"请将必填项填写完整!"];
             }
         }];
         return cell;
@@ -250,7 +250,7 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
 - (void)alertInsert:(BOOL)isInsert
 {
     if (![self judgeContactIsEmpty] || ![self judgeOptometryIsEmpty]) {
-        [IPCUIKit showAlert:@"冰点云" Message:@"您正在新增验光数据，如果点击确定，客户验光记录将丢失，确定清空吗？" Owner:self Done:^{
+        [IPCCustomUI showAlert:@"冰点云" Message:@"您正在新增验光数据，如果点击确定，客户验光记录将丢失，确定清空吗？" Owner:self Done:^{
             [self clearAllInputInfo];
             if (!isInsert)[self pushToSearchCustomer];
         }];

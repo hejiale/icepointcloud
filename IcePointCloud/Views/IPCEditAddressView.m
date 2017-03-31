@@ -42,7 +42,7 @@ typedef  void(^DismissBlock)();
         
         self.editAddressView.layer.cornerRadius = 10;
         [self.saveAddressButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
-        [IPCUIKit clearAutoCorrection:self.editAddressView];
+        [IPCCustomUI clearAutoCorrection:self.editAddressView];
         [self.genderTextField setRightButton:self Action:@selector(showGenderPickerAction) OnView:self.editAddressView];
         
         RAC(self.saveAddressButton,enabled) = [RACSignal combineLatest:@[self.contactTextField.rac_textSignal,self.phoneTextField.rac_textSignal,self.addressTextField.rac_textSignal,RACObserve(self, self.genderTextField.text)] reduce:^id(NSString *contactName,NSString *phone,NSString *address,NSString *gender){
@@ -66,9 +66,9 @@ typedef  void(^DismissBlock)();
          if (self.completeBlock) {
              self.completeBlock();
          }
-         [IPCUIKit showSuccess:@"新建地址成功!"];
+         [IPCCustomUI showSuccess:@"新建地址成功!"];
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -121,7 +121,7 @@ typedef  void(^DismissBlock)();
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField isEqual:self.phoneTextField]) {
         if (![IPCCommon checkTelNumber:[textField.text jk_trimmingWhitespace]]) {
-            [IPCUIKit showError:@"请输入有效的手机号码!"];
+            [IPCCustomUI showError:@"请输入有效的手机号码!"];
             [textField setText:@""];
         }
     }

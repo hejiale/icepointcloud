@@ -41,7 +41,7 @@ typedef void(^DismissBlock)();
         self.employeTableView.emptyAlertTitle = @"没有搜索到该员工";
         
         [self.searchTextField setLeftImageView:@"text_searchIcon"];
-        [IPCUIKit show];
+        [IPCCustomUI show];
         [self queryEmploye];
     }
     return self;
@@ -52,11 +52,11 @@ typedef void(^DismissBlock)();
 - (void)queryEmploye{
     [IPCPayOrderRequestManager queryEmployeWithKeyword:self.searchTextField.text SuccessBlock:^(id responseValue)
      {
-         [IPCUIKit hiden];
+         [IPCCustomUI hiden];
          _employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 

@@ -71,7 +71,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 }
 
 - (void)commitUI{
-    [IPCUIKit show];
+    [IPCCustomUI show];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
     self.customerViewMode.customerID = self.customer.customerID;
@@ -123,7 +123,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.detailTableView reloadData];
-            [IPCUIKit hiden];
+            [IPCCustomUI hiden];
         });
     });
 }

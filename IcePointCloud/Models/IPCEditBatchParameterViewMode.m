@@ -42,7 +42,7 @@
              self.UpdateBlock();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -55,7 +55,7 @@
              self.UpdateBlock();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 
@@ -82,7 +82,7 @@
                 self.UpdateBlock();
             }
         } FailureBlock:^(NSError *error) {
-            [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+            [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
         }];
     }else{
         if (self.UpdateBlock) {
@@ -100,7 +100,7 @@
              self.UpdateBlock();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
      }];
 }
 

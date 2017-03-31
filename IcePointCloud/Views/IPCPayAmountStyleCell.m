@@ -85,7 +85,7 @@
 #pragma mark //UITextField Delegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     if (! [IPCPayOrderMode sharedManager].currentEmploye) {
-        [IPCUIKit showError:@"请先选择员工号"];
+        [IPCCustomUI showError:@"请先选择员工号"];
         [textField resignFirstResponder];
     }
 }
@@ -105,13 +105,13 @@
     if (textField.text.length && [textField.text doubleValue] > 0){
         if ([IPCPayOrderMode sharedManager].currentEmploye && [IPCPayOrderMode sharedManager].isSelectEmploye) {
             if ([textField.text doubleValue] > [IPCPayOrderMode sharedManager].employeAmount){
-                [IPCUIKit showError:@"输入的金额大于打折金额!"];
+                [IPCCustomUI showError:@"输入的金额大于打折金额!"];
             }else{
                 [IPCPayOrderMode sharedManager].prepaidAmount = [textField.text doubleValue];
             }
         }else{
             if ([textField.text doubleValue] > [[IPCShoppingCart sharedCart] selectedNormalSellGlassesTotalPrice]){
-                [IPCUIKit showError:@"输入的金额大于订单总价!"];
+                [IPCCustomUI showError:@"输入的金额大于订单总价!"];
             }else{
                 [IPCPayOrderMode sharedManager].prepaidAmount = [textField.text doubleValue];
             }

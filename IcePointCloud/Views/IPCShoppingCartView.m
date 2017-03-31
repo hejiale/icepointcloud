@@ -101,7 +101,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 }
 
 - (void)updateTotalPrice{
-    [self.totalPriceLabel setAttributedText:[IPCUIKit subStringWithText:[NSString stringWithFormat:@"合计：￥%.f", [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]] BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor blackColor]]];
+    [self.totalPriceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"合计：￥%.f", [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]] BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor blackColor]]];
     [self.navigationTitleLabel setText:[NSString stringWithFormat:@"购物车 (%d)",(long)[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
 }
 
@@ -122,7 +122,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
             self.PayBlock();
         }
     }else{
-        [IPCUIKit showError:@"购物车中未选中任何商品!"];
+        [IPCCustomUI showError:@"购物车中未选中任何商品!"];
     }
 }
 
@@ -136,13 +136,13 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 - (IBAction)onDeleteProductsAction:(id)sender {
     __weak typeof (self) weakSelf = self;
     if (! [self.cartViewMode shoppingCartIsEmpty]) {
-        [IPCUIKit showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
+        [IPCCustomUI showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [[IPCShoppingCart sharedCart] removeSelectCartItem];
             [strongSelf updateCartUI];
         }];
     }else{
-        [IPCUIKit showError:@"未选中任何商品!"];
+        [IPCCustomUI showError:@"未选中任何商品!"];
     }
 }
 
@@ -218,7 +218,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
             [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
                 if (! hasStock) {
-                    [IPCUIKit showError:@"当前选择护理液数量大于库存数"];
+                    [IPCCustomUI showError:@"当前选择护理液数量大于库存数"];
                 }else{
                     [[IPCShoppingCart sharedCart] plusItem:cartItem];
                     [self updateCartUI];
@@ -226,7 +226,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
             }];
         }else{
             if ([self.cartViewMode judgeContactLensStock:cartItem]) {
-                [IPCUIKit showError:@"当前选择隐形眼镜镜片数量大于库存数"];
+                [IPCCustomUI showError:@"当前选择隐形眼镜镜片数量大于库存数"];
             }else{
                 [[IPCShoppingCart sharedCart] plusItem:cartItem];
                 [self updateCartUI];

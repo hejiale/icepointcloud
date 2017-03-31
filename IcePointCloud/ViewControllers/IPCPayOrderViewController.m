@@ -79,7 +79,7 @@
 #pragma mark //Clicked Events
 - (IBAction)backAction:(id)sender {
     __weak typeof (self) weakSelf = self;
-    [IPCUIKit showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
+    [IPCCustomUI showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [[IPCPayOrderMode sharedManager] clearData];
         [self.navigationController popViewControllerAnimated:YES];

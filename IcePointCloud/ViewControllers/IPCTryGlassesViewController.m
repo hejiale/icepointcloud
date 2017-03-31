@@ -115,8 +115,8 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     self.productCollectionView.emptyAlertTitle = @"没有找到可试戴的眼镜!";
     [self.refreshHeader beginRefreshing];
     
-    if ([IPCUIKit rootViewcontroller]) {
-        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCUIKit rootViewcontroller];
+    if ([IPCCustomUI rootViewcontroller]) {
+        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCCustomUI rootViewcontroller];
         [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
             [self removeAllPopView];
         }];
@@ -186,7 +186,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 #pragma mark //Set UI ----------------------------------------------------------------------------
 - (UIVisualEffectView *)blurBgView{
     if (!_blurBgView)
-        _blurBgView = [IPCUIKit showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeAllPopView)];
+        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeAllPopView)];
     return _blurBgView;
 }
 
@@ -217,7 +217,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (void)beginReloadTableView{
     self.glassListViewMode.currentPage = 0;
     self.productCollectionView.mj_footer.hidden = NO;
-    [IPCUIKit show];
+    [IPCCustomUI show];
     
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -241,7 +241,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
             [self.productCollectionView reloadData];
             [self.refreshHeader endRefreshing];
             [self.refreshFooter endRefreshing];
-            [IPCUIKit hiden];
+            [IPCCustomUI hiden];
         });
     });
 }
@@ -262,7 +262,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (error && status == IPCRefreshError){
             if (error.code != NSURLErrorNotConnectedToInternet) {
-                [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+                [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
             }
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             strongSelf.productCollectionView.mj_footer.hidden = YES;
@@ -298,7 +298,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (void)searchProductAction:(NSNotification *)notification{
     [self removeAllPopView];
     if (self.recommendedButton.selected){
-        [IPCUIKit showError:@"暂无可查询的热门推荐商品"];
+        [IPCCustomUI showError:@"暂无可查询的热门推荐商品"];
         return;
     }
     self.glassListViewMode.searchWord = notification.userInfo[IPCSearchKeyWord];
@@ -516,10 +516,10 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCUIKit showError:error.userInfo[kIPCNetworkErrorMessage]];
+                [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
             }];
         }else{
-            [IPCUIKit showError:@"未检测到人脸轮廓"];
+            [IPCCustomUI showError:@"未检测到人脸轮廓"];
         }
     }];
     [self.faceRecognition postFaceRequest:image];
@@ -642,7 +642,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc] initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
         detailVC.glasses  = self.glassListViewMode.glassesList[indexPath.row];
         [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-            [IPCUIKit pushToRootIndex:4];
+            [IPCCustomUI pushToRootIndex:4];
             [detailVC.navigationController popToRootViewControllerAnimated:NO];
         }];
         [self.navigationController pushViewController:detailVC animated:YES];

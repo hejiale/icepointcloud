@@ -35,7 +35,7 @@
         [self.scanCodeImageView setImageURL:[IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeAlipay?  [NSURL URLWithString:orderInfo.alipayPhotoURL]:[NSURL URLWithString:orderInfo.wechatURL]];
     
         NSString * priceStr = [NSString stringWithFormat:@"￥%.f",orderInfo.totalPrice];
-        [self.orderPriceLabel setAttributedText:[IPCUIKit subStringWithText:priceStr BeginRang:1 Rang:priceStr.length - 1 Font:[UIFont systemFontOfSize:18 weight:UIFontWeightThin] Color:COLOR_RGB_BLUE]];
+        [self.orderPriceLabel setAttributedText:[IPCCustomUI subStringWithText:priceStr BeginRang:1 Rang:priceStr.length - 1 Font:[UIFont systemFontOfSize:18 weight:UIFontWeightThin] Color:COLOR_RGB_BLUE]];
     }
     return self;
 }
