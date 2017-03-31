@@ -2679,6 +2679,7 @@
 					"$(inherited)",
 					"COCOAPODS=1",
 					CONFIGU,
+					"BETA=1",
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				HEADER_SEARCH_PATHS = (

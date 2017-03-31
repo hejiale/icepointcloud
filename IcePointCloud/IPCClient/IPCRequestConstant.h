@@ -44,9 +44,9 @@ static NSString * const kIPCErrorNetworkAlertMessage = @"请检查您的设备->
 /**
  *  The  client url
  */
-#ifdef DEVELOP
+#ifdef DEBUG
 #define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com/gateway/api/jsonrpc.jsp"
-#elif UAT
+#elif BETA
 #define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com/gateway/api/jsonrpc.jsp"
 #else
 #define   IPC_ProductAPI_URL       @"http://icepointcloud.com/gateway/api/jsonrpc.jsp"
