@@ -51,7 +51,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                                                [[IPCAppManager sharedManager].profile.user setContactMobilePhone:mobile];
                                                [self.personTableView reloadData];
                                            }FailureBlock:^(NSError *error) {
-                                               [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+                                               [IPCCustomUI showError:error.domain];
                                            }];
 }
 
@@ -63,7 +63,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         if (self.LogoutBlock)
             self.LogoutBlock();
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+        [IPCCustomUI showError:error.domain];
     }];
 }
 

@@ -68,7 +68,7 @@ typedef  void(^DismissBlock)();
          }
          [IPCCustomUI showSuccess:@"新建地址成功!"];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 

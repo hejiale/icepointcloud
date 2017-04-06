@@ -17,12 +17,13 @@
         if ([responseData isKindOfClass:[NSDictionary class]]){
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {
-//                NSLog(@"-----json %@",[responseData jk_JSONString]);
-                
                 NSLog(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
+                
+                id responseValue = [NSDictionary changeType:responseData[kIPCNetworkResult]];
+                
                 if (complete) {
-                    if (responseData[kIPCNetworkResult]) {
-                        complete(responseData[kIPCNetworkResult]);
+                    if (responseValue) {
+                        complete(responseValue);
                     }
                 }
             }else if ([[responseData allKeys] containsObject:kIPCNetworkError]){
@@ -47,8 +48,7 @@
     if (errorMessage){
         if (errorMessage.code == kIPCServiceErrorCode){
             if (errorMessage.message) {
-                NSError * error = [NSError errorWithDomain:NSCocoaErrorDomain code:kIPCServiceErrorCode userInfo:@{kIPCNetworkErrorMessage:errorMessage.message}];
-                return error;
+                return HTTPError(errorMessage.message, kIPCServiceErrorCode);
             }
         }
     }

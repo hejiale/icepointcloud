@@ -12,11 +12,11 @@
 
 
 + (void)getAllCateTypeWithType:(NSString *)type
-                    FilterKey:(NSDictionary *)key
-                 SuccessBlock:(void (^)(id responseValue))success
-                 FailureBlock:(void (^)(NSError * error))failure
+                     FilterKey:(NSDictionary *)key
+                  SuccessBlock:(void (^)(id responseValue))success
+                  FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@[key,@{@"type":type,@"searchSupplier":@"true",@"proAvailable":@"true"}] RequestMethod:@"bizadmin.getCategoryType" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@[key,@{@"type":type,@"searchSupplier":@"true",@"proAvailable":@"true"}] RequestMethod:@"bizadmin.getCategoryType" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -39,7 +39,7 @@
                              @"proAvailable":@"true",
                              @"startPrice":@(startPrice),
                              @"endPrice":endPrice > 0 ? @(endPrice) : @""};
-    [self loadRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

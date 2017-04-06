@@ -34,27 +34,6 @@
 }
 
 
-- (void)sendRequestWithParams:(IPCJoinRequest *)request
-                  RequestType:(IPCRequestType)requestType
-                  CacheEnable:(IPCRequestCache)cacheEnable
-                 SuccessBlock:(void (^)(id responseValue))success
-                 FailureBlock:(void (^)(NSError * error))failure
-{
-    [self callRequestWithParams:request ImageData:nil ImageName:nil RequestType:requestType CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
-}
-
-
-- (void)uploadImageWithParams:(IPCJoinRequest *)request
-                        image:(NSData *)imageData
-                    imageName:(NSString *)imageName
-                 SuccessBlock:(void (^)(id responseValue))success
-                ProgressBlock:(void (^)(NSProgress *))uploadProgress
-                 FailureBlock:(void (^)(NSError * error))failure
-{
-    [self callRequestWithParams:request ImageData:imageData  ImageName:imageName  RequestType:IPCRequestTypeUpload CacheEnable:IPCRequestCacheDisEnable  SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
-}
-
-
 #pragma mark //AFNetworking Request Method
 - (void)callRequestWithParams:(IPCJoinRequest *)request
                     ImageData:(NSData *)imageData
@@ -77,7 +56,7 @@
             }
         }else{
             if (failure){
-                failure([NSError errorWithDomain:NSCocoaErrorDomain code:NSURLErrorNotConnectedToInternet userInfo:@{kIPCNetworkErrorMessage:kIPCErrorNetworkAlertMessage}]);
+                failure(HTTPError(kIPCErrorNetworkAlertMessage, NSURLErrorNotConnectedToInternet));
             }
         }
     }else{

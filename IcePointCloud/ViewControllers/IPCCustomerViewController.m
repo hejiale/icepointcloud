@@ -90,7 +90,7 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
          [self.insertTextArray removeAllObjects];self.insertTextArray = nil;
          [self.userInfoTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -140,7 +140,7 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
         [[[self opometryCell].editOptometryView subTextField:7] setText:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.axisLeft];
         [[[self opometryCell].editOptometryView subTextField:8] setText:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.addLeft];
         [[[self opometryCell].editOptometryView subTextField:9] setText:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.correctedVisionLeft];
-        [[[self opometryCell].editOptometryView subTextField:10] setText:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.distance];
+//        [[[self opometryCell].editOptometryView subTextField:10] setText:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.distance];
     }
 }
 

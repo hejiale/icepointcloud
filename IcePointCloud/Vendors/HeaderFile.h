@@ -59,6 +59,6 @@
 #import "UICollectionView+Alert.h"
 #import "UIView+GestureRecognizerBlock.h"
 #import "UITextField+Extend.h"
-
+#import "NSDictionary+DeleteNull.h"
 
 #endif /* HeaderFile_h */

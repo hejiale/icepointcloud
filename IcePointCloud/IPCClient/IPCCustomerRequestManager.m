@@ -16,7 +16,7 @@
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"customerId":customID,@"pageNo":@(page),@"maxPageSize":@(5)} RequestMethod:@"customerAdmin.listOptometry" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"pageNo":@(page),@"maxPageSize":@(5)} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -46,7 +46,7 @@
                              @"addRight":addRight,
                              @"correctedVisionLeft":correctedVisionLeft,
                              @"correctedVisionRight":correctedVisionRight};
-    [self loadRequest:params RequestMethod:@"customerAdmin.saveOptometry" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:params RequestMethod:@"customerAdmin.saveOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -99,7 +99,7 @@
                              @"contactorGengerString":contactGender,
                              @"contactorPhone":contactPhone,
                              @"contactorAddress":contactAddress};
-    [self loadRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -107,7 +107,7 @@
                                  SuccessBlock:(void (^)(id responseValue))success
                                  FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"customerId":customerID} RequestMethod:@"customerAdmin.getCusomerInfo"  RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customerID} RequestMethod:@"customerAdmin.getCusomerInfo" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -115,7 +115,7 @@
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"keyword":keyword} RequestMethod:@"customerAdmin.listAllCustomer" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"keyword":keyword} RequestMethod:@"customerAdmin.listAllCustomer" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -124,7 +124,7 @@
                            SuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"customerId":customID,@"optometryId":optometryID} RequestMethod:@"customerAdmin.setCurrentOptometry" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"optometryId":optometryID} RequestMethod:@"customerAdmin.setCurrentOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -133,7 +133,7 @@
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerPhone":phone} RequestMethod:@"customerAdmin.listHistoryOrders" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerPhone":phone} RequestMethod:@"customerAdmin.listHistoryOrders" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -152,7 +152,7 @@
                                   @"genderstring":gender,
                                   @"contactorPhone":phone,
                                   @"detailAdress":address};
-    [self loadRequest:parameters RequestMethod:@"customerAdmin.saveAddress" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:parameters RequestMethod:@"customerAdmin.saveAddress" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -160,7 +160,7 @@
                                 SuccessBlock:(void (^)(id responseValue))success
                                 FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"customerId":customID} RequestMethod:@"customerAdmin.getAllAddress"  RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID} RequestMethod:@"customerAdmin.getAllAddress" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -168,7 +168,7 @@
                        SuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure
 {
-    [self loadRequest:@{@"orderNumber":orderNumber} RequestMethod:@"bizadmin.getSalesOrderByOrderNumberForPos" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"orderNumber":orderNumber} RequestMethod:@"bizadmin.getSalesOrderByOrderNumberForPos" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -197,7 +197,7 @@
                                   @"photo_uuid":photoUUID,
                                   @"currentAddressId":defaultAddressID,
                                   @"currentOptometryId":defaultOptometryID};
-    [self loadRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

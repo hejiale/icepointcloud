@@ -11,6 +11,16 @@
 @implementation AFHTTPSessionManager (Extend)
 
 
+- (AFHTTPResponseSerializer *)responseSerializer
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
+    AFJSONResponseSerializer *responseSerializer  = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];
+    responseSerializer.acceptableContentTypes      = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
+    responseSerializer.removesKeysWithNullValues = YES;
+    return responseSerializer;
+}
+
 - (NSURLSessionDataTask *)sendRequestWithParams:(IPCJoinRequest *)request
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName
@@ -22,12 +32,7 @@
 {
     NSURLSessionDataTask * urlSessionDataTask = nil;
     
-    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];
-    responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
-    responseSerializer.removesKeysWithNullValues = YES;
-    self.responseSerializer = responseSerializer;
-    
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    self.responseSerializer = [self responseSerializer];
     
     void(^successCall)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
@@ -35,30 +40,31 @@
          {
              if (cacheEnable == IPCRequestCacheEnable) {
                  [[IPCNetworkCache sharedCache] setHttpCache:responseValue RequestMethod:request.requestMethod parameters:request.parameters];
-             }else{
-                 [[IPCNetworkCache sharedCache] removeCacheForRequestMethod:request.requestMethod parameters:request.parameters];
              }
-             if (success)
+             if (success){
                  success(responseValue, task);
-             
+             }
          } Failed:^(NSError * _Nonnull error) {
-             if (failure)
+             if (failure){
                  failure(error, task);
+             }
          }];
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };
     
     void(^progressCall)(NSProgress * _Nonnull uploadProgress) = ^(NSProgress * _Nonnull uploadProgress){
-        if (progress && uploadProgress)
+        if (progress && uploadProgress){
             progress(uploadProgress);
+        }
     };
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
         NSLog(@"-------Service Error  %@",error.localizedDescription);
-        if (failure)
-            failure([NSError errorWithDomain:NSCocoaErrorDomain code:error.code userInfo:@{kIPCNetworkErrorMessage:error.localizedDescription}], task);
+        if (failure){
+            failure(error, task);
+        }
         
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };
@@ -89,7 +95,6 @@
                                 success:successCall
                                 failure:failureCall];
     }
-    [urlSessionDataTask resume];
     return urlSessionDataTask;
 }
 

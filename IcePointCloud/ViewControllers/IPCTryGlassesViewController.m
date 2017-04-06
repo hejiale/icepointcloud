@@ -262,7 +262,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (error && status == IPCRefreshError){
             if (error.code != NSURLErrorNotConnectedToInternet) {
-                [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+                [IPCCustomUI showError:error.domain];
             }
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             strongSelf.productCollectionView.mj_footer.hidden = YES;
@@ -517,7 +517,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+                [IPCCustomUI showError:error.domain];
             }];
         }else{
             [IPCCustomUI showError:@"未检测到人脸轮廓"];

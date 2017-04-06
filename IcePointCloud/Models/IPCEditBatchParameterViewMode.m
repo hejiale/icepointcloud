@@ -42,7 +42,7 @@
              self.UpdateBlock();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -55,7 +55,7 @@
              self.UpdateBlock();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -82,7 +82,7 @@
                 self.UpdateBlock();
             }
         } FailureBlock:^(NSError *error) {
-            [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+            [IPCCustomUI showError:error.domain];
         }];
     }else{
         if (self.UpdateBlock) {
@@ -100,7 +100,7 @@
              self.UpdateBlock();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 

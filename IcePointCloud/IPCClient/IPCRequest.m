@@ -11,16 +11,28 @@
 @implementation IPCRequest
 
 #pragma mark //POST REQUEST
-+ (void)loadRequest:(id)parameters
++ (void)postRequest:(id)parameters
       RequestMethod:(NSString *)requestMethod
-        RequestType:(IPCRequestType)requestType
         CacheEnable:(IPCRequestCache)cacheEnable
        SuccessBlock:(void (^)(id responseValue))success
        FailureBlock:(void (^)(NSError *error))failure
 {
     IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
-    [[IPCHttpRequest sharedClient] sendRequestWithParams:request RequestType:requestType CacheEnable:cacheEnable SuccessBlock:success FailureBlock:failure];
+    [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypePost CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
 }
+
+
+#pragma mark //GET REQUEST
++ (void)getRequest:(id)parameters
+     RequestMethod:(NSString *)requestMethod
+       CacheEnable:(IPCRequestCache)cacheEnable
+      SuccessBlock:(void (^)(id responseValue))success
+      FailureBlock:(void (^)(NSError *error))failure
+{
+    IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
+    [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypeGet CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
+}
+
 
 #pragma mark //UPLOAD IMAGE
 + (void)uploadImageWithImageName:(NSString *)imageName
@@ -32,8 +44,7 @@
                     FailureBlock:(void (^)(NSError *error))failure
 {
     IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
-    [[IPCHttpRequest sharedClient] uploadImageWithParams:request image:imageData imageName:imageName SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
-    
+    [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:imageData ImageName:imageName RequestType:IPCRequestTypeUpload CacheEnable: IPCRequestCacheDisEnable SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
 }
 
 @end

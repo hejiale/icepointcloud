@@ -27,7 +27,12 @@
 
 @implementation IPCRootBarMenuView
 
-- (instancetype)initWithFrame:(CGRect)frame MenuIndex:(NSInteger)index PayOrder:(void (^)())payOrder Logout:(void (^)())logout Help:(void (^)())help Dismiss:(void (^)())dismiss
+- (instancetype)initWithFrame:(CGRect)frame
+                    MenuIndex:(NSInteger)index
+                     PayOrder:(void (^)())payOrder
+                       Logout:(void (^)())logout
+                         Help:(void (^)())help
+                      Dismiss:(void (^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {

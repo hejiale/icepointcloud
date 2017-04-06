@@ -56,7 +56,7 @@ typedef void(^DismissBlock)();
          _employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 

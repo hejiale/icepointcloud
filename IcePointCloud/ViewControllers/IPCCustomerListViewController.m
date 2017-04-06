@@ -90,7 +90,7 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
          [self.customerCollectionView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
          [self.customerCollectionView reloadData];
      }];
 }

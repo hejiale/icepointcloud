@@ -38,8 +38,10 @@ typedef NS_ENUM(NSUInteger, IPCRequestCache){
 static NSInteger const  kIPCServiceErrorCode   =  490;
 static NSString * const kIPCNetworkResult       =  @"result";
 static NSString * const kIPCNetworkError         =  @"error";
-static NSString * const kIPCNetworkErrorMessage = @"ErrorMessage";
 static NSString * const kIPCErrorNetworkAlertMessage = @"请检查您的设备->设置->无线局域网选项";
+static NSError *HTTPError(NSString *domain, int code) {
+    return [NSError errorWithDomain:domain code:code userInfo:nil];
+}
 
 /**
  *  The  client url

@@ -127,7 +127,7 @@
         }];
         [IPCCustomUI hiden];
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+        [IPCCustomUI showError:error.domain];
     }];
 }
 
@@ -142,7 +142,7 @@
              complete([self accessoryCartStock:cartItem]);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -173,7 +173,7 @@
              [IPCCustomUI hiden];
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
          if (failed) {
              failed();
          }

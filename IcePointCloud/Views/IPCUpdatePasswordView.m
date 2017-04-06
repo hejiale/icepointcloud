@@ -77,7 +77,7 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
              [IPCCustomUI hiden];
              self.CloseBlock();
          } FailureBlock:^(NSError *error) {
-             [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+             [IPCCustomUI showError:error.domain];
          }];
     }
 }

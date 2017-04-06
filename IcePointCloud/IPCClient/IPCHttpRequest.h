@@ -15,36 +15,25 @@
 
 + (IPCHttpRequest *)sharedClient;
 
-
 /**
- *  SEND REQUEST
- *
- *  @param request
- *  @param cacheType
- *  @param requestType
- *  @param success
- *  @param failure
+ CALL REQUEST
+
+ @param request
+ @param imageData
+ @param imageName
+ @param requestType
+ @param cacheEnable
+ @param success
+ @param progress 
+ @param failure
  */
-- (void)sendRequestWithParams:(IPCJoinRequest *)request
+- (void)callRequestWithParams:(IPCJoinRequest *)request
+                    ImageData:(NSData *)imageData
+                    ImageName:(NSString *)imageName
                   RequestType:(IPCRequestType)requestType
                   CacheEnable:(IPCRequestCache)cacheEnable
                  SuccessBlock:(void (^)(id responseValue))success
-                 FailureBlock:(void (^)(NSError * error))failure;
-
-/**
- *  UPLOAD IMAGE
- *
- *  @param requestParams
- *  @param imageData
- *  @param success
- *  @param uploadProgress
- *  @param failure
- */
-- (void)uploadImageWithParams:(IPCJoinRequest *)request
-                        image:(NSData *)imageData
-                    imageName:(NSString *)imageName
-                 SuccessBlock:(void (^)(id responseValue))success
-                ProgressBlock:(void (^)(NSProgress *))uploadProgress
+                ProgressBlock:(void (^)(NSProgress *))progress
                  FailureBlock:(void (^)(NSError * error))failure;
 
 /**

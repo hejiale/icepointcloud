@@ -18,7 +18,7 @@
         if ([responseValue isKindOfClass:[NSDictionary class]]) {
             if ([responseValue[@"resultList"] isKindOfClass:[NSArray class]]) {
                 [responseValue[@"resultList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:obj];
+                    IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:[NSDictionary changeType:obj]];
                     [self.listArray addObject:optometry];
                 }];
             }

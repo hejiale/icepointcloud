@@ -24,7 +24,8 @@
 @property (nonatomic, copy, readonly) NSString * cylRight;
 @property (nonatomic, copy, readonly) NSString * axisRight;
 @property (nonatomic, copy, readonly) NSString * addRight;
-@property (nonatomic, copy, readonly) NSString * distance;//pd
+@property (nonatomic, copy, readonly) NSString * distanceLeft;//pd
+@property (nonatomic, copy, readonly) NSString * distanceRight;//pd
 @property (nonatomic, copy, readonly) NSString * cylLeft;
 @property (nonatomic, copy, readonly) NSString * axisLeft;
 @property (nonatomic, copy, readonly) NSString * addLeft;

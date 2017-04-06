@@ -16,7 +16,7 @@
                                  FailureBlock:(void (^)(NSError * error))failure
 {
     NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self loadRequest:lensID RequestMethod:@"batchAdmin.getBatchLenInventory" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lensID RequestMethod:@"batchAdmin.getBatchLenInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -25,7 +25,7 @@
                                     FailureBlock:(void (^)(NSError * error))failure
 {
     NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self loadRequest:lensID RequestMethod:@"batchAdmin.getBatchReadingGlassesInventory" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lensID RequestMethod:@"batchAdmin.getBatchReadingGlassesInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -34,7 +34,7 @@
                                     FailureBlock:(void (^)(NSError * error))failure
 {
     NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self loadRequest:lensID RequestMethod:@"batchAdmin.getBatchContactLensInventory" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lensID RequestMethod:@"batchAdmin.getBatchContactLensInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -43,7 +43,7 @@
                                FailureBlock:(void (^)(NSError *error))failure
 {
     NSString * contactLens = [contactLensID componentsJoinedByString:@","];
-    [self loadRequest:contactLens RequestMethod:@"batchAdmin.getBatchContactLensInventoryDetailsByContactLensIds" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:contactLens RequestMethod:@"batchAdmin.getBatchContactLensInventoryDetailsByContactLensIds"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)queryAccessoryBatchSpecification:(NSString *)lenID
@@ -51,7 +51,7 @@
                             FailureBlock:(void (^)(NSError *error))failure
 {
     NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self loadRequest:lensID RequestMethod:@"batchAdmin.getContactSolutionDetailsWithProdIdForPos" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lensID RequestMethod:@"batchAdmin.getContactSolutionDetailsWithProdIdForPos"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

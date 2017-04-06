@@ -104,7 +104,7 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
          [self.orderDetailTableView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 

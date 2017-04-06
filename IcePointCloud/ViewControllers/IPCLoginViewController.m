@@ -120,7 +120,7 @@
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+        [IPCCustomUI showError:error.domain];
     }];
 }
 

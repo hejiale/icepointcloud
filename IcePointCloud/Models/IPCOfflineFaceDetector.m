@@ -39,7 +39,7 @@ typedef void(^ErrorBlock)(NSError*error);
         [self praseDetectResult:strResult];
     }else{
         if (self.errorBlock) {
-            NSError * error = [[NSError alloc]initWithDomain:NSCocoaErrorDomain code:0 userInfo:@{kIPCNetworkErrorMessage:@"未检测到人脸轮廓"}];
+            NSError * error = [[NSError alloc]initWithDomain:@"未检测到人脸轮廓" code:0 userInfo:nil];
             self.errorBlock(error);
         }
     }
@@ -59,7 +59,7 @@ typedef void(^ErrorBlock)(NSError*error);
 
             if([faceArray count]==0){
                 if (self.errorBlock) {
-                    NSError * error = [[NSError alloc]initWithDomain:NSCocoaErrorDomain code:0 userInfo:@{kIPCNetworkErrorMessage:@"未检测到人脸轮廓"}];
+                    NSError * error = [[NSError alloc]initWithDomain:@"未检测到人脸轮廓" code:0 userInfo:nil];
                     self.errorBlock(error);
                     return;
                 }
@@ -91,7 +91,7 @@ typedef void(^ErrorBlock)(NSError*error);
     }
     @catch (NSException *exception) {
         if (self.errorBlock) {
-            NSError * error = [[NSError alloc]initWithDomain:NSCocoaErrorDomain code:0 userInfo:@{kIPCNetworkErrorMessage:exception.name}];
+            NSError * error = [[NSError alloc]initWithDomain:exception.name code:0 userInfo:nil];
             self.errorBlock(error);
         }
     }

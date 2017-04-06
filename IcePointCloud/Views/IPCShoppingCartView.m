@@ -102,7 +102,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 - (void)updateTotalPrice{
     [self.totalPriceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"合计：￥%.f", [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]] BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor blackColor]]];
-    [self.navigationTitleLabel setText:[NSString stringWithFormat:@"购物车 (%d)",(long)[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
+    [self.navigationTitleLabel setText:[NSString stringWithFormat:@"购物车(%d)",(long)[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
 }
 
 

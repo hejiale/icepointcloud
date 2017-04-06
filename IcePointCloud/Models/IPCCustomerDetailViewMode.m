@@ -68,7 +68,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -91,7 +91,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -113,7 +113,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -129,7 +129,7 @@
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
          if (completeBlock)completeBlock();
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
      }];
 }
 
@@ -167,7 +167,7 @@
          [IPCCustomUI hiden];
          if (completeBlock)completeBlock();
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.userInfo[kIPCNetworkErrorMessage]];
+         [IPCCustomUI showError:error.domain];
          if (failure)failure();
      }];
 }

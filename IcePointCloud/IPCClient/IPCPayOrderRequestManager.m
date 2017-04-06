@@ -28,8 +28,9 @@
     
     for (int i = 0; i < cart.itemsCount; i++) {
         IPCShoppingCartItem *item = [cart itemAtIndex:i];
-        if (item.selected)
+        if (item.selected){
             [itemParams addObject:[item paramtersJSONForOrderRequest]];
+        }
     }
     
     NSDictionary * parameters = @{@"customerId":customerID,
@@ -43,7 +44,7 @@
                                   @"afterDiscountPrice":[IPCPayOrderMode sharedManager].isSelectEmploye ? @(discountPrice) : @(totalAmount),
                                   @"employeeId":employeID
                                   };
-    [self loadRequest:parameters RequestMethod:@"bizadmin.brushedSaveSalesOrder" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:parameters RequestMethod:@"bizadmin.brushedSaveSalesOrder" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -52,7 +53,7 @@
                    FailureBlock:(void (^)(NSError *error))failure
 {
     NSDictionary * responseParameter = @{@"pageNo":@"1",@"maxPageSize":@"10000",@"keyWord":keyword,@"isOnJob":@"true"};
-    [self loadRequest:responseParameter RequestMethod:@"employeeadmin.listEmployee" RequestType:IPCRequestTypePost CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:responseParameter RequestMethod:@"employeeadmin.listEmployee" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end
