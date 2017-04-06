@@ -204,22 +204,7 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
     
     if (searchWord.length){
         [self performSelectorOnMainThread:@selector(queryCustomerInfo) withObject:nil waitUntilDone:YES];
-        
-        __block BOOL isContain = NO;
-        
-        [self.keywordHistory enumerateObjectsUsingBlock:^(NSString *  _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([key isKindOfClass:[NSString class]]) {
-                if ([key isEqualToString:searchWord]) {
-                    isContain = YES;
-                    *stop = YES;
-                }
-            }
-        }];
-        
-        if (searchWord.length && !isContain) {
-            [self.keywordHistory insertObject:searchWord atIndex:0];
-            [self storeCustomer];
-        }
+        [self storeCustomer];
     }
     [textField resignFirstResponder];
     return YES;
@@ -235,7 +220,11 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
 
 
 #pragma mark //Save search local users
-- (void)storeCustomer{
+- (void)storeCustomer
+{
+    if (searchWord.length && ![self.keywordHistory containsObject:searchWord]) {
+        [self.keywordHistory insertObject:searchWord atIndex:0];
+    }
     
     if ([self.keywordHistory.lastObject isKindOfClass:[NSNull class]])
         [self.keywordHistory removeLastObject];

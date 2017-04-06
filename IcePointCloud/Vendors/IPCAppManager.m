@@ -73,14 +73,14 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
 
 - (NSArray *)localCustomerHistory
 {
-    __block NSMutableArray * keywordHistory = [[NSMutableArray alloc]init];
+    __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
     
     NSData *historyData = [NSUserDefaults jk_dataForKey:IPCSearchCustomerkey];
     
     if ([historyData isKindOfClass:[NSData class]]) {
         keywordHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
     } else {
-        keywordHistory = [[NSMutableArray alloc]init];
+        keywordHistory = [[NSArray alloc]init];
     }
     return keywordHistory;
 }
@@ -88,16 +88,30 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
 
 - (NSArray *)localProductsHistory
 {
-    __block NSMutableArray * keywordHistory = [[NSMutableArray alloc]init];
+    __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
     
     NSData *historyData = [NSUserDefaults jk_dataForKey:IPCListSearchHistoryKey];
     
     if ([historyData isKindOfClass:[NSData class]]) {
         keywordHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
     } else {
-        keywordHistory = [[NSMutableArray alloc]init];
+        keywordHistory = [[NSArray alloc]init];
     }
     return keywordHistory;
+}
+
+- (NSArray *)loginAccountHistory
+{
+    __block NSArray * accountHistory = [[NSMutableArray alloc]init];
+    
+    NSData *historyData = [NSUserDefaults jk_dataForKey:IPCListLoginHistoryKey];
+    
+    if ([historyData isKindOfClass:[NSData class]]) {
+        accountHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
+    } else {
+        accountHistory = [[NSArray alloc]init];
+    }
+    return accountHistory;
 }
 
 
@@ -122,61 +136,6 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
         return [UIImage imageNamed:imgName];
     }
     return nil;
-}
-
-
-+ (NSArray<NSString *> *)batchReadingDegrees{
-    NSMutableArray * degreeArray = [[NSMutableArray alloc]init];
-    float startDegree =0;
-    
-    while (startDegree < 6) {
-        startDegree += 0.25;
-        if (startDegree != 0) {
-            [degreeArray addObject:[NSString stringWithFormat:@"+%.2f",startDegree]];
-        }
-    }
-    return degreeArray;
-}
-
-+ (NSArray<NSString *> *)batchSphs{
-    NSMutableArray * sphArray = [[NSMutableArray alloc]init];
-    float startSph = 15.25;
-    
-    while (startSph > -15) {
-        startSph -= 0.25;
-        if (startSph > 0) {
-            [sphArray addObject:[NSString stringWithFormat:@"+%.2f",startSph]];
-        }else{
-            [sphArray addObject:[NSString stringWithFormat:@"%.2f",startSph]];
-        }
-    }
-    return sphArray;
-}
-
-+ (NSArray<NSString *> *)batchCyls{
-    NSMutableArray * cylArray = [[NSMutableArray alloc]init];
-    float startCyl = 6.25;
-    
-    while (startCyl > -6) {
-        startCyl -= 0.25;
-        if (startCyl > 0) {
-            [cylArray addObject:[NSString stringWithFormat:@"+%.2f",startCyl]];
-        }else{
-            [cylArray addObject:[NSString stringWithFormat:@"%.2f",startCyl]];
-        }
-    }
-    return cylArray;
-}
-
-+ (NSArray<NSString *> *)batchDegrees{
-    NSMutableArray * degreeArray = [[NSMutableArray alloc]init];
-    float startDegree = 0.25;
-    
-    while (startDegree > -20) {
-        startDegree -= 0.25;
-        [degreeArray addObject:[NSString stringWithFormat:@"%.2f",startDegree]];
-    }
-    return degreeArray;
 }
 
 

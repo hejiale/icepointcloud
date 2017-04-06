@@ -415,7 +415,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     [self.parameterTableView reloadData];
     
     if ([self.glasses filterType] == IPCTopFilterTypeLens && isLeft){
-        NSInteger startIndex = [[IPCAppManager batchSphs] indexOfObject:@"0.00"];
+        NSInteger startIndex = [[IPCBatchDegreeObject batchSphs] indexOfObject:@"0.00"];
         [self.parameterTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:startIndex inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     }else{
         [self.parameterTableView scrollToTopAnimated:NO];
@@ -919,13 +919,13 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        return isLeft ? [[IPCAppManager batchSphs]count] : [[IPCAppManager batchCyls]count];
+        return isLeft ? [[IPCBatchDegreeObject batchSphs]count] : [[IPCBatchDegreeObject batchCyls]count];
     }else if ([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        return [[IPCAppManager batchReadingDegrees]count];
+        return [[IPCBatchDegreeObject batchReadingDegrees]count];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
         if (self.contactSpecType == ContactLenSpecTypeDegree) {
             if ([self.batchNoneStockView superview])
-                return [[IPCAppManager batchDegrees] count];
+                return [[IPCBatchDegreeObject batchDegrees] count];
             return [self.parameterViewMode.contactDegreeList count];
         }else if (self.contactSpecType == ContactLenSpecTypeBatchNum){
             return [self.parameterViewMode batchNumArray].count;
@@ -955,13 +955,13 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
         cell = [[UINib nibWithNibName:@"IPCBatchParameterCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        [cell.parameterLabel setText:isLeft ? [IPCAppManager batchSphs][indexPath.row] : [IPCAppManager batchCyls][indexPath.row]];
+        [cell.parameterLabel setText:isLeft ? [IPCBatchDegreeObject batchSphs][indexPath.row] : [IPCBatchDegreeObject batchCyls][indexPath.row]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [cell.parameterLabel setText:[IPCAppManager batchReadingDegrees][indexPath.row]];
+        [cell.parameterLabel setText:[IPCBatchDegreeObject batchReadingDegrees][indexPath.row]];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
         if (self.contactSpecType == ContactLenSpecTypeDegree) {
             if ([self.batchNoneStockView superview]) {
-                [cell.parameterLabel setText:[IPCAppManager batchDegrees][indexPath.row]];
+                [cell.parameterLabel setText:[IPCBatchDegreeObject batchDegrees][indexPath.row]];
             }else{
                 BatchParameterObject * parameter = self.parameterViewMode.contactDegreeList[indexPath.row];
                 if (parameter)[cell.parameterLabel setText:parameter.degree];
@@ -1000,18 +1000,18 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([_glasses filterType] == IPCTopFilterTypeLens) {
         if (isLeft) {
-            [self.leftParameterLabel setText:[IPCAppManager batchSphs][indexPath.row]];
+            [self.leftParameterLabel setText:[IPCBatchDegreeObject batchSphs][indexPath.row]];
         }else{
-            [self.rightParameterLabel setText:[IPCAppManager batchCyls][indexPath.row]];
+            [self.rightParameterLabel setText:[IPCBatchDegreeObject batchCyls][indexPath.row]];
         }
         [self reloadLensCartStatus];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [self.leftParameterLabel setText:[IPCAppManager batchReadingDegrees][indexPath.row]];
+        [self.leftParameterLabel setText:[IPCBatchDegreeObject batchReadingDegrees][indexPath.row]];
         [self reloadLensCartStatus];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory){
         if (self.contactSpecType == ContactLenSpecTypeDegree) {
             if ([self.batchNoneStockView superview]) {
-                [self.batchNoneDegreeLabel setText:[IPCAppManager batchDegrees][indexPath.row]];
+                [self.batchNoneDegreeLabel setText:[IPCBatchDegreeObject batchDegrees][indexPath.row]];
                 [self reloadContactLensCartStatus];
             }else{
                 BatchParameterObject * parameter = self.parameterViewMode.contactDegreeList[indexPath.row];

@@ -85,7 +85,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [cell inputText:self.keywordHistory[indexPath.row] Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.keywordHistory removeObjectAtIndex:indexPath.row];
-        [strongSelf syncSearchHistory];
+        [strongSelf syncSearchHistory:nil];
         [strongSelf.searchTableView reloadData];
     }];
     
@@ -141,10 +141,15 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 }
 
 #pragma mark //Do Search History
-- (void)syncSearchHistory
+- (void)syncSearchHistory:(NSString *)keyWord
 {
-    if ([self.keywordHistory.lastObject isKindOfClass:[NSNull class]])
+    if (keyWord.length && ![self.keywordHistory containsObject:keyWord]) {
+        [self.keywordHistory insertObject:keyWord atIndex:0];
+    }
+    
+    if ([self.keywordHistory.lastObject isKindOfClass:[NSNull class]]){
         [self.keywordHistory removeLastObject];
+    }
     
     NSData *historyData  = [NSKeyedArchiver archivedDataWithRootObject:self.keywordHistory];
     [NSUserDefaults jk_setObject:historyData forKey:IPCListSearchHistoryKey];
@@ -161,26 +166,13 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 {
     NSString *curKeyword = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    if (!curKeyword.length)curKeyword = @"";
-    
-    __block BOOL isContain = NO;
-    
-    [self.keywordHistory enumerateObjectsUsingBlock:^(NSString *  _Nonnull key, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([key isEqualToString:curKeyword]) {
-            isContain = YES;
-            *stop = YES;
-        }
-    }];
-    
-    if (curKeyword.length && !isContain) {
-        [self.keywordHistory insertObject:curKeyword atIndex:0];
-        [self syncSearchHistory];
-    }
+    [self syncSearchHistory:curKeyword];
     
     if ([self.delegate respondsToSelector:@selector(didSearchWithKeyword:)])
         [self.delegate didSearchWithKeyword:curKeyword];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    
     return YES;
 }
 

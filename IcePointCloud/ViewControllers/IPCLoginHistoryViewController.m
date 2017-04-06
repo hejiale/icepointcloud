@@ -25,13 +25,17 @@ static NSString * const historyIdentifier = @"HistoryCellIdentifier";
     // Do any additional setup after loading the view from its nib.
     
     [self.historyTableView setTableFooterView:[[UIView alloc]init]];
-    
-    NSData *historyData = [NSUserDefaults jk_dataForKey:IPCListLoginHistoryKey];
-    if ([historyData isKindOfClass:[NSData class]])
-        self.loginHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
+    [self.loginHistory addObjectsFromArray:[IPCAppManager sharedManager].loginAccountHistory];
     [self.historyTableView reloadData];
 }
 
+
+- (NSMutableArray<NSString *> *)loginHistory{
+    if (!_loginHistory) {
+        _loginHistory = [[NSMutableArray alloc]init];
+    }
+    return _loginHistory;
+}
 
 - (void)showWithSize:(CGSize)size Position:(CGPoint)position Owner:(UIView *)owner
 {
@@ -69,7 +73,7 @@ static NSString * const historyIdentifier = @"HistoryCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([self.delegate respondsToSelector:@selector(chooseHistoryLoginName:)])
-        [self.delegate chooseHistoryLoginName:self.loginHistory[indexPath.row]];
+    [self.delegate chooseHistoryLoginName:self.loginHistory[indexPath.row]];
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

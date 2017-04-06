@@ -47,18 +47,19 @@
         [self.usernameTf setText:[NSUserDefaults jk_stringForKey:IPCUserNameKey]];
     }
     
-    NSData *historyData = [NSUserDefaults jk_dataForKey:IPCListLoginHistoryKey];
-    if ([historyData isKindOfClass:[NSData class]]) {
-        self.loginHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
-    } else {
-        self.loginHistory = [[NSMutableArray alloc]init];
-    }
-    
-    if ([self.loginHistory count] > 0){
+    [self.loginHistory addObjectsFromArray:[IPCAppManager sharedManager].loginAccountHistory];
+    if ([self.loginHistory count]){
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
     
     [[IPCHttpRequest sharedClient] cancelAllRequest];
+}
+
+- (NSMutableArray<NSString *> *)loginHistory{
+    if (!_loginHistory) {
+        _loginHistory = [[NSMutableArray alloc]init];
+    }
+    return _loginHistory;
 }
 
 #pragma mark //ClickEvents
@@ -144,7 +145,7 @@
 #pragma mark //Save UserName History
 - (void)syncUserAccountHistory:(NSString *)userName
 {
-    if ([IPCAppManager sharedManager].profile.user && [IPCAppManager sharedManager].profile.token.length)
+    if ([IPCAppManager sharedManager].profile.user && [IPCAppManager sharedManager].profile.token.length && userName.length)
     {
         [NSUserDefaults jk_setObject:userName forKey:IPCUserNameKey];
         

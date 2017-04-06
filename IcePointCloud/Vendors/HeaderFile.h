@@ -49,6 +49,7 @@
 #import "IPCPayOrderMode.h"
 #import "IPCEmployeList.h"
 #import "IPCAccessorySpecList.h"
+#import "IPCBatchDegreeObject.h"
 /**
  *  Category
  */

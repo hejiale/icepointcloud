@@ -258,6 +258,7 @@
 		CB5CC4CB1E8E24B20091D0FD /* UICollectionView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */; };
 		CB60C0FC1E9612A7001B11E2 /* IPCEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */; };
 		CB60C0FD1E9612A7001B11E2 /* IPCEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */; };
+		CB60C1021E962A45001B11E2 /* IPCBatchDegreeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
 		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
@@ -704,6 +705,8 @@
 		CB60C0F91E9612A7001B11E2 /* IPCEmptyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCEmptyAlertView.h; path = IcePointCloud/Vendors/IPCEmptyAlertView.h; sourceTree = SOURCE_ROOT; };
 		CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCEmptyAlertView.m; path = IcePointCloud/Vendors/IPCEmptyAlertView.m; sourceTree = SOURCE_ROOT; };
 		CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IPCEmptyAlertView.xib; path = IcePointCloud/Vendors/IPCEmptyAlertView.xib; sourceTree = SOURCE_ROOT; };
+		CB60C1001E962A45001B11E2 /* IPCBatchDegreeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchDegreeObject.h; sourceTree = "<group>"; };
+		CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchDegreeObject.m; sourceTree = "<group>"; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
@@ -1737,6 +1740,8 @@
 				0444C7461D9CEBD600553032 /* IPCContactLenSpecList.m */,
 				044E4BBC1E1CF36A00C7C9C3 /* IPCAccessorySpecList.h */,
 				044E4BBD1E1CF36A00C7C9C3 /* IPCAccessorySpecList.m */,
+				CB60C1001E962A45001B11E2 /* IPCBatchDegreeObject.h */,
+				CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */,
 			);
 			name = BatchParameter;
 			sourceTree = "<group>";
@@ -2283,6 +2288,7 @@
 				9EFAC1FC19D6E8F700C1EFBF /* IPCError.m in Sources */,
 				04BDB5CF1D38C44500F2D446 /* IPCChooseCategoryView.m in Sources */,
 				CB5CC49B1E8E00B70091D0FD /* IPCSwitch.m in Sources */,
+				CB60C1021E962A45001B11E2 /* IPCBatchDegreeObject.m in Sources */,
 				044E0ECE1E03CDC500FD2525 /* IPCPaySuccessView.m in Sources */,
 				04C9F7991DEE706C001258B2 /* IPCOrderPayTypeCell.m in Sources */,
 				CB404B101E7285E4005673CD /* IPCEditBatchParameterViewMode.m in Sources */,
@@ -2455,6 +2461,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
@@ -2485,11 +2492,13 @@
 				);
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos.Test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "1c93d522-4622-4ca5-9c19-c0db7d24be93";
 				PROVISIONING_PROFILE_SPECIFIER = icePointCloudTest;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2504,6 +2513,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
@@ -2535,6 +2545,7 @@
 				);
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2668,6 +2679,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
@@ -2700,6 +2712,7 @@
 				);
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos.Beta;
 				PRODUCT_NAME = "$(TARGET_NAME)";

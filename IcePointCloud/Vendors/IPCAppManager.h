@@ -59,21 +59,16 @@ extern NSString *const IPCShoppingCartCountKey;
  */
 - (NSArray *)localProductsHistory;
 
+
+/**
+ * Login Account Name
+ */
+- (NSArray *)loginAccountHistory;
+
 /**
  *  Access to different location of the model photos
  */
 + (UIImage *)modelPhotoWithType:(IPCModelType)type usage:(IPCModelUsage)usage;
-
-/**
- *  Bulk power range
- */
-+ (NSArray<NSString *> *)batchReadingDegrees;
-
-+ (NSArray<NSString *> *)batchSphs;
-
-+ (NSArray<NSString *> *)batchCyls;
-
-+ (NSArray<NSString *> *)batchDegrees;
 
 /**
  *  The order status
