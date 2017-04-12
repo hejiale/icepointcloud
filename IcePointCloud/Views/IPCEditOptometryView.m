@@ -1,154 +1,106 @@
 //
-//  EditOptometryView.m
+//  IPCCustomEditOptometryView.m
 //  IcePointCloud
 //
-//  Created by mac on 16/7/21.
+//  Created by mac on 2016/12/16.
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
 #import "IPCEditOptometryView.h"
+#import "IPCOptometryView.h"
+
+typedef  void(^CompleteBlock)();
+typedef  void(^DismissBlock)();
+
+@interface IPCEditOptometryView()
+
+@property (copy,  nonatomic) NSString * customerID;
+@property (copy,  nonatomic) CompleteBlock  completeBlock;
+@property (copy,  nonatomic) DismissBlock   dismissBlock;
+
+@property (weak, nonatomic) IBOutlet UIView *opometryBgView;
+@property (weak, nonatomic) IBOutlet UIView *optometryContentView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+
+@property (strong,  nonatomic) IPCOptometryView * optometryView;
+
+
+@end
 
 @implementation IPCEditOptometryView
 
-- (instancetype)initWithFrame:(CGRect)frame
-               LensViewHeight:(CGFloat)lensViewHeight
-                    ItemWidth:(CGFloat)itemWidth
-                   OrignSpace:(CGFloat)orignSpace
-                     Spaceing:(CGFloat)spacing
-                OptometryInfo:(NSArray *)optometryInfo
-                    IsCanEdit:(BOOL)isCanEdit
+- (instancetype)initWithFrame:(CGRect)frame CustomerID:(NSString *)customerID Complete:(void(^)())complete Dismiss:(void(^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.allOptometryInfo = optometryInfo;
+        self.completeBlock = complete;
+        self.dismissBlock = dismiss;
+        self.customerID = customerID;
         
-        NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"下加光/ADD", @"矫正视力/VA",@"双眼瞳距/PD"];
+        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditOptometryView" owner:self];
+        [self addSubview:view];
         
-        for (int i = 0; i < 3; i++) {
-            UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (lensViewHeight+orignSpace) * i, self.jk_width, lensViewHeight)];
-            [self addSubview:lensView];
-            
-            UIImageView *imgView = nil;
-            if (i != 2) {
-                imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:(i==1 ? @"icon_left" : @"icon_right")]];
-                imgView.contentMode = UIViewContentModeScaleAspectFit;
-                CGRect frame   = imgView.frame;
-                frame.origin.y = (lensViewHeight - frame.size.height) / 2;
-                imgView.frame  = frame;
-                [lensView addSubview:imgView];
-            }
-            
-            if ( i != 2) {
-                for (int j = 0; j < lensItems.count-1; j++) {
-                    [lensView addSubview:[self createLensView:CGRectMake(28 + 30 + (itemWidth + spacing) * j, 0, itemWidth, lensView.jk_height) Label:lensItems[j] Enabled:isCanEdit Tag:i*5 + j InputText:self.allOptometryInfo.count ? self.allOptometryInfo[i*5 + j] : @""]];
-                }
-            }else{
-                [lensView addSubview:[self createLensView:CGRectMake(28 + 30, 0, itemWidth + 100, lensView.jk_height) Label:[lensItems lastObject] Enabled:isCanEdit Tag:10 InputText:self.allOptometryInfo.count ? self.allOptometryInfo[10] : @""]];
-            }
-            [IPCCustomUI clearAutoCorrection:lensView];
-        }
+        self.opometryBgView.layer.cornerRadius = 5;
     }
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self createOptometryView];
+}
 
-- (UIView *)createLensView:(CGRect)rect Label:(NSString *)label Enabled:(BOOL)enable Tag:(NSInteger)tag InputText:(NSString *)text
+#pragma mark //Set UI
+- (void)createOptometryView
 {
-    UIView *itemView = [[UIView alloc] initWithFrame:rect];
-    [itemView addBorder:5 Width:0.7];
+    CGFloat originY = (self.optometryContentView.jk_height - 145)/2;
     
-    UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, itemView.jk_height)];
-    lbl.textColor = [UIColor lightGrayColor];
-    lbl.text = label;
-    lbl.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
-    lbl.backgroundColor = [UIColor clearColor];
-    
-    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, itemView.jk_width-10, itemView.jk_height)];
-    tf.textColor = [UIColor lightGrayColor];
-    tf.delegate  = self;
-    tf.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
-    tf.textAlignment = NSTextAlignmentRight;
-    tf.tag = tag;
-    tf.returnKeyType = UIReturnKeyDone;
-    tf.keyboardType = UIKeyboardTypeNumberPad;
-    tf.userInteractionEnabled = enable;
-    tf.text = text;
-    [tf setLeftView:lbl];
-    [tf setLeftViewMode:UITextFieldViewModeAlways];
-    [itemView addSubview:tf];
-    
-    [self.allTextFields addObject:tf];
-    
-    return itemView;
+    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(0, originY, self.optometryContentView.jk_width, 145)];
+    [self.optometryContentView addSubview:self.optometryView];
 }
 
-- (NSMutableArray<UITextField *> *)allTextFields{
-    if (!_allTextFields)
-        _allTextFields = [[NSMutableArray alloc]init];
-    return _allTextFields;
+#pragma mark //Request Method
+- (void)saveNewOpometryRequest{
+    [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:self.customerID
+                                                          SphLeft:self.optometryView.insertOptometry.sphLeft
+                                                         SphRight:self.optometryView.insertOptometry.sphRight
+                                                          CylLeft:self.optometryView.insertOptometry.cylLeft
+                                                         CylRight:self.optometryView.insertOptometry.cylRight
+                                                         AxisLeft:self.optometryView.insertOptometry.axisLeft
+                                                        AxisRight:self.optometryView.insertOptometry.axisRight
+                                                          AddLeft:self.optometryView.insertOptometry.addLeft
+                                                         AddRight:self.optometryView.insertOptometry.addRight
+                                              CorrectedVisionLeft:self.optometryView.insertOptometry.correctedVisionLeft
+                                             CorrectedVisionRight:self.optometryView.insertOptometry.correctedVisionRight
+                                                     DistanceLeft:self.optometryView.insertOptometry.distanceLeft
+                                                    DistanceRight:self.optometryView.insertOptometry.distanceRight
+                                                          Purpose:self.optometryView.insertOptometry.purpose
+                                                       EmployeeId:self.optometryView.insertOptometry.employeeId
+                                                     EmployeeName:self.optometryView.insertOptometry.employeeName
+                                                     SuccessBlock:^(id responseValue) {
+                                                         if (self.completeBlock) {
+                                                             self.completeBlock();
+                                                         }
+                                                         [IPCCustomUI showSuccess:@"新建验光单成功!"];
+                                                     } FailureBlock:^(NSError *error) {
+                                                         [IPCCustomUI showError:error.domain];
+                                                     }];
 }
 
 
-- (NSString *)subString:(NSInteger)tag{
-    __block NSString * text = @"";
-    
-    [self.allTextFields enumerateObjectsUsingBlock:^(UITextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx == tag){
-            if (obj.text.length) {
-                text = obj.text;
-            }else if (tag == 0 || tag == 1 || tag == 5 || tag == 6){
-                text = @"+0.00";
-            }
-        }
-    }];
-    return text;
+
+#pragma mark //Clicked Event
+- (IBAction)completeAction:(id)sender {
+    [self endEditing:YES];
+    [self saveNewOpometryRequest];
 }
 
-- (UITextField *)subTextField:(NSInteger)tag{
-    return (UITextField *)self.allTextFields[tag];
-}
 
-#pragma mark //UITextFieldDelegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (![IPCCommon judgeIsNumber:string])
-        return NO;
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSString * str = [textField.text jk_trimmingWhitespace];
-    
-    //axis   0 － 180 Not a plus sign
-    //correct  unlimited
-    
-    if (str.length > 0) {
-        if (textField.tag != 10) {
-            if (textField.tag == 2 || textField.tag == 7)
-            {
-                if ([str doubleValue] >= 0 && [str doubleValue] <= 180) {
-                    [textField setText:[NSString stringWithFormat:@"%.f",[str doubleValue]]];
-                }else{
-                    [textField setText:@""];
-                }
-            }else if (textField.tag != 4 && textField.tag != 9){
-                if (![str hasPrefix:@"-"]) {
-                    [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
-                }else{
-                    [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
-                }
-            }
-        }else{
-            [textField setText:[NSString stringWithFormat:@"%.f mm",[str doubleValue]]];
-        }
-    }else if (textField.tag == 0 || textField.tag == 1 || textField.tag == 5 || textField.tag == 6){
-        [textField setText:@"+0.00"];
+- (IBAction)backAction:(id)sender {
+    if (self.dismissBlock) {
+        self.dismissBlock();
     }
 }
-
 
 @end

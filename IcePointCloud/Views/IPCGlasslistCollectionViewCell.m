@@ -44,8 +44,12 @@
             if ([self.glasses imageWithType:IPCGlassesImageTypeProfileNormal])
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeProfileNormal]];
         }else{
-            if ([self.glasses imageWithType:IPCGlassesImageTypeThumb]) {
+            if ([self.glasses imageWithType:IPCGlassesImageTypeThumb] && [self.glasses filterType] != IPCTopFilterTypeCard) {
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeThumb]];
+            }else{
+                IPCGlassesImage * cardImage = [[IPCGlassesImage alloc]init];
+                cardImage.imageURL = [NSString stringWithFormat:@"%@/%@",IPC_ProductAPI_URL,self.glasses.valueCardPhotoURL];
+                [images addObject:cardImage];
             }
         }
         
@@ -68,6 +72,14 @@
         self.labelHeightConstraint.constant = labelHeight;
         
         //Shopping cart whether to join the product
+        if ([self.glasses filterType] == IPCTopFilterTypeCard) {
+            [self.addCartButton setHidden:YES];
+            [self.reduceButton setHidden:YES];
+        }else{
+            [self.addCartButton setHidden:NO];
+            [self.reduceButton setHidden:NO];
+        }
+        
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
         
         if (glassCount > 0) {

@@ -8,6 +8,7 @@
 
 #import "IPCCustomerListViewController.h"
 #import "IPCCustomerCollectionViewCell.h"
+#import "IPCInsertCustomerViewController.h"
 #import "IPCCustomerDetailViewController.h"
 #import "IPCSearchItemTableViewCell.h"
 
@@ -96,9 +97,11 @@ static NSString * const seachIdentifier = @"SearchItemCellIdentifier";
 }
 
 #pragma mark //Clicked Events
-- (IBAction)cancelSearchAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)insertNewCustomerAction:(id)sender {
+    IPCInsertCustomerViewController * insertCustomerVC = [[IPCInsertCustomerViewController alloc]initWithNibName:@"IPCInsertCustomerViewController" bundle:nil];
+    [self.navigationController pushViewController:insertCustomerVC animated:YES];
 }
+
 
 - (void)clearHistoryAction{
     [self clearSearchHistory];

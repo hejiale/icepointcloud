@@ -92,6 +92,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)beginReloadTableView{
     self.glassListViewMode.currentPage = 0;
     self.glassListCollectionView.mj_footer.hidden = NO;
+    
     [IPCCustomUI show];
     __weak typeof (self) weakSelf = self;
     
@@ -114,14 +115,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     
-    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.glassListCollectionView reloadData];
-            [strongSelf.refreshHeader endRefreshing];
-            [strongSelf.refreshFooter endRefreshing];
-            [IPCCustomUI hiden];
-        });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.glassListCollectionView reloadData];
+        [strongSelf.refreshHeader endRefreshing];
+        [strongSelf.refreshFooter endRefreshing];
+        [IPCCustomUI hiden];
     });
 }
 

@@ -49,7 +49,7 @@
     UIView * rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, self.jk_height)];
     [rightView setBackgroundColor:[UIColor clearColor]];
     
-    UIImageView * rightImage = [[UIImageView alloc]initWithFrame:CGRectMake(10, rightView.jk_height/2-6, 12, 12)];
+    UIImageView * rightImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, rightView.jk_height/2-6, 12, 12)];
     [rightImage setImage:[UIImage imageNamed:@"icon_down_arrow"]];
     rightImage.contentMode = UIViewContentModeScaleAspectFit;
     [rightImage setBackgroundColor:[UIColor clearColor]];

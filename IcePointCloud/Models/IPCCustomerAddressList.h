@@ -19,10 +19,10 @@
 
 @interface IPCCustomerAddressMode : NSObject
 
-@property (nonatomic, copy, readonly) NSString * addressID;
-@property (nonatomic, copy, readonly) NSString * contactName;
-@property (nonatomic, copy, readonly) NSString * phone;
-@property (nonatomic, copy, readonly) NSString * gender;
-@property (nonatomic, copy, readonly) NSString * detailAddress;
+@property (nonatomic, copy, readwrite) NSString * addressID;
+@property (nonatomic, copy, readwrite) NSString * contactName;
+@property (nonatomic, copy, readwrite) NSString * phone;
+@property (nonatomic, copy, readwrite) NSString * gender;
+@property (nonatomic, copy, readwrite) NSString * detailAddress;
 
 @end

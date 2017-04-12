@@ -21,6 +21,7 @@
 @property (nonatomic, copy, readonly) NSString * glassesID;// id
 @property (nonatomic, copy, readonly) NSString * glassCode;//Commodity item no
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
+@property (nonatomic, copy, readwrite) NSString * valueCardPhotoURL;//储值卡图片路径
 
 @property (nonatomic, copy, readonly) NSString * lensTypeName;//The lens type
 @property (nonatomic, copy, readonly) NSString * glassTypeName;//Frame type
@@ -62,9 +63,7 @@
 @property (nonatomic, assign, readonly) BOOL     solutionType;
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
-- (NSURL *)imageURL;
 - (IPCTopFilterType)filterType;
-- (NSString *)glassPropertyName;
 - (NSDictionary *)displayFields;
 
 @end

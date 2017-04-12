@@ -236,13 +236,11 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     
-    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.productCollectionView reloadData];
-            [self.refreshHeader endRefreshing];
-            [self.refreshFooter endRefreshing];
-            [IPCCustomUI hiden];
-        });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [self.productCollectionView reloadData];
+        [self.refreshHeader endRefreshing];
+        [self.refreshFooter endRefreshing];
+        [IPCCustomUI hiden];
     });
 }
 

@@ -87,7 +87,15 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
     /**
      *  ACCESSORY
      */
-    IPCTopFilterTypeAccessory
+    IPCTopFilterTypeAccessory,
+    /**
+     *  CARD
+     */
+    IPCTopFilterTypeCard,
+    /**
+     *  OTHERS
+     */
+    IPCTopFilterTypeOthers
 };
 
 /**
@@ -113,7 +121,7 @@ typedef NS_ENUM(NSInteger, IPCGlassesImageType) {
     /**
      *   THUMB
      */
-    IPCGlassesImageTypeThumb,
+    IPCGlassesImageTypeThumb
 };
 
 /**

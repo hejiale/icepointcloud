@@ -27,7 +27,7 @@
     if (_glasses) {
         IPCGlassesImage *gp = [_glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gp){
-            [self.productImageView setImageWithURL:self.glasses.imageURL placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
+            [self.productImageView setImageWithURL:gp.imageURL placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
             
             if (gp.width > 0 && gp.height > 0) {
                 __block CGFloat maxWidth = 512;

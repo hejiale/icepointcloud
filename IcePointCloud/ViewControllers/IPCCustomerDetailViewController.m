@@ -8,16 +8,17 @@
 
 #import "IPCCustomerDetailViewController.h"
 #import "IPCGlassDetailsViewController.h"
-#import "IPCHistoryOptometryCell.h"
-#import "IPCHistoryOrderCell.h"
+#import "IPCCustomerOptometryCell.h"
+#import "IPCCustomerHistoryOrderCell.h"
 #import "IPCCustomerDetailCell.h"
-#import "IPCCustomerAddressListCell.h"
+#import "IPCCustomerAddressCell.h"
 #import "IPCCustomerTopTitleCell.h"
 #import "IPCCustomerBottomCell.h"
 #import "IPCEditAddressView.h"
-#import "IPCCustomEditOptometryView.h"
+#import "IPCEditOptometryView.h"
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
+#import "IPCUpdateCustomerView.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
@@ -26,15 +27,13 @@ static NSString * const optometryIdentifier = @"HistoryOptometryCellIdentifier";
 static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifier";
 
-@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,IPCDataPickerViewDataSource,IPCDataPickerViewDelegate,UserDetailInfoCellDelegate>
+@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *topBarView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
-@property (weak, nonatomic) IBOutlet UIButton *sureButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCEditAddressView  *  editAddressView;
-@property (strong, nonatomic) IPCCustomEditOptometryView * editOptometryView;
+@property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
 
 @end
@@ -55,13 +54,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     
     [self setNavigationTitle:@"个人信息"];
     [self.topBarView addBottomLine];
-    [self.cancelButton addTopLine];
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     self.detailTableView.isHiden = YES;
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
     self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
-    [self.sureButton setBackgroundColor:COLOR_RGB_BLUE];
     [self commitUI];
 }
 
@@ -74,12 +71,13 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [IPCCustomUI show];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
-    self.customerViewMode.customerID = self.customer.customerID;
-    self.customerViewMode.customerPhone = self.customer.customerPhone;
-    [self.customerViewMode isCanChoose:^(BOOL isCan) {
-        [self.sureButton setEnabled:isCan];
-        [self.sureButton setAlpha:isCan ? 1 : 0.5];
-    }];
+    self.customerViewMode.currentCustomer = self.customer;
+    [self requestCustomerDetailInfo];
+}
+
+#pragma mark //Request Data
+- (void)requestCustomerDetailInfo{
+    [self.customerViewMode resetData];
     
     __weak typeof (self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
@@ -119,13 +117,25 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     
-    dispatch_group_notify(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.detailTableView reloadData];
-            [IPCCustomUI hiden];
-        });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.detailTableView reloadData];
+        [IPCCustomUI hiden];
     });
+}
+
+- (void)setDefaultOptometry:(NSString *)optometryID
+{
+    [self.customerViewMode setCurrentOptometry:optometryID Complete:^{
+        [self requestCustomerDetailInfo];
+    }];
+}
+
+- (void)setCurrentAddress:(NSString *)addressID
+{
+    [self.customerViewMode setCurrentAddress:addressID Complete:^{
+        [self requestCustomerDetailInfo];
+    }];
 }
 
 #pragma mark //Set UI
@@ -147,7 +157,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (void)loadEditOptometryView{
     __weak typeof (self) weakSelf = self;
-    self.editOptometryView = [[IPCCustomEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
+    self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView];
         [strongSelf.customerViewMode.optometryList removeAllObjects];
@@ -177,13 +187,20 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.detailOrderView show];
 }
 
+
+- (void)loadUpdateCustomerView{
+    IPCUpdateCustomerView * updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds];
+    updateCustomerView.currentDetailCustomer = self.customerViewMode.detailCustomer;
+    [self.view addSubview:updateCustomerView];
+    [self.view bringSubviewToFront:updateCustomerView];
+    [[updateCustomerView rac_signalForSelector:@selector(removeCoverAction:)] subscribeNext:^(id x) {
+        [updateCustomerView removeFromSuperview];
+    }];
+}
+
 #pragma mark //ClickEvents
 - (IBAction)backToLastAction{
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)backAction:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -221,27 +238,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }];
 }
 
-/**
- *   Choose Customer Opometry
- */
-- (IBAction)chooseCustomerOpometryAction:(id)sender {
-    __weak typeof (self) weakSelf = self;
-    [self.sureButton jk_showIndicator];
-    [self.customerViewMode updateUserInfo:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.sureButton jk_hideIndicator];
-        [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-    } Failure:^{
-         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.sureButton jk_hideIndicator];
-    }];
-}
-
 - (void)pushToProductDetailViewController:(IPCGlasses *)glass{
     IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
     detailVC.glasses = glass;
     [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:@"ShowShoppingCartNotification" object:nil];
         [detailVC.navigationController popToRootViewControllerAnimated:NO];
     }];
     [self.navigationController pushViewController:detailVC animated:YES];
@@ -260,7 +260,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
-        return 1;
+        return 2;
     }else if (section == 1){
         if (self.customerViewMode.isLoadMoreOptometry)
             return self.customerViewMode.optometryList.count + 2;
@@ -275,37 +275,36 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCCustomerDetailCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            cell.delegate = self;
-        }
-        if (self.customerViewMode && self.customerViewMode.detailCustomer) {
-            cell.currentCustomer = self.customerViewMode.detailCustomer;
-            if (self.customerViewMode.isCanEdit)[cell setAllSubViewIsEnable];
-            
-            __weak typeof (self) weakSelf = self;
+        if (indexPath.row == 0) {
+            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell setEditTitle:@"客户基本信息"];
             [[cell rac_signalForSelector:@selector(editAction:)] subscribeNext:^(id x) {
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                if (!strongSelf.customerViewMode.isCanEdit) {
-                    strongSelf.customerViewMode.isCanEdit = YES;
-                    [cell setAllSubViewIsEnable];
-                    [cell.userNameTextField becomeFirstResponder];
-                }
+                [self loadUpdateCustomerView];
             }];
+            return cell;
+        }else{
+            IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerDetailCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            if (self.customerViewMode && self.customerViewMode.detailCustomer) {
+                cell.currentCustomer = self.customerViewMode.detailCustomer;
+            }
+            return cell;
         }
-        return cell;
     }else if(indexPath.section == 1){
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setButtonTitle:@"历史验光单信息" IsShow:YES];
-            __weak typeof (self) weakSelf = self;
+            [cell setInsertTitle:@"历史验光单信息"];
+            
             [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                [strongSelf editOptometryAction];
+                [self editOptometryAction];
             }];
             return cell;
         }else if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] -1){
@@ -315,25 +314,21 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             return cell;
         }else{
-            IPCHistoryOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:optometryIdentifier];
+            IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:optometryIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCHistoryOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             if (self.customerViewMode && self.customerViewMode.optometryList.count) {
                 IPCOptometryMode * optometry = self.customerViewMode.optometryList[indexPath.row -1];
-                [cell setOptometryMode:optometry];
-                [cell.selectButton setSelected:[self.customerViewMode.currentOptometryID isEqualToString:optometry.optometryID]];
-                __weak typeof (self) weakSelf = self;
-                [[cell rac_signalForSelector:@selector(selectOptometryAction:)] subscribeNext:^(id x) {
-                    __strong typeof (weakSelf) strongSelf = weakSelf;
-                    if ([strongSelf.customerViewMode.currentOptometryID isEqualToString:optometry.optometryID]) {
-                        strongSelf.customerViewMode.currentOptometryID = nil;
-                    }else{
-                        IPCOptometryMode * optometry = strongSelf.customerViewMode.optometryList[indexPath.row-1];
-                        strongSelf.customerViewMode.currentOptometryID = optometry.optometryID;
-                    }
-                    [strongSelf.detailTableView reloadData];
-                }];
+                cell.optometryMode = optometry;
+            }
+            [[cell rac_signalForSelector:@selector(setDefaultOptometryAction:)] subscribeNext:^(id x) {
+                [self setDefaultOptometry:cell.optometryMode.optometryID];
+            }];
+            if ([self.customerViewMode.detailCustomer.currentOptometryId isEqualToString:cell.optometryMode.optometryID]) {
+                [cell.defaultButton setSelected:YES];
+            }else{
+                [cell.defaultButton setSelected:NO];
             }
             return cell;
         }
@@ -343,7 +338,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setButtonTitle:@"历史订单信息" IsShow:NO];
+            [cell setTopTitle:@"历史订单信息"];
             return cell;
         }else if (self.customerViewMode.isLoadMoreOrder && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] -1){
             IPCCustomerBottomCell * cell = [tableView dequeueReusableCellWithIdentifier:footLoadIdentifier];
@@ -352,9 +347,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             return cell;
         }else{
-            IPCHistoryOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:orderIdentifier];
+            IPCCustomerHistoryOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:orderIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCHistoryOrderCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomerHistoryOrderCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             if (self.customerViewMode && self.customerViewMode.orderList.count) {
                 IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
@@ -368,34 +363,28 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setButtonTitle:@"收货地址信息" IsShow:YES];
-            __weak typeof (self) weakSelf = self;
+            [cell setInsertTitle:@"收货地址信息"];
             [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                [strongSelf editAddressAction];
+                [self editAddressAction];
             }];
             return cell;
         }else{
-            IPCCustomerAddressListCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
+            IPCCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerAddressListCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             if (self.customerViewMode && self.customerViewMode.addressList.count) {
                 IPCCustomerAddressMode * address = self.customerViewMode.addressList[indexPath.row-1];
                 cell.addressMode = address;
-                [cell.chooseButton setSelected:[self.customerViewMode.currentAddressID isEqualToString:address.addressID]];
-                __weak typeof (self) weakSelf = self;
-                [[cell rac_signalForSelector:@selector(chooseAction:)]subscribeNext:^(id x) {
-                    __strong typeof (weakSelf) strongSelf = weakSelf;
-                    if ([strongSelf.customerViewMode.currentAddressID isEqualToString:address.addressID]) {
-                        strongSelf.customerViewMode.currentAddressID = nil;
-                    }else{
-                        IPCCustomerAddressMode * address = strongSelf.customerViewMode.addressList[indexPath.row-1];
-                        strongSelf.customerViewMode.currentAddressID = address.addressID;
-                    }
-                    [strongSelf.detailTableView reloadData];
-                }];
             }
+            if ([self.customerViewMode.detailCustomer.currentAddressId isEqualToString:cell.addressMode.addressID]) {
+                [cell.defaultButton setSelected:YES];
+            }else{
+                [cell.defaultButton setSelected:NO];
+            }
+            [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(id x) {
+                [self setCurrentAddress:cell.addressMode.addressID];
+            }];
             return cell;
         }
     }
@@ -403,24 +392,24 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 345;
+    if (indexPath.section == 0 && indexPath.row > 0) {
+        return 420;
     }else if (indexPath.section == 1 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1)
             return 50;
-        return 190;
+        return 160;
     }else if (indexPath.section == 2 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1)
             return 50;
-        return 95;
-    }else if ((indexPath.section == 1 && indexPath.row == 0) || (indexPath.section == 2 && indexPath.row == 0) || (indexPath.section == 3 && indexPath.row == 0)){
-        return 71;
+        return 80;
+    }else if (indexPath.section == 3 && indexPath.row > 0){
+        return 75;
     }
     return 60;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if ((self.customerViewMode.orderList.count == 0 && section == 2) || section == 0)return 0;
+    if (self.customerViewMode.orderList.count == 0 && section == 2)return 0;
     return 5;
 }
 
@@ -449,11 +438,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }
 }
 
-#pragma mark //UserDetailInfoCellDelegate
-- (void)reloadCustomer:(IPCDetailCustomer *)customer{
-    self.customerViewMode.detailCustomer = customer;
-    [self.detailTableView reloadData];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

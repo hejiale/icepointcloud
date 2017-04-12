@@ -7,8 +7,8 @@
 //
 
 #import "IPCPayOrderViewNormalSellCellMode.h"
-#import "IPCHistoryOptometryCell.h"
-#import "IPCCustomerAddressListCell.h"
+#import "IPCCustomerOptometryCell.h"
+#import "IPCCustomerAddressCell.h"
 #import "IPCPayOrderTitleCell.h"
 #import "IPCPayOrderCustomerCell.h"
 #import "IPCPayOrderProductCell.h"
@@ -57,10 +57,9 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
             [cell.topTitleLabel setText:@"历史验光信息"];
             return cell;
         }else{
-            IPCHistoryOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
+            IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCHistoryOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-                [cell.selectButton setHidden:YES];
+                cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setOptometryMode:[IPCCurrentCustomerOpometry sharedManager].currentOpometry];
             return cell;
@@ -74,16 +73,13 @@ static NSString * const payAmountStyleIdentifier = @"IPCPayAmountStyleCellIdenti
             [cell.topTitleLabel setText:@"收货地址信息"];
             return cell;
         }else{
-            IPCCustomerAddressListCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
+            IPCCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerAddressListCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-                [cell.chooseButton setHidden:YES];
-                cell.leftLeading.constant = -38;
-                cell.contactLeftLeading.constant = -38;
+                cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell.contactNameLabel setText:[NSString stringWithFormat:@"收货人:%@",[IPCCurrentCustomerOpometry sharedManager].currentAddress.contactName]];
-            [cell.addressLabel setText:[NSString stringWithFormat:@"收货地址:%@",[IPCCurrentCustomerOpometry sharedManager].currentAddress.detailAddress]];
-            [cell.contactPhoneLabel setText:[NSString stringWithFormat:@"联系电话:%@",[IPCCurrentCustomerOpometry sharedManager].currentAddress.phone]];
+//            [cell.contactNameLabel setText:[NSString stringWithFormat:@"收货人:%@",[IPCCurrentCustomerOpometry sharedManager].currentAddress.contactName]];
+//            [cell.addressLabel setText:[NSString stringWithFormat:@"收货地址:%@",[IPCCurrentCustomerOpometry sharedManager].currentAddress.detailAddress]];
+//            [cell.contactPhoneLabel setText:[NSString stringWithFormat:@"联系电话:%@",[IPCCurrentCustomerOpometry sharedManager].currentAddress.phone]];
             return cell;
         }
     }else if(indexPath.section == 3){

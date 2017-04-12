@@ -18,8 +18,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    [self.contentView addSubview:self.titleButton];
+    [self.addButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
+    [self.editButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -28,33 +28,29 @@
     // Configure the view for the selected state
 }
 
-- (IPCStaticImageTextButton *)titleButton{
-    if (!_titleButton) {
-        _titleButton = [IPCStaticImageTextButton buttonWithType:UIButtonTypeCustom];
-        [_titleButton setFrame:CGRectMake(40, 32, 0, 20)];
-        [_titleButton setBackgroundColor:[UIColor clearColor]];
-        [_titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [_titleButton.titleLabel setFont:[UIFont systemFontOfSize:18 weight:UIFontWeightThin]];
-        [_titleButton addTarget:self action:@selector(insertAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _titleButton;
-}
-
-- (void)setButtonTitle:(NSString *)title IsShow:(BOOL)isShow
+- (void)setTopTitle:(NSString *)title
 {
-    [self.titleButton setTitle:title forState:UIControlStateNormal];
-    
-    CGFloat width = [title jk_widthWithFont:self.titleButton.titleLabel.font constrainedToHeight:self.titleButton.jk_height];
-    self.titleButton.jk_width = width + 18 + (isShow ? 18 : 0);
-    
-    if (isShow){
-        [self.titleButton setImage:[UIImage imageNamed:@"icon_insert"] forState:UIControlStateNormal];
-        [self.titleButton setImgTextDistance:20];
-        [self.titleButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentLeft];
-    }
+    [self.topTitleLabel setText:title];
 }
 
-- (void)insertAction:(id)sender {
+- (void)setInsertTitle:(NSString *)title
+{
+    [self.topTitleLabel setText:title];
+    [self.addButton setHidden:NO];
+}
+
+- (void)setEditTitle:(NSString *)title
+{
+    [self.topTitleLabel setText:title];
+    [self.editButton setHidden:NO];
+}
+
+- (IBAction)insertAction:(id)sender {
+    
+}
+
+
+- (IBAction)editAction:(id)sender {
 }
 
 

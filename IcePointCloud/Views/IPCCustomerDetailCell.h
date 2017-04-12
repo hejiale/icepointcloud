@@ -8,30 +8,29 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol UserDetailInfoCellDelegate;
+@interface IPCCustomerDetailCell : UITableViewCell
 
-@interface IPCCustomerDetailCell : UITableViewCell<IPCDataPickerViewDataSource,IPCDataPickerViewDelegate,IPCDatePickViewControllerDelegate,UITextViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
-@property (strong, nonatomic) UIImageView *userPhotoImageView;
-@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *birthdayTextField;
-@property (weak, nonatomic) IBOutlet UITextField *genderTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *mailTextField;
-@property (weak, nonatomic) IBOutlet UITextField *ageTextFiled;
-@property (weak, nonatomic) IBOutlet IQTextView *memoTextView;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
-@property (assign, nonatomic) id<UserDetailInfoCellDelegate>delegate;
+@property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *genderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *handlersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memberNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memberLevlLabel;
+@property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *customerCategoryLabel;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UILabel *jobLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *returnVisitDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalPayAmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *storeValueLabel;
+@property (weak, nonatomic) IBOutlet UILabel *bookDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pointLabel;
+
 @property (copy, nonatomic) IPCDetailCustomer * currentCustomer;
 
-- (void)clear;
-- (void)setAllSubViewIsEnable;
 
 @end
 
-@protocol UserDetailInfoCellDelegate <NSObject>
-@optional
-- (void)reloadCustomer:(IPCDetailCustomer *)customer;
-
-@end

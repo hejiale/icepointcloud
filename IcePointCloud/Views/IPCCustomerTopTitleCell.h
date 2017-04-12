@@ -10,9 +10,13 @@
 
 @interface IPCCustomerTopTitleCell : UITableViewCell
 
-@property (strong, nonatomic) IPCStaticImageTextButton * titleButton;
+@property (weak, nonatomic) IBOutlet UILabel   *topTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 
-- (void)setButtonTitle:(NSString *)title IsShow:(BOOL)isShow;
+- (void)setTopTitle:(NSString *)title;
+- (void)setInsertTitle:(NSString *)title;
+- (void)setEditTitle:(NSString *)title;
 
 @end
 

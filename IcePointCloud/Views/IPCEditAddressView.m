@@ -7,18 +7,18 @@
 //
 
 #import "IPCEditAddressView.h"
+#import "IPCAddressView.h"
 
 typedef  void(^CompleteBlock)();
 typedef  void(^DismissBlock)();
 
-@interface IPCEditAddressView()<IPCDataPickerViewDataSource,IPCDataPickerViewDelegate>
+@interface IPCEditAddressView()
 
 @property (strong, nonatomic) IBOutlet UIView *editAddressView;
-@property (weak, nonatomic) IBOutlet UITextField *contactTextField;
-@property (weak, nonatomic) IBOutlet UITextField *genderTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 @property (weak, nonatomic) IBOutlet UIButton *saveAddressButton;
+@property (weak, nonatomic) IBOutlet UIView *addressContentView;
+@property (strong, nonatomic) IPCAddressView * addressView;
+
 @property (copy,  nonatomic) NSString * customerID;
 @property (copy,  nonatomic) CompleteBlock  completeBlock;
 @property (copy,  nonatomic) DismissBlock   dismissBlock;
@@ -41,35 +41,40 @@ typedef  void(^DismissBlock)();
         [self addSubview:view];
         
         self.editAddressView.layer.cornerRadius = 10;
-        [self.saveAddressButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
-        [IPCCustomUI clearAutoCorrection:self.editAddressView];
-        [self.genderTextField setRightButton:self Action:@selector(showGenderPickerAction) OnView:self.editAddressView];
-        
-        RAC(self.saveAddressButton,enabled) = [RACSignal combineLatest:@[self.contactTextField.rac_textSignal,self.phoneTextField.rac_textSignal,self.addressTextField.rac_textSignal,RACObserve(self, self.genderTextField.text)] reduce:^id(NSString *contactName,NSString *phone,NSString *address,NSString *gender){
-            return @(contactName.length && phone.length && address.length && gender.length);
-        }];
+        [self.saveAddressButton setBackgroundColor:COLOR_RGB_BLUE];
     }
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self createAddressView];
+}
+
+#pragma mark //Set UI
+- (void)createAddressView{
+    self.addressView = [[IPCAddressView alloc]initWithFrame:CGRectMake(0, 20, self.addressContentView.jk_width, 80)];
+    [self.addressContentView addSubview:self.addressView];
+}
 
 #pragma mark //Requst Method
 - (void)saveNewAddress{
-    [IPCCustomerRequestManager saveNewCustomerAddressWithAddressID:@""
-                                                          CustomID:self.customerID
-                                                       ContactName:self.contactTextField.text
-                                                            Gender:[IPCCommon gender:self.genderTextField.text]
-                                                             Phone:self.phoneTextField.text
-                                                           Address:self.addressTextField.text
-                                                      SuccessBlock:^(id responseValue)
-     {
-         if (self.completeBlock) {
-             self.completeBlock();
-         }
-         [IPCCustomUI showSuccess:@"新建地址成功!"];
-     } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
-     }];
+//    [IPCCustomerRequestManager saveNewCustomerAddressWithAddressID:@""
+//                                                          CustomID:self.customerID
+//                                                       ContactName:self.addressV
+//                                                            Gender:[IPCCommon gender:self.genderTextField.text]
+//                                                             Phone:self.phoneTextField.text
+//                                                           Address:self.addressTextField.text
+//                                                      SuccessBlock:^(id responseValue)
+//     {
+//         if (self.completeBlock) {
+//             self.completeBlock();
+//         }
+//         [IPCCustomUI showSuccess:@"新建地址成功!"];
+//     } FailureBlock:^(NSError *error) {
+//         [IPCCustomUI showError:error.domain];
+//     }];
 }
 
 #pragma mark //Clicked Events
@@ -82,49 +87,6 @@ typedef  void(^DismissBlock)();
 
 - (IBAction)completeAction:(id)sender {
     [self saveNewAddress];
-}
-
-- (void)showGenderPickerAction{
-    [self endEditing:YES];
-    
-    IPCDataPickViewController * pickerVC = [[IPCDataPickViewController alloc]initWithNibName:@"IPCDataPickViewController" bundle:nil];
-    pickerVC.dataSource = self;
-    pickerVC.delegate = self;
-    [pickerVC showWithPosition:CGPointMake(self.editAddressView.jk_width/2, self.genderTextField.jk_bottom) Size:CGSizeMake(self.editAddressView.jk_width, 150) Owner:self.editAddressView];
-}
-
-#pragma mark //CustomPickerViewDataSource
-- (NSInteger)numberOfComponentsInPickerView{
-    return 1;
-}
-
-- (NSInteger)pickerViewNumberOfRowsInComponent:(NSInteger)component{
-    return 2;
-}
-
-#pragma mark //CustomPickerViewDelegate
-- (NSString *)pickerViewTitleForRow:(NSInteger)row{
-    return row == 0 ? @"男":@"女";
-}
-
-- (void)didSelectContent:(NSString *)content titleForRow:(NSInteger)row{
-    [self.genderTextField setText:content];
-}
-
-
-#pragma mark //UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([textField isEqual:self.phoneTextField]) {
-        if (![IPCCommon checkTelNumber:[textField.text jk_trimmingWhitespace]]) {
-            [IPCCustomUI showError:@"请输入有效的手机号码!"];
-            [textField setText:@""];
-        }
-    }
 }
 
 

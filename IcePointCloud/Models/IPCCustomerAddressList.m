@@ -38,6 +38,18 @@
 
 @implementation IPCCustomerAddressMode
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.contactName = @"";
+        self.phone = @"";
+        self.gender = @"MALE";
+        self.detailAddress = @"";
+    }
+    return self;
+}
+
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"addressID"    :@"id",
              @"contactName"  :@"contactorName",

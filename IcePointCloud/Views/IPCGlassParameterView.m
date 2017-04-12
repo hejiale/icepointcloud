@@ -231,6 +231,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     [self.customsizedCancleButton addSignleCorner:UIRectCornerBottomRight Size:10];
 }
 
+#pragma mark //Set Data
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
     
@@ -607,8 +608,8 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 - (void)addLensToCart{
     if ([_glasses filterType] == IPCTopFilterTypeLens) {
         [[IPCShoppingCart sharedCart] addLensWithGlasses:self.glasses
-                                                     Sph:self.leftParameterLabel.text ?  : @"0.00"
-                                                     Cyl:self.rightParameterLabel.text ?  : @"0.00"
+                                                     Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
+                                                     Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                    Count:[self.lensNumLabel.text integerValue]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:self.glasses

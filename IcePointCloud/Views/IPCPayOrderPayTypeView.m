@@ -8,10 +8,13 @@
 
 #import "IPCPayOrderPayTypeView.h"
 
+typedef void(^UpdateBlock)();
+
 @interface IPCPayOrderPayTypeView()
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
+@property (nonatomic, copy) UpdateBlock updateBlock;
 
 @end
 
@@ -34,6 +37,41 @@
     [self.completeButton addSignleCorner:UIRectCornerBottomLeft|UIRectCornerBottomRight Size:5];
 }
 
+
+#pragma mark //Clicked Events
+- (IBAction)selectWechatAction:(UIButton *)sender {
+    if (!sender.selected)[sender setSelected:!sender.selected];
+    [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeWechat;
+    [IPCPayOrderMode sharedManager].payStyleName = @"WECHAT";
+    if (self.updateBlock)
+        self.updateBlock();
+}
+
+
+- (IBAction)selectAlipayAction:(UIButton *)sender {
+    if (!sender.selected)[sender setSelected:!sender.selected];
+    [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeAlipay;
+    [IPCPayOrderMode sharedManager].payStyleName = @"ALIPAY";
+    if (self.updateBlock)
+        self.updateBlock();
+}
+
+- (IBAction)selectCashAction:(UIButton *)sender {
+    if (!sender.selected)[sender setSelected:!sender.selected];
+    [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
+    [IPCPayOrderMode sharedManager].payStyleName = @"CASH";
+    if (self.updateBlock)
+        self.updateBlock();
+}
+
+
+- (IBAction)selectCardAction:(UIButton *)sender {
+    if (!sender.selected)[sender setSelected:!sender.selected];
+    [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCard;
+    [IPCPayOrderMode sharedManager].payStyleName = @"CARD";
+    if (self.updateBlock)
+        self.updateBlock();
+}
 
 
 @end

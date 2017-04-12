@@ -21,7 +21,6 @@
 
 
 + (void)storeUserOptometryInfoWithCustomID:(NSString *)customID
-                                  Distance:(NSString *)distance
                                    SphLeft:(NSString *)sphLeft
                                   SphRight:(NSString *)sphRight
                                    CylLeft:(NSString *)cylLeft
@@ -32,10 +31,17 @@
                                   AddRight:(NSString *)addRight
                        CorrectedVisionLeft:(NSString *)correctedVisionLeft
                       CorrectedVisionRight:(NSString *)correctedVisionRight
+                              DistanceLeft:(NSString *)distanceLeft
+                             DistanceRight:(NSString *)distanceRight
+                                   Purpose:(NSString *)purpose
+                                EmployeeId:(NSString *)employeeId
+                              EmployeeName:(NSString *)employeeName
                               SuccessBlock:(void (^)(id responseValue))success
-                              FailureBlock:(void (^)(NSError * error))failure{
+                              FailureBlock:(void (^)(NSError * error))failure
+{
     NSDictionary *params = @{@"customerId": customID,
-                             @"distance": distance,
+                             @"distanceRight": distanceRight,
+                             @"distanceLeft":distanceLeft,
                              @"sphLeft": sphLeft,
                              @"sphRight":sphRight,
                              @"cylLeft": cylLeft,
@@ -45,7 +51,10 @@
                              @"addLeft":addLeft,
                              @"addRight":addRight,
                              @"correctedVisionLeft":correctedVisionLeft,
-                             @"correctedVisionRight":correctedVisionRight};
+                             @"correctedVisionRight":correctedVisionRight,
+                             @"purpose":purpose,
+                             @"employeeId":employeeId,
+                             @"employeeName":employeeName};
     [self postRequest:params RequestMethod:@"customerAdmin.saveOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -180,9 +189,6 @@
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
                                 Remark:(NSString *)remark
-                             PhotoUUID:(NSString *)photoUUID
-                      DefaultAddressID:(NSString *)defaultAddressID
-                    DefaultOptometryID:(NSString *)defaultOptometryID
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -193,11 +199,37 @@
                                   @"age":age,
                                   @"email":email,
                                   @"birthday":birthday,
-                                  @"remark":remark,
-                                  @"photo_uuid":photoUUID,
-                                  @"currentAddressId":defaultAddressID,
-                                  @"currentOptometryId":defaultOptometryID};
+                                  @"remark":remark};
     [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)setDefaultOptometryWithCustomID:(NSString *)customID
+                     DefaultOptometryID:(NSString *)defaultOptometryID
+                           SuccessBlock:(void (^)(id responseValue))success
+                           FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:@{@"customerId":customID,@"optometryId":defaultOptometryID} RequestMethod:@"customerAdmin.setCurrentOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
+
++ (void)setDefaultAddressWithCustomID:(NSString *)customID
+                     DefaultAddressID:(NSString *)defaultAddressID
+                         SuccessBlock:(void (^)(id responseValue))success
+                         FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:@{@"customerId":customID,@"addressId":defaultAddressID} RequestMethod:@"customerAdmin.setCurrentAddress" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)getMemberLevelWithSuccessBlock:(void (^)(id))success
+                          FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:@"customerAdmin.listMemberLevel" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)getCustomerTypeSuccessBlock:(void (^)(id))success
+                       FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:@"customerAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

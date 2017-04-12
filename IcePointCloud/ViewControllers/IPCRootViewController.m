@@ -10,7 +10,7 @@
 #import "IPCTryGlassesViewController.h"
 #import "IPCHelpViewController.h"
 #import "IPCGlassListViewController.h"
-#import "IPCCustomerViewController.h"
+#import "IPCCustomerListViewController.h"
 #import "IPCPayOrderViewController.h"
 #import "IPCRootBarMenuView.h"
 
@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
-@property (nonatomic, strong) IPCCustomerViewController * customerInfoVC;
+@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
 @property (nonatomic, strong) IPCRootBarMenuView * menuView;
 
 @end
@@ -33,7 +33,7 @@
     
     _productVC = [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    _customerInfoVC = [[IPCCustomerViewController alloc]initWithNibName:@"IPCCustomerViewController" bundle:nil];
+    _customerInfoVC = [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
     [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC]];
 }
 
@@ -114,19 +114,19 @@
 }
 
 - (void)judgeIsInsertNewCustomer:(NSInteger)index{
-    if ([self.selectedViewController isKindOfClass:[IPCCustomerViewController class]] && self.selectedViewController)
+    if ([self.selectedViewController isKindOfClass:[IPCCustomerListViewController class]] && self.selectedViewController)
     {
-        __weak typeof (self) weakSelf = self;
-        IPCCustomerViewController * currentUserVC = (IPCCustomerViewController *)self.selectedViewController;
-        if (currentUserVC.isInserting) {
-            [IPCCustomUI showAlert:@"冰点云" Message:@"您正在新增验光数据，如果点击确定，客户验光记录将丢失，确定清空吗？" Owner:self Done:^{
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                [currentUserVC toExitInsertCustomer];
-                [strongSelf setSelectedIndex:index];
-            }];
-        }else{
+//        __weak typeof (self) weakSelf = self;
+//        IPCCustomerListViewController * currentUserVC = (IPCCustomerListViewController *)self.selectedViewController;
+//        if (currentUserVC.isInserting) {
+//            [IPCCustomUI showAlert:@"冰点云" Message:@"您正在新增验光数据，如果点击确定，客户验光记录将丢失，确定清空吗？" Owner:self Done:^{
+//                __strong typeof (weakSelf) strongSelf = weakSelf;
+//                [currentUserVC toExitInsertCustomer];
+//                [strongSelf setSelectedIndex:index];
+//            }];
+//        }else{
             [self setSelectedIndex:index];
-        }
+//        }
     }
 }
 

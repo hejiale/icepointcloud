@@ -23,26 +23,27 @@
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;
 
+
 /**
- *  SAVE CUSTOMER OPTOMETRY
- *
- *  @param customID             CUSTOMER ID
- *  @param distance             PD
- *  @param sphLeft              SPH
- *  @param sphRight
- *  @param cylLeft              CYL
- *  @param cylRight
- *  @param axisLeft             AXIS
- *  @param axisRight
- *  @param addLeft              ADD
- *  @param addRight
- *  @param correctedVisionLeft
- *  @param correctedVisionRight
- *  @param success
- *  @param failure
+ SAVE CUSTOMER OPTOMETRY
+ 
+ @param customID  用户id
+ @param sphLeft 球镜
+ @param sphRight
+ @param cylLeft 柱镜
+ @param cylRight
+ @param axisLeft
+ @param axisRight
+ @param addLeft
+ @param addRight
+ @param correctedVisionLeft
+ @param correctedVisionRight
+ @param distanceLeft
+ @param distanceRight
+ @param success
+ @param failure
  */
 + (void)storeUserOptometryInfoWithCustomID:(NSString *)customID
-                                  Distance:(NSString *)distance
                                    SphLeft:(NSString *)sphLeft
                                   SphRight:(NSString *)sphRight
                                    CylLeft:(NSString *)cylLeft
@@ -53,6 +54,11 @@
                                   AddRight:(NSString *)addRight
                        CorrectedVisionLeft:(NSString *)correctedVisionLeft
                       CorrectedVisionRight:(NSString *)correctedVisionRight
+                              DistanceLeft:(NSString *)distanceLeft
+                             DistanceRight:(NSString *)distanceRight
+                                   Purpose:(NSString *)purpose
+                                EmployeeId:(NSString *)employeeId
+                              EmployeeName:(NSString *)employeeName
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;
 
@@ -217,9 +223,6 @@
  *  @param email
  *  @param birthday
  *  @param remark
- *  @param photoUUID
- *  @param defaultAddressID
- *  @param defaultOptometryID
  *  @param success
  *  @param failure
  */
@@ -231,10 +234,55 @@
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
                                 Remark:(NSString *)remark
-                             PhotoUUID:(NSString *)photoUUID
-                      DefaultAddressID:(NSString *)defaultAddressID
-                    DefaultOptometryID:(NSString *)defaultOptometryID
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ 设置默认验光单
+ 
+ @param customID
+ @param defaultOptometryID
+ @param success
+ @param failure
+ */
++ (void)setDefaultOptometryWithCustomID:(NSString *)customID
+                     DefaultOptometryID:(NSString *)defaultOptometryID
+                           SuccessBlock:(void (^)(id responseValue))success
+                           FailureBlock:(void (^)(NSError * error))failure;
+
+
+
+/**
+ 设置默认地址
+ 
+ @param customID
+ @param defaultAddressID
+ @param success
+ @param failure
+ */
++ (void)setDefaultAddressWithCustomID:(NSString *)customID
+                     DefaultAddressID:(NSString *)defaultAddressID
+                         SuccessBlock:(void (^)(id responseValue))success
+                         FailureBlock:(void (^)(NSError * error))failure;
+
+/**
+ MemberLevel
+
+ @param success
+ @param failure
+ */
++ (void)getMemberLevelWithSuccessBlock:(void (^)(id responseValue))success
+                          FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ CustomerType
+
+ @param success
+ @param failure 
+ */
++ (void)getCustomerTypeSuccessBlock:(void (^)(id responseValue))success
+                       FailureBlock:(void (^)(NSError * error))failure;
 
 @end

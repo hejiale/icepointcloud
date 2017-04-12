@@ -166,6 +166,7 @@
         [_filterButton setBackgroundColor:[UIColor clearColor]];
         [_filterButton setImage:[UIImage imageNamed:@"list_btn_filter"] forState:UIControlStateNormal];
         [_filterButton setFrame:CGRectZero];
+        _filterButton.adjustsImageWhenHighlighted = NO;
         [_filterButton addTarget:self action:@selector(filterProductAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _filterButton;

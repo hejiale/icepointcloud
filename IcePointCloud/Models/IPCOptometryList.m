@@ -40,6 +40,28 @@
 
 @implementation IPCOptometryMode
 
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        self.cylRight = @"+0.00";
+        self.axisRight = @"";
+        self.addRight =@"";
+        self.distanceLeft = @"";
+        self.distanceRight = @"";
+        self.cylLeft =@"+0.00";
+        self.axisLeft = @"";
+        self.addLeft = @"";
+        self.correctedVisionRight = @"";
+        self.correctedVisionLeft = @"";
+        self.sphLeft = @"+0.00";
+        self.sphRight = @"+0.00";
+        self.purpose = @"";
+        self. employeeName = @"";
+    }
+    return self;
+}
+
+
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"optometryID": @"id"};
 }

@@ -53,6 +53,10 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
             return @"CONTACT_LENSES";
         case IPCTopFilterTypeAccessory:
             return @"ACCESSORY";
+        case IPCTopFilterTypeCard:
+            return @"VALUECARD";
+        case IPCTopFilterTypeOthers:
+            return @"OTHERS";
         default:
             break;
     }

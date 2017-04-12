@@ -7,20 +7,15 @@
 //
 
 #import "IPCPayOrderViewController.h"
-#import "IPCEmployeListView.h"
-#import "IPCPaySuccessView.h"
-#import "IPCPayOrderPayTypeView.h"
 #import "IPCPayOrderViewNormalSellCellMode.h"
 
-@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewCellDelegate>
+@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
-@property (strong, nonatomic) IPCEmployeListView * employeView;
-@property (strong, nonatomic) IPCPaySuccessView  * paySuccessView;
 @property (strong, nonatomic) IPCPayOrderViewNormalSellCellMode * normalSellCellMode;
 
 @end
@@ -39,8 +34,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
-    self.normalSellCellMode.delegate = self;
-    
     [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
     
     [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
@@ -53,28 +46,28 @@
 
 
 #pragma mark //Set UI
-- (void)loadEmployeView{
-    __weak typeof (self) weakSelf = self;
-    self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.employeView removeFromSuperview];self.employeView = nil;
-        [strongSelf.payOrderTableView reloadData];
-        [strongSelf updateTotalPrice];
-    }];
-    [self.view addSubview:self.employeView];
-    [self.view bringSubviewToFront:self.employeView];
-}
+//- (void)loadEmployeView{
+//    __weak typeof (self) weakSelf = self;
+//    self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
+//        __strong typeof (weakSelf) strongSelf = weakSelf;
+//        [strongSelf.employeView removeFromSuperview];self.employeView = nil;
+//        [strongSelf.payOrderTableView reloadData];
+//        [strongSelf updateTotalPrice];
+//    }];
+//    [self.view addSubview:self.employeView];
+//    [self.view bringSubviewToFront:self.employeView];
+//}
 
-- (void)showPopoverOrderBgView:(IPCOrder *)result{
-    __weak typeof (self) weakSelf = self;
-    self.paySuccessView = [[IPCPaySuccessView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds OrderInfo:result Dismiss:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.paySuccessView removeFromSuperview];
-    }];
-    [self.view addSubview:self.paySuccessView];
-    [self.view bringSubviewToFront:self.paySuccessView];
-    [self successPayOrder];
-}
+//- (void)showPopoverOrderBgView:(IPCOrder *)result{
+//    __weak typeof (self) weakSelf = self;
+//    self.paySuccessView = [[IPCPaySuccessView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds OrderInfo:result Dismiss:^{
+//        __strong typeof (weakSelf) strongSelf = weakSelf;
+//        [strongSelf.paySuccessView removeFromSuperview];
+//    }];
+//    [self.view addSubview:self.paySuccessView];
+//    [self.view bringSubviewToFront:self.paySuccessView];
+//    [self successPayOrder];
+//}
 
 #pragma mark //Clicked Events
 - (IBAction)backAction:(id)sender {
@@ -88,9 +81,7 @@
 
 
 - (IBAction)onPayOrderAction:(id)sender {
-    IPCPayOrderPayTypeView * payTypeView = [[IPCPayOrderPayTypeView alloc]init];
-    [self.view addSubview:payTypeView];
-    [self.view bringSubviewToFront:payTypeView];
+
 }
 
 - (void)successPayOrder{
@@ -141,16 +132,6 @@
     UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, (section == 3  ? 0 : 6))];
     [footView setBackgroundColor:[UIColor clearColor]];
     return footView;
-}
-
-#pragma mark //IPCPayOrderViewCellDelegate
-- (void)showEmployeeView{
-    [self loadEmployeView];
-}
-
-- (void)reloadPayOrderView{
-    [self.payOrderTableView reloadData];
-    [self updateTotalPrice];
 }
 
 - (void)didReceiveMemoryWarning {

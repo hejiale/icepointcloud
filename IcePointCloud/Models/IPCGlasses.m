@@ -36,23 +36,6 @@
     }
 }
 
-- (NSURL *)imageURL
-{
-    NSString *URLStr = nil;
-    IPCGlassesImage * glassImage = [self imageWithType:IPCGlassesImageTypeThumb];
-    if (glassImage) {
-        URLStr = glassImage.imageURL;
-    } else {
-        glassImage = [self imageWithType:IPCGlassesImageTypeFrontialNormal];
-        if (glassImage){
-            URLStr = glassImage.imageURL;
-        }
-    }
-    
-    if (URLStr)return [NSURL URLWithString:URLStr];
-    
-    return nil;
-}
 
 /**
  *  Glasses type
@@ -71,30 +54,12 @@
         return IPCTopFilterTypeLens;
     }else if ([self.lensTypeName isEqualToString:@"CONTACT_LENSES"]){
         return IPCTopFilterTypeContactLenses;
+    }else if ([self.lensTypeName isEqualToString:@"ACCESSORY"]){
+        return IPCTopFilterTypeAccessory;
+    }else if ([self.lensTypeName isEqualToString:@"VALUECARD"]){
+        return IPCTopFilterTypeCard;
     }
-    return IPCTopFilterTypeAccessory;
-}
-
-/**
- *  Glasses type name
- *
- */
-- (NSString *)glassPropertyName
-{
-    if ([self.glassTypeName isEqualToString:@"FRAMES"]) {
-        return @"镜架";
-    }else if ([self.glassTypeName isEqualToString:@"SUNGLASSES"]){
-        return @"太阳眼镜";
-    }else if ([self.glassTypeName isEqualToString:@"CUSTOMIZED"]){
-        return @"定制类眼镜";
-    }else if ([self.glassTypeName isEqualToString:@"READING_GLASSES"]){
-        return @"老花眼镜";
-    }else if ([self.lensTypeName isEqualToString:@"LENS"]){
-        return @"镜片";
-    }else if ([self.lensTypeName isEqualToString:@"CONTACT_LENSES"]){
-        return @"隐形眼镜";
-    }
-    return @"配件";
+    return IPCTopFilterTypeOthers;
 }
 
 
@@ -122,7 +87,8 @@
              @"refractiveIndex"     : @"refraction",
              @"isTryOn"              : @"proTry",
              @"productCount"        : @"count",
-             @"isBatch"               : @"batch"
+             @"isBatch"               : @"batch",
+             @"valueCardPhotoURL": @"photoUrl",
              };
 }
 

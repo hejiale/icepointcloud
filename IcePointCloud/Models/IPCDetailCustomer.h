@@ -25,6 +25,16 @@
 @property (nonatomic, copy, readwrite) NSString * contactorAddress;
 @property (nonatomic, copy, readwrite) NSString * currentAddressId;
 @property (nonatomic, copy, readwrite) NSString * contactorPhone;
-@property (nonatomic, copy, readwrite) NSString * age;
+@property (nonatomic, copy, readwrite) NSString * lastPhoneReturn;
+@property (nonatomic, copy, readwrite) NSString * memberLevel;
+@property (nonatomic, copy, readwrite) NSString * membergrowth;
+@property (nonatomic, copy, readwrite) NSString * consumptionAmount;
+@property (nonatomic, copy, readwrite) NSString * balance;
+@property (nonatomic, copy, readwrite) NSString * createDate;
+@property (nonatomic, copy, readwrite) NSString * customerType;
+@property (nonatomic, copy, readwrite) NSString * empName;
+@property (nonatomic, copy, readonly) NSString * memberId;
+@property (nonatomic, copy, readonly) NSString * integral;
+@property (nonatomic, copy, readwrite) NSString * occupation;
 
 @end

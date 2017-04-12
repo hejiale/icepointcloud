@@ -28,7 +28,7 @@
  */
 #import "IPCTabBarViewController.h"
 #import "IPCRootViewController.h"
-#import "IPCDataPickViewController.h"
+#import "IPCParameterTableViewController.h"
 #import "IPCDatePickViewController.h"
 #import "IPCNavigationViewController.h"
 #import "IPCRotatingViewController.h"

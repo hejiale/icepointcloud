@@ -7,12 +7,12 @@
 //
 
 #import "IPCCustomDetailOrderView.h"
-#import "OrderDetailTopTableViewCell.h"
+#import "IPCOrderDetailTopCell.h"
 #import "IPCOrderDetailContactCell.h"
-#import "IPCOrderProductCell.h"
+#import "IPCOrderDetailProductCell.h"
 #import "IPCOrderDetailInfoCell.h"
 #import "IPCOrderDetailMemoCell.h"
-#import "IPCOrderProductPriceCell.h"
+#import "IPCOrderDetailProductPriceCell.h"
 
 static NSString * const topIdentifier        = @"OrderDetailTopTableViewCellIdentifier";
 static NSString * const memoIdentifier    = @"OrderDetailMemoCellIdentifier";
@@ -123,9 +123,9 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        OrderDetailTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
+        IPCOrderDetailTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
         if (!cell) {
-            cell = [[UINib nibWithNibName:@"OrderDetailTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell = [[UINib nibWithNibName:@"IPCOrderDetailTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         if (self.detailOrder) {
             [cell.statusLabel setText:[IPCAppManager orderStatus:self.detailOrder.orderInfo.status]];
@@ -152,9 +152,9 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
         return cell;
     }else if (indexPath.section == 3){
         if (indexPath.row < self.detailOrder.products.count) {
-            IPCOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
+            IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCOrderDetailProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             
             if (self.detailOrder) {
@@ -164,9 +164,9 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
             
             return cell;
         }else{
-            IPCOrderProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
+            IPCOrderDetailProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCOrderDetailProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             if (self.detailOrder) {
                 [cell inputBeforeDiscountPrice:self.detailOrder.orderInfo.beforeDiscountPrice AfterPrice:self.detailOrder.orderInfo.totalPrice];
