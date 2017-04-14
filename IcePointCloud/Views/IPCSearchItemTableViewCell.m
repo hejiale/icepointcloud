@@ -22,16 +22,8 @@
     [self setBackgroundColor:[UIColor clearColor]];
 }
 
-- (void)inputText:(NSString *)text Complete:(void (^)())complete
-{
-    [self.textLbl setText:text];
-    self.CompleteBlock = complete;
-}
-
 - (IBAction)deleteSearchValueAction:(id)sender {
-    if (self.CompleteBlock) {
-        self.CompleteBlock();
-    }
+  
 }
 
 @end

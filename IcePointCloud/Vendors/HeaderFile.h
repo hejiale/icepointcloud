@@ -32,6 +32,7 @@
 #import "IPCDatePickViewController.h"
 #import "IPCNavigationViewController.h"
 #import "IPCRotatingViewController.h"
+#import "IPCRootNavigationViewController.h"
 /**
  *  Model
  */
@@ -50,6 +51,11 @@
 #import "IPCEmployeList.h"
 #import "IPCAccessorySpecList.h"
 #import "IPCBatchDegreeObject.h"
+#import "IPCEmployeeMode.h"
+#import "IPCInsertCustomer.h"
+#import "IPCCustomerTypeList.h"
+#import "IPCMemberLevelList.h"
+
 /**
  *  Category
  */

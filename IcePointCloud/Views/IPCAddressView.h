@@ -10,6 +10,13 @@
 
 @interface IPCAddressView : UIView
 
-@property (nonatomic, strong) IPCCustomerAddressMode * insertAddress;
+- (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update;
+
+@property (weak, nonatomic) IBOutlet UITextField *contacterTextField;
+@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+@property (weak, nonatomic) IBOutlet UIButton *maleButton;
+@property (weak, nonatomic) IBOutlet UIButton *femaleButton;
+
 
 @end

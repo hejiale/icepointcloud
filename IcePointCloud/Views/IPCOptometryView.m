@@ -8,25 +8,27 @@
 
 #import "IPCOptometryView.h"
 
+typedef void(^UpdateBlock)(void);
+
 @interface IPCOptometryView()<UITextFieldDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
 {
     NSInteger  functionTag;//用途
     NSInteger  optometristTag;//验光师
 }
 
-@property (nonatomic, strong) IPCEmployeList * employeList;
 @property (nonatomic, strong) NSMutableArray<UITextField *> * allTextFields;
-@property (nonatomic, strong) NSMutableArray * employeeNameArray;
+@property (nonatomic, copy) UpdateBlock updateBlock;
 
 @end
 
 @implementation IPCOptometryView
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self queryEmploye];
+        self.updateBlock = update;
+        
         [self createOptometryView:frame];
         self.insertOptometry = [[IPCOptometryMode alloc]init];
     }
@@ -133,33 +135,11 @@
     [parameterTableVC showWithPosition:CGPointMake(sender.jk_right, [[sender superview]superview].jk_bottom + self.jk_top) Size:CGSizeMake(sender.jk_width, height) Owner:self Direction:UIPopoverArrowDirectionDown];
 }
 
-#pragma mark //Request Method
-- (void)queryEmploye{
-    [IPCPayOrderRequestManager queryEmployeWithKeyword:@"" SuccessBlock:^(id responseValue)
-     {
-         _employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
-         [_employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmploye * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-             [self.employeeNameArray addObject:obj.name];
-         }];
-     } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
-     }];
-}
-
-
 #pragma mark //Init Data
 - (NSMutableArray<UITextField *> *)allTextFields{
     if (!_allTextFields)
         _allTextFields = [[NSMutableArray alloc]init];
     return _allTextFields;
-}
-
-
-- (NSMutableArray *)employeeNameArray{
-    if (!_employeeNameArray) {
-        _employeeNameArray = [[NSMutableArray alloc]init];
-    }
-    return _employeeNameArray;
 }
 
 - (UITextField *)subTextField:(NSInteger)tag{
@@ -175,8 +155,10 @@
     [self showParameterTableView:[self subTextField:functionTag] Height:150 Tag:functionTag];
 }
 
+
 - (void)insertOptometryInfo{
     self.insertOptometry.purpose = [self subTextField:0].text;
+    
     if ([self subTextField:1].text.length) {
         self.insertOptometry.sphRight = [self subTextField:1].text;
     }
@@ -198,12 +180,11 @@
     self.insertOptometry.distanceLeft = [self subTextField:11].text;
     self.insertOptometry.addLeft = [self subTextField:12].text;
     self.insertOptometry.employeeName = [self subTextField:13].text;
- 
-    [self.employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmploye * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.name isEqualToString:self.insertOptometry.employeeName]) {
-            self.insertOptometry.employeeId = obj.jobID;
-        }
-    }];
+    self.insertOptometry.employeeId = [[IPCEmployeeMode sharedManager] employeeId:self.insertOptometry.employeeName];
+    
+    if (self.updateBlock) {
+        self.updateBlock();
+    }
 }
 
 #pragma mark //UITextFieldDelegate
@@ -230,15 +211,19 @@
                 }else{
                     [textField setText:@""];
                 }
-            }else if (textField.tag != 5 && textField.tag != 11){
+            }else if (textField.tag == 5 || textField.tag == 11){
+                [textField setText:[NSString stringWithFormat:@"%.f mm",[str doubleValue]]];
+            }else{
                 if (![str hasPrefix:@"-"]) {
                     [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
                 }else{
                     [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
                 }
             }
-        }else{
-            [textField setText:[NSString stringWithFormat:@"%.f mm",[str doubleValue]]];
+        }
+    }else{
+        if (textField.tag == 1 || textField.tag == 2 || textField.tag == 7 || textField.tag == 8) {
+            [textField setText:@"+0.00"];
         }
     }
     [self insertOptometryInfo];
@@ -247,7 +232,7 @@
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
     if (tableView.view.tag == optometristTag)
-        return self.employeeNameArray;
+        return [[IPCEmployeeMode sharedManager] employeeNameArray];
     return @[@"远用",@"近用"];
 }
 

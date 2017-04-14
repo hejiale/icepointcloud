@@ -62,58 +62,52 @@
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;
 
+
+
 /**
- *  SAVE CUSTOMER INFO
- *
- *  @param customName
- *  @param phone
- *  @param gender
- *  @param age
- *  @param email
- *  @param birthday
- *  @param remark
- *  @param photoUUID
- *  @param distance
- *  @param sphLeft
- *  @param sphRight
- *  @param cylLeft
- *  @param cylRight
- *  @param axisLeft
- *  @param axisRight
- *  @param addLeft
- *  @param addRight
- *  @param correctedLeft
- *  @param correctedRight
- *  @param contactName
- *  @param contactGender
- *  @param contactPhone
- *  @param contactAddress
- *  @param success
- *  @param failure
+ SAVE CUSTOMER INFO
+ 
+ @param customName
+ @param phone
+ @param gender
+ @param email
+ @param birthday
+ @param remark
+ @param optometryList
+ @param contactName
+ @param contactGender
+ @param contactPhone
+ @param contactAddress
+ @param employeeId
+ @param employeeName
+ @param customerType
+ @param customerTypeId
+ @param occupation
+ @param memberLevel
+ @param memberLevelId
+ @param memberNum
+ @param success
+ @param failure
  */
 + (void)saveCustomerInfoWithCustomName:(NSString *)customName
                            CustomPhone:(NSString *)phone
                                 Gender:(NSString *)gender
-                                   Age:(NSString *)age
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
                                 Remark:(NSString *)remark
-                             PhotoUUID:(NSString *)photoUUID
-                              Distance:(NSString *)distance
-                               SphLeft:(NSString *)sphLeft
-                              SphRight:(NSString *)sphRight
-                               CylLeft:(NSString *)cylLeft
-                              CylRight:(NSString *)cylRight
-                              AxisLeft:(NSString *)axisLeft
-                             AxisRight:(NSString *)axisRight
-                               AddLeft:(NSString *)addLeft
-                              AddRight:(NSString *)addRight
-                         CorrectedLeft:(NSString *)correctedLeft
-                        CorrectedRight:(NSString *)correctedRight
+                         OptometryList:(NSArray *)optometryList
                            ContactName:(NSString *)contactName
                          ContactGender:(NSString *)contactGender
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
+                            EmployeeId:(NSString *)employeeId
+                          EmployeeName:(NSString *)employeeName
+                          CustomerType:(NSString *)customerType
+                        CustomerTypeId:(NSString *)customerTypeId
+                            Occupation:(NSString *)occupation
+                           MemberLevel:(NSString *)memberLevel
+                         MemberLevelId:(NSString *)memberLevelId
+                             MemberNum:(NSString *)memberNum
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
@@ -137,6 +131,7 @@
  *  @param failure
  */
 + (void)queryCustomerListWithKeyword:(NSString *)keyword
+                                Page:(NSInteger )page
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure;
 
@@ -212,27 +207,39 @@
                        SuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure;
 
+
 /**
- *  SELECT DEFAULT CUSTOMER
- *
- *  @param customID
- *  @param customName
- *  @param phone
- *  @param gender
- *  @param age
- *  @param email
- *  @param birthday
- *  @param remark
- *  @param success
- *  @param failure
+ SELECT DEFAULT CUSTOMER
+ 
+ @param customID
+ @param customName
+ @param phone
+ @param gender
+ @param email
+ @param birthday
+ @param employeeId
+ @param memberNum
+ @param memberLevelId
+ @param customerTypeId
+ @param job
+ @param remark
+ @param success
+ @param failure
  */
 + (void)updateCustomerInfoWithCustomID:(NSString *)customID
                           CustomerName:(NSString *)customName
                            CustomPhone:(NSString *)phone
                                 Gender:(NSString *)gender
-                                   Age:(NSString *)age
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
+                            EmployeeId:(NSString *)employeeId
+                             MemberNum:(NSString *)memberNum
+                         MemberLevelId:(NSString *)memberLevelId
+                        CustomerTypeId:(NSString *)customerTypeId
+                          EmployeeName:(NSString *)employeeName
+                          CustomerType:(NSString *)customerType
+                           MemberLevel:(NSString *)memberLevel
+                                   Job:(NSString *)job
                                 Remark:(NSString *)remark
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
@@ -268,7 +275,7 @@
 
 /**
  MemberLevel
-
+ 
  @param success
  @param failure
  */
@@ -278,9 +285,9 @@
 
 /**
  CustomerType
-
+ 
  @param success
- @param failure 
+ @param failure
  */
 + (void)getCustomerTypeSuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure;

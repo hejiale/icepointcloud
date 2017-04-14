@@ -62,52 +62,44 @@
 + (void)saveCustomerInfoWithCustomName:(NSString *)customName
                            CustomPhone:(NSString *)phone
                                 Gender:(NSString *)gender
-                                   Age:(NSString *)age
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
                                 Remark:(NSString *)remark
-                             PhotoUUID:(NSString *)photoUUID
-                              Distance:(NSString *)distance
-                               SphLeft:(NSString *)sphLeft
-                              SphRight:(NSString *)sphRight
-                               CylLeft:(NSString *)cylLeft
-                              CylRight:(NSString *)cylRight
-                              AxisLeft:(NSString *)axisLeft
-                             AxisRight:(NSString *)axisRight
-                               AddLeft:(NSString *)addLeft
-                              AddRight:(NSString *)addRight
-                         CorrectedLeft:(NSString *)correctedLeft
-                        CorrectedRight:(NSString *)correctedRight
+                         OptometryList:(NSArray *)optometryList
                            ContactName:(NSString *)contactName
                          ContactGender:(NSString *)contactGender
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
+                            EmployeeId:(NSString *)employeeId
+                          EmployeeName:(NSString *)employeeName
+                          CustomerType:(NSString *)customerType
+                        CustomerTypeId:(NSString *)customerTypeId
+                            Occupation:(NSString *)occupation
+                           MemberLevel:(NSString *)memberLevel
+                         MemberLevelId:(NSString *)memberLevelId
+                             MemberNum:(NSString *)memberNum
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
     NSDictionary *params = @{@"customerName": customName,
                              @"customerPhone":phone,
                              @"genderString":gender,
-                             @"age":age,
                              @"email":email,
                              @"birthday":birthday,
                              @"remark":remark,
-                             @"photo_uuid":photoUUID,
-                             @"distance":distance,
-                             @"sphLeft":sphLeft,
-                             @"sphRight":sphRight,
-                             @"cylLeft":cylLeft,
-                             @"cylRight":cylRight,
-                             @"axisLeft":axisLeft,
-                             @"axisRight":axisRight,
-                             @"addLeft":addLeft,
-                             @"addRight":addRight,
-                             @"correctedVisionLeft":correctedLeft,
-                             @"correctedVisionRight":correctedRight,
                              @"contactorName":contactName,
                              @"contactorGengerString":contactGender,
                              @"contactorPhone":contactPhone,
-                             @"contactorAddress":contactAddress};
+                             @"contactorAddress":contactAddress,
+                             @"employeeId":employeeId,
+                             @"empName":employeeName,
+                             @"customerType":customerType,
+                             @"customerTypeId":customerTypeId,
+                             @"memberLevel":memberLevel,
+                             @"memberLevelId":memberLevelId,
+                             @"memberId":memberNum,
+                             @"occupation":occupation,
+                             @"optometrys":optometryList};
     [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -121,10 +113,11 @@
 
 
 + (void)queryCustomerListWithKeyword:(NSString *)keyword
+                                Page:(NSInteger )page
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"keyword":keyword} RequestMethod:@"customerAdmin.listAllCustomer" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"keyword":keyword,@"pageNo":@(page),@"maxPageSize":@(15)} RequestMethod:@"customerAdmin.listCustomer" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -185,9 +178,16 @@
                           CustomerName:(NSString *)customName
                            CustomPhone:(NSString *)phone
                                 Gender:(NSString *)gender
-                                   Age:(NSString *)age
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
+                            EmployeeId:(NSString *)employeeId
+                             MemberNum:(NSString *)memberNum
+                         MemberLevelId:(NSString *)memberLevelId
+                        CustomerTypeId:(NSString *)customerTypeId
+                          EmployeeName:(NSString *)employeeName
+                          CustomerType:(NSString *)customerType
+                           MemberLevel:(NSString *)memberLevel
+                                   Job:(NSString *)job
                                 Remark:(NSString *)remark
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
@@ -196,10 +196,18 @@
                                   @"customerName":customName,
                                   @"customerPhone":phone,
                                   @"genderString":gender,
-                                  @"age":age,
                                   @"email":email,
                                   @"birthday":birthday,
-                                  @"remark":remark};
+                                  @"remark":remark,
+                                  @"employeeId":employeeId,
+                                  @"memberId":memberNum,
+                                  @"memberLevelId":memberLevelId,
+                                  @"customerTypeId":customerTypeId,
+                                  @"occupation":job,
+                                  @"empName":employeeName,
+                                  @"customerType":customerType,
+                                  @"memberLevel":memberLevel
+                                  };
     [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -217,7 +225,7 @@
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID,@"addressId":defaultAddressID} RequestMethod:@"customerAdmin.setCurrentAddress" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"id":defaultAddressID} RequestMethod:@"customerAdmin.setCurrentAddress" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getMemberLevelWithSuccessBlock:(void (^)(id))success

@@ -11,8 +11,5 @@
 @interface IPCSearchItemTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *seachTitleLabel;
-@property (copy, nonatomic) void(^CompleteBlock)();
-
-- (void)inputText:(NSString *)text Complete:(void(^)())complete;
 
 @end

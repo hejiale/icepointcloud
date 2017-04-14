@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) IPCAddressView * addressView;
 
+- (void)updateInsertAddressUI;
+
 @end

@@ -45,6 +45,7 @@
         self.contactName = @"";
         self.phone = @"";
         self.gender = @"MALE";
+        self.genderString = @"男";
         self.detailAddress = @"";
     }
     return self;

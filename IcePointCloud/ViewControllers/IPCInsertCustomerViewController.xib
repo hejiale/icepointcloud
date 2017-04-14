@@ -12,7 +12,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCInsertCustomerViewController">
             <connections>
                 <outlet property="tableFootView" destination="0Pm-Iu-SbG" id="FA5-eb-LKA"/>
-                <outlet property="topBarView" destination="ito-75-Yd5" id="N7C-uC-0gM"/>
                 <outlet property="userInfoTableView" destination="aPT-fP-hol" id="36T-aY-dSX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,14 +21,14 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="688"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="aPT-fP-hol">
-                    <rect key="frame" x="0.0" y="70" width="1024" height="618"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="aPT-fP-hol">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="688"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="0.1037296660958904" colorSpace="calibratedWhite"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="350" id="N31-sf-Naq"/>
                     </constraints>
-                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.66666666666666663" alpha="0.20178724315068494" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                     <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -43,49 +42,13 @@
                         <outlet property="delegate" destination="-1" id="N3S-ym-Ot7"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ito-75-Yd5">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="70"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApV-4H-HBj">
-                            <rect key="frame" x="0.0" y="20" width="60" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="60" id="afh-Pd-2Sm"/>
-                            </constraints>
-                            <state key="normal" image="icon_back"/>
-                            <connections>
-                                <action selector="closeAction:" destination="-1" eventType="touchUpInside" id="lZk-Xh-gZL"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="新增客户" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ecv-jj-UO6">
-                            <rect key="frame" x="462" y="20" width="100" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="1G9-G5-R5N"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Ecv-jj-UO6" secondAttribute="bottom" constant="5" id="6YV-4q-hn2"/>
-                        <constraint firstItem="Ecv-jj-UO6" firstAttribute="top" secondItem="ito-75-Yd5" secondAttribute="top" constant="20" id="GCT-0X-mI4"/>
-                        <constraint firstAttribute="height" constant="70" id="OGK-fL-uSg"/>
-                        <constraint firstAttribute="bottom" secondItem="ApV-4H-HBj" secondAttribute="bottom" id="Q2A-9D-PA9"/>
-                        <constraint firstItem="ApV-4H-HBj" firstAttribute="leading" secondItem="ito-75-Yd5" secondAttribute="leading" id="RLL-Dy-Xoe"/>
-                        <constraint firstItem="ApV-4H-HBj" firstAttribute="top" secondItem="ito-75-Yd5" secondAttribute="top" constant="20" id="v6Y-FV-WOq"/>
-                        <constraint firstItem="Ecv-jj-UO6" firstAttribute="centerX" secondItem="ito-75-Yd5" secondAttribute="centerX" id="z9V-fp-HSz"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="aPT-fP-hol" secondAttribute="trailing" id="3Ma-VB-8VE"/>
                 <constraint firstAttribute="bottom" secondItem="aPT-fP-hol" secondAttribute="bottom" id="JOf-Rx-gLJ"/>
+                <constraint firstItem="aPT-fP-hol" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="L7Q-9E-OKj"/>
                 <constraint firstItem="aPT-fP-hol" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mk9-tb-QoI"/>
-                <constraint firstItem="ito-75-Yd5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="W55-sf-n72"/>
-                <constraint firstAttribute="trailing" secondItem="ito-75-Yd5" secondAttribute="trailing" id="XcM-z9-PO7"/>
-                <constraint firstItem="ito-75-Yd5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="jlv-bg-Q9H"/>
-                <constraint firstItem="aPT-fP-hol" firstAttribute="top" secondItem="ito-75-Yd5" secondAttribute="bottom" id="rg6-OK-ZBW"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
@@ -100,6 +63,9 @@
                         <constraint firstAttribute="width" constant="195" id="uni-OX-Q19"/>
                     </constraints>
                     <state key="normal" image="icon_insert_customer"/>
+                    <connections>
+                        <action selector="insertNewCustomerAction:" destination="-1" eventType="touchUpInside" id="ic9-ab-WhD"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5C5-Ky-r8d">
                     <rect key="frame" x="534.5" y="12.5" width="195" height="35"/>
@@ -108,6 +74,9 @@
                         <constraint firstAttribute="width" constant="195" id="j3e-Cc-viB"/>
                     </constraints>
                     <state key="normal" image="icon_save_customer"/>
+                    <connections>
+                        <action selector="saveNewCustomerAction:" destination="-1" eventType="touchUpInside" id="jjZ-sK-5QA"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -125,7 +94,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_back" width="22" height="22"/>
         <image name="icon_insert_customer" width="195" height="35"/>
         <image name="icon_save_customer" width="195" height="35"/>
     </resources>

@@ -22,18 +22,9 @@
 
 
 - (void)clearData{
-    [IPCPayOrderMode sharedManager].employeAmount = 0;
-    [IPCPayOrderMode sharedManager].prepaidAmount = 0;
-    [IPCPayOrderMode sharedManager].orderMemo = @"";
-    [IPCPayOrderMode sharedManager].currentEmploye = nil;
-    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
+
     [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeNone;
-    [IPCPayOrderMode sharedManager].isSelectEmploye = NO;
-    [IPCPayOrderMode sharedManager].payStyleName = nil;
-    [IPCPayOrderMode sharedManager].isOrder = NO;
-//    [IPCPayOrderMode sharedManager].prePayType = IPCOrderPreSellPayTypeNone;
-    [IPCPayOrderMode sharedManager].preEmployeAmount = 0;
-    [IPCPayOrderMode sharedManager].preSellPrepaidAmount = 0;
+
     
 }
 

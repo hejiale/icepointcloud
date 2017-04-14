@@ -12,6 +12,7 @@
 
 + (IPCCurrentCustomerOpometry *)sharedManager;
 
+@property (nonatomic, assign, readwrite) BOOL  isOrderStatus;//是否支付订单状态
 @property (nonatomic, strong, readwrite) IPCDetailCustomer * currentCustomer;
 @property (nonatomic, strong, readwrite) IPCCustomerAddressMode  * currentAddress;
 @property (nonatomic, strong, readwrite) IPCOptometryMode     * currentOpometry;

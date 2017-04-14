@@ -8,14 +8,14 @@
 
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewNormalSellCellMode.h"
+#import "IPCSearchCustomerViewController.h"
+#import "IPCEmployeListView.h"
 
-@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UIButton *payButton;
-@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (strong, nonatomic) IBOutlet UIView *tableFootView;
+@property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewNormalSellCellMode * normalSellCellMode;
 
 @end
@@ -33,30 +33,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
-    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
     
-    [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
+    [self setNavigationTitle:@"确认订单"];
+    self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
+    self.normalSellCellMode.delegate = self;
+
+    [IPCCurrentCustomerOpometry sharedManager].isOrderStatus = YES;
+    
+    [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    [self.topView addBottomLine];
-    [self.bottomView addTopLine];
-    [self.payButton setBackgroundColor:COLOR_RGB_BLUE];
     [self updateTotalPrice];
+    
+    [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self setNavigationBarStatus:NO];
+    [self.payOrderTableView reloadData];
+}
 
 #pragma mark //Set UI
-//- (void)loadEmployeView{
-//    __weak typeof (self) weakSelf = self;
-//    self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
-//        __strong typeof (weakSelf) strongSelf = weakSelf;
-//        [strongSelf.employeView removeFromSuperview];self.employeView = nil;
-//        [strongSelf.payOrderTableView reloadData];
-//        [strongSelf updateTotalPrice];
-//    }];
-//    [self.view addSubview:self.employeView];
-//    [self.view bringSubviewToFront:self.employeView];
-//}
+- (void)loadEmployeView{
+    __weak typeof(self) weakSelf = self;
+    self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
+        [weakSelf.employeView removeFromSuperview];
+    }];
+    [self.view addSubview:self.employeView];
+    [self.view bringSubviewToFront:self.employeView];
+}
 
 //- (void)showPopoverOrderBgView:(IPCOrder *)result{
 //    __weak typeof (self) weakSelf = self;
@@ -70,19 +76,19 @@
 //}
 
 #pragma mark //Clicked Events
-- (IBAction)backAction:(id)sender {
-    __weak typeof (self) weakSelf = self;
-    [IPCCustomUI showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [[IPCPayOrderMode sharedManager] clearData];
-        [self.navigationController popViewControllerAnimated:YES];
-    }];
-}
-
-
-- (IBAction)onPayOrderAction:(id)sender {
-
-}
+//- (IBAction)backAction:(id)sender {
+//    __weak typeof (self) weakSelf = self;
+//    [IPCCustomUI showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
+//        __strong typeof (weakSelf) strongSelf = weakSelf;
+//        [[IPCPayOrderMode sharedManager] clearData];
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }];
+//}
+//
+//
+//- (IBAction)onPayOrderAction:(id)sender {
+//
+//}
 
 - (void)successPayOrder{
     [[IPCPayOrderMode sharedManager] clearData];
@@ -93,6 +99,12 @@
 - (void)updateTotalPrice
 {
 
+}
+
+- (void)selectCustomerAction{
+    IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    customerListVC.isMainStatus = NO;
+    [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
 #pragma mark //UITableViewDataSource
@@ -122,16 +134,19 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 3 )
-        return 0;
-    return 6;
+    return 5;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, (section == 3  ? 0 : 6))];
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, (section == 3  ? 0 : 5))];
     [footView setBackgroundColor:[UIColor clearColor]];
     return footView;
+}
+
+#pragma mark //IPCPayOrderViewCellDelegate
+- (void)showEmployeeView{
+    [self loadEmployeView];
 }
 
 - (void)didReceiveMemoryWarning {

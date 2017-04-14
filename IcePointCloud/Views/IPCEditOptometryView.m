@@ -56,7 +56,9 @@ typedef  void(^DismissBlock)();
 {
     CGFloat originY = (self.optometryContentView.jk_height - 145)/2;
     
-    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(0, originY, self.optometryContentView.jk_width, 145)];
+    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(0, originY, self.optometryContentView.jk_width, 145) Update:^{
+        
+    }];
     [self.optometryContentView addSubview:self.optometryView];
 }
 

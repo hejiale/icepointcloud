@@ -31,8 +31,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *jobTextField;
 @property (weak, nonatomic) IBOutlet UITextField *memoTextField;
-@property (nonatomic, strong) IPCEmployeList * employeList;
-@property (nonatomic, strong) NSMutableArray * employeeNameArray;
 @property (assign, nonatomic) InsertCustomerType insertType;
 
 @end
@@ -45,10 +43,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCUpdateCustomerView" owner:self];
         [view setFrame:frame];
         [self addSubview:view];
-        
-        [self queryMemberLevel];
-        [self queryCustomerType];
-        [self queryEmployee];
     }
     return self;
 }
@@ -72,11 +66,29 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     }
 }
 
-- (NSMutableArray *)employeeNameArray{
-    if (!_employeeNameArray) {
-        _employeeNameArray = [[NSMutableArray alloc]init];
-    }
-    return _employeeNameArray;
+#pragma mark //Request Data
+- (void)updateCustomerRequest{
+    [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.currentDetailCustomer.customerID
+                                                 CustomerName:self.userNameTextField.text
+                                                  CustomPhone:self.phoneTextField.text
+                                                       Gender:[IPCCommon gender:self.genderTextField.text]
+                                                        Email:self.emailTextField.text
+                                                     Birthday:self.birthdayTextField.text
+                                                   EmployeeId:[[IPCEmployeeMode sharedManager] employeeId:self.handlersTextField.text]
+                                                    MemberNum:self.memberNumTextField.text
+                                                MemberLevelId:[[IPCEmployeeMode sharedManager] memberLevelId:self.memberLevelTextField.text]
+                                               CustomerTypeId:[[IPCEmployeeMode sharedManager] customerTypeId:self.customerCategoryTextField.text]
+                                                 EmployeeName:self.handlersTextField.text
+                                                 CustomerType:self.customerCategoryTextField.text
+                                                  MemberLevel:self.memberLevelTextField.text
+                                                          Job:self.jobTextField.text
+                                                       Remark:self.memoTextField.text
+                                                 SuccessBlock:^(id responseValue)
+     {
+         [IPCCustomUI showSuccess:@"更改用户信息成功!"];
+     } FailureBlock:^(NSError *error) {
+         [IPCCustomUI showError:error.domain];
+     }];
 }
 
 
@@ -101,7 +113,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 
 - (IBAction)updateCustomerAction:(id)sender {
-    
+    [self updateCustomerRequest];
 }
 
 - (void)showGenderPickViewAction{
@@ -137,7 +149,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     IPCParameterTableViewController * parameterTableVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
     [parameterTableVC setDataSource:self];
     [parameterTableVC setDelegate:self];
-    [parameterTableVC showWithPosition:CGPointMake(sender.jk_left + sender.jk_width/2 + self.mainView.jk_left, self.contentView.jk_top + self.mainView.jk_top + sender.jk_bottom) Size:CGSizeMake(sender.jk_width, height) Owner:self Direction:UIPopoverArrowDirectionUp];
+    [parameterTableVC showWithPosition:CGPointMake(sender.jk_left + sender.jk_width/2, sender.jk_bottom) Size:CGSizeMake(sender.jk_width, height) Owner:[sender superview] Direction:UIPopoverArrowDirectionUp];
 }
 
 - (void)showDatePickView{
@@ -149,51 +161,34 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 }
 
 
-#pragma mark //Request Data
-- (void)queryMemberLevel{
-    [IPCCustomerRequestManager getMemberLevelWithSuccessBlock:^(id responseValue) {
-        
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
-
-- (void)queryCustomerType{
-    [IPCCustomerRequestManager getCustomerTypeSuccessBlock:^(id responseValue) {
-        
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
-
-- (void)queryEmployee{
-    [IPCPayOrderRequestManager queryEmployeWithKeyword:@"" SuccessBlock:^(id responseValue) {
-        _employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
-        [_employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmploye * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self.employeeNameArray addObject:obj.name];
-        }];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
-
-
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
     if (self.insertType == InsertCustomerTypeEmployee)
-        return self.employeeNameArray;
+        return [[IPCEmployeeMode sharedManager] employeeNameArray];
+    else if (self.insertType == InsertCustomerTypeCustomerType)
+        return [[IPCEmployeeMode sharedManager] customerTypeNameArray];
+    else if (self.insertType == InsertCustomerTypeMemberType)
+        return [[IPCEmployeeMode sharedManager] memberLevelNameArray];
     return @[@"男" , @"女"];
 }
 
 
 #pragma mark /IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView{
-
+    if (self.insertType == InsertCustomerTypeEmployee) {
+        [self.handlersTextField setText:parameter];
+    }else if (self.insertType == InsertCustomerTypeCustomerType){
+        [self.customerCategoryTextField setText:parameter];
+    }else if (self.insertType == InsertCustomerTypeMemberType){
+        [self.memberLevelTextField setText:parameter];
+    }else{
+        [self.genderTextField setText:parameter];
+    }
 }
 
 #pragma mark //IPCDatePickViewControllerDelegate
 - (void)completeChooseDate:(NSString *)date{
-    
+    [self.birthdayTextField setText:date];
 }
 
 @end

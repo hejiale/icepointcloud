@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCSearchCustomerViewController">
+            <connections>
+                <outlet property="customerCollectionView" destination="kAD-05-wII" id="ApV-ZX-HjE"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kAD-05-wII">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.095275042808219176" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xmn-WK-ZJU">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="kd9-hM-CjW"/>
+                        <outlet property="delegate" destination="-1" id="0fY-oO-CBY"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvY-2T-ih6">
+                    <rect key="frame" x="960" y="674" width="44" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="Ofw-GX-BtM"/>
+                        <constraint firstAttribute="height" constant="44" id="yVb-X9-7j4"/>
+                    </constraints>
+                    <state key="normal" image="icon_search"/>
+                    <connections>
+                        <action selector="searchCustomerAction:" destination="-1" eventType="touchUpInside" id="s0n-n5-beC"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9D-ec-pb3">
+                    <rect key="frame" x="960" y="610" width="44" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="c64-dd-EDD"/>
+                        <constraint firstAttribute="height" constant="44" id="gOD-16-bQg"/>
+                    </constraints>
+                    <state key="normal" image="icon_addCustomer"/>
+                    <connections>
+                        <action selector="insertNewCustomerAction:" destination="-1" eventType="touchUpInside" id="Wph-sY-9XZ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="kAD-05-wII" secondAttribute="trailing" id="5Pg-4w-Px9"/>
+                <constraint firstAttribute="bottom" secondItem="XvY-2T-ih6" secondAttribute="bottom" constant="50" id="6Dv-eK-Pxt"/>
+                <constraint firstAttribute="bottom" secondItem="kAD-05-wII" secondAttribute="bottom" id="NTF-cN-CnW"/>
+                <constraint firstItem="kAD-05-wII" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Pjg-SE-icX"/>
+                <constraint firstAttribute="trailing" secondItem="XvY-2T-ih6" secondAttribute="trailing" constant="20" id="X48-Gg-bQB"/>
+                <constraint firstAttribute="trailing" secondItem="q9D-ec-pb3" secondAttribute="trailing" constant="20" id="aOV-HU-5l3"/>
+                <constraint firstItem="XvY-2T-ih6" firstAttribute="top" secondItem="q9D-ec-pb3" secondAttribute="bottom" constant="20" id="eCj-mY-TdZ"/>
+                <constraint firstItem="kAD-05-wII" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oQK-nn-zcN"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_addCustomer" width="48" height="48"/>
+        <image name="icon_search" width="22" height="22"/>
+    </resources>
+</document>

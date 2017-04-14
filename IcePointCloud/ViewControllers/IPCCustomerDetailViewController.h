@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCCustomerDetailViewController : UIViewController
+@interface IPCCustomerDetailViewController : IPCRootNavigationViewController
 
 @property (nonatomic, strong) IPCCustomerMode * customer;
 

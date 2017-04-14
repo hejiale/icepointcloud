@@ -16,8 +16,10 @@
     if (self) {
         if ([self.list count] > 0)[self.list removeAllObjects];
         
-        if ([responseValue isKindOfClass:[NSArray class]]) {
-            [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSArray * list = responseValue[@"resultList"];
+        
+        if ([list isKindOfClass:[NSArray class]]) {
+            [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCCustomerMode * glasses = [IPCCustomerMode mj_objectWithKeyValues:obj];
                 [self.list addObject:glasses];
             }];
@@ -38,7 +40,7 @@
 @implementation IPCCustomerMode
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"customerID": @"id"};
+    return @{@"customerID": @"id", @"memberLevel": @"memberLevel.memberLevel"};
 }
 
 @end

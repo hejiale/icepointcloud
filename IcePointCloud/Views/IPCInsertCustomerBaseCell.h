@@ -37,17 +37,7 @@
 
 @protocol UserBaseInfoCellDelegate <NSObject>
 
-@optional
-- (void)searchCustomer;
-
-- (void)insertNewCustomer;
-
-- (void)changeCustomerGender;
-
-- (void)inputText:(NSString *)text Tag:(NSInteger)tag InCell:(IPCInsertCustomerBaseCell *)cell;
-
-- (void)updateSureButtonUI:(BOOL)enable;
-
 - (void)updatePackUpStatus:(BOOL)isPackUp;
+- (void)reloadInsertCustomUI;
 
 @end

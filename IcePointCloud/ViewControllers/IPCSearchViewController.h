@@ -10,15 +10,23 @@
 #import "IPCPresentModeViewController.h"
 #import "IPCSearchItemTableViewCell.h"
 
+
+@protocol IPCSearchViewControllerDelegate;
+
+@interface IPCSearchViewController : IPCPresentModeViewController <UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, assign) id<IPCSearchViewControllerDelegate> searchDelegate;
+
+- (void)showSearchProductViewWithSearchWord:(NSString *)word;
+- (void)showSearchCustomerViewWithSearchWord:(NSString *)word;
+
+@end
+
+
 @protocol IPCSearchViewControllerDelegate <NSObject>
 
 - (void)didSearchWithKeyword:(NSString *)keyword;
 
 @end
 
-@interface IPCSearchViewController : IPCPresentModeViewController <UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate,UIViewControllerTransitioningDelegate>
 
-@property (nonatomic, copy) NSString * currentSearchword;
-@property (nonatomic, assign) id<IPCSearchViewControllerDelegate> delegate;
-
-@end

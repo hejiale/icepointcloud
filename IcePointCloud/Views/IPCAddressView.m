@@ -8,26 +8,25 @@
 
 #import "IPCAddressView.h"
 
+typedef void(^UpdateUIBlock)(void);
+
 @interface IPCAddressView()<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *contacterTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
-@property (weak, nonatomic) IBOutlet UIButton *maleButton;
-@property (weak, nonatomic) IBOutlet UIButton *femaleButton;
+@property (copy, nonatomic) UpdateUIBlock updateBlock;
 
 @end
 
 @implementation IPCAddressView
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update
+{
     self = [super initWithFrame:frame];
     if (self) {
+        self.updateBlock = update;
+        
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCAddressView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
-        
-        self.insertAddress = [[IPCCustomerAddressMode alloc]init];
     }
     return self;
 }
@@ -39,31 +38,53 @@
     [self.contacterTextField addBorder:3 Width:1];
     [self.phoneTextField addBorder:3 Width:1];
     [self.addressTextField addBorder:3 Width:1];
+    [self.contacterTextField setLeftSpace:5];
+    [self.phoneTextField setLeftSpace:5];
+    [self.addressTextField setLeftSpace:5];
 }
+
 
 #pragma mark //Clicked Events
 - (IBAction)selectedMaleAction:(id)sender {
     [self.maleButton setSelected:YES];
     [self.femaleButton setSelected:NO];
-    self.insertAddress.gender = @"MALE";
+ 
+    if (self.updateBlock) {
+        self.updateBlock();
+    }
 }
 
 - (IBAction)selectFemalAction:(id)sender {
     [self.maleButton setSelected:NO];
     [self.femaleButton setSelected:YES];
-    self.insertAddress.gender = @"FEMALE";
+
+    if (self.updateBlock) {
+        self.updateBlock();
+    }
 }
 
 #pragma mark //UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField isEqual:self.addressTextField]) {
+        [textField endEditing:YES];
+    }else{
+        UITextField * nextTextField = (UITextField *)[self viewWithTag:textField.tag + 1];
+        [nextTextField becomeFirstResponder];
+    }
+    return YES;
+}
+
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if ([textField isEqual:self.contacterTextField]) {
-        self.insertAddress.contactName = textField.text;
-    }else if ([textField isEqual:self.phoneTextField]){
-        self.insertAddress.phone = self.phoneTextField.text;
-    }else if ([textField isEqual:self.addressTextField]){
-        self.insertAddress.detailAddress = self.addressTextField.text;
+    NSString * str = [textField.text jk_trimmingWhitespace];
+    
+    if (str.length) {
+        if (self.updateBlock) {
+            self.updateBlock();
+        }
     }
+    
 }
 
 

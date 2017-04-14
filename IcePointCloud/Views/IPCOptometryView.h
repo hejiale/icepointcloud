@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;
 
+- (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update;
+
 - (UITextField *)subTextField:(NSInteger)tag;
 
 - (NSString *)subString:(NSInteger)tag;

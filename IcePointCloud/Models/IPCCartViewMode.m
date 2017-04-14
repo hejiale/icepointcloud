@@ -149,35 +149,35 @@
 
 - (void)offerOrderWithCashBlock:(void(^)())cash EbuyBlock:(void(^)(IPCOrder *result))ebuy Failed:(void(^)())failed
 {
-    [IPCCustomUI show];
-    [IPCPayOrderRequestManager offerOrderWithRequestCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
-                                                    OpometryID:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID
-                                                     AddressID:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID
-                                                   OrderRemark:[IPCPayOrderMode sharedManager].orderMemo
-                                                       PayType:[IPCPayOrderMode sharedManager].payStyleName
-                                                   TotalAmount:[[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]
-                                                 PrepaidAmount:[IPCPayOrderMode sharedManager].prepaidAmount
-                                                 DiscountPrice:[IPCPayOrderMode sharedManager].employeAmount
-                                                     EmployeID:[IPCPayOrderMode sharedManager].currentEmploye.jobID
-                                                  SuccessBlock:^(id responseValue)
-     {
-         if ([[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CASH"] || [[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CARD"])  {
-             if (cash)
-                 cash();
-             [IPCCustomUI showSuccess:@"请前去现金或刷卡支付订单!"];
-         }else{
-             IPCOrder *result = [IPCOrder mj_objectWithKeyValues:responseValue];
-             if (result)
-                 if (ebuy)
-                     ebuy(result);
-             [IPCCustomUI hiden];
-         }
-     } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
-         if (failed) {
-             failed();
-         }
-     }];
+//    [IPCCustomUI show];
+//    [IPCPayOrderRequestManager offerOrderWithRequestCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
+//                                                    OpometryID:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID
+//                                                     AddressID:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID
+//                                                   OrderRemark:[IPCPayOrderMode sharedManager].orderMemo
+//                                                       PayType:[IPCPayOrderMode sharedManager].payStyleName
+//                                                   TotalAmount:[[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]
+//                                                 PrepaidAmount:[IPCPayOrderMode sharedManager].prepaidAmount
+//                                                 DiscountPrice:[IPCPayOrderMode sharedManager].employeAmount
+//                                                     EmployeID:[IPCPayOrderMode sharedManager].currentEmploye.jobID
+//                                                  SuccessBlock:^(id responseValue)
+//     {
+//         if ([[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CASH"] || [[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CARD"])  {
+//             if (cash)
+//                 cash();
+//             [IPCCustomUI showSuccess:@"请前去现金或刷卡支付订单!"];
+//         }else{
+//             IPCOrder *result = [IPCOrder mj_objectWithKeyValues:responseValue];
+//             if (result)
+//                 if (ebuy)
+//                     ebuy(result);
+//             [IPCCustomUI hiden];
+//         }
+//     } FailureBlock:^(NSError *error) {
+//         [IPCCustomUI showError:error.domain];
+//         if (failed) {
+//             failed();
+//         }
+//     }];
 }
 
 @end

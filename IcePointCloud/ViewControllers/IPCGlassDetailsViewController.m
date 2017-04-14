@@ -55,6 +55,9 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
     [self reloadCartView];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 
 -(void) viewDidDisappear:(BOOL)animated
 {

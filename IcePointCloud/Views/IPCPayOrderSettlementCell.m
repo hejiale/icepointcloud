@@ -1,14 +1,14 @@
 //
-//  IPCOrderTopTableViewCell.m
+//  IPCPayOrderSettlementCell.m
 //  IcePointCloud
 //
-//  Created by mac on 2016/11/30.
-//  Copyright © 2016年 Doray. All rights reserved.
+//  Created by gerry on 2017/4/14.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCPayOrderTitleCell.h"
+#import "IPCPayOrderSettlementCell.h"
 
-@implementation IPCPayOrderTitleCell
+@implementation IPCPayOrderSettlementCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

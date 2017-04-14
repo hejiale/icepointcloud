@@ -33,18 +33,18 @@
         }
     }
     
-    NSDictionary * parameters = @{@"customerId":customerID,
-                                  @"optometryId":opometryID,
-                                  @"addressId":addressID,
-                                  @"orderDetail":itemParams,
-                                  @"orderRemark":remark,
-                                  @"payType":payType,
-                                  @"payAmount":[IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment ? @(prepaidAmount) : @(0),
-                                  @"isAdvancePayment":[IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment ? @"true" : @"false",
-                                  @"afterDiscountPrice":[IPCPayOrderMode sharedManager].isSelectEmploye ? @(discountPrice) : @(totalAmount),
-                                  @"employeeId":employeID
-                                  };
-    [self postRequest:parameters RequestMethod:@"bizadmin.brushedSaveSalesOrder" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+//    NSDictionary * parameters = @{@"customerId":customerID,
+//                                  @"optometryId":opometryID,
+//                                  @"addressId":addressID,
+//                                  @"orderDetail":itemParams,
+//                                  @"orderRemark":remark,
+//                                  @"payType":payType,
+//                                  @"payAmount":[IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment ? @(prepaidAmount) : @(0),
+//                                  @"isAdvancePayment":[IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment ? @"true" : @"false",
+//                                  @"afterDiscountPrice":[IPCPayOrderMode sharedManager].isSelectEmploye ? @(discountPrice) : @(totalAmount),
+//                                  @"employeeId":employeID
+//                                  };
+//    [self postRequest:parameters RequestMethod:@"bizadmin.brushedSaveSalesOrder" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

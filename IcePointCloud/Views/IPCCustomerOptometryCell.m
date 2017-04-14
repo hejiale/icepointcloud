@@ -67,23 +67,22 @@
     }
     return _defaultButton;
 }
+
 - (void)createUI
 {
-   [self.contentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       if (![obj isEqual:self.employeeLabel] && ![obj isEqual:self.insertDateLabel]) {
-           [obj removeFromSuperview];
-       }
+   [self.optometryContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+       [obj removeFromSuperview];
    }];
     
     NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"单眼瞳距/PD", @"下加光/ADD"];
     
     CGFloat  spaceWidth   = 5;
     CGFloat  spaceHeight  = 15;
-    CGFloat  itemWidth = (self.contentView.jk_width - 42 - 30 - 30 - spaceWidth*6)/6;
+    CGFloat  itemWidth = (self.optometryContentView.jk_width - 42 - 30 - spaceWidth * 6) /6;
     
     for (int i = 0; i < 3; i++) {
-        UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(15, (25 + spaceHeight) * i, self.jk_width-40, 25)];
-        [self.contentView addSubview:lensView];
+        UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (25 + spaceHeight) * i, self.optometryContentView.jk_width, 25)];
+        [self.optometryContentView addSubview:lensView];
         
         if (i == 0) {
             [lensView addSubview:self.defaultButton];

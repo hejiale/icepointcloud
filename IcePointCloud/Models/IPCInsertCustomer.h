@@ -10,14 +10,21 @@
 
 @interface IPCInsertCustomer : NSObject
 
++ (IPCInsertCustomer *)instance;
+- (void)resetData;
+
 @property (nonatomic, copy, readwrite) NSString * headImage;//头像
 @property (nonatomic, copy, readwrite) NSString * customerName;
 @property (nonatomic, copy, readwrite) NSString * genderString;
+@property (nonatomic, copy, readwrite) NSString * gender;//MALE   FEMALE
 @property (nonatomic, copy, readwrite) NSString * customerPhone;
 @property (nonatomic, copy, readwrite) NSString * empName;//经手人
+@property (nonatomic, copy, readwrite) NSString * empNameId;//经手人ID
 @property (nonatomic, copy, readwrite) NSString * memberNum;//会员号
 @property (nonatomic, copy, readwrite) NSString * memberLevel;//会员级别
+@property (nonatomic, copy, readwrite) NSString * memberLevelId;//会员级别ID
 @property (nonatomic, copy, readwrite) NSString * customerType;//顾客类别
+@property (nonatomic, copy, readwrite) NSString * customerTypeId;//顾客类别ID
 @property (nonatomic, copy, readwrite) NSString * job;//职业
 @property (nonatomic, copy, readwrite) NSString * birthday;
 @property (nonatomic, copy, readwrite) NSString * email;
@@ -26,6 +33,7 @@
 @property (nonatomic, copy, readwrite) NSString * contactorAddress;//联系地址
 @property (nonatomic, copy, readwrite) NSString * contactorPhone;//联系电话
 @property (nonatomic, copy, readwrite) NSString * contactorGengerString;
+@property (nonatomic, copy, readwrite) NSString * contactorGenger;
 @property (nonatomic, copy, readwrite) NSMutableArray<IPCOptometryMode *> * optometryArray;
 
 

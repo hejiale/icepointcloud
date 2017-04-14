@@ -7,7 +7,7 @@
 //
 
 
-@interface IPCTryGlassesViewController : UIViewController
+@interface IPCTryGlassesViewController : IPCRootNavigationViewController
 
 - (void)addTryNotifications;
 - (void)reload;

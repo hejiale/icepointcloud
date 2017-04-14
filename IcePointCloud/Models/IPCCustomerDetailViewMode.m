@@ -46,6 +46,24 @@
     [self.orderList removeAllObjects];
 }
 
+- (void)getChooseCustomer{
+    [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
+            [IPCCurrentCustomerOpometry sharedManager].currentOpometry = obj;
+        }
+    }];
+    
+    [self.addressList enumerateObjectsUsingBlock:^(IPCCustomerAddressMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.addressID isEqualToString:self.detailCustomer.currentAddressId]) {
+            [IPCCurrentCustomerOpometry sharedManager].currentAddress = obj;
+        }
+    }];
+    
+    
+    if (self.detailCustomer) {
+        [IPCCurrentCustomerOpometry sharedManager].currentCustomer = self.detailCustomer;
+    }
+}
 
 #pragma mark //Requst Method
 - (void)queryCustomerDetailInfo:(void(^)())completeBlock

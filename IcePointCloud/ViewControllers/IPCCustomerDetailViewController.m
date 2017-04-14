@@ -19,6 +19,7 @@
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
 #import "IPCUpdateCustomerView.h"
+#import "IPCPayOrderViewController.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
@@ -29,8 +30,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 @interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIView *topBarView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
+@property (strong, nonatomic) IBOutlet UIView *tableFootView;
+
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCEditAddressView  *  editAddressView;
 @property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
@@ -52,20 +54,30 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setNavigationTitle:@"个人信息"];
-    [self.topBarView addBottomLine];
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
-    [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+    if ([IPCCurrentCustomerOpometry sharedManager].isOrderStatus) {
+        [self.detailTableView setTableFooterView:self.tableFootView];
+    }else{
+        [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+    }
+    
     self.detailTableView.isHiden = YES;
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
     self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
     [self commitUI];
+    
+    [[IPCEmployeeMode sharedManager] queryEmploye:@""];
+    [[IPCEmployeeMode sharedManager] queryMemberLevel];
+    [[IPCEmployeeMode sharedManager] queryCustomerType];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    
+    [self setNavigationTitle:@"个人信息"];
+    [self setNavigationBarStatus:NO];
 }
+
 
 - (void)commitUI{
     [IPCCustomUI show];
@@ -175,15 +187,17 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)loadOrderDetailView:(IPCCustomerOrderMode *)orderObject{
     [self.view endEditing:YES];
     __weak typeof (self) weakSelf = self;
-    self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:self.view.bounds OrderNum:orderObject.orderCode  ProductDetail:^(IPCGlasses *glass) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf pushToProductDetailViewController:glass];
-    } Dismiss:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView];
-    }];
-    [self.view addSubview:self.detailOrderView];
-    [self.view bringSubviewToFront:self.detailOrderView];
+    self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+                                                                 OrderNum:orderObject.orderCode
+                                                            ProductDetail:^(IPCGlasses *glass) {
+                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
+                                                                [strongSelf pushToProductDetailViewController:glass];
+                                                            } Dismiss:^{
+                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
+                                                                [strongSelf removerAllPopView];
+                                                            }];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.detailOrderView];
     [self.detailOrderView show];
 }
 
@@ -246,6 +260,17 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }];
     [self.navigationController pushViewController:detailVC animated:YES];
 }
+
+- (IBAction)chooseCustomerAction:(id)sender {
+    [self.customerViewMode getChooseCustomer];
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[IPCPayOrderViewController class]]) {
+            IPCPayOrderViewController *revise =(IPCPayOrderViewController *)controller;
+            [self.navigationController popToViewController:revise animated:YES];
+        }
+    }
+}
+
 
 - (void)removerAllPopView{
     [self.editAddressView removeFromSuperview];
@@ -405,7 +430,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }else if (indexPath.section == 3 && indexPath.row > 0){
         return 75;
     }
-    return 60;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

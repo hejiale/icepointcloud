@@ -11,7 +11,6 @@
 #import "IPCGlasslistCollectionViewCell.h"
 #import "IPCGlassParameterView.h"
 #import "IPCEditBatchParameterView.h"
-#import "IPCSearchViewController.h"
 #import "IPCGlassListViewMode.h"
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
@@ -64,6 +63,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self setNavigationBarStatus:YES];
     [self.glassListCollectionView reloadData];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
 }

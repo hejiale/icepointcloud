@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCEmployeListView">
@@ -22,8 +26,8 @@
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3K8-1k-qfc">
                             <rect key="frame" x="5" y="90" width="290" height="410"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="separatorColor" white="0.0" alpha="0.19764019691780821" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.19764019691780821" colorSpace="custom" customColorSpace="sRGB"/>
                             <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="FpJ-3e-yLm"/>
@@ -37,7 +41,7 @@
                                 <constraint firstAttribute="height" constant="50" id="UQ5-Ch-baL"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bl-LM-2tv">
@@ -56,7 +60,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="c83-wR-gFG"/>
                             </constraints>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             <connections>
@@ -64,7 +68,7 @@
                             </connections>
                         </textField>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="3K8-1k-qfc" firstAttribute="leading" secondItem="SOz-xf-co9" secondAttribute="leading" constant="5" id="0td-5R-GGC"/>
                         <constraint firstItem="fIf-eL-bWE" firstAttribute="centerX" secondItem="SOz-xf-co9" secondAttribute="centerX" id="5na-0X-pCa"/>
@@ -82,7 +86,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.20197452910958905" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20197452910958905" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="SOz-xf-co9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DPQ-NI-u29"/>
                 <constraint firstItem="SOz-xf-co9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Qbc-jT-wyk"/>

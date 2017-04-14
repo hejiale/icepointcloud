@@ -10,9 +10,12 @@
 
 @interface IPCCustomerCollectionViewCell : UICollectionViewCell
 
-@property (strong, nonatomic) UIImageView *customImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *customImageView;
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerPhoneLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memberLevelLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pointLabel;
+
 @property (copy, nonatomic) IPCCustomerMode * currentCustomer;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCInsertCustomerViewController : UIViewController
+@interface IPCInsertCustomerViewController : IPCRootNavigationViewController
 
 @property (nonatomic) BOOL isInserting;
 

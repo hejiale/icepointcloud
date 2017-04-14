@@ -23,6 +23,7 @@
 @property (nonatomic, copy, readwrite) NSString * contactName;
 @property (nonatomic, copy, readwrite) NSString * phone;
 @property (nonatomic, copy, readwrite) NSString * gender;
+@property (nonatomic, copy, readwrite) NSString * genderString;
 @property (nonatomic, copy, readwrite) NSString * detailAddress;
 
 @end

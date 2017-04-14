@@ -9,7 +9,16 @@
 #import "IPCInsertCustomerBaseCell.h"
 #import "IPCParameterTableViewController.h"
 
+typedef NS_ENUM(NSInteger, IPCInsertType){
+    IPCInsertTypeEmployee,
+    IPCInsertTypeMemberLevel,
+    IPCInsertTypeCustomerType,
+    IPCInsertTypeGender
+};
+
 @interface IPCInsertCustomerBaseCell()<IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
+
+@property (assign, nonatomic) IPCInsertType insertType;
 
 @end
 
@@ -22,6 +31,9 @@
     [IPCCustomUI clearAutoCorrection:self.mainView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.mainView];
     [self.birthdayTextField setRightButton:self Action:@selector(showDatePickViewAction) OnView:self.packUpView];
+    [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.mainView];
+    [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.mainView];
+    [self.customerCategoryTextField setRightButton:self Action:@selector(showCustomerTypeAction) OnView:self.packUpView];
 }
 
 
@@ -37,16 +49,49 @@
 {
     [self.packUpView setHidden:!isPackUp];
     [self.packDownButton setHidden:isPackUp];
+    
+    [self.userNameTextField setText:[IPCInsertCustomer instance].customerName];
+    [self.phoneTextField setText:[IPCInsertCustomer instance].customerPhone];
+    [self.emailTextField setText:[IPCInsertCustomer instance].email];
+    [self.memoTextField setText:[IPCInsertCustomer instance].remark];
+    [self.customerCategoryTextField setText:[IPCInsertCustomer instance].customerType];
+    [self.genderTextField setText:[IPCInsertCustomer instance].genderString];
+    [self.handlersTextField setText:[IPCInsertCustomer instance].empName];
+    [self.birthdayTextField setText:[IPCInsertCustomer instance].birthday];
+    [self.memberNumTextField setText:[IPCInsertCustomer instance].memberNum];
+    [self.memberLevelTextField setText:[IPCInsertCustomer instance].memberLevel];
+    [self.jobTextField setText:[IPCInsertCustomer instance].job];
 }
 
 
+- (void)showEmployeeAction{
+    self.insertType = IPCInsertTypeEmployee;
+    [self showParameterTabelView:self.handlersTextField];
+}
+
+- (void)showMemberLevelAction{
+    self.insertType = IPCInsertTypeMemberLevel;
+    [self showParameterTabelView:self.memberLevelTextField];
+}
+
+- (void)showCustomerTypeAction{
+    self.insertType = IPCInsertTypeCustomerType;
+    [self showParameterTabelView:self.customerCategoryTextField];
+}
+
 - (void)showGenderPickViewAction{
+    self.insertType = IPCInsertTypeGender;
+    [self showParameterTabelView:self.genderTextField];
+}
+
+- (void)showParameterTabelView:(UITextField *)sender
+{
     [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
     
     IPCParameterTableViewController * pickerVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
     pickerVC.dataSource = self;
     pickerVC.delegate = self;
-    [pickerVC showWithPosition:CGPointMake(self.genderTextField.jk_width/2, self.genderTextField.jk_height) Size:CGSizeMake(self.genderTextField.jk_width, 150) Owner:self.genderTextField Direction:UIPopoverArrowDirectionUp];
+    [pickerVC showWithPosition:CGPointMake(sender.jk_width/2, sender.jk_height) Size:CGSizeMake(sender.jk_width, 150) Owner:sender Direction:UIPopoverArrowDirectionUp];
 }
 
 
@@ -76,57 +121,81 @@
 
 #pragma mark //uiPickerViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
+    if (self.insertType == IPCInsertTypeEmployee) {
+        return [[IPCEmployeeMode sharedManager] employeeNameArray];
+    }else if (self.insertType == IPCInsertTypeCustomerType){
+        return [[IPCEmployeeMode sharedManager] customerTypeNameArray];
+    }else if (self.insertType == IPCInsertTypeMemberLevel){
+        return [[IPCEmployeeMode sharedManager] memberLevelNameArray];
+    }
     return @[@"男" , @"女"];
 }
 
 
 #pragma mark //UIPickerViewDelegate
-- (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView{
-    [self.genderTextField setText:parameter];
-    
-    if ([self.delegate respondsToSelector:@selector(inputText:Tag:InCell:)]) {
-        [self.delegate inputText:self.genderTextField.text Tag:self.genderTextField.tag InCell:self];
+- (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
+{
+    if (self.insertType == IPCInsertTypeGender) {
+        [IPCInsertCustomer instance].genderString = parameter;
+        [IPCInsertCustomer instance].gender = [IPCCommon gender:parameter];
+    }else if (self.insertType == IPCInsertTypeMemberLevel){
+        [IPCInsertCustomer instance].memberLevel = parameter;
+        [IPCInsertCustomer instance].memberLevelId = [[IPCEmployeeMode sharedManager] memberLevelId:parameter];
+    }else if (self.insertType == IPCInsertTypeEmployee){
+        [IPCInsertCustomer instance].empName = parameter;
+        [IPCInsertCustomer instance].empNameId = [[IPCEmployeeMode sharedManager] employeeId:parameter];
+    }else if (self.insertType == IPCInsertTypeCustomerType){
+        [IPCInsertCustomer instance].customerType =parameter;
+        [IPCInsertCustomer instance].customerTypeId = [[IPCEmployeeMode sharedManager] customerTypeId:parameter];
     }
-    
-    if ([self.delegate respondsToSelector:@selector(changeCustomerGender)]) {
-        [self.delegate changeCustomerGender];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {
+            [self.delegate reloadInsertCustomUI];
+        }
     }
 }
 
 #pragma mark //CustomDatePickViewControllerDelegate
 - (void)completeChooseDate:(NSString *)date{
-    [self.birthdayTextField setText:date];
-    if ([self.delegate respondsToSelector:@selector(inputText:Tag:InCell:)]) {
-        [self.delegate inputText:self.birthdayTextField.text Tag:self.birthdayTextField.tag InCell:self];
+    [IPCInsertCustomer instance].birthday = date;
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {
+            [self.delegate reloadInsertCustomUI];
+        }
     }
 }
 
 #pragma mark //UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if ([textField isEqual:self.emailTextField]) {
-        [self.jobTextField becomeFirstResponder];
-    }else{
-        if (textField.tag == 10) {
-            [self showGenderPickViewAction];
-        }else{
-            UITextField * nextTextField = (UITextField *)[self.mainView viewWithTag:textField.tag + 1];
-            [nextTextField becomeFirstResponder];
-        }
-    }
+    [textField resignFirstResponder];
     return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([textField isEqual:self.phoneTextField]) {
-        if (![IPCCommon checkTelNumber:[textField.text jk_trimmingWhitespace]]) {
-            [IPCCustomUI showError:@"请输入有效的手机号码!"];
-            [textField setText:@""];
+    NSString * str = [textField.text jk_trimmingWhitespace];
+    
+    if (str.length) {
+        if ([textField isEqual:self.phoneTextField]) {
+            if (![IPCCommon checkTelNumber:str]) {
+                [IPCCustomUI showError:@"请输入有效的手机号码!"];
+            }else{
+                [IPCInsertCustomer instance].customerPhone = str;
+            }
+        }else if ([textField isEqual:self.userNameTextField]){
+            [IPCInsertCustomer instance].customerName = str;
+        }else if ([textField isEqual:self.memberNumTextField]){
+            [IPCInsertCustomer instance].memberNum = str;
+        }else if ([textField isEqual:self.emailTextField]){
+            [IPCInsertCustomer instance].email = str;
+        }else if ([textField isEqual:self.jobTextField]){
+            [IPCInsertCustomer instance].job = str;
+        }else if ([textField isEqual:self.memoTextField]){
+            [IPCInsertCustomer instance].remark = str;
         }
     }
-    
-    if (textField.tag != 11 && textField.tag != 16) {
-        if ([self.delegate respondsToSelector:@selector(inputText:Tag:InCell:)]) {
-            [self.delegate inputText:textField.text Tag:textField.tag InCell:self];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {
+            [self.delegate reloadInsertCustomUI];
         }
     }
 }

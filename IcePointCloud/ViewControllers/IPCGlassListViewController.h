@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCGlassListViewController : UIViewController
+@interface IPCGlassListViewController : IPCRootNavigationViewController
 
 - (void)addNotifications;
 - (void)reload;

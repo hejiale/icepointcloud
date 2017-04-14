@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCPayOrderViewController : UIViewController
+@interface IPCPayOrderViewController : IPCRootNavigationViewController
 
 @end

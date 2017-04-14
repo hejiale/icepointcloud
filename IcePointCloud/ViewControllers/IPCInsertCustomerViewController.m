@@ -17,12 +17,11 @@ static NSString * const baseIdentifier = @"UserBaseInfoCellIdentifier";
 static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
 static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdentifier";
 
-@interface IPCInsertCustomerViewController ()<UITableViewDelegate,UITableViewDataSource,UserBaseInfoCellDelegate>
+@interface IPCInsertCustomerViewController ()<UITableViewDelegate,UITableViewDataSource,UserBaseInfoCellDelegate,IPCInsertCustomerOpometryCellDelegate>
 {
     BOOL  isPackUping;
 }
 
-@property (weak, nonatomic) IBOutlet UIView *topBarView;
 @property (weak,   nonatomic) IBOutlet UITableView *userInfoTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 
@@ -34,8 +33,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
-        self.automaticallyAdjustsScrollViewInsets = NO;
-
+        
     }
     return self;
 }
@@ -44,44 +42,72 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.topBarView addBottomLine];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
+    
+    [[IPCEmployeeMode sharedManager] queryEmploye:@""];
+    [[IPCEmployeeMode sharedManager] queryMemberLevel];
+    [[IPCEmployeeMode sharedManager] queryCustomerType];
+    
+    [[IPCInsertCustomer instance] resetData];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self setNavigationTitle:@"新增客户"];
+    [self setNavigationBarStatus:NO];
 }
 
 #pragma mark //Request Data
 - (void)saveNewCustomerRequest
 {
-//    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:self.insertTextArray[0]
-//                                                  CustomPhone:self.insertTextArray[4]
-//                                                       Gender:[IPCCommon gender:self.insertTextArray[1]]
-//                                                          Age:self.insertTextArray[3]
-//                                                        Email:self.insertTextArray[5]
-//                                                     Birthday:self.insertTextArray[2]
-//                                                       Remark:self.insertTextArray[7]
-//                                                    PhotoUUID:@""
-//                                                     Distance:[[self opometryCell].editOptometryView subString:10]
-//                                                      SphLeft:[[self opometryCell].editOptometryView subString:5]
-//                                                     SphRight:[[self opometryCell].editOptometryView subString:0]
-//                                                      CylLeft:[[self opometryCell].editOptometryView subString:6]
-//                                                     CylRight:[[self opometryCell].editOptometryView subString:1]
-//                                                     AxisLeft:[[self opometryCell].editOptometryView subString:7]
-//                                                    AxisRight:[[self opometryCell].editOptometryView subString:2]
-//                                                      AddLeft:[[self opometryCell].editOptometryView subString:8]
-//                                                     AddRight:[[self opometryCell].editOptometryView subString:3]
-//                                                CorrectedLeft:[[self opometryCell].editOptometryView subString:9]
-//                                               CorrectedRight:[[self opometryCell].editOptometryView subString:4]
-//                                                  ContactName:self.insertTextArray[0]
-//                                                ContactGender:[IPCCommon gender:self.insertTextArray[1]]
-//                                                 ContactPhone:self.insertTextArray[4]
-//                                               ContactAddress:self.insertTextArray[6]
-//                                                 SuccessBlock:^(id responseValue)
-//     {
-//         [IPCCustomUI showSuccess:@"新建用户成功!"];
-//         [self.insertTextArray removeAllObjects];self.insertTextArray = nil;
-//         [self.userInfoTableView reloadData];
-//     } FailureBlock:^(NSError *error) {
-//         [IPCCustomUI showError:error.domain];
-//     }];
+    NSMutableArray * optometryList = [[NSMutableArray alloc]init];
+    
+    [[IPCInsertCustomer instance].optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [optometryList addObject:@{
+                                   @"distanceRight": obj.distanceRight,
+                                   @"distanceLeft":obj.distanceLeft,
+                                   @"sphLeft": (obj.sphLeft.length ? obj.sphLeft : @"+0.00"),
+                                   @"sphRight":(obj.sphRight.length ? obj.sphRight : @"+0.00"),
+                                   @"cylLeft": (obj.cylLeft.length ? obj.cylLeft : @"+0.00"),
+                                   @"cylRight":(obj.cylRight.length ? obj.cylRight : @"+0.00"),
+                                   @"axisLeft":obj.axisLeft,
+                                   @"axisRight":obj.axisRight,
+                                   @"addLeft":obj.addLeft,
+                                   @"addRight":obj.addRight,
+                                   @"correctedVisionLeft":obj.correctedVisionLeft,
+                                   @"correctedVisionRight":obj.correctedVisionRight,
+                                   @"purpose":obj.purpose,
+                                   @"employeeId":obj.employeeId,
+                                   @"employeeName":obj.employeeName}];
+    }];
+    
+    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:[IPCInsertCustomer instance].customerName
+                                                  CustomPhone:[IPCInsertCustomer instance].customerPhone
+                                                       Gender:[IPCInsertCustomer instance].gender
+                                                        Email:[IPCInsertCustomer instance].email
+                                                     Birthday:[IPCInsertCustomer instance].birthday
+                                                       Remark:[IPCInsertCustomer instance].remark
+                                                OptometryList:optometryList
+                                                  ContactName:[IPCInsertCustomer instance].contactorName
+                                                ContactGender:[IPCInsertCustomer instance].contactorGenger
+                                                 ContactPhone:[IPCInsertCustomer instance].contactorPhone
+                                               ContactAddress:[IPCInsertCustomer instance].contactorAddress
+                                                   EmployeeId:[IPCInsertCustomer instance].empNameId
+                                                 EmployeeName:[IPCInsertCustomer instance].empName
+                                                 CustomerType:[IPCInsertCustomer instance].customerType
+                                               CustomerTypeId:[IPCInsertCustomer instance].customerTypeId
+                                                   Occupation:[IPCInsertCustomer instance].job
+                                                  MemberLevel:[IPCInsertCustomer instance].memberLevel
+                                                MemberLevelId:[IPCInsertCustomer instance].memberLevelId
+                                                    MemberNum:[IPCInsertCustomer instance].memberNum
+                                                 SuccessBlock:^(id responseValue) {
+                                                     [IPCCustomUI showSuccess:@"新建用户成功!"];
+                                                     [[IPCInsertCustomer instance] resetData];
+                                                     [self.userInfoTableView reloadData];
+                                                 } FailureBlock:^(NSError *error) {
+                                                     [IPCCustomUI showError:error.domain];
+                                                 }];
 }
 
 #pragma mark //Set UI
@@ -96,9 +122,16 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 }
 
 #pragma mark //Clicked Events
-- (IBAction)closeAction:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)insertNewCustomerAction:(id)sender {
+    [[IPCInsertCustomer instance] resetData];
+    [self.userInfoTableView reloadData];
 }
+
+
+- (IBAction)saveNewCustomerAction:(id)sender {
+    [self saveNewCustomerRequest];
+}
+
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -106,6 +139,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (section == 2) {
+        return [IPCInsertCustomer instance].optometryArray.count + 1;
+    }
     return 2;
 }
 
@@ -140,6 +176,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            [cell updateInsertAddressUI];
             return cell;
         }
     }else{
@@ -149,12 +186,29 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setInsertTitle:@"验光单"];
+            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
+                [[IPCInsertCustomer instance].optometryArray addObject:[[IPCOptometryMode alloc]init]];
+                [tableView reloadData];
+                [tableView scrollToBottom];
+            }];
             return cell;
         }else{
             IPCInsertCustomerOpometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerOpometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell.delegate = self;
             }
+            if (indexPath.row == 1) {
+                [cell.removeButton setHidden:YES];
+            }else{
+                [cell.removeButton setHidden:NO];
+            }
+            [cell reloadUIWithOptometry:[IPCInsertCustomer instance].optometryArray[indexPath.row-1]];
+            
+            [[cell rac_signalForSelector:@selector(removeOptometryAction:)] subscribeNext:^(id x) {
+                [[IPCInsertCustomer instance] .optometryArray removeObjectAtIndex:indexPath.row-1];
+                [tableView reloadData];
+            }];
             return cell;
         }
     }
@@ -168,7 +222,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         return 100;
     else if (indexPath.section == 2 && indexPath.row > 0)
         return 165;
-    return 60;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -191,8 +245,15 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [self.userInfoTableView reloadData];
 }
 
-- (void)inputText:(NSString *)text Tag:(NSInteger)tag InCell:(IPCInsertCustomerBaseCell *)cell{
-    
+- (void)reloadInsertCustomUI{
+    [self.userInfoTableView reloadData];
+}
+
+#pragma mark //IPCInsertCustomerOpometryCellDelegate
+- (void)updateOptometryMode:(IPCOptometryMode *)optometry Cell:(IPCInsertCustomerOpometryCell *)cell{
+    NSIndexPath * indexPath = [self.userInfoTableView indexPathForCell:cell];
+    [[IPCInsertCustomer instance].optometryArray replaceObjectAtIndex:indexPath.row-1 withObject:optometry];
+    [self.userInfoTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

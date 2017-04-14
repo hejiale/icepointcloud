@@ -28,6 +28,7 @@
 - (void)queryCustomerAddressList:(void(^)())completeBlock;
 - (void)setCurrentOptometry:(NSString *)optometryID Complete:(void(^)())completeBlock;
 - (void)setCurrentAddress:(NSString *)addressID Complete:(void(^)())completeBlock;
+- (void)getChooseCustomer;
 
 
 @end

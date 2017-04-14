@@ -29,6 +29,8 @@
 @property (copy, nonatomic, readwrite) NSString * gender;
 @property (copy, nonatomic, readwrite) NSString * age;
 @property (copy, nonatomic, readwrite) NSString * remark;
+@property (copy, nonatomic, readwrite) NSString * integral;
+@property (copy, nonatomic, readwrite) NSString * memberLevel;
 
 
 @end

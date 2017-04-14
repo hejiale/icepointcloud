@@ -43,20 +43,21 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.cylRight = @"+0.00";
+        self.cylRight = @"";
         self.axisRight = @"";
         self.addRight =@"";
         self.distanceLeft = @"";
         self.distanceRight = @"";
-        self.cylLeft =@"+0.00";
+        self.cylLeft =@"";
         self.axisLeft = @"";
         self.addLeft = @"";
         self.correctedVisionRight = @"";
         self.correctedVisionLeft = @"";
-        self.sphLeft = @"+0.00";
-        self.sphRight = @"+0.00";
+        self.sphLeft = @"";
+        self.sphRight = @"";
         self.purpose = @"";
-        self. employeeName = @"";
+        self.employeeName = @"";
+        self.employeeId = @"";
     }
     return self;
 }
