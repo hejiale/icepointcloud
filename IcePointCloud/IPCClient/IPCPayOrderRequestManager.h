@@ -49,4 +49,8 @@
                    SuccessBlock:(void (^)(id responseValue))success
                    FailureBlock:(void (^)(NSError *error))failure;
 
+
++ (void)getIntegralRulesWithSuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError *error))failure;
+
 @end

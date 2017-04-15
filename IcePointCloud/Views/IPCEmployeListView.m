@@ -90,7 +90,18 @@ typedef void(^DismissBlock)();
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     IPCEmploye * employe = self.employeList.employeArray[indexPath.row];
     if (employe) {
-        
+        __block BOOL isExist = NO;
+        [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([employe.jobID isEqualToString:obj.employe.jobID]) {
+                isExist = YES;
+            }
+        }];
+        if (!isExist){
+            IPCEmployeeResult * result = [[IPCEmployeeResult alloc]init];
+            result.employe = employe;
+            result.employeeResult = 0;
+            [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
+        }
     }
     if (self.dismissBlock)
         self.dismissBlock();

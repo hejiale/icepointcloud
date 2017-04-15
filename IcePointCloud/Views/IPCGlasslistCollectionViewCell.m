@@ -44,12 +44,8 @@
             if ([self.glasses imageWithType:IPCGlassesImageTypeProfileNormal])
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeProfileNormal]];
         }else{
-            if ([self.glasses imageWithType:IPCGlassesImageTypeThumb] && [self.glasses filterType] != IPCTopFilterTypeCard) {
+            if ([self.glasses imageWithType:IPCGlassesImageTypeThumb]) {
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeThumb]];
-            }else{
-                IPCGlassesImage * cardImage = [[IPCGlassesImage alloc]init];
-                cardImage.imageURL = [NSString stringWithFormat:@"%@/%@",IPC_ProductAPI_URL,self.glasses.valueCardPhotoURL];
-                [images addObject:cardImage];
             }
         }
         

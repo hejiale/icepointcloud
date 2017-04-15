@@ -8,12 +8,14 @@
 
 #import "IPCPayOrderProductCell.h"
 
-@interface IPCPayOrderProductCell()
+@interface IPCPayOrderProductCell()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
+@property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end
 
@@ -25,6 +27,7 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     [self.glassesImgView addBorder:3 Width:1];
+    [self.inputPriceTextField addBorder:3 Width:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -45,6 +48,16 @@
         self.glassesNameLbl.text = _cartItem.glasses.glassName;
         [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.unitPrice]];
     }
+}
+
+#pragma mark //UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField endEditing:YES];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    
 }
 
 @end

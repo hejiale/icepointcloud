@@ -9,6 +9,7 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewNormalSellCellMode.h"
 #import "IPCSearchCustomerViewController.h"
+#import "IPCPayOrderPayTypeView.h"
 #import "IPCEmployeListView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewCellDelegate>
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
+@property (strong, nonatomic) IPCPayOrderPayTypeView * payTypeView;
 @property (strong, nonatomic) IPCPayOrderViewNormalSellCellMode * normalSellCellMode;
 
 @end
@@ -42,9 +44,12 @@
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    [self updateTotalPrice];
     
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
+    [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
+        [[IPCCurrentCustomerOpometry sharedManager] clearData];
+        [[IPCPayOrderMode sharedManager] clearData];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -58,47 +63,37 @@
 - (void)loadEmployeView{
     __weak typeof(self) weakSelf = self;
     self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
-        [weakSelf.employeView removeFromSuperview];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.employeView removeFromSuperview];
+        [strongSelf.payOrderTableView reloadData];
     }];
-    [self.view addSubview:self.employeView];
-    [self.view bringSubviewToFront:self.employeView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.employeView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.employeView];
 }
 
-//- (void)showPopoverOrderBgView:(IPCOrder *)result{
-//    __weak typeof (self) weakSelf = self;
-//    self.paySuccessView = [[IPCPaySuccessView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds OrderInfo:result Dismiss:^{
-//        __strong typeof (weakSelf) strongSelf = weakSelf;
-//        [strongSelf.paySuccessView removeFromSuperview];
-//    }];
-//    [self.view addSubview:self.paySuccessView];
-//    [self.view bringSubviewToFront:self.paySuccessView];
-//    [self successPayOrder];
-//}
-
 #pragma mark //Clicked Events
-//- (IBAction)backAction:(id)sender {
-//    __weak typeof (self) weakSelf = self;
-//    [IPCCustomUI showAlert:@"冰点云" Message:@"确认退出此次订单支付吗?" Owner:self Done:^{
-//        __strong typeof (weakSelf) strongSelf = weakSelf;
-//        [[IPCPayOrderMode sharedManager] clearData];
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }];
-//}
-//
-//
-//- (IBAction)onPayOrderAction:(id)sender {
-//
-//}
+- (IBAction)loadPayStyleView:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Dismiss:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.payTypeView removeFromSuperview];
+    }];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payTypeView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.payTypeView];
+}
+
+
+- (IBAction)cancelPayOrderAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
 
 - (void)successPayOrder{
     [[IPCPayOrderMode sharedManager] clearData];
     [[IPCShoppingCart sharedCart] removeSelectCartItem];
     [[IPCCurrentCustomerOpometry sharedManager] clearData];
-}
-
-- (void)updateTotalPrice
-{
-
 }
 
 - (void)selectCustomerAction{

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCEmployeePerformanceView.h"
 
 @interface IPCPayOrderEmployeeCell : UITableViewCell
 
+- (void)updateUI:(void(^)())update;
 
 @end

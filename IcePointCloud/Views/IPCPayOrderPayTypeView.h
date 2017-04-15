@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderPayTypeView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame Dismiss:(void(^)())dismiss;
+
 @end

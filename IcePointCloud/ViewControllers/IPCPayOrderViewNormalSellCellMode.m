@@ -132,6 +132,9 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPayOrderEmployeeCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            [cell updateUI:^{
+                [tableView reloadData];
+            }];
             return cell;
         }
     }else{
@@ -139,6 +142,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPayOrderSettlementCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
+        [cell updateUI];
         return cell;
     }
 }
@@ -156,7 +160,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
         }else if (indexPath.section == 3 && indexPath.row > 0) {
             return 135;
         }else if (indexPath.section == 4 && indexPath.row > 0){
-            return 100;
+            return 110;
         }else if (indexPath.section == 5){
             return 200;
         }

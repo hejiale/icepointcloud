@@ -149,18 +149,18 @@
 
 - (void)offerOrderWithCashBlock:(void(^)())cash EbuyBlock:(void(^)(IPCOrder *result))ebuy Failed:(void(^)())failed
 {
-//    [IPCCustomUI show];
-//    [IPCPayOrderRequestManager offerOrderWithRequestCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
-//                                                    OpometryID:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID
-//                                                     AddressID:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID
-//                                                   OrderRemark:[IPCPayOrderMode sharedManager].orderMemo
-//                                                       PayType:[IPCPayOrderMode sharedManager].payStyleName
-//                                                   TotalAmount:[[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]
-//                                                 PrepaidAmount:[IPCPayOrderMode sharedManager].prepaidAmount
-//                                                 DiscountPrice:[IPCPayOrderMode sharedManager].employeAmount
-//                                                     EmployeID:[IPCPayOrderMode sharedManager].currentEmploye.jobID
-//                                                  SuccessBlock:^(id responseValue)
-//     {
+    [IPCCustomUI show];
+    [IPCPayOrderRequestManager offerOrderWithRequestCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
+                                                    OpometryID:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID
+                                                     AddressID:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID
+                                                   OrderRemark:nil
+                                                       PayType:nil
+                                                   TotalAmount:[[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]
+                                                 PrepaidAmount:0
+                                                 DiscountPrice:0
+                                                     EmployeID:nil
+                                                  SuccessBlock:^(id responseValue)
+     {
 //         if ([[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CASH"] || [[IPCPayOrderMode sharedManager].payStyleName isEqualToString:@"CARD"])  {
 //             if (cash)
 //                 cash();
@@ -170,14 +170,14 @@
 //             if (result)
 //                 if (ebuy)
 //                     ebuy(result);
-//             [IPCCustomUI hiden];
+             [IPCCustomUI hiden];
 //         }
-//     } FailureBlock:^(NSError *error) {
-//         [IPCCustomUI showError:error.domain];
+     } FailureBlock:^(NSError *error) {
+         [IPCCustomUI showError:error.domain];
 //         if (failed) {
 //             failed();
 //         }
-//     }];
+     }];
 }
 
 @end
