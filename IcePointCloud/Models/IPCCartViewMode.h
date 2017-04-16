@@ -35,14 +35,6 @@
 - (void)changeAllCartItemSelected:(BOOL)isSelected;
 
 /**
- *  Submit a new order
- *
- *  @param cash A credit card or cash
- *  @param ebuy WeChat or pay treasure to pay
- */
-- (void)offerOrderWithCashBlock:(void(^)())cash EbuyBlock:(void(^)(IPCOrder *result))ebuy Failed:(void(^)())failed;
-
-/**
  *  Query the corresponding nursing liquid inventory
  *
  *  @param cartItem

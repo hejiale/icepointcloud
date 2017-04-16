@@ -24,8 +24,58 @@ static NSString * const titleIdentifier          = @"IPCOrderTopTableViewCellIde
 static NSString * const employeeIdentifier = @"IPCPayOrderEmployeeCellIdentifier";
 static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdentifier";
 
+@interface IPCPayOrderViewNormalSellCellMode()<IPCPayOrderSubViewDelegate>
+
+@end
+
 @implementation IPCPayOrderViewNormalSellCellMode
 
+#pragma mark //Request Data
+- (void)requestOrderPointPrice:(double)point
+{
+    [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
+                                              IsPresellStatus:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"true":@"false")
+                                                        Point:point
+                                                 SuccessBlock:^(id responseValue) {
+                                                     
+                                                     IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
+                                                     IPCPointValue * point = pointValue.pointArray[0];
+                                                     
+                                                     [IPCPayOrderMode sharedManager].pointPrice = point.integralDeductionAmount;
+                                                     [IPCPayOrderMode sharedManager].usedPoint = point.deductionIntegral;
+                                                     
+                                                     if ([[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
+                                                         [IPCPayOrderMode sharedManager].realTotalPrice = 0;
+                                                         [IPCPayOrderMode sharedManager].givingAmount = 0;
+                                                     }
+                                                     
+                                                     if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
+                                                         [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
+                                                         if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
+                                                             [IPCPayOrderMode sharedManager].givingAmount = 0;
+                                                         }
+                                                     }
+                                                     
+                                                     if (self.delegate) {
+                                                         if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
+                                                             [self.delegate reloadPayOrderView];
+                                                         }
+                                                     }
+                                                 } FailureBlock:^(NSError *error) {
+                                                     
+                                                 }];
+}
+
+
+- (void)offerOrder{
+    [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue) {
+        
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark //UITableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
         return 6;
@@ -38,6 +88,8 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
     if ((section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0))
         return  [[IPCShoppingCart sharedCart] selectedItemsCount] + 1;
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))
+        return 1;
+    else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 4)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
         return 1;
     return 2;
 }
@@ -107,6 +159,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
             IPCPayOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:payOrderCartItemIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell.delegate = self;
             }
             IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedItemAtIndex:indexPath.row-1] ;
             if (cartItem){
@@ -141,6 +194,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPayOrderSettlementCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell.delegate = self;
         }
         [cell updateUI];
         return cell;
@@ -176,5 +230,19 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
     return 50;
 }
 
+#pragma mark //IPCPayOrderSubViewDelegate
+- (void)reloadUI{
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
+            [self.delegate reloadPayOrderView];
+        }
+    }
+}
+
+- (void)getPointPrice:(double)point{
+    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
+        [self requestOrderPointPrice:point];
+    }
+}
 
 @end

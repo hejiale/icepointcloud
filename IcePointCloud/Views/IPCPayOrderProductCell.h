@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCPayOrderSubViewDelegate.h"
 
 @interface IPCPayOrderProductCell : UITableViewCell
 
 @property (nonatomic, strong) IPCShoppingCartItem * cartItem;
+@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
 
 @end
+

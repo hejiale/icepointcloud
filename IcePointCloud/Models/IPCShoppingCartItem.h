@@ -20,7 +20,7 @@
 @property (nonatomic, strong, readwrite) IPCGlasses *glasses;
 @property (nonatomic, assign, readwrite) NSInteger   count;
 @property (nonatomic, assign, readwrite) BOOL        selected;
-@property (nonatomic, assign, readwrite) double      unitPrice;
+@property (nonatomic, assign, readwrite) double      unitPrice;//可修改单价
 @property (nonatomic, copy, readwrite)   NSString   *remarks;//note
 
 /**

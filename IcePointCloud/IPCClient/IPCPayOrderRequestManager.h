@@ -12,30 +12,12 @@
 
 /**
  *  CONFIRM PAY ORDER
- *
- *  @param customerID
- *  @param opometryID
- *  @param addressID
- *  @param remark
- *  @param payType
- *  @param totalAmount
- *  @param prepaidAmount
- *  @param discountPrice
- *  @param employeID
+
  *  @param success
  *  @param failure
  */
-+ (void)offerOrderWithRequestCustomerID:(NSString *)customerID
-                             OpometryID:(NSString *)opometryID
-                              AddressID:(NSString *)addressID
-                            OrderRemark:(NSString *)remark
-                                PayType:(NSString *)payType
-                            TotalAmount:(double) totalAmount
-                          PrepaidAmount:(double)prepaidAmount
-                          DiscountPrice:(double)discountPrice
-                              EmployeID:(NSString *)employeID
-                           SuccessBlock:(void (^)(id responseValue))success
-                           FailureBlock:(void (^)(NSError * error))failure;
++ (void)offerOrderWithSuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
@@ -50,7 +32,19 @@
                    FailureBlock:(void (^)(NSError *error))failure;
 
 
-+ (void)getIntegralRulesWithSuccessBlock:(void (^)(id responseValue))success
-                            FailureBlock:(void (^)(NSError *error))failure;
+/**
+ Get Point Price
+
+ @param customID
+ @param presellStatus
+ @param point
+ @param success
+ @param failure 
+ */
++ (void)getIntegralRulesWithCustomerID:(NSString *)customID
+                       IsPresellStatus:(NSString *)presellStatus
+                                 Point:(double)point
+                          SuccessBlock:(void (^)(id responseValue))success
+                          FailureBlock:(void (^)(NSError *error))failure;
 
 @end

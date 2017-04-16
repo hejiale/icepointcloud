@@ -10,4 +10,8 @@
 
 @interface IPCPayOrderTypeTopView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update;
+
+- (void)reloadUI;
+
 @end

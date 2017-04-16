@@ -18,5 +18,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+/**
+ *  Submit a new order
+ *
+ *  @param cash A credit card or cash
+ *  @param ebuy WeChat or pay treasure to pay
+ */
+- (void)offerOrder;
+
 @end
 

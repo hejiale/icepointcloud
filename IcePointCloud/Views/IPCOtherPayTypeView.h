@@ -14,5 +14,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *payTypeNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *payAmountLabel;
+@property (strong, nonatomic)  IPCOtherPayTypeResult * otherPayTypeResult;
+
+- (instancetype)initWithFrame:(CGRect)frame Update:(void(^)(IPCOtherPayTypeResult * result))update;
+
+- (void)updateUI;
 
 @end

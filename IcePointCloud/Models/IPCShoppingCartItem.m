@@ -42,63 +42,92 @@
 //Joining together to upload the order parameter
 - (NSDictionary *)paramtersJSONForOrderRequest
 {
+    NSString * lensID = [self.glasses.glassesID substringFromIndex:[self.glasses.glassesID rangeOfString:@"-"].location + 1];
+    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    [params setObject:@(self.unitPrice) forKey:@"afterDiscountPrice"];
     
-    [params setObject:self.glasses.glassesID forKey:@"productId"];
-    [params setObject:@(self.count) forKey:@"count"];
-    [params setObject:@(self.unitPrice) forKey:@"price"];
+    if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
+    {
+        [params setObject:@(self.count) forKey:@"glassCount"];
+        [params setObject:@(self.glasses.price) forKey:@"glassPrice"];
+        [params setObject:lensID forKey:@"glassId"];
+    }else if ([self.glasses filterType] == IPCTopFilterTypeLens || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
+    {
+        [params setObject:@(self.count) forKey:@"lensCount"];
+        [params setObject:@(self.glasses.price) forKey:@"lensPrice"];
+        [params setObject:lensID forKey:@"lensId"];
+    }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory)
+    {
+        [params setObject:@(self.count) forKey:@"accessoryCount"];
+        [params setObject:@(self.glasses.price) forKey:@"accessoryPrice"];
+        [params setObject:lensID forKey:@"accessoryId"];
+    }else if ([self.glasses filterType] == IPCTopFilterTypeCard)
+    {
+        [params setObject:@(self.count) forKey:@"valueCardCount"];
+        [params setObject:@(self.glasses.price) forKey:@"valueCardPrice"];
+        [params setObject:lensID forKey:@"valueCardId"];
+    }else if ([self.glasses filterType] == IPCTopFilterTypeOthers)
+    {
+        [params setObject:@(self.count) forKey:@"othersProductCount"];
+        [params setObject:@(self.glasses.price) forKey:@"othersProductPrice"];
+        [params setObject:lensID forKey:@"othersProductId"];
+    }
     
+    //=--------定制类眼镜参数-----=//
     NSMutableDictionary *attrs = [[NSMutableDictionary alloc]init];
     
-    if (self.batchSph.length) {
-        [attrs setObject:self.batchSph forKey:@"sphLeft"];
-        [attrs setObject:self.batchSph forKey:@"sphRight"];
+    if ([self.glasses filterType] == IPCTopFilterTypeCustomized) {
+        if (self.batchSph.length) {
+            [attrs setObject:self.batchSph forKey:@"sphLeft"];
+            [attrs setObject:self.batchSph forKey:@"sphRight"];
+        }
+        
+        if (self.bacthCyl.length) {
+            [attrs setObject:self.bacthCyl forKey:@"cylLeft"];
+            [attrs setObject:self.bacthCyl forKey:@"cylRight"];
+        }
+        
+        if (self.batchReadingDegree.length)
+            [attrs setObject:self.batchReadingDegree forKey:@"degree"];
+        
+        
+        if (self.contactDegree.length)
+            [attrs setObject:self.contactDegree forKey:@"degree"];
+        
+        if (self.batchNum.length) {
+            [attrs setObject:self.batchNum forKey:@"batchNumber"];
+        }
+        
+        if (self.kindNum.length) {
+            [attrs setObject:self.kindNum forKey:@"approvalNumber"];
+        }
+        
+        if (self.validityDate.length) {
+            [attrs setObject:self.validityDate forKey:@"expireDate"];
+        }
+        
+        if (self.IOROptions.length)
+            attrs[@"refraction"] = self.IOROptions;
+        
+        if (self.lensTypes.length)
+            attrs[@"orderLensType"] = self.lensTypes;
+        
+        if (self.lensFuncsArray.count)
+            attrs[@"orderLensFunction"] = [self.lensFuncsArray componentsJoinedByString:@","];
+        
+        if (self.thickenOptions.length)
+            attrs[@"addThickness"] = self.thickenOptions;
+        
+        if (self.thinnerOptions.length)
+            attrs[@"isThinLens"] = self.thinnerOptions;
+        
+        if (self.shiftOptions.length)
+            attrs[@"moveCenter"] = self.shiftOptions;
+        
+        if (self.remarks.length)
+            attrs[@"memo"] = self.remarks;
     }
-    
-    if (self.bacthCyl.length) {
-        [attrs setObject:self.bacthCyl forKey:@"cylLeft"];
-        [attrs setObject:self.bacthCyl forKey:@"cylRight"];
-    }
-    
-    if (self.batchReadingDegree.length)
-        [attrs setObject:self.batchReadingDegree forKey:@"degree"];
-    
-    
-    if (self.contactDegree.length)
-        [attrs setObject:self.contactDegree forKey:@"degree"];
-    
-    if (self.batchNum.length) {
-        [attrs setObject:self.batchNum forKey:@"batchNumber"];
-    }
-    
-    if (self.kindNum.length) {
-        [attrs setObject:self.kindNum forKey:@"approvalNumber"];
-    }
-    
-    if (self.validityDate.length) {
-        [attrs setObject:self.validityDate forKey:@"expireDate"];
-    }
-    
-    if (self.IOROptions.length)
-        attrs[@"refraction"] = self.IOROptions;
-    
-    if (self.lensTypes.length)
-        attrs[@"orderLensType"] = self.lensTypes;
-    
-    if (self.lensFuncsArray.count)
-        attrs[@"orderLensFunction"] = [self.lensFuncsArray componentsJoinedByString:@","];
-    
-    if (self.thickenOptions.length)
-        attrs[@"addThickness"] = self.thickenOptions;
-    
-    if (self.thinnerOptions.length)
-        attrs[@"isThinLens"] = self.thinnerOptions;
-    
-    if (self.shiftOptions.length)
-        attrs[@"moveCenter"] = self.shiftOptions;
-    
-    if (self.remarks.length)
-        attrs[@"memo"] = self.remarks;
     
     if (attrs.allKeys.count)
         [params setObject:attrs forKey:@"attributes"];

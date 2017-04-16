@@ -99,7 +99,12 @@ typedef void(^DismissBlock)();
         if (!isExist){
             IPCEmployeeResult * result = [[IPCEmployeeResult alloc]init];
             result.employe = employe;
-            result.employeeResult = 0;
+            
+            if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+                result.employeeResult = 100;
+            }else{
+                result.employeeResult = 0;
+            }
             [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
         }
     }

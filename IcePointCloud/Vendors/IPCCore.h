@@ -194,7 +194,7 @@ typedef NS_ENUM(NSInteger, IPCPayStyleType){
 #define SCREEN_HEIGHT                 [UIScreen mainScreen].bounds.size.height
 //Color
 #define COLOR_RGB_BLUE              [UIColor jk_colorWithHexString:@"#63a0d4"]
-#define COLOR_RGB_RED                [UIColor jk_colorWithHexString:@"#fd6800"]
+#define COLOR_RGB_RED                [UIColor jk_colorWithHexString:@"#FF0000"]
 //Account Key
 #define IPCWeixinAppID                 @"wx94ce99b4ee7c5356"
 #define IPCWeixinAppSecret           @"12a16d241dfcc9133783f4e3e8a47c59"

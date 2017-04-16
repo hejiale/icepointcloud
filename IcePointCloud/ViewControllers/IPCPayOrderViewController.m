@@ -39,7 +39,7 @@
     [self setNavigationTitle:@"确认订单"];
     self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
     self.normalSellCellMode.delegate = self;
-
+    
     [IPCCurrentCustomerOpometry sharedManager].isOrderStatus = YES;
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
@@ -56,11 +56,19 @@
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
+    [self reloadCustomerInfo];
     [self.payOrderTableView reloadData];
+}
+
+
+- (void)reloadCustomerInfo{
+    [IPCPayOrderMode sharedManager].balanceAmount = [[IPCCurrentCustomerOpometry sharedManager].currentCustomer.balance doubleValue];
+    [IPCPayOrderMode sharedManager].point = [[IPCCurrentCustomerOpometry sharedManager].currentCustomer.integral doubleValue];
 }
 
 #pragma mark //Set UI
 - (void)loadEmployeView{
+    [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
     self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -74,11 +82,36 @@
 #pragma mark //Clicked Events
 - (IBAction)loadPayStyleView:(id)sender
 {
+    if ( ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
+        [IPCCustomUI showError:@"请先选择客户信息"];
+        return;
+    }
+    if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+        [IPCCustomUI showError:@"请选择员工"];
+        return;
+    }
+    if ([[IPCPayOrderMode sharedManager] totalEmployeeResult] < 100) {
+        [IPCCustomUI showError:@"员工总份额不足百分之一百"];
+        return;
+    }
+    if ([IPCPayOrderMode sharedManager].realTotalPrice == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount) {
+        [IPCCustomUI showError:@"请输入有效实付金额"];
+        return;
+    }
+    if ([IPCPayOrderMode sharedManager].presellAmount == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment) {
+        [IPCCustomUI showError:@"请输入有效定金"];
+        return;
+    }
+    [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
-    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Dismiss:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.payTypeView removeFromSuperview];
-    }];
+    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+                                                                Pay:^{
+                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                                    [strongSelf.normalSellCellMode offerOrder];
+                                                                }Dismiss:^{
+                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                                    [strongSelf.payTypeView removeFromSuperview];
+                                                                }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.payTypeView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.payTypeView];
 }
@@ -87,7 +120,6 @@
 - (IBAction)cancelPayOrderAction:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 
 - (void)successPayOrder{
@@ -142,6 +174,10 @@
 #pragma mark //IPCPayOrderViewCellDelegate
 - (void)showEmployeeView{
     [self loadEmployeView];
+}
+
+- (void)reloadPayOrderView{
+    [self.payOrderTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
