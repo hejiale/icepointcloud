@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCCustomerDetailViewDelegate.h"
 
 @interface IPCUpdateCustomerView : UIView
 
 @property (strong, nonatomic, readwrite) IPCDetailCustomer * currentDetailCustomer;
+@property (assign, nonatomic, readwrite) id<IPCCustomerDetailViewDelegate>delegate;
 
 @end

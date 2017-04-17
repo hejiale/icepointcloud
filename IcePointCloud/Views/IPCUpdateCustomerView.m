@@ -68,6 +68,11 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 #pragma mark //Request Data
 - (void)updateCustomerRequest{
+    // 判断是否修改了性别
+    __block BOOL isUpdateGender = NO;
+    if ( ![self.currentDetailCustomer.genderString isEqualToString:[IPCCommon gender:self.genderTextField.text]]) {
+        isUpdateGender = YES;
+    }
     [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.currentDetailCustomer.customerID
                                                  CustomerName:self.userNameTextField.text
                                                   CustomPhone:self.phoneTextField.text
@@ -83,9 +88,15 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                   MemberLevel:self.memberLevelTextField.text
                                                           Job:self.jobTextField.text
                                                        Remark:self.memoTextField.text
+                                                      PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : self.currentDetailCustomer.photo_uuid)
                                                  SuccessBlock:^(id responseValue)
      {
          [IPCCustomUI showSuccess:@"更改用户信息成功!"];
+         if (self.delegate) {
+             if ([self.delegate respondsToSelector:@selector(dismissCoverSubViews)]) {
+                 [self.delegate dismissCoverSubViews];
+             }
+         }
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
      }];
@@ -100,6 +111,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 - (void)insertCustomerInfo{
     [self.userNameTextField setText:self.currentDetailCustomer.customerName];
+    [self.genderTextField setText:[IPCCommon formatGender:self.currentDetailCustomer.contactorGengerString]];
     [self.phoneTextField setText:self.currentDetailCustomer.customerPhone];
     [self.handlersTextField setText:self.currentDetailCustomer.empName];
     [self.memberNumTextField setText:self.currentDetailCustomer.memberId];
@@ -183,6 +195,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
         [self.memberLevelTextField setText:parameter];
     }else{
         [self.genderTextField setText:parameter];
+        
     }
 }
 

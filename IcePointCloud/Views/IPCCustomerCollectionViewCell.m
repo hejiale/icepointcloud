@@ -22,6 +22,7 @@
     _currentCustomer = currentCustomer;
     
     if (_currentCustomer) {
+        [self.customImageView setImage:[UIImage imageNamed:[IPCHeadImage  gender:_currentCustomer.gender Size:@"small" Tag:_currentCustomer.photo_uuid]]];
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
         [self.pointLabel setText:[NSString stringWithFormat:@"%@积分",_currentCustomer.integral]];

@@ -39,7 +39,7 @@
     [self.contactDegreeList removeAllObjects];
     if (self.glasses.stock <= 0)return;
     
-    [IPCBatchRequestManager queryBatchContactProductsStockWithLensID:self.glasses.glassesID
+    [IPCBatchRequestManager queryBatchContactProductsStockWithLensID:[self.glasses glassId]
                                                         SuccessBlock:^(id responseValue)
      {
          IPCBatchParameterList * batchParameterList = [[IPCBatchParameterList alloc]initWithResponseObject:responseValue];

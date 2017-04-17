@@ -62,7 +62,7 @@
  */
 - (BOOL)shoppingCartIsEmpty
 {
-    return [[IPCShoppingCart sharedCart] selectedItemsCount] == 0;
+    return [[IPCShoppingCart sharedCart] selectNormalItemsCount] == 0;
 }
 
 
@@ -134,7 +134,7 @@
 
 - (void)queryAccessoryStock:(IPCShoppingCartItem *)cartItem Complete:(void(^)(BOOL hasStock))complete
 {
-    [IPCBatchRequestManager queryAccessoryBatchSpecification:cartItem.glasses.glassesID
+    [IPCBatchRequestManager queryAccessoryBatchSpecification:[cartItem.glasses glassId]
                                                 SuccessBlock:^(id responseValue)
      {
          _accessorySpecification = [[IPCAccessorySpecList alloc]initWithResponseObject:responseValue];

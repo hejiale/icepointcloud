@@ -19,7 +19,6 @@
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
 #import "IPCUpdateCustomerView.h"
-#import "IPCPayOrderViewController.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
@@ -28,7 +27,7 @@ static NSString * const optometryIdentifier = @"HistoryOptometryCellIdentifier";
 static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifier";
 
-@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,IPCCustomerDetailViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
@@ -37,6 +36,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 @property (strong, nonatomic) IPCEditAddressView  *  editAddressView;
 @property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
+@property (strong, nonatomic) IPCUpdateCustomerView * updateCustomerView;
 
 @end
 
@@ -55,7 +55,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     // Do any additional setup after loading the view from its nib.
     
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
-    if ([IPCCurrentCustomerOpometry sharedManager].isOrderStatus) {
+    if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
+        [self.tableFootView addTopLine];
         [self.detailTableView setTableFooterView:self.tableFootView];
     }else{
         [self.detailTableView setTableFooterView:[[UIView alloc]init]];
@@ -64,7 +65,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     self.detailTableView.isHiden = YES;
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
     self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
-    [self commitUI];
+    
+    self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
+    self.customerViewMode.currentCustomer = self.customer;
     
     [[IPCEmployeeMode sharedManager] queryEmploye:@""];
     [[IPCEmployeeMode sharedManager] queryMemberLevel];
@@ -74,22 +77,18 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self requestCustomerDetailInfo];
+    
     [self setNavigationTitle:@"个人信息"];
     [self setNavigationBarStatus:NO];
 }
 
-
-- (void)commitUI{
-    [IPCCustomUI show];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
-    self.customerViewMode.currentCustomer = self.customer;
-    [self requestCustomerDetailInfo];
-}
-
 #pragma mark //Request Data
 - (void)requestCustomerDetailInfo{
+    [IPCCustomUI show];
+    
     [self.customerViewMode resetData];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     __weak typeof (self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
@@ -156,9 +155,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView];
-        [strongSelf.customerViewMode queryCustomerAddressList:^{
-            [strongSelf.detailTableView reloadData];
-        }];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView];
@@ -203,12 +199,15 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 
 - (void)loadUpdateCustomerView{
-    IPCUpdateCustomerView * updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds];
-    updateCustomerView.currentDetailCustomer = self.customerViewMode.detailCustomer;
-    [self.view addSubview:updateCustomerView];
-    [self.view bringSubviewToFront:updateCustomerView];
-    [[updateCustomerView rac_signalForSelector:@selector(removeCoverAction:)] subscribeNext:^(id x) {
-        [updateCustomerView removeFromSuperview];
+    self.updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds];
+    self.updateCustomerView.currentDetailCustomer = self.customerViewMode.detailCustomer;
+    [self.view addSubview:self.updateCustomerView];
+    [self.view bringSubviewToFront:self.updateCustomerView];
+
+     __weak typeof(self) weakSelf = self;
+    [[self.updateCustomerView rac_signalForSelector:@selector(removeCoverAction:)] subscribeNext:^(id x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf removerAllPopView];
     }];
 }
 
@@ -263,19 +262,18 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (IBAction)chooseCustomerAction:(id)sender {
     [self.customerViewMode getChooseCustomer];
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[IPCPayOrderViewController class]]) {
-            IPCPayOrderViewController *revise =(IPCPayOrderViewController *)controller;
-            [self.navigationController popToViewController:revise animated:YES];
-        }
-    }
+    [self popToPayOrderViewController];
 }
 
 
 - (void)removerAllPopView{
+    [self.updateCustomerView removeFromSuperview];
     [self.editAddressView removeFromSuperview];
     [self.editOptometryView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
+    [self.customerViewMode queryCustomerAddressList:^{
+        [self.detailTableView reloadData];
+    }];
 }
 
 #pragma mark //UITableViewDataSource
@@ -461,6 +459,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             [self loadOrderDetailView:order];
         }
     }
+}
+
+#pragma mark //IPCCustomerDetailViewDelegate
+- (void)dismissCoverSubViews{
+    [self removerAllPopView];
 }
 
 

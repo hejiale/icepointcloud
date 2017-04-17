@@ -35,7 +35,7 @@
     [self.fullAmountButton setSelected:NO];
     [self.depositButton setSelected:NO];
 
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
     [self.depositTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].presellAmount]];
@@ -133,13 +133,13 @@
             }
         }else if ([textField isEqual:self.payAmountTextField]){
             //判断实际输入价格
-            if (([[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice) < [str doubleValue]) {
-                [IPCPayOrderMode sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice;
+            if (([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice) < [str doubleValue]) {
+                [IPCPayOrderMode sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice;
             }else{
                 [IPCPayOrderMode sharedManager].realTotalPrice = [str doubleValue];
             }
             //计算赠送金额
-            [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
+            [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
             if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
                 [IPCPayOrderMode sharedManager].givingAmount = 0;
             }

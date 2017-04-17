@@ -14,8 +14,7 @@
 @property (nonatomic, copy, readwrite) NSString * birthday;
 @property (nonatomic, copy, readwrite) NSString * remark;
 @property (nonatomic, copy, readwrite) NSString * customerPhone;
-@property (nonatomic, copy, readwrite) NSString * photo_uuid;
-@property (nonatomic, copy, readwrite) NSString * photo_url;
+@property (nonatomic, copy, readwrite) NSString * photo_uuid;//存储本地头像
 @property (nonatomic, copy, readwrite) NSString * currentOptometryId;
 @property (nonatomic, copy, readwrite) NSString * email;
 @property (nonatomic, copy, readwrite) NSString * contactorGengerString;
@@ -27,14 +26,17 @@
 @property (nonatomic, copy, readwrite) NSString * contactorPhone;
 @property (nonatomic, copy, readwrite) NSString * lastPhoneReturn;
 @property (nonatomic, copy, readwrite) NSString * memberLevel;
+@property (nonatomic, copy, readwrite) NSString * memberLevelId;
 @property (nonatomic, copy, readwrite) NSString * membergrowth;
 @property (nonatomic, copy, readwrite) NSString * consumptionAmount;
 @property (nonatomic, copy, readwrite) NSString * balance;
 @property (nonatomic, copy, readwrite) NSString * createDate;
 @property (nonatomic, copy, readwrite) NSString * customerType;
+@property (nonatomic, copy, readwrite) NSString * customerTypeId;
+@property (nonatomic, copy, readwrite) NSString * employeeId;
 @property (nonatomic, copy, readwrite) NSString * empName;
-@property (nonatomic, copy, readonly) NSString * memberId;
-@property (nonatomic, copy, readonly) NSString * integral;
+@property (nonatomic, copy, readwrite) NSString * memberId;
+@property (nonatomic, assign, readwrite) double      integral;
 @property (nonatomic, copy, readwrite) NSString * occupation;
 
 @end

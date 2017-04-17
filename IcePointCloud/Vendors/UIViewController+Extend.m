@@ -7,6 +7,7 @@
 //
 
 #import "UIViewController+Extend.h"
+#import "IPCPayOrderViewController.h"
 
 static char const *  coverViewIdentifier = "coverViewIdentifier";
 
@@ -81,6 +82,17 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
 
 - (UIView *)backGroudView{
     return objc_getAssociatedObject(self, coverViewIdentifier);
+}
+
+
+- (void)popToPayOrderViewController
+{
+    for (UIViewController *controller in self.navigationController.viewControllers) {
+        if ([controller isKindOfClass:[IPCPayOrderViewController class]]) {
+            IPCPayOrderViewController *revise =(IPCPayOrderViewController *)controller;
+            [self.navigationController popToViewController:revise animated:YES];
+        }
+    }
 }
 
 

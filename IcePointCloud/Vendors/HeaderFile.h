@@ -56,7 +56,7 @@
 #import "IPCCustomerTypeList.h"
 #import "IPCMemberLevelList.h"
 #import "IPCPointValueMode.h"
-
+#import "IPCHeadImage.h"
 /**
  *  Category
  */

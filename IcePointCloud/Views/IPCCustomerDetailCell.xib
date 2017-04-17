@@ -433,6 +433,7 @@
                 <outlet property="emailLabel" destination="gqd-8A-9sw" id="BdP-oS-bRc"/>
                 <outlet property="genderLabel" destination="H2r-Nn-RLx" id="RkN-DG-yAd"/>
                 <outlet property="handlersLabel" destination="0va-7p-BKK" id="EJ3-yc-m2s"/>
+                <outlet property="headImageView" destination="Qib-cm-kbN" id="UGk-3g-fKY"/>
                 <outlet property="jobLabel" destination="clr-D8-48D" id="bdw-qo-rOn"/>
                 <outlet property="mainView" destination="N2i-EY-IWv" id="Tdw-vj-O58"/>
                 <outlet property="memberLevlLabel" destination="4qA-76-sgC" id="Mkb-DX-FhI"/>

@@ -40,7 +40,7 @@
     self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
     self.normalSellCellMode.delegate = self;
     
-    [IPCCurrentCustomerOpometry sharedManager].isOrderStatus = YES;
+    [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
@@ -63,7 +63,7 @@
 
 - (void)reloadCustomerInfo{
     [IPCPayOrderMode sharedManager].balanceAmount = [[IPCCurrentCustomerOpometry sharedManager].currentCustomer.balance doubleValue];
-    [IPCPayOrderMode sharedManager].point = [[IPCCurrentCustomerOpometry sharedManager].currentCustomer.integral doubleValue];
+    [IPCPayOrderMode sharedManager].point = [IPCCurrentCustomerOpometry sharedManager].currentCustomer.integral;
 }
 
 #pragma mark //Set UI
@@ -75,8 +75,8 @@
         [strongSelf.employeView removeFromSuperview];
         [strongSelf.payOrderTableView reloadData];
     }];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.employeView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.employeView];
+    [self.view addSubview:self.employeView];
+    [self.view bringSubviewToFront:self.employeView];
 }
 
 #pragma mark //Clicked Events
@@ -88,6 +88,10 @@
     }
     if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
         [IPCCustomUI showError:@"请选择员工"];
+        return;
+    }
+    if ([[IPCPayOrderMode sharedManager] isExistEmptyEmployeeResult]) {
+        [IPCCustomUI showError:@"参与比例必须填写且大于零"];
         return;
     }
     if ([[IPCPayOrderMode sharedManager] totalEmployeeResult] < 100) {

@@ -15,6 +15,8 @@
 
 + (IPCPayOrderMode *)sharedManager;
 
+@property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
+
 @property (nonatomic,assign, readwrite) IPCPayStyleType      payStyle;//支付方式 \ 支付宝  微信  现金  刷卡
 @property (nonatomic,assign, readwrite) IPCOrderPayType     payType;//全额  定金支付
 @property (nonatomic, copy, readwrite) NSString     *   payStyleName;//支付名称
@@ -54,5 +56,9 @@
 - (void)reloadWithOtherTypeAmount;
 
 - (double)waitPayAmount;
+
+- (double)minumEmployeeResult;
+
+- (BOOL)isExistEmptyEmployeeResult;
 
 @end

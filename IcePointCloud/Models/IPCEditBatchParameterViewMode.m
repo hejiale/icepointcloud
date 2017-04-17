@@ -34,7 +34,7 @@
 
 #pragma mark //Network Request
 - (void)queryBatchStockRequest{
-    [IPCBatchRequestManager queryBatchLensProductsStockWithLensID:self.currentGlass.glassesID
+    [IPCBatchRequestManager queryBatchLensProductsStockWithLensID:[self.currentGlass glassId]
                                                      SuccessBlock:^(id responseValue)
      {
          _batchParameterList = [[IPCBatchParameterList alloc]initWithResponseObject:responseValue];
@@ -47,7 +47,7 @@
 }
 
 - (void)queryBatchReadingDegreeRequest{
-    [IPCBatchRequestManager queryBatchReadingProductsStockWithLensID:self.currentGlass.glassesID
+    [IPCBatchRequestManager queryBatchReadingProductsStockWithLensID:[self.currentGlass glassId]
                                                         SuccessBlock:^(id responseValue)
      {
          _batchParameterList = [[IPCBatchParameterList alloc]initWithResponseObject:responseValue];
@@ -92,7 +92,7 @@
 }
 
 - (void)queryAccessoryStock{
-    [IPCBatchRequestManager queryAccessoryBatchSpecification:self.currentGlass.glassesID
+    [IPCBatchRequestManager queryAccessoryBatchSpecification:[self.currentGlass glassId]
                                                 SuccessBlock:^(id responseValue)
      {
          _accessorySpecification = [[IPCAccessorySpecList alloc]initWithResponseObject:responseValue];

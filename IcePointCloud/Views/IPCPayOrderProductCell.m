@@ -33,8 +33,8 @@
     [super awakeFromNib];
     
     [self setBackgroundColor:[UIColor clearColor]];
-    [self.glassesImgView addBorder:3 Width:1];
-    [self.inputPriceTextField addBorder:3 Width:1];
+
+    [self.inputPriceTextField addBorder:3 Width:0.5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -47,14 +47,14 @@
 {
     _cartItem = cartItem;
     
-    [self.countNumView setHidden:YES];
-    [self.inputPriceTextField setHidden:YES];
-    
     if (_cartItem) {
+        if ([_cartItem.glasses filterType] != IPCTopFilterTypeCard) {
+            [self.glassesImgView addBorder:3 Width:0.5];
+        }
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard) {
             [self.countNumView setHidden:NO];
         }else{
-            [self.inputPriceTextField setHidden:NO];
+            [self.inputPirceView setHidden:NO];
         }
         
         IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
@@ -62,7 +62,7 @@
             [self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
         }
         self.glassesNameLbl.text = _cartItem.glasses.glassName;
-        [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.unitPrice]];
+        [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.glasses.price]];
         [self.countLabel setText:[NSString stringWithFormat:@"X%d",_cartItem.count]];
         [self.inputCountLabel setText:[NSString stringWithFormat:@"%d",_cartItem.count]];
         [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];

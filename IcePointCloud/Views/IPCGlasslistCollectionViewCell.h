@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reduceButtonLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
 @property (strong, nonatomic) UIPageControl * imagePageControl;
+@property (weak, nonatomic) IBOutlet UIButton *buyButton;
 
 @property (nonatomic, weak) IPCGlasses *glasses;
 @property (nonatomic) BOOL  isTrying;//Whether to try the page
@@ -37,5 +38,6 @@
 - (void)addShoppingCartAnimation:(IPCGlasslistCollectionViewCell *)cell;
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell;
 - (void)reloadProductList;
+- (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell;
 
 @end

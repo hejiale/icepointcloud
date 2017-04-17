@@ -22,6 +22,7 @@
     _currentCustomer = currentCustomer;
     
     if (_currentCustomer) {
+        [self.headImageView setImage:[UIImage imageNamed:[IPCHeadImage  gender:_currentCustomer.contactorGengerString Size:@"Large" Tag:_currentCustomer.photo_uuid]]];
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.phoneLabel setText:_currentCustomer.customerPhone];
         [self.birthdayLabel setText:_currentCustomer.birthday];
@@ -34,10 +35,10 @@
         [self.jobLabel setText:@""];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
-        [self.totalPayAmountLabel setText:_currentCustomer.consumptionAmount];
-        [self.storeValueLabel setText:_currentCustomer.balance];
+        [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.f",_currentCustomer.consumptionAmount]];
+        [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.f",_currentCustomer.balance]];
         [self.bookDateLabel setText:_currentCustomer.createDate];
-        [self.pointLabel setText:[NSString stringWithFormat:@"%@积分",_currentCustomer.integral]];
+        [self.pointLabel setText:[NSString stringWithFormat:@"%.f积分",_currentCustomer.integral]];
     }
 }
 

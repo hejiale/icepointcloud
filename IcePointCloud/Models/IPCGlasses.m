@@ -41,25 +41,35 @@
  *  Glasses type
  *
  */
-- (IPCTopFilterType)filterType{
-    if ([self.glassTypeName isEqualToString:@"FRAMES"]) {
+- (IPCTopFilterType)filterType
+{
+    NSRange range = [self.glassesID rangeOfString:@"-"];
+    NSString * typeName = [self.glassesID substringToIndex:range.location];
+    
+    if ([typeName isEqualToString:@"FRAMES"]) {
         return IPCTopFIlterTypeFrames;
-    }else if ([self.glassTypeName isEqualToString:@"SUNGLASSES"]){
+    }else if ([typeName isEqualToString:@"SUNGLASSES"]){
         return IPCTopFilterTypeSunGlasses;
-    }else if ([self.glassTypeName isEqualToString:@"CUSTOMIZED"]){
+    }else if ([typeName isEqualToString:@"CUSTOMIZED"]){
         return IPCTopFilterTypeCustomized;
-    }else if ([self.glassTypeName isEqualToString:@"READING_GLASSES"]){
+    }else if ([typeName isEqualToString:@"READING_GLASSES"]){
         return IPCTopFilterTypeReadingGlass;
-    }else if ([self.lensTypeName isEqualToString:@"LENS"]){
+    }else if ([typeName isEqualToString:@"LENS"]){
         return IPCTopFilterTypeLens;
-    }else if ([self.lensTypeName isEqualToString:@"CONTACT_LENSES"]){
+    }else if ([typeName isEqualToString:@"CONTACT_LENSES"]){
         return IPCTopFilterTypeContactLenses;
-    }else if ([self.lensTypeName isEqualToString:@"ACCESSORY"]){
+    }else if ([typeName isEqualToString:@"ACCESSORY"]){
         return IPCTopFilterTypeAccessory;
-    }else if ([self.lensTypeName isEqualToString:@"VALUECARD"]){
+    }else if ([typeName isEqualToString:@"VALUECARD"]){
         return IPCTopFilterTypeCard;
     }
     return IPCTopFilterTypeOthers;
+}
+
+
+- (NSString *)glassId
+{
+    return [self.glassesID substringFromIndex:[self.glassesID rangeOfString:@"-"].location + 1];
 }
 
 
@@ -69,8 +79,6 @@
              @"glassCode"                : @"stockNumber",
              @"price"                        : @"suggestPrice",
              @"border"                     : @"frame",
-             @"glassTypeName"       : @"glassesType",
-             @"lensTypeName"        : @"lensType",
              @"detailLinkURl"           : @"desc",
              @"stock"                       : @"inventoryStock",
              @"profileDisplayImage" : @"photos.侧面展示",
@@ -83,12 +91,11 @@
              @"specification"       : @"packingSpec",
              @"baseOfArc"           : @"baseCurve",
              @"watercontent"        : @"waterContent",
-             @"lensType"            : @"glassLensType",
              @"refractiveIndex"     : @"refraction",
              @"isTryOn"              : @"proTry",
              @"productCount"        : @"count",
-             @"isBatch"               : @"batch",
-             @"valueCardPhotoURL": @"photoUrl",
+             @"lensType"            : @"glassLensType",
+             @"isBatch"               : @"batch"
              };
 }
 

@@ -78,6 +78,7 @@
                            MemberLevel:(NSString *)memberLevel
                          MemberLevelId:(NSString *)memberLevelId
                              MemberNum:(NSString *)memberNum
+                               PhotoId:(NSString *)photoId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -99,7 +100,8 @@
                              @"memberLevelId":memberLevelId,
                              @"memberId":memberNum,
                              @"occupation":occupation,
-                             @"optometrys":optometryList};
+                             @"optometrys":optometryList,
+                             @"photo_uuid":photoId};
     [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -189,6 +191,7 @@
                            MemberLevel:(NSString *)memberLevel
                                    Job:(NSString *)job
                                 Remark:(NSString *)remark
+                               PhotoId:(NSString *)photoId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -206,7 +209,8 @@
                                   @"occupation":job,
                                   @"empName":employeeName,
                                   @"customerType":customerType,
-                                  @"memberLevel":memberLevel
+                                  @"memberLevel":memberLevel,
+                                  @"photo_uuid":photoId
                                   };
     [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }

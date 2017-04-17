@@ -42,8 +42,6 @@
 //Joining together to upload the order parameter
 - (NSDictionary *)paramtersJSONForOrderRequest
 {
-    NSString * lensID = [self.glasses.glassesID substringFromIndex:[self.glasses.glassesID rangeOfString:@"-"].location + 1];
-    
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:@(self.unitPrice) forKey:@"afterDiscountPrice"];
     
@@ -51,27 +49,27 @@
     {
         [params setObject:@(self.count) forKey:@"glassCount"];
         [params setObject:@(self.glasses.price) forKey:@"glassPrice"];
-        [params setObject:lensID forKey:@"glassId"];
+        [params setObject:[self.glasses glassId] forKey:@"glassId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
     {
         [params setObject:@(self.count) forKey:@"lensCount"];
         [params setObject:@(self.glasses.price) forKey:@"lensPrice"];
-        [params setObject:lensID forKey:@"lensId"];
+        [params setObject:[self.glasses glassId] forKey:@"lensId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory)
     {
         [params setObject:@(self.count) forKey:@"accessoryCount"];
         [params setObject:@(self.glasses.price) forKey:@"accessoryPrice"];
-        [params setObject:lensID forKey:@"accessoryId"];
+        [params setObject:[self.glasses glassId] forKey:@"accessoryId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeCard)
     {
         [params setObject:@(self.count) forKey:@"valueCardCount"];
         [params setObject:@(self.glasses.price) forKey:@"valueCardPrice"];
-        [params setObject:lensID forKey:@"valueCardId"];
+        [params setObject:[self.glasses glassId] forKey:@"valueCardId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeOthers)
     {
         [params setObject:@(self.count) forKey:@"othersProductCount"];
         [params setObject:@(self.glasses.price) forKey:@"othersProductPrice"];
-        [params setObject:lensID forKey:@"othersProductId"];
+        [params setObject:[self.glasses glassId] forKey:@"othersProductId"];
     }
     
     //=--------定制类眼镜参数-----=//

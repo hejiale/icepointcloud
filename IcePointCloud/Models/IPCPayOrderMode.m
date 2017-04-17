@@ -25,6 +25,8 @@
     if (self) {
         self.payType = IPCOrderPayTypePayAmount;
         self.payStyle = IPCPayStyleTypeCash;
+        self.isSelectPayType = YES;
+        self.payStyleName = @"CASH";
     }
     return self;
 }
@@ -43,7 +45,9 @@
     [IPCPayOrderMode sharedManager].realTotalPrice = 0;
     [IPCPayOrderMode sharedManager].balanceAmount = 0;
     [IPCPayOrderMode sharedManager].isSelectPoint = NO;
+    [IPCPayOrderMode sharedManager].isPayOrderStatus = NO;
     [[IPCPayOrderMode sharedManager] clearPayTypeData];
+    [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
 }
 
 
@@ -51,7 +55,7 @@
 {
     [[IPCPayOrderMode sharedManager].otherPayTypeArray removeAllObjects];
     [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
-    [IPCPayOrderMode sharedManager].payStyleName = @"";
+    [IPCPayOrderMode sharedManager].payStyleName = @"CASH";
     [IPCPayOrderMode sharedManager].payTypeAmount = 0;
     [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
     [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
@@ -156,6 +160,24 @@
     }
 }
 
+- (double)minumEmployeeResult
+{
+    __block double totalResult = 0;
+    [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        totalResult += obj.employeeResult;
+    }];
+    return MAX(100 - totalResult, 0);
+}
+
+- (BOOL)isExistEmptyEmployeeResult{
+    __block BOOL isExist = NO;
+    [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.employeeResult == 0) {
+            isExist = YES;
+        }
+    }];
+    return isExist;
+}
 
 
 @end

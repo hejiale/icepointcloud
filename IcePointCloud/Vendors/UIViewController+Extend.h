@@ -19,4 +19,6 @@
 
 - (void)addBackgroundViewWithAlpha:(CGFloat)alpha Complete:(void(^)())completed;
 
+- (void)popToPayOrderViewController;
+
 @end

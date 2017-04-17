@@ -15,8 +15,7 @@
                                  SuccessBlock:(void (^)(id responseValue))success
                                  FailureBlock:(void (^)(NSError * error))failure
 {
-    NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self postRequest:lensID RequestMethod:@"batchAdmin.getBatchLenInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:@"batchAdmin.getBatchLenInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -24,8 +23,7 @@
                                     SuccessBlock:(void (^)(id responseValue))success
                                     FailureBlock:(void (^)(NSError * error))failure
 {
-    NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self postRequest:lensID RequestMethod:@"batchAdmin.getBatchReadingGlassesInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:@"batchAdmin.getBatchReadingGlassesInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -33,8 +31,7 @@
                                     SuccessBlock:(void (^)(id responseValue))success
                                     FailureBlock:(void (^)(NSError * error))failure
 {
-    NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self postRequest:lensID RequestMethod:@"batchAdmin.getBatchContactLensInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:@"batchAdmin.getBatchContactLensInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -50,8 +47,7 @@
                             SuccessBlock:(void (^)(id responseValue))success
                             FailureBlock:(void (^)(NSError *error))failure
 {
-    NSString * lensID = [lenID substringFromIndex:[lenID rangeOfString:@"-"].location + 1];
-    [self postRequest:lensID RequestMethod:@"batchAdmin.getContactSolutionDetailsWithProdIdForPos"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:@"batchAdmin.getContactSolutionDetailsWithProdIdForPos"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

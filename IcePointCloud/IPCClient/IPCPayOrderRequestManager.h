@@ -16,8 +16,9 @@
  *  @param success
  *  @param failure
  */
-+ (void)offerOrderWithSuccessBlock:(void (^)(id responseValue))success
-                      FailureBlock:(void (^)(NSError * error))failure;
++ (void)offerOrderWithPayStatus:(BOOL)status
+                   SuccessBlock:(void (^)(id responseValue))success
+                   FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**

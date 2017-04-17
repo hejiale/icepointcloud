@@ -108,6 +108,7 @@
                            MemberLevel:(NSString *)memberLevel
                          MemberLevelId:(NSString *)memberLevelId
                              MemberNum:(NSString *)memberNum
+                               PhotoId:(NSString *)photoId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
@@ -241,6 +242,7 @@
                            MemberLevel:(NSString *)memberLevel
                                    Job:(NSString *)job
                                 Remark:(NSString *)remark
+                               PhotoId:(NSString *)photoId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 

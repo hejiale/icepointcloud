@@ -21,6 +21,38 @@
 }
 
 
+- (void)insertNewCustomer
+{
+    self.currentCustomer = [[IPCDetailCustomer alloc]init];
+    self.currentOpometry = [[IPCOptometryMode alloc]init];
+    self.currentAddress = [[IPCCustomerAddressMode alloc]init];
+    
+    self.currentCustomer.customerName = [IPCInsertCustomer instance].customerName;
+    self.currentCustomer.birthday = [IPCInsertCustomer instance].birthday;
+    self.currentCustomer.email = [IPCInsertCustomer instance].email;
+    self.currentCustomer.genderString = [IPCInsertCustomer instance].contactorGengerString;
+    self.currentCustomer.customerPhone = [IPCInsertCustomer instance].customerPhone;
+    self.currentCustomer.customerType = [IPCInsertCustomer instance].customerType;
+    self.currentCustomer.customerTypeId = [IPCInsertCustomer instance].customerTypeId;
+    self.currentCustomer.memberId = [IPCInsertCustomer instance].memberNum;
+    self.currentCustomer.empName = [IPCInsertCustomer instance].empName;
+    self.currentCustomer.employeeId = [IPCInsertCustomer instance].empNameId;
+    self.currentCustomer.memberLevel = [IPCInsertCustomer instance].memberLevel;
+    self.currentCustomer.memberLevelId = [IPCInsertCustomer instance].memberLevelId;
+    self.currentCustomer.remark = [IPCInsertCustomer instance].remark;
+    self.currentCustomer.occupation = [IPCInsertCustomer instance].job;
+    self.currentCustomer.integral = 0;
+    
+    self.currentAddress.contactName = [IPCInsertCustomer instance].contactorName;
+    self.currentAddress.phone = [IPCInsertCustomer instance].contactorPhone;
+    self.currentAddress.gender = [IPCInsertCustomer instance].gender;
+    self.currentAddress.genderString = [IPCInsertCustomer instance].genderString;
+    self.currentAddress.detailAddress = [IPCInsertCustomer instance].contactorAddress;
+    
+    self.currentOpometry = [IPCInsertCustomer instance].optometryArray[0];
+    self.currentOpometry.insertDate = [IPCCommon formatDate:[NSDate date] IsTime:YES];
+}
+
 - (void)clearData{
     [IPCCurrentCustomerOpometry sharedManager].currentAddress  = nil;
     [IPCCurrentCustomerOpometry sharedManager].currentCustomer = nil;

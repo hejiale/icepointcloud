@@ -38,6 +38,7 @@ typedef  void(^DismissBlock)();
         self.customerID = customerID;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditOptometryView" owner:self];
+        [view setFrame:frame];
         [self addSubview:view];
         
         self.opometryBgView.layer.cornerRadius = 5;

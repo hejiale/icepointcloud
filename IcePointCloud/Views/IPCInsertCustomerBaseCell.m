@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -61,6 +61,9 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.memberNumTextField setText:[IPCInsertCustomer instance].memberNum];
     [self.memberLevelTextField setText:[IPCInsertCustomer instance].memberLevel];
     [self.jobTextField setText:[IPCInsertCustomer instance].job];
+    
+    NSString * headImage  = [IPCHeadImage gender:[IPCInsertCustomer instance].gender Size:@"middle" Tag:[IPCInsertCustomer instance].photo_udid];
+    [self.customerImageView setImage:[UIImage imageNamed:headImage]];
 }
 
 
@@ -138,6 +141,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     if (self.insertType == IPCInsertTypeGender) {
         [IPCInsertCustomer instance].genderString = parameter;
         [IPCInsertCustomer instance].gender = [IPCCommon gender:parameter];
+        [IPCInsertCustomer instance].photo_udid = [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]];
     }else if (self.insertType == IPCInsertTypeMemberLevel){
         [IPCInsertCustomer instance].memberLevel = parameter;
         [IPCInsertCustomer instance].memberLevelId = [[IPCEmployeeMode sharedManager] memberLevelId:parameter];

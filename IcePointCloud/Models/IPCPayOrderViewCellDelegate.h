@@ -12,5 +12,6 @@
 
 - (void)showEmployeeView;
 - (void)reloadPayOrderView;
+- (void)showPaySuccessView;
 
 @end

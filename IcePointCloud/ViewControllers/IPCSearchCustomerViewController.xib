@@ -35,19 +35,19 @@
                     </connections>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvY-2T-ih6">
-                    <rect key="frame" x="960" y="674" width="44" height="44"/>
+                    <rect key="frame" x="960" y="620" width="44" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="Ofw-GX-BtM"/>
                         <constraint firstAttribute="height" constant="44" id="yVb-X9-7j4"/>
                     </constraints>
-                    <state key="normal" image="icon_search"/>
+                    <state key="normal" image="icon_search_customer"/>
                     <connections>
                         <action selector="searchCustomerAction:" destination="-1" eventType="touchUpInside" id="s0n-n5-beC"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q9D-ec-pb3">
-                    <rect key="frame" x="960" y="610" width="44" height="44"/>
+                    <rect key="frame" x="960" y="684" width="44" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="c64-dd-EDD"/>
@@ -62,19 +62,19 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="kAD-05-wII" secondAttribute="trailing" id="5Pg-4w-Px9"/>
-                <constraint firstAttribute="bottom" secondItem="XvY-2T-ih6" secondAttribute="bottom" constant="50" id="6Dv-eK-Pxt"/>
+                <constraint firstAttribute="bottom" secondItem="q9D-ec-pb3" secondAttribute="bottom" constant="40" id="8Mf-fU-oJP"/>
                 <constraint firstAttribute="bottom" secondItem="kAD-05-wII" secondAttribute="bottom" id="NTF-cN-CnW"/>
                 <constraint firstItem="kAD-05-wII" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Pjg-SE-icX"/>
                 <constraint firstAttribute="trailing" secondItem="XvY-2T-ih6" secondAttribute="trailing" constant="20" id="X48-Gg-bQB"/>
                 <constraint firstAttribute="trailing" secondItem="q9D-ec-pb3" secondAttribute="trailing" constant="20" id="aOV-HU-5l3"/>
-                <constraint firstItem="XvY-2T-ih6" firstAttribute="top" secondItem="q9D-ec-pb3" secondAttribute="bottom" constant="20" id="eCj-mY-TdZ"/>
                 <constraint firstItem="kAD-05-wII" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oQK-nn-zcN"/>
+                <constraint firstItem="q9D-ec-pb3" firstAttribute="top" secondItem="XvY-2T-ih6" secondAttribute="bottom" constant="20" id="thx-eT-K7B"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
     <resources>
         <image name="icon_addCustomer" width="48" height="48"/>
-        <image name="icon_search" width="22" height="22"/>
+        <image name="icon_search_customer" width="48" height="48"/>
     </resources>
 </document>

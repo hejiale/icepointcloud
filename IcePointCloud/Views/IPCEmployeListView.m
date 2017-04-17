@@ -103,7 +103,7 @@ typedef void(^DismissBlock)();
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
                 result.employeeResult = 100;
             }else{
-                result.employeeResult = 0;
+                result.employeeResult = [[IPCPayOrderMode sharedManager] minumEmployeeResult];
             }
             [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
         }

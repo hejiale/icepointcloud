@@ -34,6 +34,7 @@
                              @"limit": @(9),
                              @"type": classType,
                              @"keyword": searchWord,
+                             @"delFlag":@"false",
                              @"hot":isHot? @"true":@"false",
                              @"searchSupplier": @"true",
                              @"proAvailable":@"true",

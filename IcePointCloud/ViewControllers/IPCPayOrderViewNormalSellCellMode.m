@@ -44,13 +44,13 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
                                                      [IPCPayOrderMode sharedManager].pointPrice = point.integralDeductionAmount;
                                                      [IPCPayOrderMode sharedManager].usedPoint = point.deductionIntegral;
                                                      
-                                                     if ([[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
+                                                     if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
                                                          [IPCPayOrderMode sharedManager].realTotalPrice = 0;
                                                          [IPCPayOrderMode sharedManager].givingAmount = 0;
                                                      }
                                                      
                                                      if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
-                                                         [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
+                                                         [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
                                                          if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
                                                              [IPCPayOrderMode sharedManager].givingAmount = 0;
                                                          }
@@ -68,11 +68,12 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
 
 
 - (void)offerOrder{
-    [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue) {
-        
-    } FailureBlock:^(NSError *error) {
-        
-    }];
+    [IPCPayOrderRequestManager offerOrderWithPayStatus:YES SuccessBlock:^(id responseValue)
+     {
+         
+     } FailureBlock:^(NSError *error) {
+         
+     }];
 }
 
 #pragma mark //UITableView DataSource
@@ -86,7 +87,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ((section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0))
-        return  [[IPCShoppingCart sharedCart] selectedItemsCount] + 1;
+        return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))
         return 1;
     else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 4)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
@@ -161,7 +162,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
                 cell.delegate = self;
             }
-            IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedItemAtIndex:indexPath.row-1] ;
+            IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:indexPath.row-1] ;
             if (cartItem){
                 [cell setCartItem:cartItem];
             }
@@ -216,7 +217,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
         }else if (indexPath.section == 4 && indexPath.row > 0){
             return 110;
         }else if (indexPath.section == 5){
-            return 200;
+            return 235;
         }
         return 50;
     }
@@ -225,7 +226,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
     }else if (indexPath.section == 1 && indexPath.row > 0) {
         return 100;
     }else if (indexPath.section == 2) {
-        return 200;
+        return 235;
     }
     return 50;
 }

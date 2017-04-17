@@ -12,6 +12,7 @@
 #import "IPCGlassParameterView.h"
 #import "IPCEditBatchParameterView.h"
 #import "IPCGlassListViewMode.h"
+#import "IPCPayOrderViewController.h"
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
@@ -283,6 +284,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.glassListCollectionView reloadData];
 }
 
+
+- (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell{
+    if ([self.glassListViewMode.glassesList count] > 0) {
+        NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
+        IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+        [self.navigationController pushViewController:payOrderVC animated:YES];
+    }
+}
 
 #pragma mark //NSNotification
 - (void)addNotifications{

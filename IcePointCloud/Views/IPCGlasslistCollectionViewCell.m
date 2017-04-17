@@ -49,9 +49,11 @@
             }
         }
         
+        __block CGFloat originX = (self.jk_width - 183)/2;
+        
         [images enumerateObjectsUsingBlock:^(IPCGlassesImage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
          {
-            UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width+20, 0, self.jk_width-40, self.imageScrollView.jk_height)];
+            UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width + originX, 20, 183, 112)];
             glassImageView.contentMode = UIViewContentModeScaleAspectFit;
             [glassImageView setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
             [self.imageScrollView addSubview:glassImageView];
@@ -71,9 +73,11 @@
         if ([self.glasses filterType] == IPCTopFilterTypeCard) {
             [self.addCartButton setHidden:YES];
             [self.reduceButton setHidden:YES];
+            [self.buyButton setHidden:NO];
         }else{
             [self.addCartButton setHidden:NO];
             [self.reduceButton setHidden:NO];
+            [self.buyButton setHidden:YES];
         }
         
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
@@ -205,6 +209,16 @@
         [[IPCShoppingCart sharedCart] removeGlasses:self.glasses];
         if ([self.delegate respondsToSelector:@selector(reloadProductList)]) {
             [self.delegate reloadProductList];
+        }
+    }
+}
+
+
+- (IBAction)buyCardAction:(id)sender {
+    if (self.glasses) {
+        [[IPCShoppingCart sharedCart] addValueCard:self.glasses];
+        if ([self.delegate respondsToSelector:@selector(buyValueCard:)]) {
+            [self.delegate buyValueCard:self];
         }
     }
 }

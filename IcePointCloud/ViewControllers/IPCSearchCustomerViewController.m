@@ -43,6 +43,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     // Do any additional setup after loading the view from its nib.
     
     searchKeyWord = @"";
+    if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
+        [self setNavigationTitle:@"客户"];
+    }
     [self loadCollectionView];
 }
 

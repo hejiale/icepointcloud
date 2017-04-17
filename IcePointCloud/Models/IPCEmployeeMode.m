@@ -51,7 +51,7 @@
 }
 
 - (NSString *)employeeId:(NSString *)employee{
-    __block NSString * employeeId = nil;
+    __block NSString * employeeId = @"";
     [[IPCEmployeeMode sharedManager].employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmploye * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.name isEqualToString:employee]) {
             employeeId = obj.jobID;
@@ -61,7 +61,7 @@
 }
 
 - (NSString *)customerTypeId:(NSString *)customerType{
-    __block NSString * customerTypeId = nil;
+    __block NSString * customerTypeId = @"";
     [[IPCEmployeeMode sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.customerType isEqualToString:customerType]) {
             customerTypeId = obj.customerTypeId;
@@ -71,7 +71,7 @@
 }
 
 - (NSString *)memberLevelId:(NSString *)memberLevel{
-    __block NSString * memberLevelId = nil;
+    __block NSString * memberLevelId = @"";
     [[IPCEmployeeMode sharedManager].memberLevelList.list enumerateObjectsUsingBlock:^(IPCMemberLevel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.memberLevel isEqualToString:memberLevel]) {
             memberLevelId = obj.memberLevelId;

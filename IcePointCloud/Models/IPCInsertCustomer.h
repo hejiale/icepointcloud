@@ -11,9 +11,12 @@
 @interface IPCInsertCustomer : NSObject
 
 + (IPCInsertCustomer *)instance;
+
 - (void)resetData;
 
-@property (nonatomic, copy, readwrite) NSString * headImage;//头像
+- (BOOL)isEmpty;
+
+@property (nonatomic, copy, readwrite) NSString * photo_udid;//头像
 @property (nonatomic, copy, readwrite) NSString * customerName;
 @property (nonatomic, copy, readwrite) NSString * genderString;
 @property (nonatomic, copy, readwrite) NSString * gender;//MALE   FEMALE
@@ -36,5 +39,7 @@
 @property (nonatomic, copy, readwrite) NSString * contactorGenger;
 @property (nonatomic, copy, readwrite) NSMutableArray<IPCOptometryMode *> * optometryArray;
 
+- (BOOL)isCustomerInfoEmpty;
+- (BOOL)isEmptyOptometry;
 
 @end
