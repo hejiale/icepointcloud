@@ -11,8 +11,12 @@
 @implementation IPCPayOrderParameter
 
 
-- (NSDictionary *)offOrderParameterWithPayStatus:(BOOL)payStatus//(payStatus判断新建订单时是新增的用户还是选取的用户)
+- (NSDictionary *)offOrderParameter
 {
+    BOOL isChooseCustomer = YES;
+    
+    if (![IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID)isChooseCustomer = NO;
+    
     //员工份额
     NSMutableArray * employeeList = [[NSMutableArray alloc]init];
     [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -33,7 +37,7 @@
     
     NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
     
-    if (payStatus) {
+    if (isChooseCustomer) {
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID forKey:@"customerId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID forKey:@"addressId"];
@@ -47,7 +51,7 @@
     [parameters setObject:employeeList forKey:@"employeeAchievements"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].realTotalPrice) forKey:@"orderFinalPrice"];
     [parameters setObject:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false" : @"true") forKey:@"isAdvancePayment"];
-    [parameters setObject:@([IPCPayOrderMode sharedManager].presellAmount) forKey:@"payAmount"];
+    [parameters setObject:@([[IPCPayOrderMode sharedManager] waitPayAmount]) forKey:@"payAmount"];
     [parameters setObject:[IPCPayOrderMode sharedManager].payStyleName forKey:@"payType"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].givingAmount) forKey:@"donationAmount"];

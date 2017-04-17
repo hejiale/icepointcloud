@@ -68,11 +68,15 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
 
 
 - (void)offerOrder{
-    [IPCPayOrderRequestManager offerOrderWithPayStatus:YES SuccessBlock:^(id responseValue)
+    [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue)
      {
-         
+         IPCOrder *result = [IPCOrder mj_objectWithKeyValues:responseValue];
+        
+         if ([self.delegate respondsToSelector:@selector(showPaySuccessViewWithOrderInfo:)]) {
+             [self.delegate showPaySuccessViewWithOrderInfo:result];
+         }
      } FailureBlock:^(NSError *error) {
-         
+         [IPCCustomUI showError:error.domain];
      }];
 }
 

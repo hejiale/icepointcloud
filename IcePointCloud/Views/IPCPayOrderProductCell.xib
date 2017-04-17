@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="135"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="134"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="134.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3GQ-zG-pCv" userLabel="InnerView">
@@ -30,18 +30,18 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYY-5p-Hy4" userLabel="GlassNameLbl">
-                                <rect key="frame" x="120" y="25" width="899" height="25"/>
+                                <rect key="frame" x="120" y="25" width="899" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="oXS-iZ-YiZ"/>
+                                    <constraint firstAttribute="height" constant="30" id="oXS-iZ-YiZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvC-mw-3mE">
-                                <rect key="frame" x="120" y="85" width="200" height="25"/>
+                                <rect key="frame" x="120" y="80" width="200" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="1gg-Gp-INt"/>
+                                    <constraint firstAttribute="height" constant="30" id="1gg-Gp-INt"/>
                                     <constraint firstAttribute="width" constant="200" id="cUS-vk-j3C"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>

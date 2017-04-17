@@ -49,7 +49,7 @@
 
 - (double)minimumEmployeeDiscountPrice:(double)originPrice;
 
-- (void)clearData;
+- (void)resetData;
 
 - (void)clearPayTypeData;
 

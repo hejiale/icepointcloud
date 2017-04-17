@@ -29,7 +29,7 @@
 @property (nonatomic, copy, readwrite) NSString * memberLevelId;
 @property (nonatomic, copy, readwrite) NSString * membergrowth;
 @property (nonatomic, copy, readwrite) NSString * consumptionAmount;
-@property (nonatomic, copy, readwrite) NSString * balance;
+@property (nonatomic, assign, readwrite) double      balance;
 @property (nonatomic, copy, readwrite) NSString * createDate;
 @property (nonatomic, copy, readwrite) NSString * customerType;
 @property (nonatomic, copy, readwrite) NSString * customerTypeId;

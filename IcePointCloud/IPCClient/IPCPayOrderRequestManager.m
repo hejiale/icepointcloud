@@ -12,13 +12,12 @@
 @implementation IPCPayOrderRequestManager
 
 
-+ (void)offerOrderWithPayStatus:(BOOL)status
-                   SuccessBlock:(void (^)(id responseValue))success
++ (void)offerOrderWithSuccessBlock:(void (^)(id responseValue))success
                       FailureBlock:(void (^)(NSError * error))failure
 {
     IPCPayOrderParameter * parameter = [[IPCPayOrderParameter alloc]init];
     
-    [self postRequest:[parameter offOrderParameterWithPayStatus:status] RequestMethod:@"bizadmin.saveSalesOrder" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:[parameter offOrderParameter] RequestMethod:@"bizadmin.saveSalesOrder" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

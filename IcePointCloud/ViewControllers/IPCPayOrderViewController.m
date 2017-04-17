@@ -11,6 +11,7 @@
 #import "IPCSearchCustomerViewController.h"
 #import "IPCPayOrderPayTypeView.h"
 #import "IPCEmployeListView.h"
+#import "IPCPaySuccessView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewCellDelegate>
 
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderPayTypeView * payTypeView;
+@property (strong, nonatomic) IPCPaySuccessView * paySuccessView;
 @property (strong, nonatomic) IPCPayOrderViewNormalSellCellMode * normalSellCellMode;
 
 @end
@@ -37,6 +39,8 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setNavigationTitle:@"确认订单"];
+    [[IPCPayOrderMode sharedManager] resetData];
+    
     self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
     self.normalSellCellMode.delegate = self;
     
@@ -48,7 +52,7 @@
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
         [[IPCCurrentCustomerOpometry sharedManager] clearData];
-        [[IPCPayOrderMode sharedManager] clearData];
+        [[IPCPayOrderMode sharedManager] resetData];
     }];
 }
 
@@ -62,7 +66,7 @@
 
 
 - (void)reloadCustomerInfo{
-    [IPCPayOrderMode sharedManager].balanceAmount = [[IPCCurrentCustomerOpometry sharedManager].currentCustomer.balance doubleValue];
+    [IPCPayOrderMode sharedManager].balanceAmount = [IPCCurrentCustomerOpometry sharedManager].currentCustomer.balance;
     [IPCPayOrderMode sharedManager].point = [IPCCurrentCustomerOpometry sharedManager].currentCustomer.integral;
 }
 
@@ -77,6 +81,36 @@
     }];
     [self.view addSubview:self.employeView];
     [self.view bringSubviewToFront:self.employeView];
+}
+
+- (void)loadPayTypeView{
+    [self.view endEditing:YES];
+    __weak typeof(self) weakSelf = self;
+    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+                                                                Pay:^{
+                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                                    [strongSelf.normalSellCellMode offerOrder];
+                                                                }Dismiss:^{
+                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                                    [strongSelf.payTypeView removeFromSuperview];
+                                                                }];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.payTypeView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.payTypeView];
+}
+
+- (void)loadPaySuccessView:(IPCOrder *)result
+{
+    __weak typeof(self) weakSelf = self;
+    [self.payOrderTableView setHidden:YES];
+    self.paySuccessView = [[IPCPaySuccessView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+                                                        OrderInfo:result
+                                                          Dismiss:^{
+                                                              __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                              [strongSelf resetPayInfoData];
+                                                              [strongSelf.navigationController popViewControllerAnimated:YES];
+                                                          }];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.paySuccessView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.paySuccessView];
 }
 
 #pragma mark //Clicked Events
@@ -106,18 +140,7 @@
         [IPCCustomUI showError:@"请输入有效定金"];
         return;
     }
-    [self.view endEditing:YES];
-    __weak typeof(self) weakSelf = self;
-    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
-                                                                Pay:^{
-                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                    [strongSelf.normalSellCellMode offerOrder];
-                                                                }Dismiss:^{
-                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                    [strongSelf.payTypeView removeFromSuperview];
-                                                                }];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.payTypeView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.payTypeView];
+    [self loadPayTypeView];
 }
 
 
@@ -125,17 +148,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
-- (void)successPayOrder{
-    [[IPCPayOrderMode sharedManager] clearData];
-    [[IPCShoppingCart sharedCart] removeSelectCartItem];
-    [[IPCCurrentCustomerOpometry sharedManager] clearData];
-}
-
 - (void)selectCustomerAction{
     IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     customerListVC.isMainStatus = NO;
     [self.navigationController pushViewController:customerListVC animated:YES];
+}
+
+- (void)resetPayInfoData{
+    [[IPCShoppingCart sharedCart] removeSelectCartItem];
+    [[IPCCurrentCustomerOpometry sharedManager] clearData];
+    [[IPCPayOrderMode sharedManager] resetData];
 }
 
 #pragma mark //UITableViewDataSource
@@ -182,6 +204,18 @@
 
 - (void)reloadPayOrderView{
     [self.payOrderTableView reloadData];
+}
+
+- (void)showPaySuccessViewWithOrderInfo:(IPCOrder *)orderResult
+{
+    [self.payTypeView removeFromSuperview];
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat || [IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat) {
+        [self loadPaySuccessView:orderResult];
+    }else{
+        [IPCCustomUI showSuccess:@"订单支付成功"];
+        [self resetPayInfoData];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

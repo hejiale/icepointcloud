@@ -12,13 +12,12 @@
 
 /**
  *  CONFIRM PAY ORDER
-
+ 
  *  @param success
  *  @param failure
  */
-+ (void)offerOrderWithPayStatus:(BOOL)status
-                   SuccessBlock:(void (^)(id responseValue))success
-                   FailureBlock:(void (^)(NSError * error))failure;
++ (void)offerOrderWithSuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
@@ -35,12 +34,12 @@
 
 /**
  Get Point Price
-
+ 
  @param customID
  @param presellStatus
  @param point
  @param success
- @param failure 
+ @param failure
  */
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID
                        IsPresellStatus:(NSString *)presellStatus

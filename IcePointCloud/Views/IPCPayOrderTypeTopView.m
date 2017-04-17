@@ -43,15 +43,16 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-
+    
     [self.payStyleContentView addBorder:1 Width:1];
     [self.payTotalPriceLabel setTextColor:COLOR_RGB_RED];
     [self.paysStyleAmountLabel setTextColor:COLOR_RGB_RED];
     [self.customerStoreValueLabel setTextColor:COLOR_RGB_RED];
     
+    [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount];
     [self.payTotalPriceLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]]];
     [self.storeValueLabel setText:[NSString stringWithFormat:@"储值余额(可用余额￥%.2f)",[IPCPayOrderMode sharedManager].balanceAmount]];
-    [self.paysStyleAmountLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]]];
+    [self.paysStyleAmountLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount]];
 }
 
 
@@ -65,7 +66,9 @@
     [sender setSelected:!sender.selected];
     [IPCPayOrderMode sharedManager].isSelectStoreValue = sender.selected;
     
-    if ([[IPCPayOrderMode sharedManager].otherPayTypeArray count] > 0) {
+    
+    if ([[IPCPayOrderMode sharedManager].otherPayTypeArray count] > 0 && sender.selected && ([IPCPayOrderMode sharedManager].balanceAmount >= [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount]))
+    {
         [[IPCPayOrderMode sharedManager].otherPayTypeArray removeAllObjects];
         
         if (self.UpdateBlock) {
@@ -78,13 +81,18 @@
         {
             [IPCPayOrderMode sharedManager].usedBalanceAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
             [IPCPayOrderMode sharedManager].isSelectPayType = NO;
+            [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeNone;
+            
         }else if([IPCPayOrderMode sharedManager].balanceAmount < [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
         {
             [IPCPayOrderMode sharedManager].usedBalanceAmount = [IPCPayOrderMode sharedManager].balanceAmount;
         }
     }else{
         [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
-        [IPCPayOrderMode sharedManager].isSelectPayType = YES;
+        if (![IPCPayOrderMode sharedManager].isSelectPayType) {
+            [IPCPayOrderMode sharedManager].isSelectPayType = YES;
+            [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
+        }
     }
     //待支付金额
     [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
@@ -95,19 +103,27 @@
 }
 
 - (IBAction)selectNormalPayTypeAction:(UIButton *)sender {
-    if (sender.selected)return;
     [sender setSelected:!sender.selected];
+    [IPCPayOrderMode sharedManager].isSelectPayType = sender.selected;
     
-    if (sender.selected) {
-        if ([IPCPayOrderMode sharedManager].isSelectStoreValue && [IPCPayOrderMode sharedManager].usedBalanceAmount >= [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
+    if ([IPCPayOrderMode sharedManager].isSelectPayType)
+    {
+        if ([IPCPayOrderMode sharedManager].isSelectStoreValue && [IPCPayOrderMode sharedManager].usedBalanceAmount > [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
         {
             [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
             [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
             [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager]waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
         }else{
-            [IPCPayOrderMode sharedManager].isSelectStoreValue = YES;
+            if ([[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount]  - [IPCPayOrderMode sharedManager].payTypeAmount > 0) {
+                [IPCPayOrderMode sharedManager].isSelectStoreValue = YES;
+            }else{
+                [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
+            }
         }
-        [IPCPayOrderMode sharedManager].isSelectPayType = sender.selected;
+        [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
+        [self reloadUI];
+    }else{
+        [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeNone;
         [self reloadUI];
     }
 }
@@ -168,15 +184,40 @@
     }
     if ([IPCPayOrderMode sharedManager].isSelectPayType) {
         [self.selectPayStyleButton setSelected:YES];
-        [self.paysStyleAmountLabel setHidden:NO];
-        [self.selectCashButton setSelected:YES];
-        self.payStyleAmountTop.constant = 5;
     }else{
         [self.selectPayStyleButton setSelected:NO];
+    }
+    [self reloadPayStyleView];
+}
+
+
+- (void)reloadPayStyleView{
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeNone) {
         [self resetPayStyleStatus];
         [self.paysStyleAmountLabel setHidden:YES];
     }
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeCash) {
+        [self.selectCashButton setSelected:YES];
+        [self.paysStyleAmountLabel setHidden:NO];
+        self.payStyleAmountTop.constant = 5;
+    }
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeCard) {
+        [self.selectCardButton setSelected:YES];
+        [self.paysStyleAmountLabel setHidden:NO];
+        self.payStyleAmountTop.constant = self.selectCardButton.tag * self.selectCardButton.jk_height + 5;
+    }
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat) {
+        [self.selectWeixinButton setSelected:YES];
+        [self.paysStyleAmountLabel setHidden:NO];
+        self.payStyleAmountTop.constant = self.selectWeixinButton.tag * self.selectWeixinButton.jk_height + 5;
+    }
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeAlipay) {
+        [self.selectAlipayButton setSelected:YES];
+        [self.paysStyleAmountLabel setHidden:NO];
+        self.payStyleAmountTop.constant = self.selectAlipayButton.tag * self.selectAlipayButton.jk_height + 5;
+    }
 }
+
 
 
 

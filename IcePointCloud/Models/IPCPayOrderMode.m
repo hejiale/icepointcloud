@@ -20,21 +20,12 @@
     return _client;
 }
 
-- (instancetype)init{
-    self = [super init];
-    if (self) {
-        self.payType = IPCOrderPayTypePayAmount;
-        self.payStyle = IPCPayStyleTypeCash;
-        self.isSelectPayType = YES;
-        self.payStyleName = @"CASH";
-    }
-    return self;
-}
 
-
-- (void)clearData
+- (void)resetData
 {
-    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypeNone;
+    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
+    [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
+    [IPCPayOrderMode sharedManager].payStyleName = @"CASH";
     [[IPCPayOrderMode sharedManager].employeeResultArray removeAllObjects];
     [IPCPayOrderMode sharedManager].point = 0;
     [IPCPayOrderMode sharedManager].pointPrice = 0;
@@ -46,6 +37,7 @@
     [IPCPayOrderMode sharedManager].balanceAmount = 0;
     [IPCPayOrderMode sharedManager].isSelectPoint = NO;
     [IPCPayOrderMode sharedManager].isPayOrderStatus = NO;
+    [IPCPayOrderMode sharedManager].isSelectPayType = YES;
     [[IPCPayOrderMode sharedManager] clearPayTypeData];
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
 }
@@ -110,10 +102,6 @@
 {
     __block NSMutableArray * discountArray = [[NSMutableArray alloc]init];
     
-    if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
-        [IPCCustomUI showError:@"请先选择员工"];
-        return 0;
-    }
     [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [discountArray addObject:[NSNumber numberWithDouble:obj.employe.discount]];
     }];

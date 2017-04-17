@@ -36,7 +36,7 @@
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
         [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.f",_currentCustomer.consumptionAmount]];
-        [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.f",_currentCustomer.balance]];
+        [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.balance]];
         [self.bookDateLabel setText:_currentCustomer.createDate];
         [self.pointLabel setText:[NSString stringWithFormat:@"%.f积分",_currentCustomer.integral]];
     }

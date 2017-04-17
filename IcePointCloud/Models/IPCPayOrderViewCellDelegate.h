@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IPCOrder.h"
 
 @protocol IPCPayOrderViewCellDelegate <NSObject>
 
 - (void)showEmployeeView;
 - (void)reloadPayOrderView;
-- (void)showPaySuccessView;
+- (void)showPaySuccessViewWithOrderInfo:(IPCOrder *)orderResult;
 
 @end

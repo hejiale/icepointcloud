@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "IPCPayOrderViewCellDelegate.h"
+#import "IPCOrder.h"
 
 @interface IPCPayOrderViewNormalSellCellMode : NSObject
 

@@ -102,13 +102,17 @@
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length) {
-        if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-            [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+        if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+            [IPCCustomUI showError:@"请先选择员工"];
+        }else{
+            if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+            }
+            self.cartItem.unitPrice = [str doubleValue];
+            
+            [IPCPayOrderMode sharedManager].realTotalPrice = 0;
+            [IPCPayOrderMode sharedManager].givingAmount = 0;
         }
-        self.cartItem.unitPrice = [str doubleValue];
-        
-        [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-        [IPCPayOrderMode sharedManager].givingAmount = 0;
     }
     
     if (self.delegate) {
