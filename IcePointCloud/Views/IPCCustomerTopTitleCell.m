@@ -45,6 +45,9 @@
     [self.editButton setHidden:NO];
 }
 
+
+
+#pragma mark //Clicked Events
 - (IBAction)insertAction:(id)sender {
     
 }
@@ -52,6 +55,11 @@
 
 - (IBAction)editAction:(id)sender {
 }
+
+
+- (IBAction)searchCustomerAction:(id)sender {
+}
+
 
 
 @end

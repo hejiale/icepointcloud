@@ -31,19 +31,23 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [self.payTypeNameTextField addBorder:3 Width:1];
-    [self.payAmountTextField addBorder:3 Width:1];
+    
+    [self.payTypeNameTextField addBorder:3 Width:0.5];
+    [self.payAmountTextField addBorder:3 Width:0.5];
     [self.payAmountTextField setLeftSpace:5];
     [self.payTypeNameTextField setLeftSpace:5];
     [self.selectStyleButton setSelected:YES];
-    [self.payAmountLabel setTextColor:COLOR_RGB_RED];
+    [self.payAmountTextField setLeftText:@"￥"];
 }
 
 - (void)updateUI
 {
     [self.payTypeNameTextField setText:self.otherPayTypeResult.otherPayTypeName];
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.f",self.otherPayTypeResult.otherPayAmount]];
-    [self.payAmountLabel setText:[NSString stringWithFormat:@"支付￥%.f",self.otherPayTypeResult.otherPayAmount]];
+    
+    NSString * payText = [NSString stringWithFormat:@"支付￥%.f",self.otherPayTypeResult.otherPayAmount];
+
+    [self.payAmountLabel setAttributedText:[IPCCustomUI subStringWithText:payText BeginRang:2 Rang:payText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
 }
 
 #pragma mark //Clicked Events

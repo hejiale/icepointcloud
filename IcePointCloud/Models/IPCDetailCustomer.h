@@ -14,7 +14,7 @@
 @property (nonatomic, copy, readwrite) NSString * birthday;
 @property (nonatomic, copy, readwrite) NSString * remark;
 @property (nonatomic, copy, readwrite) NSString * customerPhone;
-@property (nonatomic, copy, readwrite) NSString * photo_uuid;//存储本地头像
+@property (nonatomic, copy, readwrite) NSString * photoIdForPos;//存储本地头像
 @property (nonatomic, copy, readwrite) NSString * currentOptometryId;
 @property (nonatomic, copy, readwrite) NSString * email;
 @property (nonatomic, copy, readwrite) NSString * contactorGengerString;

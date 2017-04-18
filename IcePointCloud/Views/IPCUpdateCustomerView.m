@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                   MemberLevel:self.memberLevelTextField.text
                                                           Job:self.jobTextField.text
                                                        Remark:self.memoTextField.text
-                                                      PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : self.currentDetailCustomer.photo_uuid)
+                                                      PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : self.currentDetailCustomer.photoIdForPos)
                                                  SuccessBlock:^(id responseValue)
      {
          [IPCCustomUI showSuccess:@"更改用户信息成功!"];

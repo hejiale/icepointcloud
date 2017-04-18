@@ -27,6 +27,8 @@
     _addressMode = addressMode;
 
     if (_addressMode) {
+        CGFloat width = [_addressMode.contactName jk_sizeWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height].width;
+        self.contactNameWidth.constant = width;
         [self.addressLabel setText:_addressMode.detailAddress];
         [self.contactNameLabel setText:_addressMode.contactName];
         [self.genderLabel setText:[IPCCommon formatGender:_addressMode.gender]];

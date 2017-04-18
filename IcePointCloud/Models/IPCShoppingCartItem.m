@@ -127,6 +127,35 @@
             attrs[@"memo"] = self.remarks;
     }
     
+    //--------------批量眼镜--------------//
+    if (self.batchSph.length) {
+        [attrs setObject:self.batchSph forKey:@"sphLeft"];
+        [attrs setObject:self.batchSph forKey:@"sphRight"];
+    }
+    
+    if (self.bacthCyl.length) {
+        [attrs setObject:self.bacthCyl forKey:@"cylLeft"];
+        [attrs setObject:self.bacthCyl forKey:@"cylRight"];
+    }
+    
+    if (self.batchReadingDegree.length)
+        [attrs setObject:self.batchReadingDegree forKey:@"degree"];
+    
+    if (self.contactDegree.length)
+        [attrs setObject:self.contactDegree forKey:@"degree"];
+    
+    if (self.batchNum.length) {
+        [attrs setObject:self.batchNum forKey:@"batchNumber"];
+    }
+    
+    if (self.kindNum.length) {
+        [attrs setObject:self.kindNum forKey:@"approvalNumber"];
+    }
+    
+    if (self.validityDate.length) {
+        [attrs setObject:self.validityDate forKey:@"expireDate"];
+    }
+    
     if (attrs.allKeys.count)
         [params setObject:attrs forKey:@"attributes"];
     

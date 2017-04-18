@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] && [responseObject count] > 0) {
             id accessoryInfo = [responseObject allObjects][0];
             if ([accessoryInfo isKindOfClass:[NSArray class]]) {
                 [accessoryInfo enumerateObjectsUsingBlock:^(id  _Nonnull batchNumDic, NSUInteger idx, BOOL * _Nonnull stop) {

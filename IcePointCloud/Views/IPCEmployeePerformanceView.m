@@ -32,8 +32,8 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self addBorder:3 Width:1];
-    [self.amountTextField addBorder:3 Width:1];
+    [self addBorder:3 Width:0.5];
+    [self.amountTextField addBorder:3 Width:0.5];
     [self.amountTextField setLeftSpace:5];
     [self.progressView setProgressTintColor:COLOR_RGB_BLUE];
 }
@@ -43,7 +43,7 @@
     
     if (_employeeResult) {
         [self.customerNameLabel setText:_employeeResult.employe.name];
-        [self.amountButton setTitle:[NSString stringWithFormat:@"%%%.f",_employeeResult.employeeResult] forState:UIControlStateNormal];
+        [self.amountButton setTitle:[NSString stringWithFormat:@"%.f%%",_employeeResult.employeeResult] forState:UIControlStateNormal];
         [self.progressView setProgress:_employeeResult.employeeResult/100];
     }
 }

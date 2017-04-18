@@ -30,7 +30,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 @interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,IPCCustomerDetailViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
-@property (strong, nonatomic) IBOutlet UIView *tableFootView;
 
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCEditAddressView  *  editAddressView;
@@ -54,13 +53,17 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setBackgroundImage];
+    
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
+    [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+    
     if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
-        [self.tableFootView addTopLine];
-        [self.detailTableView setTableFooterView:self.tableFootView];
+        [self setRightTitle:@"确定" Selection:@selector(chooseCustomerAction:)];
     }else{
-        [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+        [self setRightEmptyView];
     }
+     [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     self.detailTableView.isHiden = YES;
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
@@ -72,13 +75,12 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [[IPCEmployeeMode sharedManager] queryEmploye:@""];
     [[IPCEmployeeMode sharedManager] queryMemberLevel];
     [[IPCEmployeeMode sharedManager] queryCustomerType];
+    [self requestCustomerDetailInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self requestCustomerDetailInfo];
-    
+
     [self setNavigationTitle:@"个人信息"];
     [self setNavigationBarStatus:NO];
 }
@@ -88,7 +90,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [IPCCustomUI show];
     
     [self.customerViewMode resetData];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     __weak typeof (self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
@@ -201,6 +202,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)loadUpdateCustomerView{
     self.updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds];
     self.updateCustomerView.currentDetailCustomer = self.customerViewMode.detailCustomer;
+    self.updateCustomerView.delegate = self;
     [self.view addSubview:self.updateCustomerView];
     [self.view bringSubviewToFront:self.updateCustomerView];
 
@@ -260,7 +262,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.navigationController pushViewController:detailVC animated:YES];
 }
 
-- (IBAction)chooseCustomerAction:(id)sender {
+- (void)chooseCustomerAction:(id)sender {
     [self.customerViewMode getChooseCustomer];
     [self popToPayOrderViewController];
 }
@@ -271,9 +273,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.editAddressView removeFromSuperview];
     [self.editOptometryView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
-    [self.customerViewMode queryCustomerAddressList:^{
-        [self.detailTableView reloadData];
-    }];
 }
 
 #pragma mark //UITableViewDataSource
@@ -346,7 +345,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                 cell.optometryMode = optometry;
             }
             [[cell rac_signalForSelector:@selector(setDefaultOptometryAction:)] subscribeNext:^(id x) {
-                [self setDefaultOptometry:cell.optometryMode.optometryID];
+                if (!cell.defaultButton.selected) {
+                    [self setDefaultOptometry:cell.optometryMode.optometryID];
+                }
             }];
             if ([self.customerViewMode.detailCustomer.currentOptometryId isEqualToString:cell.optometryMode.optometryID]) {
                 [cell.defaultButton setSelected:YES];
@@ -406,7 +407,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                 [cell.defaultButton setSelected:NO];
             }
             [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(id x) {
-                [self setCurrentAddress:cell.addressMode.addressID];
+                if (!cell.defaultButton.selected) {
+                    [self setCurrentAddress:cell.addressMode.addressID];
+                }
             }];
             return cell;
         }
@@ -416,7 +419,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row > 0) {
-        return 420;
+        return 345;
     }else if (indexPath.section == 1 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1)
             return 50;
@@ -426,7 +429,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             return 50;
         return 80;
     }else if (indexPath.section == 3 && indexPath.row > 0){
-        return 75;
+        return 70;
     }
     return 50;
 }
@@ -464,6 +467,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 #pragma mark //IPCCustomerDetailViewDelegate
 - (void)dismissCoverSubViews{
     [self removerAllPopView];
+    [self requestCustomerDetailInfo];
 }
 
 

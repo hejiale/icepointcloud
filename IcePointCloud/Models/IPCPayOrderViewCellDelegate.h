@@ -13,6 +13,7 @@
 
 - (void)showEmployeeView;
 - (void)reloadPayOrderView;
+- (void)searchCustomerMethod;
 - (void)showPaySuccessViewWithOrderInfo:(IPCOrder *)orderResult;
 
 @end

@@ -101,7 +101,7 @@
                              @"memberId":memberNum,
                              @"occupation":occupation,
                              @"optometrys":optometryList,
-                             @"photo_uuid":photoId};
+                             @"photoIdForPos":photoId};
     [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -210,7 +210,7 @@
                                   @"empName":employeeName,
                                   @"customerType":customerType,
                                   @"memberLevel":memberLevel,
-                                  @"photo_uuid":photoId
+                                  @"photoIdForPos":photoId
                                   };
     [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }

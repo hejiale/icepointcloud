@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel   *topTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (weak, nonatomic) IBOutlet UIButton *searchCustomerButton;
 
 - (void)setTopTitle:(NSString *)title;
 - (void)setInsertTitle:(NSString *)title;

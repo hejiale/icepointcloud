@@ -39,7 +39,7 @@
     __weak typeof(self) weakSelf = self;
     
     [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        IPCEmployeePerformanceView * employeeView = [[IPCEmployeePerformanceView alloc]initWithFrame:CGRectMake(20+(width+15)*idx, 5, width, 90) Update:^{
+        IPCEmployeePerformanceView * employeeView = [[IPCEmployeePerformanceView alloc]initWithFrame:CGRectMake(20+(width+15)*idx, 45/2, width, 90) Update:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf replaceEmployee:employeeView.employeeResult];
         }];

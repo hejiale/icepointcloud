@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *storeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bookDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointWidth;
 
 @property (copy, nonatomic) IPCDetailCustomer * currentCustomer;
 

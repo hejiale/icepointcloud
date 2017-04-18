@@ -55,7 +55,7 @@
     }else if ([gender isEqualToString:@"FEMALE"]){
         genderString = @"女";
     }else if ([gender isEqualToString:@"NOTSET"]){
-        genderString = @"未设置";
+        genderString = @"";
     }
     return genderString;
 }

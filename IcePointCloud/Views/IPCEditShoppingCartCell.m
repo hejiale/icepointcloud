@@ -27,7 +27,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.glassesImgView addBorder:3 Width:1];
+    [self.glassesImgView addBorder:3 Width:0.5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

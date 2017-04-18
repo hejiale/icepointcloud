@@ -14,5 +14,7 @@
 - (void)setRightView:(id)target Action:(SEL)action;
 - (void)setRightButton:(id)target Action:(SEL)action OnView:(UIView *)onView;
 - (void)setLeftSpace:(double)spaceWidth;
+- (void)setRightSpace:(double)spaceWidth;
+- (void)setLeftText:(NSString *)text;
 
 @end

@@ -42,8 +42,40 @@
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID forKey:@"addressId"];
     }else{
-        //新增用户信息  验光单  地址
-        
+        //新增用户信息
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerName forKey:@"customerName"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerPhone forKey:@"customerPhone"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.contactorGengerString forKey:@"genderString"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.email forKey:@"email"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.birthday forKey:@"birthday"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.remark forKey:@"remark"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.employeeId forKey:@"handlEmployeeId"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerType forKey:@"customerType"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerTypeId forKey:@"customerTypeId"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberLevelId forKey:@"memberLevel"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberLevel forKey:@"memberLevelId"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberId forKey:@"memberId"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.occupation forKey:@"occupation"];
+        //地址
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.contactName forKey:@"contactorName"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.genderString forKey:@"contactorGengerString"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.phone forKey:@"contactorPhone"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.detailAddress forKey:@"contactorAddress"];
+        //验光单
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.sphLeft forKey:@"sphLeft"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.sphRight forKey:@"sphRight"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.cylLeft forKey:@"cylLeft"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.cylRight forKey:@"cylRight"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.axisLeft forKey:@"axisLeft"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.axisRight forKey:@"axisRight"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.addLeft forKey:@"addLeft"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.addRight forKey:@"addRight"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.distanceLeft forKey:@"distanceLeft"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.distanceRight forKey:@"distanceRight"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.correctedVisionLeft forKey:@"correctedVisionLeft"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.correctedVisionRight forKey:@"correctedVisionRight"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.purpose forKey:@"purpose"];
+        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.employeeId forKey:@"employeeId"];
     }
     
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
@@ -54,7 +86,7 @@
     [parameters setObject:@([[IPCPayOrderMode sharedManager] waitPayAmount]) forKey:@"payAmount"];
     [parameters setObject:[IPCPayOrderMode sharedManager].payStyleName forKey:@"payType"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
-    [parameters setObject:@([IPCPayOrderMode sharedManager].givingAmount) forKey:@"donationAmount"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].givingAmount] forKey:@"donationAmount"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].usedBalanceAmount) forKey:@"usebalanceAmount"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].payTypeAmount) forKey:@"payTypeAmount"];
     [parameters setObject:otherTypeList forKey:@"payTypeDetails"];

@@ -79,18 +79,10 @@ typedef void(^UpdateBlock)(void);
 - (UIView *)createLensView:(CGRect)rect Label:(NSString *)label Tag:(NSInteger)tag InputText:(NSString *)text
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
-    [itemView addBorder:3 Width:0.7];
-    
-    UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectZero];
-    lbl.textColor = [UIColor lightGrayColor];
-    lbl.text = label;
-    lbl.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
-    lbl.backgroundColor = [UIColor clearColor];
-    CGFloat width = [lbl.text jk_sizeWithFont:lbl.font constrainedToHeight:itemView.jk_height].width;
-    [lbl setFrame:CGRectMake(0, 0, width, itemView.jk_height)];
+    [itemView addBorder:3 Width:0.5];
     
     UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, itemView.jk_width-5, itemView.jk_height)];
-    tf.textColor = [UIColor lightGrayColor];
+    tf.textColor = [UIColor darkGrayColor];
     tf.delegate  = self;
     tf.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     tf.tag = tag;
@@ -98,8 +90,7 @@ typedef void(^UpdateBlock)(void);
     tf.returnKeyType = UIReturnKeyDone;
     tf.keyboardType = UIKeyboardTypeNumberPad;
     tf.text = text;
-    [tf setLeftView:lbl];
-    [tf setLeftViewMode:UITextFieldViewModeAlways];
+    [tf setLeftText:label];
     if (tag == optometristTag)[tf setRightButton:self Action:@selector(onSelectEmployeeAction) OnView:itemView];
     [itemView addSubview:tf];
     [self.allTextFields addObject:tf];
@@ -110,10 +101,10 @@ typedef void(^UpdateBlock)(void);
 - (UIView *)createFunctionView:(CGRect)rect
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
-    [itemView addBorder:3 Width:0.7];
+    [itemView addBorder:3 Width:0.5];
     
     UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, itemView.jk_width-10, itemView.jk_height)];
-    tf.textColor = [UIColor lightGrayColor];
+    tf.textColor = [UIColor darkGrayColor];
     tf.delegate  = self;
     tf.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     tf.tag = functionTag;

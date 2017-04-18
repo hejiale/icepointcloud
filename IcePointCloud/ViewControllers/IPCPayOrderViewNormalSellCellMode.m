@@ -109,6 +109,16 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"客户基本信息"];
+            [cell.searchCustomerButton setHidden:NO];
+            __weak typeof(self) weakSelf = self;
+            [[cell rac_signalForSelector:@selector(searchCustomerAction:)] subscribeNext:^(id x) {
+                __strong typeof(weakSelf) strongSelf =  weakSelf;
+                if (strongSelf.delegate) {
+                    if ([strongSelf.delegate respondsToSelector:@selector(searchCustomerMethod)]) {
+                        [strongSelf.delegate searchCustomerMethod];
+                    }
+                }
+            }];
             return cell;
         }else{
             IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
@@ -133,6 +143,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.addressMode = [IPCCurrentCustomerOpometry sharedManager].currentAddress;
+            [cell.defaultButton setHidden:YES];
             return cell;
         }
     }else if(indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentAddress){
@@ -141,7 +152,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"历史验光单"];
+            [cell setTopTitle:@"验光单"];
             return cell;
         }else{
             IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
@@ -149,6 +160,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.optometryMode = [IPCCurrentCustomerOpometry sharedManager].currentOpometry;
+            [cell.defaultButton setHidden:YES];
             return cell;
         }
     }else if((indexPath.section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer))
@@ -211,15 +223,15 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
 {
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
         if (indexPath.section == 0 && indexPath.row > 0){
-            return 420;
+            return 345;
         }else if (indexPath.section == 1 && indexPath.row > 0){
-            return 80;
+            return 70;
         }else if (indexPath.section == 2 && indexPath.row > 0 ){
             return 160;
         }else if (indexPath.section == 3 && indexPath.row > 0) {
             return 135;
         }else if (indexPath.section == 4 && indexPath.row > 0){
-            return 110;
+            return 130;
         }else if (indexPath.section == 5){
             return 235;
         }
@@ -228,7 +240,7 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
     if (indexPath.section == 0 && indexPath.row > 0 ){
         return 135;
     }else if (indexPath.section == 1 && indexPath.row > 0) {
-        return 100;
+        return 130;
     }else if (indexPath.section == 2) {
         return 235;
     }

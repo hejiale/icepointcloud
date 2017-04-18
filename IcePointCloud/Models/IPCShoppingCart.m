@@ -267,22 +267,22 @@
     if (item) {
         item.count += count;
     } else {
-        IPCShoppingCartItem *nci = [[IPCShoppingCartItem alloc]init];
+        item = [[IPCShoppingCartItem alloc]init];
         if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses && glasses.stock == 0))
         {
-            nci.batchSph = sph;
-            nci.bacthCyl = cyl;
-            nci.contactDegree = contactDegree;
-            nci.batchReadingDegree = readingDegree;
-            nci.kindNum = kindNum;
-            nci.batchNum = batchNum;
-            nci.validityDate = date;
-            nci.contactLensID = contactID;
-            nci.isPreSell = isOpenBooking;
+            item.batchSph = sph;
+            item.bacthCyl = cyl;
+            item.contactDegree = contactDegree;
+            item.batchReadingDegree = readingDegree;
+            item.kindNum = kindNum;
+            item.batchNum = batchNum;
+            item.validityDate = date;
+            item.contactLensID = contactID;
+            item.isPreSell = isOpenBooking;
         }
-        nci.glasses = glasses;
-        nci.count   = count;
-        [self.itemList addObject:nci];
+        item.glasses = glasses;
+        item.count   = count;
+        [self.itemList addObject:item];
     }
     [self postChangedNotification];
 }

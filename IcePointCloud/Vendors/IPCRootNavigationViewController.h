@@ -12,5 +12,7 @@
 
 - (void)setNavigationBarStatus:(BOOL)isHiden;
 - (void)setRightItem:(NSString *)itemImageName Selection:(SEL)selection;
+- (void)setRightTitle:(NSString *)itemName Selection:(SEL)selection;
+- (void)setRightEmptyView;
 
 @end

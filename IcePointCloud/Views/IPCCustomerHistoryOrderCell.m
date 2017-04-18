@@ -29,8 +29,7 @@
         
         NSString * pirce = [NSString stringWithFormat:@"订单价格: ￥%.2f",_customerOrder.orderPrice];
         
-        [self.orderPriceLabel setAttributedText:[IPCCustomUI subStringWithText:pirce BeginRang:7 Rang:pirce.length - 7 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
-        
+        [self.orderPriceLabel setAttributedText:[IPCCustomUI subStringWithText:pirce BeginRang:7 Rang:pirce.length - 7 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
         
         [self.orderDateLabel setText:[NSString stringWithFormat:@"下单时间: %@",[IPCCommon formatDate:[IPCCommon dateFromString:_customerOrder.orderDate] IsTime:YES]]];
         

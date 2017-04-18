@@ -183,29 +183,29 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     [self.accessoryNoneStockView addBorder:10 Width:0];
     [self.customsizedParameterView addBorder:10 Width:0];
     
-    [self.leftParameterView addBorder:5 Width:0.7];
-    [self.rightParameterView addBorder:5 Width:0.7];
-    [self.contactDegreeView addBorder:5 Width:0.7];
-    [self.batchNoneDegreeView addBorder:5 Width:0.7];
-    [self.contactBatchNumView addBorder:5 Width:0.7];
-    [self.accessoryBatchNumView addBorder:5 Width:0.7];
-    [self.contactKindNumView addBorder:5 Width:0.7];
-    [self.accessoryKindNumView addBorder:5 Width:0.7];
-    [self.contactDateView addBorder:5 Width:0.7];
-    [self.accessoryDateView addBorder:5 Width:0.7];
-    [self.contactImageView addBorder:5 Width:0.7];
-    [self.preContactImageView addBorder:5 Width:0.7];
-    [self.accessoryImageView addBorder:5 Width:0.7];
-    [self.normalLensImageView addBorder:5 Width:0.7];
-    [self.preAccessoryImageView addBorder:5 Width:0.7];
-    [self.customsizedImageView addBorder:5 Width:0.7];
-    [self.refractionView addBorder:5 Width:0.7];
-    [self.lensStyleView addBorder:5 Width:0.7];
-    [self.lensFunctionView addBorder:5 Width:0.7];
-    [self.thinView addBorder:5 Width:0.7];
-    [self.upsetView addBorder:5 Width:0.7];
-    [self.moveHeartView addBorder:5 Width:0.7];
-    [self.customsizedMemoView addBorder:5 Width:0.7];
+    [self.leftParameterView addBorder:5 Width:0.5];
+    [self.rightParameterView addBorder:5 Width:0.5];
+    [self.contactDegreeView addBorder:5 Width:0.5];
+    [self.batchNoneDegreeView addBorder:5 Width:0.5];
+    [self.contactBatchNumView addBorder:5 Width:0.5];
+    [self.accessoryBatchNumView addBorder:5 Width:0.5];
+    [self.contactKindNumView addBorder:5 Width:0.5];
+    [self.accessoryKindNumView addBorder:5 Width:0.5];
+    [self.contactDateView addBorder:5 Width:0.5];
+    [self.accessoryDateView addBorder:5 Width:0.5];
+    [self.contactImageView addBorder:5 Width:0.5];
+    [self.preContactImageView addBorder:5 Width:0.5];
+    [self.accessoryImageView addBorder:5 Width:0.5];
+    [self.normalLensImageView addBorder:5 Width:0.5];
+    [self.preAccessoryImageView addBorder:5 Width:0.5];
+    [self.customsizedImageView addBorder:5 Width:0.5];
+    [self.refractionView addBorder:5 Width:0.5];
+    [self.lensStyleView addBorder:5 Width:0.5];
+    [self.lensFunctionView addBorder:5 Width:0.5];
+    [self.thinView addBorder:5 Width:0.5];
+    [self.upsetView addBorder:5 Width:0.5];
+    [self.moveHeartView addBorder:5 Width:0.5];
+    [self.customsizedMemoView addBorder:5 Width:0.5];
     
     [self.contactSureButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.lensSureButton setBackgroundColor:COLOR_RGB_BLUE];
@@ -409,7 +409,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 
 - (void)showParameterTableView:(UITapGestureRecognizer *)sender InView:(UIView *)contentView
 {
-    [self.parameterTableView addBorder:3 Width:1];
+    [self.parameterTableView addBorder:3 Width:0.5];
     [self.parameterTableView setFrame:CGRectMake(sender.view.jk_left + contentView.jk_left, sender.view.jk_bottom + contentView.jk_top, sender.view.jk_width, 300)];
     [self.parameterTableView setTableFooterView:[[UIView alloc]init]];
     [self addSubview:self.parameterTableView];

@@ -40,7 +40,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.view setBackgroundColor:[UIColor clearColor]];
+//    [self.view setBackgroundColor:[UIColor clearColor]];
+    [self setBackgroundImage];
     [self.view addSubview:self.menuBarView];
     [self.view addSubview:self.contentView];
     [self.view addSubview:self.coverLine];
@@ -110,7 +111,7 @@
 - (UIView *)contentView{
     if (!_contentView) {
         _contentView = [[UIView alloc]initWithFrame:CGRectZero];
-        [_contentView setBackgroundColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.1]];
+        [_contentView setBackgroundColor:[UIColor clearColor]];
     }
     return _contentView;
 }

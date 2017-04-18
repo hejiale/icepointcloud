@@ -30,7 +30,12 @@
     if (_optometryMode) {
         [self createUI];
         [self.employeeLabel setText:_optometryMode.employeeName];
-        [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
+        if (_optometryMode.insertDate && _optometryMode.insertDate.length) {
+            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
+        }else{
+            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[NSDate date] IsTime:YES]]];
+        }
+        
     }
 }
 
@@ -62,6 +67,7 @@
         [_defaultButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_defaultButton.titleLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
         _defaultButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        _defaultButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
         [_defaultButton setBackgroundColor:[UIColor clearColor]];
         [_defaultButton addTarget:self action:@selector(setDefaultOptometryAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -124,15 +130,16 @@
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
     
     UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 70, itemView.jk_height)];
-    lbl.textColor = [UIColor lightGrayColor];
+    lbl.textColor = [UIColor darkGrayColor];
     lbl.text = label;
     lbl.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     lbl.backgroundColor = [UIColor clearColor];
     [itemView addSubview:lbl];
     
     UILabel * valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(lbl.jk_right + 5, 0, itemView.jk_width-5 - lbl.jk_right, itemView.jk_height)];
-    valueLabel.textColor = [UIColor lightGrayColor];
+    valueLabel.textColor = [UIColor darkGrayColor];
     [valueLabel setText:value];
+    [valueLabel setTextAlignment:NSTextAlignmentCenter];
     valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     [itemView addSubview:valueLabel];
     
@@ -144,7 +151,7 @@
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
     
     UILabel * valueLabel = [[UILabel alloc] initWithFrame:itemView.bounds];
-    valueLabel.textColor = [UIColor lightGrayColor];
+    valueLabel.textColor = [UIColor darkGrayColor];
     valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     [valueLabel setText:value];
     [itemView addSubview:valueLabel];
@@ -154,7 +161,6 @@
 
 #pragma mark //Clicked Events
 - (void)setDefaultOptometryAction:(id)sender{
-    
 }
 
 

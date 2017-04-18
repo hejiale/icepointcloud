@@ -14,9 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     
-    self.productImageView.layer.cornerRadius = 5;
-    self.productImageView.layer.borderColor = [UIColor jk_colorWithHexString:@"#cccccc"].CGColor;
-    self.productImageView.layer.borderWidth = 0.5;
     [self.contentView addSubview:self.suggestPriceLabel];
     [self.contentView addSubview:self.productNameLabel];
     
@@ -78,6 +75,9 @@
     _glasses = glasses;
     
     if (_glasses) {
+        if ([_glasses filterType] != IPCTopFilterTypeCard) {
+            [self.productImageView addBorder:3 Width:0.5];
+        }
         [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];

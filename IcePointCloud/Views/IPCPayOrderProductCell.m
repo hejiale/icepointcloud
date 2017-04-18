@@ -18,9 +18,12 @@
 @property (weak, nonatomic) IBOutlet UIView *inputPirceView;
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *inputCountLabel;
-
-
 @property (weak, nonatomic) IBOutlet UIView *countNumView;
+@property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
+
+@property (weak, nonatomic) IBOutlet UIView *batchNumView;
+@property (weak, nonatomic) IBOutlet UILabel *degreeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *kindNumLabel;
 
 
 
@@ -33,7 +36,7 @@
     [super awakeFromNib];
     
     [self setBackgroundColor:[UIColor clearColor]];
-
+    
     [self.inputPriceTextField addBorder:3 Width:0.5];
 }
 
@@ -66,6 +69,26 @@
         [self.countLabel setText:[NSString stringWithFormat:@"X%d",_cartItem.count]];
         [self.inputCountLabel setText:[NSString stringWithFormat:@"%d",_cartItem.count]];
         [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
+        
+        if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens && _cartItem.glasses.isBatch) {
+            [self.parameterLabel setHidden:NO];
+            if (_cartItem.batchSph.length && _cartItem.bacthCyl.length){
+                [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",_cartItem.batchSph,_cartItem.bacthCyl]];
+            }
+        }else if ([_cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && _cartItem.glasses.isBatch){
+            [self.parameterLabel setHidden:NO];
+            if (_cartItem.batchReadingDegree.length){
+                [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.batchReadingDegree]];
+            }
+        }else if (([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && _cartItem.glasses.isBatch) || [_cartItem.glasses filterType] ==IPCTopFilterTypeAccessory && _cartItem.glasses.solutionType)
+        {
+            [self.batchNumView setHidden:NO];
+            if (_cartItem.contactDegree.length && _cartItem.batchNum.length)
+                [self.degreeLabel setText:[NSString stringWithFormat:@"度数: %@   批次号：%@",_cartItem.contactDegree,_cartItem.batchNum]];
+            if (_cartItem.kindNum.length && _cartItem.validityDate.length){
+                [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
+            }
+        }
     }
 }
 

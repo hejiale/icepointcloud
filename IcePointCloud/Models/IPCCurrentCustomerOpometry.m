@@ -30,7 +30,7 @@
     self.currentCustomer.customerName = [IPCInsertCustomer instance].customerName;
     self.currentCustomer.birthday = [IPCInsertCustomer instance].birthday;
     self.currentCustomer.email = [IPCInsertCustomer instance].email;
-    self.currentCustomer.genderString = [IPCInsertCustomer instance].contactorGengerString;
+    self.currentCustomer.contactorGengerString = [IPCInsertCustomer instance].gender;
     self.currentCustomer.customerPhone = [IPCInsertCustomer instance].customerPhone;
     self.currentCustomer.customerType = [IPCInsertCustomer instance].customerType;
     self.currentCustomer.customerTypeId = [IPCInsertCustomer instance].customerTypeId;
@@ -50,7 +50,6 @@
     self.currentAddress.detailAddress = [IPCInsertCustomer instance].contactorAddress;
     
     self.currentOpometry = [IPCInsertCustomer instance].optometryArray[0];
-    self.currentOpometry.insertDate = [IPCCommon formatDate:[NSDate date] IsTime:YES];
 }
 
 - (void)clearData{

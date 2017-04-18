@@ -48,17 +48,22 @@
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    
-    [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
+
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
         [[IPCCurrentCustomerOpometry sharedManager] clearData];
         [[IPCPayOrderMode sharedManager] resetData];
+        [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
+        [self setRightEmptyView];
+    }else{
+        [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
+    }
     [self setNavigationBarStatus:NO];
     [self reloadCustomerInfo];
     [self.payOrderTableView reloadData];
@@ -86,7 +91,7 @@
 - (void)loadPayTypeView{
     [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
-    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:self.view.bounds
                                                                 Pay:^{
                                                                     __strong typeof(weakSelf) strongSelf = weakSelf;
                                                                     [strongSelf.normalSellCellMode offerOrder];
@@ -94,8 +99,8 @@
                                                                     __strong typeof(weakSelf) strongSelf = weakSelf;
                                                                     [strongSelf.payTypeView removeFromSuperview];
                                                                 }];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.payTypeView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.payTypeView];
+    [self.view addSubview:self.payTypeView];
+    [self.view bringSubviewToFront:self.payTypeView];
 }
 
 - (void)loadPaySuccessView:(IPCOrder *)result
@@ -107,6 +112,7 @@
                                                           Dismiss:^{
                                                               __strong typeof(weakSelf) strongSelf = weakSelf;
                                                               [strongSelf resetPayInfoData];
+                                                              [strongSelf.paySuccessView removeFromSuperview];
                                                               [strongSelf.navigationController popViewControllerAnimated:YES];
                                                           }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.paySuccessView];
@@ -209,13 +215,17 @@
 - (void)showPaySuccessViewWithOrderInfo:(IPCOrder *)orderResult
 {
     [self.payTypeView removeFromSuperview];
-    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat || [IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat) {
+    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat || [IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeAlipay) {
         [self loadPaySuccessView:orderResult];
     }else{
         [IPCCustomUI showSuccess:@"订单支付成功"];
         [self resetPayInfoData];
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+- (void)searchCustomerMethod{
+    [self selectCustomerAction];
 }
 
 - (void)didReceiveMemoryWarning {

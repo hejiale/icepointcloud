@@ -49,7 +49,7 @@
     UIView * rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 30, self.jk_height)];
     [rightView setBackgroundColor:[UIColor clearColor]];
     
-    UIImageView * rightImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, rightView.jk_height/2-6, 12, 12)];
+    UIImageView * rightImage = [[UIImageView alloc]initWithFrame:CGRectMake(8, rightView.jk_height/2-6, 12, 12)];
     [rightImage setImage:[UIImage imageNamed:@"icon_down_arrow"]];
     rightImage.contentMode = UIViewContentModeScaleAspectFit;
     [rightImage setBackgroundColor:[UIColor clearColor]];
@@ -64,6 +64,31 @@
     UIView * spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, spaceWidth, self.jk_height)];
     [spaceView setBackgroundColor:[UIColor clearColor]];
     [self setLeftView:spaceView];
+    [self setLeftViewMode:UITextFieldViewModeAlways];
+}
+
+- (void)setRightSpace:(double)spaceWidth{
+    UIView * spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, spaceWidth, self.jk_height)];
+    [spaceView setBackgroundColor:[UIColor clearColor]];
+    [self setRightView:spaceView];
+    [self setRightViewMode:UITextFieldViewModeAlways];
+}
+
+- (void)setLeftText:(NSString *)text
+{
+    CGFloat width  = [text jk_sizeWithFont:self.font constrainedToHeight:self.jk_height].width;
+    
+    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width + 10, self.jk_height)];
+    [leftView setBackgroundColor:[UIColor clearColor]];
+    
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:leftView.bounds];
+    [textLabel setText:text];
+    [textLabel setTextColor:[UIColor lightGrayColor]];
+    [textLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
+    [textLabel setTextAlignment:NSTextAlignmentCenter];
+    [leftView addSubview:textLabel];
+    
+    [self setLeftView:leftView];
     [self setLeftViewMode:UITextFieldViewModeAlways];
 }
 

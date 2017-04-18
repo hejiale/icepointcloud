@@ -12,10 +12,9 @@
 
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"orderID"    : @"orderInfo.id",
-             @"orderNumber": @"orderInfo.orderNumber",
-             @"alipayPhotoURL":@"orderInfo.alipayPhotoUrl",
-             @"wechatURL":@"orderInfo.wechatPhotoUrl"};
+    return @{@"orderID"    : @"order.id",
+             @"alipayPhotoURL":@"order.store.alipayPhoto.photoURL",
+             @"wechatURL":@"order.store.wechatPhoto.photoURL"};
 }
 
 

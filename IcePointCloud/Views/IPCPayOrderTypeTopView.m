@@ -44,15 +44,17 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.payStyleContentView addBorder:1 Width:1];
-    [self.payTotalPriceLabel setTextColor:COLOR_RGB_RED];
-    [self.paysStyleAmountLabel setTextColor:COLOR_RGB_RED];
-    [self.customerStoreValueLabel setTextColor:COLOR_RGB_RED];
+    [self.payStyleContentView addBorder:3 Width:0.5];
     
     [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount];
-    [self.payTotalPriceLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]]];
+    
+    NSString * totalPricText = [NSString stringWithFormat:@"支付￥%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]];
+    [self.payTotalPriceLabel setAttributedText:[IPCCustomUI subStringWithText:totalPricText BeginRang:2 Rang:totalPricText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+    
+    NSString * payStyleText = [NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount];
+    [self.paysStyleAmountLabel setAttributedText:[IPCCustomUI subStringWithText:payStyleText BeginRang:2 Rang:payStyleText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+    
     [self.storeValueLabel setText:[NSString stringWithFormat:@"储值余额(可用余额￥%.2f)",[IPCPayOrderMode sharedManager].balanceAmount]];
-    [self.paysStyleAmountLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount]];
 }
 
 
@@ -168,8 +170,11 @@
 
 - (void)reloadUI
 {
-    [self.customerStoreValueLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].usedBalanceAmount]];
-    [self.paysStyleAmountLabel setText:[NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount]];
+    NSString * usedBalanceText = [NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].usedBalanceAmount];
+    [self.customerStoreValueLabel setAttributedText:[IPCCustomUI subStringWithText:usedBalanceText BeginRang:2 Rang:usedBalanceText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+    
+    NSString * payStyleText = [NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount];
+    [self.paysStyleAmountLabel setAttributedText:[IPCCustomUI subStringWithText:payStyleText BeginRang:2 Rang:payStyleText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
     
     if ([IPCPayOrderMode sharedManager].balanceAmount ==0 ) {
         [self.selectStoreValueButton setEnabled:NO];
@@ -217,8 +222,6 @@
         self.payStyleAmountTop.constant = self.selectAlipayButton.tag * self.selectAlipayButton.jk_height + 5;
     }
 }
-
-
 
 
 @end

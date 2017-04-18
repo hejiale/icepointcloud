@@ -21,7 +21,7 @@
     // Initialization code
     
     __weak typeof(self) weakSelf = self;
-    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(15, 5, self.jk_width-35, 145) Update:^{
+    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(15, 15, self.jk_width-35, 145) Update:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.delegate) {
             if ([strongSelf.delegate respondsToSelector:@selector(updateOptometryMode:Cell:)]) {

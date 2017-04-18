@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) UIView *  backGroudView;
 
+- (void)setBackgroundImage;
+
 - (void)setNavigationTitle:(NSString *)title;
 
 -(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;

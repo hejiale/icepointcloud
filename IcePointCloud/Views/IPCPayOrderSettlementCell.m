@@ -16,11 +16,11 @@
     
     [self.totalPriceLabel setTextColor:COLOR_RGB_RED];
     [self.pointAmountLabel setTextColor:COLOR_RGB_RED];
-    [self.pointAmountTextField addBorder:3 Width:1];
-    [self.payAmountTextField addBorder:3 Width:1];
-    [self.depositTextField addBorder:3 Width:1];
-    [self.depositTextField setLeftSpace:5];
-    [self.payAmountTextField setLeftSpace:5];
+    [self.pointAmountTextField addBorder:3 Width:0.5];
+    [self.payAmountTextField addBorder:3 Width:0.5];
+    [self.depositTextField addBorder:3 Width:0.5];
+    [self.depositTextField setRightSpace:5];
+    [self.payAmountTextField setRightSpace:5];
     
 }
 

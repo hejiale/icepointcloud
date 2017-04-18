@@ -22,15 +22,16 @@
 {
     NSString * headImage = nil;
     
-    if (tag.length && tag) {
-        headImage = [NSString stringWithFormat:@"%@_%@_%@", gender, size, tag];
+    if ([gender isEqualToString:@"NOTSET"]) {
+        headImage = [NSString stringWithFormat:@"MALE_%@_11", size];
     }else{
-        if ([gender isEqualToString:@"NOTSET"]) {
-            headImage = @"MALE_small_11";
+        if (tag.length && tag && [tag integerValue] > 0) {
+            headImage = [NSString stringWithFormat:@"%@_%@_%@", gender, size, tag];
         }else{
             headImage = [IPCHeadImage  gender:gender Size:size Tag:@"1"];
         }
     }
+
     return headImage;
 }
 

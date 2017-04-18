@@ -28,6 +28,9 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [super awakeFromNib];
     // Initialization code
     
+    [self.packUpButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
+    [self.packDownButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
+    
     [IPCCustomUI clearAutoCorrection:self.mainView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.mainView];
     [self.birthdayTextField setRightButton:self Action:@selector(showDatePickViewAction) OnView:self.packUpView];
@@ -180,11 +183,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     
     if (str.length) {
         if ([textField isEqual:self.phoneTextField]) {
-            if (![IPCCommon checkTelNumber:str]) {
-                [IPCCustomUI showError:@"请输入有效的手机号码!"];
-            }else{
-                [IPCInsertCustomer instance].customerPhone = str;
-            }
+            [IPCInsertCustomer instance].customerPhone = str;
         }else if ([textField isEqual:self.userNameTextField]){
             [IPCInsertCustomer instance].customerName = str;
         }else if ([textField isEqual:self.memberNumTextField]){

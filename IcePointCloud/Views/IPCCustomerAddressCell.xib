@@ -19,47 +19,47 @@
                 <rect key="frame" x="0.0" y="0.0" width="1024" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="wefwefwf" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD9-kj-di3">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD9-kj-di3">
                         <rect key="frame" x="28" y="46.5" width="953" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="gME-Us-x8e"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="fwefwefwf" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXC-Lk-1r0">
-                        <rect key="frame" x="28" y="13" width="120" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zXC-Lk-1r0">
+                        <rect key="frame" x="28" y="13" width="0.0" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="FuL-wF-f0y"/>
-                            <constraint firstAttribute="width" constant="120" id="KX9-bY-k5g"/>
+                            <constraint firstAttribute="width" id="KX9-bY-k5g"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nWP-nS-E14">
-                        <rect key="frame" x="229" y="13" width="120" height="20"/>
+                        <rect key="frame" x="79" y="13" width="120" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="Hde-Qg-lFS"/>
                             <constraint firstAttribute="height" constant="20" id="R7I-Xg-GKr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="0.70143942640000001" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkK-ID-1LI">
-                        <rect key="frame" x="148" y="13" width="60" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkK-ID-1LI">
+                        <rect key="frame" x="28" y="13" width="30" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="m1G-xL-XyJ"/>
+                            <constraint firstAttribute="width" constant="30" id="m1G-xL-XyJ"/>
                             <constraint firstAttribute="height" constant="21" id="nb9-PJ-gb3"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="textColor" white="0.33333333329999998" alpha="0.70143942640000001" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SGm-P9-cdY">
-                        <rect key="frame" x="218" y="18" width="1" height="15"/>
+                        <rect key="frame" x="68" y="18" width="1" height="15"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="0sP-bo-ewl"/>
@@ -67,13 +67,14 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0V-3H-wwL">
-                        <rect key="frame" x="896" y="13" width="100" height="20"/>
+                        <rect key="frame" x="906" y="13" width="90" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="AAs-dB-YMf"/>
-                            <constraint firstAttribute="width" constant="100" id="rC1-wn-JEh"/>
+                            <constraint firstAttribute="width" constant="90" id="rC1-wn-JEh"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                         <state key="normal" title="默认地址" image="icon_undefault">
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -104,6 +105,7 @@
             <connections>
                 <outlet property="addressLabel" destination="kD9-kj-di3" id="ZPw-T8-i33"/>
                 <outlet property="contactNameLabel" destination="zXC-Lk-1r0" id="1ZI-fx-NRI"/>
+                <outlet property="contactNameWidth" destination="KX9-bY-k5g" id="hy5-kl-qO3"/>
                 <outlet property="contactPhoneLabel" destination="nWP-nS-E14" id="X8D-FF-20c"/>
                 <outlet property="defaultButton" destination="k0V-3H-wwL" id="DOa-Jc-lIO"/>
                 <outlet property="genderLabel" destination="kkK-ID-1LI" id="6ea-hd-LDf"/>

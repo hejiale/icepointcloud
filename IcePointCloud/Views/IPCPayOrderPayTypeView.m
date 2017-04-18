@@ -119,7 +119,7 @@ typedef void(^PayBlock)();
 
 - (UIView *)otherPayStyleContentView{
     if (!_otherPayStyleContentView) {
-        _otherPayStyleContentView = [[UIView alloc]initWithFrame:CGRectMake(20, self.payTypeTopView.jk_bottom + 10, self.mainView.jk_width-40, 0)];
+        _otherPayStyleContentView = [[UIView alloc]initWithFrame:CGRectMake(20, self.payTypeTopView.jk_bottom + 10, self.mainView.jk_width, 0)];
         [_otherPayStyleContentView setBackgroundColor:[UIColor clearColor]];
     }
     return _otherPayStyleContentView;

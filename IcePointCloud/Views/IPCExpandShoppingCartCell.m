@@ -30,7 +30,7 @@
     [super awakeFromNib];
     
     [self setBackgroundColor:[UIColor clearColor]];
-    [self.glassesImgView addBorder:3 Width:1];
+    [self.glassesImgView addBorder:3 Width:0.5];
 }
 
 

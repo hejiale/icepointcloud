@@ -53,7 +53,33 @@
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
+- (void)setRightTitle:(NSString *)itemName Selection:(SEL)selection
+{
+    UIFont * font = [UIFont systemFontOfSize:15 weight:UIFontWeightThin];
+    CGFloat width = [itemName jk_sizeWithFont:font constrainedToHeight:40].width;
+    
+    UIView * rightView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width + 10, 40)];
+    [rightView setBackgroundColor:[UIColor clearColor]];
+    
+    UIButton * rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [rightButton setFrame:CGRectMake(0, 0, width, 40)];
+    [rightButton setAdjustsImageWhenHighlighted:NO];
+    [rightButton setTitle:itemName forState:UIControlStateNormal];
+    [rightButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
+    [rightButton.titleLabel setFont:font];
+    rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [rightButton addTarget:self action:selection forControlEvents:UIControlEventTouchUpInside];
+    [rightView addSubview:rightButton];
+    
+    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc]initWithCustomView:rightView];
+    self.navigationItem.rightBarButtonItem = rightItem;
+}
 
+- (void)setRightEmptyView{
+    UIView * view = [[UIView alloc]init];
+    UIBarButtonItem * emptyItem = [[UIBarButtonItem alloc]initWithCustomView:view];
+    self.navigationItem.rightBarButtonItem = emptyItem;
+}
 #pragma mark //Clicked Events
 - (void)backAction{
     [self.navigationController popViewControllerAnimated:YES];

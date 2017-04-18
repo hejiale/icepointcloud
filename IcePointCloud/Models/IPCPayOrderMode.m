@@ -39,7 +39,6 @@
     [IPCPayOrderMode sharedManager].isPayOrderStatus = NO;
     [IPCPayOrderMode sharedManager].isSelectPayType = YES;
     [[IPCPayOrderMode sharedManager] clearPayTypeData];
-    [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
 }
 
 

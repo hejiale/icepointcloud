@@ -11,26 +11,26 @@
 @implementation UIView (Border)
 
 - (void)addTopLine{
-    [self jk_addTopBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.7];
+    [self jk_addTopBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.5];
 }
 
 
 - (void)addBottomLine{
-    [self jk_addBottomBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.7];
+    [self jk_addBottomBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.5];
 }
 
 - (void)addLeftLine{
-    [self jk_addLeftBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.7];
+    [self jk_addLeftBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.5];
 }
 
 - (void)addRightLine{
-    [self jk_addRightBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.7];
+    [self jk_addRightBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.5];
 }
 
 - (void)addBorder:(CGFloat)corner Width:(CGFloat)width
 {
     [self.layer setBorderWidth:width];
-    [self.layer setBorderColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.5].CGColor];
+    [self.layer setBorderColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.3].CGColor];
     [self.layer setCornerRadius:corner];
 }
 

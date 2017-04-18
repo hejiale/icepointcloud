@@ -42,6 +42,8 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setBackgroundImage];
+    
     searchKeyWord = @"";
     if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
         [self setNavigationTitle:@"客户"];
@@ -52,6 +54,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNavigationBarStatus:self.isMainStatus];
+    [self.refreshHeader beginRefreshing];
 }
 
 - (NSMutableArray<IPCCustomerMode *> *)customerArray{
@@ -81,7 +84,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     _customerCollectionView.mj_header = self.refreshHeader;
     _customerCollectionView.mj_footer = self.refreshFooter;
     [_customerCollectionView registerNib:[UINib nibWithNibName:@"IPCCustomerCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:customerIdentifier];
-    [self.refreshHeader beginRefreshing];
 }
 
 
