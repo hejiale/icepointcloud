@@ -16,5 +16,6 @@
 @property (nonatomic, copy, readonly) NSString *QRCodeURL;
 @property (nonatomic, copy, readonly) NSString *headImageURL;
 @property (nonatomic, copy, readonly) NSString *deviceToken;
+@property (nonatomic, copy, readonly) NSString *storeName;
 
 @end

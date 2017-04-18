@@ -31,6 +31,7 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     [self.glassesImgView addBorder:3 Width:0.5];
+    [self.unitPriceLabel setTextColor:COLOR_RGB_RED];
 }
 
 

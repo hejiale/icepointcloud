@@ -8,18 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol IPCPersonInputCellDelegate;
-@interface IPCPersonInputCell : UITableViewCell<UITextFieldDelegate>
+@interface IPCPersonInputCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *classNameLabel;
 @property (weak, nonatomic) IBOutlet UITextField *inputTextField;
-@property (assign, nonatomic) id<IPCPersonInputCellDelegate>personDelegate;
 
 @end
 
-@protocol IPCPersonInputCellDelegate <NSObject>
-
-- (void)textFieldEndEdit:(IPCPersonInputCell *)cell;
-
-@end
 

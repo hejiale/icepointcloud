@@ -55,6 +55,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     self.cartListTableView.emptyAlertImage = @"exception_cart";
     self.cartListTableView.emptyAlertTitle = @"您的购物车空空的,请前去选取眼镜!";
     [self.cartBottomView addTopLine];
+    [self.deleteButton setBackgroundColor:COLOR_RGB_RED];
 }
 
 - (UIView *)coverView{

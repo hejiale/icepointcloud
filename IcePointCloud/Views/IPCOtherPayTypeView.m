@@ -78,10 +78,14 @@
             
             double minum = [[IPCPayOrderMode sharedManager] waitPayAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount -  otherTotalAmout;
             
-            if (minum < [str doubleValue] && minum > 0) {
-                self.otherPayTypeResult.otherPayAmount = minum;
+            if (minum > 0) {
+                if (minum < [str doubleValue]) {
+                    self.otherPayTypeResult.otherPayAmount = minum;
+                }else{
+                    self.otherPayTypeResult.otherPayAmount = [str doubleValue];
+                }
             }else{
-                self.otherPayTypeResult.otherPayAmount = [str doubleValue];
+                self.otherPayTypeResult.otherPayAmount = 0;
             }
         }
     }

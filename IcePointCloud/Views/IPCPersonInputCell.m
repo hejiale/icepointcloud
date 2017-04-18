@@ -22,16 +22,4 @@
     // Configure the view for the selected state
 }
 
-#pragma mark //UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([self.personDelegate respondsToSelector:@selector(textFieldEndEdit:)]) {
-        [self.personDelegate textFieldEndEdit:self];
-    }
-}
-
 @end

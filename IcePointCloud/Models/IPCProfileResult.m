@@ -17,7 +17,8 @@
              @"company"  : @"companyName",
              @"QRCodeURL" : @"store.alipayPhoto.photoURL",
              @"headImageURL":@"roleIconData.normal.dataURI",
-             @"deviceToken" :@"mobileToken"};
+             @"deviceToken" :@"mobileToken",
+             @"storeName":@"store.storeName"};
 }
 
 @end

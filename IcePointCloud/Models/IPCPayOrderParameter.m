@@ -29,10 +29,12 @@
     //其它支付方式
     NSMutableArray * otherTypeList = [[NSMutableArray alloc]init];
     [[IPCPayOrderMode sharedManager].otherPayTypeArray enumerateObjectsUsingBlock:^(IPCOtherPayTypeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableDictionary * otherResultDic = [[NSMutableDictionary alloc]init];
-        [otherResultDic setObject:@(obj.otherPayAmount) forKey:@"price"];
-        [otherResultDic setObject:obj.otherPayTypeName forKey:@"payTypeInfo"];
-        [otherTypeList addObject:otherResultDic];
+        if (obj.otherPayAmount > 0) {
+            NSMutableDictionary * otherResultDic = [[NSMutableDictionary alloc]init];
+            [otherResultDic setObject:@(obj.otherPayAmount) forKey:@"price"];
+            [otherResultDic setObject:obj.otherPayTypeName forKey:@"payTypeInfo"];
+            [otherTypeList addObject:otherResultDic];
+        }
     }];
     
     NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];

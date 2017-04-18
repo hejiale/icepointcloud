@@ -10,6 +10,7 @@
 
 @interface IPCPersonTitleCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *companyTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
 
 @end

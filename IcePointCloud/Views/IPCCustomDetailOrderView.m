@@ -48,7 +48,7 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
         self.currentOrderNum = orderNum;
         
         if ([self.currentOrderNum integerValue] > 0) {
-            [self performSelectorOnMainThread:@selector(queryOrderDetail) withObject:nil waitUntilDone:YES];
+            [self queryOrderDetail];
         }
     }
     return self;
@@ -97,6 +97,7 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
 #pragma mark //Request Data
 - (void)queryOrderDetail
 {
+    [IPCCustomUI show];
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
@@ -213,13 +214,13 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if (indexPath.section == 3) {
-        if (self.detailOrder) {
-            IPCGlasses * glass = self.detailOrder.products[indexPath.row];
-            if (self.ProductDetailBlock)
-                self.ProductDetailBlock(glass);
-        }
-    }
+//    if (indexPath.section == 3) {
+//        if (self.detailOrder) {
+//            IPCGlasses * glass = self.detailOrder.products[indexPath.row];
+//            if (self.ProductDetailBlock)
+//                self.ProductDetailBlock(glass);
+//        }
+//    }
 }
 
 

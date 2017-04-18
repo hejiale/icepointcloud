@@ -19,7 +19,7 @@ static NSString * const titleIdentifier = @"PersonTitleCellIdentifier";
 static NSString * const QRCodeIdentifier= @"PersonQRCodeCellIdentifier";
 static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 
-@interface IPCPersonBaseView()<IPCPersonInputCellDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface IPCPersonBaseView()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *personTableView;
 @property (weak, nonatomic) IBOutlet UIButton *logouOutButton;
@@ -128,6 +128,9 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0)
         return 1;
+    if (section == 2) {
+        return 3;
+    }
     return 2;
 }
 
@@ -144,7 +147,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         IPCPersonInputCell * cell = [tableView dequeueReusableCellWithIdentifier:inputIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPersonInputCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            cell.personDelegate = self;
         }
         if (indexPath.row == 0) {
             [cell.classNameLabel setText:@"姓名"];
@@ -160,6 +162,15 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            [cell.companyTitleLabel setText:@"所属店铺"];
+            [cell.companyNameLabel setText:[IPCAppManager sharedManager].profile.storeName];
+            return cell;
+        }else if (indexPath.row == 1) {
+            IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell.companyTitleLabel setText:@"公司"];
             [cell.companyNameLabel setText:[IPCAppManager sharedManager].profile.company];
             return cell;
         }else{
@@ -219,15 +230,14 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-    }else if (indexPath.section == 3){
+    if (indexPath.section == 3){
         if (indexPath.row == 0) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://icepointcloud.com/"]];
         }else{
             if (self.UpdateBlock)
                 self.UpdateBlock();
         }
-    }else if (indexPath.section == 2 && indexPath.row == 1){
+    }else if (indexPath.section == 2 && indexPath.row == 2){
         if (self.QRCodeBlock) {
             self.QRCodeBlock();
         }
@@ -244,12 +254,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             [IPCCustomUI showSuccess:@"缓存清理成功"];
         }
     }
-}
-
-#pragma mark //IPCPersonInputCellDelegate
-- (void)textFieldEndEdit:(IPCPersonInputCell *)cell{
-    NSIndexPath * indexPath = [self.personTableView indexPathForCell:cell];
-    [self updateUserInfo:indexPath Cell:cell];
 }
 
 @end

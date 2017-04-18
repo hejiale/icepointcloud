@@ -52,6 +52,7 @@
     self.contactorPhone= @"";
     self.contactorGenger = @"MALE";
     self.contactorGengerString= @"";
+    self.photo_udid = @"1";
     
     [self.optometryArray removeAllObjects];
     IPCOptometryMode * optometry = [[IPCOptometryMode alloc]init];

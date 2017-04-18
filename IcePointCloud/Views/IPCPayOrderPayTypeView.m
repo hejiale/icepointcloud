@@ -69,7 +69,6 @@ typedef void(^PayBlock)();
         self.payTypeBottomView = [[IPCPayOrderTypeBottomView alloc]initWithFrame:CGRectMake(0, self.mainView.jk_height-90, self.mainView.jk_width, 90)];
         [self.mainView addSubview:self.payTypeBottomView];
         
-        
         [[self.payTypeBottomView rac_signalForSelector:@selector(selectOtherPayStyleAction:)] subscribeNext:^(id x) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf packUpOtherPayTypeView];

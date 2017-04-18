@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *inputCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *countNumView;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
-
 @property (weak, nonatomic) IBOutlet UIView *batchNumView;
 @property (weak, nonatomic) IBOutlet UILabel *degreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kindNumLabel;
@@ -37,6 +36,7 @@
     
     [self setBackgroundColor:[UIColor clearColor]];
     
+    [self.unitPriceLabel setTextColor:COLOR_RGB_RED];
     [self.inputPriceTextField addBorder:3 Width:0.5];
 }
 
