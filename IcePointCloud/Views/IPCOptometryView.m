@@ -41,7 +41,7 @@ typedef void(^UpdateBlock)(void);
     
     CGFloat  spaceWidth   = 10;
     CGFloat  spaceHeight  = 15;
-    CGFloat  itemWidth = (frame.size.width - 42 - 30 - spaceWidth*6)/6;
+    CGFloat  itemWidth = (frame.size.width - 34 - 30 - spaceWidth*6)/6;
     
     for (int i = 0; i < 4; i++) {
         UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (25 + spaceHeight) * i, self.jk_width, 25)];
@@ -49,7 +49,7 @@ typedef void(^UpdateBlock)(void);
         
         UIImageView *imgView = nil;
         if ( i < 3) {
-            imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (lensView.jk_height - 24) / 2, 42, 24)];
+            imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (lensView.jk_height - 20) / 2, 34, 20)];
             if (i == 0) {
                 [imgView setImage:[UIImage imageNamed:@"icon_optometry_function"]];
             }else if (i == 1){
@@ -63,14 +63,14 @@ typedef void(^UpdateBlock)(void);
         
         if ( i >0 && i < 3) {
             for (int j = 0; j < lensItems.count-1; j++) {
-                [lensView addSubview:[self createLensView:CGRectMake(42 + 30 + (itemWidth + spaceWidth) * j, 0, itemWidth, lensView.jk_height) Label:lensItems[j]  Tag:j + 1 + (i-1)*6 InputText: @""]];
+                [lensView addSubview:[self createLensView:CGRectMake(34 + 30 + (itemWidth + spaceWidth) * j, 0, itemWidth, lensView.jk_height) Label:lensItems[j]  Tag:j + 1 + (i-1)*6 InputText: @""]];
             }
         }else if(i == 3){
             optometristTag = 13;
-            [lensView addSubview:[self createLensView:CGRectMake(42 + 30, 0, itemWidth, lensView.jk_height) Label:[lensItems lastObject] Tag:optometristTag InputText:@""]];
+            [lensView addSubview:[self createLensView:CGRectMake(34 + 30, 0, itemWidth, lensView.jk_height) Label:[lensItems lastObject] Tag:optometristTag InputText:@""]];
         }else if (i == 0){
             functionTag = 0;
-            [lensView addSubview:[self createFunctionView:CGRectMake(42 + 30, 0, itemWidth, lensView.jk_height)]];
+            [lensView addSubview:[self createFunctionView:CGRectMake(34 + 30, 0, itemWidth, lensView.jk_height)]];
         }
         [IPCCustomUI clearAutoCorrection:lensView];
     }
@@ -123,7 +123,7 @@ typedef void(^UpdateBlock)(void);
     parameterTableVC.view.tag = tag;
     [parameterTableVC setDataSource:self];
     [parameterTableVC setDelegate:self];
-    [parameterTableVC showWithPosition:CGPointMake(sender.jk_right, [[sender superview]superview].jk_bottom + self.jk_top) Size:CGSizeMake(sender.jk_width, height) Owner:self Direction:UIPopoverArrowDirectionDown];
+    [parameterTableVC showWithPosition:CGPointMake(sender.jk_right, [[sender superview]superview].jk_top + self.jk_top) Size:CGSizeMake(sender.jk_width, height) Owner:self Direction:UIPopoverArrowDirectionDown];
 }
 
 #pragma mark //Init Data

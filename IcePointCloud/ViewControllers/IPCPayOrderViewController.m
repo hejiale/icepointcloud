@@ -7,7 +7,7 @@
 //
 
 #import "IPCPayOrderViewController.h"
-#import "IPCPayOrderViewNormalSellCellMode.h"
+#import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
 #import "IPCPayOrderPayTypeView.h"
 #import "IPCEmployeListView.h"
@@ -20,7 +20,7 @@
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderPayTypeView * payTypeView;
 @property (strong, nonatomic) IPCPaySuccessView * paySuccessView;
-@property (strong, nonatomic) IPCPayOrderViewNormalSellCellMode * normalSellCellMode;
+@property (strong, nonatomic) IPCPayOrderViewMode * normalSellCellMode;
 
 @end
 
@@ -38,10 +38,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
     [[IPCPayOrderMode sharedManager] resetData];
     
-    self.normalSellCellMode = [[IPCPayOrderViewNormalSellCellMode alloc]init];
+    self.normalSellCellMode = [[IPCPayOrderViewMode alloc]init];
     self.normalSellCellMode.delegate = self;
     
     [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;
@@ -59,11 +60,6 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
-        [self setRightEmptyView];
-    }else{
-        [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
-    }
     [self setNavigationBarStatus:NO];
     [self reloadCustomerInfo];
     [self.payOrderTableView reloadData];

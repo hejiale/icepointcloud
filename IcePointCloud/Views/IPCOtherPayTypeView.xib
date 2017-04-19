@@ -44,7 +44,7 @@
                                 <constraint firstAttribute="height" constant="20" id="ygZ-EL-ABn"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lxe-Wv-tAP">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lxe-Wv-tAP">
                             <rect key="frame" x="80" y="0.0" width="100" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="Shd-XV-jdn"/>
@@ -56,8 +56,8 @@
                                 <outlet property="delegate" destination="-1" id="2Ha-tF-gbT"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Klb-3n-y9Y">
-                            <rect key="frame" x="230" y="0.0" width="100" height="30"/>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Klb-3n-y9Y">
+                            <rect key="frame" x="195" y="0.0" width="100" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="IWr-EY-Ct8"/>
                             </constraints>
@@ -69,7 +69,7 @@
                             </connections>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puo-rX-AkA">
-                            <rect key="frame" x="360" y="0.0" width="140" height="30"/>
+                            <rect key="frame" x="325" y="0.0" width="175" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -91,7 +91,7 @@
                         <constraint firstAttribute="bottom" secondItem="Klb-3n-y9Y" secondAttribute="bottom" id="gyG-FG-BRc"/>
                         <constraint firstAttribute="bottom" secondItem="lxe-Wv-tAP" secondAttribute="bottom" id="uo0-by-MvG"/>
                         <constraint firstItem="puo-rX-AkA" firstAttribute="leading" secondItem="Klb-3n-y9Y" secondAttribute="trailing" constant="30" id="wO9-pw-tp7"/>
-                        <constraint firstItem="Klb-3n-y9Y" firstAttribute="leading" secondItem="lxe-Wv-tAP" secondAttribute="trailing" constant="50" id="yVD-m5-dwV"/>
+                        <constraint firstItem="Klb-3n-y9Y" firstAttribute="leading" secondItem="lxe-Wv-tAP" secondAttribute="trailing" constant="15" id="yVD-m5-dwV"/>
                     </constraints>
                 </view>
             </subviews>

@@ -63,7 +63,7 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
     /**
      *  FRAME
      */
-    IPCTopFIlterTypeFrames,
+    IPCTopFIlterTypeFrames = 0,
     /**
      *  SUN GLASS
      */
@@ -92,6 +92,14 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
      *  CARD
      */
     IPCTopFilterTypeCard,
+    /**
+     *  CUSTOMSIZED CONTACT LENS
+     */
+    IPCTopFilterTypeCustomsizedContactLens,
+    /**
+     *  CUSTOMSIZED LENS
+     */
+    IPCTopFilterTypeCustomsizedLens,
     /**
      *  OTHERS
      */

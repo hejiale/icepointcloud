@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCPayOrderViewNormalSellCellMode.h"
+#import "IPCPayOrderViewMode.h"
 
 #import "IPCCustomerTopTitleCell.h"
 #import "IPCCustomerDetailCell.h"
@@ -24,17 +24,17 @@ static NSString * const titleIdentifier          = @"IPCOrderTopTableViewCellIde
 static NSString * const employeeIdentifier = @"IPCPayOrderEmployeeCellIdentifier";
 static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdentifier";
 
-@interface IPCPayOrderViewNormalSellCellMode()<IPCPayOrderSubViewDelegate>
+@interface IPCPayOrderViewMode()<IPCPayOrderSubViewDelegate>
 
 @end
 
-@implementation IPCPayOrderViewNormalSellCellMode
+@implementation IPCPayOrderViewMode
 
 #pragma mark //Request Data
 - (void)requestOrderPointPrice:(double)point
 {
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
-                                              IsPresellStatus:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"true":@"false")
+                                              IsPresellStatus:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false":@"true")
                                                         Point:point
                                                  SuccessBlock:^(id responseValue) {
                                                      
@@ -109,16 +109,6 @@ static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"客户基本信息"];
-            [cell.searchCustomerButton setHidden:NO];
-            __weak typeof(self) weakSelf = self;
-            [[cell rac_signalForSelector:@selector(searchCustomerAction:)] subscribeNext:^(id x) {
-                __strong typeof(weakSelf) strongSelf =  weakSelf;
-                if (strongSelf.delegate) {
-                    if ([strongSelf.delegate respondsToSelector:@selector(searchCustomerMethod)]) {
-                        [strongSelf.delegate searchCustomerMethod];
-                    }
-                }
-            }];
             return cell;
         }else{
             IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];

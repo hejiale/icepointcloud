@@ -35,7 +35,14 @@
     [self addBorder:3 Width:0.5];
     [self.amountTextField addBorder:3 Width:0.5];
     [self.amountTextField setLeftSpace:5];
-    [self.progressView setProgressTintColor:COLOR_RGB_BLUE];
+    
+    UIImage *progressImage = [UIImage imageNamed:@"icon_progress"];
+    UIImage *trackImage = [UIImage imageNamed:@"icon_progress_track"];
+    UIEdgeInsets insets = UIEdgeInsetsMake(10, 20, 10, 20);
+    progressImage = [progressImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    trackImage = [trackImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+    self.progressView.trackImage = trackImage;
+    self.progressView.progressImage = progressImage;
 }
 
 - (void)setEmployeeResult:(IPCEmployeeResult *)employeeResult{

@@ -23,8 +23,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
 @property (strong, nonatomic) UIPageControl * imagePageControl;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
+@property (weak, nonatomic) IBOutlet UIImageView *customsizedImageView;
+
 
 @property (nonatomic, weak) IPCGlasses *glasses;
+@property (nonatomic, weak) IPCCustomsizedProduct *customsizedProduct;
+
 @property (nonatomic) BOOL  isTrying;//Whether to try the page
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;
 

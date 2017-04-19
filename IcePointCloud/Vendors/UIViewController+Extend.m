@@ -13,11 +13,8 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
 
 @implementation UIViewController (Extend)
 
-- (void)setBackgroundImage{
-    UIImageView * backgroundImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [backgroundImageView setImage:[UIImage imageNamed:@"bg"]];
-    [self.view addSubview:backgroundImageView];
-    [self.view sendSubviewToBack:backgroundImageView];
+- (void)setBackground{
+    [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F4F4F4"]];
 }
 
 - (void)setNavigationTitle:(NSString *)title

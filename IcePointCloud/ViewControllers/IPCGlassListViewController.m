@@ -33,7 +33,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
     self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
     
@@ -91,10 +91,36 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Method
 - (void)beginReloadTableView{
-    self.glassListViewMode.currentPage = 0;
+    self.glassListViewMode.currentPage = 1;
     self.glassListCollectionView.mj_footer.hidden = NO;
     
-    [IPCCustomUI show];
+    if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
+        [self loadCustomsizedConatctLens];
+    }else if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens){
+        [self loadCustomsizedLens];
+    }else{
+        [self loadNormalProducts];
+    }
+}
+
+- (void)loadMoreTableView{
+    self.glassListViewMode.currentPage += 9;
+    
+    if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
+        [self loadCustomsizedConatctLens];
+    }else if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens){
+        [self loadCustomsizedLens];
+    }else{
+        [self loadGlassesListData:^{
+            [self.glassListCollectionView reloadData];
+            [self.refreshHeader endRefreshing];
+            [self.refreshFooter endRefreshing];
+        }];
+    }
+}
+
+
+- (void)loadNormalProducts{
     __weak typeof (self) weakSelf = self;
     
     dispatch_group_t group = dispatch_group_create();
@@ -121,18 +147,33 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [strongSelf.glassListCollectionView reloadData];
         [strongSelf.refreshHeader endRefreshing];
         [strongSelf.refreshFooter endRefreshing];
-        [IPCCustomUI hiden];
     });
 }
 
-- (void)loadMoreTableView{
-    self.glassListViewMode.currentPage++;
-    [self loadGlassesListData:^{
-        [self.glassListCollectionView reloadData];
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
+- (void)loadCustomsizedConatctLens
+{
+    __weak typeof (self) weakSelf = self;
+    
+    [self.glassListViewMode getCustomsizedContactLensWithComplete:^(LSRefreshDataStatus status, NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.glassListCollectionView reloadData];
+        [strongSelf.refreshHeader endRefreshing];
+        [strongSelf.refreshFooter endRefreshing];
     }];
 }
+
+- (void)loadCustomsizedLens
+{
+    __weak typeof (self) weakSelf = self;
+    
+    [self.glassListViewMode getCustomsizedLensWithComplete:^(LSRefreshDataStatus status, NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.glassListCollectionView reloadData];
+        [strongSelf.refreshHeader endRefreshing];
+        [strongSelf.refreshFooter endRefreshing];
+    }];
+}
+
 
 #pragma mark //Load Data
 - (void)loadGlassesListData:(void(^)())complete
@@ -215,17 +256,26 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens || self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens)
+        return self.glassListViewMode.customsizedList.count;
     return self.glassListViewMode.glassesList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     IPCGlasslistCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:glassListCellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
-    cell.isTrying = self.glassListViewMode.isTrying;
-    
-    if ([self.glassListViewMode.glassesList count] && self.glassListViewMode){
-        IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
-        [cell setGlasses:glasses];
+
+    if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens || self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
+        if ([self.glassListViewMode.customsizedList count] && self.glassListViewMode) {
+            IPCCustomsizedProduct * product = self.glassListViewMode.customsizedList[indexPath.row];
+            [cell setCustomsizedProduct:product];
+        }
+    }else{
+        if ([self.glassListViewMode.glassesList count] && self.glassListViewMode){
+            cell.isTrying = self.glassListViewMode.isTrying;
+            IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
+            [cell setGlasses:glasses];
+        }
     }
     return cell;
 }
@@ -287,7 +337,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
-        NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
+        __block NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
         IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
         [self.navigationController pushViewController:payOrderVC animated:YES];
     }

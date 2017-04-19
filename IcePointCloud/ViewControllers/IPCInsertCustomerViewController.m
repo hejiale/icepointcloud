@@ -41,7 +41,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setBackgroundImage];
+    [self setBackground];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
     
     [[IPCEmployeeMode sharedManager] queryEmploye:@""];
@@ -235,7 +235,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row > 0)
-        return isPackUping ? 350 : 200;
+        return isPackUping ? 310 : 170;
     else if (indexPath.section == 1 && indexPath.row > 0)
         return 100;
     else if (indexPath.section == 2 && indexPath.row > 0)

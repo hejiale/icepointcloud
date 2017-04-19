@@ -37,7 +37,7 @@
         [self.handlersLabel setText:_currentCustomer.empName];
         [self.memberNumLabel setText:_currentCustomer.memberId];
         [self.memberLevlLabel setText:_currentCustomer.memberLevel];
-        [self.jobLabel setText:@""];
+        [self.jobLabel setText:_currentCustomer.occupation];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
         [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.f",_currentCustomer.consumptionAmount]];

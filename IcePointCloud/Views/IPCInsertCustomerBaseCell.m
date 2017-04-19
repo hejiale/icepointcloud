@@ -37,6 +37,20 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.mainView];
     [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.mainView];
     [self.customerCategoryTextField setRightButton:self Action:@selector(showCustomerTypeAction) OnView:self.packUpView];
+    
+    [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UITextField class]]) {
+            UITextField * textField = (UITextField *)obj;
+            [textField addBorder:3 Width:0.5];
+        }
+    }];
+    
+    [self.packUpView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UITextField class]]) {
+            UITextField * textField = (UITextField *)obj;
+            [textField addBorder:3 Width:0.5];
+        }
+    }];
 }
 
 
@@ -174,7 +188,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 
 #pragma mark //UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
+    [textField endEditing:YES];
     return YES;
 }
 

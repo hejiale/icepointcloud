@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UIView *  backGroudView;
 
-- (void)setBackgroundImage;
+- (void)setBackground;
 
 - (void)setNavigationTitle:(NSString *)title;
 

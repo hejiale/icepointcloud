@@ -81,20 +81,20 @@
    }];
     
     NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"单眼瞳距/PD", @"下加光/ADD"];
-    
-    CGFloat  spaceWidth   = 5;
+    CGFloat  itemWidth = 130;
+    CGFloat  spaceWidth   = (self.optometryContentView.jk_width - 34 - 20 -itemWidth * 6) /5;
     CGFloat  spaceHeight  = 15;
-    CGFloat  itemWidth = (self.optometryContentView.jk_width - 42 - 30 - spaceWidth * 6) /6;
+    
     
     for (int i = 0; i < 3; i++) {
-        UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (25 + spaceHeight) * i, self.optometryContentView.jk_width, 25)];
+        UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (20 + spaceHeight) * i, self.optometryContentView.jk_width, 20)];
         [self.optometryContentView addSubview:lensView];
         
         if (i == 0) {
             [lensView addSubview:self.defaultButton];
             [self.defaultButton mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.right.equalTo(lensView.mas_right).offset(0);
-                make.top.equalTo(lensView.mas_top).offset(5);
+                make.top.equalTo(lensView.mas_top).offset(-5);
                 make.width.mas_equalTo(100);
                 make.height.mas_equalTo(30);
             }];
@@ -102,7 +102,7 @@
         
         UIImageView *imgView = nil;
         if ( i < 3) {
-            imgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, (lensView.jk_height - 24) / 2, 42, 24)];
+            imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 34, lensView.jk_height)];
             if (i == 0) {
                 [imgView setImage:[UIImage imageNamed:@"icon_optometry_function"]];
             }else if (i == 1){
@@ -116,30 +116,39 @@
         
         if ( i > 0) {
             for (int j = 0; j < lensItems.count; j++) {
-                [lensView addSubview:[self createLensView:CGRectMake(42 + 30 + (itemWidth + spaceWidth) * j, 0, itemWidth, lensView.jk_height) Label:lensItems[j] Value:[self optometryInfo][j + 1 + (i-1)*6]]];
+                [lensView addSubview:[self createLensView:CGRectMake(34 + 20 + (itemWidth + spaceWidth) * j, 0, itemWidth, lensView.jk_height) Label:lensItems[j] Value:[self optometryInfo][j + 1 + (i-1)*6] Tag:(j + 1 + (i-1)*6)]];
             }
         }else{
-            [lensView addSubview:[self createFunctionView:CGRectMake(42 + 30, 0, itemWidth, lensView.jk_height) Value:[self optometryInfo][0]]];
+            [lensView addSubview:[self createFunctionView:CGRectMake(34 + 20, 0, itemWidth, lensView.jk_height) Value:[self optometryInfo][0]]];
         }
         [IPCCustomUI clearAutoCorrection:lensView];
     }
 }
 
-- (UIView *)createLensView:(CGRect)rect Label:(NSString *)label Value:(NSString *)value
+- (UIView *)createLensView:(CGRect)rect Label:(NSString *)label Value:(NSString *)value Tag:(NSInteger)tag
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
+    [itemView setBackgroundColor:[UIColor clearColor]];
     
-    UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 70, itemView.jk_height)];
+    UIFont * font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    
+    CGFloat width = [label jk_sizeWithFont:font constrainedToHeight:itemView.jk_height].width;
+    
+    UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width+5, itemView.jk_height)];
     lbl.textColor = [UIColor darkGrayColor];
     lbl.text = label;
-    lbl.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    lbl.font = font;
     lbl.backgroundColor = [UIColor clearColor];
     [itemView addSubview:lbl];
     
-    UILabel * valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(lbl.jk_right + 5, 0, itemView.jk_width-5 - lbl.jk_right, itemView.jk_height)];
+    UILabel * valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(lbl.jk_right, 0, itemView.jk_width - lbl.jk_right, itemView.jk_height)];
     valueLabel.textColor = [UIColor darkGrayColor];
     [valueLabel setText:value];
-    [valueLabel setTextAlignment:NSTextAlignmentCenter];
+    if (tag == 6 || tag == 12) {
+        [valueLabel setTextAlignment:NSTextAlignmentRight];
+    }else{
+        [valueLabel setTextAlignment:NSTextAlignmentCenter];
+    }
     valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     [itemView addSubview:valueLabel];
     
@@ -150,9 +159,11 @@
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
     
+    UIFont * font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    
     UILabel * valueLabel = [[UILabel alloc] initWithFrame:itemView.bounds];
     valueLabel.textColor = [UIColor darkGrayColor];
-    valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    valueLabel.font = font;
     [valueLabel setText:value];
     [itemView addSubview:valueLabel];
     

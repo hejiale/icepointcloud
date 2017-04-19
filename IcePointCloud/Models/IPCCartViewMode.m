@@ -77,7 +77,7 @@
     }];
     
     if (selectCount > 0) {
-        if (selectCount == [[IPCShoppingCart sharedCart] itemsCount]) {
+        if (selectCount == [[IPCShoppingCart sharedCart] selectNormalItemsCount]) {
             return YES;
         }
     }

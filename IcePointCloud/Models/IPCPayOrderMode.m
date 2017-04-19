@@ -159,12 +159,33 @@
 - (BOOL)isExistEmptyEmployeeResult{
     __block BOOL isExist = NO;
     [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.employeeResult == 0) {
+        if (obj.employeeResult == 0 ) {
             isExist = YES;
         }
     }];
     return isExist;
 }
 
+
+- (BOOL)isExistZeroOtherTypeAmount{
+    __block BOOL isExist = NO;
+    [[IPCPayOrderMode sharedManager].otherPayTypeArray enumerateObjectsUsingBlock:^(IPCOtherPayTypeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.otherPayAmount <= 0 ) {
+            isExist = YES;
+        }
+    }];
+    return isExist;
+}
+
+
+- (BOOL)isExistEmptyOtherTypeName{
+    __block BOOL isExist = NO;
+    [[IPCPayOrderMode sharedManager].otherPayTypeArray enumerateObjectsUsingBlock:^(IPCOtherPayTypeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.otherPayTypeName.length == 0 ) {
+            isExist = YES;
+        }
+    }];
+    return isExist;
+}
 
 @end

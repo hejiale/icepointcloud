@@ -34,8 +34,8 @@
     
     [self.payTypeNameTextField addBorder:3 Width:0.5];
     [self.payAmountTextField addBorder:3 Width:0.5];
-    [self.payAmountTextField setLeftSpace:5];
-    [self.payTypeNameTextField setLeftSpace:5];
+    [self.payAmountTextField setRightSpace:10];
+    [self.payTypeNameTextField setRightSpace:10];
     [self.selectStyleButton setSelected:YES];
     [self.payAmountTextField setLeftText:@"￥"];
 }

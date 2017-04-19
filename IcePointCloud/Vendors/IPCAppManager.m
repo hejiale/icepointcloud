@@ -12,7 +12,7 @@
 NSString *const IPCFirstLanuchKey                               = @"IPFirstLanucKey";
 NSString* const IPCUserNameKey                                 = @"UserNameKey";
 NSString *const IPCListLoginHistoryKey                        = @"IPCListLoginHistoryKey";
-NSString *const IPClearSearchwordNotification            = @"IPClearSearchwordNotification";
+NSString *const IPCClearSearchwordNotification            = @"IPCClearSearchwordNotification";
 NSString *const IPCListSearchHistoryKey                      = @"IPCListSearchHistoryKey";
 NSString *const IPCSearchKeyWord                              = @"IPCSearchKeyWord";
 NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingCartChanged";

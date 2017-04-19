@@ -27,6 +27,9 @@
  */
 - (NSInteger)itemsCount
 {
+    if ([self isExistValueCard]) {
+        return [self valueCardCartItems].count;
+    }
     return [self cartItems].count;
 }
 
@@ -36,7 +39,7 @@
 //}
 
 - (NSInteger)selectNormalItemsCount{
-    return [self selectNormalSellCartItems].count;
+    return [self selectCartItems].count;
 }
 
 - (NSInteger)selectPayItemsCount
@@ -58,7 +61,7 @@
 - (NSInteger)selectedGlassesCount
 {
     NSInteger count = 0;
-    for (IPCShoppingCartItem *ci in [self selectNormalSellCartItems]) {
+    for (IPCShoppingCartItem *ci in [self selectCartItems]) {
         if (ci.selected) count += ci.count;
     }
     return count;
@@ -113,7 +116,7 @@
 - (double)selectedGlassesTotalPrice
 {
     double price = 0;
-    for (IPCShoppingCartItem *ci in [self selectNormalSellCartItems]) {
+    for (IPCShoppingCartItem *ci in [self selectCartItems]) {
         price += ci.totalPrice;
     }
     return price;
@@ -145,9 +148,15 @@
     }]];
 }
 
+- (NSArray<IPCShoppingCartItem *>*)valueCardCartItems{
+    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return [[evaluatedObject glasses] filterType] == IPCTopFilterTypeCard;
+    }]];
+}
+
 
 - (NSArray<IPCShoppingCartItem *>*)selectCartItems{
-    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+    return [[self cartItems] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return [evaluatedObject selected];
     }]];
 }
@@ -158,11 +167,11 @@
 //    }]];
 //}
 
-- (NSArray<IPCShoppingCartItem *>*)selectNormalSellCartItems{
-    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return [evaluatedObject selected] && [[evaluatedObject glasses] filterType] != IPCTopFilterTypeCard;
-    }]];
-}
+//- (NSArray<IPCShoppingCartItem *>*)selectNormalSellCartItems{
+//    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+//        return [evaluatedObject selected] && [[evaluatedObject glasses] filterType] != IPCTopFilterTypeCard;
+//    }]];
+//}
 
 - (NSArray<IPCShoppingCartItem *>*)selectValueCardCartItems{
     return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -193,7 +202,7 @@
 
 - (IPCShoppingCartItem *)selectedNormalSelltemAtIndex:(NSInteger)index
 {
-    return [self selectNormalSellCartItems][index];
+    return [self selectCartItems][index];
 }
 
 //- (IPCShoppingCartItem *)selectedPreSelltemAtIndex:(NSInteger)index

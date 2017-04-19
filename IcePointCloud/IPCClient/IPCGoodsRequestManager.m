@@ -30,7 +30,7 @@
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
-    NSDictionary *params = @{@"start": @(page * 9),
+    NSDictionary *params = @{@"start": @(page),
                              @"limit": @(9),
                              @"type": classType,
                              @"keyword": searchWord,
@@ -42,5 +42,21 @@
                              @"endPrice":endPrice > 0 ? @(endPrice) : @""};
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
+
++ (void)searchCustomsizedContactLensWithPage:(NSInteger)page
+                                SuccessBlock:(void (^)(id responseValue))success
+                                FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:@{@"pageNo": @(page) , @"maxPageSize":@(9), @"listType":@"AVAILABLE", @"customizedProdType":@"CUSTOMIZED_CONTACT_LENS"} RequestMethod:@"productAdmin.listCustomizedProd" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+}
+
+
++ (void)searchCustomsizedLensWithPage:(NSInteger)page
+                                SuccessBlock:(void (^)(id responseValue))success
+                                FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:@{@"pageNo": @(page) ,@"maxPageSize":@(9), @"listType":@"AVAILABLE", @"customizedProdType":@"CUSTOMIZED_LENS"} RequestMethod:@"productAdmin.listCustomizedProd" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+}
+
 
 @end

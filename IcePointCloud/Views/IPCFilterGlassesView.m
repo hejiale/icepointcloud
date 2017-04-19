@@ -453,7 +453,13 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 - (NSString *)filterValue:(NSIndexPath *)indexPath{
     if ([[[self.dataSource filterDataSourceResult] allFilterValues] count] && [self.dataSource respondsToSelector:@selector(filterDataSourceResult)]) {
         NSArray * filterValue = [[self.dataSource filterDataSourceResult] allFilterValues][[self filterKey]];
-        return filterValue[indexPath.row];
+        NSString * filterValueText = nil;
+        if ([filterValue[indexPath.row] isKindOfClass:[NSNumber class]]) {
+            filterValueText = [NSString stringWithFormat:@"%d",[filterValue[indexPath.row] integerValue]];
+        }else{
+            filterValueText = filterValue[indexPath.row];
+        }
+        return filterValueText;
     }
     return nil;
 }

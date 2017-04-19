@@ -74,14 +74,20 @@ typedef void(^PayBlock)();
             [strongSelf packUpOtherPayTypeView];
         }];
         [[self.payTypeBottomView rac_signalForSelector:@selector(payOrderAction:)] subscribeNext:^(id x) {
-            if ([[IPCPayOrderMode sharedManager] waitPayAmount] == [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] + [[IPCPayOrderMode sharedManager] usedBalanceAmount] + [IPCPayOrderMode sharedManager].payTypeAmount)
-            {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                if (strongSelf.payBlock) {
-                    strongSelf.payBlock();
-                }
+            if ([[IPCPayOrderMode sharedManager] isExistEmptyOtherTypeName]) {
+                [IPCCustomUI showError:@"请检查其它支付方式名称填写完整"];
+            }else if ([[IPCPayOrderMode sharedManager] isExistZeroOtherTypeAmount]){
+                [IPCCustomUI showError:@"请检查其它支付方式支付金额,确保金额大于零"];
             }else{
-                [IPCCustomUI showError:@"付款金额计算有误!"];
+                if ([[IPCPayOrderMode sharedManager] waitPayAmount] == [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] + [[IPCPayOrderMode sharedManager] usedBalanceAmount] + [IPCPayOrderMode sharedManager].payTypeAmount)
+                {
+                    __strong typeof(weakSelf) strongSelf = weakSelf;
+                    if (strongSelf.payBlock) {
+                        strongSelf.payBlock();
+                    }
+                }else{
+                    [IPCCustomUI showError:@"付款金额计算有误!"];
+                }
             }
         }];
         

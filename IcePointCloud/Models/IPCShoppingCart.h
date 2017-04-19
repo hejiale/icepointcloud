@@ -19,6 +19,7 @@
  *    To obtain the corresponding number of shopping cart
  */
 - (NSInteger)itemsCount;
+- (NSInteger)cardItemsCount;
 //- (NSInteger)selectedItemsCount;
 - (NSInteger)selectPayItemsCount;
 - (NSInteger)selectNormalItemsCount;

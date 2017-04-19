@@ -53,7 +53,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setBackgroundImage];
+    [self setBackground];
     
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];

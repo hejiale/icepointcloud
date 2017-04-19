@@ -61,4 +61,8 @@
 
 - (BOOL)isExistEmptyEmployeeResult;
 
+- (BOOL)isExistZeroOtherTypeAmount;
+
+- (BOOL)isExistEmptyOtherTypeName;
+
 @end

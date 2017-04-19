@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self.orderPriceLabel setTextColor:COLOR_RGB_RED];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

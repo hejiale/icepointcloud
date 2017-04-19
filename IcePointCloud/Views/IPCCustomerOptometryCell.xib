@@ -42,19 +42,19 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhQ-KC-Osn">
-                        <rect key="frame" x="23" y="13" width="978" height="116.5"/>
+                        <rect key="frame" x="28" y="18" width="968" height="111.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="t9g-n2-nhQ" firstAttribute="top" secondItem="RhQ-KC-Osn" secondAttribute="bottom" id="Jjw-dG-xR9"/>
-                    <constraint firstItem="RhQ-KC-Osn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="Oea-Xg-qAP"/>
+                    <constraint firstItem="RhQ-KC-Osn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="Oea-Xg-qAP"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Vlh-9R-dJe" secondAttribute="bottom" id="R8Q-vR-fsb"/>
                     <constraint firstAttribute="bottomMargin" secondItem="t9g-n2-nhQ" secondAttribute="bottom" id="X7a-YF-d0B"/>
-                    <constraint firstItem="RhQ-KC-Osn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="15" id="YPm-eP-JzW"/>
+                    <constraint firstItem="RhQ-KC-Osn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="YPm-eP-JzW"/>
                     <constraint firstItem="Vlh-9R-dJe" firstAttribute="leading" secondItem="t9g-n2-nhQ" secondAttribute="trailing" id="iod-yK-5gQ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Vlh-9R-dJe" secondAttribute="trailing" constant="20" id="oQN-di-OYn"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="RhQ-KC-Osn" secondAttribute="trailing" constant="15" id="xsr-U2-kk1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RhQ-KC-Osn" secondAttribute="trailing" constant="20" id="xsr-U2-kk1"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

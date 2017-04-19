@@ -10,7 +10,7 @@
 #import "IPCPayOrderViewCellDelegate.h"
 #import "IPCOrder.h"
 
-@interface IPCPayOrderViewNormalSellCellMode : NSObject
+@interface IPCPayOrderViewMode : NSObject
 
 @property (nonatomic, assign, readwrite) id<IPCPayOrderViewCellDelegate>delegate;
 

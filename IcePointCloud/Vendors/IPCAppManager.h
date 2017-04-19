@@ -20,7 +20,7 @@ extern NSString *const IPCListSearchHistoryKey;
 //Notify the save search key
 extern NSString *const IPCSearchKeyWord;
 //Empty the search box
-extern NSString *const IPClearSearchwordNotification;
+extern NSString *const IPCClearSearchwordNotification;
 //Save search Key users
 extern NSString *const IPCSearchCustomerkey;
 //Inform the screening homepage search goods

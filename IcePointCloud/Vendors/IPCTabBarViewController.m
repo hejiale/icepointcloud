@@ -40,8 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self.view setBackgroundColor:[UIColor clearColor]];
-    [self setBackgroundImage];
+    [self setBackground];
     [self.view addSubview:self.menuBarView];
     [self.view addSubview:self.contentView];
     [self.view addSubview:self.coverLine];
@@ -103,7 +102,7 @@
         make.right.equalTo(self.menusView.mas_right).with.offset(-88);
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMenuCartAction) name:IPCNotificationShoppingCartChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearSearchwordAction) name:IPClearSearchwordNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearSearchwordAction) name:IPCClearSearchwordNotification object:nil];
 }
 
 
@@ -111,7 +110,7 @@
 - (UIView *)contentView{
     if (!_contentView) {
         _contentView = [[UIView alloc]initWithFrame:CGRectZero];
-        [_contentView setBackgroundColor:[UIColor clearColor]];
+        [_contentView setBackgroundColor:[UIColor colorWithHexString:@"#F4F4F4"]];
     }
     return _contentView;
 }

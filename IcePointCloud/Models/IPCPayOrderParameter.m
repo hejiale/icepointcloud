@@ -105,10 +105,8 @@
     IPCShoppingCart *cart = [IPCShoppingCart sharedCart];
     
     for (int i = 0; i < cart.itemsCount; i++) {
-        IPCShoppingCartItem *item = [cart itemAtIndex:i];
-        if (item.selected){
-            [itemParams addObject:[item paramtersJSONForOrderRequest]];
-        }
+        IPCShoppingCartItem *item = [cart selectedPayItemAtIndex:i];
+        [itemParams addObject:[item paramtersJSONForOrderRequest]];
     }
     return itemParams;
 }

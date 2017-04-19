@@ -12,7 +12,7 @@
 		0401B0FF1D7D3B4D0061C8A9 /* IPCBatchParameterList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0401B0FE1D7D3B4D0061C8A9 /* IPCBatchParameterList.m */; };
 		04186E051E69011C00758646 /* IPCPayOrderEmployeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186E031E69011C00758646 /* IPCPayOrderEmployeeCell.m */; };
 		04186E061E69011C00758646 /* IPCPayOrderEmployeeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04186E041E69011C00758646 /* IPCPayOrderEmployeeCell.xib */; };
-		04186E0D1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */; };
+		04186E0D1E691A9600758646 /* IPCPayOrderViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04186E0C1E691A9600758646 /* IPCPayOrderViewMode.m */; };
 		0421BE601D80FC39002C4FE4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0421BE5F1D80FC39002C4FE4 /* AVFoundation.framework */; };
 		042402011D87AA6400E1DD1A /* IPCEditFilterSampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042402001D87AA6400E1DD1A /* IPCEditFilterSampleController.m */; };
 		0424025A1D87F26400E1DD1A /* IPCOnlineFaceDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = 042402591D87F26400E1DD1A /* IPCOnlineFaceDetector.m */; };
@@ -213,6 +213,7 @@
 		CB1B54E81EA2F931006ED851 /* IPCOtherPayTypeResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B54E71EA2F931006ED851 /* IPCOtherPayTypeResult.m */; };
 		CB1B54ED1EA354FB006ED851 /* IPCPointValueMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B54EC1EA354FB006ED851 /* IPCPointValueMode.m */; };
 		CB31F1251EA446B200CBEC67 /* IPCPayOrderParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB31F1241EA446B200CBEC67 /* IPCPayOrderParameter.m */; };
+		CB3B93201EA7036B0013FAD6 /* IPCCustomsizedProductList.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3B931F1EA7036B0013FAD6 /* IPCCustomsizedProductList.m */; };
 		CB404B101E7285E4005673CD /* IPCEditBatchParameterViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB404B0F1E7285E4005673CD /* IPCEditBatchParameterViewMode.m */; };
 		CB5CC4651E8DFFB50091D0FD /* IPCGuideViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4621E8DFFB50091D0FD /* IPCGuideViewCell.m */; };
 		CB5CC4661E8DFFB50091D0FD /* IPCGuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4641E8DFFB50091D0FD /* IPCGuideViewManager.m */; };
@@ -305,8 +306,8 @@
 		04186E021E69011C00758646 /* IPCPayOrderEmployeeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderEmployeeCell.h; sourceTree = "<group>"; };
 		04186E031E69011C00758646 /* IPCPayOrderEmployeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderEmployeeCell.m; sourceTree = "<group>"; };
 		04186E041E69011C00758646 /* IPCPayOrderEmployeeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderEmployeeCell.xib; sourceTree = "<group>"; };
-		04186E0B1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPayOrderViewNormalSellCellMode.h; path = ../ViewControllers/IPCPayOrderViewNormalSellCellMode.h; sourceTree = "<group>"; };
-		04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPayOrderViewNormalSellCellMode.m; path = ../ViewControllers/IPCPayOrderViewNormalSellCellMode.m; sourceTree = "<group>"; };
+		04186E0B1E691A9600758646 /* IPCPayOrderViewMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPayOrderViewMode.h; path = ../ViewControllers/IPCPayOrderViewMode.h; sourceTree = "<group>"; };
+		04186E0C1E691A9600758646 /* IPCPayOrderViewMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPayOrderViewMode.m; path = ../ViewControllers/IPCPayOrderViewMode.m; sourceTree = "<group>"; };
 		04186E0E1E693D8000758646 /* IPCPayOrderViewCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderViewCellDelegate.h; sourceTree = "<group>"; };
 		0421BE5F1D80FC39002C4FE4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		042401FF1D87AA6400E1DD1A /* IPCEditFilterSampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditFilterSampleController.h; sourceTree = "<group>"; };
@@ -639,6 +640,8 @@
 		CB31F1231EA446B200CBEC67 /* IPCPayOrderParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderParameter.h; sourceTree = "<group>"; };
 		CB31F1241EA446B200CBEC67 /* IPCPayOrderParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderParameter.m; sourceTree = "<group>"; };
 		CB31F1271EA48EF900CBEC67 /* IPCCustomerDetailViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerDetailViewDelegate.h; sourceTree = "<group>"; };
+		CB3B931E1EA7036B0013FAD6 /* IPCCustomsizedProductList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedProductList.h; sourceTree = "<group>"; };
+		CB3B931F1EA7036B0013FAD6 /* IPCCustomsizedProductList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomsizedProductList.m; sourceTree = "<group>"; };
 		CB404B0E1E7285E4005673CD /* IPCEditBatchParameterViewMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditBatchParameterViewMode.h; sourceTree = "<group>"; };
 		CB404B0F1E7285E4005673CD /* IPCEditBatchParameterViewMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditBatchParameterViewMode.m; sourceTree = "<group>"; };
 		CB5CC4601E8DFFB50091D0FD /* IPCGuideConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCGuideConstant.h; path = IcePointCloud/Views/IPCGuideConstant.h; sourceTree = SOURCE_ROOT; };
@@ -1586,6 +1589,7 @@
 		9EA3537A197AB815005960AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CB3B931D1EA7033E0013FAD6 /* Customsized */,
 				04B1D1FD1D867C8400D9B865 /* Asset */,
 				0444C7441D9CEBA200553032 /* Batch */,
 				0485F4081D34BDA500A42DE3 /* Cart */,
@@ -1683,6 +1687,15 @@
 				CB1B54EC1EA354FB006ED851 /* IPCPointValueMode.m */,
 			);
 			name = PointValue;
+			sourceTree = "<group>";
+		};
+		CB3B931D1EA7033E0013FAD6 /* Customsized */ = {
+			isa = PBXGroup;
+			children = (
+				CB3B931E1EA7036B0013FAD6 /* IPCCustomsizedProductList.h */,
+				CB3B931F1EA7036B0013FAD6 /* IPCCustomsizedProductList.m */,
+			);
+			name = Customsized;
 			sourceTree = "<group>";
 		};
 		CB6AC20F1E9F5181008031DD /* Employee */ = {
@@ -1981,8 +1994,8 @@
 			isa = PBXGroup;
 			children = (
 				04186E0E1E693D8000758646 /* IPCPayOrderViewCellDelegate.h */,
-				04186E0B1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.h */,
-				04186E0C1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m */,
+				04186E0B1E691A9600758646 /* IPCPayOrderViewMode.h */,
+				04186E0C1E691A9600758646 /* IPCPayOrderViewMode.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -2395,6 +2408,7 @@
 				0470ADB11D407C24003AF4F4 /* IPCCustomerHistoryOrderCell.m in Sources */,
 				04BF93641E165F0C00D14A14 /* IPCPayOrderRequestManager.m in Sources */,
 				044E0EBB1E03AA4A00FD2525 /* IPCEditAddressView.m in Sources */,
+				CB3B93201EA7036B0013FAD6 /* IPCCustomsizedProductList.m in Sources */,
 				CB5CC4C81E8E245B0091D0FD /* UITableView+Alert.m in Sources */,
 				04760B101D3C80B0003A4E16 /* IPCSimpleUserResult.m in Sources */,
 				04CBD98B1D586D3C00C7CAA4 /* IPCUpdatePasswordView.m in Sources */,
@@ -2414,7 +2428,7 @@
 				CB5CC4771E8E00500091D0FD /* IPCCommon.m in Sources */,
 				0470ADAC1D407183003AF4F4 /* IPCCustomerOptometryCell.m in Sources */,
 				04C9F7A51DEEAC73001258B2 /* IPCEmployeListView.m in Sources */,
-				04186E0D1E691A9600758646 /* IPCPayOrderViewNormalSellCellMode.m in Sources */,
+				04186E0D1E691A9600758646 /* IPCPayOrderViewMode.m in Sources */,
 				04443C511D23C89300596519 /* IPCFilterGlassesView.m in Sources */,
 				CB79C0F81EA1E4A600078CCA /* IPCPayOrderTypeBottomView.m in Sources */,
 				0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */,
