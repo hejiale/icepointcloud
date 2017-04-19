@@ -33,11 +33,6 @@
     return [self cartItems].count;
 }
 
-//- (NSInteger)selectedItemsCount
-//{
-//    return [self selectCartItems].count;
-//}
-
 - (NSInteger)selectNormalItemsCount{
     return [self selectCartItems].count;
 }
@@ -45,18 +40,14 @@
 - (NSInteger)selectPayItemsCount
 {
     if ([self isExistValueCard]) {
-        return [self selectValueCardCount];
+        return [self valueCardCount];
     }
     return [self selectNormalItemsCount];
 }
 
-- (NSInteger)selectValueCardCount{
+- (NSInteger)valueCardCount{
     return [self selectValueCardCartItems].count;
 }
-
-//- (NSInteger)selectedPreSellItemsCount{
-//    return [self selectPreSellCartItems].count;
-//}
 
 - (NSInteger)selectedGlassesCount
 {
@@ -93,26 +84,6 @@
  *  Shopping cart price calculation
  *
  */
-//- (double)selectedGlassesTotalPrice
-//{
-//    double price = 0;
-//    for (IPCShoppingCartItem *ci in [self selectNormalSellCartItems]) {
-//        if (ci.selected) price += ci.totalPrice;
-//    }
-//    return price;
-//}
-
-
-//- (double)selectedPreSellGlassesTotalPrice
-//{
-//    double price = 0;
-//    for (IPCShoppingCartItem *ci in [self selectPreSellCartItems]) {
-//        price += ci.totalPrice;
-//    }
-//    return price;
-//}
-
-
 - (double)selectedGlassesTotalPrice
 {
     double price = 0;
@@ -160,18 +131,6 @@
         return [evaluatedObject selected];
     }]];
 }
-//
-//- (NSArray<IPCShoppingCartItem *>*)selectPreSellCartItems{
-//    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-//        return [evaluatedObject selected] && [evaluatedObject isPreSell];
-//    }]];
-//}
-
-//- (NSArray<IPCShoppingCartItem *>*)selectNormalSellCartItems{
-//    return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-//        return [evaluatedObject selected] && [[evaluatedObject glasses] filterType] != IPCTopFilterTypeCard;
-//    }]];
-//}
 
 - (NSArray<IPCShoppingCartItem *>*)selectValueCardCartItems{
     return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
@@ -205,10 +164,6 @@
     return [self selectCartItems][index];
 }
 
-//- (IPCShoppingCartItem *)selectedPreSelltemAtIndex:(NSInteger)index
-//{
-//    return [self selectPreSellCartItems][index];
-//}
 
 /**
  *  Add a shopping cart
@@ -248,16 +203,6 @@
     [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:batchNum KindNum:kindNum ValidityDate:date ContactID:nil IsOpenBooking:NO Count:count];
 }
 
-
-//- (void)addPreSellContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree Count:(NSInteger)count
-//{
-//    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:YES Count:count];
-//}
-//
-//- (void)addPreSellAccessoryWithGlasses:(IPCGlasses *)glasses Count:(NSInteger)count
-//{
-//    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:YES Count:count];
-//}
 
 - (void)addValueCard:(IPCGlasses *)glass{
     [self addGlasses:glass Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:1];
@@ -417,17 +362,6 @@
 {
     return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:batchNum KindNum:kindNum ValidityDate:date IsOpenBooking:NO];
 }
-
-//- (IPCShoppingCartItem *)preSellcontactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree
-//{
-//    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:YES];
-//}
-//
-//- (IPCShoppingCartItem *)preSellAccessoryForGlass:(IPCGlasses *)glasses
-//{
-//    return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:YES];
-//}
-
 
 - (IPCShoppingCartItem *)batchAccessoryForGlass:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date
 {

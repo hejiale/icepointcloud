@@ -24,6 +24,7 @@
 @property (strong, nonatomic) UIPageControl * imagePageControl;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIImageView *customsizedImageView;
+@property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
 
 
 @property (nonatomic, weak) IPCGlasses *glasses;
@@ -43,5 +44,6 @@
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell;
 - (void)reloadProductList;
 - (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell;
+- (void)startCustomsized:(IPCGlasslistCollectionViewCell *)cell;
 
 @end

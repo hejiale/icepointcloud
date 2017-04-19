@@ -36,6 +36,15 @@
 @property (nonatomic, copy, readwrite) NSString * validityDate;//Batch stealth is valid
 @property (nonatomic, assign, readwrite) BOOL     isPreSell;
 
+/**
+ *  Customsized Parameter
+ */
+
+
+
+
+
+
 - (double)totalPrice;
 - (NSDictionary *)paramtersJSONForOrderRequest;
 

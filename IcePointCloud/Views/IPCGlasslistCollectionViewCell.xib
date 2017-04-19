@@ -109,12 +109,26 @@
                             <constraint firstAttribute="width" constant="183" id="r3l-CE-dbd"/>
                         </constraints>
                     </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rf8-id-HGS">
+                        <rect key="frame" x="221" y="210" width="90" height="30"/>
+                        <color key="backgroundColor" red="0.38823529411764707" green="0.62745098039215685" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="0lp-Pg-9sd"/>
+                            <constraint firstAttribute="width" constant="90" id="dKE-Js-cHt"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <state key="normal" title="开始定制"/>
+                        <connections>
+                            <action selector="startCustomsizedAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="kVD-JX-S2b"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YIP-c3-VGM" firstAttribute="top" secondItem="I3A-bO-jTo" secondAttribute="bottom" constant="10" id="4nU-u2-vOT"/>
                 <constraint firstItem="uNz-8c-cOd" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="5d4-OF-1FX"/>
+                <constraint firstAttribute="bottom" secondItem="rf8-id-HGS" secondAttribute="bottom" constant="10" id="Aur-GL-St1"/>
                 <constraint firstItem="I3A-bO-jTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BoE-Nq-Ma9"/>
                 <constraint firstAttribute="trailing" secondItem="ba3-fr-oCi" secondAttribute="trailing" constant="20" id="Cge-ga-qXG"/>
                 <constraint firstAttribute="trailing" secondItem="eXU-xi-Nbo" secondAttribute="trailing" constant="20" id="DCy-ii-2Rj"/>
@@ -127,6 +141,7 @@
                 <constraint firstItem="uNz-8c-cOd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="QuC-cx-xXd"/>
                 <constraint firstAttribute="bottom" secondItem="zT7-2e-guu" secondAttribute="bottom" constant="15" id="WCo-kU-arb"/>
                 <constraint firstItem="I3A-bO-jTo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WZJ-Kx-dWK"/>
+                <constraint firstAttribute="trailing" secondItem="rf8-id-HGS" secondAttribute="trailing" constant="20" id="b99-0Y-ahn"/>
                 <constraint firstAttribute="bottom" secondItem="ldI-Dd-6ZV" secondAttribute="bottom" constant="15" id="ciU-CD-im0"/>
                 <constraint firstAttribute="trailing" secondItem="YIP-c3-VGM" secondAttribute="trailing" constant="20" id="lw4-Ug-Hey"/>
                 <constraint firstAttribute="trailing" secondItem="I3A-bO-jTo" secondAttribute="trailing" id="q9T-N1-BqF"/>
@@ -137,6 +152,7 @@
                 <outlet property="addCartButton" destination="ba3-fr-oCi" id="rQh-YD-U60"/>
                 <outlet property="buyButton" destination="eXU-xi-Nbo" id="MfV-82-WnT"/>
                 <outlet property="cartNumLabel" destination="zT7-2e-guu" id="3kh-Wd-b18"/>
+                <outlet property="customsizedButton" destination="rf8-id-HGS" id="0dY-fK-x5v"/>
                 <outlet property="customsizedImageView" destination="uNz-8c-cOd" id="hSg-am-mGc"/>
                 <outlet property="imageScrollView" destination="I3A-bO-jTo" id="0WR-8c-d5a"/>
                 <outlet property="labelHeightConstraint" destination="Djy-mQ-nGY" id="g3j-2i-V8U"/>

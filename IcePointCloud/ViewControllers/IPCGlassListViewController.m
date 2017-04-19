@@ -343,6 +343,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }
 }
 
+- (void)startCustomsized:(IPCGlasslistCollectionViewCell *)cell{
+    if ([self.glassListViewMode.glassesList count] > 0) {
+        __block NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
+        IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+        [self.navigationController pushViewController:payOrderVC animated:YES];
+    }
+}
+
 #pragma mark //NSNotification
 - (void)addNotifications{
     [self clearNotifications];

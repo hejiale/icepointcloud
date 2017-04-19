@@ -15,6 +15,7 @@
     // Initialization code
     
     [self.priceLabel setTextColor:COLOR_RGB_RED];
+    self.customsizedButton.layer.cornerRadius = 3;
     
     __weak typeof (self) weakSelf = self;
     [self.imageScrollView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -123,6 +124,7 @@
     if (_customsizedProduct) {
         [self resetBuyStatus];
         [self.customsizedImageView setHidden:NO];
+        [self.customsizedButton setHidden:NO];
         
         [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_customsizedProduct.bizPriceOrigin] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
         
@@ -235,6 +237,15 @@
     }
 }
 
+
+- (IBAction)startCustomsizedAction:(id)sender {
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(startCustomsized:)]) {
+            [self.delegate startCustomsized:self];
+        }
+    }
+}
+
 - (void)resetBuyStatus{
     [self.buyButton setHidden:YES];
     [self.addCartButton setHidden:YES];
@@ -242,6 +253,7 @@
     [self.cartNumLabel setHidden:YES];
     [self.customsizedImageView setHidden:YES];
     [self.imageScrollView setHidden:YES];
+    [self.customsizedButton setHidden:YES];
 }
 
 #pragma mark //UIScrollViewDelegate
