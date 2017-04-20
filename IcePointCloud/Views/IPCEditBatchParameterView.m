@@ -66,7 +66,6 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
             if (([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) && glasses.stock <= 0) {
                 [self.editNoneAccessoryView setHidden:NO];
                 self.editContentView = self.editNoneAccessoryView;
-//                [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
             }else{
                 [self.editParameterView setHidden:NO];
                 self.editContentView = self.editParameterView;
@@ -88,10 +87,6 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     [self.parameterTableView setTableFooterView:[[UIView alloc]init]];
 }
 
-//- (IPCShoppingCartItem *)cartItemAccessory{
-//    return [[IPCShoppingCart sharedCart] preSellAccessoryForGlass:self.editParameterMode.currentGlass];
-//}
-
 #pragma mark //Clicked Events
 - (void)show{
     [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -109,16 +104,9 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 }
 
 - (IBAction)reduceNoneAccessoryCartAction:(id)sender {
-//    [[IPCShoppingCart sharedCart] removeGlasses:self.editParameterMode.currentGlass];
-//    [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
-//    if ([self cartItemAccessory].count == 0) {
-//        [self removeCover];
-//    }
 }
 
 - (IBAction)addNoneAccessoryCartAction:(id)sender {
-//    [[IPCShoppingCart sharedCart] plusGlass:self.editParameterMode.currentGlass];
-//    [self.noneAccessoryCartNumLbl setText:[NSString stringWithFormat:@"%d",[self cartItemAccessory].count]];
 }
 
 - (void)removeCover{

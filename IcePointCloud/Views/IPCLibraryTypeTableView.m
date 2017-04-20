@@ -28,7 +28,6 @@ static NSString * const typeIdentifier = @"LibraryTypeTableViewCellIdentifier";
         self.delegate = self;
         self.tableFooterView = [[UIView alloc]init];
         self.separatorColor = [UIColor whiteColor];
-        [self setBackgroundColor:[[UIColor lightGrayColor] colorWithAlphaComponent:0.2]];
         
         self.datas = [[IPCPhotoDatas alloc]init];
         self.photoList = [self.datas GetPhotoListDatas];

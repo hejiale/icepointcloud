@@ -50,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self setBackground];
     self.navigationItem.leftBarButtonItem = self.backBtn;
     [self setNavigationBarTitle:@"所有照片"];
 
@@ -123,6 +124,7 @@
         UIButton *back_btn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 45, 44)];
         [back_btn setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
         back_btn.frame = CGRectMake(0, 0, 60, 44);
+        back_btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [back_btn addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
         _backBtn = [[UIBarButtonItem alloc] initWithCustomView:back_btn];
     }
@@ -225,7 +227,8 @@
 
 #pragma mark //IPCLibraryTypeTableViewDelegate
 - (void)getAlbumPhotos:(IPCPhotoListModel *)photoMode{
-    [self.libraryTypeTableView dismiss];self.libraryTypeTableView = nil;
+    [self.libraryTypeTableView dismiss];
+    self.libraryTypeTableView = nil;
     [self.button setSelected:NO];
     [self.photoArray removeAllObjects];
     [self.photoArray addObjectsFromArray:photoMode.assetArray];

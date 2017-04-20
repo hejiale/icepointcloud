@@ -113,7 +113,7 @@ typedef NS_ENUM(NSInteger, IPCGlassesImageType) {
     /**
      *  FRONT NORMAL
      */
-    IPCGlassesImageTypeFrontialNormal,
+    IPCGlassesImageTypeFrontialNormal = 0,
     /**
      *  FRONT MATCH
      */
@@ -196,6 +196,21 @@ typedef NS_ENUM(NSInteger, IPCPayStyleType){
     IPCPayStyleTypeCard
 };
 
+/**
+ 订单支付商品类型
+ 
+ - IPCPayOrderTypeNormal: 普通商品
+ - IPCPayOrderTypeVlaueCard: 储值卡
+ - IPCPayOrderTypeCustomsizedLens: 定制类镜片
+ - IPCPayOrderTypeCustomsizedContactLens: 定制类隐形眼镜
+ */
+typedef NS_ENUM(NSInteger, IPCPayOrderType){
+    IPCPayOrderTypeNormal = 0,
+    IPCPayOrderTypeVlaueCard,
+    IPCPayOrderTypeCustomsizedLens,
+    IPCPayOrderTypeCustomsizedContactLens,
+};
+
 
 //Frame
 #define SCREEN_WIDTH                  [UIScreen mainScreen].bounds.size.width
@@ -206,7 +221,9 @@ typedef NS_ENUM(NSInteger, IPCPayStyleType){
 //Account Key
 #define IPCWeixinAppID                 @"wx94ce99b4ee7c5356"
 #define IPCWeixinAppSecret           @"12a16d241dfcc9133783f4e3e8a47c59"
-#define IPCTuSdkKey                      @"2107c2f9f27e3f7b-00-yzbvp1"
+//TuSDK_key
+#define IPCTuSdkKey                      @"034207930b3030f9-00-yzbvp1"
+//IFLY_FACE_KEY
 #define IPCIflyFaceDetectorKey       @"5774da82"
 
 

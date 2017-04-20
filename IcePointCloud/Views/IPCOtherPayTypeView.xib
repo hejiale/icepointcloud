@@ -69,7 +69,7 @@
                             </connections>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puo-rX-AkA">
-                            <rect key="frame" x="325" y="0.0" width="175" height="30"/>
+                            <rect key="frame" x="325" y="0.0" width="170" height="30"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -79,7 +79,7 @@
                     <constraints>
                         <constraint firstItem="lxe-Wv-tAP" firstAttribute="top" secondItem="QmQ-Ye-COv" secondAttribute="top" id="575-or-dnV"/>
                         <constraint firstItem="2si-Nk-3A8" firstAttribute="centerY" secondItem="QmQ-Ye-COv" secondAttribute="centerY" id="5BK-sa-5QL"/>
-                        <constraint firstAttribute="trailing" secondItem="puo-rX-AkA" secondAttribute="trailing" constant="-30" id="6qq-we-PJd"/>
+                        <constraint firstAttribute="trailing" secondItem="puo-rX-AkA" secondAttribute="trailing" constant="-25" id="6qq-we-PJd"/>
                         <constraint firstAttribute="bottom" secondItem="Cig-WO-sOk" secondAttribute="bottom" id="7uA-xO-xaQ"/>
                         <constraint firstItem="Cig-WO-sOk" firstAttribute="top" secondItem="QmQ-Ye-COv" secondAttribute="top" id="A9f-dt-B1Y"/>
                         <constraint firstItem="Klb-3n-y9Y" firstAttribute="top" secondItem="QmQ-Ye-COv" secondAttribute="top" id="JdL-T3-Xsl"/>

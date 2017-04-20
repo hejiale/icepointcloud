@@ -80,11 +80,18 @@
             if (_cartItem.batchReadingDegree.length){
                 [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.batchReadingDegree]];
             }
-        }else if (([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && _cartItem.glasses.isBatch) || [_cartItem.glasses filterType] ==IPCTopFilterTypeAccessory && _cartItem.glasses.solutionType)
+        }else if ([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && _cartItem.glasses.isBatch)
         {
             [self.batchNumView setHidden:NO];
             if (_cartItem.contactDegree.length && _cartItem.batchNum.length)
                 [self.degreeLabel setText:[NSString stringWithFormat:@"度数: %@   批次号：%@",_cartItem.contactDegree,_cartItem.batchNum]];
+            if (_cartItem.kindNum.length && _cartItem.validityDate.length){
+                [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
+            }
+        }else if ([_cartItem.glasses filterType] ==IPCTopFilterTypeAccessory && _cartItem.glasses.solutionType){
+            [self.batchNumView setHidden:NO];
+            if (_cartItem.batchNum.length)
+                [self.degreeLabel setText:[NSString stringWithFormat:@"批次号：%@",_cartItem.batchNum]];
             if (_cartItem.kindNum.length && _cartItem.validityDate.length){
                 [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
             }

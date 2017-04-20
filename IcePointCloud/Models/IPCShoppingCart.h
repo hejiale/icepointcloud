@@ -44,8 +44,8 @@
 - (void)removeItem:(IPCShoppingCartItem *)item;
 - (void)removeSelectCartItem;
 - (void)removeAllValueCardCartItem;
-- (void)reduceItem:(IPCShoppingCartItem *)cartItem;
-- (void)reduceGlass:(IPCGlasses *)glass;
+- (void)removeGlasses:(IPCGlasses *)glasse;
+- (void)clear;
 /**
  *     Add a shopping cart
  */
@@ -54,13 +54,16 @@
 - (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID Count:(NSInteger)count;
 - (void)addAccessoryWithGlasses:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date Count:(NSInteger)count;
 - (void)addValueCard:(IPCGlasses *)glass;
+/**
+ *   Plus Cart Item
+ */
 - (void)plusItem:(IPCShoppingCartItem *)cartItem;
 - (void)plusGlass:(IPCGlasses *)glass;
 /**
- *    Remove glasses category shopping cart items accordingly
+ *   Reduce Cart Item
  */
-- (void)removeGlasses:(IPCGlasses *)glasse;
-- (void)clear;
+- (void)reduceItem:(IPCShoppingCartItem *)cartItem;
+- (void)reduceGlass:(IPCGlasses *)glass;
 /**
  *   To obtain the corresponding glasses category shopping cart items
  */

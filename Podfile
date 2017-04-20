@@ -15,12 +15,12 @@ pod 'OBDragDrop'
 pod 'SNWeChatSDK'
 pod 'ZYCornerRadius'
 pod 'GPUImage'
-pod 'TuSDK'
 pod 'JKCategories'
 pod 'YYKit'
 pod 'ReactiveCocoa', '~> 4.2.2’
 pod 'MJRefresh'
 pod 'SVProgressHUD'
+pod 'TuSDK'
 end
 
 target "IcePointCloudTests" do

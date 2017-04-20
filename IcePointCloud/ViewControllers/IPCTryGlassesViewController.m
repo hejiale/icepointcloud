@@ -125,7 +125,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self setNavigationBarStatus:YES];
+//    [self setNavigationBarStatus:YES];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self.productCollectionView reloadData];
     if ([self.matchItems count] == 0 || [self.compareBgView.subviews count] == 0)[self initMatchItems];
@@ -161,8 +161,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 - (void)initCompareModeView
 {
-    [self.compareBgView removeAllSubviews];
-    
     if ([self.compareBgView.subviews count] == 0) {
         __weak typeof (self) weakSelf = self;
         [self.matchItems enumerateObjectsUsingBlock:^(IPCMatchItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -216,7 +214,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
 - (void)beginReloadTableView{
-    self.glassListViewMode.currentPage = 0;
+    self.glassListViewMode.currentPage = 1;
     self.productCollectionView.mj_footer.hidden = NO;
     [IPCCustomUI show];
     
@@ -246,7 +244,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 - (void)loadMoreTableView{
-    self.glassListViewMode.currentPage++;
+    self.glassListViewMode.currentPage += 9;
     [self loadGlassesListData:^{
         [self.productCollectionView reloadData];
         [self.refreshHeader endRefreshing];
@@ -558,14 +556,20 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 {
     [self initCompareModeView];
     
+    for (IPCCompareItemView * item in self.compareBgView.subviews) {
+        item.transform = CGAffineTransformIdentity;
+        item.center = item.originalCenter;
+        [item updateItem:NO];
+    }
+    
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[activeMatchItemIndex];
     
-    CGRect frame = targetItemView.frame;
-    targetItemView.layer.anchorPoint = targetItemView.singleModeViewAnchorPoint;
-    targetItemView.frame = frame;
+    CGRect frame = self.signleModeView.frame;
+    self.signleModeView.layer.anchorPoint = targetItemView.singleModeViewAnchorPoint;
+    self.signleModeView.frame = frame;
     
-    [UIView animateWithDuration:.2 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        targetItemView.transform = CGAffineTransformScale(targetItemView.transform, 1, 1);
+    [UIView animateWithDuration:.2 delay:0 options:0 animations:^{
+        self.signleModeView.transform = CGAffineTransformScale(self.signleModeView.transform, 0.5, 0.5);
     } completion:^(BOOL finished) {
         if (finished) {
             [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -573,14 +577,15 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
                 obj.hidden = NO;
             }];
             
+            [UIView animateWithDuration:2 animations:^{
+                self.signleModeView.alpha = 0;
+                self.signleModeView.hidden = YES;
+            }];
+            
             [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [UIView animateWithDuration:.2 delay:.1 * idx options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
                     obj.alpha = 1;
-                } completion:^(BOOL finished) {
-                    if (finished) {
-                        self.signleModeView.hidden = YES;
-                    }
-                }];
+                } completion:nil];
             }];
         }
     }];

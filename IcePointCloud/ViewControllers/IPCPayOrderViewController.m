@@ -41,6 +41,7 @@
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
     [[IPCPayOrderMode sharedManager] resetData];
+    [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
     
     self.normalSellCellMode = [[IPCPayOrderViewMode alloc]init];
     self.normalSellCellMode.delegate = self;
@@ -65,6 +66,14 @@
     [self.payOrderTableView reloadData];
 }
 
+- (void)setPayOrderType:(IPCPayOrderType)payOrderType{
+    _payOrderType = payOrderType;
+    
+    if (_payOrderType == IPCPayOrderTypeCustomsizedLens || _payOrderType == IPCPayOrderTypeCustomsizedContactLens) {
+        [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
+        [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
+    }
+}
 
 - (void)reloadCustomerInfo{
     [IPCPayOrderMode sharedManager].balanceAmount = [IPCCurrentCustomerOpometry sharedManager].currentCustomer.balance;
@@ -164,23 +173,23 @@
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.normalSellCellMode numberOfSectionsInTableView:tableView];
+    return [self.normalSellCellMode numberOfSectionsInTableView:tableView PayType:self.payOrderType];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.normalSellCellMode tableView:tableView numberOfRowsInSection:section];
+    return [self.normalSellCellMode tableView:tableView numberOfRowsInSection:section PayType:self.payOrderType];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.normalSellCellMode tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [self.normalSellCellMode tableView:tableView cellForRowAtIndexPath:indexPath PayType:self.payOrderType];
 }
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.normalSellCellMode tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [self.normalSellCellMode tableView:tableView heightForRowAtIndexPath:indexPath PayType:self.payOrderType];
 }
 
 

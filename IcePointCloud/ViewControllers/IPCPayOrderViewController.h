@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderViewController : IPCRootNavigationViewController
 
+@property (assign, nonatomic, readwrite) IPCPayOrderType payOrderType;
+
 @end

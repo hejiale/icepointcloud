@@ -287,7 +287,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         if (self.customerViewMode.isLoadMoreOptometry)
             return self.customerViewMode.optometryList.count + 2;
         return self.customerViewMode.optometryList.count + 1;
-    }else if (section == 2){
+    }else if (section == 3){
         if (self.customerViewMode.isLoadMoreOrder)
             return self.customerViewMode.orderList.count+2;
         return self.customerViewMode.orderList.count > 0 ? self.customerViewMode.orderList.count+1 : 0;
@@ -356,7 +356,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             return cell;
         }
-    }else if(indexPath.section == 2){
+    }else if(indexPath.section == 3){
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
             if (!cell) {
@@ -424,11 +424,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1)
             return 50;
         return 160;
-    }else if (indexPath.section == 2 && indexPath.row > 0){
+    }else if (indexPath.section == 3 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1)
             return 50;
         return 80;
-    }else if (indexPath.section == 3 && indexPath.row > 0){
+    }else if (indexPath.section == 2 && indexPath.row > 0){
         return 70;
     }
     return 50;
@@ -454,7 +454,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         if(self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1){
             [self loadMoreOptometryData];
         }
-    }else if (indexPath.section == 2 && indexPath.row > 0) {
+    }else if (indexPath.section == 3 && indexPath.row > 0) {
         if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1) {
             [self loadMoreOrderData];
         }else{

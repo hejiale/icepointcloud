@@ -271,7 +271,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 - (void)queryAccessorySpecification:(BOOL)isUpdateForm
 {
     __weak typeof (self) weakSelf = self;
-    [self.parameterViewMode getAccessorySpecification:self.glasses.glassesID CompleteBlock:^{
+    [self.parameterViewMode getAccessorySpecification:[self.glasses glassId] CompleteBlock:^{
         if (isUpdateForm) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf updateAccessoryParamater];
@@ -616,30 +616,19 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
                                                   ReadingDegree:self.leftParameterLabel.text
                                                           Count:[self.lensNumLabel.text integerValue]];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        if ([self.batchNoneStockView superview]) {
-//            [[IPCShoppingCart sharedCart] addPreSellContactLensWithGlasses:self.glasses
-//                                                             ContactDegree:self.batchNoneDegreeLabel.text
-//                                                                     Count:[self.batchNoneNumLabel.text integerValue]];
-        }else{
-            [[IPCShoppingCart sharedCart] addContactLensWithGlasses:self.glasses
-                                                      ContactDegree:self.contactDegreeLabel.text
-                                                           BatchNum:self.contactBatchNumLabel.text
-                                                            KindNum:self.contactKindNumLabel.text
-                                                       ValidityDate:self.contactDateLabel.text
-                                                          ContactID:currentContactDegreeID
-                                                              Count:[self.contactCartNumLabel.text integerValue]];
-        }
+        [[IPCShoppingCart sharedCart] addContactLensWithGlasses:self.glasses
+                                                  ContactDegree:self.contactDegreeLabel.text
+                                                       BatchNum:self.contactBatchNumLabel.text
+                                                        KindNum:self.contactKindNumLabel.text
+                                                   ValidityDate:self.contactDateLabel.text
+                                                      ContactID:currentContactDegreeID
+                                                          Count:[self.contactCartNumLabel.text integerValue]];
     }else{
-        if ([self.accessoryNoneStockView superview]) {
-//            [[IPCShoppingCart sharedCart] addPreSellAccessoryWithGlasses:self.glasses
-//                                                                   Count:[self.preAccessoryNumLabel.text integerValue]];
-        }else{
-            [[IPCShoppingCart sharedCart] addAccessoryWithGlasses:self.glasses
-                                                         BatchNum:self.accessoryBatchNumLabel.text
-                                                          KindNum:self.accessoryKindNumLabel.text
-                                                     ValidityDate:self.accessoryDateLabel.text
-                                                            Count:[self.accessoryCartNumLabel.text integerValue]];
-        }
+        [[IPCShoppingCart sharedCart] addAccessoryWithGlasses:self.glasses
+                                                     BatchNum:self.accessoryBatchNumLabel.text
+                                                      KindNum:self.accessoryKindNumLabel.text
+                                                 ValidityDate:self.accessoryDateLabel.text
+                                                        Count:[self.accessoryCartNumLabel.text integerValue]];
     }
 }
 
@@ -696,15 +685,11 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 
 #pragma mark //Query Shopping Cart Item
 - (IPCShoppingCartItem *)cartItemContactLens{
-//    if ([self.batchNoneStockView superview])
-//        return [[IPCShoppingCart sharedCart] preSellcontactLensForGlasses:self.glasses ContactDegree:self.batchNoneDegreeLabel.text];
     return [[IPCShoppingCart sharedCart] contactLensForGlasses:self.glasses ContactDegree:self.contactDegreeLabel.text  BatchNum:self.contactBatchNumLabel.text KindNum:self.contactKindNumLabel.text ValidityDate:self.contactDateLabel.text];
 }
 
 
 - (IPCShoppingCartItem *)cartItemAccessory{
-//    if ([self.accessoryNoneStockView superview])
-//        return [[IPCShoppingCart sharedCart] preSellAccessoryForGlass:self.glasses];
     return [[IPCShoppingCart sharedCart] batchAccessoryForGlass:self.glasses BatchNum:self.accessoryBatchNumLabel.text KindNum:self.accessoryKindNumLabel.text ValidityDate:self.accessoryDateLabel.text];
 }
 

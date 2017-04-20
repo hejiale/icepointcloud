@@ -59,8 +59,8 @@ typedef void(^ReloadFilterUnCloseBlock)();
 
 - (void)reloadGlassListDataWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
-- (void)getCustomsizedLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;;
-- (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;;
+- (void)getCustomsizedLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
+- (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)loadFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 
 @end

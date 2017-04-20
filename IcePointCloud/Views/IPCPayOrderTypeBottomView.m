@@ -19,6 +19,11 @@
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [self addSignleCorner:UIRectCornerBottomLeft | UIRectCornerBottomRight Size:5];
+}
+
 - (IBAction)selectOtherPayStyleAction:(id)sender {
     
 }

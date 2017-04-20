@@ -26,9 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *customsizedImageView;
 @property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
 
-
-@property (nonatomic, weak) IPCGlasses *glasses;
-@property (nonatomic, weak) IPCCustomsizedProduct *customsizedProduct;
+@property (nonatomic, copy) IPCGlasses *glasses;
+@property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;
 
 @property (nonatomic) BOOL  isTrying;//Whether to try the page
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;
@@ -44,6 +43,6 @@
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell;
 - (void)reloadProductList;
 - (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell;
-- (void)startCustomsized:(IPCGlasslistCollectionViewCell *)cell;
+- (void)customsized:(IPCGlasslistCollectionViewCell *)cell;
 
 @end

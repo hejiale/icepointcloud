@@ -39,9 +39,8 @@
 
 - (NSInteger)selectPayItemsCount
 {
-    if ([self isExistValueCard]) {
+    if ([self isExistValueCard])
         return [self valueCardCount];
-    }
     return [self selectNormalItemsCount];
 }
 
@@ -103,12 +102,10 @@
     return price;
 }
 
-
 - (double)selectedPayItemTotalPrice
 {
-    if ([self isExistValueCard]) {
+    if ([self isExistValueCard])
         return [self selectedValueCardTotalPrice];
-    }
     return [self selectedGlassesTotalPrice];
 }
 
@@ -137,6 +134,7 @@
         return [[evaluatedObject glasses] filterType] == IPCTopFilterTypeCard;
     }]];
 }
+
 
 /**
  *  Specify a shopping cart information
@@ -207,6 +205,7 @@
 - (void)addValueCard:(IPCGlasses *)glass{
     [self addGlasses:glass Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil ContactID:nil IsOpenBooking:NO Count:1];
 }
+
 
 - (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID IsOpenBooking:(BOOL)isOpenBooking Count:(NSInteger)count
 {
@@ -368,6 +367,7 @@
     return [self batchItemForGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:batchNum KindNum:kindNum ValidityDate:date IsOpenBooking:NO];
 }
 
+
 - (IPCShoppingCartItem *)batchItemForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl  ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date IsOpenBooking:(BOOL)isOpenBooking
 {
     for (IPCShoppingCartItem *ci in self.itemList)
@@ -400,7 +400,6 @@
     return nil;
 }
 
-
 - (void)postChangedNotification
 {
     [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCNotificationShoppingCartChanged object:nil];
@@ -430,6 +429,10 @@
     return itemArray;
 }
 
+
+/**
+ * Judge  Filter Type
+ */
 - (BOOL)isExistValueCard{
     __block BOOL isExist = NO;
     [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -439,5 +442,6 @@
     }];
     return isExist;
 }
+
 
 @end

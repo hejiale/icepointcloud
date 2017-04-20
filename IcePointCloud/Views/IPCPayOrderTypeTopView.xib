@@ -259,7 +259,7 @@
                                     </variation>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnP-BI-9KY">
-                                    <rect key="frame" x="310" y="5" width="150" height="40"/>
+                                    <rect key="frame" x="305" y="5" width="150" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="35g-E1-vBD"/>
                                         <constraint firstAttribute="height" constant="40" id="6kQ-ea-hUl"/>
@@ -285,7 +285,7 @@
                                 <constraint firstAttribute="trailing" secondItem="dQj-Hq-OyH" secondAttribute="trailing" constant="5" id="ooa-gy-2fw"/>
                                 <constraint firstItem="9kL-PZ-AhI" firstAttribute="top" secondItem="eG3-IL-uFO" secondAttribute="bottom" id="qym-D3-D9H"/>
                                 <constraint firstItem="9Bz-e7-ZGm" firstAttribute="top" secondItem="dQj-Hq-OyH" secondAttribute="bottom" id="tuv-lm-sh0"/>
-                                <constraint firstAttribute="trailing" secondItem="PnP-BI-9KY" secondAttribute="trailing" id="uLQ-hO-j1F"/>
+                                <constraint firstAttribute="trailing" secondItem="PnP-BI-9KY" secondAttribute="trailing" constant="5" id="uLQ-hO-j1F"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择支付方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAy-YS-0Zl">
@@ -327,7 +327,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWi-71-3cC">
-                            <rect key="frame" x="420" y="66" width="100" height="40"/>
+                            <rect key="frame" x="415" y="66" width="100" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="dI1-OB-eoo"/>
                                 <constraint firstAttribute="width" constant="100" id="gyV-cd-V7w"/>
@@ -359,7 +359,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iv3-hc-9Fa">
-                            <rect key="frame" x="340" y="107" width="180" height="40"/>
+                            <rect key="frame" x="340" y="107" width="175" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="UA9-hb-VVU"/>
                             </constraints>
@@ -405,8 +405,8 @@
                         <constraint firstItem="eHK-gj-fK6" firstAttribute="top" secondItem="HX8-nl-Pqq" secondAttribute="bottom" constant="10" id="Fzd-A7-iDz"/>
                         <constraint firstItem="iv3-hc-9Fa" firstAttribute="leading" secondItem="DF0-Jz-Pwe" secondAttribute="trailing" id="Imu-Qj-Ggd"/>
                         <constraint firstAttribute="trailing" secondItem="Qz4-jz-lTH" secondAttribute="trailing" constant="15" id="JBF-Xm-TAL"/>
-                        <constraint firstAttribute="trailing" secondItem="iv3-hc-9Fa" secondAttribute="trailing" constant="20" id="Mid-Dn-DJe"/>
-                        <constraint firstAttribute="trailing" secondItem="FWi-71-3cC" secondAttribute="trailing" constant="20" id="Pm0-vO-jnY"/>
+                        <constraint firstAttribute="trailing" secondItem="iv3-hc-9Fa" secondAttribute="trailing" constant="25" id="Mid-Dn-DJe"/>
+                        <constraint firstAttribute="trailing" secondItem="FWi-71-3cC" secondAttribute="trailing" constant="25" id="Pm0-vO-jnY"/>
                         <constraint firstAttribute="trailing" secondItem="3dk-jh-S6n" secondAttribute="trailing" constant="20" id="RFF-cM-27W"/>
                         <constraint firstItem="zAy-YS-0Zl" firstAttribute="top" secondItem="sQe-I1-dya" secondAttribute="top" constant="20" id="UdF-W0-gt5"/>
                         <constraint firstItem="sKT-MS-dDU" firstAttribute="top" secondItem="zAy-YS-0Zl" secondAttribute="bottom" constant="25" id="XA8-Vc-Jgp"/>

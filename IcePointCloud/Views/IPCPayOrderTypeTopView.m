@@ -44,6 +44,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    [self addSignleCorner:UIRectCornerTopLeft | UIRectCornerTopRight Size:5];
     [self.payTotalPriceLabel setTextColor:COLOR_RGB_RED];
     [self.payStyleContentView addBorder:3 Width:0.5];
     

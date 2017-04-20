@@ -15,7 +15,6 @@
     // Initialization code
     
     [self.priceLabel setTextColor:COLOR_RGB_RED];
-    self.customsizedButton.layer.cornerRadius = 3;
     
     __weak typeof (self) weakSelf = self;
     [self.imageScrollView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -56,11 +55,11 @@
         
         [images enumerateObjectsUsingBlock:^(IPCGlassesImage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
          {
-            UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width + originX, 20, 183, 112)];
-            glassImageView.contentMode = UIViewContentModeScaleAspectFit;
-            [glassImageView setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
-            [self.imageScrollView addSubview:glassImageView];
-        }];
+             UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width + originX, 20, 183, 112)];
+             glassImageView.contentMode = UIViewContentModeScaleAspectFit;
+             [glassImageView setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
+             [self.imageScrollView addSubview:glassImageView];
+         }];
         
         [self.imageScrollView setContentSize:CGSizeMake(images.count * self.jk_width, 0)];
         [self.imageScrollView setContentOffset:CGPointZero];
@@ -77,7 +76,7 @@
             [self.buyButton setHidden:NO];
         }else{
             [self.addCartButton setHidden:NO];
-     
+            
             __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
             
             if (glassCount > 0) {
@@ -151,17 +150,6 @@
 
 #pragma mark //Clicked Events
 - (IBAction)addCartAction:(id)sender {
-    //---------------******预售添加参数*******----------------//
-//    __weak typeof (self) weakSelf = self;
-//    if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || ([self.glasses filterType] == IPCTopFilterTypeContactLenses && self.glasses.stock == 0))
-//    {
-//        __strong typeof (weakSelf) strongSelf = weakSelf;
-//        if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
-//            [strongSelf.delegate chooseParameter:strongSelf];
-//        }
-//    }else{
-//        [self addCartAnimation];
-//    }
     __weak typeof (self) weakSelf = self;
     if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType))
     {
@@ -195,7 +183,7 @@
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
-    
+        
         if (glassCount > 0) {
             if (glassCount == 1) {
                 [UIView animateWithDuration:2.f delay:0 usingSpringWithDamping:0.75 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -238,22 +226,25 @@
 }
 
 
-- (IBAction)startCustomsizedAction:(id)sender {
+- (IBAction)customsizedAction:(id)sender {
+    [IPCCustomsizedItem sharedItem].customsizedProduct = self.customsizedProduct;
+    
     if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(startCustomsized:)]) {
-            [self.delegate startCustomsized:self];
+        if ([self.delegate respondsToSelector:@selector(customsized:)]) {
+            [self.delegate customsized:self];
         }
     }
 }
+
 
 - (void)resetBuyStatus{
     [self.buyButton setHidden:YES];
     [self.addCartButton setHidden:YES];
     [self.reduceButton setHidden:YES];
     [self.cartNumLabel setHidden:YES];
+    [self.customsizedButton setHidden:YES];
     [self.customsizedImageView setHidden:YES];
     [self.imageScrollView setHidden:YES];
-    [self.customsizedButton setHidden:YES];
 }
 
 #pragma mark //UIScrollViewDelegate

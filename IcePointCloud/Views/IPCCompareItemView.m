@@ -74,9 +74,7 @@
 - (UIView *)glassesView{
     if (!_glassesView) {
         _glassesView = [[UIView alloc]initWithFrame:self.bounds];
-        _glassesView.userInteractionEnabled = YES;
         [_glassesView addBorder:0 Width:0];
-        [_glassesView setHidden:YES];
     }
     return _glassesView;
 }
@@ -104,7 +102,6 @@
 - (void)initGlassView{
     self.glassesView.transform = CGAffineTransformIdentity;
     draggedPosition = CGPointMake(-100, -100);
-    [self.glassImageView setImage:nil];
 }
 
 - (IBAction)onScaleTapped:(id)sender
@@ -115,25 +112,32 @@
 - (void)amplificationLargeModelView
 {
     [self.superview.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.alpha = 0;
-        obj.transform = CGAffineTransformIdentity;
-        obj.hidden = YES;
+        if (obj != self) {
+            [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
+                obj.alpha = 0;
+            } completion:nil];
+        }
     }];
     
-    CGRect frame = self.parentSingleModeView.frame;
-    self.parentSingleModeView.layer.anchorPoint = [self singleModeViewAnchorPoint];
-    self.parentSingleModeView.frame = frame;
+    CGRect parentFrame = self.superview.frame;
     
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.parentSingleModeView.alpha = 1;
-        self.parentSingleModeView.hidden = NO;
-        self.parentSingleModeView.transform = CGAffineTransformIdentity;
+    [UIView animateWithDuration:.2 delay:.2 options:0 animations:^{
+        self.transform = CGAffineTransformScale(self.transform, 2.0, 2.0);
+        self.center = CGPointMake(parentFrame.size.width / 2, parentFrame.size.height / 2);
     } completion:^(BOOL finished) {
         if (finished) {
+            self.parentSingleModeView.alpha = 0;
             self.parentSingleModeView.transform = CGAffineTransformIdentity;
-
+            self.parentSingleModeView.hidden = NO;
+            
             if (self.delegate && [self.delegate respondsToSelector:@selector(didAnimateToSingleMode:withIndex:)])
                 [self.delegate didAnimateToSingleMode:self withIndex:self.tag];
+            
+            [UIView animateWithDuration:.3 animations:^{
+                self.alpha = 0;
+                self.parentSingleModeView.alpha = 1;
+            } completion:^(BOOL finished) {
+            }];
         }
     }];
 }
@@ -259,13 +263,10 @@
     if (gi.imageURL.length){
         [self.glassImageView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
     }else{
-        [self.glassesView setHidden:YES];
         [self.glassImageView setImage:nil];
     }
     
     if (self.glassImageView.image) {
-        [self.glassesView setHidden:NO];
-        
         CGFloat scale = self.glassesView.bounds.size.width / gi.width;
         CGRect bounds = self.glassesView.bounds;
         bounds.size.height = (gi ?  gi.height*scale : [self defaultGlassesSize].height);
