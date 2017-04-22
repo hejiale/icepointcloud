@@ -24,7 +24,7 @@
 @property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
 
 
-- (void)updateUI;
+//- (void)updateUI;
 
 
 @end

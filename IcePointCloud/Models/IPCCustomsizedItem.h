@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, IPCCustomsizedType){
 
 + (IPCCustomsizedItem *)sharedItem;
 
+@property (assign, nonatomic, readwrite) IPCPayOrderType payOrderType;
 @property (nonatomic, assign, readwrite) IPCCustomsizedType customsizdType;
 
 @property (nonatomic, strong, readwrite) IPCCustomsizedProduct * customsizedProduct;

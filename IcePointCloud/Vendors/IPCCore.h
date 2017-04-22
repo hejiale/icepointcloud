@@ -93,17 +93,17 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
      */
     IPCTopFilterTypeCard,
     /**
+     *  OTHERS
+     */
+    IPCTopFilterTypeOthers,
+    /**
      *  CUSTOMSIZED CONTACT LENS
      */
     IPCTopFilterTypeCustomsizedContactLens,
     /**
      *  CUSTOMSIZED LENS
      */
-    IPCTopFilterTypeCustomsizedLens,
-    /**
-     *  OTHERS
-     */
-    IPCTopFilterTypeOthers
+    IPCTopFilterTypeCustomsizedLens
 };
 
 /**

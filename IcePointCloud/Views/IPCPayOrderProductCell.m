@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *batchNumView;
 @property (weak, nonatomic) IBOutlet UILabel *degreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kindNumLabel;
-
+@property (weak, nonatomic) IBOutlet UIButton *noPointButton;
 
 
 @end
@@ -40,6 +40,12 @@
     [self.inputPriceTextField addBorder:3 Width:0.5];
 }
 
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -58,6 +64,19 @@
             [self.countNumView setHidden:NO];
         }else{
             [self.inputPirceView setHidden:NO];
+            if ([IPCPayOrderMode sharedManager].point > 0) {
+                [self.noPointButton setHidden:NO];
+            }else{
+                [self.noPointButton setHidden:YES];
+            }
+            
+            if (_cartItem.isChoosePoint && [IPCPayOrderMode sharedManager].point > 0) {
+                [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
+                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.pointValue]];
+            }else{
+                [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
+                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
+            }
         }
         
         IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
@@ -68,7 +87,6 @@
         [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.glasses.price]];
         [self.countLabel setText:[NSString stringWithFormat:@"X%d",_cartItem.count]];
         [self.inputCountLabel setText:[NSString stringWithFormat:@"%d",_cartItem.count]];
-        [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
         
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens && _cartItem.glasses.isBatch) {
             [self.parameterLabel setHidden:NO];
@@ -121,8 +139,31 @@
     }
 }
 
+- (IBAction)noPointAction:(UIButton *)sender {
+    [sender setSelected:!sender.selected];
+    self.cartItem.isChoosePoint = sender.selected;
+    
+    if (sender.selected) {
+        [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
+        self.cartItem.unitPrice = 0;
+    }else{
+        [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
+        [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue;
+        self.cartItem.pointValue = 0;
+        
+    }
+    [self getPointPrice];
+}
+
 
 #pragma mark //UITextField Delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (![IPCCommon judgeIsFloatNumber:string]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;
@@ -132,22 +173,41 @@
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length) {
-        if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
-            [IPCCustomUI showError:@"请先选择员工"];
-        }else{
-            if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-                [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+        if (self.cartItem.isChoosePoint) {
+            if (self.cartItem.glasses.price < [str doubleValue] || [IPCPayOrderMode sharedManager].point < [str doubleValue]) {
+                self.cartItem.pointValue = MIN([IPCPayOrderMode sharedManager].point, self.cartItem.glasses.price);
+            }else{
+                self.cartItem.pointValue = [str doubleValue];
             }
-            self.cartItem.unitPrice = [str doubleValue];
-            
-            [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-            [IPCPayOrderMode sharedManager].givingAmount = 0;
+            [self getPointPrice];
+        }else{
+            if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+                [IPCCustomUI showError:@"请先选择员工"];
+            }else{
+                if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                    [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+                }
+                self.cartItem.unitPrice = [str doubleValue];
+                
+                [IPCPayOrderMode sharedManager].realTotalPrice = 0;
+                [IPCPayOrderMode sharedManager].givingAmount = 0;
+            }
         }
     }
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
             [self.delegate reloadUI];
+        }
+    }
+}
+
+
+//获取积分换取金额
+- (void)getPointPrice{
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
+            [self.delegate getPointPrice:[[IPCShoppingCart sharedCart] totalUsedPoint]];
         }
     }
 }

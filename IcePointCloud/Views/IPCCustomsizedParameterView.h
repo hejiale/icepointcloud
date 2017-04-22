@@ -7,23 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCCustomsizedEyeDelegate.h"
+#import "IPCCustomsizedLensView.h"
+#import "IPCCustomsizedContactLensView.h"
+#import "IPCCustomsizedOtherView.h"
+
+@protocol IPCCustomsizedParameterViewDelegate;
 
 @interface IPCCustomsizedParameterView : UIView<UITextFieldDelegate>
-
-@property (strong, nonatomic) IBOutlet UIView *mainView;
-@property (weak, nonatomic) IBOutlet UITextField *sphTextField;
-@property (weak, nonatomic) IBOutlet UITextField *cylTextField;
-@property (weak, nonatomic) IBOutlet UITextField *axisTextField;
-@property (weak, nonatomic) IBOutlet UITextField *distanceTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addTextField;
-@property (weak, nonatomic) IBOutlet UITextField *channalTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addLayerTextField;
-@property (weak, nonatomic) IBOutlet UITextField *dyeingTextField;
-@property (weak, nonatomic) IBOutlet UITextField *remarkTextField;
-@property (weak, nonatomic) IBOutlet UILabel *countLabel;
-@property (weak, nonatomic) IBOutlet UIView *otherContentView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherContentHeight;
+//定制镜片商品
+@property (strong, nonatomic)  IPCCustomsizedLensView *lensView;
+//定制隐形眼镜商品
+@property (strong, nonatomic)  IPCCustomsizedContactLensView *contactLensView;
+//判断左右眼
 @property (assign, nonatomic) BOOL isRight;
+
+@property (assign, nonatomic) id<IPCCustomsizedEyeDelegate>delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame Direction:(BOOL)isRight;
 
 - (void)reloadOtherParameterView;
 

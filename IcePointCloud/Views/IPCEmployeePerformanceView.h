@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CustomProgress.h"
 
 @interface IPCEmployeePerformanceView : UIView<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *amountButton;
 @property (weak, nonatomic) IBOutlet UITextField *amountTextField;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIView *progressView;
+@property (strong, nonatomic) CustomProgress * progress;
 @property (copy, nonatomic) IPCEmployeeResult * employeeResult;
 
 - (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update;

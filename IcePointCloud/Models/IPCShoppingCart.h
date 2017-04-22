@@ -84,4 +84,12 @@
  */
 - (void)postChangedNotification;
 
+/**
+ *   Point Value
+ */
+- (void)clearAllItemPoint;
+- (BOOL)judgeZeroPointValue;
+- (double)totalUsedPoint;
+- (BOOL)isHaveUsedPoint;
+
 @end

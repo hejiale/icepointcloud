@@ -125,7 +125,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //Request Data
 - (void)queryCustomerInfo:(void(^)())complete
 {
-    [IPCCustomUI show];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     [IPCCustomerRequestManager queryCustomerListWithKeyword:searchKeyWord
                                                        Page:currentPage
@@ -138,7 +137,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
          if (complete) {
              complete();
          }
-         [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
          if (complete) {

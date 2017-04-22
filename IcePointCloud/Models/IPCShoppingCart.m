@@ -443,5 +443,44 @@
     return isExist;
 }
 
+- (void)clearAllItemPoint{
+    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isChoosePoint) {
+            obj.pointValue = 0;
+        }
+    }];
+}
+
+- (BOOL)judgeZeroPointValue{
+    __block BOOL isZero = NO;
+    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isChoosePoint) {
+            obj.pointValue = 0;
+            isZero = YES;
+        }
+    }];
+    return isZero;
+}
+
+
+- (double)totalUsedPoint{
+    __block double totoalPoint = 0;
+    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isChoosePoint) {
+            totoalPoint += obj.pointValue;
+        }
+    }];
+    return totoalPoint;
+}
+
+- (BOOL)isHaveUsedPoint{
+    __block BOOL isHave = NO;
+    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isChoosePoint) {
+            isHave = YES;
+        }
+    }];
+    return isHave;
+}
 
 @end

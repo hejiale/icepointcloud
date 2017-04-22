@@ -16,19 +16,19 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="460"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="459.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="459"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3b1-2g-wv4">
-                        <rect key="frame" x="83" y="18" width="933" height="433.5"/>
+                        <rect key="frame" x="63" y="18" width="933" height="433.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="3b1-2g-wv4" secondAttribute="bottom" id="G8g-yb-bRv"/>
                     <constraint firstItem="3b1-2g-wv4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="KRU-is-phM"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="3b1-2g-wv4" secondAttribute="trailing" id="Noq-rm-Mmm"/>
-                    <constraint firstItem="3b1-2g-wv4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="75" id="Txc-rj-XnS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="3b1-2g-wv4" secondAttribute="trailing" constant="20" id="Noq-rm-Mmm"/>
+                    <constraint firstItem="3b1-2g-wv4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="55" id="Txc-rj-XnS"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

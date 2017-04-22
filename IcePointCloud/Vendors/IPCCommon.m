@@ -9,6 +9,8 @@
 #import "IPCCommon.h"
 
 #define NUMBERS                  @"0123456789.-+\n"
+#define INTNUMBERS             @"0123456789"
+#define FLOATNUMBERS         @"0123456789."
 #define SecondFormatter      @"yyyy-MM-dd'T'HH:mm:ssZZZZZ"
 #define TimeFormatter          @"yyyy-MM-dd HH:mm:ss"
 #define DateFormatter           @"yyyy-MM-dd"
@@ -18,6 +20,18 @@
 
 + (BOOL)judgeIsNumber:(NSString *)text{
     NSCharacterSet * cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS] invertedSet];
+    NSString *filtered = [[text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [text isEqualToString:filtered];
+}
+
++ (BOOL)judgeIsIntNumber:(NSString *)text{
+    NSCharacterSet * cs = [[NSCharacterSet characterSetWithCharactersInString:INTNUMBERS] invertedSet];
+    NSString *filtered = [[text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [text isEqualToString:filtered];
+}
+
++ (BOOL)judgeIsFloatNumber:(NSString *)text{
+    NSCharacterSet * cs = [[NSCharacterSet characterSetWithCharactersInString:FLOATNUMBERS] invertedSet];
     NSString *filtered = [[text componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
     return [text isEqualToString:filtered];
 }

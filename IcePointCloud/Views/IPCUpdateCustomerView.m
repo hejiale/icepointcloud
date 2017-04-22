@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 - (void)updateCustomerRequest{
     // 判断是否修改了性别
     __block BOOL isUpdateGender = NO;
-    if ( ![self.currentDetailCustomer.genderString isEqualToString:[IPCCommon gender:self.genderTextField.text]]) {
+    if ( ![self.currentDetailCustomer.contactorGengerString isEqualToString:[IPCCommon gender:self.genderTextField.text]]) {
         isUpdateGender = YES;
     }
     [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.currentDetailCustomer.customerID

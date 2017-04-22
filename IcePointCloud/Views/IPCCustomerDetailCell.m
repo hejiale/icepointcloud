@@ -15,8 +15,6 @@
     // Initialization code
 }
 
-
-
 - (void)setCurrentCustomer:(IPCDetailCustomer *)currentCustomer
 {
     _currentCustomer = currentCustomer;
@@ -40,7 +38,7 @@
         [self.jobLabel setText:_currentCustomer.occupation];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
-        [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.f",_currentCustomer.consumptionAmount]];
+        [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.consumptionAmount]];
         [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.balance]];
         [self.bookDateLabel setText:_currentCustomer.createDate];
         [self.pointLabel setText:pointValue];

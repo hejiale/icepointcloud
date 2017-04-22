@@ -51,11 +51,16 @@
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
 
+    __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
-        [[IPCCurrentCustomerOpometry sharedManager] clearData];
-        [[IPCPayOrderMode sharedManager] resetData];
-        [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf resetPayInfoData];
     }];
+    
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens) {
+        [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
+        [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -64,15 +69,6 @@
     [self setNavigationBarStatus:NO];
     [self reloadCustomerInfo];
     [self.payOrderTableView reloadData];
-}
-
-- (void)setPayOrderType:(IPCPayOrderType)payOrderType{
-    _payOrderType = payOrderType;
-    
-    if (_payOrderType == IPCPayOrderTypeCustomsizedLens || _payOrderType == IPCPayOrderTypeCustomsizedContactLens) {
-        [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
-        [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
-    }
 }
 
 - (void)reloadCustomerInfo{
@@ -151,6 +147,10 @@
         [IPCCustomUI showError:@"请输入有效定金"];
         return;
     }
+    if ( [[IPCShoppingCart sharedCart] judgeZeroPointValue]) {
+        [IPCCustomUI showError:@"请输入有效商品兑换积分!"];
+        return;
+    }
     [self loadPayTypeView];
 }
 
@@ -169,27 +169,29 @@
     [[IPCShoppingCart sharedCart] removeSelectCartItem];
     [[IPCCurrentCustomerOpometry sharedManager] clearData];
     [[IPCPayOrderMode sharedManager] resetData];
+    [[IPCShoppingCart sharedCart] clearAllItemPoint];
+    [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
 }
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.normalSellCellMode numberOfSectionsInTableView:tableView PayType:self.payOrderType];
+    return [self.normalSellCellMode numberOfSectionsInTableView:tableView];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.normalSellCellMode tableView:tableView numberOfRowsInSection:section PayType:self.payOrderType];
+    return [self.normalSellCellMode tableView:tableView numberOfRowsInSection:section];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.normalSellCellMode tableView:tableView cellForRowAtIndexPath:indexPath PayType:self.payOrderType];
+    return [self.normalSellCellMode tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.normalSellCellMode tableView:tableView heightForRowAtIndexPath:indexPath PayType:self.payOrderType];
+    return [self.normalSellCellMode tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 

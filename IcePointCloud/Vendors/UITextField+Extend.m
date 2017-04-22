@@ -12,12 +12,14 @@
 
 - (void)setLeftImageView:(NSString *)imageName
 {
-    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.jk_height, self.jk_height)];
+    UIImage * leftImage = [UIImage imageNamed:imageName];
+    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, leftImage.size.width, self.jk_height)];
     [leftView setBackgroundColor:[UIColor clearColor]];
     
-    UIImageView * leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 15, 15)];
-    [leftImageView setImage:[UIImage imageNamed:imageName]];
+    UIImageView * leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)];
+    [leftImageView setImage:leftImage];
     [leftImageView setCenter:leftView.center];
+    leftImageView.contentMode = UIViewContentModeScaleAspectFit;
     [leftView addSubview:leftImageView];
     
     [self setLeftView:leftView];

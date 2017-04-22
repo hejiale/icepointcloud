@@ -34,5 +34,11 @@
 @property (nonatomic, copy, readonly) NSString *  supplierName;
 @property (nonatomic, copy, readonly) NSString *  name;
 @property (nonatomic, assign, readonly) double    bizPriceOrigin;
+@property (nonatomic, copy, readonly) NSString *   packingSpec;//规格
+@property (nonatomic, copy, readonly) NSString *   waterContent;//含水量
+@property (nonatomic, copy, readonly) NSString *   lensPeriod;//周期
+@property (nonatomic, copy, readonly) NSString *   lensDistance;//周期
+@property (nonatomic, copy, readonly) NSString *   lensThickness;//厚度
+@property (nonatomic, copy, readonly) NSString *   baseCurve;
 
 @end

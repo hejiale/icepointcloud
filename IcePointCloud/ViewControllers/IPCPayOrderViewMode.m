@@ -7,7 +7,6 @@
 //
 
 #import "IPCPayOrderViewMode.h"
-
 #import "IPCCustomerTopTitleCell.h"
 #import "IPCCustomerDetailCell.h"
 #import "IPCPayOrderProductCell.h"
@@ -18,23 +17,34 @@
 #import "IPCCustomsizedProductCell.h"
 #import "IPCCustomsizedRightParameterCell.h"
 #import "IPCCustomsizedLeftParameterCell.h"
+#import "IPCPayOrderViewCellMode.h"
 
 static NSString * const payOrderCartItemIdentifier = @"payOrderProductCellIdentifier";
-static NSString * const customerIdentifier    = @"IPCCustomerDetailCellIdentifier";
-static NSString * const opometryIdentifier = @"HistoryOptometryCellIdentifier";
-static NSString * const addressIdentifier    = @"CustomerAddressListCellIdentifier";
-static NSString * const titleIdentifier          = @"IPCOrderTopTableViewCellIdentifier";
-static NSString * const employeeIdentifier = @"IPCPayOrderEmployeeCellIdentifier";
-static NSString * const settlementIdentifier = @"IPCPayOrderSettlementCellIdentifier";
-static NSString * const customsizedProIdentifier = @"IPCCustomsizedProductCellIdentifier";
-static NSString * const rightEyeIdentifier = @"IPCCustomsizedRightParameterCellIdentifier";
-static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIdentifier";
+static NSString * const customerIdentifier              = @"IPCCustomerDetailCellIdentifier";
+static NSString * const opometryIdentifier              = @"HistoryOptometryCellIdentifier";
+static NSString * const addressIdentifier                = @"CustomerAddressListCellIdentifier";
+static NSString * const titleIdentifier                      = @"IPCOrderTopTableViewCellIdentifier";
+static NSString * const employeeIdentifier             = @"IPCPayOrderEmployeeCellIdentifier";
+static NSString * const settlementIdentifier           = @"IPCPayOrderSettlementCellIdentifier";
+static NSString * const customsizedProIdentifier   = @"IPCCustomsizedProductCellIdentifier";
+static NSString * const rightEyeIdentifier               = @"IPCCustomsizedRightParameterCellIdentifier";
+static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLeftParameterCellIdentifier";
 
 @interface IPCPayOrderViewMode()<IPCPayOrderSubViewDelegate>
+
+@property (nonatomic, strong) IPCPayOrderViewCellMode * cellMode;
 
 @end
 
 @implementation IPCPayOrderViewMode
+
+- (instancetype)init{
+    self = [super init];
+    if (self) {
+        self.cellMode = [[IPCPayOrderViewCellMode alloc] init];
+    }
+    return self;
+}
 
 #pragma mark //Request Data
 - (void)requestOrderPointPrice:(double)point
@@ -87,7 +97,7 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
 }
 
 #pragma mark //DO Datasource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView PayType:(IPCPayOrderType)payType{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
         return 6;
     }
@@ -95,9 +105,9 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
 }
 
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section PayType:(IPCPayOrderType)payType{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1)){
-        if (payType == IPCPayOrderTypeCustomsizedLens || payType == IPCPayOrderTypeCustomsizedContactLens){
+        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
             if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
                 return 3;
             }
@@ -113,7 +123,7 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath PayType:(IPCPayOrderType)payType{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
@@ -199,7 +209,7 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
             [cell setTopTitle:@"购买列表"];
             return cell;
         }else{
-            if (payType == IPCPayOrderTypeCustomsizedContactLens || payType == IPCPayOrderTypeCustomsizedLens) {
+            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
                 if (indexPath.row == 1) {
                     IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
                     if (!cell) {
@@ -221,6 +231,9 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
                     if (!cell) {
                         cell = [[UINib nibWithNibName:@"IPCCustomsizedLeftParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
                     }
+                    [cell reloadUI:^{
+                        [tableView reloadData];
+                    }];
                     return cell;
                 }
             }else{
@@ -242,13 +255,12 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
             cell = [[UINib nibWithNibName:@"IPCPayOrderSettlementCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             cell.delegate = self;
         }
-        [cell updateUI];
         return cell;
     }
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath PayType:(IPCPayOrderType)payType
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
         if (indexPath.section == 0 && indexPath.row > 0){
@@ -257,42 +269,16 @@ static NSString * const leftEyeIdentifier = @"IPCCustomsizedLeftParameterCellIde
             return 70;
         }else if (indexPath.section == 2 && indexPath.row > 0 ){
             return 160;
-        }else if (indexPath.section == 3 && indexPath.row > 0) {
-            return 130;
-        }else if (indexPath.section == 4 && indexPath.row > 0){
-            if (payType == IPCPayOrderTypeCustomsizedLens || payType == IPCPayOrderTypeCustomsizedContactLens){
-                if (indexPath.row == 1) {
-                    return 120;
-                }else if (indexPath.row == 2){
-                    return 480;
-                }
-                return 450;
-            }
-            return 135;
-        }else if (indexPath.section == 5){
-            return 235;
         }
-        return 50;
     }
-    if (indexPath.section == 0 && indexPath.row > 0 ){
+    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 3 && indexPath.row > 0))
+    {
         return 130;
-    }else if (indexPath.section == 1 && indexPath.row > 0) {
-        if (payType == IPCPayOrderTypeCustomsizedLens || payType == IPCPayOrderTypeCustomsizedContactLens){
-            if (indexPath.row == 1) {
-                return 120;
-            }else if (indexPath.row == 2){
-                if ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count > 1) {
-                    return 480 + ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count - 1) * 30;
-                }
-                return 480;
-            }
-            if ([IPCCustomsizedItem sharedItem].leftEye.otherArray.count > 1) {
-                return 450 + ([IPCCustomsizedItem sharedItem].leftEye.otherArray.count - 1) * 30;
-            }
-            return 450;
-        }
-        return 135;
-    }else if (indexPath.section == 2) {
+    }else if ((indexPath.section == 1 && indexPath.row > 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))
+    {
+        return [self.cellMode buyProductCellHeight:indexPath];
+    }else if ((indexPath.section == 2 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 5))
+    {
         return 235;
     }
     return 50;

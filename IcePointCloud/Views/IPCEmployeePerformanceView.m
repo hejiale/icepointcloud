@@ -35,15 +35,18 @@
     [self addBorder:3 Width:0.5];
     [self.amountTextField addBorder:3 Width:0.5];
     [self.amountTextField setLeftSpace:5];
-    
-    UIImage *progressImage = [UIImage imageNamed:@"icon_progress"];
-    UIImage *trackImage = [UIImage imageNamed:@"icon_progress_track"];
-    UIEdgeInsets insets = UIEdgeInsetsMake(10, 20, 10, 20);
-    progressImage = [progressImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
-    trackImage = [trackImage resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
-    self.progressView.trackImage = trackImage;
-    self.progressView.progressImage = progressImage;
+    [self.progressView addSubview:_progress];
 }
+
+
+- (CustomProgress *)progress{
+    if (!_progress) {
+        _progress = [[CustomProgress alloc] initWithFrame:self.progressView.bounds];
+        [_progress setMaxValue:100];
+    }
+    return _progress;
+}
+
 
 - (void)setEmployeeResult:(IPCEmployeeResult *)employeeResult{
     _employeeResult = employeeResult;
@@ -51,7 +54,7 @@
     if (_employeeResult) {
         [self.customerNameLabel setText:_employeeResult.employe.name];
         [self.amountButton setTitle:[NSString stringWithFormat:@"%.f%%",_employeeResult.employeeResult] forState:UIControlStateNormal];
-        [self.progressView setProgress:_employeeResult.employeeResult/100];
+        [self.progress setPresent:_employeeResult.employeeResult];
     }
 }
 
@@ -68,15 +71,21 @@
 }
 
 #pragma mark //UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (![IPCCommon judgeIsIntNumber:string]) {
+        return NO;
+    }
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;
 }
 
-
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    double result = [[IPCPayOrderMode sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
+    double  result = [[IPCPayOrderMode sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
     
     if (result > 0) {
         self.employeeResult.employeeResult = result;

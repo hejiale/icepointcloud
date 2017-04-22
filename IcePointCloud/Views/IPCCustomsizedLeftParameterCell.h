@@ -14,4 +14,6 @@
 @property (nonatomic, strong) IPCCustomsizedParameterView * parameterView;
 @property (weak, nonatomic) IBOutlet UIView *parameterContentView;
 
+- (void)reloadUI:(void(^)())update;
+
 @end

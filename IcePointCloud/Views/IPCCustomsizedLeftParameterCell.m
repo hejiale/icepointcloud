@@ -8,6 +8,13 @@
 
 #import "IPCCustomsizedLeftParameterCell.h"
 
+@interface IPCCustomsizedLeftParameterCell()<IPCCustomsizedEyeDelegate>
+
+@property (copy, nonatomic) void(^UpdateBlock)(void);
+
+@end
+
+
 @implementation IPCCustomsizedLeftParameterCell
 
 - (void)awakeFromNib {
@@ -20,13 +27,26 @@
 
 - (IPCCustomsizedParameterView *)parameterView{
     if (!_parameterView) {
-        _parameterView = [[IPCCustomsizedParameterView alloc] initWithFrame:CGRectMake(0, 0, self.parameterContentView.jk_width, 400)];
-        [_parameterView.distanceTextField setLeftText:@"双眼瞳距/PD(L)"];
+        _parameterView = [[IPCCustomsizedParameterView alloc] initWithFrame:CGRectMake(0, 0, self.parameterContentView.jk_width, 375) Direction:NO];
+        [_parameterView setDelegate:self];
     }
     return _parameterView;
 }
 
 
+#pragma mark //Clicked Events
+- (void)reloadUI:(void (^)())update
+{
+    self.UpdateBlock = update;
+    [self.parameterView reloadOtherParameterView];
+}
+
+#pragma mark //IPCCustomsizedEyeDelegate
+- (void)reloadParameterInfoView{
+    if (self.UpdateBlock) {
+        self.UpdateBlock();
+    }
+}
 
 
 

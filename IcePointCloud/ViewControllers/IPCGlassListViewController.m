@@ -335,7 +335,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.glassListViewMode.glassesList count] > 0) {
         __block NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
         IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-        payOrderVC.payOrderType = IPCPayOrderTypeVlaueCard;
+        [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeVlaueCard;
         [self.navigationController pushViewController:payOrderVC animated:YES];
     }
 }
@@ -345,9 +345,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         __block NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
         IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
         if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
-            payOrderVC.payOrderType = IPCPayOrderTypeCustomsizedContactLens;
+            [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeCustomsizedContactLens;
         }else if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens){
-            payOrderVC.payOrderType = IPCPayOrderTypeCustomsizedLens;
+            [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeCustomsizedLens;
         }
         [self.navigationController pushViewController:payOrderVC animated:YES];
     }

@@ -16,11 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="419"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="418.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="418"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nqj-n3-bXQ">
-                        <rect key="frame" x="83" y="68" width="933" height="342.5"/>
+                        <rect key="frame" x="63" y="68" width="933" height="342.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="定制类型" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e4j-ma-LHD">
@@ -71,12 +71,12 @@
                     <constraint firstItem="Iqa-2D-HeI" firstAttribute="leading" secondItem="oOk-vl-upn" secondAttribute="trailing" constant="50" id="2Ss-Bv-FZC"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Nqj-n3-bXQ" secondAttribute="bottom" id="FHE-DE-uNZ"/>
                     <constraint firstItem="oOk-vl-upn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="QSR-KY-C6T"/>
-                    <constraint firstItem="Nqj-n3-bXQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="75" id="RbZ-0s-LzS"/>
+                    <constraint firstItem="Nqj-n3-bXQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="55" id="RbZ-0s-LzS"/>
                     <constraint firstItem="e4j-ma-LHD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="fQD-mp-MqH"/>
                     <constraint firstItem="Nqj-n3-bXQ" firstAttribute="top" secondItem="Iqa-2D-HeI" secondAttribute="bottom" constant="20" id="ggM-It-hk0"/>
                     <constraint firstItem="e4j-ma-LHD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="hVx-WG-XRO"/>
                     <constraint firstItem="Iqa-2D-HeI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="15" id="qHB-HM-Iej"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Nqj-n3-bXQ" secondAttribute="trailing" id="uai-Jh-hQg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Nqj-n3-bXQ" secondAttribute="trailing" constant="20" id="uai-Jh-hQg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

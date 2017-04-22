@@ -7,71 +7,113 @@
 //
 
 #import "IPCCustomsizedParameterView.h"
-#import "IPCCustomsizedOtherView.h"
+
+@interface IPCCustomsizedParameterView()
+
+@end
 
 @implementation IPCCustomsizedParameterView
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame Direction:(BOOL)isRight
+{
     self = [super initWithFrame:frame];
     if (self) {
-        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCCustomsizedParameterView" owner:self];
-        [view setFrame:frame];
-        [self addSubview:view];
+        self.isRight = isRight;
+        __weak typeof(self) weakSelf = self;
+        
+        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens) {
+            [self addSubview:self.contactLensView];
+        
+            [[self.contactLensView rac_signalForSelector:@selector(addOtherAction:)] subscribeNext:^(id x) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf addOtherParameter];
+            }];
+        }else if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens){
+            [self addSubview:self.lensView];
+        
+            [[self.lensView rac_signalForSelector:@selector(addOtherAction:)] subscribeNext:^(id x) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf addOtherParameter];
+            }];
+        }
     }
     return self;
 }
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UITextField class]]) {
-            UITextField * textField = (UITextField *)obj;
-            [textField addBorder:3 Width:0.5];
-        }
-    }];
-    
-    [self.addLayerTextField setLeftSpace:10];
-    [self.dyeingTextField setLeftSpace:10];
-    [self.remarkTextField setLeftSpace:10];
-    
-    [self.sphTextField setRightButton:self Action:@selector(onGetSphAction) OnView:self.mainView];
-    [self.cylTextField setRightButton:self Action:@selector(onGetSphAction) OnView:self.mainView];
-    [self.sphTextField setLeftText:@"球镜/SPH"];
-    [self.cylTextField setLeftText:@"柱镜/CYL"];
-    [self.axisTextField setLeftText:@" 轴位/AXIS"];
-}
 
-#pragma mark //Clicked Events
-- (IBAction)addOtherAction:(id)sender {
-    
-}
-
-- (void)reloadOtherParameterView{
-    if ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count > 0)
-    {
-        [self.otherContentView setHidden:NO];
-        
-        if ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count > 1) {
-            self.otherContentHeight.constant += ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count - 1) * 30;
-        }
-        __weak typeof(self) weakSelf = self;
-        
-        [[IPCCustomsizedItem sharedItem].rightEye.otherArray enumerateObjectsUsingBlock:^(IPCCustomsizedOther * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            IPCCustomsizedOtherView * otherView = [[IPCCustomsizedOtherView alloc]initWithFrame:CGRectMake(0, idx *30, strongSelf.otherContentView.jk_width, 30)];
-            [strongSelf.otherContentView addSubview:otherView];
-        }];
+#pragma mark //Add Other Parameter
+- (void)addOtherParameter{
+    IPCCustomsizedOther * other = [[IPCCustomsizedOther alloc]init];
+    if (self.isRight) {
+        [[IPCCustomsizedItem sharedItem].rightEye.otherArray addObject:other];
     }else{
-        [self.otherContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        self.otherContentHeight.constant = 30;
+        [[IPCCustomsizedItem sharedItem].leftEye.otherArray addObject:other];
+    }
+    
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadParameterInfoView)]) {
+            [self.delegate reloadParameterInfoView];
+        }
     }
 }
 
-#pragma mark //UITextField Delegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField endEditing:YES];
-    return YES;
+#pragma mark //Set UI
+- (IPCCustomsizedLensView *)lensView{
+    if (!_lensView) {
+        __weak typeof(self) weakSelf = self;
+        _lensView = [[IPCCustomsizedLensView alloc]initWithFrame:self.bounds Update:^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf.delegate) {
+                if ([strongSelf.delegate respondsToSelector:@selector(reloadParameterInfoView)]) {
+                    [strongSelf.delegate reloadParameterInfoView];
+                }
+            }
+        }];
+        _lensView.isRight = self.isRight;
+    }
+    return _lensView;
 }
+
+- (IPCCustomsizedContactLensView *)contactLensView{
+    if (!_contactLensView) {
+        __weak typeof(self) weakSelf = self;
+        _contactLensView = [[IPCCustomsizedContactLensView alloc]initWithFrame:self.bounds Update:^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf.delegate) {
+                if ([strongSelf.delegate respondsToSelector:@selector(reloadParameterInfoView)]) {
+                    [strongSelf.delegate reloadParameterInfoView];
+                }
+            }
+        }];
+        _contactLensView.isRight = self.isRight;
+    }
+    return _contactLensView;
+}
+
+- (void)reloadOtherParameterView{
+    NSArray * otherArray = nil;
+    if (self.isRight) {
+        otherArray = [IPCCustomsizedItem sharedItem].rightEye.otherArray;
+    }
+    else{
+        otherArray = [IPCCustomsizedItem sharedItem].leftEye.otherArray;
+    }
+    
+    if (otherArray.count)
+    {
+        if (otherArray.count > 1) {
+            CGRect frame = self.frame;
+            frame.size.height += (otherArray.count - 1) * 50;
+            self.frame = frame;
+        }
+    }
+    
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
+        [self.lensView reloadUI];
+    }else if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+        [self.contactLensView reloadUI];
+    }
+}
+
 
 @end

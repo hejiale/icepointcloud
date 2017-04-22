@@ -14,10 +14,10 @@
 
 @property (nonatomic, assign, readwrite) id<IPCPayOrderViewCellDelegate>delegate;
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView PayType:(IPCPayOrderType)payType;
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section PayType:(IPCPayOrderType)payType;
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath  PayType:(IPCPayOrderType)payType;
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  PayType:(IPCPayOrderType)payType;
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 
 /**
  *  Submit a new order

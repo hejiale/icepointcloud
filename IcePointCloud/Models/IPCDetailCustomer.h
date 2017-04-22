@@ -28,15 +28,15 @@
 @property (nonatomic, copy, readwrite) NSString * memberLevel;
 @property (nonatomic, copy, readwrite) NSString * memberLevelId;
 @property (nonatomic, copy, readwrite) NSString * membergrowth;
-@property (nonatomic, copy, readwrite) NSString * consumptionAmount;
-@property (nonatomic, assign, readwrite) double      balance;
+@property (nonatomic, assign, readwrite) double   consumptionAmount;
+@property (nonatomic, assign, readwrite) double   balance;
 @property (nonatomic, copy, readwrite) NSString * createDate;
 @property (nonatomic, copy, readwrite) NSString * customerType;
 @property (nonatomic, copy, readwrite) NSString * customerTypeId;
 @property (nonatomic, copy, readwrite) NSString * employeeId;
 @property (nonatomic, copy, readwrite) NSString * empName;
 @property (nonatomic, copy, readwrite) NSString * memberId;
-@property (nonatomic, assign, readwrite) double      integral;
+@property (nonatomic, assign, readwrite) double   integral;
 @property (nonatomic, copy, readwrite) NSString * occupation;
 
 @end

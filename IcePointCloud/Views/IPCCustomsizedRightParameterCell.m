@@ -8,7 +8,7 @@
 
 #import "IPCCustomsizedRightParameterCell.h"
 
-@interface IPCCustomsizedRightParameterCell()
+@interface IPCCustomsizedRightParameterCell()<IPCCustomsizedEyeDelegate>
 
 @property (copy, nonatomic) void(^UpdateBlock)(void);
 
@@ -21,20 +21,13 @@
     // Initialization code
     
     [self.parameterContentView addSubview:self.parameterView];
-    [[self.parameterView rac_signalForSelector:@selector(addOtherAction:)] subscribeNext:^(id x) {
-        IPCCustomsizedOther * other = [[IPCCustomsizedOther alloc]init];
-        [[IPCCustomsizedItem sharedItem].rightEye.otherArray addObject:other];
-        if (self.UpdateBlock) {
-            self.UpdateBlock();
-        }
-    }];
 }
 
 
 - (IPCCustomsizedParameterView *)parameterView{
     if (!_parameterView) {
-        _parameterView = [[IPCCustomsizedParameterView alloc] initWithFrame:CGRectMake(0, 0, self.parameterContentView.jk_width, 400)];
-        [_parameterView.distanceTextField setLeftText:@"双眼瞳距/PD(R)"];
+        _parameterView = [[IPCCustomsizedParameterView alloc] initWithFrame:CGRectMake(0, 0, 930, 375) Direction:YES];
+        [_parameterView setDelegate:self];
     }
     return _parameterView;
 }
@@ -65,6 +58,13 @@
 
 - (IBAction)leftOrRightEyeAction:(id)sender {
     [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeLeftOrRightEye;
+    if (self.UpdateBlock) {
+        self.UpdateBlock();
+    }
+}
+
+#pragma mark //IPCCustomsizedEyeDelegate
+- (void)reloadParameterInfoView{
     if (self.UpdateBlock) {
         self.UpdateBlock();
     }

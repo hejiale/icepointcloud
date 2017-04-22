@@ -19,6 +19,10 @@
  */
 + (BOOL)judgeIsNumber:(NSString *)text;
 
++ (BOOL)judgeIsIntNumber:(NSString *)text;
+
++ (BOOL)judgeIsFloatNumber:(NSString *)text;
+
 
 /**
  The date format conversion
