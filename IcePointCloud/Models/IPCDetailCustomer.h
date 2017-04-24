@@ -36,7 +36,7 @@
 @property (nonatomic, copy, readwrite) NSString * employeeId;
 @property (nonatomic, copy, readwrite) NSString * empName;
 @property (nonatomic, copy, readwrite) NSString * memberId;
-@property (nonatomic, assign, readwrite) double   integral;
+@property (nonatomic, assign, readwrite) NSInteger   integral;
 @property (nonatomic, copy, readwrite) NSString * occupation;
 
 @end

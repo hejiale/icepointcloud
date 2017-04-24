@@ -27,6 +27,7 @@
                             StartPrice:(double)startPrice
                               EndPrice:(double)endPrice
                                  IsHot:(BOOL)isHot
+                             IsTrying:(BOOL)isTrying
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -39,7 +40,8 @@
                              @"searchSupplier": @"true",
                              @"proAvailable":@"true",
                              @"startPrice":@(startPrice),
-                             @"endPrice":endPrice > 0 ? @(endPrice) : @""};
+                             @"endPrice":endPrice > 0 ? @(endPrice) : @"",
+                             @"isTryProduct": isTrying ? @"true":@"false"};
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 

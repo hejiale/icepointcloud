@@ -78,7 +78,7 @@ typedef  void(^DismissBlock)();
                                              CorrectedVisionRight:self.optometryView.insertOptometry.correctedVisionRight
                                                      DistanceLeft:self.optometryView.insertOptometry.distanceLeft
                                                     DistanceRight:self.optometryView.insertOptometry.distanceRight
-                                                          Purpose:self.optometryView.insertOptometry.purpose
+                                                          Purpose:[IPCCommon purpose:self.optometryView.insertOptometry.purpose]
                                                        EmployeeId:self.optometryView.insertOptometry.employeeId
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
                                                      SuccessBlock:^(id responseValue) {

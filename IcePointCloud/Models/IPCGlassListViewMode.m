@@ -18,7 +18,7 @@
     self = [super init];
     if (self) {
         self.searchWord =  @"";
-        self.currentPage =  1;
+        self.currentPage =  0;
         self.currentType =  IPCTopFIlterTypeFrames;
         self.filterValue    =  [[IPCFilterTypeMode alloc]init];
     }
@@ -39,9 +39,11 @@
     return _customsizedList;
 }
 
-- (void)reloadGlassListDataWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
+- (void)reloadGlassListDataWithIsTry:(BOOL)isTry
+                               IsHot:(BOOL)isHot
+                            Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
 {
-    if (self.currentPage == 1){
+    if (self.currentPage == 0){
         [self.glassesList removeAllObjects];
         [self.customsizedList removeAllObjects];
     }
@@ -51,7 +53,9 @@
                            ClassType:[[IPCAppManager sharedManager]classType:self.currentType]
                           SearchType:[self.filterValue getStoreFilterSource]
                           StartPrice:self.filterValue.currentStartPirce
-                            EndPrice:self.filterValue.currentEndPrice];
+                            EndPrice:self.filterValue.currentEndPrice
+                            IsTrying:isTry
+                               IsHot:isHot];
 }
 
 - (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
@@ -87,6 +91,9 @@
                         SearchType:(NSString *)searchType
                         StartPrice:(double)startPrice
                           EndPrice:(double)endPrice
+                          IsTrying:(BOOL)isTrying
+                             IsHot:(BOOL)isHot
+
 {
     __weak typeof (self) weakSelf = self;
     [IPCGoodsRequestManager queryFilterGlassesListWithPage:page
@@ -95,7 +102,8 @@
                                                 SearchType:searchType
                                                 StartPrice:startPrice
                                                   EndPrice:endPrice
-                                                     IsHot:self.isTrying
+                                                     IsHot:isHot
+                                                  IsTrying:isTrying
                                               SuccessBlock:^(id responseValue){
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
                                                   [strongSelf parseNormalGlassesData:responseValue];
@@ -116,7 +124,7 @@
                                       SuccessBlock:^(id responseValue){
                                           __strong typeof (weakSelf) strongSelf = weakSelf;
                                           strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
-                                          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:strongSelf.isTrying];
+                                          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying];
                                           if (strongSelf.filterView)
                                               [strongSelf.filterView reloadFilterView];
                                           
@@ -165,15 +173,7 @@
     
     if (result) {
         if (result.glassesList.count){
-            if (self.isTrying) {
-                [result.glassesList enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (obj.isTryOn) {
-                        [self.glassesList addObject:obj];
-                    }
-                }];
-            }else{
-                [self.glassesList addObjectsFromArray:result.glassesList];
-            }
+            [self.glassesList addObjectsFromArray:result.glassesList];
             
             if (self.completeBlock) {
                 self.completeBlock(IPCFooterRefresh_HasMoreData,nil);

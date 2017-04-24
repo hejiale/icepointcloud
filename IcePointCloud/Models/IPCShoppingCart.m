@@ -124,8 +124,8 @@
 
 
 - (NSArray<IPCShoppingCartItem *>*)selectCartItems{
-    return [[self cartItems] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
-        return [evaluatedObject selected];
+    return [[self itemList] filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+        return [evaluatedObject selected] && [[evaluatedObject glasses] filterType] != IPCTopFilterTypeCard;
     }]];
 }
 
@@ -133,6 +133,13 @@
     return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return [[evaluatedObject glasses] filterType] == IPCTopFilterTypeCard;
     }]];
+}
+
+- (NSArray<IPCShoppingCartItem *> *)selectPayCartItems{
+    if ([self isExistValueCard]) {
+        return [self selectValueCardCartItems];
+    }
+    return [self selectCartItems];
 }
 
 
@@ -444,16 +451,15 @@
 }
 
 - (void)clearAllItemPoint{
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.isChoosePoint) {
-            obj.pointValue = 0;
-        }
+    [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.isChoosePoint = NO;
+        obj.pointValue = 0;
     }];
 }
 
 - (BOOL)judgeZeroPointValue{
     __block BOOL isZero = NO;
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
             obj.pointValue = 0;
             isZero = YES;
@@ -463,11 +469,11 @@
 }
 
 
-- (double)totalUsedPoint{
-    __block double totoalPoint = 0;
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+- (NSInteger)totalUsedPoint{
+    __block NSInteger   totoalPoint = 0;
+    [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
-            totoalPoint += obj.pointValue;
+            totoalPoint += obj.pointValue * obj.count;
         }
     }];
     return totoalPoint;
@@ -475,12 +481,15 @@
 
 - (BOOL)isHaveUsedPoint{
     __block BOOL isHave = NO;
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
             isHave = YES;
         }
     }];
     return isHave;
 }
+
+
+
 
 @end

@@ -54,6 +54,7 @@
     [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount];
     NSString * payStyleText = [NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount];
     [self.paysStyleAmountLabel setAttributedText:[IPCCustomUI subStringWithText:payStyleText BeginRang:2 Rang:payStyleText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+    [self reloadUI];
 }
 
 

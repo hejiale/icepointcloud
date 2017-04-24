@@ -35,14 +35,15 @@
     [self addBorder:3 Width:0.5];
     [self.amountTextField addBorder:3 Width:0.5];
     [self.amountTextField setLeftSpace:5];
-    [self.progressView addSubview:_progress];
+    [self.progressBarView addSubview:self.progress];
 }
 
 
-- (CustomProgress *)progress{
+- (ZYProGressView *)progress{
     if (!_progress) {
-        _progress = [[CustomProgress alloc] initWithFrame:self.progressView.bounds];
-        [_progress setMaxValue:100];
+        _progress = [[ZYProGressView alloc] initWithFrame:CGRectMake(0, 0, self.progressBarView.jk_width, self.progressBarView.jk_height)];
+        _progress.progressColor = COLOR_RGB_BLUE;
+        _progress.bottomColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     }
     return _progress;
 }
@@ -54,7 +55,7 @@
     if (_employeeResult) {
         [self.customerNameLabel setText:_employeeResult.employe.name];
         [self.amountButton setTitle:[NSString stringWithFormat:@"%.f%%",_employeeResult.employeeResult] forState:UIControlStateNormal];
-        [self.progress setPresent:_employeeResult.employeeResult];
+        [self.progress setProgressValue:[NSString stringWithFormat:@"%.2f",_employeeResult.employeeResult/100]];
     }
 }
 

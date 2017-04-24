@@ -87,11 +87,16 @@
     [parameters setObject:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false" : @"true") forKey:@"isAdvancePayment"];
     [parameters setObject:@([[IPCPayOrderMode sharedManager] waitPayAmount]) forKey:@"payAmount"];
     [parameters setObject:[IPCPayOrderMode sharedManager].payStyleName forKey:@"payType"];
-    [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
+    if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {//积分兑换置为0
+        [parameters setObject:@(0) forKey:@"integral"];
+    }else{
+        [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
+    }
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].givingAmount] forKey:@"donationAmount"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].usedBalanceAmount) forKey:@"usebalanceAmount"];
     [parameters setObject:@([IPCPayOrderMode sharedManager].payTypeAmount) forKey:@"payTypeAmount"];
     [parameters setObject:otherTypeList forKey:@"payTypeDetails"];
+    [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
 
     return parameters;
 }

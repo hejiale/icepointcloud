@@ -38,6 +38,7 @@
     [self.payTypeNameTextField setRightSpace:10];
     [self.selectStyleButton setSelected:YES];
     [self.payAmountTextField setLeftText:@"￥"];
+    [self updateUI];
 }
 
 - (void)updateUI

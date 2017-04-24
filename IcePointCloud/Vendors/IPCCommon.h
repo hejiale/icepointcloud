@@ -32,6 +32,10 @@
 
 + (NSString *)formatDate:(NSDate *)date IsTime:(BOOL)isTime;
 
++ (NSString *)formatPurpose:(NSString *)purpose;
+
++ (NSString *)purpose:(NSString *)text;
+
 
 /**
  The optometry customer gender transformation

@@ -19,11 +19,15 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *inputCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *countNumView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *countNumHeight;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
 @property (weak, nonatomic) IBOutlet UIView *batchNumView;
 @property (weak, nonatomic) IBOutlet UILabel *degreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kindNumLabel;
 @property (weak, nonatomic) IBOutlet UIButton *noPointButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointButtonWith;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputPriceViewRight;
+
 
 
 @end
@@ -60,20 +64,39 @@
         if ([_cartItem.glasses filterType] != IPCTopFilterTypeCard) {
             [self.glassesImgView addBorder:3 Width:0.5];
         }
+
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard) {
             [self.countNumView setHidden:NO];
-        }else{
-            [self.inputPirceView setHidden:NO];
-            if ([IPCPayOrderMode sharedManager].point > 0) {
-                [self.noPointButton setHidden:NO];
+            if (![IPCPayOrderMode sharedManager].isTrade && _cartItem.isChoosePoint) {
+                [self.inputPirceView setHidden:NO];
             }else{
-                [self.noPointButton setHidden:YES];
+                [self.inputPirceView setHidden:YES];
+            }
+        }else{
+            [self.countLabel setHidden:NO];
+            [self.inputPirceView setHidden:NO];
+        }
+        
+        if ([IPCPayOrderMode sharedManager].isTrade) {
+            [self.noPointButton setHidden:YES];
+            self.pointButtonWith.constant = 0;
+            self.inputPriceViewRight.constant = 0;
+            [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
+            [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
+        }else{
+            [self.noPointButton setHidden:NO];
+            self.pointButtonWith.constant = 130;
+            self.inputPriceViewRight.constant = 20;
+            if ([_cartItem.glasses filterType] != IPCTopFilterTypeCard) {
+                [self.inputPirceView setHidden:NO];
             }
             
-            if (_cartItem.isChoosePoint && [IPCPayOrderMode sharedManager].point > 0) {
+            if (_cartItem.isChoosePoint) {
+                [self.noPointButton setSelected:YES];
                 [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
-                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.pointValue]];
+                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%d", _cartItem.pointValue]];
             }else{
+                [self.noPointButton setSelected:NO];
                 [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
                 [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
             }
@@ -123,6 +146,7 @@
     if (self.cartItem.count <= 1) {
         self.cartItem.count = 1;
     }
+    self.cartItem.pointValue = 0;
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
             [self.delegate reloadUI];
@@ -132,6 +156,11 @@
 
 - (IBAction)plusCartNumAction:(id)sender {
     self.cartItem.count++;
+    self.cartItem.pointValue = 0;
+    [IPCPayOrderMode sharedManager].pointPrice = 0;
+    [IPCPayOrderMode sharedManager].usedPoint = 0;
+    [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].realTotalPrice;
+    
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
             [self.delegate reloadUI];
@@ -140,19 +169,25 @@
 }
 
 - (IBAction)noPointAction:(UIButton *)sender {
+    if ( ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
+        [IPCCustomUI showError:@"请先选择客户"];
+        return;
+    }
     [sender setSelected:!sender.selected];
     self.cartItem.isChoosePoint = sender.selected;
     
     if (sender.selected) {
-        [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
         self.cartItem.unitPrice = 0;
     }else{
-        [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
-        [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue;
+        [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.count;
         self.cartItem.pointValue = 0;
-        
+        [self getPointPrice];
     }
-    [self getPointPrice];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
+            [self.delegate reloadUI];
+        }
+    }
 }
 
 
@@ -174,12 +209,21 @@
     
     if (str.length) {
         if (self.cartItem.isChoosePoint) {
-            if (self.cartItem.glasses.price < [str doubleValue] || [IPCPayOrderMode sharedManager].point < [str doubleValue]) {
-                self.cartItem.pointValue = MIN([IPCPayOrderMode sharedManager].point, self.cartItem.glasses.price);
-            }else{
-                self.cartItem.pointValue = [str doubleValue];
+            NSInteger usedPoint = [IPCPayOrderMode sharedManager].usedPoint;
+            usedPoint -= self.cartItem.pointValue;
+            NSInteger minum = [IPCPayOrderMode sharedManager].point - usedPoint;
+            
+            if (minum > 0) {
+                if (minum < [str doubleValue] * self.cartItem.count && [str doubleValue] < self.cartItem.glasses.price)
+                {
+                    self.cartItem.pointValue = minum/self.cartItem.count;
+                }else if ([str doubleValue] > self.cartItem.glasses.price){
+                    self.cartItem.pointValue = self.cartItem.glasses.price;
+                }else{
+                    self.cartItem.pointValue = [str integerValue];
+                }
+                [self getPointPrice];
             }
-            [self getPointPrice];
         }else{
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
                 [IPCCustomUI showError:@"请先选择员工"];

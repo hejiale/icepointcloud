@@ -55,7 +55,6 @@ typedef void(^PayBlock)();
             count = 0;
             [strongSelf packDownOtherPayTypeView];
         }];
-        [self.payTypeTopView reloadUI];
         [self.mainView addSubview:self.payTypeTopView];
         
         [[self.payTypeTopView rac_signalForSelector:@selector(closeAction:)] subscribeNext:^(id x) {
@@ -143,11 +142,10 @@ typedef void(^PayBlock)();
                                                                                       //刷新价格
                                                                                       __strong typeof(weakSelf) strongSelf = weakSelf;
                                                                                       [[IPCPayOrderMode sharedManager] reloadWithOtherTypeAmount];
-                                                                                      [strongSelf.payTypeTopView reloadUI];
+//                                                                                      [strongSelf.payTypeTopView reloadUI];
                                                                                       [strongSelf createOtherPayTypeView];
                                                                                   }];
          otherTypeView.otherPayTypeResult = obj;
-         [otherTypeView updateUI];
          [self.otherPayStyleContentView addSubview:otherTypeView];
          //移除该选中其它支付方式
          [[otherTypeView rac_signalForSelector:@selector(onSelectPayTypeAction:)] subscribeNext:^(id x) {
@@ -155,7 +153,6 @@ typedef void(^PayBlock)();
              [[IPCPayOrderMode sharedManager].otherPayTypeArray removeObject:obj];
              [strongSelf.otherTypeViewArray removeObject:otherTypeView];
              [[IPCPayOrderMode sharedManager] reloadWithOtherTypeAmount];
-             [strongSelf.payTypeTopView reloadUI];
              [strongSelf packDownOtherPayTypeView];
          }];
          [self.otherTypeViewArray addObject:otherTypeView];

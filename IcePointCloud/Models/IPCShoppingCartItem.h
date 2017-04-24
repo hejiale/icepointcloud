@@ -23,7 +23,7 @@
 @property (nonatomic, assign, readwrite) double      unitPrice;//可修改单价
 @property (nonatomic, copy, readwrite)   NSString   *remarks;//note
 @property (nonatomic, assign, readwrite) BOOL        isChoosePoint;//是否选择积分
-@property (nonatomic, assign, readwrite) double      pointValue;//输入积分
+@property (nonatomic, assign, readwrite) NSInteger   pointValue;//输入积分
 
 /**
  *  Bulk data parameter

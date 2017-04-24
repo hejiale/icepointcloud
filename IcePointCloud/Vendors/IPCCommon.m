@@ -74,6 +74,28 @@
     return genderString;
 }
 
++ (NSString *)formatPurpose:(NSString *)purpose{
+    NSString * purposeString = @"";
+    
+    if ([purpose isEqualToString:@"FAR"]) {
+        purposeString = @"远用";
+    }else if ([purpose isEqualToString:@"NEAR"]){
+        purposeString = @"近用";
+    }
+    return purposeString;
+}
+
++ (NSString *)purpose:(NSString *)text{
+    NSString * purpose = @"";
+    
+    if ([text isEqualToString:@"远用"]) {
+        purpose = @"FAR";
+    }else if ([text isEqualToString:@"近用"]){
+        purpose = @"NEAR";
+    }
+    return purpose;
+}
+
 
 +(BOOL)checkTelNumber:(NSString*)telNumber
 {

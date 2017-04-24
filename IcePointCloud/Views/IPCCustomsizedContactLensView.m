@@ -43,6 +43,7 @@
             [textField addBorder:3 Width:0.5];
         }
     }];
+    [self reloadUI];
 }
 
 - (void)reloadUI

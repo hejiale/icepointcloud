@@ -113,6 +113,7 @@
                                                           Dismiss:^{
                                                               __strong typeof(weakSelf) strongSelf = weakSelf;
                                                               [strongSelf resetPayInfoData];
+                                                              [[IPCShoppingCart sharedCart] removeSelectCartItem];
                                                               [strongSelf.paySuccessView removeFromSuperview];
                                                               [strongSelf.navigationController popViewControllerAnimated:YES];
                                                           }];
@@ -139,16 +140,12 @@
         [IPCCustomUI showError:@"员工总份额不足百分之一百"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].realTotalPrice == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount) {
+    if ([IPCPayOrderMode sharedManager].realTotalPrice == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount && [IPCPayOrderMode sharedManager].isTrade) {
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
     }
     if ([IPCPayOrderMode sharedManager].presellAmount == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment) {
         [IPCCustomUI showError:@"请输入有效定金"];
-        return;
-    }
-    if ( [[IPCShoppingCart sharedCart] judgeZeroPointValue]) {
-        [IPCCustomUI showError:@"请输入有效商品兑换积分!"];
         return;
     }
     [self loadPayTypeView];
@@ -166,7 +163,6 @@
 }
 
 - (void)resetPayInfoData{
-    [[IPCShoppingCart sharedCart] removeSelectCartItem];
     [[IPCCurrentCustomerOpometry sharedManager] clearData];
     [[IPCPayOrderMode sharedManager] resetData];
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
@@ -227,6 +223,7 @@
     }else{
         [IPCCustomUI showSuccess:@"订单支付成功"];
         [self resetPayInfoData];
+        [[IPCShoppingCart sharedCart] removeSelectCartItem];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }

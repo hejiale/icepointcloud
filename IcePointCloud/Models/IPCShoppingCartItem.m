@@ -44,7 +44,11 @@
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:@(self.unitPrice) forKey:@"afterDiscountPrice"];
-    
+    if ( ![IPCPayOrderMode sharedManager].isTrade) {
+        [params setObject:@(self.pointValue) forKey:@"exchangeIntegral"];
+        [params setObject:(self.isChoosePoint ? @"true" : @"false") forKey:@"isIntegralExchange"];
+    }
+
     if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
     {
         [params setObject:@(self.count) forKey:@"glassCount"];

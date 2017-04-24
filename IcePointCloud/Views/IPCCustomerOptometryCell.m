@@ -41,7 +41,7 @@
 
 #pragma mark //Set Data
 - (NSArray *)optometryInfo{
-    return @[self.optometryMode.purpose,
+    return @[[IPCCommon formatPurpose:self.optometryMode.purpose],
              self.optometryMode.sphRight,
              self.optometryMode.cylRight,
              self.optometryMode.axisRight,

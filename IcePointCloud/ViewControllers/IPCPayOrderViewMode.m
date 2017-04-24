@@ -42,12 +42,27 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
     self = [super init];
     if (self) {
         self.cellMode = [[IPCPayOrderViewCellMode alloc] init];
+        [self requestTradeOrExchangeStatus];
     }
     return self;
 }
 
 #pragma mark //Request Data
-- (void)requestOrderPointPrice:(double)point
+- (void)requestTradeOrExchangeStatus{
+    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
+        [IPCPayOrderMode sharedManager].isTrade = [responseValue boolValue];
+//        [IPCPayOrderMode sharedManager].isTrade = YES;
+        if (self.delegate) {
+            if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
+                [self.delegate reloadPayOrderView];
+            }
+        }
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
+}
+
+- (void)requestOrderPointPrice:(NSInteger)point
 {
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
                                               IsPresellStatus:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false":@"true")
@@ -55,10 +70,16 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
                                                  SuccessBlock:^(id responseValue) {
                                                      
                                                      IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
-                                                     IPCPointValue * point = pointValue.pointArray[0];
                                                      
-                                                     [IPCPayOrderMode sharedManager].pointPrice = point.integralDeductionAmount;
-                                                     [IPCPayOrderMode sharedManager].usedPoint = point.deductionIntegral;
+                                                     __block double pointPrice = 0;
+                                                     __block NSInteger point = 0;
+                                                     [pointValue.pointArray enumerateObjectsUsingBlock:^(IPCPointValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                                                         pointPrice += obj.integralDeductionAmount;
+                                                         point += obj.deductionIntegral;
+                                                     }];
+                                                     
+                                                     [IPCPayOrderMode sharedManager].pointPrice = pointPrice;
+                                                     [IPCPayOrderMode sharedManager].usedPoint = point;
                                                      
                                                      if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
                                                          [IPCPayOrderMode sharedManager].realTotalPrice = 0;
@@ -107,12 +128,12 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1)){
-        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
-            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
-                return 3;
-            }
-            return 4;
-        }
+//        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+//            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
+//                return 3;
+//            }
+//            return 4;
+//        }
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))
@@ -209,34 +230,34 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             [cell setTopTitle:@"购买列表"];
             return cell;
         }else{
-            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
-                if (indexPath.row == 1) {
-                    IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
-                    if (!cell) {
-                        cell = [[UINib nibWithNibName:@"IPCCustomsizedProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-                    }
-                    cell.customsizedProduct = [IPCCustomsizedItem sharedItem].customsizedProduct;
-                    return cell;
-                }else if(indexPath.row == 2){
-                    IPCCustomsizedRightParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:rightEyeIdentifier];
-                    if (!cell) {
-                        cell = [[UINib nibWithNibName:@"IPCCustomsizedRightParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
-                    }
-                    [cell reloadUI:^{
-                        [tableView reloadData];
-                    }];
-                    return cell;
-                }else{
-                    IPCCustomsizedLeftParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:leftEyeIdentifier];
-                    if (!cell) {
-                        cell = [[UINib nibWithNibName:@"IPCCustomsizedLeftParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
-                    }
-                    [cell reloadUI:^{
-                        [tableView reloadData];
-                    }];
-                    return cell;
-                }
-            }else{
+//            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
+//                if (indexPath.row == 1) {
+//                    IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
+//                    if (!cell) {
+//                        cell = [[UINib nibWithNibName:@"IPCCustomsizedProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+//                    }
+//                    cell.customsizedProduct = [IPCCustomsizedItem sharedItem].customsizedProduct;
+//                    return cell;
+//                }else if(indexPath.row == 2){
+//                    IPCCustomsizedRightParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:rightEyeIdentifier];
+//                    if (!cell) {
+//                        cell = [[UINib nibWithNibName:@"IPCCustomsizedRightParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
+//                    }
+//                    [cell reloadUI:^{
+//                        [tableView reloadData];
+//                    }];
+//                    return cell;
+//                }else{
+//                    IPCCustomsizedLeftParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:leftEyeIdentifier];
+//                    if (!cell) {
+//                        cell = [[UINib nibWithNibName:@"IPCCustomsizedLeftParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
+//                    }
+//                    [cell reloadUI:^{
+//                        [tableView reloadData];
+//                    }];
+//                    return cell;
+//                }
+//            }else{
                 IPCPayOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:payOrderCartItemIdentifier];
                 if (!cell) {
                     cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -247,7 +268,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
                     [cell setCartItem:cartItem];
                 }
                 return cell;
-            }
+//            }
         }
     }else{
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];
@@ -293,7 +314,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
     }
 }
 
-- (void)getPointPrice:(double)point{
+- (void)getPointPrice:(NSInteger)point{
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
         [self requestOrderPointPrice:point];
     }

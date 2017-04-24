@@ -91,7 +91,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Method
 - (void)beginReloadTableView{
-    self.glassListViewMode.currentPage = 1;
+    self.glassListViewMode.currentPage = 0;
     self.glassListCollectionView.mj_footer.hidden = NO;
     
     if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
@@ -171,7 +171,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 #pragma mark //Load Data
 - (void)loadGlassesListData:(void(^)())complete
 {
-    [self.glassListViewMode reloadGlassListDataWithComplete:^(LSRefreshDataStatus status, NSError *error){
+    [self.glassListViewMode reloadGlassListDataWithIsTry:NO IsHot:NO Complete:^(LSRefreshDataStatus status, NSError *error){
         if (status == IPCRefreshError && error) {
             if (error.code != NSURLErrorNotConnectedToInternet) {
                 [IPCCustomUI showError:error.domain];

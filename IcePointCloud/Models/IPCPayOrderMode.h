@@ -15,6 +15,7 @@
 
 + (IPCPayOrderMode *)sharedManager;
 
+@property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
 @property (nonatomic,assign, readwrite) IPCPayStyleType      payStyle;//支付方式 \ 支付宝  微信  现金  刷卡
@@ -24,8 +25,8 @@
 @property (nonatomic, assign, readwrite) double   orderTotalPrice;//订单总金额(可根据输入金额改变)
 @property (nonatomic, assign, readwrite) double   realTotalPrice;//实付金额
 @property (nonatomic, assign, readwrite) double   pointPrice;//积分金额
-@property (nonatomic, assign, readwrite) double   usedPoint;//已使用积分
-@property (nonatomic, assign, readwrite) double   point;//总积分
+@property (nonatomic, assign, readwrite) NSInteger    usedPoint;//已使用积分
+@property (nonatomic, assign, readwrite) NSInteger    point;//总积分
 @property (nonatomic, assign, readwrite) double   presellAmount;//定金
 @property (nonatomic, assign, readwrite) double   givingAmount;//赠送金额
 
@@ -36,8 +37,6 @@
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
 @property (nonatomic, assign, readwrite) BOOL     isSelectStoreValue;// 是否选择储值
 @property (nonatomic, assign, readwrite) BOOL     isSelectPayType;// 是否选择支付方式
-
-
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCOtherPayTypeResult *> * otherPayTypeArray;//其它支付方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩

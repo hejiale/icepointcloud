@@ -18,6 +18,4 @@
 
 - (instancetype)initWithFrame:(CGRect)frame Update:(void(^)(IPCOtherPayTypeResult * result))update;
 
-- (void)updateUI;
-
 @end

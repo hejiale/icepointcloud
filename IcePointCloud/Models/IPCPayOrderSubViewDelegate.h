@@ -12,6 +12,6 @@
 
 - (void)reloadUI;
 
-- (void)getPointPrice:(double)point;
+- (void)getPointPrice:(NSInteger)point;
 
 @end

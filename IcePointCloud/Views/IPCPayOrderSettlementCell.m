@@ -16,7 +16,6 @@
     
     [self.totalPriceLabel setTextColor:COLOR_RGB_RED];
     [self.pointAmountLabel setTextColor:COLOR_RGB_RED];
-    [self.pointAmountTextField addBorder:3 Width:0.5];
     [self.payAmountTextField addBorder:3 Width:0.5];
     [self.depositTextField addBorder:3 Width:0.5];
     [self.depositTextField setRightSpace:5];
@@ -39,6 +38,16 @@
 
 - (void)updateUI
 {
+    if ([IPCPayOrderMode sharedManager].isTrade) {
+        [self.selectPointButton setHidden:NO];
+        self.selectPointButtonWidth.constant = 40;
+        [self.pointAmountTextField addBorder:3 Width:0.5];
+    }else{
+        [self.selectPointButton setHidden:YES];
+        self.selectPointButtonWidth.constant = 0;
+        [self.pointAmountTextField addBorder:0 Width:0];
+    }
+    
     [self.fullAmountButton setSelected:NO];
     [self.depositButton setSelected:NO];
     if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount) {
@@ -81,8 +90,8 @@
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
     [self.depositTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].presellAmount]];
-    [self.pointAmountTextField setText:[NSString stringWithFormat:@"%.f",[IPCPayOrderMode sharedManager].usedPoint]];
-    [self.customerPointLabel setText:[NSString stringWithFormat:@"%.f点积分可用",[IPCPayOrderMode sharedManager].point]];
+    [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderMode sharedManager].usedPoint]];
+    [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderMode sharedManager].point]];
     [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderMode sharedManager].givingAmount]];
 }
 
@@ -141,9 +150,17 @@
     if (str.length) {
         if ([textField isEqual:self.pointAmountTextField]) {
             //获取积分换取金额
-            if (self.delegate) {
-                if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
-                    [self.delegate getPointPrice:[str doubleValue]];
+            if ([str integerValue] > [IPCPayOrderMode sharedManager].point) {
+                if (self.delegate) {
+                    if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
+                        [self.delegate getPointPrice:[IPCPayOrderMode sharedManager].point];
+                    }
+                }
+            }else{
+                if (self.delegate) {
+                    if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
+                        [self.delegate getPointPrice:[str integerValue]];
+                    }
                 }
             }
         }else if ([textField isEqual:self.payAmountTextField]){

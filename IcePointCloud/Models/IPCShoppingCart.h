@@ -37,6 +37,7 @@
  */
 - (NSArray<IPCShoppingCartItem *> *)selectCartItems;
 - (NSArray<IPCShoppingCartItem *>*)selectValueCardCartItems;
+- (NSArray<IPCShoppingCartItem *> *)selectPayCartItems;
 /**
  *    Remove the shopping cart
  */
@@ -89,7 +90,7 @@
  */
 - (void)clearAllItemPoint;
 - (BOOL)judgeZeroPointValue;
-- (double)totalUsedPoint;
+- (NSInteger)totalUsedPoint;
 - (BOOL)isHaveUsedPoint;
 
 @end

@@ -268,7 +268,13 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 }
 
 - (void)chooseCustomerAction:(id)sender {
+    //清除积分数据
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
+    [IPCPayOrderMode sharedManager].usedPoint = 0;
+    [IPCPayOrderMode sharedManager].pointPrice = 0;
+    [IPCPayOrderMode sharedManager].realTotalPrice = 0;
+    [IPCPayOrderMode sharedManager].givingAmount = 0;
+    
     [self.customerViewMode getChooseCustomer];
     [self popToPayOrderViewController];
 }

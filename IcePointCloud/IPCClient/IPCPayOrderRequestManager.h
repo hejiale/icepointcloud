@@ -33,7 +33,7 @@
 
 
 /**
- Get Point Price
+* Get Point Price
  
  @param customID
  @param presellStatus
@@ -43,8 +43,18 @@
  */
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID
                        IsPresellStatus:(NSString *)presellStatus
-                                 Point:(double)point
+                                 Point:(NSInteger)point
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError *error))failure;
+
+
+/**
+ * Get Trade Or Exchange Status
+
+ @param success
+ @param failure 
+ */
++ (void)getStatusTradeOrExchangeWithSuccessBlock:(void (^)(id responseValue))success
+                                    FailureBlock:(void (^)(NSError *error))failure;
 
 @end

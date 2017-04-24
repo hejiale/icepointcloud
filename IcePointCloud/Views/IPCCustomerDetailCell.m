@@ -21,7 +21,7 @@
     
     if (_currentCustomer)
     {
-        NSString * pointValue = [NSString stringWithFormat:@"%.f积分",_currentCustomer.integral];
+        NSString * pointValue = [NSString stringWithFormat:@"%d积分",_currentCustomer.integral];
         CGFloat width = [pointValue jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
         self.pointWidth.constant = width + 25;
         

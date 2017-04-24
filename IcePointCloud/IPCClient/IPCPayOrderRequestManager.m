@@ -31,7 +31,7 @@
 
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID
                        IsPresellStatus:(NSString *)presellStatus
-                                 Point:(double)point
+                                 Point:(NSInteger)point
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError *error))failure
 {
@@ -46,6 +46,12 @@
                                   };
     
     [self postRequest:parameters RequestMethod:@"integralTradeAdmin.getSaleOrderDetailIntegralList" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
+
++ (void)getStatusTradeOrExchangeWithSuccessBlock:(void (^)(id))success
+                                    FailureBlock:(void (^)(NSError *))failure{
+    [self postRequest:nil RequestMethod:@"integralTradeAdmin.getStatusTradeOrExchange" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

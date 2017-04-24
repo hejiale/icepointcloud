@@ -125,7 +125,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self setNavigationBarStatus:YES];
+    [self setNavigationBarStatus:YES];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self.productCollectionView reloadData];
     if ([self.matchItems count] == 0 || [self.compareBgView.subviews count] == 0)[self initMatchItems];
@@ -255,7 +255,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 #pragma mark //Load Data
 - (void)loadGlassesListData:(void(^)())complete{
     __weak typeof (self) weakSelf = self;
-    [self.glassListViewMode reloadGlassListDataWithComplete:^(LSRefreshDataStatus status, NSError *error){
+    [self.glassListViewMode reloadGlassListDataWithIsTry:YES IsHot:YES  Complete:^(LSRefreshDataStatus status, NSError *error){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (error && status == IPCRefreshError){
             if (error.code != NSURLErrorNotConnectedToInternet) {

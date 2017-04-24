@@ -70,14 +70,14 @@
 {
     __block NSInteger selectCount = 0;
     
-    [[[IPCShoppingCart sharedCart]itemList] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[[IPCShoppingCart sharedCart] itemList] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.selected) {
             selectCount++;
         }
     }];
     
     if (selectCount > 0) {
-        if (selectCount == [[IPCShoppingCart sharedCart] selectNormalItemsCount]) {
+        if (selectCount == [[IPCShoppingCart sharedCart] itemsCount]) {
             return YES;
         }
     }

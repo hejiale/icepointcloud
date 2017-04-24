@@ -54,10 +54,12 @@ typedef void(^ReloadFilterUnCloseBlock)();
 
 @property (nonatomic, copy, readwrite) NSString *  searchWord;
 @property (nonatomic, assign, readwrite) NSInteger   currentPage;
-@property (nonatomic, assign, readwrite) BOOL    isTrying;
 @property (nonatomic) IPCTopFilterType   currentType;
+@property (nonatomic, assign, readwrite) BOOL  isTrying;
 
-- (void)reloadGlassListDataWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
+- (void)reloadGlassListDataWithIsTry:(BOOL)isTry
+                               IsHot:(BOOL)isHot
+                            Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
 - (void)getCustomsizedLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;

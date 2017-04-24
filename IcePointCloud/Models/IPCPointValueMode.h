@@ -21,7 +21,7 @@
 @interface IPCPointValue : NSObject
 
 @property (nonatomic, assign, readonly) double integralDeductionAmount;//积分抵现金
-@property (nonatomic, assign, readonly) double deductionIntegral;//抵用积分
+@property (nonatomic, assign, readonly) NSInteger   deductionIntegral;//抵用积分
 
 @end
 

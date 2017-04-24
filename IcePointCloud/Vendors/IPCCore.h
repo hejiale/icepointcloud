@@ -222,7 +222,7 @@ typedef NS_ENUM(NSInteger, IPCPayOrderType){
 #define IPCWeixinAppID                 @"wx94ce99b4ee7c5356"
 #define IPCWeixinAppSecret           @"12a16d241dfcc9133783f4e3e8a47c59"
 //TuSDK_key
-#define IPCTuSdkKey                      @"034207930b3030f9-00-yzbvp1"
+#define IPCTuSdkKey                      @"76f28d5c99160928-00-rzltq1"
 //IFLY_FACE_KEY
 #define IPCIflyFaceDetectorKey       @"5774da82"
 

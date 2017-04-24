@@ -43,6 +43,7 @@
                             StartPrice:(double)startPrice
                               EndPrice:(double)endPrice
                                  IsHot:(BOOL)isHot
+                              IsTrying:(BOOL)isTrying
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
