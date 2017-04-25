@@ -39,9 +39,9 @@
 }
 
 
-- (ZYProGressView *)progress{
+- (IPCProgressView *)progress{
     if (!_progress) {
-        _progress = [[ZYProGressView alloc] initWithFrame:CGRectMake(0, 0, self.progressBarView.jk_width, self.progressBarView.jk_height)];
+        _progress = [[IPCProgressView alloc] initWithFrame:CGRectMake(0, 0, self.progressBarView.jk_width, self.progressBarView.jk_height)];
         _progress.progressColor = COLOR_RGB_BLUE;
         _progress.bottomColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.5];
     }

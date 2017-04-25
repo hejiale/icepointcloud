@@ -197,7 +197,11 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     
     if (str.length) {
         if ([textField isEqual:self.phoneTextField]) {
-            [IPCInsertCustomer instance].customerPhone = str;
+            if (![IPCCommon checkTelNumber:str]) {
+                [IPCCustomUI showError:@"手机号码输入有误!"];
+            }else{
+                [IPCInsertCustomer instance].customerPhone = str;
+            }
         }else if ([textField isEqual:self.userNameTextField]){
             [IPCInsertCustomer instance].customerName = str;
         }else if ([textField isEqual:self.memberNumTextField]){

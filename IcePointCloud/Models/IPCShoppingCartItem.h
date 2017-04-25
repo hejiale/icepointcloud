@@ -24,6 +24,7 @@
 @property (nonatomic, copy, readwrite)   NSString   *remarks;//note
 @property (nonatomic, assign, readwrite) BOOL        isChoosePoint;//是否选择积分
 @property (nonatomic, assign, readwrite) NSInteger   pointValue;//输入积分
+@property (nonatomic, assign, readwrite) double      pointPrice;//积分兑换金额
 
 /**
  *  Bulk data parameter

@@ -156,10 +156,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     __weak typeof (self) weakSelf = self;
     self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView];
+        [strongSelf removerAllPopView:YES];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView];
+        [strongSelf removerAllPopView:NO];
     }];
     [self.view addSubview:self.editAddressView];
     [self.view bringSubviewToFront:self.editAddressView];
@@ -170,10 +170,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     __weak typeof (self) weakSelf = self;
     self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView];
+        [strongSelf removerAllPopView:YES];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView];
+        [strongSelf removerAllPopView:NO];
     }];
     [self.view addSubview:self.editOptometryView];
     [self.view bringSubviewToFront:self.editOptometryView];
@@ -189,7 +189,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                                                                 [strongSelf pushToProductDetailViewController:glass];
                                                             } Dismiss:^{
                                                                 __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                                [strongSelf removerAllPopView];
+                                                                [strongSelf removerAllPopView:NO];
                                                             }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.detailOrderView];
@@ -207,7 +207,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
      __weak typeof(self) weakSelf = self;
     [[self.updateCustomerView rac_signalForSelector:@selector(removeCoverAction:)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView];
+        [strongSelf removerAllPopView:NO];
     }];
 }
 
@@ -280,12 +280,15 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 }
 
 
-- (void)removerAllPopView{
+- (void)removerAllPopView:(BOOL)isLoad
+{
     [self.updateCustomerView removeFromSuperview];
     [self.editAddressView removeFromSuperview];
     [self.editOptometryView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
-    [self.refreshHeader beginRefreshing];
+    if (isLoad) {
+        [self.refreshHeader beginRefreshing];
+    }
 }
 
 #pragma mark //UITableViewDataSource
@@ -479,7 +482,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 #pragma mark //IPCCustomerDetailViewDelegate
 - (void)dismissCoverSubViews{
-    [self removerAllPopView];
+    [self removerAllPopView:YES];
 }
 
 

@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     InsertCustomerTypeMemberType
 };
 
-@interface IPCUpdateCustomerView()<IPCParameterTableViewDataSource,IPCParameterTableViewDelegate,IPCDatePickViewControllerDelegate>
+@interface IPCUpdateCustomerView()<IPCParameterTableViewDataSource,IPCParameterTableViewDelegate,IPCDatePickViewControllerDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                   MemberLevel:self.memberLevelTextField.text
                                                           Job:self.jobTextField.text
                                                        Remark:self.memoTextField.text
-                                                      PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : self.currentDetailCustomer.photoIdForPos)
+                                                      PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : (self.currentDetailCustomer.photoIdForPos ? : @""))
                                                  SuccessBlock:^(id responseValue)
      {
          [IPCCustomUI showSuccess:@"更改用户信息成功!"];
@@ -202,6 +202,26 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 #pragma mark //IPCDatePickViewControllerDelegate
 - (void)completeChooseDate:(NSString *)date{
     [self.birthdayTextField setText:date];
+}
+
+#pragma mark //UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField endEditing:YES];
+    return YES;
+}
+
+ 
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString * str = [textField.text jk_trimmingWhitespace];
+    
+    if (str.length) {
+        if ([textField isEqual:self.phoneTextField]) {
+            if (![IPCCommon checkTelNumber:str]) {
+                [IPCCustomUI showError:@"输入手机号有误!"];
+                [textField setText:@""];
+            }
+        }
+    }
 }
 
 @end

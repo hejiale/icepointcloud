@@ -21,9 +21,13 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0iE-Gg-Q1L">
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0iE-Gg-Q1L">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20050299657534246" colorSpace="custom" customColorSpace="sRGB"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Idg-iB-QCr" appends="YES" id="umS-Ak-90v"/>
+                    </connections>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EiT-Sx-K1V">
                     <rect key="frame" x="112" y="261.5" width="800" height="245"/>
@@ -73,17 +77,6 @@
                                 <constraint firstAttribute="height" constant="1" id="xdI-mD-QDB"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KCC-Jh-fNe">
-                            <rect key="frame" x="749" y="0.0" width="46" height="46"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="46" id="JZH-Qe-z8p"/>
-                                <constraint firstAttribute="height" constant="46" id="yQ6-3T-kDE"/>
-                            </constraints>
-                            <state key="normal" image="icon_back"/>
-                            <connections>
-                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="XIi-wM-HR7"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -91,8 +84,6 @@
                         <constraint firstItem="1wQ-af-4XI" firstAttribute="centerX" secondItem="EiT-Sx-K1V" secondAttribute="centerX" id="A74-ph-6b0"/>
                         <constraint firstAttribute="bottom" secondItem="1wQ-af-4XI" secondAttribute="bottom" constant="15" id="BCq-en-V2j"/>
                         <constraint firstItem="tcO-iM-VLA" firstAttribute="top" secondItem="EiT-Sx-K1V" secondAttribute="top" constant="15" id="CPX-lB-nD3"/>
-                        <constraint firstItem="KCC-Jh-fNe" firstAttribute="top" secondItem="EiT-Sx-K1V" secondAttribute="top" id="E0U-Gv-rHz"/>
-                        <constraint firstAttribute="trailing" secondItem="KCC-Jh-fNe" secondAttribute="trailing" constant="5" id="Eif-dv-tKF"/>
                         <constraint firstItem="tcO-iM-VLA" firstAttribute="centerX" secondItem="EiT-Sx-K1V" secondAttribute="centerX" id="FHk-5J-NLY"/>
                         <constraint firstAttribute="height" constant="245" id="FhU-up-sfZ"/>
                         <constraint firstItem="Grj-h6-OTn" firstAttribute="leading" secondItem="EiT-Sx-K1V" secondAttribute="leading" id="GVF-OH-IED"/>
@@ -121,8 +112,10 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <tapGestureRecognizer id="Idg-iB-QCr">
+            <connections>
+                <action selector="backAction:" destination="-1" id="oRv-4b-rKs"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
-    <resources>
-        <image name="icon_back" width="22" height="22"/>
-    </resources>
 </document>

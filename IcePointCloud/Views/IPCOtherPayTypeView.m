@@ -8,7 +8,7 @@
 
 #import "IPCOtherPayTypeView.h"
 
-@interface IPCOtherPayTypeView()
+@interface IPCOtherPayTypeView()<UITextFieldDelegate>
 
 @property (copy, nonatomic) void(^UpdateBlock)(IPCOtherPayTypeResult *);
 
@@ -57,6 +57,16 @@
 }
 
 #pragma mark //UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([textField isEqual:self.payAmountTextField]) {
+        if (![IPCCommon judgeIsFloatNumber:string]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;

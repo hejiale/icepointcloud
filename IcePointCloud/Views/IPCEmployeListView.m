@@ -17,8 +17,8 @@ typedef void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UIView *employeBgView;
 @property (weak, nonatomic) IBOutlet UITableView *employeTableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-@property (strong, nonatomic) IPCEmployeList * employeList;
 @property (copy, nonatomic) DismissBlock dismissBlock;
+@property (strong, nonatomic) NSMutableArray<IPCEmploye *> *employeeArray;
 
 @end
 
@@ -47,13 +47,29 @@ typedef void(^DismissBlock)();
     return self;
 }
 
+- (NSMutableArray<IPCEmploye *> *)employeeArray{
+    if (!_employeeArray) {
+        _employeeArray = [[NSMutableArray alloc] init];
+    }
+    return _employeeArray;
+}
 
 #pragma mark //Network Request
 - (void)queryEmploye{
+    [self.employeeArray removeAllObjects];
+    
     [IPCPayOrderRequestManager queryEmployeWithKeyword:self.searchTextField.text SuccessBlock:^(id responseValue)
      {
          [IPCCustomUI hiden];
-         _employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
+         IPCEmployeList * employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
+         [self.employeeArray addObjectsFromArray:employeList.employeArray];
+         
+//         if ([[IPCPayOrderMode sharedManager].employeeResultArray count] > 0) {
+//             [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                 
+//             }];
+//         }
+         
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
@@ -70,7 +86,7 @@ typedef void(^DismissBlock)();
 
 #pragma mark //UITableView DataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.employeList.employeArray.count;
+    return self.employeeArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,7 +94,7 @@ typedef void(^DismissBlock)();
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCEmployeListCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
-    IPCEmploye * employe = self.employeList.employeArray[indexPath.row];
+    IPCEmploye * employe = self.employeeArray[indexPath.row];
     if (employe) {
         [cell.employeLabel setText:[NSString stringWithFormat:@"员工号:%@   员工名:%@",employe.jobNumber,employe.name]];
     }
@@ -88,7 +104,7 @@ typedef void(^DismissBlock)();
 
 #pragma mark //UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    IPCEmploye * employe = self.employeList.employeArray[indexPath.row];
+    IPCEmploye * employe = self.employeeArray[indexPath.row];
     if (employe) {
         __block BOOL isExist = NO;
         [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -102,10 +118,14 @@ typedef void(^DismissBlock)();
             
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
                 result.employeeResult = 100;
-            }else{
-                result.employeeResult = [[IPCPayOrderMode sharedManager] minumEmployeeResult];
             }
             [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
+            
+            if ([[IPCPayOrderMode sharedManager].employeeResultArray count] > 1) {
+                [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    obj.employeeResult = 0;
+                }];
+            }
         }
     }
     if (self.dismissBlock)

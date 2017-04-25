@@ -14,7 +14,8 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"orderID"    : @"order.id",
              @"alipayPhotoURL":@"order.store.alipayPhoto.photoURL",
-             @"wechatURL":@"order.store.wechatPhoto.photoURL"};
+             @"wechatURL":@"order.store.wechatPhoto.photoURL",
+             @"totalPrice":@"order.totalPrice"};
 }
 
 

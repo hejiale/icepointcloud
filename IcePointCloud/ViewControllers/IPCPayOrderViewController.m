@@ -140,7 +140,8 @@
         [IPCCustomUI showError:@"员工总份额不足百分之一百"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].realTotalPrice == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount && [IPCPayOrderMode sharedManager].isTrade) {
+    if ([IPCPayOrderMode sharedManager].realTotalPrice + [IPCPayOrderMode sharedManager].givingAmount + [IPCPayOrderMode sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice])
+    {
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
     }

@@ -2,13 +2,13 @@
 //  ZYProGressView.h
 //  ProgressBar
 //
-//  Created by Apple on 2017/4/12.
-//  Copyright © 2017年 Apple. All rights reserved.
+//  Created by mac on 2017/4/12.
+//  Copyright © 2017年 Doray. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ZYProGressView : UIView
+@interface IPCProgressView : UIView
 
 /**
     进度值

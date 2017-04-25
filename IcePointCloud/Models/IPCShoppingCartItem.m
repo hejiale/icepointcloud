@@ -43,7 +43,12 @@
 - (NSDictionary *)paramtersJSONForOrderRequest
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setObject:@(self.unitPrice) forKey:@"afterDiscountPrice"];
+    if (self.isChoosePoint) {
+        [params setObject:@(0) forKey:@"afterDiscountPrice"];
+    }else{
+        [params setObject:@(self.unitPrice) forKey:@"afterDiscountPrice"];
+    }
+    
     if ( ![IPCPayOrderMode sharedManager].isTrade) {
         [params setObject:@(self.pointValue) forKey:@"exchangeIntegral"];
         [params setObject:(self.isChoosePoint ? @"true" : @"false") forKey:@"isIntegralExchange"];

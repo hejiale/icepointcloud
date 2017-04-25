@@ -147,6 +147,10 @@
         self.cartItem.count = 1;
     }
     self.cartItem.pointValue = 0;
+    if (self.cartItem.isChoosePoint) {
+        [IPCPayOrderMode sharedManager].pointPrice = 0;
+        [IPCPayOrderMode sharedManager].usedPoint = 0;
+    }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
             [self.delegate reloadUI];
@@ -157,10 +161,10 @@
 - (IBAction)plusCartNumAction:(id)sender {
     self.cartItem.count++;
     self.cartItem.pointValue = 0;
-    [IPCPayOrderMode sharedManager].pointPrice = 0;
-    [IPCPayOrderMode sharedManager].usedPoint = 0;
-    [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].realTotalPrice;
-    
+    if (self.cartItem.isChoosePoint) {
+        [IPCPayOrderMode sharedManager].pointPrice = 0;
+        [IPCPayOrderMode sharedManager].usedPoint = 0;
+    }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
             [self.delegate reloadUI];
@@ -170,7 +174,11 @@
 
 - (IBAction)noPointAction:(UIButton *)sender {
     if ( ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
-        [IPCCustomUI showError:@"请先选择客户"];
+        [IPCCustomUI showError:@"请先选择客户!"];
+        return;
+    }
+    if ([IPCPayOrderMode sharedManager].point <= 0) {
+        [IPCCustomUI showError:@"所选客户积分为零!"];
         return;
     }
     [sender setSelected:!sender.selected];
@@ -178,10 +186,19 @@
     
     if (sender.selected) {
         self.cartItem.unitPrice = 0;
+        [IPCPayOrderMode sharedManager].realTotalPrice = 0;
+        [IPCPayOrderMode sharedManager].givingAmount = 0;
+        [IPCPayOrderMode sharedManager].presellAmount = 0;
     }else{
         [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.count;
+        if ([IPCPayOrderMode sharedManager].usedPoint <= 0) {
+            [IPCPayOrderMode sharedManager].usedPoint = 0;
+        }
+        [IPCPayOrderMode sharedManager].pointPrice -= self.cartItem.pointPrice;
+        if ([IPCPayOrderMode sharedManager].pointPrice <= 0) {
+            [IPCPayOrderMode sharedManager].pointPrice = 0;
+        }
         self.cartItem.pointValue = 0;
-        [self getPointPrice];
     }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -193,8 +210,14 @@
 
 #pragma mark //UITextField Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (![IPCCommon judgeIsFloatNumber:string]) {
-        return NO;
+    if (self.cartItem.isChoosePoint) {
+        if (![IPCCommon judgeIsIntNumber:string]) {
+            return NO;
+        }
+    }else{
+        if (![IPCCommon judgeIsFloatNumber:string]) {
+            return NO;
+        }
     }
     return YES;
 }
@@ -211,27 +234,32 @@
         if (self.cartItem.isChoosePoint) {
             NSInteger usedPoint = [IPCPayOrderMode sharedManager].usedPoint;
             usedPoint -= self.cartItem.pointValue;
-            NSInteger minum = [IPCPayOrderMode sharedManager].point - usedPoint;
+            NSInteger minumPoint = [IPCPayOrderMode sharedManager].point - usedPoint;
             
-            if (minum > 0) {
-                if (minum < [str doubleValue] * self.cartItem.count && [str doubleValue] < self.cartItem.glasses.price)
+            if (minumPoint > 0) {
+                if (minumPoint <= [str doubleValue] * self.cartItem.count && [str doubleValue] <= self.cartItem.glasses.price)
                 {
-                    self.cartItem.pointValue = minum/self.cartItem.count;
+                    self.cartItem.pointValue = minumPoint/self.cartItem.count;
                 }else if ([str doubleValue] > self.cartItem.glasses.price){
                     self.cartItem.pointValue = self.cartItem.glasses.price;
                 }else{
                     self.cartItem.pointValue = [str integerValue];
                 }
-                [self getPointPrice];
+                self.cartItem.pointPrice = self.cartItem.totalPrice;
+                
+                [IPCPayOrderMode sharedManager].usedPoint = [[IPCShoppingCart sharedCart] totalUsedPoint];
+                [IPCPayOrderMode sharedManager].pointPrice = [[IPCShoppingCart sharedCart] totalUsedPointPrice];
             }
         }else{
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
                 [IPCCustomUI showError:@"请先选择员工"];
             }else{
-                if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-                    [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+                if ([str doubleValue] < self.cartItem.unitPrice) {
+                    if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                        [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+                    }
+                    self.cartItem.unitPrice = [str doubleValue];
                 }
-                self.cartItem.unitPrice = [str doubleValue];
                 
                 [IPCPayOrderMode sharedManager].realTotalPrice = 0;
                 [IPCPayOrderMode sharedManager].givingAmount = 0;
@@ -246,14 +274,5 @@
     }
 }
 
-
-//获取积分换取金额
-- (void)getPointPrice{
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
-            [self.delegate getPointPrice:[[IPCShoppingCart sharedCart] totalUsedPoint]];
-        }
-    }
-}
 
 @end

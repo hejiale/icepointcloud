@@ -91,6 +91,7 @@
 - (void)clearAllItemPoint;
 - (BOOL)judgeZeroPointValue;
 - (NSInteger)totalUsedPoint;
+- (double)totalUsedPointPrice;
 - (BOOL)isHaveUsedPoint;
 
 @end

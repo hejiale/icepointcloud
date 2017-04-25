@@ -92,7 +92,10 @@
                                     </constraints>
                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="yQH-TY-vPR"/>
+                                    </connections>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEh-ZL-kPv">
                                     <rect key="frame" x="20" y="0.0" width="8" height="40"/>
@@ -167,7 +170,10 @@
                                     </constraints>
                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="t2X-cD-kgB"/>
+                                    </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJz-Xe-vb6">
                                     <rect key="frame" x="108" y="113" width="200" height="35"/>
@@ -177,7 +183,10 @@
                                     </constraints>
                                     <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="EDU-qp-vgZ"/>
+                                    </connections>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8b-v1-ILA">
                                     <rect key="frame" x="373" y="-3" width="8" height="40"/>
@@ -325,7 +334,10 @@
                                             </constraints>
                                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="5LM-ry-TA1"/>
+                                            </connections>
                                         </textField>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职业" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vrn-ZN-HHa">
                                             <rect key="frame" x="364" y="50" width="60" height="35"/>
@@ -369,7 +381,10 @@
                                             </constraints>
                                             <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="done"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="nqh-gi-cQg"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

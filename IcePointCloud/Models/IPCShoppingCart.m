@@ -158,10 +158,7 @@
 
 - (IPCShoppingCartItem *)selectedPayItemAtIndex:(NSInteger)index
 {
-    if ([self isExistValueCard]) {
-        return [self selectValueCardCartItems][index];
-    }
-    return [self selectCartItems][index];
+    return [self selectPayCartItems][index];
 }
 
 - (IPCShoppingCartItem *)selectedNormalSelltemAtIndex:(NSInteger)index
@@ -477,6 +474,16 @@
         }
     }];
     return totoalPoint;
+}
+
+- (double)totalUsedPointPrice{
+    __block double   totoalPointPrice = 0;
+    [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isChoosePoint) {
+            totoalPointPrice += obj.pointPrice;
+        }
+    }];
+    return totoalPointPrice;
 }
 
 - (BOOL)isHaveUsedPoint{

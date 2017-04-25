@@ -278,7 +278,7 @@
 		CBC6AF541EA0A88400F7914D /* IPCPayOrderSettlementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC6AF521EA0A88400F7914D /* IPCPayOrderSettlementCell.xib */; };
 		CBC6AF581EA0BAA400F7914D /* IPCSearchCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC6AF561EA0BAA400F7914D /* IPCSearchCustomerViewController.m */; };
 		CBC6AF591EA0BAA400F7914D /* IPCSearchCustomerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC6AF571EA0BAA400F7914D /* IPCSearchCustomerViewController.xib */; };
-		CBD8DC671EADF5B700AB3DE0 /* ZYProGressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD8DC661EADF5B700AB3DE0 /* ZYProGressView.m */; };
+		CBD8DC671EADF5B700AB3DE0 /* IPCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */; };
 		CBDB8F391E9BC05300363F10 /* IPCInsertCustomerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDB8F371E9BC05300363F10 /* IPCInsertCustomerAddressCell.m */; };
 		CBDB8F3A1E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */; };
 		CBE416CF1EA85E1200105EEC /* IPCCustomsizedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE416CE1EA85E1200105EEC /* IPCCustomsizedItem.m */; };
@@ -777,8 +777,8 @@
 		CBC6AF551EA0BAA400F7914D /* IPCSearchCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSearchCustomerViewController.h; sourceTree = "<group>"; };
 		CBC6AF561EA0BAA400F7914D /* IPCSearchCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSearchCustomerViewController.m; sourceTree = "<group>"; };
 		CBC6AF571EA0BAA400F7914D /* IPCSearchCustomerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSearchCustomerViewController.xib; sourceTree = "<group>"; };
-		CBD8DC651EADF5B700AB3DE0 /* ZYProGressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZYProGressView.h; path = IcePointCloud/Vendors/ZYProGressView.h; sourceTree = SOURCE_ROOT; };
-		CBD8DC661EADF5B700AB3DE0 /* ZYProGressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZYProGressView.m; path = IcePointCloud/Vendors/ZYProGressView.m; sourceTree = SOURCE_ROOT; };
+		CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCProgressView.h; path = IcePointCloud/Vendors/IPCProgressView.h; sourceTree = SOURCE_ROOT; };
+		CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCProgressView.m; path = IcePointCloud/Vendors/IPCProgressView.m; sourceTree = SOURCE_ROOT; };
 		CBDB8F361E9BC05300363F10 /* IPCInsertCustomerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomerAddressCell.h; sourceTree = "<group>"; };
 		CBDB8F371E9BC05300363F10 /* IPCInsertCustomerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCInsertCustomerAddressCell.m; sourceTree = "<group>"; };
 		CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCInsertCustomerAddressCell.xib; sourceTree = "<group>"; };
@@ -1833,8 +1833,8 @@
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				CBD8DC651EADF5B700AB3DE0 /* ZYProGressView.h */,
-				CBD8DC661EADF5B700AB3DE0 /* ZYProGressView.m */,
+				CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */,
+				CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */,
 				CB5CC4931E8E00B70091D0FD /* IPCDynamicImageTextButton.h */,
 				CB5CC4941E8E00B70091D0FD /* IPCDynamicImageTextButton.m */,
 				CB60C0F91E9612A7001B11E2 /* IPCEmptyAlertView.h */,
@@ -2553,7 +2553,7 @@
 				CB79C1081EA2157200078CCA /* IPCEmployeeResult.m in Sources */,
 				0444C7471D9CEBD600553032 /* IPCContactLenSpecList.m in Sources */,
 				CBE416E31EA8A19600105EEC /* IPCCustomsizedParameterView.m in Sources */,
-				CBD8DC671EADF5B700AB3DE0 /* ZYProGressView.m in Sources */,
+				CBD8DC671EADF5B700AB3DE0 /* IPCProgressView.m in Sources */,
 				04D8954E1DD981B7005E678C /* IPCContactLensMode.m in Sources */,
 				9E03C2E51978D5D5007389D0 /* IPCAppDelegate.m in Sources */,
 				CB5CC4BF1E8E01670091D0FD /* UIViewController+Extend.m in Sources */,
@@ -2648,7 +2648,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = NO;
 				CustomAppBundleld = com.IcePointCloud.Pos;
-				CustomProductName = "冰点云test";
+				CustomProductName = "冰点云";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2915,7 +2915,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = YES;
 				CustomAppBundleld = com.IcePointCloud.Pos;
-				CustomProductName = "冰点云beta";
+				CustomProductName = "冰点云";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

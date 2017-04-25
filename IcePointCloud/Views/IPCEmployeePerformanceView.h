@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZYProGressView.h"
+#import "IPCProgressView.h"
 
 @interface IPCEmployeePerformanceView : UIView<UITextFieldDelegate>
 
@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *amountTextField;
 @property (weak, nonatomic) IBOutlet UIView *progressBarView;
 
-@property (strong, nonatomic) ZYProGressView * progress;
+@property (strong, nonatomic) IPCProgressView * progress;
 @property (copy, nonatomic) IPCEmployeeResult * employeeResult;
 
 - (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update;

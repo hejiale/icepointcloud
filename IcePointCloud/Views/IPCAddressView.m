@@ -65,12 +65,7 @@ typedef void(^UpdateUIBlock)(void);
 
 #pragma mark //UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if ([textField isEqual:self.addressTextField]) {
-        [textField endEditing:YES];
-    }else{
-        UITextField * nextTextField = (UITextField *)[self viewWithTag:textField.tag + 1];
-        [nextTextField becomeFirstResponder];
-    }
+    [textField endEditing:YES];
     return YES;
 }
 
@@ -78,6 +73,15 @@ typedef void(^UpdateUIBlock)(void);
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSString * str = [textField.text jk_trimmingWhitespace];
+    
+    if (str.length) {
+        if ([textField isEqual:self.phoneTextField]) {
+            if (![IPCCommon checkTelNumber:str]) {
+                [IPCCustomUI showError:@"输入手机号有误!"];
+                [textField setText:@""];
+            }
+        }
+    }
     
     if (str.length) {
         if (self.updateBlock) {

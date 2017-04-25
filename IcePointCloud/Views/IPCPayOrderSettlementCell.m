@@ -87,7 +87,7 @@
     }
 
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
-    [self.pointAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
+    [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
     [self.depositTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].presellAmount]];
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderMode sharedManager].usedPoint]];
@@ -139,6 +139,20 @@
 }
 
 #pragma mark //UITextFidle Delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([textField isEqual:self.pointAmountTextField]) {
+        if (![IPCCommon judgeIsIntNumber:string]) {
+            return NO;
+        }
+    }else{
+        if (![IPCCommon judgeIsFloatNumber:string]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;
@@ -180,12 +194,6 @@
             if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
                 if ([IPCPayOrderMode sharedManager].realTotalPrice < [str doubleValue]) {
                     [IPCPayOrderMode sharedManager].presellAmount = [IPCPayOrderMode sharedManager].realTotalPrice;
-                }else{
-                    [IPCPayOrderMode sharedManager].presellAmount = [str doubleValue];
-                }
-            }else{
-                if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] < [str doubleValue]) {
-                    [IPCPayOrderMode sharedManager].presellAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice];
                 }else{
                     [IPCPayOrderMode sharedManager].presellAmount = [str doubleValue];
                 }

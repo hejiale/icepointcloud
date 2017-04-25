@@ -142,7 +142,7 @@ typedef void(^PayBlock)();
                                                                                       //刷新价格
                                                                                       __strong typeof(weakSelf) strongSelf = weakSelf;
                                                                                       [[IPCPayOrderMode sharedManager] reloadWithOtherTypeAmount];
-//                                                                                      [strongSelf.payTypeTopView reloadUI];
+                                                                                      [strongSelf.payTypeTopView reloadUI];
                                                                                       [strongSelf createOtherPayTypeView];
                                                                                   }];
          otherTypeView.otherPayTypeResult = obj;

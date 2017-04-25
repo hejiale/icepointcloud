@@ -51,7 +51,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 - (void)requestTradeOrExchangeStatus{
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderMode sharedManager].isTrade = [responseValue boolValue];
-//        [IPCPayOrderMode sharedManager].isTrade = YES;
+//        [IPCPayOrderMode sharedManager].isTrade = NO;
         if (self.delegate) {
             if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
                 [self.delegate reloadPayOrderView];
@@ -99,7 +99,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
                                                          }
                                                      }
                                                  } FailureBlock:^(NSError *error) {
-                                                     
+                                                     [IPCCustomUI showError:error.domain];
                                                  }];
 }
 
