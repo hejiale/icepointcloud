@@ -39,7 +39,8 @@
 @property (nonatomic, copy, readwrite) NSString * contactorGenger;
 @property (nonatomic, copy, readwrite) NSMutableArray<IPCOptometryMode *> * optometryArray;
 
-- (BOOL)isCustomerInfoEmpty;
-- (BOOL)isEmptyOptometry;
+
+- (BOOL)isFullOptometry;
+- (BOOL)isFullAddress;
 
 @end

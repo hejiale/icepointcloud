@@ -58,5 +58,19 @@
     [IPCCurrentCustomerOpometry sharedManager].currentOpometry = nil;
 }
 
+- (BOOL)isEmptyAddress{
+    if ((!self.currentAddress.contactName.length && !self.currentAddress.phone.length && !self.currentAddress.detailAddress.length) || !self.currentAddress.addressID)
+        return YES;
+    return NO;
+}
+
+
+- (BOOL)isEmptyOptometry{
+    if ((!self.currentOpometry.purpose.length && !self.currentOpometry.employeeName.length) || !self.currentOpometry.optometryID.length)
+        return YES;
+    return NO;
+}
+
+
 
 @end

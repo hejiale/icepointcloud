@@ -42,6 +42,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
         if ([obj isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *)obj;
             [textField addBorder:3 Width:0.5];
+            [textField setLeftSpace:10];
         }
     }];
     
@@ -49,6 +50,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
         if ([obj isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *)obj;
             [textField addBorder:3 Width:0.5];
+            [textField setLeftSpace:10];
         }
     }];
 }

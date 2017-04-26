@@ -100,7 +100,6 @@
                          ContactGender:(NSString *)contactGender
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
-                            EmployeeId:(NSString *)employeeId
                           EmployeeName:(NSString *)employeeName
                           CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId

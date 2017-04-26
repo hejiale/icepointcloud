@@ -40,9 +40,15 @@
     NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
     
     if (isChooseCustomer) {
-        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID forKey:@"customerId"];
-        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
-        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID forKey:@"addressId"];
+        if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID.length) {
+            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID forKey:@"customerId"];
+        }
+        if ([IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID.length) {
+            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
+        }
+        if ([IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID.length) {
+            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID forKey:@"addressId"];
+        }
     }else{
         //新增用户信息
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerName forKey:@"customerName"];
@@ -58,6 +64,11 @@
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberLevel forKey:@"memberLevelId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberId forKey:@"memberId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.occupation forKey:@"occupation"];
+        if (![IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberLevel.length) {
+            IPCMemberLevel * memberLevelMode = [IPCEmployeeMode sharedManager].memberLevelList.list[0];
+            [parameters setObject:memberLevelMode.memberLevel forKey:@"memberLevel"];
+            [parameters setObject:memberLevelMode.memberLevelId forKey:@"memberLevelId"];
+        }
         //地址
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.contactName forKey:@"contactorName"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.genderString forKey:@"contactorGengerString"];
@@ -76,10 +87,11 @@
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.distanceRight forKey:@"distanceRight"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.correctedVisionLeft forKey:@"correctedVisionLeft"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.correctedVisionRight forKey:@"correctedVisionRight"];
-        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.purpose forKey:@"purpose"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.employeeId forKey:@"employeeId"];
+        if ([IPCCurrentCustomerOpometry sharedManager].currentOpometry.purpose.length) {
+            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.purpose forKey:@"purpose"];
+        }
     }
-    
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
     [parameters setObject:employeeList forKey:@"employeeAchievements"];

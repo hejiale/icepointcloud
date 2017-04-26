@@ -83,10 +83,8 @@ typedef void(^UpdateUIBlock)(void);
         }
     }
     
-    if (str.length) {
-        if (self.updateBlock) {
-            self.updateBlock();
-        }
+    if (self.updateBlock) {
+        self.updateBlock();
     }
     
 }

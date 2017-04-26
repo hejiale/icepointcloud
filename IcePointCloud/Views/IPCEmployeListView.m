@@ -63,13 +63,6 @@ typedef void(^DismissBlock)();
          [IPCCustomUI hiden];
          IPCEmployeList * employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
          [self.employeeArray addObjectsFromArray:employeList.employeArray];
-         
-//         if ([[IPCPayOrderMode sharedManager].employeeResultArray count] > 0) {
-//             [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                 
-//             }];
-//         }
-         
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
@@ -94,8 +87,15 @@ typedef void(^DismissBlock)();
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCEmployeListCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
+    [cell setAccessoryType:UITableViewCellAccessoryNone];
+    
     IPCEmploye * employe = self.employeeArray[indexPath.row];
     if (employe) {
+        [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj.employe.jobID isEqualToString:employe.jobID]) {
+                [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+            }
+        }];
         [cell.employeLabel setText:[NSString stringWithFormat:@"员工号:%@   员工名:%@",employe.jobNumber,employe.name]];
     }
     return cell;

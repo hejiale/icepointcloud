@@ -140,6 +140,10 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
         return 1;
     else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 3)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
         return 1;
+    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyOptometry])
+        return 0;
+    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyAddress])
+        return 0;
     return 2;
 }
 

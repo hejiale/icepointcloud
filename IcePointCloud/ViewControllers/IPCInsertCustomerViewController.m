@@ -61,25 +61,33 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 #pragma mark //Request Data
 - (void)saveNewCustomerRequest
 {
-    NSMutableArray * optometryList = [[NSMutableArray alloc]init];
+    if (![IPCInsertCustomer instance].memberLevel.length) {
+        IPCMemberLevel * memberLevelMode = [IPCEmployeeMode sharedManager].memberLevelList.list[0];
+        [IPCInsertCustomer instance].memberLevel = memberLevelMode.memberLevel;
+        [IPCInsertCustomer instance].memberLevelId = memberLevelMode.memberLevelId;
+    }
     
+    NSMutableArray * optometryList = [[NSMutableArray alloc]init];
     [[IPCInsertCustomer instance].optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [optometryList addObject:@{
-                                   @"distanceRight": obj.distanceRight,
-                                   @"distanceLeft":obj.distanceLeft,
-                                   @"sphLeft": (obj.sphLeft.length ? obj.sphLeft : @"+0.00"),
-                                   @"sphRight":(obj.sphRight.length ? obj.sphRight : @"+0.00"),
-                                   @"cylLeft": (obj.cylLeft.length ? obj.cylLeft : @"+0.00"),
-                                   @"cylRight":(obj.cylRight.length ? obj.cylRight : @"+0.00"),
-                                   @"axisLeft":obj.axisLeft,
-                                   @"axisRight":obj.axisRight,
-                                   @"addLeft":obj.addLeft,
-                                   @"addRight":obj.addRight,
-                                   @"correctedVisionLeft":obj.correctedVisionLeft,
-                                   @"correctedVisionRight":obj.correctedVisionRight,
-                                   @"purpose":obj.purpose,
-                                   @"employeeId":obj.employeeId,
-                                   @"employeeName":obj.employeeName}];
+        NSMutableDictionary * optometryDic = [[NSMutableDictionary alloc]init];
+        [optometryDic setDictionary:@{
+                                     @"distanceRight": obj.distanceRight,
+                                     @"distanceLeft":obj.distanceLeft,
+                                     @"sphLeft": (obj.sphLeft.length ? obj.sphLeft : @""),
+                                     @"sphRight":(obj.sphRight.length ? obj.sphRight : @""),
+                                     @"cylLeft": (obj.cylLeft.length ? obj.cylLeft : @""),
+                                     @"cylRight":(obj.cylRight.length ? obj.cylRight : @""),
+                                     @"axisLeft":obj.axisLeft,
+                                     @"axisRight":obj.axisRight,
+                                     @"addLeft":obj.addLeft,
+                                     @"addRight":obj.addRight,
+                                     @"correctedVisionLeft":obj.correctedVisionLeft,
+                                     @"correctedVisionRight":obj.correctedVisionRight,
+                                     @"employeeName":obj.employeeName}];
+        if (obj.purpose.length) {
+            [optometryDic setObject:[IPCCommon purpose:obj.purpose] forKey:@"purpose"];
+        }
+        [optometryList addObject:optometryDic];
     }];
     
     [IPCCustomerRequestManager saveCustomerInfoWithCustomName:[IPCInsertCustomer instance].customerName
@@ -93,7 +101,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                                                 ContactGender:[IPCInsertCustomer instance].contactorGenger
                                                  ContactPhone:[IPCInsertCustomer instance].contactorPhone
                                                ContactAddress:[IPCInsertCustomer instance].contactorAddress
-                                                   EmployeeId:[IPCInsertCustomer instance].empNameId
                                                  EmployeeName:[IPCInsertCustomer instance].empName
                                                  CustomerType:[IPCInsertCustomer instance].customerType
                                                CustomerTypeId:[IPCInsertCustomer instance].customerTypeId
@@ -131,16 +138,24 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 
 - (IBAction)saveNewCustomerAction:(id)sender {
-    if (![[IPCInsertCustomer instance] isCustomerInfoEmpty]) {
-        if (![[IPCInsertCustomer instance] isEmptyOptometry]) {
-            if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
-                [[IPCCurrentCustomerOpometry sharedManager] insertNewCustomer];
-                [[IPCInsertCustomer instance] resetData];
-                [self popToPayOrderViewController];
+    if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
+        if ([[IPCInsertCustomer instance] isFullAddress]) {
+            if ([[IPCInsertCustomer instance] isFullOptometry]) {
+                if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
+                    [[IPCCurrentCustomerOpometry sharedManager] insertNewCustomer];
+                    [[IPCInsertCustomer instance] resetData];
+                    [self popToPayOrderViewController];
+                }else{
+                    [self saveNewCustomerRequest];
+                }
             }else{
-                [self saveNewCustomerRequest];
+                [IPCCustomUI showError:@"请选择填写完整验光单或跳过新建验光单操作!"];
             }
+        }else{
+            [IPCCustomUI showError:@"请选择填写完整地址或跳过新建地址操作!"];
         }
+    }else{
+        [IPCCustomUI showError:@"请输入完整客户名或手机号!"];
     }
 }
 

@@ -451,7 +451,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.customerViewMode.orderList.count == 0 && section == 2)return 0;
+    if (self.customerViewMode.orderList.count == 0 && section == 3)return 0;
     return 5;
 }
 

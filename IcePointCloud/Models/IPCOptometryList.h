@@ -38,7 +38,7 @@
 @property (nonatomic, copy, readwrite) NSString * purpose;
 @property (nonatomic, copy, readwrite) NSString * employeeId;
 @property (nonatomic, copy, readwrite) NSString * employeeName;
-@property (nonatomic, assign, readwrite) BOOL ifDefault;
+@property (nonatomic, assign, readwrite) BOOL     ifDefault;
 
 
 @end

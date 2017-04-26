@@ -17,7 +17,8 @@
 @property (nonatomic, strong, readwrite) IPCOptometryMode     * currentOpometry;
 
 - (void)insertNewCustomer;
-
 - (void)clearData;
+- (BOOL)isEmptyAddress;
+- (BOOL)isEmptyOptometry;
 
 @end

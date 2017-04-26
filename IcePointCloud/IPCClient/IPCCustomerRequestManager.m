@@ -70,7 +70,6 @@
                          ContactGender:(NSString *)contactGender
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
-                            EmployeeId:(NSString *)employeeId
                           EmployeeName:(NSString *)employeeName
                           CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId
@@ -92,7 +91,6 @@
                              @"contactorGengerString":contactGender,
                              @"contactorPhone":contactPhone,
                              @"contactorAddress":contactAddress,
-                             @"employeeId":employeeId,
                              @"empName":employeeName,
                              @"customerType":customerType,
                              @"customerTypeId":customerTypeId,
@@ -101,7 +99,8 @@
                              @"memberId":memberNum,
                              @"occupation":occupation,
                              @"optometrys":optometryList,
-                             @"photoIdForPos":photoId};
+                             @"photoIdForPos":photoId,
+                             @"isPos":@"true"};
     [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -210,8 +209,8 @@
                                   @"empName":employeeName,
                                   @"customerType":customerType,
                                   @"memberLevel":memberLevel,
-                                  @"photoIdForPos":photoId
-                                  };
+                                  @"photoIdForPos":photoId,
+                                  @"isPos":@"true"};
     [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 

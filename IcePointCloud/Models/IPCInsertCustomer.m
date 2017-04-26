@@ -66,28 +66,32 @@
     return _optometryArray;
 }
 
-- (BOOL)isCustomerInfoEmpty{
-    if (!self.customerName.length || !self.genderString.length || !self.customerPhone.length || !self.empName.length || !self.memberLevel.length || !self.memberNum.length) {
-        [IPCCustomUI showError:@"客户信息必填项请填写完整!"];
+#pragma mark //判断输入完整的地址或验光单数据
+- (BOOL)isFullAddress{
+    if (self.contactorName.length && self.contactorPhone.length && self.contactorAddress.length) {
         return YES;
     }
-    if (!self.contactorName.length || !self.contactorGenger.length || !self.contactorPhone.length || !self.contactorAddress.length) {
-        [IPCCustomUI showError:@"收货地址信息必填项请填写完整!"];
+    if (!self.contactorName.length && !self.contactorPhone.length && !self.contactorAddress.length) {
         return YES;
     }
     return NO;
 }
 
 
-- (BOOL)isEmptyOptometry{
-    __block BOOL isEmptyOptometry = NO;
+- (BOOL)isFullOptometry{
+    __block BOOL isFull = NO;
+   [self.optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+       if (obj.purpose.length  && obj.employeeName.length && obj.sphLeft.length && obj.sphRight.length && obj.cylLeft.length && obj.cylRight.length) {
+           isFull = YES;
+       }
+   }];
     [self.optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (!obj.purpose.length || !obj.employeeName.length) {
-            isEmptyOptometry = YES;
-            [IPCCustomUI showError:@"请填写完整验光单信息!"];
+        if (!obj.purpose.length  && !obj.employeeName.length && !obj.sphLeft.length && !obj.sphRight.length && !obj.cylLeft.length && !obj.cylRight.length) {
+            isFull = YES;
         }
     }];
-    return isEmptyOptometry;
+    return isFull;
 }
+
 
 @end

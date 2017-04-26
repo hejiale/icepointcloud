@@ -30,6 +30,8 @@
         [self.pointLabel setText:pointText];
         if (_currentCustomer.memberLevel && _currentCustomer.memberLevel.length) {
             [self.memberLevelLabel setText:_currentCustomer.memberLevel];
+        }else{
+            [self.memberLevelLabel setText:@""];
         }
     }
 }
