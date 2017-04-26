@@ -57,7 +57,7 @@
 
 - (void)reloadUIWithOptometry:(IPCOptometryMode *)optometry
 {
-    [self.optometryView subTextField:0].text = optometry.purpose;
+    [self.optometryView subTextField:0].text = [IPCCommon formatPurpose:optometry.purpose];
     [self.optometryView subTextField:1].text = optometry.sphRight;
     [self.optometryView subTextField:2].text = optometry.cylRight;
     [self.optometryView subTextField:3].text = optometry.axisRight;

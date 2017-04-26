@@ -148,7 +148,7 @@ typedef void(^UpdateBlock)(void);
 
 
 - (void)insertOptometryInfo{
-    self.insertOptometry.purpose = [self subTextField:0].text;
+    self.insertOptometry.purpose = [IPCCommon purpose:[self subTextField:0].text];
     
     if ([self subTextField:1].text.length) {
         self.insertOptometry.sphRight = [self subTextField:1].text;

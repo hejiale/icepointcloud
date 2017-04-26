@@ -59,14 +59,14 @@
 }
 
 - (BOOL)isEmptyAddress{
-    if ((!self.currentAddress.contactName.length && !self.currentAddress.phone.length && !self.currentAddress.detailAddress.length) || !self.currentAddress.addressID)
+    if (!self.currentAddress.contactName.length && !self.currentAddress.phone.length && !self.currentAddress.detailAddress.length)
         return YES;
     return NO;
 }
 
 
 - (BOOL)isEmptyOptometry{
-    if ((!self.currentOpometry.purpose.length && !self.currentOpometry.employeeName.length) || !self.currentOpometry.optometryID.length)
+    if (!self.currentOpometry.purpose.length && !self.currentOpometry.employeeName.length)
         return YES;
     return NO;
 }

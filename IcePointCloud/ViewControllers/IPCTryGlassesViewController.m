@@ -216,7 +216,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (void)beginReloadTableView{
     self.glassListViewMode.currentPage = 1;
     self.productCollectionView.mj_footer.hidden = NO;
-    [IPCCustomUI show];
     
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -239,7 +238,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         [self.productCollectionView reloadData];
         [self.refreshHeader endRefreshing];
         [self.refreshFooter endRefreshing];
-        [IPCCustomUI hiden];
     });
 }
 

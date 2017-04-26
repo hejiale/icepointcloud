@@ -197,9 +197,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyOptometry])
+    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyAddress])
         return 0;
-    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyAddress])
+    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyOptometry])
         return 0;
     return 5;
 }
