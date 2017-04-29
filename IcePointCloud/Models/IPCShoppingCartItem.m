@@ -33,8 +33,15 @@
 
 - (double)unitPrice
 {
-    if (_unitPrice == 0)
+    if ([IPCPayOrderMode sharedManager].customerDiscount > 0) {
+        if (_unitPrice == 0){
+            return self.glasses.price * [IPCPayOrderMode sharedManager].customerDiscount;
+        }
+        return _unitPrice * [IPCPayOrderMode sharedManager].customerDiscount;
+    }
+    if (_unitPrice == 0) {
         return self.glasses.price;
+    }
     return _unitPrice;
 }
 

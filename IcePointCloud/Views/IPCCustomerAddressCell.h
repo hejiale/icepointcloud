@@ -16,10 +16,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *contactPhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *defaultButton;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactNameWidth;
-
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressWidthConstraint;
 @property (copy, nonatomic) IPCCustomerAddressMode * addressMode;
 
 @end

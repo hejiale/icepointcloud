@@ -88,8 +88,16 @@
 
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
-    [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
-    [self.depositTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].presellAmount]];
+    if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
+        [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
+    }else{
+        [self.payAmountTextField setText:@""];
+    }
+    if ([IPCPayOrderMode sharedManager].presellAmount > 0) {
+        [self.depositTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].presellAmount]];
+    }else{
+        [self.depositTextField setText:@""];
+    }
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderMode sharedManager].usedPoint]];
     [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderMode sharedManager].point]];
     [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderMode sharedManager].givingAmount]];

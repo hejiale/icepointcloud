@@ -50,8 +50,8 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 #pragma mark //Request Data
 - (void)requestTradeOrExchangeStatus{
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-        [IPCPayOrderMode sharedManager].isTrade = [responseValue boolValue];
-//        [IPCPayOrderMode sharedManager].isTrade = NO;
+//        [IPCPayOrderMode sharedManager].isTrade = [responseValue boolValue];
+        [IPCPayOrderMode sharedManager].isTrade = NO;
         if (self.delegate) {
             if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
                 [self.delegate reloadPayOrderView];

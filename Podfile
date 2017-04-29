@@ -21,6 +21,7 @@ pod 'ReactiveCocoa', '~> 4.2.2’
 pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'TuSDK'
+pod 'ZYCornerRadius'
 end
 
 target "IcePointCloudTests" do

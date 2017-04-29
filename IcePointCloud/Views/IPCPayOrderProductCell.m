@@ -237,11 +237,9 @@
             NSInteger minumPoint = [IPCPayOrderMode sharedManager].point - usedPoint;
             
             if (minumPoint > 0) {
-                if (minumPoint <= [str doubleValue] * self.cartItem.count && [str doubleValue] <= self.cartItem.glasses.price)
+                if (minumPoint <= [str doubleValue] * self.cartItem.count)
                 {
                     self.cartItem.pointValue = minumPoint/self.cartItem.count;
-                }else if ([str doubleValue] > self.cartItem.glasses.price){
-                    self.cartItem.pointValue = self.cartItem.glasses.price;
                 }else{
                     self.cartItem.pointValue = [str integerValue];
                 }

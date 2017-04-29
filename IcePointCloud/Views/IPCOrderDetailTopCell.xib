@@ -19,12 +19,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="400" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_orderBg" translatesAutoresizingMaskIntoConstraints="NO" id="V0g-8e-4DL">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="top_order_detail" translatesAutoresizingMaskIntoConstraints="NO" id="V0g-8e-4DL">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="76"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3W-IG-3vb">
-                        <rect key="frame" x="41" y="23" width="150" height="30"/>
+                        <rect key="frame" x="28" y="23" width="150" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="3lU-vh-5fW"/>
                             <constraint firstAttribute="width" constant="150" id="HqW-d8-fs6"/>
@@ -37,20 +37,12 @@
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="V0g-8e-4DL" secondAttribute="trailing" constant="-8" id="0tY-0x-M4z"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="K3W-IG-3vb" secondAttribute="bottom" id="9M3-b5-vay"/>
-                    <constraint firstItem="K3W-IG-3vb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="GEX-X9-Qjn"/>
                     <constraint firstItem="V0g-8e-4DL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="KSQ-pv-DOV"/>
                     <constraint firstAttribute="bottomMargin" secondItem="V0g-8e-4DL" secondAttribute="bottom" constant="-9" id="L4b-cI-VxV"/>
-                    <constraint firstItem="K3W-IG-3vb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="33" id="Ma5-MQ-JgC"/>
+                    <constraint firstItem="K3W-IG-3vb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Ma5-MQ-JgC"/>
                     <constraint firstItem="V0g-8e-4DL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="RVc-6V-VmW"/>
                     <constraint firstItem="K3W-IG-3vb" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="g7k-XR-jmy"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="9M3-b5-vay"/>
-                        <exclude reference="GEX-X9-Qjn"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
@@ -60,6 +52,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_orderBg" width="400" height="74"/>
+        <image name="top_order_detail" width="400" height="75"/>
     </resources>
 </document>

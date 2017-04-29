@@ -17,11 +17,11 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="310"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="310"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="309"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jul-sB-4SG">
-                        <rect key="frame" x="8" y="8" width="1008" height="294"/>
+                        <rect key="frame" x="8" y="8" width="1008" height="293"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeV-2c-7aM">
                                 <rect key="frame" x="225" y="25" width="60" height="30"/>
@@ -207,7 +207,7 @@
                                 </connections>
                             </textField>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ITg-bC-G8I">
-                                <rect key="frame" x="212" y="160" width="756" height="134"/>
+                                <rect key="frame" x="212" y="160" width="756" height="133"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="生日" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTp-sf-UR8">
                                         <rect key="frame" x="12" y="0.0" width="60" height="30"/>
@@ -435,7 +435,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="jul-sB-4SG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="36S-DK-78x"/>
-                    <constraint firstItem="jul-sB-4SG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="94P-Mf-28A"/>
                     <constraint firstAttribute="trailingMargin" secondItem="jul-sB-4SG" secondAttribute="trailing" id="EgZ-CS-d1p"/>
                     <constraint firstAttribute="bottomMargin" secondItem="jul-sB-4SG" secondAttribute="bottom" id="G1W-vz-Otl"/>
                     <constraint firstItem="jul-sB-4SG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="jri-Xp-Dq8"/>

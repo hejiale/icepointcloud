@@ -10,26 +10,34 @@
 
 @implementation IPCCustomOrderDetailList
 
-- (instancetype)initWithResponseValue:(id)responseValue{
-    self = [super init];
-    if (self) {
-        [self.products removeAllObjects];
-        self.orderInfo = nil;
++ (IPCCustomOrderDetailList *)instance
+{
+    static dispatch_once_t token;
+    static IPCCustomOrderDetailList *_client;
+    dispatch_once(&token, ^{
+        _client = [[self alloc] init];
+    });
+    return _client;
+}
+
+
+- (void)parseResponseValue:(id)responseValue
+{
+    [self.products removeAllObjects];
+    self.orderInfo = nil;
+    
+    if ([responseValue isKindOfClass:[NSDictionary class]]) {
+        if ([responseValue[@"detailList"] isKindOfClass:[NSArray class]]) {
+            [responseValue[@"detailList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                IPCGlasses * glass = [IPCGlasses mj_objectWithKeyValues:obj];
+                [self.products addObject:glass];
+            }];
+        }
         
-        if ([responseValue isKindOfClass:[NSDictionary class]]) {
-            if ([responseValue[@"detailList"] isKindOfClass:[NSArray class]]) {
-                [responseValue[@"detailList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    IPCGlasses * glass = [IPCGlasses mj_objectWithKeyValues:obj];
-                    [self.products addObject:glass];
-                }];
-            }
-            
-            if ([responseValue[@"order"] isKindOfClass:[NSDictionary class]]) {
-                self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
-            }
+        if ([responseValue[@"order"] isKindOfClass:[NSDictionary class]]) {
+            self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
         }
     }
-    return self;
 }
 
 - (NSMutableArray<IPCGlasses *> *)products{

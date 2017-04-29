@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+
     [self.packUpButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
     [self.packDownButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
     
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.emailTextField setText:[IPCInsertCustomer instance].email];
     [self.memoTextField setText:[IPCInsertCustomer instance].remark];
     [self.customerCategoryTextField setText:[IPCInsertCustomer instance].customerType];
-    [self.genderTextField setText:[IPCInsertCustomer instance].genderString];
+    [self.genderTextField setText:[IPCCommon formatGender:[IPCInsertCustomer instance].gender]];
     [self.handlersTextField setText:[IPCInsertCustomer instance].empName];
     [self.birthdayTextField setText:[IPCInsertCustomer instance].birthday];
     [self.memberNumTextField setText:[IPCInsertCustomer instance].memberNum];

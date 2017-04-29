@@ -62,6 +62,7 @@
     
     if (self.detailCustomer) {
         [IPCCurrentCustomerOpometry sharedManager].currentCustomer = self.detailCustomer;
+        [IPCPayOrderMode sharedManager].customerDiscount = self.detailCustomer.discount/10;
     }
 }
 

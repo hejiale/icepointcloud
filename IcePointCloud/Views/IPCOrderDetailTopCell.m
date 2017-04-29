@@ -21,4 +21,9 @@
     // Configure the view for the selected state
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [self.statusLabel setText:[IPCAppManager orderStatus:[IPCCustomOrderDetailList instance].orderInfo.status]];
+}
+
 @end

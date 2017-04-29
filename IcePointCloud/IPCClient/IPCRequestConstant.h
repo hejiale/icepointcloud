@@ -49,8 +49,8 @@ static NSError *HTTPError(NSString *domain, int code) {
  */
 #ifdef DEBUG
 //#define   IPC_ProductAPI_URL       @"http://10.0.0.6:8080/pos"
-#define   IPC_ProductAPI_URL       @"http://10.0.0.31:8080/pos"
-//#define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com"
+//#define   IPC_ProductAPI_URL       @"http://10.0.0.31:8080/pos"
+#define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com"
 #elif BETA
 #define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com"
 #else

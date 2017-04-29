@@ -16,17 +16,9 @@
     static dispatch_once_t token;
     dispatch_once(&token, ^{
         mgr = [[self alloc] init];
+        [mgr resetData];
     });
     return mgr;
-}
-
-
-- (instancetype)init{
-    self = [super init];
-    if (self) {
-        [self resetData];
-    }
-    return self;
 }
 
 - (void)resetData

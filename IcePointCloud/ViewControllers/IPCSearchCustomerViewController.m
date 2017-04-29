@@ -49,12 +49,12 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [self setNavigationTitle:@"客户"];
     }
     [self loadCollectionView];
+    [self.refreshHeader beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNavigationBarStatus:self.isMainStatus];
-    [self.refreshHeader beginRefreshing];
 }
 
 - (NSMutableArray<IPCCustomerMode *> *)customerArray{

@@ -20,8 +20,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kD9-kj-di3">
-                        <rect key="frame" x="28" y="46.5" width="953" height="15"/>
+                        <rect key="frame" x="28" y="46.5" width="0.0" height="15"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="width" id="1b4-81-lsC"/>
                             <constraint firstAttribute="height" constant="15" id="gME-Us-x8e"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
@@ -98,12 +100,13 @@
                     <constraint firstAttribute="bottomMargin" secondItem="kD9-kj-di3" secondAttribute="bottom" constant="5" id="eAe-sk-Eza"/>
                     <constraint firstItem="zXC-Lk-1r0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="f57-QA-IQB"/>
                     <constraint firstItem="SGm-P9-cdY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="nJe-DP-3bl"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="kD9-kj-di3" secondAttribute="trailing" constant="35" id="s86-ro-dji"/>
                     <constraint firstAttribute="trailingMargin" secondItem="k0V-3H-wwL" secondAttribute="trailing" constant="20" id="wh9-ho-0pr"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addressHeightConstraint" destination="gME-Us-x8e" id="RDg-uR-cSQ"/>
                 <outlet property="addressLabel" destination="kD9-kj-di3" id="ZPw-T8-i33"/>
+                <outlet property="addressWidthConstraint" destination="1b4-81-lsC" id="McI-xw-uYr"/>
                 <outlet property="contactNameLabel" destination="zXC-Lk-1r0" id="1ZI-fx-NRI"/>
                 <outlet property="contactNameWidth" destination="KX9-bY-k5g" id="hy5-kl-qO3"/>
                 <outlet property="contactPhoneLabel" destination="nWP-nS-E14" id="X8D-FF-20c"/>

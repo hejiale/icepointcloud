@@ -14,7 +14,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *createDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *operationLabel;
 
-- (void)inputOrderInfo:(IPCCustomerOrderInfo *)orderInfo;
-
-
 @end

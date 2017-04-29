@@ -10,11 +10,10 @@
 
 @interface IPCOrderDetailProductPriceCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel * beforePriceLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *afterPriceWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *beforePriceWidth;
-@property (weak, nonatomic) IBOutlet UILabel * afterPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *realTotalPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *usePointLabel;
+@property (weak, nonatomic) IBOutlet UILabel *givingAmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 
-- (void)inputBeforeDiscountPrice:(double)beforePrice AfterPrice:(double)afterPrice;
 
 @end

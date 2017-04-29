@@ -21,11 +21,13 @@
     // Configure the view for the selected state
 }
 
-
-- (void)inputOrderInfo:(IPCCustomerOrderInfo *)orderInfo{
-    [self.orderCodeLabel setText:orderInfo.orderNumber];
-    [self.createDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:orderInfo.orderTime]  IsTime:YES]];
-    [self.operationLabel setText:orderInfo.operatorName];
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self.orderCodeLabel setText:[IPCCustomOrderDetailList instance].orderInfo.orderNumber];
+    [self.createDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:[IPCCustomOrderDetailList instance].orderInfo.orderTime]  IsTime:YES]];
+    [self.operationLabel setText:[IPCCustomOrderDetailList instance].orderInfo.operatorName];
 }
+
 
 @end
