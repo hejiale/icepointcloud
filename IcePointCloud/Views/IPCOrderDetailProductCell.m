@@ -55,7 +55,7 @@
     if (!_suggestPriceLabel) {
         _suggestPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_suggestPriceLabel setBackgroundColor:[UIColor clearColor]];
-        [_suggestPriceLabel setTextColor:[UIColor darkGrayColor]];
+        [_suggestPriceLabel setTextColor:COLOR_RGB_RED];
         [_suggestPriceLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
     }
     return _suggestPriceLabel;

@@ -46,7 +46,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
         UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCCustomDetailOrderView" owner:self];
         [view setFrame:frame];
         [self addSubview: view];
- 
+        
         self.ProductDetailBlock = product;
         self.DismissBlock = dismiss;
         self.currentOrderNum = orderNum;
@@ -108,7 +108,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
-          [[IPCCustomOrderDetailList instance] parseResponseValue:responseValue];
+         [[IPCCustomOrderDetailList instance] parseResponseValue:responseValue];
          [self.orderDetailTableView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
@@ -123,11 +123,13 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 2)
+    if (section == 2){
         if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpOptometry)
             return 2;
-    else if (section == 3)
+    }
+    else if (section == 3){
         return [IPCCustomOrderDetailList instance].products.count + 1;
+    }
     return 1;
 }
 
@@ -161,7 +163,13 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             return cell;
         }
     }else if (indexPath.section == 3){
-        if (indexPath.row < [IPCCustomOrderDetailList instance].products.count) {
+        if (indexPath.row ==  [IPCCustomOrderDetailList instance].products.count) {
+            IPCOrderDetailProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCOrderDetailProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            return cell;
+        }else{
             IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -170,12 +178,6 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             if ([IPCCustomOrderDetailList instance].products.count) {
                 IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
                 cell.glasses = product;
-            }
-            return cell;
-        }else{
-            IPCOrderDetailProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderDetailProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             return cell;
         }
@@ -207,11 +209,11 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
     }else if (indexPath.section == 1){
         return 70;
     }else if (indexPath.section == 2 && indexPath.row > 0){
-        return 180;
+        return 185;
     }else if (indexPath.section == 3){
-        if (indexPath.row < [IPCCustomOrderDetailList instance].products.count )
-            return 110;
-        return 125;
+        if (indexPath.row == [IPCCustomOrderDetailList instance].products.count )
+            return 125;
+        return 110;
     }else if (indexPath.section == 4){
         return 60;
     }else if (indexPath.section == 5){

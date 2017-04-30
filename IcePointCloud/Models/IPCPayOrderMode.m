@@ -38,6 +38,7 @@
     [IPCPayOrderMode sharedManager].isSelectPoint = NO;
     [IPCPayOrderMode sharedManager].isPayOrderStatus = NO;
     [IPCPayOrderMode sharedManager].isSelectPayType = YES;
+    [IPCPayOrderMode sharedManager].customerDiscount = 0;
     [[IPCPayOrderMode sharedManager] clearPayTypeData];
 }
 

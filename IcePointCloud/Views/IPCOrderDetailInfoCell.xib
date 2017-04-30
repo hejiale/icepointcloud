@@ -66,7 +66,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="操作人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sps-q4-RLQ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下单员工" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sps-q4-RLQ">
                         <rect key="frame" x="28" y="63" width="60" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="6sz-Do-ma4"/>

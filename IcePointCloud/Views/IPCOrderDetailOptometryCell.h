@@ -10,4 +10,8 @@
 
 @interface IPCOrderDetailOptometryCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *optometryContentView;
+@property (weak, nonatomic) IBOutlet UILabel *employeeNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *insertDateLabel;
+
 @end

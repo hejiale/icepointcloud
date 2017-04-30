@@ -38,7 +38,9 @@
     }
     
     [self.payStyleLabel setText:[NSString stringWithFormat:@"%@ %.f",payTypeName,[IPCCustomOrderDetailList instance].orderInfo.payTypeAmount]];
-    [self.pointRemarkLabel setText:[NSString stringWithFormat:@"本次消费产生积分%d",[IPCCustomOrderDetailList instance].orderInfo.integral]];
+    
+    NSString * remark = [NSString stringWithFormat:@"本次消费产生积分%d",[IPCCustomOrderDetailList instance].orderInfo.integral];
+    [self.pointRemarkLabel setAttributedText:[IPCCustomUI subStringWithText:remark BeginRang:8 Rang:remark.length - 8 Font:self.pointRemarkLabel.font Color:COLOR_RGB_RED]];
 }
 
 @end

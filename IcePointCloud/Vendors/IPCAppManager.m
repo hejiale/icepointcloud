@@ -154,7 +154,7 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
         return  @"退货中";
     }else if ([status isEqualToString:@"RETURN_FINISH"]){
         return  @"退货完成";
-    }else if ([status isEqualToString:@"WAITING_FOR_AUTH"]){
+    }else if ([status isEqualToString:@"WAITING_FOR_AUTH"] || [status isEqualToString:@"CUSTOM_IN"]){
         return  @"待审核";
     }else if ([status isEqualToString:@"WAITING_FOR_PAY_RETAINAGE"]){
         return  @"等待支付尾款";

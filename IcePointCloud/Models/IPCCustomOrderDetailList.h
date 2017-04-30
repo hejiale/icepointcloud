@@ -51,6 +51,8 @@
 @property (nonatomic, copy, readonly) NSString *  axisRight;
 @property (nonatomic, copy, readonly) NSString *  sphLeft;
 @property (nonatomic, copy, readonly) NSString *  sphRight;
+@property (nonatomic, copy, readonly) NSString *  cylLeft;
+@property (nonatomic, copy, readonly) NSString *  cylRight;
 @property (nonatomic, copy, readonly) NSString *  correctedVisionLeft;
 @property (nonatomic, copy, readonly) NSString *  correctedVisionRight;
 @property (nonatomic, copy, readonly) NSString *  distanceLeft;
