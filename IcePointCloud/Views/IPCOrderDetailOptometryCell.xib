@@ -12,12 +12,53 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="112" id="KGk-i7-Jjw" customClass="IPCOrderDetailOptometryCell">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="150"/>
+            <rect key="frame" x="0.0" y="0.0" width="400" height="190"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="149"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="189"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbJ-sN-rs4">
+                        <rect key="frame" x="28" y="5" width="352" height="159.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xqB-AQ-8Rz">
+                        <rect key="frame" x="28" y="164.5" width="100" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="nZx-xN-4qJ"/>
+                            <constraint firstAttribute="height" constant="15" id="qYE-k7-ojC"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bs-Na-YuY">
+                        <rect key="frame" x="200" y="164.5" width="180" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="K3l-sf-Ty8"/>
+                            <constraint firstAttribute="width" constant="180" id="UK3-4m-3HY"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kbJ-sN-rs4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="2Gm-gQ-gxr"/>
+                    <constraint firstAttribute="trailing" secondItem="3bs-Na-YuY" secondAttribute="trailing" constant="20" id="6YM-Gq-KUm"/>
+                    <constraint firstItem="kbJ-sN-rs4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="6rb-Z2-c9B"/>
+                    <constraint firstItem="xqB-AQ-8Rz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="KLR-tR-kSV"/>
+                    <constraint firstAttribute="bottom" secondItem="xqB-AQ-8Rz" secondAttribute="bottom" constant="10" id="S7i-tQ-MSm"/>
+                    <constraint firstAttribute="bottom" secondItem="3bs-Na-YuY" secondAttribute="bottom" constant="10" id="UDI-XO-J5f"/>
+                    <constraint firstAttribute="trailing" secondItem="kbJ-sN-rs4" secondAttribute="trailing" constant="20" id="bX0-06-XQN"/>
+                    <constraint firstItem="xqB-AQ-8Rz" firstAttribute="top" secondItem="kbJ-sN-rs4" secondAttribute="bottom" id="qCi-KO-7zO"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="employeeNameLabel" destination="xqB-AQ-8Rz" id="UPI-1L-0LD"/>
+                <outlet property="insertDateLabel" destination="3bs-Na-YuY" id="VZa-OK-QeT"/>
+                <outlet property="optometryContentView" destination="kbJ-sN-rs4" id="lMt-Ue-qyE"/>
+            </connections>
             <point key="canvasLocation" x="60" y="68"/>
         </tableViewCell>
     </objects>

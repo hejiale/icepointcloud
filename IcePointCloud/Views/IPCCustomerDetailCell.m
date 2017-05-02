@@ -24,8 +24,14 @@
         NSString * pointValue = [NSString stringWithFormat:@"%d积分",_currentCustomer.integral];
         CGFloat width = [pointValue jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
         self.pointWidth.constant = width + 25;
+    
+        if (_currentCustomer.photo_url.length) {
+            [self.headImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
+        }else{
+            NSString * headImage  = [IPCHeadImage gender:_currentCustomer.contactorGengerString Size:@"Large" Tag:_currentCustomer.photoIdForPos];
+            [self.headImageView setImage:[UIImage imageNamed:headImage]];
+        }
         
-        [self.headImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.phoneLabel setText:_currentCustomer.customerPhone];
         [self.birthdayLabel setText:_currentCustomer.birthday];

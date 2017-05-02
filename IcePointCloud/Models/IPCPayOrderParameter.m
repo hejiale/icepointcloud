@@ -64,6 +64,7 @@
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberLevel forKey:@"memberLevelId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberId forKey:@"memberId"];
         [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.occupation forKey:@"occupation"];
+//        [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.photoIdForPos forKey:@"photoIdForPos"];
         if (![IPCCurrentCustomerOpometry sharedManager].currentCustomer.memberLevel.length) {
             IPCMemberLevel * memberLevelMode = [IPCEmployeeMode sharedManager].memberLevelList.list[0];
             [parameters setObject:memberLevelMode.memberLevel forKey:@"memberLevel"];

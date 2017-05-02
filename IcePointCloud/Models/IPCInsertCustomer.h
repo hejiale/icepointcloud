@@ -40,7 +40,7 @@
 @property (nonatomic, copy, readwrite) NSMutableArray<IPCOptometryMode *> * optometryArray;
 
 
-- (BOOL)isFullOptometry;
-- (BOOL)isFullAddress;
+//- (BOOL)isFullOptometry;
+//- (BOOL)isFullAddress;
 
 @end

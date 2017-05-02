@@ -139,21 +139,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 - (IBAction)saveNewCustomerAction:(id)sender {
     if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
-        if ([[IPCInsertCustomer instance] isFullAddress]) {
-            if ([[IPCInsertCustomer instance] isFullOptometry]) {
-                if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
-                    [[IPCCurrentCustomerOpometry sharedManager] insertNewCustomer];
-                    [[IPCInsertCustomer instance] resetData];
-                    [self popToPayOrderViewController];
-                }else{
-                    [self saveNewCustomerRequest];
-                }
-            }else{
-                [IPCCustomUI showError:@"请选择填写完整验光单或跳过新建验光单操作!"];
-            }
-        }else{
-            [IPCCustomUI showError:@"请选择填写完整地址或跳过新建地址操作!"];
-        }
+        [self saveNewCustomerRequest];
     }else{
         [IPCCustomUI showError:@"请输入完整客户名或手机号!"];
     }

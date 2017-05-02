@@ -59,31 +59,31 @@
 }
 
 #pragma mark //判断输入完整的地址或验光单数据
-- (BOOL)isFullAddress{
-    if (self.contactorName.length && self.contactorPhone.length && self.contactorAddress.length) {
-        return YES;
-    }
-    if (!self.contactorName.length && !self.contactorPhone.length && !self.contactorAddress.length) {
-        return YES;
-    }
-    return NO;
-}
+//- (BOOL)isFullAddress{
+//    if (self.contactorName.length && self.contactorPhone.length && self.contactorAddress.length) {
+//        return YES;
+//    }
+//    if (!self.contactorName.length && !self.contactorPhone.length && !self.contactorAddress.length) {
+//        return YES;
+//    }
+//    return NO;
+//}
 
-
-- (BOOL)isFullOptometry{
-    __block BOOL isFull = NO;
-   [self.optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       if (obj.purpose.length  && obj.employeeName.length && obj.sphLeft.length && obj.sphRight.length && obj.cylLeft.length && obj.cylRight.length) {
-           isFull = YES;
-       }
-   }];
-    [self.optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (!obj.purpose.length  && !obj.employeeName.length && !obj.sphLeft.length && !obj.sphRight.length && !obj.cylLeft.length && !obj.cylRight.length) {
-            isFull = YES;
-        }
-    }];
-    return isFull;
-}
+//
+//- (BOOL)isFullOptometry{
+//    __block BOOL isFull = NO;
+//   [self.optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//       if (obj.purpose.length  && obj.employeeName.length && obj.sphLeft.length && obj.sphRight.length && obj.cylLeft.length && obj.cylRight.length) {
+//           isFull = YES;
+//       }
+//   }];
+//    [self.optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (!obj.purpose.length  && !obj.employeeName.length && !obj.sphLeft.length && !obj.sphRight.length && !obj.cylLeft.length && !obj.cylRight.length) {
+//            isFull = YES;
+//        }
+//    }];
+//    return isFull;
+//}
 
 
 @end

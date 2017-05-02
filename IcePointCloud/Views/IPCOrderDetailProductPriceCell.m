@@ -23,20 +23,24 @@
 }
 
 
-- (void)inputBeforeDiscountPrice:(double)beforePrice AfterPrice:(double)afterPrice
-{
-    NSString * beforePriceText = [NSString stringWithFormat:@"合计:￥%.f",afterPrice];
-//    NSString * afterPriceText = [NSString stringWithFormat:@"折后金额:￥%.f",afterPrice];
+- (void)layoutSubviews{
+    [super layoutSubviews];
     
-    CGFloat beforeWidth = [beforePriceText jk_widthWithFont:self.beforePriceLabel.font constrainedToHeight:self.beforePriceLabel.jk_height];
-//    CGFloat afterWith = [afterPriceText jk_widthWithFont:self.afterPriceLabel.font constrainedToHeight:self.afterPriceLabel.jk_height];
+    [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomOrderDetailList instance].orderInfo.totalPayAmount]];
+    //抵扣积分  兑换积分
+    if ([IPCCustomOrderDetailList instance].orderInfo.exchangeTotalIntegral > 0) {
+        [self.usedPointLabel setText:[NSString stringWithFormat:@"使用积分%.f点",[IPCCustomOrderDetailList instance].orderInfo.exchangeTotalIntegral]];
+        [self.usePointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomOrderDetailList instance].orderInfo.totalPointAmount]];
+    }else if ([IPCCustomOrderDetailList instance].orderInfo.deductionIntegral > 0){
+        [self.usedPointLabel setText:[NSString stringWithFormat:@"使用积分%.f点",[IPCCustomOrderDetailList instance].orderInfo.deductionIntegral]];
+        [self.usePointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomOrderDetailList instance].orderInfo.integralDeductionAmount]];
+    }else{
+        [self.usedPointLabel setText:@"使用积分0点"];
+        [self.usePointAmountLabel setText:@"-￥0.00"];
+    }
+    [self.givingAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomOrderDetailList instance].orderInfo.donationAmount]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomOrderDetailList instance].orderInfo.totalPrice]];
     
-    [self.beforePriceLabel setAttributedText:[IPCCustomUI subStringWithText:beforePriceText BeginRang:3 Rang:beforePriceText.length - 3 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
-    
-//    [self.afterPriceLabel setAttributedText:[IPCCustomUI subStringWithText:afterPriceText BeginRang:5 Rang:afterPriceText.length - 5 Font:[UIFont systemFontOfSize:16 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
-    
-    self.beforePriceWidth.constant = beforeWidth + 10;
-//    self.afterPriceWidth.constant = afterWith + 20;
 }
 
 @end

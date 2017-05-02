@@ -30,6 +30,10 @@
 @property (nonatomic, copy, readonly) NSString * style;//style
 @property (nonatomic, assign, readonly) double   price;//Recommended retail price
 @property (nonatomic, assign, readonly) double   prodPrice;//The actual price
+@property (nonatomic, assign, readonly) double  afterDiscountPrice;//折后价
+@property (nonatomic, assign, readonly) BOOL    integralExchange;//判断是否积分兑换
+@property (nonatomic, assign, readonly) double  exchangeIntegral;
+
 @property (nonatomic, copy, readonly) NSString * frameColor;//Frame color
 @property (nonatomic, copy, readonly) NSString * lensColor;//Lens color
 @property (nonatomic, copy, readonly) NSString * function;//function

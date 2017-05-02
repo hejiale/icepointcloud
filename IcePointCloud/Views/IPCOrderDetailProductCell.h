@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contactDegreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *batchNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *degreeWidthConstraint;
+@property (strong, nonatomic) UIImageView * pointImageView;
 
 
 @end

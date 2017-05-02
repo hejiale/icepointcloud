@@ -14,8 +14,10 @@
     [super awakeFromNib];
     // Initialization code
     
+    [self.contentView addSubview:self.pointImageView];
     [self.contentView addSubview:self.suggestPriceLabel];
     [self.contentView addSubview:self.productNameLabel];
+    
     
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(19);
@@ -23,12 +25,18 @@
         make.right.equalTo(self.contentView.mas_right).with.offset(19);
     }];
     
-    [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.pointImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(19);
         make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
+        make.width.mas_equalTo(10);
         make.height.mas_equalTo(20);
     }];
     
+    [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.productImageView.mas_right).with.offset(32);
+        make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
+        make.height.mas_equalTo(20);
+    }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -71,6 +79,17 @@
     return _productPriceLabel;
 }
 
+- (UIImageView *)pointImageView{
+    if (!_pointImageView) {
+        _pointImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
+        [_pointImageView setImage:[UIImage imageNamed:@"icon_red_point"]];
+        [_pointImageView setBackgroundColor:[UIColor clearColor]];
+        _pointImageView.contentMode = UIViewContentModeScaleAspectFit;
+        [_pointImageView setHidden:YES];
+    }
+    return _pointImageView;
+}
+
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
     
@@ -85,15 +104,28 @@
         CGFloat  titleHeight = [self.productNameLabel.text boundingRectWithSize:CGSizeMake(self.productNameLabel.jk_width, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.productNameLabel.font} context:nil].size.height;
         self.productNameLabel.jk_height = titleHeight;
         
-        [self.suggestPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.prodPrice]];
+        if (glasses.integralExchange) {
+            [self.pointImageView setHidden:NO];
+            [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.productImageView.mas_right).with.offset(32);
+            }];
+            [self.suggestPriceLabel setText:[NSString stringWithFormat:@"%.f",glasses.exchangeIntegral]];
+        }else{
+            [self.pointImageView setHidden:YES];
+            [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.equalTo(self.productImageView.mas_right).with.offset(19);
+            }];
+            [self.suggestPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.afterDiscountPrice]];
+        }
         
         CGFloat width = [self.suggestPriceLabel.text jk_widthWithFont:self.suggestPriceLabel.font constrainedToHeight:self.suggestPriceLabel.jk_height];
         self.suggestPriceLabel.jk_width = width + 5;
         
-        if (glasses.prodPrice < glasses.price) {
+        if ((_glasses.afterDiscountPrice < glasses.price && !_glasses.integralExchange) || _glasses.integralExchange)
+        {
             [self.contentView addSubview:self.productPriceLabel];
             
-            NSString * priceText = [NSString stringWithFormat:@"%.f",glasses.price];
+            NSString * priceText = [NSString stringWithFormat:@"￥%.2f",glasses.price];
             NSMutableAttributedString * aAttributedString = [[NSMutableAttributedString alloc] initWithString:priceText];
             [aAttributedString addAttribute:NSStrikethroughStyleAttributeName
                                       value:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid)

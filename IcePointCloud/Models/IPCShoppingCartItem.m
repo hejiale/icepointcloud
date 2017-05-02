@@ -33,14 +33,17 @@
 
 - (double)unitPrice
 {
-    if ([IPCPayOrderMode sharedManager].customerDiscount > 0) {
+    if (self.isChoosePoint) {
         if (_unitPrice == 0){
-            return self.glasses.price * [IPCPayOrderMode sharedManager].customerDiscount;
+            return self.glasses.price;
         }
-        return _unitPrice * [IPCPayOrderMode sharedManager].customerDiscount;
-    }
-    if (_unitPrice == 0) {
-        return self.glasses.price;
+    }else{
+        if (_unitPrice == 0){
+            if ([IPCPayOrderMode sharedManager].customerDiscount > 0) {
+                return self.glasses.price * [IPCPayOrderMode sharedManager].customerDiscount;
+            }
+            return self.glasses.price;
+        }
     }
     return _unitPrice;
 }
@@ -53,7 +56,7 @@
     if (self.isChoosePoint) {
         [params setObject:@(0) forKey:@"afterDiscountPrice"];
     }else{
-        [params setObject:@(self.unitPrice) forKey:@"afterDiscountPrice"];
+        [params setObject:[NSString stringWithFormat:@"%.2f",self.unitPrice] forKey:@"afterDiscountPrice"];
     }
     
     if ( ![IPCPayOrderMode sharedManager].isTrade) {

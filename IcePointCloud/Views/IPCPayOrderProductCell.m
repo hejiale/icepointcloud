@@ -252,11 +252,13 @@
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
                 [IPCCustomUI showError:@"请先选择员工"];
             }else{
-                if ([str doubleValue] < self.cartItem.unitPrice) {
+                if ([str doubleValue] < self.cartItem.glasses.price) {
                     if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
                         [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
                     }
                     self.cartItem.unitPrice = [str doubleValue];
+                }else{
+                    self.cartItem.unitPrice = self.cartItem.glasses.price;
                 }
                 
                 [IPCPayOrderMode sharedManager].realTotalPrice = 0;

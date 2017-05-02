@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderProductPriceCellIdentifier" id="KGk-i7-Jjw" customClass="IPCOrderDetailProductPriceCell">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="OrderProductPriceCellIdentifier" id="KGk-i7-Jjw" customClass="IPCOrderDetailProductPriceCell">
             <rect key="frame" x="0.0" y="0.0" width="400" height="125"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -49,11 +49,11 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="使用积分" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blg-xi-3Pz">
-                        <rect key="frame" x="212" y="38" width="80" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="blg-xi-3Pz">
+                        <rect key="frame" x="92" y="38" width="200" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="0Wq-Wc-RN4"/>
-                            <constraint firstAttribute="width" constant="80" id="SzV-1l-rct"/>
+                            <constraint firstAttribute="width" constant="200" id="SzV-1l-rct"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,7 +133,8 @@
                 <outlet property="givingAmountLabel" destination="tio-u4-UEj" id="05I-7u-XNi"/>
                 <outlet property="realTotalPriceLabel" destination="rDe-aP-QhW" id="OEe-yn-vkJ"/>
                 <outlet property="totalPriceLabel" destination="oFA-4p-lfV" id="x2E-td-lqN"/>
-                <outlet property="usePointLabel" destination="Nb7-3M-bGh" id="jJC-Cq-WhO"/>
+                <outlet property="usePointAmountLabel" destination="Nb7-3M-bGh" id="83H-EY-8Yq"/>
+                <outlet property="usedPointLabel" destination="blg-xi-3Pz" id="3oH-Ll-cTF"/>
             </connections>
         </tableViewCell>
     </objects>

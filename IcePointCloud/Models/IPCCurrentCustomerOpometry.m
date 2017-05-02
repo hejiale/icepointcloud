@@ -41,6 +41,7 @@
     self.currentCustomer.memberLevelId = [IPCInsertCustomer instance].memberLevelId;
     self.currentCustomer.remark = [IPCInsertCustomer instance].remark;
     self.currentCustomer.occupation = [IPCInsertCustomer instance].job;
+    self.currentCustomer.photoIdForPos = [IPCInsertCustomer instance].photo_udid;
     self.currentCustomer.integral = 0;
     
     self.currentAddress.contactName = [IPCInsertCustomer instance].contactorName;

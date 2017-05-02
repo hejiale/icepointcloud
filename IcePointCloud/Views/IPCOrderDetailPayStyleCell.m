@@ -37,7 +37,11 @@
         payTypeName = @"刷卡";
     }
     
-    [self.payStyleLabel setText:[NSString stringWithFormat:@"%@ %.f",payTypeName,[IPCCustomOrderDetailList instance].orderInfo.payTypeAmount]];
+    NSMutableString * payStyleStr = [[NSMutableString alloc]initWithFormat:@"%@%.f",payTypeName,[IPCCustomOrderDetailList instance].orderInfo.payTypeAmount];
+    if ([IPCCustomOrderDetailList instance].orderInfo.totalOtherPrice > 0) {
+        [payStyleStr appendString:[NSString stringWithFormat:@" / 其它%.f",[IPCCustomOrderDetailList instance].orderInfo.totalOtherPrice]];
+    }
+    [self.payStyleLabel setText:payStyleStr];
     
     NSString * remark = [NSString stringWithFormat:@"本次消费产生积分%d",[IPCCustomOrderDetailList instance].orderInfo.integral];
     [self.pointRemarkLabel setAttributedText:[IPCCustomUI subStringWithText:remark BeginRang:8 Rang:remark.length - 8 Font:self.pointRemarkLabel.font Color:COLOR_RGB_RED]];

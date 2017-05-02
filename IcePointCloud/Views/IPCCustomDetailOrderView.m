@@ -215,7 +215,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             return 125;
         return 110;
     }else if (indexPath.section == 4){
-        return 60;
+        return 50;
     }else if (indexPath.section == 5){
         return 70;
     }else if (indexPath.section == 6){

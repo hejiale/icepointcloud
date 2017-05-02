@@ -28,7 +28,7 @@
 @property (nonatomic, copy, readonly) NSString *  contactorGender;
 @property (nonatomic, copy, readonly) NSString *  status;
 @property (nonatomic, copy, readonly) NSString *  orderCode;
-@property (nonatomic, assign, readonly) double    totalPrice;
+@property (nonatomic, assign, readwrite) double    totalPrice;
 @property (nonatomic, copy, readonly) NSString *  orderNumber;
 @property (nonatomic, copy, readonly) NSString *  orderTime;
 @property (nonatomic, copy, readonly) NSString *  operatorName;
@@ -64,6 +64,10 @@
 @property (nonatomic, copy, readonly) NSString *  payType;
 @property (nonatomic, assign, readonly) double    payTypeAmount;
 @property (nonatomic, assign, readwrite) BOOL     isPackUpOptometry;
+@property (nonatomic, assign, readwrite) double   totalPayAmount;
+@property (nonatomic, assign, readwrite) double    totalPointAmount;
+@property (nonatomic, assign, readwrite) double   totalOtherPrice;
+@property (nonatomic, assign, readonly) double    deductionIntegral;
 
 
 @end

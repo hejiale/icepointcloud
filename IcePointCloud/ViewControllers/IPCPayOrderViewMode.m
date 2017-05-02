@@ -166,7 +166,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             cell.currentCustomer = [IPCCurrentCustomerOpometry sharedManager].currentCustomer;
             return cell;
         }
-    }else if (indexPath.section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentOpometry)
+    }else if (indexPath.section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentAddress)
     {
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -184,7 +184,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             [cell.defaultButton setHidden:YES];
             return cell;
         }
-    }else if(indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentAddress){
+    }else if(indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentOpometry){
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
