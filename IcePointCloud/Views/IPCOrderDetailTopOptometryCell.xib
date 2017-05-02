@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="IPCOrderDetailTopOptometryCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验光单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZR-zW-mkF">
+                        <rect key="frame" x="28" y="13" width="50" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="LMa-Fb-MSH"/>
+                            <constraint firstAttribute="width" constant="50" id="Yh0-eM-8b4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4AU-Mz-qRj">
+                        <rect key="frame" x="200" y="13" width="100" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="hPl-ef-kRT"/>
+                            <constraint firstAttribute="width" constant="100" id="ks9-IU-mqS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <state key="normal" title="查看" image="icon_down_arrow">
+                            <color key="titleColor" red="0.38823529411764707" green="0.62745098039215685" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" title="收起" image="icon_up_arrow"/>
+                        <connections>
+                            <action selector="packUpAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dRO-Qh-hZP"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="cZR-zW-mkF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="I4j-EV-4JU"/>
+                    <constraint firstAttribute="trailing" secondItem="4AU-Mz-qRj" secondAttribute="trailing" constant="20" id="J1i-Cl-U3U"/>
+                    <constraint firstItem="cZR-zW-mkF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Muc-Eb-Pk1"/>
+                    <constraint firstItem="4AU-Mz-qRj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="TcI-2c-29V"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="packUpButton" destination="4AU-Mz-qRj" id="ADa-cW-4u4"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_down_arrow" width="19" height="19"/>
+        <image name="icon_up_arrow" width="19" height="19"/>
+    </resources>
+</document>

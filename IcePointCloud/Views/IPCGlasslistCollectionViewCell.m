@@ -28,6 +28,10 @@
     [self bringSubviewToFront:self.imagePageControl];
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+}
+
 
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
@@ -74,8 +78,14 @@
         //Shopping cart whether to join the product
         if ([self.glasses filterType] == IPCTopFilterTypeCard) {
             [self.buyButton setHidden:NO];
+            [self.cardValueLabel setHidden:NO];
+            [self.cardValueNameLabel setHidden:NO];
+            [self.cardValueLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
+            [self.cardValueNameLabel setText:_glasses.glassName];
         }else{
             [self.addCartButton setHidden:NO];
+            [self.cardValueNameLabel setHidden:YES];
+            [self.cardValueLabel setHidden:YES];
             
             __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
             
