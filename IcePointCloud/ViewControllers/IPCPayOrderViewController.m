@@ -154,6 +154,7 @@
 
 
 - (IBAction)cancelPayOrderAction:(id)sender {
+    [self resetPayInfoData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

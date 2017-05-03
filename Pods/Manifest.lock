@@ -22,9 +22,7 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - OBDragDrop (1.0.3)
-  - ReactiveCocoa (4.2.2):
-    - Result (~> 2.0)
-  - Result (2.1.3)
+  - ReactiveObjC (3.0.0)
   - SNWeChatSDK (1.7.5)
   - SVProgressHUD (2.1.2)
   - TuSDK (2.6.3):
@@ -52,7 +50,7 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - OBDragDrop
-  - ReactiveCocoa (~> 4.2.2)
+  - ReactiveObjC
   - SNWeChatSDK
   - SVProgressHUD
   - TuSDK
@@ -69,14 +67,13 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   OBDragDrop: 827cd5cecede6b5320b18106e3695f030900d8cf
-  ReactiveCocoa: 72263e7ac0770c274617ccd345e01049d0ca38ae
-  Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
+  ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   TuSDK: 172852c5ce5db82af759947f85f5cc608d738d77
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 918ee2e02750a1678e3df7fc4cd74e70368014b7
+PODFILE CHECKSUM: 94428dacdbede467037faf56dd25093244ebc821
 
 COCOAPODS: 1.2.0

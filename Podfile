@@ -17,7 +17,7 @@ pod 'ZYCornerRadius'
 pod 'GPUImage'
 pod 'JKCategories'
 pod 'YYKit'
-pod 'ReactiveCocoa', '~> 4.2.2’
+pod 'ReactiveObjC'
 pod 'MJRefresh'
 pod 'SVProgressHUD'
 pod 'TuSDK'

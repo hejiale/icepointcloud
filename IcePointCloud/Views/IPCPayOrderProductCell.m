@@ -67,14 +67,8 @@
 
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard) {
             [self.countNumView setHidden:NO];
-            if (![IPCPayOrderMode sharedManager].isTrade && _cartItem.isChoosePoint) {
-                [self.inputPirceView setHidden:NO];
-            }else{
-                [self.inputPirceView setHidden:YES];
-            }
         }else{
             [self.countLabel setHidden:NO];
-            [self.inputPirceView setHidden:NO];
         }
         
         if ([IPCPayOrderMode sharedManager].isTrade) {
@@ -87,9 +81,6 @@
             [self.noPointButton setHidden:NO];
             self.pointButtonWith.constant = 130;
             self.inputPriceViewRight.constant = 20;
-            if ([_cartItem.glasses filterType] != IPCTopFilterTypeCard) {
-                [self.inputPirceView setHidden:NO];
-            }
             
             if (_cartItem.isChoosePoint) {
                 [self.noPointButton setSelected:YES];
@@ -253,8 +244,10 @@
                 [IPCCustomUI showError:@"请先选择员工"];
             }else{
                 if ([str doubleValue] < self.cartItem.glasses.price) {
-                    if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-                        [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+                    if ( [self.cartItem.glasses filterType] != IPCTopFilterTypeCard) {
+                        if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                            [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+                        }
                     }
                     self.cartItem.unitPrice = [str doubleValue];
                 }else{

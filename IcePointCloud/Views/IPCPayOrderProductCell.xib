@@ -149,7 +149,7 @@
                                     <action selector="noPointAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="66x-D9-dtK"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psX-Zh-06S">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psX-Zh-06S">
                                 <rect key="frame" x="719" y="40" width="130" height="30"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4xs-0g-MOb">

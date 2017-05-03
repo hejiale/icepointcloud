@@ -36,7 +36,7 @@
 #import "iflyMSC/IFlyFaceSDK.h"
 #import "YYKit.h"
 #import "JKCategories.h"
-#import "ReactiveCocoa.h"
+#import "ReactiveObjC.h"
 #import "UIImageView+CornerRadius.h"
 //Head File
 #import "HeaderFile.h"

@@ -39,7 +39,7 @@
         }
     }else{
         if (_unitPrice == 0){
-            if ([IPCPayOrderMode sharedManager].customerDiscount > 0) {
+            if ([IPCPayOrderMode sharedManager].customerDiscount > 0 && [self.glasses filterType] != IPCTopFilterTypeCard) {
                 return self.glasses.price * [IPCPayOrderMode sharedManager].customerDiscount;
             }
             return self.glasses.price;

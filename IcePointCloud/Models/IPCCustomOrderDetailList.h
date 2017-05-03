@@ -68,7 +68,8 @@
 @property (nonatomic, assign, readwrite) double    totalPointAmount;
 @property (nonatomic, assign, readwrite) double   totalOtherPrice;
 @property (nonatomic, assign, readonly) double    deductionIntegral;
-
+@property (nonatomic, assign, readwrite) BOOL     isCustomized;
+@property (nonatomic, assign, readwrite) BOOL     isCustomizedLens;
 
 @end
 
