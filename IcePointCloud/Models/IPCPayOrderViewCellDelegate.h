@@ -15,5 +15,6 @@
 - (void)reloadPayOrderView;
 - (void)searchCustomerMethod;
 - (void)showPaySuccessViewWithOrderInfo:(IPCOrder *)orderResult;
+- (void)selectNormalGlasses;
 
 @end

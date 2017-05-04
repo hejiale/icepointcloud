@@ -49,14 +49,13 @@
                                 <constraint firstAttribute="height" constant="1" id="MCq-1e-HhR"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wQ-af-4XI">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wQ-af-4XI">
                             <rect key="frame" x="277.5" y="195" width="245" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="PRw-R8-8oK"/>
                                 <constraint firstAttribute="width" constant="245" id="PlA-9v-mSI"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
-                            <state key="normal" title="确定">
+                            <state key="normal" image="icon_sure_customer">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
@@ -118,4 +117,7 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
+    <resources>
+        <image name="icon_sure_customer" width="245" height="35"/>
+    </resources>
 </document>

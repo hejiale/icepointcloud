@@ -103,12 +103,11 @@ typedef void(^UpdateBlock)(void);
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
     [itemView addBorder:3 Width:0.5];
     
-    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, itemView.jk_width-10, itemView.jk_height)];
+    UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, itemView.jk_width-10, itemView.jk_height)];
     tf.textColor = [UIColor darkGrayColor];
     tf.delegate  = self;
     tf.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     tf.tag = functionTag;
-    tf.textAlignment = NSTextAlignmentCenter;
     tf.returnKeyType = UIReturnKeyDone;
     [tf setRightButton:self Action:@selector(onSelectFunctionAction) OnView:itemView];
     [itemView addSubview:tf];

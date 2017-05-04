@@ -96,7 +96,11 @@ typedef  void(^DismissBlock)();
 #pragma mark //Clicked Event
 - (IBAction)completeAction:(id)sender {
     [self endEditing:YES];
-    [self saveNewOpometryRequest];
+    if (!self.optometryView.insertOptometry.employeeName.length && !self.optometryView.insertOptometry.purpose.length) {
+        [IPCCustomUI showError:@"请填写验光师和用途!"];
+    }else{
+        [self saveNewOpometryRequest];
+    }
 }
 
 

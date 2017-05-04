@@ -273,6 +273,10 @@
 		CB7C41F71E9B62AE008174A6 /* IPCAddressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7C41F61E9B62AE008174A6 /* IPCAddressView.m */; };
 		CB7C41F91E9B62BC008174A6 /* IPCAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7C41F81E9B62BC008174A6 /* IPCAddressView.xib */; };
 		CB7EF4891E83A020003F7995 /* IPCPayOrderPayTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */; };
+		CB8F5CE71EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F5CE51EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.m */; };
+		CB8F5CE81EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8F5CE61EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.xib */; };
+		CB8F5CF11EBB200A00B319D1 /* IPCCustomsizedGlassesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F5CEF1EBB200A00B319D1 /* IPCCustomsizedGlassesCell.m */; };
+		CB8F5CF21EBB200A00B319D1 /* IPCCustomsizedGlassesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8F5CF01EBB200A00B319D1 /* IPCCustomsizedGlassesCell.xib */; };
 		CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */; };
 		CB9211591E824CE000FD4EDC /* IPCPayOrderProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */; };
 		CBA749A71E9DB5D200160088 /* IPCInsertCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA749A61E9DB5D200160088 /* IPCInsertCustomer.m */; };
@@ -773,6 +777,12 @@
 		CB7C41F81E9B62BC008174A6 /* IPCAddressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCAddressView.xib; sourceTree = "<group>"; };
 		CB7EF4871E83A020003F7995 /* IPCPayOrderPayTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderPayTypeView.h; sourceTree = "<group>"; };
 		CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderPayTypeView.m; sourceTree = "<group>"; };
+		CB8F5CE41EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSelectCustomsizedViewController.h; sourceTree = "<group>"; };
+		CB8F5CE51EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSelectCustomsizedViewController.m; sourceTree = "<group>"; };
+		CB8F5CE61EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSelectCustomsizedViewController.xib; sourceTree = "<group>"; };
+		CB8F5CEE1EBB200A00B319D1 /* IPCCustomsizedGlassesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedGlassesCell.h; sourceTree = "<group>"; };
+		CB8F5CEF1EBB200A00B319D1 /* IPCCustomsizedGlassesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomsizedGlassesCell.m; sourceTree = "<group>"; };
+		CB8F5CF01EBB200A00B319D1 /* IPCCustomsizedGlassesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomsizedGlassesCell.xib; sourceTree = "<group>"; };
 		CB9211551E824CE000FD4EDC /* IPCPayOrderProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderProductCell.h; sourceTree = "<group>"; };
 		CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderProductCell.m; sourceTree = "<group>"; };
 		CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderProductCell.xib; sourceTree = "<group>"; };
@@ -977,13 +987,11 @@
 		0470ADA51D407042003AF4F4 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				044E0EC31E03B86D00FD2525 /* IPCCustomDetailOrderView.h */,
-				044E0EC41E03B86D00FD2525 /* IPCCustomDetailOrderView.m */,
-				044E0EC61E03B88400FD2525 /* IPCCustomDetailOrderView.xib */,
-				CBE4C83C1E9CCE8700F09D2A /* IPCUpdateCustomerView.h */,
-				CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */,
-				CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */,
 				04A202061D7FDE4C00F2A681 /* Cell */,
+				CB7C41F41E9B626A008174A6 /* EditAddress */,
+				CB0419911E97740D00D99F24 /* EditOpmetory */,
+				CBD683251EBAF743001512A3 /* OrderDetail */,
+				CBD683261EBAF751001512A3 /* UpdateCustomer */,
 			);
 			name = Customer;
 			sourceTree = "<group>";
@@ -1198,13 +1206,10 @@
 		04A202101D7FDFC300F2A681 /* PayOrder */ = {
 			isa = PBXGroup;
 			children = (
-				044E0ECC1E03CDC500FD2525 /* IPCPaySuccessView.h */,
-				044E0ECD1E03CDC500FD2525 /* IPCPaySuccessView.m */,
-				044E0ECF1E03CDD500FD2525 /* IPCPaySuccessView.xib */,
 				CBE416D31EA887B900105EEC /* Customsized */,
-				CB79C0F51EA1E48500078CCA /* PayType */,
 				CB79C1031EA20C0200078CCA /* EmployeePerformance */,
-				04C9F7A81DEEB146001258B2 /* cell */,
+				CBD683241EBAF675001512A3 /* PaySuccess */,
+				CB79C0F51EA1E48500078CCA /* PayType */,
 			);
 			name = PayOrder;
 			sourceTree = "<group>";
@@ -1218,6 +1223,9 @@
 				04A84FAB1D509BBC005D92AB /* IPCOrderDetailMemoCell.h */,
 				04A84FAC1D509BBC005D92AB /* IPCOrderDetailMemoCell.m */,
 				04A84FAD1D509BBC005D92AB /* IPCOrderDetailMemoCell.xib */,
+				CB3FB0661EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.h */,
+				CB3FB0671EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m */,
+				CB3FB0681EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.xib */,
 				CB3FB05C1EB4789E00DDF59F /* IPCOrderDetailPayStyleCell.h */,
 				CB3FB05D1EB4789E00DDF59F /* IPCOrderDetailPayStyleCell.m */,
 				CB3FB05E1EB4789E00DDF59F /* IPCOrderDetailPayStyleCell.xib */,
@@ -1233,9 +1241,6 @@
 				CB3FB0611EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.h */,
 				CB3FB0621EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m */,
 				CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */,
-				CB3FB0661EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.h */,
-				CB3FB0671EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m */,
-				CB3FB0681EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.xib */,
 			);
 			name = OrderDetail;
 			sourceTree = "<group>";
@@ -1634,12 +1639,10 @@
 				04B1D2091D867D8D00D9B865 /* Asset */,
 				04A4154E1D7D203D0093FF6E /* BatchParameter */,
 				0470ADA51D407042003AF4F4 /* Customer */,
-				CB7C41F41E9B626A008174A6 /* CustomerAddress */,
 				CBC6AF4F1EA0A29000F7914D /* Employee */,
 				04443C561D23CAA300596519 /* FilterProduct */,
 				04C34CC41E0140D500979001 /* GuideView */,
 				CB1234EF1E762D3400AB29DF /* MenuView */,
-				CB0419911E97740D00D99F24 /* Opmetory */,
 				04A202101D7FDFC300F2A681 /* PayOrder */,
 				049753B71D4AF49C00E6579F /* Product */,
 				046497811D483E6300137A3E /* ProductDetail */,
@@ -1719,7 +1722,7 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		CB0419911E97740D00D99F24 /* Opmetory */ = {
+		CB0419911E97740D00D99F24 /* EditOpmetory */ = {
 			isa = PBXGroup;
 			children = (
 				044E0EBE1E03B2CE00FD2525 /* IPCEditOptometryView.h */,
@@ -1728,7 +1731,7 @@
 				CB7C41F11E9B2360008174A6 /* IPCOptometryView.h */,
 				CB7C41F21E9B2360008174A6 /* IPCOptometryView.m */,
 			);
-			name = Opmetory;
+			name = EditOpmetory;
 			sourceTree = "<group>";
 		};
 		CB1234EF1E762D3400AB29DF /* MenuView */ = {
@@ -1793,6 +1796,7 @@
 				CB79C0F61EA1E4A600078CCA /* IPCPayOrderTypeBottomView.h */,
 				CB79C0F71EA1E4A600078CCA /* IPCPayOrderTypeBottomView.m */,
 				CB79C0FB1EA1E4C300078CCA /* IPCPayOrderTypeBottomView.xib */,
+				04C9F7A81DEEB146001258B2 /* cell */,
 			);
 			name = PayType;
 			sourceTree = "<group>";
@@ -1807,7 +1811,7 @@
 			name = EmployeePerformance;
 			sourceTree = "<group>";
 		};
-		CB7C41F41E9B626A008174A6 /* CustomerAddress */ = {
+		CB7C41F41E9B626A008174A6 /* EditAddress */ = {
 			isa = PBXGroup;
 			children = (
 				044E0EB91E03AA4A00FD2525 /* IPCEditAddressView.h */,
@@ -1817,7 +1821,7 @@
 				CB7C41F61E9B62AE008174A6 /* IPCAddressView.m */,
 				CB7C41F81E9B62BC008174A6 /* IPCAddressView.xib */,
 			);
-			name = CustomerAddress;
+			name = EditAddress;
 			sourceTree = "<group>";
 		};
 		CB7C41FA1E9B7E2D008174A6 /* CustomerList */ = {
@@ -1844,6 +1848,34 @@
 				CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */,
 			);
 			name = InsertNewCustomer;
+			sourceTree = "<group>";
+		};
+		CB8F5CE11EBB1B9900B319D1 /* Parameter */ = {
+			isa = PBXGroup;
+			children = (
+				CBE416E11EA8A19600105EEC /* IPCCustomsizedParameterView.h */,
+				CBE416E21EA8A19600105EEC /* IPCCustomsizedParameterView.m */,
+				CBFD04101EA9D371006EF4E3 /* IPCCustomsizedLensView.h */,
+				CBFD04111EA9D371006EF4E3 /* IPCCustomsizedLensView.m */,
+				CBFD04161EA9D39B006EF4E3 /* IPCCustomsizedLensView.xib */,
+				CBFD04131EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.h */,
+				CBFD04141EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m */,
+				CBFD04181EA9D409006EF4E3 /* IPCCustomsizedContactLensView.xib */,
+				CBE416EC1EA8BF6200105EEC /* IPCCustomsizedOtherView.h */,
+				CBE416ED1EA8BF6200105EEC /* IPCCustomsizedOtherView.m */,
+				CBE416EF1EA8C12F00105EEC /* IPCCustomsizedOtherView.xib */,
+			);
+			name = Parameter;
+			sourceTree = "<group>";
+		};
+		CB8F5CE31EBB1BE400B319D1 /* Customsized */ = {
+			isa = PBXGroup;
+			children = (
+				CB8F5CE41EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.h */,
+				CB8F5CE51EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.m */,
+				CB8F5CE61EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.xib */,
+			);
+			name = Customsized;
 			sourceTree = "<group>";
 		};
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
@@ -1904,6 +1936,7 @@
 		CB91871D1E8CCAD200D59487 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CB8F5CE31EBB1BE400B319D1 /* Customsized */,
 				04A2020D1D7FDF4600F2A681 /* Search */,
 				CB91871E1E8CF5C500D59487 /* ProductDetail */,
 				046332441D49E98F000B4940 /* SkinCare */,
@@ -2112,20 +2145,40 @@
 			name = Employee;
 			sourceTree = "<group>";
 		};
+		CBD683241EBAF675001512A3 /* PaySuccess */ = {
+			isa = PBXGroup;
+			children = (
+				044E0ECC1E03CDC500FD2525 /* IPCPaySuccessView.h */,
+				044E0ECD1E03CDC500FD2525 /* IPCPaySuccessView.m */,
+				044E0ECF1E03CDD500FD2525 /* IPCPaySuccessView.xib */,
+			);
+			name = PaySuccess;
+			sourceTree = "<group>";
+		};
+		CBD683251EBAF743001512A3 /* OrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				044E0EC31E03B86D00FD2525 /* IPCCustomDetailOrderView.h */,
+				044E0EC41E03B86D00FD2525 /* IPCCustomDetailOrderView.m */,
+				044E0EC61E03B88400FD2525 /* IPCCustomDetailOrderView.xib */,
+			);
+			name = OrderDetail;
+			sourceTree = "<group>";
+		};
+		CBD683261EBAF751001512A3 /* UpdateCustomer */ = {
+			isa = PBXGroup;
+			children = (
+				CBE4C83C1E9CCE8700F09D2A /* IPCUpdateCustomerView.h */,
+				CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */,
+				CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */,
+			);
+			name = UpdateCustomer;
+			sourceTree = "<group>";
+		};
 		CBE416D31EA887B900105EEC /* Customsized */ = {
 			isa = PBXGroup;
 			children = (
-				CBE416E11EA8A19600105EEC /* IPCCustomsizedParameterView.h */,
-				CBE416E21EA8A19600105EEC /* IPCCustomsizedParameterView.m */,
-				CBFD04101EA9D371006EF4E3 /* IPCCustomsizedLensView.h */,
-				CBFD04111EA9D371006EF4E3 /* IPCCustomsizedLensView.m */,
-				CBFD04161EA9D39B006EF4E3 /* IPCCustomsizedLensView.xib */,
-				CBFD04131EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.h */,
-				CBFD04141EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m */,
-				CBFD04181EA9D409006EF4E3 /* IPCCustomsizedContactLensView.xib */,
-				CBE416EC1EA8BF6200105EEC /* IPCCustomsizedOtherView.h */,
-				CBE416ED1EA8BF6200105EEC /* IPCCustomsizedOtherView.m */,
-				CBE416EF1EA8C12F00105EEC /* IPCCustomsizedOtherView.xib */,
+				CB8F5CE11EBB1B9900B319D1 /* Parameter */,
 				CBE416EB1EA8B0DC00105EEC /* cell */,
 			);
 			name = Customsized;
@@ -2143,6 +2196,9 @@
 				CBE416E61EA8B00D00105EEC /* IPCCustomsizedLeftParameterCell.h */,
 				CBE416E71EA8B00D00105EEC /* IPCCustomsizedLeftParameterCell.m */,
 				CBE416E81EA8B00D00105EEC /* IPCCustomsizedLeftParameterCell.xib */,
+				CB8F5CEE1EBB200A00B319D1 /* IPCCustomsizedGlassesCell.h */,
+				CB8F5CEF1EBB200A00B319D1 /* IPCCustomsizedGlassesCell.m */,
+				CB8F5CF01EBB200A00B319D1 /* IPCCustomsizedGlassesCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -2309,6 +2365,8 @@
 				04CBD97F1D585BBD00C7CAA4 /* IPCPersonQRCodeCell.xib in Resources */,
 				044E0ED01E03CDD500FD2525 /* IPCPaySuccessView.xib in Resources */,
 				04443C551D23C8A800596519 /* IPCFilterGlassesView.xib in Resources */,
+				CB8F5CF21EBB200A00B319D1 /* IPCCustomsizedGlassesCell.xib in Resources */,
+				CB8F5CE81EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.xib in Resources */,
 				046332491D49FDBE000B4940 /* IPCInsertCustomerOpometryCell.xib in Resources */,
 				04F98DBF1D6D720600C97474 /* IPCSingleModeView.xib in Resources */,
 				CB79C0FC1EA1E4C300078CCA /* IPCPayOrderTypeBottomView.xib in Resources */,
@@ -2477,6 +2535,7 @@
 				04B35DB01DE67ADF00281B71 /* IPCOrderDetailTopCell.m in Sources */,
 				04443C5A1D23CADA00596519 /* IPCFilterClassViewCell.m in Sources */,
 				04542C851DDA9E54005B5CCA /* IPCGlassListViewMode.m in Sources */,
+				CB8F5CE71EBB1C2500B319D1 /* IPCSelectCustomsizedViewController.m in Sources */,
 				CB6AC2191E9F915D008031DD /* IPCCustomerTypeList.m in Sources */,
 				CB6AC2121E9F51B9008031DD /* IPCEmployeeMode.m in Sources */,
 				9E15729919F858DD00EC93D1 /* IPCHttpRequest.m in Sources */,
@@ -2556,6 +2615,7 @@
 				04443C511D23C89300596519 /* IPCFilterGlassesView.m in Sources */,
 				CB79C0F81EA1E4A600078CCA /* IPCPayOrderTypeBottomView.m in Sources */,
 				0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */,
+				CB8F5CF11EBB200A00B319D1 /* IPCCustomsizedGlassesCell.m in Sources */,
 				044A91AD1E56943A00C9DF1A /* IPCShoppingCartView.m in Sources */,
 				047D3FC01D43039400638526 /* IPCOrderDetailInfoCell.m in Sources */,
 				04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */,
@@ -2713,8 +2773,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Huashi Intelligent Technology Co., Ltd.";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Huashi Intelligent Technology Co., Ltd.";
 				COPY_PHASE_STRIP = YES;
 				CustomAppBundleld = com.IcePointCloud.Pos;
 				CustomProductName = "冰点云";
@@ -2729,7 +2789,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PROVISIONING_PROFILE = "c524837e-9058-46a0-85bd-298de81fd4f5";
+				PROVISIONING_PROFILE = "97aa4570-6518-4b03-b3fa-8f7e7840cb33";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -2800,6 +2860,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Jiang Peng (TV2UGXUC6A)";
+				CustomAppBundleld = com.IcePointCloud.Pos;
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

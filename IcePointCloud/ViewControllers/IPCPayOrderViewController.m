@@ -9,6 +9,7 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
+#import "IPCSelectCustomsizedViewController.h"
 #import "IPCPayOrderPayTypeView.h"
 #import "IPCEmployeListView.h"
 #import "IPCPaySuccessView.h"
@@ -236,6 +237,11 @@
 
 - (void)searchCustomerMethod{
     [self selectCustomerAction];
+}
+
+- (void)selectNormalGlasses{
+    IPCSelectCustomsizedViewController * selectCustomsizedVC = [[IPCSelectCustomsizedViewController alloc]initWithNibName:@"IPCSelectCustomsizedViewController" bundle:nil];
+    [self.navigationController pushViewController:selectCustomsizedVC animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

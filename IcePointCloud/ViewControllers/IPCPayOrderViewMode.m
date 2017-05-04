@@ -128,12 +128,12 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1)){
-//        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
-//            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
-//                return 3;
-//            }
-//            return 4;
-//        }
+        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
+                return 3;
+            }
+            return 4;
+        }
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))
@@ -231,37 +231,42 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"购买列表"];
+            [cell setInsertTitle:@"购买列表"];
+            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
+                    [self.delegate selectNormalGlasses];
+                }
+            }];
             return cell;
         }else{
-//            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
-//                if (indexPath.row == 1) {
-//                    IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
-//                    if (!cell) {
-//                        cell = [[UINib nibWithNibName:@"IPCCustomsizedProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-//                    }
-//                    cell.customsizedProduct = [IPCCustomsizedItem sharedItem].customsizedProduct;
-//                    return cell;
-//                }else if(indexPath.row == 2){
-//                    IPCCustomsizedRightParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:rightEyeIdentifier];
-//                    if (!cell) {
-//                        cell = [[UINib nibWithNibName:@"IPCCustomsizedRightParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
-//                    }
-//                    [cell reloadUI:^{
-//                        [tableView reloadData];
-//                    }];
-//                    return cell;
-//                }else{
-//                    IPCCustomsizedLeftParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:leftEyeIdentifier];
-//                    if (!cell) {
-//                        cell = [[UINib nibWithNibName:@"IPCCustomsizedLeftParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
-//                    }
-//                    [cell reloadUI:^{
-//                        [tableView reloadData];
-//                    }];
-//                    return cell;
-//                }
-//            }else{
+            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
+                if (indexPath.row == 1) {
+                    IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
+                    if (!cell) {
+                        cell = [[UINib nibWithNibName:@"IPCCustomsizedProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                    }
+                    cell.customsizedProduct = [IPCCustomsizedItem sharedItem].customsizedProduct;
+                    return cell;
+                }else if(indexPath.row == 2){
+                    IPCCustomsizedRightParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:rightEyeIdentifier];
+                    if (!cell) {
+                        cell = [[UINib nibWithNibName:@"IPCCustomsizedRightParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
+                    }
+                    [cell reloadUI:^{
+                        [tableView reloadData];
+                    }];
+                    return cell;
+                }else{
+                    IPCCustomsizedLeftParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:leftEyeIdentifier];
+                    if (!cell) {
+                        cell = [[UINib nibWithNibName:@"IPCCustomsizedLeftParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
+                    }
+                    [cell reloadUI:^{
+                        [tableView reloadData];
+                    }];
+                    return cell;
+                }
+            }else{
                 IPCPayOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:payOrderCartItemIdentifier];
                 if (!cell) {
                     cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -272,7 +277,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
                     [cell setCartItem:cartItem];
                 }
                 return cell;
-//            }
+            }
         }
     }else{
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];

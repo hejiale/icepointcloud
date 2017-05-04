@@ -39,11 +39,12 @@
     return _customsizedList;
 }
 
+#pragma mark //Get Data
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
                                IsHot:(BOOL)isHot
                             Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
 {
-    if (self.currentPage == 0){
+    if (self.isBeginLoad){
         [self.glassesList removeAllObjects];
         [self.customsizedList removeAllObjects];
     }
@@ -60,7 +61,7 @@
 
 - (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
 {
-    if (self.currentPage == 1){
+    if (self.isBeginLoad){
         [self.glassesList removeAllObjects];
         [self.customsizedList removeAllObjects];
     }
@@ -70,7 +71,7 @@
 
 - (void)getCustomsizedLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
 {
-    if (self.currentPage == 1){
+    if (self.isBeginLoad){
         [self.glassesList removeAllObjects];
         [self.customsizedList removeAllObjects];
     }

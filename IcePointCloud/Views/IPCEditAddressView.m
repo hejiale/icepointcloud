@@ -41,7 +41,6 @@ typedef  void(^DismissBlock)();
         [self addSubview:view];
         
         self.editAddressView.layer.cornerRadius = 10;
-        [self.saveAddressButton setBackgroundColor:COLOR_RGB_BLUE];
     }
     return self;
 }

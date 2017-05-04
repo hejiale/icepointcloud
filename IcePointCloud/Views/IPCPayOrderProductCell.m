@@ -72,7 +72,6 @@
         }
         
         if ([IPCPayOrderMode sharedManager].isTrade) {
-            [self.noPointButton setHidden:YES];
             self.pointButtonWith.constant = 0;
             self.inputPriceViewRight.constant = 0;
             [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
@@ -83,7 +82,6 @@
             self.inputPriceViewRight.constant = 20;
             
             if (_cartItem.isChoosePoint) {
-                [self.noPointButton setSelected:YES];
                 [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
                 [self.inputPriceTextField setText:[NSString stringWithFormat:@"%d", _cartItem.pointValue]];
             }else{

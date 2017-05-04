@@ -91,7 +91,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Method
 - (void)beginReloadTableView{
-    self.glassListViewMode.currentPage = 0;
+    self.glassListViewMode.isBeginLoad = YES;
+    
+    if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens || self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens)
+    {
+        self.glassListViewMode.currentPage = 1;
+    }else{
+        self.glassListViewMode.currentPage = 0;
+    }
     self.glassListCollectionView.mj_footer.hidden = NO;
     
     if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
@@ -104,6 +111,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)loadMoreTableView{
+    self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
     if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens) {
@@ -243,6 +251,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.currentType = IPCTopFIlterTypeFrames;
     [self.refreshHeader beginRefreshing];
 }
+
+
 #pragma mark //UICollectionViewDataSoure
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;

@@ -37,9 +37,12 @@
         payTypeName = @"刷卡";
     }
     
-    NSMutableString * payStyleStr = [[NSMutableString alloc]initWithFormat:@"%@%.f",payTypeName,[IPCCustomOrderDetailList instance].orderInfo.payTypeAmount];
+    NSMutableString * payStyleStr = [[NSMutableString alloc]initWithFormat:@"%@%.2f",payTypeName,[IPCCustomOrderDetailList instance].orderInfo.payTypeAmount];
+    if ([IPCCustomOrderDetailList instance].orderInfo.usebalanceAmount > 0) {
+        [payStyleStr appendString:[NSString stringWithFormat:@" / 储值卡%.2f",[IPCCustomOrderDetailList instance].orderInfo.usebalanceAmount]];
+    }
     if ([IPCCustomOrderDetailList instance].orderInfo.totalOtherPrice > 0) {
-        [payStyleStr appendString:[NSString stringWithFormat:@" / 其它%.f",[IPCCustomOrderDetailList instance].orderInfo.totalOtherPrice]];
+        [payStyleStr appendString:[NSString stringWithFormat:@" / 其它%.2f",[IPCCustomOrderDetailList instance].orderInfo.totalOtherPrice]];
     }
     [self.payStyleLabel setText:payStyleStr];
     
