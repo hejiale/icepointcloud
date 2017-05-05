@@ -29,9 +29,15 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self setBackground];
     [self setNavigationBarStatus:NO];
+    [self setRightItem:@"list_btn_filter" Selection:@selector(filterProductAction:)];
+    [self setTopSearchBar:^(NSString *text) {
+        self.glassListViewMode.searchWord = text;
+        [self.refreshHeader beginRefreshing];
+    }];
     
     self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
+    self.glassListViewMode.isCustomsized = YES;
     
     __block CGFloat width = (self.customsizedCollectionView.jk_width - 10)/3;
     __block CGFloat height = (self.customsizedCollectionView.jk_height - 64 - 10)/3;
@@ -47,11 +53,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.customsizedCollectionView.emptyAlertTitle = @"没有找到符合条件的商品";
     self.customsizedCollectionView.emptyAlertImage = @"exception_search";
     [self.refreshHeader beginRefreshing];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
 }
 
 
@@ -136,9 +137,40 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
+#pragma mark //Clicked Events
+- (void)filterProductAction:(id)sender{
+    if ([self.glassListViewMode.filterView superview]) {
+        [self removeCover];
+    }else{
+        __weak typeof (self) weakSelf = self;
+        [self addBackgroundViewWithAlpha:0.2 Complete:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf removeCover];
+        }];
+        [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf removeCover];
+            [strongSelf.refreshHeader beginRefreshing];
+        } ReloadUnClose:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf.refreshHeader beginRefreshing];
+        }];
+    }
+}
+
+- (void)removeCover
+{
+    __weak typeof (self) weakSelf = self;
+    if ([self.backGroudView superview] && self.glassListViewMode.filterView) {
+        [self.glassListViewMode.filterView closeCompletion:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf.glassListViewMode.filterView removeFromSuperview];strongSelf.glassListViewMode.filterView = nil;
+            [strongSelf.backGroudView removeFromSuperview];
+        }];
+    }
+}
 
 #pragma mark //UICollectionViewDataSource
-#pragma mark //UICollectionViewDataSoure
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }

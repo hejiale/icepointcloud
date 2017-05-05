@@ -125,7 +125,7 @@
                                       SuccessBlock:^(id responseValue){
                                           __strong typeof (weakSelf) strongSelf = weakSelf;
                                           strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
-                                          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying];
+                                          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying IsCustomsized:self.isCustomsized];
                                           if (strongSelf.filterView)
                                               [strongSelf.filterView reloadFilterView];
                                           

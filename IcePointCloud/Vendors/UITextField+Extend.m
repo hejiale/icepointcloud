@@ -13,7 +13,7 @@
 - (void)setLeftImageView:(NSString *)imageName
 {
     UIImage * leftImage = [UIImage imageNamed:imageName];
-    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, leftImage.size.width+5, self.jk_height)];
+    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(10, 0, leftImage.size.width+10, self.jk_height)];
     [leftView setBackgroundColor:[UIColor clearColor]];
     
     UIImageView * leftImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, leftImage.size.width, leftImage.size.height)];

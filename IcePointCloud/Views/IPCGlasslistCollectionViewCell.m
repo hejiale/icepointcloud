@@ -43,14 +43,14 @@
         
         __block NSMutableArray<IPCGlassesImage *> * images = [[NSMutableArray alloc]init];
         
-        if (self.glasses.isTryOn && self.isTrying) {
-            if ([self.glasses imageWithType:IPCGlassesImageTypeFrontialNormal])
+        if (_glasses.isTryOn && self.isTrying) {
+            if ([_glasses imageWithType:IPCGlassesImageTypeFrontialNormal])
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeFrontialNormal]];
             
-            if ([self.glasses imageWithType:IPCGlassesImageTypeProfileNormal])
+            if ([_glasses imageWithType:IPCGlassesImageTypeProfileNormal])
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeProfileNormal]];
         }else{
-            if ([self.glasses imageWithType:IPCGlassesImageTypeThumb]) {
+            if ([_glasses imageWithType:IPCGlassesImageTypeThumb]) {
                 [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeThumb]];
             }
         }
@@ -69,25 +69,19 @@
         [self.imageScrollView setContentOffset:CGPointZero];
         self.imagePageControl.numberOfPages = images.count;
         
-        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",glasses.price] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_glasses.price] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
         
         [self.productNameLabel setText:_glasses.glassName];
         CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
         self.labelHeightConstraint.constant = labelHeight;
         
         //Shopping cart whether to join the product
-        if ([self.glasses filterType] == IPCTopFilterTypeCard) {
+        if ([_glasses filterType] == IPCTopFilterTypeCard) {
             [self.buyButton setHidden:NO];
-//            [self.cardValueLabel setHidden:NO];
-//            [self.cardValueNameLabel setHidden:NO];
-//            [self.cardValueLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
-//            [self.cardValueNameLabel setText:_glasses.glassName];
         }else{
             [self.addCartButton setHidden:NO];
-//            [self.cardValueNameLabel setHidden:YES];
-//            [self.cardValueLabel setHidden:YES];
             
-            __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
+            __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
             
             if (glassCount > 0) {
                 [self.reduceButton setHidden:NO];
@@ -104,7 +98,7 @@
                 }else{
                     [self.addCartButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
                 }
-                if ((([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType))
+                if ((([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
                 {
                     if (cartCount >= _glasses.stock) {
                         [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
@@ -116,7 +110,7 @@
                 }
             }else{
                 [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-                if ((([self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([self.glasses filterType] == IPCTopFilterTypeAccessory && self.glasses.solutionType) || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
+                if ((([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType) || [_glasses filterType] == IPCTopFilterTypeContactLenses)
                 {
                     [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
                 }else{
@@ -134,6 +128,9 @@
         [self resetBuyStatus];
         [self.customsizedImageView setHidden:NO];
         [self.customsizedButton setHidden:NO];
+        [self.customsizedTagImageView setHidden:NO];
+        [self.customsizedDateImage setHidden:NO];
+        [self.customsizedDateLabel setHidden:NO];
         
         [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_customsizedProduct.bizPriceOrigin] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
         
@@ -142,6 +139,7 @@
         self.labelHeightConstraint.constant = labelHeight;
         
         [self.customsizedImageView setImageURL:[NSURL URLWithString:_customsizedProduct.thumbnailURL]];
+        [self.customsizedDateLabel setText:[NSString stringWithFormat:@"%d天内定制完成",_customsizedProduct.period]];
     }
 }
 
@@ -255,6 +253,9 @@
     [self.customsizedButton setHidden:YES];
     [self.customsizedImageView setHidden:YES];
     [self.imageScrollView setHidden:YES];
+    [self.customsizedTagImageView setHidden:YES];
+    [self.customsizedDateImage setHidden:YES];
+    [self.customsizedDateLabel setHidden:YES];
 }
 
 #pragma mark //UIScrollViewDelegate

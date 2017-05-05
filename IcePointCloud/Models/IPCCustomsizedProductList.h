@@ -40,5 +40,6 @@
 @property (nonatomic, copy, readonly) NSString *   lensDistance;//周期
 @property (nonatomic, copy, readonly) NSString *   lensThickness;//厚度
 @property (nonatomic, copy, readonly) NSString *   baseCurve;
+@property (nonatomic, assign, readonly) NSInteger   period;//周期
 
 @end

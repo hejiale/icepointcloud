@@ -36,6 +36,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
     self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
+    self.glassListViewMode.isCustomsized = NO;
     
     __block CGFloat width = (self.view.jk_width - 10)/3;
     __block CGFloat height = self.view.jk_height/3;

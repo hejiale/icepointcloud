@@ -25,9 +25,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @property (weak, nonatomic) IBOutlet UIImageView *customsizedImageView;
 @property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
-@property (weak, nonatomic) IBOutlet UILabel *cardValueLabel;
-@property (weak, nonatomic) IBOutlet UILabel *cardValueNameLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *customsizedTagImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *customsizedDateImage;
+@property (weak, nonatomic) IBOutlet UILabel *customsizedDateLabel;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;
