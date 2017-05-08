@@ -148,6 +148,30 @@
     }
 }
 
+- (void)calculatePointValue:(IPCPointValueMode *)pointValue{
+    __block double pointPrice = 0;
+    __block NSInteger point = 0;
+    [pointValue.pointArray enumerateObjectsUsingBlock:^(IPCPointValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        pointPrice += obj.integralDeductionAmount;
+        point += obj.deductionIntegral;
+    }];
+    
+    [IPCPayOrderMode sharedManager].pointPrice = pointPrice;
+    [IPCPayOrderMode sharedManager].usedPoint = point;
+    
+    if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
+        [IPCPayOrderMode sharedManager].realTotalPrice = 0;
+        [IPCPayOrderMode sharedManager].givingAmount = 0;
+    }
+    
+    if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
+        [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
+        if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
+            [IPCPayOrderMode sharedManager].givingAmount = 0;
+        }
+    }
+}
+
 - (double)minumEmployeeResult
 {
     __block double totalResult = 0;

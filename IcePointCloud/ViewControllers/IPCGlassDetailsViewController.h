@@ -12,6 +12,7 @@
 @interface IPCGlassDetailsViewController : UIViewController
 
 @property (nonatomic, copy) IPCGlasses *glasses;
+@property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;
 
 @end
 

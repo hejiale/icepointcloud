@@ -51,7 +51,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 - (void)requestTradeOrExchangeStatus{
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderMode sharedManager].isTrade = [responseValue boolValue];
-
+        
         if (self.delegate) {
             if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
                 [self.delegate reloadPayOrderView];
@@ -67,40 +67,19 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
                                               IsPresellStatus:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false":@"true")
                                                         Point:point
-                                                 SuccessBlock:^(id responseValue) {
-                                                     
-                                                     IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
-                                                     
-                                                     __block double pointPrice = 0;
-                                                     __block NSInteger point = 0;
-                                                     [pointValue.pointArray enumerateObjectsUsingBlock:^(IPCPointValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                                                         pointPrice += obj.integralDeductionAmount;
-                                                         point += obj.deductionIntegral;
-                                                     }];
-                                                     
-                                                     [IPCPayOrderMode sharedManager].pointPrice = pointPrice;
-                                                     [IPCPayOrderMode sharedManager].usedPoint = point;
-                                                     
-                                                     if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
-                                                         [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-                                                         [IPCPayOrderMode sharedManager].givingAmount = 0;
-                                                     }
-                                                     
-                                                     if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
-                                                         [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
-                                                         if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
-                                                             [IPCPayOrderMode sharedManager].givingAmount = 0;
-                                                         }
-                                                     }
-                                                     
-                                                     if (self.delegate) {
-                                                         if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
-                                                             [self.delegate reloadPayOrderView];
-                                                         }
-                                                     }
-                                                 } FailureBlock:^(NSError *error) {
-                                                     [IPCCustomUI showError:error.domain];
-                                                 }];
+                                                 SuccessBlock:^(id responseValue)
+     {
+         IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
+         [[IPCPayOrderMode sharedManager] calculatePointValue:pointValue];
+         
+         if (self.delegate) {
+             if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
+                 [self.delegate reloadPayOrderView];
+             }
+         }
+     } FailureBlock:^(NSError *error) {
+         [IPCCustomUI showError:error.domain];
+     }];
 }
 
 

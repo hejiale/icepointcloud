@@ -10,6 +10,7 @@
 #import "IPCEmploye.h"
 #import "IPCEmployeeResult.h"
 #import "IPCOtherPayTypeResult.h"
+#import "IPCPointValueMode.h"
 
 @interface IPCPayOrderMode : NSObject
 
@@ -58,6 +59,8 @@
 - (void)reloadWithOtherTypeAmount;
 
 - (double)waitPayAmount;
+
+- (void)calculatePointValue:(IPCPointValueMode *)pointValue;
 
 - (double)minumEmployeeResult;
 

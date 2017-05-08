@@ -12,7 +12,8 @@
 
 - (CGFloat)buyProductCellHeight:(NSIndexPath *)indexPath
 {
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
+    {
         if (indexPath.row == 1) {
             return 120;
         }else if (indexPath.row == 2){

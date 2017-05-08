@@ -19,11 +19,12 @@
     __weak typeof (self) weakSelf = self;
     [self.imageScrollView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        if (strongSelf.glasses)
-            if ([strongSelf.delegate respondsToSelector:@selector(showProductDetail:)])
-                [strongSelf.delegate showProductDetail:strongSelf];
+        [strongSelf showCustomsizedDetailAction];
     }];
-    
+    [self.customsizedImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf showCustomsizedDetailAction];
+    }];
     [self addSubview:self.imagePageControl];
     [self bringSubviewToFront:self.imagePageControl];
 }
@@ -242,6 +243,13 @@
             [self.delegate customsized:self];
         }
     }
+}
+
+
+- (void)showCustomsizedDetailAction{
+    if (self.delegate)
+        if ([self.delegate respondsToSelector:@selector(showProductDetail:)])
+            [self.delegate showProductDetail:self];
 }
 
 

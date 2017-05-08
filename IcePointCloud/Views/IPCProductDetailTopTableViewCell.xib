@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhT-I3-8xx">
-                        <rect key="frame" x="43" y="8" width="80" height="38"/>
+                        <rect key="frame" x="28" y="8" width="80" height="38"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="zNe-WE-yxK"/>
                         </constraints>
@@ -29,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M86-94-sLI">
-                        <rect key="frame" x="128" y="27" width="883" height="1"/>
+                        <rect key="frame" x="113" y="27" width="883" height="1"/>
                         <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.30402260638297873" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="42f-0b-RLY"/>
@@ -38,8 +38,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="LhT-I3-8xx" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="26h-SH-y9Y"/>
-                    <constraint firstItem="LhT-I3-8xx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="35" id="J3E-PK-9yN"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="M86-94-sLI" secondAttribute="trailing" constant="5" id="ZaV-Om-mWV"/>
+                    <constraint firstItem="LhT-I3-8xx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="J3E-PK-9yN"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="M86-94-sLI" secondAttribute="trailing" constant="20" id="ZaV-Om-mWV"/>
                     <constraint firstItem="M86-94-sLI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Zzr-4H-e1G"/>
                     <constraint firstItem="M86-94-sLI" firstAttribute="leading" secondItem="LhT-I3-8xx" secondAttribute="trailing" constant="5" id="sw5-Le-lSj"/>
                     <constraint firstAttribute="bottomMargin" secondItem="LhT-I3-8xx" secondAttribute="bottom" id="yC6-eO-dM1"/>

@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="addCartButton" destination="ABO-6O-xCi" id="z01-8I-qdi"/>
                 <outlet property="bottomView" destination="Lcp-kQ-Mst" id="iGs-RP-pGP"/>
+                <outlet property="cartImageView" destination="mro-Nz-La5" id="mHM-fO-Myt"/>
                 <outlet property="detailTableView" destination="Q07-8o-Fhi" id="XBf-oS-ttm"/>
                 <outlet property="topBarView" destination="eKo-cA-iHV" id="Atr-Mv-PxU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -59,7 +60,7 @@
                                 </mask>
                             </variation>
                         </label>
-                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cart_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mro-Nz-La5">
+                        <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cart_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mro-Nz-La5">
                             <rect key="frame" x="964" y="25" width="35" height="35"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <gestureRecognizers/>
@@ -99,7 +100,7 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q07-8o-Fhi">
                     <rect key="frame" x="0.0" y="70" width="1024" height="698"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="sectionIndexColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

@@ -15,11 +15,13 @@
     if (self) {
         [self.productsList removeAllObjects];
         
-        if ([responseObject[@"resultList"] isKindOfClass:[NSArray class]]) {
-            id resultList = responseObject[@"resultList"];
+        id resultList = responseObject[@"resultList"];
+        if ([resultList isKindOfClass:[NSArray class]]) {
             [resultList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                IPCCustomsizedProduct * product = [IPCCustomsizedProduct mj_objectWithKeyValues:obj];
-                [self.productsList addObject:product];
+                if (![obj isKindOfClass:[NSNull class]]) {
+                    IPCCustomsizedProduct * product = [IPCCustomsizedProduct mj_objectWithKeyValues:obj];
+                    [self.productsList addObject:product];
+                }
             }];
         }
     }
@@ -35,10 +37,3 @@
 
 @end
 
-@implementation IPCCustomsizedProduct
-
-+ (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"customsizedId"    : @"id"};
-}
-
-@end

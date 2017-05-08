@@ -296,18 +296,24 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{
-    if ([self.glassListViewMode.glassesList count] > 0) {
+    if ([self.glassListViewMode currentType] == IPCTopFilterTypeCard)return;
+    
+    if ([self.glassListViewMode.glassesList count] > 0 || [self.glassListViewMode.customsizedList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
-        IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
-        if ([glasses filterType] != IPCTopFilterTypeCard) {
-            IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
+    
+        IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
+        if ([self.glassListViewMode currentType] == IPCTopFilterTypeCustomsizedContactLens || [self.glassListViewMode currentType] == IPCTopFilterTypeCustomsizedLens) {
+            IPCCustomsizedProduct * product = self.glassListViewMode.customsizedList[indexPath.row];
+            detailVC.customsizedProduct = product;
+        }else{
+            IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
             detailVC.glasses  = glasses;
-            [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-                [IPCCustomUI pushToRootIndex:4];
-                [detailVC.navigationController popToRootViewControllerAnimated:NO];
-            }];
-            [self.navigationController pushViewController:detailVC animated:YES];
         }
+        [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
+            [IPCCustomUI pushToRootIndex:4];
+            [detailVC.navigationController popToRootViewControllerAnimated:NO];
+        }];
+        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 

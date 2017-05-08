@@ -27,7 +27,7 @@
     if (_glasses) {
         IPCGlassesImage *gp = [_glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gp){
-            [self.productImageView setImageWithURL:gp.imageURL placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
+            [self.productImageView setImageURL:gp.imageURL];
             
             if (gp.width > 0 && gp.height > 0) {
                 __block CGFloat maxWidth = 512;
@@ -37,10 +37,20 @@
                 if (scale * gp.height > maxHeight)
                     scale = maxHeight / gp.height;
             }
-            
-            self.productNameLabel.text = [NSString stringWithFormat:@"%@  ￥%.f", _glasses.glassName, _glasses.price];
         }
+        self.productNameLabel.text = [NSString stringWithFormat:@"%@  ￥%.f", _glasses.glassName, _glasses.price];
     }
 }
+
+- (void)setCustomsizedProduct:(IPCCustomsizedProduct *)customsizedProduct{
+    _customsizedProduct = customsizedProduct;
+    
+    if (_customsizedProduct) {
+        self.productNameLabel.text = [NSString stringWithFormat:@"%@  ￥%.f", _customsizedProduct.name, _customsizedProduct.suggestPrice];
+        [self.productImageView setImageURL:[NSURL URLWithString:_customsizedProduct.thumbnailURL]];
+    }
+}
+
+
 
 @end

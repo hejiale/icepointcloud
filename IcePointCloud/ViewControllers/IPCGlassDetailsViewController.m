@@ -23,6 +23,8 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (weak, nonatomic) IBOutlet UIButton *addCartButton;
 @property (weak, nonatomic) IBOutlet UIView *topBarView;
+@property (weak, nonatomic) IBOutlet UIImageView *cartImageView;
+
 @property (strong, nonatomic) UIView * specHostView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
 @property (strong, nonatomic)  UIView   *cartBageView;
@@ -73,6 +75,16 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
     _glasses = glasses;
     
     if (_glasses) {
+        [self.cartImageView setHidden:NO];
+        [self buildSpecificationViews];
+        [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+    }
+}
+
+- (void)setCustomsizedProduct:(IPCCustomsizedProduct *)customsizedProduct{
+    _customsizedProduct = customsizedProduct;
+    
+    if (_customsizedProduct) {
         [self buildSpecificationViews];
         [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
     }
@@ -102,7 +114,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 
 - (UIView *)specHostView{
     if (!_specHostView) {
-        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(43, 0, SCREEN_WIDTH-50, 0)];
+        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH-70, 0)];
         [_specHostView setBackgroundColor:[UIColor clearColor]];
     }
     return _specHostView;
@@ -113,7 +125,12 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
     CGFloat yMargin   = 35;
     CGFloat lblWidth  = self.specHostView.jk_width/3;
     
-    NSArray<NSString *> *keys = [self.glasses displayFields].allKeys;
+    NSArray<NSString *> *keys = nil;
+    if (self.glasses) {
+        keys = [self.glasses displayFields].allKeys;
+    }else{
+        keys = [self.customsizedProduct displayFields].allKeys;
+    }
     NSInteger numOfRows = ceil(keys.count / 3);
     
     [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -122,7 +139,11 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
         label.textColor = [UIColor lightGrayColor];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
-        label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.glasses displayFields][obj]];
+        if (self.glasses) {
+            label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.glasses displayFields][obj]];
+        }else{
+            label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.customsizedProduct displayFields][obj]];
+        }
         [self.specHostView addSubview:label];
     }];
     
@@ -135,7 +156,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 
 - (UIWebView *)productDetailWebView{
     if (!_productDetailWebView) {
-        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH-40, 0)];
+        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(30, 0, SCREEN_WIDTH-60, 0)];
         [_productDetailWebView setBackgroundColor:[UIColor clearColor]];
         _productDetailWebView.delegate = self;
         _productDetailWebView.scrollView.scrollEnabled = NO;
@@ -163,7 +184,11 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCProductDetailTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
-        cell.glasses = self.glasses;
+        if (self.glasses) {
+            cell.glasses = self.glasses;
+        }else{
+            cell.customsizedProduct = self.customsizedProduct;
+        }
         return cell;
     }else if(indexPath.section == 1){
         if (indexPath.row == 0) {
@@ -171,7 +196,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCProductDetailTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell.topTitleLabel setText:@"产品参数"];
+            [cell.topTitleLabel setText:@"基本信息"];
             return cell;
         }else{
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:specIdentifier];
@@ -188,13 +213,12 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCProductDetailTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell.topTitleLabel setText:@"产品详情"];
+            [cell.topTitleLabel setText:@"图文详情"];
             return cell;
         }else{
             UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:webIdentifier];
             if (!cell) {
                 cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:webIdentifier];
-                [cell setBackgroundColor:[UIColor clearColor]];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.contentView addSubview:self.productDetailWebView];
             }

@@ -267,6 +267,8 @@
     }
     
     if (self.glassImageView.image) {
+        [self.glassesView setHidden:NO];
+        
         CGFloat scale = self.glassesView.bounds.size.width / gi.width;
         CGRect bounds = self.glassesView.bounds;
         bounds.size.height = (gi ?  gi.height*scale : [self defaultGlassesSize].height);
@@ -329,7 +331,6 @@
 }
 
 #pragma mark -  UIGestureRecognizerDelegate
-
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
 }

@@ -19,13 +19,13 @@ typedef NS_ENUM(NSInteger, IPCCustomsizedType){
 
 + (IPCCustomsizedItem *)sharedItem;
 
-@property (assign, nonatomic, readwrite) IPCPayOrderType payOrderType;
-@property (nonatomic, assign, readwrite) IPCCustomsizedType customsizdType;
-
-@property (nonatomic, strong, readwrite) IPCCustomsizedProduct * customsizedProduct;
-@property (nonatomic, strong, readwrite) IPCCustomsizedEye * unifiedEye;
-@property (nonatomic, strong, readwrite) IPCCustomsizedEye * leftEye;
-@property (nonatomic, strong, readwrite) IPCCustomsizedEye * rightEye;
+@property (assign, nonatomic, readwrite) IPCPayOrderType              payOrderType;//订单支付商品类型
+@property (nonatomic, assign, readwrite) IPCCustomsizedType        customsizdType;//定制类型
+@property (nonatomic, strong, readwrite) IPCCustomsizedProduct * customsizedProduct;//定制商品
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> * normalProducts;//新增普通类商品
+@property (nonatomic, strong, readwrite) IPCCustomsizedEye        * unifiedEye;//统一定制
+@property (nonatomic, strong, readwrite) IPCCustomsizedEye        * leftEye;//左眼
+@property (nonatomic, strong, readwrite) IPCCustomsizedEye        * rightEye;//右眼
 
 
 @end

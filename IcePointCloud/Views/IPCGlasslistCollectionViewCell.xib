@@ -101,9 +101,10 @@
                             <action selector="buyCardAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="YmN-vV-IFm"/>
                         </connections>
                     </button>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gV6-E7-rf5">
+                    <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gV6-E7-rf5">
                         <rect key="frame" x="20" y="35" width="291" height="105"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="height" constant="105" id="I6W-mS-JAg"/>
                         </constraints>

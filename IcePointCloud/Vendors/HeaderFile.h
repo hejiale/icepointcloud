@@ -59,6 +59,7 @@
 #import "IPCHeadImage.h"
 #import "IPCCustomsizedProductList.h"
 #import "IPCCustomsizedItem.h"
+#import "IPCCustomsizedProduct.h"
 /**
  *  Category
  */
