@@ -149,6 +149,7 @@
             </constraints>
             <size key="customSize" width="441" height="155"/>
             <connections>
+                <outlet property="countLabel" destination="UT8-bP-FUu" id="oqH-rQ-zLp"/>
                 <outlet property="operationBottom" destination="xH5-oL-Q3u" id="vMA-7G-AAf"/>
                 <outlet property="operationView" destination="Njn-fo-lhi" id="TKo-cT-fCQ"/>
                 <outlet property="productImageView" destination="dl0-GR-JAk" id="AKe-k9-B19"/>

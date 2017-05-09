@@ -14,6 +14,7 @@
                 <outlet property="addCartButton" destination="ABO-6O-xCi" id="z01-8I-qdi"/>
                 <outlet property="bottomView" destination="Lcp-kQ-Mst" id="iGs-RP-pGP"/>
                 <outlet property="cartImageView" destination="mro-Nz-La5" id="mHM-fO-Myt"/>
+                <outlet property="customsizedButton" destination="jEi-B4-oZT" id="Nzt-3m-KMd"/>
                 <outlet property="detailTableView" destination="Q07-8o-Fhi" id="XBf-oS-ttm"/>
                 <outlet property="topBarView" destination="eKo-cA-iHV" id="Atr-Mv-PxU"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -60,7 +61,7 @@
                                 </mask>
                             </variation>
                         </label>
-                        <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cart_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mro-Nz-La5">
+                        <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_cart_normal" translatesAutoresizingMaskIntoConstraints="NO" id="mro-Nz-La5">
                             <rect key="frame" x="964" y="25" width="35" height="35"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <gestureRecognizers/>
@@ -118,9 +119,9 @@
                             <rect key="frame" x="0.0" y="0.0" width="1024" height="55"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABO-6O-xCi">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABO-6O-xCi">
                             <rect key="frame" x="774" y="0.0" width="250" height="55"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.38823529411764707" green="0.62745098039215685" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="250" id="qig-AM-6le"/>
                                 <constraint firstAttribute="height" constant="35" id="w4b-cg-IPg"/>
@@ -134,6 +135,18 @@
                             </variation>
                             <connections>
                                 <action selector="addToCartAction:" destination="-1" eventType="touchUpInside" id="SBQ-WI-LrM"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEi-B4-oZT">
+                            <rect key="frame" x="774" y="0.0" width="250" height="54"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <state key="normal" title="立即定制">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onCustomsizedAction:" destination="-1" eventType="touchUpInside" id="ZE7-y0-M6Q"/>
                             </connections>
                         </button>
                     </subviews>

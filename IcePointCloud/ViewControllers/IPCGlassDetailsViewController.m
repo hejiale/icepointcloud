@@ -24,6 +24,7 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIButton *addCartButton;
 @property (weak, nonatomic) IBOutlet UIView *topBarView;
 @property (weak, nonatomic) IBOutlet UIImageView *cartImageView;
+@property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
 
 @property (strong, nonatomic) UIView * specHostView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
@@ -54,12 +55,19 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
     [self.topBarView addBottomLine];
     
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
-    [self.addCartButton setBackgroundColor:COLOR_RGB_BLUE];
     [self reloadCartView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    if (self.glasses) {
+        [self.cartImageView setHidden:NO];
+        [self.addCartButton setHidden:NO];
+    }else{
+        [self.cartImageView setHidden:YES];
+        [self.customsizedButton setHidden:NO];
+    }
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -68,14 +76,13 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
     [self.productDetailWebView reload];
     [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     [self.productDetailWebView jk_clearCookies];
-}
+} 
 
 
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
     
     if (_glasses) {
-        [self.cartImageView setHidden:NO];
         [self buildSpecificationViews];
         [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
     }
@@ -281,6 +288,10 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 
 - (IBAction)pushToCartAction:(id)sender {
 }
+
+- (IBAction)onCustomsizedAction:(id)sender {
+}
+
 
 - (void)reloadCartView{
     if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0) {

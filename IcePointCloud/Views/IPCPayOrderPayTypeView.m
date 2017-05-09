@@ -80,10 +80,11 @@ typedef void(^PayBlock)();
             }else{
                 if ([[IPCPayOrderMode sharedManager] waitPayAmount] == [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] + [[IPCPayOrderMode sharedManager] usedBalanceAmount] + [IPCPayOrderMode sharedManager].payTypeAmount)
                 {
-                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                    if (strongSelf.payBlock) {
-                        strongSelf.payBlock();
-                    }
+                    NSLog(@"----other %.f balance %.f payType %.f", [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount], [[IPCPayOrderMode sharedManager] usedBalanceAmount],[IPCPayOrderMode sharedManager].payTypeAmount);
+//                    __strong typeof(weakSelf) strongSelf = weakSelf;
+//                    if (strongSelf.payBlock) {
+//                        strongSelf.payBlock();
+//                    }
                 }else{
                     [IPCCustomUI showError:@"付款金额计算有误!"];
                 }
@@ -154,6 +155,7 @@ typedef void(^PayBlock)();
              [strongSelf.otherTypeViewArray removeObject:otherTypeView];
              [[IPCPayOrderMode sharedManager] reloadWithOtherTypeAmount];
              [strongSelf packDownOtherPayTypeView];
+             [strongSelf.payTypeTopView reloadUI];
          }];
          [self.otherTypeViewArray addObject:otherTypeView];
      }];

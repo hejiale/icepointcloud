@@ -133,9 +133,13 @@
 - (void)reloadWithOtherTypeAmount
 {
     //待支付金额
-    [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount;
-
-    if ([IPCPayOrderMode sharedManager].payTypeAmount < 0) {
+    if ([IPCPayOrderMode sharedManager].isSelectPayType)
+    {
+        [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount;
+        if ([IPCPayOrderMode sharedManager].payTypeAmount < 0) {
+            [IPCPayOrderMode sharedManager].payTypeAmount = 0;
+        }
+    }else{
         [IPCPayOrderMode sharedManager].payTypeAmount = 0;
     }
 }
@@ -159,17 +163,12 @@
     [IPCPayOrderMode sharedManager].pointPrice = pointPrice;
     [IPCPayOrderMode sharedManager].usedPoint = point;
     
-    if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice == 0) {
+    if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice <= 0) {
         [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-        [IPCPayOrderMode sharedManager].givingAmount = 0;
+    }else{
+        [IPCPayOrderMode sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice;
     }
-    
-    if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
-        [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
-        if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
-            [IPCPayOrderMode sharedManager].givingAmount = 0;
-        }
-    }
+    [IPCPayOrderMode sharedManager].givingAmount = 0;
 }
 
 - (double)minumEmployeeResult

@@ -44,9 +44,9 @@
 - (void)updateUI
 {
     [self.payTypeNameTextField setText:self.otherPayTypeResult.otherPayTypeName];
-    [self.payAmountTextField setText:[NSString stringWithFormat:@"%.f",self.otherPayTypeResult.otherPayAmount]];
+    [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",self.otherPayTypeResult.otherPayAmount]];
     
-    NSString * payText = [NSString stringWithFormat:@"支付￥%.f",self.otherPayTypeResult.otherPayAmount];
+    NSString * payText = [NSString stringWithFormat:@"支付￥%.2f",self.otherPayTypeResult.otherPayAmount];
 
     [self.payAmountLabel setAttributedText:[IPCCustomUI subStringWithText:payText BeginRang:2 Rang:payText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
 }

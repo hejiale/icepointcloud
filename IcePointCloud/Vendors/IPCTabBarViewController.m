@@ -15,7 +15,7 @@
 @property (strong, nonatomic)  UIView   * menuBarView;
 @property (strong, nonatomic)  UIImageView * coverLine;
 @property (strong, nonatomic)  UIView   * menusView;
-//@property (strong, nonatomic)  UIImageView *logoImageView;
+@property (strong, nonatomic)  UIImageView *logoImageView;
 @property (strong, nonatomic)  UIButton * filterButton;
 @property (strong, nonatomic)  UILabel  * titleLabel;
 @property (strong, nonatomic)  UIView   * bageView;
@@ -47,7 +47,7 @@
     [self.view bringSubviewToFront:self.coverLine];
     [self.menuBarView addSubview:self.menusView];
     [self setMenuButtons];
-//    [self.menuBarView addSubview:self.logoImageView];
+    [self.menuBarView addSubview:self.logoImageView];
     [self.menuBarView addSubview:self.filterButton];
     [self.menuBarView addSubview:self.titleLabel];
     [self.menusView addSubview:self.bageView];
@@ -71,12 +71,12 @@
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.height.mas_equalTo(5.5);
     }];
-//    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
-//        make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(-9);
-//        make.width.mas_equalTo(92);
-//        make.height.mas_equalTo(35);
-//    }];
+    [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
+        make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(-9);
+        make.width.mas_equalTo(92);
+        make.height.mas_equalTo(35);
+    }];
     [self.menusView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.menuBarView.mas_right).with.offset(0);
         make.top.equalTo(self.menuBarView.mas_top).with.offset(0);
@@ -139,13 +139,13 @@
     return _menusView;
 }
 
-//- (UIImageView *)logoImageView{
-//    if (!_logoImageView) {
-//        _logoImageView = [[UIImageView alloc]initWithImage:[UIImage  imageNamed:@"icon_logo"]];
-//        [_logoImageView setFrame:CGRectZero];
-//    }
-//    return _logoImageView;
-//}
+- (UIImageView *)logoImageView{
+    if (!_logoImageView) {
+        _logoImageView = [[UIImageView alloc]initWithImage:[UIImage  imageNamed:@"icon_logo"]];
+        [_logoImageView setFrame:CGRectZero];
+    }
+    return _logoImageView;
+}
 
 - (void)setMenuButtons{
     for (NSInteger i = 0; i < 6; i ++) {
@@ -268,9 +268,9 @@
 {
     if (selectedIndex == 1 || selectedIndex == 3) {
         [self.filterButton setHidden:NO];
-//        [self.logoImageView setHidden:NO];
+        [self.logoImageView setHidden:NO];
     }else{
-//        [self.logoImageView setHidden:YES];
+        [self.logoImageView setHidden:YES];
         [self.filterButton setHidden:YES];
     }
     

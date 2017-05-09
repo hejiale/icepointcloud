@@ -29,7 +29,10 @@
     
     if (_optometryMode) {
         [self createUI];
-        [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
+        if (_optometryMode.employeeName.length && _optometryMode.employeeName) {
+            [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
+        }
+        
         if (_optometryMode.insertDate && _optometryMode.insertDate.length) {
             [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
         }else{

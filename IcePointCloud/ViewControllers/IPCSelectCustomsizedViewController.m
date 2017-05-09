@@ -12,7 +12,7 @@
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCSelectCustomsizedViewController ()<UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IPCSelectCustomsizedViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,IPCCustomsizedGlassesCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UICollectionView                 *customsizedCollectionView;
 @property (strong, nonatomic) IPCGlassListViewMode                   *glassListViewMode;
@@ -181,12 +181,18 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     IPCCustomsizedGlassesCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:glassListCellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     
     if ([self.glassListViewMode.glassesList count] && self.glassListViewMode){
         IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
         cell.glasses = glasses;
     }
     return cell;
+}
+
+#pragma mark //IPCCustomsizedGlassesCellDelegate
+- (void)confirmSelectGlass:(IPCCustomsizedGlassesCell *)cell{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

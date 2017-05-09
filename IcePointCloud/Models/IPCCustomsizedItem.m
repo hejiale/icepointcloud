@@ -20,7 +20,7 @@
     return cart;
 }
 
-- (NSMutableArray<IPCGlasses *> *)normalProducts{
+- (NSMutableArray<IPCShoppingCartItem *> *)normalProducts{
     if (_normalProducts) {
         _normalProducts = [[NSMutableArray alloc] init];
     }

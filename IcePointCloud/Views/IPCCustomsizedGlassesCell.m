@@ -35,14 +35,20 @@
 }
 
 - (IBAction)minusAction:(id)sender {
-    
+    NSInteger count = [self.countLabel.text integerValue];
 }
 
 - (IBAction)plusAction:(id)sender {
-    
+    NSInteger count = [self.countLabel.text integerValue];
 }
 
 - (IBAction)sureAction:(id)sender {
+    IPCShoppingCartItem * cartItem = [[IPCShoppingCartItem alloc]init];
+    cartItem.count    = [self.countLabel.text integerValue];
+    cartItem.glasses = self.glasses;
+
+    [[IPCCustomsizedItem sharedItem].normalProducts addObject:cartItem];
+    
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(confirmSelectGlass:)]) {
             [self.delegate confirmSelectGlass:self];
