@@ -210,13 +210,13 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-//            [cell setTopTitle:@"购买列表"];
-            [cell setInsertTitle:@"购买列表"];
-            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
-                    [self.delegate selectNormalGlasses];
-                }
-            }];
+            [cell setTopTitle:@"购买列表"];
+//            [cell setInsertTitle:@"购买列表"];
+//            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+//                if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
+//                    [self.delegate selectNormalGlasses];
+//                }
+//            }];
             return cell;
         }else{
             if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {

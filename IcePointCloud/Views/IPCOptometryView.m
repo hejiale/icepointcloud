@@ -193,21 +193,23 @@ typedef void(^UpdateBlock)(void);
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length > 0) {
-        if (textField.tag > 0 && textField.tag != optometristTag) {
-            if (textField.tag == 3 || textField.tag == 9)
-            {
-                if ([str doubleValue] >= 0 && [str doubleValue] <= 180) {
-                    [textField setText:[NSString stringWithFormat:@"%.f",[str doubleValue]]];
+        if (textField.tag != 4 && textField.tag != 10) {
+            if (textField.tag > 0 && textField.tag != optometristTag) {
+                if (textField.tag == 3 || textField.tag == 9)
+                {
+                    if ([str doubleValue] >= 0 && [str doubleValue] <= 180) {
+                        [textField setText:[NSString stringWithFormat:@"%.f",[str doubleValue]]];
+                    }else{
+                        [textField setText:@""];
+                    }
+                }else if (textField.tag == 5 || textField.tag == 11){
+                    [textField setText:[NSString stringWithFormat:@"%.f mm",[str doubleValue]]];
                 }else{
-                    [textField setText:@""];
-                }
-            }else if (textField.tag == 5 || textField.tag == 11){
-                [textField setText:[NSString stringWithFormat:@"%.f mm",[str doubleValue]]];
-            }else{
-                if (![str hasPrefix:@"-"]) {
-                    [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
-                }else{
-                    [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
+                    if (![str hasPrefix:@"-"]) {
+                        [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
+                    }else{
+                        [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
+                    }
                 }
             }
         }
