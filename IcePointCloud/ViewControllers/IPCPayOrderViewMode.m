@@ -107,7 +107,8 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1)){
-        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
+        {
             if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
                 return 3 + [IPCCustomsizedItem sharedItem].normalProducts.count;
             }
@@ -219,7 +220,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             }];
             return cell;
         }else{
-            if (([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) && indexPath.row < 4) {
+            if (([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) && indexPath.row < ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified ? 3 : 4)) {
                 if (indexPath.row == 1) {
                     IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
                     if (!cell) {
@@ -254,7 +255,12 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
                 }
                 if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens)
                 {
-                    IPCShoppingCartItem * cartItem = [IPCCustomsizedItem sharedItem].normalProducts[indexPath.row-4];
+                    IPCShoppingCartItem * cartItem = nil;
+                    if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
+                        cartItem = [IPCCustomsizedItem sharedItem].normalProducts[indexPath.row-3];
+                    }else{
+                        cartItem = [IPCCustomsizedItem sharedItem].normalProducts[indexPath.row-4];
+                    }
                     if (cartItem){
                         [cell setCartItem:cartItem];
                     }

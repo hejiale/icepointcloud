@@ -107,12 +107,6 @@
             self.frame = frame;
         }
     }
-    
-//    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
-//        [self.lensView reloadUI];
-//    }else if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
-//        [self.contactLensView reloadUI];
-//    }
 }
 
 

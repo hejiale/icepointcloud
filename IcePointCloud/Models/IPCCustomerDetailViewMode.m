@@ -47,6 +47,12 @@
 }
 
 - (void)getChooseCustomer{
+    //初始化数据
+    [IPCCurrentCustomerOpometry sharedManager].currentOpometry = nil;
+    [IPCCurrentCustomerOpometry sharedManager].currentAddress = nil;
+    [IPCCurrentCustomerOpometry sharedManager].currentCustomer = nil;
+    [IPCPayOrderMode sharedManager].customerDiscount = 1;
+    
     [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
             [IPCCurrentCustomerOpometry sharedManager].currentOpometry = obj;
@@ -58,7 +64,6 @@
             [IPCCurrentCustomerOpometry sharedManager].currentAddress = obj;
         }
     }];
-    
     
     if (self.detailCustomer) {
         [IPCCurrentCustomerOpometry sharedManager].currentCustomer = self.detailCustomer;

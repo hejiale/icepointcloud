@@ -22,8 +22,9 @@
 @property (nonatomic, copy, readonly) NSString * glassCode;//Commodity item no
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 
-@property (nonatomic,assign, readonly) NSInteger stock;//inventory
-@property (nonatomic, copy, readonly) NSString * supplierName;//supplier
+@property (nonatomic, assign, readonly) NSInteger  stock;//inventory
+@property (nonatomic, copy, readonly) NSString    * supplierName;//supplier
+@property (nonatomic, assign, readwrite) NSInteger normalCount;
 
 @property (nonatomic, copy, readonly) NSString * brand;//brand
 @property (nonatomic, copy, readonly) NSString * color;//color
@@ -60,7 +61,7 @@
 @property (nonatomic, copy, readonly) NSString * approvalNumber;//A kind
 @property (nonatomic, copy, readonly) NSString * batchNumber;//Batch no.
 @property (nonatomic, copy, readonly) NSString * expireDate;//The period of validity
-@property (nonatomic, assign, readonly) BOOL     solutionType;
+@property (nonatomic, assign, readonly) BOOL     solutionType;//护理液判断
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (IPCTopFilterType)filterType;

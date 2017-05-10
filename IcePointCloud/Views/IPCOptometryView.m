@@ -90,6 +90,7 @@ typedef void(^UpdateBlock)(void);
     tf.returnKeyType = UIReturnKeyDone;
     tf.keyboardType = UIKeyboardTypeNumberPad;
     tf.text = text;
+    tf.clearsOnBeginEditing = YES;
     [tf setLeftText:label];
     if (tag == optometristTag)[tf setRightButton:self Action:@selector(onSelectEmployeeAction) OnView:itemView];
     [itemView addSubview:tf];

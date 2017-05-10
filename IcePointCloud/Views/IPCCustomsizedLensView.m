@@ -9,7 +9,7 @@
 #import "IPCCustomsizedLensView.h"
 #import "IPCCustomsizedOtherView.h"
 
-@interface IPCCustomsizedLensView()<IPCParameterTableViewDataSource,IPCParameterTableViewDelegate>
+@interface IPCCustomsizedLensView()<IPCParameterTableViewDataSource,IPCParameterTableViewDelegate,UITextFieldDelegate>
 
 @property (copy, nonatomic) void(^UpdateBlock)();
 
@@ -24,6 +24,7 @@
         self.UpdateBlock = update;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCCustomsizedLensView" owner:self];
+        [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
     }
     return self;
@@ -35,12 +36,20 @@
     //定制镜片商品
     [self.addLayerTextField setLeftSpace:10];
     [self.dyeingTextField setLeftSpace:10];
+    [self.addTextField setLeftSpace:10];
+    [self.channalTextField setLeftSpace:10];
     [self.remarkTextView addBorder:3 Width:0.5];
     [self.sphTextField setRightButton:self Action:@selector(onGetSphAction) OnView:self];
     [self.cylTextField setRightButton:self Action:@selector(onGetCylAction) OnView:self];
     [self.sphTextField setLeftText:@"球镜/SPH"];
     [self.cylTextField setLeftText:@"柱镜/CYL"];
     [self.axisTextField setLeftText:@" 轴位/AXIS"];
+    if (self.isRight) {
+        [self.distanceTextField setLeftText:@"右眼瞳距/PD(R)"];
+    }else{
+        [self.distanceTextField setLeftText:@"左眼瞳距/PD(L)"];
+    }
+    
     
     [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {
@@ -152,5 +161,7 @@
     [textField endEditing:YES];
     return YES;
 }
+
+
 
 @end

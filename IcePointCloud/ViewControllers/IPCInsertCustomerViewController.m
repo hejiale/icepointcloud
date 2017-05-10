@@ -83,9 +83,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                                      @"addRight":obj.addRight,
                                      @"correctedVisionLeft":obj.correctedVisionLeft,
                                      @"correctedVisionRight":obj.correctedVisionRight,
-                                     @"employeeName":obj.employeeName}];
+                                     @"employeeName":obj.employeeName,
+                                     @"employeeId":obj.employeeId}];
         if (obj.purpose.length) {
-            [optometryDic setObject:[IPCCommon purpose:obj.purpose] forKey:@"purpose"];
+            [optometryDic setObject:obj.purpose forKey:@"purpose"];
         }
         [optometryList addObject:optometryDic];
     }];

@@ -26,42 +26,41 @@
 }
 
 #pragma mark //Clicked Events
-- (IBAction)addAction:(id)sender {
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.operationBottom.constant += 70;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
 - (IBAction)minusAction:(id)sender {
     NSInteger count = [self.countLabel.text integerValue];
+    count--;
+    if (count <= 0)count = 0;
+    [self.countLabel setText:[NSString stringWithFormat:@"%d",count]];
 }
 
 - (IBAction)plusAction:(id)sender {
     NSInteger count = [self.countLabel.text integerValue];
+    count++;
+    [self.countLabel setText:[NSString stringWithFormat:@"%d",count]];
 }
 
-- (IBAction)sureAction:(id)sender {
-    IPCShoppingCartItem * cartItem = [[IPCShoppingCartItem alloc]init];
-    cartItem.count    = [self.countLabel.text integerValue];
-    cartItem.glasses = self.glasses;
+//- (IBAction)sureAction:(id)sender {
+//    NSInteger count = [self.countLabel.text integerValue];
+//    
+//    if (!self.hasChooseImageView.hidden) {
+//        [[IPCCustomsizedItem sharedItem].normalProducts enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            if ([self.glasses.glassesID isEqualToString:obj.glasses.glassesID]) {
+//                obj.count += count;
+//            }
+//        }];
+//    }else{
+//        IPCShoppingCartItem * cartItem = [[IPCShoppingCartItem alloc]init];
+//        cartItem.count    = count;
+//        cartItem.glasses = self.glasses;
+//        [[IPCCustomsizedItem sharedItem].normalProducts addObject:cartItem];
+//    }
+//
+//    if (self.delegate) {
+//        if ([self.delegate respondsToSelector:@selector(confirmSelectGlass:)]) {
+//            [self.delegate confirmSelectGlass:self];
+//        }
+//    }
+//}
 
-    [[IPCCustomsizedItem sharedItem].normalProducts addObject:cartItem];
-    
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(confirmSelectGlass:)]) {
-            [self.delegate confirmSelectGlass:self];
-        }
-    }
-}
-
-- (IBAction)cancelAction:(id)sender {
-    [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.operationBottom.constant -= 70;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
 
 @end
