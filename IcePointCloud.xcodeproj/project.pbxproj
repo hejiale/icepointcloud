@@ -2734,7 +2734,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				COPY_PHASE_STRIP = NO;
 				CustomAppBundleld = com.IcePointCloud.Pos;
-				CustomProductName = "冰点云";
+				CustomProductName = "冰点云测试";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

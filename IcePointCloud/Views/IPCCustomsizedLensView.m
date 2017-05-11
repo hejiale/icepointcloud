@@ -24,7 +24,6 @@
         self.UpdateBlock = update;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCCustomsizedLensView" owner:self];
-        [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
     }
     return self;
@@ -38,7 +37,7 @@
     [self.dyeingTextField setLeftSpace:10];
     [self.addTextField setLeftSpace:10];
     [self.channalTextField setLeftSpace:10];
-    [self.remarkTextView addBorder:3 Width:0.5];
+    [self.priceTextField addBorder:3 Width:0.5];
     [self.sphTextField setRightButton:self Action:@selector(onGetSphAction) OnView:self];
     [self.cylTextField setRightButton:self Action:@selector(onGetCylAction) OnView:self];
     [self.sphTextField setLeftText:@"球镜/SPH"];

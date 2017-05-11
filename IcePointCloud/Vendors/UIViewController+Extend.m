@@ -63,12 +63,12 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
     [layerAnimation removeFromSuperlayer];
 }
 
-- (void)addBackgroundViewWithAlpha:(CGFloat)alpha Complete:(void (^)())completed
+- (void)addBackgroundViewWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed
 {
-    self.backGroudView = [[UIView alloc]initWithFrame:self.view.bounds];
+    self.backGroudView = [[UIView alloc]initWithFrame:view.bounds];
     [self.backGroudView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:self.backGroudView];
-    [self.view bringSubviewToFront:self.backGroudView];
+    [view addSubview:self.backGroudView];
+    [view bringSubviewToFront:self.backGroudView];
     
     UIImageView * coverView = [[UIImageView alloc]initWithFrame:self.backGroudView.bounds];
     [coverView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:alpha]];

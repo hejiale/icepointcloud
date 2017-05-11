@@ -19,7 +19,7 @@
 
 -(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
 
-- (void)addBackgroundViewWithAlpha:(CGFloat)alpha Complete:(void(^)())completed;
+- (void)addBackgroundViewWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed;
 
 - (void)popToPayOrderViewController;
 

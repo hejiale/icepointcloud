@@ -200,7 +200,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self removeCover];
     }else{
         __weak typeof (self) weakSelf = self;
-        [self addBackgroundViewWithAlpha:0.2 Complete:^{
+        [self addBackgroundViewWithAlpha:0.2 InView:self.view Complete:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
@@ -352,7 +352,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.glassListViewMode.glassesList count] > 0) {
         __block NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
         IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-        [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeVlaueCard;
         [self.navigationController pushViewController:payOrderVC animated:YES];
     }
 }

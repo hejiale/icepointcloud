@@ -26,7 +26,7 @@
 
 - (IPCCustomsizedParameterView *)parameterView{
     if (!_parameterView) {
-        _parameterView = [[IPCCustomsizedParameterView alloc] initWithFrame:CGRectMake(0, 0, 930, 375) Direction:YES];
+        _parameterView = [[IPCCustomsizedParameterView alloc] initWithFrame:CGRectMake(0, 0, 930, 285) Direction:YES];
         [_parameterView setDelegate:self];
     }
     return _parameterView;

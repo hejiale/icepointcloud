@@ -18,7 +18,7 @@
 
 //- (void)insertNewCustomer;
 - (void)clearData;
-- (BOOL)isEmptyAddress;
-- (BOOL)isEmptyOptometry;
+//- (BOOL)isEmptyAddress;
+//- (BOOL)isEmptyOptometry;
 
 @end

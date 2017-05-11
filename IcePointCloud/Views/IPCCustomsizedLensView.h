@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *channalTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addLayerTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dyeingTextField;
-@property (weak, nonatomic) IBOutlet UITextView *remarkTextView;
+@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic)  IBOutlet  UIView *otherContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherContentHeight;

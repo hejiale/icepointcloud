@@ -138,15 +138,19 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (void)setDefaultOptometry:(NSString *)optometryID
 {
+    __weak typeof(self) weakSelf = self;
     [self.customerViewMode setCurrentOptometry:optometryID Complete:^{
-        [self.refreshHeader beginRefreshing];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf requestCustomerDetailInfo];
     }];
 }
 
 - (void)setCurrentAddress:(NSString *)addressID
 {
+    __weak typeof(self) weakSelf = self;
     [self.customerViewMode setCurrentAddress:addressID Complete:^{
-        [self.refreshHeader beginRefreshing];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf requestCustomerDetailInfo];
     }];
 }
 
@@ -154,9 +158,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)loadEditAddressView
 {
     __weak typeof (self) weakSelf = self;
-    self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
+    self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^(NSString *addressId){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView:YES];
+        [strongSelf setCurrentAddress:addressId];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView:NO];
@@ -168,9 +173,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)loadEditOptometryView
 {
     __weak typeof (self) weakSelf = self;
-    self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^{
+    self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^(NSString *optometryId){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView:YES];
+        [strongSelf setDefaultOptometry:optometryId];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView:NO];
@@ -287,7 +293,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.editOptometryView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
     if (isLoad) {
-        [self.refreshHeader beginRefreshing];
+        [self requestCustomerDetailInfo];
     }
 }
 

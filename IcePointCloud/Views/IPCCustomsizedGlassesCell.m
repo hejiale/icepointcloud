@@ -26,41 +26,39 @@
 }
 
 #pragma mark //Clicked Events
-- (IBAction)minusAction:(id)sender {
-    NSInteger count = [self.countLabel.text integerValue];
-    count--;
-    if (count <= 0)count = 0;
-    [self.countLabel setText:[NSString stringWithFormat:@"%d",count]];
+- (IBAction)addGlassesAction:(id)sender {
+    [self addGlasses];
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(confirmSelectGlass:)]) {
+            [self.delegate confirmSelectGlass:self];
+        }
+    }
 }
 
-- (IBAction)plusAction:(id)sender {
-    NSInteger count = [self.countLabel.text integerValue];
-    count++;
-    [self.countLabel setText:[NSString stringWithFormat:@"%d",count]];
+- (void)addGlasses
+{
+    IPCShoppingCartItem * cartItem = [self cartItem];
+    if (cartItem) {
+        cartItem.count++;
+    }else{
+        IPCShoppingCartItem * addCartItem = [[IPCShoppingCartItem alloc]init];
+        addCartItem.count = 1;
+        addCartItem.glasses = self.glasses;
+        [[IPCCustomsizedItem sharedItem].normalProducts addObject:addCartItem];
+    }
 }
 
-//- (IBAction)sureAction:(id)sender {
-//    NSInteger count = [self.countLabel.text integerValue];
-//    
-//    if (!self.hasChooseImageView.hidden) {
-//        [[IPCCustomsizedItem sharedItem].normalProducts enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            if ([self.glasses.glassesID isEqualToString:obj.glasses.glassesID]) {
-//                obj.count += count;
-//            }
-//        }];
-//    }else{
-//        IPCShoppingCartItem * cartItem = [[IPCShoppingCartItem alloc]init];
-//        cartItem.count    = count;
-//        cartItem.glasses = self.glasses;
-//        [[IPCCustomsizedItem sharedItem].normalProducts addObject:cartItem];
-//    }
-//
-//    if (self.delegate) {
-//        if ([self.delegate respondsToSelector:@selector(confirmSelectGlass:)]) {
-//            [self.delegate confirmSelectGlass:self];
-//        }
-//    }
-//}
+
+- (IPCShoppingCartItem *)cartItem
+{
+    __block IPCShoppingCartItem * cartItem = nil;
+    [[IPCCustomsizedItem sharedItem].normalProducts enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.glasses.glassesID isEqualToString:self.glasses.glassesID]) {
+            cartItem = obj;
+        }
+    }];
+    return cartItem;
+}
 
 
 @end

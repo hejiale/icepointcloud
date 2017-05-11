@@ -30,7 +30,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.contactRemarkView addBorder:3 Width:0.5];
+    [self.priceTextField addBorder:3 Width:0.5];
     [self.contactSphTextField setRightButton:self Action:@selector(onGetSphAction) OnView:self];
     [self.contactCylTextField setRightButton:self Action:@selector(onGetCylAction) OnView:self];
     [self.contactSphTextField setLeftText:@"球镜/SPH"];

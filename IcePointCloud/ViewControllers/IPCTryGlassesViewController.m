@@ -280,7 +280,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     if ([self.glassListViewMode.filterView superview]) {
         [self removeAllPopView];
     }else{
-        [self addBackgroundViewWithAlpha:0.2 Complete:^{
+        [self addBackgroundViewWithAlpha:0.2   InView:self.view Complete:^{
             [self removeAllPopView];
         }];
         [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
@@ -359,7 +359,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     if ([self.backGroudView superview]) {
         [self removeAllPopView];
     }else{
-        [self addBackgroundViewWithAlpha:0 Complete:^{
+        [self addBackgroundViewWithAlpha:0   InView:self.view Complete:^{
             [self removeAllPopView];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x-50;
@@ -389,7 +389,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     if ([self.backGroudView superview]) {
         [self removeAllPopView];
     }else{
-        [self addBackgroundViewWithAlpha:0 Complete:^{
+        [self addBackgroundViewWithAlpha:0   InView:self.view Complete:^{
             [self removeAllPopView];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x - self.modelsPicker.jk_width + 75;
@@ -439,7 +439,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Share Tryglass Image
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
-    [self addBackgroundViewWithAlpha:0.2 Complete:^{
+    [self addBackgroundViewWithAlpha:0.2  InView:self.view  Complete:^{
         [self removeAllPopView];
     }];
     _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.backGroudView.jk_width,80 )

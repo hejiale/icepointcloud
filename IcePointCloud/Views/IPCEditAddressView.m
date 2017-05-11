@@ -9,7 +9,7 @@
 #import "IPCEditAddressView.h"
 #import "IPCAddressView.h"
 
-typedef  void(^CompleteBlock)();
+typedef  void(^CompleteBlock)(NSString *);
 typedef  void(^DismissBlock)();
 
 @interface IPCEditAddressView()
@@ -28,7 +28,7 @@ typedef  void(^DismissBlock)();
 @implementation IPCEditAddressView
 
 
-- (instancetype)initWithFrame:(CGRect)frame CustomerID:(NSString *)customerID Complete:(void(^)())complete Dismiss:(void(^)())dismiss
+- (instancetype)initWithFrame:(CGRect)frame CustomerID:(NSString *)customerID Complete:(void(^)(NSString *))complete Dismiss:(void(^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -78,7 +78,7 @@ typedef  void(^DismissBlock)();
                                                       SuccessBlock:^(id responseValue)
      {
          if (self.completeBlock) {
-             self.completeBlock();
+             self.completeBlock(responseValue[@"id"]);
          }
          [IPCCustomUI showSuccess:@"新建地址成功!"];
      } FailureBlock:^(NSError *error) {

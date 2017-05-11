@@ -106,23 +106,24 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1)){
+    if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1))
+    {
         if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
         {
-            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
+            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified)
                 return 3 + [IPCCustomsizedItem sharedItem].normalProducts.count;
-            }
             return 4 + [IPCCustomsizedItem sharedItem].normalProducts.count;
         }
+        NSLog(@"--- cartCount %d", [[IPCShoppingCart sharedCart] selectPayItemsCount]);
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))
         return 1;
     else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 3)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
         return 1;
-    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyAddress])
+    else if (![IPCCurrentCustomerOpometry sharedManager].currentAddress && section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
-    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyOptometry])
+    else if (![IPCCurrentCustomerOpometry sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
     return 2;
 }
@@ -146,7 +147,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             cell.currentCustomer = [IPCCurrentCustomerOpometry sharedManager].currentCustomer;
             return cell;
         }
-    }else if (indexPath.section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentAddress)
+    }else if (indexPath.section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentAddress && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -164,7 +165,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             [cell.defaultButton setHidden:YES];
             return cell;
         }
-    }else if(indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentOpometry){
+    }else if(indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentOpometry && [IPCCurrentCustomerOpometry sharedManager].currentCustomer){
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -211,13 +212,16 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-//            [cell setTopTitle:@"购买列表"];
-            [cell setInsertTitle:@"购买列表"];
-            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
-                    [self.delegate selectNormalGlasses];
-                }
-            }];
+            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeNormal || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeVlaueCard) {
+                [cell setTopTitle:@"购买列表"];
+            }else{
+                [cell setInsertTitle:@"购买列表"];
+                [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                    if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
+                        [self.delegate selectNormalGlasses];
+                    }
+                }];
+            }
             return cell;
         }else{
             if (([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) && indexPath.row < ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified ? 3 : 4)) {

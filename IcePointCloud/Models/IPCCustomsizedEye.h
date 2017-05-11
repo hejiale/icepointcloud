@@ -22,6 +22,8 @@
 @property (nonatomic, copy, readwrite) NSString * remark;
 @property (nonatomic, assign, readwrite) NSInteger   count;
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomsizedOther *> * otherArray;
+@property (nonatomic, assign, readwrite) double    customsizedPrice;//定制价格
+@property (nonatomic, assign, readwrite) NSInteger  customsizedCount;//定制数量
 
 @end
 

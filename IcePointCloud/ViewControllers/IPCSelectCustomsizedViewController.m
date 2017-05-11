@@ -12,9 +12,11 @@
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCSelectCustomsizedViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,IPCCustomsizedGlassesCellDelegate>
+@interface IPCSelectCustomsizedViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,IPCCustomsizedGlassesCellDelegate,UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UICollectionView                 *customsizedCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *searchBgView;
 @property (strong, nonatomic) IPCGlassListViewMode                   *glassListViewMode;
 @property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter           *refreshFooter;
@@ -26,21 +28,19 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     
     [self setBackground];
-    [self setNavigationBarStatus:NO];
-    [self setRightItem:@"list_btn_filter" Selection:@selector(filterProductAction:)];
-    [self setTopSearchBar:^(NSString *text) {
-        self.glassListViewMode.searchWord = text;
-        [self.refreshHeader beginRefreshing];
-    }];
+    [self setNavigationBarStatus:YES];
+    [self.searchBgView addBorder:3 Width:0.5];
+    [self.topView addBottomLine];
     
     self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
     self.glassListViewMode.isCustomsized = YES;
     
     __block CGFloat width = (self.customsizedCollectionView.jk_width - 10)/3;
-    __block CGFloat height = (self.customsizedCollectionView.jk_height - 64 - 10)/3;
+    __block CGFloat height = (self.customsizedCollectionView.jk_height - 10)/3;
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
     [layout setItemSize:CGSizeMake(width, height)];
     [layout setMinimumLineSpacing:5];
@@ -138,12 +138,17 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 #pragma mark //Clicked Events
-- (void)filterProductAction:(id)sender{
+- (IBAction)backAction:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (IBAction)filterProductAction:(id)sender{
     if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
         __weak typeof (self) weakSelf = self;
-        [self addBackgroundViewWithAlpha:0.2 Complete:^{
+        [self addBackgroundViewWithAlpha:0.2   InView:self.customsizedCollectionView Complete:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
@@ -195,6 +200,17 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark //UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField endEditing:YES];
+    return YES;
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    self.glassListViewMode.searchWord = [textField.text jk_trimmingWhitespace];
+    [self.refreshHeader beginRefreshing];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

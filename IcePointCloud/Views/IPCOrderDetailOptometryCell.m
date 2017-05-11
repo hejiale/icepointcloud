@@ -54,7 +54,7 @@
         [obj removeFromSuperview];
     }];
     
-    NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"单眼瞳距/PD", @"下加光/ADD"];
+    NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"瞳距/PD", @"下加光/ADD"];
     CGFloat  itemWidth = (self.optometryContentView.jk_width - 34 - 10)/3;
     CGFloat  spaceWidth   = 0;
     CGFloat  spaceHeight  = 30;

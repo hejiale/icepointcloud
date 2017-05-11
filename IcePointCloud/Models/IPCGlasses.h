@@ -23,8 +23,7 @@
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 
 @property (nonatomic, assign, readonly) NSInteger  stock;//inventory
-@property (nonatomic, copy, readonly) NSString    * supplierName;//supplier
-@property (nonatomic, assign, readwrite) NSInteger normalCount;
+@property (nonatomic, copy, readonly) NSString    * supplierName;//supplier              
 
 @property (nonatomic, copy, readonly) NSString * brand;//brand
 @property (nonatomic, copy, readonly) NSString * color;//color

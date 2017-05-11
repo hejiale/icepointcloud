@@ -28,7 +28,16 @@
 }
 
 
-
+- (void)resetData{
+    self.customsizdType = IPCCustomsizedTypeNone;
+    self.payOrderType = IPCPayOrderTypeNormal;
+    self.customsizedProduct = nil;
+    [self.normalProducts removeAllObjects];
+    self.normalProducts = nil;
+    self.leftEye       = nil;
+    self.rightEye     = nil;
+    self.unifiedEye  = nil;
+}
 
 
 @end

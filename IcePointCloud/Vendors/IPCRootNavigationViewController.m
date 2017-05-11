@@ -8,9 +8,8 @@
 
 #import "IPCRootNavigationViewController.h"
 
-@interface IPCRootNavigationViewController ()<UITextFieldDelegate>
+@interface IPCRootNavigationViewController ()
 
-@property (nonatomic, copy) void(^SearchBlock)(NSString *);
 
 @end
 
@@ -83,41 +82,22 @@
     self.navigationItem.rightBarButtonItem = emptyItem;
 }
 
-- (void)setTopSearchBar:(void (^)(NSString * text))searchBlock
-{
-    self.SearchBlock = searchBlock;
-    
-    UIView * searchView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 490, 30)];
-    [searchView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"icon_search_border"]]];
-    
-    UITextField * searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(30, 0, searchView.jk_width-30, searchView.jk_height)];
-    searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    searchTextField.returnKeyType = UIReturnKeyDone;
-    searchTextField.delegate = self;
-    [searchTextField setPlaceholder:@"请输入搜索关键词"];
-    [searchTextField setTextColor:[UIColor darkGrayColor]];
-    [searchTextField setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-    [searchView addSubview:searchTextField];
-
-    self.navigationItem.titleView = searchView;
-}
-
 #pragma mark //Clicked Events
 - (void)backAction{
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark //UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField endEditing:YES];
-    return YES;
+#pragma mark //UIInterfaceOrientation
+- (BOOL)shouldAutorotate{
+    return NO;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSString * str = [textField.text jk_trimmingWhitespace];
-    if (self.SearchBlock) {
-        self.SearchBlock(str);
-    }
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return  UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
 }
 
 

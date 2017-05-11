@@ -9,7 +9,7 @@
 #import "IPCEditOptometryView.h"
 #import "IPCOptometryView.h"
 
-typedef  void(^CompleteBlock)();
+typedef  void(^CompleteBlock)(NSString *);
 typedef  void(^DismissBlock)();
 
 @interface IPCEditOptometryView()
@@ -29,7 +29,7 @@ typedef  void(^DismissBlock)();
 
 @implementation IPCEditOptometryView
 
-- (instancetype)initWithFrame:(CGRect)frame CustomerID:(NSString *)customerID Complete:(void(^)())complete Dismiss:(void(^)())dismiss
+- (instancetype)initWithFrame:(CGRect)frame CustomerID:(NSString *)customerID Complete:(void(^)(NSString *))complete Dismiss:(void(^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -83,7 +83,7 @@ typedef  void(^DismissBlock)();
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
                                                      SuccessBlock:^(id responseValue) {
                                                          if (self.completeBlock) {
-                                                             self.completeBlock();
+                                                             self.completeBlock(responseValue[@"id"]);
                                                          }
                                                          [IPCCustomUI showSuccess:@"新建验光单成功!"];
                                                      } FailureBlock:^(NSError *error) {

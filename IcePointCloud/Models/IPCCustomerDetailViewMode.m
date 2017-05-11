@@ -55,6 +55,7 @@
     
     [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
+            NSLog(@"---optometry %@",obj);
             [IPCCurrentCustomerOpometry sharedManager].currentOpometry = obj;
         }
     }];

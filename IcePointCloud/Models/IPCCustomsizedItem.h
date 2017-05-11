@@ -27,5 +27,8 @@ typedef NS_ENUM(NSInteger, IPCCustomsizedType){
 @property (nonatomic, strong, readwrite) IPCCustomsizedEye        * leftEye;//左眼
 @property (nonatomic, strong, readwrite) IPCCustomsizedEye        * rightEye;//右眼
 
+- (double)totalPrice;
+
+- (void)resetData;
 
 @end

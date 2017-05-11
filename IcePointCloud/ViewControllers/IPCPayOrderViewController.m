@@ -41,13 +41,12 @@
     
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
-    [[IPCPayOrderMode sharedManager] resetData];
-    [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
     
     self.normalSellCellMode = [[IPCPayOrderViewMode alloc]init];
     self.normalSellCellMode.delegate = self;
     
-    [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;
+    [[IPCPayOrderMode sharedManager] resetData];
+    [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;//判断选择用户页面的确定按钮是否显示
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
@@ -58,7 +57,9 @@
         [strongSelf resetPayInfoData];
     }];
     
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens) {
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
+    {
+        [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
         [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
         [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
     }
@@ -170,6 +171,7 @@
     [[IPCPayOrderMode sharedManager] resetData];
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
+    [[IPCCustomsizedItem sharedItem] resetData];
 }
 
 #pragma mark //UITableViewDataSource
@@ -199,9 +201,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyAddress])
+    if (![IPCCurrentCustomerOpometry sharedManager].currentAddress && section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
-    else if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2 && [[IPCCurrentCustomerOpometry sharedManager] isEmptyOptometry])
+    else if (![IPCCurrentCustomerOpometry sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
     return 5;
 }

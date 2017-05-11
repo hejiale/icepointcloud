@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *contactCylTextField;
 @property (weak, nonatomic) IBOutlet UITextField *contactAxisTextField;
 @property (weak, nonatomic) IBOutlet UIView *contactOtherContentView;
-@property (weak, nonatomic) IBOutlet UITextView *contactRemarkView;
+@property (weak, nonatomic) IBOutlet UITextField *priceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *contactCountLabel;
 @property (weak, nonatomic) IBOutlet UIView *otherContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *otherContentHeight;

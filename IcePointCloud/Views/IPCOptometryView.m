@@ -37,7 +37,7 @@ typedef void(^UpdateBlock)(void);
 
 #pragma mark //Set UI
 - (void)createOptometryView:(CGRect)frame{
-    NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"单眼瞳距/PD", @"下加光/ADD",@"验光师"];
+    NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"瞳距/PD", @"下加光/ADD",@"验光师"];
     
     CGFloat  spaceWidth   = 10;
     CGFloat  spaceHeight  = 15;
@@ -204,7 +204,7 @@ typedef void(^UpdateBlock)(void);
                         [textField setText:@""];
                     }
                 }else if (textField.tag == 5 || textField.tag == 11){
-                    [textField setText:[NSString stringWithFormat:@"%.f mm",[str doubleValue]]];
+                    [textField setText:[NSString stringWithFormat:@"%.2f mm",[str doubleValue]]];
                 }else{
                     if (![str hasPrefix:@"-"]) {
                         [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];

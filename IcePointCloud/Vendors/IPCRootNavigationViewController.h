@@ -14,6 +14,5 @@
 - (void)setRightItem:(NSString *)itemImageName Selection:(SEL)selection;
 - (void)setRightTitle:(NSString *)itemName Selection:(SEL)selection;
 - (void)setRightEmptyView;
-- (void)setTopSearchBar:(void(^)(NSString * text))searchBlock;
 
 @end
