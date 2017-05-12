@@ -18,7 +18,6 @@
     
     self.addressView = [[IPCAddressView alloc]initWithFrame:CGRectMake(15, 10, self.jk_width-15, 80) Update:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        
         [IPCInsertCustomer instance].contactorName = strongSelf.addressView.contacterTextField.text;
         [IPCInsertCustomer instance].contactorPhone = strongSelf.addressView.phoneTextField.text;
         [IPCInsertCustomer instance].contactorAddress = strongSelf.addressView.addressTextField.text;

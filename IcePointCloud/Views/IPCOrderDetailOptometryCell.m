@@ -45,7 +45,9 @@
         [self.employeeNameLabel setText:[NSString stringWithFormat:@"验光师 %@",orderInfo.optometryEmployee]];
     }
     
-    [self.insertDateLabel setText:[NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:orderInfo.optometryInsertDate] IsTime:YES]]];
+    if (orderInfo.optometryInsertDate && orderInfo.optometryInsertDate.length) {
+        [self.insertDateLabel setText:[NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:orderInfo.optometryInsertDate] IsTime:YES]]];
+    }
 }
 
 - (void)createUI:(NSArray *)info

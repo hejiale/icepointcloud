@@ -141,7 +141,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPersonHeadCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
-        [cell.headImageView setImageURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.headImageURL]];
         return cell;
     }else if(indexPath.section == 1){
         IPCPersonInputCell * cell = [tableView dequeueReusableCellWithIdentifier:inputIdentifier];

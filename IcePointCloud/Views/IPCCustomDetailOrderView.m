@@ -206,7 +206,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 75;
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 1 && ![[IPCCustomOrderDetailList instance].orderInfo isEmptyAddress]){
         return 70;
     }else if (indexPath.section == 2 && indexPath.row > 0){
         return 185;

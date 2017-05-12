@@ -11,6 +11,7 @@
 
 @interface IPCCustomerAddressCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIView *addressContentView;
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactPhoneLabel;
@@ -18,7 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *defaultButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactNameWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *addressWidthConstraint;
+
+@property (weak, nonatomic) IBOutlet UILabel *noAddressLabel;
 @property (copy, nonatomic) IPCCustomerAddressMode * addressMode;
 
 @end

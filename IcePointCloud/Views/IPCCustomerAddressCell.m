@@ -35,6 +35,8 @@
     _addressMode = addressMode;
 
     if (_addressMode) {
+        [self.addressContentView setHidden:NO];
+        
         CGFloat width = [_addressMode.contactName jk_sizeWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height].width;
         self.contactNameWidth.constant = width;
         
@@ -43,29 +45,34 @@
         [self.genderLabel setText:[IPCCommon formatGender:_addressMode.gender]];
         [self.contactPhoneLabel setText:_addressMode.phone];
         
-        width = [self.addressLabel.text jk_widthWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height];
-        self.addressWidthConstraint.constant = width;
+//        width = [self.addressLabel.text jk_widthWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height];
+//        self.addressWidthConstraint.constant = width;
     }
 }
 
 - (void)setCustomer:(IPCCustomerOrderInfo *)customer
 {
     if (customer) {
-        [self.defaultButton setHidden:YES];
-        
-        CGFloat width = [customer.contactorName jk_sizeWithFont:self.contactNameLabel.font constrainedToHeight:self.contactNameLabel.jk_height].width;
-        self.contactNameWidth.constant = width;
-        
-        [self.contactNameLabel setText:customer.contactorName];
-        [self.contactPhoneLabel setText:customer.contactorPhone];
-        [self.genderLabel setText:[IPCCommon formatGender:customer.contactorGender]];
-        [self.addressLabel setText:customer.contactorAddress];
-        
-        width = [self.addressLabel.text jk_widthWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height];
-        self.addressWidthConstraint.constant = width;
-
-        if (width >= 320) {
-            self.addressWidthConstraint.constant = 320;
+        if ([customer isEmptyAddress]) {
+            [self.noAddressLabel setHidden:NO];
+        }else{
+            [self.addressContentView setHidden:NO];
+            [self.defaultButton setHidden:YES];
+            
+            CGFloat width = [customer.contactorName jk_sizeWithFont:self.contactNameLabel.font constrainedToHeight:self.contactNameLabel.jk_height].width;
+            self.contactNameWidth.constant = width;
+            
+            [self.contactNameLabel setText:customer.contactorName];
+            [self.contactPhoneLabel setText:customer.contactorPhone];
+            [self.genderLabel setText:[IPCCommon formatGender:customer.contactorGender]];
+            [self.addressLabel setText:customer.contactorAddress];
+            
+//            width = [self.addressLabel.text jk_widthWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height];
+//            self.addressWidthConstraint.constant = width;
+//            
+//            if (width >= 320) {
+//                self.addressWidthConstraint.constant = 320;
+//            }
         }
     }
 }

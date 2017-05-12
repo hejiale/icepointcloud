@@ -69,7 +69,12 @@
 
 @implementation IPCCustomerOrderInfo
 
-
+- (BOOL)isEmptyAddress{
+    if (!self.contactorName.length && !self.contactorPhone.length && !self.contactorAddress.length) {
+        return YES;
+    }
+    return NO;
+}
 
 @end
 

@@ -42,7 +42,6 @@
     self.contactorName= @"";
     self.contactorAddress= @"";
     self.contactorPhone= @"";
-    self.contactorGenger = @"MALE";
     self.contactorGengerString= @"";
     self.photo_udid = @"1";
     

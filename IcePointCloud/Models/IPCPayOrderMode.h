@@ -39,6 +39,7 @@
 @property (nonatomic, assign, readwrite) BOOL     isSelectStoreValue;// 是否选择储值
 @property (nonatomic, assign, readwrite) BOOL     isSelectPayType;// 是否选择支付方式
 
+@property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//选择客户
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCOtherPayTypeResult *> * otherPayTypeArray;//其它支付方式

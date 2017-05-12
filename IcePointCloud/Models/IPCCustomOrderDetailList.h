@@ -73,6 +73,8 @@
 @property (nonatomic, copy, readonly) NSString *  retainagePayType;//尾款支付方式
 @property (nonatomic, assign, readwrite) double   retainagePayTypeAmount;//尾款支付金额
 
+- (BOOL)isEmptyAddress;
+
 @end
 
 

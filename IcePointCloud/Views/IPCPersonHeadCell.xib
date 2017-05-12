@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,25 +15,29 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="84.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="84"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="设置头像" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTm-vy-nYi">
-                        <rect key="frame" x="332" y="32" width="60" height="20"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login_head_male" translatesAutoresizingMaskIntoConstraints="NO" id="Yc0-Fb-n77">
+                        <rect key="frame" x="40" y="15" width="55" height="55"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="pfC-gb-ZNo"/>
-                            <constraint firstAttribute="height" constant="20" id="yKb-Yg-fBr"/>
+                            <constraint firstAttribute="height" constant="55" id="2FF-10-IWo"/>
+                            <constraint firstAttribute="width" constant="55" id="tcR-z8-7Av"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="KTm-vy-nYi" secondAttribute="trailing" id="9Xl-9e-dim"/>
-                    <constraint firstItem="KTm-vy-nYi" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DGk-bv-NqU"/>
+                    <constraint firstItem="Yc0-Fb-n77" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ER9-Mk-jHq"/>
+                    <constraint firstItem="Yc0-Fb-n77" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="hz3-HA-mSr"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="loginHeadImage" destination="Yc0-Fb-n77" id="BPm-Lq-yuF"/>
+            </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon_login_head_male" width="44" height="44"/>
+    </resources>
 </document>

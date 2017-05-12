@@ -10,6 +10,6 @@
 
 @interface IPCPersonHeadCell : UITableViewCell
 
-@property (strong, nonatomic)  UIImageView *headImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *loginHeadImage;
 
 @end

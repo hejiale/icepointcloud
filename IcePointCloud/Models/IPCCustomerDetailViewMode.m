@@ -55,7 +55,6 @@
     
     [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
-            NSLog(@"---optometry %@",obj);
             [IPCCurrentCustomerOpometry sharedManager].currentOpometry = obj;
         }
     }];
@@ -69,6 +68,7 @@
     if (self.detailCustomer) {
         [IPCCurrentCustomerOpometry sharedManager].currentCustomer = self.detailCustomer;
         [IPCPayOrderMode sharedManager].customerDiscount = self.detailCustomer.discount/10;
+        [IPCPayOrderMode sharedManager].isChooseCustomer = YES;
     }
 }
 

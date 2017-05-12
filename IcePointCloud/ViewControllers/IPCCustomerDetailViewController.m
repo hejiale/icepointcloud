@@ -160,7 +160,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     __weak typeof (self) weakSelf = self;
     self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^(NSString *addressId){
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView:YES];
+        [strongSelf removerAllPopView:NO];
         [strongSelf setCurrentAddress:addressId];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -175,7 +175,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     __weak typeof (self) weakSelf = self;
     self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:self.customer.customerID Complete:^(NSString *optometryId){
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView:YES];
+        [strongSelf removerAllPopView:NO];
         [strongSelf setDefaultOptometry:optometryId];
     } Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;

@@ -66,6 +66,15 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         [IPCInsertCustomer instance].memberLevel = memberLevelMode.memberLevel;
         [IPCInsertCustomer instance].memberLevelId = memberLevelMode.memberLevelId;
     }
+    if (![IPCInsertCustomer instance].customerType.length) {
+        IPCCustomerType * customerType = [IPCEmployeeMode sharedManager].customerTypeList.list[0];
+        [IPCInsertCustomer instance].customerType = @"自然进店";
+        [[IPCEmployeeMode sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj.customerType isEqualToString:@"自然进店"]) {
+                [IPCInsertCustomer instance].customerTypeId = obj.customerTypeId;
+            }
+        }];
+    }
     
     NSMutableArray * optometryList = [[NSMutableArray alloc]init];
     [[IPCInsertCustomer instance].optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -82,11 +91,13 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                                      @"addLeft":obj.addLeft,
                                      @"addRight":obj.addRight,
                                      @"correctedVisionLeft":obj.correctedVisionLeft,
-                                     @"correctedVisionRight":obj.correctedVisionRight,
-                                     @"employeeName":obj.employeeName,
-                                     @"employeeId":obj.employeeId}];
+                                     @"correctedVisionRight":obj.correctedVisionRight}];
         if (obj.purpose.length) {
             [optometryDic setObject:obj.purpose forKey:@"purpose"];
+        }
+        if (obj.employeeName.length) {
+            [optometryDic setObject:obj.employeeId forKey:@"employeeId"];
+            [optometryDic setObject:obj.employeeName forKey:@"employeeName"];
         }
         [optometryList addObject:optometryDic];
     }];
