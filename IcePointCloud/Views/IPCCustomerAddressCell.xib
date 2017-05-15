@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="75"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="74.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ndg-ie-XFJ">
@@ -53,11 +53,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SGm-P9-cdY">
-                                <rect key="frame" x="30" y="10" width="1" height="15"/>
+                                <rect key="frame" x="30" y="5" width="1" height="20"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="0sP-bo-ewl"/>
-                                    <constraint firstAttribute="height" constant="15" id="7c7-Jo-Gvq"/>
+                                    <constraint firstAttribute="height" constant="20" id="7c7-Jo-Gvq"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0V-3H-wwL">
@@ -95,7 +95,7 @@
                             <constraint firstItem="kkK-ID-1LI" firstAttribute="leading" secondItem="zXC-Lk-1r0" secondAttribute="trailing" id="0HW-js-ujA"/>
                             <constraint firstAttribute="trailing" secondItem="kD9-kj-di3" secondAttribute="trailing" constant="20" id="0Kd-eL-FRp"/>
                             <constraint firstItem="zXC-Lk-1r0" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" constant="5" id="1mY-65-fyE"/>
-                            <constraint firstItem="SGm-P9-cdY" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" constant="10" id="B8C-o0-LRU"/>
+                            <constraint firstItem="SGm-P9-cdY" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" constant="5" id="B8C-o0-LRU"/>
                             <constraint firstItem="zXC-Lk-1r0" firstAttribute="leading" secondItem="Ndg-ie-XFJ" secondAttribute="leading" id="DdN-AI-NRt"/>
                             <constraint firstItem="nWP-nS-E14" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" constant="5" id="GiL-zX-Mv3"/>
                             <constraint firstItem="nWP-nS-E14" firstAttribute="leading" secondItem="SGm-P9-cdY" secondAttribute="trailing" constant="10" id="Td2-aR-i3e"/>

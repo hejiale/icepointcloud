@@ -39,12 +39,12 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPq-33-uHn">
-                        <rect key="frame" x="57" y="28" width="60" height="24"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PPq-33-uHn">
+                        <rect key="frame" x="47" y="28" width="70" height="24"/>
                         <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.30089206560283688" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="ow2-75-Wdk"/>
-                            <constraint firstAttribute="width" constant="60" id="zRw-e8-o26"/>
+                            <constraint firstAttribute="width" constant="70" id="zRw-e8-o26"/>
                         </constraints>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
@@ -53,11 +53,11 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="Mwa-dq-zd3"/>
                         </connections>
                     </textField>
-                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NJo-1Z-jOw">
-                        <rect key="frame" x="143" y="28" width="60" height="24"/>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NJo-1Z-jOw">
+                        <rect key="frame" x="143" y="28" width="70" height="24"/>
                         <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.3095910904255319" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="AOB-38-eeh"/>
+                            <constraint firstAttribute="width" constant="70" id="AOB-38-eeh"/>
                             <constraint firstAttribute="height" constant="24" id="O0i-7j-4NK"/>
                         </constraints>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

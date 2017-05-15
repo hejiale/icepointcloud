@@ -70,7 +70,7 @@
     
     [self setNavigationBarStatus:NO];
     [self reloadCustomerInfo];
-    [self.payOrderTableView reloadData];
+    [self.normalSellCellMode requestTradeOrExchangeStatus];
 }
 
 - (void)reloadCustomerInfo{

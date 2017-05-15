@@ -32,19 +32,19 @@
                                 <constraint firstAttribute="height" constant="40" id="XVc-Sq-xBx"/>
                             </constraints>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                             <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="6wI-Lf-H6s"/>
                             </connections>
                         </textField>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-nY-x8w">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3eD-nY-x8w">
                             <rect key="frame" x="0.0" y="60" width="350" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="oh0-za-xxJ"/>
                             </constraints>
                             <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                             <connections>
                                 <outlet property="delegate" destination="-1" id="llw-dC-1PV"/>
@@ -79,7 +79,7 @@
                         <constraint firstAttribute="height" constant="40" id="Q9Y-I2-Rny"/>
                         <constraint firstAttribute="width" constant="350" id="jb6-lY-Nyz"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
                     <state key="normal" title="登  录">
                         <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -111,7 +111,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="icon_login_logo" width="239" height="88"/>
+        <image name="icon_login_logo" width="236" height="88"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

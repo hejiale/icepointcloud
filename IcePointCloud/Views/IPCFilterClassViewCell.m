@@ -15,7 +15,7 @@
     // Initialization code
     
     UIView * selectedView = [[UIView alloc]initWithFrame:self.frame];
-    [selectedView setBackgroundColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.1]];
+    [selectedView setBackgroundColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.09]];
     [self setSelectedBackgroundView:selectedView];
 }
 

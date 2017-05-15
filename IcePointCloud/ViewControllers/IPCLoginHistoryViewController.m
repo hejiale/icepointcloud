@@ -64,7 +64,7 @@ static NSString * const historyIdentifier = @"HistoryCellIdentifier";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
-    [cell.textLabel setFont:[UIFont systemFontOfSize:16 weight:UIFontWeightThin]];
+    [cell.textLabel setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightThin]];
     [cell.textLabel setTextColor:[UIColor darkGrayColor]];
     [cell.textLabel setText:self.loginHistory[indexPath.row]];
     

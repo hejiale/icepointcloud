@@ -69,15 +69,14 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 - (void)showWithPay:(void (^)())pay
 {
+    [self commitUI];
     self.payBlock = pay;
     
     [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.frame;
         frame.origin.x -= self.jk_width;
         self.frame = frame;
-    } completion:^(BOOL finished) {
-        [self commitUI];
-    }];
+    } completion:nil];
 }
 
 - (void)dismiss:(void(^)())complete
