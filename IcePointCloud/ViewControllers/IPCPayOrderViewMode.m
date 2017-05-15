@@ -114,7 +114,6 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
                 return 3 + [IPCCustomsizedItem sharedItem].normalProducts.count;
             return 4 + [IPCCustomsizedItem sharedItem].normalProducts.count;
         }
-        NSLog(@"--- cartCount %d", [[IPCShoppingCart sharedCart] selectPayItemsCount]);
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))

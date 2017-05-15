@@ -8,13 +8,11 @@
 
 #import "IPCPersonBaseView.h"
 #import "IPCPersonHeadCell.h"
-#import "IPCPersonInputCell.h"
 #import "IPCPersonTitleCell.h"
 #import "IPCPersonQRCodeCell.h"
 #import "IPCPersonMenuCell.h"
 
 static NSString * const headIdentifier  = @"PersonHeadCellIdentifier";
-static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 static NSString * const titleIdentifier = @"PersonTitleCellIdentifier";
 static NSString * const QRCodeIdentifier= @"PersonQRCodeCellIdentifier";
 static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
@@ -107,28 +105,16 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     }];
 }
 
-- (void)updateUserInfo:(NSIndexPath *)indexPath Cell:(IPCPersonInputCell *)cell{
-    NSString * inputNameText  = [cell.inputTextField.text jk_trimmingWhitespace];
-    NSString * inputPhoneText = [cell.inputTextField.text jk_trimmingWhitespace];
-    
-    if (indexPath.row == 0) {
-        [self updateUserInfo:inputNameText ?  : [IPCAppManager sharedManager].profile.user.contactName
-                      Mobile:[IPCAppManager sharedManager].profile.user.contactMobilePhone];
-    }else{
-        [self updateUserInfo:[IPCAppManager sharedManager].profile.user.contactName
-                      Mobile:inputPhoneText ?  : [IPCAppManager sharedManager].profile.user.contactMobilePhone];
-    }
-}
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 5;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0)
         return 1;
-    if (section == 2) {
+    if (section == 1) {
         return 3;
     }
     return 2;
@@ -143,19 +129,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         }
         return cell;
     }else if(indexPath.section == 1){
-        IPCPersonInputCell * cell = [tableView dequeueReusableCellWithIdentifier:inputIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCPersonInputCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        }
-        if (indexPath.row == 0) {
-            [cell.classNameLabel setText:@"姓名"];
-            [cell.inputTextField setText:[IPCAppManager sharedManager].profile.user.contactName];
-        }else{
-            [cell.classNameLabel setText:@"手机"];
-            [cell.inputTextField setText:[IPCAppManager sharedManager].profile.user.contactMobilePhone];
-        }
-        return cell;
-    }else if(indexPath.section == 2){
         if (indexPath.row == 0) {
             IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -179,7 +152,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             }
             return cell;
         }
-    }else if(indexPath.section == 3){
+    }else if(indexPath.section == 2){
         IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -207,7 +180,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0)
-        return 85;
+        return 140;
     return 50;
 }
 
@@ -229,18 +202,18 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 3){
+    if (indexPath.section == 2){
         if (indexPath.row == 0) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://icepointcloud.com/"]];
         }else{
             if (self.UpdateBlock)
                 self.UpdateBlock();
         }
-    }else if (indexPath.section == 2 && indexPath.row == 2){
+    }else if (indexPath.section == 1 && indexPath.row == 2){
         if (self.QRCodeBlock) {
             self.QRCodeBlock();
         }
-    }else if (indexPath.section == 4){
+    }else if (indexPath.section == 3){
         if (indexPath.row == 0) {
             if (self.HelpBlock) {
                 self.HelpBlock();

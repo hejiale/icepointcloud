@@ -15,6 +15,13 @@
     // Initialization code
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self.loginUserNameLabel setText:[IPCAppManager sharedManager].profile.user.contactName];
+    [self.loginPhoneLabel setText:[IPCAppManager sharedManager].profile.user.contactMobilePhone];
+}
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

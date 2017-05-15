@@ -11,5 +11,7 @@
 @interface IPCPersonHeadCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *loginHeadImage;
+@property (weak, nonatomic) IBOutlet UILabel *loginUserNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *loginPhoneLabel;
 
 @end
