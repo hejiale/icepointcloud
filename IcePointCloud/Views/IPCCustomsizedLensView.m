@@ -49,18 +49,46 @@
         [self.distanceTextField setLeftText:@"左眼瞳距/PD(L)"];
     }
     
-    
     [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *)obj;
             [textField addBorder:3 Width:0.5];
         }
     }];
-    [self reloadUI];
 }
 
 - (void)reloadUI
 {
+    if (self.isRight) {
+        [self.sphTextField setText:[IPCCustomsizedItem sharedItem].rightEye.sph];
+        [self.cylTextField setText:[IPCCustomsizedItem sharedItem].rightEye.cyl];
+        [self.axisTextField setText:[IPCCustomsizedItem sharedItem].rightEye.axis];
+        [self.distanceTextField setText:[IPCCustomsizedItem sharedItem].rightEye.distance];
+        [self.addTextField setText:[IPCCustomsizedItem sharedItem].rightEye.add];
+        [self.channalTextField setText:[IPCCustomsizedItem sharedItem].rightEye.channel];
+        [self.dyeingTextField setText:[IPCCustomsizedItem sharedItem].rightEye.dyeing];
+        [self.addLayerTextField setText:[IPCCustomsizedItem sharedItem].rightEye.membrane];
+        if ([IPCCustomsizedItem sharedItem].rightEye.customsizedPrice <= 0) {
+            [IPCCustomsizedItem sharedItem].rightEye.customsizedPrice = [IPCCustomsizedItem sharedItem].customsizedProduct.suggestPrice;
+        }
+        [self.priceTextField setText:[NSString stringWithFormat:@"%.2f",[IPCCustomsizedItem sharedItem].rightEye.customsizedPrice]];
+        [self.countLabel setText:[NSString stringWithFormat:@"%d",[IPCCustomsizedItem sharedItem].rightEye.customsizedCount]];
+    }else{
+        [self.sphTextField setText:[IPCCustomsizedItem sharedItem].leftEye.sph];
+        [self.cylTextField setText:[IPCCustomsizedItem sharedItem].leftEye.cyl];
+        [self.axisTextField setText:[IPCCustomsizedItem sharedItem].leftEye.axis];
+        [self.distanceTextField setText:[IPCCustomsizedItem sharedItem].leftEye.distance];
+        [self.addTextField setText:[IPCCustomsizedItem sharedItem].leftEye.add];
+        [self.channalTextField setText:[IPCCustomsizedItem sharedItem].leftEye.channel];
+        [self.dyeingTextField setText:[IPCCustomsizedItem sharedItem].leftEye.dyeing];
+        [self.addLayerTextField setText:[IPCCustomsizedItem sharedItem].leftEye.membrane];
+        if ([IPCCustomsizedItem sharedItem].leftEye.customsizedPrice <= 0) {
+            [IPCCustomsizedItem sharedItem].leftEye.customsizedPrice = [IPCCustomsizedItem sharedItem].customsizedProduct.suggestPrice;
+        }
+        [self.priceTextField setText:[NSString stringWithFormat:@"%.2f",[IPCCustomsizedItem sharedItem].leftEye.customsizedPrice]];
+        [self.countLabel setText:[NSString stringWithFormat:@"%d",[IPCCustomsizedItem sharedItem].leftEye.customsizedCount]];
+    }
+    
     [self.otherContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     NSArray * otherArray = nil;
@@ -91,8 +119,20 @@
         
         [otherArray enumerateObjectsUsingBlock:^(IPCCustomsizedOther * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            IPCCustomsizedOtherView * otherView = [[IPCCustomsizedOtherView alloc]initWithFrame:CGRectMake(0, idx *50, width, 30)];
+            IPCCustomsizedOtherView * otherView = [[IPCCustomsizedOtherView alloc]initWithFrame:CGRectMake(0, idx *50, width, 30) Insert:^(NSString *str,OtherType otherType)
+            {
+                if (otherType == OtherTypeParameter) {
+                    obj.otherParameter = str;
+                }else{
+                    obj.otherParameterRemark = str;
+                }
+                if (strongSelf.UpdateBlock) {
+                    strongSelf.UpdateBlock();
+                }
+            }];
             [strongSelf.otherContentView addSubview:otherView];
+            [otherView.otherParameterTextField setText:obj.otherParameter];
+            [otherView.otherDescription setText:obj.otherParameterRemark];
             
             [[otherView rac_signalForSelector:@selector(deleteAction:)] subscribeNext:^(id x) {
                 if (strongSelf.isRight) {
@@ -103,7 +143,6 @@
                 if (strongSelf.UpdateBlock) {
                     strongSelf.UpdateBlock();
                 }
-               
             }];
         }];
     }else{
@@ -117,11 +156,32 @@
 }
 
 - (IBAction)reduceAction:(id)sender {
+    NSInteger count = [self.countLabel.text integerValue];
+    count--;
+    if (count <= 1)count = 1;
     
+    if (self.isRight) {
+        [IPCCustomsizedItem sharedItem].rightEye.customsizedCount = count;
+    }else{
+        [IPCCustomsizedItem sharedItem].leftEye.customsizedCount = count;
+    }
+    if (self.UpdateBlock) {
+        self.UpdateBlock();
+    }
 }
 
 - (IBAction)addAction:(id)sender {
+    NSInteger count = [self.countLabel.text integerValue];
+    count++;
     
+    if (self.isRight) {
+        [IPCCustomsizedItem sharedItem].rightEye.customsizedCount = count;
+    }else{
+        [IPCCustomsizedItem sharedItem].leftEye.customsizedCount = count;
+    }
+    if (self.UpdateBlock) {
+        self.UpdateBlock();
+    }
 }
 
 - (void)onGetSphAction{
@@ -140,6 +200,7 @@
     IPCParameterTableViewController * pickerVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
     pickerVC.dataSource = self;
     pickerVC.delegate = self;
+    pickerVC.view.tag = sender.tag;
     [pickerVC showWithPosition:CGPointMake(sender.jk_width/2, sender.jk_height) Size:CGSizeMake(sender.jk_width, 150) Owner:sender Direction:UIPopoverArrowDirectionUp];
 }
 
@@ -152,7 +213,22 @@
 #pragma mark //UIPickerViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
-    
+    if (tableView.view.tag == 0) {
+        if (self.isRight) {
+            [IPCCustomsizedItem sharedItem].rightEye.sph = parameter;
+        }else{
+            [IPCCustomsizedItem sharedItem].leftEye.sph = parameter;
+        }
+    }else{
+        if (self.isRight) {
+            [IPCCustomsizedItem sharedItem].rightEye.cyl = parameter;
+        }else{
+            [IPCCustomsizedItem sharedItem].leftEye.cyl = parameter;
+        }
+    }
+    if (self.UpdateBlock) {
+        self.UpdateBlock();
+    }
 }
 
 #pragma mark //UITextField Delegate
@@ -161,6 +237,57 @@
     return YES;
 }
 
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString * str = [textField.text jk_trimmingWhitespace];
+    if (str.length) {
+        if (textField.tag == 2) {
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.axis = str;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.axis = str;
+            }
+        }else if (textField.tag == 3){
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.distance = str;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.distance = str;
+            }
+        }else if (textField.tag == 4){
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.add = str;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.add = str;
+            }
+        }else if (textField.tag == 5){
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.channel = str;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.channel = str;
+            }
+        }else if (textField.tag == 6){
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.membrane = str;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.membrane = str;
+            }
+        }else if (textField.tag == 7){
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.dyeing = str;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.dyeing = str;
+            }
+        }else if (textField.tag == 8){
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.customsizedPrice = [str doubleValue];
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.customsizedPrice = [str doubleValue];
+            }
+        }
+        if (self.UpdateBlock) {
+            self.UpdateBlock();
+        }
+    }
+}
 
 
 @end

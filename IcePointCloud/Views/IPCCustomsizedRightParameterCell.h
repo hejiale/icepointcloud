@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIView *parameterContentView;
 @property (weak, nonatomic) IBOutlet UIButton *unifiedButton;
 @property (weak, nonatomic) IBOutlet UIButton *leftOrRightEyeButton;
+@property (weak, nonatomic) IBOutlet UIImageView *rightEyeImageView;
+
 
 - (void)reloadUI:(void(^)())update;
 

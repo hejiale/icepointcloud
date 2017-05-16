@@ -42,6 +42,7 @@
         [self.unifiedButton setSelected:YES];
         [self.leftOrRightEyeButton setSelected:NO];
     }else if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye){
+        [self.rightEyeImageView setHidden:NO];
         [self.leftOrRightEyeButton setSelected:YES];
         [self.unifiedButton setSelected:NO];
     }

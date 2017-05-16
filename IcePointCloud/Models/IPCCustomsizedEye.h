@@ -19,8 +19,6 @@
 @property (nonatomic, copy, readwrite) NSString * membrane;//加膜
 @property (nonatomic, copy, readwrite) NSString * channel;//通道长度
 @property (nonatomic, copy, readwrite) NSString * dyeing;//染色
-@property (nonatomic, copy, readwrite) NSString * remark;
-@property (nonatomic, assign, readwrite) NSInteger   count;
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomsizedOther *> * otherArray;
 @property (nonatomic, assign, readwrite) double    customsizedPrice;//定制价格
 @property (nonatomic, assign, readwrite) NSInteger  customsizedCount;//定制数量

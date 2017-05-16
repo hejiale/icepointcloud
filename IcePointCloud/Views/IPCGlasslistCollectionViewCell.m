@@ -133,7 +133,7 @@
         [self.customsizedDateImage setHidden:NO];
         [self.customsizedDateLabel setHidden:NO];
         
-        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_customsizedProduct.bizPriceOrigin] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_customsizedProduct.suggestPrice] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
         
         [self.productNameLabel setText:_customsizedProduct.name];
         CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];

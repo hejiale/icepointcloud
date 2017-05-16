@@ -36,7 +36,21 @@
     self.normalProducts = nil;
     self.leftEye       = nil;
     self.rightEye     = nil;
-    self.unifiedEye  = nil;
+}
+
+- (double)totalPrice
+{
+    __block double price = 0;
+    [self.normalProducts enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        price += obj.totalPrice;
+    }];
+    if (self.customsizdType == IPCCustomsizedTypeUnified) {
+        price += self.rightEye.customsizedCount * self.rightEye.customsizedPrice;
+    }else if(self.customsizdType == IPCCustomsizedTypeLeftOrRightEye){
+        price += self.rightEye.customsizedCount * self.rightEye.customsizedPrice;
+        price += self.leftEye.customsizedCount * self.leftEye.customsizedPrice;
+    }
+    return price;
 }
 
 

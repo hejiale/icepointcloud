@@ -91,6 +91,12 @@
 }
 
 - (void)reloadOtherParameterView{
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+        [self.contactLensView reloadUI];
+    }else{
+        [self.lensView reloadUI];
+    }
+    
     NSArray * otherArray = nil;
     if (self.isRight) {
         otherArray = [IPCCustomsizedItem sharedItem].rightEye.otherArray;

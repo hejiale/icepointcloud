@@ -65,7 +65,7 @@
                             <action selector="leftOrRightEyeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fL8-9x-uun"/>
                         </connections>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_customsizedEye" translatesAutoresizingMaskIntoConstraints="NO" id="bQW-x3-Pzf">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="right_customsizedEye" translatesAutoresizingMaskIntoConstraints="NO" id="bQW-x3-Pzf">
                         <rect key="frame" x="28" y="73" width="34" height="18"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -92,6 +92,7 @@
             <connections>
                 <outlet property="leftOrRightEyeButton" destination="Iqa-2D-HeI" id="qOl-Mh-rdW"/>
                 <outlet property="parameterContentView" destination="Nqj-n3-bXQ" id="VKJ-Y0-7C9"/>
+                <outlet property="rightEyeImageView" destination="bQW-x3-Pzf" id="suy-PH-d4R"/>
                 <outlet property="unifiedButton" destination="oOk-vl-upn" id="3fw-OP-MgE"/>
             </connections>
             <point key="canvasLocation" x="205" y="323.5"/>

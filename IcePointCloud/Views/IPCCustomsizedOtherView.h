@@ -8,11 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCCustomsizedOtherView : UIView
+typedef NS_ENUM(NSInteger, OtherType){
+    OtherTypeParameter = 0,
+    OtherTypeDescription = 1
+};
+
+@interface IPCCustomsizedOtherView : UIView<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *otherParameterTextField;
 @property (weak, nonatomic) IBOutlet UITextField *otherDescription;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
+- (instancetype)initWithFrame:(CGRect)frame Insert:(void(^)(NSString *, OtherType))insert;
 
 @end

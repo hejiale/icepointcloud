@@ -13,9 +13,6 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.sph = @"+0.00";
-        self.cyl  = @"+0.00";
-        self.count = 1;
     }
     return self;
 }

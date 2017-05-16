@@ -104,6 +104,8 @@
 
 - (double)selectedPayItemTotalPrice
 {
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
+        return [[IPCCustomsizedItem sharedItem] totalPrice];
     if ([self isExistValueCard])
         return [self selectedValueCardTotalPrice];
     return [self selectedGlassesTotalPrice];

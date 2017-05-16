@@ -26,5 +26,6 @@
 @property (assign, nonatomic) BOOL isRight;
 
 - (instancetype)initWithFrame:(CGRect)frame Update:(void(^)())update;
+- (void)reloadUI;
 
 @end

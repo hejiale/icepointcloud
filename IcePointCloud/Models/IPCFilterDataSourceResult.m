@@ -37,7 +37,7 @@
 
 - (void)parseFilterData:(id)responseObject IsTry:(BOOL)isTry IsCustomsized:(BOOL)isCustomsized
 {
-    self.isTryOn = isTry;
+    self.isTryOn = isTry;  
     self.isCustomsized = isCustomsized;
     
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
@@ -56,8 +56,8 @@
         return @[@"镜架",@"太阳眼镜",@"定制类眼镜",@"老花眼镜"];
     else if (self.isCustomsized)
         return @[@"镜架",@"太阳眼镜"];
-    return @[@"镜架",@"太阳眼镜",@"定制类眼镜",@"老花眼镜",@"镜片",@"隐形眼镜",@"配件",@"储值卡",@"其它"];
-//    return @[@"镜架",@"太阳眼镜",@"定制类眼镜",@"老花眼镜",@"镜片",@"隐形眼镜",@"配件",@"储值卡",@"其它",@"定制隐形眼镜",@"定制镜片"];
+//    return @[@"镜架",@"太阳眼镜",@"定制类眼镜",@"老花眼镜",@"镜片",@"隐形眼镜",@"配件",@"储值卡",@"其它"];
+    return @[@"镜架",@"太阳眼镜",@"定制类眼镜",@"老花眼镜",@"镜片",@"隐形眼镜",@"配件",@"储值卡",@"其它",@"定制隐形眼镜",@"定制镜片"];
 }
 
 - (NSArray *)allFilterKeys{
