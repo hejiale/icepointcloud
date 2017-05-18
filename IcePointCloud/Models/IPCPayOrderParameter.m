@@ -67,6 +67,9 @@
     [parameters setObject:@([IPCPayOrderMode sharedManager].payTypeAmount) forKey:@"payTypeAmount"];
     [parameters setObject:otherTypeList forKey:@"payTypeDetails"];
     [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
+        [parameters setObject:@"true" forKey:@"isCustomizedLens"];
+    }
 
     return parameters;
 }
@@ -79,6 +82,8 @@
     
     if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
     {
+        [itemParams addObject:[[IPCCustomsizedItem sharedItem] paramtersJSONForOrderRequest]];
+        
         for (int i = 0; i < [IPCCustomsizedItem sharedItem].normalProducts.count; i++) {
             IPCShoppingCartItem * item = [IPCCustomsizedItem sharedItem].normalProducts[i];
             [itemParams addObject:[item paramtersJSONForOrderRequest]];

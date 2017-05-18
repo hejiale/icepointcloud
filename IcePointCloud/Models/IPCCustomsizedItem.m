@@ -53,5 +53,71 @@
     return price;
 }
 
+//Joining together to upload the order parameter
+- (NSDictionary *)paramtersJSONForOrderRequest
+{
+    NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
+    
+    //--------------定制商品--------------//
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
+        [params setObject:@"CUSTOMIZED_LENS" forKey:@"customizedProdType"];
+    }else if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
+        [params setObject:@"CUSTOMIZED_CONTACT_LENS" forKey:@"customizedProdType"];
+    }
+    [params setObject:@"true" forKey:@"isCustomizedLens"];
+    
+    IPCCustomsizedEye * rightEye = [IPCCustomsizedItem sharedItem].rightEye;
+    IPCCustomsizedEye * leftEye   = [IPCCustomsizedItem sharedItem].leftEye;
+    
+    if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified)
+    {
+        [params setObject:@"true" forKey:@"isUnifiedCustomizd"];
+        leftEye = rightEye;
+        leftEye.customsizedCount = 0;
+        leftEye.customsizedPrice = 0;
+        
+    }else if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye){
+        [params setObject:@"false" forKey:@"isUnifiedCustomizd"];
+    }
+    [params setObject:rightEye.channel ? : @"" forKey:@"chanelRight"];
+    [params setObject:rightEye.sph ? : @"" forKey:@"sphRight"];
+    [params setObject:rightEye.cyl ? : @"" forKey:@"cylRight"];
+    [params setObject:rightEye.distance ? : @"" forKey:@"distanceRight"];
+    [params setObject:rightEye.axis ? : @"" forKey:@"axisRight"];
+    [params setObject:rightEye.add ? : @"" forKey:@"addRight"];
+    [params setObject:rightEye.dyeing ? : @"" forKey:@"dyeRight"];
+    [params setObject:rightEye.membrane ? : @"" forKey:@"layerRight"];
+    [params setObject:rightEye.channel ? : @"" forKey:@"chanelRight"];
+    [params setObject:@(rightEye.customsizedPrice) forKey:@"customizedRightPrice"];
+    [params setObject:@(rightEye.customsizedCount) forKey:@"customizedRightCount"];
+    
+    NSMutableDictionary * rightCustomsizedDic = [[NSMutableDictionary alloc]init];
+    [rightEye.otherArray enumerateObjectsUsingBlock:^(IPCCustomsizedOther * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [rightCustomsizedDic setObject:obj.otherParameter forKey:obj.otherParameterRemark];
+    }];
+    [params setObject:rightCustomsizedDic forKey:@"customizedRight"];
+    
+    [params setObject:leftEye.channel ? : @"" forKey:@"chanelLeft"];
+    [params setObject:leftEye.sph ? : @"" forKey:@"sphLeft"];
+    [params setObject:leftEye.cyl ? : @"" forKey:@"cylLeft"];
+    [params setObject:leftEye.distance ? : @"" forKey:@"distance"];
+    [params setObject:leftEye.axis ? : @"" forKey:@"axisLeft"];
+    [params setObject:leftEye.add ? : @"" forKey:@"addLeft"];
+    [params setObject:leftEye.dyeing ? : @"" forKey:@"dyeLeft"];
+    [params setObject:leftEye.membrane ? : @"" forKey:@"layerLeft"];
+    [params setObject:leftEye.channel ? : @"" forKey:@"chanelLeft"];
+    [params setObject:@(leftEye.customsizedPrice) forKey:@"customizedLeftPrice"];
+    [params setObject:@(leftEye.customsizedCount) forKey:@"customizedCount"];
+    
+    NSMutableDictionary * leftCustomsizedDic = [[NSMutableDictionary alloc]init];
+    [leftEye.otherArray enumerateObjectsUsingBlock:^(IPCCustomsizedOther * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [leftCustomsizedDic setObject:obj.otherParameter forKey:obj.otherParameterRemark];
+    }];
+    [params setObject:leftCustomsizedDic forKey:@"customizedLeft"];
+    
+    return params;
+}
+
+
 
 @end

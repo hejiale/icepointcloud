@@ -30,4 +30,6 @@ typedef NS_ENUM(NSInteger, IPCCustomsizedType){
 
 - (void)resetData;
 
+- (NSDictionary *)paramtersJSONForOrderRequest;
+
 @end
