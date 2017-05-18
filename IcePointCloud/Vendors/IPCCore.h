@@ -61,6 +61,10 @@ typedef NS_ENUM(NSInteger, IPCModelUsage) {
  */
 typedef NS_ENUM(NSInteger, IPCTopFilterType) {
     /**
+     *  NONE
+     */
+    IPCTopFIlterTypeNone = -1,
+    /**
      *  FRAME
      */
     IPCTopFIlterTypeFrames = 0,

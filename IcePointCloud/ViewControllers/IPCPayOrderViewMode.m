@@ -313,7 +313,8 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 }
 
 #pragma mark //IPCPayOrderSubViewDelegate
-- (void)reloadUI{
+- (void)reloadUI
+{
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
             [self.delegate reloadPayOrderView];

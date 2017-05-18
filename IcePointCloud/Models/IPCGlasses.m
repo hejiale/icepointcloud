@@ -43,6 +43,8 @@
  */
 - (IPCTopFilterType)filterType
 {
+    if (!self.glassesID && !self.glassesID.length)return IPCTopFIlterTypeNone;
+    
     NSRange range = [self.glassesID rangeOfString:@"-"];
     NSString * typeName = [self.glassesID substringToIndex:range.location];
     

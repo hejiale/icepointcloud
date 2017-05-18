@@ -88,6 +88,7 @@
 
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
+    
     if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
         [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
     }else{
