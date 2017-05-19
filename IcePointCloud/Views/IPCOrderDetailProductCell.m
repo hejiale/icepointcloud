@@ -18,7 +18,6 @@
     [self.contentView addSubview:self.suggestPriceLabel];
     [self.contentView addSubview:self.productNameLabel];
     
-    
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(19);
         make.top.equalTo(self.productImageView.mas_top).with.offset(0);

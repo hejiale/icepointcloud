@@ -61,7 +61,9 @@
     {
         [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
         [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
+        [IPCCustomsizedItem sharedItem].rightEye.customsizedCount = 1;
         [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
+        [IPCCustomsizedItem sharedItem].leftEye.customsizedCount = 1;
     }
 }
 

@@ -61,18 +61,12 @@ typedef  void(^DismissBlock)();
 }
 
 #pragma mark //Requst Method
-- (void)saveNewAddress{
-    NSString * genderString = nil;
-    if (self.addressView.maleButton.selected) {
-        genderString = @"MALE";
-    }else{
-        genderString = @"FEMALE";
-    }
-    
+- (void)saveNewAddress
+{
     [IPCCustomerRequestManager saveNewCustomerAddressWithAddressID:@""
                                                           CustomID:self.customerID
                                                        ContactName:self.addressView.contacterTextField.text
-                                                            Gender:genderString
+                                                            Gender:self.addressView.maleButton.selected ? @"MALE" : @"FEMALE"
                                                              Phone:self.addressView.phoneTextField.text
                                                            Address:self.addressView.addressTextField.text
                                                       SuccessBlock:^(id responseValue)

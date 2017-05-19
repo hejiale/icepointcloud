@@ -53,6 +53,14 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
             [textField setLeftSpace:10];
         }
     }];
+    
+    [self.introducerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UITextField class]]) {
+            UITextField * textField = (UITextField *)obj;
+            [textField addBorder:3 Width:0.5];
+            [textField setLeftSpace:10];
+        }
+    }];
 }
 
 
@@ -83,6 +91,16 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     
     NSString * headImage  = [IPCHeadImage gender:[IPCInsertCustomer instance].gender Size:@"middle" Tag:[IPCInsertCustomer instance].photo_udid];
     [self.customerImageView setImage:[UIImage imageNamed:headImage]];
+    
+    if ([[IPCInsertCustomer instance].customerType isEqualToString:@"转介绍"]) {
+        [self.introducerView setHidden:NO];
+        self.introduceTop.constant = 15;
+        self.introduceHeight.constant = 30;
+    }else{
+        [self.introducerView setHidden:YES];
+        self.introduceTop.constant = 0;
+        self.introduceHeight.constant = 0;
+    }
 }
 
 

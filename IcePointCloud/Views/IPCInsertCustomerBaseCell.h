@@ -29,6 +29,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *memoTextField;
 @property (weak, nonatomic) IBOutlet UIButton *packUpButton;
 @property (weak, nonatomic) IBOutlet UIButton *packDownButton;
+@property (weak, nonatomic) IBOutlet UIView *introducerView;
+@property (weak, nonatomic) IBOutlet UITextField *introducerTextField;
+@property (weak, nonatomic) IBOutlet UITextField *introducerInteger;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceTop;
+
+
 @property (weak, nonatomic) id<UserBaseInfoCellDelegate>delegate;
 
 - (void)updatePackUpUI:(BOOL)isPackUp;

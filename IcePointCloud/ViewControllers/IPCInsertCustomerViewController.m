@@ -82,10 +82,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         [optometryDic setDictionary:@{
                                      @"distanceRight": obj.distanceRight,
                                      @"distanceLeft":obj.distanceLeft,
-                                     @"sphLeft": (obj.sphLeft.length ? obj.sphLeft : @""),
-                                     @"sphRight":(obj.sphRight.length ? obj.sphRight : @""),
-                                     @"cylLeft": (obj.cylLeft.length ? obj.cylLeft : @""),
-                                     @"cylRight":(obj.cylRight.length ? obj.cylRight : @""),
+                                     @"sphLeft": (obj.sphLeft ?  : @""),
+                                     @"sphRight":(obj.sphRight ?  : @""),
+                                     @"cylLeft": (obj.cylLeft ?  : @""),
+                                     @"cylRight":(obj.cylRight ?  : @""),
                                      @"axisLeft":obj.axisLeft,
                                      @"axisRight":obj.axisRight,
                                      @"addLeft":obj.addLeft,
@@ -247,9 +247,15 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0 && indexPath.row > 0)
-        return isPackUping ? 310 : 170;
-    else if (indexPath.section == 1 && indexPath.row > 0)
+    if (indexPath.section == 0 && indexPath.row > 0){
+        if (isPackUping) {
+            if ([[IPCInsertCustomer instance].customerType isEqualToString:@"转介绍"]) {
+                return 360;
+            }
+            return 310;
+        }
+        return 180;
+    }else if (indexPath.section == 1 && indexPath.row > 0)
         return 100;
     else if (indexPath.section == 2 && indexPath.row > 0)
         return 175;
