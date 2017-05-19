@@ -100,7 +100,9 @@
                              @"occupation":occupation,
                              @"optometrys":optometryList,
                              @"photoIdForPos":photoId,
-                             @"isPos":@"true"};
+                             @"isPos":@"true",
+                             @"introducerId":@"",
+                             @"introducerIntegral":@""};
     [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 

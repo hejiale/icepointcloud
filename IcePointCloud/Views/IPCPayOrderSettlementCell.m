@@ -20,7 +20,8 @@
     [self.depositTextField addBorder:3 Width:0.5];
     [self.depositTextField setRightSpace:5];
     [self.payAmountTextField setRightSpace:5];
-    
+    [self.payAmountTextField setLeftText:@"￥"];
+    [self.depositTextField setLeftText:@"￥"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

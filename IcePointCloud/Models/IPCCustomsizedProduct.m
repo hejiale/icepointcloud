@@ -12,7 +12,8 @@
 
 + (NSDictionary *)replacedKeyFromPropertyName
 {
-    return @{@"customsizedId"  : @"id"};
+    return @{@"customsizedId"  : @"id",
+             @"remark": @"description"};
 }
 
 
@@ -22,7 +23,7 @@
     [dic setObject:[NSString stringWithFormat:@"%d天",self.period] forKey:@"定制周期"];
     [dic setObject:self.supplierName forKey:@"供应商"];
     [dic setObject:self.brand forKey:@"品牌"];
-    [dic setObject:self.description forKey:@"商品说明"];
+    [dic setObject:self.remark forKey:@"商品说明"];
     [dic setObject:self.lensFunction ? : @"" forKey:@"功能"];
     [dic setObject:[NSString stringWithFormat:@"%@~%@",self.sphStart,self.sphEnd] forKey:@"球镜范围"];
     [dic setObject:self.layer ? : @"" forKey:@"膜层"];

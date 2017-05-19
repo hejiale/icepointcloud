@@ -65,6 +65,7 @@
         [params setObject:@"CUSTOMIZED_CONTACT_LENS" forKey:@"customizedProdType"];
     }
     [params setObject:@"true" forKey:@"isCustomizedLens"];
+    [params setObject:[IPCCustomsizedItem sharedItem].customsizedProduct.customsizedId forKey:@"customizedId"];
     
     IPCCustomsizedEye * rightEye = [IPCCustomsizedItem sharedItem].rightEye;
     IPCCustomsizedEye * leftEye   = [IPCCustomsizedItem sharedItem].leftEye;
@@ -73,12 +74,16 @@
     {
         [params setObject:@"true" forKey:@"isUnifiedCustomizd"];
         leftEye = rightEye;
-        leftEye.customsizedCount = 0;
-        leftEye.customsizedPrice = 0;
-        
     }else if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye){
         [params setObject:@"false" forKey:@"isUnifiedCustomizd"];
     }
+    
+    if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
+        [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice] forKey:@"afterDiscountPrice"];
+    }else if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye){
+        [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice + leftEye.customsizedPrice] forKey:@"afterDiscountPrice"];
+    }
+    
     [params setObject:rightEye.channel ? : @"" forKey:@"chanelRight"];
     [params setObject:rightEye.sph ? : @"" forKey:@"sphRight"];
     [params setObject:rightEye.cyl ? : @"" forKey:@"cylRight"];
@@ -88,7 +93,7 @@
     [params setObject:rightEye.dyeing ? : @"" forKey:@"dyeRight"];
     [params setObject:rightEye.membrane ? : @"" forKey:@"layerRight"];
     [params setObject:rightEye.channel ? : @"" forKey:@"chanelRight"];
-    [params setObject:@(rightEye.customsizedPrice) forKey:@"customizedRightPrice"];
+    [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice] forKey:@"customizedRightPrice"];
     [params setObject:@(rightEye.customsizedCount) forKey:@"customizedRightCount"];
     
     NSMutableDictionary * rightCustomsizedDic = [[NSMutableDictionary alloc]init];
@@ -106,9 +111,11 @@
     [params setObject:leftEye.dyeing ? : @"" forKey:@"dyeLeft"];
     [params setObject:leftEye.membrane ? : @"" forKey:@"layerLeft"];
     [params setObject:leftEye.channel ? : @"" forKey:@"chanelLeft"];
-    [params setObject:@(leftEye.customsizedPrice) forKey:@"customizedLeftPrice"];
-    [params setObject:@(leftEye.customsizedCount) forKey:@"customizedCount"];
-    
+    if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye) {
+        [params setObject:[NSString stringWithFormat:@"%.2f",leftEye.customsizedPrice] forKey:@"customizedLeftPrice"];
+        [params setObject:@(leftEye.customsizedCount) forKey:@"customizedCount"];
+    }
+
     NSMutableDictionary * leftCustomsizedDic = [[NSMutableDictionary alloc]init];
     [leftEye.otherArray enumerateObjectsUsingBlock:^(IPCCustomsizedOther * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [leftCustomsizedDic setObject:obj.otherParameter forKey:obj.otherParameterRemark];

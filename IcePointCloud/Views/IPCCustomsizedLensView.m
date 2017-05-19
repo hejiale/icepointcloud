@@ -33,11 +33,13 @@
     [super layoutSubviews];
     
     //定制镜片商品
-    [self.addLayerTextField setLeftSpace:10];
-    [self.dyeingTextField setLeftSpace:10];
-    [self.addTextField setLeftSpace:10];
-    [self.channalTextField setLeftSpace:10];
+    [self.addLayerTextField setLeftSpace:5];
+    [self.dyeingTextField setLeftSpace:5];
+    [self.addTextField setLeftSpace:5];
+    [self.channalTextField setLeftSpace:5];
     [self.priceTextField addBorder:3 Width:0.5];
+    [self.priceTextField setLeftSpace:5];
+    [self.priceTextField setLeftText:@"￥"];
     [self.sphTextField setRightButton:self Action:@selector(onGetSphAction) OnView:self];
     [self.cylTextField setRightButton:self Action:@selector(onGetCylAction) OnView:self];
     [self.sphTextField setLeftText:@"球镜/SPH"];
@@ -248,15 +250,21 @@
             }
         }else if (textField.tag == 3){
             if (self.isRight) {
-                [IPCCustomsizedItem sharedItem].rightEye.distance = str;
+                [IPCCustomsizedItem sharedItem].rightEye.distance = [NSString stringWithFormat:@"%.2fmm",[str doubleValue]];
             }else{
-                [IPCCustomsizedItem sharedItem].leftEye.distance = str;
+                [IPCCustomsizedItem sharedItem].leftEye.distance = [NSString stringWithFormat:@"%.2fmm",[str doubleValue]];
             }
         }else if (textField.tag == 4){
-            if (self.isRight) {
-                [IPCCustomsizedItem sharedItem].rightEye.add = str;
+            NSString * addText = nil;
+            if (![str hasPrefix:@"-"]) {
+                addText = [NSString stringWithFormat:@"+%.2f",[str doubleValue]];
             }else{
-                [IPCCustomsizedItem sharedItem].leftEye.add = str;
+                addText = [NSString stringWithFormat:@"%.2f",[str doubleValue]];
+            }
+            if (self.isRight) {
+                [IPCCustomsizedItem sharedItem].rightEye.add = addText;
+            }else{
+                [IPCCustomsizedItem sharedItem].leftEye.add = addText;
             }
         }else if (textField.tag == 5){
             if (self.isRight) {

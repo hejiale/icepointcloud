@@ -34,8 +34,8 @@
     
     [self.otherParameterTextField addBorder:3 Width:0.5];
     [self.otherDescription addBorder:3 Width:0.5];
-    [self.otherDescription setLeftSpace:10];
-    [self.otherParameterTextField setLeftSpace:10];
+    [self.otherParameterTextField setLeftSpace:5];
+    [self.otherDescription setLeftSpace:5];
     [self.deleteButton.layer setCornerRadius:3];
 }
 
