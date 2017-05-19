@@ -37,10 +37,6 @@
     [self.contactSphTextField setLeftText:@"球镜/SPH"];
     [self.contactCylTextField setLeftText:@"柱镜/CYL"];
     [self.contactAxisTextField setLeftText:@" 轴位/AXIS"];
-    [self.contactSphTextField setLeftSpace:5];
-    [self.contactCylTextField setLeftSpace:5];
-    [self.contactAxisTextField setLeftSpace:5];
-    [self.priceTextField setLeftSpace:5];
     
     [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {

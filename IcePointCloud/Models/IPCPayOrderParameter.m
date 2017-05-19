@@ -70,6 +70,7 @@
     if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
         [parameters setObject:@"true" forKey:@"isCustomizedLens"];
     }
+    [parameters setObject:[IPCPayOrderMode sharedManager].remark forKey:@"orderRemark"];
 
     return parameters;
 }

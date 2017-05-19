@@ -17,6 +17,7 @@
 #import "IPCCustomsizedProductCell.h"
 #import "IPCCustomsizedRightParameterCell.h"
 #import "IPCCustomsizedLeftParameterCell.h"
+#import "IPCPayOrderMemoCell.h"
 #import "IPCPayOrderViewCellMode.h"
 
 static NSString * const payOrderCartItemIdentifier = @"payOrderProductCellIdentifier";
@@ -29,6 +30,7 @@ static NSString * const settlementIdentifier           = @"IPCPayOrderSettlement
 static NSString * const customsizedProIdentifier   = @"IPCCustomsizedProductCellIdentifier";
 static NSString * const rightEyeIdentifier               = @"IPCCustomsizedRightParameterCellIdentifier";
 static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLeftParameterCellIdentifier";
+static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellIdentifier";
 
 @interface IPCPayOrderViewMode()<IPCPayOrderSubViewDelegate>
 
@@ -100,14 +102,14 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 #pragma mark //DO Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
-        return 6;
+        return 7;
     }
     return 3;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ((section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1))
+    if ((section == 5 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 1))
     {
         if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
         {
@@ -117,13 +119,13 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
         }
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
-    else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 5))
+    else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 6))
         return 1;
-    else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 3)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
+    else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 4)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
         return 1;
-    else if (![IPCCurrentCustomerOpometry sharedManager].currentAddress && section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
+    else if (![IPCCurrentCustomerOpometry sharedManager].currentAddress && section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
-    else if (![IPCCurrentCustomerOpometry sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
+    else if (![IPCCurrentCustomerOpometry sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
     return 2;
 }
@@ -147,7 +149,23 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             cell.currentCustomer = [IPCCurrentCustomerOpometry sharedManager].currentCustomer;
             return cell;
         }
-    }else if (indexPath.section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentAddress && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
+    }else if (indexPath.section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer){
+        if (indexPath.row == 0) {
+            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell setTopTitle:@"订单备注"];
+            return cell;
+        }else{
+            IPCPayOrderMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCPayOrderMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell.memoTextView setText:[IPCPayOrderMode sharedManager].remark];
+            return cell;
+        }
+    }else if (indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentAddress && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -165,7 +183,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             [cell.defaultButton setHidden:YES];
             return cell;
         }
-    }else if(indexPath.section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentOpometry && [IPCCurrentCustomerOpometry sharedManager].currentCustomer){
+    }else if(indexPath.section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentOpometry && [IPCCurrentCustomerOpometry sharedManager].currentCustomer){
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -182,7 +200,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             [cell.defaultButton setHidden:YES];
             return cell;
         }
-    }else if((indexPath.section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer)){
+    }else if((indexPath.section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer)){
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -205,7 +223,7 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
             }];
             return cell;
         }
-    }else if((indexPath.section == 4 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (indexPath.section == 1 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer))
+    }else if((indexPath.section == 5 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (indexPath.section == 1 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer))
     {
         if (indexPath.row == 0) {
             IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -293,19 +311,19 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
         if (indexPath.section == 0 && indexPath.row > 0){
             return 345;
-        }else if (indexPath.section == 1 && indexPath.row > 0){
+        }else if ((indexPath.section == 1 || indexPath.section == 2) && indexPath.row > 0){
             return 70;
-        }else if (indexPath.section == 2 && indexPath.row > 0 ){
+        }else if (indexPath.section == 3 && indexPath.row > 0 ){
             return 160;
         }
     }
-    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 3 && indexPath.row > 0))
+    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))
     {
         return 130;
-    }else if ((indexPath.section == 1 && indexPath.row > 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))
+    }else if ((indexPath.section == 1 && indexPath.row > 0 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 5 && indexPath.row > 0))
     {
         return [self.cellMode buyProductCellHeight:indexPath];
-    }else if ((indexPath.section == 2 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 5))
+    }else if ((indexPath.section == 2 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 6))
     {
         return 235;
     }

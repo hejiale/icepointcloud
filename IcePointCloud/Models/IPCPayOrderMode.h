@@ -42,6 +42,8 @@
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//选择客户
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
 
+@property (nonatomic, copy, readwrite) NSString * remark;//订单备注
+
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCOtherPayTypeResult *> * otherPayTypeArray;//其它支付方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩
 

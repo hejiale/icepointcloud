@@ -61,14 +61,19 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [self setNavigationBarStatus:YES];
+    
     if (self.glasses) {
         [self.cartImageView setHidden:NO];
+        [self.cartBageView setHidden:NO];
         [self.addCartButton setHidden:NO];
     }else{
         [self.cartImageView setHidden:YES];
+        [self.cartBageView setHidden:YES];
         [self.customsizedButton setHidden:NO];
     }
 }
+
 
 -(void) viewDidDisappear:(BOOL)animated
 {

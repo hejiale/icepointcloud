@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IPCGlasses.h"
 
-@interface IPCGlassDetailsViewController : UIViewController
+@interface IPCGlassDetailsViewController : IPCRootNavigationViewController
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;

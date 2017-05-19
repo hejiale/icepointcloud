@@ -253,6 +253,16 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.refreshHeader beginRefreshing];
 }
 
+- (void)showPayOrderView{
+    IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+    if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
+        [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeCustomsizedContactLens;
+    }else if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens){
+        [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeCustomsizedLens;
+    }
+    [self.navigationController pushViewController:payOrderVC animated:YES];
+}
+
 
 #pragma mark //UICollectionViewDataSoure
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -313,6 +323,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [IPCCustomUI pushToRootIndex:4];
             [detailVC.navigationController popToRootViewControllerAnimated:NO];
         }];
+        __weak typeof(self) weakSelf = self;
+        [[detailVC rac_signalForSelector:@selector(onCustomsizedAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            IPCCustomsizedProduct * product = strongSelf.glassListViewMode.customsizedList[indexPath.row];
+            [IPCCustomsizedItem sharedItem].customsizedProduct = product;
+            [strongSelf showPayOrderView];
+        }];
         [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
@@ -358,16 +375,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)customsized:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.customsizedList count] > 0) {
-        __block NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
-        IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-        if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedContactLens) {
-            [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeCustomsizedContactLens;
-        }else if (self.glassListViewMode.currentType == IPCTopFilterTypeCustomsizedLens){
-            [IPCCustomsizedItem sharedItem].payOrderType = IPCPayOrderTypeCustomsizedLens;
-        }
-        [self.navigationController pushViewController:payOrderVC animated:YES];
+        [self showPayOrderView];
     }
 }
+
 
 #pragma mark //NSNotification
 - (void)addNotifications{
