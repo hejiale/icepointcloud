@@ -20,6 +20,8 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     NSString * searchKeyWord;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
+@property (weak, nonatomic) IBOutlet UIButton *insertButton;
+
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
 @property (strong, nonatomic) NSMutableArray<IPCCustomerMode *> * customerArray;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
@@ -47,6 +49,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     searchKeyWord = @"";
     if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
         [self setNavigationTitle:@"客户"];
+    }else if ([IPCInsertCustomer instance].isInsertStatus){
+        [self setNavigationTitle:@"选择客户"];
+        [self.insertButton setHidden:YES];
     }
     [self loadCollectionView];
     [self.refreshHeader beginRefreshing];
@@ -177,9 +182,15 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     IPCCustomerMode * customer = self.customerArray[indexPath.row];
     
-    IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
-    [detailVC setCustomer:customer];
-    [self.navigationController pushViewController:detailVC animated:YES];
+    if ([IPCInsertCustomer instance].isInsertStatus) {
+        [IPCInsertCustomer instance].introducerId = customer.customerID;
+        [IPCInsertCustomer instance].introducerName = customer.customerName;
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
+        [detailVC setCustomer:customer];
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 #pragma mark //IPCSearchViewControllerDelegate

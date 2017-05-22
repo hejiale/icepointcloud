@@ -39,6 +39,7 @@
 @property (nonatomic, assign, readwrite) NSInteger   integral;
 @property (nonatomic, copy, readwrite) NSString * occupation;
 @property (nonatomic, copy, readwrite) NSString * photo_url;
+@property (nonatomic, copy, readwrite) NSString * introducerName;
 @property (nonatomic, assign, readwrite) double  discount;
 
 @end

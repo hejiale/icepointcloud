@@ -37,6 +37,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.mainView];
     [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.mainView];
     [self.customerCategoryTextField setRightButton:self Action:@selector(showCustomerTypeAction) OnView:self.packUpView];
+    [self.introducerTextField setRightButton:self Action:@selector(showCustomerListAction) OnView:self.introducerView];
     
     [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {
@@ -88,6 +89,8 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.memberNumTextField setText:[IPCInsertCustomer instance].memberNum];
     [self.memberLevelTextField setText:[IPCInsertCustomer instance].memberLevel];
     [self.jobTextField setText:[IPCInsertCustomer instance].job];
+    [self.introducerTextField setText:[IPCInsertCustomer instance].introducerName];
+    [self.introducerInteger setText:[IPCInsertCustomer instance].introducerInteger];
     
     NSString * headImage  = [IPCHeadImage gender:[IPCInsertCustomer instance].gender Size:@"middle" Tag:[IPCInsertCustomer instance].photo_udid];
     [self.customerImageView setImage:[UIImage imageNamed:headImage]];
@@ -141,6 +144,9 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     IPCDatePickViewController * datePickVC = [[IPCDatePickViewController alloc]initWithNibName:@"IPCDatePickViewController" bundle:nil];
     datePickVC.delegate = self;
     [datePickVC showWithPosition:CGPointMake(self.birthdayTextField.jk_width/2, self.birthdayTextField.jk_height) Size:CGSizeMake(self.birthdayTextField.jk_width+60, 150) Owner:self.birthdayTextField];
+}
+
+- (void)showCustomerListAction{
 }
 
 #pragma mark //Clicked Events
@@ -207,6 +213,16 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 }
 
 #pragma mark //UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([textField isEqual:self.introducerInteger]) {
+        if (![IPCCommon judgeIsIntNumber:string]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;
@@ -232,6 +248,8 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
             [IPCInsertCustomer instance].job = str;
         }else if ([textField isEqual:self.memoTextField]){
             [IPCInsertCustomer instance].remark = str;
+        }else if ([textField isEqual:self.introducerInteger]){
+            [IPCInsertCustomer instance].introducerInteger = str;
         }
     }
     if (self.delegate) {

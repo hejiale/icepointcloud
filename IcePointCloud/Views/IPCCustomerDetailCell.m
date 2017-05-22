@@ -31,7 +31,7 @@
             NSString * headImage  = [IPCHeadImage gender:_currentCustomer.contactorGengerString Size:@"Large" Tag:_currentCustomer.photoIdForPos];
             [self.headImageView setImage:[UIImage imageNamed:headImage]];
         }
-        
+    
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.phoneLabel setText:_currentCustomer.customerPhone];
         [self.birthdayLabel setText:_currentCustomer.birthday];
@@ -42,12 +42,20 @@
         [self.memberNumLabel setText:_currentCustomer.memberId];
         [self.memberLevlLabel setText:_currentCustomer.memberLevel];
         [self.jobLabel setText:_currentCustomer.occupation];
-        [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
         [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.consumptionAmount]];
         [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.balance]];
         [self.bookDateLabel setText:_currentCustomer.createDate];
         [self.pointLabel setText:pointValue];
+        [self.customerCategoryLabel setText:_currentCustomer.customerType];
+        if ([_currentCustomer.customerType isEqualToString:@"转介绍"]) {
+            [self.introduceTitleLabel setHidden:NO];
+            [self.introduceValueLabel setHidden:NO];
+            [self.introduceValueLabel setText:_currentCustomer.introducerName];
+        }else{
+            [self.introduceTitleLabel setHidden:YES];
+            [self.introduceValueLabel setHidden:YES];
+        }
     }
 }
 

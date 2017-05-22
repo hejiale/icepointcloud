@@ -44,6 +44,10 @@
     self.contactorPhone= @"";
     self.contactorGengerString= @"";
     self.photo_udid = @"1";
+    self.introducerId = @"";
+    self.introducerName = @"";
+    self.introducerInteger = @"";
+    self.isInsertStatus = NO;
     
     [self.optometryArray removeAllObjects];
     IPCOptometryMode * optometry = [[IPCOptometryMode alloc]init];

@@ -108,6 +108,8 @@
                          MemberLevelId:(NSString *)memberLevelId
                              MemberNum:(NSString *)memberNum
                                PhotoId:(NSString *)photoId
+                          IntroducerId:(NSString *)introducerId
+                     IntroducerInteger:(NSString *)introducerInteger
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
@@ -237,7 +239,6 @@
                          MemberLevelId:(NSString *)memberLevelId
                         CustomerTypeId:(NSString *)customerTypeId
                           EmployeeName:(NSString *)employeeName
-                          CustomerType:(NSString *)customerType
                            MemberLevel:(NSString *)memberLevel
                                    Job:(NSString *)job
                                 Remark:(NSString *)remark

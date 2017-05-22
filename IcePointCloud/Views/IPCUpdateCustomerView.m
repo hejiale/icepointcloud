@@ -11,7 +11,6 @@
 typedef NS_ENUM(NSInteger, InsertCustomerType){
     InsertCustomerTypeGender = 0,
     InsertCustomerTypeEmployee,
-    InsertCustomerTypeCustomerType,
     InsertCustomerTypeMemberType
 };
 
@@ -27,7 +26,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 @property (weak, nonatomic) IBOutlet UITextField *handlersTextField;//经手人
 @property (weak, nonatomic) IBOutlet UITextField *memberLevelTextField;
 @property (weak, nonatomic) IBOutlet UITextField *birthdayTextField;
-@property (weak, nonatomic) IBOutlet UITextField *customerCategoryTextField;
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *jobTextField;
 @property (weak, nonatomic) IBOutlet UITextField *memoTextField;
@@ -54,7 +52,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     
     [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.contentView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.contentView];
-    [self.customerCategoryTextField setRightButton:self Action:@selector(showCustomTypeAction) OnView:self.packUpView];
     [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.contentView];
     [self.birthdayTextField setRightButton:self Action:@selector(showDatePickAction) OnView:self.packUpView];
 }
@@ -82,9 +79,8 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                    EmployeeId:[[IPCEmployeeMode sharedManager] employeeId:self.handlersTextField.text]
                                                     MemberNum:self.memberNumTextField.text
                                                 MemberLevelId:[[IPCEmployeeMode sharedManager] memberLevelId:self.memberLevelTextField.text]
-                                               CustomerTypeId:[[IPCEmployeeMode sharedManager] customerTypeId:self.customerCategoryTextField.text]
+                                               CustomerTypeId:self.currentDetailCustomer.customerTypeId
                                                  EmployeeName:self.handlersTextField.text
-                                                 CustomerType:self.customerCategoryTextField.text
                                                   MemberLevel:self.memberLevelTextField.text
                                                           Job:self.jobTextField.text
                                                        Remark:self.memoTextField.text
@@ -119,7 +115,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     [self.memberLevelTextField setText:self.currentDetailCustomer.memberLevel];
     [self.emailTextField setText:self.currentDetailCustomer.email];
     [self.birthdayTextField setText:self.currentDetailCustomer.birthday];
-    [self.customerCategoryTextField setText:self.currentDetailCustomer.customerType];
     [self.jobTextField setText:self.currentDetailCustomer.occupation];
 }
 
@@ -138,10 +133,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     [self showParameterTableView:self.memberLevelTextField Height:200];
 }
 
-- (void)showCustomTypeAction{
-    self.insertType = InsertCustomerTypeCustomerType;
-    [self showParameterTableView:self.customerCategoryTextField Height:200];
-}
 
 - (void)showDatePickAction{
     [self showDatePickView];
@@ -177,8 +168,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
     if (self.insertType == InsertCustomerTypeEmployee)
         return [[IPCEmployeeMode sharedManager] employeeNameArray];
-    else if (self.insertType == InsertCustomerTypeCustomerType)
-        return [[IPCEmployeeMode sharedManager] customerTypeNameArray];
     else if (self.insertType == InsertCustomerTypeMemberType)
         return [[IPCEmployeeMode sharedManager] memberLevelNameArray];
     return @[@"男" , @"女"];
@@ -189,8 +178,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView{
     if (self.insertType == InsertCustomerTypeEmployee) {
         [self.handlersTextField setText:parameter];
-    }else if (self.insertType == InsertCustomerTypeCustomerType){
-        [self.customerCategoryTextField setText:parameter];
     }else if (self.insertType == InsertCustomerTypeMemberType){
         [self.memberLevelTextField setText:parameter];
     }else{
@@ -210,7 +197,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     return YES;
 }
 
- 
+
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     NSString * str = [textField.text jk_trimmingWhitespace];
     

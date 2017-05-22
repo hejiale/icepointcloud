@@ -76,7 +76,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     
     [[IPCEmployeeMode sharedManager] queryEmploye:@""];
     [[IPCEmployeeMode sharedManager] queryMemberLevel];
-    [[IPCEmployeeMode sharedManager] queryCustomerType];
     [self.refreshHeader beginRefreshing];
 }
 

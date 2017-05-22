@@ -78,6 +78,8 @@
                          MemberLevelId:(NSString *)memberLevelId
                              MemberNum:(NSString *)memberNum
                                PhotoId:(NSString *)photoId
+                            IntroducerId:(NSString *)introducerId
+                     IntroducerInteger:(NSString *)introducerInteger
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -101,8 +103,8 @@
                              @"optometrys":optometryList,
                              @"photoIdForPos":photoId,
                              @"isPos":@"true",
-                             @"introducerId":@"",
-                             @"introducerIntegral":@""};
+                             @"introducerId": introducerId,
+                             @"introducerIntegral":introducerInteger};
     [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -188,7 +190,6 @@
                          MemberLevelId:(NSString *)memberLevelId
                         CustomerTypeId:(NSString *)customerTypeId
                           EmployeeName:(NSString *)employeeName
-                          CustomerType:(NSString *)customerType
                            MemberLevel:(NSString *)memberLevel
                                    Job:(NSString *)job
                                 Remark:(NSString *)remark
@@ -209,7 +210,6 @@
                                   @"customerTypeId":customerTypeId,
                                   @"occupation":job,
                                   @"empName":employeeName,
-                                  @"customerType":customerType,
                                   @"memberLevel":memberLevel,
                                   @"photoIdForPos":photoId,
                                   @"isPos":@"true"};

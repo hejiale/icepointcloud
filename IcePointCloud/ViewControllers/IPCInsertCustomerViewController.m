@@ -7,6 +7,7 @@
 //
 
 #import "IPCInsertCustomerViewController.h"
+#import "IPCSearchCustomerViewController.h"
 #import "IPCCustomerTopTitleCell.h"
 #import "IPCInsertCustomerBaseCell.h"
 #import "IPCInsertCustomerOpometryCell.h"
@@ -42,6 +43,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     // Do any additional setup after loading the view from its nib.
     
     [self setBackground];
+    [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
+        [[IPCInsertCustomer instance] resetData];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
     
     [[IPCEmployeeMode sharedManager] queryEmploye:@""];
@@ -49,6 +54,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [[IPCEmployeeMode sharedManager] queryCustomerType];
     
     [[IPCInsertCustomer instance] resetData];
+    [IPCInsertCustomer instance].isInsertStatus = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -56,6 +62,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     
     [self setNavigationTitle:@"新增客户"];
     [self setNavigationBarStatus:NO];
+    [self.userInfoTableView reloadData];
 }
 
 #pragma mark //Request Data
@@ -80,18 +87,18 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [[IPCInsertCustomer instance].optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * optometryDic = [[NSMutableDictionary alloc]init];
         [optometryDic setDictionary:@{
-                                     @"distanceRight": obj.distanceRight,
-                                     @"distanceLeft":obj.distanceLeft,
-                                     @"sphLeft": (obj.sphLeft ?  : @""),
-                                     @"sphRight":(obj.sphRight ?  : @""),
-                                     @"cylLeft": (obj.cylLeft ?  : @""),
-                                     @"cylRight":(obj.cylRight ?  : @""),
-                                     @"axisLeft":obj.axisLeft,
-                                     @"axisRight":obj.axisRight,
-                                     @"addLeft":obj.addLeft,
-                                     @"addRight":obj.addRight,
-                                     @"correctedVisionLeft":obj.correctedVisionLeft,
-                                     @"correctedVisionRight":obj.correctedVisionRight}];
+                                      @"distanceRight": obj.distanceRight,
+                                      @"distanceLeft":obj.distanceLeft,
+                                      @"sphLeft": (obj.sphLeft ?  : @""),
+                                      @"sphRight":(obj.sphRight ?  : @""),
+                                      @"cylLeft": (obj.cylLeft ?  : @""),
+                                      @"cylRight":(obj.cylRight ?  : @""),
+                                      @"axisLeft":obj.axisLeft,
+                                      @"axisRight":obj.axisRight,
+                                      @"addLeft":obj.addLeft,
+                                      @"addRight":obj.addRight,
+                                      @"correctedVisionLeft":obj.correctedVisionLeft,
+                                      @"correctedVisionRight":obj.correctedVisionRight}];
         if (obj.purpose.length) {
             [optometryDic setObject:obj.purpose forKey:@"purpose"];
         }
@@ -121,14 +128,16 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                                                 MemberLevelId:[IPCInsertCustomer instance].memberLevelId
                                                     MemberNum:[IPCInsertCustomer instance].memberNum
                                                       PhotoId:[IPCInsertCustomer instance].photo_udid
-                                                 SuccessBlock:^(id responseValue) {
-                                                     
-                                                     [IPCCustomUI showSuccess:@"新建用户成功!"];
-                                                     [[IPCInsertCustomer instance] resetData];
-                                                     [self.navigationController popViewControllerAnimated:YES];
-                                                 } FailureBlock:^(NSError *error) {
-                                                     [IPCCustomUI showError:error.domain];
-                                                 }];
+                                                 IntroducerId:[IPCInsertCustomer instance].introducerId
+                                            IntroducerInteger: [IPCInsertCustomer instance].introducerInteger
+                                                 SuccessBlock:^(id responseValue)
+     {
+         [IPCCustomUI showSuccess:@"新建用户成功!"];
+         [[IPCInsertCustomer instance] resetData];
+         [self.navigationController popViewControllerAnimated:YES];
+     } FailureBlock:^(NSError *error) {
+         [IPCCustomUI showError:error.domain];
+     }];
 }
 
 #pragma mark //Set UI
@@ -157,6 +166,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     }
 }
 
+- (void)selectIntroducerMethod{
+    IPCSearchCustomerViewController * searchCustomerVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    [self.navigationController pushViewController:searchCustomerVC animated:YES];
+}
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -186,6 +199,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                 cell.delegate = self;
             }
             [cell updatePackUpUI:isPackUping];
+            [[cell rac_signalForSelector:@selector(showCustomerListAction)] subscribeNext:^(RACTuple * _Nullable x) {
+                [self selectIntroducerMethod];
+            }];
             return cell;
         }
     }else if (indexPath.section == 1){
