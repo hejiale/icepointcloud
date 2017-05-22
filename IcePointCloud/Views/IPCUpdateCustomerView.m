@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                         Email:self.emailTextField.text
                                                      Birthday:self.birthdayTextField.text
                                                    EmployeeId:[[IPCEmployeeMode sharedManager] employeeId:self.handlersTextField.text]
-                                                    MemberNum:self.memberNumTextField.text
+                                                    MemberNum:self.memberNumTextField.text 
                                                 MemberLevelId:[[IPCEmployeeMode sharedManager] memberLevelId:self.memberLevelTextField.text]
                                                CustomerTypeId:self.currentDetailCustomer.customerTypeId
                                                  EmployeeName:self.handlersTextField.text

@@ -49,8 +49,8 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     searchKeyWord = @"";
     if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
         [self setNavigationTitle:@"客户"];
-    }else if ([IPCInsertCustomer instance].isInsertStatus){
-        [self setNavigationTitle:@"选择客户"];
+    }
+    if ([IPCInsertCustomer instance].isInsertStatus){
         [self.insertButton setHidden:YES];
     }
     [self loadCollectionView];

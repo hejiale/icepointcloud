@@ -102,10 +102,14 @@
                              @"occupation":occupation,
                              @"optometrys":optometryList,
                              @"photoIdForPos":photoId,
-                             @"isPos":@"true",
-                             @"introducerId": introducerId,
-                             @"introducerIntegral":introducerInteger};
-    [self postRequest:params RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+                             @"isPos":@"true"};
+    NSMutableDictionary * paramterDic = [[NSMutableDictionary alloc]initWithDictionary:params];
+    
+    if ([customerType isEqualToString:@"转介绍"]) {
+        [paramterDic setObject:introducerId forKey:@"introducerId"];
+        [paramterDic setObject:introducerInteger forKey:@"introducerIntegral"];
+    }
+    [self postRequest:paramterDic RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

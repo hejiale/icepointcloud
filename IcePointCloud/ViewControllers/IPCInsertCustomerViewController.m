@@ -45,7 +45,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [self setBackground];
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
-        [self.navigationController popViewControllerAnimated:YES];
     }];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
     
