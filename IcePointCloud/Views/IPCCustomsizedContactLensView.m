@@ -52,12 +52,18 @@
         [self.contactSphTextField setText:[IPCCustomsizedItem sharedItem].rightEye.sph];
         [self.contactCylTextField setText:[IPCCustomsizedItem sharedItem].rightEye.cyl];
         [self.contactAxisTextField setText:[IPCCustomsizedItem sharedItem].rightEye.axis];
+        if ([IPCCustomsizedItem sharedItem].rightEye.customsizedPrice <= 0) {
+            [IPCCustomsizedItem sharedItem].rightEye.customsizedPrice = [IPCCustomsizedItem sharedItem].customsizedProduct.suggestPrice;
+        }
         [self.priceTextField setText:[NSString stringWithFormat:@"%.2f",[IPCCustomsizedItem sharedItem].rightEye.customsizedPrice]];
         [self.contactCountLabel setText:[NSString stringWithFormat:@"%d",[IPCCustomsizedItem sharedItem].rightEye.customsizedCount]];
     }else{
         [self.contactSphTextField setText:[IPCCustomsizedItem sharedItem].leftEye.sph];
         [self.contactCylTextField setText:[IPCCustomsizedItem sharedItem].leftEye.cyl];
         [self.contactAxisTextField setText:[IPCCustomsizedItem sharedItem].leftEye.axis];
+        if ([IPCCustomsizedItem sharedItem].leftEye.customsizedPrice <= 0) {
+            [IPCCustomsizedItem sharedItem].leftEye.customsizedPrice = [IPCCustomsizedItem sharedItem].customsizedProduct.suggestPrice;
+        }
         [self.priceTextField setText:[NSString stringWithFormat:@"%.2f",[IPCCustomsizedItem sharedItem].leftEye.customsizedPrice]];
         [self.contactCountLabel setText:[NSString stringWithFormat:@"%d",[IPCCustomsizedItem sharedItem].leftEye.customsizedCount]];
     }

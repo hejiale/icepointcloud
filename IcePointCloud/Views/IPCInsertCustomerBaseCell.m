@@ -192,8 +192,12 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
         [IPCInsertCustomer instance].empName = parameter;
         [IPCInsertCustomer instance].empNameId = [[IPCEmployeeMode sharedManager] employeeId:parameter];
     }else if (self.insertType == IPCInsertTypeCustomerType){
-        [IPCInsertCustomer instance].customerType =parameter;
-        [IPCInsertCustomer instance].customerTypeId = [[IPCEmployeeMode sharedManager] customerTypeId:parameter];
+        if (![[IPCInsertCustomer instance].customerType isEqualToString:parameter]) {
+            [IPCInsertCustomer instance].customerType =parameter;
+            [IPCInsertCustomer instance].customerTypeId = [[IPCEmployeeMode sharedManager] customerTypeId:parameter];
+            [IPCInsertCustomer instance].introducerInteger = @"";
+            [IPCInsertCustomer instance].introducerName = @"";
+        }
     }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {

@@ -60,9 +60,9 @@
     
     //--------------定制商品--------------//
     if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
-        [params setObject:@"CUSTOMIZED_LENS" forKey:@"customizedProdType"];
+        [params setObject:[[IPCAppManager sharedManager] classType:IPCTopFilterTypeCustomsizedLens] forKey:@"customizedProdType"];
     }else if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens){
-        [params setObject:@"CUSTOMIZED_CONTACT_LENS" forKey:@"customizedProdType"];
+        [params setObject:[[IPCAppManager sharedManager] classType:IPCTopFilterTypeCustomsizedContactLens]forKey:@"customizedProdType"];
     }
     [params setObject:@"true" forKey:@"isCustomizedLens"];
     [params setObject:[IPCCustomsizedItem sharedItem].customsizedProduct.customsizedId forKey:@"customizedId"];

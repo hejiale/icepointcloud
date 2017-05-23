@@ -18,11 +18,10 @@
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {
                 NSLog(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
-                
                 id responseValue = [NSDictionary changeType:responseData[kIPCNetworkResult]];
                 
-                if (complete) {
-                    if (responseValue) {
+                if (responseValue) {
+                    if (complete) {
                         complete(responseValue);
                     }
                 }
@@ -42,13 +41,15 @@
 
 + (NSError *)parseErrorResponse:(id)responseValue
 {
-    IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];
-    NSLog(@"----request Local Error message %@",errorMessage.message);
-    
-    if (errorMessage){
-        if (errorMessage.code == kIPCServiceErrorCode){
-            if (errorMessage.message) {
-                return HTTPError(errorMessage.message, kIPCServiceErrorCode);
+    if (responseValue) {
+        IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];
+        NSLog(@"----request Local Error message %@",errorMessage.message);
+        
+        if (errorMessage){
+            if (errorMessage.code == kIPCServiceErrorCode){
+                if (errorMessage.message) {
+                    return HTTPError(errorMessage.message, kIPCServiceErrorCode);
+                }
             }
         }
     }
