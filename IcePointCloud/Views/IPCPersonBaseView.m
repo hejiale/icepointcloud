@@ -112,7 +112,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 0)
+    if (section == 0 || section == 3)
         return 1;
     if (section == 1) {
         return 3;
@@ -168,11 +168,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
-        if (indexPath.row == 0) {
-            [cell.menuTitleLabel setText:@"帮助"];
-        }else{
-            [cell.menuTitleLabel setText:@"清除本地缓存"];
-        }
+        [cell.menuTitleLabel setText:@"清除本地缓存"];
         return cell;
     }
 }
@@ -214,17 +210,11 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             self.QRCodeBlock();
         }
     }else if (indexPath.section == 3){
-        if (indexPath.row == 0) {
-            if (self.HelpBlock) {
-                self.HelpBlock();
-            }
-        }else{
-            [[IPCNetworkCache sharedCache] removeAllHttpCache];
-            YYImageCache *cache = [YYWebImageManager sharedManager].cache;
-            [cache.memoryCache removeAllObjects];
-            [cache.diskCache removeAllObjects];
-            [IPCCustomUI showSuccess:@"缓存清理成功"];
-        }
+        [[IPCNetworkCache sharedCache] removeAllHttpCache];
+        YYImageCache *cache = [YYWebImageManager sharedManager].cache;
+        [cache.memoryCache removeAllObjects];
+        [cache.diskCache removeAllObjects];
+        [IPCCustomUI showSuccess:@"缓存清理成功"];
     }
 }
 

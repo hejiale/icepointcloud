@@ -71,7 +71,6 @@
                                                              success(responseValue);
                                                          }
                                                          [self.allTasks removeObject:task];
-                                                         
                                                      } ProgressBlock:^(NSProgress *uploadProgress) {
                                                          if (progress) {
                                                              progress(uploadProgress);

@@ -53,11 +53,11 @@
 
 
 #pragma mark //Show Methods
-- (void)showHelpViewController{
-    [self removeCover];
-    IPCHelpViewController * helpVC = [[IPCHelpViewController alloc]initWithNibName:@"IPCHelpViewController" bundle:nil];
-    [self.navigationController pushViewController:helpVC animated:YES];
-}
+//- (void)showHelpViewController{
+//    [self removeCover];
+//    IPCHelpViewController * helpVC = [[IPCHelpViewController alloc]initWithNibName:@"IPCHelpViewController" bundle:nil];
+//    [self.navigationController pushViewController:helpVC animated:YES];
+//}
 
 - (void)popToLoginViewController{
     [self removeCover];
@@ -79,7 +79,7 @@
                                                 } Logout:^{
                                                     [self popToLoginViewController];
                                                 } Help:^{
-                                                    [self showHelpViewController];
+//                                                    [self showHelpViewController];
                                                 } Dismiss:^{
                                                     [self removeCover];
                                                 }];
