@@ -52,7 +52,7 @@
 {
     NSInteger count = 0;
     for (IPCShoppingCartItem *ci in [self selectCartItems]) {
-        if (ci.selected) count += ci.count;
+        if (ci.selected) count += ci.glassCount;
     }
     return count;
 }
@@ -62,7 +62,7 @@
     NSInteger count = 0;
     for (IPCShoppingCartItem *ci in self.itemList) {
         if ([ci.glasses filterType] != IPCTopFilterTypeCard) {
-            count += ci.count;
+            count += ci.glassCount;
         }
     }
     return count;
@@ -73,7 +73,7 @@
     
     for (IPCShoppingCartItem * item in self.itemList) {
         if ([item isEqual:cartItem]) {
-            count = item.count;
+            count = item.glassCount;
         }
     }
     return count;
@@ -175,7 +175,7 @@
  */
 - (void)plusItem:(IPCShoppingCartItem *)cartItem{
     if (cartItem){
-        cartItem.count++;
+        cartItem.glassCount++;
     }
     [self postChangedNotification];
 }
@@ -224,7 +224,7 @@
     }
     
     if (item) {
-        item.count += count;
+        item.glassCount += count;
     } else {
         item = [[IPCShoppingCartItem alloc]init];
         if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses && glasses.stock == 0))
@@ -240,7 +240,7 @@
             item.isPreSell = isOpenBooking;
         }
         item.glasses = glasses;
-        item.count   = count;
+        item.glassCount   = count;
         [self.itemList addObject:item];
     }
     [self postChangedNotification];
@@ -267,8 +267,8 @@
     }
     
     if (item) {
-        item.count--;
-        if (item.count == 0) {
+        item.glassCount--;
+        if (item.glassCount == 0) {
             [self.itemList removeObject:item];
         }
     }
@@ -299,8 +299,8 @@
 
 - (void)reduceItem:(IPCShoppingCartItem *)cartItem{
     if (cartItem){
-        cartItem.count--;
-        if (cartItem.count == 0) {
+        cartItem.glassCount--;
+        if (cartItem.glassCount == 0) {
             [self.itemList removeObject:cartItem];
         }
     }
@@ -325,7 +325,7 @@
     
     for (IPCShoppingCartItem * item in self.itemList) {
         if ([item.glasses.glassesID isEqualToString:glasses.glassesID]) {
-            itemCount += item.count;
+            itemCount += item.glassCount;
         }
     }
     return itemCount;
@@ -472,7 +472,7 @@
     __block NSInteger   totoalPoint = 0;
     [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
-            totoalPoint += obj.pointValue * obj.count;
+            totoalPoint += obj.pointValue * obj.glassCount;
         }
     }];
     return totoalPoint;
@@ -499,6 +499,10 @@
 }
 
 
-
+- (void)resetSelectCartItemPrice{
+    [[self selectPayCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.unitPrice = 0;
+    }];
+}
 
 @end

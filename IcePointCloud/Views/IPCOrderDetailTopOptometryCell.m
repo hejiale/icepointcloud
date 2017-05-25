@@ -34,8 +34,8 @@
    [IPCCustomOrderDetailList instance].orderInfo.isPackUpOptometry = sender.selected;
     
     if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(packUpOptometryStatus)]) {
-            [self.delegate packUpOptometryStatus];
+        if ([self.delegate respondsToSelector:@selector(reloadOrderDetailTableView)]) {
+            [self.delegate reloadOrderDetailTableView];
         }
     }
 }

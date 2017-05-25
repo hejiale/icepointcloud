@@ -43,7 +43,7 @@
         if ([obj.contactLensID isEqualToString:cartItem.contactLensID] && [obj.degree isEqualToString:cartItem.contactDegree]) {
             [obj.parameterList enumerateObjectsUsingBlock:^(IPCContactLenSpec * _Nonnull parameter, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ([parameter.batchNumber isEqualToString:cartItem.batchNum] && [parameter.approvalNumber isEqualToString:cartItem.kindNum] && [parameter.expireDate isEqualToString:cartItem.validityDate]) {
-                    if (cartItem.count >= parameter.bizStock) {
+                    if (cartItem.glassCount >= parameter.bizStock) {
                         hasStock = YES;
                     }
                     *stop = YES;
@@ -103,7 +103,7 @@
                 if ([kindNumMode.kindNum isEqualToString:cartItem.kindNum]) {
                     [kindNumMode.expireDateArray enumerateObjectsUsingBlock:^(IPCAccessoryExpireDate * _Nonnull dateMode, NSUInteger idx, BOOL * _Nonnull stop) {
                         if ([dateMode.expireDate isEqualToString:cartItem.validityDate]) {
-                            if (dateMode.stock <= cartItem.count) {
+                            if (dateMode.stock <= cartItem.glassCount) {
                                 hasStock = NO;
                             }
                             *stop = YES;

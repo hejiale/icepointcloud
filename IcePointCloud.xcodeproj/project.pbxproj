@@ -805,6 +805,7 @@
 		CBCF57D11ECEC43C004747C9 /* IPCPayOrderMemoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderMemoCell.h; sourceTree = "<group>"; };
 		CBCF57D21ECEC43C004747C9 /* IPCPayOrderMemoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderMemoCell.m; sourceTree = "<group>"; };
 		CBCF57D31ECEC43C004747C9 /* IPCPayOrderMemoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderMemoCell.xib; sourceTree = "<group>"; };
+		CBCFBFFA1ED6B2BB0004B2D0 /* IPCCustomerOrderDetailDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerOrderDetailDelegate.h; sourceTree = "<group>"; };
 		CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCProgressView.h; path = IcePointCloud/Vendors/IPCProgressView.h; sourceTree = SOURCE_ROOT; };
 		CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCProgressView.m; path = IcePointCloud/Vendors/IPCProgressView.m; sourceTree = SOURCE_ROOT; };
 		CBDB8F361E9BC05300363F10 /* IPCInsertCustomerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomerAddressCell.h; sourceTree = "<group>"; };
@@ -2009,6 +2010,7 @@
 		CB9187221E8CF7CE00D59487 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				CBCFBFFA1ED6B2BB0004B2D0 /* IPCCustomerOrderDetailDelegate.h */,
 				0470AD9F1D406E6D003AF4F4 /* IPCCustomerOrderList.h */,
 				0470ADA01D406E6D003AF4F4 /* IPCCustomerOrderList.m */,
 				047F695E1D41B10900AA4C0F /* IPCCustomOrderDetailList.h */,

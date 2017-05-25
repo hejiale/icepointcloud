@@ -64,6 +64,10 @@
         return IPCTopFilterTypeAccessory;
     }else if ([typeName isEqualToString:@"VALUECARD"]){
         return IPCTopFilterTypeCard;
+    }else if ([typeName isEqualToString:@"CUSTOMIZED_LENS"]){
+        return IPCTopFilterTypeCustomsizedLens;
+    }else if ([typeName isEqualToString:@"CUSTOMIZED_CONTACT_LENS"]){
+        return IPCTopFilterTypeCustomsizedContactLens;
     }
     return IPCTopFilterTypeOthers;
 }
@@ -171,6 +175,36 @@
         [fields setObject:self.glassCode forKey:@"商品货号"];
     }
     return fields;
+}
+
+- (NSDictionary *)rightCustomizedLens{
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:self.sphRight forKey:@"球镜/SPH"];
+    [dic setObject:self.cylRight forKey:@"柱镜/CYL"];
+    [dic setObject:self.axisRight forKey:@"轴位/AXIS"];
+    [dic setObject:self.distanceRight forKey:@"瞳距/PD"];
+    [dic setObject:self.addRight forKey:@"下加光/ADD"];
+    [dic setObject:self.chanelRight forKey:@"通道长度/mm"];
+    [dic setObject:self.layerRight forKey:@"加膜"];
+    [dic setObject:self.dyeRight forKey:@"染色"];
+
+    return dic;
+}
+
+- (NSDictionary *)leftCustomizedLens{
+    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+    
+    [dic setObject:self.sphLeft forKey:@"球镜/SPH"];
+    [dic setObject:self.cylLeft forKey:@"柱镜/CYL"];
+    [dic setObject:self.axisLeft forKey:@"轴位/AXIS"];
+    [dic setObject:self.distance forKey:@"瞳距/PD"];
+    [dic setObject:self.addLeft forKey:@"下加光/ADD"];
+    [dic setObject:self.chanelLeft forKey:@"通道长度/mm"];
+    [dic setObject:self.layerLeft forKey:@"加膜"];
+    [dic setObject:self.dyeLeft forKey:@"染色"];
+    
+    return dic;
 }
 
 

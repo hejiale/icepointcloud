@@ -31,10 +31,11 @@
     
     self.delegate = self;
     
-    _productVC = [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
-    _tryVC =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    _customerInfoVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
+    _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
+    _customerInfoVC =  [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     _customerInfoVC.isMainStatus = YES;
+    
     [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC]];
 }
 

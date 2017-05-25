@@ -97,8 +97,8 @@
         }
         self.glassesNameLbl.text = _cartItem.glasses.glassName;
         [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.glasses.price]];
-        [self.countLabel setText:[NSString stringWithFormat:@"X%d",_cartItem.count]];
-        [self.inputCountLabel setText:[NSString stringWithFormat:@"%d",_cartItem.count]];
+        [self.countLabel setText:[NSString stringWithFormat:@"X%d",_cartItem.glassCount]];
+        [self.inputCountLabel setText:[NSString stringWithFormat:@"%d",_cartItem.glassCount]];
         
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens && _cartItem.glasses.isBatch) {
             [self.parameterLabel setHidden:NO];
@@ -131,9 +131,9 @@
 
 #pragma mark //Clicked Events
 - (IBAction)reduceCartNumAction:(id)sender {
-    self.cartItem.count--;
-    if (self.cartItem.count <= 1) {
-        self.cartItem.count = 1;
+    self.cartItem.glassCount--;
+    if (self.cartItem.glassCount <= 1) {
+        self.cartItem.glassCount = 1;
     }
     self.cartItem.pointValue = 0;
     if (self.cartItem.isChoosePoint) {
@@ -148,7 +148,7 @@
 }
 
 - (IBAction)plusCartNumAction:(id)sender {
-    self.cartItem.count++;
+    self.cartItem.glassCount++;
     self.cartItem.pointValue = 0;
     if (self.cartItem.isChoosePoint) {
         [IPCPayOrderMode sharedManager].pointPrice = 0;
@@ -179,7 +179,7 @@
         [IPCPayOrderMode sharedManager].givingAmount = 0;
         [IPCPayOrderMode sharedManager].presellAmount = 0;
     }else{
-        [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.count;
+        [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
         if ([IPCPayOrderMode sharedManager].usedPoint <= 0) {
             [IPCPayOrderMode sharedManager].usedPoint = 0;
         }
@@ -226,9 +226,9 @@
             NSInteger minumPoint = [IPCPayOrderMode sharedManager].point - usedPoint;
             
             if (minumPoint > 0) {
-                if (minumPoint <= [str doubleValue] * self.cartItem.count)
+                if (minumPoint <= [str doubleValue] * self.cartItem.glassCount)
                 {
-                    self.cartItem.pointValue = minumPoint/self.cartItem.count;
+                    self.cartItem.pointValue = minumPoint/self.cartItem.glassCount;
                 }else{
                     self.cartItem.pointValue = [str integerValue];
                 }

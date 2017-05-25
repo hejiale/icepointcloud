@@ -27,7 +27,7 @@ static NSString * const payStyleIdentifier = @"IPCOrderDetailPayStyleCellIdentif
 static NSString * const topOptometryIdentifier = @"IPCOrderDetailTopOptometryCellIdentifier";
 static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdentifier";
 
-@interface IPCCustomDetailOrderView()<UITableViewDelegate,UITableViewDataSource,IPCOrderDetailOptometryCellDelegate>
+@interface IPCCustomDetailOrderView()<UITableViewDelegate,UITableViewDataSource,IPCCustomerOrderDetailDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
@@ -119,7 +119,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 7;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -128,13 +128,14 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             return 2;
     }
     else if (section == 3){
-        return [IPCCustomOrderDetailList instance].products.count + 1;
+        return [IPCCustomOrderDetailList instance].products.count;
     }
     return 1;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if (indexPath.section == 0) {
         IPCOrderDetailTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
         if (!cell) {
@@ -163,31 +164,30 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             return cell;
         }
     }else if (indexPath.section == 3){
-        if (indexPath.row ==  [IPCCustomOrderDetailList instance].products.count) {
-            IPCOrderDetailProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderDetailProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            return cell;
-        }else{
-            IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCOrderDetailProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            
-            if ([IPCCustomOrderDetailList instance].products.count) {
-                IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
-                cell.glasses = product;
-            }
-            return cell;
+        IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCOrderDetailProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell.delegate  = self;
         }
+        
+        if ([IPCCustomOrderDetailList instance].products.count) {
+            IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
+            cell.glasses = product;
+        }
+        return cell;
     }else if (indexPath.section == 4){
+        IPCOrderDetailProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCOrderDetailProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }
+        return cell;
+    }else if (indexPath.section == 5){
         IPCOrderDetailMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         return cell;
-    }else if(indexPath.section == 5){
+    }else if(indexPath.section ==6){
         IPCOrderDetailPayStyleCell * cell = [tableView dequeueReusableCellWithIdentifier:payStyleIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailPayStyleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -211,25 +211,37 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
     }else if (indexPath.section == 2 && indexPath.row > 0){
         return 185;
     }else if (indexPath.section == 3){
-        if (indexPath.row == [IPCCustomOrderDetailList instance].products.count )
-            return 125;
-        return 110;
+        if ([IPCCustomOrderDetailList instance].products.count) {
+            IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
+            if ([product filterType] == IPCTopFilterTypeCustomsizedContactLens || [product filterType] == IPCTopFilterTypeCustomsizedLens) {
+                if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized) {
+                    return 310;
+                }
+                return 160;
+            }
+            return 115;
+        }
     }else if (indexPath.section == 4){
-        return 50;
+        return 125;
     }else if (indexPath.section == 5){
-        return 70;
+        return 50;
     }else if (indexPath.section == 6){
+        return 70;
+    }else if (indexPath.section == 7){
         return 95;
     }
     return 44;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 3) {
+        return 0;
+    }
     return 5;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width,  5)];
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width,  (section == 3 ? 0 : 5))];
     [footView setBackgroundColor:[UIColor clearColor]];
     return footView;
 }
@@ -238,8 +250,8 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
-#pragma mark //IPCOrderDetailOptometryCellDelegate
-- (void)packUpOptometryStatus{
+#pragma mark //IPCCustomerOrderDetailDelegate
+- (void)reloadOrderDetailTableView{
     [self.orderDetailTableView reloadData];
 }
 

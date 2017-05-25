@@ -120,7 +120,11 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 
 - (IBAction)updateCustomerAction:(id)sender {
-    [self updateCustomerRequest];
+    if (!self.userNameTextField.text.length || !self.phoneTextField.text.length) {
+        [IPCCustomUI showError:@"用户名或手机号输入为空!"];
+    }else{
+        [self updateCustomerRequest];
+    }
 }
 
 - (void)showGenderPickViewAction{

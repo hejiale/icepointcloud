@@ -7,17 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCCustomerOrderDetailDelegate.h"
 
-@protocol IPCOrderDetailOptometryCellDelegate;
 @interface IPCOrderDetailTopOptometryCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *packUpButton;
-@property (assign, nonatomic) id<IPCOrderDetailOptometryCellDelegate>delegate;
-
-@end
-
-@protocol IPCOrderDetailOptometryCellDelegate <NSObject>
-
-- (void)packUpOptometryStatus;
+@property (assign, nonatomic) id<IPCCustomerOrderDetailDelegate>delegate;
 
 @end

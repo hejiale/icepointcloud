@@ -89,5 +89,7 @@
 - (IPCTopFilterType)filterType;
 - (NSString *)glassId;
 - (NSDictionary *)displayFields;
+- (NSDictionary *)rightCustomizedLens;
+- (NSDictionary *)leftCustomizedLens;
 
 @end

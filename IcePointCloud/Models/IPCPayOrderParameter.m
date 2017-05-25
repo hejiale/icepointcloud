@@ -53,9 +53,9 @@
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
     [parameters setObject:employeeList forKey:@"employeeAchievements"];
-    [parameters setObject:@([IPCPayOrderMode sharedManager].realTotalPrice) forKey:@"orderFinalPrice"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice] forKey:@"orderFinalPrice"];
     [parameters setObject:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false" : @"true") forKey:@"isAdvancePayment"];
-    [parameters setObject:@([[IPCPayOrderMode sharedManager] waitPayAmount]) forKey:@"payAmount"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]] forKey:@"payAmount"];
     [parameters setObject:[IPCPayOrderMode sharedManager].payStyleName forKey:@"payType"];
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {//积分兑换置为0
         [parameters setObject:@(0) forKey:@"integral"];
@@ -63,8 +63,8 @@
         [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
     }
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].givingAmount] forKey:@"donationAmount"];
-    [parameters setObject:@([IPCPayOrderMode sharedManager].usedBalanceAmount) forKey:@"usebalanceAmount"];
-    [parameters setObject:@([IPCPayOrderMode sharedManager].payTypeAmount) forKey:@"payTypeAmount"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].usedBalanceAmount] forKey:@"usebalanceAmount"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].payTypeAmount] forKey:@"payTypeAmount"];
     [parameters setObject:otherTypeList forKey:@"payTypeDetails"];
     [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
     if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {

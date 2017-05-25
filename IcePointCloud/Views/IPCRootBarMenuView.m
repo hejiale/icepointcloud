@@ -78,7 +78,8 @@
     _cartView = [[IPCShoppingCartView alloc]initWithFrame:CGRectMake(self.jk_width, 0, IPCMenuShowWidth, self.jk_height)];
     [self addSubview:_cartView];
     [_cartView showWithPay:^{
-        if (self.PayOrderBlock)self.PayOrderBlock();
+        if (self.PayOrderBlock)
+            self.PayOrderBlock();
     }];
 }
 

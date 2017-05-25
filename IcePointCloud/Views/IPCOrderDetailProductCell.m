@@ -14,14 +14,14 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.contentView addSubview:self.pointImageView];
-    [self.contentView addSubview:self.suggestPriceLabel];
-    [self.contentView addSubview:self.productNameLabel];
+    [self.productContentView addSubview:self.pointImageView];
+    [self.productContentView addSubview:self.suggestPriceLabel];
+    [self.productContentView addSubview:self.productNameLabel];
     
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(19);
         make.top.equalTo(self.productImageView.mas_top).with.offset(0);
-        make.right.equalTo(self.contentView.mas_right).with.offset(19);
+        make.right.equalTo(self.productContentView.mas_right).with.offset(19);
     }];
     
     [self.pointImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -63,6 +63,7 @@
         _suggestPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_suggestPriceLabel setBackgroundColor:[UIColor clearColor]];
         [_suggestPriceLabel setTextColor:COLOR_RGB_RED];
+        [_suggestPriceLabel setHidden:YES];
         [_suggestPriceLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
     }
     return _suggestPriceLabel;
@@ -73,6 +74,7 @@
         _productPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_productPriceLabel setBackgroundColor:[UIColor clearColor]];
         [_productPriceLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
+        [_productPriceLabel setHidden:YES];
         [_productPriceLabel setTextColor:[UIColor lightGrayColor]];
     }
     return _productPriceLabel;
@@ -89,6 +91,13 @@
     return _pointImageView;
 }
 
+- (UIView *)customizedContentView{
+    if (!_customizedContentView) {
+        _customizedContentView = [[UIView alloc]initWithFrame:CGRectZero];
+    }
+    return _customizedContentView;
+}
+
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
     
@@ -96,6 +105,19 @@
         if ([_glasses filterType] != IPCTopFilterTypeCard) {
             [self.productImageView addBorder:3 Width:0.5];
         }
+        if ([_glasses filterType] == IPCTopFilterTypeCustomsizedContactLens || [_glasses filterType] == IPCTopFilterTypeCustomsizedLens) {
+            [self.customsizedImage setHidden:NO];
+            [self.customsizedPackView setHidden:NO];
+            
+            if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized) {
+                [self creatCustomizedView];
+            }
+        }else{
+            [self.suggestPriceLabel setHidden:NO];
+            [self.productPriceLabel setHidden:NO];
+            [self.countLabel setHidden:NO];
+        }
+        
         [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];
@@ -161,5 +183,75 @@
         }
     }
 }
+
+- (void)creatCustomizedView
+{
+    [self.lookCustomizedButton setSelected:YES];
+    [self.productContentView addSubview:self.customizedContentView];
+    [self.customizedContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.productContentView.mas_left).offset(20);
+        make.right.equalTo(self.productContentView.mas_right).offset(-20);
+        make.top.equalTo(self.customsizedPackView.mas_bottom).offset(0);
+        make.height.mas_equalTo(150);
+    }];
+    [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, 360, 150) IsRight:YES]];
+}
+
+- (UIView *)customizedView:(CGRect)rect IsRight:(BOOL)isRight
+{
+    UIView * customizedView = [[UIView alloc]initWithFrame:rect];
+    
+    UIImageView * tagImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, rect.origin.y, 34, 20)];
+    [tagImageView setContentMode:UIViewContentModeScaleAspectFit];
+    [tagImageView setImage:[UIImage imageNamed:(isRight ?  @"icon_right_optometry" : @"icon_left_optometry")]];
+    [customizedView addSubview:tagImageView];
+    
+    NSDictionary * parameter = nil;
+    
+    if (isRight) {
+        parameter = [self.glasses rightCustomizedLens];
+    }else{
+        parameter = [self.glasses leftCustomizedLens];
+    }
+    CGFloat width = (customizedView.jk_width - tagImageView.jk_width - 10)/3;
+    
+    [parameter.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIFont * font = [UIFont systemFontOfSize:11 weight:UIFontWeightThin];
+        CGFloat textWidth = [obj jk_sizeWithFont:font constrainedToHeight:20].width;
+        
+        UILabel * titleLabel = [[UILabel alloc]init];
+        if (idx < 3) {
+            [titleLabel setFrame:CGRectMake(width*idx+tagImageView.jk_right + 10, 0, textWidth, 20)];
+        }else if (idx > 2 && idx < 6){
+            [titleLabel setFrame:CGRectMake(width*(idx-3)+tagImageView.jk_right + 10, 30, textWidth, 20)];
+        }else{
+            [titleLabel setFrame:CGRectMake(width*(idx-6)+tagImageView.jk_right + 10, 60, textWidth, 20)];
+        }
+        [titleLabel setText:obj];
+        [titleLabel setFont:font];
+        [titleLabel setTextColor:[UIColor lightGrayColor]];
+        [customizedView addSubview:titleLabel];
+        
+        UILabel * valueLabel = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel.jk_right + 5,(idx/3)*30 , width-textWidth - 5, 20)];
+        [valueLabel setText:parameter[obj]];
+        [valueLabel setFont:font];
+        [valueLabel setTextColor:[UIColor lightGrayColor]];
+        [customizedView addSubview:valueLabel];
+    }];
+    
+    return customizedView;
+}
+
+
+- (IBAction)lookUpCustomizedAction:(UIButton *)sender
+{
+    [sender setSelected:!sender.selected];
+    [IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized = sender.selected;
+    
+    if ([self.delegate respondsToSelector:@selector(reloadOrderDetailTableView)]) {
+        [self.delegate reloadOrderDetailTableView];
+    }
+}
+
 
 @end

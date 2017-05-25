@@ -39,10 +39,10 @@
 {
     IPCShoppingCartItem * cartItem = [self cartItem];
     if (cartItem) {
-        cartItem.count++;
+        cartItem.glassCount++;
     }else{
         IPCShoppingCartItem * addCartItem = [[IPCShoppingCartItem alloc]init];
-        addCartItem.count = 1;
+        addCartItem.glassCount = 1;
         addCartItem.glasses = self.glasses;
         [[IPCCustomsizedItem sharedItem].normalProducts addObject:addCartItem];
     }

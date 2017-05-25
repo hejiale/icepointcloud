@@ -20,15 +20,16 @@
 }
 
 
-- (void)setCount:(NSInteger)count
+- (void)setGlassCount:(int)glassCount
 {
-    _count = count;
+    _glassCount = glassCount;
     [[IPCShoppingCart sharedCart] postChangedNotification];
 }
 
 - (double)totalPrice
 {
-    return self.unitPrice * self.count;
+    NSString * priceStr = [NSString stringWithFormat:@"%.2f",self.unitPrice];
+    return [priceStr doubleValue] * self.glassCount;
 }
 
 - (double)unitPrice
@@ -71,27 +72,27 @@
 
     if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
     {
-        [params setObject:@(self.count) forKey:@"glassCount"];
+        [params setObject:@(self.glassCount) forKey:@"glassCount"];
         [params setObject:@(self.glasses.price) forKey:@"glassPrice"];
         [params setObject:[self.glasses glassId] forKey:@"glassId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
     {
-        [params setObject:@(self.count) forKey:@"lensCount"];
+        [params setObject:@(self.glassCount) forKey:@"lensCount"];
         [params setObject:@(self.glasses.price) forKey:@"lensPrice"];
         [params setObject:[self.glasses glassId] forKey:@"lensId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory)
     {
-        [params setObject:@(self.count) forKey:@"accessoryCount"];
+        [params setObject:@(self.glassCount) forKey:@"accessoryCount"];
         [params setObject:@(self.glasses.price) forKey:@"accessoryPrice"];
         [params setObject:[self.glasses glassId] forKey:@"accessoryId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeCard)
     {
-        [params setObject:@(self.count) forKey:@"valueCardCount"];
+        [params setObject:@(self.glassCount) forKey:@"valueCardCount"];
         [params setObject:@(self.glasses.price) forKey:@"valueCardPrice"];
         [params setObject:[self.glasses glassId] forKey:@"valueCardId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeOthers)
     {
-        [params setObject:@(self.count) forKey:@"othersProductCount"];
+        [params setObject:@(self.glassCount) forKey:@"othersProductCount"];
         [params setObject:@(self.glasses.price) forKey:@"othersProductPrice"];
         [params setObject:[self.glasses glassId] forKey:@"othersProductId"];
     }

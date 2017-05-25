@@ -174,6 +174,7 @@
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
     [[IPCCustomsizedItem sharedItem] resetData];
+    [[IPCShoppingCart sharedCart] resetSelectCartItemPrice];
 }
 
 #pragma mark //UITableViewDataSource

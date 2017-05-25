@@ -767,12 +767,12 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     if (!self.cartItem)return;
     
     if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        if (self.cartItem.count > currentDegreeStock && currentDegreeStock > 0) {
+        if (self.cartItem.glassCount > currentDegreeStock && currentDegreeStock > 0) {
             [IPCCustomUI showError:@"暂无库存,请重新选择"];
             return;
         }
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory){
-        if (self.cartItem.count > currentAccessoryStock && currentAccessoryStock > 0) {
+        if (self.cartItem.glassCount > currentAccessoryStock && currentAccessoryStock > 0) {
             [IPCCustomUI showError:@"暂无库存,请重新选择"];
             return;
         }
@@ -884,7 +884,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
             self.batchNonePlusButton.enabled = YES;
         }
     }else{
-        if ([self.contactCartNumLabel.text integerValue] + [self cartItemContactLens].count >= currentDegreeStock || !self.contactDegreeLabel.text.length) {
+        if ([self.contactCartNumLabel.text integerValue] + [self cartItemContactLens].glassCount >= currentDegreeStock || !self.contactDegreeLabel.text.length) {
             self.contactPlusButton.enabled = NO;
         }else{
             self.contactPlusButton.enabled = YES;
@@ -895,7 +895,7 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
 //Refresh the Accessory  to increase quantity button state
 - (void)reloadAccessoryCartStatus{
     //The user to select the number of the specifications of the accessory before they can start editing
-    if ([self.accessoryCartNumLabel.text integerValue] + [self cartItemAccessory].count >= currentAccessoryStock) {
+    if ([self.accessoryCartNumLabel.text integerValue] + [self cartItemAccessory].glassCount >= currentAccessoryStock) {
         self.accessoryplusButton.enabled = NO;
     }else{
         self.accessoryplusButton.enabled = YES;

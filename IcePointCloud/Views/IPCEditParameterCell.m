@@ -70,7 +70,7 @@
                     [self.kindNumLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_cartItem.kindNum,_cartItem.validityDate]];
             }
         }
-        [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.count]stringValue]];
+        [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.glassCount]stringValue]];
     }
 }
 
