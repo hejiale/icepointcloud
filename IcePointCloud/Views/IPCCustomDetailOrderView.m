@@ -215,7 +215,12 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
             if ([product filterType] == IPCTopFilterTypeCustomsizedContactLens || [product filterType] == IPCTopFilterTypeCustomsizedLens) {
                 if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized) {
-                    return 310;
+                    id customizedRight = [product.customizedRight objectFromJSONString] ;
+                    id customizedLeft   = [product.customizedLeft objectFromJSONString];
+                    if (product.isUnifiedCustomizd) {
+                        return 240 + ([customizedRight allKeys].count) * 20;
+                    }
+                    return 330 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
                 }
                 return 160;
             }

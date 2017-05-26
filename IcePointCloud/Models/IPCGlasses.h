@@ -83,7 +83,7 @@
 @property (nonatomic, assign, readonly) double   customizedRightPrice;
 @property (nonatomic, assign, readonly) NSInteger   customizedCount;
 @property (nonatomic, assign, readonly) NSInteger   customizedRightCount;
-
+@property (nonatomic, assign, readonly) BOOL      isUnifiedCustomizd;
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (IPCTopFilterType)filterType;

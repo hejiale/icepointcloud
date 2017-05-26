@@ -79,9 +79,9 @@
     }
     
     if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
-        [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice] forKey:@"afterDiscountPrice"];
+        [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice * rightEye.customsizedCount] forKey:@"afterDiscountPrice"];
     }else if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye){
-        [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice + leftEye.customsizedPrice] forKey:@"afterDiscountPrice"];
+        [params setObject:[NSString stringWithFormat:@"%.2f",rightEye.customsizedPrice * rightEye.customsizedCount + leftEye.customsizedPrice * leftEye.customsizedCount] forKey:@"afterDiscountPrice"];
     }
     
     [params setObject:rightEye.channel ? : @"" forKey:@"chanelRight"];

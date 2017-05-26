@@ -186,59 +186,109 @@
 
 - (void)creatCustomizedView
 {
+    id customizedRight = [self.glasses.customizedRight objectFromJSONString] ;
+    id customizedLeft   = [self.glasses.customizedLeft objectFromJSONString];
+    CGFloat totalHeight = 170 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
+    
     [self.lookCustomizedButton setSelected:YES];
     [self.productContentView addSubview:self.customizedContentView];
     [self.customizedContentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productContentView.mas_left).offset(20);
         make.right.equalTo(self.productContentView.mas_right).offset(-20);
         make.top.equalTo(self.customsizedPackView.mas_bottom).offset(0);
-        make.height.mas_equalTo(150);
+        make.height.mas_equalTo(totalHeight);
     }];
-    [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, 360, 150) IsRight:YES]];
+    if (self.glasses.isUnifiedCustomizd) {
+        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, 360, 85 + [customizedRight allKeys].count *20) IsRight:YES]];
+    }else{
+        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, 360, 85 + [customizedRight allKeys].count *20) IsRight:YES]];
+        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 85+ [customizedRight allKeys].count *20, 360, 90+ [customizedLeft allKeys].count *20) IsRight:NO]];
+    }
 }
 
 - (UIView *)customizedView:(CGRect)rect IsRight:(BOOL)isRight
 {
     UIView * customizedView = [[UIView alloc]initWithFrame:rect];
+    UIImageView * tagImageView = nil;
+    CGFloat  space = 0;
     
-    UIImageView * tagImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, rect.origin.y, 34, 20)];
-    [tagImageView setContentMode:UIViewContentModeScaleAspectFit];
-    [tagImageView setImage:[UIImage imageNamed:(isRight ?  @"icon_right_optometry" : @"icon_left_optometry")]];
-    [customizedView addSubview:tagImageView];
-    
-    NSDictionary * parameter = nil;
+    if (!self.glasses.isUnifiedCustomizd) {
+        space = 10;
+        tagImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 5 , 34, 18)];
+        [tagImageView setContentMode:UIViewContentModeScaleAspectFit];
+        [tagImageView setImage:[UIImage imageNamed:(isRight ?  @"icon_right_optometry" : @"icon_left_optometry")]];
+        [customizedView addSubview:tagImageView];
+    }
+   
+    NSMutableDictionary * parameter = nil;
+    UIFont * font = [UIFont systemFontOfSize:11 weight:UIFontWeightThin];
     
     if (isRight) {
-        parameter = [self.glasses rightCustomizedLens];
+        parameter = [[NSMutableDictionary alloc] initWithDictionary:[self.glasses rightCustomizedLens]];
     }else{
-        parameter = [self.glasses leftCustomizedLens];
+        parameter = [[NSMutableDictionary alloc]initWithDictionary:[self.glasses leftCustomizedLens]];
     }
-    CGFloat width = (customizedView.jk_width - tagImageView.jk_width - 10)/3;
+    CGFloat width = (customizedView.jk_width - tagImageView.jk_width - space)/3;
     
     [parameter.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UIFont * font = [UIFont systemFontOfSize:11 weight:UIFontWeightThin];
-        CGFloat textWidth = [obj jk_sizeWithFont:font constrainedToHeight:20].width;
+        CGFloat textWidth = [obj jk_sizeWithFont:font constrainedToHeight:18].width;
         
         UILabel * titleLabel = [[UILabel alloc]init];
         if (idx < 3) {
-            [titleLabel setFrame:CGRectMake(width*idx+tagImageView.jk_right + 10, 0, textWidth, 20)];
+            [titleLabel setFrame:CGRectMake(width*idx+tagImageView.jk_right + space, 0, textWidth, 18)];
         }else if (idx > 2 && idx < 6){
-            [titleLabel setFrame:CGRectMake(width*(idx-3)+tagImageView.jk_right + 10, 30, textWidth, 20)];
+            [titleLabel setFrame:CGRectMake(width*(idx-3)+tagImageView.jk_right + space, 20, textWidth, 18)];
         }else{
-            [titleLabel setFrame:CGRectMake(width*(idx-6)+tagImageView.jk_right + 10, 60, textWidth, 20)];
+            [titleLabel setFrame:CGRectMake(width*(idx-6)+tagImageView.jk_right + space, 40, textWidth, 18)];
         }
         [titleLabel setText:obj];
         [titleLabel setFont:font];
         [titleLabel setTextColor:[UIColor lightGrayColor]];
         [customizedView addSubview:titleLabel];
         
-        UILabel * valueLabel = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel.jk_right + 5,(idx/3)*30 , width-textWidth - 5, 20)];
+        UILabel * valueLabel = [[UILabel alloc]initWithFrame:CGRectMake(titleLabel.jk_right + 5 ,(idx/3)*20 , width-textWidth - 5, 18)];
         [valueLabel setText:parameter[obj]];
         [valueLabel setFont:font];
         [valueLabel setTextColor:[UIColor lightGrayColor]];
         [customizedView addSubview:valueLabel];
     }];
     
+    //---------------自定义参数------------//
+    id customized = isRight ? [self.glasses.customizedRight objectFromJSONString] : [self.glasses.customizedLeft objectFromJSONString];
+    if ([customized isKindOfClass:[NSDictionary class]]) {
+        [[customized allKeys] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+        {
+            CGFloat   width = [obj jk_sizeWithFont:font constrainedToHeight:18].width;
+            UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(tagImageView.jk_right + space, 60 + 20*idx, width , 18)];
+            [label setFont:font];
+            [label setText:obj];
+            [label setTextColor:[UIColor lightGrayColor]];
+            [customizedView addSubview:label];
+            
+            width = [customized[obj] jk_sizeWithFont:font constrainedToHeight:18].width;
+            UILabel * valueLabel = [[UILabel alloc]initWithFrame:CGRectMake(label.jk_right + 20, 60 + 20*idx, width, 18)];
+            [valueLabel setText:customized[obj]];
+            [valueLabel setFont:font];
+            [valueLabel setTextColor:[UIColor lightGrayColor]];
+            [customizedView addSubview:valueLabel];
+        }];
+    }
+    
+    //-----------售价、数量---------------//
+    UILabel * numLabel = [[UILabel alloc]initWithFrame:CGRectMake(customizedView.jk_width - 40, 55 + [customized allKeys].count * 20, 40, 18)];
+    [numLabel setFont:font];
+    [numLabel setTextColor:[UIColor lightGrayColor]];
+    [numLabel setTextAlignment:NSTextAlignmentRight];
+    [numLabel setText:[NSString stringWithFormat:@"x%d",isRight ? self.glasses.customizedRightCount : self.glasses.customizedCount]];
+    [customizedView addSubview:numLabel];
+    
+    UILabel * unitPriceLabel = [[UILabel alloc]initWithFrame:CGRectMake(customizedView.jk_width - 140, 55 + [customized allKeys].count * 20, 100, 18)];
+    [unitPriceLabel setTextColor:[UIColor redColor]];
+    [unitPriceLabel setFont:font];
+    [unitPriceLabel setTextAlignment:NSTextAlignmentRight];
+    [unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",isRight ? self.glasses.customizedRightPrice : self.glasses.customizedLeftPrice]];
+    [customizedView addSubview:unitPriceLabel];
+
     return customizedView;
 }
 

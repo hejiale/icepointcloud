@@ -178,33 +178,25 @@
 }
 
 - (NSDictionary *)rightCustomizedLens{
-    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-    
-    [dic setObject:self.sphRight forKey:@"球镜/SPH"];
-    [dic setObject:self.cylRight forKey:@"柱镜/CYL"];
-    [dic setObject:self.axisRight forKey:@"轴位/AXIS"];
-    [dic setObject:self.distanceRight forKey:@"瞳距/PD"];
-    [dic setObject:self.addRight forKey:@"下加光/ADD"];
-    [dic setObject:self.chanelRight forKey:@"通道长度/mm"];
-    [dic setObject:self.layerRight forKey:@"加膜"];
-    [dic setObject:self.dyeRight forKey:@"染色"];
-
-    return dic;
+    return @{@"球镜/SPH":self.sphRight ,
+             @"柱镜/CYL":self.cylRight,
+             @"轴位/AXIS":self.axisRight  ,
+             @"瞳距/PD":self.distanceRight,
+             @"下加光/ADD":self.addRight ,
+             @"通道长度/mm":self.chanelRight ,
+             @"加膜":self.layerRight ,
+             @"染色":self.dyeRight};
 }
 
 - (NSDictionary *)leftCustomizedLens{
-    NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-    
-    [dic setObject:self.sphLeft forKey:@"球镜/SPH"];
-    [dic setObject:self.cylLeft forKey:@"柱镜/CYL"];
-    [dic setObject:self.axisLeft forKey:@"轴位/AXIS"];
-    [dic setObject:self.distance forKey:@"瞳距/PD"];
-    [dic setObject:self.addLeft forKey:@"下加光/ADD"];
-    [dic setObject:self.chanelLeft forKey:@"通道长度/mm"];
-    [dic setObject:self.layerLeft forKey:@"加膜"];
-    [dic setObject:self.dyeLeft forKey:@"染色"];
-    
-    return dic;
+    return @{@"球镜/SPH":self.sphLeft ,
+             @"柱镜/CYL":self.cylLeft,
+             @"轴位/AXIS":self.axisLeft  ,
+             @"瞳距/PD":self.distance,
+             @"下加光/ADD":self.addLeft ,
+             @"通道长度/mm":self.chanelLeft ,
+             @"加膜":self.layerLeft ,
+             @"染色":self.dyeLeft};
 }
 
 

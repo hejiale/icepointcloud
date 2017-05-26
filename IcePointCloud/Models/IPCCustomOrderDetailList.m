@@ -47,15 +47,23 @@
                 self.orderInfo.totalPointAmount += glass.price * glass.productCount;
             }else{
                 self.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
+                if ([glass filterType] == IPCTopFilterTypeCustomsizedContactLens || [glass filterType] == IPCTopFilterTypeCustomsizedLens) {
+                    if (glass.isUnifiedCustomizd) {
+                        self.orderInfo.totalPayAmount += glass.customizedRightCount * glass.customizedRightPrice;
+                    }else{
+                        self.orderInfo.totalPayAmount += glass.customizedRightCount * glass.customizedRightPrice;
+                        self.orderInfo.totalPayAmount += glass.customizedCount * glass.customizedLeftPrice;
+                    }
+                }
             }
         }];
         
         self.orderInfo.totalOtherPrice = 0;
-        if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
-            [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                self.orderInfo.totalOtherPrice += [obj[@"payPrice"] doubleValue];
-            }];
-        }
+//        if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
+//            [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                self.orderInfo.totalOtherPrice += [obj[@"payPrice"] doubleValue];
+//            }];
+//        }
     }
 }
 
