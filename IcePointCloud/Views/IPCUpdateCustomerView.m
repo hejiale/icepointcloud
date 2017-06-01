@@ -196,6 +196,16 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 }
 
 #pragma mark //UITextField Delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([textField isEqual:self.phoneTextField]) {
+        if (![IPCCommon judgeIsIntNumber:string]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;
@@ -203,16 +213,16 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSString * str = [textField.text jk_trimmingWhitespace];
-    
-    if (str.length) {
-        if ([textField isEqual:self.phoneTextField]) {
-            if (![IPCCommon checkTelNumber:str]) {
-                [IPCCustomUI showError:@"输入手机号有误!"];
-                [textField setText:@""];
-            }
-        }
-    }
+//    NSString * str = [textField.text jk_trimmingWhitespace];
+//    
+//    if (str.length) {
+//        if ([textField isEqual:self.phoneTextField]) {
+//            if (![IPCCommon checkTelNumber:str]) {
+//                [IPCCustomUI showError:@"输入手机号有误!"];
+//                [textField setText:@""];
+//            }
+//        }
+//    }
 }
 
 @end

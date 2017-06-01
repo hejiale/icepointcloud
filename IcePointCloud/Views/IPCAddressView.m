@@ -64,6 +64,16 @@ typedef void(^UpdateUIBlock)(void);
 }
 
 #pragma mark //UITextFieldDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if ([textField isEqual:self.phoneTextField]) {
+        if (![IPCCommon judgeIsIntNumber:string]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField endEditing:YES];
     return YES;
@@ -72,16 +82,16 @@ typedef void(^UpdateUIBlock)(void);
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSString * str = [textField.text jk_trimmingWhitespace];
+//    NSString * str = [textField.text jk_trimmingWhitespace];
     
-    if (str.length) {
-        if ([textField isEqual:self.phoneTextField]) {
-            if (![IPCCommon checkTelNumber:str]) {
-                [IPCCustomUI showError:@"输入手机号有误!"];
-                [textField setText:@""];
-            }
-        }
-    }
+//    if (str.length) {
+//        if ([textField isEqual:self.phoneTextField]) {
+//            if (![IPCCommon checkTelNumber:str]) {
+//                [IPCCustomUI showError:@"输入手机号有误!"];
+//                [textField setText:@""];
+//            }
+//        }
+//    }
     
     if (self.updateBlock) {
         self.updateBlock();

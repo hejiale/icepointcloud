@@ -127,7 +127,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="addressContentView" destination="Ndg-ie-XFJ" id="aVC-Ce-gLb"/>
-                <outlet property="addressHeightConstraint" destination="gME-Us-x8e" id="RDg-uR-cSQ"/>
                 <outlet property="addressLabel" destination="kD9-kj-di3" id="ZPw-T8-i33"/>
                 <outlet property="contactNameLabel" destination="zXC-Lk-1r0" id="1ZI-fx-NRI"/>
                 <outlet property="contactNameWidth" destination="KX9-bY-k5g" id="hy5-kl-qO3"/>

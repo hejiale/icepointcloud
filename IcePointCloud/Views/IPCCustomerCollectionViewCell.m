@@ -35,7 +35,6 @@
         self.pointViewWidth.constant = pointWidth + 25;
         
         [self.customImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
-
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
         [self.pointLabel setText:pointText];

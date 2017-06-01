@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 
 #pragma mark //UITextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([textField isEqual:self.introducerInteger]) {
+    if ([textField isEqual:self.introducerInteger] || [textField isEqual:self.phoneTextField]) {
         if (![IPCCommon judgeIsIntNumber:string]) {
             return NO;
         }

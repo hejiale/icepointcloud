@@ -48,6 +48,7 @@
         [self.bookDateLabel setText:_currentCustomer.createDate];
         [self.pointLabel setText:pointValue];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
+        
         if ([_currentCustomer.customerType isEqualToString:@"转介绍"]) {
             [self.introduceTitleLabel setHidden:NO];
             [self.introduceValueLabel setHidden:NO];

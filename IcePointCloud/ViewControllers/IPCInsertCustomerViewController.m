@@ -73,7 +73,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         [IPCInsertCustomer instance].memberLevelId = memberLevelMode.memberLevelId;
     }
     if (![IPCInsertCustomer instance].customerType.length) {
-        IPCCustomerType * customerType = [IPCEmployeeMode sharedManager].customerTypeList.list[0];
+        __block IPCCustomerType * customerType = [IPCEmployeeMode sharedManager].customerTypeList.list[0];
         [IPCInsertCustomer instance].customerType = @"自然进店";
         [[IPCEmployeeMode sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj.customerType isEqualToString:@"自然进店"]) {

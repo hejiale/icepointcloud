@@ -106,6 +106,11 @@ typedef void(^DismissBlock)();
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     IPCEmploye * employe = self.employeeArray[indexPath.row];
     if (employe) {
+        if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 5){
+            [IPCCustomUI showError:@"至多选择五名员工"];
+            return;
+        }
+
         __block BOOL isExist = NO;
         [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([employe.jobID isEqualToString:obj.employe.jobID]) {

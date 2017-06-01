@@ -44,9 +44,6 @@
         [self.contactNameLabel setText:_addressMode.contactName];
         [self.genderLabel setText:[IPCCommon formatGender:_addressMode.gender]];
         [self.contactPhoneLabel setText:_addressMode.phone];
-        
-//        width = [self.addressLabel.text jk_widthWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height];
-//        self.addressWidthConstraint.constant = width;
     }
 }
 
@@ -66,13 +63,6 @@
             [self.contactPhoneLabel setText:customer.contactorPhone];
             [self.genderLabel setText:[IPCCommon formatGender:customer.contactorGender]];
             [self.addressLabel setText:customer.contactorAddress];
-            
-//            width = [self.addressLabel.text jk_widthWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height];
-//            self.addressWidthConstraint.constant = width;
-//            
-//            if (width >= 320) {
-//                self.addressWidthConstraint.constant = 320;
-//            }
         }
     }
 }
