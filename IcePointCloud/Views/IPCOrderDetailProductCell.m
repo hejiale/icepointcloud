@@ -188,7 +188,12 @@
 {
     id customizedRight = [self.glasses.customizedRight objectFromJSONString] ;
     id customizedLeft   = [self.glasses.customizedLeft objectFromJSONString];
-    CGFloat totalHeight = 170 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
+    CGFloat totalHeight = 0;
+    if (self.glasses.isUnifiedCustomizd) {
+        totalHeight = 85 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
+    }else{
+        totalHeight = 170 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
+    }
     
     [self.lookCustomizedButton setSelected:YES];
     [self.productContentView addSubview:self.customizedContentView];
@@ -198,11 +203,12 @@
         make.top.equalTo(self.customsizedPackView.mas_bottom).offset(0);
         make.height.mas_equalTo(totalHeight);
     }];
+    
     if (self.glasses.isUnifiedCustomizd) {
-        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, 360, 85 + [customizedRight allKeys].count *20) IsRight:YES]];
+        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, self.customsizedPackView.jk_width, 85 + [customizedRight allKeys].count *20) IsRight:YES]];
     }else{
-        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, 360, 85 + [customizedRight allKeys].count *20) IsRight:YES]];
-        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 85+ [customizedRight allKeys].count *20, 360, 90+ [customizedLeft allKeys].count *20) IsRight:NO]];
+        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 0, self.customsizedPackView.jk_width, 85 + [customizedRight allKeys].count *20) IsRight:YES]];
+        [self.customizedContentView addSubview:[self customizedView:CGRectMake(0, 85+ [customizedRight allKeys].count *20, self.customsizedPackView.jk_width, 85+ [customizedLeft allKeys].count *20) IsRight:NO]];
     }
 }
 
@@ -211,7 +217,7 @@
     UIView * customizedView = [[UIView alloc]initWithFrame:rect];
     UIImageView * tagImageView = nil;
     CGFloat  space = 0;
-    
+     
     if (!self.glasses.isUnifiedCustomizd) {
         space = 10;
         tagImageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 5 , 34, 18)];

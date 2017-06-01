@@ -30,6 +30,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
 @interface IPCCustomDetailOrderView()<UITableViewDelegate,UITableViewDataSource,IPCCustomerOrderDetailDelegate>
 
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
 @property (copy,  nonatomic) void(^ProductDetailBlock)(IPCGlasses *glass);
 @property (copy,  nonatomic) void(^DismissBlock)();
@@ -61,6 +62,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    [self.topView addBottomLine];
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
     self.orderDetailTableView.isHiden = YES;
     self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
@@ -220,7 +222,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
                     if (product.isUnifiedCustomizd) {
                         return 240 + ([customizedRight allKeys].count) * 20;
                     }
-                    return 330 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
+                    return 325 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
                 }
                 return 160;
             }
