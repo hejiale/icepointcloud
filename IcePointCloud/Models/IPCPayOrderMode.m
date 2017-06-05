@@ -23,14 +23,12 @@
 
 - (void)resetData
 {
-    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
     [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
     [IPCPayOrderMode sharedManager].payStyleName = @"CASH";
     [[IPCPayOrderMode sharedManager].employeeResultArray removeAllObjects];
     [IPCPayOrderMode sharedManager].point = 0;
     [IPCPayOrderMode sharedManager].pointPrice = 0;
     [IPCPayOrderMode sharedManager].usedPoint = 0;
-    [IPCPayOrderMode sharedManager].presellAmount = 0;
     [IPCPayOrderMode sharedManager].givingAmount = 0;
     [IPCPayOrderMode sharedManager].orderTotalPrice = 0;
     [IPCPayOrderMode sharedManager].realTotalPrice = 0;
@@ -130,25 +128,25 @@
     return _otherPayTypeArray;
 }
 
+-(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
+    if (!_payTypeRecordArray) {
+        _payTypeRecordArray = [[NSMutableArray alloc] init];
+    }
+    return _payTypeRecordArray;
+}
+
+
 - (void)reloadWithOtherTypeAmount
 {
     //待支付金额
     if ([IPCPayOrderMode sharedManager].isSelectPayType)
     {
-        [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount;
+        [IPCPayOrderMode sharedManager].payTypeAmount = [IPCPayOrderMode sharedManager].realTotalPrice - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount;
         if ([IPCPayOrderMode sharedManager].payTypeAmount < 0) {
             [IPCPayOrderMode sharedManager].payTypeAmount = 0;
         }
     }else{
         [IPCPayOrderMode sharedManager].payTypeAmount = 0;
-    }
-}
-
-- (double)waitPayAmount{
-    if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount) {
-        return  [IPCPayOrderMode sharedManager].realTotalPrice;
-    }else{
-        return  [IPCPayOrderMode sharedManager].presellAmount;
     }
 }
 

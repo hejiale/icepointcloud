@@ -177,7 +177,6 @@
         self.cartItem.unitPrice = 0;
         [IPCPayOrderMode sharedManager].realTotalPrice = 0;
         [IPCPayOrderMode sharedManager].givingAmount = 0;
-        [IPCPayOrderMode sharedManager].presellAmount = 0;
     }else{
         [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
         if ([IPCPayOrderMode sharedManager].usedPoint <= 0) {

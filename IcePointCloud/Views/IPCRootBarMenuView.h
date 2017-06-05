@@ -14,7 +14,6 @@
                     MenuIndex:(NSInteger)index
                      PayOrder:(void(^)())payOrder
                        Logout:(void(^)())logout
-                         Help:(void(^)())help
                       Dismiss:(void(^)())dismiss;
 
 @end

@@ -11,6 +11,7 @@
 #import "IPCEmployeeResult.h"
 #import "IPCOtherPayTypeResult.h"
 #import "IPCPointValueMode.h"
+#import "IPCPayRecord.h"
 
 @interface IPCPayOrderMode : NSObject
 
@@ -20,7 +21,6 @@
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
 @property (nonatomic,assign, readwrite) IPCPayStyleType      payStyle;//支付方式 \ 支付宝  微信  现金  刷卡
-@property (nonatomic,assign, readwrite) IPCOrderPayType     payType;//全额  定金支付
 @property (nonatomic, copy, readwrite) NSString     *   payStyleName;//支付名称
 
 @property (nonatomic, assign, readwrite) double   orderTotalPrice;//订单总金额(可根据输入金额改变)
@@ -28,7 +28,6 @@
 @property (nonatomic, assign, readwrite) double   pointPrice;//积分金额
 @property (nonatomic, assign, readwrite) NSInteger    usedPoint;//已使用积分
 @property (nonatomic, assign, readwrite) NSInteger    point;//总积分
-@property (nonatomic, assign, readwrite) double   presellAmount;//定金
 @property (nonatomic, assign, readwrite) double   givingAmount;//赠送金额
 
 @property (nonatomic, assign, readwrite) double   payTypeAmount;//支付宝  微信  现金  刷卡 \支付金额
@@ -42,9 +41,13 @@
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//选择客户
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
 
+@property (nonatomic, strong) IPCPayRecord * insertPayRecord;//正在输入中的付款方式记录
+@property (nonatomic, assign) BOOL      isInsertRecordStatus;//是否正在输入付款记录的状态
+
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCOtherPayTypeResult *> * otherPayTypeArray;//其它支付方式
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;//付款记录方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩
 
 - (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult;
@@ -60,8 +63,6 @@
 - (void)clearPayTypeData;
 
 - (void)reloadWithOtherTypeAmount;
-
-- (double)waitPayAmount;
 
 - (void)calculatePointValue:(IPCPointValueMode *)pointValue;
 

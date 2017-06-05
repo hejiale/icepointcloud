@@ -42,7 +42,6 @@
  @param failure
  */
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID
-                       IsPresellStatus:(NSString *)presellStatus
                                  Point:(NSInteger)point
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError *error))failure;

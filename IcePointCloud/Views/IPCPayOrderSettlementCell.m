@@ -17,11 +17,8 @@
     [self.totalPriceLabel setTextColor:COLOR_RGB_RED];
     [self.pointAmountLabel setTextColor:COLOR_RGB_RED];
     [self.payAmountTextField addBorder:3 Width:0.5];
-    [self.depositTextField addBorder:3 Width:0.5];
-    [self.depositTextField setRightSpace:5];
     [self.payAmountTextField setRightSpace:5];
     [self.payAmountTextField setLeftText:@"￥"];
-    [self.depositTextField setLeftText:@"￥"];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -48,21 +45,7 @@
         self.selectPointButtonWidth.constant = 0;
         [self.pointAmountTextField addBorder:0 Width:0];
     }
-    
-    [self.fullAmountButton setSelected:NO];
-    [self.depositButton setSelected:NO];
-    if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount) {
-        [self.fullAmountButton setSelected:YES];
-    }else{
-        [self.depositButton setSelected:YES];
-    }
-    
-    if ([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount) {
-        [self.depositTextField setEnabled:NO];
-    }else{
-        [self.depositTextField setEnabled:YES];
-    }
-    
+
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {
         [self.pointAmountTextField setEnabled:NO];
         [self.selectPointButton setEnabled:YES];
@@ -95,11 +78,7 @@
     }else{
         [self.payAmountTextField setText:@""];
     }
-    if ([IPCPayOrderMode sharedManager].presellAmount > 0) {
-        [self.depositTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].presellAmount]];
-    }else{
-        [self.depositTextField setText:@""];
-    }
+
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderMode sharedManager].usedPoint]];
     [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderMode sharedManager].point]];
     [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderMode sharedManager].givingAmount]];
@@ -117,29 +96,6 @@
         [IPCPayOrderMode sharedManager].usedPoint = 0;
         [IPCPayOrderMode sharedManager].pointPrice = 0;
     }
-    
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
-            [self.delegate reloadUI];
-        }
-    }
-}
-
-//选择全额支付
-- (IBAction)selectFullAmountAction:(UIButton *)sender {
-    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypePayAmount;
-    [IPCPayOrderMode sharedManager].presellAmount = 0;
-    
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
-            [self.delegate reloadUI];
-        }
-    }
-}
-
-
-- (IBAction)selectPayPresellAmountAction:(UIButton *)sender {
-    [IPCPayOrderMode sharedManager].payType = IPCOrderPayTypeInstallment;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -198,15 +154,6 @@
             [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
             if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
                 [IPCPayOrderMode sharedManager].givingAmount = 0;
-            }
-            [IPCPayOrderMode sharedManager].presellAmount = 0;
-        }else if ([textField isEqual:self.depositTextField]){
-            if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
-                if ([IPCPayOrderMode sharedManager].realTotalPrice < [str doubleValue]) {
-                    [IPCPayOrderMode sharedManager].presellAmount = [IPCPayOrderMode sharedManager].realTotalPrice;
-                }else{
-                    [IPCPayOrderMode sharedManager].presellAmount = [str doubleValue];
-                }
             }
         }
     }

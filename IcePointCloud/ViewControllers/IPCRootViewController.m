@@ -8,7 +8,6 @@
 
 #import "IPCRootViewController.h"
 #import "IPCTryGlassesViewController.h"
-#import "IPCHelpViewController.h"
 #import "IPCGlassListViewController.h"
 #import "IPCSearchCustomerViewController.h"
 #import "IPCPayOrderViewController.h"
@@ -54,12 +53,6 @@
 
 
 #pragma mark //Show Methods
-//- (void)showHelpViewController{
-//    [self removeCover];
-//    IPCHelpViewController * helpVC = [[IPCHelpViewController alloc]initWithNibName:@"IPCHelpViewController" bundle:nil];
-//    [self.navigationController pushViewController:helpVC animated:YES];
-//}
-
 - (void)popToLoginViewController{
     [self removeCover];
     [[IPCAppManager sharedManager] logout];
@@ -79,8 +72,6 @@
                                                     [self pushToPayOrderViewController];
                                                 } Logout:^{
                                                     [self popToLoginViewController];
-                                                } Help:^{
-//                                                    [self showHelpViewController];
                                                 } Dismiss:^{
                                                     [self removeCover];
                                                 }];

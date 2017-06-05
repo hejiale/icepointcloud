@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="IPCPayTypeRecordCell">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="49"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qpI-oJ-8R5">
+                        <rect key="frame" x="40" y="15" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="5jU-mI-yyH"/>
+                            <constraint firstAttribute="height" constant="20" id="WoB-y6-fzw"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W1a-n6-qcu">
+                        <rect key="frame" x="90" y="15.5" width="80" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="A6h-rt-56e"/>
+                            <constraint firstAttribute="width" constant="80" id="Fvr-Xo-LNs"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSe-2Y-VzP">
+                        <rect key="frame" x="220" y="15" width="150" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="150" id="CZ0-fB-19P"/>
+                            <constraint firstAttribute="height" constant="20" id="hjY-6A-lDa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="W1a-n6-qcu" firstAttribute="leading" secondItem="qpI-oJ-8R5" secondAttribute="trailing" constant="30" id="1Zb-9C-aN1"/>
+                    <constraint firstItem="qpI-oJ-8R5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7he-Xt-pwf"/>
+                    <constraint firstItem="mSe-2Y-VzP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YTW-DC-0p9"/>
+                    <constraint firstItem="qpI-oJ-8R5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="40" id="eAn-2q-6Fv"/>
+                    <constraint firstItem="W1a-n6-qcu" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="j8H-bV-EXz"/>
+                    <constraint firstItem="mSe-2Y-VzP" firstAttribute="leading" secondItem="W1a-n6-qcu" secondAttribute="trailing" constant="50" id="m5a-7i-UA0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="payAmountLabel" destination="mSe-2Y-VzP" id="kvY-M4-BRN"/>
+                <outlet property="payTypeImageView" destination="qpI-oJ-8R5" id="oXG-sd-9YS"/>
+                <outlet property="payTypeNameLabel" destination="W1a-n6-qcu" id="ou0-CR-6pS"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

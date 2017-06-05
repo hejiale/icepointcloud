@@ -18,9 +18,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectPointButtonWidth;
 @property (weak, nonatomic) IBOutlet UILabel *customerPointLabel;
 @property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
-@property (weak, nonatomic) IBOutlet UIButton *fullAmountButton;
-@property (weak, nonatomic) IBOutlet UIButton *depositButton;
-@property (weak, nonatomic) IBOutlet UITextField *depositTextField;
 @property (weak, nonatomic) IBOutlet UILabel *givingAmountLabel;
 @property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
 

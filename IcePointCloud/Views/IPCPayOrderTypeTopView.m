@@ -48,10 +48,10 @@
     [self.payTotalPriceLabel setTextColor:COLOR_RGB_RED];
     [self.payStyleContentView addBorder:3 Width:0.5];
     
-    [self.payTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]]];
+//    [self.payTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderMode sharedManager] waitPayAmount]]];
     [self.storeValueLabel setText:[NSString stringWithFormat:@"储值余额(可用余额￥%.2f)",[IPCPayOrderMode sharedManager].balanceAmount]];
     
-    [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount];
+//    [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount];
     NSString * payStyleText = [NSString stringWithFormat:@"支付￥%.2f",[IPCPayOrderMode sharedManager].payTypeAmount];
     [self.paysStyleAmountLabel setAttributedText:[IPCCustomUI subStringWithText:payStyleText BeginRang:2 Rang:payStyleText.length - 2 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
     [self reloadUI];
@@ -66,21 +66,21 @@
 
 - (IBAction)selectStoreValueAction:(UIButton *)sender
 {
-    if ([[IPCPayOrderMode sharedManager].otherPayTypeArray count] > 0 && !sender.selected && ([IPCPayOrderMode sharedManager].balanceAmount >= [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount]))
-    {
-        __weak typeof(self) weakSelf = self;
-        [IPCCustomUI showAlert:@"友情提示" Message:@"您确定选择使用储值余额支付并清空其它支付方式吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [[IPCPayOrderMode sharedManager].otherPayTypeArray removeAllObjects];
-            
-            if (strongSelf.UpdateBlock) {
-                strongSelf.UpdateBlock();
-            }
-            [strongSelf chooseStoreValue:sender];
-        }];
-    }else{
-        [self chooseStoreValue:sender];
-    }
+//    if ([[IPCPayOrderMode sharedManager].otherPayTypeArray count] > 0 && !sender.selected && ([IPCPayOrderMode sharedManager].balanceAmount >= [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount]))
+//    {
+//        __weak typeof(self) weakSelf = self;
+//        [IPCCustomUI showAlert:@"友情提示" Message:@"您确定选择使用储值余额支付并清空其它支付方式吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            [[IPCPayOrderMode sharedManager].otherPayTypeArray removeAllObjects];
+//            
+//            if (strongSelf.UpdateBlock) {
+//                strongSelf.UpdateBlock();
+//            }
+//            [strongSelf chooseStoreValue:sender];
+//        }];
+//    }else{
+//        [self chooseStoreValue:sender];
+//    }
     
 }
 
@@ -89,33 +89,7 @@
     [button setSelected:!button.selected];
     [IPCPayOrderMode sharedManager].isSelectStoreValue = button.selected;
     
-    if ([IPCPayOrderMode sharedManager].isSelectStoreValue) {
-        if ([IPCPayOrderMode sharedManager].balanceAmount >= [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
-        {
-            [IPCPayOrderMode sharedManager].usedBalanceAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
-            [IPCPayOrderMode sharedManager].isSelectPayType = NO;
-            [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeNone;
-            
-        }else if([IPCPayOrderMode sharedManager].balanceAmount < [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
-        {
-            [IPCPayOrderMode sharedManager].usedBalanceAmount = [IPCPayOrderMode sharedManager].balanceAmount;
-        }
-    }else{
-        [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
-        if (![IPCPayOrderMode sharedManager].isSelectPayType) {
-            [IPCPayOrderMode sharedManager].isSelectPayType = YES;
-            [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
-        }
-    }
-    if ([IPCPayOrderMode sharedManager].isSelectPayType) {
-        //待支付金额
-        [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
-        if ([IPCPayOrderMode sharedManager].payTypeAmount <= 0) {
-            [IPCPayOrderMode sharedManager].payTypeAmount = 0;
-        }
-    }else{
-        [IPCPayOrderMode sharedManager].payTypeAmount = 0;
-    }
+    
     [self reloadUI];
 }
 
@@ -125,21 +99,21 @@
     
     if ([IPCPayOrderMode sharedManager].isSelectPayType)
     {
-        if ([IPCPayOrderMode sharedManager].isSelectStoreValue && [IPCPayOrderMode sharedManager].usedBalanceAmount > [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
-        {
-            [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
-            [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
-            [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager]waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
-        }else{
-            if ([[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount]  - [IPCPayOrderMode sharedManager].payTypeAmount > 0) {
-                [IPCPayOrderMode sharedManager].isSelectStoreValue = YES;
-            }else{
-                [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
-            }
-        }
+//        if ([IPCPayOrderMode sharedManager].isSelectStoreValue && [IPCPayOrderMode sharedManager].usedBalanceAmount > [[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount])
+//        {
+//            [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
+//            [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
+//            [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager]waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
+//        }else{
+//            if ([[IPCPayOrderMode sharedManager] waitPayAmount] - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount]  - [IPCPayOrderMode sharedManager].payTypeAmount > 0) {
+//                [IPCPayOrderMode sharedManager].isSelectStoreValue = YES;
+//            }else{
+//                [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
+//            }
+//        }
         [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
         //待支付金额
-        [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
+//        [IPCPayOrderMode sharedManager].payTypeAmount = [[IPCPayOrderMode sharedManager] waitPayAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount];
         [self reloadUI];
     }else{
         [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeNone;

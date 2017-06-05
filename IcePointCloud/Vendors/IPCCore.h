@@ -136,23 +136,6 @@ typedef NS_ENUM(NSInteger, IPCGlassesImageType) {
     IPCGlassesImageTypeThumb
 };
 
-/**
- *  PAY TYPE
- */
-typedef NS_ENUM(NSInteger, IPCOrderPayType){
-    /**
-     *  NONE
-     */
-    IPCOrderPayTypeNone,
-    /**
-     *  PAY AMOUNT
-     */
-    IPCOrderPayTypePayAmount,
-    /**
-     *  INSTALLMENT
-     */
-    IPCOrderPayTypeInstallment,
-};
 
 /**
  *  PreSell PAY TYPE
@@ -197,7 +180,15 @@ typedef NS_ENUM(NSInteger, IPCPayStyleType){
     /**
      *  CARD
      */
-    IPCPayStyleTypeCard
+    IPCPayStyleTypeCard,
+    /**
+     *  STORE_VALUE
+     */
+    IPCPayStyleTypeStoreValue,
+    /**
+     *  OTHER
+     */
+    IPCPayStyleTypeOther
 };
 
 /**

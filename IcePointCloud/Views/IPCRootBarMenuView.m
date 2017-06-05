@@ -20,7 +20,6 @@
 @property (nonatomic, strong) IPCPersonBaseView * personBaseView;
 @property (copy, nonatomic) void(^PayOrderBlock)();
 @property (copy, nonatomic) void(^LogoutBlock)();
-@property (copy, nonatomic) void(^HelpBlock)();
 @property (nonatomic, copy) void(^DismissBlock)();
 
 @end
@@ -31,14 +30,12 @@
                     MenuIndex:(NSInteger)index
                      PayOrder:(void (^)())payOrder
                        Logout:(void (^)())logout
-                         Help:(void (^)())help
                       Dismiss:(void (^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.PayOrderBlock = payOrder;
         self.LogoutBlock = logout;
-        self.HelpBlock = help;
         self.DismissBlock = dismiss;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCRootBarMenuView" owner:self];
@@ -93,8 +90,6 @@
         [self showUpdatePasswordView];
     } QRCodeBlock:^{
         [self showQRCodeView];
-    } HelpBlock:^{
-        if (self.HelpBlock)self.HelpBlock();
     }];
 }
 

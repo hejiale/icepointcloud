@@ -10,17 +10,13 @@
 #import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
 #import "IPCSelectCustomsizedViewController.h"
-#import "IPCPayOrderPayTypeView.h"
 #import "IPCEmployeListView.h"
-#import "IPCPaySuccessView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
-@property (strong, nonatomic) IPCPayOrderPayTypeView * payTypeView;
-@property (strong, nonatomic) IPCPaySuccessView * paySuccessView;
 @property (strong, nonatomic) IPCPayOrderViewMode * normalSellCellMode;
 
 @end
@@ -93,38 +89,6 @@
     [self.view bringSubviewToFront:self.employeView];
 }
 
-- (void)loadPayTypeView{
-    [self.view endEditing:YES];
-    __weak typeof(self) weakSelf = self;
-    self.payTypeView = [[IPCPayOrderPayTypeView alloc]initWithFrame:self.view.bounds
-                                                                Pay:^{
-                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                    [strongSelf.normalSellCellMode offerOrder];
-                                                                }Dismiss:^{
-                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                    [strongSelf.payTypeView removeFromSuperview];
-                                                                }];
-    [self.view addSubview:self.payTypeView];
-    [self.view bringSubviewToFront:self.payTypeView];
-}
-
-- (void)loadPaySuccessView:(IPCOrder *)result
-{
-    __weak typeof(self) weakSelf = self;
-    [self.payOrderTableView setHidden:YES];
-    self.paySuccessView = [[IPCPaySuccessView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
-                                                        OrderInfo:result
-                                                          Dismiss:^{
-                                                              __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                              [strongSelf resetPayInfoData];
-                                                              [[IPCShoppingCart sharedCart] removeSelectCartItem];
-                                                              [strongSelf.paySuccessView removeFromSuperview];
-                                                              [strongSelf.navigationController popViewControllerAnimated:YES];
-                                                          }];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.paySuccessView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.paySuccessView];
-}
-
 #pragma mark //Clicked Events
 - (IBAction)loadPayStyleView:(id)sender
 {
@@ -149,11 +113,7 @@
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].presellAmount == 0 && [IPCPayOrderMode sharedManager].payType == IPCOrderPayTypeInstallment) {
-        [IPCCustomUI showError:@"请输入有效定金"];
-        return;
-    }
-    [self loadPayTypeView];
+//    [self.normalSellCellMode offerOrder];
 }
 
 
@@ -225,19 +185,6 @@
 
 - (void)reloadPayOrderView{
     [self.payOrderTableView reloadData];
-}
-
-- (void)showPaySuccessViewWithOrderInfo:(IPCOrder *)orderResult
-{
-    [self.payTypeView removeFromSuperview];
-    if ([IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeWechat || [IPCPayOrderMode sharedManager].payStyle == IPCPayStyleTypeAlipay) {
-        [self loadPaySuccessView:orderResult];
-    }else{
-        [IPCCustomUI showSuccess:@"订单支付成功"];
-        [self resetPayInfoData];
-        [[IPCShoppingCart sharedCart] removeSelectCartItem];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 - (void)searchCustomerMethod{

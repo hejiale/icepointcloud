@@ -62,7 +62,7 @@
                         <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
                         <constraint firstAttribute="width" constant="200" id="kJE-03-Oh0"/>
                     </constraints>
-                    <state key="normal" title="Button" image="icon_payOrder"/>
+                    <state key="normal" title="Button" image="icon_save_customer"/>
                     <connections>
                         <action selector="loadPayStyleView:" destination="-1" eventType="touchUpInside" id="JOr-Cn-RgS"/>
                     </connections>
@@ -84,6 +84,6 @@
     </objects>
     <resources>
         <image name="icon_cancel_payOrder" width="195" height="35"/>
-        <image name="icon_payOrder" width="195" height="35"/>
+        <image name="icon_save_customer" width="195" height="35"/>
     </resources>
 </document>

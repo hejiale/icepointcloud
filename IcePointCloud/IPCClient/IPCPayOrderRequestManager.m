@@ -30,7 +30,6 @@
 }
 
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID
-                       IsPresellStatus:(NSString *)presellStatus
                                  Point:(NSInteger)point
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError *error))failure
@@ -38,7 +37,6 @@
     IPCPayOrderParameter * productParameter = [[IPCPayOrderParameter alloc]init];
     
     NSDictionary * parameters = @{
-                                  @"isAdvancePayment": presellStatus,
                                   @"orderType": @"FOR_SALES",
                                   @"integral": @(point),
                                   @"customerId": customID,

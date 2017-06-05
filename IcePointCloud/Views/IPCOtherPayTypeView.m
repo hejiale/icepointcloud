@@ -87,7 +87,7 @@
                 }
             }];
             
-            double minum = [[IPCPayOrderMode sharedManager] waitPayAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount -  otherTotalAmout;
+            double minum = [IPCPayOrderMode sharedManager].realTotalPrice - [IPCPayOrderMode sharedManager].usedBalanceAmount -  otherTotalAmout;
             
             if (minum > 0) {
                 if (minum < [str doubleValue]) {

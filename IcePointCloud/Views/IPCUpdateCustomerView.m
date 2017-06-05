@@ -212,17 +212,4 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 }
 
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-//    NSString * str = [textField.text jk_trimmingWhitespace];
-//    
-//    if (str.length) {
-//        if ([textField isEqual:self.phoneTextField]) {
-//            if (![IPCCommon checkTelNumber:str]) {
-//                [IPCCustomUI showError:@"输入手机号有误!"];
-//                [textField setText:@""];
-//            }
-//        }
-//    }
-}
-
 @end

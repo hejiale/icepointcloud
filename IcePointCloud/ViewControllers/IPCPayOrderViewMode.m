@@ -19,6 +19,8 @@
 #import "IPCCustomsizedLeftParameterCell.h"
 #import "IPCPayOrderMemoCell.h"
 #import "IPCPayOrderViewCellMode.h"
+#import "IPCInsertPayRecordCell.h"
+#import "IPCPayRecordBottomCell.h"
 
 static NSString * const payOrderCartItemIdentifier = @"payOrderProductCellIdentifier";
 static NSString * const customerIdentifier              = @"IPCCustomerDetailCellIdentifier";
@@ -31,6 +33,8 @@ static NSString * const customsizedProIdentifier   = @"IPCCustomsizedProductCell
 static NSString * const rightEyeIdentifier               = @"IPCCustomsizedRightParameterCellIdentifier";
 static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLeftParameterCellIdentifier";
 static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellIdentifier";
+static NSString * const insertRecordIdentifier        = @"IPCInsertPayRecordCellIdentifier";
+static NSString * const bottomRecordIdentifier        = @"IPCPayRecordBottomCellIdentifier";
 
 @interface IPCPayOrderViewMode()<IPCPayOrderSubViewDelegate>
 
@@ -68,7 +72,6 @@ static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellI
 - (void)requestOrderPointPrice:(NSInteger)point
 {
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID
-                                              IsPresellStatus:([IPCPayOrderMode sharedManager].payType == IPCOrderPayTypePayAmount ? @"false":@"true")
                                                         Point:point
                                                  SuccessBlock:^(id responseValue)
      {
@@ -89,11 +92,7 @@ static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellI
 - (void)offerOrder{
     [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue)
      {
-         IPCOrder *result = [IPCOrder mj_objectWithKeyValues:responseValue];
          
-         if ([self.delegate respondsToSelector:@selector(showPaySuccessViewWithOrderInfo:)]) {
-             [self.delegate showPaySuccessViewWithOrderInfo:result];
-         }
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
      }];
@@ -102,9 +101,9 @@ static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellI
 #pragma mark //DO Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
-        return 7;
+        return 8;
     }
-    return 3;
+    return 4;
 }
 
 
@@ -121,12 +120,14 @@ static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellI
     }
     else if ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 6))
         return 1;
-    else if ( ((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 4)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
+    else if (((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 4)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
         return 1;
     else if (![IPCCurrentCustomerOpometry sharedManager].currentAddress && section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
     else if (![IPCCurrentCustomerOpometry sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
         return 0;
+    else if (((![IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 3) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && section == 7)) && [IPCPayOrderMode sharedManager].isInsertRecordStatus)
+        return 3;
     return 2;
 }
 
@@ -295,13 +296,47 @@ static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellI
                 return cell;
             }
         }
-    }else{
+    }else if((indexPath.section == 6 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer) || (indexPath.section == 2 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer)){
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPayOrderSettlementCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             cell.delegate = self;
         }
         return cell;
+    }else{
+        if (indexPath.row == 0) {
+            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell setTopTitle:@"收款记录"];
+            return cell;
+        }else if ([IPCPayOrderMode sharedManager].isInsertRecordStatus && indexPath.row == 1){
+            IPCInsertPayRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:insertRecordIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCInsertPayRecordCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [[cell rac_signalForSelector:@selector(sureAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                IPCPayRecord * payRecord = [[IPCPayRecord alloc]init];
+                [[IPCPayOrderMode sharedManager].payTypeRecordArray addObject:payRecord];
+                [tableView reloadData];
+            }];
+            [[cell rac_signalForSelector:@selector(cancelAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                [IPCPayOrderMode sharedManager].isInsertRecordStatus = NO;
+                [tableView reloadData];
+            }];
+            return cell;
+        }else{
+            IPCPayRecordBottomCell * cell = [tableView dequeueReusableCellWithIdentifier:bottomRecordIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCPayRecordBottomCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [[cell rac_signalForSelector:@selector(insertPayRecordAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                [IPCPayOrderMode sharedManager].isInsertRecordStatus = YES;
+                [tableView reloadData];
+            }];
+            return cell;
+        }
     }
 }
 
@@ -325,7 +360,7 @@ static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellI
         return [self.cellMode buyProductCellHeight:indexPath];
     }else if ((indexPath.section == 2 && ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) || ([IPCCurrentCustomerOpometry sharedManager].currentCustomer && indexPath.section == 6))
     {
-        return 235;
+        return 180;
     }
     return 50;
 }

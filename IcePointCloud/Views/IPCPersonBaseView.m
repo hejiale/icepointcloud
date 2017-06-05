@@ -24,7 +24,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 @property (copy, nonatomic) void(^LogoutBlock)();
 @property (copy, nonatomic) void(^UpdateBlock)();
 @property (copy, nonatomic) void(^QRCodeBlock)();
-@property (copy, nonatomic) void(^HelpBlock)();
 
 @end
 
@@ -71,12 +70,11 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     [self logoutRequest];
 }
 
-- (void)showWithLogout:(void(^)())logout UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode HelpBlock:(void (^)())help
+- (void)showWithLogout:(void(^)())logout UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode
 {
     self.LogoutBlock  = logout;
     self.UpdateBlock  = update;
     self.QRCodeBlock  = qrcode;
-    self.HelpBlock    = help;
     
     [self.logouOutButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.personTableView setTableFooterView:[[UIView alloc]init]];
