@@ -16,6 +16,8 @@
 #import "IPCOrderDetailPayStyleCell.h"
 #import "IPCOrderDetailTopOptometryCell.h"
 #import "IPCOrderDetailOptometryCell.h"
+#import "IPCCustomerTopTitleCell.h"
+#import "IPCOrderDetailPayRecordCell.h"
 
 static NSString * const topIdentifier        = @"OrderDetailTopTableViewCellIdentifier";
 static NSString * const memoIdentifier    = @"OrderDetailMemoCellIdentifier";
@@ -26,6 +28,8 @@ static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier"
 static NSString * const payStyleIdentifier = @"IPCOrderDetailPayStyleCellIdentifier";
 static NSString * const topOptometryIdentifier = @"IPCOrderDetailTopOptometryCellIdentifier";
 static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdentifier";
+static NSString * const titleIdentifier            = @"IPCOrderTopTableViewCellIdentifier";
+static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIdentifier";
 
 @interface IPCCustomDetailOrderView()<UITableViewDelegate,UITableViewDataSource,IPCCustomerOrderDetailDelegate>
 
@@ -121,7 +125,7 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 8;
+    return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -131,6 +135,8 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
     }
     else if (section == 3){
         return [IPCCustomOrderDetailList instance].products.count;
+    }else if (section == 6){
+        return 2;
     }
     return 1;
 }
@@ -189,7 +195,25 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
             cell = [[UINib nibWithNibName:@"IPCOrderDetailMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         return cell;
-    }else if(indexPath.section ==6){
+    }else if (indexPath.section == 6){
+        if (indexPath.row == 0) {
+            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell setTopTitle:@"收款记录"];
+//            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderMode sharedManager].remainAmount];
+//            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:6 Rang:remainAmountText.length - 6 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
+//            [cell setRightTitle:str];
+            return cell;
+        }else{
+            IPCOrderDetailPayRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:payRecordIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCOrderDetailPayRecordCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            return cell;
+        }
+    }else if(indexPath.section ==7){
         IPCOrderDetailPayStyleCell * cell = [tableView dequeueReusableCellWithIdentifier:payStyleIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailPayStyleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -232,12 +256,12 @@ static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdent
         return 125;
     }else if (indexPath.section == 5){
         return 50;
-    }else if (indexPath.section == 6){
-        return 70;
     }else if (indexPath.section == 7){
+        return 70;
+    }else if (indexPath.section == 8){
         return 95;
     }
-    return 44;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

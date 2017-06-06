@@ -33,6 +33,7 @@
 @property (nonatomic, assign, readwrite) double   payTypeAmount;//支付宝  微信  现金  刷卡 \支付金额
 @property (nonatomic, assign, readwrite) double   balanceAmount;//储值金额
 @property (nonatomic, assign, readwrite) double   usedBalanceAmount;//已使用储值金额
+@property (nonatomic, assign, readwrite) double   remainAmount;//剩余付款金额
 
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
 @property (nonatomic, assign, readwrite) BOOL     isSelectStoreValue;// 是否选择储值

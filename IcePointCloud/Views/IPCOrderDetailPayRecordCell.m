@@ -1,14 +1,14 @@
 //
-//  IPCInsertPayRecordCell.m
+//  IPCOrderDetailPayRecordCell.m
 //  IcePointCloud
 //
-//  Created by gerry on 2017/6/5.
+//  Created by gerry on 2017/6/6.
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCInsertPayRecordCell.h"
+#import "IPCOrderDetailPayRecordCell.h"
 
-@implementation IPCInsertPayRecordCell
+@implementation IPCOrderDetailPayRecordCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -19,13 +19,6 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-}
-
-
-- (IBAction)sureAction:(id)sender {
-}
-
-- (IBAction)cancelAction:(id)sender {
 }
 
 @end

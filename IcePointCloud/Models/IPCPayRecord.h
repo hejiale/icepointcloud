@@ -10,4 +10,9 @@
 
 @interface IPCPayRecord : NSObject
 
+@property (nonatomic, assign) IPCPayStyleType payStyle;
+@property (nonatomic, copy) NSString * payStyleName;
+@property (nonatomic, assign) double   payAmount;
+@property (nonatomic, copy) NSString * payDate;
+
 @end

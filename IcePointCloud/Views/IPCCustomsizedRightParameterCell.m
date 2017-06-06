@@ -10,7 +10,6 @@
 
 @interface IPCCustomsizedRightParameterCell()<IPCCustomsizedEyeDelegate>
 
-@property (copy, nonatomic) void(^UpdateBlock)(void);
 
 @end
 
@@ -21,6 +20,12 @@
     // Initialization code
     
     [self.parameterContentView addSubview:self.parameterView];
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self reloadUI];
 }
 
 
@@ -34,10 +39,8 @@
 
 
 #pragma mark //Clicked Events
-- (void)reloadUI:(void (^)())update
+- (void)reloadUI
 {
-    self.UpdateBlock = update;
-    
     if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
         [self.unifiedButton setSelected:YES];
         [self.leftOrRightEyeButton setSelected:NO];
@@ -52,22 +55,28 @@
 
 - (IBAction)unifiedAction:(id)sender {
     [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
-    if (self.UpdateBlock) {
-        self.UpdateBlock();
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
+            [self.delegate reloadUI];
+        }
     }
 }
 
 - (IBAction)leftOrRightEyeAction:(id)sender {
     [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeLeftOrRightEye;
-    if (self.UpdateBlock) {
-        self.UpdateBlock();
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
+            [self.delegate reloadUI];
+        }
     }
 }
 
 #pragma mark //IPCCustomsizedEyeDelegate
 - (void)reloadParameterInfoView{
-    if (self.UpdateBlock) {
-        self.UpdateBlock();
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
+            [self.delegate reloadUI];
+        }
     }
 }
 

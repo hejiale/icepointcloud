@@ -155,6 +155,9 @@
             if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
                 [IPCPayOrderMode sharedManager].givingAmount = 0;
             }
+            //剩余支付金额
+            [IPCPayOrderMode sharedManager].remainAmount = [IPCPayOrderMode sharedManager].realTotalPrice;
+            [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
         }
     }
     

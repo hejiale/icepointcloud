@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "IPCCustomsizedParameterView.h"
+#import "IPCPayOrderSubViewDelegate.h"
 
 @interface IPCCustomsizedLeftParameterCell : UITableViewCell
 
 @property (nonatomic, strong) IPCCustomsizedParameterView * parameterView;
 @property (weak, nonatomic) IBOutlet UIView *parameterContentView;
-
-- (void)reloadUI:(void(^)())update;
+@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
 
 @end

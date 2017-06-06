@@ -10,8 +10,6 @@
 
 @interface IPCPayOrderEmployeeCell()
 
-@property (copy, nonatomic) void(^UpdateBlock)(void);
-
 @end
 
 @implementation IPCPayOrderEmployeeCell
@@ -28,10 +26,14 @@
     // Configure the view for the selected state
 }
 
-- (void)updateUI:(void (^)())update
-{
-    self.UpdateBlock = update;
+- (void)layoutSubviews{
+    [super layoutSubviews];
     
+    [self updateUI];
+}
+
+- (void)updateUI
+{
     CGFloat width = (self.jk_width - 100)/5;
     
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -60,8 +62,10 @@
        }
    }];
     
-    if (self.UpdateBlock) {
-        self.UpdateBlock();
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
+            [self.delegate reloadUI];
+        }
     }
 }
 
@@ -72,8 +76,10 @@
         }
     }];
     
-    if (self.UpdateBlock) {
-        self.UpdateBlock();
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
+            [self.delegate reloadUI];
+        }
     }
 }
 

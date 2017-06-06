@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCSwipeView.h"
+#import "IPCPayTypeRecordView.h"
+#import "IPCPayOrderSubViewDelegate.h"
 
-@interface IPCPayTypeRecordCell : UITableViewCell
+@interface IPCPayTypeRecordCell : UITableViewCell<UITextFieldDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIImageView *payTypeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *payAmountLabel;
+@property (weak, nonatomic) IBOutlet UIView *payRecordContentView;
+@property (weak, nonatomic) IBOutlet UIView *insertRecordView;
+@property (weak, nonatomic) IBOutlet UITextField *payTypeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payRecordHeight;
+
+@property (strong, nonatomic) NSMutableArray<IPCSwipeView *> * recordViews;
+@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
 
 @end
+

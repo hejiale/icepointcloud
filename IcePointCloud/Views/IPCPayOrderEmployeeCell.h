@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "IPCEmployeePerformanceView.h"
+#import "IPCPayOrderSubViewDelegate.h"
 
 @interface IPCPayOrderEmployeeCell : UITableViewCell
 
-- (void)updateUI:(void(^)())update;
+@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
 
 @end

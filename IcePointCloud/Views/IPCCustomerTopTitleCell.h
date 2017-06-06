@@ -14,10 +14,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *searchCustomerButton;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
 
 - (void)setTopTitle:(NSString *)title;
 - (void)setInsertTitle:(NSString *)title;
 - (void)setEditTitle:(NSString *)title;
+- (void)setRightTitle:(NSAttributedString *)title;
 
 @end
 

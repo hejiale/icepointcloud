@@ -45,7 +45,10 @@
     [self.editButton setHidden:NO];
 }
 
-
+- (void)setRightTitle:(NSString *)title{
+    [self.rightLabel setHidden:NO];
+    [self.rightLabel setAttributedText:title];
+}
 
 #pragma mark //Clicked Events
 - (IBAction)insertAction:(id)sender {
