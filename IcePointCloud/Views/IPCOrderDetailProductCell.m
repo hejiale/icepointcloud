@@ -19,13 +19,13 @@
     [self.productContentView addSubview:self.productNameLabel];
     
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.productImageView.mas_right).with.offset(19);
+        make.left.equalTo(self.productImageView.mas_right).with.offset(10);
         make.top.equalTo(self.productImageView.mas_top).with.offset(0);
-        make.right.equalTo(self.productContentView.mas_right).with.offset(19);
+        make.right.equalTo(self.productContentView.mas_right).with.offset(20);
     }];
     
     [self.pointImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.productImageView.mas_right).with.offset(19);
+        make.left.equalTo(self.productImageView.mas_right).with.offset(10);
         make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
         make.width.mas_equalTo(10);
         make.height.mas_equalTo(20);
@@ -134,7 +134,7 @@
         }else{
             [self.pointImageView setHidden:YES];
             [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.productImageView.mas_right).with.offset(19);
+                make.left.equalTo(self.productImageView.mas_right).with.offset(10);
             }];
             [self.suggestPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.afterDiscountPrice]];
         }

@@ -1235,7 +1235,8 @@
 				CBE416D31EA887B900105EEC /* Customsized */,
 				CB79C1031EA20C0200078CCA /* EmployeePerformance */,
 				CBAE2AFB1EE674440081B0BB /* PayTypeRecord */,
-				CB79C0F51EA1E48500078CCA /* useless */,
+				CBD683241EBAF675001512A3 /* PaySuccess */,
+				CB79C0F51EA1E48500078CCA /* PayStyle */,
 			);
 			name = PayOrder;
 			sourceTree = "<group>";
@@ -1807,10 +1808,9 @@
 			name = Employee;
 			sourceTree = "<group>";
 		};
-		CB79C0F51EA1E48500078CCA /* useless */ = {
+		CB79C0F51EA1E48500078CCA /* PayStyle */ = {
 			isa = PBXGroup;
 			children = (
-				CBD683241EBAF675001512A3 /* PaySuccess */,
 				CB7EF4871E83A020003F7995 /* IPCPayOrderPayTypeView.h */,
 				CB7EF4881E83A020003F7995 /* IPCPayOrderPayTypeView.m */,
 				CB79C0F21EA1E47E00078CCA /* IPCPayOrderTypeTopView.h */,
@@ -1823,7 +1823,7 @@
 				CB79C0EE1EA1B62100078CCA /* IPCOtherPayTypeView.m */,
 				CB79C0F01EA1B63B00078CCA /* IPCOtherPayTypeView.xib */,
 			);
-			name = useless;
+			name = PayStyle;
 			sourceTree = "<group>";
 		};
 		CB79C1031EA20C0200078CCA /* EmployeePerformance */ = {
