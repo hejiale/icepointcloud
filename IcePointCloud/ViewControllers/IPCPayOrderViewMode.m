@@ -90,7 +90,11 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (void)offerOrder{
     [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue)
      {
-         
+         if (self.delegate) {
+             if ([self.delegate respondsToSelector:@selector(successPayOrder)]) {
+                 [self.delegate successPayOrder];
+             }
+         }
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
      }];

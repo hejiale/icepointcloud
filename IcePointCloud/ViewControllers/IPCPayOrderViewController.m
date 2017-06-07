@@ -113,7 +113,7 @@
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
     }
-//    [self.normalSellCellMode offerOrder];
+    [self.normalSellCellMode offerOrder];
 }
 
 
@@ -194,6 +194,11 @@
 - (void)selectNormalGlasses{
     IPCSelectCustomsizedViewController * selectCustomsizedVC = [[IPCSelectCustomsizedViewController alloc]initWithNibName:@"IPCSelectCustomsizedViewController" bundle:nil];
     [self.navigationController pushViewController:selectCustomsizedVC animated:YES];
+}
+
+- (void)successPayOrder{
+    [IPCCustomUI showSuccess:@"订单付款成功!"];
+    [self performSelector:@selector(popViewControllerAnimated:) afterDelay:2];
 }
 
 - (void)didReceiveMemoryWarning {

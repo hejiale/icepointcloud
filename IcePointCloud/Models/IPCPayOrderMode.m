@@ -36,6 +36,8 @@
     [IPCPayOrderMode sharedManager].isSelectPoint = NO;
     [IPCPayOrderMode sharedManager].isPayOrderStatus = NO;
     [IPCPayOrderMode sharedManager].isSelectPayType = YES;
+    [IPCPayOrderMode sharedManager].isInsertRecordStatus = NO;
+    [IPCPayOrderMode sharedManager].insertPayRecord = nil;
     [IPCPayOrderMode sharedManager].customerDiscount = 0;
     [IPCPayOrderMode sharedManager].remainAmount = 0;
     [[IPCPayOrderMode sharedManager] clearPayTypeData];
@@ -45,6 +47,7 @@
 - (void)clearPayTypeData
 {
     [[IPCPayOrderMode sharedManager].otherPayTypeArray removeAllObjects];
+    [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
     [IPCPayOrderMode sharedManager].payStyle = IPCPayStyleTypeCash;
     [IPCPayOrderMode sharedManager].payStyleName = @"CASH";
     [IPCPayOrderMode sharedManager].payTypeAmount = 0;
@@ -168,6 +171,8 @@
         [IPCPayOrderMode sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice;
     }
     [IPCPayOrderMode sharedManager].givingAmount = 0;
+    [IPCPayOrderMode sharedManager].remainAmount = [IPCPayOrderMode sharedManager].realTotalPrice;
+    [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
 }
 
 - (double)minumEmployeeResult

@@ -12,7 +12,7 @@
 #define INTNUMBERS             @"0123456789"
 #define FLOATNUMBERS         @"0123456789."
 #define SecondFormatter      @"yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-#define TimeFormatter          @"yyyy-MM-dd HH:mm:ss"
+#define TimeFormatter          @"yyyy-MM-dd HH:mm"
 #define DateFormatter           @"yyyy-MM-dd"
 
 @implementation IPCCommon

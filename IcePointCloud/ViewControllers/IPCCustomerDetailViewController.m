@@ -279,6 +279,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [IPCPayOrderMode sharedManager].pointPrice = 0;
     [IPCPayOrderMode sharedManager].realTotalPrice = 0;
     [IPCPayOrderMode sharedManager].givingAmount = 0;
+    [IPCPayOrderMode sharedManager].remainAmount = 0;
+    [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
+    [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
     
     [self.customerViewMode getChooseCustomer];
     [self popToPayOrderViewController];

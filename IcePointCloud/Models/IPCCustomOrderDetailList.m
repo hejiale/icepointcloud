@@ -24,6 +24,7 @@
 - (void)parseResponseValue:(id)responseValue
 {
     [self.products removeAllObjects];
+    [self.payTypes removeAllObjects];
     self.orderInfo = nil;
     
     if ([responseValue isKindOfClass:[NSDictionary class]]) {
@@ -59,11 +60,16 @@
         }];
         
         self.orderInfo.totalOtherPrice = 0;
-//        if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
-//            [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                self.orderInfo.totalOtherPrice += [obj[@"payPrice"] doubleValue];
-//            }];
-//        }
+        __block double totalPayTypePrice = 0;
+        
+        if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
+            [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                IPCCustomerOrderPayType * payType = [IPCCustomerOrderPayType mj_objectWithKeyValues:obj];
+                [self.payTypes addObject:payType];
+                totalPayTypePrice += payType.payPrice;
+            }];
+        }
+        self.orderInfo.totalOtherPrice = self.orderInfo.totalPrice - totalPayTypePrice;
     }
 }
 
@@ -71,6 +77,13 @@
     if (!_products)
         _products = [[NSMutableArray alloc]init];
     return _products;
+}
+
+- (NSMutableArray<IPCCustomerOrderPayType *> *)payTypes{
+    if (!_payTypes) {
+        _payTypes = [[NSMutableArray alloc]init];
+    }
+    return _payTypes;
 }
 
 @end
@@ -83,6 +96,11 @@
     }
     return NO;
 }
+
+@end
+
+@implementation IPCCustomerOrderPayType
+
 
 @end
 

@@ -192,7 +192,7 @@
 
 #pragma mark //uiPickerViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
-    return @[@"储值余额",@"现金",@"刷卡",@"支付宝",@"微信",@"其它"];
+    return @[@"储值余额",@"现金",@"刷卡",@"支付宝",@"微信",@"其他"];
 }
 
 

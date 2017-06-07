@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @class IPCCustomerOrderInfo;
+@class IPCCustomerOrderPayType;
 @interface IPCCustomOrderDetailList : NSObject
 
 + (IPCCustomOrderDetailList *)instance;
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> * products;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomerOrderPayType *> * payTypes;
 @property (nonatomic, strong, readwrite) IPCCustomerOrderInfo  *  orderInfo;
 
 - (void)parseResponseValue:(id)responseValue;
@@ -75,6 +77,15 @@
 @property (nonatomic, assign, readwrite) double   retainagePayTypeAmount;//尾款支付金额
 
 - (BOOL)isEmptyAddress;
+
+@end
+
+@interface IPCCustomerOrderPayType : NSObject
+
+@property (nonatomic, copy) NSString * payTypeInfo;
+@property (nonatomic, assign) double    payPrice;
+@property (nonatomic, copy) NSString * payDate;
+
 
 @end
 

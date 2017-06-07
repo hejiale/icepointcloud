@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCCustomDetailOrderPayRecordView.h"
 
 @interface IPCOrderDetailPayRecordCell : UITableViewCell
 

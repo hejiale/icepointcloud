@@ -35,27 +35,18 @@
         [self.payTypeNameLabel setText:_payRecord.payStyleName];
         [self.payAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_payRecord.payAmount]];
         
-        switch (payRecord.payStyle) {
-            case IPCPayStyleTypeStoreValue:
-                [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_card"]];
-                break;
-            case IPCPayStyleTypeCash:
-                [self.payTypeImageView setImage:[UIImage imageNamed:@"cash"]];
-                break;
-            case IPCPayStyleTypeCard:
-                [self.payTypeImageView setImage:[UIImage imageNamed:@"card"]];
-                break;
-            case IPCPayStyleTypeAlipay:
-                [self.payTypeImageView setImage:[UIImage imageNamed:@"zhifubao"]];
-                break;
-            case IPCPayStyleTypeWechat:
-                [self.payTypeImageView setImage:[UIImage imageNamed:@"wexin"]];
-                break;
-            case IPCPayStyleTypeOther:
-                [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_ wallet"]];
-                break;
-            default:
-                break;
+        if ([payRecord.payStyleName isEqualToString:@"储值卡"]) {
+            [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_card"]];
+        }else if ([payRecord.payStyleName isEqualToString:@"现金"]){
+            [self.payTypeImageView setImage:[UIImage imageNamed:@"cash"]];
+        }else if ([payRecord.payStyleName isEqualToString:@"刷卡"]){
+            [self.payTypeImageView setImage:[UIImage imageNamed:@"card"]];
+        }else if ([payRecord.payStyleName isEqualToString:@"支付宝"]){
+            [self.payTypeImageView setImage:[UIImage imageNamed:@"zhifubao"]];
+        }else if ([payRecord.payStyleName isEqualToString:@"微信"]){
+            [self.payTypeImageView setImage:[UIImage imageNamed:@"wexin"]];
+        }else if ([payRecord.payStyleName isEqualToString:@"其他"]){
+            [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_ wallet"]];
         }
     }
 }

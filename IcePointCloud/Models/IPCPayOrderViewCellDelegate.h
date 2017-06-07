@@ -15,5 +15,6 @@
 - (void)reloadPayOrderView;
 - (void)searchCustomerMethod;
 - (void)selectNormalGlasses;
+- (void)successPayOrder;
 
 @end
