@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderCodeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *operationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pointLabel;
 
 @end

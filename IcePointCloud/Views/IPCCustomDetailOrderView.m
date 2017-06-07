@@ -13,7 +13,6 @@
 #import "IPCOrderDetailInfoCell.h"
 #import "IPCOrderDetailMemoCell.h"
 #import "IPCOrderDetailProductPriceCell.h"
-#import "IPCOrderDetailPayStyleCell.h"
 #import "IPCOrderDetailTopOptometryCell.h"
 #import "IPCOrderDetailOptometryCell.h"
 #import "IPCOrderDetailSectionCell.h"
@@ -25,7 +24,6 @@ static NSString * const contactIdentifier  = @"IPCCustomerAddressCellIdentifier"
 static NSString * const productIdentifier = @"OrderProductTableViewCellIdentifier";
 static NSString * const detailIdetifier      = @"OrderDetailInfoTableViewCellIdentifier";
 static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier";
-static NSString * const payStyleIdentifier = @"IPCOrderDetailPayStyleCellIdentifier";
 static NSString * const topOptometryIdentifier = @"IPCOrderDetailTopOptometryCellIdentifier";
 static NSString * const optometryIdentifier = @"IPCOrderDetailOptometryCellIdentifier";
 static NSString * const titleIdentifier            = @"IPCOrderDetailSectionCellIdentifier";
@@ -125,7 +123,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 9;
+    return 8;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -214,12 +212,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             }
             return cell;
         }
-    }else if(indexPath.section ==7){
-        IPCOrderDetailPayStyleCell * cell = [tableView dequeueReusableCellWithIdentifier:payStyleIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCOrderDetailPayStyleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        }
-        return cell;
     }else{
         IPCOrderDetailInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:detailIdetifier];
         if (!cell) {
@@ -257,12 +249,10 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         return 125;
     }else if (indexPath.section == 5){
         return 50;
-    }else if (indexPath.section && indexPath.row > 0){
+    }else if (indexPath.section == 6 && indexPath.row > 0){
         return [IPCCustomOrderDetailList instance].payTypes.count * 40;
     }else if (indexPath.section == 7){
-        return 70;
-    }else if (indexPath.section == 8){
-        return 95;
+        return 120;
     }
     return 50;
 }

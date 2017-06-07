@@ -76,14 +76,36 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="积分说明" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0Y-Lj-ok6">
+                        <rect key="frame" x="28" y="88" width="60" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="GLg-wJ-Oin"/>
+                            <constraint firstAttribute="width" constant="60" id="iaK-ik-5Am"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJO-Fb-v6s">
+                        <rect key="frame" x="88" y="88" width="231" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="T9c-oi-nGI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="8V2-nU-bLf" secondAttribute="trailing" constant="20" id="3V2-rx-fgd"/>
                     <constraint firstItem="Sps-q4-RLQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="3Xh-Y1-OTm"/>
+                    <constraint firstItem="V0Y-Lj-ok6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="AhW-2Y-OGB"/>
                     <constraint firstItem="aqz-te-aDK" firstAttribute="leading" secondItem="pSU-l4-PJB" secondAttribute="trailing" id="C3d-Q6-TZX"/>
                     <constraint firstItem="8V2-nU-bLf" firstAttribute="leading" secondItem="59o-1r-YQc" secondAttribute="trailing" id="G2S-lj-ZSp"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vJO-Fb-v6s" secondAttribute="trailing" constant="20" id="HNX-Vg-LLn"/>
                     <constraint firstAttribute="trailingMargin" secondItem="aqz-te-aDK" secondAttribute="trailing" constant="20" id="MLY-uT-NAw"/>
                     <constraint firstItem="59o-1r-YQc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="OXf-YD-cNv"/>
+                    <constraint firstItem="V0Y-Lj-ok6" firstAttribute="top" secondItem="Sps-q4-RLQ" secondAttribute="bottom" constant="5" id="R1r-CC-J4v"/>
                     <constraint firstItem="d3P-aY-UGf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="100" id="TpI-Tz-Ev6"/>
                     <constraint firstItem="59o-1r-YQc" firstAttribute="top" secondItem="pSU-l4-PJB" secondAttribute="bottom" constant="5" id="Tzh-tD-AME"/>
                     <constraint firstItem="d3P-aY-UGf" firstAttribute="top" secondItem="8V2-nU-bLf" secondAttribute="bottom" constant="5" id="Y8L-7Z-W7g"/>
@@ -92,10 +114,12 @@
                     <constraint firstItem="pSU-l4-PJB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="b7D-Be-mpG"/>
                     <constraint firstItem="8V2-nU-bLf" firstAttribute="top" secondItem="aqz-te-aDK" secondAttribute="bottom" constant="5" id="bIv-SJ-ckk"/>
                     <constraint firstItem="aqz-te-aDK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="cfi-uE-qtF"/>
+                    <constraint firstItem="vJO-Fb-v6s" firstAttribute="leading" secondItem="V0Y-Lj-ok6" secondAttribute="trailing" id="iwQ-hu-eUE"/>
                     <constraint firstItem="Sps-q4-RLQ" firstAttribute="top" secondItem="59o-1r-YQc" secondAttribute="bottom" constant="5" id="lee-3E-X8R"/>
                     <constraint firstAttribute="trailingMargin" secondItem="d3P-aY-UGf" secondAttribute="trailing" constant="20" id="sad-1E-Fhw"/>
                     <constraint firstItem="8V2-nU-bLf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="100" id="tia-bG-vxY"/>
                     <constraint firstItem="pSU-l4-PJB" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="vBK-bq-cwr"/>
+                    <constraint firstItem="vJO-Fb-v6s" firstAttribute="top" secondItem="d3P-aY-UGf" secondAttribute="bottom" constant="5" id="vbW-tV-ccF"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -109,6 +133,7 @@
                 <outlet property="createDateLabel" destination="8V2-nU-bLf" id="Nbw-w3-1f4"/>
                 <outlet property="operationLabel" destination="d3P-aY-UGf" id="OiG-hg-t7E"/>
                 <outlet property="orderCodeLabel" destination="aqz-te-aDK" id="fBT-Ad-I0e"/>
+                <outlet property="pointLabel" destination="vJO-Fb-v6s" id="XEl-Fb-3q8"/>
             </connections>
             <point key="canvasLocation" x="338.5" y="417.5"/>
         </tableViewCell>
