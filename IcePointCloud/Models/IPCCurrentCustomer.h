@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCCurrentCustomerOpometry : NSObject
+@interface IPCCurrentCustomer : NSObject
 
-+ (IPCCurrentCustomerOpometry *)sharedManager;
++ (IPCCurrentCustomer *)sharedManager;
 
-@property (nonatomic, strong, readwrite) IPCDetailCustomer * currentCustomer;
+@property (nonatomic, strong, readwrite) IPCDetailCustomer              * currentCustomer;
 @property (nonatomic, strong, readwrite) IPCCustomerAddressMode  * currentAddress;
-@property (nonatomic, strong, readwrite) IPCOptometryMode     * currentOpometry;
+@property (nonatomic, strong, readwrite) IPCOptometryMode             * currentOpometry;
 
 - (void)clearData;
 

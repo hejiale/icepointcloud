@@ -70,7 +70,7 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
 - (void)logout
 {
     [IPCAppManager sharedManager].profile = nil;
-    [[IPCCurrentCustomerOpometry sharedManager]clearData];
+    [[IPCCurrentCustomer sharedManager]clearData];
     [[IPCShoppingCart sharedCart] clear];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     

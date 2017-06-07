@@ -15,7 +15,7 @@
 {
     BOOL isChooseCustomer = YES;
     
-    if (![IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID)isChooseCustomer = NO;
+    if (![IPCCurrentCustomer sharedManager].currentCustomer.customerID)isChooseCustomer = NO;
     
     //员工份额
     NSMutableArray * employeeList = [[NSMutableArray alloc]init];
@@ -38,14 +38,14 @@
     NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
     
     if (isChooseCustomer) {
-        if ([IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID.length) {
-            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentCustomer.customerID forKey:@"customerId"];
+        if ([IPCCurrentCustomer sharedManager].currentCustomer.customerID.length) {
+            [parameters setObject:[IPCCurrentCustomer sharedManager].currentCustomer.customerID forKey:@"customerId"];
         }
-        if ([IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID.length) {
-            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
+        if ([IPCCurrentCustomer sharedManager].currentOpometry.optometryID.length) {
+            [parameters setObject:[IPCCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
         }
-        if ([IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID.length) {
-            [parameters setObject:[IPCCurrentCustomerOpometry sharedManager].currentAddress.addressID forKey:@"addressId"];
+        if ([IPCCurrentCustomer sharedManager].currentAddress.addressID.length) {
+            [parameters setObject:[IPCCurrentCustomer sharedManager].currentAddress.addressID forKey:@"addressId"];
         }
     }
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];

@@ -52,6 +52,7 @@ static NSString * const parameterIdentifier = @"";
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:parameterIdentifier];
         [cell.textLabel setFont:[UIFont systemFontOfSize:12 weight:UIFontWeightThin]];
         [cell.textLabel setTextColor:[UIColor lightGrayColor]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     if ([self.dataSource respondsToSelector:@selector(parameterDataInTableView:)]) {
         NSArray * parameterData = [self.dataSource parameterDataInTableView:self];

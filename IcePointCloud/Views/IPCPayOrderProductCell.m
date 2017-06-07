@@ -97,7 +97,7 @@
         }
         self.glassesNameLbl.text = _cartItem.glasses.glassName;
         [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.glasses.price]];
-        [self.countLabel setText:[NSString stringWithFormat:@"X%d",_cartItem.glassCount]];
+        [self.countLabel setText:[NSString stringWithFormat:@"x%d",_cartItem.glassCount]];
         [self.inputCountLabel setText:[NSString stringWithFormat:@"%d",_cartItem.glassCount]];
         
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens && _cartItem.glasses.isBatch) {
@@ -162,7 +162,7 @@
 }
 
 - (IBAction)noPointAction:(UIButton *)sender {
-    if ( ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
+    if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
         [IPCCustomUI showError:@"请先选择客户!"];
         return;
     }

@@ -48,25 +48,25 @@
 
 - (void)getChooseCustomer{
     //初始化数据
-    [IPCCurrentCustomerOpometry sharedManager].currentOpometry = nil;
-    [IPCCurrentCustomerOpometry sharedManager].currentAddress = nil;
-    [IPCCurrentCustomerOpometry sharedManager].currentCustomer = nil;
+    [IPCCurrentCustomer sharedManager].currentOpometry = nil;
+    [IPCCurrentCustomer sharedManager].currentAddress = nil;
+    [IPCCurrentCustomer sharedManager].currentCustomer = nil;
     [IPCPayOrderMode sharedManager].customerDiscount = 1;
     
     [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
-            [IPCCurrentCustomerOpometry sharedManager].currentOpometry = obj;
+            [IPCCurrentCustomer sharedManager].currentOpometry = obj;
         }
     }];
     
     [self.addressList enumerateObjectsUsingBlock:^(IPCCustomerAddressMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.addressID isEqualToString:self.detailCustomer.currentAddressId]) {
-            [IPCCurrentCustomerOpometry sharedManager].currentAddress = obj;
+            [IPCCurrentCustomer sharedManager].currentAddress = obj;
         }
     }];
     
     if (self.detailCustomer) {
-        [IPCCurrentCustomerOpometry sharedManager].currentCustomer = self.detailCustomer;
+        [IPCCurrentCustomer sharedManager].currentCustomer = self.detailCustomer;
         [IPCPayOrderMode sharedManager].customerDiscount = self.detailCustomer.discount/10;
         [IPCPayOrderMode sharedManager].isChooseCustomer = YES;
     }

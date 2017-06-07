@@ -215,7 +215,9 @@
                                                         
                                                         [self dismissViewControllerAnimated:YES completion:nil];
                                                     }];
-        [sampleVC showImage:cell.photo.image];
+        if (cell.photo) {
+            [sampleVC showImage:cell.photo.image];
+        }
         [self.navigationController pushViewController:sampleVC animated:YES];
     }
 }

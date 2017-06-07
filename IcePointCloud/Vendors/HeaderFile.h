@@ -43,7 +43,7 @@
 #import "IPCCustomerAddressList.h"
 #import "IPCCustomOrderDetailList.h"
 #import "IPCDetailCustomer.h"
-#import "IPCCurrentCustomerOpometry.h"
+#import "IPCCurrentCustomer.h"
 #import "IPCBatchParameterList.h"
 #import "IPCContactLenSpecList.h"
 #import "IPCContactLensMode.h"

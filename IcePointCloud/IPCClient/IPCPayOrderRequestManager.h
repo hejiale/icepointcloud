@@ -56,4 +56,12 @@
 + (void)getStatusTradeOrExchangeWithSuccessBlock:(void (^)(id responseValue))success
                                     FailureBlock:(void (^)(NSError *error))failure;
 
+/**
+ * Pay Remain Order Info
+ */
++ (void)payRemainOrderWithOrderNum:(NSString *)orderNum
+                          PayInfos:(NSArray *)payInfos
+                      SuccessBlock:(void (^)(id responseValue))success
+                          FailureBlock:(void (^)(NSError *error))failure;
+
 @end

@@ -52,4 +52,11 @@
     [self postRequest:nil RequestMethod:@"integralTradeAdmin.getStatusTradeOrExchange" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++(void)payRemainOrderWithOrderNum:(NSString *)orderNum
+                         PayInfos:(NSArray *)payInfos
+                     SuccessBlock:(void (^)(id))success
+                     FailureBlock:(void (^)(NSError *))failure{
+    [self postRequest:@{@"orderNumber":orderNum,@"orderPayInfos":payInfos} RequestMethod:@"bizadmin.saveOrderPayInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

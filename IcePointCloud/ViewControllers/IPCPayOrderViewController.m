@@ -72,8 +72,8 @@
 }
 
 - (void)reloadCustomerInfo{
-    [IPCPayOrderMode sharedManager].balanceAmount = [IPCCurrentCustomerOpometry sharedManager].currentCustomer.balance;
-    [IPCPayOrderMode sharedManager].point = [IPCCurrentCustomerOpometry sharedManager].currentCustomer.integral;
+    [IPCPayOrderMode sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
+    [IPCPayOrderMode sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
 }
 
 #pragma mark //Set UI
@@ -92,7 +92,7 @@
 #pragma mark //Clicked Events
 - (IBAction)loadPayStyleView:(id)sender
 {
-    if ( ![IPCCurrentCustomerOpometry sharedManager].currentCustomer) {
+    if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
         [IPCCustomUI showError:@"请先选择客户信息"];
         return;
     }
@@ -133,7 +133,7 @@
 }
 
 - (void)resetPayInfoData{
-    [[IPCCurrentCustomerOpometry sharedManager] clearData];
+    [[IPCCurrentCustomer sharedManager] clearData];
     [[IPCPayOrderMode sharedManager] resetData];
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
@@ -168,9 +168,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (![IPCCurrentCustomerOpometry sharedManager].currentAddress && section == 1 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
+    if (![IPCCurrentCustomer sharedManager].currentAddress && section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return 0;
-    else if (![IPCCurrentCustomerOpometry sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomerOpometry sharedManager].currentCustomer)
+    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return 0;
     return 5;
 }

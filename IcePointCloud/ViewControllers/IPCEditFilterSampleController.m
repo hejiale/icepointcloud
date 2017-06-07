@@ -26,7 +26,9 @@
 
 
 - (void)showImage:(UIImage *)image{
-    [self initParamsWithImage:image];
+    if (image) {
+        [self initParamsWithImage:image];
+    }
 }
 
 /**
