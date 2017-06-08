@@ -33,7 +33,7 @@
     _payType = payType;
     
     if (_payType) {
-        if ([_payType.payTypeInfo isEqualToString:@"储值卡"]) {
+        if ([_payType.payTypeInfo isEqualToString:@"储值余额"]) {
             [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_card"]];
         }else if ([_payType.payTypeInfo isEqualToString:@"现金"]){
             [self.payTypeImageView setImage:[UIImage imageNamed:@"cash"]];
@@ -43,7 +43,7 @@
             [self.payTypeImageView setImage:[UIImage imageNamed:@"zhifubao"]];
         }else if ([_payType.payTypeInfo isEqualToString:@"微信"]){
             [self.payTypeImageView setImage:[UIImage imageNamed:@"wexin"]];
-        }else if ([_payType.payTypeInfo isEqualToString:@"其他"]){
+        }else if ([_payType.payTypeInfo isEqualToString:@"其它"]){
             [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_ wallet"]];
         }
         

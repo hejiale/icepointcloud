@@ -50,7 +50,9 @@
     }
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
-    [parameters setObject:employeeList forKey:@"employeeAchievements"];
+    if (employeeList.count) {
+        [parameters setObject:employeeList forKey:@"employeeAchievements"];
+    }
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice] forKey:@"orderFinalPrice"];
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {//积分兑换置为0
         [parameters setObject:@(0) forKey:@"integral"];
@@ -58,7 +60,9 @@
         [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
     }
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].givingAmount] forKey:@"donationAmount"];
-    [parameters setObject:otherTypeList forKey:@"orderPayInfos"];
+    if (otherTypeList.count) {
+        [parameters setObject:otherTypeList forKey:@"orderPayInfos"];
+    }
     [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
     if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
         [parameters setObject:@"true" forKey:@"isCustomizedLens"];

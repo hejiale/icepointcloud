@@ -297,6 +297,8 @@
 		CBD7B1511EE79F20008EE3E3 /* IPCOrderDetailSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD7B14F1EE79F20008EE3E3 /* IPCOrderDetailSectionCell.xib */; };
 		CBD7B1541EE7A8EB008EE3E3 /* IPCCustomDetailOrderPayRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD7B1531EE7A8EB008EE3E3 /* IPCCustomDetailOrderPayRecordView.m */; };
 		CBD7B1561EE7A8FA008EE3E3 /* IPCCustomDetailOrderPayRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD7B1551EE7A8FA008EE3E3 /* IPCCustomDetailOrderPayRecordView.xib */; };
+		CBD7B15B1EE8029E008EE3E3 /* IPCUpdateOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD7B1591EE8029E008EE3E3 /* IPCUpdateOrderViewController.m */; };
+		CBD7B15C1EE8029E008EE3E3 /* IPCUpdateOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBD7B15A1EE8029E008EE3E3 /* IPCUpdateOrderViewController.xib */; };
 		CBD8DC671EADF5B700AB3DE0 /* IPCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */; };
 		CBDB8F391E9BC05300363F10 /* IPCInsertCustomerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDB8F371E9BC05300363F10 /* IPCInsertCustomerAddressCell.m */; };
 		CBDB8F3A1E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */; };
@@ -827,6 +829,9 @@
 		CBD7B1521EE7A8EB008EE3E3 /* IPCCustomDetailOrderPayRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomDetailOrderPayRecordView.h; sourceTree = "<group>"; };
 		CBD7B1531EE7A8EB008EE3E3 /* IPCCustomDetailOrderPayRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomDetailOrderPayRecordView.m; sourceTree = "<group>"; };
 		CBD7B1551EE7A8FA008EE3E3 /* IPCCustomDetailOrderPayRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomDetailOrderPayRecordView.xib; sourceTree = "<group>"; };
+		CBD7B1581EE8029E008EE3E3 /* IPCUpdateOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUpdateOrderViewController.h; sourceTree = "<group>"; };
+		CBD7B1591EE8029E008EE3E3 /* IPCUpdateOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUpdateOrderViewController.m; sourceTree = "<group>"; };
+		CBD7B15A1EE8029E008EE3E3 /* IPCUpdateOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdateOrderViewController.xib; sourceTree = "<group>"; };
 		CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCProgressView.h; path = IcePointCloud/Vendors/IPCProgressView.h; sourceTree = SOURCE_ROOT; };
 		CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCProgressView.m; path = IcePointCloud/Vendors/IPCProgressView.m; sourceTree = SOURCE_ROOT; };
 		CBDB8F361E9BC05300363F10 /* IPCInsertCustomerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomerAddressCell.h; sourceTree = "<group>"; };
@@ -1937,6 +1942,7 @@
 		CB91871D1E8CCAD200D59487 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				CBD7B1571EE80272008EE3E3 /* UpdateOrder */,
 				CB8F5CE31EBB1BE400B319D1 /* Customsized */,
 				04A2021B1D801A5B00F2A681 /* Lanuch */,
 				048C213A1D34F89800EC4214 /* Login */,
@@ -2234,6 +2240,16 @@
 			name = UpdateCustomer;
 			sourceTree = "<group>";
 		};
+		CBD7B1571EE80272008EE3E3 /* UpdateOrder */ = {
+			isa = PBXGroup;
+			children = (
+				CBD7B1581EE8029E008EE3E3 /* IPCUpdateOrderViewController.h */,
+				CBD7B1591EE8029E008EE3E3 /* IPCUpdateOrderViewController.m */,
+				CBD7B15A1EE8029E008EE3E3 /* IPCUpdateOrderViewController.xib */,
+			);
+			name = UpdateOrder;
+			sourceTree = "<group>";
+		};
 		CBE416D31EA887B900105EEC /* Customsized */ = {
 			isa = PBXGroup;
 			children = (
@@ -2355,6 +2371,7 @@
 				04443C601D23CAF800596519 /* IPCFilterValueCollectionViewCell.xib in Resources */,
 				04EB43981D42190600027B42 /* IPCCustomerDetailCell.xib in Resources */,
 				9E9F173119AF14AD00B4F4CE /* IPCLoginViewController.xib in Resources */,
+				CBD7B15C1EE8029E008EE3E3 /* IPCUpdateOrderViewController.xib in Resources */,
 				046404361D3CCE3D0005FAE3 /* IPCChooseCategoryCell.xib in Resources */,
 				CBE416F01EA8C12F00105EEC /* IPCCustomsizedOtherView.xib in Resources */,
 				CB1234F41E762D9A00AB29DF /* IPCRootBarMenuView.xib in Resources */,
@@ -2673,6 +2690,7 @@
 				0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */,
 				CB8F5CF11EBB200A00B319D1 /* IPCCustomsizedGlassesCell.m in Sources */,
 				044A91AD1E56943A00C9DF1A /* IPCShoppingCartView.m in Sources */,
+				CBD7B15B1EE8029E008EE3E3 /* IPCUpdateOrderViewController.m in Sources */,
 				047D3FC01D43039400638526 /* IPCOrderDetailInfoCell.m in Sources */,
 				04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */,
 				CB5CC4901E8E00830091D0FD /* UITextField+Extend.m in Sources */,

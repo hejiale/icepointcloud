@@ -120,6 +120,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                                                  ContactPhone:[IPCInsertCustomer instance].contactorPhone
                                                ContactAddress:[IPCInsertCustomer instance].contactorAddress
                                                  EmployeeName:[IPCInsertCustomer instance].empName
+                                                   EmployeeId:[IPCInsertCustomer instance].empNameId
                                                  CustomerType:[IPCInsertCustomer instance].customerType
                                                CustomerTypeId:[IPCInsertCustomer instance].customerTypeId
                                                    Occupation:[IPCInsertCustomer instance].job

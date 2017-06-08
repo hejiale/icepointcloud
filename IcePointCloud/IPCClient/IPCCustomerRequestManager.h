@@ -101,6 +101,7 @@
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
                           EmployeeName:(NSString *)employeeName
+                            EmployeeId:(NSString *)employeeId
                           CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId
                             Occupation:(NSString *)occupation

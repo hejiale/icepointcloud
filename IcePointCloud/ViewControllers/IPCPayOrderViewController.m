@@ -113,10 +113,6 @@
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].payTypeRecordArray.count == 0) {
-        [IPCCustomUI showError:@"请填写收款记录"];
-        return;
-    }
     [self.normalSellCellMode offerOrder];
 }
 

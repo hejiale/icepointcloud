@@ -35,7 +35,7 @@
         [self.payTypeNameLabel setText:_payRecord.payStyleName];
         [self.payAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_payRecord.payAmount]];
         
-        if ([payRecord.payStyleName isEqualToString:@"储值卡"]) {
+        if ([payRecord.payStyleName isEqualToString:@"储值余额"]) {
             [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_card"]];
         }else if ([payRecord.payStyleName isEqualToString:@"现金"]){
             [self.payTypeImageView setImage:[UIImage imageNamed:@"cash"]];
@@ -45,7 +45,7 @@
             [self.payTypeImageView setImage:[UIImage imageNamed:@"zhifubao"]];
         }else if ([payRecord.payStyleName isEqualToString:@"微信"]){
             [self.payTypeImageView setImage:[UIImage imageNamed:@"wexin"]];
-        }else if ([payRecord.payStyleName isEqualToString:@"其他"]){
+        }else if ([payRecord.payStyleName isEqualToString:@"其它"]){
             [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_ wallet"]];
         }
     }

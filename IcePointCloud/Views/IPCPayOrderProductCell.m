@@ -253,6 +253,8 @@
                 
                 [IPCPayOrderMode sharedManager].realTotalPrice = 0;
                 [IPCPayOrderMode sharedManager].givingAmount = 0;
+                [IPCPayOrderMode sharedManager].remainAmount = 0;
+                [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
             }
         }
     }

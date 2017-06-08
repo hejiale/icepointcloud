@@ -71,6 +71,7 @@
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
                           EmployeeName:(NSString *)employeeName
+                            EmployeeId:(NSString *)employeeId
                           CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId
                             Occupation:(NSString *)occupation
@@ -94,6 +95,7 @@
                              @"contactorPhone":contactPhone,
                              @"contactorAddress":contactAddress,
                              @"empName":employeeName,
+                             @"employeeId":employeeId,
                              @"customerType":customerType,
                              @"customerTypeId":customerTypeId,
                              @"memberLevel":memberLevel,

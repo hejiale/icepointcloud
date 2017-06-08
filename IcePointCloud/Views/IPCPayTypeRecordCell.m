@@ -91,6 +91,7 @@
 - (IBAction)insertRecordAction:(id)sender
 {
     if ([IPCPayOrderMode sharedManager].remainAmount <= 0) {
+        [IPCCustomUI showError:@"剩余应收金额为零"];
         return;
     }
     if ([IPCPayOrderMode sharedManager].isInsertRecordStatus){
@@ -107,7 +108,10 @@
 }
 
 - (IBAction)sureInsertAction:(id)sender {
-    if (!self.payTypeTextField.text.length || !self.payAmountTextField.text.length)return;
+    if (!self.payTypeTextField.text.length || !self.payAmountTextField.text.length){
+        [IPCCustomUI showError:@"付款方式或付款金额为空!"];
+        return;
+    }
     
     IPCPayRecord * payRecord = [[IPCPayRecord alloc]init];
     payRecord.payStyleName = self.payTypeTextField.text;
@@ -189,10 +193,9 @@
         }
     }
 }
-
 #pragma mark //uiPickerViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
-    return @[@"储值余额",@"现金",@"刷卡",@"支付宝",@"微信",@"其他"];
+    return @[@"储值余额",@"现金",@"刷卡",@"支付宝",@"微信",@"其它"];
 }
 
 
