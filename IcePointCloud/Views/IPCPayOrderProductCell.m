@@ -240,16 +240,12 @@
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
                 [IPCCustomUI showError:@"请先选择员工"];
             }else{
-                if ([str doubleValue] < self.cartItem.glasses.price) {
-                    if ( [self.cartItem.glasses filterType] != IPCTopFilterTypeCard) {
-                        if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-                            [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
-                        }
+                if ( [self.cartItem.glasses filterType] != IPCTopFilterTypeCard) {
+                    if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                        [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
                     }
-                    self.cartItem.unitPrice = [str doubleValue];
-                }else{
-                    self.cartItem.unitPrice = self.cartItem.glasses.price;
                 }
+                self.cartItem.unitPrice = [str doubleValue];
                 
                 [IPCPayOrderMode sharedManager].realTotalPrice = 0;
                 [IPCPayOrderMode sharedManager].givingAmount = 0;

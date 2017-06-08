@@ -20,7 +20,6 @@
         [self enableFace];
         [self enableSkin];
         [self enableKeyboard];
-        [self enableLondPress];
         [self bindWechat];
     }
     return self;
@@ -74,14 +73,6 @@
             [IPCCustomUI showError:kIPCErrorNetworkAlertMessage];
         }
     }];
-}
-
-/**
- *  Add long by gesture
- */
-- (void)enableLondPress{
-    OBDragDropManager *mgr = [OBDragDropManager sharedManager];
-    [mgr prepareOverlayWindowUsingMainWindow:[UIApplication sharedApplication].keyWindow];
 }
 
 

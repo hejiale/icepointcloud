@@ -40,6 +40,7 @@
     [IPCPayOrderMode sharedManager].insertPayRecord = nil;
     [IPCPayOrderMode sharedManager].customerDiscount = 0;
     [IPCPayOrderMode sharedManager].remainAmount = 0;
+    [IPCPayOrderMode sharedManager].remark = nil;
     [[IPCPayOrderMode sharedManager] clearPayTypeData];
 }
 

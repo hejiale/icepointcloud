@@ -24,6 +24,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    OBDragDropManager *manager = [OBDragDropManager sharedManager];
+    [manager prepareOverlayWindowUsingMainWindow:self.window];
+    
     _platformService = [[IPCPlatformService alloc] init];
     
     if ([NSUserDefaults jk_boolForKey:IPCFirstLanuchKey]) {
