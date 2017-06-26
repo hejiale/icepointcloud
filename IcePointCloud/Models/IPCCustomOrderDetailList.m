@@ -24,7 +24,9 @@
 - (void)parseResponseValue:(id)responseValue
 {
     [self.products removeAllObjects];
-    [self.payTypes removeAllObjects];
+    [[IPCPayOrderMode sharedManager] resetData];
+    self.addressMode = nil;
+    self.optometryMode = nil;
     self.orderInfo = nil;
     
     if ([responseValue isKindOfClass:[NSDictionary class]]) {
@@ -37,6 +39,8 @@
         
         if ([responseValue[@"order"] isKindOfClass:[NSDictionary class]]) {
             self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
+            self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
+            self.addressMode = [IPCCustomerAddressMode mj_objectWithKeyValues:responseValue[@"order"]];
         }
         
         self.orderInfo.totalPayAmount = 0;
@@ -59,17 +63,17 @@
             }
         }];
         
-        self.orderInfo.totalOtherPrice = 0;
         __block double totalPayTypePrice = 0;
         
         if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                IPCCustomerOrderPayType * payType = [IPCCustomerOrderPayType mj_objectWithKeyValues:obj];
-                [self.payTypes addObject:payType];
+                IPCPayRecord * payType = [IPCPayRecord mj_objectWithKeyValues:obj];
+                payType.isHavePay = YES;
+                [[IPCPayOrderMode sharedManager].payTypeRecordArray addObject:payType];
                 totalPayTypePrice += payType.payPrice;
             }];
         }
-        self.orderInfo.totalOtherPrice = self.orderInfo.totalPrice - totalPayTypePrice;
+        [IPCPayOrderMode sharedManager].remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;
     }
 }
 
@@ -79,29 +83,12 @@
     return _products;
 }
 
-- (NSMutableArray<IPCCustomerOrderPayType *> *)payTypes{
-    if (!_payTypes) {
-        _payTypes = [[NSMutableArray alloc]init];
-    }
-    return _payTypes;
-}
 
 @end
 
 @implementation IPCCustomerOrderInfo
 
-- (BOOL)isEmptyAddress{
-    if (!self.contactorName.length && !self.contactorPhone.length && !self.contactorAddress.length) {
-        return YES;
-    }
-    return NO;
-}
-
 @end
 
-@implementation IPCCustomerOrderPayType
-
-
-@end
 
 

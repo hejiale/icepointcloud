@@ -16,20 +16,13 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewMode * normalSellCellMode;
 
 @end
 
 @implementation IPCPayOrderViewController
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -113,6 +106,7 @@
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
     }
+    [self.saveButton jk_showIndicator];
     [self.normalSellCellMode offerOrder];
 }
 
@@ -198,10 +192,15 @@
 }
 
 - (void)successPayOrder{
+    [self.saveButton jk_hideIndicator];
     [IPCCustomUI showSuccess:@"订单付款成功!"];
     [self resetPayInfoData];
     [[IPCShoppingCart sharedCart] removeSelectCartItem];
     [self performSelector:@selector(popViewControllerAnimated:) afterDelay:2];
+}
+
+- (void)failPayOrder{
+    [self.saveButton jk_hideIndicator];
 }
 
 - (void)didReceiveMemoryWarning {

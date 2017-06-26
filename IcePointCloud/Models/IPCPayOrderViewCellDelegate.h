@@ -16,5 +16,5 @@
 - (void)searchCustomerMethod;
 - (void)selectNormalGlasses;
 - (void)successPayOrder;
-
+- (void)failPayOrder;
 @end

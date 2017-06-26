@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class IPCCustomerOrderInfo;
-@class IPCCustomerOrderPayType;
 @interface IPCCustomOrderDetailList : NSObject
 
 + (IPCCustomOrderDetailList *)instance;
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> * products;
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomerOrderPayType *> * payTypes;
 @property (nonatomic, strong, readwrite) IPCCustomerOrderInfo  *  orderInfo;
+@property (nonatomic, strong, readwrite) IPCCustomerAddressMode * addressMode;
+@property (nonatomic, strong, readwrite) IPCOptometryMode * optometryMode;
 
 - (void)parseResponseValue:(id)responseValue;
 
@@ -24,10 +24,6 @@
 
 @interface IPCCustomerOrderInfo : NSObject
 
-@property (nonatomic, copy, readonly) NSString *  contactorName;
-@property (nonatomic, copy, readonly) NSString *  contactorPhone;
-@property (nonatomic, copy, readonly) NSString *  contactorAddress;
-@property (nonatomic, copy, readonly) NSString *  contactorGender;
 @property (nonatomic, copy, readonly) NSString *  status;
 @property (nonatomic, copy, readonly) NSString *  orderCode;
 @property (nonatomic, assign, readwrite) double    totalPrice;
@@ -47,21 +43,6 @@
 @property (nonatomic, assign, readonly) NSInteger    integral;
 @property (nonatomic, assign, readonly) double   integralDeductionAmount;
 @property (nonatomic, assign, readonly) double   donationAmount;
-@property (nonatomic, copy, readonly) NSString *  addLeft;
-@property (nonatomic, copy, readonly) NSString *  addRight;
-@property (nonatomic, copy, readonly) NSString *  axisLeft;
-@property (nonatomic, copy, readonly) NSString *  axisRight;
-@property (nonatomic, copy, readonly) NSString *  sphLeft;
-@property (nonatomic, copy, readonly) NSString *  sphRight;
-@property (nonatomic, copy, readonly) NSString *  cylLeft;
-@property (nonatomic, copy, readonly) NSString *  cylRight;
-@property (nonatomic, copy, readonly) NSString *  correctedVisionLeft;
-@property (nonatomic, copy, readonly) NSString *  correctedVisionRight;
-@property (nonatomic, copy, readonly) NSString *  distanceLeft;
-@property (nonatomic, copy, readonly) NSString *  distanceRight;
-@property (nonatomic, copy, readonly) NSString *  optometryEmployee;
-@property (nonatomic, copy, readonly) NSString *  optometryInsertDate;
-@property (nonatomic, copy, readonly) NSString *  purpose;
 @property (nonatomic, assign, readonly) double   exchangeTotalIntegral;
 @property (nonatomic, copy, readonly) NSString *  payType;
 @property (nonatomic, assign, readonly) double    payTypeAmount;
@@ -69,24 +50,13 @@
 @property (nonatomic, assign, readwrite) BOOL     isPackUpCustomized;
 @property (nonatomic, assign, readwrite) double   totalPayAmount;
 @property (nonatomic, assign, readwrite) double    totalPointAmount;
-@property (nonatomic, assign, readwrite) double   totalOtherPrice;
 @property (nonatomic, assign, readonly) double    deductionIntegral;
 @property (nonatomic, assign, readwrite) BOOL     isCustomized;
 @property (nonatomic, assign, readwrite) BOOL     isCustomizedLens;
 @property (nonatomic, copy, readonly) NSString *  retainagePayType;//尾款支付方式
 @property (nonatomic, assign, readwrite) double   retainagePayTypeAmount;//尾款支付金额
 
-- (BOOL)isEmptyAddress;
-
 @end
 
-@interface IPCCustomerOrderPayType : NSObject
-
-@property (nonatomic, copy) NSString * payTypeInfo;
-@property (nonatomic, assign) double    payPrice;
-@property (nonatomic, copy) NSString * payDate;
-
-
-@end
 
 

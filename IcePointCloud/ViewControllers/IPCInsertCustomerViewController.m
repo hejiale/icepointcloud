@@ -8,7 +8,7 @@
 
 #import "IPCInsertCustomerViewController.h"
 #import "IPCSearchCustomerViewController.h"
-#import "IPCCustomerTopTitleCell.h"
+#import "IPCCustomTopCell.h"
 #import "IPCInsertCustomerBaseCell.h"
 #import "IPCInsertCustomerOpometryCell.h"
 #import "IPCInsertCustomerAddressCell.h"
@@ -186,9 +186,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"客户基本信息"];
             return cell;
@@ -206,9 +206,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         }
     }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"收货地址"];
             return cell;
@@ -222,9 +222,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         }
     }else{
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             
             if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {

@@ -10,7 +10,11 @@
 
 @interface IPCCustomDetailOrderView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame OrderNum:(NSString *)orderNum ProductDetail:(void(^)(IPCGlasses *glass))product Dismiss:(void(^)())dismiss;
+- (instancetype)initWithFrame:(CGRect)frame
+                     OrderNum:(NSString *)orderNum
+                ProductDetail:(void(^)(IPCGlasses *glass))product
+                          Pay:(void(^)())pay
+                      Dismiss:(void(^)())dismiss;
 
 - (void)show;
 

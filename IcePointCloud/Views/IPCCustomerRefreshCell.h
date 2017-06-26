@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCCustomerBottomCell : UITableViewCell
+@interface IPCCustomerRefreshCell : UITableViewCell
 
 @end

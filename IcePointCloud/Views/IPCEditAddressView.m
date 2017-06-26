@@ -37,7 +37,7 @@ typedef  void(^DismissBlock)();
         self.customerID = customerID;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditAddressView" owner:self];
-        [view setFrame:frame];
+        [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
         
         self.editAddressView.layer.cornerRadius = 10;

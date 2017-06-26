@@ -26,14 +26,15 @@
         self.payRecordHeight.constant = [IPCPayOrderMode sharedManager].payTypeRecordArray.count * 50;
         [self.payRecordContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
-        [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull payRecord, NSUInteger idx, BOOL * _Nonnull stop) {
             IPCSwipeView * swipeView = [[IPCSwipeView alloc]initWithFrame:CGRectMake(0, 50*idx, self.payRecordContentView.jk_width, 50)];
             [self.payRecordContentView addSubview:swipeView];
             [self.recordViews addObject:swipeView];
             
             IPCPayTypeRecordView * recordView = [[IPCPayTypeRecordView alloc]initWithFrame:swipeView.bounds];
-            recordView.payRecord = obj;
+            recordView.payRecord = payRecord;
             
+            [swipeView setIsCanEdit:!payRecord.isHavePay];
             [swipeView setContentView:recordView];
             swipeView.swipeBlock = ^{
                 [self.recordViews enumerateObjectsUsingBlock:^(IPCSwipeView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -44,7 +45,7 @@
             };
             
             [[swipeView rac_signalForSelector:@selector(deleteAction)] subscribeNext:^(RACTuple * _Nullable x) {
-                [IPCPayOrderMode sharedManager].remainAmount += obj.payAmount;
+                [IPCPayOrderMode sharedManager].remainAmount += payRecord.payPrice;
                 [[IPCPayOrderMode sharedManager].payTypeRecordArray removeObjectAtIndex:idx];
                 if (self.delegate) {
                     if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -61,11 +62,11 @@
     if ([IPCPayOrderMode sharedManager].isInsertRecordStatus) {
         [self.insertRecordView setHidden:NO];
         if ([IPCPayOrderMode sharedManager].insertPayRecord) {
-            [self.payTypeTextField setText:[IPCPayOrderMode sharedManager].insertPayRecord.payStyleName];
-            if ([IPCPayOrderMode sharedManager].insertPayRecord.payAmount > 0) {
-                [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].insertPayRecord.payAmount]];
+            [self.payTypeTextField setText:[IPCPayOrderMode sharedManager].insertPayRecord.payTypeInfo];
+            if ([IPCPayOrderMode sharedManager].insertPayRecord.payPrice > 0) {
+                [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].insertPayRecord.payPrice]];
             }
-            if ([[IPCPayOrderMode sharedManager].insertPayRecord.payStyleName isEqualToString:@"储值余额"]) {
+            if ([[IPCPayOrderMode sharedManager].insertPayRecord.payTypeInfo isEqualToString:@"储值余额"]) {
                 [self.payAmountTextField setPlaceholder:[NSString stringWithFormat:@"可用余额%.2f",[IPCPayOrderMode sharedManager].balanceAmount - [IPCPayOrderMode sharedManager].usedBalanceAmount]];
             }
         }
@@ -114,15 +115,14 @@
     }
     
     IPCPayRecord * payRecord = [[IPCPayRecord alloc]init];
-    payRecord.payStyleName = self.payTypeTextField.text;
-    payRecord.payStyle = [self payStyle];
+    payRecord.payTypeInfo = self.payTypeTextField.text;
     
     if ([IPCPayOrderMode sharedManager].remainAmount <= [self.payAmountTextField.text doubleValue]) {
-        payRecord.payAmount = [IPCPayOrderMode sharedManager].remainAmount;
+        payRecord.payPrice = [IPCPayOrderMode sharedManager].remainAmount;
     }else{
-        payRecord.payAmount = [self.payAmountTextField.text doubleValue];
+        payRecord.payPrice = [self.payAmountTextField.text doubleValue];
     }
-    [IPCPayOrderMode sharedManager].remainAmount -= payRecord.payAmount;
+    [IPCPayOrderMode sharedManager].remainAmount -= payRecord.payPrice;
     if ([IPCPayOrderMode sharedManager].remainAmount <= 0) {
         [IPCPayOrderMode sharedManager].remainAmount = 0;
     }
@@ -172,19 +172,19 @@
     if ([self.payTypeTextField.text isEqualToString:@"储值余额"]) {
         if ([IPCPayOrderMode sharedManager].balanceAmount > 0) {
             if ([IPCPayOrderMode sharedManager].balanceAmount - [IPCPayOrderMode sharedManager].usedBalanceAmount <= 0) {
-                [IPCPayOrderMode sharedManager].insertPayRecord.payAmount = 0;
+                [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = 0;
             }else{
                 [IPCPayOrderMode sharedManager].usedBalanceAmount += [textField.text doubleValue];
-                [IPCPayOrderMode sharedManager].insertPayRecord.payAmount = [textField.text doubleValue];
+                [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
             }
         }else{
-            [IPCPayOrderMode sharedManager].insertPayRecord.payAmount = 0;
+            [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = 0;
         }
     }else{
         if ([IPCPayOrderMode sharedManager].remainAmount <= [textField.text doubleValue]) {
-            [IPCPayOrderMode sharedManager].insertPayRecord.payAmount = [IPCPayOrderMode sharedManager].remainAmount;
+            [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = [IPCPayOrderMode sharedManager].remainAmount;
         }else{
-            [IPCPayOrderMode sharedManager].insertPayRecord.payAmount = [textField.text doubleValue];
+            [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
         }
     }
     if (self.delegate) {
@@ -203,7 +203,7 @@
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
     [self.payTypeTextField setText:parameter];
-    [IPCPayOrderMode sharedManager].insertPayRecord.payStyleName = parameter;
+    [IPCPayOrderMode sharedManager].insertPayRecord.payTypeInfo = parameter;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {

@@ -56,6 +56,9 @@
         [self.customerNameLabel setText:_employeeResult.employe.name];
         [self.amountButton setTitle:[NSString stringWithFormat:@"%.f%%",_employeeResult.employeeResult] forState:UIControlStateNormal];
         [self.progress setProgressValue:[NSString stringWithFormat:@"%.2f",_employeeResult.employeeResult/100]];
+        if (employeeResult.isUpdateStatus) {
+            [self.amountButton setEnabled:NO];
+        }
     }
 }
 

@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCUpdateOrderViewController">
             <connections>
+                <outlet property="orderTableView" destination="I1R-ie-Ow9" id="VGJ-MW-Ydu"/>
+                <outlet property="saveButton" destination="2Qr-va-hu8" id="aRj-Aa-1yX"/>
+                <outlet property="tableFootView" destination="8oQ-yi-NCy" id="rO4-Nb-X2s"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,7 +24,13 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I1R-ie-Ow9">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.10062607020547945" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Psz-TI-bbA"/>
+                        <outlet property="delegate" destination="-1" id="Pao-fG-Knd"/>
+                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -43,14 +52,22 @@
                         <constraint firstAttribute="height" constant="35" id="tpm-XU-CVK"/>
                     </constraints>
                     <state key="normal" image="icon_cancel_payOrder"/>
+                    <connections>
+                        <action selector="cancelPayAction:" destination="-1" eventType="touchUpInside" id="GY2-aD-dX6"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Qr-va-hu8">
                     <rect key="frame" x="532" y="12.5" width="200" height="35"/>
+                    <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="23t-Q8-NaT"/>
                         <constraint firstAttribute="width" constant="200" id="DCR-Fh-DRs"/>
                     </constraints>
-                    <state key="normal" title="Button" image="icon_save_customer"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                    <state key="normal" title="保存"/>
+                    <connections>
+                        <action selector="surePayAction:" destination="-1" eventType="touchUpInside" id="nbL-MO-MV6"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -69,6 +86,5 @@
     </objects>
     <resources>
         <image name="icon_cancel_payOrder" width="195" height="35"/>
-        <image name="icon_save_customer" width="195" height="35"/>
     </resources>
 </document>

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCUpdateOrderViewController : UIViewController
+@protocol IPCUpdateOrderViewControllerDelegate;
+@interface IPCUpdateOrderViewController : IPCRootNavigationViewController
+
+@property (nonatomic, assign) id<IPCUpdateOrderViewControllerDelegate>delegate;
+
+@end
+
+@protocol IPCUpdateOrderViewControllerDelegate <NSObject>
+
+- (void)updatePayOrder;
 
 @end

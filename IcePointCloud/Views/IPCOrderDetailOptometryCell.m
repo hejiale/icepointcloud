@@ -24,29 +24,29 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    IPCCustomerOrderInfo * orderInfo = [IPCCustomOrderDetailList instance].orderInfo;
+    IPCOptometryMode * optometry = [IPCCustomOrderDetailList instance].optometryMode;
     
-    NSArray * optometryInfo = @[[IPCCommon formatPurpose:orderInfo.purpose],
-                                orderInfo.sphRight,
-                                orderInfo.cylRight,
-                                orderInfo.axisRight,
-                                orderInfo.correctedVisionRight,
-                                orderInfo.distanceRight,
-                                orderInfo.addRight,
-                                orderInfo.sphLeft,
-                                orderInfo.cylLeft,
-                                orderInfo.axisLeft,
-                                orderInfo.correctedVisionLeft,
-                                orderInfo.distanceLeft,
-                                orderInfo.addLeft];
+    NSArray * optometryInfo = @[[IPCCommon formatPurpose:optometry.purpose],
+                                optometry.sphRight,
+                                optometry.cylRight,
+                                optometry.axisRight,
+                                optometry.correctedVisionRight,
+                                optometry.distanceRight,
+                                optometry.addRight,
+                                optometry.sphLeft,
+                                optometry.cylLeft,
+                                optometry.axisLeft,
+                                optometry.correctedVisionLeft,
+                                optometry.distanceLeft,
+                                optometry.addLeft];
     [self createUI:optometryInfo];
     
-    if (orderInfo.optometryEmployee && orderInfo.optometryEmployee.length) {
-        [self.employeeNameLabel setText:[NSString stringWithFormat:@"验光师 %@",orderInfo.optometryEmployee]];
+    if (optometry && optometry.optometryEmployee.length) {
+        [self.employeeNameLabel setText:[NSString stringWithFormat:@"验光师 %@",optometry.optometryEmployee]];
     }
     
-    if (orderInfo.optometryInsertDate && orderInfo.optometryInsertDate.length) {
-        [self.insertDateLabel setText:[NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:orderInfo.optometryInsertDate] IsTime:YES]]];
+    if (optometry && optometry.optometryInsertDate.length) {
+        [self.insertDateLabel setText:[NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate] IsTime:YES]]];
     }
 }
 

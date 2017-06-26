@@ -29,7 +29,7 @@
     return self;
 }
 
-- (void)setPayType:(IPCCustomerOrderPayType *)payType{
+- (void)setPayType:(IPCPayRecord *)payType{
     _payType = payType;
     
     if (_payType) {

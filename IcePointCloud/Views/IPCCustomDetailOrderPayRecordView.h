@@ -10,6 +10,6 @@
 
 @interface IPCCustomDetailOrderPayRecordView : UIView
 
-@property (nonatomic, copy) IPCCustomerOrderPayType * payType;
+@property (nonatomic, copy) IPCPayRecord * payType;
 
 @end

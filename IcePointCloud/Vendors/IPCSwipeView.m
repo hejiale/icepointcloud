@@ -24,15 +24,17 @@
         [self addSubview:_contentView];
         [self bringSubviewToFront:_contentView];
         
-        UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
-        leftSwipe.direction=UISwipeGestureRecognizerDirectionLeft;
-        [_contentView addGestureRecognizer:leftSwipe];
-        
-        UISwipeGestureRecognizer * rightSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
-        rightSwipe.direction=UISwipeGestureRecognizerDirectionRight;
-        [self.contentView addGestureRecognizer:rightSwipe];
-        
-        [self buildButtonView];
+        if (self.isCanEdit) {
+            UISwipeGestureRecognizer * leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
+            leftSwipe.direction=UISwipeGestureRecognizerDirectionLeft;
+            [_contentView addGestureRecognizer:leftSwipe];
+            
+            UISwipeGestureRecognizer * rightSwipe=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeAction:)];
+            rightSwipe.direction=UISwipeGestureRecognizerDirectionRight;
+            [self.contentView addGestureRecognizer:rightSwipe];
+            
+            [self buildButtonView];
+        }
     }
 }
 

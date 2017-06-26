@@ -25,10 +25,6 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
-    if ([IPCCustomOrderDetailList instance].orderInfo) {
-        [self setCustomer:[IPCCustomOrderDetailList instance].orderInfo];
-    }
 }
 
 - (void)setAddressMode:(IPCCustomerAddressMode *)addressMode{
@@ -37,35 +33,32 @@
     if (_addressMode) {
         [self.addressContentView setHidden:NO];
         
-        CGFloat width = [_addressMode.contactName jk_sizeWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height].width;
+        CGFloat width = [_addressMode.contactorName jk_sizeWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height].width;
         self.contactNameWidth.constant = width;
         
-        [self.addressLabel setText:_addressMode.detailAddress];
-        [self.contactNameLabel setText:_addressMode.contactName];
-        [self.genderLabel setText:[IPCCommon formatGender:_addressMode.gender]];
-        [self.contactPhoneLabel setText:_addressMode.phone];
+        if (_addressMode.detailAddress.length) {
+            [self.addressLabel setText:_addressMode.detailAddress];
+        }
+        
+        if (_addressMode.contactorAddress.length) {
+            [self.addressLabel setText:_addressMode.contactorAddress];
+            [self.defaultButton setHidden:YES];
+        }
+        
+        [self.contactNameLabel setText:_addressMode.contactorName];
+        
+        if (_addressMode.gender.length) {
+            [self.genderLabel setText:[IPCCommon formatGender:_addressMode.gender]];
+        }
+        
+        if (_addressMode.contactorGender.length) {
+            [self.genderLabel setText:[IPCCommon formatGender:_addressMode.contactorGender]];
+        }
+        
+        [self.contactPhoneLabel setText:_addressMode.contactorPhone];
     }
 }
 
-- (void)setCustomer:(IPCCustomerOrderInfo *)customer
-{
-    if (customer) {
-        if ([customer isEmptyAddress]) {
-            [self.noAddressLabel setHidden:NO];
-        }else{
-            [self.addressContentView setHidden:NO];
-            [self.defaultButton setHidden:YES];
-            
-            CGFloat width = [customer.contactorName jk_sizeWithFont:self.contactNameLabel.font constrainedToHeight:self.contactNameLabel.jk_height].width;
-            self.contactNameWidth.constant = width;
-            
-            [self.contactNameLabel setText:customer.contactorName];
-            [self.contactPhoneLabel setText:customer.contactorPhone];
-            [self.genderLabel setText:[IPCCommon formatGender:customer.contactorGender]];
-            [self.addressLabel setText:customer.contactorAddress];
-        }
-    }
-}
 
 - (IBAction)setDefaultAction:(id)sender {
   

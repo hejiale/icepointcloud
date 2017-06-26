@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong, readwrite) IPCEmploye * employe;
 @property (nonatomic, assign, readwrite) double      employeeResult;//员工份额
-
+@property (nonatomic, assign, readwrite) BOOL     isUpdateStatus;
 
 @end

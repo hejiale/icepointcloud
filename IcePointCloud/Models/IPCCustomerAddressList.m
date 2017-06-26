@@ -42,8 +42,8 @@
 {
     self = [super init];
     if (self) {
-        self.contactName = @"";
-        self.phone = @"";
+        self.contactorName = @"";
+        self.contactorPhone = @"";
         self.gender = @"MALE";
         self.genderString = @"男";
         self.detailAddress = @"";
@@ -51,12 +51,17 @@
     return self;
 }
 
+- (BOOL)isEmptyAddress{
+    if (!self.contactorName.length && !self.contactorPhone.length && !self.contactorAddress.length) {
+        return YES;
+    }
+    return NO;
+}
+
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"addressID"    :@"id",
-             @"contactName"  :@"contactorName",
-             @"phone"        :@"contactorPhone",
-             @"gender"       :@"genderstring",
-             @"detailAddress":@"detailAdress"};
+    return @{@"addressID"      :@"id",
+                  @"gender"          :@"genderstring",
+                  @"detailAddress":@"detailAdress"};
 }
 
 @end

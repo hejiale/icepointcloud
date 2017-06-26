@@ -7,7 +7,7 @@
 //
 
 #import "IPCPayOrderViewMode.h"
-#import "IPCCustomerTopTitleCell.h"
+#import "IPCCustomTopCell.h"
 #import "IPCCustomerDetailCell.h"
 #import "IPCPayOrderProductCell.h"
 #import "IPCCustomerAddressCell.h"
@@ -97,6 +97,11 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          }
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
+         if (self.delegate) {
+             if ([self.delegate respondsToSelector:@selector(failPayOrder)]) {
+                 [self.delegate failPayOrder];
+             }
+         }
      }];
 }
 
@@ -136,9 +141,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     if (indexPath.section == 0 && [IPCCurrentCustomer sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"客户基本信息"];
             return cell;
@@ -152,9 +157,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         }
     }else if (indexPath.section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer){
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"订单备注"];
             return cell;
@@ -169,9 +174,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     }else if (indexPath.section == 2 && [IPCCurrentCustomer sharedManager].currentAddress && [IPCCurrentCustomer sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"收货地址"];
             return cell;
@@ -186,9 +191,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         }
     }else if(indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentOpometry && [IPCCurrentCustomer sharedManager].currentCustomer){
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"验光单"];
             return cell;
@@ -203,9 +208,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         }
     }else if((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setInsertTitle:@"选择员工"];
             [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
@@ -225,9 +230,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     }else if((indexPath.section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer))
     {
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeNormal || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeVlaueCard) {
                 [cell setTopTitle:@"购买列表"];
@@ -299,9 +304,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         return cell;
     }else{
         if (indexPath.row == 0) {
-            IPCCustomerTopTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerTopTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"收款记录"];
             NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderMode sharedManager].remainAmount];

@@ -30,8 +30,8 @@
     NSMutableArray * otherTypeList = [[NSMutableArray alloc]init];
     [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * otherResultDic = [[NSMutableDictionary alloc]init];
-        [otherResultDic setObject:[NSString stringWithFormat:@"%.2f",obj.payAmount] forKey:@"payAmount"];
-        [otherResultDic setObject:obj.payStyleName forKey:@"payType"];
+        [otherResultDic setObject:[NSString stringWithFormat:@"%.2f",obj.payPrice] forKey:@"payAmount"];
+        [otherResultDic setObject:obj.payTypeInfo forKey:@"payType"];
         [otherTypeList addObject:otherResultDic];
     }];
     

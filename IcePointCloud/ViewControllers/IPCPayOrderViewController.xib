@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderViewController">
             <connections>
                 <outlet property="payOrderTableView" destination="Fy7-Yr-o0G" id="fyl-p2-lpZ"/>
+                <outlet property="saveButton" destination="GUo-wl-t5L" id="zFs-VI-8Iq"/>
                 <outlet property="tableFootView" destination="L70-zW-7W1" id="Ugo-9A-79C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -25,7 +26,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.045911245810684918" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="separatorColor" white="0.66666666666666663" alpha="0.19563356164383561" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.66666666666666663" alpha="0.10327482876712329" colorSpace="calibratedWhite"/>
                     <inset key="separatorInset" minX="25" minY="0.0" maxX="25" maxY="0.0"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="1lV-e0-oMi"/>
@@ -58,11 +59,13 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
                     <rect key="frame" x="532" y="12.5" width="200" height="35"/>
+                    <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
                         <constraint firstAttribute="width" constant="200" id="kJE-03-Oh0"/>
                     </constraints>
-                    <state key="normal" title="Button" image="icon_save_customer"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                    <state key="normal" title="保存"/>
                     <connections>
                         <action selector="loadPayStyleView:" destination="-1" eventType="touchUpInside" id="JOr-Cn-RgS"/>
                     </connections>
@@ -84,6 +87,5 @@
     </objects>
     <resources>
         <image name="icon_cancel_payOrder" width="195" height="35"/>
-        <image name="icon_save_customer" width="195" height="35"/>
     </resources>
 </document>

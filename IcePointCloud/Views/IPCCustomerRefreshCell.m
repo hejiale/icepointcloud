@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCCustomerBottomCell.h"
+#import "IPCCustomerRefreshCell.h"
 
-@implementation IPCCustomerBottomCell
+@implementation IPCCustomerRefreshCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

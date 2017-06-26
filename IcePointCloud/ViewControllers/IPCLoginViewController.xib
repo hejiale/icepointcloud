@@ -74,7 +74,7 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yf-Un-adf" userLabel="SigninButton">
                     <rect key="frame" x="337" y="525" width="350" height="40"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.38823529411764707" green="0.62745098039215685" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Q9Y-I2-Rny"/>
                         <constraint firstAttribute="width" constant="350" id="jb6-lY-Nyz"/>

@@ -53,7 +53,7 @@ static NSError *HTTPError(NSString *domain, int code) {
 #elif BETA
 #define   IPC_ProductAPI_URL       @"http://dev.icepointcloud.com"
 #else
-#define   IPC_ProductAPI_URL       @"http://icepointcloud.com"
+#define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
 #endif
 
 #define   IPC_ProductAPI_Port       @"/gateway/api/jsonrpc.jsp"
