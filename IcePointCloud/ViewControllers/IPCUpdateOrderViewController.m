@@ -68,7 +68,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
         }
     }];
 
-    [IPCPayOrderRequestManager payRemainOrderWithOrderNum:[IPCCustomOrderDetailList instance].orderInfo.orderNumber PayInfos:payRecordArray SuccessBlock:^(id responseValue)
+    [IPCPayOrderRequestManager payRemainOrderWithOrderNum:[IPCCustomerOrderDetail instance].orderInfo.orderNumber PayInfos:payRecordArray SuccessBlock:^(id responseValue)
     {
         [IPCCustomUI showSuccess:@"订单保存成功!"];
         [self performSelector:@selector(successSaveOrder) withObject:nil afterDelay:2];
@@ -117,7 +117,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 3) {
-        return [IPCCustomOrderDetailList instance].products.count + 1;
+        return [IPCCustomerOrderDetail instance].products.count + 1;
     }else if (section == 5){
         return 1;
     }
@@ -153,7 +153,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            cell.addressMode = [IPCCustomOrderDetailList instance].addressMode;
+            cell.addressMode = [IPCCustomerOrderDetail instance].addressMode;
             return cell;
         }
     }else if(indexPath.section == 2){
@@ -169,7 +169,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            cell.optometryMode = [IPCCustomOrderDetailList instance].optometryMode;
+            cell.optometryMode = [IPCCustomerOrderDetail instance].optometryMode;
             [cell.defaultButton setHidden:YES];
             return cell;
         }
@@ -187,8 +187,8 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             
-            if ([IPCCustomOrderDetailList instance].products.count) {
-                IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row-1];
+            if ([IPCCustomerOrderDetail instance].products.count) {
+                IPCGlasses * product = [IPCCustomerOrderDetail instance].products[indexPath.row-1];
                 cell.glasses = product;
             }
             return cell;

@@ -24,7 +24,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self inputMemoText:[IPCCustomOrderDetailList instance].orderInfo.remark];
+    [self inputMemoText:[IPCCustomerOrderDetail instance].orderInfo.remark];
 }
 
 - (void)inputMemoText:(NSString *)memo{

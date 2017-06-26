@@ -24,14 +24,14 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.packUpButton setSelected:[IPCCustomOrderDetailList instance].orderInfo.isPackUpOptometry];
+    [self.packUpButton setSelected:[IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry];
 }
 
 
 - (IBAction)packUpAction:(UIButton *)sender {
     [sender setSelected:!sender.selected];
     
-   [IPCCustomOrderDetailList instance].orderInfo.isPackUpOptometry = sender.selected;
+   [IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry = sender.selected;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadOrderDetailTableView)]) {

@@ -93,7 +93,7 @@
 		047D3FC01D43039400638526 /* IPCOrderDetailInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D3FBE1D43039400638526 /* IPCOrderDetailInfoCell.m */; };
 		047D3FC11D43039400638526 /* IPCOrderDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047D3FBF1D43039400638526 /* IPCOrderDetailInfoCell.xib */; };
 		047D3FCA1D43479300638526 /* IPCCurrentCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D3FC91D43479300638526 /* IPCCurrentCustomer.m */; };
-		047F69601D41B10900AA4C0F /* IPCCustomOrderDetailList.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F695F1D41B10900AA4C0F /* IPCCustomOrderDetailList.m */; };
+		047F69601D41B10900AA4C0F /* IPCCustomerOrderDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F695F1D41B10900AA4C0F /* IPCCustomerOrderDetail.m */; };
 		047F69771D41FFF900AA4C0F /* IPCDetailCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F69761D41FFF900AA4C0F /* IPCDetailCustomer.m */; };
 		047FCA781D2B72B500775045 /* IPCResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 047FCA771D2B72B500775045 /* IPCResponse.m */; };
 		0482B0CC1D596F990099AFD3 /* IPCQRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0482B0CB1D596F990099AFD3 /* IPCQRCodeView.xib */; };
@@ -468,8 +468,8 @@
 		047D3FBF1D43039400638526 /* IPCOrderDetailInfoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailInfoCell.xib; sourceTree = "<group>"; };
 		047D3FC81D43479300638526 /* IPCCurrentCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCurrentCustomer.h; sourceTree = "<group>"; };
 		047D3FC91D43479300638526 /* IPCCurrentCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCurrentCustomer.m; sourceTree = "<group>"; };
-		047F695E1D41B10900AA4C0F /* IPCCustomOrderDetailList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomOrderDetailList.h; sourceTree = "<group>"; };
-		047F695F1D41B10900AA4C0F /* IPCCustomOrderDetailList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomOrderDetailList.m; sourceTree = "<group>"; };
+		047F695E1D41B10900AA4C0F /* IPCCustomerOrderDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerOrderDetail.h; sourceTree = "<group>"; };
+		047F695F1D41B10900AA4C0F /* IPCCustomerOrderDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerOrderDetail.m; sourceTree = "<group>"; };
 		047F69751D41FFF900AA4C0F /* IPCDetailCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDetailCustomer.h; sourceTree = "<group>"; };
 		047F69761D41FFF900AA4C0F /* IPCDetailCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDetailCustomer.m; sourceTree = "<group>"; };
 		047FCA761D2B72B500775045 /* IPCResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCResponse.h; sourceTree = "<group>"; };
@@ -2012,8 +2012,8 @@
 				CBCFBFFA1ED6B2BB0004B2D0 /* IPCCustomerOrderDetailDelegate.h */,
 				0470AD9F1D406E6D003AF4F4 /* IPCCustomerOrderList.h */,
 				0470ADA01D406E6D003AF4F4 /* IPCCustomerOrderList.m */,
-				047F695E1D41B10900AA4C0F /* IPCCustomOrderDetailList.h */,
-				047F695F1D41B10900AA4C0F /* IPCCustomOrderDetailList.m */,
+				047F695E1D41B10900AA4C0F /* IPCCustomerOrderDetail.h */,
+				047F695F1D41B10900AA4C0F /* IPCCustomerOrderDetail.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -2749,7 +2749,7 @@
 				9E03C2E11978D5D5007389D0 /* main.m in Sources */,
 				CBA749AB1E9DC25800160088 /* IPCParameterTableViewController.m in Sources */,
 				CB5CC4BC1E8E012D0091D0FD /* IPCRefreshAnimationHeader.m in Sources */,
-				047F69601D41B10900AA4C0F /* IPCCustomOrderDetailList.m in Sources */,
+				047F69601D41B10900AA4C0F /* IPCCustomerOrderDetail.m in Sources */,
 				04A065A11D2231C100A62291 /* IPCGlasslistCollectionViewCell.m in Sources */,
 				CB5CC49E1E8E00D60091D0FD /* IPCPhotoPickerViewController.m in Sources */,
 				047D3FCA1D43479300638526 /* IPCCurrentCustomer.m in Sources */,

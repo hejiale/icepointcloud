@@ -24,7 +24,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    IPCOptometryMode * optometry = [IPCCustomOrderDetailList instance].optometryMode;
+    IPCOptometryMode * optometry = [IPCCustomerOrderDetail instance].optometryMode;
     
     NSArray * optometryInfo = @[[IPCCommon formatPurpose:optometry.purpose],
                                 optometry.sphRight,

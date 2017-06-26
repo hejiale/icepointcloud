@@ -24,10 +24,10 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.orderCodeLabel setText:[IPCCustomOrderDetailList instance].orderInfo.orderNumber];
-    [self.createDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:[IPCCustomOrderDetailList instance].orderInfo.orderTime]  IsTime:YES]];
-    [self.operationLabel setText:[IPCCustomOrderDetailList instance].orderInfo.operatorName];
-    NSString * remark = [NSString stringWithFormat:@"本次消费产生积分%d",[IPCCustomOrderDetailList instance].orderInfo.integral];
+    [self.orderCodeLabel setText:[IPCCustomerOrderDetail instance].orderInfo.orderNumber];
+    [self.createDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:[IPCCustomerOrderDetail instance].orderInfo.orderTime]  IsTime:YES]];
+    [self.operationLabel setText:[IPCCustomerOrderDetail instance].orderInfo.operatorName];
+    NSString * remark = [NSString stringWithFormat:@"本次消费产生积分%d",[IPCCustomerOrderDetail instance].orderInfo.integral];
     [self.pointLabel setAttributedText:[IPCCustomUI subStringWithText:remark BeginRang:8 Rang:remark.length - 8 Font:self.pointLabel.font Color:COLOR_RGB_RED]];
 }
 

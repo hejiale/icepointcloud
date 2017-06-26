@@ -6,14 +6,14 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCCustomOrderDetailList.h"
+#import "IPCCustomerOrderDetail.h"
 
-@implementation IPCCustomOrderDetailList
+@implementation IPCCustomerOrderDetail
 
-+ (IPCCustomOrderDetailList *)instance
++ (IPCCustomerOrderDetail *)instance
 {
     static dispatch_once_t token;
-    static IPCCustomOrderDetailList *_client;
+    static IPCCustomerOrderDetail *_client;
     dispatch_once(&token, ^{
         _client = [[self alloc] init];
     });

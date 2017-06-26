@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class IPCCustomerOrderInfo;
-@interface IPCCustomOrderDetailList : NSObject
+@interface IPCCustomerOrderDetail : NSObject
 
-+ (IPCCustomOrderDetailList *)instance;
++ (IPCCustomerOrderDetail *)instance;
 
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> * products;
-@property (nonatomic, strong, readwrite) IPCCustomerOrderInfo  *  orderInfo;
-@property (nonatomic, strong, readwrite) IPCCustomerAddressMode * addressMode;
-@property (nonatomic, strong, readwrite) IPCOptometryMode * optometryMode;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *  products;
+@property (nonatomic, strong, readwrite) IPCCustomerOrderInfo               *  orderInfo;
+@property (nonatomic, strong, readwrite) IPCCustomerAddressMode         *  addressMode;
+@property (nonatomic, strong, readwrite) IPCOptometryMode                    *  optometryMode;
 
 - (void)parseResponseValue:(id)responseValue;
 

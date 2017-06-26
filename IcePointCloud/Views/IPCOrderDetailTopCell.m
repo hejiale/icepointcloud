@@ -23,7 +23,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    [self.statusLabel setText:[IPCAppManager orderStatus:[IPCCustomOrderDetailList instance].orderInfo.status]];
+    [self.statusLabel setText:[IPCAppManager orderStatus:[IPCCustomerOrderDetail instance].orderInfo.status]];
 }
 
 @end

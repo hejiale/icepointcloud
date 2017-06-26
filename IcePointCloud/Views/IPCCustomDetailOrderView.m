@@ -98,8 +98,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 }
 
 - (IBAction)dismissViewAction:(id)sender {
-    [IPCCustomOrderDetailList instance].orderInfo = nil;
-    [[IPCCustomOrderDetailList instance].products removeAllObjects];
+    [IPCCustomerOrderDetail instance].orderInfo = nil;
+    [[IPCCustomerOrderDetail instance].products removeAllObjects];
     
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.orderDetailBgView.frame;
@@ -128,7 +128,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
-         [[IPCCustomOrderDetailList instance] parseResponseValue:responseValue];
+         [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
          [self.orderDetailTableView reloadData];
          if ([IPCPayOrderMode sharedManager].remainAmount > 0) {
              [self.payBottomView setHidden:NO];
@@ -150,11 +150,11 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 2){
-        if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpOptometry)
+        if ([IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry)
             return 2;
     }
     else if (section == 3){
-        return [IPCCustomOrderDetailList instance].products.count;
+        return [IPCCustomerOrderDetail instance].products.count;
     }else if (section == 6){
         return 2;
     }
@@ -175,7 +175,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
-        cell.addressMode = [IPCCustomOrderDetailList instance].addressMode;
+        cell.addressMode = [IPCCustomerOrderDetail instance].addressMode;
         return cell;
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
@@ -199,8 +199,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             cell.delegate  = self;
         }
         
-        if ([IPCCustomOrderDetailList instance].products.count) {
-            IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
+        if ([IPCCustomerOrderDetail instance].products.count) {
+            IPCGlasses * product = [IPCCustomerOrderDetail instance].products[indexPath.row];
             cell.glasses = product;
         }
         return cell;
@@ -248,15 +248,15 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 75;
-    }else if (indexPath.section == 1 && ![[IPCCustomOrderDetailList instance].addressMode isEmptyAddress]){
+    }else if (indexPath.section == 1 && ![[IPCCustomerOrderDetail instance].addressMode isEmptyAddress]){
         return 70;
     }else if (indexPath.section == 2 && indexPath.row > 0){
         return 185;
     }else if (indexPath.section == 3){
-        if ([IPCCustomOrderDetailList instance].products.count) {
-            IPCGlasses * product = [IPCCustomOrderDetailList instance].products[indexPath.row];
+        if ([IPCCustomerOrderDetail instance].products.count) {
+            IPCGlasses * product = [IPCCustomerOrderDetail instance].products[indexPath.row];
             if ([product filterType] == IPCTopFilterTypeCustomsizedContactLens || [product filterType] == IPCTopFilterTypeCustomsizedLens) {
-                if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized) {
+                if ([IPCCustomerOrderDetail instance].orderInfo.isPackUpCustomized) {
                     id customizedRight = [product.customizedRight objectFromJSONString] ;
                     id customizedLeft   = [product.customizedLeft objectFromJSONString];
                     if (product.isUnifiedCustomizd) {

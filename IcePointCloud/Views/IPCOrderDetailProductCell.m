@@ -109,7 +109,7 @@
             [self.customsizedImage setHidden:NO];
             [self.customsizedPackView setHidden:NO];
             
-            if ([IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized) {
+            if ([IPCCustomerOrderDetail instance].orderInfo.isPackUpCustomized) {
                 [self creatCustomizedView];
             }
         }else{
@@ -302,7 +302,7 @@
 - (IBAction)lookUpCustomizedAction:(UIButton *)sender
 {
     [sender setSelected:!sender.selected];
-    [IPCCustomOrderDetailList instance].orderInfo.isPackUpCustomized = sender.selected;
+    [IPCCustomerOrderDetail instance].orderInfo.isPackUpCustomized = sender.selected;
     
     if ([self.delegate respondsToSelector:@selector(reloadOrderDetailTableView)]) {
         [self.delegate reloadOrderDetailTableView];

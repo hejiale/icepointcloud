@@ -41,7 +41,7 @@
 #import "IPCOptometryList.h"
 #import "IPCCustomerOrderList.h"
 #import "IPCCustomerAddressList.h"
-#import "IPCCustomOrderDetailList.h"
+#import "IPCCustomerOrderDetail.h"
 #import "IPCDetailCustomer.h"
 #import "IPCCurrentCustomer.h"
 #import "IPCBatchParameterList.h"
