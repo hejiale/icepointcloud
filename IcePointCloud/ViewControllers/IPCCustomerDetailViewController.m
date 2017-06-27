@@ -380,7 +380,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.optometryList.count) {
                 IPCOptometryMode * optometry = self.customerViewMode.optometryList[indexPath.row -1];
                 cell.optometryMode = optometry;
-                if (indexPath.row == self.customerViewMode.optometryList.count) {
+                if (!self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count) {
                     [cell.bottomLine setHidden:YES];
                 }else{
                     [cell.bottomLine setHidden:NO];
@@ -398,37 +398,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             return cell;
         }
-    }else if(indexPath.section == 3){
-        if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell setTopTitle:@"历史订单信息"];
-            return cell;
-        }else if (self.customerViewMode.isLoadMoreOrder && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] -1){
-            IPCCustomerRefreshCell * cell = [tableView dequeueReusableCellWithIdentifier:footLoadIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerRefreshCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            return cell;
-        }else{
-            IPCCustomerHistoryOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:orderIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerHistoryOrderCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            if (self.customerViewMode && self.customerViewMode.orderList.count) {
-                IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
-                cell.customerOrder = order;
-                if (indexPath.row == self.customerViewMode.orderList.count) {
-                    [cell.bottomLine setHidden:YES];
-                }else{
-                    [cell.bottomLine setHidden:NO];
-                }
-            }
-            return cell;
-        }
-    }else{
+    }else if(indexPath.section == 2){
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
             if (!cell) {
@@ -463,6 +433,36 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                     [self setCurrentAddress:cell.addressMode.addressID];
                 }
             }];
+            return cell;
+        }
+    }else{
+        if (indexPath.row == 0) {
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell setTopTitle:@"历史订单信息"];
+            return cell;
+        }else if (self.customerViewMode.isLoadMoreOrder && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] -1){
+            IPCCustomerRefreshCell * cell = [tableView dequeueReusableCellWithIdentifier:footLoadIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerRefreshCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            return cell;
+        }else{
+            IPCCustomerHistoryOrderCell * cell = [tableView dequeueReusableCellWithIdentifier:orderIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomerHistoryOrderCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            if (self.customerViewMode && self.customerViewMode.orderList.count) {
+                IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
+                cell.customerOrder = order;
+                if (!self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count) {
+                    [cell.bottomLine setHidden:YES];
+                }else{
+                    [cell.bottomLine setHidden:NO];
+                }
+            }
             return cell;
         }
     }

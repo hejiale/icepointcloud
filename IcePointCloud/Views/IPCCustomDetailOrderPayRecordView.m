@@ -49,7 +49,7 @@
         
         [self.payTypeNameLabel setText:_payType.payTypeInfo];
         [self.payDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_payType.payDate] IsTime:YES]];
-        [self.payPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",_payType.payPrice]];
+        [self.payPriceLabel setText:[NSString stringWithFormat:@"-￥%.2f",_payType.payPrice]];
     }
 }
 

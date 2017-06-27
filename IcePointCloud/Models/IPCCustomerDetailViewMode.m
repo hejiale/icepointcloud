@@ -36,6 +36,7 @@
     return _addressList;
 }
 
+#pragma mark //Reset Data
 - (void)resetData{
     _optometryCurrentPage = 1;
     _orderCurrentPage         = 1;
@@ -46,6 +47,7 @@
     [self.orderList removeAllObjects];
 }
 
+#pragma mark //Select Customer
 - (void)getChooseCustomer{
     //初始化数据
     [IPCCurrentCustomer sharedManager].currentOpometry = nil;
@@ -80,9 +82,11 @@
                                                         SuccessBlock:^(id responseValue){
                                                             __strong typeof (weakSelf) strongSelf = weakSelf;
                                                             strongSelf.detailCustomer         = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-                                                            if (completeBlock)completeBlock();
+                                                            if (completeBlock)
+                                                                completeBlock();
                                                         } FailureBlock:^(NSError *error) {
-                                                            if (completeBlock)completeBlock();
+                                                            if (completeBlock)
+                                                                completeBlock();
                                                             [IPCCustomUI showError:error.domain];
                                                         }];
 }
@@ -102,9 +106,11 @@
                                                          }else{
                                                              _isLoadMoreOptometry = NO;
                                                          }
-                                                         if (completeBlock)completeBlock();
+                                                         if (completeBlock)
+                                                             completeBlock();
                                                      } FailureBlock:^(NSError *error) {
-                                                         if (completeBlock)completeBlock();
+                                                         if (completeBlock)
+                                                             completeBlock();
                                                          [IPCCustomUI showError:error.domain];
                                                      }];
 }
@@ -123,9 +129,11 @@
                                                     }else{
                                                         _isLoadMoreOrder = NO;
                                                     }
-                                                    if (completeBlock)completeBlock();
+                                                    if (completeBlock)
+                                                        completeBlock();
                                                 } FailureBlock:^(NSError *error) {
-                                                    if (completeBlock)completeBlock();
+                                                    if (completeBlock)
+                                                        completeBlock();
                                                     [IPCCustomUI showError:error.domain];
                                                 }];
 }
@@ -138,9 +146,11 @@
                                                            __strong typeof (weakSelf) strongSelf = weakSelf;
                                                            IPCCustomerAddressList * addressObject = [[IPCCustomerAddressList alloc]initWithResponseValue:responseValue];
                                                            [strongSelf.addressList addObjectsFromArray:addressObject.list];
-                                                           if (completeBlock)completeBlock();
+                                                           if (completeBlock)
+                                                               completeBlock();
                                                        } FailureBlock:^(NSError *error) {
-                                                           if (completeBlock)completeBlock();
+                                                           if (completeBlock)
+                                                               completeBlock();
                                                            [IPCCustomUI showError:error.domain];
                                                        }];
 }
