@@ -29,8 +29,15 @@
     
     if (_optometryMode) {
         [self createUI];
-        if (_optometryMode.employeeName.length && _optometryMode.employeeName) {
-            [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
+        
+        if (_optometryMode.isUpdateStatus) {
+            if (_optometryMode.optometryEmployee.length && _optometryMode.optometryEmployee) {
+                [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.optometryEmployee]];
+            }
+        }else{
+            if (_optometryMode.employeeName.length && _optometryMode.employeeName) {
+                [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
+            }
         }
         
         if (_optometryMode.insertDate && _optometryMode.insertDate.length) {

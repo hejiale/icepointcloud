@@ -31,11 +31,12 @@
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
     
+    [[IPCPayOrderMode sharedManager] resetData];
+    //判断选择用户页面的确定按钮是否显示
+    [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;
+    
     self.normalSellCellMode = [[IPCPayOrderViewMode alloc]init];
     self.normalSellCellMode.delegate = self;
-    
-    [[IPCPayOrderMode sharedManager] resetData];
-    [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;//判断选择用户页面的确定按钮是否显示
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
@@ -60,13 +61,10 @@
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
-    [self reloadCustomerInfo];
-    [self.normalSellCellMode requestTradeOrExchangeStatus];
-}
-
-- (void)reloadCustomerInfo{
+    
     [IPCPayOrderMode sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
     [IPCPayOrderMode sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
+    [self.normalSellCellMode requestTradeOrExchangeStatus];
 }
 
 #pragma mark //Set UI

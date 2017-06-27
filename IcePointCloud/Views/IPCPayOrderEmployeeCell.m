@@ -57,7 +57,7 @@
 
 - (void)replaceEmployee:(IPCEmployeeResult *)employeeResult{
    [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-       if ([employeeResult.employe.jobID isEqualToString:obj.employe.jobID]) {
+       if ([employeeResult.employee.jobID isEqualToString:obj.employee.jobID]) {
            [[IPCPayOrderMode sharedManager].employeeResultArray replaceObjectAtIndex:idx withObject:employeeResult];
        }
    }];
@@ -71,7 +71,7 @@
 
 - (void)removeEmployee:(IPCEmployeeResult *)employeeResult{
     [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([employeeResult.employe.jobID isEqualToString:obj.employe.jobID]) {
+        if ([employeeResult.employee.jobID isEqualToString:obj.employee.jobID]) {
             [[IPCPayOrderMode sharedManager].employeeResultArray removeObject:employeeResult];
         }
     }];

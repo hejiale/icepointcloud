@@ -21,8 +21,8 @@
     NSMutableArray * employeeList = [[NSMutableArray alloc]init];
     [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
-        [employeeResultDic setObject:@(obj.employeeResult) forKey:@"achievement"];
-        [employeeResultDic setObject:obj.employe.jobID forKey:@"employeeId"];
+        [employeeResultDic setObject:@(obj.achievement) forKey:@"achievement"];
+        [employeeResultDic setObject:obj.employee.jobID forKey:@"employeeId"];
         [employeeList addObject:employeeResultDic];
     }];
     

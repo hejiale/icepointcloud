@@ -30,6 +30,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 @property (weak, nonatomic) IBOutlet UITableView * orderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 
 @end
 
@@ -39,7 +40,9 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [IPCCustomUI show];
     [self setBackground];
+    [self queryCustomerDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -57,6 +60,18 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 }
 
 #pragma mark //Request Method
+- (void)queryCustomerDetail{
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCCustomerOrderDetail instance].orderInfo.customerId SuccessBlock:^(id responseValue)
+    {
+        self.detailCustomer  = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
+        [self.orderTableView reloadData];
+        [IPCCustomUI hiden];
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
+}
+
+
 - (void)updatePayOrderRequest{
     __block NSMutableArray * payRecordArray = [[NSMutableArray alloc]init];
     [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -70,6 +85,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 
     [IPCPayOrderRequestManager payRemainOrderWithOrderNum:[IPCCustomerOrderDetail instance].orderInfo.orderNumber PayInfos:payRecordArray SuccessBlock:^(id responseValue)
     {
+        [self.saveButton jk_hideIndicator];
         [IPCCustomUI showSuccess:@"订单保存成功!"];
         [self performSelector:@selector(successSaveOrder) withObject:nil afterDelay:2];
     } FailureBlock:^(NSError *error) {
@@ -138,6 +154,9 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerDetailCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            if (self.detailCustomer) {
+                cell.currentCustomer = self.detailCustomer;
+            }
             return cell;
         }
     }else if (indexPath.section == 1){
@@ -154,6 +173,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.addressMode = [IPCCustomerOrderDetail instance].addressMode;
+            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if(indexPath.section == 2){
@@ -171,6 +191,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             }
             cell.optometryMode = [IPCCustomerOrderDetail instance].optometryMode;
             [cell.defaultButton setHidden:YES];
+            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if (indexPath.section == 3){
@@ -179,7 +200,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"订单列表"];
+            [cell setTopTitle:@"购买列表"];
             return cell;
         }else{
             IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
@@ -199,7 +220,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"选择员工"];
+            [cell setTopTitle:@"参与员工"];
             return cell;
         }else{
             IPCPayOrderEmployeeCell * cell = [tableView dequeueReusableCellWithIdentifier:employeeIdentifier];

@@ -40,6 +40,7 @@
         if ([responseValue[@"order"] isKindOfClass:[NSDictionary class]]) {
             self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
             self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
+            self.optometryMode.isUpdateStatus = YES;
             self.addressMode = [IPCCustomerAddressMode mj_objectWithKeyValues:responseValue[@"order"]];
         }
         
@@ -74,6 +75,14 @@
             }];
         }
         [IPCPayOrderMode sharedManager].remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;
+    }
+   
+    if ([responseValue[@"employeeAchievements"] isKindOfClass:[NSArray class]]) {
+        [responseValue[@"employeeAchievements"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            IPCEmployeeResult * result = [IPCEmployeeResult mj_objectWithKeyValues:obj];
+            result.isUpdateStatus= YES;
+            [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
+        }];
     }
 }
 

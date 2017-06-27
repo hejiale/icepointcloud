@@ -61,7 +61,7 @@
 
 - (void)resetData;
 
-- (void)clearPayTypeData;
+- (void)clearSelectCustomerData;
 
 - (void)reloadWithOtherTypeAmount;
 

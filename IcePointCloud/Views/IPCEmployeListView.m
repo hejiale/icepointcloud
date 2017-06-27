@@ -92,7 +92,7 @@ typedef void(^DismissBlock)();
     IPCEmploye * employe = self.employeeArray[indexPath.row];
     if (employe) {
         [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.employe.jobID isEqualToString:employe.jobID]) {
+            if ([obj.employee.jobID isEqualToString:employe.jobID]) {
                 [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
             }
         }];
@@ -113,22 +113,22 @@ typedef void(^DismissBlock)();
 
         __block BOOL isExist = NO;
         [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([employe.jobID isEqualToString:obj.employe.jobID]) {
+            if ([employe.jobID isEqualToString:obj.employee.jobID]) {
                 isExist = YES;
             }
         }];
         if (!isExist){
             IPCEmployeeResult * result = [[IPCEmployeeResult alloc]init];
-            result.employe = employe;
+            result.employee = employe;
             
             if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
-                result.employeeResult = 100;
+                result.achievement = 100;
             }
             [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
             
             if ([[IPCPayOrderMode sharedManager].employeeResultArray count] > 1) {
                 [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    obj.employeeResult = 0;
+                    obj.achievement = 0;
                 }];
             }
         }

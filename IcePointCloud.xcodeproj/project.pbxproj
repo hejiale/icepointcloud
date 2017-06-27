@@ -1474,7 +1474,7 @@
 		04C9F7A81DEEB146001258B2 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				CBAE2AFA1EE6740E0081B0BB /* PayType */,
+				CBAE2AFA1EE6740E0081B0BB /* PayOrder */,
 				CBAE2AF91EE673E80081B0BB /* Customized */,
 			);
 			name = Cell;
@@ -2167,7 +2167,7 @@
 			name = Customized;
 			sourceTree = "<group>";
 		};
-		CBAE2AFA1EE6740E0081B0BB /* PayType */ = {
+		CBAE2AFA1EE6740E0081B0BB /* PayOrder */ = {
 			isa = PBXGroup;
 			children = (
 				04186E021E69011C00758646 /* IPCPayOrderEmployeeCell.h */,
@@ -2189,7 +2189,7 @@
 				CBB992081F00E4C000C90FEA /* IPCPayOrderPayInfoCell.m */,
 				CBB992091F00E4C000C90FEA /* IPCPayOrderPayInfoCell.xib */,
 			);
-			name = PayType;
+			name = PayOrder;
 			sourceTree = "<group>";
 		};
 		CBAE2AFB1EE674440081B0BB /* PayTypeRecord */ = {

@@ -95,6 +95,7 @@
         [IPCPayOrderMode sharedManager].realTotalPrice    += [IPCPayOrderMode sharedManager].pointPrice;// 刷新实际价格
         [IPCPayOrderMode sharedManager].remainAmount  += [IPCPayOrderMode sharedManager].pointPrice;//刷新剩余付款金额
         [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
+        [IPCPayOrderMode sharedManager].point += [IPCPayOrderMode sharedManager].usedPoint;
         [IPCPayOrderMode sharedManager].usedPoint = 0;
         [IPCPayOrderMode sharedManager].pointPrice = 0;
     }

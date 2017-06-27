@@ -60,6 +60,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     
     [self setBackground];
     [self.topBar addBottomLine];
+    
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     
@@ -136,6 +137,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     });
 }
 
+
 - (void)setDefaultOptometry:(NSString *)optometryID
 {
     __weak typeof(self) weakSelf = self;
@@ -191,8 +193,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:self.view.bounds
                                                                  OrderNum:orderObject.orderCode
                                                             ProductDetail:^(IPCGlasses *glass) {
-                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                                [strongSelf pushToProductDetailViewController:glass];
+
                                                             } Pay:^{
                                                                 __strong typeof (weakSelf) strongSelf = weakSelf;
                                                                 [strongSelf pushToUpdateOrderViewController];
@@ -267,6 +268,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }];
 }
 
+/**
+ *  Push Method
+ */
 - (void)pushToProductDetailViewController:(IPCGlasses *)glass{
     IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
     detailVC.glasses = glass;
@@ -282,22 +286,21 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.navigationController pushViewController:updateOrderVC animated:YES];
 }
 
+/**
+ *  Choose Customer
+ */
 - (IBAction)chooseCustomerAction:(id)sender {
     //清除积分数据
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
-    [IPCPayOrderMode sharedManager].usedPoint = 0;
-    [IPCPayOrderMode sharedManager].pointPrice = 0;
-    [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-    [IPCPayOrderMode sharedManager].givingAmount = 0;
-    [IPCPayOrderMode sharedManager].remainAmount = 0;
-    [IPCPayOrderMode sharedManager].usedBalanceAmount = 0;
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
+    [[IPCPayOrderMode sharedManager] clearSelectCustomerData];
     
     [self.customerViewMode getChooseCustomer];
     [self popToPayOrderViewController];
 }
 
-
+/**
+ *  Dismiss Cover
+ */
 - (void)removerAllPopView:(BOOL)isLoad
 {
     [self.updateCustomerView removeFromSuperview];
@@ -377,6 +380,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.optometryList.count) {
                 IPCOptometryMode * optometry = self.customerViewMode.optometryList[indexPath.row -1];
                 cell.optometryMode = optometry;
+                if (indexPath.row == self.customerViewMode.optometryList.count) {
+                    [cell.bottomLine setHidden:YES];
+                }else{
+                    [cell.bottomLine setHidden:NO];
+                }
             }
             [[cell rac_signalForSelector:@selector(setDefaultOptometryAction:)] subscribeNext:^(id x) {
                 if (!cell.defaultButton.selected) {
@@ -412,6 +420,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.orderList.count) {
                 IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
                 cell.customerOrder = order;
+                if (indexPath.row == self.customerViewMode.orderList.count) {
+                    [cell.bottomLine setHidden:YES];
+                }else{
+                    [cell.bottomLine setHidden:NO];
+                }
             }
             return cell;
         }
@@ -434,6 +447,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.addressList.count) {
                 IPCCustomerAddressMode * address = self.customerViewMode.addressList[indexPath.row-1];
                 cell.addressMode = address;
+                if (indexPath.row == self.customerViewMode.addressList.count) {
+                    [cell.bottomLine setHidden:YES];
+                }else{
+                    [cell.bottomLine setHidden:NO];
+                }
             }
             if ([self.customerViewMode.detailCustomer.currentAddressId isEqualToString:cell.addressMode.addressID]) {
                 [cell.defaultButton setSelected:YES];

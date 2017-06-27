@@ -187,6 +187,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             cell.addressMode = [IPCCurrentCustomer sharedManager].currentAddress;
             [cell.defaultButton setHidden:YES];
+            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if(indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentOpometry && [IPCCurrentCustomer sharedManager].currentCustomer){
@@ -204,6 +205,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             cell.optometryMode = [IPCCurrentCustomer sharedManager].currentOpometry;
             [cell.defaultButton setHidden:YES];
+            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
@@ -213,6 +215,11 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setInsertTitle:@"选择员工"];
+            if ([IPCPayOrderMode sharedManager].employeeResultArray.count) {
+                [cell.bottomLine setHidden:NO];
+            }else{
+                [cell.bottomLine setHidden:YES];
+            }
             [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
                 if ([self.delegate respondsToSelector:@selector(showEmployeeView)]) {
                     [self.delegate showEmployeeView];

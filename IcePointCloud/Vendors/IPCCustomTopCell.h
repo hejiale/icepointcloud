@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightLabel;
 @property (weak, nonatomic) IBOutlet UIView *noPayPriceView;
 @property (weak, nonatomic) IBOutlet UILabel *noPayPriceLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bottomLine;
 
 - (void)setTopTitle:(NSString *)title;
 - (void)setInsertTitle:(NSString *)title;

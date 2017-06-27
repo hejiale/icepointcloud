@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="amountButton" destination="X8m-9b-ewT" id="SFv-5c-IA0"/>
                 <outlet property="amountTextField" destination="R1D-Kh-njT" id="QSC-ez-KEH"/>
+                <outlet property="closeButton" destination="Qeu-bN-npy" id="iYs-KS-QZl"/>
                 <outlet property="customerNameLabel" destination="Vm0-fC-HFy" id="Fa0-Ft-OVd"/>
                 <outlet property="progressBarView" destination="6Dg-K4-FjY" id="G5f-rl-h1L"/>
             </connections>
@@ -52,10 +53,10 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="数额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObX-gd-FVH">
-                    <rect key="frame" x="10" y="72" width="50" height="15"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参与百分比" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObX-gd-FVH">
+                    <rect key="frame" x="10" y="72" width="55" height="15"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="50" id="dnB-c0-aai"/>
+                        <constraint firstAttribute="width" constant="55" id="dnB-c0-aai"/>
                         <constraint firstAttribute="height" constant="15" id="oT0-XC-shh"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="10"/>
@@ -63,7 +64,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1D-Kh-njT">
-                    <rect key="frame" x="75" y="72" width="100" height="15"/>
+                    <rect key="frame" x="80" y="72" width="95" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="8Ti-oE-pfY"/>
                     </constraints>
@@ -75,7 +76,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8m-9b-ewT">
-                    <rect key="frame" x="65" y="72" width="110" height="15"/>
+                    <rect key="frame" x="70" y="72" width="105" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="yEc-2H-qQh"/>
                     </constraints>

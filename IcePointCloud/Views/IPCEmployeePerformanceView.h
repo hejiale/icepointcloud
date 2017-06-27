@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *amountButton;
 @property (weak, nonatomic) IBOutlet UITextField *amountTextField;
 @property (weak, nonatomic) IBOutlet UIView *progressBarView;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 
 @property (strong, nonatomic) IPCProgressView * progress;
 @property (copy, nonatomic) IPCEmployeeResult * employeeResult;

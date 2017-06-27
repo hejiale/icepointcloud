@@ -47,7 +47,11 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 @implementation IPCCustomDetailOrderView
 
-- (instancetype)initWithFrame:(CGRect)frame OrderNum:(NSString *)orderNum ProductDetail:(void(^)(IPCGlasses *glass))product Pay:(void (^)())pay Dismiss:(void (^)())dismiss
+- (instancetype)initWithFrame:(CGRect)frame
+                     OrderNum:(NSString *)orderNum
+                ProductDetail:(void(^)(IPCGlasses *glass))product
+                          Pay:(void (^)())pay
+                      Dismiss:(void (^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -176,6 +180,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         cell.addressMode = [IPCCustomerOrderDetail instance].addressMode;
+        [cell.bottomLine setHidden:YES];
         return cell;
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
@@ -295,6 +300,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (indexPath.section == 3) {
+        IPCGlasses * product = [IPCCustomerOrderDetail instance].products[indexPath.row];
+        if (self.ProductDetailBlock) {
+            self.ProductDetailBlock(product);
+        }
+    }
 }
 
 #pragma mark //IPCCustomerOrderDetailDelegate

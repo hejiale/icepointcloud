@@ -10,8 +10,8 @@
 
 @interface IPCEmployeeResult : NSObject
 
-@property (nonatomic, strong, readwrite) IPCEmploye * employe;
-@property (nonatomic, assign, readwrite) double      employeeResult;//员工份额
+@property (nonatomic, strong, readwrite) IPCEmploye * employee;
+@property (nonatomic, assign, readwrite) double      achievement;//员工份额
 @property (nonatomic, assign, readwrite) BOOL     isUpdateStatus;
 
 @end

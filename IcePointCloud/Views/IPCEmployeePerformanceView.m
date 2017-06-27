@@ -53,11 +53,12 @@
     _employeeResult = employeeResult;
     
     if (_employeeResult) {
-        [self.customerNameLabel setText:_employeeResult.employe.name];
-        [self.amountButton setTitle:[NSString stringWithFormat:@"%.f%%",_employeeResult.employeeResult] forState:UIControlStateNormal];
-        [self.progress setProgressValue:[NSString stringWithFormat:@"%.2f",_employeeResult.employeeResult/100]];
+        [self.customerNameLabel setText:_employeeResult.employee.name];
+        [self.amountButton setTitle:[NSString stringWithFormat:@"%.f%%",_employeeResult.achievement] forState:UIControlStateNormal];
+        [self.progress setProgressValue:[NSString stringWithFormat:@"%.2f",_employeeResult.achievement/100]];
         if (employeeResult.isUpdateStatus) {
             [self.amountButton setEnabled:NO];
+            [self.closeButton setHidden:YES];
         }
     }
 }
@@ -92,7 +93,7 @@
     double  result = [[IPCPayOrderMode sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
     
     if (result > 0) {
-        self.employeeResult.employeeResult = result;
+        self.employeeResult.achievement = result;
     }
     
     if (self.UpdateBlock) {

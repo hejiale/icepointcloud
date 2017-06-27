@@ -38,9 +38,10 @@
 @property (nonatomic, copy, readwrite) NSString * purpose;
 @property (nonatomic, copy, readwrite) NSString * employeeId;
 @property (nonatomic, copy, readwrite) NSString * employeeName;
-@property (nonatomic, copy, readwrite) NSString * optometryEmployee;
-@property (nonatomic, copy, readwrite) NSString * optometryInsertDate;
+@property (nonatomic, copy, readonly) NSString * optometryEmployee;
+@property (nonatomic, copy, readonly) NSString * optometryInsertDate;
 @property (nonatomic, assign, readwrite) BOOL     ifDefault;
+@property (nonatomic, assign, readwrite) BOOL     isUpdateStatus;
 
 
 @end
