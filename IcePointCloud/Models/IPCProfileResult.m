@@ -12,13 +12,15 @@
 
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"user"     : @"owner",
-             @"token"    : @"mobileToken",
-             @"company"  : @"companyName",
-             @"QRCodeURL" : @"store.alipayPhoto.photoURL",
-             @"headImageURL":@"roleIconData.normal.dataURI",
-             @"deviceToken" :@"mobileToken",
-             @"storeName":@"store.storeName"};
+    return @{@"userID"         : @"owner.id",
+             @"contacterName" : @"owner.contactName",
+             @"contacterPhone" : @"owner.contactMobilePhone",
+             @"token"                : @"mobileToken",
+             @"company"           : @"companyName",
+             @"QRCodeURL"       : @"store.alipayPhoto.photoURL",
+             @"headImageURL"   : @"roleIconData.normal.dataURI",
+             @"deviceToken"      : @"mobileToken",
+             @"storeName"         : @"store.storeName"};
 }
 
 @end

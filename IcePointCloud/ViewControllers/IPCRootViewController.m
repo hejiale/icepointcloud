@@ -11,14 +11,14 @@
 #import "IPCGlassListViewController.h"
 #import "IPCSearchCustomerViewController.h"
 #import "IPCPayOrderViewController.h"
-#import "IPCRootBarMenuView.h"
+#import "IPCSideBarMenuView.h"
 
 @interface IPCRootViewController ()<IPCRootMenuViewControllerDelegate>
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
 @property (nonatomic, strong) IPCSearchCustomerViewController * customerInfoVC;
-@property (nonatomic, strong) IPCRootBarMenuView * menuView;
+@property (nonatomic, strong) IPCSideBarMenuView * menuView;
 
 @end
 
@@ -66,7 +66,7 @@
 
 - (void)showMenuView:(NSInteger)index{
     [self removerFilterCover];
-    _menuView = [[IPCRootBarMenuView alloc]initWithFrame:self.view.bounds
+    _menuView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
                                                MenuIndex:index
                                                 PayOrder:^{
                                                     [self pushToPayOrderViewController];

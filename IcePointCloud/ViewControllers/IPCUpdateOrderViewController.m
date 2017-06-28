@@ -74,7 +74,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 
 - (void)updatePayOrderRequest{
     __block NSMutableArray * payRecordArray = [[NSMutableArray alloc]init];
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (!obj.isHavePay) {
             NSMutableDictionary * otherResultDic = [[NSMutableDictionary alloc]init];
             [otherResultDic setObject:[NSString stringWithFormat:@"%.2f",obj.payPrice] forKey:@"payAmount"];
@@ -114,16 +114,16 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 }
 
 - (void)closeSaveOrder{
-    [IPCPayOrderMode sharedManager].insertPayRecord = nil;
-    [IPCPayOrderMode sharedManager].isInsertRecordStatus = NO;
+    [IPCPayOrderManager sharedManager].insertPayRecord = nil;
+    [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
     
     __block NSMutableArray<IPCPayRecord *> * insertArray = [[NSMutableArray alloc]init];
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (!obj.isHavePay) {
             [insertArray addObject:obj];
         }
     }];
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray removeObjectsInArray:insertArray];
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeObjectsInArray:insertArray];
 }
 
 #pragma mark //UITableViewDataSource
@@ -242,7 +242,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"收款记录"];
-            [cell setNoPayTitle:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderMode sharedManager].remainAmount]];
+            [cell setNoPayTitle:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].remainAmount]];
             return cell;
         }else {
             IPCPayTypeRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:recordIdentifier];
@@ -270,7 +270,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
     }else if (indexPath.section == 5){
         return 150;
     }else if (indexPath.section == 6 && indexPath.row > 0){
-        return [IPCPayOrderMode sharedManager].payTypeRecordArray.count * 50 + ([IPCPayOrderMode sharedManager].isInsertRecordStatus ? 50 : 0) + 50;
+        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 50 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0) + 50;
     }
     return 50;
 }

@@ -1,14 +1,14 @@
 //
-//  IPCEmploye.m
+//  IPCEmployee.m
 //  IcePointCloud
 //
 //  Created by mac on 2016/12/1.
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCEmploye.h"
+#import "IPCEmployee.h"
 
-@implementation IPCEmploye
+@implementation IPCEmployee
 
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"jobID"    : @"id"};

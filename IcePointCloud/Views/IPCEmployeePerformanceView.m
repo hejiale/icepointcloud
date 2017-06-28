@@ -1,5 +1,5 @@
 //
-//  IPCEmployeePerformanceView.m
+//  IPCEmployeeePerformanceView.m
 //  IcePointCloud
 //
 //  Created by gerry on 2017/4/15.
@@ -90,7 +90,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    double  result = [[IPCPayOrderMode sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
+    double  result = [[IPCPayOrderManager sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
     
     if (result > 0) {
         self.employeeResult.achievement = result;

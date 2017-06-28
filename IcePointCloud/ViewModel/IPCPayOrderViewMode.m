@@ -54,7 +54,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (void)requestTradeOrExchangeStatus{
     [IPCCustomUI show];
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-        [IPCPayOrderMode sharedManager].isTrade = [responseValue boolValue];
+        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
         
         if (self.delegate) {
             if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
@@ -74,7 +74,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                                                  SuccessBlock:^(id responseValue)
      {
          IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
-         [[IPCPayOrderMode sharedManager] calculatePointValue:pointValue];
+         [[IPCPayOrderManager sharedManager] calculatePointValue:pointValue];
          
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
@@ -127,7 +127,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     }
     else if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 6))
         return 1;
-    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderMode sharedManager].employeeResultArray.count == 0 )
+    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
         return 1;
     else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return 0;
@@ -168,7 +168,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPayOrderMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell.memoTextView setText:[IPCPayOrderMode sharedManager].remark];
+            [cell.memoTextView setText:[IPCPayOrderManager sharedManager].remark];
             return cell;
         }
     }else if (indexPath.section == 2 && [IPCCurrentCustomer sharedManager].currentAddress && [IPCCurrentCustomer sharedManager].currentCustomer)
@@ -215,7 +215,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setInsertTitle:@"选择员工"];
-            if ([IPCPayOrderMode sharedManager].employeeResultArray.count) {
+            if ([IPCPayOrderManager sharedManager].employeeResultArray.count) {
                 [cell.bottomLine setHidden:NO];
             }else{
                 [cell.bottomLine setHidden:YES];
@@ -316,7 +316,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setTopTitle:@"收款记录"];
-            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderMode sharedManager].remainAmount];
+            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
             NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:6 Rang:remainAmountText.length - 6 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
             [cell setRightTitle:str];
             
@@ -354,7 +354,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     {
         return 180;
     }else if ((indexPath.section == 3 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 7 && indexPath.row > 0)){
-        return [IPCPayOrderMode sharedManager].payTypeRecordArray.count * 50 + ([IPCPayOrderMode sharedManager].isInsertRecordStatus ? 50 : 0) + 50;
+        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 50 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0) + 50;
     }
     return 50;
 }

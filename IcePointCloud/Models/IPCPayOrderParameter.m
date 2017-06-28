@@ -19,7 +19,7 @@
     
     //员工份额
     NSMutableArray * employeeList = [[NSMutableArray alloc]init];
-    [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
         [employeeResultDic setObject:@(obj.achievement) forKey:@"achievement"];
         [employeeResultDic setObject:obj.employee.jobID forKey:@"employeeId"];
@@ -28,7 +28,7 @@
     
     //支付方式
     NSMutableArray * otherTypeList = [[NSMutableArray alloc]init];
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * otherResultDic = [[NSMutableDictionary alloc]init];
         [otherResultDic setObject:[NSString stringWithFormat:@"%.2f",obj.payPrice] forKey:@"payAmount"];
         [otherResultDic setObject:obj.payTypeInfo forKey:@"payType"];
@@ -50,24 +50,29 @@
     }
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
+    
     if (employeeList.count) {
         [parameters setObject:employeeList forKey:@"employeeAchievements"];
     }
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice] forKey:@"orderFinalPrice"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice] forKey:@"orderFinalPrice"];
+    
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {//积分兑换置为0
         [parameters setObject:@(0) forKey:@"integral"];
     }else{
-        [parameters setObject:@([IPCPayOrderMode sharedManager].usedPoint) forKey:@"integral"];
+        [parameters setObject:@([IPCPayOrderManager sharedManager].usedPoint) forKey:@"integral"];
     }
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].givingAmount] forKey:@"donationAmount"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].givingAmount] forKey:@"donationAmount"];
+    
     if (otherTypeList.count) {
         [parameters setObject:otherTypeList forKey:@"orderPayInfos"];
     }
     [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
+    
+    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens)
+    {
         [parameters setObject:@"true" forKey:@"isCustomizedLens"];
     }
-    [parameters setObject:[IPCPayOrderMode sharedManager].remark ? : @"" forKey:@"orderRemark"];
+    [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
 
     return parameters;
 }

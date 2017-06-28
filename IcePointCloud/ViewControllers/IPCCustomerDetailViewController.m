@@ -46,13 +46,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 @implementation IPCCustomerDetailViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -64,7 +57,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     
-    if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
+    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
         [self.sureButton setHidden:NO];
     }
      [[IPCHttpRequest sharedClient] cancelAllRequest];
@@ -77,8 +70,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
     self.customerViewMode.currentCustomer = self.customer;
     
-    [[IPCEmployeeMode sharedManager] queryEmploye:@""];
-    [[IPCEmployeeMode sharedManager] queryMemberLevel];
+    [[IPCEmployeeeManager sharedManager] queryEmploye:@""];
+    [[IPCEmployeeeManager sharedManager] queryMemberLevel];
     [self.refreshHeader beginRefreshing];
 }
 
@@ -292,7 +285,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (IBAction)chooseCustomerAction:(id)sender {
     //清除积分数据
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
-    [[IPCPayOrderMode sharedManager] clearSelectCustomerData];
+    [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
     
     [self.customerViewMode getChooseCustomer];
     [self popToPayOrderViewController];

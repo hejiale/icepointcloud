@@ -1,5 +1,5 @@
 //
-//  IPCGetGlassesListResult.h
+//  IPCProductList.h
 //  IcePointCloud
 //
 //  Created by mac on 8/2/15.
@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "IPCGlasses.h"
 
-@interface IPCGetGlassesListResult : NSObject
+@interface IPCProductList : NSObject
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *glassesList;
 

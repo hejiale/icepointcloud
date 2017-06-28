@@ -103,7 +103,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (IBAction)dismissViewAction:(id)sender {
     [[IPCCustomerOrderDetail instance] clearData];
-    [[IPCPayOrderMode sharedManager] resetData];
+    [[IPCPayOrderManager sharedManager] resetData];
     
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.orderDetailBgView.frame;
@@ -134,10 +134,10 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
      {
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
          [self.orderDetailTableView reloadData];
-         if ([IPCPayOrderMode sharedManager].remainAmount > 0) {
+         if ([IPCPayOrderManager sharedManager].remainAmount > 0) {
              [self.payBottomView setHidden:NO];
              self.tableViewBottom.constant = 56;
-             NSString * payPrice = [NSString stringWithFormat:@"支付尾款:￥%.2f", [IPCPayOrderMode sharedManager].remainAmount];
+             NSString * payPrice = [NSString stringWithFormat:@"支付尾款:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
              [self.payPriceLabel setAttributedText:[IPCCustomUI subStringWithText:payPrice BeginRang:5 Rang:payPrice.length - 5 Font:self.payPriceLabel.font Color:COLOR_RGB_RED]];
          }
          [IPCCustomUI hiden];
@@ -218,8 +218,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailSectionCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.sectionTitleLabel setText:@"收款记录"];
-            [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderMode sharedManager].remainAmount]];
-            if ([IPCPayOrderMode sharedManager].payTypeRecordArray.count) {
+            [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].remainAmount]];
+            if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count) {
                 [cell.bottomLine setHidden:NO];
             }else{
                 [cell.bottomLine setHidden:YES];
@@ -274,7 +274,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     }else if (indexPath.section == 4){
         return 125;
     }else if (indexPath.section == 5 && indexPath.row > 0){
-        return [IPCPayOrderMode sharedManager].payTypeRecordArray.count * 40;
+        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 40;
     }else if (indexPath.section == 6){
         return 120;
     }

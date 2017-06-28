@@ -1,5 +1,5 @@
 //
-//  IPCEmployeListView.m
+//  IPCEmployeeListView.m
 //  IcePointCloud
 //
 //  Created by mac on 2016/11/30.
@@ -9,7 +9,7 @@
 #import "IPCEmployeListView.h"
 #import "IPCEmployeListCell.h"
 
-static NSString * const employeIdentifier = @"IPCEmployeListTableViewCellIdentifier";
+static NSString * const employeIdentifier = @"IPCEmployeeListTableViewCellIdentifier";
 typedef void(^DismissBlock)();
 
 @interface IPCEmployeListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
@@ -18,7 +18,7 @@ typedef void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UITableView *employeTableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (copy, nonatomic) DismissBlock dismissBlock;
-@property (strong, nonatomic) NSMutableArray<IPCEmploye *> *employeeArray;
+@property (strong, nonatomic) NSMutableArray<IPCEmployee *> *employeeArray;
 
 @end
 
@@ -47,7 +47,7 @@ typedef void(^DismissBlock)();
     return self;
 }
 
-- (NSMutableArray<IPCEmploye *> *)employeeArray{
+- (NSMutableArray<IPCEmployee *> *)employeeArray{
     if (!_employeeArray) {
         _employeeArray = [[NSMutableArray alloc] init];
     }
@@ -61,7 +61,7 @@ typedef void(^DismissBlock)();
     [IPCPayOrderRequestManager queryEmployeWithKeyword:self.searchTextField.text SuccessBlock:^(id responseValue)
      {
          [IPCCustomUI hiden];
-         IPCEmployeList * employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
+         IPCEmployeeList * employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
          [self.employeeArray addObjectsFromArray:employeList.employeArray];
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
@@ -89,9 +89,9 @@ typedef void(^DismissBlock)();
     }
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
-    IPCEmploye * employe = self.employeeArray[indexPath.row];
+    IPCEmployee * employe = self.employeeArray[indexPath.row];
     if (employe) {
-        [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj.employee.jobID isEqualToString:employe.jobID]) {
                 [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
             }
@@ -104,15 +104,15 @@ typedef void(^DismissBlock)();
 
 #pragma mark //UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    IPCEmploye * employe = self.employeeArray[indexPath.row];
+    IPCEmployee * employe = self.employeeArray[indexPath.row];
     if (employe) {
-        if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 5){
+        if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 5){
             [IPCCustomUI showError:@"至多选择五名员工"];
             return;
         }
 
         __block BOOL isExist = NO;
-        [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([employe.jobID isEqualToString:obj.employee.jobID]) {
                 isExist = YES;
             }
@@ -121,13 +121,13 @@ typedef void(^DismissBlock)();
             IPCEmployeeResult * result = [[IPCEmployeeResult alloc]init];
             result.employee = employe;
             
-            if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+            if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
                 result.achievement = 100;
             }
-            [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
+            [[IPCPayOrderManager sharedManager].employeeResultArray addObject:result];
             
-            if ([[IPCPayOrderMode sharedManager].employeeResultArray count] > 1) {
-                [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([[IPCPayOrderManager sharedManager].employeeResultArray count] > 1) {
+                [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     obj.achievement = 0;
                 }];
             }

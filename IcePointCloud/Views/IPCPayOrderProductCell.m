@@ -71,7 +71,7 @@
             [self.countLabel setHidden:NO];
         }
         
-        if ([IPCPayOrderMode sharedManager].isTrade) {
+        if ([IPCPayOrderManager sharedManager].isTrade) {
             self.pointButtonWith.constant = 0;
             self.inputPriceViewRight.constant = 0;
             [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
@@ -137,8 +137,8 @@
     }
     self.cartItem.pointValue = 0;
     if (self.cartItem.isChoosePoint) {
-        [IPCPayOrderMode sharedManager].pointPrice = 0;
-        [IPCPayOrderMode sharedManager].usedPoint = 0;
+        [IPCPayOrderManager sharedManager].pointPrice = 0;
+        [IPCPayOrderManager sharedManager].usedPoint = 0;
     }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -151,8 +151,8 @@
     self.cartItem.glassCount++;
     self.cartItem.pointValue = 0;
     if (self.cartItem.isChoosePoint) {
-        [IPCPayOrderMode sharedManager].pointPrice = 0;
-        [IPCPayOrderMode sharedManager].usedPoint = 0;
+        [IPCPayOrderManager sharedManager].pointPrice = 0;
+        [IPCPayOrderManager sharedManager].usedPoint = 0;
     }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -166,7 +166,7 @@
         [IPCCustomUI showError:@"请先选择客户!"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].point <= 0) {
+    if ([IPCPayOrderManager sharedManager].point <= 0) {
         [IPCCustomUI showError:@"所选客户积分为零!"];
         return;
     }
@@ -175,16 +175,16 @@
     
     if (sender.selected) {
         self.cartItem.unitPrice = 0;
-        [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-        [IPCPayOrderMode sharedManager].givingAmount = 0;
+        [IPCPayOrderManager sharedManager].realTotalPrice = 0;
+        [IPCPayOrderManager sharedManager].givingAmount = 0;
     }else{
-        [IPCPayOrderMode sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
-        if ([IPCPayOrderMode sharedManager].usedPoint <= 0) {
-            [IPCPayOrderMode sharedManager].usedPoint = 0;
+        [IPCPayOrderManager sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
+        if ([IPCPayOrderManager sharedManager].usedPoint <= 0) {
+            [IPCPayOrderManager sharedManager].usedPoint = 0;
         }
-        [IPCPayOrderMode sharedManager].pointPrice -= self.cartItem.pointPrice;
-        if ([IPCPayOrderMode sharedManager].pointPrice <= 0) {
-            [IPCPayOrderMode sharedManager].pointPrice = 0;
+        [IPCPayOrderManager sharedManager].pointPrice -= self.cartItem.pointPrice;
+        if ([IPCPayOrderManager sharedManager].pointPrice <= 0) {
+            [IPCPayOrderManager sharedManager].pointPrice = 0;
         }
         self.cartItem.pointValue = 0;
     }
@@ -220,9 +220,9 @@
     
     if (str.length) {
         if (self.cartItem.isChoosePoint) {
-            NSInteger usedPoint = [IPCPayOrderMode sharedManager].usedPoint;
+            NSInteger usedPoint = [IPCPayOrderManager sharedManager].usedPoint;
             usedPoint -= self.cartItem.pointValue;
-            NSInteger minumPoint = [IPCPayOrderMode sharedManager].point - usedPoint;
+            NSInteger minumPoint = [IPCPayOrderManager sharedManager].point - usedPoint;
             
             if (minumPoint > 0) {
                 if (minumPoint <= [str doubleValue] * self.cartItem.glassCount)
@@ -233,24 +233,24 @@
                 }
                 self.cartItem.pointPrice = self.cartItem.totalPrice;
                 
-                [IPCPayOrderMode sharedManager].usedPoint = [[IPCShoppingCart sharedCart] totalUsedPoint];
-                [IPCPayOrderMode sharedManager].pointPrice = [[IPCShoppingCart sharedCart] totalUsedPointPrice];
+                [IPCPayOrderManager sharedManager].usedPoint = [[IPCShoppingCart sharedCart] totalUsedPoint];
+                [IPCPayOrderManager sharedManager].pointPrice = [[IPCShoppingCart sharedCart] totalUsedPointPrice];
             }
         }else{
-            if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+            if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
                 [IPCCustomUI showError:@"请先选择员工"];
             }else{
                 if ( [self.cartItem.glasses filterType] != IPCTopFilterTypeCard) {
-                    if ([[IPCPayOrderMode sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                    if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
                         [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
                     }
                 }
                 self.cartItem.unitPrice = [str doubleValue];
                 
-                [IPCPayOrderMode sharedManager].realTotalPrice = 0;
-                [IPCPayOrderMode sharedManager].givingAmount = 0;
-                [IPCPayOrderMode sharedManager].remainAmount = 0;
-                [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
+                [IPCPayOrderManager sharedManager].realTotalPrice = 0;
+                [IPCPayOrderManager sharedManager].givingAmount = 0;
+                [IPCPayOrderManager sharedManager].remainAmount = 0;
+                [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
             }
         }
     }

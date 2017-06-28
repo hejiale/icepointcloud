@@ -12,6 +12,7 @@
 @interface IPCLoginHistoryViewController : UIViewController
 
 @property (nonatomic, weak) id<LoginHistoryViewControllerDelegate>delegate;
+
 - (void)showWithSize:(CGSize)size Position:(CGPoint)position Owner:(UIView *)owner;
 
 @end

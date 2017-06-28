@@ -82,10 +82,16 @@
 
 - (void)showMainRootViewController
 {
-    IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
-    UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
-    menuNav.navigationBarHidden = YES;
-    [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
+    [UIView transitionWithView:[UIApplication sharedApplication].keyWindow duration:0.8f options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        BOOL oldState = [UIView areAnimationsEnabled];
+        [UIView setAnimationsEnabled:NO];
+        IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
+        UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
+        menuNav.navigationBarHidden = YES;
+        [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
+        [UIView setAnimationsEnabled:oldState];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 #pragma mark //Request Methods
@@ -144,7 +150,7 @@
 #pragma mark //Save UserName History
 - (void)syncUserAccountHistory:(NSString *)userName
 {
-    if ([IPCAppManager sharedManager].profile.user && [IPCAppManager sharedManager].profile.token.length && userName.length)
+    if ([IPCAppManager sharedManager].profile.token.length && userName.length)
     {
         [NSUserDefaults jk_setObject:userName forKey:IPCUserNameKey];
         

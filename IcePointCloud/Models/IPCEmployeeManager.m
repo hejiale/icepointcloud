@@ -1,22 +1,22 @@
 //
-//  IPCEmployeeMode.m
+//  IPCEmployeeeManager.m
 //  IcePointCloud
 //
 //  Created by gerry on 2017/4/13.
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCEmployeeMode.h"
+#import "IPCEmployeeManager.h"
 
-@implementation IPCEmployeeMode
+@implementation IPCEmployeeeManager
 
 
-+ (IPCEmployeeMode *)sharedManager
++ (IPCEmployeeeManager *)sharedManager
 {
-    static IPCEmployeeMode *mgr = nil;
+    static IPCEmployeeeManager *mgr = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        mgr = [[IPCEmployeeMode alloc] init];
+        mgr = [[IPCEmployeeeManager alloc] init];
     });
     return mgr;
 }
@@ -26,7 +26,7 @@
 {
     NSMutableArray * employeeNameArray = [[NSMutableArray alloc]init];
     
-    [self.employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmploye * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmployee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [employeeNameArray addObject:obj.name];
     }];
     return employeeNameArray;
@@ -52,7 +52,7 @@
 
 - (NSString *)employeeId:(NSString *)employee{
     __block NSString * employeeId = @"";
-    [[IPCEmployeeMode sharedManager].employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmploye * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCEmployeeeManager sharedManager].employeList.employeArray enumerateObjectsUsingBlock:^(IPCEmployee * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.name isEqualToString:employee]) {
             employeeId = obj.jobID;
         }
@@ -62,7 +62,7 @@
 
 - (NSString *)customerTypeId:(NSString *)customerType{
     __block NSString * customerTypeId = @"";
-    [[IPCEmployeeMode sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCEmployeeeManager sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.customerType isEqualToString:customerType]) {
             customerTypeId = obj.customerTypeId;
         }
@@ -72,7 +72,7 @@
 
 - (NSString *)memberLevelId:(NSString *)memberLevel{
     __block NSString * memberLevelId = @"";
-    [[IPCEmployeeMode sharedManager].memberLevelList.list enumerateObjectsUsingBlock:^(IPCMemberLevel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCEmployeeeManager sharedManager].memberLevelList.list enumerateObjectsUsingBlock:^(IPCMemberLevel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.memberLevel isEqualToString:memberLevel]) {
             memberLevelId = obj.memberLevelId;
         }
@@ -85,7 +85,7 @@
 - (void)queryEmploye:(NSString *)keyWord
 {
     [IPCPayOrderRequestManager queryEmployeWithKeyword:keyWord SuccessBlock:^(id responseValue){
-         self.employeList = [[IPCEmployeList alloc] initWithResponseObject:responseValue];
+         self.employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
      }];

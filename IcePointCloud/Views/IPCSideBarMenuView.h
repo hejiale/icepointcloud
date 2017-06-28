@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCRootBarMenuView : UIView
+@interface IPCSideBarMenuView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame
                     MenuIndex:(NSInteger)index

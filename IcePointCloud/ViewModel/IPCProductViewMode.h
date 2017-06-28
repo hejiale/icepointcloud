@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCGetGlassesListResult.h"
+#import "IPCProductList.h"
 #import "IPCFilterDataSourceResult.h"
 #import "IPCFilterTypeMode.h"
 #import "IPCFilterGlassesView.h"
@@ -38,7 +38,7 @@ typedef void(^FilterSucceedBlock)(NSError * error);
 typedef void(^ReloadFilterCloseBlock)();
 typedef void(^ReloadFilterUnCloseBlock)();
 
-@interface IPCGlassListViewMode : NSObject
+@interface IPCProductViewMode : NSObject
 
 @property (nonatomic, copy) CompleteBlock              completeBlock;
 @property (nonatomic, copy) FilterSucceedBlock         filterSuccessBlock;

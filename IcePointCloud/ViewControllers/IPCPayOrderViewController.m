@@ -31,9 +31,9 @@
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
     
-    [[IPCPayOrderMode sharedManager] resetData];
+    [[IPCPayOrderManager sharedManager] resetData];
     //判断选择用户页面的确定按钮是否显示
-    [IPCPayOrderMode sharedManager].isPayOrderStatus = YES;
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
     
     self.normalSellCellMode = [[IPCPayOrderViewMode alloc]init];
     self.normalSellCellMode.delegate = self;
@@ -62,8 +62,8 @@
     
     [self setNavigationBarStatus:NO];
     
-    [IPCPayOrderMode sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
-    [IPCPayOrderMode sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
+    [IPCPayOrderManager sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
+    [IPCPayOrderManager sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
     [self.normalSellCellMode requestTradeOrExchangeStatus];
 }
 
@@ -87,19 +87,19 @@
         [IPCCustomUI showError:@"请先选择客户信息"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].employeeResultArray.count == 0) {
+    if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
         [IPCCustomUI showError:@"请选择员工"];
         return;
     }
-    if ([[IPCPayOrderMode sharedManager] isExistEmptyEmployeeResult]) {
+    if ([[IPCPayOrderManager sharedManager] isExistEmptyEmployeeResult]) {
         [IPCCustomUI showError:@"参与比例必须填写且大于零"];
         return;
     }
-    if ([[IPCPayOrderMode sharedManager] totalEmployeeResult] < 100) {
+    if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
         [IPCCustomUI showError:@"员工总份额不足百分之一百"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].realTotalPrice + [IPCPayOrderMode sharedManager].givingAmount + [IPCPayOrderMode sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice])
+    if ([IPCPayOrderManager sharedManager].realTotalPrice + [IPCPayOrderManager sharedManager].givingAmount + [IPCPayOrderManager sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice])
     {
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return;
@@ -122,7 +122,7 @@
 
 - (void)resetPayInfoData{
     [[IPCCurrentCustomer sharedManager] clearData];
-    [[IPCPayOrderMode sharedManager] resetData];
+    [[IPCPayOrderManager sharedManager] resetData];
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
     [[IPCCustomsizedItem sharedItem] resetData];

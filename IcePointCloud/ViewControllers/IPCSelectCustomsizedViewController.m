@@ -8,7 +8,7 @@
 
 #import "IPCSelectCustomsizedViewController.h"
 #import "IPCCustomsizedGlassesCell.h"
-#import "IPCGlassListViewMode.h"
+#import "IPCProductViewMode.h"
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
@@ -17,7 +17,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UICollectionView                 *customsizedCollectionView;
 @property (weak, nonatomic) IBOutlet UIView *searchBgView;
-@property (strong, nonatomic) IPCGlassListViewMode                   *glassListViewMode;
+@property (strong, nonatomic) IPCProductViewMode                   *glassListViewMode;
 @property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter           *refreshFooter;
 
@@ -35,7 +35,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.searchBgView addBorder:3 Width:0.5];
     [self.topView addBottomLine];
     
-    self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
+    self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
     self.glassListViewMode.isCustomsized = YES;
     

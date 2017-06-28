@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCRootBarMenuView.h"
+#import "IPCSideBarMenuView.h"
 #import "IPCPersonBaseView.h"
 #import "IPCUpdatePasswordView.h"
 #import "IPCQRCodeView.h"
@@ -14,7 +14,7 @@
 
 #define IPCMenuShowWidth  400
 
-@interface IPCRootBarMenuView()
+@interface IPCSideBarMenuView()
 
 @property (nonatomic, strong) IPCShoppingCartView * cartView;
 @property (nonatomic, strong) IPCPersonBaseView * personBaseView;
@@ -24,7 +24,7 @@
 
 @end
 
-@implementation IPCRootBarMenuView
+@implementation IPCSideBarMenuView
 
 - (instancetype)initWithFrame:(CGRect)frame
                     MenuIndex:(NSInteger)index
@@ -38,7 +38,7 @@
         self.LogoutBlock = logout;
         self.DismissBlock = dismiss;
         
-        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCRootBarMenuView" owner:self];
+        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCSideBarMenuView" owner:self];
         [view setFrame:frame];
         [self addSubview:view];
         

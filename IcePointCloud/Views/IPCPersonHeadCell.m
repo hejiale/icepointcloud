@@ -18,8 +18,8 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.loginUserNameLabel setText:[IPCAppManager sharedManager].profile.user.contactName];
-    [self.loginPhoneLabel setText:[IPCAppManager sharedManager].profile.user.contactMobilePhone];
+    [self.loginUserNameLabel setText:[IPCAppManager sharedManager].profile.contacterName];
+    [self.loginPhoneLabel setText:[IPCAppManager sharedManager].profile.contacterPhone];
 }
 
 

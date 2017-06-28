@@ -6,13 +6,13 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCGlassListViewMode.h"
+#import "IPCProductViewMode.h"
 
-@interface IPCGlassListViewMode()<IPCFilterGlassesViewDataSource,IPCFilterGlassesViewDelegate>
+@interface IPCProductViewMode()<IPCFilterGlassesViewDataSource,IPCFilterGlassesViewDelegate>
 
 @end
 
-@implementation IPCGlassListViewMode
+@implementation IPCProductViewMode
 
 - (instancetype)init{
     self = [super init];
@@ -170,7 +170,7 @@
 //Parse Normal Glass Data
 - (void)parseNormalGlassesData:(id)response
 {
-    IPCGetGlassesListResult * result = [[IPCGetGlassesListResult alloc]initWithResponseValue:response];
+    IPCProductList * result = [[IPCProductList alloc]initWithResponseValue:response];
     
     if (result) {
         if (result.glassesList.count){

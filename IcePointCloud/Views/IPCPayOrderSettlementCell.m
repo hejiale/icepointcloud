@@ -36,7 +36,7 @@
 
 - (void)updateUI
 {
-    if ([IPCPayOrderMode sharedManager].isTrade) {
+    if ([IPCPayOrderManager sharedManager].isTrade) {
         [self.selectPointButton setHidden:NO];
         self.selectPointButtonWidth.constant = 40;
         [self.pointAmountTextField addBorder:3 Width:0.5];
@@ -51,15 +51,15 @@
         [self.selectPointButton setEnabled:YES];
         [self.selectPointButton setSelected:YES];
     }else{
-        if ([IPCPayOrderMode sharedManager].isSelectPoint) {
+        if ([IPCPayOrderManager sharedManager].isSelectPoint) {
             [self.selectPointButton setSelected:YES];
         }else{
             [self.selectPointButton setSelected:NO];
         }
         
-        if ([IPCPayOrderMode sharedManager].point >  0) {
+        if ([IPCPayOrderManager sharedManager].point >  0) {
             [self.selectPointButton setEnabled:YES];
-            if ([IPCPayOrderMode sharedManager].isSelectPoint) {
+            if ([IPCPayOrderManager sharedManager].isSelectPoint) {
                 [self.pointAmountTextField setEnabled:YES];
             }else{
                 [self.pointAmountTextField setEnabled:NO];
@@ -71,17 +71,17 @@
     }
 
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
-    [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderMode sharedManager].pointPrice]];
+    [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].pointPrice]];
     
-    if ([IPCPayOrderMode sharedManager].realTotalPrice > 0) {
-        [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].realTotalPrice]];
+    if ([IPCPayOrderManager sharedManager].realTotalPrice > 0) {
+        [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice]];
     }else{
         [self.payAmountTextField setText:@""];
     }
 
-    [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderMode sharedManager].usedPoint]];
-    [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderMode sharedManager].point]];
-    [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderMode sharedManager].givingAmount]];
+    [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].usedPoint]];
+    [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderManager sharedManager].point]];
+    [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderManager sharedManager].givingAmount]];
 }
 
 #pragma mark //Clicke Events
@@ -90,14 +90,14 @@
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint])return;
     
     [sender setSelected:!sender.selected];
-    [IPCPayOrderMode sharedManager].isSelectPoint = sender.selected;
+    [IPCPayOrderManager sharedManager].isSelectPoint = sender.selected;
     if (!sender.selected) {
-        [IPCPayOrderMode sharedManager].realTotalPrice    += [IPCPayOrderMode sharedManager].pointPrice;// 刷新实际价格
-        [IPCPayOrderMode sharedManager].remainAmount  += [IPCPayOrderMode sharedManager].pointPrice;//刷新剩余付款金额
-        [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
-        [IPCPayOrderMode sharedManager].point += [IPCPayOrderMode sharedManager].usedPoint;
-        [IPCPayOrderMode sharedManager].usedPoint = 0;
-        [IPCPayOrderMode sharedManager].pointPrice = 0;
+        [IPCPayOrderManager sharedManager].realTotalPrice    += [IPCPayOrderManager sharedManager].pointPrice;// 刷新实际价格
+        [IPCPayOrderManager sharedManager].remainAmount  += [IPCPayOrderManager sharedManager].pointPrice;//刷新剩余付款金额
+        [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+        [IPCPayOrderManager sharedManager].point += [IPCPayOrderManager sharedManager].usedPoint;
+        [IPCPayOrderManager sharedManager].usedPoint = 0;
+        [IPCPayOrderManager sharedManager].pointPrice = 0;
     }
     
     if (self.delegate) {
@@ -133,10 +133,10 @@
     if (str.length) {
         if ([textField isEqual:self.pointAmountTextField]) {
             //获取积分换取金额
-            if ([str integerValue] > [IPCPayOrderMode sharedManager].point) {
+            if ([str integerValue] > [IPCPayOrderManager sharedManager].point) {
                 if (self.delegate) {
                     if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
-                        [self.delegate getPointPrice:[IPCPayOrderMode sharedManager].point];
+                        [self.delegate getPointPrice:[IPCPayOrderManager sharedManager].point];
                     }
                 }
             }else{
@@ -148,19 +148,19 @@
             }
         }else if ([textField isEqual:self.payAmountTextField]){
             //判断实际输入价格
-            if (([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice) < [str doubleValue]) {
-                [IPCPayOrderMode sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice;
+            if (([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice) < [str doubleValue]) {
+                [IPCPayOrderManager sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice;
             }else{
-                [IPCPayOrderMode sharedManager].realTotalPrice = [str doubleValue];
+                [IPCPayOrderManager sharedManager].realTotalPrice = [str doubleValue];
             }
             //计算赠送金额
-            [IPCPayOrderMode sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderMode sharedManager].pointPrice - [IPCPayOrderMode sharedManager].realTotalPrice;
-            if ([IPCPayOrderMode sharedManager].givingAmount <= 0) {
-                [IPCPayOrderMode sharedManager].givingAmount = 0;
+            [IPCPayOrderManager sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].realTotalPrice;
+            if ([IPCPayOrderManager sharedManager].givingAmount <= 0) {
+                [IPCPayOrderManager sharedManager].givingAmount = 0;
             }
             //剩余支付金额
-            [IPCPayOrderMode sharedManager].remainAmount = [IPCPayOrderMode sharedManager].realTotalPrice;
-            [[IPCPayOrderMode sharedManager].payTypeRecordArray removeAllObjects];
+            [IPCPayOrderManager sharedManager].remainAmount = [IPCPayOrderManager sharedManager].realTotalPrice;
+            [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
         }
     }
     

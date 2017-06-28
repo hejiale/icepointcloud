@@ -40,13 +40,13 @@
         }
     }else{
         //下订单页面 选择客户的折扣计算
-        if ([IPCPayOrderMode sharedManager].isChooseCustomer) {
+        if ([IPCPayOrderManager sharedManager].isChooseCustomer) {
             _unitPrice = 0;
-            [IPCPayOrderMode sharedManager].isChooseCustomer = NO;
+            [IPCPayOrderManager sharedManager].isChooseCustomer = NO;
         }
         if (_unitPrice == 0){
-            if ([IPCPayOrderMode sharedManager].customerDiscount > 0 && [self.glasses filterType] != IPCTopFilterTypeCard) {
-                return self.glasses.price * [IPCPayOrderMode sharedManager].customerDiscount;
+            if ([IPCPayOrderManager sharedManager].customerDiscount > 0 && [self.glasses filterType] != IPCTopFilterTypeCard) {
+                return self.glasses.price * [IPCPayOrderManager sharedManager].customerDiscount;
             }
             return self.glasses.price;
         }
@@ -65,7 +65,7 @@
         [params setObject:[NSString stringWithFormat:@"%.2f",self.unitPrice] forKey:@"afterDiscountPrice"];
     }
     
-    if ( ![IPCPayOrderMode sharedManager].isTrade) {
+    if ( ![IPCPayOrderManager sharedManager].isTrade) {
         [params setObject:@(self.pointValue) forKey:@"exchangeIntegral"];
         [params setObject:(self.isChoosePoint ? @"true" : @"false") forKey:@"isIntegralExchange"];
     }

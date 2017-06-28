@@ -30,14 +30,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 @implementation IPCInsertCustomerViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -48,9 +40,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     }];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
     
-    [[IPCEmployeeMode sharedManager] queryEmploye:@""];
-    [[IPCEmployeeMode sharedManager] queryMemberLevel];
-    [[IPCEmployeeMode sharedManager] queryCustomerType];
+    [[IPCEmployeeeManager sharedManager] queryEmploye:@""];
+    [[IPCEmployeeeManager sharedManager] queryMemberLevel];
+    [[IPCEmployeeeManager sharedManager] queryCustomerType];
     
     [[IPCInsertCustomer instance] resetData];
     [IPCInsertCustomer instance].isInsertStatus = YES;
@@ -68,14 +60,14 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 - (void)saveNewCustomerRequest
 {
     if (![IPCInsertCustomer instance].memberLevel.length) {
-        IPCMemberLevel * memberLevelMode = [IPCEmployeeMode sharedManager].memberLevelList.list[0];
+        IPCMemberLevel * memberLevelMode = [IPCEmployeeeManager sharedManager].memberLevelList.list[0];
         [IPCInsertCustomer instance].memberLevel = memberLevelMode.memberLevel;
         [IPCInsertCustomer instance].memberLevelId = memberLevelMode.memberLevelId;
     }
     if (![IPCInsertCustomer instance].customerType.length) {
-        __block IPCCustomerType * customerType = [IPCEmployeeMode sharedManager].customerTypeList.list[0];
+        __block IPCCustomerType * customerType = [IPCEmployeeeManager sharedManager].customerTypeList.list[0];
         [IPCInsertCustomer instance].customerType = @"自然进店";
-        [[IPCEmployeeMode sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[IPCEmployeeeManager sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj.customerType isEqualToString:@"自然进店"]) {
                 [IPCInsertCustomer instance].customerTypeId = obj.customerTypeId;
             }
@@ -227,7 +219,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             
-            if ([IPCPayOrderMode sharedManager].isPayOrderStatus) {
+            if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
                 [cell setTopTitle:@"验光单"];
             }else{
                 [cell setInsertTitle:@"验光单"];

@@ -76,9 +76,9 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                        Gender:[IPCCommon gender:self.genderTextField.text]
                                                         Email:self.emailTextField.text
                                                      Birthday:self.birthdayTextField.text
-                                                   EmployeeId:[[IPCEmployeeMode sharedManager] employeeId:self.handlersTextField.text]
+                                                   EmployeeId:[[IPCEmployeeeManager sharedManager] employeeId:self.handlersTextField.text]
                                                     MemberNum:self.memberNumTextField.text 
-                                                MemberLevelId:[[IPCEmployeeMode sharedManager] memberLevelId:self.memberLevelTextField.text]
+                                                MemberLevelId:[[IPCEmployeeeManager sharedManager] memberLevelId:self.memberLevelTextField.text]
                                                CustomerTypeId:self.currentDetailCustomer.customerTypeId
                                                  EmployeeName:self.handlersTextField.text
                                                   MemberLevel:self.memberLevelTextField.text
@@ -171,9 +171,9 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
     if (self.insertType == InsertCustomerTypeEmployee)
-        return [[IPCEmployeeMode sharedManager] employeeNameArray];
+        return [[IPCEmployeeeManager sharedManager] employeeNameArray];
     else if (self.insertType == InsertCustomerTypeMemberType)
-        return [[IPCEmployeeMode sharedManager] memberLevelNameArray];
+        return [[IPCEmployeeeManager sharedManager] memberLevelNameArray];
     return @[@"男" , @"女"];
 }
 

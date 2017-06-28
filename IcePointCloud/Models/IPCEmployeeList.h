@@ -1,5 +1,5 @@
 //
-//  IPCEmploye.h
+//  IPCEmployee.h
 //  IcePointCloud
 //
 //  Created by mac on 2016/11/30.
@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCEmploye.h"
+#import "IPCEmployee.h"
 
-@interface IPCEmployeList : NSObject
+@interface IPCEmployeeList : NSObject
 
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCEmploye *> * employeArray;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployee *> * employeArray;
 
 - (instancetype)initWithResponseObject:(id)responseObject;
 

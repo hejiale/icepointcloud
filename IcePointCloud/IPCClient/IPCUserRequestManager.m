@@ -30,15 +30,6 @@
 }
 
 
-+ (void)updatePersonInfoWithUserName:(NSString *)userName
-                               Phone:(NSString *)phone
-                        SuccessBlock:(void (^)(id responseValue))success
-                        FailureBlock:(void (^)(NSError * error))failure
-{
-    [self postRequest:@{@"username":userName,@"mobile":phone} RequestMethod:@"bizadmin.saveUserInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-}
-
-
 + (void)updatePasswordWithOldPassword:(NSString *)oldPassword
                        UpdatePassword:(NSString *)updatePassword
                          SuccessBlock:(void (^)(id responseValue))success

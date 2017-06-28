@@ -171,7 +171,7 @@ typedef void(^UpdateBlock)(void);
     self.insertOptometry.distanceLeft = [self subTextField:11].text;
     self.insertOptometry.addLeft = [self subTextField:12].text;
     self.insertOptometry.employeeName = [self subTextField:13].text;
-    self.insertOptometry.employeeId = [[IPCEmployeeMode sharedManager] employeeId:self.insertOptometry.employeeName];
+    self.insertOptometry.employeeId = [[IPCEmployeeeManager sharedManager] employeeId:self.insertOptometry.employeeName];
     
     if (self.updateBlock) {
         self.updateBlock();
@@ -225,7 +225,7 @@ typedef void(^UpdateBlock)(void);
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
     if (tableView.view.tag == optometristTag)
-        return [[IPCEmployeeMode sharedManager] employeeNameArray];
+        return [[IPCEmployeeeManager sharedManager] employeeNameArray];
     return @[@"远用",@"近用"];
 }
 

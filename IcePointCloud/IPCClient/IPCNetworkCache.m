@@ -66,7 +66,7 @@ static NSString *const NetworkResponseCache = @"NetworkResponseCache";
 
 - (NSString *)cacheKeyWithRequestMethod:(NSString *)requestMethod Parameters:(id)parameter
 {
-    NSString * userID = [IPCAppManager sharedManager].profile.user.userID;
+    NSString * userID = [IPCAppManager sharedManager].profile.userID;
     //Different userID to login every time to save the user's network corresponding cached data
     NSMutableString *cacheKey = [[NSMutableString alloc]initWithFormat:@"%@_%@_%@_%@",[self jk_version],IPC_ProductAPI_URL,requestMethod,userID ?  : @""];
     

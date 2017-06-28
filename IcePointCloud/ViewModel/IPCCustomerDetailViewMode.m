@@ -53,7 +53,7 @@
     [IPCCurrentCustomer sharedManager].currentOpometry = nil;
     [IPCCurrentCustomer sharedManager].currentAddress = nil;
     [IPCCurrentCustomer sharedManager].currentCustomer = nil;
-    [IPCPayOrderMode sharedManager].customerDiscount = 1;
+    [IPCPayOrderManager sharedManager].customerDiscount = 1;
     
     [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
@@ -69,8 +69,8 @@
     
     if (self.detailCustomer) {
         [IPCCurrentCustomer sharedManager].currentCustomer = self.detailCustomer;
-        [IPCPayOrderMode sharedManager].customerDiscount = self.detailCustomer.discount/10;
-        [IPCPayOrderMode sharedManager].isChooseCustomer = YES;
+        [IPCPayOrderManager sharedManager].customerDiscount = self.detailCustomer.discount/10;
+        [IPCPayOrderManager sharedManager].isChooseCustomer = YES;
     }
 }
 

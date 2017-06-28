@@ -1,5 +1,5 @@
 //
-//  IPCEmployeeMode.h
+//  IPCEmployeeeManager.h
 //  IcePointCloud
 //
 //  Created by gerry on 2017/4/13.
@@ -10,14 +10,14 @@
 #import "IPCCustomerTypeList.h"
 #import "IPCMemberLevelList.h"
 
-@interface IPCEmployeeMode : NSObject
+@interface IPCEmployeeeManager : NSObject
 
-@property (nonatomic, strong) IPCEmployeList * employeList;
+@property (nonatomic, strong) IPCEmployeeList * employeList;
 @property (nonatomic, strong) IPCCustomerTypeList * customerTypeList;
 @property (nonatomic, strong) IPCMemberLevelList * memberLevelList;
 
 
-+ (IPCEmployeeMode *)sharedManager;
++ (IPCEmployeeeManager *)sharedManager;
 
 - (void)queryEmploye:(NSString *)keyWord;
 - (void)queryMemberLevel;

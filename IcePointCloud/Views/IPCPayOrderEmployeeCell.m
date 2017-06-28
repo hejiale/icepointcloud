@@ -40,7 +40,7 @@
     
     __weak typeof(self) weakSelf = self;
     
-    [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         __block IPCEmployeePerformanceView * employeeView = [[IPCEmployeePerformanceView alloc]initWithFrame:CGRectMake(20+(width+15)*idx, 45/2, width, 90) Update:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf replaceEmployee:employeeView.employeeResult];
@@ -56,9 +56,9 @@
 
 
 - (void)replaceEmployee:(IPCEmployeeResult *)employeeResult{
-   [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+   [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
        if ([employeeResult.employee.jobID isEqualToString:obj.employee.jobID]) {
-           [[IPCPayOrderMode sharedManager].employeeResultArray replaceObjectAtIndex:idx withObject:employeeResult];
+           [[IPCPayOrderManager sharedManager].employeeResultArray replaceObjectAtIndex:idx withObject:employeeResult];
        }
    }];
     
@@ -70,9 +70,9 @@
 }
 
 - (void)removeEmployee:(IPCEmployeeResult *)employeeResult{
-    [[IPCPayOrderMode sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([employeeResult.employee.jobID isEqualToString:obj.employee.jobID]) {
-            [[IPCPayOrderMode sharedManager].employeeResultArray removeObject:employeeResult];
+            [[IPCPayOrderManager sharedManager].employeeResultArray removeObject:employeeResult];
         }
     }];
     

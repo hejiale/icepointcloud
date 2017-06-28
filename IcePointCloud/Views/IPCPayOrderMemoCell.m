@@ -36,7 +36,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView{
     NSString * str = [textView.text jk_trimmingWhitespace];
     if (str.length) {
-        [IPCPayOrderMode sharedManager].remark = str;
+        [IPCPayOrderManager sharedManager].remark = str;
     }
 }
 

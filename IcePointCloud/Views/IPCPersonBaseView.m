@@ -39,20 +39,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 }
 
 #pragma mark //Request Data
-- (void)updateUserInfo:(NSString *)userName Mobile:(NSString *)mobile
-{
-    [IPCUserRequestManager updatePersonInfoWithUserName:userName ? : [IPCAppManager sharedManager].profile.user.contactName
-                                                  Phone:mobile ? : [IPCAppManager sharedManager].profile.user.contactMobilePhone
-                                           SuccessBlock:^(id responseValue){
-                                               [[IPCAppManager sharedManager].profile.user setContactName:userName];
-                                               [[IPCAppManager sharedManager].profile.user setContactMobilePhone:mobile];
-                                               [self.personTableView reloadData];
-                                           }FailureBlock:^(NSError *error) {
-                                               [IPCCustomUI showError:error.domain];
-                                           }];
-}
-
-
 - (void)logoutRequest
 {
     [IPCUserRequestManager userLogoutWithSuccessBlock:^(id responseValue) {

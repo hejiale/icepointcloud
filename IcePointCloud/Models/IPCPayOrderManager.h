@@ -1,5 +1,5 @@
 //
-//  IPCPayOrderMode.h
+//  IPCPayOrderManager.h
 //  IcePointCloud
 //
 //  Created by mac on 2016/11/30.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCEmploye.h"
+#import "IPCEmployee.h"
 #import "IPCEmployeeResult.h"
 #import "IPCPointValueMode.h"
 #import "IPCPayRecord.h"
 
-@interface IPCPayOrderMode : NSObject
+@interface IPCPayOrderManager : NSObject
 
-+ (IPCPayOrderMode *)sharedManager;
++ (IPCPayOrderManager *)sharedManager;
 
 @property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态

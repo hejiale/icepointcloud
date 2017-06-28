@@ -24,7 +24,7 @@
 - (void)parseResponseValue:(id)responseValue
 {
     [self.products removeAllObjects];
-    [[IPCPayOrderMode sharedManager] resetData];
+    [[IPCPayOrderManager sharedManager] resetData];
     self.addressMode = nil;
     self.optometryMode = nil;
     self.orderInfo = nil;
@@ -70,18 +70,18 @@
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCPayRecord * payType = [IPCPayRecord mj_objectWithKeyValues:obj];
                 payType.isHavePay = YES;
-                [[IPCPayOrderMode sharedManager].payTypeRecordArray addObject:payType];
+                [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:payType];
                 totalPayTypePrice += payType.payPrice;
             }];
         }
-        [IPCPayOrderMode sharedManager].remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;
+        [IPCPayOrderManager sharedManager].remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;
     }
    
     if ([responseValue[@"employeeAchievements"] isKindOfClass:[NSArray class]]) {
         [responseValue[@"employeeAchievements"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             IPCEmployeeResult * result = [IPCEmployeeResult mj_objectWithKeyValues:obj];
             result.isUpdateStatus= YES;
-            [[IPCPayOrderMode sharedManager].employeeResultArray addObject:result];
+            [[IPCPayOrderManager sharedManager].employeeResultArray addObject:result];
         }];
     }
 }

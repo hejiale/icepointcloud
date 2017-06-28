@@ -1,5 +1,5 @@
 //
-//  IPCEmploye.h
+//  IPCEmployee.h
 //  IcePointCloud
 //
 //  Created by mac on 2016/12/1.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCEmploye : NSObject
+@interface IPCEmployee : NSObject
 
 @property (nonatomic, copy, readonly) NSString *  jobNumber;
 @property (nonatomic, copy, readonly) NSString *  name;

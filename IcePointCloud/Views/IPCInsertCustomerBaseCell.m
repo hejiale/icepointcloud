@@ -168,11 +168,11 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 #pragma mark //uiPickerViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
     if (self.insertType == IPCInsertTypeEmployee) {
-        return [[IPCEmployeeMode sharedManager] employeeNameArray];
+        return [[IPCEmployeeeManager sharedManager] employeeNameArray];
     }else if (self.insertType == IPCInsertTypeCustomerType){
-        return [[IPCEmployeeMode sharedManager] customerTypeNameArray];
+        return [[IPCEmployeeeManager sharedManager] customerTypeNameArray];
     }else if (self.insertType == IPCInsertTypeMemberLevel){
-        return [[IPCEmployeeMode sharedManager] memberLevelNameArray];
+        return [[IPCEmployeeeManager sharedManager] memberLevelNameArray];
     }
     return @[@"男" , @"女"];
 }
@@ -187,14 +187,14 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
         [IPCInsertCustomer instance].photo_udid = [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]];
     }else if (self.insertType == IPCInsertTypeMemberLevel){
         [IPCInsertCustomer instance].memberLevel = parameter;
-        [IPCInsertCustomer instance].memberLevelId = [[IPCEmployeeMode sharedManager] memberLevelId:parameter];
+        [IPCInsertCustomer instance].memberLevelId = [[IPCEmployeeeManager sharedManager] memberLevelId:parameter];
     }else if (self.insertType == IPCInsertTypeEmployee){
         [IPCInsertCustomer instance].empName = parameter;
-        [IPCInsertCustomer instance].empNameId = [[IPCEmployeeMode sharedManager] employeeId:parameter];
+        [IPCInsertCustomer instance].empNameId = [[IPCEmployeeeManager sharedManager] employeeId:parameter];
     }else if (self.insertType == IPCInsertTypeCustomerType){
         if (![[IPCInsertCustomer instance].customerType isEqualToString:parameter]) {
             [IPCInsertCustomer instance].customerType =parameter;
-            [IPCInsertCustomer instance].customerTypeId = [[IPCEmployeeMode sharedManager] customerTypeId:parameter];
+            [IPCInsertCustomer instance].customerTypeId = [[IPCEmployeeeManager sharedManager] customerTypeId:parameter];
             [IPCInsertCustomer instance].introducerInteger = @"";
             [IPCInsertCustomer instance].introducerName = @"";
         }

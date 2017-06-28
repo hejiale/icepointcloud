@@ -34,20 +34,6 @@
 
 
 /**
- *  UPDATE USER INFO
- *
- *  @param userName
- *  @param phone
- *  @param isUserName
- *  @param success
- *  @param failure
- */
-+ (void)updatePersonInfoWithUserName:(NSString *)userName
-                               Phone:(NSString *)phone
-                        SuccessBlock:(void (^)(id responseValue))success
-                        FailureBlock:(void (^)(NSError * error))failure;
-
-/**
  *  UPDATE PASSWORD
  *
  *  @param oldPassword

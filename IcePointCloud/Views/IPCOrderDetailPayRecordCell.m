@@ -20,7 +20,7 @@
     
     [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         IPCCustomDetailOrderPayRecordView * recordView  = [[IPCCustomDetailOrderPayRecordView alloc]initWithFrame:CGRectMake(28, 40*idx, self.jk_width-56, 40)];
         recordView.payType = obj;
         [self.contentView addSubview:recordView];

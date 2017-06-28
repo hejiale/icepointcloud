@@ -21,12 +21,12 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    if ([IPCPayOrderMode sharedManager].payTypeRecordArray.count) {
+    if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count) {
         [self.payRecordContentView setHidden:NO];
-        self.payRecordHeight.constant = [IPCPayOrderMode sharedManager].payTypeRecordArray.count * 50;
+        self.payRecordHeight.constant = [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 50;
         [self.payRecordContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
-        [[IPCPayOrderMode sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull payRecord, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull payRecord, NSUInteger idx, BOOL * _Nonnull stop) {
             IPCSwipeView * swipeView = [[IPCSwipeView alloc]initWithFrame:CGRectMake(0, 50*idx, self.payRecordContentView.jk_width, 50)];
             [self.payRecordContentView addSubview:swipeView];
             [self.recordViews addObject:swipeView];
@@ -45,8 +45,8 @@
             };
             
             [[swipeView rac_signalForSelector:@selector(deleteAction)] subscribeNext:^(RACTuple * _Nullable x) {
-                [IPCPayOrderMode sharedManager].remainAmount += payRecord.payPrice;
-                [[IPCPayOrderMode sharedManager].payTypeRecordArray removeObjectAtIndex:idx];
+                [IPCPayOrderManager sharedManager].remainAmount += payRecord.payPrice;
+                [[IPCPayOrderManager sharedManager].payTypeRecordArray removeObjectAtIndex:idx];
                 if (self.delegate) {
                     if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
                         [self.delegate reloadUI];
@@ -59,15 +59,15 @@
         self.payRecordHeight.constant = 0;
     }
     
-    if ([IPCPayOrderMode sharedManager].isInsertRecordStatus) {
+    if ([IPCPayOrderManager sharedManager].isInsertRecordStatus) {
         [self.insertRecordView setHidden:NO];
-        if ([IPCPayOrderMode sharedManager].insertPayRecord) {
-            [self.payTypeTextField setText:[IPCPayOrderMode sharedManager].insertPayRecord.payTypeInfo];
-            if ([IPCPayOrderMode sharedManager].insertPayRecord.payPrice > 0) {
-                [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderMode sharedManager].insertPayRecord.payPrice]];
+        if ([IPCPayOrderManager sharedManager].insertPayRecord) {
+            [self.payTypeTextField setText:[IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo];
+            if ([IPCPayOrderManager sharedManager].insertPayRecord.payPrice > 0) {
+                [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].insertPayRecord.payPrice]];
             }
-            if ([[IPCPayOrderMode sharedManager].insertPayRecord.payTypeInfo isEqualToString:@"储值余额"]) {
-                [self.payAmountTextField setPlaceholder:[NSString stringWithFormat:@"可用余额%.2f",[IPCPayOrderMode sharedManager].balanceAmount - [IPCPayOrderMode sharedManager].usedBalanceAmount]];
+            if ([[IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo isEqualToString:@"储值余额"]) {
+                [self.payAmountTextField setPlaceholder:[NSString stringWithFormat:@"可用余额%.2f",[IPCPayOrderManager sharedManager].balanceAmount - [IPCPayOrderManager sharedManager].usedBalanceAmount]];
             }
         }
     }else{
@@ -91,15 +91,15 @@
 #pragma mark //Clicked Events
 - (IBAction)insertRecordAction:(id)sender
 {
-    if ([IPCPayOrderMode sharedManager].remainAmount <= 0) {
+    if ([IPCPayOrderManager sharedManager].remainAmount <= 0) {
         [IPCCustomUI showError:@"剩余应收金额为零"];
         return;
     }
-    if ([IPCPayOrderMode sharedManager].isInsertRecordStatus){
+    if ([IPCPayOrderManager sharedManager].isInsertRecordStatus){
         return;
     }
-    [IPCPayOrderMode sharedManager].isInsertRecordStatus = YES;
-    [IPCPayOrderMode sharedManager].insertPayRecord = [[IPCPayRecord alloc]init];
+    [IPCPayOrderManager sharedManager].isInsertRecordStatus = YES;
+    [IPCPayOrderManager sharedManager].insertPayRecord = [[IPCPayRecord alloc]init];
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -117,18 +117,18 @@
     IPCPayRecord * payRecord = [[IPCPayRecord alloc]init];
     payRecord.payTypeInfo = self.payTypeTextField.text;
     
-    if ([IPCPayOrderMode sharedManager].remainAmount <= [self.payAmountTextField.text doubleValue]) {
-        payRecord.payPrice = [IPCPayOrderMode sharedManager].remainAmount;
+    if ([IPCPayOrderManager sharedManager].remainAmount <= [self.payAmountTextField.text doubleValue]) {
+        payRecord.payPrice = [IPCPayOrderManager sharedManager].remainAmount;
     }else{
         payRecord.payPrice = [self.payAmountTextField.text doubleValue];
     }
-    [IPCPayOrderMode sharedManager].remainAmount -= payRecord.payPrice;
-    if ([IPCPayOrderMode sharedManager].remainAmount <= 0) {
-        [IPCPayOrderMode sharedManager].remainAmount = 0;
+    [IPCPayOrderManager sharedManager].remainAmount -= payRecord.payPrice;
+    if ([IPCPayOrderManager sharedManager].remainAmount <= 0) {
+        [IPCPayOrderManager sharedManager].remainAmount = 0;
     }
     
-    [[IPCPayOrderMode sharedManager].payTypeRecordArray addObject:payRecord];
-    [IPCPayOrderMode sharedManager].isInsertRecordStatus = NO;
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:payRecord];
+    [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -138,8 +138,8 @@
 }
 
 - (IBAction)closeInsertAction:(id)sender {
-    [IPCPayOrderMode sharedManager].isInsertRecordStatus = NO;
-    [IPCPayOrderMode sharedManager].insertPayRecord = nil;
+    [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
+    [IPCPayOrderManager sharedManager].insertPayRecord = nil;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -170,21 +170,21 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([self.payTypeTextField.text isEqualToString:@"储值余额"]) {
-        if ([IPCPayOrderMode sharedManager].balanceAmount > 0) {
-            if ([IPCPayOrderMode sharedManager].balanceAmount - [IPCPayOrderMode sharedManager].usedBalanceAmount <= 0) {
-                [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = 0;
+        if ([IPCPayOrderManager sharedManager].balanceAmount > 0) {
+            if ([IPCPayOrderManager sharedManager].balanceAmount - [IPCPayOrderManager sharedManager].usedBalanceAmount <= 0) {
+                [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = 0;
             }else{
-                [IPCPayOrderMode sharedManager].usedBalanceAmount += [textField.text doubleValue];
-                [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
+                [IPCPayOrderManager sharedManager].usedBalanceAmount += [textField.text doubleValue];
+                [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
             }
         }else{
-            [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = 0;
+            [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = 0;
         }
     }else{
-        if ([IPCPayOrderMode sharedManager].remainAmount <= [textField.text doubleValue]) {
-            [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = [IPCPayOrderMode sharedManager].remainAmount;
+        if ([IPCPayOrderManager sharedManager].remainAmount <= [textField.text doubleValue]) {
+            [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [IPCPayOrderManager sharedManager].remainAmount;
         }else{
-            [IPCPayOrderMode sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
+            [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
         }
     }
     if (self.delegate) {
@@ -203,7 +203,7 @@
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
     [self.payTypeTextField setText:parameter];
-    [IPCPayOrderMode sharedManager].insertPayRecord.payTypeInfo = parameter;
+    [IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo = parameter;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {

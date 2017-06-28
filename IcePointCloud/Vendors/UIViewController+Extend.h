@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IPCEmptyAlertView.h"
 
 @interface UIViewController (Extend)
 
@@ -15,12 +14,7 @@
 
 - (void)setBackground;
 
-- (void)setNavigationTitle:(NSString *)title;
-
--(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
-
 - (void)addBackgroundViewWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed;
 
-- (void)popToPayOrderViewController;
 
 @end

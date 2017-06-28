@@ -19,7 +19,7 @@
 #import "IPCMatchItem.h"
 #import "IPCSingleModeView.h"
 #import "IPCCompareItemView.h"
-#import "IPCGlassListViewMode.h"
+#import "IPCProductViewMode.h"
 #import "IPCOfflineFaceDetector.h"
 
 static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
@@ -54,7 +54,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 @property (nonatomic, strong) IPCRefreshAnimationHeader *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter *refreshFooter;
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
-@property (strong, nonatomic) IPCGlassListViewMode  *glassListViewMode;
+@property (strong, nonatomic) IPCProductViewMode  *glassListViewMode;
 @property (nonatomic, strong) NSMutableArray<IPCMatchItem *> *matchItems;
 @property (nonatomic, strong) IPCOfflineFaceDetector  * offlineFaceDetector;
 
@@ -62,19 +62,11 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 @implementation IPCTryGlassesViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
+    self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = YES;
     self.glassListViewMode.isCustomsized = NO;
     

@@ -1,5 +1,5 @@
 //
-//  IPCEmployeeResult.h
+//  IPCEmployeeeResult.h
 //  IcePointCloud
 //
 //  Created by gerry on 2017/4/15.
@@ -10,7 +10,7 @@
 
 @interface IPCEmployeeResult : NSObject
 
-@property (nonatomic, strong, readwrite) IPCEmploye * employee;
+@property (nonatomic, strong, readwrite) IPCEmployee * employee;
 @property (nonatomic, assign, readwrite) double      achievement;//员工份额
 @property (nonatomic, assign, readwrite) BOOL     isUpdateStatus;
 

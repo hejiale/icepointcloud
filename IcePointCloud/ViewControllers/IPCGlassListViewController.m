@@ -11,7 +11,7 @@
 #import "IPCGlasslistCollectionViewCell.h"
 #import "IPCGlassParameterView.h"
 #import "IPCEditBatchParameterView.h"
-#import "IPCGlassListViewMode.h"
+#import "IPCProductViewMode.h"
 #import "IPCPayOrderViewController.h"
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
@@ -23,7 +23,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @property (strong, nonatomic) IPCEditBatchParameterView           *editParameterView;
 @property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter           *refreshFooter;
-@property (strong, nonatomic) IPCGlassListViewMode                   *glassListViewMode;
+@property (strong, nonatomic) IPCProductViewMode                   *glassListViewMode;
 
 @end
 
@@ -34,7 +34,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     [super viewDidLoad];
 
-    self.glassListViewMode =  [[IPCGlassListViewMode alloc]init];
+    self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
     self.glassListViewMode.isCustomsized = NO;
     

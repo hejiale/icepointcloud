@@ -32,13 +32,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 @implementation IPCSearchCustomerViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,7 +40,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [self setBackground];
     
     searchKeyWord = @"";
-    if ([IPCPayOrderMode sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
+    if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
         [self setNavigationTitle:@"客户"];
     }
     if ([IPCInsertCustomer instance].isInsertStatus){
