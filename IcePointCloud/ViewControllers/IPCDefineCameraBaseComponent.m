@@ -295,11 +295,7 @@
     imgView.backgroundColor = [UIColor clearColor];
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     
-    UIImage * sourceImage = [result.image lsqImageScale:1.5];
-    
-    UIImage *image = [result.image lsqImageCorpWithSize:sourceImage.size rect:self.view.bounds outputSize:CGSizeMake(569, 748) orientation:UIImageOrientationUp interpolationQuality:kCGInterpolationHigh];
-    
-    lsqLDebug(@"image: %@", NSStringFromCGSize(image.size));
+    UIImage *image = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
     
     imgView.image = image;
     [_preview addSubview:imgView];
@@ -341,35 +337,35 @@
     self.view.backgroundColor = lsqRGB(122, 122, 122);
     
     // The camera configuration section
-    _configBar = [UIView initWithFrame:CGRectMake(0, 0, self.view.getSizeWidth, 60)];
+    _configBar = [UIView initWithFrame:CGRectMake(0, 0, [self.view lsqGetSizeWidth], 60)];
     [_configBar setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:_configBar];
     
     // Bottom bar
-    _bottomBar = [UIView initWithFrame:CGRectMake(0, self.view.getSizeHeight - 100, self.view.getSizeWidth, 100)];
+    _bottomBar = [UIView initWithFrame:CGRectMake(0, [self.view lsqGetSizeHeight] - 100, [self.view lsqGetSizeWidth], 100)];
     [_bottomBar setBackgroundColor:COLOR_RGB_BLUE];
     [self.view addSubview:_bottomBar];
     
     // The camera view
-    _cameraView = [UIView initWithFrame:CGRectMake(0, _configBar.getBottomY, self.view.getSizeWidth, self.view.getSizeHeight-_configBar.getSizeHeight-_bottomBar.getSizeHeight)];
+    _cameraView = [UIView initWithFrame:CGRectMake(0, [_configBar lsqGetBottomY], [self.view lsqGetSizeWidth], [self.view lsqGetSizeHeight]-[_configBar lsqGetSizeHeight]-[_bottomBar lsqGetSizeHeight])];
     [self.view addSubview:_cameraView];
     
     // Cancel button
-    _cancelButton = [UIButton buttonWithFrame:CGRectMake(0, 10, 60, _configBar.getSizeHeight)
+    _cancelButton = [UIButton buttonWithFrame:CGRectMake(0, 10, 60, [_configBar lsqGetSizeHeight])
                                     imageName:@"icon_back"];
     
     [_cancelButton addTouchUpInsideTarget:self action:@selector(onWindowExit:)];
     [_configBar addSubview:_cancelButton];
     
     // Camera before and after the switch button
-    _switchCameraButton = [UIButton buttonWithFrame:CGRectMake(_configBar.getSizeWidth - 60, 10, 60, _configBar.getSizeHeight)
+    _switchCameraButton = [UIButton buttonWithFrame:CGRectMake([_configBar lsqGetSizeWidth] - 60, 10, 60, [_configBar lsqGetSizeHeight])
                                           imageName:@"camera_swap_btn"];
     
     [_switchCameraButton addTouchUpInsideTarget:self action:@selector(onSwitchCamera:)];
     [_configBar addSubview:_switchCameraButton];
     
     //The title bar
-    _topTitleLabel = [UILabel initWithFrame:CGRectMake(_configBar.center.x - 200, 15, 400, _configBar.getSizeHeight-15) font:[UIFont systemFontOfSize:20 weight:UIFontWeightThin] color:COLOR_RGB_BLUE aligment:NSTextAlignmentCenter];
+    _topTitleLabel = [UILabel initWithFrame:CGRectMake([_configBar lsqGetCenterX:0] - 200, 15, 400, [_configBar lsqGetSizeHeight]-15) font:[UIFont systemFontOfSize:20 weight:UIFontWeightThin] color:COLOR_RGB_BLUE aligment:NSTextAlignmentCenter];
     [_topTitleLabel setText:@"请把脸调整至虚线框内，点击拍摄按钮保存"];
     [_configBar addSubview:_topTitleLabel];
     
@@ -377,15 +373,14 @@
     _switchCameraButton.hidden = ([AVCaptureDevice lsqCameraCounts] == 0);
     
     //The face of a frame
-    _personLayer = [UIImageView initWithFrame:CGRectMake(0, _configBar.getBottomY+50, self.view.getSizeWidth, self.view.getSizeHeight-_configBar.getSizeHeight-_bottomBar.getSizeHeight-50) imageNamed:@"camera_person_frame"];
+    _personLayer = [UIImageView initWithFrame:CGRectMake(0, [_configBar lsqGetBottomY]+50, [self.view lsqGetSizeWidth], [self.view lsqGetSizeHeight]-[_configBar lsqGetSizeHeight]-[_bottomBar lsqGetSizeHeight]-50) imageNamed:@"camera_person_frame"];
     [self.view addSubview:_personLayer];
     
     // Photo button
-    CGFloat capBtnSize = _bottomBar.getSizeHeight - 20;
-    _captureButton = [UIButton initWithFrame:CGRectMake([_bottomBar getCenterX:capBtnSize], [_bottomBar getCenterY:capBtnSize], capBtnSize, capBtnSize)];
+    CGFloat capBtnSize = [_bottomBar lsqGetSizeHeight]  - 20;
+    
+    _captureButton = [UIButton initWithFrame:CGRectMake([_bottomBar lsqGetCenterX:capBtnSize], [_bottomBar lsqGetCenterY:capBtnSize], capBtnSize, capBtnSize)];
     [_captureButton setStateNormalImageName:@"camera_shoot_btn"];
-    _captureButton.layer.cornerRadius = capBtnSize * 0.5f;
-    _captureButton.layer.masksToBounds = YES;
     [_captureButton addTouchUpInsideTarget:self action:@selector(onCapturePhoto:)];
     [_bottomBar addSubview:_captureButton];
     

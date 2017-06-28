@@ -92,6 +92,14 @@
     return _products;
 }
 
+- (void)clearData{
+    [self.products removeAllObjects];
+    self.orderInfo = nil;
+    self.addressMode = nil;
+    self.optometryMode = nil;
+    
+}
+
 
 @end
 

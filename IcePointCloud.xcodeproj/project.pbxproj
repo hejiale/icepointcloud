@@ -1317,8 +1317,8 @@
 			isa = PBXGroup;
 			children = (
 				04B1D1F91D867B6100D9B865 /* AssetLibrary */,
+				CB9187181E8CB63500D59487 /* CustomVC */,
 				CB9187171E8CB62700D59487 /* PopoverVC */,
-				CB9187181E8CB63500D59487 /* RootVC */,
 				CB9187191E8CB64F00D59487 /* TabBarVC */,
 			);
 			name = CustomViewController;
@@ -1887,22 +1887,12 @@
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				CBB9920C1F01092A00C90FEA /* IPCCustomTopCell.h */,
-				CBB9920D1F01092A00C90FEA /* IPCCustomTopCell.m */,
-				CBB9920E1F01092A00C90FEA /* IPCCustomTopCell.xib */,
-				CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */,
-				CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */,
-				CB5CC4931E8E00B70091D0FD /* IPCDynamicImageTextButton.h */,
-				CB5CC4941E8E00B70091D0FD /* IPCDynamicImageTextButton.m */,
-				CB60C0F91E9612A7001B11E2 /* IPCEmptyAlertView.h */,
-				CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */,
-				CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */,
-				CB5CC4951E8E00B70091D0FD /* IPCStaticImageTextButton.h */,
-				CB5CC4961E8E00B70091D0FD /* IPCStaticImageTextButton.m */,
-				CB5CC4971E8E00B70091D0FD /* IPCSwitch.h */,
-				CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */,
-				CBAE2AF61EE6493B0081B0BB /* IPCSwipeView.h */,
-				CBAE2AF71EE6493B0081B0BB /* IPCSwipeView.m */,
+				CBC419DE1F0343E700387F9C /* Button */,
+				CBC419E01F03441A00387F9C /* EmptyAlert */,
+				CBC419DF1F03440100387F9C /* Progress */,
+				CBC419E11F03445200387F9C /* Swipe */,
+				CBC419E21F03446A00387F9C /* Switch */,
+				CBC419E31F03447B00387F9C /* TitleCell */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -1920,7 +1910,7 @@
 			name = PopoverVC;
 			sourceTree = "<group>";
 		};
-		CB9187181E8CB63500D59487 /* RootVC */ = {
+		CB9187181E8CB63500D59487 /* CustomVC */ = {
 			isa = PBXGroup;
 			children = (
 				CB5CC4A91E8E01040091D0FD /* IPCNavigationViewController.h */,
@@ -1932,7 +1922,7 @@
 				CB6AC2071E9F12C6008031DD /* IPCRootNavigationViewController.h */,
 				CB6AC2081E9F12C6008031DD /* IPCRootNavigationViewController.m */,
 			);
-			name = RootVC;
+			name = CustomVC;
 			sourceTree = "<group>";
 		};
 		CB9187191E8CB64F00D59487 /* TabBarVC */ = {
@@ -2200,6 +2190,64 @@
 				CBAE2B041EE674E30081B0BB /* IPCPayTypeRecordView.xib */,
 			);
 			name = PayTypeRecord;
+			sourceTree = "<group>";
+		};
+		CBC419DE1F0343E700387F9C /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				CB5CC4931E8E00B70091D0FD /* IPCDynamicImageTextButton.h */,
+				CB5CC4941E8E00B70091D0FD /* IPCDynamicImageTextButton.m */,
+				CB5CC4951E8E00B70091D0FD /* IPCStaticImageTextButton.h */,
+				CB5CC4961E8E00B70091D0FD /* IPCStaticImageTextButton.m */,
+			);
+			name = Button;
+			sourceTree = "<group>";
+		};
+		CBC419DF1F03440100387F9C /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */,
+				CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */,
+			);
+			name = Progress;
+			sourceTree = "<group>";
+		};
+		CBC419E01F03441A00387F9C /* EmptyAlert */ = {
+			isa = PBXGroup;
+			children = (
+				CB60C0F91E9612A7001B11E2 /* IPCEmptyAlertView.h */,
+				CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */,
+				CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */,
+			);
+			name = EmptyAlert;
+			sourceTree = "<group>";
+		};
+		CBC419E11F03445200387F9C /* Swipe */ = {
+			isa = PBXGroup;
+			children = (
+				CBAE2AF61EE6493B0081B0BB /* IPCSwipeView.h */,
+				CBAE2AF71EE6493B0081B0BB /* IPCSwipeView.m */,
+			);
+			name = Swipe;
+			sourceTree = "<group>";
+		};
+		CBC419E21F03446A00387F9C /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				CB5CC4971E8E00B70091D0FD /* IPCSwitch.h */,
+				CB5CC4981E8E00B70091D0FD /* IPCSwitch.m */,
+			);
+			name = Switch;
+			sourceTree = "<group>";
+		};
+		CBC419E31F03447B00387F9C /* TitleCell */ = {
+			isa = PBXGroup;
+			children = (
+				CBB9920C1F01092A00C90FEA /* IPCCustomTopCell.h */,
+				CBB9920D1F01092A00C90FEA /* IPCCustomTopCell.m */,
+				CBB9920E1F01092A00C90FEA /* IPCCustomTopCell.xib */,
+			);
+			name = TitleCell;
 			sourceTree = "<group>";
 		};
 		CBC6AF4F1EA0A29000F7914D /* Employee */ = {

@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *sectionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sectionValueLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bottomLine;
 
 @end

@@ -14,8 +14,6 @@
 /**
  Determine whether the Numbers
 
- @param text
- @return
  */
 + (BOOL)judgeIsNumber:(NSString *)text;
 
@@ -32,6 +30,10 @@
 
 + (NSString *)formatDate:(NSDate *)date IsTime:(BOOL)isTime;
 
+/**
+  Format purpose
+ 
+ */
 + (NSString *)formatPurpose:(NSString *)purpose;
 
 + (NSString *)purpose:(NSString *)text;

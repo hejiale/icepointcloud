@@ -10,7 +10,8 @@
                     "name":"lsq_filter_SkinNature",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.3
+                        "smoothing":0.6,
+                        "mixied":0.8
                     }
                 },
                 {
@@ -18,8 +19,8 @@
                     "name":"lsq_filter_SkinPink",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.5,
-                        "mixied":0.3
+                        "smoothing":0.6,
+                        "mixied":0.8
                     }
                 },
                 {
@@ -28,7 +29,7 @@
                     "color":"#E9807E",
                     "args":{
                         "smoothing":0.6,
-                        "mixied":0.4
+                        "mixied":0.8
                     }
                 },
                 {
@@ -36,8 +37,8 @@
                     "name":"lsq_filter_SkinNoir",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.5,
-                        "mixied":1
+                        "smoothing":0.6,
+                        "mixied":0.8
                     }
                 },
                 {
@@ -45,8 +46,8 @@
                     "name":"lsq_filter_SkinRuddy",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.45,
-                        "mixied":0.25
+                        "smoothing":0.6,
+                        "mixied":0.8
                     }
                 },
                 {
@@ -55,7 +56,7 @@
                     "color":"#E9807E",
                     "args":{
                         "smoothing":0.6,
-                        "mixied":0.3
+                        "mixied":0.8
                     }
                 },
                 {
@@ -63,8 +64,8 @@
                     "name":"lsq_filter_SkinPowder",
                     "color":"#E9807E",
                     "args":{
-                        "smoothing":0.45,
-                        "mixied":0.4
+                        "smoothing":0.6,
+                        "mixied":0.8
                     }
                 }
             ]
@@ -87,5 +88,5 @@
     "stickerGroups":[
         
     ],
-    "master":"g2nyCCzbOVvh25mY76w6kDiCQcE2votZP99YCmHGiG3McEGzaeyHLJ5x0vGBfP7MMvbwX\/EY7A74cE5bWdQLa8qIbxUavoacF2KzUSW2MmkUUKyBguQi8vWSq9YW9PFQItrjnAlumoOyV9mMAElvGoy86DooxDnnMHEzTbRHYsJSkjExNYwHOnZM79Q\/CEvohPAfq+W8hm\/LkGYfE\/5XNGdw3Wte5V684cTU4V9XNwc2p2n8OytfN9xwchEKz0fn7LubefYm8D5AwreO1XLlUIQlClCsgmMD7kxgEl+5DW26uH2oTjr4eyho2q2BghM5Md48S9ZBToFRHp5Doj6oPoYY8JZoCoy6y3DbLIOHW9utcEpIy12op8f4b2MG8RpDPF87mVf8NZD+nFjNrLW2js5aGlMEaBtH5BDPcBJfUDuRLZ8IqPF5cSH7Y9ueuiJ0yo+ruRLHuRckh53fjbZ6BAlEynsq9oZeLIaocsCCMQSoV2Tct7HN2mhhFvhZC0WuqqKMdU6yu+E0GinMGavf\/xyIeUWHLqe6B2zpt8NVUcsvugN2A3zV7+JP+s45T6K8YtXm8v8wtLpJEF\/CbTZ7HrAn2M2YyU91u6eHQVxGjNYMYNmTYSKRbVrY6y3gdGZLaaYJS7m1S3K4st16Te2P2w==29D765B444"
+    "master":"eOlFkxg41\/WGEm27U8hnvigCxBoK7BaOxIrJsSyhYVQIt5SerAtJm5ASY8SN2GNhQwRjL+8hXHf4bfKT2SGq2M8s\/6zzUfUwiDQsbkBQOTjFjI6Ryue1PVWxroJPf+jT4w9sTqJDTNur8AbG8YI63GbeyrhWhEokwqAJwPlNi1XS67VW24bdXp2CLF0CYjJqzUE6ZUpLWi5ngBZ9vxjNdRw7xj35QopODd\/tTA4uSSFD0O7ruc91BXDzIeJOxn2Vain3cMzwzrphd1X6+SENBBOBk5q8B2jfGl5C0zJS3hvMqOGnEsrHz3Jz3AvHghru4HW\/NNroZ\/0KiVMxXD8E5sSRAZbM5hQa9XHwMMhxziCDrRRcd4jD8QXcL2pIct4Kn54aDgsLNNFTLe4PrC6xnuSjwxx2fuc8O0fo6BcvHeHFgXTxWzCSIXG7+e9XMskNKVX8q58MceFToz+k9I5lHzIFx7MYmZmy8N9yQR2GaLxhQ05GFuidih60DxFlkxtjDuB9cECdPG0zMVrVcZ9A8YYXbFSX1Uk8gSv6noRIgzCkGSohz8p2aaMTCHt6FMb+k\/XlR0upL5mLty1IIL7x2e0mykXuodvWUkuH6jPv2fRQkEhOPTIZDmkUggd5PgdgCh1PR0ccEVlbKNKxRgKVDQ==452666523F"
 }

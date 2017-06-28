@@ -53,8 +53,7 @@
 {
     [super notifyProcessingWithResult:result];
     
-    UIImage * sourceImage = [[result loadResultImage] lsqImageScale:0.68];
-    UIImage *image = [result.image lsqImageCorpWithSize:sourceImage.size rect:CGRectMake(0, 60, self.view.jk_width, self.view.jk_height - 160) outputSize:CGSizeMake(531, 698) orientation:UIImageOrientationUp interpolationQuality:kCGInterpolationHigh];
+    UIImage *image = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
     
     if (self.ResultImageBlock)
         self.ResultImageBlock(image);

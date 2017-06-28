@@ -33,20 +33,7 @@
     _payType = payType;
     
     if (_payType) {
-        if ([_payType.payTypeInfo isEqualToString:@"储值余额"]) {
-            [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_card"]];
-        }else if ([_payType.payTypeInfo isEqualToString:@"现金"]){
-            [self.payTypeImageView setImage:[UIImage imageNamed:@"cash"]];
-        }else if ([_payType.payTypeInfo isEqualToString:@"刷卡"]){
-            [self.payTypeImageView setImage:[UIImage imageNamed:@"card"]];
-        }else if ([_payType.payTypeInfo isEqualToString:@"支付宝"]){
-            [self.payTypeImageView setImage:[UIImage imageNamed:@"zhifubao"]];
-        }else if ([_payType.payTypeInfo isEqualToString:@"微信"]){
-            [self.payTypeImageView setImage:[UIImage imageNamed:@"wexin"]];
-        }else if ([_payType.payTypeInfo isEqualToString:@"其它"]){
-            [self.payTypeImageView setImage:[UIImage imageNamed:@"icon_ wallet"]];
-        }
-        
+        [self.payTypeImageView setImage:[[IPCAppManager sharedManager] payTypeImage:_payType.payTypeInfo]];
         [self.payTypeNameLabel setText:_payType.payTypeInfo];
         [self.payDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_payType.payDate] IsTime:YES]];
         [self.payPriceLabel setText:[NSString stringWithFormat:@"-￥%.2f",_payType.payPrice]];

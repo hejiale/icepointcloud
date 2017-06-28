@@ -19,6 +19,7 @@
 @property (nonatomic, strong, readwrite) IPCOptometryMode                    *  optometryMode;
 
 - (void)parseResponseValue:(id)responseValue;
+- (void)clearData;
 
 @end
 

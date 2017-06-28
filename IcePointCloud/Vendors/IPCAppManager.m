@@ -181,5 +181,24 @@ NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProduct
 }
 
 
+- (UIImage *)payTypeImage:(NSString *)payTypeInfo
+{
+    NSString * imageName = nil;
+    if ([payTypeInfo isEqualToString:@"储值余额"]) {
+        imageName = @"icon_card";
+    }else if ([payTypeInfo isEqualToString:@"现金"]){
+        imageName = @"cash";
+    }else if ([payTypeInfo isEqualToString:@"刷卡"]){
+        imageName = @"card";
+    }else if ([payTypeInfo isEqualToString:@"支付宝"]){
+        imageName = @"zhifubao";
+    }else if ([payTypeInfo isEqualToString:@"微信"]){
+        imageName = @"wexin";
+    }else if ([payTypeInfo isEqualToString:@"其它"]){
+        imageName = @"icon_ wallet";
+    }
+    return [UIImage imageNamed:imageName];
+}
+
 
 @end

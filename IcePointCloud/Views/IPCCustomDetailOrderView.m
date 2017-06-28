@@ -102,8 +102,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 }
 
 - (IBAction)dismissViewAction:(id)sender {
-    [IPCCustomerOrderDetail instance].orderInfo = nil;
-    [[IPCCustomerOrderDetail instance].products removeAllObjects];
+    [[IPCCustomerOrderDetail instance] clearData];
+    [[IPCPayOrderMode sharedManager] resetData];
     
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.orderDetailBgView.frame;
@@ -153,14 +153,10 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 2){
-        if ([IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry)
-            return 2;
-    }
-    else if (section == 3){
-        return [IPCCustomerOrderDetail instance].products.count;
-    }else if (section == 6){
+    if ((section == 2 && [IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry) || section == 5){
         return 2;
+    }else if (section == 3){
+        return [IPCCustomerOrderDetail instance].products.count;
     }
     return 1;
 }
@@ -216,22 +212,18 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         }
         return cell;
     }else if (indexPath.section == 5){
-        IPCOrderDetailMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCOrderDetailMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        }
-        return cell;
-    }else if (indexPath.section == 6){
         if (indexPath.row == 0) {
             IPCOrderDetailSectionCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailSectionCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.sectionTitleLabel setText:@"收款记录"];
-            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderMode sharedManager].remainAmount];
-            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:6 Rang:remainAmountText.length - 6 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
-            [cell.sectionValueLabel setAttributedText:str];
-            
+            [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderMode sharedManager].remainAmount]];
+            if ([IPCPayOrderMode sharedManager].payTypeRecordArray.count) {
+                [cell.bottomLine setHidden:NO];
+            }else{
+                [cell.bottomLine setHidden:YES];
+            }
             return cell;
         }else{
             IPCOrderDetailPayRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:payRecordIdentifier];
@@ -240,10 +232,16 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             }
             return cell;
         }
-    }else{
+    }else if(indexPath.section == 6){
         IPCOrderDetailInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:detailIdetifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailInfoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }
+        return cell;
+    }else{
+        IPCOrderDetailMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCOrderDetailMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         return cell;
     }
@@ -275,11 +273,9 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         }
     }else if (indexPath.section == 4){
         return 125;
-    }else if (indexPath.section == 5){
-        return 50;
-    }else if (indexPath.section == 6 && indexPath.row > 0){
+    }else if (indexPath.section == 5 && indexPath.row > 0){
         return [IPCPayOrderMode sharedManager].payTypeRecordArray.count * 40;
-    }else if (indexPath.section == 7){
+    }else if (indexPath.section == 6){
         return 120;
     }
     return 50;

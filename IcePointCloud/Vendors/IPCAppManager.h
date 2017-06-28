@@ -75,5 +75,10 @@ extern NSString *const IPCShoppingCartCountKey;
  */
 + (NSString *)orderStatus:(NSString *)status;
 
+/**
+ *  PayTypeInfo Image Name
+ */
+- (UIImage *)payTypeImage:(NSString *)payTypeInfo;
+
 
 @end
