@@ -212,22 +212,5 @@
     }
 }
 
-- (IPCPayStyleType)payStyle{
-    if ([self.payTypeTextField.text isEqualToString:@"储值余额"]) {
-        return IPCPayStyleTypeStoreValue;
-    }else if ([self.payTypeTextField.text isEqualToString:@"现金"]){
-        return IPCPayStyleTypeCash;
-    }else if ([self.payTypeTextField.text isEqualToString:@"刷卡"]){
-        return IPCPayStyleTypeCard;
-    }else if ([self.payTypeTextField.text isEqualToString:@"支付宝"]){
-        return IPCPayStyleTypeAlipay;
-    }else if ([self.payTypeTextField.text isEqualToString:@"微信"]){
-        return IPCPayStyleTypeWechat;
-    }else if ([self.payTypeTextField.text isEqualToString:@"其它"]){
-        return IPCPayStyleTypeOther;
-    }
-    return IPCPayStyleTypeNone;
-}
-
 
 @end
