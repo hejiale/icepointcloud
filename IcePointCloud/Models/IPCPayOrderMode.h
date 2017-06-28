@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "IPCEmploye.h"
 #import "IPCEmployeeResult.h"
-#import "IPCOtherPayTypeResult.h"
 #import "IPCPointValueMode.h"
 #import "IPCPayRecord.h"
 
@@ -20,9 +19,6 @@
 @property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
-@property (nonatomic,assign, readwrite) IPCPayStyleType      payStyle;//支付方式 \ 支付宝  微信  现金  刷卡
-@property (nonatomic, copy, readwrite) NSString     *   payStyleName;//支付名称
-
 @property (nonatomic, assign, readwrite) double   orderTotalPrice;//订单总金额(可根据输入金额改变)
 @property (nonatomic, assign, readwrite) double   realTotalPrice;//实付金额
 @property (nonatomic, assign, readwrite) double   pointPrice;//积分金额
@@ -30,15 +26,11 @@
 @property (nonatomic, assign, readwrite) NSInteger    point;//总积分
 @property (nonatomic, assign, readwrite) double   givingAmount;//赠送金额
 
-@property (nonatomic, assign, readwrite) double   payTypeAmount;//支付宝  微信  现金  刷卡 \支付金额
 @property (nonatomic, assign, readwrite) double   balanceAmount;//储值金额
 @property (nonatomic, assign, readwrite) double   usedBalanceAmount;//已使用储值金额
 @property (nonatomic, assign, readwrite) double   remainAmount;//剩余付款金额
 
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
-@property (nonatomic, assign, readwrite) BOOL     isSelectStoreValue;// 是否选择储值
-@property (nonatomic, assign, readwrite) BOOL     isSelectPayType;// 是否选择支付方式
-
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//选择客户
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
 
@@ -47,7 +39,6 @@
 
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
 
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCOtherPayTypeResult *> * otherPayTypeArray;//其它支付方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;//付款记录方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩
 
@@ -55,15 +46,11 @@
 
 - (double)totalEmployeeResult;
 
-- (double)totalOtherPayTypeAmount;
-
 - (double)minimumEmployeeDiscountPrice:(double)originPrice;
 
 - (void)resetData;
 
 - (void)clearSelectCustomerData;
-
-- (void)reloadWithOtherTypeAmount;
 
 - (void)calculatePointValue:(IPCPointValueMode *)pointValue;
 
@@ -71,8 +58,5 @@
 
 - (BOOL)isExistEmptyEmployeeResult;
 
-- (BOOL)isExistZeroOtherTypeAmount;
-
-- (BOOL)isExistEmptyOtherTypeName;
 
 @end

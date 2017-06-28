@@ -31,7 +31,6 @@
     [IPCPayOrderMode sharedManager].insertPayRecord = nil;
     [IPCPayOrderMode sharedManager].customerDiscount = 0;
     [IPCPayOrderMode sharedManager].remark = nil;
-    [IPCPayOrderMode sharedManager].isSelectStoreValue = NO;
     [[IPCPayOrderMode sharedManager] clearSelectCustomerData];
 }
 
@@ -108,20 +107,6 @@
     return  (minimumDiscount/10) * originPrice;
 }
 
-- (double)totalOtherPayTypeAmount{
-    __block double amount = 0;
-    [[IPCPayOrderMode sharedManager].otherPayTypeArray enumerateObjectsUsingBlock:^(IPCOtherPayTypeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        amount += obj.otherPayAmount;
-    }];
-    return amount;
-}
-
-- (NSMutableArray<IPCOtherPayTypeResult *> *)otherPayTypeArray{
-    if (!_otherPayTypeArray) {
-        _otherPayTypeArray = [[NSMutableArray alloc]init];
-    }
-    return _otherPayTypeArray;
-}
 
 -(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
     if (!_payTypeRecordArray) {
@@ -130,20 +115,6 @@
     return _payTypeRecordArray;
 }
 
-
-- (void)reloadWithOtherTypeAmount
-{
-    //待支付金额
-    if ([IPCPayOrderMode sharedManager].isSelectPayType)
-    {
-        [IPCPayOrderMode sharedManager].payTypeAmount = [IPCPayOrderMode sharedManager].realTotalPrice - [[IPCPayOrderMode sharedManager] totalOtherPayTypeAmount] - [IPCPayOrderMode sharedManager].usedBalanceAmount;
-        if ([IPCPayOrderMode sharedManager].payTypeAmount < 0) {
-            [IPCPayOrderMode sharedManager].payTypeAmount = 0;
-        }
-    }else{
-        [IPCPayOrderMode sharedManager].payTypeAmount = 0;
-    }
-}
 
 - (void)calculatePointValue:(IPCPointValueMode *)pointValue{
     __block double pointPrice = 0;
@@ -186,26 +157,5 @@
     return isExist;
 }
 
-
-- (BOOL)isExistZeroOtherTypeAmount{
-    __block BOOL isExist = NO;
-    [[IPCPayOrderMode sharedManager].otherPayTypeArray enumerateObjectsUsingBlock:^(IPCOtherPayTypeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.otherPayAmount <= 0 ) {
-            isExist = YES;
-        }
-    }];
-    return isExist;
-}
-
-
-- (BOOL)isExistEmptyOtherTypeName{
-    __block BOOL isExist = NO;
-    [[IPCPayOrderMode sharedManager].otherPayTypeArray enumerateObjectsUsingBlock:^(IPCOtherPayTypeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.otherPayTypeName.length == 0 ) {
-            isExist = YES;
-        }
-    }];
-    return isExist;
-}
 
 @end
