@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Doray. All rights reserved.
 //
 
-#import "IPCJoinRequest.h"
+#import "IPCAppendRequestParameter.h"
 
 /**
  *  Port parameters
@@ -20,7 +20,7 @@
 #define    kAPIParamFormatValue          @"2.0"
 #define    kAPIParamDeviceToken          @"access_token"
 
-@implementation IPCJoinRequest
+@implementation IPCAppendRequestParameter
 
 
 - (instancetype)initWithRequestMethod:(NSString *)requestMethod Parameter:(id)parameter

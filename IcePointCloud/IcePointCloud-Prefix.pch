@@ -37,7 +37,6 @@
 #import "YYKit.h"
 #import "JKCategories.h"
 #import "ReactiveObjC.h"
-#import "UIImageView+CornerRadius.h"
 //Head File
 #import "HeaderFile.h"
 

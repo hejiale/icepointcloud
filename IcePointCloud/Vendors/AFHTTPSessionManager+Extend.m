@@ -21,7 +21,7 @@
     return responseSerializer;
 }
 
-- (NSURLSessionDataTask *)sendRequestWithParams:(IPCJoinRequest *)request
+- (NSURLSessionDataTask *)sendRequestWithParams:(IPCAppendRequestParameter *)request
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName
                                     RequestType:(IPCRequestType)requestType

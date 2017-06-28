@@ -35,7 +35,7 @@
 
 
 #pragma mark //AFNetworking Request Method
-- (void)callRequestWithParams:(IPCJoinRequest *)request
+- (void)callRequestWithParams:(IPCAppendRequestParameter *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
                   RequestType:(IPCRequestType)requestType
@@ -91,7 +91,7 @@
 
 - (void)cancelAllRequest
 {
-    if (self.allTasks && self.allTasks.count) {
+    if (self.allTasks.count) {
         [self.allTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
             [task cancel];
         }];

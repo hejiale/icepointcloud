@@ -17,7 +17,7 @@
        SuccessBlock:(void (^)(id responseValue))success
        FailureBlock:(void (^)(NSError *error))failure
 {
-    IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
+    IPCAppendRequestParameter * request = [[IPCAppendRequestParameter alloc]initWithRequestMethod:requestMethod Parameter:parameters];
     [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypePost CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
 }
 
@@ -29,7 +29,7 @@
       SuccessBlock:(void (^)(id responseValue))success
       FailureBlock:(void (^)(NSError *error))failure
 {
-    IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
+    IPCAppendRequestParameter * request = [[IPCAppendRequestParameter alloc]initWithRequestMethod:requestMethod Parameter:parameters];
     [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypeGet CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
 }
 
@@ -43,7 +43,7 @@
                    ProgressBlock:(void (^)(NSProgress *))uploadProgress
                     FailureBlock:(void (^)(NSError *error))failure
 {
-    IPCJoinRequest * request = [[IPCJoinRequest alloc]initWithRequestMethod:requestMethod Parameter:parameters];
+    IPCAppendRequestParameter * request = [[IPCAppendRequestParameter alloc]initWithRequestMethod:requestMethod Parameter:parameters];
     [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:imageData ImageName:imageName RequestType:IPCRequestTypeUpload CacheEnable: IPCRequestCacheDisEnable SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
 }
 

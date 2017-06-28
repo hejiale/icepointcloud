@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCJoinRequest : NSObject
+@interface IPCAppendRequestParameter : NSObject
 
 /**
  *  REQUEST METHODS

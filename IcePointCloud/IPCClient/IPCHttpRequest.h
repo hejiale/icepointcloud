@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCJoinRequest.h"
+#import "IPCAppendRequestParameter.h"
 
 
 @interface IPCHttpRequest : NSObject
@@ -27,7 +27,7 @@
  @param progress 
  @param failure
  */
-- (void)callRequestWithParams:(IPCJoinRequest *)request
+- (void)callRequestWithParams:(IPCAppendRequestParameter *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
                   RequestType:(IPCRequestType)requestType
