@@ -15,7 +15,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UIButton *checkBtn;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
-@property (weak, nonatomic) IBOutlet UIImageView *preSellImage;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
 @property (copy, nonatomic) void(^ReloadBlock)();
@@ -28,10 +27,8 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    [self setBackgroundColor:[UIColor clearColor]];
+
     [self.glassesImgView addBorder:3 Width:0.5];
-    [self.unitPriceLabel setTextColor:COLOR_RGB_RED];
 }
 
 
@@ -48,23 +45,11 @@
     self.glassesNameLbl.text = _cartItem.glasses.glassName;
     self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
     [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.unitPrice]];
-    
-    if (self.cartItem.isPreSell) {
-        [self.preSellImage setHidden:NO];
-    }else{
-        [self.preSellImage setHidden:YES];
-    }
-    
+
     CGFloat nameHeight = [self.glassesNameLbl.text jk_sizeWithFont:self.glassesNameLbl.font constrainedToWidth:self.glassesNameLbl.jk_width].height;
-    if ((([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch) && !self.cartItem.isPreSell)
+    if (([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch)
     {
         nameHeight = 20;
-    }else{
-        if (nameHeight <= 20) {
-            nameHeight = 20;
-        }else{
-            nameHeight = 35;
-        }
     }
     self.glassNameHeight.constant = nameHeight;
     [self loadContactLensBatchSpecification:nameHeight];
@@ -83,60 +68,50 @@
     [self.mainContentView addSubview:specificationView];
     
     if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch) {
-        if (self.cartItem.isPreSell) {
-            UILabel * degreeLabel = [[UILabel alloc]initWithFrame:specificationView.bounds];
-            [degreeLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.contactDegree]];
-            [degreeLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-            [degreeLabel setTextColor:[UIColor lightGrayColor]];
-            [specificationView addSubview:degreeLabel];
-        }else{
-            CGFloat halfWidth = specificationView.jk_width/2;
-            NSArray * titleArray = @[@"度数",@"批次号",@"准字号",@"有效期"];
-            NSArray * valueArray = @[self.cartItem.contactDegree,self.cartItem.batchNum,self.cartItem.kindNum,self.cartItem.validityDate];
-            
-            for (NSInteger i= 0; i < titleArray.count; i++) {
-                UILabel * titleLbl = nil;
-                if (i < 2) {
-                    titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*i  , 0, 40, 15)];
-                }else{
-                    titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*(i-2), 15, 40, 15)];
-                }
-                [titleLbl setText:titleArray[i]];
-                [titleLbl setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-                [titleLbl setTextColor:[UIColor lightGrayColor]];
-                [specificationView addSubview:titleLbl];
-                
-                UILabel * valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(titleLbl.jk_right, titleLbl.jk_top, halfWidth - titleLbl.jk_width, 15)];
-                [valueLbl setFont:titleLbl.font];
-                [valueLbl setTextColor:titleLbl.textColor];
-                [valueLbl setText:valueArray[i]];
-                [specificationView addSubview:valueLbl];
+        CGFloat halfWidth = specificationView.jk_width/2;
+        NSArray * titleArray = @[@"度数",@"批次号",@"准字号",@"有效期"];
+        NSArray * valueArray = @[self.cartItem.contactDegree,self.cartItem.batchNum,self.cartItem.kindNum,self.cartItem.validityDate];
+        
+        for (NSInteger i= 0; i < titleArray.count; i++) {
+            UILabel * titleLbl = nil;
+            if (i < 2) {
+                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*i  , 0, 40, 15)];
+            }else{
+                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*(i-2), 15, 40, 15)];
             }
+            [titleLbl setText:titleArray[i]];
+            [titleLbl setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
+            [titleLbl setTextColor:[UIColor lightGrayColor]];
+            [specificationView addSubview:titleLbl];
+            
+            UILabel * valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(titleLbl.jk_right, titleLbl.jk_top, halfWidth - titleLbl.jk_width, 15)];
+            [valueLbl setFont:titleLbl.font];
+            [valueLbl setTextColor:titleLbl.textColor];
+            [valueLbl setText:valueArray[i]];
+            [specificationView addSubview:valueLbl];
         }
     }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType){
-        if (!self.cartItem.isPreSell) {
-            CGFloat halfWidth = specificationView.jk_width/2;
-            NSArray * titleArray = @[@"批次号",@"有效期",@"准字号"];
-            NSArray * valueArray = @[self.cartItem.batchNum,self.cartItem.validityDate,self.cartItem.kindNum];
-            
-            for (NSInteger i= 0; i < titleArray.count; i++) {
-                UILabel * titleLbl = nil;
-                if (i < 2) {
-                    titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*i  , 0, 40, 15)];
-                }else{
-                    titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 40, 15)];
-                }
-                [titleLbl setText:titleArray[i]];
-                [titleLbl setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-                [titleLbl setTextColor:[UIColor lightGrayColor]];
-                [specificationView addSubview:titleLbl];
-                
-                UILabel * valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(titleLbl.jk_right, titleLbl.jk_top, i < 2 ? halfWidth - titleLbl.jk_width: specificationView.jk_width - titleLbl.jk_width, 15)];
-                [valueLbl setFont:titleLbl.font];
-                [valueLbl setTextColor:titleLbl.textColor];
-                [valueLbl setText:valueArray[i]];
-                [specificationView addSubview:valueLbl];
+        CGFloat halfWidth = specificationView.jk_width/2;
+        NSArray * titleArray = @[@"批次号",@"有效期",@"准字号"];
+        NSArray * valueArray = @[self.cartItem.batchNum,self.cartItem.validityDate,self.cartItem.kindNum];
+        
+        for (NSInteger i= 0; i < titleArray.count; i++) {
+            UILabel * titleLbl = nil;
+            if (i < 2) {
+                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*i  , 0, 40, 15)];
+            }else{
+                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 40, 15)];
             }
+            [titleLbl setText:titleArray[i]];
+            [titleLbl setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
+            [titleLbl setTextColor:[UIColor lightGrayColor]];
+            [specificationView addSubview:titleLbl];
+            
+            UILabel * valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(titleLbl.jk_right, titleLbl.jk_top, i < 2 ? halfWidth - titleLbl.jk_width: specificationView.jk_width - titleLbl.jk_width, 15)];
+            [valueLbl setFont:titleLbl.font];
+            [valueLbl setTextColor:titleLbl.textColor];
+            [valueLbl setText:valueArray[i]];
+            [specificationView addSubview:valueLbl];
         }
     }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && self.cartItem.glasses.isBatch){
         UILabel * degreeLabel = [[UILabel alloc]initWithFrame:specificationView.bounds];

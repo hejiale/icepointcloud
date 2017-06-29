@@ -37,6 +37,4 @@
 
 + (void)clearAutoCorrection:(UIView *)view;
 
-+ (void)clearTextField:(UIView *)view;
-
 @end

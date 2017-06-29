@@ -43,8 +43,4 @@
 @property (nonatomic, assign, readwrite) BOOL     isInsertStatus;
 @property (nonatomic, copy, readwrite) NSMutableArray<IPCOptometryMode *> * optometryArray;
 
-
-//- (BOOL)isFullOptometry;
-//- (BOOL)isFullAddress;
-
 @end

@@ -182,7 +182,7 @@
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="onChooseRecommendedAction:" destination="-1" eventType="touchUpInside" id="c3L-DC-1ts"/>
@@ -195,7 +195,7 @@
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <state key="selected">
-                                <color key="titleColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="onChooseSelledAction:" destination="-1" eventType="touchUpInside" id="6OA-uN-sgP"/>
@@ -203,7 +203,7 @@
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-om-If4">
                             <rect key="frame" x="10" y="48" width="200" height="2"/>
-                            <color key="backgroundColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="2" id="aqA-zO-R2r"/>
                                 <constraint firstAttribute="width" constant="200" id="dKr-bb-rih"/>

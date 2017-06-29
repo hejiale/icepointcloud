@@ -33,7 +33,7 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 - (void)showWithClose:(void (^)())closeBlock
 {
     self.CloseBlock = closeBlock;
-    [self.sureButton setBackgroundColor:COLOR_RGB_BLUE];
+
     [self.updateTableView setTableFooterView:[[UIView alloc]init]];
 
     [UIView animateWithDuration:0.5f animations:^{

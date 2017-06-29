@@ -14,8 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.totalPriceLabel setTextColor:COLOR_RGB_RED];
-    [self.pointAmountLabel setTextColor:COLOR_RGB_RED];
     [self.payAmountTextField addBorder:3 Width:0.5];
     [self.payAmountTextField setRightSpace:5];
     [self.payAmountTextField setLeftText:@"￥"];
@@ -31,7 +29,6 @@
     [super layoutSubviews];
     
     [self updateUI];
-    
 }
 
 - (void)updateUI

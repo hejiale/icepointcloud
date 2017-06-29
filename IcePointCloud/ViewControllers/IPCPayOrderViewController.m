@@ -40,7 +40,7 @@
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-
+    
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -156,16 +156,19 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (![IPCCurrentCustomer sharedManager].currentAddress && section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer)
+    if (![IPCCurrentCustomer sharedManager].currentAddress && section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer){
         return 0;
-    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
+    }else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer){
         return 0;
+    }else if ((section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
+        return 0;
+    }
     return 5;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, (section == 3  ? 0 : 5))];
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
     [footView setBackgroundColor:[UIColor clearColor]];
     return footView;
 }

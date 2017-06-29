@@ -15,7 +15,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *cartCountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
-@property (weak, nonatomic) IBOutlet UIImageView *preSellImage;
 
 
 @property (copy, nonatomic) void(^ReloadBlock)();
@@ -49,18 +48,13 @@
     self.glassesNameLbl.text = _cartItem.glasses.glassName;
     [self.cartCountLabel setText:[NSString stringWithFormat:@"%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]]];
     
-    if (self.cartItem.glasses.isBatch || ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType && !self.cartItem.isPreSell) || ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.stock == 0) || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
+    if (self.cartItem.glasses.isBatch || ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType) || ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.stock == 0) || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
     {
         [self.glassesNameLbl setText:@"参数设置"];
         [self.arrowImage setHidden:NO];
     }else{
         [self.arrowImage setHidden:YES];
         [self.glassesNameLbl setText:self.cartItem.glasses.glassName];
-    }
-    if (self.cartItem.isPreSell) {
-        [self.preSellImage setHidden:NO];
-    }else{
-        [self.preSellImage setHidden:YES];
     }
 }
 

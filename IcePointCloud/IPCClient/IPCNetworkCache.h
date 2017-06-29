@@ -31,21 +31,9 @@
 
 
 /**
- *  ALL CACHE
- */
-- (NSInteger)getAllHttpCacheSize;
-
-
-/**
  *  REMOVE CACHE
  */
 - (void)removeAllHttpCache;
-
-/**
- *  REMOVE SPECIFIED CACHE
- */
-- (void)removeCacheForRequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters;
-
 
 
 @end

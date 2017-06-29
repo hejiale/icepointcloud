@@ -53,7 +53,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     
     chooseCellHeight = 100;
     self.completeButton.layer.cornerRadius = 20;
-    [self.completeButton setBackgroundColor:COLOR_RGB_BLUE];
     
     sectionTitles = @[@"类目",@"属性",@"价格区间"];
     self.allButtonsArray = [[NSMutableArray alloc]init];

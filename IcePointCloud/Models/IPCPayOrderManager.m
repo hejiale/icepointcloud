@@ -20,32 +20,6 @@
     return _client;
 }
 
-
-- (void)resetData
-{
-    [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].point = 0;
-    [IPCPayOrderManager sharedManager].orderTotalPrice = 0;
-    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
-    [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
-    [IPCPayOrderManager sharedManager].insertPayRecord = nil;
-    [IPCPayOrderManager sharedManager].customerDiscount = 0;
-    [IPCPayOrderManager sharedManager].remark = nil;
-    [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
-}
-
-- (void)clearSelectCustomerData
-{
-    [IPCPayOrderManager sharedManager].isSelectPoint = NO;
-    [IPCPayOrderManager sharedManager].usedPoint = 0;
-    [IPCPayOrderManager sharedManager].pointPrice = 0;
-    [IPCPayOrderManager sharedManager].realTotalPrice = 0;
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
-    [IPCPayOrderManager sharedManager].remainAmount = 0;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-}
-
-
 - (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult
 {
     __block double  remainResult = 0;
@@ -155,6 +129,29 @@
         }
     }];
     return isExist;
+}
+
+- (void)resetData
+{
+    [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
+    [IPCPayOrderManager sharedManager].point = 0;
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+    [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
+    [IPCPayOrderManager sharedManager].insertPayRecord = nil;
+    [IPCPayOrderManager sharedManager].customerDiscount = 0;
+    [IPCPayOrderManager sharedManager].remark = nil;
+    [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
+}
+
+- (void)clearSelectCustomerData
+{
+    [IPCPayOrderManager sharedManager].isSelectPoint = NO;
+    [IPCPayOrderManager sharedManager].usedPoint = 0;
+    [IPCPayOrderManager sharedManager].pointPrice = 0;
+    [IPCPayOrderManager sharedManager].realTotalPrice = 0;
+    [IPCPayOrderManager sharedManager].givingAmount = 0;
+    [IPCPayOrderManager sharedManager].remainAmount = 0;
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
 
 

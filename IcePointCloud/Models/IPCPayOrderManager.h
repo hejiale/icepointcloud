@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCEmployee.h"
 #import "IPCEmployeeResult.h"
 #import "IPCPointValueMode.h"
 #import "IPCPayRecord.h"
@@ -19,7 +18,6 @@
 @property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
-@property (nonatomic, assign, readwrite) double   orderTotalPrice;//订单总金额(可根据输入金额改变)
 @property (nonatomic, assign, readwrite) double   realTotalPrice;//实付金额
 @property (nonatomic, assign, readwrite) double   pointPrice;//积分金额
 @property (nonatomic, assign, readwrite) NSInteger    usedPoint;//已使用积分

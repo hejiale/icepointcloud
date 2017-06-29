@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IPCProductList.h"
 #import "IPCFilterDataSourceResult.h"
-#import "IPCFilterTypeMode.h"
+#import "IPCFilterCategoryMode.h"
 #import "IPCFilterGlassesView.h"
 
 
@@ -50,7 +50,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *>   *glassesList;
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomsizedProduct *>   * customsizedList;
 @property (nonatomic, strong, readwrite) IPCFilterDataSourceResult   * filterDataSource;
-@property (strong, nonatomic, readwrite) IPCFilterTypeMode               *filterValue;
+@property (strong, nonatomic, readwrite) IPCFilterCategoryMode               *filterValue;
 
 @property (nonatomic, copy, readwrite) NSString *  searchWord;
 @property (nonatomic, assign, readwrite) NSInteger   currentPage;

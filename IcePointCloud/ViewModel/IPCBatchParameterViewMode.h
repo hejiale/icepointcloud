@@ -14,7 +14,7 @@
 @property (strong, nonatomic, readwrite) IPCContactLensMode * contactLensMode;
 @property (strong, nonatomic, readwrite) IPCAccessorySpecList * accessorySpecification;
 
-- (instancetype)initWithGlasses:(IPCGlasses *)glasses IsPreSell:(BOOL)isPreSell;
+- (instancetype)initWithGlasses:(IPCGlasses *)glasses;
 
 - (void)queryBatchContactDegreeRequest;
 - (void)getContactLensSpecification:(NSString *)degreeID CompleteBlock:(void(^)())complete;

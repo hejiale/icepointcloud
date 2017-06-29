@@ -280,6 +280,9 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 3) {
+        return 0;
+    }
     return 5;
 }
 

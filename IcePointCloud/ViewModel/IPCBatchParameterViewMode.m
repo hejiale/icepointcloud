@@ -16,12 +16,12 @@
 
 @implementation IPCBatchParameterViewMode
 
-- (instancetype)initWithGlasses:(IPCGlasses *)glasses IsPreSell:(BOOL)isPreSell
+- (instancetype)initWithGlasses:(IPCGlasses *)glasses
 {
     self = [super init];
     if (self) {
         self.glasses = glasses;
-        if ([self.glasses filterType] == IPCTopFilterTypeContactLenses && !isPreSell)
+        if ([self.glasses filterType] == IPCTopFilterTypeContactLenses)
             [self queryBatchContactDegreeRequest];
     }
     return self;

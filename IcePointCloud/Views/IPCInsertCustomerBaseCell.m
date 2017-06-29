@@ -27,9 +27,6 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-
-    [self.packUpButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
-    [self.packDownButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
     
     [IPCCustomUI clearAutoCorrection:self.mainView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.mainView];

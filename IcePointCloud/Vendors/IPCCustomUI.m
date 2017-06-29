@@ -131,15 +131,4 @@
     }];
 }
 
-#pragma mark //Clear the input box on the specified View
-+ (void)clearTextField:(UIView *)view
-{
-    [view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UITextField class]]) {
-            UITextField * subTextField = (UITextField *)obj;
-            [subTextField setText:@""];
-        }
-    }];
-}
-
 @end

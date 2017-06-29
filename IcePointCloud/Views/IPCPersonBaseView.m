@@ -62,7 +62,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     self.UpdateBlock  = update;
     self.QRCodeBlock  = qrcode;
     
-    [self.logouOutButton setBackgroundColor:COLOR_RGB_BLUE];
     [self.personTableView setTableFooterView:[[UIView alloc]init]];
     
     [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{

@@ -47,22 +47,10 @@ static NSString *const NetworkResponseCache = @"NetworkResponseCache";
 }
 
 
-- (NSInteger)getAllHttpCacheSize{
-    return [self.dataCache .diskCache totalCost];
-}
-
-
 - (void)removeAllHttpCache{
     [self.dataCache removeAllObjects];
 }
 
-
-- (void)removeCacheForRequestMethod:(NSString *)requestMethod parameters:(NSDictionary *)parameters
-{
-    if ([self.dataCache containsObjectForKey:[self cacheKeyWithRequestMethod:requestMethod Parameters:parameters]]) {
-        [self.dataCache removeObjectForKey:[self cacheKeyWithRequestMethod:requestMethod Parameters:parameters]];
-    }
-}
 
 - (NSString *)cacheKeyWithRequestMethod:(NSString *)requestMethod Parameters:(id)parameter
 {

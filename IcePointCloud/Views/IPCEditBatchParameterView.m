@@ -14,17 +14,11 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 
 @interface IPCEditBatchParameterView()<UITableViewDelegate,UITableViewDataSource>
 
-@property (strong, nonatomic) UIView * editContentView;
 @property (weak, nonatomic) IBOutlet UIView *editParameterView;
 @property (weak, nonatomic) IBOutlet UITableView *parameterTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *glassImageView;
 @property (weak, nonatomic) IBOutlet UILabel *glassNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *glassPriceLabel;
-@property (weak, nonatomic) IBOutlet UIView *editNoneAccessoryView;
-@property (weak, nonatomic) IBOutlet UIImageView *noneAccessoryImageView;
-@property (weak, nonatomic) IBOutlet UILabel *noneAccessoryNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *noneAccessoryPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *noneAccessoryCartNumLbl;
 @property (strong, nonatomic) IPCEditBatchParameterViewMode * editParameterMode;
 @property (copy, nonatomic) void(^DismissBlock)();
 
@@ -46,11 +40,8 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         [self addSubview:parameterBgView];
         
         [self.glassImageView setImageURL:[NSURL URLWithString:glasses.thumbImage.imageURL]];
-        [self.noneAccessoryImageView setImageURL:[NSURL URLWithString:glasses.thumbImage.imageURL]];
         [self.glassNameLabel setText:glasses.glassName];
-        [self.noneAccessoryNameLabel setText:glasses.glassName];
         [self.glassPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
-        [self.noneAccessoryPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
     
         if (glasses){
             if ([glasses filterType] ==IPCTopFilterTypeLens) {
@@ -63,15 +54,8 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
                 [self.editParameterMode queryAccessoryStock];
             }
             
-            if (([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) && glasses.stock <= 0) {
-                [self.editNoneAccessoryView setHidden:NO];
-                self.editContentView = self.editNoneAccessoryView;
-            }else{
-                [self.editParameterView setHidden:NO];
-                self.editContentView = self.editParameterView;
-            }
-            CGAffineTransform transform = CGAffineTransformScale(self.editContentView.transform, 0.2, 0.2);
-            [self.editContentView setTransform:transform];
+            CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.2, 0.2);
+            [self.editParameterView setTransform:transform];
         }
     }
     return self;
@@ -81,18 +65,16 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     [super layoutSubviews];
 
     [self.editParameterView addBorder:8 Width:0];
-    [self.editNoneAccessoryView addBorder:8 Width:0];
     [self.glassImageView addBorder:5 Width:0.5];
-    [self.noneAccessoryImageView addBorder:5 Width:0.5];
     [self.parameterTableView setTableFooterView:[[UIView alloc]init]];
 }
 
 #pragma mark //Clicked Events
 - (void)show{
     [UIView animateKeyframesWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGAffineTransform newTransform =  CGAffineTransformConcat(self.editContentView.transform,  CGAffineTransformInvert(self.editContentView.transform));
-        [self.editContentView setTransform:newTransform];
-        self.editContentView.alpha = 1.0;
+        CGAffineTransform newTransform =  CGAffineTransformConcat(self.editParameterView.transform,  CGAffineTransformInvert(self.editParameterView.transform));
+        [self.editParameterView setTransform:newTransform];
+        self.editParameterView.alpha = 1.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -103,17 +85,11 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     [self removeCover];
 }
 
-- (IBAction)reduceNoneAccessoryCartAction:(id)sender {
-}
-
-- (IBAction)addNoneAccessoryCartAction:(id)sender {
-}
-
 - (void)removeCover{
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        CGAffineTransform transform = CGAffineTransformScale(self.editContentView.transform, 0.3, 0.3);
-        [self.editContentView setTransform:transform];
-        self.editContentView.alpha = 0;
+        CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.3, 0.3);
+        [self.editParameterView setTransform:transform];
+        self.editParameterView.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished) {
             if (self.DismissBlock)self.DismissBlock();

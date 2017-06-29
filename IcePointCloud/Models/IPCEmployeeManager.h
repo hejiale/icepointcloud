@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IPCCustomerTypeList.h"
 #import "IPCMemberLevelList.h"
+#import "IPCEmployeeList.h"
 
 @interface IPCEmployeeeManager : NSObject
 

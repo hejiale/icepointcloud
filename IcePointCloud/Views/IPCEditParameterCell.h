@@ -20,10 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *kindNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *degreeHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *batchHeight;
-@property (weak, nonatomic) IBOutlet UILabel *noneContactDegreeLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noneContactDegreeWidth;
-@property (weak, nonatomic) IBOutlet UIImageView *noneContactSellImage;
-
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
 - (void)reloadAddButtonStatus:(BOOL)hasStock;

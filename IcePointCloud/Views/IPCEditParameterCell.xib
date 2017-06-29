@@ -107,36 +107,14 @@
                             <action selector="addCartAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1aN-Yi-IWQ"/>
                         </connections>
                     </button>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Cl-m1-BRJ">
-                        <rect key="frame" x="8" y="55.5" width="0.0" height="20"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Xcf-k4-B7W"/>
-                            <constraint firstAttribute="width" id="n5I-xy-XFx"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="preSell_selected" translatesAutoresizingMaskIntoConstraints="NO" id="2ai-Kz-T0u">
-                        <rect key="frame" x="13" y="53" width="100" height="25"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="6J3-25-5GE"/>
-                            <constraint firstAttribute="height" constant="25" id="Avh-jY-q7A"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="JY2-SP-yGW" secondAttribute="trailing" id="63N-ak-ujv"/>
-                    <constraint firstItem="4Cl-m1-BRJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="AW2-Fn-ZCy"/>
                     <constraint firstItem="9il-4y-SHs" firstAttribute="top" secondItem="C8R-iX-paw" secondAttribute="bottom" constant="5" id="BgU-9s-Sxb"/>
                     <constraint firstItem="3PD-IZ-Uz3" firstAttribute="leading" secondItem="C8R-iX-paw" secondAttribute="trailing" id="Bpe-Kr-dYb"/>
                     <constraint firstItem="isk-3j-tra" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fl7-4x-DVK"/>
                     <constraint firstItem="JY2-SP-yGW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="J2O-2b-qVo"/>
-                    <constraint firstItem="4Cl-m1-BRJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MFV-UE-gyt"/>
-                    <constraint firstItem="2ai-Kz-T0u" firstAttribute="leading" secondItem="4Cl-m1-BRJ" secondAttribute="trailing" constant="5" id="Qs4-gb-swX"/>
                     <constraint firstItem="C8R-iX-paw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="S9L-XG-YWR"/>
                     <constraint firstAttribute="bottomMargin" secondItem="JY2-SP-yGW" secondAttribute="bottom" id="Sjp-TS-uXR"/>
                     <constraint firstItem="XCf-hF-6T2" firstAttribute="leading" secondItem="3PD-IZ-Uz3" secondAttribute="trailing" id="Xfk-h7-SFy"/>
@@ -149,7 +127,6 @@
                     <constraint firstItem="XCf-hF-6T2" firstAttribute="leading" secondItem="9il-4y-SHs" secondAttribute="trailing" id="jU4-pX-ayB"/>
                     <constraint firstItem="3PD-IZ-Uz3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ktF-1C-zgQ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="XCf-hF-6T2" secondAttribute="bottom" id="mIM-Qb-86b"/>
-                    <constraint firstItem="2ai-Kz-T0u" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nqp-0M-RWg"/>
                     <constraint firstItem="XCf-hF-6T2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ns3-ZX-Cqa"/>
                     <constraint firstItem="boh-kY-eq1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xUK-nB-RZm"/>
                     <constraint firstItem="C8R-iX-paw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ym0-MM-pXs"/>
@@ -166,9 +143,6 @@
                 <outlet property="degreeLabel" destination="C8R-iX-paw" id="YQa-Vx-eqt"/>
                 <outlet property="degreeWidthConstraint" destination="Huo-0S-eGd" id="7zt-RJ-YzN"/>
                 <outlet property="kindNumLabel" destination="9il-4y-SHs" id="5V1-MJ-qFG"/>
-                <outlet property="noneContactDegreeLabel" destination="4Cl-m1-BRJ" id="6LT-RM-qtF"/>
-                <outlet property="noneContactDegreeWidth" destination="n5I-xy-XFx" id="6v6-Hz-2YK"/>
-                <outlet property="noneContactSellImage" destination="2ai-Kz-T0u" id="p6f-Lb-E9C"/>
                 <outlet property="parameterLabel" destination="isk-3j-tra" id="47t-4D-0Ah"/>
                 <outlet property="reduceButton" destination="XCf-hF-6T2" id="oea-r0-Nsb"/>
             </connections>
@@ -178,6 +152,5 @@
     <resources>
         <image name="icon_add" width="27" height="27"/>
         <image name="icon_subtract" width="27" height="27"/>
-        <image name="preSell_selected" width="100" height="24"/>
     </resources>
 </document>

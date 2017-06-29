@@ -20,7 +20,7 @@
         self.searchWord =  @"";
         self.currentPage =  0;
         self.currentType =  IPCTopFIlterTypeFrames;
-        self.filterValue    =  [[IPCFilterTypeMode alloc]init];
+        self.filterValue    =  [[IPCFilterCategoryMode alloc]init];
     }
     return self;
 }

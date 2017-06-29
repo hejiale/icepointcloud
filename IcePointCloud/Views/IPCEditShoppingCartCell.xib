@@ -55,13 +55,6 @@
                                 <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="preSell_selected" translatesAutoresizingMaskIntoConstraints="NO" id="aT4-2p-jrV">
-                                <rect key="frame" x="150" y="22" width="100" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="igN-0M-hAh"/>
-                                    <constraint firstAttribute="height" constant="25" id="rkR-EG-Bhw"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgv-GB-9Ly">
                                 <rect key="frame" x="368" y="22.5" width="27" height="27"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -148,8 +141,6 @@
                             <constraint firstAttribute="trailing" secondItem="2FI-qL-3Hw" secondAttribute="trailing" constant="5" id="NmJ-C2-zvI"/>
                             <constraint firstItem="2FI-qL-3Hw" firstAttribute="bottom" secondItem="J9I-Bf-ZD5" secondAttribute="bottom" id="Oql-NI-nj5"/>
                             <constraint firstItem="G9c-K2-P9t" firstAttribute="bottom" secondItem="J9I-Bf-ZD5" secondAttribute="bottom" id="VXI-Ra-LVV"/>
-                            <constraint firstItem="aT4-2p-jrV" firstAttribute="top" secondItem="J9I-Bf-ZD5" secondAttribute="top" id="ceS-yh-xMt"/>
-                            <constraint firstItem="aT4-2p-jrV" firstAttribute="leading" secondItem="J9I-Bf-ZD5" secondAttribute="trailing" constant="10" id="dW4-LD-ohh"/>
                             <constraint firstItem="akF-8G-o8D" firstAttribute="leading" secondItem="J9I-Bf-ZD5" secondAttribute="trailing" constant="10" id="kpe-PZ-bPP"/>
                             <constraint firstItem="jC4-vK-Inv" firstAttribute="top" secondItem="J9I-Bf-ZD5" secondAttribute="top" id="lLl-4E-DMv"/>
                             <constraint firstItem="G9c-K2-P9t" firstAttribute="leading" secondItem="J9I-Bf-ZD5" secondAttribute="trailing" constant="10" id="lWo-my-JZD"/>
@@ -177,7 +168,6 @@
                 <outlet property="checkBtn" destination="61Z-ah-Q7s" id="wKM-F3-RBX"/>
                 <outlet property="glassesImgView" destination="J9I-Bf-ZD5" id="1nj-cB-Wlu"/>
                 <outlet property="glassesNameLbl" destination="1V9-z5-irH" id="aMn-2t-lJA"/>
-                <outlet property="preSellImage" destination="aT4-2p-jrV" id="K8m-n4-lXO"/>
             </connections>
             <point key="canvasLocation" x="90" y="97.5"/>
         </tableViewCell>
@@ -193,6 +183,5 @@
         <image name="common_btn_check_selected" width="23" height="23"/>
         <image name="icon_small_add" width="21" height="21"/>
         <image name="icon_small_reduce" width="21" height="20"/>
-        <image name="preSell_selected" width="100" height="24"/>
     </resources>
 </document>

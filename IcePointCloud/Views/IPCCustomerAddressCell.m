@@ -14,7 +14,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.defaultButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateSelected];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

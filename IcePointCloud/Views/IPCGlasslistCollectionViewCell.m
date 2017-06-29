@@ -14,8 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.priceLabel setTextColor:COLOR_RGB_RED];
-    
     __weak typeof (self) weakSelf = self;
     [self.imageScrollView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -27,10 +25,6 @@
     }];
     [self addSubview:self.imagePageControl];
     [self bringSubviewToFront:self.imagePageControl];
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
 }
 
 

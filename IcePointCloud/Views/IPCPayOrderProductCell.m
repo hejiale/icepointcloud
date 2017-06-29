@@ -37,19 +37,11 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-    
-    [self setBackgroundColor:[UIColor clearColor]];
-    
-    [self.unitPriceLabel setTextColor:COLOR_RGB_RED];
+
     [self.inputPriceTextField addBorder:3 Width:0.5];
 }
 
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    
-}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -65,7 +57,8 @@
             [self.glassesImgView addBorder:3 Width:0.5];
         }
 
-        if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard || ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)) {
+        if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard || ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens))
+        {
             [self.countNumView setHidden:NO];
         }else{
             [self.countLabel setHidden:NO];

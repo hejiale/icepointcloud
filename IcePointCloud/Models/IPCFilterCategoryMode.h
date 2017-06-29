@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCFilterTypeMode : NSObject
+@interface IPCFilterCategoryMode : NSObject
 
 @property (assign, nonatomic, readwrite) double  currentStartPirce;//The starting price
 @property (assign, nonatomic, readwrite) double  currentEndPrice;//End of the price

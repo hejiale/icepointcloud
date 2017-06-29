@@ -41,7 +41,6 @@
 /**
  *    Remove the shopping cart
  */
-- (void)removeItemAtIndex:(NSInteger)index;
 - (void)removeItem:(IPCShoppingCartItem *)item;
 - (void)removeSelectCartItem;
 - (void)removeAllValueCardCartItem;
@@ -64,7 +63,6 @@
  *   Reduce Cart Item
  */
 - (void)reduceItem:(IPCShoppingCartItem *)cartItem;
-- (void)reduceGlass:(IPCGlasses *)glass;
 /**
  *   To obtain the corresponding glasses category shopping cart items
  */
@@ -75,8 +73,6 @@
 - (IPCShoppingCartItem *)batchAccessoryForGlass:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date;
 
 - (IPCShoppingCartItem *)itemAtIndex:(NSInteger)index;
-- (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index;
-- (IPCShoppingCartItem *)selectedNormalSelltemAtIndex:(NSInteger)index;
 - (IPCShoppingCartItem *)selectedPayItemAtIndex:(NSInteger)index;
 
 - (NSArray<IPCShoppingCartItem *> *)batchParameterList:(IPCGlasses *)glasses;
@@ -89,7 +85,6 @@
  *   Point Value
  */
 - (void)clearAllItemPoint;
-- (BOOL)judgeZeroPointValue;
 - (NSInteger)totalUsedPoint;
 - (double)totalUsedPointPrice;
 - (BOOL)isHaveUsedPoint;

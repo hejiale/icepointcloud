@@ -6,15 +6,15 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCFilterTypeMode.h"
+#import "IPCFilterCategoryMode.h"
 
-@interface IPCFilterTypeMode()
+@interface IPCFilterCategoryMode()
 
 @property (nonatomic, strong) NSMutableDictionary * filterSourceDic;//Save the filter data dynamic binding
 
 @end
 
-@implementation IPCFilterTypeMode
+@implementation IPCFilterCategoryMode
 
 - (instancetype)init{
     self = [super init];

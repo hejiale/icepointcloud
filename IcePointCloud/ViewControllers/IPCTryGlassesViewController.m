@@ -70,9 +70,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     self.glassListViewMode.isTrying = YES;
     self.glassListViewMode.isCustomsized = NO;
     
-    [self.recommendedButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateSelected];
-    [self.sellButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateSelected];
-    [self.bottomImageView setBackgroundColor:COLOR_RGB_BLUE];
     [self.cameraButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     [self.librayButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     self.matchPanelView.dropZoneHandler = self;

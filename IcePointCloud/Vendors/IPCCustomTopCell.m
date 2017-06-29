@@ -18,8 +18,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.addButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
-    [self.editButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

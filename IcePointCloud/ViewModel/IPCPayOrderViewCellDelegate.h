@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCOrder.h"
 
 @protocol IPCPayOrderViewCellDelegate <NSObject>
 

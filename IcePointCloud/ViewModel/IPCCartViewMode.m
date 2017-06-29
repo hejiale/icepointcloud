@@ -14,7 +14,7 @@
 - (void)reloadContactLensStock{
     __block NSMutableArray<NSString *> * batchIDs = [[NSMutableArray alloc]init];
     [[[IPCShoppingCart sharedCart] itemList] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (([obj.glasses filterType] == IPCTopFilterTypeContactLenses && obj.glasses.isBatch) && !obj.isPreSell)
+        if ([obj.glasses filterType] == IPCTopFilterTypeContactLenses && obj.glasses.isBatch)
             [batchIDs addObject:obj.contactLensID];
     }];
     if ([batchIDs count]) {

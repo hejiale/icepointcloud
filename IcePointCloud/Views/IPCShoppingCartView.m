@@ -27,9 +27,11 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
 @property (strong, nonatomic) UIView * coverView;
-@property (copy, nonatomic) void(^PayBlock)();
+
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
+
+@property (copy, nonatomic) void(^PayBlock)();
 
 @end
 
@@ -50,15 +52,14 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     [super layoutSubviews];
     
     [self addLeftLine];
-    [self.settlementButton setBackgroundColor:COLOR_RGB_BLUE];
-    [self.totalPriceLabel setTextColor:COLOR_RGB_RED];
+    [self.cartBottomView addTopLine];
     [self.cartListTableView setTableFooterView:[[UIView alloc]init]];
     self.cartListTableView.emptyAlertImage = @"exception_cart";
     self.cartListTableView.emptyAlertTitle = @"您的购物车空空的,请前去选取眼镜!";
-    [self.cartBottomView addTopLine];
-    [self.deleteButton setBackgroundColor:COLOR_RGB_RED];
 }
 
+
+#pragma mark //Set UI
 - (UIView *)coverView{
     if (!_coverView) {
         _coverView = [[UIView alloc]initWithFrame:self.bounds];
@@ -67,6 +68,21 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     return _coverView;
 }
 
+- (void)commitUI{
+    self.cartViewMode = [[IPCCartViewMode alloc]init];
+    [self updateCartUI];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    [self.cartViewMode reloadContactLensStock];
+}
+
+- (void)updateCartUI{
+    [self updateTotalPrice];
+    [self.selectAllButton setSelected:[self.cartViewMode judgeCartItemSelectState]];
+    [self.settlementButton setTitle:[NSString stringWithFormat:@"结算(%d)",[[IPCShoppingCart sharedCart] selectedGlassesCount]] forState:UIControlStateNormal];
+    [self.cartListTableView reloadData];
+}
+
+#pragma mark //Clicked Events
 - (void)showWithPay:(void (^)())pay
 {
     [self commitUI];
@@ -94,20 +110,12 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     }];
 }
 
-- (void)commitUI{
-    self.cartViewMode = [[IPCCartViewMode alloc]init];
-    [self updateCartUI];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    [self.cartViewMode reloadContactLensStock];
-}
-
 - (void)updateTotalPrice{
     [self.totalPriceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"合计：￥%.f", [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]] BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
     [self.navigationTitleLabel setText:[NSString stringWithFormat:@"购物车(%d)",(long)[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
 }
 
 
-#pragma mark //Clicked Methods
 - (IBAction)onEditAction:(UIButton *)sender {
     [sender setSelected:!sender.selected];
     [self.settlementButton setHidden:sender.selected];
@@ -145,13 +153,6 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     }else{
         [IPCCustomUI showError:@"未选中任何商品!"];
     }
-}
-
-- (void)updateCartUI{
-    [self updateTotalPrice];
-    [self.selectAllButton setSelected:[self.cartViewMode judgeCartItemSelectState]];
-    [self.settlementButton setTitle:[NSString stringWithFormat:@"结算(%d)",[[IPCShoppingCart sharedCart] selectedGlassesCount]] forState:UIControlStateNormal];
-    [self.cartListTableView reloadData];
 }
 
 #pragma mark //UITableViewDataSource
