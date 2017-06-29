@@ -24,7 +24,7 @@
 /**
  *  Basic camera view controller
  */
-@interface IPCDefineCameraViewController : IPCRotatingViewController
+@interface IPCDefineCameraViewController : UIViewController
 
 - (instancetype)initWithImageBlock:(void(^)(UIImage *image))imageBlock;
 

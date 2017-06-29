@@ -20,6 +20,7 @@
 
 + (IPCEmployeeeManager *)sharedManager;
 
+- (void)queryEmployee;
 - (void)queryEmploye:(NSString *)keyWord;
 - (void)queryMemberLevel;
 - (void)queryCustomerType;

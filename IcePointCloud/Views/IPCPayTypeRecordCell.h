@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IPCSwipeView.h"
 #import "IPCPayTypeRecordView.h"
-#import "IPCPayOrderSubViewDelegate.h"
+#import "IPCPayOrderViewCellDelegate.h"
 
 @interface IPCPayTypeRecordCell : UITableViewCell<UITextFieldDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
 
@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *payRecordHeight;
 
 @property (strong, nonatomic) NSMutableArray<IPCSwipeView *> * recordViews;
-@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
+@property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;
 
 @end
 

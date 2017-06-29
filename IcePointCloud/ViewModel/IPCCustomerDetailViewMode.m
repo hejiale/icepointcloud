@@ -13,6 +13,8 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
+        [[IPCEmployeeeManager sharedManager] queryEmployee];
+        [[IPCEmployeeeManager sharedManager] queryMemberLevel];
     }
     return self;
 }

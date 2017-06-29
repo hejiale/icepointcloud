@@ -68,7 +68,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = YES;
-    self.glassListViewMode.isCustomsized = NO;
     
     [self.cameraButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     [self.librayButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
@@ -108,25 +107,25 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     if ([IPCCustomUI rootViewcontroller]) {
         IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCCustomUI rootViewcontroller];
         [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
-            [self removeAllPopView];
+            [self onRemoveAllPopView];
         }];
     }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     [self setNavigationBarStatus:YES];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self.productCollectionView reloadData];
     if ([self.matchItems count] == 0 || [self.compareBgView.subviews count] == 0)[self initMatchItems];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self removeAllPopView];
+    [self onRemoveAllPopView];
 }
 
-
+#pragma mark //Init Array
 - (NSMutableArray<IPCMatchItem *> *)matchItems{
     if (!_matchItems)
         _matchItems = [[NSMutableArray alloc]init];
@@ -182,7 +181,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (IPCSwitch *)compareSwitch{
     if (!_compareSwitch) {
         _compareSwitch = [[IPCSwitch alloc] initWithFrame:CGRectMake(55, self.topOperationBar.frame.size.height/2-10, 50, 20)];
-        [_compareSwitch addTarget:self action:@selector(switchPressed:) forControlEvents:UIControlEventValueChanged];
+        [_compareSwitch addTarget:self action:@selector(onSwitchPressed:) forControlEvents:UIControlEventValueChanged];
         [_compareSwitch setTintColor:[UIColor darkGrayColor]];
         [_compareSwitch setOnTintColor:[UIColor darkGrayColor]];
         [_compareSwitch setThumbTintColor:[UIColor whiteColor]];
@@ -226,9 +225,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [self.productCollectionView reloadData];
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
+        [self reload];
     });
 }
 
@@ -236,22 +233,20 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
+    __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
-        [self.productCollectionView reloadData];
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf reload];
     }];
 }
 
-#pragma mark //Load Data
+#pragma mark //Request Data
 - (void)loadGlassesListData:(void(^)())complete{
     __weak typeof (self) weakSelf = self;
     [self.glassListViewMode reloadGlassListDataWithIsTry:YES IsHot:YES  Complete:^(LSRefreshDataStatus status, NSError *error){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (error && status == IPCRefreshError){
-            if (error.code != NSURLErrorNotConnectedToInternet) {
-                [IPCCustomUI showError:error.domain];
-            }
+            [IPCCustomUI showError:error.domain];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             strongSelf.productCollectionView.mj_footer.hidden = YES;
         }
@@ -267,14 +262,14 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     
     __weak typeof (self) weakSelf = self;
     if ([self.glassListViewMode.filterView superview]) {
-        [self removeAllPopView];
+        [self onRemoveAllPopView];
     }else{
         [self addBackgroundViewWithAlpha:0.2   InView:self.view Complete:^{
-            [self removeAllPopView];
+            [self onRemoveAllPopView];
         }];
         [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf removeAllPopView];
+            [strongSelf onRemoveAllPopView];
             [strongSelf.refreshHeader beginRefreshing];
         } ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -284,7 +279,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 - (void)searchProductAction:(NSNotification *)notification{
-    [self removeAllPopView];
+    [self onRemoveAllPopView];
     if (self.recommendedButton.selected){
         [IPCCustomUI showError:@"暂无可查询的热门推荐商品"];
         return;
@@ -312,7 +307,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 //Clean bg cover methods
-- (void)removeAllPopView{
+- (void)onRemoveAllPopView{
     [self.shareButtonView removeFromSuperview];
     [self.photoDeleteConfirmView removeFromSuperview];
     [self.modelsPicker removeFromSuperview];
@@ -322,7 +317,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 //Add a shopping cart animation
-- (void)addCartAnimationInCell:(IPCGlasslistCollectionViewCell *)cell{
+- (void)onAddCartAnimationInCell:(IPCGlasslistCollectionViewCell *)cell{
     [self.productCollectionView reloadData];
     CGPoint startPoint = [cell convertRect:cell.addCartButton.frame toView:self.view.superview].origin;
     CGPoint endPoint = CGPointMake(self.view.superview.jk_width-85, -30);
@@ -331,9 +326,9 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 
 //signle show or compare show methods
-- (void)switchPressed:(id)sender {
+- (void)onSwitchPressed:(id)sender {
     if ([self.backGroudView superview])
-        [self removeAllPopView];
+        [self onRemoveAllPopView];
     
     if (self.compareSwitch.isOn) {
         [self switchToCompareMode];
@@ -346,10 +341,10 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (IBAction)onDeleteBtnTapped:(UIButton *)sender
 {
     if ([self.backGroudView superview]) {
-        [self removeAllPopView];
+        [self onRemoveAllPopView];
     }else{
         [self addBackgroundViewWithAlpha:0   InView:self.view Complete:^{
-            [self removeAllPopView];
+            [self onRemoveAllPopView];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x-50;
         [self.photoDeleteConfirmView setFrame:CGRectMake(x, self.topOperationBar.jk_bottom, 135, 70)];
@@ -369,17 +364,17 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     
     [self.signleModeView updateModelPhoto];
     self.photoDeleteBtn.enabled = NO;
-    [self removeAllPopView];
+    [self onRemoveAllPopView];
 }
 
 //Choose Model Method
 - (IBAction)onModelsBtnTapped:(UIButton *)sender
 {
     if ([self.backGroudView superview]) {
-        [self removeAllPopView];
+        [self onRemoveAllPopView];
     }else{
         [self addBackgroundViewWithAlpha:0   InView:self.view Complete:^{
-            [self removeAllPopView];
+            [self onRemoveAllPopView];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x - self.modelsPicker.jk_width + 75;
         self.modelsPicker.layer.anchorPoint = CGPointMake(0.9, 0);
@@ -402,7 +397,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Click model head image
 - (IBAction)onModelPhotoTapped:(UIButton *)sender
 {
-    if ([self.backGroudView superview])[self removeAllPopView];
+    if ([self.backGroudView superview])[self onRemoveAllPopView];
     
     IPCMatchItem *mi = self.matchItems[0];
     if (mi.photoType == IPCPhotoTypeModel && mi.modelType == index) return;
@@ -421,7 +416,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 
-- (IBAction)goToTopAction:(id)sender {
+- (IBAction)onGoToTopAction:(id)sender {
     [self.productCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
 }
 
@@ -429,33 +424,33 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
     [self addBackgroundViewWithAlpha:0.2  InView:self.view  Complete:^{
-        [self removeAllPopView];
+        [self onRemoveAllPopView];
     }];
     _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.backGroudView.jk_width,80 )
                                                          Chat:^{
-                                                             [self shareToWechat:WXSceneSession];
+                                                             [self onShareToWechat:WXSceneSession];
                                                          } Line:^{
-                                                             [self shareToWechat:WXSceneTimeline];
+                                                             [self onShareToWechat:WXSceneTimeline];
                                                          } Favorite:^{
-                                                             [self shareToWechat:WXSceneFavorite];
+                                                             [self onShareToWechat:WXSceneFavorite];
                                                          }];
     [self.backGroudView addSubview:_shareButtonView];
     [self.backGroudView bringSubviewToFront:_shareButtonView];
     [_shareButtonView show];
 }
 
-- (void)shareToWechat :(int)scene{
+- (void)onShareToWechat :(int)scene{
     UIImage * screenImage = [UIImage jk_captureWithView:self.matchPanelView];
     IPCShareManager * manager = [[IPCShareManager alloc]init];
     [manager shareToChat:screenImage Scene:scene];
-    [self removeAllPopView];
+    [self onRemoveAllPopView];
 }
 
 //Shooting head
 - (IBAction)onCameraBtnTapped:(id)sender
 {
     if ([self.blurBgView superview]) {
-        [self removeAllPopView];
+        [self onRemoveAllPopView];
     }else{
         [[UIApplication sharedApplication].keyWindow addSubview:self.blurBgView];
         [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.blurBgView];
@@ -467,7 +462,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 //Camera method
 - (IBAction)onPickerFrontalBtnTapped:(id)sender
 {
-    [self removeAllPopView];
+    [self onRemoveAllPopView];
     __weak typeof (self) weakSelf = self;
     IPCDefineCameraBaseComponent * baseComponent = [[IPCDefineCameraBaseComponent alloc]initWithResultImage:^(UIImage *image) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -628,7 +623,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 #pragma mark //GlasslistCollectionViewCellDelegate
 - (void)addShoppingCartAnimation:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0)
-        [self addCartAnimationInCell:cell];
+        [self onAddCartAnimationInCell:cell];
 }
 
 
@@ -658,7 +653,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 - (void)reloadProductList{
-    [self.productCollectionView reloadData];
+    [self reload];
 }
 
 #pragma mark - OBOvumSource ----------------------------------------------------------------------------
@@ -765,7 +760,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     }
 }
 
-#pragma mark //Adding/removing notice ----------------------------------------------------------------------------
+#pragma mark //Adding Removing notice ----------------------------------------------------------------------------
 - (void)addTryNotifications{
     [self clearNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchProductAction:) name:IPCTrySearchProductNotification object:nil];
@@ -777,8 +772,11 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCTryFilterProductNotification object:nil];
 }
 
+#pragma mark //Reload Table View
 - (void)reload{
     [self.productCollectionView reloadData];
+    [self.refreshHeader endRefreshing];
+    [self.refreshFooter endRefreshing];
 }
 
 - (void)rootRefresh{

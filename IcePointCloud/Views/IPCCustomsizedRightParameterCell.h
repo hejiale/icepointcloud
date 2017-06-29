@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "IPCCustomsizedParameterView.h"
-#import "IPCPayOrderSubViewDelegate.h"
+#import "IPCPayOrderViewCellDelegate.h"
 
 @interface IPCCustomsizedRightParameterCell : UITableViewCell
 
@@ -17,6 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *unifiedButton;
 @property (weak, nonatomic) IBOutlet UIButton *leftOrRightEyeButton;
 @property (weak, nonatomic) IBOutlet UIImageView *rightEyeImageView;
-@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
+@property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;
 
 @end

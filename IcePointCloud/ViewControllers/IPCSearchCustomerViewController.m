@@ -39,7 +39,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     
     [self setBackground];
     
-    searchKeyWord = @"";
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
         [self setNavigationTitle:@"客户"];
     }
@@ -85,7 +84,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 }
 
 
-- (MJRefreshBackStateFooter *)refreshHeader{
+- (IPCRefreshAnimationHeader *)refreshHeader{
     if (!_refreshHeader){
         _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadData)];
     }

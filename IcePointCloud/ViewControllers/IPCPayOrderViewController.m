@@ -12,13 +12,13 @@
 #import "IPCSelectCustomsizedViewController.h"
 #import "IPCEmployeListView.h"
 
-@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewCellDelegate>
+@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewModelDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
-@property (strong, nonatomic) IPCPayOrderViewMode * normalSellCellMode;
+@property (strong, nonatomic) IPCPayOrderViewMode * payOrderViewMode;
 
 @end
 
@@ -31,12 +31,8 @@
     [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
     
-    [[IPCPayOrderManager sharedManager] resetData];
-    //判断选择用户页面的确定按钮是否显示
-    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
-    
-    self.normalSellCellMode = [[IPCPayOrderViewMode alloc]init];
-    self.normalSellCellMode.delegate = self;
+    self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
+    self.payOrderViewMode.delegate = self;
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
@@ -44,17 +40,8 @@
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf resetPayInfoData];
+        [strongSelf.payOrderViewMode resetPayInfoData];
     }];
-    
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
-    {
-        [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
-        [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
-        [IPCCustomsizedItem sharedItem].rightEye.customsizedCount = 1;
-        [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
-        [IPCCustomsizedItem sharedItem].leftEye.customsizedCount = 1;
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -64,11 +51,12 @@
     
     [IPCPayOrderManager sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
     [IPCPayOrderManager sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
-    [self.normalSellCellMode requestTradeOrExchangeStatus];
+    [self.payOrderViewMode requestTradeOrExchangeStatus];
 }
 
 #pragma mark //Set UI
-- (void)loadEmployeView{
+- (void)loadEmployeView
+{
     [self.view endEditing:YES];
     __weak typeof(self) weakSelf = self;
     self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
@@ -105,12 +93,12 @@
         return;
     }
     [self.saveButton jk_showIndicator];
-    [self.normalSellCellMode offerOrder];
+    [self.payOrderViewMode offerOrder];
 }
 
 
 - (IBAction)cancelPayOrderAction:(id)sender {
-    [self resetPayInfoData];
+    [self.payOrderViewMode resetPayInfoData];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -120,34 +108,26 @@
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
-- (void)resetPayInfoData{
-    [[IPCCurrentCustomer sharedManager] clearData];
-    [[IPCPayOrderManager sharedManager] resetData];
-    [[IPCShoppingCart sharedCart] clearAllItemPoint];
-    [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
-    [[IPCCustomsizedItem sharedItem] resetData];
-    [[IPCShoppingCart sharedCart] resetSelectCartItemPrice];
-}
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.normalSellCellMode numberOfSectionsInTableView:tableView];
+    return [self.payOrderViewMode numberOfSectionsInTableView:tableView];
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.normalSellCellMode tableView:tableView numberOfRowsInSection:section];
+    return [self.payOrderViewMode tableView:tableView numberOfRowsInSection:section];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.normalSellCellMode tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [self.payOrderViewMode tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self.normalSellCellMode tableView:tableView heightForRowAtIndexPath:indexPath];
+    return [self.payOrderViewMode tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 
@@ -195,7 +175,7 @@
 - (void)successPayOrder{
     [self.saveButton jk_hideIndicator];
     [IPCCustomUI showSuccess:@"订单付款成功!"];
-    [self resetPayInfoData];
+    [self.payOrderViewMode resetPayInfoData];
     [[IPCShoppingCart sharedCart] removeSelectCartItem];
     [self performSelector:@selector(popViewControllerAnimated:) afterDelay:2];
 }

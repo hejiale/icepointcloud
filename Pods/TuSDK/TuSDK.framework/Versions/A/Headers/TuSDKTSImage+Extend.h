@@ -332,7 +332,7 @@
  *  @return 指定长宽图片
  */
 - (UIImage *) lsqImageCorpResizeWithSize:(CGSize)size;
-
+                                                                                            
 /**
  *  裁剪图片 (需要先旋转到正确的方向)
  *

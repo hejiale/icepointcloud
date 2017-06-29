@@ -12,6 +12,6 @@
 - (void)addTryNotifications;
 - (void)reload;
 - (void)rootRefresh;
-- (void)removeAllPopView;
+- (void)onRemoveAllPopView;
 
 @end

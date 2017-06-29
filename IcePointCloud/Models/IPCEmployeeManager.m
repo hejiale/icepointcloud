@@ -82,6 +82,11 @@
 
 
 #pragma mark //Request Data
+- (void)queryEmployee
+{
+    [self queryEmploye:@""];
+}
+
 - (void)queryEmploye:(NSString *)keyWord
 {
     [IPCPayOrderRequestManager queryEmployeWithKeyword:keyWord SuccessBlock:^(id responseValue){

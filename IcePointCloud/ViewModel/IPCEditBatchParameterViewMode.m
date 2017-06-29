@@ -70,7 +70,7 @@
         }];
     }
     
-    if (contactLensIDs > 0) {
+    if (contactLensIDs.count) {
         [IPCBatchRequestManager queryContactGlassBatchSpecification:contactLensIDs SuccessBlock:^(id responseValue) {
             [contactLensIDs enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCContactLenSpecList * _contactSpecificationArray = [[IPCContactLenSpecList alloc]initWithResponseObject:responseValue ContactLensID:obj];

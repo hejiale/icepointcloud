@@ -19,6 +19,7 @@
     if (self) {
         self.searchWord =  @"";
         self.currentPage =  0;
+        self.isCustomsized = NO;
         self.currentType =  IPCTopFIlterTypeFrames;
         self.filterValue    =  [[IPCFilterCategoryMode alloc]init];
     }

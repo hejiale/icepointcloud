@@ -37,11 +37,14 @@
 - (void)showSampleWithController:(UIViewController *)controller;
 {
     if (!controller) return;
-    [controller presentViewController:[[IPCDefineCameraViewController alloc] initWithImageBlock:^(UIImage *image) {
-        if (self.ResultImageBlock)
+    
+    IPCDefineCameraViewController * cameraVC = [[IPCDefineCameraViewController alloc]initWithImageBlock:^(UIImage *image) {
+        if (self.ResultImageBlock) {
             self.ResultImageBlock(image);
-        
-    }] animated:YES completion:nil];
+        }
+    }];
+    IPCNavigationViewController * cameraNav = [[IPCNavigationViewController alloc]initWithRootViewController:cameraVC];
+    [controller presentViewController:cameraNav  animated:YES completion:nil];
 }
 @end
 
@@ -99,6 +102,11 @@
     return self;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
 
 #pragma mark - camera action
 - (BOOL)prefersStatusBarHidden;
@@ -109,7 +117,10 @@
 -(void)loadView
 {
     [super loadView];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+ 
+    self.wantsFullScreenLayout = YES;
+    [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 }
 
 
@@ -117,6 +128,9 @@
 {
     [super viewWillAppear:animated];
     
+    // 如果从编辑图片回来，需要隐藏状态栏和导航栏  隐藏状态栏 for IOS6
+    [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     // Camera open access
     [TuSDKTSDeviceSettings checkAllowWithController:self
                                                type:lsqDeviceSettingsCamera
@@ -193,7 +207,6 @@
 - (void)onCapturePhoto:(UIButton *)sender;
 {
     if (!_camera) return;
-    [IPCCustomUI show];
     [_camera captureImage];
 }
 
@@ -292,10 +305,13 @@
     [_preview removeAllSubviews];
     
     UIImageView *imgView = [UIImageView initWithFrame:_preview.bounds];
-    imgView.backgroundColor = [UIColor clearColor];
+    imgView.backgroundColor = lsqRGB(60, 60, 60);
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     
-    UIImage *image = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
+    UIImage *image = [result.image lsqImageCorpWithRatio:1];
+    UIImage *sourceImage = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
+//    UIImage *sourceImage = [image lsqImageCorpWithSize:image.size rect:self.view.bounds outputSize:CGSizeMake(531, 698) orientation:UIImageOrientationUp interpolationQuality:kCGInterpolationHigh];
+    lsqLDebug(@"image: %@", NSStringFromCGSize(image.size));
     
     imgView.image = image;
     [_preview addSubview:imgView];
@@ -305,14 +321,10 @@
     [UIView animateWithDuration:0.32 animations:^{
         _preview.alpha = 1;
     } completion:^(BOOL finished) {
-        if (finished) {
-            [IPCCustomUI hiden];
-            
-            if (self.OutImageBlock)
-                self.OutImageBlock(image);
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
+        if (self.OutImageBlock) {
+            self.OutImageBlock(sourceImage);
         }
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }
 
@@ -333,39 +345,39 @@
 {
     [super viewDidLoad];
     
-    self.view = [UIView initWithFrame:CGRectMake(0, 0, lsqScreenHeight,lsqScreenWidth)];
+    self.view = [UIView initWithFrame:CGRectMake(0, 0, lsqScreenWidth,lsqScreenHeight)];
     self.view.backgroundColor = lsqRGB(122, 122, 122);
     
     // The camera configuration section
-    _configBar = [UIView initWithFrame:CGRectMake(0, 0, [self.view lsqGetSizeWidth], 60)];
+    _configBar = [UIView initWithFrame:CGRectMake(0, 0, self.view.lsqGetSizeWidth, 60)];
     [_configBar setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:_configBar];
     
     // Bottom bar
-    _bottomBar = [UIView initWithFrame:CGRectMake(0, [self.view lsqGetSizeHeight] - 100, [self.view lsqGetSizeWidth], 100)];
+    _bottomBar = [UIView initWithFrame:CGRectMake(0, self.view.lsqGetSizeHeight - 100, self.view.lsqGetSizeWidth, 100)];
     [_bottomBar setBackgroundColor:COLOR_RGB_BLUE];
     [self.view addSubview:_bottomBar];
     
     // The camera view
-    _cameraView = [UIView initWithFrame:CGRectMake(0, [_configBar lsqGetBottomY], [self.view lsqGetSizeWidth], [self.view lsqGetSizeHeight]-[_configBar lsqGetSizeHeight]-[_bottomBar lsqGetSizeHeight])];
+    _cameraView = [UIView initWithFrame:CGRectMake(0, _configBar.lsqGetBottomY, self.view.lsqGetSizeWidth, self.view.lsqGetSizeHeight-_configBar.lsqGetSizeHeight-_bottomBar.lsqGetSizeHeight)];
     [self.view addSubview:_cameraView];
     
     // Cancel button
-    _cancelButton = [UIButton buttonWithFrame:CGRectMake(0, 10, 60, [_configBar lsqGetSizeHeight])
+    _cancelButton = [UIButton buttonWithFrame:CGRectMake(0, 10, 60, _configBar.lsqGetSizeHeight)
                                     imageName:@"icon_back"];
     
     [_cancelButton addTouchUpInsideTarget:self action:@selector(onWindowExit:)];
     [_configBar addSubview:_cancelButton];
     
     // Camera before and after the switch button
-    _switchCameraButton = [UIButton buttonWithFrame:CGRectMake([_configBar lsqGetSizeWidth] - 60, 10, 60, [_configBar lsqGetSizeHeight])
+    _switchCameraButton = [UIButton buttonWithFrame:CGRectMake(_configBar.lsqGetSizeWidth - 60, 10, 60, _configBar.lsqGetSizeHeight)
                                           imageName:@"camera_swap_btn"];
     
     [_switchCameraButton addTouchUpInsideTarget:self action:@selector(onSwitchCamera:)];
     [_configBar addSubview:_switchCameraButton];
     
     //The title bar
-    _topTitleLabel = [UILabel initWithFrame:CGRectMake([_configBar lsqGetCenterX:0] - 200, 15, 400, [_configBar lsqGetSizeHeight]-15) font:[UIFont systemFontOfSize:20 weight:UIFontWeightThin] color:COLOR_RGB_BLUE aligment:NSTextAlignmentCenter];
+    _topTitleLabel = [UILabel initWithFrame:CGRectMake([_configBar lsqGetCenterX:0] - 200, 15, 400, _configBar.lsqGetSizeHeight-15) font:[UIFont systemFontOfSize:20 weight:UIFontWeightThin] color:COLOR_RGB_BLUE aligment:NSTextAlignmentCenter];
     [_topTitleLabel setText:@"请把脸调整至虚线框内，点击拍摄按钮保存"];
     [_configBar addSubview:_topTitleLabel];
     
@@ -373,16 +385,22 @@
     _switchCameraButton.hidden = ([AVCaptureDevice lsqCameraCounts] == 0);
     
     //The face of a frame
-    _personLayer = [UIImageView initWithFrame:CGRectMake(0, [_configBar lsqGetBottomY]+50, [self.view lsqGetSizeWidth], [self.view lsqGetSizeHeight]-[_configBar lsqGetSizeHeight]-[_bottomBar lsqGetSizeHeight]-50) imageNamed:@"camera_person_frame"];
+    _personLayer = [UIImageView initWithFrame:CGRectMake(0, _configBar.lsqGetBottomY+50, self.view.lsqGetSizeWidth, self.view.lsqGetSizeHeight-_configBar.lsqGetSizeHeight-_bottomBar.lsqGetSizeHeight-50) imageNamed:@"camera_person_frame"];
     [self.view addSubview:_personLayer];
     
     // Photo button
-    CGFloat capBtnSize = [_bottomBar lsqGetSizeHeight]  - 20;
+    CGFloat capBtnSize = _bottomBar.lsqGetSizeHeight - 20;
     
     _captureButton = [UIButton initWithFrame:CGRectMake([_bottomBar lsqGetCenterX:capBtnSize], [_bottomBar lsqGetCenterY:capBtnSize], capBtnSize, capBtnSize)];
     [_captureButton setStateNormalImageName:@"camera_shoot_btn"];
     [_captureButton addTouchUpInsideTarget:self action:@selector(onCapturePhoto:)];
     [_bottomBar addSubview:_captureButton];
+    
+    // 照片预览视图
+    _preview = [UIButton initWithFrame:self.view.bounds];
+    _preview.hidden = YES;
+    [_preview addTouchUpInsideTarget:self action:@selector(onClosePreview:)];
+    [self.view addSubview:_preview];
     
     [self buildFilterWindow];
 }

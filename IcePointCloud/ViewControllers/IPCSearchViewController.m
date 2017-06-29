@@ -28,14 +28,6 @@ typedef NS_ENUM(NSInteger, IPCSearchType){
 
 static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,6 +40,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
     [self.keywordTf becomeFirstResponder];
     [self.keywordTf setText:self.currentSearchword];
 }
@@ -59,6 +52,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     return _keywordHistory;
 }
 
+#pragma mark //Clicked Events
 - (void)showSearchProductViewWithSearchWord:(NSString *)word
 {
     self.searchType = IPCSearchTypeProduct;
@@ -75,8 +69,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [self.searchTableView reloadData];
 }
 
-
-#pragma mark //Clicked Events
 - (IBAction)onCancelBtnTapped:(id)sender{
     [self.keywordTf endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -117,19 +109,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 }
 
 #pragma mark //UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString * searchText = self.keywordHistory[indexPath.row];
-    
-    if (self.searchDelegate) {
-        if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
-            [self.searchDelegate didSearchWithKeyword:searchText];
-    }
-    [self.keywordTf endEditing:YES];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView * headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 50)];
     
@@ -170,6 +149,18 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     return 0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString * searchText = self.keywordHistory[indexPath.row];
+    
+    if (self.searchDelegate) {
+        if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
+        [self.searchDelegate didSearchWithKeyword:searchText];
+    }
+    [self.keywordTf endEditing:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark //UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -178,7 +169,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     
     if (self.searchDelegate) {
         if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
-            [self.searchDelegate didSearchWithKeyword:curKeyword];
+        [self.searchDelegate didSearchWithKeyword:curKeyword];
     }
     
     [textField endEditing:YES];

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IPCPayOrderSubViewDelegate.h"
+#import "IPCPayOrderViewCellDelegate.h"
 
 @interface IPCPayOrderSettlementCell : UITableViewCell<UITextFieldDelegate>
 
@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *customerPointLabel;
 @property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *givingAmountLabel;
-@property (nonatomic, assign) id<IPCPayOrderSubViewDelegate>delegate;
+@property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;
 
 
 

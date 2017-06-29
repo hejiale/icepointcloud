@@ -13,9 +13,9 @@
 #import "IPCShoppingCart.h"
 
 static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellIdentifier";
-static NSString * const topIdentifier  = @"DetailTopTableViewCellIdentifier";
-static NSString * const specIdentifier = @"SpecificationCellIdentifier";
-static NSString * const webIdentifier  = @"WebViewCellIdentifier";
+static NSString * const topIdentifier           = @"DetailTopTableViewCellIdentifier";
+static NSString * const specIdentifier         = @"SpecificationCellIdentifier";
+static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 @interface IPCGlassDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
 
@@ -70,6 +70,8 @@ static NSString * const webIdentifier  = @"WebViewCellIdentifier";
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    
+    //清除网页内容
     [self.productDetailWebView reload];
     [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     [self.productDetailWebView jk_clearCookies];

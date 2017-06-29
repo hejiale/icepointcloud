@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCPayOrderViewCellDelegate.h"
+#import "IPCPayOrderViewModelDelegate.h"
 
 @interface IPCPayOrderViewMode : NSObject
 
-@property (nonatomic, assign, readwrite) id<IPCPayOrderViewCellDelegate>delegate;
+@property (nonatomic, assign, readwrite) id<IPCPayOrderViewModelDelegate>delegate;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
@@ -26,6 +26,8 @@
  */
 - (void)offerOrder;
 - (void)requestTradeOrExchangeStatus;
+
+- (void)resetPayInfoData;
 
 @end
 

@@ -31,7 +31,6 @@
 #import "IPCParameterTableViewController.h"
 #import "IPCDatePickViewController.h"
 #import "IPCNavigationViewController.h"
-#import "IPCRotatingViewController.h"
 #import "IPCRootNavigationViewController.h"
 /**
  *  Model

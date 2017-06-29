@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCPayOrderViewCellMode : NSObject
+@interface IPCPayOrderViewCellHeight : NSObject
 
-- (CGFloat)buyProductCellHeight:(NSIndexPath *)indexPath;
+- (CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath;
 
 @end

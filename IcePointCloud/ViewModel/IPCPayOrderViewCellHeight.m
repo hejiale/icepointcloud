@@ -6,9 +6,36 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCPayOrderViewCellMode.h"
+#import "IPCPayOrderViewCellHeight.h"
 
-@implementation IPCPayOrderViewCellMode
+@implementation IPCPayOrderViewCellHeight
+
+- (CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath
+{
+    if ([IPCCurrentCustomer sharedManager].currentCustomer) {
+        if (indexPath.section == 0 && indexPath.row > 0){
+            return 345;
+        }else if ((indexPath.section == 1 || indexPath.section == 2) && indexPath.row > 0){
+            return 70;
+        }else if (indexPath.section == 3 && indexPath.row > 0 ){
+            return 160;
+        }
+    }
+    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))
+    {
+        return 130;
+    }else if ((indexPath.section == 1 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5 && indexPath.row > 0))
+    {
+        return [self buyProductCellHeight:indexPath];
+    }else if ((indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6))
+    {
+        return 180;
+    }else if ((indexPath.section == 3 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 7 && indexPath.row > 0)){
+        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 50 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0) + 50;
+    }
+    return 50;
+}
+
 
 - (CGFloat)buyProductCellHeight:(NSIndexPath *)indexPath
 {

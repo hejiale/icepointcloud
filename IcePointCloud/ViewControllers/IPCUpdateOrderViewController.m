@@ -25,7 +25,7 @@ static NSString * const productIdentifier      = @"IPCOrderDetailProductCellIden
 static NSString * const payInfoIdentifier       = @"IPCPayOrderPayInfoCellIdentifier";
 static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentifier";
 
-@interface IPCUpdateOrderViewController ()<UITableViewDataSource, UITableViewDelegate,IPCPayOrderSubViewDelegate>
+@interface IPCUpdateOrderViewController ()<UITableViewDataSource, UITableViewDelegate,IPCPayOrderViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView * orderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;

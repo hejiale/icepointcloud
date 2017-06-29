@@ -247,7 +247,7 @@
                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
-                        <action selector="goToTopAction:" destination="-1" eventType="touchUpInside" id="pc1-35-ESF"/>
+                        <action selector="onGoToTopAction:" destination="-1" eventType="touchUpInside" id="CD3-7L-745"/>
                     </connections>
                 </button>
             </subviews>

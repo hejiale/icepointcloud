@@ -12,6 +12,7 @@
 #import "IPCInsertCustomerBaseCell.h"
 #import "IPCInsertCustomerOpometryCell.h"
 #import "IPCInsertCustomerAddressCell.h"
+#import "IPCInsertCustomerViewModel.h"
 
 static NSString * const topIdentifier = @"UserBaseTopTitleCellIdentifier";
 static NSString * const baseIdentifier = @"UserBaseInfoCellIdentifier";
@@ -25,6 +26,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 @property (weak,   nonatomic) IBOutlet UITableView *userInfoTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
+@property (strong, nonatomic) IPCInsertCustomerViewModel * insertCustomerModel;
 
 @end
 
@@ -35,17 +37,13 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     // Do any additional setup after loading the view from its nib.
     
     [self setBackground];
+    [self.userInfoTableView setTableFooterView:self.tableFootView];
+    
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
     }];
-    [self.userInfoTableView setTableFooterView:self.tableFootView];
     
-    [[IPCEmployeeeManager sharedManager] queryEmploye:@""];
-    [[IPCEmployeeeManager sharedManager] queryMemberLevel];
-    [[IPCEmployeeeManager sharedManager] queryCustomerType];
-    
-    [[IPCInsertCustomer instance] resetData];
-    [IPCInsertCustomer instance].isInsertStatus = YES;
+    self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -54,82 +52,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [self setNavigationTitle:@"新增客户"];
     [self setNavigationBarStatus:NO];
     [self.userInfoTableView reloadData];
-}
-
-#pragma mark //Request Data
-- (void)saveNewCustomerRequest
-{
-    if (![IPCInsertCustomer instance].memberLevel.length) {
-        IPCMemberLevel * memberLevelMode = [IPCEmployeeeManager sharedManager].memberLevelList.list[0];
-        [IPCInsertCustomer instance].memberLevel = memberLevelMode.memberLevel;
-        [IPCInsertCustomer instance].memberLevelId = memberLevelMode.memberLevelId;
-    }
-    if (![IPCInsertCustomer instance].customerType.length) {
-        __block IPCCustomerType * customerType = [IPCEmployeeeManager sharedManager].customerTypeList.list[0];
-        [IPCInsertCustomer instance].customerType = @"自然进店";
-        [[IPCEmployeeeManager sharedManager].customerTypeList.list enumerateObjectsUsingBlock:^(IPCCustomerType * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.customerType isEqualToString:@"自然进店"]) {
-                [IPCInsertCustomer instance].customerTypeId = obj.customerTypeId;
-            }
-        }];
-    }
-    
-    NSMutableArray * optometryList = [[NSMutableArray alloc]init];
-    [[IPCInsertCustomer instance].optometryArray enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableDictionary * optometryDic = [[NSMutableDictionary alloc]init];
-        [optometryDic setDictionary:@{
-                                      @"distanceRight": obj.distanceRight,
-                                      @"distanceLeft":obj.distanceLeft,
-                                      @"sphLeft": (obj.sphLeft ?  : @""),
-                                      @"sphRight":(obj.sphRight ?  : @""),
-                                      @"cylLeft": (obj.cylLeft ?  : @""),
-                                      @"cylRight":(obj.cylRight ?  : @""),
-                                      @"axisLeft":obj.axisLeft,
-                                      @"axisRight":obj.axisRight,
-                                      @"addLeft":obj.addLeft,
-                                      @"addRight":obj.addRight,
-                                      @"correctedVisionLeft":obj.correctedVisionLeft,
-                                      @"correctedVisionRight":obj.correctedVisionRight}];
-        if (obj.purpose.length) {
-            [optometryDic setObject:obj.purpose forKey:@"purpose"];
-        }
-        if (obj.employeeName.length) {
-            [optometryDic setObject:obj.employeeId forKey:@"employeeId"];
-            [optometryDic setObject:obj.employeeName forKey:@"employeeName"];
-        }
-        [optometryList addObject:optometryDic];
-    }];
-    
-    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:[IPCInsertCustomer instance].customerName
-                                                  CustomPhone:[IPCInsertCustomer instance].customerPhone
-                                                       Gender:[IPCInsertCustomer instance].gender
-                                                        Email:[IPCInsertCustomer instance].email
-                                                     Birthday:[IPCInsertCustomer instance].birthday
-                                                       Remark:[IPCInsertCustomer instance].remark
-                                                OptometryList:optometryList
-                                                  ContactName:[IPCInsertCustomer instance].contactorName
-                                                ContactGender:[IPCInsertCustomer instance].contactorGenger
-                                                 ContactPhone:[IPCInsertCustomer instance].contactorPhone
-                                               ContactAddress:[IPCInsertCustomer instance].contactorAddress
-                                                 EmployeeName:[IPCInsertCustomer instance].empName
-                                                   EmployeeId:[IPCInsertCustomer instance].empNameId
-                                                 CustomerType:[IPCInsertCustomer instance].customerType
-                                               CustomerTypeId:[IPCInsertCustomer instance].customerTypeId
-                                                   Occupation:[IPCInsertCustomer instance].job
-                                                  MemberLevel:[IPCInsertCustomer instance].memberLevel
-                                                MemberLevelId:[IPCInsertCustomer instance].memberLevelId
-                                                    MemberNum:[IPCInsertCustomer instance].memberNum
-                                                      PhotoId:[IPCInsertCustomer instance].photo_udid
-                                                 IntroducerId:[IPCInsertCustomer instance].introducerId
-                                            IntroducerInteger: [IPCInsertCustomer instance].introducerInteger
-                                                 SuccessBlock:^(id responseValue)
-     {
-         [IPCCustomUI showSuccess:@"新建用户成功!"];
-         [[IPCInsertCustomer instance] resetData];
-         [self.navigationController popViewControllerAnimated:YES];
-     } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
-     }];
 }
 
 #pragma mark //Set UI
@@ -152,7 +74,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 - (IBAction)saveNewCustomerAction:(id)sender {
     if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
-        [self saveNewCustomerRequest];
+        [self.insertCustomerModel saveNewCustomer:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
     }else{
         [IPCCustomUI showError:@"请输入完整客户名或手机号!"];
     }

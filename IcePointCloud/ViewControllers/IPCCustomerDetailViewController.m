@@ -60,19 +60,15 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
         [self.sureButton setHidden:NO];
     }
-     [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     self.detailTableView.isHiden = YES;
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
     self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
     self.detailTableView.mj_header = self.refreshHeader;
+    [self.refreshHeader beginRefreshing];
     
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
     self.customerViewMode.currentCustomer = self.customer;
-    
-    [[IPCEmployeeeManager sharedManager] queryEmploye:@""];
-    [[IPCEmployeeeManager sharedManager] queryMemberLevel];
-    [self.refreshHeader beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

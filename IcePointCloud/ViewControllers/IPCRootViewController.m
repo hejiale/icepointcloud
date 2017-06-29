@@ -48,7 +48,7 @@
 
 - (void)removerFilterCover{
     [self.productVC removeCover];
-    [self.tryVC removeAllPopView];
+    [self.tryVC onRemoveAllPopView];
 }
 
 

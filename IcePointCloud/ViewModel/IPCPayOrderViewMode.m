@@ -18,7 +18,7 @@
 #import "IPCCustomsizedRightParameterCell.h"
 #import "IPCCustomsizedLeftParameterCell.h"
 #import "IPCPayOrderMemoCell.h"
-#import "IPCPayOrderViewCellMode.h"
+#import "IPCPayOrderViewCellHeight.h"
 #import "IPCPayTypeRecordCell.h"
 
 static NSString * const payOrderCartItemIdentifier = @"payOrderProductCellIdentifier";
@@ -34,9 +34,9 @@ static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLef
 static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellIdentifier";
 static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCellIdentifier";
 
-@interface IPCPayOrderViewMode()<IPCPayOrderSubViewDelegate>
+@interface IPCPayOrderViewMode()<IPCPayOrderViewCellDelegate>
 
-@property (nonatomic, strong) IPCPayOrderViewCellMode * cellMode;
+@property (nonatomic, strong) IPCPayOrderViewCellHeight * cellHeight;
 
 @end
 
@@ -45,7 +45,18 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.cellMode = [[IPCPayOrderViewCellMode alloc] init];
+        self.cellHeight = [[IPCPayOrderViewCellHeight alloc] init];
+        //判断选择用户页面的确定按钮是否显示
+        [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+        
+        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
+        {
+            [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
+            [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
+            [IPCCustomsizedItem sharedItem].rightEye.customsizedCount = 1;
+            [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
+            [IPCCustomsizedItem sharedItem].leftEye.customsizedCount = 1;
+        }
     }
     return self;
 }
@@ -103,6 +114,17 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
              }
          }
      }];
+}
+
+#pragma mark //Clicked Events
+- (void)resetPayInfoData
+{
+    [[IPCCurrentCustomer sharedManager] clearData];
+    [[IPCPayOrderManager sharedManager] resetData];
+    [[IPCShoppingCart sharedCart] clearAllItemPoint];
+    [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
+    [[IPCCustomsizedItem sharedItem] resetData];
+    [[IPCShoppingCart sharedCart] resetSelectCartItemPrice];
 }
 
 #pragma mark //DO Datasource
@@ -335,28 +357,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([IPCCurrentCustomer sharedManager].currentCustomer) {
-        if (indexPath.section == 0 && indexPath.row > 0){
-            return 345;
-        }else if ((indexPath.section == 1 || indexPath.section == 2) && indexPath.row > 0){
-            return 70;
-        }else if (indexPath.section == 3 && indexPath.row > 0 ){
-            return 160;
-        }
-    }
-    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))
-    {
-        return 130;
-    }else if ((indexPath.section == 1 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5 && indexPath.row > 0))
-    {
-        return [self.cellMode buyProductCellHeight:indexPath];
-    }else if ((indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6))
-    {
-        return 180;
-    }else if ((indexPath.section == 3 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 7 && indexPath.row > 0)){
-        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 50 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0) + 50;
-    }
-    return 50;
+    return [self.cellHeight cellHeightForIndexPath:indexPath];
 }
 
 #pragma mark //IPCPayOrderSubViewDelegate

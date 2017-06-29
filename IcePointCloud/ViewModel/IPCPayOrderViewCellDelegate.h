@@ -1,8 +1,8 @@
 //
-//  IPCPayOrderViewCellDelegate.h
+//  IPCPayOrderSubViewDelegate.h
 //  IcePointCloud
 //
-//  Created by mac on 2017/3/3.
+//  Created by gerry on 2017/4/16.
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
@@ -10,10 +10,8 @@
 
 @protocol IPCPayOrderViewCellDelegate <NSObject>
 
-- (void)showEmployeeView;
-- (void)reloadPayOrderView;
-- (void)searchCustomerMethod;
-- (void)selectNormalGlasses;
-- (void)successPayOrder;
-- (void)failPayOrder;
+- (void)reloadUI;
+
+- (void)getPointPrice:(NSInteger)point;
+
 @end

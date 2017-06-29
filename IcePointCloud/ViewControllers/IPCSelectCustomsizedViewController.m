@@ -125,9 +125,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     [self.glassListViewMode reloadGlassListDataWithIsTry:NO IsHot:NO Complete:^(LSRefreshDataStatus status, NSError *error){
         if (status == IPCRefreshError && error) {
-            if (error.code != NSURLErrorNotConnectedToInternet) {
-                [IPCCustomUI showError:error.domain];
-            }
+            [IPCCustomUI showError:error.domain];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             self.customsizedCollectionView.mj_footer.hidden = YES;
         }
