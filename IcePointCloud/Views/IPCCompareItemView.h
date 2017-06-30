@@ -9,24 +9,28 @@
 #import <UIKit/UIKit.h>
 #import "IPCMatchItem.h"
 #import "IPCGlasses.h"
+#import "IPCTryGlassesViewDelegate.h"
+#import "IPCTryGlassView.h"
 
-@protocol CompareItemViewDelegate;
+
 @interface IPCCompareItemView : UIView
 
 @property (nonatomic, strong, readwrite) UIView * parentSingleModeView;
-@property (nonatomic, assign, readwrite) CGPoint origin;
+
 @property (nonatomic, assign, readwrite) CGPoint originalCenter;
 @property (nonatomic, assign, readwrite) CGPoint singleModeViewAnchorPoint;
+
+@property (nonatomic, strong) IPCTryGlassView * compareView;
 @property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
 
-@property (nonatomic, weak) id<CompareItemViewDelegate> delegate;
+@property (nonatomic, weak) id<IPCTryGlassesViewDelegate> delegate;
 
 //Update the model picture
-- (void)updateItem:(BOOL)isDroped;
+//- (void)updateItem:(BOOL)isDroped;
 - (void)updateModelPhoto;
-- (void)amplificationLargeModelView;
+//- (void)amplificationLargeModelView;
 - (void)dropGlasses:(IPCGlasses *)glasses onLocaton:(CGPoint)location;
-- (void)initGlassView;
+//- (void)initGlassView;
 /**
  *  Updated photo like glasses
  */
@@ -34,11 +38,5 @@
 
 @end
 
-@protocol CompareItemViewDelegate<NSObject>
-
-- (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView withIndex:(NSInteger)index;
-- (void)deleteCompareGlasses:(IPCCompareItemView *)itemView;
-
-@end
 
 

@@ -7,18 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IPCMatchItem.h"
+#import "IPCTryGlassView.h"
+#import "IPCTryGlassesViewDelegate.h"
 
 @interface IPCSingleModeView : UIView<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
+@property (nonatomic, copy, readwrite) IPCMatchItem *matchItem;
+@property (nonatomic, assign) id<IPCTryGlassesViewDelegate>delegate;
 
 //Update the model picture
 - (void)updateModelPhoto;
 - (void)updateItem:(BOOL)isDroped;
 //Switch glasses
 - (void)dropGlasses:(IPCGlasses *)glasses onLocaton:(CGPoint)location;
-- (void)initGlassView;
+//- (void)initGlassView;
 /**
  *  Updated photo like glasses
  */
