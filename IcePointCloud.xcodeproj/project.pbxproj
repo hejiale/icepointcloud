@@ -197,6 +197,8 @@
 		CB3FB0651EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */; };
 		CB3FB0691EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3FB0671EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m */; };
 		CB3FB06A1EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3FB0681EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.xib */; };
+		CB457FA31F09E23000BB2077 /* IPCCompareItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB457FA11F09E23000BB2077 /* IPCCompareItemView.xib */; };
+		CB457FA41F09E23000BB2077 /* IPCSingleModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB457FA21F09E23000BB2077 /* IPCSingleModeView.xib */; };
 		CB52501D1EC06279006736EE /* IPCCustomsizedProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CB52501C1EC06279006736EE /* IPCCustomsizedProduct.m */; };
 		CB5CC4651E8DFFB50091D0FD /* IPCGuideViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4621E8DFFB50091D0FD /* IPCGuideViewCell.m */; };
 		CB5CC4661E8DFFB50091D0FD /* IPCGuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4641E8DFFB50091D0FD /* IPCGuideViewManager.m */; };
@@ -252,7 +254,6 @@
 		CB9211581E824CE000FD4EDC /* IPCPayOrderProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9211561E824CE000FD4EDC /* IPCPayOrderProductCell.m */; };
 		CB9211591E824CE000FD4EDC /* IPCPayOrderProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */; };
 		CB9B1BF31F04CCCE00642242 /* IPCInsertCustomerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9B1BF21F04CCCE00642242 /* IPCInsertCustomerViewModel.m */; };
-		CB9D93A01F05EE09003963D7 /* IPCTryGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9D939F1F05EE09003963D7 /* IPCTryGlassView.m */; };
 		CBA749A71E9DB5D200160088 /* IPCInsertCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA749A61E9DB5D200160088 /* IPCInsertCustomer.m */; };
 		CBA749AB1E9DC25800160088 /* IPCParameterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA749A91E9DC25800160088 /* IPCParameterTableViewController.m */; };
 		CBA749AC1E9DC25800160088 /* IPCParameterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBA749AA1E9DC25800160088 /* IPCParameterTableViewController.xib */; };
@@ -635,6 +636,8 @@
 		CB3FB0661EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailOptometryCell.h; sourceTree = "<group>"; };
 		CB3FB0671EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailOptometryCell.m; sourceTree = "<group>"; };
 		CB3FB0681EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailOptometryCell.xib; sourceTree = "<group>"; };
+		CB457FA11F09E23000BB2077 /* IPCCompareItemView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCompareItemView.xib; sourceTree = "<group>"; };
+		CB457FA21F09E23000BB2077 /* IPCSingleModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSingleModeView.xib; sourceTree = "<group>"; };
 		CB52501B1EC06279006736EE /* IPCCustomsizedProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedProduct.h; sourceTree = "<group>"; };
 		CB52501C1EC06279006736EE /* IPCCustomsizedProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomsizedProduct.m; sourceTree = "<group>"; };
 		CB5CC4601E8DFFB50091D0FD /* IPCGuideConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCGuideConstant.h; path = IcePointCloud/Views/IPCGuideConstant.h; sourceTree = SOURCE_ROOT; };
@@ -738,9 +741,6 @@
 		CB9211571E824CE000FD4EDC /* IPCPayOrderProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderProductCell.xib; sourceTree = "<group>"; };
 		CB9B1BF11F04CCCE00642242 /* IPCInsertCustomerViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomerViewModel.h; sourceTree = "<group>"; };
 		CB9B1BF21F04CCCE00642242 /* IPCInsertCustomerViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCInsertCustomerViewModel.m; sourceTree = "<group>"; };
-		CB9D939E1F05EE09003963D7 /* IPCTryGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryGlassView.h; sourceTree = "<group>"; };
-		CB9D939F1F05EE09003963D7 /* IPCTryGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTryGlassView.m; sourceTree = "<group>"; };
-		CB9D93A31F061385003963D7 /* IPCTryGlassesViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryGlassesViewDelegate.h; sourceTree = "<group>"; };
 		CBA749A51E9DB5D200160088 /* IPCInsertCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomer.h; sourceTree = "<group>"; };
 		CBA749A61E9DB5D200160088 /* IPCInsertCustomer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCInsertCustomer.m; sourceTree = "<group>"; };
 		CBA749A81E9DC25800160088 /* IPCParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCParameterTableViewController.h; path = IcePointCloud/Vendors/IPCParameterTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1077,7 +1077,6 @@
 		0485F40A1D34BDD400A42DE3 /* TryGlass */ = {
 			isa = PBXGroup;
 			children = (
-				CB9D93A31F061385003963D7 /* IPCTryGlassesViewDelegate.h */,
 				9EF32097199334DB004FC5B9 /* IPCMatchItem.h */,
 				9EF32098199334DB004FC5B9 /* IPCMatchItem.m */,
 				042402581D87F26400E1DD1A /* IPCOnlineFaceDetector.h */,
@@ -1429,10 +1428,10 @@
 			children = (
 				9E18E8AB199D30CD0085704B /* IPCSingleModeView.h */,
 				9E18E8AC199D30CD0085704B /* IPCSingleModeView.m */,
+				CB457FA21F09E23000BB2077 /* IPCSingleModeView.xib */,
 				9EF3209419931EE7004FC5B9 /* IPCCompareItemView.h */,
 				9EF3209519931EE7004FC5B9 /* IPCCompareItemView.m */,
-				CB9D939E1F05EE09003963D7 /* IPCTryGlassView.h */,
-				CB9D939F1F05EE09003963D7 /* IPCTryGlassView.m */,
+				CB457FA11F09E23000BB2077 /* IPCCompareItemView.xib */,
 			);
 			name = TakeGlasses;
 			sourceTree = "<group>";
@@ -2507,10 +2506,12 @@
 				04C9F7A71DEEAC87001258B2 /* IPCEmployeListView.xib in Resources */,
 				047D3FC11D43039400638526 /* IPCOrderDetailInfoCell.xib in Resources */,
 				046CF1481E5FE1280098B6BF /* IPCShoppingCartView.xib in Resources */,
+				CB457FA31F09E23000BB2077 /* IPCCompareItemView.xib in Resources */,
 				04CBD9861D58619700C7CAA4 /* IPCPersonMenuCell.xib in Resources */,
 				04A415481D7D094F0093FF6E /* IPCEditBatchParameterView.xib in Resources */,
 				9ECE988C1B7DD8E000A13C8F /* IPCSearchViewController.xib in Resources */,
 				CB5CC4A81E8E00EA0091D0FD /* IPCDatePickViewController.xib in Resources */,
+				CB457FA41F09E23000BB2077 /* IPCSingleModeView.xib in Resources */,
 				CBE4C8401E9CCF5300F09D2A /* IPCUpdateCustomerView.xib in Resources */,
 				CBC6AF541EA0A88400F7914D /* IPCPayOrderSettlementCell.xib in Resources */,
 				9E9C68301B8F43B300695FED /* IPCExpandShoppingCartCell.xib in Resources */,
@@ -2660,7 +2661,6 @@
 				CBC6AF581EA0BAA400F7914D /* IPCSearchCustomerViewController.m in Sources */,
 				CB5CC48E1E8E00830091D0FD /* UIImage+Face.m in Sources */,
 				9EF3209619931EE7004FC5B9 /* IPCCompareItemView.m in Sources */,
-				CB9D93A01F05EE09003963D7 /* IPCTryGlassView.m in Sources */,
 				0470ADB51D409233003AF4F4 /* IPCCustomerAddressList.m in Sources */,
 				04EAF91E1D531A4300A4A66F /* IPCShoppingCart.m in Sources */,
 				046497871D483EBD00137A3E /* IPCProductDetailTableViewCell.m in Sources */,

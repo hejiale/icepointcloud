@@ -24,7 +24,7 @@
 
 static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCTryGlassesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GlasslistCollectionViewCellDelegate,OBOvumSource,OBDropZone,UIScrollViewDelegate,IPCTryGlassesViewDelegate>
+@interface IPCTryGlassesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GlasslistCollectionViewCellDelegate,OBOvumSource,OBDropZone,UIScrollViewDelegate,CompareItemViewDelegate>
 {
     NSInteger    activeMatchItemIndex;
 }
@@ -73,17 +73,18 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self.librayButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     self.matchPanelView.dropZoneHandler = self;
     
-    self.signleModeView = [[IPCSingleModeView alloc] initWithFrame:self.matchPanelView.bounds];
+    self.signleModeView = [IPCSingleModeView jk_loadInstanceFromNibWithName:@"IPCSingleModeView" owner:self];
+    [self.signleModeView setFrame:self.matchPanelView.bounds];
     [self.matchPanelView addSubview:self.signleModeView];
     
-//    [[self.signleModeView rac_signalForSelector:@selector(scaleAction:)]subscribeNext:^(id x) {
-//        [self.compareSwitch setOn:YES];
-//        [self switchToCompareMode];
-//    }];
-//    [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
-//        IPCCompareItemView * compareView = self.compareBgView.subviews[activeMatchItemIndex];
-//        [compareView initGlassView];
-//    }];
+    [[self.signleModeView rac_signalForSelector:@selector(scaleAction:)]subscribeNext:^(id x) {
+        [self.compareSwitch setOn:YES];
+        [self switchToCompareMode];
+    }];
+    [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
+        IPCCompareItemView * compareView = self.compareBgView.subviews[activeMatchItemIndex];
+        [compareView initGlassView];
+    }];
     
     self.leftBottomConstraint.constant = self.sortProductView.jk_width/2 + 15;
     [self.matchPanelView bringSubviewToFront:self.topOperationBar];
@@ -137,12 +138,13 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 {
     for (NSInteger i = 0; i < 4; i++) {
         IPCMatchItem *mi = [[IPCMatchItem alloc]init];
-        mi.modelType = IPCModelTypeGirlWithLongHair;
+        mi.modelType = IPCModelTypeGirlWithLongHair;//current model
         [self.matchItems addObject:mi];
     }
     activeMatchItemIndex = 0;
     self.signleModeView.matchItem = self.matchItems[activeMatchItemIndex];
     [self.signleModeView updateModelPhoto];
+    [self initCompareModeView];
 }
 
 
@@ -150,16 +152,18 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 {
     if ([self.compareBgView.subviews count] == 0) {
         __weak typeof (self) weakSelf = self;
-        [self.matchItems enumerateObjectsUsingBlock:^(IPCMatchItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
-        {
+        [self.matchItems enumerateObjectsUsingBlock:^(IPCMatchItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            CGFloat originX = ((idx == 0 || idx == 2) ? 0 : strongSelf.compareBgView.jk_width/2);
-            CGFloat originY = (idx < 2 ? 0 : strongSelf.compareBgView.jk_height/2);
-            
-            IPCCompareItemView *item = [[IPCCompareItemView alloc]initWithFrame:CGRectMake(originX, originY, strongSelf.compareBgView.jk_width/2, strongSelf.compareBgView.jk_height/2)];
+            IPCCompareItemView *item = [UIView jk_loadInstanceFromNibWithName:@"IPCCompareItemView" owner:strongSelf];
+            CGRect frame = item.frame;
+            if (idx == 1 || idx == 3) frame.origin.x = frame.size.width;
+            if (idx == 2 || idx == 3) frame.origin.y = frame.size.height;
+            item.frame  = frame;
+            item.origin = frame.origin;
+            item.originalCenter = item.center;
             item.parentSingleModeView = strongSelf.signleModeView;
-            item.delegate = strongSelf;
             item.tag = idx;
+            item.delegate = strongSelf;
             item.matchItem = strongSelf.matchItems[idx];
             [item updateModelPhoto];
             [strongSelf.compareBgView addSubview:item];
@@ -530,15 +534,19 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 #pragma mark //Try switching to wear glasses a single or more patterns
 - (void)switchToSingleMode
 {
-    [self.compareSwitch setOn:NO];
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[activeMatchItemIndex];
-//    [targetItemView amplificationLargeModelView];
+    [targetItemView amplificationLargeModelView];
 }
 
 - (void)switchToCompareMode
 {
-    [self.compareSwitch setOn:NO];
     [self initCompareModeView];
+    
+    for (IPCCompareItemView * item in self.compareBgView.subviews) {
+        item.transform = CGAffineTransformIdentity;
+        item.center = item.originalCenter;
+        [item updateItem:NO];
+    }
     
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[activeMatchItemIndex];
     
@@ -570,35 +578,17 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 
-#pragma mark //IPCTryGlassesViewDelegate
-- (void)changeSingleOrCompareModeWithMatchItem:(IPCMatchItem *)item MatchType:(IPCModelUsage)type;
+#pragma mark //CompareItemViewDelegate
+- (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView withIndex:(NSInteger)index
 {
-    NSInteger index = [self.matchItems indexOfObject:item];
     activeMatchItemIndex = index;
-    
-    if (type == IPCModelUsageSingleMode) {
-        [self switchToSingleMode];
-    }else{
-        [self switchToCompareMode];
-    }
+    [self.compareSwitch setOn:NO];
+    self.signleModeView.matchItem = itemView.matchItem;
 }
 
-- (void)removeGlassesWithMatchItem:(IPCMatchItem *)item
-{
-    [self.matchItems removeObject:item];
+- (void)deleteCompareGlasses:(IPCCompareItemView *)itemView{
+    [self.signleModeView initGlassView];
 }
-
-
-//- (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView withIndex:(NSInteger)index
-//{
-//    activeMatchItemIndex = index;
-//    [self.compareSwitch setOn:NO];
-//    self.signleModeView.matchItem = itemView.matchItem;
-//}
-//
-//- (void)deleteCompareGlasses:(IPCCompareItemView *)itemView{
-//    [self.signleModeView initGlassView];
-//}
 
 
 #pragma mark //UICollectionViewDataSource ----------------------------------------------------------------------------
