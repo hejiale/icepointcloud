@@ -46,5 +46,6 @@
 
 - (void)updatePackUpStatus:(BOOL)isPackUp;
 - (void)reloadInsertCustomUI;
+- (void)judgePhone:(NSString *)phone;
 
 @end

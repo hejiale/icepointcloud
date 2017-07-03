@@ -71,6 +71,7 @@ typedef  void(^DismissBlock)();
                                                            Address:self.addressView.addressTextField.text
                                                       SuccessBlock:^(id responseValue)
      {
+         [self insertPayOrderAddress:responseValue[@"id"]];
          if (self.completeBlock) {
              self.completeBlock(responseValue[@"id"]);
          }
@@ -89,7 +90,28 @@ typedef  void(^DismissBlock)();
 
 
 - (IBAction)completeAction:(id)sender {
-    [self saveNewAddress];
+    if (self.customerID) {
+        [self saveNewAddress];
+    }else{
+        [self insertPayOrderAddress:nil];
+        if (self.completeBlock) {
+            self.completeBlock(nil);
+        }
+    }
+}
+
+- (void)insertPayOrderAddress:(NSString *)addressId
+{
+    IPCCustomerAddressMode * currentAddress = [[IPCCustomerAddressMode alloc]init];
+    currentAddress.contactorName = self.addressView.contacterTextField.text;
+    currentAddress.contactorPhone = self.addressView.phoneTextField.text;
+    currentAddress.gender = (self.addressView.maleButton.selected ? @"MALE" : @"FEMALE");
+    currentAddress.genderString = [IPCCommon formatGender:currentAddress.gender];
+    currentAddress.detailAddress = self.addressView.addressTextField.text;
+    if (addressId) {
+        currentAddress.addressID = addressId;
+    }
+    [IPCCurrentCustomer sharedManager].currentAddress = currentAddress;
 }
 
 

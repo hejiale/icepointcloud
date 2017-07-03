@@ -152,6 +152,7 @@
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [IPCPayOrderManager sharedManager].remainAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [[IPCCurrentCustomer sharedManager] clearData];
 }
 
 

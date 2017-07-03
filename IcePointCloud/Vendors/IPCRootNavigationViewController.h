@@ -14,6 +14,7 @@
 - (void)setNavigationBarStatus:(BOOL)isHiden;
 - (void)setRightItem:(NSString *)itemImageName Selection:(SEL)selection;
 - (void)setRightTitle:(NSString *)itemName Selection:(SEL)selection;
+- (void)setRightView:(UIView *)view;
 - (void)popToPayOrderViewController;
 -(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
 

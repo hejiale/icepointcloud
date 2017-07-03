@@ -147,14 +147,8 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         }
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
-    else if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 6))
+    else if ([self tableViewCell:section])
         return 1;
-    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
-        return 1;
-    else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
-        return 0;
-    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer)
-        return 0;
     return 2;
 }
 
@@ -193,14 +187,24 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             [cell.memoTextView setText:[IPCPayOrderManager sharedManager].remark];
             return cell;
         }
-    }else if (indexPath.section == 2 && [IPCCurrentCustomer sharedManager].currentAddress && [IPCCurrentCustomer sharedManager].currentCustomer)
+    }else if (indexPath.section == 2 &&  [IPCCurrentCustomer sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"收货地址"];
+            [cell setInsertTitle:@"收货地址"];
+            if (![IPCCurrentCustomer sharedManager].currentAddress) {
+                [cell.bottomLine setHidden:YES];
+            }else{
+                [cell.bottomLine setHidden:NO];
+            }
+            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                if ([self.delegate respondsToSelector:@selector(addAddressView)]) {
+                    [self.delegate addAddressView];
+                }
+            }];
             return cell;
         }else{
             IPCCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
@@ -212,13 +216,23 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             [cell.bottomLine setHidden:YES];
             return cell;
         }
-    }else if(indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentOpometry && [IPCCurrentCustomer sharedManager].currentCustomer){
+    }else if(indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer){
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"验光单"];
+            [cell setInsertTitle:@"验光单"];
+            if (![IPCCurrentCustomer sharedManager].currentOpometry) {
+                [cell.bottomLine setHidden:YES];
+            }else{
+                [cell.bottomLine setHidden:NO];
+            }
+            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                if ([self.delegate respondsToSelector:@selector(addOptometryView)]) {
+                    [self.delegate addOptometryView];
+                }
+            }];
             return cell;
         }else{
             IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
@@ -374,6 +388,20 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {
         [self requestOrderPointPrice:point];
     }
+}
+
+
+- (BOOL)tableViewCell:(NSInteger)section
+{
+    if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 6))
+        return YES;
+    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
+        return YES;
+    else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
+        return YES;
+    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer)
+        return YES;
+    return NO;
 }
 
 

@@ -9,14 +9,21 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
+#import "IPCInsertCustomerViewController.h"
 #import "IPCSelectCustomsizedViewController.h"
 #import "IPCEmployeListView.h"
+#import "IPCEditAddressView.h"
+#import "IPCEditOptometryView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewModelDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIView *rightItemView;
+@property (strong, nonatomic) IPCEditAddressView  *  editAddressView;
+@property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
+
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewMode * payOrderViewMode;
 
@@ -28,8 +35,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction)];
     [self setNavigationTitle:@"确认订单"];
+    [self setRightView:self.rightItemView];
     
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;
@@ -68,6 +75,36 @@
     [self.view bringSubviewToFront:self.employeView];
 }
 
+- (void)loadEditAddressView
+{
+    __weak typeof (self) weakSelf = self;
+    self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID Complete:^(NSString *addressId){
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.editAddressView removeFromSuperview];
+        [strongSelf.payOrderTableView reloadData];
+    } Dismiss:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+       [strongSelf.editAddressView removeFromSuperview];
+    }];
+    [self.view addSubview:self.editAddressView];
+    [self.view bringSubviewToFront:self.editAddressView];
+}
+
+- (void)loadEditOptometryView
+{
+    __weak typeof (self) weakSelf = self;
+    self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID Complete:^(NSString *optometryId){
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.editOptometryView removeFromSuperview];
+        [strongSelf.payOrderTableView reloadData];
+    } Dismiss:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.editAddressView removeFromSuperview];
+    }];
+    [self.view addSubview:self.editOptometryView];
+    [self.view bringSubviewToFront:self.editOptometryView];
+}
+
 #pragma mark //Clicked Events
 - (IBAction)loadPayStyleView:(id)sender
 {
@@ -102,12 +139,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)selectCustomerAction{
+- (IBAction)selectCustomerAction:(id)sender{
     IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     customerListVC.isMainStatus = NO;
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
+- (IBAction)insertNewCustomerAction:(id)sender {
+    IPCInsertCustomerViewController * insertVC = [[IPCInsertCustomerViewController alloc]initWithNibName:@"IPCInsertCustomerViewController" bundle:nil];
+    [self.navigationController pushViewController:insertVC animated:YES];
+}
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -136,11 +177,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (![IPCCurrentCustomer sharedManager].currentAddress && section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer){
-        return 0;
-    }else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer){
-        return 0;
-    }else if ((section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
+    if ((section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
         return 0;
     }
     return 5;
@@ -158,13 +195,20 @@
     [self loadEmployeView];
 }
 
+- (void)addAddressView
+{
+    [self loadEditAddressView];
+}
+
+
+- (void)addOptometryView
+{
+    [self loadEditOptometryView];
+}
+
 - (void)reloadPayOrderView{
     [self.payOrderTableView setHidden:NO];
     [self.payOrderTableView reloadData];
-}
-
-- (void)searchCustomerMethod{
-    [self selectCustomerAction];
 }
 
 - (void)selectNormalGlasses{

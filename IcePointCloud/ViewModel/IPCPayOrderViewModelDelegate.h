@@ -11,8 +11,9 @@
 @protocol IPCPayOrderViewModelDelegate <NSObject>
 
 - (void)showEmployeeView;
+- (void)addAddressView;
+- (void)addOptometryView;
 - (void)reloadPayOrderView;
-- (void)searchCustomerMethod;
 - (void)selectNormalGlasses;
 - (void)successPayOrder;
 - (void)failPayOrder;

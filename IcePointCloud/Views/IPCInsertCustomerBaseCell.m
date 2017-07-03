@@ -234,7 +234,9 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     
     if (str.length) {
         if ([textField isEqual:self.phoneTextField]) {
-            [IPCInsertCustomer instance].customerPhone = str;
+            if ([self.delegate respondsToSelector:@selector(judgePhone:)]) {
+                [self.delegate judgePhone:str];
+            }
         }else if ([textField isEqual:self.userNameTextField]){
             [IPCInsertCustomer instance].customerName = str;
         }else if ([textField isEqual:self.memberNumTextField]){

@@ -73,6 +73,11 @@
     self.navigationItem.rightBarButtonItem = rightItem;
 }
 
+- (void)setRightView:(UIView *)view{
+    UIBarButtonItem * item = [[UIBarButtonItem alloc]initWithCustomView:view];
+    self.navigationItem.rightBarButtonItem = item;
+}
+
 - (void)setRightTitle:(NSString *)itemName Selection:(SEL)selection
 {
     UIFont * font = [UIFont systemFontOfSize:15 weight:UIFontWeightThin];

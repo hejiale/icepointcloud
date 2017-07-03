@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderViewController">
             <connections>
                 <outlet property="payOrderTableView" destination="Fy7-Yr-o0G" id="fyl-p2-lpZ"/>
+                <outlet property="rightItemView" destination="9VU-4t-wMA" id="GuL-pe-Dvr"/>
                 <outlet property="saveButton" destination="GUo-wl-t5L" id="zFs-VI-8Iq"/>
                 <outlet property="tableFootView" destination="L70-zW-7W1" id="Ugo-9A-79C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -84,8 +85,58 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="18" y="933"/>
         </view>
+        <view contentMode="scaleToFill" id="9VU-4t-wMA">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HiS-Rk-nYZ">
+                    <rect key="frame" x="100" y="0.0" width="100" height="64"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="nQ4-zs-MW6"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                    <state key="normal" title="调取用户" image="icon_search">
+                        <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="selectCustomerAction:" destination="-1" eventType="touchUpInside" id="lSh-TE-Lzr"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mmx-Hw-7Ys">
+                    <rect key="frame" x="0.0" y="0.0" width="100" height="64"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="7Gf-ss-g5U"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                    <state key="normal" title="新增用户" image="add_icon">
+                        <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="insertNewCustomerAction:" destination="-1" eventType="touchUpInside" id="ig9-A3-zf7"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="HiS-Rk-nYZ" firstAttribute="leading" secondItem="Mmx-Hw-7Ys" secondAttribute="trailing" id="RnE-Nk-j7j"/>
+                <constraint firstAttribute="bottom" secondItem="HiS-Rk-nYZ" secondAttribute="bottom" id="Sey-Jd-8aA"/>
+                <constraint firstAttribute="trailing" secondItem="HiS-Rk-nYZ" secondAttribute="trailing" id="XN0-4a-c8k"/>
+                <constraint firstItem="HiS-Rk-nYZ" firstAttribute="top" secondItem="9VU-4t-wMA" secondAttribute="top" id="jNG-VW-rJD"/>
+                <constraint firstAttribute="bottom" secondItem="Mmx-Hw-7Ys" secondAttribute="bottom" id="rLW-wB-fXO"/>
+                <constraint firstItem="Mmx-Hw-7Ys" firstAttribute="top" secondItem="9VU-4t-wMA" secondAttribute="top" id="vx5-I3-iJf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-1383" y="-88"/>
+        </view>
     </objects>
     <resources>
+        <image name="add_icon" width="12" height="12"/>
         <image name="icon_cancel_payOrder" width="195" height="35"/>
+        <image name="icon_search" width="22" height="22"/>
     </resources>
 </document>

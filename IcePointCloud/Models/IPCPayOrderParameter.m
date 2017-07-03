@@ -14,7 +14,6 @@
 - (NSDictionary *)offOrderParameter
 {
     BOOL isChooseCustomer = YES;
-    
     if (![IPCCurrentCustomer sharedManager].currentCustomer.customerID)isChooseCustomer = NO;
     
     //员工份额
@@ -38,14 +37,58 @@
     __block NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
     
     if (isChooseCustomer) {
-        if ([IPCCurrentCustomer sharedManager].currentCustomer.customerID.length) {
+        if ([IPCCurrentCustomer sharedManager].currentCustomer.customerID) {
             [parameters setObject:[IPCCurrentCustomer sharedManager].currentCustomer.customerID forKey:@"customerId"];
         }
-        if ([IPCCurrentCustomer sharedManager].currentOpometry.optometryID.length) {
+        if ([IPCCurrentCustomer sharedManager].currentOpometry.optometryID) {
             [parameters setObject:[IPCCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
         }
-        if ([IPCCurrentCustomer sharedManager].currentAddress.addressID.length) {
+        if ([IPCCurrentCustomer sharedManager].currentAddress.addressID) {
             [parameters setObject:[IPCCurrentCustomer sharedManager].currentAddress.addressID forKey:@"addressId"];
+        }
+    }else{
+        //新增用户信息
+        IPCDetailCustomer * customer = [IPCCurrentCustomer sharedManager].currentCustomer;
+        if (customer) {
+            [parameters setObject:customer.customerName ? : @"" forKey:@"customerName"];
+            [parameters setObject:customer.customerPhone ? : @"" forKey:@"customerPhone"];
+            [parameters setObject:customer.contactorGengerString ? : @"" forKey:@"genderString"];
+            [parameters setObject:customer.email ? : @"" forKey:@"email"];
+            [parameters setObject:customer.birthday ? : @"" forKey:@"birthday"];
+            [parameters setObject:customer.remark ? : @"" forKey:@"remark"];
+            [parameters setObject:customer.employeeId ? : @"" forKey:@"handlEmployeeId"];
+            [parameters setObject:customer.customerType ? : @"" forKey:@"customerType"];
+            [parameters setObject:customer.customerTypeId ? : @"" forKey:@"customerTypeId"];
+            [parameters setObject:customer.memberLevelId ? : @"" forKey:@"memberLevel"];
+            [parameters setObject:customer.memberLevel ? : @"" forKey:@"memberLevelId"];
+            [parameters setObject:customer.memberId ? : @"" forKey:@"memberId"];
+            [parameters setObject:customer.occupation ? : @"" forKey:@"occupation"];
+        }
+        //地址
+        IPCCustomerAddressMode * address = [IPCCurrentCustomer sharedManager].currentAddress;
+        if (address) {
+            [parameters setObject:address.contactorName ? : @"" forKey:@"contactorName"];
+            [parameters setObject:address.genderString ? : @"" forKey:@"contactorGengerString"];
+            [parameters setObject:address.contactorPhone ? : @"" forKey:@"contactorPhone"];
+            [parameters setObject:address.detailAddress ? : @"" forKey:@"contactorAddress"];
+        }
+        //验光单
+        IPCOptometryMode * optometry = [IPCCurrentCustomer sharedManager].currentOpometry;
+        if (optometry) {
+            [parameters setObject:optometry.sphLeft ? : @"" forKey:@"sphLeft"];
+            [parameters setObject:optometry.sphRight ? : @"" forKey:@"sphRight"];
+            [parameters setObject:optometry.cylLeft ? : @"" forKey:@"cylLeft"];
+            [parameters setObject:optometry.cylRight ? : @"" forKey:@"cylRight"];
+            [parameters setObject:optometry.axisLeft ? : @"" forKey:@"axisLeft"];
+            [parameters setObject:optometry.axisRight ? : @"" forKey:@"axisRight"];
+            [parameters setObject:optometry.addLeft ? : @"" forKey:@"addLeft"];
+            [parameters setObject:optometry.addRight ? : @"" forKey:@"addRight"];
+            [parameters setObject:optometry.distanceLeft ? : @"" forKey:@"distanceLeft"];
+            [parameters setObject:optometry.distanceRight ? : @"" forKey:@"distanceRight"];
+            [parameters setObject:optometry.correctedVisionLeft ? : @"" forKey:@"correctedVisionLeft"];
+            [parameters setObject:optometry.correctedVisionRight ? : @"" forKey:@"correctedVisionRight"];
+            [parameters setObject:optometry.purpose ? : @"" forKey:@"purpose"];
+            [parameters setObject:optometry.employeeId ? : @"" forKey:@"employeeId"];
         }
     }
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
@@ -73,7 +116,7 @@
         [parameters setObject:@"true" forKey:@"isCustomizedLens"];
     }
     [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
-
+    
     return parameters;
 }
 

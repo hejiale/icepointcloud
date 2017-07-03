@@ -82,6 +82,8 @@ typedef  void(^DismissBlock)();
                                                        EmployeeId:self.optometryView.insertOptometry.employeeId
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
                                                      SuccessBlock:^(id responseValue) {
+                                                         [self insertPayOrderOptometry:responseValue[@"id"]];
+                                                         
                                                          if (self.completeBlock) {
                                                              self.completeBlock(responseValue[@"id"]);
                                                          }
@@ -99,7 +101,14 @@ typedef  void(^DismissBlock)();
     if (!self.optometryView.insertOptometry.employeeName.length && !self.optometryView.insertOptometry.purpose.length) {
         [IPCCustomUI showError:@"请填写验光师和用途!"];
     }else{
-        [self saveNewOpometryRequest];
+        if (self.customerID) {
+            [self saveNewOpometryRequest];
+        }else{
+            [self insertPayOrderOptometry:nil];
+            if (self.completeBlock) {
+                self.completeBlock(nil);
+            }
+        }
     }
 }
 
@@ -107,6 +116,15 @@ typedef  void(^DismissBlock)();
 - (IBAction)backAction:(id)sender {
     if (self.dismissBlock) {
         self.dismissBlock();
+    }
+}
+
+
+- (void)insertPayOrderOptometry:(NSString *)optometryId
+{
+    [IPCCurrentCustomer sharedManager].currentOpometry = self.optometryView.insertOptometry;
+    if (optometryId) {
+        [IPCCurrentCustomer sharedManager].currentOpometry.optometryID = optometryId;
     }
 }
 

@@ -12,4 +12,6 @@
 
 - (void)saveNewCustomer:(void(^)())complete;
 
+- (void)judgeCustomerPhone:(NSString *)phone :(void(^)())complete;
+
 @end

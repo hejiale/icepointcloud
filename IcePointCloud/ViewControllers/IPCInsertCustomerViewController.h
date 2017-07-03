@@ -10,8 +10,6 @@
 
 @interface IPCInsertCustomerViewController : IPCRootNavigationViewController
 
-@property (nonatomic) BOOL isInserting;
-
 - (void)toExitInsertCustomer;
 
 @end

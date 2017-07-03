@@ -295,4 +295,16 @@
 + (void)getCustomerTypeSuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure;
 
+
+/**
+ Judge Customer Phone Is Exist
+
+ @param phone
+ @param success
+ @param failure 
+ */
++ (void)judgePhoneIsExistWithPhone:(NSString *)phone
+                      SuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError * error))failure;
+
 @end

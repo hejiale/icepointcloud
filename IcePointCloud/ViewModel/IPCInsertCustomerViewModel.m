@@ -100,4 +100,17 @@
      }];
 }
 
+
+- (void)judgeCustomerPhone:(NSString *)phone :(void(^)())complete
+{
+    [IPCCustomerRequestManager judgePhoneIsExistWithPhone:phone
+                                             SuccessBlock:^(id responseValue)
+    {
+        if (complete) {
+            complete();
+        }
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
+}
 @end

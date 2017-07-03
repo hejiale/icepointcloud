@@ -240,6 +240,7 @@
         }
         item.glasses = glasses;
         item.glassCount   = count;
+        item.selected = YES;
         [self.itemList addObject:item];
     }
     [self postChangedNotification];

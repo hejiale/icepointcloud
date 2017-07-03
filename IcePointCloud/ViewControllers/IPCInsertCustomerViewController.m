@@ -37,13 +37,19 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     // Do any additional setup after loading the view from its nib.
     
     [self setBackground];
-    [self.userInfoTableView setTableFooterView:self.tableFootView];
     
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
     }];
     
     self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
+    
+    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
+        [self.userInfoTableView setTableFooterView:[[UIView alloc]init]];
+        [self setRightTitle:@"确定" Selection:@selector(payOrderInsertCustomerAction:)];
+    }else{
+        [self.userInfoTableView setTableFooterView:self.tableFootView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -53,6 +59,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [self setNavigationBarStatus:NO];
     [self.userInfoTableView reloadData];
 }
+
 
 #pragma mark //Set UI
 - (IPCInsertCustomerBaseCell *)baseInfoCell{
@@ -77,6 +84,16 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
         [self.insertCustomerModel saveNewCustomer:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
+    }else{
+        [IPCCustomUI showError:@"请输入完整客户名或手机号!"];
+    }
+}
+
+- (void)payOrderInsertCustomerAction:(id)sender{
+    if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
+        [[IPCCurrentCustomer sharedManager] insertNewCustomer];
+        [[IPCInsertCustomer instance] resetData];
+        [self.navigationController popViewControllerAnimated:YES];
     }else{
         [IPCCustomUI showError:@"请输入完整客户名或手机号!"];
     }
@@ -216,6 +233,13 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 - (void)reloadInsertCustomUI{
     [self.userInfoTableView reloadData];
+}
+
+- (void)judgePhone:(NSString *)phone{
+    [self.insertCustomerModel judgeCustomerPhone:phone :^{
+        [IPCCurrentCustomer sharedManager].currentCustomer.customerPhone = phone;
+        [self.userInfoTableView reloadData];
+    }];
 }
 
 #pragma mark //IPCInsertCustomerOpometryCellDelegate

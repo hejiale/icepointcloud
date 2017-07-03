@@ -251,4 +251,9 @@
     [self postRequest:nil RequestMethod:@"customerAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)judgePhoneIsExistWithPhone:(NSString *)phone SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:@{@"":phone} RequestMethod:@"" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

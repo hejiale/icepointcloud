@@ -16,11 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="158"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="157"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="157.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vlh-9R-dJe">
-                        <rect key="frame" x="796" y="136.5" width="200" height="20"/>
+                        <rect key="frame" x="796" y="126.5" width="200" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Lee-nK-Szr"/>
@@ -31,7 +31,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9g-n2-nhQ">
-                        <rect key="frame" x="596" y="136.5" width="200" height="20"/>
+                        <rect key="frame" x="596" y="126.5" width="200" height="20"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="200" id="0GP-X0-t8R"/>
@@ -42,7 +42,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhQ-KC-Osn">
-                        <rect key="frame" x="28" y="18" width="968" height="118.5"/>
+                        <rect key="frame" x="28" y="18" width="968" height="108.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wni-WN-3RN">
@@ -55,11 +55,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Wni-WN-3RN" secondAttribute="bottom" id="090-4N-9hq"/>
-                    <constraint firstItem="Wni-WN-3RN" firstAttribute="top" secondItem="Vlh-9R-dJe" secondAttribute="bottom" id="Fhp-dW-1mt"/>
+                    <constraint firstItem="Wni-WN-3RN" firstAttribute="top" secondItem="Vlh-9R-dJe" secondAttribute="bottom" constant="10" id="Fhp-dW-1mt"/>
                     <constraint firstItem="Wni-WN-3RN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="ISK-Vb-3F9"/>
                     <constraint firstItem="t9g-n2-nhQ" firstAttribute="top" secondItem="RhQ-KC-Osn" secondAttribute="bottom" id="Jjw-dG-xR9"/>
                     <constraint firstItem="RhQ-KC-Osn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="Oea-Xg-qAP"/>
-                    <constraint firstItem="Wni-WN-3RN" firstAttribute="top" secondItem="t9g-n2-nhQ" secondAttribute="bottom" id="Oyk-Ey-tuE"/>
+                    <constraint firstItem="Wni-WN-3RN" firstAttribute="top" secondItem="t9g-n2-nhQ" secondAttribute="bottom" constant="10" id="Oyk-Ey-tuE"/>
                     <constraint firstAttribute="trailing" secondItem="Wni-WN-3RN" secondAttribute="trailing" constant="25" id="UdT-0W-iYJ"/>
                     <constraint firstItem="RhQ-KC-Osn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="YPm-eP-JzW"/>
                     <constraint firstItem="Vlh-9R-dJe" firstAttribute="leading" secondItem="t9g-n2-nhQ" secondAttribute="trailing" id="iod-yK-5gQ"/>
