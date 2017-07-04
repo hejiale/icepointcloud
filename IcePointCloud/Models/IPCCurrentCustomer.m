@@ -20,6 +20,10 @@
     return _client;
 }
 
+
+/**
+ 下单时 新建用户
+ */
 - (void)insertNewCustomer
 {
     [[IPCCurrentCustomer sharedManager] clearData];
