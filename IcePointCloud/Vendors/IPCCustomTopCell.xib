@@ -122,6 +122,20 @@
                             <constraint firstAttribute="height" constant="1" id="cF7-gN-4KI"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4x-s6-qOV">
+                        <rect key="frame" x="839" y="15" width="160" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="6nG-nC-bxh"/>
+                            <constraint firstAttribute="height" constant="30" id="ki5-4n-8VZ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                        <state key="normal">
+                            <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="rightButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="O15-nr-czb"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="zCY-Hn-egy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8MD-Sq-lSG"/>
@@ -131,12 +145,14 @@
                     <constraint firstAttribute="trailing" secondItem="lMM-lY-OdD" secondAttribute="trailing" constant="20" id="SAO-ms-uQ0"/>
                     <constraint firstAttribute="bottom" secondItem="w4g-sg-chx" secondAttribute="bottom" id="Vg9-X1-jYu"/>
                     <constraint firstItem="LJ8-Ay-8Yo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VpB-9i-dHh"/>
+                    <constraint firstItem="c4x-s6-qOV" firstAttribute="trailing" secondItem="w4g-sg-chx" secondAttribute="trailing" id="Xbf-no-4PR"/>
                     <constraint firstItem="TrO-4s-X3g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="ZUK-e0-sJF"/>
                     <constraint firstAttribute="trailing" secondItem="vVb-1E-3FV" secondAttribute="trailing" constant="28" id="bDc-AC-exQ"/>
                     <constraint firstAttribute="trailing" secondItem="rjt-kg-R4t" secondAttribute="trailing" constant="28" id="bI3-Df-h94"/>
                     <constraint firstItem="w4g-sg-chx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="bn4-g1-YRJ"/>
                     <constraint firstItem="TrO-4s-X3g" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dmU-Lv-V2D"/>
                     <constraint firstItem="rjt-kg-R4t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="e4c-ea-LbJ"/>
+                    <constraint firstItem="c4x-s6-qOV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eYg-fq-hTo"/>
                     <constraint firstItem="vVb-1E-3FV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lH8-91-Xfm"/>
                     <constraint firstAttribute="trailingMargin" secondItem="zCY-Hn-egy" secondAttribute="trailing" constant="20" id="mhh-PT-eYJ"/>
                 </constraints>
@@ -147,6 +163,7 @@
                 <outlet property="editButton" destination="LJ8-Ay-8Yo" id="90K-Eg-Wrg"/>
                 <outlet property="noPayPriceLabel" destination="foW-u9-1lp" id="MDA-Ro-IDF"/>
                 <outlet property="noPayPriceView" destination="rjt-kg-R4t" id="00B-mC-8cc"/>
+                <outlet property="rightButton" destination="c4x-s6-qOV" id="SY8-gZ-bvi"/>
                 <outlet property="rightLabel" destination="vVb-1E-3FV" id="NNg-kw-FOa"/>
                 <outlet property="searchCustomerButton" destination="lMM-lY-OdD" id="EjQ-Cs-h56"/>
                 <outlet property="topTitleLabel" destination="TrO-4s-X3g" id="PhR-Ju-pGN"/>

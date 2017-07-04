@@ -203,7 +203,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
 - (void)beginReloadTableView{
-    self.glassListViewMode.currentPage = 1;
+    self.glassListViewMode.currentPage = 0;
     self.glassListViewMode.isBeginLoad = YES;
     self.productCollectionView.mj_footer.hidden = NO;
     

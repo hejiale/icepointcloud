@@ -37,19 +37,13 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     // Do any additional setup after loading the view from its nib.
     
     [self setBackground];
+    [self.userInfoTableView setTableFooterView:self.tableFootView];
     
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
     }];
     
     self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
-    
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-        [self.userInfoTableView setTableFooterView:[[UIView alloc]init]];
-        [self setRightTitle:@"确定" Selection:@selector(payOrderInsertCustomerAction:)];
-    }else{
-        [self.userInfoTableView setTableFooterView:self.tableFootView];
-    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -53,6 +53,11 @@
     [self.noPayPriceLabel setText:title];
 }
 
+- (void)setRightManagerTitle:(NSString *)title{
+    [self.topTitleLabel setText:title];
+    [self.rightButton setTitle:@"管理" forState:UIControlStateNormal];
+}
+
 #pragma mark //Clicked Events
 - (IBAction)insertAction:(id)sender {
     
@@ -67,5 +72,7 @@
 }
 
 
+- (IBAction)rightButtonAction:(id)sender {
+}
 
 @end

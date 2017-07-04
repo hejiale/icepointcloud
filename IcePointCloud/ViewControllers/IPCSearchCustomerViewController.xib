@@ -13,7 +13,6 @@
             <connections>
                 <outlet property="customerCollectionView" destination="kAD-05-wII" id="ApV-ZX-HjE"/>
                 <outlet property="insertButton" destination="q9D-ec-pb3" id="n7G-5N-tBT"/>
-                <outlet property="searchBottom" destination="thx-eT-K7B" id="Lyd-ta-trL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

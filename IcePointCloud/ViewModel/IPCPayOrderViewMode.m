@@ -194,16 +194,14 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setInsertTitle:@"收货地址"];
+            [cell setRightManagerTitle:@"收货地址"];
             if (![IPCCurrentCustomer sharedManager].currentAddress) {
                 [cell.bottomLine setHidden:YES];
             }else{
                 [cell.bottomLine setHidden:NO];
             }
-            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                if ([self.delegate respondsToSelector:@selector(addAddressView)]) {
-                    [self.delegate addAddressView];
-                }
+            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                
             }];
             return cell;
         }else{
@@ -212,7 +210,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.addressMode = [IPCCurrentCustomer sharedManager].currentAddress;
-            [cell.defaultButton setHidden:YES];
             [cell.bottomLine setHidden:YES];
             return cell;
         }
@@ -222,16 +219,14 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setInsertTitle:@"验光单"];
+            [cell setRightManagerTitle:@"验光单"];
             if (![IPCCurrentCustomer sharedManager].currentOpometry) {
                 [cell.bottomLine setHidden:YES];
             }else{
                 [cell.bottomLine setHidden:NO];
             }
-            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                if ([self.delegate respondsToSelector:@selector(addOptometryView)]) {
-                    [self.delegate addOptometryView];
-                }
+            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                
             }];
             return cell;
         }else{
@@ -240,7 +235,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.optometryMode = [IPCCurrentCustomer sharedManager].currentOpometry;
-            [cell.defaultButton setHidden:YES];
             [cell.bottomLine setHidden:YES];
             return cell;
         }

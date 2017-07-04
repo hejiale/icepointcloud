@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCMangerOptometryView.h"
 
 @interface IPCCustomerOptometryCell : UITableViewCell
 
@@ -14,8 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *insertDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *employeeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomLine;
-
-@property (strong, nonatomic) UIButton * defaultButton;
+@property (strong, nonatomic) IPCMangerOptometryView * optometryView;
 @property (copy, nonatomic) IPCOptometryMode * optometryMode;
 
 @end

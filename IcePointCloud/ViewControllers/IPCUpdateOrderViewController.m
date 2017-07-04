@@ -190,7 +190,6 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.optometryMode = [IPCCustomerOrderDetail instance].optometryMode;
-            [cell.defaultButton setHidden:YES];
             [cell.bottomLine setHidden:YES];
             return cell;
         }

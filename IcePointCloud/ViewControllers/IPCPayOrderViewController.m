@@ -9,11 +9,8 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
-#import "IPCInsertCustomerViewController.h"
 #import "IPCSelectCustomsizedViewController.h"
 #import "IPCEmployeListView.h"
-#import "IPCEditAddressView.h"
-#import "IPCEditOptometryView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewModelDelegate>
 
@@ -21,8 +18,6 @@
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IBOutlet UIView *rightItemView;
-@property (strong, nonatomic) IPCEditAddressView  *  editAddressView;
-@property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewMode * payOrderViewMode;
 
@@ -79,36 +74,6 @@
     [self.view bringSubviewToFront:self.employeView];
 }
 
-- (void)loadEditAddressView
-{
-    __weak typeof (self) weakSelf = self;
-    self.editAddressView = [[IPCEditAddressView alloc]initWithFrame:self.view.bounds CustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID Complete:^(NSString *addressId){
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removeCover];
-        [strongSelf.payOrderTableView reloadData];
-    } Dismiss:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-       [strongSelf removeCover];
-    }];
-    [self.view addSubview:self.editAddressView];
-    [self.view bringSubviewToFront:self.editAddressView];
-}
-
-- (void)loadEditOptometryView
-{
-    __weak typeof (self) weakSelf = self;
-    self.editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds CustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID Complete:^(NSString *optometryId){
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removeCover];
-        [strongSelf.payOrderTableView reloadData];
-    } Dismiss:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf removeCover];
-    }];
-    [self.view addSubview:self.editOptometryView];
-    [self.view bringSubviewToFront:self.editOptometryView];
-}
-
 #pragma mark //Clicked Events
 - (IBAction)loadPayStyleView:(id)sender
 {
@@ -149,15 +114,9 @@
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
-- (IBAction)insertNewCustomerAction:(id)sender {
-    IPCInsertCustomerViewController * insertVC = [[IPCInsertCustomerViewController alloc]initWithNibName:@"IPCInsertCustomerViewController" bundle:nil];
-    [self.navigationController pushViewController:insertVC animated:YES];
-}
 
 - (void)removeCover{
     [self.employeView removeFromSuperview];
-    [self.editOptometryView removeFromSuperview];
-    [self.editAddressView removeFromSuperview];
 }
 
 #pragma mark //UITableViewDataSource
@@ -203,17 +162,6 @@
 #pragma mark //IPCPayOrderViewCellDelegate
 - (void)showEmployeeView{
     [self loadEmployeView];
-}
-
-- (void)addAddressView
-{
-    [self loadEditAddressView];
-}
-
-
-- (void)addOptometryView
-{
-    [self loadEditOptometryView];
 }
 
 - (void)reloadPayOrderView{

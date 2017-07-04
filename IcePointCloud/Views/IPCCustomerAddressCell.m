@@ -41,7 +41,6 @@
         
         if (_addressMode.contactorAddress.length) {
             [self.addressLabel setText:_addressMode.contactorAddress];
-            [self.defaultButton setHidden:YES];
         }
         
         [self.contactNameLabel setText:_addressMode.contactorName];
@@ -56,11 +55,6 @@
         
         [self.contactPhoneLabel setText:_addressMode.contactorPhone];
     }
-}
-
-
-- (IBAction)setDefaultAction:(id)sender {
-  
 }
 
 @end
