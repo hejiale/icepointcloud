@@ -253,7 +253,7 @@
 
 + (void)judgePhoneIsExistWithPhone:(NSString *)phone SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:@{@"":phone} RequestMethod:@"" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:phone RequestMethod:@"customerAdmin.getCusomerInfoByPhone" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

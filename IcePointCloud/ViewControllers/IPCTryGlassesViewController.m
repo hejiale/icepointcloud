@@ -174,7 +174,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 #pragma mark //Set UI ----------------------------------------------------------------------------
 - (UIVisualEffectView *)blurBgView{
     if (!_blurBgView)
-        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeAllPopView)];
+        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(onRemoveAllPopView)];
     return _blurBgView;
 }
 

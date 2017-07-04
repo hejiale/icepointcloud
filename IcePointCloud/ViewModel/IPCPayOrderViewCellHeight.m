@@ -10,6 +10,19 @@
 
 @implementation IPCPayOrderViewCellHeight
 
+- (BOOL)tableViewCell:(NSInteger)section
+{
+    if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 6))
+        return YES;
+    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
+        return YES;
+    else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
+        return YES;
+    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer)
+        return YES;
+    return NO;
+}
+
 - (CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath
 {
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {

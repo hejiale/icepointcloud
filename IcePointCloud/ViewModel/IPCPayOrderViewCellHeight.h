@@ -10,6 +10,7 @@
 
 @interface IPCPayOrderViewCellHeight : NSObject
 
+- (BOOL)tableViewCell:(NSInteger)section;
 - (CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath;
 
 @end

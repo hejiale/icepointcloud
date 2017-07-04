@@ -106,9 +106,14 @@
     [IPCCustomerRequestManager judgePhoneIsExistWithPhone:phone
                                              SuccessBlock:^(id responseValue)
     {
-        if (complete) {
-            complete();
+        if (![responseValue boolValue]) {
+            if (complete) {
+                complete();
+            }
+        }else{
+            [IPCCustomUI showError:@"该手机号已注册过了"];
         }
+        
     } FailureBlock:^(NSError *error) {
         [IPCCustomUI showError:error.domain];
     }];

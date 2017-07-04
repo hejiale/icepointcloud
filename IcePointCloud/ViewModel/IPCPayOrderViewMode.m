@@ -147,7 +147,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         }
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
-    else if ([self tableViewCell:section])
+    else if ([self.cellHeight tableViewCell:section])
         return 1;
     return 2;
 }
@@ -389,21 +389,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         [self requestOrderPointPrice:point];
     }
 }
-
-
-- (BOOL)tableViewCell:(NSInteger)section
-{
-    if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 6))
-        return YES;
-    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
-        return YES;
-    else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
-        return YES;
-    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer)
-        return YES;
-    return NO;
-}
-
 
 
 @end

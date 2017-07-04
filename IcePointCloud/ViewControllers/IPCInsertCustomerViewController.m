@@ -60,6 +60,11 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [self.userInfoTableView reloadData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
+}
+
 
 #pragma mark //Set UI
 - (IPCInsertCustomerBaseCell *)baseInfoCell{
