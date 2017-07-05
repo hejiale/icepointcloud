@@ -66,13 +66,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     [IPCCustomUI show];
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
-        
-        if (self.delegate) {
-            if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
-                [self.delegate reloadPayOrderView];
-            }
-        }
+        [self reload];
         [IPCCustomUI hiden];
+        
     } FailureBlock:^(NSError *error) {
         [IPCCustomUI showError:error.domain];
     }];
@@ -86,12 +82,8 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
      {
          IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
          [[IPCPayOrderManager sharedManager] calculatePointValue:pointValue];
+         [self reload];
          
-         if (self.delegate) {
-             if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
-                 [self.delegate reloadPayOrderView];
-             }
-         }
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
      }];
@@ -116,6 +108,18 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
      }];
 }
 
+- (void)queryCustomerDetailWithCustomerId:(NSString *)customerId
+{
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
+                                                        SuccessBlock:^(id responseValue)
+     {
+         [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
+         [self reload];
+     } FailureBlock:^(NSError *error) {
+         [IPCCustomUI showError:error.domain];
+     }];
+}
+
 #pragma mark //Clicked Events
 - (void)resetPayInfoData
 {
@@ -125,6 +129,14 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
     [[IPCCustomsizedItem sharedItem] resetData];
     [[IPCShoppingCart sharedCart] resetSelectCartItemPrice];
+}
+
+- (void)reload{
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
+            [self.delegate reloadPayOrderView];
+        }
+    }
 }
 
 #pragma mark //DO Datasource
@@ -200,8 +212,12 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }else{
                 [cell.bottomLine setHidden:NO];
             }
+            __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if ([strongSelf.delegate respondsToSelector:@selector(managerAddressView)]) {
+                    [strongSelf.delegate managerAddressView];
+                }
             }];
             return cell;
         }else{
@@ -225,8 +241,12 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }else{
                 [cell.bottomLine setHidden:NO];
             }
+            __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                if ([strongSelf.delegate respondsToSelector:@selector(managerOptometryView)]) {
+                    [strongSelf.delegate managerOptometryView];
+                }
             }];
             return cell;
         }else{
@@ -371,11 +391,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 #pragma mark //IPCPayOrderSubViewDelegate
 - (void)reloadUI
 {
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
-            [self.delegate reloadPayOrderView];
-        }
-    }
+    [self reload];
 }
 
 - (void)getPointPrice:(NSInteger)point{

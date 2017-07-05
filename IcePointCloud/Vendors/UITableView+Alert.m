@@ -100,11 +100,11 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
     objc_setAssociatedObject(self, emptyAlertTitleKey, emptyAlertTitle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (void)setEmptyAlertImage:(UIImage *)emptyAlertImage{
+- (void)setEmptyAlertImage:(NSString *)emptyAlertImage{
     objc_setAssociatedObject(self, emptyAlertImageKey, emptyAlertImage, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIImage *)emptyAlertImage{
+- (NSString *)emptyAlertImage{
     return objc_getAssociatedObject(self, emptyAlertImageKey);
 }
 

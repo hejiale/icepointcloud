@@ -19,6 +19,7 @@
 #import "IPCUpdateCustomerView.h"
 #import "IPCUpdateOrderViewController.h"
 #import "IPCManagerOptometryViewController.h"
+#import "IPCManagerAddressViewController.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
@@ -32,8 +33,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
-@property (weak, nonatomic) IBOutlet UIButton *sureButton;
-
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
 @property (strong, nonatomic) IPCUpdateCustomerView * updateCustomerView;
@@ -48,16 +47,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setBackground];
     [self.topBar addBottomLine];
     
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
-    
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-        [self.sureButton setHidden:NO];
-    }
-    
     self.detailTableView.isHiden = YES;
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
     self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
@@ -123,24 +116,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     });
 }
 
-
-//- (void)setDefaultOptometry:(NSString *)optometryID
-//{
-//    __weak typeof(self) weakSelf = self;
-//    [self.customerViewMode setCurrentOptometry:optometryID Complete:^{
-//        __strong typeof(weakSelf) strongSelf = weakSelf;
-//        [strongSelf requestCustomerDetailInfo];
-//    }];
-//}
-//
-//- (void)setCurrentAddress:(NSString *)addressID
-//{
-//    __weak typeof(self) weakSelf = self;
-//    [self.customerViewMode setCurrentAddress:addressID Complete:^{
-//         __strong typeof(weakSelf) strongSelf = weakSelf;
-//        [strongSelf requestCustomerDetailInfo];
-//    }];
-//}
 
 #pragma mark //Set UI
 - (void)loadOrderDetailView:(IPCCustomerOrderMode *)orderObject{
@@ -234,17 +209,12 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.navigationController pushViewController:optometryVC animated:YES];
 }
 
-/**
- *  Choose Customer
- */
-- (IBAction)chooseCustomerAction:(id)sender {
-    //清除积分数据
-    [[IPCShoppingCart sharedCart] clearAllItemPoint];
-    [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
-    
-    [self.customerViewMode getChooseCustomer];
-    [self popToPayOrderViewController];
+- (void)pushToManagerAddressViewController{
+    IPCManagerAddressViewController * addressVC = [[IPCManagerAddressViewController alloc]initWithNibName:@"IPCManagerAddressViewController" bundle:nil];
+    addressVC.customerId = self.customerViewMode.detailCustomer.customerID;
+    [self.navigationController pushViewController:addressVC animated:YES];
 }
+
 
 /**
  *  Dismiss Cover
@@ -341,7 +311,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             [cell setRightManagerTitle:@"收货地址信息"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-             
+                [self pushToManagerAddressViewController];
             }];
             return cell;
         }else{

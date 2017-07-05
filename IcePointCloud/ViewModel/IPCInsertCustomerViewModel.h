@@ -10,7 +10,7 @@
 
 @interface IPCInsertCustomerViewModel : NSObject
 
-- (void)saveNewCustomer:(void(^)())complete;
+- (void)saveNewCustomer:(void(^)(NSString *customerId))complete;
 
 - (void)judgeCustomerPhone:(NSString *)phone :(void(^)())complete;
 

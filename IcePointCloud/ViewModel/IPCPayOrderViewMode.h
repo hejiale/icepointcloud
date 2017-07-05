@@ -13,6 +13,11 @@
 
 @property (nonatomic, assign, readwrite) id<IPCPayOrderViewModelDelegate>delegate;
 
+- (void)queryCustomerDetailWithCustomerId:(NSString *)customerId;
+
+/**
+ *   UITableView DataSource \ Delegate
+ */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -26,7 +31,6 @@
  */
 - (void)offerOrder;
 - (void)requestTradeOrExchangeStatus;
-
 - (void)resetPayInfoData;
 
 @end

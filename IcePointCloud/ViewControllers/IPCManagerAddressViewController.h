@@ -10,4 +10,6 @@
 
 @interface IPCManagerAddressViewController : IPCRootNavigationViewController
 
+@property (nonatomic, copy) NSString * customerId;
+
 @end

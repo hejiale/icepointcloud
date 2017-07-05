@@ -36,13 +36,8 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setBackground];
-    
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
         [self setNavigationTitle:@"客户"];
-    }
-    if ([IPCInsertCustomer instance].isInsertStatus){
-        [self.insertButton setHidden:YES];
     }
     [self loadCollectionView];
     [self.refreshHeader beginRefreshing];
@@ -165,7 +160,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     
     IPCCustomerMode * customer = self.customerArray[indexPath.row];
     cell.currentCustomer = customer;
-    
     return cell;
 }
 
@@ -178,6 +172,11 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [IPCInsertCustomer instance].introducerName = customer.customerName;
         [self.navigationController popViewControllerAnimated:YES];
     }else if ([IPCPayOrderManager sharedManager].isPayOrderStatus){
+        //清除积分数据
+        [[IPCShoppingCart sharedCart] clearAllItemPoint];
+        [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
+        //获取选中用户
+        [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
         [self.navigationController popViewControllerAnimated:YES];
     }else{
         IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];

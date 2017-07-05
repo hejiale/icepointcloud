@@ -23,7 +23,7 @@
     return self;
 }
 
-- (void)saveNewCustomer:(void(^)())complete
+- (void)saveNewCustomer:(void(^)(NSString *customerId))complete
 {
     if (![IPCInsertCustomer instance].memberLevel.length) {
         IPCMemberLevel * memberLevelMode = [IPCEmployeeeManager sharedManager].memberLevelList.list[0];
@@ -93,7 +93,7 @@
          [IPCCustomUI showSuccess:@"新建用户成功!"];
          [[IPCInsertCustomer instance] resetData];
          if (complete) {
-             complete();
+             complete(responseValue);
          }
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];

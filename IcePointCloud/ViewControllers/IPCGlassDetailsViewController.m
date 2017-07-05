@@ -41,7 +41,6 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 {
     [super viewDidLoad];
     
-    [self setBackground];
     [self.topBarView addSubview:self.cartBageView];
     [self.cartBageView addSubview:self.cartBageLabel];
     [self.topBarView addBottomLine];

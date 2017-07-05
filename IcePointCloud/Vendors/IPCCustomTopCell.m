@@ -55,20 +55,16 @@
 
 - (void)setRightManagerTitle:(NSString *)title{
     [self.topTitleLabel setText:title];
+    [self.rightButton setHidden:NO];
     [self.rightButton setTitle:@"管理" forState:UIControlStateNormal];
 }
 
 #pragma mark //Clicked Events
 - (IBAction)insertAction:(id)sender {
-    
 }
 
 
 - (IBAction)editAction:(id)sender {
-}
-
-
-- (IBAction)searchCustomerAction:(id)sender {
 }
 
 

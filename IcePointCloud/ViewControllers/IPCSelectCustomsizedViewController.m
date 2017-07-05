@@ -27,10 +27,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    // Do any additional setup after loading the view from its nib
     
-    [self setBackground];
     [self setNavigationBarStatus:YES];
     [self.searchBgView addBorder:3 Width:0.5];
     [self.topView addBottomLine];

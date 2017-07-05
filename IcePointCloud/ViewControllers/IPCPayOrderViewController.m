@@ -10,6 +10,8 @@
 #import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
 #import "IPCSelectCustomsizedViewController.h"
+#import "IPCManagerOptometryViewController.h"
+#import "IPCManagerAddressViewController.h"
 #import "IPCEmployeListView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewModelDelegate>
@@ -17,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
-@property (strong, nonatomic) IBOutlet UIView *rightItemView;
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewMode * payOrderViewMode;
 
@@ -30,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setNavigationTitle:@"确认订单"];
-    [self setRightView:self.rightItemView];
+    [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction:)];
     
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;
@@ -53,6 +54,16 @@
     [IPCPayOrderManager sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
     [IPCPayOrderManager sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
     [self.payOrderViewMode requestTradeOrExchangeStatus];
+    
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        if ([IPCPayOrderManager sharedManager].isChooseOptometry || [IPCPayOrderManager sharedManager].isChooseAddress) {
+            [self.payOrderTableView reloadData];
+            [IPCPayOrderManager sharedManager].isChooseAddress = NO;
+            [IPCPayOrderManager sharedManager].isChooseOptometry = NO;
+        }else{
+            [self.payOrderViewMode queryCustomerDetailWithCustomerId:[IPCPayOrderManager sharedManager].currentCustomerId];
+        }
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -108,12 +119,24 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)selectCustomerAction:(id)sender{
+- (void)selectCustomerAction:(id)sender{
     IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     customerListVC.isMainStatus = NO;
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
+
+- (void)pushToManagerOptometryViewController{
+    IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
+    optometryVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
+    [self.navigationController pushViewController:optometryVC animated:YES];
+}
+
+- (void)pushToManagerAddressViewController{
+    IPCManagerAddressViewController * addressVC = [[IPCManagerAddressViewController alloc]initWithNibName:@"IPCManagerAddressViewController" bundle:nil];
+    addressVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
+    [self.navigationController pushViewController:addressVC animated:YES];
+}
 
 - (void)removeCover{
     [self.employeView removeFromSuperview];
@@ -162,6 +185,15 @@
 #pragma mark //IPCPayOrderViewCellDelegate
 - (void)showEmployeeView{
     [self loadEmployeView];
+}
+
+- (void)managerOptometryView{
+    [self pushToManagerOptometryViewController];
+}
+
+
+- (void)managerAddressView{
+    [self pushToManagerAddressViewController];
 }
 
 - (void)reloadPayOrderView{

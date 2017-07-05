@@ -29,8 +29,24 @@
             self.optometryView = [[IPCMangerOptometryView alloc]initWithFrame:self.optometryContentView.bounds];
             [self.optometryView createUIWithOptometry:_optometryMode];
             [self.optometryContentView addSubview:self.optometryView];
+            
+            if (_optometryMode.employeeName.length && _optometryMode.employeeName) {
+                [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
+            }
+            
+            if (_optometryMode.insertDate && _optometryMode.insertDate.length) {
+                [self.dateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
+            }else{
+                [self.dateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[NSDate date] IsTime:YES]]];
+            }
         }
     }
 }
+
+
+- (IBAction)setDefaultAction:(id)sender {
+    
+}
+
 
 @end

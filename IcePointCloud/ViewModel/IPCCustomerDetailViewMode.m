@@ -49,33 +49,6 @@
     [self.orderList removeAllObjects];
 }
 
-#pragma mark //Select Customer
-- (void)getChooseCustomer{
-    //初始化数据
-    [IPCCurrentCustomer sharedManager].currentOpometry = nil;
-    [IPCCurrentCustomer sharedManager].currentAddress = nil;
-    [IPCCurrentCustomer sharedManager].currentCustomer = nil;
-    [IPCPayOrderManager sharedManager].customerDiscount = 1;
-    
-    [self.optometryList enumerateObjectsUsingBlock:^(IPCOptometryMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.optometryID isEqualToString:self.detailCustomer.currentOptometryId]) {
-            [IPCCurrentCustomer sharedManager].currentOpometry = obj;
-        }
-    }];
-    
-    [self.addressList enumerateObjectsUsingBlock:^(IPCCustomerAddressMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.addressID isEqualToString:self.detailCustomer.currentAddressId]) {
-            [IPCCurrentCustomer sharedManager].currentAddress = obj;
-        }
-    }];
-    
-    if (self.detailCustomer) {
-        [IPCCurrentCustomer sharedManager].currentCustomer = self.detailCustomer;
-        [IPCPayOrderManager sharedManager].customerDiscount = self.detailCustomer.discount/10;
-        [IPCPayOrderManager sharedManager].isChooseCustomer = YES;
-    }
-}
-
 #pragma mark //Requst Method
 - (void)queryCustomerDetailInfo:(void(^)())completeBlock
 {
@@ -155,38 +128,6 @@
                                                                completeBlock();
                                                            [IPCCustomUI showError:error.domain];
                                                        }];
-}
-
-
-- (void)setCurrentAddress:(NSString *)addressID Complete:(void (^)())completeBlock{
-    [IPCCustomerRequestManager setDefaultAddressWithCustomID:self.currentCustomer.customerID
-                                            DefaultAddressID:addressID
-                                                SuccessBlock:^(id responseValue) {
-                                                    if (completeBlock) {
-                                                        completeBlock();
-                                                    }
-                                                } FailureBlock:^(NSError *error) {
-                                                    if (completeBlock) {
-                                                        completeBlock();
-                                                    }
-                                                    [IPCCustomUI showError:error.domain];
-                                                }];
-}
-
-
-- (void)setCurrentOptometry:(NSString *)optometryID Complete:(void (^)())completeBlock{
-    [IPCCustomerRequestManager setDefaultOptometryWithCustomID:self.currentCustomer.customerID
-                                            DefaultOptometryID:optometryID
-                                                  SuccessBlock:^(id responseValue) {
-                                                      if (completeBlock) {
-                                                          completeBlock();
-                                                      }
-                                                  } FailureBlock:^(NSError *error) {
-                                                      if (completeBlock) {
-                                                          completeBlock();
-                                                      }
-                                                      [IPCCustomUI showError:error.domain];
-                                                  }];
 }
 
 @end

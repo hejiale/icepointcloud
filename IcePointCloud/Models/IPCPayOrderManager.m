@@ -140,6 +140,7 @@
     [IPCPayOrderManager sharedManager].insertPayRecord = nil;
     [IPCPayOrderManager sharedManager].customerDiscount = 0;
     [IPCPayOrderManager sharedManager].remark = nil;
+    [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
 }
 
@@ -152,7 +153,7 @@
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [IPCPayOrderManager sharedManager].remainAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [[IPCCurrentCustomer sharedManager] clearData];
+    [IPCPayOrderManager sharedManager].customerDiscount = 1;
 }
 
 

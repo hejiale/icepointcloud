@@ -41,5 +41,7 @@
 @property (nonatomic, copy, readwrite) NSString * photo_url;
 @property (nonatomic, copy, readwrite) NSString * introducerName;
 @property (nonatomic, assign, readwrite) double  discount;
+@property (nonatomic, copy, readwrite) NSArray<IPCOptometryMode *>  * optometrys;
+@property (nonatomic, copy, readwrite) NSArray<IPCCustomerAddressMode *>  * addresses;
 
 @end

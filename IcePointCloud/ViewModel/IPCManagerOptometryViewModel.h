@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSMutableArray<IPCOptometryMode *> * optometryList;
 
 - (void)queryCustomerOptometryList:(void(^)(BOOL canLoadMore))completeBlock;
+- (void)setCurrentOptometry:(NSString *)optometryID Complete:(void(^)())completeBlock;
 
 @end

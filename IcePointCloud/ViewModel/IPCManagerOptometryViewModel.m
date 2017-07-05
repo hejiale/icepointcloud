@@ -27,6 +27,9 @@
 
 - (void)queryCustomerOptometryList:(void(^)(BOOL canLoadMore))completeBlock
 {
+    if (self.currentPage == 1) {
+        [self.optometryList removeAllObjects];
+    }
     __weak typeof (self) weakSelf = self;
     [IPCCustomerRequestManager queryUserOptometryListWithCustomID:self.customerId
                                                              Page:self.currentPage
@@ -48,6 +51,21 @@
                                                              completeBlock(NO);
                                                          [IPCCustomUI showError:error.domain];
                                                      }];
+}
+
+
+- (void)setCurrentOptometry:(NSString *)optometryID Complete:(void (^)())completeBlock
+{
+    [IPCCustomerRequestManager setDefaultOptometryWithCustomID:self.customerId
+                                            DefaultOptometryID:optometryID
+                                                  SuccessBlock:^(id responseValue) {
+                                                      [IPCCustomUI showSuccess:@""];
+                                                      if (completeBlock) {
+                                                          completeBlock();
+                                                      }
+                                                  } FailureBlock:^(NSError *error) {
+                                                      [IPCCustomUI showError:error.domain];
+                                                  }];
 }
 
 

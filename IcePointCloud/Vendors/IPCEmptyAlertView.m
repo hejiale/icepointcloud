@@ -17,7 +17,7 @@
 
 @implementation IPCEmptyAlertView
 
-- (instancetype)initWithFrame:(CGRect)frame AlertImage:(NSString *)image AlertTitle:(NSString *)title
+- (instancetype)initWithFrame:(CGRect)frame AlertImage:(NSString *)imageName AlertTitle:(NSString *)title
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -25,7 +25,7 @@
         [emptyAlertView setFrame:self.bounds];
         [self addSubview:emptyAlertView];
         
-        [self.alertImageView setImage:[UIImage imageNamed:image]];
+        [self.alertImageView setImage:[UIImage imageNamed:imageName]];
         [self.alertLabel setText:title];
     }
     return self;

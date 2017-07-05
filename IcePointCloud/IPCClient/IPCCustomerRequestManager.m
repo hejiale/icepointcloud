@@ -119,7 +119,7 @@
                                  SuccessBlock:(void (^)(id responseValue))success
                                  FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customerID} RequestMethod:@"customerAdmin.getCusomerInfo" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customerID,@"needMoreInfo":@"true"} RequestMethod:@"customerAdmin.getCusomerInfo" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
