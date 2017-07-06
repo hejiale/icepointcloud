@@ -656,16 +656,18 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self reload];
 }
 
-#pragma mark - OBOvumSource ----------------------------------------------------------------------------
+#pragma mark - OBOvumSource ---------------------------------------------------------------------------
 -(OBOvum *)createOvumFromView:(UIView*)sourceView
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
-        UIView *cell = [self nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
+        UIView *cell = [IPCCustomUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
         NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
         IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
-        OBOvum *ovum = [[OBOvum alloc] init];
-        if (glass)ovum.dataObject = glass;
-        return ovum;
+        if (glass) {
+            OBOvum *ovum = [[OBOvum alloc] init];
+            ovum.dataObject = glass;
+            return ovum;
+        }
     }
     return nil;
 }
@@ -673,18 +675,18 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 - (UIView *)createDragRepresentationOfSourceView:(UIView *)sourceView inWindow:(UIWindow*)window
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
-        UIView *cell = [self nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
+        UIView *cell = [IPCCustomUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
         if (cell) {
-            NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
-            IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
             CGRect frame = [sourceView convertRect:sourceView.bounds toView:sourceView.window];
             frame = [window convertRect:frame fromWindow:sourceView.window];
+            
+            NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
+            IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
             if (glass) {
                 IPCGlassesImage *gp = [glass imageWithType:IPCGlassesImageTypeFrontialNormal];
-                UIImageView *glassImgView = [[UIImageView alloc] init];
-                glassImgView.contentMode = UIViewContentModeScaleAspectFit;
+                UIImageView *glassImgView = [[UIImageView alloc] initWithFrame:frame];
+                [glassImgView setBackgroundColor:[UIColor clearColor]];
                 [glassImgView setImageWithURL:[NSURL URLWithString:gp.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
-                glassImgView.frame = CGRectMake(frame.origin.x, frame.origin.y, sourceView.frame.size.width*0.9, sourceView.frame.size.height*0.9);
                 return glassImgView;
             }
             return nil;
@@ -700,21 +702,11 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     
     [UIView animateWithDuration:0.25 animations:^{
         dragView.center = location;
-        dragView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        dragView.alpha = 0.85;
+        dragView.transform = CGAffineTransformMakeScale(1, 1);
+        dragView.alpha = 0.75;
     }];
 }
 
-
-- (UIView *)nearestAncestorForView:(UIView *)aView withClass:(Class)aClass
-{
-    UIView *parent = aView;
-    while (parent) {
-        if ([parent isKindOfClass:aClass]) return parent;
-        parent = parent.superview;
-    }
-    return nil;
-}
 
 #pragma mark - OBDropZone
 - (void)ovumExited:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location{
@@ -736,10 +728,10 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
             if (!self.compareSwitch.isOn) {
                 [self.signleModeView dropGlasses:glass onLocaton:location];
             }else{
-//                [self.signleModeView initGlassView];
+                [self.signleModeView initGlassView];
                 
                 UIView *target = [self.compareBgView hitTest:location withEvent:nil];
-                target = [self nearestAncestorForView:target withClass:[IPCCompareItemView class]];
+                target = [IPCCustomUI nearestAncestorForView:target withClass:[IPCCompareItemView class]];
                 if (target && [target isKindOfClass:[IPCCompareItemView class]]) {
                     IPCCompareItemView * itemView = (IPCCompareItemView *)target;
                     location = [self.compareBgView convertPoint:location toView:itemView];

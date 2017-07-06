@@ -30,7 +30,6 @@
         }
     }];
     [self.contentView addSubview:self.optometryView];
-    
     [self.contentView addSubview:self.removeButton];
     [self.contentView bringSubviewToFront:self.removeButton];
     
@@ -54,24 +53,27 @@
     return _removeButton;
 }
 
-
-- (void)reloadUIWithOptometry:(IPCOptometryMode *)optometry
-{
-    [self.optometryView subTextField:0].text = [IPCCommon formatPurpose:optometry.purpose];
-    [self.optometryView subTextField:1].text = optometry.sphRight;
-    [self.optometryView subTextField:2].text = optometry.cylRight;
-    [self.optometryView subTextField:3].text = optometry.axisRight;
-    [self.optometryView subTextField:4].text = optometry.correctedVisionRight;
-    [self.optometryView subTextField:5].text = optometry.distanceRight;
-    [self.optometryView subTextField:6].text = optometry.addRight;
-    [self.optometryView subTextField:7].text = optometry.sphLeft;
-    [self.optometryView subTextField:8].text = optometry.cylLeft;
-    [self.optometryView subTextField:9].text = optometry.axisLeft;
-    [self.optometryView subTextField:10].text = optometry.correctedVisionLeft;
-    [self.optometryView subTextField:11].text = optometry.distanceLeft;
-    [self.optometryView subTextField:12].text = optometry.addLeft;
-    [self.optometryView subTextField:13].text = optometry.employeeName;
+- (void)setOptometryMode:(IPCOptometryMode *)optometryMode{
+    _optometryMode = optometryMode;
+    
+    if (_optometryMode) {
+        [self.optometryView subTextField:0].text = [IPCCommon formatPurpose:_optometryMode.purpose];
+        [self.optometryView subTextField:1].text = _optometryMode.sphRight;
+        [self.optometryView subTextField:2].text = _optometryMode.cylRight;
+        [self.optometryView subTextField:3].text = _optometryMode.axisRight;
+        [self.optometryView subTextField:4].text = _optometryMode.correctedVisionRight;
+        [self.optometryView subTextField:5].text = _optometryMode.distanceRight;
+        [self.optometryView subTextField:6].text = _optometryMode.addRight;
+        [self.optometryView subTextField:7].text = _optometryMode.sphLeft;
+        [self.optometryView subTextField:8].text = _optometryMode.cylLeft;
+        [self.optometryView subTextField:9].text = _optometryMode.axisLeft;
+        [self.optometryView subTextField:10].text = _optometryMode.correctedVisionLeft;
+        [self.optometryView subTextField:11].text = _optometryMode.distanceLeft;
+        [self.optometryView subTextField:12].text = _optometryMode.addLeft;
+        [self.optometryView subTextField:13].text = _optometryMode.employeeName;
+    }
 }
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

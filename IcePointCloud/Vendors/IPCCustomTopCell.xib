@@ -30,35 +30,6 @@
                         <nil key="highlightedColor"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zCY-Hn-egy">
-                        <rect key="frame" x="951" y="19.5" width="50" height="20"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="50" id="KUJ-FN-mBV"/>
-                            <constraint firstAttribute="height" constant="20" id="vie-fc-PcO"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                        <state key="normal" image="icon_insert_btn"/>
-                        <connections>
-                            <action selector="insertAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4g4-qM-P5D"/>
-                        </connections>
-                    </button>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJ8-Ay-8Yo">
-                        <rect key="frame" x="896" y="19.5" width="100" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Hyt-Gd-H2t"/>
-                            <constraint firstAttribute="width" constant="100" id="nO1-Xm-N2z"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="5" maxY="0.0"/>
-                        <state key="normal" title="编辑" image="icon_edit_customer">
-                            <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="editAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6wT-ZK-g76"/>
-                        </connections>
-                    </button>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVb-1E-3FV">
                         <rect key="frame" x="696" y="19.5" width="300" height="20"/>
                         <constraints>
@@ -126,11 +97,8 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="zCY-Hn-egy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8MD-Sq-lSG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="LJ8-Ay-8Yo" secondAttribute="trailing" constant="20" id="8vW-hc-ve9"/>
                     <constraint firstAttribute="trailing" secondItem="w4g-sg-chx" secondAttribute="trailing" constant="25" id="N6W-vg-boU"/>
                     <constraint firstAttribute="bottom" secondItem="w4g-sg-chx" secondAttribute="bottom" id="Vg9-X1-jYu"/>
-                    <constraint firstItem="LJ8-Ay-8Yo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VpB-9i-dHh"/>
                     <constraint firstItem="c4x-s6-qOV" firstAttribute="trailing" secondItem="w4g-sg-chx" secondAttribute="trailing" id="Xbf-no-4PR"/>
                     <constraint firstItem="TrO-4s-X3g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="17" id="ZUK-e0-sJF"/>
                     <constraint firstAttribute="trailing" secondItem="vVb-1E-3FV" secondAttribute="trailing" constant="28" id="bDc-AC-exQ"/>
@@ -140,24 +108,17 @@
                     <constraint firstItem="rjt-kg-R4t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="e4c-ea-LbJ"/>
                     <constraint firstItem="c4x-s6-qOV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eYg-fq-hTo"/>
                     <constraint firstItem="vVb-1E-3FV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lH8-91-Xfm"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="zCY-Hn-egy" secondAttribute="trailing" constant="15" id="mhh-PT-eYJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="addButton" destination="zCY-Hn-egy" id="11E-j1-wKh"/>
                 <outlet property="bottomLine" destination="w4g-sg-chx" id="DNP-Xg-bEj"/>
-                <outlet property="editButton" destination="LJ8-Ay-8Yo" id="90K-Eg-Wrg"/>
+                <outlet property="leftTitleLabel" destination="TrO-4s-X3g" id="dqM-mw-BPH"/>
                 <outlet property="noPayPriceLabel" destination="foW-u9-1lp" id="MDA-Ro-IDF"/>
                 <outlet property="noPayPriceView" destination="rjt-kg-R4t" id="00B-mC-8cc"/>
                 <outlet property="rightButton" destination="c4x-s6-qOV" id="SY8-gZ-bvi"/>
                 <outlet property="rightLabel" destination="vVb-1E-3FV" id="NNg-kw-FOa"/>
-                <outlet property="topTitleLabel" destination="TrO-4s-X3g" id="PhR-Ju-pGN"/>
             </connections>
             <point key="canvasLocation" x="336" y="419"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="icon_edit_customer" width="12" height="12"/>
-        <image name="icon_insert_btn" width="44" height="14"/>
-    </resources>
 </document>

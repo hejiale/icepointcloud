@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="158"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="157.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="157"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vlh-9R-dJe">
@@ -43,7 +43,23 @@
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhQ-KC-Osn">
                         <rect key="frame" x="28" y="18" width="968" height="108.5"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[默认验光单]" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIN-av-K6r">
+                                <rect key="frame" x="883" y="0.0" width="85" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="B4c-O1-t7h"/>
+                                    <constraint firstAttribute="width" constant="85" id="ohA-cn-8fM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                                <color key="textColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GIN-av-K6r" firstAttribute="top" secondItem="RhQ-KC-Osn" secondAttribute="top" id="1bG-04-iqI"/>
+                            <constraint firstAttribute="trailing" secondItem="GIN-av-K6r" secondAttribute="trailing" id="ynG-Fa-JvS"/>
+                        </constraints>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wni-WN-3RN">
                         <rect key="frame" x="25" y="156.5" width="974" height="1"/>
@@ -69,6 +85,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="bottomLine" destination="Wni-WN-3RN" id="WFT-ba-1Hs"/>
+                <outlet property="defaultLabel" destination="GIN-av-K6r" id="Uxf-2R-WSi"/>
                 <outlet property="employeeLabel" destination="t9g-n2-nhQ" id="2zv-o5-NlC"/>
                 <outlet property="insertDateLabel" destination="Vlh-9R-dJe" id="ajj-Iq-woV"/>
                 <outlet property="optometryContentView" destination="RhQ-KC-Osn" id="Oqe-vE-Sed"/>

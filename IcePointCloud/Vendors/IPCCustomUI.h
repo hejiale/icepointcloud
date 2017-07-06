@@ -37,4 +37,6 @@
 
 + (void)clearAutoCorrection:(UIView *)view;
 
++ (UIView *)nearestAncestorForView:(UIView *)aView withClass:(Class)aClass;
+
 @end

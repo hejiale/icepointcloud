@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *insertDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *employeeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomLine;
+@property (weak, nonatomic) IBOutlet UILabel *defaultLabel;
+
 @property (strong, nonatomic) IPCMangerOptometryView * optometryView;
 @property (copy, nonatomic) IPCOptometryMode * optometryMode;
 

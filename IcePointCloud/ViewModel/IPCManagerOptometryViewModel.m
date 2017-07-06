@@ -30,6 +30,7 @@
     if (self.currentPage == 1) {
         [self.optometryList removeAllObjects];
     }
+    [IPCCustomUI show];
     __weak typeof (self) weakSelf = self;
     [IPCCustomerRequestManager queryUserOptometryListWithCustomID:self.customerId
                                                              Page:self.currentPage
@@ -45,7 +46,7 @@
                                                              if (completeBlock)
                                                                  completeBlock(NO);
                                                          }
-                                                         
+                                                         [IPCCustomUI hiden];
                                                      } FailureBlock:^(NSError *error) {
                                                          if (completeBlock)
                                                              completeBlock(NO);

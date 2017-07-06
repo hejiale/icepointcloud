@@ -173,7 +173,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"客户基本信息"];
+            [cell setLeftTitle:@"客户基本信息"];
             return cell;
         }else{
             IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
@@ -189,7 +189,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"订单备注"];
+            [cell setLeftTitle:@"订单备注"];
             return cell;
         }else{
             IPCPayOrderMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
@@ -206,7 +206,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightManagerTitle:@"收货地址"];
+            [cell setRightOperation:@"收货地址" ButtonTitle:@"选择" ButtonImage:nil];
             if (![IPCCurrentCustomer sharedManager].currentAddress) {
                 [cell.bottomLine setHidden:YES];
             }else{
@@ -235,7 +235,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightManagerTitle:@"验光单"];
+            [cell setRightOperation:@"验光单" ButtonTitle:@"选择" ButtonImage:nil];
             if (![IPCCurrentCustomer sharedManager].currentOpometry) {
                 [cell.bottomLine setHidden:YES];
             }else{
@@ -264,13 +264,13 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setInsertTitle:@"选择员工"];
+            [cell setRightOperation:@"选择员工" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             if ([IPCPayOrderManager sharedManager].employeeResultArray.count) {
                 [cell.bottomLine setHidden:NO];
             }else{
                 [cell.bottomLine setHidden:YES];
             }
-            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
+            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 if ([self.delegate respondsToSelector:@selector(showEmployeeView)]) {
                     [self.delegate showEmployeeView];
                 }
@@ -292,10 +292,10 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeNormal || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeVlaueCard) {
-                [cell setTopTitle:@"购买列表"];
+                [cell setLeftTitle:@"购买列表"];
             }else{
-                [cell setInsertTitle:@"购买列表"];
-                [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                [cell setRightOperation:@"购买列表" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+                [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
                     if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
                         [self.delegate selectNormalGlasses];
                     }
@@ -365,7 +365,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"收款记录"];
+            [cell setLeftTitle:@"收款记录"];
             NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
             NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:6 Rang:remainAmountText.length - 6 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
             [cell setRightTitle:str];

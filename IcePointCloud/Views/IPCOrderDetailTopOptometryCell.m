@@ -1,5 +1,5 @@
 //
-//  IPCOrderDetailOptometryCell.m
+//  IPCOrderDetailTopOptometryCell.m
 //  IcePointCloud
 //
 //  Created by gerry on 2017/4/29.

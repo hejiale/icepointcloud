@@ -116,7 +116,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 80;
 }
 
 

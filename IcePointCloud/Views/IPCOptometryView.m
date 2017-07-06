@@ -87,7 +87,7 @@ typedef void(^UpdateBlock)(void);
     tf.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     tf.tag = tag;
     tf.textAlignment = NSTextAlignmentCenter;
-    tf.returnKeyType = UIReturnKeyDone;
+    tf.returnKeyType = UIReturnKeyNext;
     tf.keyboardType = UIKeyboardTypeNumberPad;
     tf.text = text;
     tf.clearsOnBeginEditing = YES;
@@ -109,7 +109,6 @@ typedef void(^UpdateBlock)(void);
     tf.delegate  = self;
     tf.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     tf.tag = functionTag;
-    tf.returnKeyType = UIReturnKeyDone;
     [tf setRightButton:self Action:@selector(onSelectFunctionAction) OnView:itemView];
     [itemView addSubview:tf];
     [self.allTextFields addObject:tf];
@@ -186,7 +185,12 @@ typedef void(^UpdateBlock)(void);
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
+    if (textField.tag == 12) {
+        [textField resignFirstResponder];
+    }else{
+        UITextField * nextTextField = (UITextField *)self.allTextFields[textField.tag + 1];
+        [nextTextField becomeFirstResponder];
+    }
     return YES;
 }
 

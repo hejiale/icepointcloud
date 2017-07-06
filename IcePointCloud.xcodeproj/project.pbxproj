@@ -1869,7 +1869,7 @@
 				CBC419DF1F03440100387F9C /* Progress */,
 				CBC419E11F03445200387F9C /* Swipe */,
 				CBC419E21F03446A00387F9C /* Switch */,
-				CBC419E31F03447B00387F9C /* TitleCell */,
+				CBC419E31F03447B00387F9C /* TopCell */,
 				04A202141D7FE3EC00F2A681 /* Refresh */,
 			);
 			name = CustomView;
@@ -2143,14 +2143,14 @@
 			name = Switch;
 			sourceTree = "<group>";
 		};
-		CBC419E31F03447B00387F9C /* TitleCell */ = {
+		CBC419E31F03447B00387F9C /* TopCell */ = {
 			isa = PBXGroup;
 			children = (
 				CBB9920C1F01092A00C90FEA /* IPCCustomTopCell.h */,
 				CBB9920D1F01092A00C90FEA /* IPCCustomTopCell.m */,
 				CBB9920E1F01092A00C90FEA /* IPCCustomTopCell.xib */,
 			);
-			name = TitleCell;
+			name = TopCell;
 			sourceTree = "<group>";
 		};
 		CBC419E41F03759500387F9C /* Custom */ = {

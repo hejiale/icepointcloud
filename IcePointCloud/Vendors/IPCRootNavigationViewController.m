@@ -152,21 +152,6 @@
     [layerAnimation removeFromSuperlayer];
 }
 
-
-#pragma mark //UIInterfaceOrientation
-- (BOOL)shouldAutorotate{
-    return NO;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
-    return  UIInterfaceOrientationLandscapeLeft|UIInterfaceOrientationLandscapeRight;
-}
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

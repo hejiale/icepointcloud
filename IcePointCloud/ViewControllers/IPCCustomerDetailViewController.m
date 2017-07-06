@@ -255,8 +255,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setEditTitle:@"客户基本信息"];
-            [[cell rac_signalForSelector:@selector(editAction:)] subscribeNext:^(id x) {
+            [cell setRightOperation:@"客户基本信息" ButtonTitle:nil ButtonImage:@"icon_edit_customer"];
+            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self loadUpdateCustomerView];
             }];
             return cell;
@@ -276,7 +276,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightManagerTitle:@"历史验光单"];
+            [cell setRightOperation:@"历史验光单" ButtonTitle:@"管理" ButtonImage:nil];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self pushToManagerOptometryViewController];
             }];
@@ -300,6 +300,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                 }else{
                     [cell.bottomLine setHidden:NO];
                 }
+                if (indexPath.row == 1) {
+                    [cell.defaultLabel setHidden:NO];
+                }else{
+                    [cell.defaultLabel setHidden:YES];
+                }
             }
             return cell;
         }
@@ -309,7 +314,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightManagerTitle:@"收货地址信息"];
+            [cell setRightOperation:@"收货地址信息" ButtonTitle:@"管理" ButtonImage:nil];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self pushToManagerAddressViewController];
             }];
@@ -327,6 +332,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                 }else{
                     [cell.bottomLine setHidden:NO];
                 }
+                if (indexPath.row == 1) {
+                    [cell.defaultLabel setHidden:NO];
+                }else{
+                    [cell.defaultLabel setHidden:YES];
+                }
             }
             return cell;
         }
@@ -336,7 +346,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"历史订单信息"];
+            [cell setLeftTitle:@"历史订单信息"];
             return cell;
         }else if (self.customerViewMode.isLoadMoreOrder && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] -1){
             IPCCustomerRefreshCell * cell = [tableView dequeueReusableCellWithIdentifier:footLoadIdentifier];

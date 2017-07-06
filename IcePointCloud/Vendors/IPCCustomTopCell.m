@@ -26,21 +26,9 @@
     // Configure the view for the selected state
 }
 
-- (void)setTopTitle:(NSString *)title
+- (void)setLeftTitle:(NSString *)title
 {
-    [self.topTitleLabel setText:title];
-}
-
-- (void)setInsertTitle:(NSString *)title
-{
-    [self.topTitleLabel setText:title];
-    [self.addButton setHidden:NO];
-}
-
-- (void)setEditTitle:(NSString *)title
-{
-    [self.topTitleLabel setText:title];
-    [self.editButton setHidden:NO];
+    [self.leftTitleLabel setText:title];
 }
 
 - (void)setRightTitle:(NSString *)title{
@@ -53,21 +41,15 @@
     [self.noPayPriceLabel setText:title];
 }
 
-- (void)setRightManagerTitle:(NSString *)title{
-    [self.topTitleLabel setText:title];
+- (void)setRightOperation:(NSString *)title ButtonTitle:(NSString *)button ButtonImage:(NSString *)buttonImage
+{
+    [self.leftTitleLabel setText:title];
     [self.rightButton setHidden:NO];
-    [self.rightButton setTitle:@"管理" forState:UIControlStateNormal];
+    [self.rightButton setTitle:button forState:UIControlStateNormal];
+    [self.rightButton setImage:[UIImage imageNamed:buttonImage] forState:UIControlStateNormal];
 }
 
 #pragma mark //Clicked Events
-- (IBAction)insertAction:(id)sender {
-}
-
-
-- (IBAction)editAction:(id)sender {
-}
-
-
 - (IBAction)rightButtonAction:(id)sender {
 }
 

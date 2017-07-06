@@ -146,7 +146,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"客户基本信息"];
+            [cell setLeftTitle:@"客户基本信息"];
             return cell;
         }else{
             IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
@@ -164,7 +164,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"收货地址"];
+            [cell setLeftTitle:@"收货地址"];
             return cell;
         }else{
             IPCCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
@@ -181,7 +181,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"验光单"];
+            [cell setLeftTitle:@"验光单"];
             return cell;
         }else{
             IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
@@ -198,7 +198,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"购买列表"];
+            [cell setLeftTitle:@"购买列表"];
             return cell;
         }else{
             IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
@@ -218,7 +218,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"参与员工"];
+            [cell setLeftTitle:@"参与员工"];
             return cell;
         }else{
             IPCPayOrderEmployeeCell * cell = [tableView dequeueReusableCellWithIdentifier:employeeIdentifier];
@@ -239,7 +239,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"收款记录"];
+            [cell setLeftTitle:@"收款记录"];
             [cell setNoPayTitle:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].remainAmount]];
             return cell;
         }else {

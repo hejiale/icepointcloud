@@ -16,8 +16,7 @@
 @property (nonatomic, strong) IPCOptometryView * optometryView;
 @property (strong, nonatomic) UIButton *removeButton;
 @property (assign, nonatomic) id<IPCInsertCustomerOpometryCellDelegate>delegate;
-
-- (void)reloadUIWithOptometry:(IPCOptometryMode *)optometry;
+@property (copy, nonatomic) IPCOptometryMode * optometryMode;
 
 @end
 

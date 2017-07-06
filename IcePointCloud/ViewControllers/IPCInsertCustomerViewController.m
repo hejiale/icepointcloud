@@ -120,7 +120,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"客户基本信息"];
+            [cell setLeftTitle:@"客户基本信息"];
             return cell;
         }else{
             IPCInsertCustomerBaseCell * cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifier];
@@ -140,7 +140,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setTopTitle:@"收货地址"];
+            [cell setLeftTitle:@"收货地址"];
             return cell;
         }else{
             IPCInsertCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
@@ -156,14 +156,13 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            
             if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-                [cell setTopTitle:@"验光单"];
+                [cell setLeftTitle:@"验光单"];
             }else{
-                [cell setInsertTitle:@"验光单"];
+                [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             }
             
-            [[cell rac_signalForSelector:@selector(insertAction:)] subscribeNext:^(id x) {
+            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [[IPCInsertCustomer instance].optometryArray addObject:[[IPCOptometryMode alloc]init]];
                 [tableView reloadData];
                 [tableView scrollToBottom];
@@ -180,7 +179,8 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             }else{
                 [cell.removeButton setHidden:NO];
             }
-            [cell reloadUIWithOptometry:[IPCInsertCustomer instance].optometryArray[indexPath.row-1]];
+            IPCOptometryMode * optometry = [IPCInsertCustomer instance].optometryArray[indexPath.row-1];
+            cell.optometryMode = optometry;
             
             [[cell rac_signalForSelector:@selector(removeOptometryAction:)] subscribeNext:^(id x) {
                 [[IPCInsertCustomer instance] .optometryArray removeObjectAtIndex:indexPath.row-1];

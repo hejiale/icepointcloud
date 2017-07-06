@@ -131,4 +131,14 @@
     }];
 }
 
++ (UIView *)nearestAncestorForView:(UIView *)aView withClass:(Class)aClass
+{
+    UIView *parent = aView;
+    while (parent) {
+        if ([parent isKindOfClass:aClass]) return parent;
+        parent = parent.superview;
+    }
+    return nil;
+}
+
 @end

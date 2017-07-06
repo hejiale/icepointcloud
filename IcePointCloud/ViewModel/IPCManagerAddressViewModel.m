@@ -19,6 +19,7 @@
 
 - (void)queryCustomerAddressList:(void(^)())completeBlock
 {
+    [IPCCustomUI show];
     __weak typeof (self) weakSelf = self;
     [self.addressList removeAllObjects];
     
@@ -29,6 +30,7 @@
                                                            [strongSelf.addressList addObjectsFromArray:addressObject.list];
                                                            if (completeBlock)
                                                                completeBlock();
+                                                           [IPCCustomUI hiden];
                                                        } FailureBlock:^(NSError *error) {
                                                            if (completeBlock)
                                                                completeBlock();
