@@ -31,6 +31,11 @@ typedef void(^UpdateBlock)(void);
         
         [self createOptometryView:frame];
         self.insertOptometry = [[IPCOptometryMode alloc]init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
     }
     return self;
 }
@@ -138,10 +143,12 @@ typedef void(^UpdateBlock)(void);
 
 #pragma mark //Clicked Events
 - (void)onSelectEmployeeAction{
+    [self endEditing:YES];
     [self showParameterTableView:[self subTextField:optometristTag] Height:280 Tag:optometristTag];
 }
 
 - (void)onSelectFunctionAction{
+    [self endEditing:YES];
     [self showParameterTableView:[self subTextField:functionTag] Height:150 Tag:functionTag];
 }
 
@@ -223,7 +230,6 @@ typedef void(^UpdateBlock)(void);
             [textField setText:@"+0.00"];
         }
     }
-    [self insertOptometryInfo];
 }
 
 #pragma mark //IPCParameterTableViewDataSource
@@ -237,6 +243,13 @@ typedef void(^UpdateBlock)(void);
 #pragma mark /IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView{
     [[self subTextField:tableView.view.tag] setText:parameter];
+    [self insertOptometryInfo];
+}
+
+
+#pragma mark //UIKeyboard Hiden Notification
+- (void)keyboardWillHide:(NSNotification *)notification
+{
     [self insertOptometryInfo];
 }
 

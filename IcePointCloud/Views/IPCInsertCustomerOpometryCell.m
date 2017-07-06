@@ -39,7 +39,6 @@
         make.width.mas_equalTo(40);
         make.height.mas_equalTo(40);
     }];
-    
 }
 
 - (UIButton *)removeButton{
