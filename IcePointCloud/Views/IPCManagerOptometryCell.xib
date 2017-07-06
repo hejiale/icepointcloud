@@ -20,31 +20,9 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sw-gU-vy1">
                         <rect key="frame" x="20" y="20" width="984" height="90"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="acI-OL-aNs">
-                                <rect key="frame" x="864" y="0.0" width="120" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="H8t-Ux-67L"/>
-                                    <constraint firstAttribute="height" constant="23" id="Naq-P3-aaZ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                                <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="设为默认验光单" image="icon_undefault">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="selected" title="默认验光单" image="icon_default">
-                                    <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="setDefaultAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="TWC-3g-zdK"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="acI-OL-aNs" firstAttribute="top" secondItem="4sw-gU-vy1" secondAttribute="top" id="2vB-iN-fMJ"/>
                             <constraint firstAttribute="height" constant="90" id="mBl-oE-5OM"/>
-                            <constraint firstAttribute="trailing" secondItem="acI-OL-aNs" secondAttribute="trailing" id="r9B-JP-Ooa"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4o-Jk-vgE">
@@ -80,14 +58,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="m4o-Jk-vgE" id="Dnp-Ks-lmO"/>
-                <outlet property="defaultButton" destination="acI-OL-aNs" id="gC3-KI-nfs"/>
                 <outlet property="employeeLabel" destination="fdZ-39-nVp" id="t2C-WQ-tdx"/>
                 <outlet property="optometryContentView" destination="4sw-gU-vy1" id="FF0-7K-Xxm"/>
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="icon_default" width="14" height="14"/>
-        <image name="icon_undefault" width="14" height="14"/>
-    </resources>
 </document>
