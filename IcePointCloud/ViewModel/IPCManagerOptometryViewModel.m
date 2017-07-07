@@ -39,6 +39,11 @@
                                                          IPCOptometryList * optometryObject = [[IPCOptometryList alloc]initWithResponseValue:responseValue];
                                                          [strongSelf.optometryList addObjectsFromArray:optometryObject.listArray];
                                                          
+                                                         if (strongSelf.optometryList.count == 0) {
+                                                             [IPCCustomUI showError:@"暂无验光单，请前去添加!"];
+                                                         }else{
+                                                             [IPCCustomUI hiden];
+                                                         }
                                                          if ([optometryObject.listArray count] > 0 && strongSelf.optometryList.count < optometryObject.totalCount) {
                                                              if (completeBlock)
                                                                  completeBlock(YES);
@@ -46,7 +51,6 @@
                                                              if (completeBlock)
                                                                  completeBlock(NO);
                                                          }
-                                                         [IPCCustomUI hiden];
                                                      } FailureBlock:^(NSError *error) {
                                                          if (completeBlock)
                                                              completeBlock(NO);

@@ -87,7 +87,6 @@ typedef  void(^DismissBlock)();
                                                          if (self.completeBlock) {
                                                              self.completeBlock(responseValue[@"id"]);
                                                          }
-                                                         [IPCCustomUI showSuccess:@"新建验光单成功!"];
                                                      } FailureBlock:^(NSError *error) {
                                                          [IPCCustomUI showError:error.domain];
                                                      }];

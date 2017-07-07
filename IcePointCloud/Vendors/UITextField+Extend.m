@@ -79,18 +79,15 @@
 - (void)setLeftText:(NSString *)text
 {
     CGFloat width  = [text jk_sizeWithFont:self.font constrainedToHeight:self.jk_height].width;
-    
-    UIView * leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, width + 10, self.jk_height)];
-    [leftView setBackgroundColor:[UIColor clearColor]];
-    
-    UILabel * textLabel = [[UILabel alloc]initWithFrame:leftView.bounds];
+
+    UILabel * textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, width + 5, self.jk_height)];
     [textLabel setText:text];
     [textLabel setTextColor:[UIColor lightGrayColor]];
+    [textLabel setBackgroundColor:[UIColor clearColor]];
     [textLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [textLabel setTextAlignment:NSTextAlignmentCenter];
-    [leftView addSubview:textLabel];
     
-    [self setLeftView:leftView];
+    [self setLeftView:textLabel];
     [self setLeftViewMode:UITextFieldViewModeAlways];
 }
 

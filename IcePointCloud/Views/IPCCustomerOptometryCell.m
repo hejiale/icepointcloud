@@ -46,8 +46,6 @@
         
         if (_optometryMode.insertDate && _optometryMode.insertDate.length) {
             [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
-        }else{
-            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[NSDate date] IsTime:YES]]];
         }
     }
 }

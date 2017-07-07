@@ -84,7 +84,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             __strong typeof(weakSelf) strongSelf = weakSelf;
             if ([customerId integerValue] > 0 ) {
                 if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
+                    [[IPCShoppingCart sharedCart] clearAllItemPoint];
+                    [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
                     [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+                    [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
                     [strongSelf popToPayOrderViewController];
                 }else{
                     [strongSelf.navigationController popViewControllerAnimated:YES];

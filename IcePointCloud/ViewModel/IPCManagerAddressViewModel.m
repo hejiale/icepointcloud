@@ -28,9 +28,13 @@
                                                            __strong typeof (weakSelf) strongSelf = weakSelf;
                                                            IPCCustomerAddressList * addressObject = [[IPCCustomerAddressList alloc]initWithResponseValue:responseValue];
                                                            [strongSelf.addressList addObjectsFromArray:addressObject.list];
+                                                           if (strongSelf.addressList.count == 0) {
+                                                               [IPCCustomUI showError:@"暂无收货地址，请前去添加!"];
+                                                           }else{
+                                                               [IPCCustomUI hiden];
+                                                           }
                                                            if (completeBlock)
                                                                completeBlock();
-                                                           [IPCCustomUI hiden];
                                                        } FailureBlock:^(NSError *error) {
                                                            if (completeBlock)
                                                                completeBlock();
