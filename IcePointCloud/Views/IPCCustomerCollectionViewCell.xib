@@ -128,12 +128,22 @@
                             <constraint firstAttribute="width" constant="80" id="o7E-oi-6By"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="customsized_haschoose" translatesAutoresizingMaskIntoConstraints="NO" id="IUa-70-KLz">
+                        <rect key="frame" x="300" y="0.0" width="36" height="23"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="23" id="HI7-E8-bJj"/>
+                            <constraint firstAttribute="width" constant="36" id="MTc-Je-hSZ"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="IUa-70-KLz" secondAttribute="trailing" id="1gg-Gc-c3c"/>
                 <constraint firstItem="4bG-VU-wEf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="GGr-gw-Yh6"/>
                 <constraint firstAttribute="trailing" secondItem="bIk-d2-efl" secondAttribute="trailing" constant="10" id="PZn-Ub-2Hy"/>
+                <constraint firstItem="IUa-70-KLz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XAy-2I-gc8"/>
                 <constraint firstItem="bIk-d2-efl" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="hSJ-0a-5Kl"/>
                 <constraint firstItem="Mfx-fD-wfU" firstAttribute="centerX" secondItem="4bG-VU-wEf" secondAttribute="centerX" id="kv5-RW-cSJ"/>
                 <constraint firstItem="4bG-VU-wEf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="l45-Ax-J9N"/>
@@ -144,6 +154,7 @@
             <connections>
                 <outlet property="customerNameLabel" destination="nUz-Ya-oYz" id="eiY-lx-Fwk"/>
                 <outlet property="customerPhoneLabel" destination="rbk-Ku-7Mf" id="qUv-G1-3Dm"/>
+                <outlet property="hasChooseImageView" destination="IUa-70-KLz" id="NTj-Nk-wFH"/>
                 <outlet property="imageContentView" destination="4bG-VU-wEf" id="nXm-sB-xHL"/>
                 <outlet property="memberLevelLabel" destination="cT5-BI-3fh" id="j07-z8-dH8"/>
                 <outlet property="pointLabel" destination="pCM-kS-l8A" id="7zB-4R-sAh"/>
@@ -153,6 +164,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="customsized_haschoose" width="36" height="23"/>
         <image name="icon_customerName" width="13" height="16"/>
         <image name="icon_customerPhone" width="13" height="19"/>
         <image name="icon_customer_point" width="13" height="12"/>

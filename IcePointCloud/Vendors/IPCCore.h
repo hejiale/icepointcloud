@@ -221,7 +221,6 @@ typedef NS_ENUM(NSInteger, IPCPayOrderType){
 //IFLY_FACE_KEY
 #define IPCIflyFaceDetectorKey       @"5774da82"
 
-
 #ifdef DEBUG
 #define DLog(fmt, ...)                     NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define DeBugLog(fmt, ...)             NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

@@ -60,7 +60,7 @@
     [IPCCustomerRequestManager setDefaultOptometryWithCustomID:self.customerId
                                             DefaultOptometryID:optometryID
                                                   SuccessBlock:^(id responseValue) {
-                                                      [IPCCustomUI showSuccess:@""];
+                                                      [IPCCustomUI showSuccess:@"设置默认验光单成功!"];
                                                       if (completeBlock) {
                                                           completeBlock();
                                                       }

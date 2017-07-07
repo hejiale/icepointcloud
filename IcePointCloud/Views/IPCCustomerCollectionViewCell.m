@@ -43,6 +43,16 @@
         }else{
             [self.memberLevelLabel setText:@""];
         }
+        
+        if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
+            if ([_currentCustomer.customerID isEqualToString:[IPCCurrentCustomer sharedManager].currentCustomer.customerID]) {
+                [self.hasChooseImageView setHidden:NO];
+            }else{
+                [self.hasChooseImageView setHidden:YES];
+            }
+        }else{
+            [self.hasChooseImageView setHidden:YES];
+        }
     }
 }
 

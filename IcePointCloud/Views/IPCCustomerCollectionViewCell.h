@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *memberLevelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointViewWidth;
+@property (weak, nonatomic) IBOutlet UIImageView *hasChooseImageView;
 
 @property (copy, nonatomic) IPCCustomerMode * currentCustomer;
 
