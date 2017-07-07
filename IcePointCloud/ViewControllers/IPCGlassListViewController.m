@@ -312,6 +312,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
             detailVC.glasses  = glasses;
         }
+        [self.navigationController pushViewController:detailVC animated:YES];
+        
         [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
             [IPCCustomUI pushToRootIndex:4];
             [detailVC.navigationController popToRootViewControllerAnimated:NO];
@@ -323,7 +325,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [IPCCustomsizedItem sharedItem].customsizedProduct = product;
             [strongSelf showPayOrderView];
         }];
-        [self.navigationController pushViewController:detailVC animated:YES];
     }
 }
 

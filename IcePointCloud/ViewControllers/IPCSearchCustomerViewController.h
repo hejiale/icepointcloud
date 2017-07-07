@@ -10,6 +10,4 @@
 
 @interface IPCSearchCustomerViewController : IPCRootNavigationViewController
 
-@property (nonatomic, assign, readwrite) BOOL  isMainStatus;
-
 @end

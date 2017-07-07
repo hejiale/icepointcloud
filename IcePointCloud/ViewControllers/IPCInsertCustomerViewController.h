@@ -10,6 +10,4 @@
 
 @interface IPCInsertCustomerViewController : IPCRootNavigationViewController
 
-- (void)toExitInsertCustomer;
-
 @end

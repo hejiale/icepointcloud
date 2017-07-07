@@ -32,8 +32,6 @@
 
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//是否已选择客户
-@property (nonatomic, assign, readwrite) BOOL     isChooseOptometry;//是否已选择验光单
-@property (nonatomic, assign, readwrite) BOOL     isChooseAddress;//是否已选择地址
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
 
 @property (nonatomic, strong) IPCPayRecord * insertPayRecord;//正在输入中的付款方式记录

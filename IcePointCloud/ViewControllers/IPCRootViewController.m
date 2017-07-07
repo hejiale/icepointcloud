@@ -18,7 +18,7 @@
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
 @property (nonatomic, strong) IPCSearchCustomerViewController * customerInfoVC;
-@property (nonatomic, strong) IPCSideBarMenuView * menuView;
+@property (nonatomic, strong) IPCSideBarMenuView * sideBarView;
 
 @end
 
@@ -33,14 +33,13 @@
     _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
     _customerInfoVC =  [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
-    _customerInfoVC.isMainStatus = YES;
     
     [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC]];
 }
 
 #pragma mark //Clicked Events
 - (void)removeCover{
-    [self.menuView removeFromSuperview];
+    [self.sideBarView removeFromSuperview];
     [self removerFilterCover];
     [self.productVC reload];
     [self.tryVC reload];
@@ -53,29 +52,24 @@
 
 
 #pragma mark //Show Methods
-- (void)popToLoginViewController{
-    [self removeCover];
-    [[IPCAppManager sharedManager] logout];
-}
-
 - (void)pushToPayOrderViewController{
     [self removeCover];
     IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
     [self.navigationController pushViewController:payOrderVC animated:YES];
 }
 
-- (void)showMenuView:(NSInteger)index{
+- (void)showSideBarView:(NSInteger)index{
     [self removerFilterCover];
-    _menuView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
+    _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
                                                MenuIndex:index
                                                 PayOrder:^{
                                                     [self pushToPayOrderViewController];
                                                 } Logout:^{
-                                                    [self popToLoginViewController];
+                                                    [[IPCAppManager sharedManager] logout];
                                                 } Dismiss:^{
                                                     [self removeCover];
                                                 }];
-    [self.view addSubview:_menuView];
+    [self.view addSubview:_sideBarView];
 }
 
 #pragma mark //RootMenuViewControllerDelegate
@@ -95,7 +89,7 @@
     }else if (tabBarIndex == 3){
         [self.tryVC rootRefresh];
     }else if (tabBarIndex == 4 || tabBarIndex == 5){
-        [self showMenuView:tabBarIndex];
+        [self showSideBarView:tabBarIndex];
     }
 }
 

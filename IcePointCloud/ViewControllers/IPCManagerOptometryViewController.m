@@ -174,7 +174,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.section];
         [IPCCurrentCustomer sharedManager].currentOpometry = nil;
         [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
-        [IPCPayOrderManager sharedManager].isChooseOptometry = YES;
         [self popToPayOrderViewController];
     }
 }

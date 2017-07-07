@@ -81,13 +81,15 @@
                             <constraint firstAttribute="height" constant="1" id="cF7-gN-4KI"/>
                         </constraints>
                     </imageView>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4x-s6-qOV">
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4x-s6-qOV">
                         <rect key="frame" x="839" y="15" width="160" height="30"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="160" id="6nG-nC-bxh"/>
                             <constraint firstAttribute="height" constant="30" id="ki5-4n-8VZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal">
                             <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>

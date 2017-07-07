@@ -43,10 +43,16 @@
 
 - (void)setRightOperation:(NSString *)title ButtonTitle:(NSString *)button ButtonImage:(NSString *)buttonImage
 {
-    [self.leftTitleLabel setText:title];
     [self.rightButton setHidden:NO];
-    [self.rightButton setTitle:button forState:UIControlStateNormal];
-    [self.rightButton setImage:[UIImage imageNamed:buttonImage] forState:UIControlStateNormal];
+    if (title) {
+        [self.leftTitleLabel setText:title];
+    }
+    if (button) {
+        [self.rightButton setTitle:button forState:UIControlStateNormal];
+    }
+    if (buttonImage) {
+        [self.rightButton setImage:[UIImage imageNamed:buttonImage] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark //Clicked Events

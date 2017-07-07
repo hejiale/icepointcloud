@@ -44,26 +44,18 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.payOrderViewMode resetPayInfoData];
     }];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(queryCustomerDetail)
+                                                 name:IPCChooseCustomerNotification
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
-    
-    [IPCPayOrderManager sharedManager].balanceAmount = [IPCCurrentCustomer sharedManager].currentCustomer.balance;
-    [IPCPayOrderManager sharedManager].point = [IPCCurrentCustomer sharedManager].currentCustomer.integral;
     [self.payOrderViewMode requestTradeOrExchangeStatus];
-    
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        if ([IPCPayOrderManager sharedManager].isChooseOptometry || [IPCPayOrderManager sharedManager].isChooseAddress) {
-            [self.payOrderTableView reloadData];
-            [IPCPayOrderManager sharedManager].isChooseAddress = NO;
-            [IPCPayOrderManager sharedManager].isChooseOptometry = NO;
-        }else{
-            [self.payOrderViewMode queryCustomerDetailWithCustomerId:[IPCPayOrderManager sharedManager].currentCustomerId];
-        }
-    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -121,7 +113,6 @@
 
 - (void)selectCustomerAction:(id)sender{
     IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
-    customerListVC.isMainStatus = NO;
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
@@ -140,6 +131,13 @@
 
 - (void)removeCover{
     [self.employeView removeFromSuperview];
+}
+
+#pragma mark //ChooseCustomer Notification
+- (void)queryCustomerDetail{
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        [self.payOrderViewMode queryCustomerDetailWithCustomerId:[IPCPayOrderManager sharedManager].currentCustomerId];
+    }
 }
 
 #pragma mark //UITableViewDataSource

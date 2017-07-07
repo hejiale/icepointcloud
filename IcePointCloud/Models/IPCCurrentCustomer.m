@@ -30,6 +30,8 @@
     [IPCCurrentCustomer sharedManager].currentAddress    = [IPCCustomerAddressMode mj_objectWithKeyValues:detailCustomer.addresses[0]];
     
     [IPCPayOrderManager sharedManager].customerDiscount = detailCustomer.discount/10;
+    [IPCPayOrderManager sharedManager].balanceAmount = detailCustomer.balance;
+    [IPCPayOrderManager sharedManager].point = detailCustomer.integral;
     [IPCPayOrderManager sharedManager].isChooseCustomer = YES;
 }
 

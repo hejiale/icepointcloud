@@ -32,6 +32,8 @@ extern NSString *const IPCTryFilterProductNotification;
 //Shopping cart change notification
 extern NSString *const IPCNotificationShoppingCartChanged;
 extern NSString *const IPCShoppingCartCountKey;
+//Choose Customer notification
+extern NSString *const  IPCChooseCustomerNotification;
 
 @interface IPCAppManager : NSObject
 

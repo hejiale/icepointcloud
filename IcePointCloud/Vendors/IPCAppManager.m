@@ -22,6 +22,7 @@ NSString *const IPCHomeSearchProductNotification     = @"IPHomeSearchProductNoti
 NSString *const IPCHomeFilterProductNotification       = @"IPHomeFilterProductNotification";
 NSString *const IPCTrySearchProductNotification         = @"IPTrySearchProductNotification";
 NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProductNotification";
+NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNotification";
 
 @implementation IPCAppManager
 
