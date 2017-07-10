@@ -30,6 +30,12 @@
     [self.contentView addSubview:self.addressView];
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self updateInsertAddressUI];
+}
+
 
 - (void)updateInsertAddressUI
 {

@@ -68,12 +68,16 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     // Configure the view for the selected state
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [self updateUI];
+}
 
 #pragma mark //Set UI
-- (void)updatePackUpUI:(BOOL)isPackUp
+- (void)updateUI
 {
-    [self.packUpView setHidden:!isPackUp];
-    [self.packDownButton setHidden:isPackUp];
+    [self.packUpView setHidden:![IPCInsertCustomer instance].isPackUp];
+    [self.packDownButton setHidden:[IPCInsertCustomer instance].isPackUp];
     
     [self.userNameTextField setText:[IPCInsertCustomer instance].customerName];
     [self.phoneTextField setText:[IPCInsertCustomer instance].customerPhone];
@@ -149,15 +153,17 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 #pragma mark //Clicked Events
 //展开
 - (IBAction)packUpAction:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(updatePackUpStatus:)]) {
-        [self.delegate updatePackUpStatus:YES];
+    [IPCInsertCustomer instance].isPackUp = YES;
+    if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {
+        [self.delegate reloadInsertCustomUI];
     }
 }
 
 //收起
 - (IBAction)packDownAction:(id)sender {
-    if ([self.delegate respondsToSelector:@selector(updatePackUpStatus:)]) {
-        [self.delegate updatePackUpStatus:NO];
+    [IPCInsertCustomer instance].isPackUp = NO;
+    if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {
+        [self.delegate reloadInsertCustomUI];
     }
 }
 

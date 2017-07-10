@@ -41,6 +41,7 @@
 @property (nonatomic, copy, readwrite) NSString * contactorGengerString;
 @property (nonatomic, copy, readwrite) NSString * contactorGenger;
 @property (nonatomic, assign, readwrite) BOOL     isInsertStatus;
+@property (nonatomic, assign, readwrite) BOOL     isPackUp;
 @property (nonatomic, copy, readwrite) NSMutableArray<IPCOptometryMode *> * optometryArray;
 
 @end

@@ -63,17 +63,15 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         self.PayBlock = pay;
         self.DismissBlock = dismiss;
         self.currentOrderNum = orderNum;
+        
+        [self queryOrderDetail];
     }
     return self;
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
-    if ([self.currentOrderNum integerValue] > 0) {
-        [self queryOrderDetail];
-    }
-    
+
     [self.topView addBottomLine];
     [self.payBottomView addTopLine];
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];

@@ -20,9 +20,6 @@ static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
 static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdentifier";
 
 @interface IPCInsertCustomerViewController ()<UITableViewDelegate,UITableViewDataSource,UserBaseInfoCellDelegate,IPCInsertCustomerOpometryCellDelegate>
-{
-    BOOL  isPackUping;
-}
 
 @property (weak,   nonatomic) IBOutlet UITableView *userInfoTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
@@ -131,7 +128,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerBaseCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
                 cell.delegate = self;
             }
-            [cell updatePackUpUI:isPackUping];
             [[cell rac_signalForSelector:@selector(showCustomerListAction)] subscribeNext:^(RACTuple * _Nullable x) {
                 [self selectIntroducerMethod];
             }];
@@ -150,7 +146,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell updateInsertAddressUI];
             return cell;
         }
     }else{
@@ -159,12 +154,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-                [cell setLeftTitle:@"验光单"];
-            }else{
-                [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
-            }
-            
+            [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [[IPCInsertCustomer instance].optometryArray addObject:[[IPCOptometryMode alloc]init]];
                 [tableView reloadData];
@@ -197,7 +187,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row > 0){
-        if (isPackUping) {
+        if ([IPCInsertCustomer instance].isPackUp) {
             if ([[IPCInsertCustomer instance].customerType isEqualToString:@"转介绍"]) {
                 return 360;
             }
@@ -226,11 +216,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 }
 
 #pragma mark //UserBaseInfoCellDelegate
-- (void)updatePackUpStatus:(BOOL)isPackUp{
-    isPackUping = isPackUp;
-    [self.userInfoTableView reloadData];
-}
-
 - (void)reloadInsertCustomUI{
     [self.userInfoTableView reloadData];
 }

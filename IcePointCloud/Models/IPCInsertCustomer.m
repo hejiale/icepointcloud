@@ -48,6 +48,7 @@
     self.introducerName = @"";
     self.introducerInteger = @"";
     self.isInsertStatus = NO;
+    self.isPackUp = NO;
     
     [self.optometryArray removeAllObjects];
     IPCOptometryMode * optometry = [[IPCOptometryMode alloc]init];

@@ -34,17 +34,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *introducerInteger;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceTop;
-
-
 @property (weak, nonatomic) id<UserBaseInfoCellDelegate>delegate;
-
-- (void)updatePackUpUI:(BOOL)isPackUp;
 
 @end
 
 @protocol UserBaseInfoCellDelegate <NSObject>
 
-- (void)updatePackUpStatus:(BOOL)isPackUp;
 - (void)reloadInsertCustomUI;
 - (void)judgePhone:(NSString *)phone;
 

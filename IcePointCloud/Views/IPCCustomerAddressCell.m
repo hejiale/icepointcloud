@@ -30,7 +30,8 @@
     _addressMode = addressMode;
 
     if (_addressMode) {
-        if (addressMode.detailAddress.length) {
+        if (addressMode.detailAddress.length || addressMode.contactorAddress.length)
+        {
             [self.addressContentView setHidden:NO];
             
             CGFloat width = [_addressMode.contactorName jk_sizeWithFont:self.addressLabel.font constrainedToHeight:self.addressLabel.jk_height].width;
