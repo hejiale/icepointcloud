@@ -23,5 +23,6 @@
 
 @optional
 - (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectViewController:(UIViewController *)viewController;
+- (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectIndex:(NSInteger)index;
 
 @end

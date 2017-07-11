@@ -45,15 +45,6 @@
             [strongSelf.tryVC onFilterProducts];
         }
     }];
-    
-    [[self rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(RACTuple * _Nullable x) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.selectedIndex == 1) {
-            [strongSelf.productVC onSearchProducts];
-        }else if (strongSelf.selectedIndex == 3){
-            [strongSelf.tryVC onSearchProducts];
-        }
-    }];
 }
 
 #pragma mark //Clicked Events
@@ -94,8 +85,18 @@
 #pragma mark //RootMenuViewControllerDelegate
 - (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if (self.selectedIndex == 4 || self.selectedIndex == 5){
-        [self showSideBarView:self.selectedIndex];
+}
+
+- (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectIndex:(NSInteger)index
+{
+    if (index == 0) {
+        if (self.selectedIndex == 1) {
+            [self.productVC onSearchProducts];
+        }else if (self.selectedIndex == 3){
+            [self.tryVC onSearchProducts];
+        }
+    }else if (index == 4 || index == 5){
+        [self showSideBarView:index];
     }
 }
 

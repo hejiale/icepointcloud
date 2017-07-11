@@ -199,37 +199,32 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    if ( selectedIndex > 0)
-    {
-        if (selectedIndex != _selectedIndex) {
-            UIViewController * selectedViewController = nil;
-            
-            if (selectedIndex < 4) {
-                selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
-                [self addChildViewController:selectedViewController];
-                
-                selectedViewController.view.frame = self.contentView.bounds;
-                [self.contentView addSubview:selectedViewController.view];
-                [self.contentView bringSubviewToFront:selectedViewController.view];
-                [selectedViewController didMoveToParentViewController:self];
-                
-                if (_selectedIndex != NSNotFound && _selectedIndex < 4)
-                {
-                    UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
-                    [previousViewController.view removeFromSuperview];
-                    [previousViewController removeFromParentViewController];
-                }
-            }
-            _selectedIndex = selectedIndex;
-            
-            [self updateSidebar];
-            [self updateTopView];
-            
-            if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
-                [self.delegate tabBarController:self didSelectViewController:selectedViewController];
+    if (selectedIndex != _selectedIndex && selectedIndex > 0 && selectedIndex < 4) {
+        UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
+        [self addChildViewController:selectedViewController];
+        
+        selectedViewController.view.frame = self.contentView.bounds;
+        [self.contentView addSubview:selectedViewController.view];
+        [self.contentView bringSubviewToFront:selectedViewController.view];
+        [selectedViewController didMoveToParentViewController:self];
+        
+        if (_selectedIndex != NSNotFound && _selectedIndex < 4)
+        {
+            UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
+            [previousViewController.view removeFromSuperview];
+            [previousViewController removeFromParentViewController];
         }
+        _selectedIndex = selectedIndex;
+        
+        [self updateSidebar];
+        [self updateTopView];
+        
+        if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
+            [self.delegate tabBarController:self didSelectViewController:selectedViewController];
     }else{
-        [self searchProductAction];
+        if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectIndex:)]) {
+            [self.delegate tabBarController:self didSelectIndex:selectedIndex];
+        }
     }
 }
 
@@ -259,7 +254,6 @@
     [self setSelectedIndex:sender.tag];
 }
 
-
 - (void)updateSidebar
 {
     if (_selectedIndex < 4 && _selectedIndex > 0) {
@@ -278,10 +272,6 @@
 
 - (void)filterProductAction{
 }
-
-- (void)searchProductAction{
-}
-
 
 #pragma mark //Notification
 - (void)reloadMenuCartAction{
