@@ -8,6 +8,7 @@
 
 #import "IPCTabBarViewController.h"
 #import "IPCSearchViewController.h"
+#import "UIView+Badge.h"
 
 @interface IPCTabBarViewController ()<IPCSearchViewControllerDelegate>
 
@@ -18,8 +19,6 @@
 @property (strong, nonatomic)  UIImageView *logoImageView;
 @property (strong, nonatomic)  UIButton * filterButton;
 @property (strong, nonatomic)  UILabel  * titleLabel;
-@property (strong, nonatomic)  UIView   * bageView;
-@property (strong, nonatomic) UILabel   * bageLabel;
 @property (copy, nonatomic) NSString * productKeyword;
 @property (copy, nonatomic) NSString * tryKeyword;
 @property (copy, nonatomic) NSString * customerKeyword;
@@ -50,8 +49,6 @@
     [self.menuBarView addSubview:self.logoImageView];
     [self.menuBarView addSubview:self.filterButton];
     [self.menuBarView addSubview:self.titleLabel];
-    [self.menusView addSubview:self.bageView];
-    [self.bageView addSubview:self.bageLabel];
     
     [self.menuBarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(0);
@@ -95,12 +92,7 @@
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(20);
     }];
-    [self.bageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.menusView.mas_top).with.offset(30);
-        make.height.mas_equalTo(12);
-        make.width.mas_equalTo(16);
-        make.right.equalTo(self.menusView.mas_right).with.offset(-88);
-    }];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMenuCartAction) name:IPCNotificationShoppingCartChanged object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearSearchwordAction) name:IPCClearSearchwordNotification object:nil];
 }
@@ -188,28 +180,6 @@
     }
     return _titleLabel;
 }
-
-- (UIView *)bageView{
-    if (!_bageView) {
-        _bageView = [[UIView alloc]initWithFrame:CGRectZero];
-        [_bageView setBackgroundColor:COLOR_RGB_BLUE];
-        _bageView.layer.cornerRadius = 6;
-        [_bageView setHidden:YES];
-    }
-    return _bageView;
-}
-
-- (UILabel *)bageLabel{
-    if (!_bageLabel) {
-        _bageLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        [_bageLabel setBackgroundColor:[UIColor clearColor]];
-        [_bageLabel setTextColor:[UIColor whiteColor]];
-        [_bageLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-        _bageLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _bageLabel;
-}
-
 
 #pragma mark //Update SelectViewController
 - (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers
@@ -339,13 +309,8 @@
 
 #pragma mark //Notification
 - (void)reloadMenuCartAction{
-    if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0) {
-        [self.bageView setHidden:NO];
-        [self.bageLabel setText:[[NSNumber numberWithInteger:[[IPCShoppingCart sharedCart] allGlassesCount]]stringValue]];
-        [self.bageLabel setFrame:self.bageView.bounds];
-    }else{
-        [self.bageView setHidden:YES];
-    }
+    UIButton * button = (UIButton *)self.menusView.subviews[4];
+    [button createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
 
 - (void)clearSearchwordAction{

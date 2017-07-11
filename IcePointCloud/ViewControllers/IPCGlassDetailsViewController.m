@@ -11,6 +11,7 @@
 #import "IPCProductDetailTopTableViewCell.h"
 #import "IPCGlassParameterView.h"
 #import "IPCShoppingCart.h"
+#import "UIView+Badge.h"
 
 static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellIdentifier";
 static NSString * const topIdentifier           = @"DetailTopTableViewCellIdentifier";
@@ -25,11 +26,9 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIView *topBarView;
 @property (weak, nonatomic) IBOutlet UIImageView *cartImageView;
 @property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
-
+@property (weak, nonatomic) IBOutlet UIView *cartBageView;
 @property (strong, nonatomic) UIView * specHostView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
-@property (strong, nonatomic)  UIView   *cartBageView;
-@property (strong, nonatomic)  UILabel  *cartBageLabel;
 @property (strong, nonatomic) IPCGlassParameterView  *parameterView;
 
 @end
@@ -41,10 +40,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 {
     [super viewDidLoad];
     
-    [self.topBarView addSubview:self.cartBageView];
-    [self.cartBageView addSubview:self.cartBageLabel];
     [self.topBarView addBottomLine];
-    
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     [self reloadCartView];
 }
@@ -56,11 +52,9 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     
     if (self.glasses) {
         [self.cartImageView setHidden:NO];
-        [self.cartBageView setHidden:NO];
         [self.addCartButton setHidden:NO];
     }else{
         [self.cartImageView setHidden:YES];
-        [self.cartBageView setHidden:YES];
         [self.customsizedButton setHidden:NO];
     }
 }
@@ -95,27 +89,6 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     }
 }
 
-#pragma mark //Set UI
-- (UIView *)cartBageView{
-    if (!_cartBageView) {
-        _cartBageView = [[UIView alloc]initWithFrame:CGRectZero];
-        [_cartBageView setBackgroundColor:COLOR_RGB_BLUE];
-        _cartBageView.layer.cornerRadius = 6;
-        [_cartBageView setHidden:YES];
-    }
-    return _cartBageView;
-}
-
-- (UILabel *)cartBageLabel{
-    if (!_cartBageLabel) {
-        _cartBageLabel = [[UILabel alloc]initWithFrame:CGRectZero];
-        [_cartBageLabel setBackgroundColor:[UIColor clearColor]];
-        [_cartBageLabel setTextColor:[UIColor whiteColor]];
-        [_cartBageLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-        _cartBageLabel.textAlignment = NSTextAlignmentCenter;
-    }
-    return _cartBageLabel;
-}
 
 - (UIView *)specHostView{
     if (!_specHostView) {
@@ -290,19 +263,9 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 - (IBAction)onCustomsizedAction:(id)sender {
 }
 
-
 - (void)reloadCartView{
-    if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0) {
-        [self.cartBageView setHidden:NO];
-        [self.cartBageLabel setText:[[NSNumber numberWithInteger:[[IPCShoppingCart sharedCart] allGlassesCount]]stringValue]];
-        
-        CGFloat width = [self.cartBageLabel.text jk_widthWithFont:self.cartBageLabel.font constrainedToHeight:self.cartBageView.jk_height];
-        
-        [self.cartBageView setFrame:CGRectMake(self.topBarView.jk_width- width - 25, 28, width + 10, 12)];
-        [self.cartBageLabel setFrame:self.cartBageView.bounds];
-    }else{
-        [self.cartBageView setHidden:YES];
-    }
+    [self.cartBageView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
+
 
 @end

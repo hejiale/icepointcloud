@@ -316,6 +316,7 @@
 		CBE4C83E1E9CCE8700F09D2A /* IPCUpdateCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */; };
 		CBE4C8401E9CCF5300F09D2A /* IPCUpdateCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */; };
 		CBF68D021E8FA92F001DA929 /* NSDictionary+DeleteNull.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */; };
+		CBF6CFEF1F14768200F02ECF /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */; };
 		CBFD04121EA9D371006EF4E3 /* IPCCustomsizedLensView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFD04111EA9D371006EF4E3 /* IPCCustomsizedLensView.m */; };
 		CBFD04151EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFD04141EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m */; };
 		CBFD04171EA9D39B006EF4E3 /* IPCCustomsizedLensView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBFD04161EA9D39B006EF4E3 /* IPCCustomsizedLensView.xib */; };
@@ -858,6 +859,8 @@
 		CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdateCustomerView.xib; sourceTree = "<group>"; };
 		CBF68D001E8FA92F001DA929 /* NSDictionary+DeleteNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+DeleteNull.h"; path = "IcePointCloud/Vendors/NSDictionary+DeleteNull.h"; sourceTree = SOURCE_ROOT; };
 		CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+DeleteNull.m"; path = "IcePointCloud/Vendors/NSDictionary+DeleteNull.m"; sourceTree = SOURCE_ROOT; };
+		CBF6CFED1F14768200F02ECF /* UIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Badge.h"; path = "IcePointCloud/Vendors/UIView+Badge.h"; sourceTree = SOURCE_ROOT; };
+		CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Badge.m"; path = "IcePointCloud/Vendors/UIView+Badge.m"; sourceTree = SOURCE_ROOT; };
 		CBFD040F1EA9995B006EF4E3 /* IPCCustomsizedEyeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedEyeDelegate.h; sourceTree = "<group>"; };
 		CBFD04101EA9D371006EF4E3 /* IPCCustomsizedLensView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedLensView.h; sourceTree = "<group>"; };
 		CBFD04111EA9D371006EF4E3 /* IPCCustomsizedLensView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomsizedLensView.m; sourceTree = "<group>"; };
@@ -1540,6 +1543,8 @@
 				CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */,
 				CBF68D001E8FA92F001DA929 /* NSDictionary+DeleteNull.h */,
 				CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */,
+				CBF6CFED1F14768200F02ECF /* UIView+Badge.h */,
+				CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -2780,6 +2785,7 @@
 				CBA749A71E9DB5D200160088 /* IPCInsertCustomer.m in Sources */,
 				CB5CC4751E8E00500091D0FD /* IPCAppManager.m in Sources */,
 				CB1234F21E762D9100AB29DF /* IPCSideBarMenuView.m in Sources */,
+				CBF6CFEF1F14768200F02ECF /* UIView+Badge.m in Sources */,
 				9E5C85831B60DDFB00A879BB /* IPCGlassListViewController.m in Sources */,
 				CBC6AF581EA0BAA400F7914D /* IPCSearchCustomerViewController.m in Sources */,
 				CB5CC48E1E8E00830091D0FD /* UIImage+Face.m in Sources */,
