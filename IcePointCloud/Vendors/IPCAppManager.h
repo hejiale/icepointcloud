@@ -17,18 +17,9 @@ extern NSString* const IPCUserNameKey;
 extern NSString *const IPCListLoginHistoryKey;
 //Keep records of commodity search key
 extern NSString *const IPCListSearchHistoryKey;
-//Notify the save search key
-extern NSString *const IPCSearchKeyWord;
-//Empty the search box
-extern NSString *const IPCClearSearchwordNotification;
 //Save search Key users
 extern NSString *const IPCSearchCustomerkey;
 //Inform the screening homepage search goods
-extern NSString *const IPCHomeSearchProductNotification;
-extern NSString *const IPCHomeFilterProductNotification;
-//Try to search for goods notice screening
-extern NSString *const IPCTrySearchProductNotification;
-extern NSString *const IPCTryFilterProductNotification;
 //Shopping cart change notification
 extern NSString *const IPCNotificationShoppingCartChanged;
 extern NSString *const IPCShoppingCartCountKey;

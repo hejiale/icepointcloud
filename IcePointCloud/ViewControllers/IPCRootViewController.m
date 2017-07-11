@@ -35,6 +35,25 @@
     _customerInfoVC =  [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     
     [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC]];
+    
+    __weak typeof(self) weakSelf = self;
+    [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.selectedIndex == 1) {
+            [strongSelf.productVC onFilterProducts];
+        }else if (strongSelf.selectedIndex == 3){
+            [strongSelf.tryVC onFilterProducts];
+        }
+    }];
+    
+    [[self rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(RACTuple * _Nullable x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.selectedIndex == 1) {
+            [strongSelf.productVC onSearchProducts];
+        }else if (strongSelf.selectedIndex == 3){
+            [strongSelf.tryVC onSearchProducts];
+        }
+    }];
 }
 
 #pragma mark //Clicked Events
@@ -47,11 +66,11 @@
 
 - (void)removerFilterCover{
     [self.productVC removeCover];
-    [self.tryVC onRemoveAllPopView];
+    [self.tryVC removeCover];
 }
 
 
-#pragma mark //Show Methods
+//Show Methods
 - (void)pushToPayOrderViewController{
     [self removeCover];
     IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
@@ -75,21 +94,8 @@
 #pragma mark //RootMenuViewControllerDelegate
 - (void)tabBarController:(IPCTabBarViewController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    if (tabBarController.selectedIndex == 1) {
-        [self.productVC addNotifications];
-    }else if (tabBarController.selectedIndex == 3){
-        [self.tryVC addTryNotifications];
-    }
-}
-
-- (void)tabBarControllerNoneChange:(IPCTabBarViewController *)tabBarController TabBarIndex:(NSInteger)tabBarIndex
-{
-    if (tabBarIndex == 1) {
-        [self.productVC rootRefresh];
-    }else if (tabBarIndex == 3){
-        [self.tryVC rootRefresh];
-    }else if (tabBarIndex == 4 || tabBarIndex == 5){
-        [self showSideBarView:tabBarIndex];
+    if (self.selectedIndex == 4 || self.selectedIndex == 5){
+        [self showSideBarView:self.selectedIndex];
     }
 }
 

@@ -273,8 +273,6 @@
     [self.filterValue clear];
     self.filterDataSource = [[IPCFilterDataSourceResult alloc] init];
     
-    [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCClearSearchwordNotification object:nil];
-    
     if (self.reloadFilterCloseBlock) {
         self.reloadFilterCloseBlock();
     }

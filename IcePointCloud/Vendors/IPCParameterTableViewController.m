@@ -8,7 +8,7 @@
 
 #import "IPCParameterTableViewController.h"
 
-static NSString * const parameterIdentifier = @"";
+static NSString * const parameterIdentifier = @"ParameterIdentifier";
 
 @interface IPCParameterTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 

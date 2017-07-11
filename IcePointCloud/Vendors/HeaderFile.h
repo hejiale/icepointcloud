@@ -32,6 +32,7 @@
 #import "IPCDatePickViewController.h"
 #import "IPCNavigationViewController.h"
 #import "IPCRootNavigationViewController.h"
+#import "IPCProductViewController.h"
 /**
  *  Model
  */

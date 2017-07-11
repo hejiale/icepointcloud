@@ -12,16 +12,10 @@
 NSString *const IPCFirstLanuchKey                               = @"IPFirstLanucKey";
 NSString* const IPCUserNameKey                                 = @"UserNameKey";
 NSString *const IPCListLoginHistoryKey                        = @"IPCListLoginHistoryKey";
-NSString *const IPCClearSearchwordNotification            = @"IPCClearSearchwordNotification";
 NSString *const IPCListSearchHistoryKey                      = @"IPCListSearchHistoryKey";
-NSString *const IPCSearchKeyWord                              = @"IPCSearchKeyWord";
 NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingCartChanged";
 NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCountKey";
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerkey";
-NSString *const IPCHomeSearchProductNotification     = @"IPHomeSearchProductNotification";
-NSString *const IPCHomeFilterProductNotification       = @"IPHomeFilterProductNotification";
-NSString *const IPCTrySearchProductNotification         = @"IPTrySearchProductNotification";
-NSString *const IPCTryFilterProductNotification           = @"IPTryFilterProductNotification";
 NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNotification";
 
 @implementation IPCAppManager

@@ -68,7 +68,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     [self.productDetailWebView reload];
     [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     [self.productDetailWebView jk_clearCookies];
-} 
+}
 
 
 - (void)setGlasses:(IPCGlasses *)glasses{
@@ -89,7 +89,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     }
 }
 
-
+#pragma mark //Set UI
 - (UIView *)specHostView{
     if (!_specHostView) {
         _specHostView = [[UIView alloc]initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH-70, 0)];
@@ -143,6 +143,48 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
         [_productDetailWebView jk_makeTransparentAndRemoveShadow];
     }
     return _productDetailWebView;
+}
+
+#pragma mark //Clicked Events
+- (void)successAddCartMethod{
+    [IPCCustomUI showSuccess:@"添加购物车成功!"];
+    [self reloadCartView];
+}
+
+- (IBAction)addToCartAction:(id)sender {
+    if ((([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
+    {
+        if ( ([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory) && _glasses.stock == 0) {
+            [IPCCustomUI showError:@"暂无库存，请重新选择!"];
+        }else{
+            self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+                [self reloadCartView];
+            }];
+            self.parameterView.glasses = _glasses;
+            [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+            [self.parameterView show];
+        }
+    }else{
+        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
+        [self successAddCartMethod];
+    }
+}
+
+
+- (IBAction)onBackBtnTapped:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)pushToCartAction:(id)sender {
+    [IPCCustomUI pushToRootIndex:4];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (IBAction)onCustomsizedAction:(id)sender {
+}
+
+- (void)reloadCartView{
+    [self.cartBageView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
 
 #pragma mark //UITableViewDataSource
@@ -200,7 +242,6 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell.contentView addSubview:self.productDetailWebView];
             }
-            
             return cell;
         }
     }
@@ -227,45 +268,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     [self.detailTableView reloadData];
 }
 
-#pragma mark //Clicked Events
-- (void)successAddCartMethod{
-    [IPCCustomUI showSuccess:@"添加购物车成功!"];
-    [self reloadCartView];
-}
 
-- (IBAction)addToCartAction:(id)sender {
-    if ((([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
-    {
-        if ( ([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory) && _glasses.stock == 0) {
-            [IPCCustomUI showError:@"暂无库存，请重新选择!"];
-        }else{
-            self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-                [self reloadCartView];
-            }];
-            self.parameterView.glasses = _glasses;
-            [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
-            [self.parameterView show];
-        }
-    }else{
-        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
-        [self successAddCartMethod];
-    }
-}
-
-
-- (IBAction)onBackBtnTapped:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)pushToCartAction:(id)sender {
-}
-
-- (IBAction)onCustomsizedAction:(id)sender {
-}
-
-- (void)reloadCartView{
-    [self.cartBageView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
-}
 
 
 @end

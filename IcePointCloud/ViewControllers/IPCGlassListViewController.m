@@ -13,10 +13,11 @@
 #import "IPCEditBatchParameterView.h"
 #import "IPCProductViewMode.h"
 #import "IPCPayOrderViewController.h"
+#import "IPCSearchViewController.h"
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (weak, nonatomic)   IBOutlet UICollectionView               *glassListCollectionView;
 @property (strong, nonatomic) IPCGlassParameterView                  *parameterView;
@@ -125,7 +126,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }
 }
 
-
+#pragma mark //Load Data
 - (void)loadNormalProducts{
     __weak typeof (self) weakSelf = self;
     
@@ -170,7 +171,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
-#pragma mark //Load Data
+
 - (void)loadGlassesListData:(void(^)())complete
 {
     [self.glassListViewMode reloadGlassListDataWithIsTry:NO IsHot:NO Complete:^(LSRefreshDataStatus status, NSError *error){
@@ -185,37 +186,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
-#pragma mark //NSNotificationCenter Events
-- (void)onFilterProducts{
-    if ([self.glassListViewMode.filterView superview]) {
-        [self removeCover];
-    }else{
-        __weak typeof (self) weakSelf = self;
-        [self addBackgroundViewWithAlpha:0.2 InView:self.view Complete:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf removeCover];
-        }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf removeCover];
-            [strongSelf.refreshHeader beginRefreshing];
-        } ReloadUnClose:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.refreshHeader beginRefreshing];
-        }];
-    }
-}
-
-- (void)searchProducts:(NSNotification *)notification{
-    [self removeCover];
-    self.glassListViewMode.searchWord = notification.userInfo[IPCSearchKeyWord];
-    [self.refreshHeader beginRefreshing];
-}
-
 
 #pragma mark //Clicked Events
 - (void)removeCover
 {
+    [super removeCover];
     __weak typeof (self) weakSelf = self;
     if ([self.backGroudView superview] && self.glassListViewMode.filterView) {
         [self.glassListViewMode.filterView closeCompletion:^{
@@ -235,15 +210,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)reload{
+    [super reload];
     [self.glassListCollectionView reloadData];
     [self.refreshHeader endRefreshing];
     [self.refreshFooter endRefreshing];
-}
-
-- (void)rootRefresh{
-    [self.glassListViewMode.filterValue clear];
-    self.glassListViewMode.currentType = IPCTopFIlterTypeFrames;
-    [self.refreshHeader beginRefreshing];
 }
 
 - (void)showPayOrderView{
@@ -256,6 +226,39 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.navigationController pushViewController:payOrderVC animated:YES];
 }
 
+- (void)onFilterProducts{
+    [super onFilterProducts];
+    if ([self.glassListViewMode.filterView superview]) {
+        [self removeCover];
+    }else{
+        __weak typeof (self) weakSelf = self;
+        [self addBackgroundViewWithAlpha:0.2 InView:self.view Complete:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf removeCover];
+        }];
+        [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf removeCover];
+            [strongSelf.refreshHeader beginRefreshing];
+        } ReloadUnClose:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf.refreshHeader beginRefreshing];
+        }];
+    }
+}
+
+- (void)onSearchProducts{
+    [super onSearchProducts];
+    [self removeCover];
+    [self presentSearchViewController];
+}
+
+- (void)presentSearchViewController{
+    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    searchViewMode.searchDelegate = self;
+    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
+    [self presentViewController:searchViewMode animated:YES completion:nil];
+}
 
 #pragma mark //UICollectionViewDataSoure
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -313,18 +316,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             detailVC.glasses  = glasses;
         }
         [self.navigationController pushViewController:detailVC animated:YES];
-        
-        [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-            [IPCCustomUI pushToRootIndex:4];
-            [detailVC.navigationController popToRootViewControllerAnimated:NO];
-        }];
-        __weak typeof(self) weakSelf = self;
-        [[detailVC rac_signalForSelector:@selector(onCustomsizedAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            IPCCustomsizedProduct * product = strongSelf.glassListViewMode.customsizedList[indexPath.row];
-            [IPCCustomsizedItem sharedItem].customsizedProduct = product;
-            [strongSelf showPayOrderView];
-        }];
     }
 }
 
@@ -373,16 +364,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 
-#pragma mark //NSNotification
-- (void)addNotifications{
-    [self clearNotifications];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFilterProducts) name:IPCHomeFilterProductNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchProducts:) name:IPCHomeSearchProductNotification object:nil];
-}
-
-- (void)clearNotifications{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCHomeFilterProductNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCHomeSearchProductNotification object:nil];
+#pragma mark //IPCSearchViewControllerDelegate
+- (void)didSearchWithKeyword:(NSString *)keyword
+{
+    self.glassListViewMode.searchWord = keyword;
+    [self.refreshHeader beginRefreshing];
 }
 
 @end

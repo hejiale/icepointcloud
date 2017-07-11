@@ -7,11 +7,7 @@
 //
 
 
-@interface IPCTryGlassesViewController : IPCRootNavigationViewController
+@interface IPCTryGlassesViewController : IPCProductViewController
 
-- (void)addTryNotifications;
-- (void)reload;
-- (void)rootRefresh;
-- (void)onRemoveAllPopView;
 
 @end

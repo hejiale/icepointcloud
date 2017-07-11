@@ -10,6 +10,9 @@
 
 @interface IPCChooseCategoryView : UITableView<UITableViewDataSource,UITableViewDelegate>
 
-- (instancetype)initWithFrame:(CGRect)frame CategoryList:(NSArray *)categoryList FilterType:(IPCTopFilterType)type Complete:(void(^)(IPCTopFilterType type))complete;
+- (instancetype)initWithFrame:(CGRect)frame
+                 CategoryList:(NSArray *)categoryList
+                   FilterType:(IPCTopFilterType)type
+                     Complete:(void(^)(IPCTopFilterType type))complete;
 
 @end

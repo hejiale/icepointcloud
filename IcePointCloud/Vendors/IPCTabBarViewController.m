@@ -10,7 +10,7 @@
 #import "IPCSearchViewController.h"
 #import "UIView+Badge.h"
 
-@interface IPCTabBarViewController ()<IPCSearchViewControllerDelegate>
+@interface IPCTabBarViewController ()
 
 @property (strong, nonatomic)  UIView  *  contentView;
 @property (strong, nonatomic)  UIView   * menuBarView;
@@ -19,8 +19,6 @@
 @property (strong, nonatomic)  UIImageView *logoImageView;
 @property (strong, nonatomic)  UIButton * filterButton;
 @property (strong, nonatomic)  UILabel  * titleLabel;
-@property (copy, nonatomic) NSString * productKeyword;
-@property (copy, nonatomic) NSString * tryKeyword;
 @property (copy, nonatomic) NSString * customerKeyword;
 
 @end
@@ -92,9 +90,11 @@
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(20);
     }];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadMenuCartAction) name:IPCNotificationShoppingCartChanged object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearSearchwordAction) name:IPCClearSearchwordNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadMenuCartAction)
+                                                 name:IPCNotificationShoppingCartChanged
+                                               object:nil];
 }
 
 
@@ -201,53 +201,55 @@
 {
     if ( selectedIndex > 0)
     {
-        if (selectedIndex != _selectedIndex && selectedIndex < 4) {
-            UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
-            [self addChildViewController:selectedViewController];
+        if (selectedIndex != _selectedIndex) {
+            UIViewController * selectedViewController = nil;
             
-            selectedViewController.view.frame = self.contentView.bounds;
-            [self.contentView addSubview:selectedViewController.view];
-            [self.contentView bringSubviewToFront:selectedViewController.view];
-            [selectedViewController didMoveToParentViewController:self];
-            
-            if (_selectedIndex != NSNotFound)
-            {
-                UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
-                [previousViewController.view removeFromSuperview];
-                [previousViewController removeFromParentViewController];
+            if (selectedIndex < 4) {
+                selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
+                [self addChildViewController:selectedViewController];
+                
+                selectedViewController.view.frame = self.contentView.bounds;
+                [self.contentView addSubview:selectedViewController.view];
+                [self.contentView bringSubviewToFront:selectedViewController.view];
+                [selectedViewController didMoveToParentViewController:self];
+                
+                if (_selectedIndex != NSNotFound && _selectedIndex < 4)
+                {
+                    UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
+                    [previousViewController.view removeFromSuperview];
+                    [previousViewController removeFromParentViewController];
+                }
             }
-            
             _selectedIndex = selectedIndex;
             
             [self updateSidebar];
-            [self updateTopView:selectedIndex];
+            [self updateTopView];
             
             if ([self.delegate respondsToSelector:@selector(tabBarController:didSelectViewController:)])
                 [self.delegate tabBarController:self didSelectViewController:selectedViewController];
-        }else{
-            if ([self.delegate respondsToSelector:@selector(tabBarControllerNoneChange:TabBarIndex:)])
-                [self.delegate tabBarControllerNoneChange:self TabBarIndex:selectedIndex];
         }
-    }else if (selectedIndex == 0){
+    }else{
         [self searchProductAction];
     }
 }
 
 
-- (void)updateTopView:(NSInteger)selectedIndex
+- (void)updateTopView
 {
-    if (selectedIndex == 1 || selectedIndex == 3) {
-        [self.filterButton setHidden:NO];
-        [self.logoImageView setHidden:NO];
-    }else{
-        [self.logoImageView setHidden:YES];
-        [self.filterButton setHidden:YES];
-    }
-    
-    if(selectedIndex == 2){
-        [self.titleLabel setText:@"客户"];
-    }else{
-        [self.titleLabel setText:@""];
+    if (_selectedIndex < 4 && _selectedIndex > 0) {
+        if (_selectedIndex == 1 || _selectedIndex == 3) {
+            [self.filterButton setHidden:NO];
+            [self.logoImageView setHidden:NO];
+        }else{
+            [self.logoImageView setHidden:YES];
+            [self.filterButton setHidden:YES];
+        }
+        
+        if(_selectedIndex == 2){
+            [self.titleLabel setText:@"客户"];
+        }else{
+            [self.titleLabel setText:@""];
+        }
     }
 }
 
@@ -275,35 +277,9 @@
 }
 
 - (void)filterProductAction{
-    if (self.selectedIndex == 1) {
-        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCHomeFilterProductNotification object:nil];
-    }else if (self.selectedIndex == 3){
-        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCTryFilterProductNotification object:nil];
-    }
 }
 
 - (void)searchProductAction{
-    if (_selectedIndex == 1 || _selectedIndex == 3) {
-        IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
-        searchViewMode.searchDelegate = self;
-        [searchViewMode showSearchProductViewWithSearchWord:(_selectedIndex == 1 ? self.productKeyword : self.tryKeyword)];
-        [self presentViewController:searchViewMode animated:YES completion:nil];
-    }
-}
-
-#pragma mark //IPCSearchViewControllerDelegate
-- (void)didSearchWithKeyword:(NSString *)keyword
-{
-    if (_selectedIndex == 1) {
-        self.productKeyword = keyword;
-    }else if (_selectedIndex == 3){
-        self.tryKeyword = keyword;
-    }
-    if (self.selectedIndex == 1) {
-        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCHomeSearchProductNotification object:nil userInfo:@{IPCSearchKeyWord:keyword}];
-    }else if (self.selectedIndex == 3){
-        [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCTrySearchProductNotification object:nil userInfo:@{IPCSearchKeyWord:keyword}];
-    }
 }
 
 
@@ -311,14 +287,6 @@
 - (void)reloadMenuCartAction{
     UIButton * button = (UIButton *)self.menusView.subviews[4];
     [button createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
-}
-
-- (void)clearSearchwordAction{
-    if (_selectedIndex == 0) {
-        self.productKeyword = @"";
-    }else if (_selectedIndex == 2){
-        self.tryKeyword = @"";
-    }
 }
 
 - (void)didReceiveMemoryWarning {

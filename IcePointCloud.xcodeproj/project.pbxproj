@@ -317,6 +317,8 @@
 		CBE4C8401E9CCF5300F09D2A /* IPCUpdateCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */; };
 		CBF68D021E8FA92F001DA929 /* NSDictionary+DeleteNull.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */; };
 		CBF6CFEF1F14768200F02ECF /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */; };
+		CBF6CFF21F14B3EF00F02ECF /* IPCProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF6CFF11F14B3EF00F02ECF /* IPCProductViewController.m */; };
+		CBF6CFF51F14BF9A00F02ECF /* IPCTryGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF6CFF41F14BF9A00F02ECF /* IPCTryGlassView.m */; };
 		CBFD04121EA9D371006EF4E3 /* IPCCustomsizedLensView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFD04111EA9D371006EF4E3 /* IPCCustomsizedLensView.m */; };
 		CBFD04151EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBFD04141EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m */; };
 		CBFD04171EA9D39B006EF4E3 /* IPCCustomsizedLensView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBFD04161EA9D39B006EF4E3 /* IPCCustomsizedLensView.xib */; };
@@ -861,6 +863,10 @@
 		CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+DeleteNull.m"; path = "IcePointCloud/Vendors/NSDictionary+DeleteNull.m"; sourceTree = SOURCE_ROOT; };
 		CBF6CFED1F14768200F02ECF /* UIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Badge.h"; path = "IcePointCloud/Vendors/UIView+Badge.h"; sourceTree = SOURCE_ROOT; };
 		CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Badge.m"; path = "IcePointCloud/Vendors/UIView+Badge.m"; sourceTree = SOURCE_ROOT; };
+		CBF6CFF01F14B3EF00F02ECF /* IPCProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCProductViewController.h; path = IcePointCloud/Vendors/IPCProductViewController.h; sourceTree = SOURCE_ROOT; };
+		CBF6CFF11F14B3EF00F02ECF /* IPCProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCProductViewController.m; path = IcePointCloud/Vendors/IPCProductViewController.m; sourceTree = SOURCE_ROOT; };
+		CBF6CFF31F14BF9A00F02ECF /* IPCTryGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryGlassView.h; sourceTree = "<group>"; };
+		CBF6CFF41F14BF9A00F02ECF /* IPCTryGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTryGlassView.m; sourceTree = "<group>"; };
 		CBFD040F1EA9995B006EF4E3 /* IPCCustomsizedEyeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedEyeDelegate.h; sourceTree = "<group>"; };
 		CBFD04101EA9D371006EF4E3 /* IPCCustomsizedLensView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomsizedLensView.h; sourceTree = "<group>"; };
 		CBFD04111EA9D371006EF4E3 /* IPCCustomsizedLensView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomsizedLensView.m; sourceTree = "<group>"; };
@@ -1456,6 +1462,8 @@
 		04C555411D1B78C80083496D /* TakeGlasses */ = {
 			isa = PBXGroup;
 			children = (
+				CBF6CFF31F14BF9A00F02ECF /* IPCTryGlassView.h */,
+				CBF6CFF41F14BF9A00F02ECF /* IPCTryGlassView.m */,
 				9E18E8AB199D30CD0085704B /* IPCSingleModeView.h */,
 				9E18E8AC199D30CD0085704B /* IPCSingleModeView.m */,
 				CB457FA21F09E23000BB2077 /* IPCSingleModeView.xib */,
@@ -1902,6 +1910,8 @@
 				CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */,
 				CB6AC2071E9F12C6008031DD /* IPCRootNavigationViewController.h */,
 				CB6AC2081E9F12C6008031DD /* IPCRootNavigationViewController.m */,
+				CBF6CFF01F14B3EF00F02ECF /* IPCProductViewController.h */,
+				CBF6CFF11F14B3EF00F02ECF /* IPCProductViewController.m */,
 			);
 			name = CustomVC;
 			sourceTree = "<group>";
@@ -2880,6 +2890,7 @@
 				CBC419F81F038EEA00387F9C /* IPCCustomerDetailViewMode.m in Sources */,
 				CBFD04151EA9D38C006EF4E3 /* IPCCustomsizedContactLensView.m in Sources */,
 				CBE4C83E1E9CCE8700F09D2A /* IPCUpdateCustomerView.m in Sources */,
+				CBF6CFF21F14B3EF00F02ECF /* IPCProductViewController.m in Sources */,
 				04F3C4F31D890B8500BB3098 /* IPCShareManager.m in Sources */,
 				0485F4041D34A72800A42DE3 /* IPCCustomerList.m in Sources */,
 				0424025A1D87F26400E1DD1A /* IPCOnlineFaceDetector.m in Sources */,
@@ -2964,6 +2975,7 @@
 				04C9F7AC1DEEB6F3001258B2 /* IPCEmployeListCell.m in Sources */,
 				CB5CC4781E8E00500091D0FD /* IPCCustomUI.m in Sources */,
 				CB5CC4A71E8E00EA0091D0FD /* IPCDatePickViewController.m in Sources */,
+				CBF6CFF51F14BF9A00F02ECF /* IPCTryGlassView.m in Sources */,
 				04760B0A1D3C80A1003A4E16 /* IPCProductList.m in Sources */,
 				04760B0F1D3C80B0003A4E16 /* IPCProfileResult.m in Sources */,
 				04CBD9631D582CCA00C7CAA4 /* IPCPersonBaseView.m in Sources */,

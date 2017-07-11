@@ -100,6 +100,7 @@
 
 #pragma mark //Clicked Events
 - (void)initGlassView{
+    [super initGlassView];
     self.glassesView.transform = CGAffineTransformIdentity;
     draggedPosition = CGPointMake(-100, -100);
 }
@@ -111,6 +112,7 @@
 
 - (void)amplificationLargeModelView
 {
+    [super amplificationLargeModelView];
     [self.superview.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj != self) {
             [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
@@ -145,6 +147,7 @@
 //Modify the model photos
 - (void)updateModelPhoto
 {
+    [super updateModelPhoto];
     UIImage *img;
     switch (self.matchItem.photoType) {
         case IPCPhotoTypeModel:
@@ -169,6 +172,7 @@
  */
 - (void)updateFaceUI:(CGPoint)point :(CGSize)size
 {
+    [super updateFaceUI:point :size];
     cameraEyePoint = CGPointMake(point.x/2, point.y/2);
     cameraEyeSize  = CGSizeMake(size.width/2, 0);
     [self updateGlassFrame];
@@ -190,6 +194,7 @@
 
 - (void)updateItem:(BOOL)isDroped
 {
+    [super updateItem:isDroped];
     [self.glassesView addBorder:0 Width:0];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];
@@ -250,6 +255,7 @@
 #pragma mark //Modify the glasses location
 - (void)dropGlasses:(IPCGlasses *)glasses onLocaton:(CGPoint)location
 {
+    [super dropGlasses:glasses onLocaton:location];
     self.matchItem.glass = glasses;
     [self initGlassView];
     [self updateItem:YES];

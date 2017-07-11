@@ -7,7 +7,6 @@
 //
 
 #import "IPCCustomerDetailViewController.h"
-#import "IPCGlassDetailsViewController.h"
 #import "IPCCustomerOptometryCell.h"
 #import "IPCCustomerHistoryOrderCell.h"
 #import "IPCCustomerDetailCell.h"
@@ -188,15 +187,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 /**
  *  Push Method
  */
-- (void)pushToProductDetailViewController:(IPCGlasses *)glass{
-    IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
-    detailVC.glasses = glass;
-    [[detailVC rac_signalForSelector:@selector(pushToCartAction:)] subscribeNext:^(id x) {
-        [detailVC.navigationController popToRootViewControllerAnimated:NO];
-    }];
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
-
 - (void)pushToUpdateOrderViewController{
     IPCUpdateOrderViewController * updateOrderVC = [[IPCUpdateOrderViewController  alloc]initWithNibName:@"IPCUpdateOrderViewController" bundle:nil];
     updateOrderVC.delegate = self;

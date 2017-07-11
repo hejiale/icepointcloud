@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCGlassListViewController : IPCRootNavigationViewController
-
-- (void)addNotifications;
-- (void)reload;
-- (void)rootRefresh;
-- (void)removeCover;
+@interface IPCGlassListViewController : IPCProductViewController
 
 @end
