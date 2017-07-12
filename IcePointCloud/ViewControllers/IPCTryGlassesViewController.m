@@ -74,43 +74,11 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self.librayButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     self.matchPanelView.dropZoneHandler = self;
     
-    self.signleModeView = [IPCSingleModeView jk_loadInstanceFromNibWithName:@"IPCSingleModeView" owner:self];
-    [self.signleModeView setFrame:self.matchPanelView.bounds];
-    [self.matchPanelView addSubview:self.signleModeView];
-    
-    [[self.signleModeView rac_signalForSelector:@selector(scaleAction:)]subscribeNext:^(id x) {
-        [self.compareSwitch setOn:YES];
-        [self switchToCompareMode];
-    }];
-    [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
-        IPCCompareItemView * compareView = self.compareBgView.subviews[activeMatchItemIndex];
-        [compareView initGlassView];
-    }];
-    
+    [self loadSingleModelView];
     self.leftBottomConstraint.constant = self.sortProductView.jk_width/2 + 15;
     [self.matchPanelView bringSubviewToFront:self.topOperationBar];
     [self.topOperationBar addSubview:self.compareSwitch];
-    
-    CGFloat height = (self.view.jk_height - 15 - self.sortProductView.jk_height)/3;
-    UICollectionViewFlowLayout * layOut = [[UICollectionViewFlowLayout alloc]init];
-    layOut.itemSize = CGSizeMake(self.productCollectionView.jk_width, height);
-    layOut.minimumInteritemSpacing = 0;
-    layOut.minimumLineSpacing = 5;
-    
-    [self.productCollectionView setCollectionViewLayout:layOut];
-    [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kResuableId];
-    self.productCollectionView.mj_header = self.refreshHeader;
-    self.productCollectionView.mj_footer = self.refreshFooter;
-    self.productCollectionView.emptyAlertImage = @"exception_search";
-    self.productCollectionView.emptyAlertTitle = @"没有找到可试戴的眼镜!";
-    [self.refreshHeader beginRefreshing];
-    
-    if ([IPCCustomUI rootViewcontroller]) {
-        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCCustomUI rootViewcontroller];
-        [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
-            [self removeCover];
-        }];
-    }
+    [self loadCollectionView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -173,10 +141,42 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 #pragma mark //Set UI ----------------------------------------------------------------------------
+- (void)loadCollectionView{
+    CGFloat height = (self.view.jk_height - 15 - self.sortProductView.jk_height)/3;
+    UICollectionViewFlowLayout * layOut = [[UICollectionViewFlowLayout alloc]init];
+    layOut.itemSize = CGSizeMake(self.productCollectionView.jk_width, height);
+    layOut.minimumInteritemSpacing = 0;
+    layOut.minimumLineSpacing = 5;
+    
+    [self.productCollectionView setCollectionViewLayout:layOut];
+    [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kResuableId];
+    self.productCollectionView.mj_header = self.refreshHeader;
+    self.productCollectionView.mj_footer = self.refreshFooter;
+    self.productCollectionView.emptyAlertImage = @"exception_search";
+    self.productCollectionView.emptyAlertTitle = @"没有找到可试戴的眼镜!";
+    [self.refreshHeader beginRefreshing];
+}
+
+
 - (UIVisualEffectView *)blurBgView{
     if (!_blurBgView)
-        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(onRemoveAllPopView)];
+        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeCover)];
     return _blurBgView;
+}
+
+- (void)loadSingleModelView{
+    self.signleModeView = [IPCSingleModeView jk_loadInstanceFromNibWithName:@"IPCSingleModeView" owner:self];
+    [self.signleModeView setFrame:self.matchPanelView.bounds];
+    [self.matchPanelView addSubview:self.signleModeView];
+    
+    [[self.signleModeView rac_signalForSelector:@selector(scaleAction:)]subscribeNext:^(id x) {
+        [self.compareSwitch setOn:YES];
+        [self switchToCompareMode];
+    }];
+    [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
+        IPCCompareItemView * compareView = self.compareBgView.subviews[activeMatchItemIndex];
+        [compareView initGlassView];
+    }];
 }
 
 - (IPCSwitch *)compareSwitch{

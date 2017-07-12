@@ -90,8 +90,6 @@
     return aAttributedString;
 }
 
-#pragma mark //UITextField Add RightView
-
 
 #pragma mark//TabBar Push Methods
 + (void)pushToRootIndex:(NSInteger)index{
@@ -104,19 +102,6 @@
             [mainRootVC setSelectedIndex:index];
         }
     }
-}
-
-#pragma mark //Main Viewcontroller
-+ (UIViewController *)rootViewcontroller{
-    UIViewController * rootNavigation = [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([rootNavigation isKindOfClass:[UINavigationController class]]) {
-        UINavigationController * rootNav = (UINavigationController *)rootNavigation;
-        UIViewController * rootVC = rootNav.viewControllers[0];
-        if ([rootVC isKindOfClass:[IPCRootViewController class]]) {
-            return rootVC;
-        }
-    }
-    return nil;
 }
 
 #pragma mark //Remove automatically associate attribute of the input box

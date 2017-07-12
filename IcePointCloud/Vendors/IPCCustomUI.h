@@ -33,8 +33,6 @@
 
 + (void)pushToRootIndex:(NSInteger)index;
 
-+ (UIViewController *)rootViewcontroller;
-
 + (void)clearAutoCorrection:(UIView *)view;
 
 + (UIView *)nearestAncestorForView:(UIView *)aView withClass:(Class)aClass;

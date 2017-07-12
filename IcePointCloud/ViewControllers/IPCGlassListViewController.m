@@ -38,6 +38,24 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
     
+    [self loadCollectionView];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self setNavigationBarStatus:YES];
+    [self.glassListCollectionView reloadData];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self removeCover];
+}
+
+#pragma mark //Set UI
+- (void)loadCollectionView{
     __block CGFloat width = (self.view.jk_width - 10)/3;
     __block CGFloat height = self.view.jk_height/3;
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
@@ -52,30 +70,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListCollectionView.emptyAlertTitle = @"没有找到符合条件的商品";
     self.glassListCollectionView.emptyAlertImage = @"exception_search";
     [self.refreshHeader beginRefreshing];
-    
-    __weak typeof (self) weakSelf = self;
-    if ([IPCCustomUI rootViewcontroller]) {
-        IPCTabBarViewController * rootVC = (IPCTabBarViewController *)[IPCCustomUI rootViewcontroller];
-        [[rootVC rac_signalForSelector:@selector(searchProductAction)] subscribeNext:^(id x) {
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf removeCover];
-        }];
-    }
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [self setNavigationBarStatus:YES];
-    [self.glassListCollectionView reloadData];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-}
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self removeCover];
-}
-
-#pragma mark //Set UI
 - (MJRefreshBackStateFooter *)refreshHeader{
     if (!_refreshHeader){
         _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadTableView)];
