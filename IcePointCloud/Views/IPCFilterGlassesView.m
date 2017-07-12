@@ -52,7 +52,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     [super awakeFromNib];
     
     chooseCellHeight = 100;
-    self.completeButton.layer.cornerRadius = 20;
     
     sectionTitles = @[@"类目",@"属性",@"价格区间"];
     self.allButtonsArray = [[NSMutableArray alloc]init];

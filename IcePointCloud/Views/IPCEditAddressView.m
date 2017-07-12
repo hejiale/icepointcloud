@@ -39,8 +39,6 @@ typedef  void(^DismissBlock)();
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditAddressView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
-        
-        self.editAddressView.layer.cornerRadius = 10;
     }
     return self;
 }
@@ -53,9 +51,7 @@ typedef  void(^DismissBlock)();
 
 #pragma mark //Set UI
 - (void)createAddressView{
-    self.addressView = [[IPCAddressView alloc]initWithFrame:CGRectMake(0, 20, self.addressContentView.jk_width, 80) Update:^{
-        
-    }];
+    self.addressView = [[IPCAddressView alloc]initWithFrame:CGRectMake(0, 20, self.addressContentView.jk_width, 80) Update:nil];
     [self.addressContentView addSubview:self.addressView];
     [self.addressView.maleButton setSelected:YES];
 }
@@ -71,7 +67,6 @@ typedef  void(^DismissBlock)();
                                                            Address:self.addressView.addressTextField.text
                                                       SuccessBlock:^(id responseValue)
      {
-         [self insertPayOrderAddress:responseValue[@"id"]];
          if (self.completeBlock) {
              self.completeBlock(responseValue[@"id"]);
          }
@@ -92,25 +87,10 @@ typedef  void(^DismissBlock)();
     if (self.customerID) {
         [self saveNewAddress];
     }else{
-        [self insertPayOrderAddress:nil];
         if (self.completeBlock) {
             self.completeBlock(nil);
         }
     }
-}
-
-- (void)insertPayOrderAddress:(NSString *)addressId
-{
-    IPCCustomerAddressMode * currentAddress = [[IPCCustomerAddressMode alloc]init];
-    currentAddress.contactorName = self.addressView.contacterTextField.text;
-    currentAddress.contactorPhone = self.addressView.phoneTextField.text;
-    currentAddress.gender = (self.addressView.maleButton.selected ? @"MALE" : @"FEMALE");
-    currentAddress.genderString = [IPCCommon formatGender:currentAddress.gender];
-    currentAddress.detailAddress = self.addressView.addressTextField.text;
-    if (addressId) {
-        currentAddress.addressID = addressId;
-    }
-    [IPCCurrentCustomer sharedManager].currentAddress = currentAddress;
 }
 
 

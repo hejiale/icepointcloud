@@ -33,6 +33,11 @@
                 <constraint firstItem="rIg-lo-Vel" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="vAI-Bf-MPc"/>
             </constraints>
             <size key="customSize" width="355" height="50"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="15"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="filterValueLabel" destination="rIg-lo-Vel" id="lwe-lr-9hD"/>
             </connections>

@@ -14,8 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     
-    self.startPriceTextField.layer.cornerRadius = 12;
-    self.endPriceTextField.layer.cornerRadius = 12;
     [self.startPriceTextField setLeftText:@"￥"];
     [self.endPriceTextField setLeftText:@"￥"];
 }

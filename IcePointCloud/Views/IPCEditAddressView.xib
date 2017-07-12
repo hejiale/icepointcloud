@@ -95,6 +95,11 @@
                         <constraint firstItem="IXW-Wm-EMr" firstAttribute="leading" secondItem="EiT-Sx-K1V" secondAttribute="leading" id="lxE-0S-JHR"/>
                         <constraint firstAttribute="trailing" secondItem="FSK-LQ-4wy" secondAttribute="trailing" id="qs7-sd-IwO"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

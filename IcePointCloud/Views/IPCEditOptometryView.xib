@@ -94,6 +94,11 @@
                         <constraint firstItem="Xvn-yg-6xu" firstAttribute="top" secondItem="ERq-Op-mKV" secondAttribute="bottom" constant="15" id="X7T-uY-QgD"/>
                         <constraint firstItem="xBC-KT-wEl" firstAttribute="top" secondItem="U0y-pr-0TY" secondAttribute="bottom" constant="15" id="kYt-R4-X7x"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>

@@ -624,12 +624,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     return cell;
 }
 
-#pragma mark //UICollectionViewCellDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-}
-
-
 #pragma mark //GlasslistCollectionViewCellDelegate
 - (void)addShoppingCartAnimation:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0)

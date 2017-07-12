@@ -13,8 +13,6 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
-    self.contentView.layer.cornerRadius = 15;
 }
 
 @end

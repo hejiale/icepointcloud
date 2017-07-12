@@ -196,7 +196,6 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     _glasses = glasses;
     
     if (_glasses) {
-        [self.backgroundImageView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.2]];
         [self showParameterView];
     }
 }

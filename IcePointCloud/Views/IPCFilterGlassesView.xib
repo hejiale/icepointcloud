@@ -37,6 +37,11 @@
                             <state key="normal" title="完成">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="20"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="onFilterProductWithPriceAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="S2n-z4-rIa"/>
                             </connections>

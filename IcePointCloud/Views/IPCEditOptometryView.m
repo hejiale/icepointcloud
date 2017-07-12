@@ -40,8 +40,6 @@ typedef  void(^DismissBlock)();
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditOptometryView" owner:self];
         [view setFrame:frame];
         [self addSubview:view];
-        
-        self.opometryBgView.layer.cornerRadius = 5;
     }
     return self;
 }
@@ -55,11 +53,9 @@ typedef  void(^DismissBlock)();
 #pragma mark //Set UI
 - (void)createOptometryView
 {
-    CGFloat originY = (self.optometryContentView.jk_height - 145)/2;
+    __block CGFloat originY = (self.optometryContentView.jk_height - 145)/2;
     
-    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(0, originY, self.optometryContentView.jk_width, 145) Update:^{
-        
-    }];
+    self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(0, originY, self.optometryContentView.jk_width, 145) Update:nil];
     [self.optometryContentView addSubview:self.optometryView];
 }
 
@@ -82,7 +78,6 @@ typedef  void(^DismissBlock)();
                                                        EmployeeId:self.optometryView.insertOptometry.employeeId
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
                                                      SuccessBlock:^(id responseValue) {
-                                                         [self insertPayOrderOptometry:responseValue[@"id"]];
                                                          
                                                          if (self.completeBlock) {
                                                              self.completeBlock(responseValue[@"id"]);
@@ -103,7 +98,6 @@ typedef  void(^DismissBlock)();
         if (self.customerID) {
             [self saveNewOpometryRequest];
         }else{
-            [self insertPayOrderOptometry:nil];
             if (self.completeBlock) {
                 self.completeBlock(nil);
             }
@@ -118,13 +112,5 @@ typedef  void(^DismissBlock)();
     }
 }
 
-
-- (void)insertPayOrderOptometry:(NSString *)optometryId
-{
-    [IPCCurrentCustomer sharedManager].currentOpometry = self.optometryView.insertOptometry;
-    if (optometryId) {
-        [IPCCurrentCustomer sharedManager].currentOpometry.optometryID = optometryId;
-    }
-}
 
 @end

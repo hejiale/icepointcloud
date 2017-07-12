@@ -195,7 +195,6 @@
 }
 
 - (void)reloadPayOrderView{
-    [self.payOrderTableView setHidden:NO];
     [self.payOrderTableView reloadData];
 }
 

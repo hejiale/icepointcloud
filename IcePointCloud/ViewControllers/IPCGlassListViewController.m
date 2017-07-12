@@ -290,11 +290,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     return cell;
 }
 
-#pragma mark //UICollectionViewCellDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [collectionView deselectItemAtIndexPath:indexPath animated:NO];
-}
-
 #pragma mark //GlassListViewCellDelegate
 - (void)addShoppingCartAnimation:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0)
