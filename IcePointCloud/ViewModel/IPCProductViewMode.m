@@ -140,17 +140,17 @@
     }
 }
 
-
-- (void)loadFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose
+#pragma mark //Load Filter Category View
+- (void)loadFilterCategory:(id)owner InView:(UIView *)coverView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose
 {
     self.reloadFilterCloseBlock = reloadClose;
     self.reloadFilterUnCloseBlock = reloadUnClose;
     
     _filterView = [UIView jk_loadInstanceFromNibWithName:@"IPCFilterGlassesView" owner:owner];
-    [_filterView setFrame:CGRectMake(-_filterView.jk_width, 0, _filterView.jk_width, backgroundView.jk_height)];
+    [_filterView setFrame:CGRectMake(-_filterView.jk_width, 0, _filterView.jk_width, coverView.jk_height)];
     [_filterView setDataSource:self];
     [_filterView setDelegate:self];
-    [backgroundView addSubview:_filterView];
+    [coverView addSubview:_filterView];
     [_filterView show];
     [_filterView reloadFilterView];
 }

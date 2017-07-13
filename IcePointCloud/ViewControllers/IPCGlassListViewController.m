@@ -156,15 +156,15 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super removeCover];
     
     [UIView animateWithDuration:0.3f animations:^{
-        self.backGroudView.alpha = 0.5;
+        self.coverView.alpha = 0.5;
     }completion:^(BOOL finished) {
         if (finished) {
-            [self.backGroudView removeFromSuperview];
+            [self.coverView removeFromSuperview];
         }
     }];
     
     __weak typeof (self) weakSelf = self;
-    if ([self.backGroudView superview] && self.glassListViewMode.filterView) {
+    if ([self.coverView superview] && self.glassListViewMode.filterView) {
         [self.glassListViewMode.filterView closeCompletion:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.glassListViewMode.filterView removeFromSuperview];strongSelf.glassListViewMode.filterView = nil;
@@ -198,11 +198,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self removeCover];
     }else{
         __weak typeof (self) weakSelf = self;
-        [self addBackgroundViewWithAlpha:0.2 InView:self.view Complete:^{
+        [self addCoverWithAlpha:0.2 InView:self.view Complete:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
+        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
             [strongSelf.refreshHeader beginRefreshing];

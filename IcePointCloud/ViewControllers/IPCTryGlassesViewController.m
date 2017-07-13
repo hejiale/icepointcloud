@@ -99,8 +99,47 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     return _matchItems;
 }
 
+#pragma mark //Set UI ----------------------------------------------------------------------------
+- (void)loadCollectionView{
+    CGFloat height = (self.view.jk_height - 15 - self.sortProductView.jk_height)/3;
+    UICollectionViewFlowLayout * layOut = [[UICollectionViewFlowLayout alloc]init];
+    layOut.itemSize = CGSizeMake(self.productCollectionView.jk_width, height);
+    layOut.minimumInteritemSpacing = 0;
+    layOut.minimumLineSpacing = 5;
+    
+    [self.productCollectionView setCollectionViewLayout:layOut];
+    [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:glassListCellIdentifier];
+    self.productCollectionView.mj_header = self.refreshHeader;
+    self.productCollectionView.mj_footer = self.refreshFooter;
+    self.productCollectionView.emptyAlertImage = @"exception_search";
+    self.productCollectionView.emptyAlertTitle = @"没有找到可试戴的眼镜!";
+    [self.refreshHeader beginRefreshing];
+}
 
-#pragma mark //Initialize the default try wearing glasses compare mode
+
+- (UIVisualEffectView *)blurBgView{
+    if (!_blurBgView)
+        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeCover)];
+    return _blurBgView;
+}
+
+//Create Single Model View
+- (void)loadSingleModelView{
+    self.signleModeView = [IPCSingleModeView jk_loadInstanceFromNibWithName:@"IPCSingleModeView" owner:self];
+    [self.signleModeView setFrame:self.matchPanelView.bounds];
+    [self.matchPanelView addSubview:self.signleModeView];
+    
+    [[self.signleModeView rac_signalForSelector:@selector(scaleAction:)]subscribeNext:^(id x) {
+        [self.compareSwitch setOn:YES];
+        [self switchToCompareMode];
+    }];
+    [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
+        IPCCompareItemView * compareView = self.compareBgView.subviews[activeMatchItemIndex];
+        [compareView initGlassView];
+    }];
+}
+
+//Initialize the default try wearing glasses compare mode
 - (void)initMatchItems
 {
     for (NSInteger i = 0; i < 4; i++) {
@@ -138,44 +177,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }
 }
 
-#pragma mark //Set UI ----------------------------------------------------------------------------
-- (void)loadCollectionView{
-    CGFloat height = (self.view.jk_height - 15 - self.sortProductView.jk_height)/3;
-    UICollectionViewFlowLayout * layOut = [[UICollectionViewFlowLayout alloc]init];
-    layOut.itemSize = CGSizeMake(self.productCollectionView.jk_width, height);
-    layOut.minimumInteritemSpacing = 0;
-    layOut.minimumLineSpacing = 5;
-    
-    [self.productCollectionView setCollectionViewLayout:layOut];
-    [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:glassListCellIdentifier];
-    self.productCollectionView.mj_header = self.refreshHeader;
-    self.productCollectionView.mj_footer = self.refreshFooter;
-    self.productCollectionView.emptyAlertImage = @"exception_search";
-    self.productCollectionView.emptyAlertTitle = @"没有找到可试戴的眼镜!";
-    [self.refreshHeader beginRefreshing];
-}
-
-
-- (UIVisualEffectView *)blurBgView{
-    if (!_blurBgView)
-        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeCover)];
-    return _blurBgView;
-}
-
-- (void)loadSingleModelView{
-    self.signleModeView = [IPCSingleModeView jk_loadInstanceFromNibWithName:@"IPCSingleModeView" owner:self];
-    [self.signleModeView setFrame:self.matchPanelView.bounds];
-    [self.matchPanelView addSubview:self.signleModeView];
-    
-    [[self.signleModeView rac_signalForSelector:@selector(scaleAction:)]subscribeNext:^(id x) {
-        [self.compareSwitch setOn:YES];
-        [self switchToCompareMode];
-    }];
-    [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
-        IPCCompareItemView * compareView = self.compareBgView.subviews[activeMatchItemIndex];
-        [compareView initGlassView];
-    }];
-}
 
 - (IPCSwitch *)compareSwitch{
     if (!_compareSwitch) {
@@ -282,10 +283,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.blurBgView removeFromSuperview];
     
     [UIView animateWithDuration:0.3f animations:^{
-        self.backGroudView.alpha = 0.5f;
+        self.coverView.alpha = 0.5f;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.backGroudView removeFromSuperview];
+            [self.coverView removeFromSuperview];
         }
     }];
     if ([self.glassListViewMode.filterView superview]) {
@@ -306,7 +307,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 //signle show or compare show methods
 - (void)onSwitchPressed:(id)sender {
-    if ([self.backGroudView superview])
+    if ([self.coverView superview])
         [self removeCover];
     
     if (self.compareSwitch.isOn) {
@@ -319,15 +320,15 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Choose delete method
 - (IBAction)onDeleteBtnTapped:(UIButton *)sender
 {
-    if ([self.backGroudView superview]) {
+    if ([self.coverView superview]) {
         [self removeCover];
     }else{
-        [self addBackgroundViewWithAlpha:0   InView:self.view Complete:^{
+        [self addCoverWithAlpha:0   InView:self.view Complete:^{
             [self removeCover];
         }];
-        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x-50;
+        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.coverView].origin.x-50;
         [self.photoDeleteConfirmView setFrame:CGRectMake(x, self.topOperationBar.jk_bottom, 135, 70)];
-        [self.backGroudView addSubview:self.photoDeleteConfirmView];
+        [self.coverView addSubview:self.photoDeleteConfirmView];
     }
 }
 
@@ -349,18 +350,18 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Choose Model Method
 - (IBAction)onModelsBtnTapped:(UIButton *)sender
 {
-    if ([self.backGroudView superview]) {
+    if ([self.coverView superview]) {
         [self removeCover];
     }else{
-        [self addBackgroundViewWithAlpha:0   InView:self.view Complete:^{
+        [self addCoverWithAlpha:0   InView:self.view Complete:^{
             [self removeCover];
         }];
-        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.backGroudView].origin.x - self.modelsPicker.jk_width + 75;
+        CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.coverView].origin.x - self.modelsPicker.jk_width + 75;
         self.modelsPicker.layer.anchorPoint = CGPointMake(0.9, 0);
         [self.modelsPicker setFrame:CGRectMake(x, self.topOperationBar.jk_bottom, self.modelsPicker.jk_width, self.modelsPicker.jk_height)];
         self.modelsPicker.alpha = 0;
         self.modelsPicker.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-        [self.backGroudView addSubview:self.modelsPicker];
+        [self.coverView addSubview:self.modelsPicker];
         
         [UIView animateWithDuration:0.3f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
             self.modelsPicker.alpha = 1.f;
@@ -376,7 +377,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Click model head image
 - (IBAction)onModelPhotoTapped:(UIButton *)sender
 {
-    if ([self.backGroudView superview])[self removeCover];
+    if ([self.coverView superview])[self removeCover];
     
     IPCMatchItem *mi = self.matchItems[0];
     if (mi.photoType == IPCPhotoTypeModel && mi.modelType == index) return;
@@ -402,10 +403,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Share Tryglass Image
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
-    [self addBackgroundViewWithAlpha:0.2  InView:self.view  Complete:^{
+    [self addCoverWithAlpha:0.2  InView:self.view  Complete:^{
         [self removeCover];
     }];
-    _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.backGroudView.jk_width,80 )
+    _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.coverView.jk_width,80 )
                                                          Chat:^{
                                                              [self onShareToWechat:WXSceneSession];
                                                          } Line:^{
@@ -413,8 +414,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
                                                          } Favorite:^{
                                                              [self onShareToWechat:WXSceneFavorite];
                                                          }];
-    [self.backGroudView addSubview:_shareButtonView];
-    [self.backGroudView bringSubviewToFront:_shareButtonView];
+    [self.coverView addSubview:_shareButtonView];
+    [self.coverView bringSubviewToFront:_shareButtonView];
     [_shareButtonView show];
 }
 
@@ -463,7 +464,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self presentViewController:pickNav animated:YES completion:nil];
 }
 
-#pragma mark //His head shot head modification model refresh glasses
+//His head shot head modification model refresh glasses
 - (void)outPutCameraImage:(UIImage *)image
 {
     __weak typeof (self) weakSelf = self;
@@ -510,7 +511,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.photoDeleteBtn.enabled = YES;
 }
 
-#pragma mark //Filter Products \ Search Products
+//Filter Products \ Search Products
 - (void)onFilterProducts{
     [super onFilterProducts];
     if (self.recommendedButton.selected)return;
@@ -519,10 +520,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
-        [self addBackgroundViewWithAlpha:0.2   InView:self.view Complete:^{
+        [self addCoverWithAlpha:0.2  InView:self.view Complete:^{
             [self removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.backGroudView ReloadClose:^{
+        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
             [strongSelf.refreshHeader beginRefreshing];
@@ -550,7 +551,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self presentViewController:searchViewMode animated:YES completion:nil];
 }
 
-#pragma mark //Try switching to wear glasses a single or more patterns
+//Try switching to wear glasses a single or more patterns
 - (void)switchToSingleMode
 {
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[activeMatchItemIndex];
@@ -596,7 +597,18 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
-
+//Reload Table View
+- (void)reload{
+    [super reload];
+    
+    [self.productCollectionView reloadData];
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+    }
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+    }
+}
 #pragma mark //CompareItemViewDelegate
 - (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView withIndex:(NSInteger)index
 {
@@ -754,19 +766,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     self.glassListViewMode.searchWord = keyword;
     [self.refreshHeader beginRefreshing];
-}
-
-#pragma mark //Reload Table View
-- (void)reload{
-    [super reload];
-    
-    [self.productCollectionView reloadData];
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-    }
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-    }
 }
 
 - (void)didReceiveMemoryWarning

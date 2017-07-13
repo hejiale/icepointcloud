@@ -17,28 +17,28 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F4F4F4"]];
 }
 
-- (void)addBackgroundViewWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed
+- (void)addCoverWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed
 {
-    self.backGroudView = [[UIView alloc]initWithFrame:view.bounds];
-    [self.backGroudView setBackgroundColor:[UIColor clearColor]];
-    [view addSubview:self.backGroudView];
-    [view bringSubviewToFront:self.backGroudView];
+    self.coverView = [[UIView alloc]initWithFrame:view.bounds];
+    [self.coverView setBackgroundColor:[UIColor clearColor]];
+    [view addSubview:self.coverView];
+    [view bringSubviewToFront:self.coverView];
     
-    UIImageView * coverView = [[UIImageView alloc]initWithFrame:self.backGroudView.bounds];
+    UIImageView * coverView = [[UIImageView alloc]initWithFrame:self.coverView.bounds];
     [coverView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:alpha]];
     [coverView setUserInteractionEnabled:YES];
-    [self.backGroudView addSubview:coverView];
+    [self.coverView addSubview:coverView];
     
     [coverView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
         if (completed)completed();
     }];
 }
 
-- (void)setBackGroudView:(UIView *)backGroudView{
-    objc_setAssociatedObject(self,coverViewIdentifier , backGroudView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setCoverView:(UIView *)coverView{
+    objc_setAssociatedObject(self,coverViewIdentifier , coverView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (UIView *)backGroudView{
+- (UIView *)coverView{
     return objc_getAssociatedObject(self, coverViewIdentifier);
 }
 

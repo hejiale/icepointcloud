@@ -19,7 +19,20 @@
 
 - (void)setLeftTitle:(NSString *)title;
 - (void)setRightTitle:(NSAttributedString *)title;
+
+/**
+ *  Remain PayAmount
+
+ */
 - (void)setNoPayTitle:(NSString *)title;
+
+/**
+  * Create Right Button
+
+ @param title
+ @param button
+ @param buttonImage
+ */
 - (void)setRightOperation:(NSString *)title
               ButtonTitle:(NSString *)button
               ButtonImage:(NSString *)buttonImage;

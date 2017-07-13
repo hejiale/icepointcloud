@@ -40,7 +40,10 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [IPCCustomUI show];
+    [self setNavigationTitle:@"确认订单"];
+    [self.orderTableView setTableHeaderView:[[UIView alloc]init]];
+    [self.orderTableView setTableFooterView:self.tableFootView];
+
     [self queryCustomerDetail];
 }
 
@@ -48,9 +51,6 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
-    [self setNavigationTitle:@"确认订单"];
-    [self.orderTableView setTableHeaderView:[[UIView alloc]init]];
-    [self.orderTableView setTableFooterView:self.tableFootView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -60,6 +60,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
 
 #pragma mark //Request Method
 - (void)queryCustomerDetail{
+    [IPCCustomUI show];
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCCustomerOrderDetail instance].orderInfo.customerId SuccessBlock:^(id responseValue)
     {
         self.detailCustomer  = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];

@@ -10,11 +10,10 @@
 
 @interface UIViewController (Extend)
 
-@property (nonatomic, strong) UIView *  backGroudView;
+@property (nonatomic, strong) UIView *  coverView;
 
 - (void)setBackground;
 
-- (void)addBackgroundViewWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed;
-
+- (void)addCoverWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed;
 
 @end
