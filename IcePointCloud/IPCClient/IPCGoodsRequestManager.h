@@ -48,28 +48,5 @@
                           FailureBlock:(void (^)(NSError * error))failure;
 
 
-/**
- CUSTOMSIZED CONTACTLENS
-
- @param page
- @param success
- @param failure
- */
-+ (void)searchCustomsizedContactLensWithPage:(NSInteger)page
-                                SuccessBlock:(void (^)(id responseValue))success
-                                FailureBlock:(void (^)(NSError * error))failure;
-
-
-/**
- CUSTOMSIZED LENS
-
- @param page
- @param success
- @param failure
- */
-+ (void)searchCustomsizedLensWithPage:(NSInteger)page
-                         SuccessBlock:(void (^)(id responseValue))success
-                         FailureBlock:(void (^)(NSError * error))failure;
-
 
 @end

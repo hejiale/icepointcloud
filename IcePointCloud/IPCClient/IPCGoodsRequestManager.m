@@ -45,20 +45,5 @@
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
-+ (void)searchCustomsizedContactLensWithPage:(NSInteger)page
-                                SuccessBlock:(void (^)(id responseValue))success
-                                FailureBlock:(void (^)(NSError * error))failure
-{
-    [self postRequest:@{@"pageNo": @(page) , @"maxPageSize":@(9), @"listType":@"AVAILABLE", @"customizedProdType":@"CUSTOMIZED_CONTACT_LENS"} RequestMethod:@"productAdmin.listCustomizedProd" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
-}
-
-
-+ (void)searchCustomsizedLensWithPage:(NSInteger)page
-                                SuccessBlock:(void (^)(id responseValue))success
-                                FailureBlock:(void (^)(NSError * error))failure
-{
-    [self postRequest:@{@"pageNo": @(page) ,@"maxPageSize":@(9), @"listType":@"AVAILABLE", @"customizedProdType":@"CUSTOMIZED_LENS"} RequestMethod:@"productAdmin.listCustomizedProd" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
-}
-
 
 @end
