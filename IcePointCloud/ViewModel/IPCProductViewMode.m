@@ -19,7 +19,6 @@
     if (self) {
         self.searchWord =  @"";
         self.currentPage =  0;
-        self.isCustomsized = NO;
         self.currentType =  IPCTopFIlterTypeFrames;
         self.filterValue    =  [[IPCFilterCategoryMode alloc]init];
     }
@@ -33,12 +32,6 @@
     return _glassesList;
 }
 
-- (NSMutableArray<IPCCustomsizedProduct *> *)customsizedList{
-    if (!_customsizedList) {
-        _customsizedList = [[NSMutableArray alloc]init];
-    }
-    return _customsizedList;
-}
 
 #pragma mark //Get Data
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
@@ -47,7 +40,6 @@
 {
     if (self.isBeginLoad){
         [self.glassesList removeAllObjects];
-        [self.customsizedList removeAllObjects];
     }
     self.completeBlock = complete;
     
@@ -60,25 +52,6 @@
                                IsHot:isHot];
 }
 
-- (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
-{
-    if (self.isBeginLoad){
-        [self.glassesList removeAllObjects];
-        [self.customsizedList removeAllObjects];
-    }
-    self.completeBlock = complete;
-    [self getCustomsizedContactLens];
-}
-
-- (void)getCustomsizedLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
-{
-    if (self.isBeginLoad){
-        [self.glassesList removeAllObjects];
-        [self.customsizedList removeAllObjects];
-    }
-    self.completeBlock = complete;
-    [self getCustomsizedLens];
-}
 
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess
 {
@@ -126,7 +99,7 @@
                                       SuccessBlock:^(id responseValue){
                                           __strong typeof (weakSelf) strongSelf = weakSelf;
                                           strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
-                                          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying IsCustomsized:self.isCustomsized];
+                                          [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying];
                                           if (strongSelf.filterView)
                                               [strongSelf.filterView reloadFilterView];
                                           
@@ -140,34 +113,6 @@
 }
 
 
-- (void)getCustomsizedContactLens
-{
-    __weak typeof (self) weakSelf = self;
-    [IPCGoodsRequestManager searchCustomsizedContactLensWithPage:self.currentPage
-                                                    SuccessBlock:^(id responseValue) {
-                                                        __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                        [strongSelf parseCustomsizedGlassesData:responseValue];
-                                                    } FailureBlock:^(NSError *error) {
-                                                        __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                        if (strongSelf.completeBlock)
-                                                            strongSelf.completeBlock(IPCRefreshError,error);
-                                                    }];
-}
-
-- (void)getCustomsizedLens{
-    __weak typeof (self) weakSelf = self;
-    [IPCGoodsRequestManager searchCustomsizedLensWithPage:self.currentPage
-                                             SuccessBlock:^(id responseValue) {
-                                                 __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                 [strongSelf parseCustomsizedGlassesData:responseValue];
-                                             } FailureBlock:^(NSError *error) {
-                                                 __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                 if (strongSelf.completeBlock)
-                                                     strongSelf.completeBlock(IPCRefreshError,error);
-                                             }];
-}
-
-
 //Parse Normal Glass Data
 - (void)parseNormalGlassesData:(id)response
 {
@@ -176,32 +121,6 @@
     if (result) {
         if (result.glassesList.count){
             [self.glassesList addObjectsFromArray:result.glassesList];
-            
-            if (self.completeBlock) {
-                self.completeBlock(IPCFooterRefresh_HasMoreData,nil);
-            }
-        }else{
-            if ([self.glassesList count] > 0) {
-                if (self.completeBlock) {
-                    self.completeBlock(IPCFooterRefresh_HasNoMoreData,nil);
-                }
-            }
-        }
-    }
-    
-    if ([self.glassesList count] == 0) {
-        if (self.completeBlock)
-            self.completeBlock(IPCFooterRefresh_NoData,nil);
-    }
-}
-
-- (void)parseCustomsizedGlassesData:(id)response
-{
-    IPCCustomsizedProductList * result = [[IPCCustomsizedProductList alloc]initWithResponseObject:response];
-    
-    if (result) {
-        if (result.productsList.count){
-            [self.customsizedList addObjectsFromArray:result.productsList];
             
             if (self.completeBlock) {
                 self.completeBlock(IPCFooterRefresh_HasMoreData,nil);

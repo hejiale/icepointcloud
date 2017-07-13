@@ -28,29 +28,10 @@
         IPCGlassesImage *gp = [_glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gp){
             [self.productImageView setImageURL:gp.imageURL];
-            
-            if (gp.width > 0 && gp.height > 0) {
-                __block CGFloat maxWidth = 512;
-                __block CGFloat maxHeight = 270;
-                
-                __block CGFloat scale = maxWidth / gp.width;
-                if (scale * gp.height > maxHeight)
-                    scale = maxHeight / gp.height;
-            }
         }
-        self.productNameLabel.text = [NSString stringWithFormat:@"%@  ￥%.f", _glasses.glassName, _glasses.price];
+        self.productNameLabel.text = [NSString stringWithFormat:@"%@", _glasses.glassName];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
     }
 }
-
-- (void)setCustomsizedProduct:(IPCCustomsizedProduct *)customsizedProduct{
-    _customsizedProduct = customsizedProduct;
-    
-    if (_customsizedProduct) {
-        self.productNameLabel.text = [NSString stringWithFormat:@"%@  ￥%.f", _customsizedProduct.name, _customsizedProduct.suggestPrice];
-        [self.productImageView setImageURL:[NSURL URLWithString:_customsizedProduct.thumbnailURL]];
-    }
-}
-
-
 
 @end

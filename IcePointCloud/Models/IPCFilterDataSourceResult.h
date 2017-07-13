@@ -9,8 +9,7 @@
 @interface IPCFilterDataSourceResult : NSObject
 
 - (void)parseFilterData:(id)responseObject
-                  IsTry:(BOOL)isTry
-          IsCustomsized:(BOOL)isCustomsized;
+                  IsTry:(BOOL)isTry;
 
 - (NSArray *)allCategoryName;
 

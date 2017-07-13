@@ -57,7 +57,7 @@
             [self.glassesImgView addBorder:3 Width:0.5];
         }
 
-        if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard || ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens))
+        if ([_cartItem.glasses filterType] == IPCTopFilterTypeCard)
         {
             [self.countNumView setHidden:NO];
         }else{

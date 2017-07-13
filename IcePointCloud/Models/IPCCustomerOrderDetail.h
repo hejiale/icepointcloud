@@ -49,12 +49,9 @@
 @property (nonatomic, copy, readonly) NSString *  payType;
 @property (nonatomic, assign, readonly) double    payTypeAmount;
 @property (nonatomic, assign, readwrite) BOOL     isPackUpOptometry;
-@property (nonatomic, assign, readwrite) BOOL     isPackUpCustomized;
 @property (nonatomic, assign, readwrite) double   totalPayAmount;
 @property (nonatomic, assign, readwrite) double    totalPointAmount;
 @property (nonatomic, assign, readonly) double    deductionIntegral;
-@property (nonatomic, assign, readwrite) BOOL     isCustomized;
-@property (nonatomic, assign, readwrite) BOOL     isCustomizedLens;
 
 @end
 

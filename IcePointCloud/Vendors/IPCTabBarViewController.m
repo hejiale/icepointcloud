@@ -92,7 +92,7 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadMenuCartAction)
+                                             selector:@selector(reloadCartBadge)
                                                  name:IPCNotificationShoppingCartChanged
                                                object:nil];
 }
@@ -274,7 +274,7 @@
 }
 
 #pragma mark //Notification
-- (void)reloadMenuCartAction{
+- (void)reloadCartBadge{
     UIButton * button = (UIButton *)self.menusView.subviews[4];
     [button createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }

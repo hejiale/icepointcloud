@@ -35,17 +35,19 @@
         }
         
         if (_optometryMode.isUpdateStatus) {
-            if (_optometryMode.optometryEmployee.length && _optometryMode.optometryEmployee) {
+            if (_optometryMode.optometryEmployee) {
                 [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.optometryEmployee]];
             }
+            if (_optometryMode.optometryInsertDate) {
+                [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.optometryInsertDate]  IsTime:YES]]];
+            }
         }else{
-            if (_optometryMode.employeeName.length && _optometryMode.employeeName) {
+            if (_optometryMode.employeeName) {
                 [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
             }
-        }
-        
-        if (_optometryMode.insertDate && _optometryMode.insertDate.length) {
-            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
+            if (_optometryMode.insertDate) {
+                [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
+            }
         }
     }
 }

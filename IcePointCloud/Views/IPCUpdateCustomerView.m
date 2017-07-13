@@ -47,9 +47,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
-    [self.mainView addSignleCorner:UIRectCornerAllCorners Size:5];
-    
+        
     [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.contentView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.contentView];
     [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.contentView];

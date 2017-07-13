@@ -28,7 +28,7 @@
 
 - (NSMutableArray<IPCContactLenSpecList *> *)contactSpecificationArray{
     if (!_contactSpecificationArray)
-    _contactSpecificationArray = [[NSMutableArray alloc]init];
+        _contactSpecificationArray = [[NSMutableArray alloc]init];
     return _contactSpecificationArray;
 }
 
@@ -65,8 +65,9 @@
     __block NSMutableArray<NSString *> * contactLensIDs = [[NSMutableArray alloc]init];
     if (self.currentGlass.stock > 0) {
         [[[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (! [contactLensIDs containsObject:obj.contactLensID])
-            [contactLensIDs addObject:obj.contactLensID];
+            if (! [contactLensIDs containsObject:obj.contactLensID]){
+                [contactLensIDs addObject:obj.contactLensID];
+            }
         }];
     }
     

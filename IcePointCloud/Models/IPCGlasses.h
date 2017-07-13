@@ -57,36 +57,10 @@
 @property (nonatomic, assign, readonly) NSInteger  stock;//inventory
 @property (nonatomic, copy, readonly) NSString    * supplierName;//supplier
 @property (nonatomic, assign, readonly) BOOL     solutionType;//护理液判断
-//**********定制商品参数*************//
-@property (nonatomic, copy, readonly) NSString * addLeft;
-@property (nonatomic, copy, readonly) NSString * addRight;
-@property (nonatomic, copy, readonly) NSString * axisLeft;
-@property (nonatomic, copy, readonly) NSString * axisRight;
-@property (nonatomic, copy, readonly) NSString * chanelLeft;
-@property (nonatomic, copy, readonly) NSString * chanelRight;
-@property (nonatomic, copy, readonly) NSString * cylLeft;
-@property (nonatomic, copy, readonly) NSString * cylRight;
-@property (nonatomic, copy, readonly) NSString * distance;
-@property (nonatomic, copy, readonly) NSString * distanceRight;
-@property (nonatomic, copy, readonly) NSString * dyeLeft;
-@property (nonatomic, copy, readonly) NSString * dyeRight;
-@property (nonatomic, copy, readonly) NSString * layerLeft;
-@property (nonatomic, copy, readonly) NSString * layerRight;
-@property (nonatomic, copy, readonly) NSString * sphLeft;
-@property (nonatomic, copy, readonly) NSString * sphRight;
-@property (nonatomic, copy, readonly) NSString * customizedLeft;
-@property (nonatomic, copy, readonly) NSString * customizedRight;
-@property (nonatomic, assign, readonly) double   customizedLeftPrice;
-@property (nonatomic, assign, readonly) double   customizedRightPrice;
-@property (nonatomic, assign, readonly) NSInteger   customizedCount;
-@property (nonatomic, assign, readonly) NSInteger   customizedRightCount;
-@property (nonatomic, assign, readonly) BOOL      isUnifiedCustomizd;
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (IPCTopFilterType)filterType;
 - (NSString *)glassId;
 - (NSDictionary *)displayFields;
-- (NSDictionary *)rightCustomizedLens;
-- (NSDictionary *)leftCustomizedLens;
 
 @end

@@ -12,8 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
 @property (nonatomic, copy) IPCGlasses *glasses;
-@property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;
 
 @end

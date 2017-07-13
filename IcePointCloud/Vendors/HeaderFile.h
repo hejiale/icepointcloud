@@ -54,9 +54,6 @@
 #import "IPCInsertCustomer.h"
 #import "IPCPointValueMode.h"
 #import "IPCHeadImage.h"
-#import "IPCCustomsizedProductList.h"
-#import "IPCCustomsizedItem.h"
-#import "IPCCustomsizedProduct.h"
 /**
  *  Category
  */

@@ -64,10 +64,6 @@
         return IPCTopFilterTypeAccessory;
     }else if ([typeName isEqualToString:@"VALUECARD"]){
         return IPCTopFilterTypeCard;
-    }else if ([typeName isEqualToString:@"CUSTOMIZED_LENS"]){
-        return IPCTopFilterTypeCustomsizedLens;
-    }else if ([typeName isEqualToString:@"CUSTOMIZED_CONTACT_LENS"]){
-        return IPCTopFilterTypeCustomsizedContactLens;
     }
     return IPCTopFilterTypeOthers;
 }
@@ -175,28 +171,6 @@
         [fields setObject:self.glassCode forKey:@"商品货号"];
     }
     return fields;
-}
-
-- (NSDictionary *)rightCustomizedLens{
-    return @{@"球镜/SPH":self.sphRight ,
-             @"柱镜/CYL":self.cylRight,
-             @"轴位/AXIS":self.axisRight  ,
-             @"瞳距/PD":self.distanceRight,
-             @"下加光/ADD":self.addRight ,
-             @"通道长度/mm":self.chanelRight ,
-             @"加膜":self.layerRight ,
-             @"染色":self.dyeRight};
-}
-
-- (NSDictionary *)leftCustomizedLens{
-    return @{@"球镜/SPH":self.sphLeft ,
-             @"柱镜/CYL":self.cylLeft,
-             @"轴位/AXIS":self.axisLeft  ,
-             @"瞳距/PD":self.distance,
-             @"下加光/ADD":self.addLeft ,
-             @"通道长度/mm":self.chanelLeft ,
-             @"加膜":self.layerLeft ,
-             @"染色":self.dyeLeft};
 }
 
 

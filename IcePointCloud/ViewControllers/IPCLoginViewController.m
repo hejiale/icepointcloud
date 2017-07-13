@@ -39,7 +39,6 @@
     [self.passwordTf addBorder:5 Width:0.5];
     [self.usernameTf setLeftSpace:10];
     [self.passwordTf setLeftSpace:10];
-    [self.loginButton addSignleCorner:UIRectCornerAllCorners Size:5];
     [IPCCustomUI clearAutoCorrection:self.loginBgView];
 
     if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {

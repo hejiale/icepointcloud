@@ -10,7 +10,6 @@
 #import "IPCGlassDetailsViewController.h"
 #import "IPCGlasslistCollectionViewCell.h"
 #import "IPCSearchViewController.h"
-#import "IPCGlassParameterView.h"
 #import "IPCDefineCameraBaseComponent.h"
 #import "IPCPhotoPickerViewController.h"
 #import "IPCOnlineFaceDetector.h"
@@ -23,7 +22,7 @@
 #import "IPCProductViewMode.h"
 #import "IPCOfflineFaceDetector.h"
 
-static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
+static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
 @interface IPCTryGlassesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GlasslistCollectionViewCellDelegate,OBOvumSource,OBDropZone,UIScrollViewDelegate,CompareItemViewDelegate,IPCSearchViewControllerDelegate>
 {
@@ -50,7 +49,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIButton *toTopButton;
 @property (strong, nonatomic) UIVisualEffectView * blurBgView;
 @property (strong, nonatomic)  IPCShareChatView  *shareButtonView;
-@property (strong, nonatomic) IPCGlassParameterView  *parameterView;
 @property (strong, nonatomic) IPCSwitch *compareSwitch;
 @property (nonatomic, strong) IPCRefreshAnimationHeader *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter *refreshFooter;
@@ -149,7 +147,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     layOut.minimumLineSpacing = 5;
     
     [self.productCollectionView setCollectionViewLayout:layOut];
-    [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kResuableId];
+    [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:glassListCellIdentifier];
     self.productCollectionView.mj_header = self.refreshHeader;
     self.productCollectionView.mj_footer = self.refreshFooter;
     self.productCollectionView.emptyAlertImage = @"exception_search";
@@ -264,7 +262,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self.recommendedButton setSelected:YES];
     self.leftBottomConstraint.constant = 15;
     [self.glassListViewMode.glassesList removeAllObjects];
-    [self.productCollectionView reloadData];
+    [self reload];
 }
 
 
@@ -281,14 +279,25 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
     [self.shareButtonView removeFromSuperview];
     [self.photoDeleteConfirmView removeFromSuperview];
     [self.modelsPicker removeFromSuperview];
-    [self.backGroudView removeFromSuperview];
     [self.blurBgView removeFromSuperview];
-    [self.glassListViewMode.filterView removeFromSuperview];
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        self.backGroudView.alpha = 0.5f;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            [self.backGroudView removeFromSuperview];
+        }
+    }];
+    if ([self.glassListViewMode.filterView superview]) {
+        [self.glassListViewMode.filterView closeCompletion:^{
+            [self.glassListViewMode.filterView removeFromSuperview];
+        }];
+    }
 }
 
 //Add a shopping cart animation
 - (void)onAddCartAnimationInCell:(IPCGlasslistCollectionViewCell *)cell{
-    [self.productCollectionView reloadData];
+    [self reload];
     CGPoint startPoint = [cell convertRect:cell.addCartButton.frame toView:self.view.superview].origin;
     CGPoint endPoint = CGPointMake(self.view.superview.jk_width-85, -30);
     [self startAnimationWithStartPoint:startPoint EndPoint:endPoint];
@@ -607,7 +616,7 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    IPCGlasslistCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kResuableId forIndexPath:indexPath];
+    IPCGlasslistCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:glassListCellIdentifier forIndexPath:indexPath];
     cell.delegate = self;
     
     if ([self.glassListViewMode.glassesList count] && self.glassListViewMode){
@@ -637,18 +646,6 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
         IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc] initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
         detailVC.glasses  = self.glassListViewMode.glassesList[indexPath.row];
         [self.navigationController pushViewController:detailVC animated:YES];
-    }
-}
-
-- (void)chooseParameter:(IPCGlasslistCollectionViewCell *)cell{
-    if ([self.glassListViewMode.glassesList count] > 0) {
-        NSIndexPath * indexPath = [self.productCollectionView indexPathForCell:cell];
-        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Complete:^{
-            [self.productCollectionView reloadData];
-        }];
-        self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
-        [self.parameterView show];
     }
 }
 
@@ -762,9 +759,14 @@ static NSString * const kResuableId = @"GlasslistCollectionViewCellIdentifier";
 #pragma mark //Reload Table View
 - (void)reload{
     [super reload];
+    
     [self.productCollectionView reloadData];
-    [self.refreshHeader endRefreshing];
-    [self.refreshFooter endRefreshing];
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+    }
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning

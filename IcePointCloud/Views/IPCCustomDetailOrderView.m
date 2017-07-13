@@ -255,18 +255,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         return 185;
     }else if (indexPath.section == 3){
         if ([IPCCustomerOrderDetail instance].products.count) {
-            IPCGlasses * product = [IPCCustomerOrderDetail instance].products[indexPath.row];
-            if ([product filterType] == IPCTopFilterTypeCustomsizedContactLens || [product filterType] == IPCTopFilterTypeCustomsizedLens) {
-                if ([IPCCustomerOrderDetail instance].orderInfo.isPackUpCustomized) {
-                    id customizedRight = [product.customizedRight objectFromJSONString] ;
-                    id customizedLeft   = [product.customizedLeft objectFromJSONString];
-                    if (product.isUnifiedCustomizd) {
-                        return 240 + ([customizedRight allKeys].count) * 20;
-                    }
-                    return 325 + ([customizedRight allKeys].count + [customizedLeft allKeys].count) * 20;
-                }
-                return 160;
-            }
             return 115;
         }
     }else if (indexPath.section == 4){

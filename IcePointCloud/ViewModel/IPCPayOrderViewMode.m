@@ -14,9 +14,6 @@
 #import "IPCCustomerOptometryCell.h"
 #import "IPCPayOrderEmployeeCell.h"
 #import "IPCPayOrderSettlementCell.h"
-#import "IPCCustomsizedProductCell.h"
-#import "IPCCustomsizedRightParameterCell.h"
-#import "IPCCustomsizedLeftParameterCell.h"
 #import "IPCPayOrderMemoCell.h"
 #import "IPCPayOrderViewCellHeight.h"
 #import "IPCPayTypeRecordCell.h"
@@ -28,9 +25,6 @@ static NSString * const addressIdentifier                = @"CustomerAddressList
 static NSString * const titleIdentifier                      = @"IPCOrderTopTableViewCellIdentifier";
 static NSString * const employeeIdentifier             = @"IPCPayOrderEmployeeCellIdentifier";
 static NSString * const settlementIdentifier           = @"IPCPayOrderSettlementCellIdentifier";
-static NSString * const customsizedProIdentifier   = @"IPCCustomsizedProductCellIdentifier";
-static NSString * const rightEyeIdentifier               = @"IPCCustomsizedRightParameterCellIdentifier";
-static NSString * const leftEyeIdentifier                  = @"IPCCustomsizedLeftParameterCellIdentifier";
 static NSString * const memoIdentifier                  = @"IPCPayOrderMemoCellIdentifier";
 static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCellIdentifier";
 
@@ -48,15 +42,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         self.cellHeight = [[IPCPayOrderViewCellHeight alloc] init];
         //判断选择用户页面的确定按钮是否显示
         [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
-        
-        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
-        {
-            [IPCCustomsizedItem sharedItem].customsizdType = IPCCustomsizedTypeUnified;
-            [IPCCustomsizedItem sharedItem].rightEye = [[IPCCustomsizedEye alloc]init];
-            [IPCCustomsizedItem sharedItem].rightEye.customsizedCount = 1;
-            [IPCCustomsizedItem sharedItem].leftEye = [[IPCCustomsizedEye alloc]init];
-            [IPCCustomsizedItem sharedItem].leftEye.customsizedCount = 1;
-        }
     }
     return self;
 }
@@ -127,7 +112,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     [[IPCPayOrderManager sharedManager] resetData];
     [[IPCShoppingCart sharedCart] clearAllItemPoint];
     [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
-    [[IPCCustomsizedItem sharedItem] resetData];
     [[IPCShoppingCart sharedCart] resetSelectCartItemPrice];
 }
 
@@ -137,6 +121,32 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             [self.delegate reloadPayOrderView];
         }
     }
+}
+
+- (BOOL)isCanPayOrder
+{
+    if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
+        [IPCCustomUI showError:@"请先选择客户信息"];
+        return NO;
+    }
+    if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
+        [IPCCustomUI showError:@"请选择员工"];
+        return NO;
+    }
+    if ([[IPCPayOrderManager sharedManager] isExistEmptyEmployeeResult]) {
+        [IPCCustomUI showError:@"参与比例必须填写且大于零"];
+        return NO;
+    }
+    if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
+        [IPCCustomUI showError:@"员工总份额不足百分之一百"];
+        return NO;
+    }
+    if ([IPCPayOrderManager sharedManager].realTotalPrice + [IPCPayOrderManager sharedManager].givingAmount + [IPCPayOrderManager sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice])
+    {
+        [IPCCustomUI showError:@"请输入有效实付金额"];
+        return NO;
+    }
+    return YES;
 }
 
 #pragma mark //DO Datasource
@@ -151,12 +161,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ((section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (![IPCCurrentCustomer sharedManager].currentCustomer && section == 1))
     {
-        if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
-        {
-            if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified)
-                return 3 + [IPCCustomsizedItem sharedItem].normalProducts.count;
-            return 4 + [IPCCustomsizedItem sharedItem].normalProducts.count;
-        }
         return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
     }
     else if ([self.cellHeight tableViewCell:section])
@@ -291,66 +295,19 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeNormal || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeVlaueCard) {
-                [cell setLeftTitle:@"购买列表"];
-            }else{
-                [cell setRightOperation:@"购买列表" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
-                [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-                    if ([self.delegate respondsToSelector:@selector(selectNormalGlasses)]) {
-                        [self.delegate selectNormalGlasses];
-                    }
-                }];
-            }
+            [cell setLeftTitle:@"购买列表"];
             return cell;
         }else{
-            if (([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) && indexPath.row < ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified ? 3 : 4)) {
-                if (indexPath.row == 1) {
-                    IPCCustomsizedProductCell * cell = [tableView dequeueReusableCellWithIdentifier:customsizedProIdentifier];
-                    if (!cell) {
-                        cell = [[UINib nibWithNibName:@"IPCCustomsizedProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-                    }
-                    cell.customsizedProduct = [IPCCustomsizedItem sharedItem].customsizedProduct;
-                    return cell;
-                }else if(indexPath.row == 2){
-                    IPCCustomsizedRightParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:rightEyeIdentifier];
-                    if (!cell) {
-                        cell = [[UINib nibWithNibName:@"IPCCustomsizedRightParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
-                        cell.delegate = self;
-                    }
-                    return cell;
-                }else{
-                    IPCCustomsizedLeftParameterCell * cell = [tableView dequeueReusableCellWithIdentifier:leftEyeIdentifier];
-                    if (!cell) {
-                        cell = [[UINib nibWithNibName:@"IPCCustomsizedLeftParameterCell" bundle:nil] instantiateWithOwner:nil options:nil][0];
-                        cell.delegate = self;
-                    }
-                    return cell;
-                }
-            }else{
-                IPCPayOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:payOrderCartItemIdentifier];
-                if (!cell) {
-                    cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-                    cell.delegate = self;
-                }
-                if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens)
-                {
-                    IPCShoppingCartItem * cartItem = nil;
-                    if ([IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeUnified) {
-                        cartItem = [IPCCustomsizedItem sharedItem].normalProducts[indexPath.row-3];
-                    }else{
-                        cartItem = [IPCCustomsizedItem sharedItem].normalProducts[indexPath.row-4];
-                    }
-                    if (cartItem){
-                        [cell setCartItem:cartItem];
-                    }
-                }else{
-                    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:indexPath.row-1] ;
-                    if (cartItem){
-                        [cell setCartItem:cartItem];
-                    }
-                }
-                return cell;
+            IPCPayOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:payOrderCartItemIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell.delegate = self;
             }
+            IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:indexPath.row-1] ;
+            if (cartItem){
+                [cell setCartItem:cartItem];
+            }
+            return cell;
         }
     }else if((indexPath.section == 6 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];

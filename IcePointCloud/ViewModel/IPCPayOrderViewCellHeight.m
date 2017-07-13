@@ -52,36 +52,6 @@
 
 - (CGFloat)buyProductCellHeight:(NSIndexPath *)indexPath
 {
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
-    {
-        if (indexPath.row == 1) {
-            return 120;
-        }else if (indexPath.row == 2){
-            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
-                if ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count > 1) {
-                    return 355 + ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count - 1) * 50;
-                }
-                return 355;
-            }else{
-                if ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count > 1) {
-                    return 200 + ([IPCCustomsizedItem sharedItem].rightEye.otherArray.count - 1) * 50;
-                }
-                return 200;
-            }
-        }else if(indexPath.row == 3 && [IPCCustomsizedItem sharedItem].customsizdType == IPCCustomsizedTypeLeftOrRightEye){
-            if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens) {
-                if ([IPCCustomsizedItem sharedItem].leftEye.otherArray.count > 1) {
-                    return 310 + ([IPCCustomsizedItem sharedItem].leftEye.otherArray.count - 1) * 50;
-                }
-                return 310;
-            }else{
-                if ([IPCCustomsizedItem sharedItem].leftEye.otherArray.count > 1) {
-                    return 150 + ([IPCCustomsizedItem sharedItem].leftEye.otherArray.count - 1) * 50;
-                }
-                return 150;
-            }
-        }
-    }
     return 135;
 }
 

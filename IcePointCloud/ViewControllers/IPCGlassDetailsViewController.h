@@ -12,7 +12,6 @@
 @interface IPCGlassDetailsViewController : IPCRootNavigationViewController
 
 @property (nonatomic, copy) IPCGlasses *glasses;
-@property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;
 
 @end
 

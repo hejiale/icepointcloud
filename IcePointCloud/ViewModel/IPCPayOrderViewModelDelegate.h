@@ -14,7 +14,6 @@
 - (void)managerOptometryView;
 - (void)managerAddressView;
 - (void)reloadPayOrderView;
-- (void)selectNormalGlasses;
 - (void)successPayOrder;
 - (void)failPayOrder;
 @end

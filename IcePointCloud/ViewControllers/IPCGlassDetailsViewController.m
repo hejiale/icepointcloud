@@ -23,10 +23,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (weak, nonatomic) IBOutlet UIButton *addCartButton;
-@property (weak, nonatomic) IBOutlet UIView *topBarView;
-@property (weak, nonatomic) IBOutlet UIImageView *cartImageView;
 @property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
-@property (weak, nonatomic) IBOutlet UIView *cartBageView;
 @property (strong, nonatomic) UIView * specHostView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
 @property (strong, nonatomic) IPCGlassParameterView  *parameterView;
@@ -40,23 +37,19 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 {
     [super viewDidLoad];
     
-    [self.topBarView addBottomLine];
+    [self setNavigationTitle:@"商品详情"];
+    [self setRightItem:@"icon_cart_normal" Selection:@selector(pushToCartAction:)];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
-    [self reloadCartView];
+    
+    [self reloadCartBadge];
+    [self buildSpecificationViews];
+    [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self setNavigationBarStatus:YES];
-    
-    if (self.glasses) {
-        [self.cartImageView setHidden:NO];
-        [self.addCartButton setHidden:NO];
-    }else{
-        [self.cartImageView setHidden:YES];
-        [self.customsizedButton setHidden:NO];
-    }
+    [self setNavigationBarStatus:NO];
 }
 
 
@@ -73,26 +66,12 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
-    
-    if (_glasses) {
-        [self buildSpecificationViews];
-        [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
-    }
-}
-
-- (void)setCustomsizedProduct:(IPCCustomsizedProduct *)customsizedProduct{
-    _customsizedProduct = customsizedProduct;
-    
-    if (_customsizedProduct) {
-        [self buildSpecificationViews];
-        [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
-    }
 }
 
 #pragma mark //Set UI
 - (UIView *)specHostView{
     if (!_specHostView) {
-        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(35, 0, SCREEN_WIDTH-70, 0)];
+        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(30, 0, self.detailTableView.jk_width-50, 0)];
         [_specHostView setBackgroundColor:[UIColor clearColor]];
     }
     return _specHostView;
@@ -100,15 +79,10 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 - (void)buildSpecificationViews
 {
-    CGFloat yMargin   = 35;
-    CGFloat lblWidth  = self.specHostView.jk_width/3;
+    __block CGFloat yMargin   = 35;
+    __block CGFloat lblWidth  = self.specHostView.jk_width/3;
     
-    NSArray<NSString *> *keys = nil;
-    if (self.glasses) {
-        keys = [self.glasses displayFields].allKeys;
-    }else{
-        keys = [self.customsizedProduct displayFields].allKeys;
-    }
+    __block NSArray<NSString *> * keys = [self.glasses displayFields].allKeys;
     NSInteger numOfRows = ceil(keys.count / 3);
     
     [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -117,11 +91,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
         label.textColor = [UIColor lightGrayColor];
         label.backgroundColor = [UIColor clearColor];
         label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
-        if (self.glasses) {
-            label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.glasses displayFields][obj]];
-        }else{
-            label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.customsizedProduct displayFields][obj]];
-        }
+        label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.glasses displayFields][obj]];
         [self.specHostView addSubview:label];
     }];
     
@@ -134,7 +104,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 - (UIWebView *)productDetailWebView{
     if (!_productDetailWebView) {
-        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(30, 0, SCREEN_WIDTH-60, 0)];
+        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(25, 0, self.detailTableView.jk_width-50, 0)];
         [_productDetailWebView setBackgroundColor:[UIColor clearColor]];
         _productDetailWebView.delegate = self;
         _productDetailWebView.scrollView.scrollEnabled = NO;
@@ -148,7 +118,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
     [IPCCustomUI showSuccess:@"添加购物车成功!"];
-    [self reloadCartView];
+    [self reloadCartBadge];
 }
 
 - (IBAction)addToCartAction:(id)sender {
@@ -158,7 +128,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
             [IPCCustomUI showError:@"暂无库存，请重新选择!"];
         }else{
             self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-                [self reloadCartView];
+                [self reloadCartBadge];
             }];
             self.parameterView.glasses = _glasses;
             [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -170,12 +140,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     }
 }
 
-
-- (IBAction)onBackBtnTapped:(id)sender{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)pushToCartAction:(id)sender {
+- (void)pushToCartAction:(id)sender {
     [IPCCustomUI pushToRootIndex:4];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
@@ -183,8 +148,8 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 - (IBAction)onCustomsizedAction:(id)sender {
 }
 
-- (void)reloadCartView{
-    [self.cartBageView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
+- (void)reloadCartBadge{
+    [self.navigationItem.rightBarButtonItem.customView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
 
 #pragma mark //UITableViewDataSource
@@ -204,11 +169,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCProductDetailTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
-        if (self.glasses) {
-            cell.glasses = self.glasses;
-        }else{
-            cell.customsizedProduct = self.customsizedProduct;
-        }
+        cell.glasses = self.glasses;
         return cell;
     }else if(indexPath.section == 1){
         if (indexPath.row == 0) {

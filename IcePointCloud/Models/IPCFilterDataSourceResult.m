@@ -35,10 +35,9 @@
 }
 
 
-- (void)parseFilterData:(id)responseObject IsTry:(BOOL)isTry IsCustomsized:(BOOL)isCustomsized
+- (void)parseFilterData:(id)responseObject IsTry:(BOOL)isTry
 {
     self.isTryOn = isTry;  
-    self.isCustomsized = isCustomsized;
     
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         for (NSString * key in [responseObject allKeys]) {

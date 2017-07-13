@@ -22,11 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contactDegreeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *batchNumLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *customsizedImage;
-@property (weak, nonatomic) IBOutlet UIView *customsizedPackView;
-@property (strong, nonatomic) UIView  *  customizedContentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *degreeWidthConstraint;
-@property (weak, nonatomic) IBOutlet UIButton *lookCustomizedButton;
 @property (strong, nonatomic) UIImageView * pointImageView;
 @property (assign, nonatomic) id<IPCCustomerOrderDetailDelegate>delegate;
 

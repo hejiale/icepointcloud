@@ -100,14 +100,6 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
      *  OTHERS
      */
     IPCTopFilterTypeOthers,
-    /**
-     *  CUSTOMSIZED CONTACT LENS
-     */
-    IPCTopFilterTypeCustomsizedContactLens,
-    /**
-     *  CUSTOMSIZED LENS
-     */
-    IPCTopFilterTypeCustomsizedLens,
 };
 
 /**
@@ -134,22 +126,6 @@ typedef NS_ENUM(NSInteger, IPCGlassesImageType) {
      *   THUMB
      */
     IPCGlassesImageTypeThumb
-};
-
-
-/**
- 订单支付商品类型
- 
- - IPCPayOrderTypeNormal: 普通商品
- - IPCPayOrderTypeVlaueCard: 储值卡
- - IPCPayOrderTypeCustomsizedLens: 定制类镜片
- - IPCPayOrderTypeCustomsizedContactLens: 定制类隐形眼镜
- */
-typedef NS_ENUM(NSInteger, IPCPayOrderType){
-    IPCPayOrderTypeNormal = 0,
-    IPCPayOrderTypeVlaueCard,
-    IPCPayOrderTypeCustomsizedLens,
-    IPCPayOrderTypeCustomsizedContactLens,
 };
 
 

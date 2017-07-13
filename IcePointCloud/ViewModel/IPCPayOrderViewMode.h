@@ -16,6 +16,11 @@
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId;
 
 /**
+ * Judge Is Can Pay Order
+
+ */
+- (BOOL)isCanPayOrder;
+/**
  *   UITableView DataSource \ Delegate
  */
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;

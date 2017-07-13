@@ -12,7 +12,6 @@
 
 @interface IPCGlasslistCollectionViewCell : UICollectionViewCell<UIScrollViewDelegate>
 
-
 @property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
@@ -23,14 +22,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
 @property (strong, nonatomic) UIPageControl * imagePageControl;
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
-@property (weak, nonatomic) IBOutlet UIImageView *customsizedImageView;
-@property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
-@property (weak, nonatomic) IBOutlet UIImageView *customsizedTagImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *customsizedDateImage;
-@property (weak, nonatomic) IBOutlet UILabel *customsizedDateLabel;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
-@property (nonatomic, copy) IPCCustomsizedProduct * customsizedProduct;
 
 @property (nonatomic) BOOL  isTrying;//Whether to try the page
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;
@@ -46,6 +39,5 @@
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell;
 - (void)reloadProductList;
 - (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell;
-- (void)customsized:(IPCGlasslistCollectionViewCell *)cell;
 
 @end

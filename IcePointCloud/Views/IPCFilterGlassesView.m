@@ -52,6 +52,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     [super awakeFromNib];
     
     chooseCellHeight = 100;
+    self.leftBgView.alpha = 0;
     
     sectionTitles = @[@"类目",@"属性",@"价格区间"];
     self.allButtonsArray = [[NSMutableArray alloc]init];
@@ -97,7 +98,8 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     [UIView animateWithDuration:0.8f animations:^{
         CGRect frame    = self.frame;
         frame.origin.x += self.jk_width;
-        self.frame      = frame;
+        self.frame          = frame;
+        self.leftBgView.alpha = 1;
     } completion:^(BOOL finished) {
         if (finished) {
             [UIView animateWithDuration:0.1f animations:^{
@@ -113,11 +115,17 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 - (void)closeCompletion:(void (^)())completed
 {
     [UIView animateWithDuration:0.3f animations:^{
-        CGRect rect    = self.frame;
-        rect.origin.x -= self.jk_width;
-        self.frame     = rect;
+        CGRect frame    = self.frame;
+        frame.origin.x -= self.jk_width;
+        self.frame         = frame;
+        self.leftBgView.alpha = 0;
+        self.rightView.alpha = 0;
     } completion:^(BOOL finished) {
-        completed();
+        if (finished) {
+            if (completed) {
+                completed();
+            }
+        }
     }];
 }
 

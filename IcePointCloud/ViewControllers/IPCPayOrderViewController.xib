@@ -67,7 +67,7 @@
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                     <state key="normal" title="保存"/>
                     <connections>
-                        <action selector="loadPayStyleView:" destination="-1" eventType="touchUpInside" id="JOr-Cn-RgS"/>
+                        <action selector="savePayOrder:" destination="-1" eventType="touchUpInside" id="5bC-Gq-3SH"/>
                     </connections>
                 </button>
             </subviews>

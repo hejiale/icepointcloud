@@ -49,7 +49,7 @@
 - (NSInteger)selectPayItemsCount
 {
     if ([self isExistValueCard])
-    return [self valueCardCount];
+        return [self valueCardCount];
     return [self selectNormalItemsCount];
 }
 
@@ -113,14 +113,13 @@
 
 - (double)selectedPayItemTotalPrice
 {
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
-    return [[IPCCustomsizedItem sharedItem] totalPrice];
-    if ([self isExistValueCard])
-    return [self selectedValueCardTotalPrice];
+    if ([self isExistValueCard]){
+        return [self selectedValueCardTotalPrice];
+    }
     return [self selectedGlassesTotalPrice];
 }
 
-#pragma mark //CartItem 
+#pragma mark //CartItem
 - (NSArray<IPCShoppingCartItem *>*)cartItems{
     return [self.itemList filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
         return [[evaluatedObject glasses] filterType] != IPCTopFilterTypeCard;
@@ -283,12 +282,12 @@
 
 - (void)removeSelectCartItem{
     for (IPCShoppingCartItem *ci in [[IPCShoppingCart sharedCart] selectCartItems])
-    [[IPCShoppingCart sharedCart] removeItem:ci];
+        [[IPCShoppingCart sharedCart] removeItem:ci];
 }
 
 - (void)removeAllValueCardCartItem{
     for (IPCShoppingCartItem *ci in [[IPCShoppingCart sharedCart] selectValueCardCartItems])
-    [[IPCShoppingCart sharedCart] removeItem:ci];
+        [[IPCShoppingCart sharedCart] removeItem:ci];
 }
 
 - (void)reduceItem:(IPCShoppingCartItem *)cartItem{
@@ -333,8 +332,8 @@
 - (IPCShoppingCartItem *)normalItemForGlasses:(IPCGlasses *)glasses
 {
     for (IPCShoppingCartItem *ci in self.itemList)
-    if ([ci.glasses.glassesID isEqualToString:glasses.glassesID])
-    return ci;
+        if ([ci.glasses.glassesID isEqualToString:glasses.glassesID])
+            return ci;
     return nil;
 }
 
@@ -362,21 +361,21 @@
 - (IPCShoppingCartItem *)batchItemForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl  ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date
 {
     for (IPCShoppingCartItem *ci in self.itemList)
-    if (([ci.glasses.glassesID isEqualToString:glasses.glassesID])){
-        if ([glasses filterType] == IPCTopFilterTypeLens) {
-            if ([cyl isEqualToString:ci.bacthCyl] && [sph isEqualToString:ci.batchSph])
-            return ci;
-        }else if ([glasses filterType] == IPCTopFilterTypeReadingGlass){
-            if ([readingDegree isEqualToString:ci.batchReadingDegree])
-            return ci;
-        }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
-            if ([contactDegree isEqualToString:ci.contactDegree] && [batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
-            return ci;
-        }else{
-            if ([batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
-            return ci;
+        if (([ci.glasses.glassesID isEqualToString:glasses.glassesID])){
+            if ([glasses filterType] == IPCTopFilterTypeLens) {
+                if ([cyl isEqualToString:ci.bacthCyl] && [sph isEqualToString:ci.batchSph])
+                    return ci;
+            }else if ([glasses filterType] == IPCTopFilterTypeReadingGlass){
+                if ([readingDegree isEqualToString:ci.batchReadingDegree])
+                    return ci;
+            }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
+                if ([contactDegree isEqualToString:ci.contactDegree] && [batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
+                    return ci;
+            }else{
+                if ([batchNum isEqualToString:ci.batchNum] && [kindNum isEqualToString:ci.kindNum] && [date isEqualToString:ci.validityDate])
+                    return ci;
+            }
         }
-    }
     return nil;
 }
 

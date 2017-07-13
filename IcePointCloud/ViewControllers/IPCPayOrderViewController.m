@@ -9,7 +9,6 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewMode.h"
 #import "IPCSearchCustomerViewController.h"
-#import "IPCSelectCustomsizedViewController.h"
 #import "IPCManagerOptometryViewController.h"
 #import "IPCManagerAddressViewController.h"
 #import "IPCEmployeListView.h"
@@ -78,31 +77,12 @@
 }
 
 #pragma mark //Clicked Events
-- (IBAction)loadPayStyleView:(id)sender
+- (IBAction)savePayOrder:(id)sender
 {
-    if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
-        [IPCCustomUI showError:@"请先选择客户信息"];
-        return;
+    if ([self.payOrderViewMode isCanPayOrder]) {
+        [self.saveButton jk_showIndicator];
+        [self.payOrderViewMode offerOrder];
     }
-    if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-        [IPCCustomUI showError:@"请选择员工"];
-        return;
-    }
-    if ([[IPCPayOrderManager sharedManager] isExistEmptyEmployeeResult]) {
-        [IPCCustomUI showError:@"参与比例必须填写且大于零"];
-        return;
-    }
-    if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
-        [IPCCustomUI showError:@"员工总份额不足百分之一百"];
-        return;
-    }
-    if ([IPCPayOrderManager sharedManager].realTotalPrice + [IPCPayOrderManager sharedManager].givingAmount + [IPCPayOrderManager sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice])
-    {
-        [IPCCustomUI showError:@"请输入有效实付金额"];
-        return;
-    }
-    [self.saveButton jk_showIndicator];
-    [self.payOrderViewMode offerOrder];
 }
 
 
@@ -116,7 +96,11 @@
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
+- (void)removeCover{
+    [self.employeView removeFromSuperview];
+}
 
+#pragma mark //Push Method
 - (void)pushToManagerOptometryViewController{
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
     optometryVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
@@ -127,10 +111,6 @@
     IPCManagerAddressViewController * addressVC = [[IPCManagerAddressViewController alloc]initWithNibName:@"IPCManagerAddressViewController" bundle:nil];
     addressVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
     [self.navigationController pushViewController:addressVC animated:YES];
-}
-
-- (void)removeCover{
-    [self.employeView removeFromSuperview];
 }
 
 #pragma mark //ChooseCustomer Notification
@@ -145,11 +125,9 @@
     return [self.payOrderViewMode numberOfSectionsInTableView:tableView];
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.payOrderViewMode tableView:tableView numberOfRowsInSection:section];
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     return [self.payOrderViewMode tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -161,7 +139,6 @@
     return [self.payOrderViewMode tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.1;
 }
@@ -172,7 +149,6 @@
     }
     return 5;
 }
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
@@ -189,18 +165,12 @@
     [self pushToManagerOptometryViewController];
 }
 
-
 - (void)managerAddressView{
     [self pushToManagerAddressViewController];
 }
 
 - (void)reloadPayOrderView{
     [self.payOrderTableView reloadData];
-}
-
-- (void)selectNormalGlasses{
-    IPCSelectCustomsizedViewController * selectCustomsizedVC = [[IPCSelectCustomsizedViewController alloc]initWithNibName:@"IPCSelectCustomsizedViewController" bundle:nil];
-    [self.navigationController pushViewController:selectCustomsizedVC animated:YES];
 }
 
 - (void)successPayOrder{

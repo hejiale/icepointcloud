@@ -48,7 +48,6 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (strong, nonatomic, readwrite) IPCFilterGlassesView   * filterView;
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *>   *glassesList;
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomsizedProduct *>   * customsizedList;
 @property (nonatomic, strong, readwrite) IPCFilterDataSourceResult   * filterDataSource;
 @property (strong, nonatomic, readwrite) IPCFilterCategoryMode               *filterValue;
 
@@ -56,15 +55,12 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, assign, readwrite) NSInteger   currentPage;
 @property (nonatomic) IPCTopFilterType   currentType;
 @property (nonatomic, assign, readwrite) BOOL  isTrying;
-@property (nonatomic, assign, readwrite) BOOL  isCustomsized;
 @property (nonatomic, assign, readwrite) BOOL  isBeginLoad;
 
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
                                IsHot:(BOOL)isHot
                             Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
-- (void)getCustomsizedLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
-- (void)getCustomsizedContactLensWithComplete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)loadFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 
 @end

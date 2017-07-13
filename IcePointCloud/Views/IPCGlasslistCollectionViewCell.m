@@ -17,11 +17,7 @@
     __weak typeof (self) weakSelf = self;
     [self.imageScrollView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf showCustomsizedDetailAction];
-    }];
-    [self.customsizedImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf showCustomsizedDetailAction];
+        [strongSelf showDetailAction];
     }];
     [self addSubview:self.imagePageControl];
     [self bringSubviewToFront:self.imagePageControl];
@@ -116,28 +112,6 @@
     }
 }
 
-- (void)setCustomsizedProduct:(IPCCustomsizedProduct *)customsizedProduct{
-    _customsizedProduct = customsizedProduct;
-    
-    if (_customsizedProduct) {
-        [self resetBuyStatus];
-        [self.customsizedImageView setHidden:NO];
-        [self.customsizedButton setHidden:NO];
-        [self.customsizedTagImageView setHidden:NO];
-        [self.customsizedDateImage setHidden:NO];
-        [self.customsizedDateLabel setHidden:NO];
-        
-        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_customsizedProduct.suggestPrice] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
-        
-        [self.productNameLabel setText:_customsizedProduct.name];
-        CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
-        self.labelHeightConstraint.constant = labelHeight;
-        
-        [self.customsizedImageView setImageURL:[NSURL URLWithString:_customsizedProduct.thumbnailURL]];
-        [self.customsizedDateLabel setText:[NSString stringWithFormat:@"%d天内定制完成",_customsizedProduct.period]];
-    }
-}
-
 
 #pragma mark //Set UI
 - (UIPageControl *)imagePageControl{
@@ -228,22 +202,10 @@
     }
 }
 
-
-- (IBAction)customsizedAction:(id)sender {
-    [IPCCustomsizedItem sharedItem].customsizedProduct = self.customsizedProduct;
-    
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(customsized:)]) {
-            [self.delegate customsized:self];
-        }
+- (void)showDetailAction{
+    if ([self.delegate respondsToSelector:@selector(showProductDetail:)]) {
+        [self.delegate showProductDetail:self];
     }
-}
-
-
-- (void)showCustomsizedDetailAction{
-    if (self.delegate)
-        if ([self.delegate respondsToSelector:@selector(showProductDetail:)])
-            [self.delegate showProductDetail:self];
 }
 
 
@@ -252,12 +214,7 @@
     [self.addCartButton setHidden:YES];
     [self.reduceButton setHidden:YES];
     [self.cartNumLabel setHidden:YES];
-    [self.customsizedButton setHidden:YES];
-    [self.customsizedImageView setHidden:YES];
     [self.imageScrollView setHidden:YES];
-    [self.customsizedTagImageView setHidden:YES];
-    [self.customsizedDateImage setHidden:YES];
-    [self.customsizedDateLabel setHidden:YES];
 }
 
 #pragma mark //UIScrollViewDelegate

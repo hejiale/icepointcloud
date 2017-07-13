@@ -182,7 +182,6 @@ typedef NS_ENUM(NSInteger, ContactLenSpecType){
     [self.lensSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.accessorySureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.customsizedSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
-    [self.customsizedMemoView addSignleCorner:UIRectCornerAllCorners Size:4];
     [self.customsizedMemoView setPlaceholder:@"请输入商品备注信息..."];
     
     [self.lensCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];

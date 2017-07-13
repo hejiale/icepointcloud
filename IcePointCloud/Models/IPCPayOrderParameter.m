@@ -62,11 +62,6 @@
         [parameters setObject:otherTypeList forKey:@"orderPayInfos"];
     }
     [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
-    
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens)
-    {
-        [parameters setObject:@"true" forKey:@"isCustomizedLens"];
-    }
     [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
     
     return parameters;
@@ -78,20 +73,9 @@
 {
     __block NSMutableArray * itemParams = [[NSMutableArray alloc]init];
     
-    //***********区分定制商品与普通商品**************//
-    if ([IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedLens || [IPCCustomsizedItem sharedItem].payOrderType == IPCPayOrderTypeCustomsizedContactLens)
-    {
-        [itemParams addObject:[[IPCCustomsizedItem sharedItem] paramtersJSONForOrderRequest]];
-        
-        for (int i = 0; i < [IPCCustomsizedItem sharedItem].normalProducts.count; i++) {
-            IPCShoppingCartItem * item = [IPCCustomsizedItem sharedItem].normalProducts[i];
-            [itemParams addObject:[item paramtersJSONForOrderRequest]];
-        }
-    }else{
-        for (int i = 0; i < [[IPCShoppingCart sharedCart] selectPayItemsCount]; i++) {
-            IPCShoppingCartItem *item = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:i];
-            [itemParams addObject:[item paramtersJSONForOrderRequest]];
-        }
+    for (int i = 0; i < [[IPCShoppingCart sharedCart] selectPayItemsCount]; i++) {
+        IPCShoppingCartItem *item = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:i];
+        [itemParams addObject:[item paramtersJSONForOrderRequest]];
     }
     return itemParams;
 }
