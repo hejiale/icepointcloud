@@ -19,7 +19,6 @@
 
 - (void)show;
 - (void)reloadFilterView;
-- (void)closeCompletion:(void (^)())completed;
 
 @end
 

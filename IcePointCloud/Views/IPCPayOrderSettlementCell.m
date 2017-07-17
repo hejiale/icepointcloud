@@ -69,13 +69,7 @@
 
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].pointPrice]];
-    
-    if ([IPCPayOrderManager sharedManager].realTotalPrice > 0) {
-        [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice]];
-    }else{
-        [self.payAmountTextField setText:@""];
-    }
-
+    [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice]];
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].usedPoint]];
     [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderManager sharedManager].point]];
     [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderManager sharedManager].givingAmount]];

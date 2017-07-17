@@ -37,6 +37,7 @@
  */
 - (void)enableKeyboard{
     [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;
 }
 
 /**

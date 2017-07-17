@@ -80,7 +80,7 @@
     // Filter switch
     UIButton *_filterButton;
     // Photo preview view
-    UIButton *_preview;
+    UIView *_preview;
     //The title
     UILabel * _topTitleLabel;
     //The face of a frame
@@ -109,7 +109,7 @@
 }
 
 #pragma mark - camera action
-- (BOOL)prefersStatusBarHidden;
+- (BOOL)prefersStatusBarHidden
 {
     return YES;
 }
@@ -128,9 +128,9 @@
 {
     [super viewWillAppear:animated];
     
-    // 如果从编辑图片回来，需要隐藏状态栏和导航栏  隐藏状态栏 for IOS6
-    [self.navigationController setNavigationBarHidden:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+//    // 如果从编辑图片回来，需要隐藏状态栏和导航栏  隐藏状态栏 for IOS6
+//    [self.navigationController setNavigationBarHidden:YES];
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     // Camera open access
     [TuSDKTSDeviceSettings checkAllowWithController:self
                                                type:lsqDeviceSettingsCamera
@@ -329,17 +329,17 @@
 }
 
 // Close the preview view
-- (void)onClosePreview:(id)sender;
-{
-    [UIView animateWithDuration:0.32 animations:^{
-        _preview.alpha = 0;
-    } completion:^(BOOL finished) {
-        [_preview removeAllSubviews];
-        _preview.hidden = YES;
-        
-        [_camera resumeCameraCapture];
-    }];
-}
+//- (void)onClosePreview:(id)sender;
+//{
+//    [UIView animateWithDuration:0.32 animations:^{
+//        _preview.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        [_preview removeAllSubviews];
+//        _preview.hidden = YES;
+//        
+//        [_camera resumeCameraCapture];
+//    }];
+//}
 #pragma mark - init
 -(void)viewDidLoad;
 {
@@ -397,9 +397,8 @@
     [_bottomBar addSubview:_captureButton];
     
     // 照片预览视图
-    _preview = [UIButton initWithFrame:self.view.bounds];
+    _preview = [UIView initWithFrame:self.view.bounds];
     _preview.hidden = YES;
-    [_preview addTouchUpInsideTarget:self action:@selector(onClosePreview:)];
     [self.view addSubview:_preview];
     
     [self buildFilterWindow];

@@ -28,9 +28,8 @@
 
 @synthesize delegate = _delegate;
 
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
+- (void)awakeFromNib{
+    [super awakeFromNib];
     
     [self addLeftLine];
     
@@ -63,7 +62,6 @@
         [strongSelf showClose];
     }];
 }
-
 
 - (void)setMatchItem:(IPCMatchItem *)matchItem{
     _matchItem = matchItem;

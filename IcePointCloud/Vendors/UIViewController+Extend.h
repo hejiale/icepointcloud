@@ -14,6 +14,6 @@
 
 - (void)setBackground;
 
-- (void)addCoverWithAlpha:(CGFloat)alpha InView:(UIView *)view Complete:(void (^)())completed;
+- (void)addCoverWithAlpha:(CGFloat)alpha Complete:(void (^)())completed;
 
 @end

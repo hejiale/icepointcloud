@@ -21,6 +21,8 @@
 #import "IPCCompareItemView.h"
 #import "IPCProductViewMode.h"
 #import "IPCOfflineFaceDetector.h"
+#import "IPCGlassParameterView.h"
+#import "IPCEditBatchParameterView.h"
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
@@ -50,6 +52,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @property (strong, nonatomic) UIVisualEffectView * blurBgView;
 @property (strong, nonatomic)  IPCShareChatView  *shareButtonView;
 @property (strong, nonatomic) IPCSwitch *compareSwitch;
+@property (strong, nonatomic) IPCGlassParameterView                  *parameterView;
+@property (strong, nonatomic) IPCEditBatchParameterView           *editParameterView;
 @property (nonatomic, strong) IPCRefreshAnimationHeader *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter *refreshFooter;
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
@@ -277,23 +281,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Clean bg cover methods
 - (void)removeCover{
     [super removeCover];
+    
     [self.shareButtonView removeFromSuperview];
     [self.photoDeleteConfirmView removeFromSuperview];
     [self.modelsPicker removeFromSuperview];
     [self.blurBgView removeFromSuperview];
-    
-    [UIView animateWithDuration:0.3f animations:^{
-        self.coverView.alpha = 0.5f;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self.coverView removeFromSuperview];
-        }
-    }];
-    if ([self.glassListViewMode.filterView superview]) {
-        [self.glassListViewMode.filterView closeCompletion:^{
-            [self.glassListViewMode.filterView removeFromSuperview];
-        }];
-    }
+    [self.glassListViewMode.filterView removeFromSuperview];
+    [self.coverView removeFromSuperview];
 }
 
 //Add a shopping cart animation
@@ -323,7 +317,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.coverView superview]) {
         [self removeCover];
     }else{
-        [self addCoverWithAlpha:0   InView:self.view Complete:^{
+        [self addCoverWithAlpha:0 Complete:^{
             [self removeCover];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.coverView].origin.x-50;
@@ -353,7 +347,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.coverView superview]) {
         [self removeCover];
     }else{
-        [self addCoverWithAlpha:0   InView:self.view Complete:^{
+        [self addCoverWithAlpha:0 Complete:^{
             [self removeCover];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.coverView].origin.x - self.modelsPicker.jk_width + 75;
@@ -403,7 +397,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Share Tryglass Image
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
-    [self addCoverWithAlpha:0.2  InView:self.view  Complete:^{
+    [self addCoverWithAlpha:0.2 Complete:^{
         [self removeCover];
     }];
     _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.coverView.jk_width,80 )
@@ -520,7 +514,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
-        [self addCoverWithAlpha:0.2  InView:self.view Complete:^{
+        [self addCoverWithAlpha:0.2 Complete:^{
             [self removeCover];
         }];
         [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
@@ -652,6 +646,33 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 
+- (void)chooseParameter:(IPCGlasslistCollectionViewCell *)cell{
+    if ([self.glassListViewMode.glassesList count] > 0) {
+        NSIndexPath * indexPath = [self.productCollectionView indexPathForCell:cell];
+        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+            [self reload];
+        }];
+        self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+        [self.parameterView show];
+    }
+}
+
+- (void)editBatchParameter:(IPCGlasslistCollectionViewCell *)cell{
+    __weak typeof (self) weakSelf = self;
+    if ([self.glassListViewMode.glassesList count] > 0) {
+        NSIndexPath * indexPath = [self.productCollectionView indexPathForCell:cell];
+        self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:self.glassListViewMode.glassesList[indexPath.row] Dismiss:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf.editParameterView removeFromSuperview];strongSelf.editParameterView = nil;
+            [strongSelf reload];
+        }];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
+        [self.editParameterView show];
+    }
+}
+
+
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productCollectionView indexPathForCell:cell];
@@ -737,8 +758,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             if (!self.compareSwitch.isOn) {
                 [self.signleModeView dropGlasses:glass onLocaton:location];
             }else{
-                [self.signleModeView initGlassView];
-                
                 UIView *target = [self.compareBgView hitTest:location withEvent:nil];
                 target = [IPCCustomUI nearestAncestorForView:target withClass:[IPCCompareItemView class]];
                 if (target && [target isKindOfClass:[IPCCompareItemView class]]) {

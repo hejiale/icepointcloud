@@ -131,13 +131,15 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
                                               SuccessBlock:^(id responseValue)
      {
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
-         [self.orderDetailTableView reloadData];
-         if ([IPCPayOrderManager sharedManager].remainAmount > 0) {
+         
+         if ([IPCPayOrderManager sharedManager].remainAmount > 0 && ![[IPCAppManager orderStatus:[IPCCustomerOrderDetail instance].orderInfo.status] isEqualToString:@"已退款"])
+         {
              [self.payBottomView setHidden:NO];
              self.tableViewBottom.constant = 56;
              NSString * payPrice = [NSString stringWithFormat:@"支付尾款:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
              [self.payPriceLabel setAttributedText:[IPCCustomUI subStringWithText:payPrice BeginRang:5 Rang:payPrice.length - 5 Font:self.payPriceLabel.font Color:COLOR_RGB_RED]];
          }
+         [self.orderDetailTableView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];

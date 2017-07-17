@@ -25,9 +25,8 @@
 
 @implementation IPCSingleModeView
 
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
+- (void)awakeFromNib{
+    [super awakeFromNib];
     
     [self addLeftLine];
     [self addSubview:self.glassesView];
@@ -68,6 +67,7 @@
     [self.glassesView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
         [self showClose];
     }];
+    
 }
 
 
@@ -125,6 +125,7 @@
 
 - (void)initGlassView{
     [super initGlassView];
+    
     self.glassesView.transform = CGAffineTransformIdentity;
     self.draggedPosition = CGPointMake(-100, -100);
     [self.glassImageView setImage:nil];

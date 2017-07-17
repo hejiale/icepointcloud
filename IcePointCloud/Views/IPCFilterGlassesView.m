@@ -111,24 +111,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     }];
 }
 
-
-- (void)closeCompletion:(void (^)())completed
-{
-    [UIView animateWithDuration:0.3f animations:^{
-        CGRect frame    = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame         = frame;
-        self.leftBgView.alpha = 0;
-        self.rightView.alpha = 0;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if (completed) {
-                completed();
-            }
-        }
-    }];
-}
-
 - (void)checkCategoryAction:(UIButton *)sender{
     [self.allButtonsArray enumerateObjectsUsingBlock:^(UIButton *  _Nonnull button, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx == sender.tag) {
@@ -197,7 +179,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 - (IPCChooseCategoryView *)categoryView{
     __weak typeof (self) weakSelf = self;
     if (!_categoryView) {
-        _categoryView = [[IPCChooseCategoryView alloc]initWithFrame:self.rightValueCollectionView.bounds CategoryList:[[self.dataSource filterDataSourceResult] allCategoryName] FilterType:[self.dataSource filterType] Complete:^(IPCTopFilterType type)
+        _categoryView = [[IPCChooseCategoryView alloc]initWithFrame:self.rightView.bounds CategoryList:[[self.dataSource filterDataSourceResult] allCategoryName] FilterType:[self.dataSource filterType] Complete:^(IPCTopFilterType type)
                          {
                              __strong typeof (weakSelf) strongSelf = weakSelf;
                              if ([strongSelf.delegate respondsToSelector:@selector(filterGlassesWithClassType:)])
@@ -451,7 +433,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 
 #pragma mark //For screening of key-value pairs
 - (NSString *)filterKey{
-    if ([[[self.dataSource filterKeySource] allValues] count] > 0)
+    if ([[[self.dataSource filterKeySource] allValues] count] > 0 && self.leftClassTableView.indexPathForSelectedRow.row > 0)
         return [[self.dataSource filterDataSourceResult] allFilterKeys][self.leftClassTableView.indexPathForSelectedRow.row -1];
     return [[self.dataSource filterDataSourceResult] allFilterKeys][self.leftClassTableView.indexPathForSelectedRow.row];
 }
@@ -468,17 +450,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
         return filterValueText;
     }
     return nil;
-}
-
-#pragma mark //UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat sectionHeaderHeight = 50;
-    
-    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
-        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
-    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
-        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
-    }
 }
 
 @end

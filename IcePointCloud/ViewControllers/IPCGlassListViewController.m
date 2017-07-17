@@ -155,21 +155,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     [super removeCover];
     
-    [UIView animateWithDuration:0.3f animations:^{
-        self.coverView.alpha = 0.5;
-    }completion:^(BOOL finished) {
-        if (finished) {
-            [self.coverView removeFromSuperview];
-        }
-    }];
-    
-    __weak typeof (self) weakSelf = self;
-    if ([self.coverView superview] && self.glassListViewMode.filterView) {
-        [self.glassListViewMode.filterView closeCompletion:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.glassListViewMode.filterView removeFromSuperview];strongSelf.glassListViewMode.filterView = nil;
-        }];
-    }
+    [self.glassListViewMode.filterView removeFromSuperview];
+    [self.coverView removeFromSuperview];
 }
 
 //Add a shopping cart animation
@@ -198,7 +185,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self removeCover];
     }else{
         __weak typeof (self) weakSelf = self;
-        [self addCoverWithAlpha:0.2 InView:self.view Complete:^{
+        [self addCoverWithAlpha:0.2 Complete:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
