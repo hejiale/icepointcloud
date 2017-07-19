@@ -12,14 +12,20 @@
 #import "IPCManagerOptometryViewController.h"
 #import "IPCManagerAddressViewController.h"
 #import "IPCEmployeListView.h"
+#import "IPCShoppingCartView.h"
 
 @interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewModelDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *cartContentView;
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
+@property (strong, nonatomic) IBOutlet UIView *tableHeadView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewMode * payOrderViewMode;
+@property (strong, nonatomic) IPCShoppingCartView * shopCartView;
 
 @end
 
@@ -28,21 +34,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
     
-    [self setNavigationTitle:@"确认订单"];
-    [self setRightItem:@"icon_select_customer" Selection:@selector(selectCustomerAction:)];
+    [self.cancelButton addBorder:2 Width:0.5];
+    [self.saveButton addBorder:2 Width:0];
     
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
-    [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    
-    __weak typeof(self) weakSelf = self;
-    [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(id x) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.payOrderViewMode resetPayInfoData];
-    }];
+    [self.payOrderTableView setTableHeaderView:self.tableHeadView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(queryCustomerDetail)
@@ -53,13 +54,16 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self setNavigationBarStatus:NO];
+    [self setNavigationBarStatus:YES];
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
     [self.payOrderViewMode requestTradeOrExchangeStatus];
+    [self.cartContentView addSubview:self.shopCartView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self removeCover];
+    [self.shopCartView removeFromSuperview];self.shopCartView = nil;
 }
 
 #pragma mark //Set UI
@@ -74,6 +78,13 @@
     }];
     [self.view addSubview:self.employeView];
     [self.view bringSubviewToFront:self.employeView];
+}
+
+- (IPCShoppingCartView *)shopCartView{
+    if (!_shopCartView) {
+        _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:self.cartContentView.bounds];
+    }
+    return _shopCartView;
 }
 
 #pragma mark //Clicked Events
@@ -91,13 +102,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)selectCustomerAction:(id)sender{
+- (IBAction)selectCustomerAction:(id)sender{
     IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
 - (void)removeCover{
-    [self.employeView removeFromSuperview];
+    [self.employeView removeFromSuperview];self.employeView = nil;
 }
 
 #pragma mark //Push Method
@@ -144,15 +155,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if ((section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
-        return 0;
-    }
-    return 5;
+    return 0.5;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-    [footView setBackgroundColor:[UIColor clearColor]];
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 0.5)];
+    [footView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.1]];
     return footView;
 }
 

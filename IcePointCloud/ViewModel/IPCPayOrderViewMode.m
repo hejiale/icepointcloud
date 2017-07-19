@@ -9,7 +9,6 @@
 #import "IPCPayOrderViewMode.h"
 #import "IPCCustomTopCell.h"
 #import "IPCCustomerDetailCell.h"
-#import "IPCPayOrderProductCell.h"
 #import "IPCCustomerAddressCell.h"
 #import "IPCCustomerOptometryCell.h"
 #import "IPCPayOrderEmployeeCell.h"
@@ -18,7 +17,6 @@
 #import "IPCPayOrderViewCellHeight.h"
 #import "IPCPayTypeRecordCell.h"
 
-static NSString * const payOrderCartItemIdentifier = @"payOrderProductCellIdentifier";
 static NSString * const customerIdentifier              = @"IPCCustomerDetailCellIdentifier";
 static NSString * const opometryIdentifier              = @"HistoryOptometryCellIdentifier";
 static NSString * const addressIdentifier                = @"CustomerAddressListCellIdentifier";
@@ -40,20 +38,15 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     self = [super init];
     if (self) {
         self.cellHeight = [[IPCPayOrderViewCellHeight alloc] init];
-        //判断选择用户页面的确定按钮是否显示
-        [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
     }
     return self;
 }
 
 #pragma mark //Request Data
 - (void)requestTradeOrExchangeStatus{
-    [IPCCustomUI show];
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
         [self reload];
-        [IPCCustomUI hiden];
-        
     } FailureBlock:^(NSError *error) {
         [IPCCustomUI showError:error.domain];
     }];
@@ -152,18 +145,14 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 #pragma mark //DO Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {
-        return 8;
+        return 7;
     }
-    return 4;
+    return 3;
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ((section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (![IPCCurrentCustomer sharedManager].currentCustomer && section == 1))
-    {
-        return  [[IPCShoppingCart sharedCart] selectPayItemsCount] + 1;
-    }
-    else if ([self.cellHeight tableViewCell:section])
+    if ([self.cellHeight tableViewCell:section])
         return 1;
     return 2;
 }
@@ -211,11 +200,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"收货地址" ButtonTitle:@"选择" ButtonImage:nil];
-            if (![IPCCurrentCustomer sharedManager].currentAddress) {
-                [cell.bottomLine setHidden:YES];
-            }else{
-                [cell.bottomLine setHidden:NO];
-            }
+            
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -230,7 +215,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.addressMode = [IPCCurrentCustomer sharedManager].currentAddress;
-            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if(indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer){
@@ -240,11 +224,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"验光单" ButtonTitle:@"选择" ButtonImage:nil];
-            if (![IPCCurrentCustomer sharedManager].currentOpometry) {
-                [cell.bottomLine setHidden:YES];
-            }else{
-                [cell.bottomLine setHidden:NO];
-            }
+            
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -259,7 +239,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.optometryMode = [IPCCurrentCustomer sharedManager].currentOpometry;
-            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
@@ -269,11 +248,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"选择员工" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
-            if ([IPCPayOrderManager sharedManager].employeeResultArray.count) {
-                [cell.bottomLine setHidden:NO];
-            }else{
-                [cell.bottomLine setHidden:YES];
-            }
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 if ([self.delegate respondsToSelector:@selector(showEmployeeView)]) {
                     [self.delegate showEmployeeView];
@@ -288,28 +262,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             return cell;
         }
-    }else if((indexPath.section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer))
-    {
-        if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell setLeftTitle:@"购买列表"];
-            return cell;
-        }else{
-            IPCPayOrderProductCell * cell = [tableView dequeueReusableCellWithIdentifier:payOrderCartItemIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPayOrderProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-                cell.delegate = self;
-            }
-            IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:indexPath.row-1] ;
-            if (cartItem){
-                [cell setCartItem:cartItem];
-            }
-            return cell;
-        }
-    }else if((indexPath.section == 6 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
+    }else if((indexPath.section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPayOrderSettlementCell" bundle:nil]instantiateWithOwner:nil options:nil][0];

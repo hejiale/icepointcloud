@@ -12,7 +12,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                     MenuIndex:(NSInteger)index
-                     PayOrder:(void(^)())payOrder
                        Logout:(void(^)())logout
                       Dismiss:(void(^)())dismiss;
 

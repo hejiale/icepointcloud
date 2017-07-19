@@ -113,7 +113,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //Request Data
 - (void)queryCustomerInfo:(void(^)())complete
 {
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
+//    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [IPCCustomerRequestManager queryCustomerListWithKeyword:searchKeyWord ? : @""
                                                        Page:currentPage
                                                SuccessBlock:^(id responseValue)

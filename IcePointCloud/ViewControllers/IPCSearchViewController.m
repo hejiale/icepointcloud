@@ -38,6 +38,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     self.searchTableView.emptyAlertImage = @"exception_search";
 }
 
+
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     

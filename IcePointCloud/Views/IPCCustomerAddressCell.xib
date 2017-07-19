@@ -103,24 +103,14 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E2F-9z-WiN">
-                        <rect key="frame" x="30" y="73.5" width="969" height="1"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.06514875856164383" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="UYy-BP-D5q"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="yEV-Lq-h2O" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" id="9vv-eZ-MNc"/>
                     <constraint firstItem="yEV-Lq-h2O" firstAttribute="trailing" secondItem="Ndg-ie-XFJ" secondAttribute="trailing" id="Esz-dl-JMw"/>
-                    <constraint firstItem="E2F-9z-WiN" firstAttribute="leading" secondItem="yEV-Lq-h2O" secondAttribute="leading" id="FYX-Px-AgP"/>
                     <constraint firstItem="Ndg-ie-XFJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="LgU-Mt-nkP"/>
                     <constraint firstAttribute="bottom" secondItem="Ndg-ie-XFJ" secondAttribute="bottom" constant="5" id="fXs-2l-3Ee"/>
                     <constraint firstItem="yEV-Lq-h2O" firstAttribute="bottom" secondItem="Ndg-ie-XFJ" secondAttribute="bottom" id="fYD-ZL-d9r"/>
-                    <constraint firstAttribute="bottom" secondItem="E2F-9z-WiN" secondAttribute="bottom" id="i0z-V2-Xkg"/>
                     <constraint firstItem="Ndg-ie-XFJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="qjJ-T5-xcB"/>
-                    <constraint firstAttribute="trailing" secondItem="E2F-9z-WiN" secondAttribute="trailing" constant="25" id="r2M-vF-ZzR"/>
                     <constraint firstItem="yEV-Lq-h2O" firstAttribute="leading" secondItem="Ndg-ie-XFJ" secondAttribute="leading" id="uA1-g4-Rvd"/>
                     <constraint firstAttribute="trailing" secondItem="Ndg-ie-XFJ" secondAttribute="trailing" constant="25" id="xOB-fJ-Uy3"/>
                 </constraints>
@@ -128,7 +118,6 @@
             <connections>
                 <outlet property="addressContentView" destination="Ndg-ie-XFJ" id="aVC-Ce-gLb"/>
                 <outlet property="addressLabel" destination="kD9-kj-di3" id="ZPw-T8-i33"/>
-                <outlet property="bottomLine" destination="E2F-9z-WiN" id="lUa-yA-1hn"/>
                 <outlet property="contactNameLabel" destination="zXC-Lk-1r0" id="1ZI-fx-NRI"/>
                 <outlet property="contactNameWidth" destination="KX9-bY-k5g" id="hy5-kl-qO3"/>
                 <outlet property="contactPhoneLabel" destination="nWP-nS-E14" id="X8D-FF-20c"/>

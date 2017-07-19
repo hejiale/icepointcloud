@@ -199,7 +199,7 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    if (selectedIndex != _selectedIndex && selectedIndex > 0 && selectedIndex < 4) {
+    if (selectedIndex != _selectedIndex && selectedIndex > 0 && selectedIndex < 5) {
         UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
         [self addChildViewController:selectedViewController];
         
@@ -208,7 +208,7 @@
         [self.contentView bringSubviewToFront:selectedViewController.view];
         [selectedViewController didMoveToParentViewController:self];
         
-        if (_selectedIndex != NSNotFound && _selectedIndex < 4)
+        if (_selectedIndex != NSNotFound && _selectedIndex < 5)
         {
             UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
             [previousViewController.view removeFromSuperview];
@@ -231,7 +231,7 @@
 
 - (void)updateTopView
 {
-    if (_selectedIndex < 4 && _selectedIndex > 0) {
+    if (_selectedIndex < 5 && _selectedIndex > 0) {
         if (_selectedIndex == 1 || _selectedIndex == 3) {
             [self.filterButton setHidden:NO];
             [self.logoImageView setHidden:NO];
@@ -242,6 +242,8 @@
         
         if(_selectedIndex == 2){
             [self.titleLabel setText:@"客户"];
+        }else if (_selectedIndex == 4){
+            [self.titleLabel setText:@"确认订单"];
         }else{
             [self.titleLabel setText:@""];
         }
@@ -251,12 +253,13 @@
 
 #pragma mark //Clicked Events
 - (void)menuTapAction:(UIButton *)sender {
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
     [self setSelectedIndex:sender.tag];
 }
 
 - (void)updateSidebar
 {
-    if (_selectedIndex < 4 && _selectedIndex > 0) {
+    if (_selectedIndex < 5 && _selectedIndex > 0) {
         [self.menusView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UIButton class]]) {
                 UIButton * button = (UIButton *)obj;

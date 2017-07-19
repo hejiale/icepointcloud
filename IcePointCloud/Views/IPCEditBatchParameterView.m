@@ -48,11 +48,14 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
                 [self.editParameterMode queryBatchStockRequest];
             }else if([glasses filterType] ==IPCTopFilterTypeReadingGlass){
                 [self.editParameterMode queryBatchReadingDegreeRequest];
-            }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
-                [self.editParameterMode  getContactLensSpecification];
             }else{
-                [self.editParameterMode queryAccessoryStock];
+                [self.parameterTableView reloadData];
             }
+//            else if([glasses filterType] == IPCTopFilterTypeContactLenses){
+//                [self.editParameterMode  getContactLensSpecification];
+//            }else{
+//                [self.editParameterMode queryAccessoryStock];
+//            }
             
             CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.2, 0.2);
             [self.editParameterView setTransform:transform];
@@ -121,21 +124,22 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     }else if ([self.editParameterMode.currentGlass filterType]== IPCTopFilterTypeReadingGlass){
         if ([self.editParameterMode queryReadingLensStock:cartItem] > 0)
             isHasStock = YES;
-    }else if([self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeContactLenses){
-        if ([self.editParameterMode queryContactLensStock:cartItem] > 0 && cartItem.glassCount < [self.editParameterMode queryContactLensStock:cartItem])
-            isHasStock = YES;
-    }else{
-        if ([self.editParameterMode queryAccessoryStock:cartItem] > 0 && cartItem.glassCount < [self.editParameterMode queryAccessoryStock:cartItem])
-            isHasStock = YES;
     }
+//    else if([self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeContactLenses){
+//        if ([self.editParameterMode queryContactLensStock:cartItem] > 0 && cartItem.glassCount < [self.editParameterMode queryContactLensStock:cartItem])
+//            isHasStock = YES;
+//    }else{
+//        if ([self.editParameterMode queryAccessoryStock:cartItem] > 0 && cartItem.glassCount < [self.editParameterMode queryAccessoryStock:cartItem])
+//            isHasStock = YES;
+//    }
     [cell reloadAddButtonStatus:isHasStock];
     return cell;
 }
 
 #pragma mark //UITableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (([self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeContactLenses && self.editParameterMode.currentGlass.stock > 0) || [self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeAccessory)
-        return 60;
+//    if (([self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeContactLenses && self.editParameterMode.currentGlass.stock > 0) || [self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeAccessory)
+//        return 60;
     return 45;
 }
 

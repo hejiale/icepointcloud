@@ -9,8 +9,8 @@
 #import "IPCRootViewController.h"
 #import "IPCTryGlassesViewController.h"
 #import "IPCGlassListViewController.h"
-#import "IPCSearchCustomerViewController.h"
 #import "IPCPayOrderViewController.h"
+#import "IPCSearchCustomerViewController.h"
 #import "IPCSideBarMenuView.h"
 
 @interface IPCRootViewController ()<IPCRootMenuViewControllerDelegate>
@@ -18,6 +18,7 @@
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
 @property (nonatomic, strong) IPCSearchCustomerViewController * customerInfoVC;
+@property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 @property (nonatomic, strong) IPCSideBarMenuView * sideBarView;
 
 @end
@@ -33,8 +34,9 @@
     _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
     _customerInfoVC =  [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    _payOrderVC       = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
     
-    [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC]];
+    [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC,_payOrderVC]];
     
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x) {
@@ -62,23 +64,15 @@
 
 
 //Show Methods
-- (void)pushToPayOrderViewController{
-    [self removeCover];
-    IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-    [self.navigationController pushViewController:payOrderVC animated:YES];
-}
-
 - (void)showSideBarView:(NSInteger)index{
     [self removerFilterCover];
     _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
-                                               MenuIndex:index
-                                                PayOrder:^{
-                                                    [self pushToPayOrderViewController];
-                                                } Logout:^{
-                                                    [[IPCAppManager sharedManager] logout];
-                                                } Dismiss:^{
-                                                    [self removeCover];
-                                                }];
+                                                  MenuIndex:index
+                                                     Logout:^{
+                                                         [[IPCAppManager sharedManager] logout];
+                                                     } Dismiss:^{
+                                                         [self removeCover];
+                                                     }];
     [self.view addSubview:_sideBarView];
 }
 
@@ -95,7 +89,7 @@
         }else if (self.selectedIndex == 3){
             [self.tryVC onSearchProducts];
         }
-    }else if (index == 4 || index == 5){
+    }else if (index == 5){
         [self showSideBarView:index];
     }
 }

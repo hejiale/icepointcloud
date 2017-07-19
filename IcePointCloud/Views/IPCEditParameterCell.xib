@@ -13,14 +13,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="EditParameterCellIdentifier" rowHeight="131" id="KGk-i7-Jjw" customClass="IPCEditParameterCell">
-            <rect key="frame" x="0.0" y="0.0" width="475" height="131"/>
+            <rect key="frame" x="0.0" y="0.0" width="475" height="45"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="475" height="130"/>
+                <rect key="frame" x="0.0" y="0.0" width="475" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isk-3j-tra">
-                        <rect key="frame" x="8" y="50.5" width="369" height="30"/>
+                        <rect key="frame" x="8" y="7.5" width="369" height="30"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="aSe-xw-D5h"/>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-kY-eq1">
-                        <rect key="frame" x="412" y="8" width="20" height="115"/>
+                        <rect key="frame" x="412" y="8" width="20" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="CF7-hm-lfn"/>
@@ -46,7 +46,7 @@
                         </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCf-hF-6T2">
-                        <rect key="frame" x="377" y="8" width="35" height="115"/>
+                        <rect key="frame" x="377" y="8" width="35" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="VP0-w1-x1D"/>
@@ -73,25 +73,8 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PD-IZ-Uz3">
-                        <rect key="frame" x="108" y="13" width="269" height="20"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="yvp-lH-MF0"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                        <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9il-4y-SHs">
-                        <rect key="frame" x="8" y="38" width="369" height="80"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                        <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY2-SP-yGW">
-                        <rect key="frame" x="432" y="8" width="35" height="115"/>
+                        <rect key="frame" x="432" y="8" width="35" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="35" id="UGg-tc-eKQ"/>
@@ -111,21 +94,14 @@
                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="JY2-SP-yGW" secondAttribute="trailing" id="63N-ak-ujv"/>
-                    <constraint firstItem="9il-4y-SHs" firstAttribute="top" secondItem="C8R-iX-paw" secondAttribute="bottom" constant="5" id="BgU-9s-Sxb"/>
-                    <constraint firstItem="3PD-IZ-Uz3" firstAttribute="leading" secondItem="C8R-iX-paw" secondAttribute="trailing" id="Bpe-Kr-dYb"/>
                     <constraint firstItem="isk-3j-tra" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fl7-4x-DVK"/>
                     <constraint firstItem="JY2-SP-yGW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="J2O-2b-qVo"/>
                     <constraint firstItem="C8R-iX-paw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="S9L-XG-YWR"/>
                     <constraint firstAttribute="bottomMargin" secondItem="JY2-SP-yGW" secondAttribute="bottom" id="Sjp-TS-uXR"/>
-                    <constraint firstItem="XCf-hF-6T2" firstAttribute="leading" secondItem="3PD-IZ-Uz3" secondAttribute="trailing" id="Xfk-h7-SFy"/>
                     <constraint firstItem="JY2-SP-yGW" firstAttribute="leading" secondItem="boh-kY-eq1" secondAttribute="trailing" id="Zik-d1-Ib8"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="9il-4y-SHs" secondAttribute="bottom" constant="5" id="cVk-g9-r2D"/>
                     <constraint firstAttribute="bottomMargin" secondItem="boh-kY-eq1" secondAttribute="bottom" id="d06-S3-Sec"/>
                     <constraint firstItem="XCf-hF-6T2" firstAttribute="leading" secondItem="isk-3j-tra" secondAttribute="trailing" id="eKt-gO-c8b"/>
                     <constraint firstItem="boh-kY-eq1" firstAttribute="leading" secondItem="XCf-hF-6T2" secondAttribute="trailing" id="f7P-3p-Eul"/>
-                    <constraint firstItem="9il-4y-SHs" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="i37-no-4Vx"/>
-                    <constraint firstItem="XCf-hF-6T2" firstAttribute="leading" secondItem="9il-4y-SHs" secondAttribute="trailing" id="jU4-pX-ayB"/>
-                    <constraint firstItem="3PD-IZ-Uz3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ktF-1C-zgQ"/>
                     <constraint firstAttribute="bottomMargin" secondItem="XCf-hF-6T2" secondAttribute="bottom" id="mIM-Qb-86b"/>
                     <constraint firstItem="XCf-hF-6T2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ns3-ZX-Cqa"/>
                     <constraint firstItem="boh-kY-eq1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xUK-nB-RZm"/>
@@ -136,13 +112,10 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="addButton" destination="JY2-SP-yGW" id="CmQ-DM-EZT"/>
-                <outlet property="batchHeight" destination="yvp-lH-MF0" id="HS2-hL-gca"/>
-                <outlet property="batchNumLabel" destination="3PD-IZ-Uz3" id="dnf-my-Mdx"/>
                 <outlet property="cartNumLabel" destination="boh-kY-eq1" id="fCM-3d-K8K"/>
                 <outlet property="degreeHeight" destination="O5B-sF-oWA" id="Gt6-oD-Ep3"/>
                 <outlet property="degreeLabel" destination="C8R-iX-paw" id="YQa-Vx-eqt"/>
                 <outlet property="degreeWidthConstraint" destination="Huo-0S-eGd" id="7zt-RJ-YzN"/>
-                <outlet property="kindNumLabel" destination="9il-4y-SHs" id="5V1-MJ-qFG"/>
                 <outlet property="parameterLabel" destination="isk-3j-tra" id="47t-4D-0Ah"/>
                 <outlet property="reduceButton" destination="XCf-hF-6T2" id="oea-r0-Nsb"/>
             </connections>

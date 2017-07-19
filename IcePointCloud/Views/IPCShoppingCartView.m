@@ -31,8 +31,6 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
 
-@property (copy, nonatomic) void(^PayBlock)();
-
 @end
 
 @implementation IPCShoppingCartView
@@ -55,7 +53,8 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     [self.cartBottomView addTopLine];
     [self.cartListTableView setTableFooterView:[[UIView alloc]init]];
     self.cartListTableView.emptyAlertImage = @"exception_cart";
-    self.cartListTableView.emptyAlertTitle = @"您的购物车空空的,请前去选取眼镜!";
+    self.cartListTableView.emptyAlertTitle = @"您的购物列表空空的,请前去选取眼镜!";
+    [self commitUI];
 }
 
 
@@ -71,8 +70,8 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 - (void)commitUI{
     self.cartViewMode = [[IPCCartViewMode alloc]init];
     [self updateCartUI];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    [self.cartViewMode reloadContactLensStock];
+//    [[IPCHttpRequest sharedClient] cancelAllRequest];
+//    [self.cartViewMode reloadContactLensStock];
 }
 
 - (void)updateCartUI{
@@ -83,33 +82,6 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 }
 
 #pragma mark //Clicked Events
-- (void)showWithPay:(void (^)())pay
-{
-    [self commitUI];
-    self.payBlock = pay;
-    
-    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame = frame;
-    } completion:nil];
-}
-
-- (void)dismiss:(void(^)())complete
-{
-    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if (complete) {
-                complete();
-            }
-        }
-    }];
-}
-
 - (void)updateTotalPrice{
     [self.totalPriceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"合计：￥%.f", [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]] BeginRang:0 Rang:3 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:[UIColor darkGrayColor]]];
     [self.navigationTitleLabel setText:[NSString stringWithFormat:@"购物车(%d)",(long)[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
@@ -122,17 +94,6 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     [self.deleteButton setHidden:!sender.selected];
     isEditStatus = sender.selected;
     [self updateCartUI];
-}
-
-- (IBAction)onSettlementAction:(id)sender {
-    __weak typeof (self) weakSelf = self;
-    if ( ! [self.cartViewMode shoppingCartIsEmpty]){
-        if (self.PayBlock) {
-            self.PayBlock();
-        }
-    }else{
-        [IPCCustomUI showError:@"购物车中未选中任何商品!"];
-    }
 }
 
 - (IBAction)onSelectAllAction:(UIButton *)sender {
@@ -213,29 +174,29 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     [_parameterView show];
 }
 
-- (void)judgeStock:(IPCEditShoppingCartCell *)cell{
-    NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
-    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
-    if (cartItem) {
-        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
-            [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
-                if (! hasStock) {
-                    [IPCCustomUI showError:@"当前选择护理液数量大于库存数"];
-                }else{
-                    [[IPCShoppingCart sharedCart] plusItem:cartItem];
-                    [self updateCartUI];
-                }
-            }];
-        }else{
-            if ([self.cartViewMode judgeContactLensStock:cartItem]) {
-                [IPCCustomUI showError:@"当前选择隐形眼镜镜片数量大于库存数"];
-            }else{
-                [[IPCShoppingCart sharedCart] plusItem:cartItem];
-                [self updateCartUI];
-            }
-        }
-    }
-}
+//- (void)judgeStock:(IPCEditShoppingCartCell *)cell{
+//    NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
+//    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
+//    if (cartItem) {
+//        if ([cartItem.glasses filterType] == IPCTopFilterTypeAccessory) {
+//            [self.cartViewMode queryAccessoryStock:cartItem Complete:^(BOOL hasStock) {
+//                if (! hasStock) {
+//                    [IPCCustomUI showError:@"当前选择护理液数量大于库存数"];
+//                }else{
+//                    [[IPCShoppingCart sharedCart] plusItem:cartItem];
+//                    [self updateCartUI];
+//                }
+//            }];
+//        }else{
+//            if ([self.cartViewMode judgeContactLensStock:cartItem]) {
+//                [IPCCustomUI showError:@"当前选择隐形眼镜镜片数量大于库存数"];
+//            }else{
+//                [[IPCShoppingCart sharedCart] plusItem:cartItem];
+//                [self updateCartUI];
+//            }
+//        }
+//    }
+//}
 
 
 @end

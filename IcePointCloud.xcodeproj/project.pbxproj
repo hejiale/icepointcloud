@@ -1633,6 +1633,7 @@
 				049753B71D4AF49C00E6579F /* Product */,
 				046497811D483E6300137A3E /* ProductDetail */,
 				CB91871F1E8CF66400D59487 /* ShareChat */,
+				046CF1411E5FDE3F0098B6BF /* shoppingCart */,
 				CB1234EF1E762D3400AB29DF /* Sidebar */,
 				04C555411D1B78C80083496D /* TakeGlasses */,
 			);
@@ -1724,7 +1725,6 @@
 				CB1234F11E762D9100AB29DF /* IPCSideBarMenuView.m */,
 				CB1234F31E762D9A00AB29DF /* IPCSideBarMenuView.xib */,
 				04CBD9601D582C7600C7CAA4 /* PersonCenter */,
-				046CF1411E5FDE3F0098B6BF /* shoppingCart */,
 			);
 			name = Sidebar;
 			sourceTree = "<group>";

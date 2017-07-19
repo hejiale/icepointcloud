@@ -285,11 +285,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.optometryList.count) {
                 IPCOptometryMode * optometry = self.customerViewMode.optometryList[indexPath.row -1];
                 cell.optometryMode = optometry;
-                if (!self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count) {
-                    [cell.bottomLine setHidden:YES];
-                }else{
-                    [cell.bottomLine setHidden:NO];
-                }
+        
                 if (indexPath.row == 1) {
                     [cell.defaultLabel setHidden:NO];
                 }else{
@@ -317,11 +313,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.addressList.count) {
                 IPCCustomerAddressMode * address = self.customerViewMode.addressList[indexPath.row-1];
                 cell.addressMode = address;
-                if (indexPath.row == self.customerViewMode.addressList.count) {
-                    [cell.bottomLine setHidden:YES];
-                }else{
-                    [cell.bottomLine setHidden:NO];
-                }
+                
                 if (indexPath.row == 1) {
                     [cell.defaultLabel setHidden:NO];
                 }else{

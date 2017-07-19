@@ -173,7 +173,6 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.addressMode = [IPCCustomerOrderDetail instance].addressMode;
-            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if(indexPath.section == 2){
@@ -190,7 +189,6 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.optometryMode = [IPCCustomerOrderDetail instance].optometryMode;
-            [cell.bottomLine setHidden:YES];
             return cell;
         }
     }else if (indexPath.section == 3){

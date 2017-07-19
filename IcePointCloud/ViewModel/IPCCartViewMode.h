@@ -11,12 +11,12 @@
 @interface IPCCartViewMode : NSObject
 
 @property (strong, nonatomic, readwrite) NSMutableArray<IPCContactLenSpecList *> * contactSpecificationArray;
-@property (strong, nonatomic, readwrite) IPCAccessorySpecList * accessorySpecification;
+//@property (strong, nonatomic, readwrite) IPCAccessorySpecList * accessorySpecification;
 
 /**
  *  Contact lenses for inventory
  */
-- (void)reloadContactLensStock;
+//- (void)reloadContactLensStock;
 
 /**
  *  Judgment for the shopping cart contact lenses in stock
@@ -25,7 +25,7 @@
  *
  *  @return 
  */
-- (BOOL)judgeContactLensStock:(IPCShoppingCartItem *)cartItem;
+//- (BOOL)judgeContactLensStock:(IPCShoppingCartItem *)cartItem;
 
 - (BOOL)shoppingCartIsEmpty;
 
@@ -39,6 +39,6 @@
  *  @param cartItem
  *  @param Complete
  */
-- (void)queryAccessoryStock:(IPCShoppingCartItem *)cartItem Complete:(void(^)(BOOL hasStock))complete;
+//- (void)queryAccessoryStock:(IPCShoppingCartItem *)cartItem Complete:(void(^)(BOOL hasStock))complete;
 
 @end

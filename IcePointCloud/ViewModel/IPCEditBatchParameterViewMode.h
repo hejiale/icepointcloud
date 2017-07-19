@@ -18,11 +18,11 @@
 - (instancetype)initWithGlasses:(IPCGlasses *)glass UpdateUI:(void(^)())update;
 - (void)queryBatchStockRequest;
 - (void)queryBatchReadingDegreeRequest;
-- (void)getContactLensSpecification;
-- (void)queryAccessoryStock;
+//- (void)getContactLensSpecification;
+//- (void)queryAccessoryStock;
 - (NSInteger)queryLensStock:(IPCShoppingCartItem *)cartItem;
 - (NSInteger)queryReadingLensStock:(IPCShoppingCartItem *)cartItem;
-- (NSInteger)queryContactLensStock:(IPCShoppingCartItem *)cartItem;
-- (NSInteger)queryAccessoryStock:(IPCShoppingCartItem *)cartItem;
+//- (NSInteger)queryContactLensStock:(IPCShoppingCartItem *)cartItem;
+//- (NSInteger)queryAccessoryStock:(IPCShoppingCartItem *)cartItem;
 
 @end
