@@ -12,6 +12,7 @@
 
 @interface IPCPayOrderEmployeeCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIScrollView *employeeScrollView;
 @property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;
 
 @end

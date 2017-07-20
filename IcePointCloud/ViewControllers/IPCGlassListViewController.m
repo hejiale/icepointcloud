@@ -240,9 +240,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self addCartAnimationInCell:cell];
 }
 
-- (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{
-    if ([self.glassListViewMode currentType] == IPCTopFilterTypeCard)return;
-    
+- (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{    
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
         

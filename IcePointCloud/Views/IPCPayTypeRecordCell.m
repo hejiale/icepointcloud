@@ -23,11 +23,11 @@
     
     if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count) {
         [self.payRecordContentView setHidden:NO];
-        self.payRecordHeight.constant = [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 50;
+        self.payRecordHeight.constant = [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 40;
         [self.payRecordContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
         [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull payRecord, NSUInteger idx, BOOL * _Nonnull stop) {
-            IPCSwipeView * swipeView = [[IPCSwipeView alloc]initWithFrame:CGRectMake(0, 50*idx, self.payRecordContentView.jk_width, 50)];
+            IPCSwipeView * swipeView = [[IPCSwipeView alloc]initWithFrame:CGRectMake(0, 40*idx, self.payRecordContentView.jk_width, 40)];
             [self.payRecordContentView addSubview:swipeView];
             [self.recordViews addObject:swipeView];
             

@@ -73,8 +73,8 @@
 {
     __block NSMutableArray * itemParams = [[NSMutableArray alloc]init];
     
-    for (int i = 0; i < [[IPCShoppingCart sharedCart] selectPayItemsCount]; i++) {
-        IPCShoppingCartItem *item = [[IPCShoppingCart sharedCart] selectedPayItemAtIndex:i];
+    for (int i = 0; i < [[IPCShoppingCart sharedCart] selectItemsCount]; i++) {
+        IPCShoppingCartItem *item = [[IPCShoppingCart sharedCart] selectedItemAtIndex:i];
         [itemParams addObject:[item paramtersJSONForOrderRequest]];
     }
     return itemParams;

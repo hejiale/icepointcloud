@@ -102,10 +102,10 @@
     [IPCPayOrderManager sharedManager].usedPoint = point;
     [IPCPayOrderManager sharedManager].point -= point;
     
-    if ([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice <= 0) {
+    if ([[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice <= 0) {
         [IPCPayOrderManager sharedManager].realTotalPrice = 0;
     }else{
-        [IPCPayOrderManager sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice;
+        [IPCPayOrderManager sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice;
     }
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [IPCPayOrderManager sharedManager].remainAmount = [IPCPayOrderManager sharedManager].realTotalPrice;

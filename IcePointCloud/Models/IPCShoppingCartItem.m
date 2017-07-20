@@ -45,7 +45,7 @@
             [IPCPayOrderManager sharedManager].isChooseCustomer = NO;
         }
         if (_unitPrice == 0){
-            if ([IPCPayOrderManager sharedManager].customerDiscount > 0 && [self.glasses filterType] != IPCTopFilterTypeCard) {
+            if ([IPCPayOrderManager sharedManager].customerDiscount > 0) {
                 return self.glasses.price * [IPCPayOrderManager sharedManager].customerDiscount;
             }
             return self.glasses.price;
@@ -85,11 +85,6 @@
         [params setObject:@(self.glassCount) forKey:@"accessoryCount"];
         [params setObject:@(self.glasses.price) forKey:@"accessoryPrice"];
         [params setObject:[self.glasses glassId] forKey:@"accessoryId"];
-    }else if ([self.glasses filterType] == IPCTopFilterTypeCard)
-    {
-        [params setObject:@(self.glassCount) forKey:@"valueCardCount"];
-        [params setObject:@(self.glasses.price) forKey:@"valueCardPrice"];
-        [params setObject:[self.glasses glassId] forKey:@"valueCardId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeOthers)
     {
         [params setObject:@(self.glassCount) forKey:@"othersProductCount"];

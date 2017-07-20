@@ -56,7 +56,6 @@
     
     [self setNavigationBarStatus:YES];
     [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
-    [self.payOrderViewMode requestTradeOrExchangeStatus];
     [self.cartContentView addSubview:self.shopCartView];
 }
 

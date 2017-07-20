@@ -53,8 +53,6 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
             }
 //            else if([glasses filterType] == IPCTopFilterTypeContactLenses){
 //                [self.editParameterMode  getContactLensSpecification];
-//            }else{
-//                [self.editParameterMode queryAccessoryStock];
 //            }
             
             CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.2, 0.2);
@@ -138,8 +136,6 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 
 #pragma mark //UITableView Delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (([self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeContactLenses && self.editParameterMode.currentGlass.stock > 0) || [self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeAccessory)
-//        return 60;
     return 45;
 }
 

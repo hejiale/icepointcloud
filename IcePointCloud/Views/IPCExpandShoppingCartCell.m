@@ -17,6 +17,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
+@property (weak, nonatomic) IBOutlet UIButton *noPointButton;
+@property (weak, nonatomic) IBOutlet UIView *inputPirceView;
+@property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointButtonWith;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputPriceViewRight;
 @property (copy, nonatomic) void(^ReloadBlock)();
 
 
@@ -28,6 +33,7 @@
 {
     [super awakeFromNib];
     
+    [self.inputPirceView addBorder:3 Width:0.5];
     [self.glassesImgView addBorder:3 Width:0.5];
 }
 
@@ -36,85 +42,55 @@
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload
 {
     _cartItem = cartItem;
-    self.ReloadBlock = reload;
-    [self.checkBtn setSelected:_cartItem.selected];
     
-    IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
-    if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
-    
-    self.glassesNameLbl.text = _cartItem.glasses.glassName;
-    self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
-    [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.unitPrice]];
-    
-    CGFloat nameHeight = [self.glassesNameLbl.text jk_sizeWithFont:self.glassesNameLbl.font constrainedToWidth:self.glassesNameLbl.jk_width].height;
-    if (([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch)
-    {
-        nameHeight = 20;
+    if (_cartItem) {
+        self.ReloadBlock = reload;
+        [self.checkBtn setSelected:_cartItem.selected];
+        
+        IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
+        if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
+        
+        self.glassesNameLbl.text = _cartItem.glasses.glassName;
+        self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
+        [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.glasses.price]];
+        
+        CGFloat nameHeight = [self.glassesNameLbl.text jk_sizeWithFont:self.glassesNameLbl.font constrainedToWidth:self.glassesNameLbl.jk_width].height;
+        if (([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch)
+        {
+            nameHeight = 20;
+        }
+        self.glassNameHeight.constant = nameHeight;
+        [self loadContactLensBatchSpecification:nameHeight];
+        
+        if ([IPCPayOrderManager sharedManager].isTrade) {
+            self.pointButtonWith.constant = 0;
+            self.inputPriceViewRight.constant = 0;
+            [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
+            [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
+        }else{
+            [self.noPointButton setHidden:NO];
+            self.pointButtonWith.constant = 130;
+            self.inputPriceViewRight.constant = 20;
+            
+            if (_cartItem.isChoosePoint) {
+                [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
+                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%d", _cartItem.pointValue]];
+            }else{
+                [self.noPointButton setSelected:NO];
+                [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
+                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
+            }
+        }
     }
-    self.glassNameHeight.constant = nameHeight;
-    [self loadContactLensBatchSpecification:nameHeight];
 }
 
-
-#pragma mark //UITextField Delegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (![IPCCommon judgeIsNumber:string])return NO;
-    return YES;
-}
 
 #pragma mark //Set UI
 - (void)loadContactLensBatchSpecification:(CGFloat)height{
     UIView * specificationView = [[UIView alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right + 10, self.glassesNameLbl.jk_top+height+10, self.jk_width - self.glassesImgView.jk_right - 10, 30)];
     [self.mainContentView addSubview:specificationView];
     
-    //    if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch) {
-    //        CGFloat halfWidth = specificationView.jk_width/2;
-    //        NSArray * titleArray = @[@"度数",@"批次号",@"准字号",@"有效期"];
-    //        NSArray * valueArray = @[self.cartItem.contactDegree,self.cartItem.batchNum,self.cartItem.kindNum,self.cartItem.validityDate];
-    //
-    //        for (NSInteger i= 0; i < titleArray.count; i++) {
-    //            UILabel * titleLbl = nil;
-    //            if (i < 2) {
-    //                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*i  , 0, 40, 15)];
-    //            }else{
-    //                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*(i-2), 15, 40, 15)];
-    //            }
-    //            [titleLbl setText:titleArray[i]];
-    //            [titleLbl setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-    //            [titleLbl setTextColor:[UIColor lightGrayColor]];
-    //            [specificationView addSubview:titleLbl];
-    //
-    //            UILabel * valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(titleLbl.jk_right, titleLbl.jk_top, halfWidth - titleLbl.jk_width, 15)];
-    //            [valueLbl setFont:titleLbl.font];
-    //            [valueLbl setTextColor:titleLbl.textColor];
-    //            [valueLbl setText:valueArray[i]];
-    //            [specificationView addSubview:valueLbl];
-    //        }
-    //    }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory && self.cartItem.glasses.solutionType){
-    //        CGFloat halfWidth = specificationView.jk_width/2;
-    //        NSArray * titleArray = @[@"批次号",@"有效期",@"准字号"];
-    //        NSArray * valueArray = @[self.cartItem.batchNum,self.cartItem.validityDate,self.cartItem.kindNum];
-    //
-    //        for (NSInteger i= 0; i < titleArray.count; i++) {
-    //            UILabel * titleLbl = nil;
-    //            if (i < 2) {
-    //                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(halfWidth*i  , 0, 40, 15)];
-    //            }else{
-    //                titleLbl = [[UILabel alloc]initWithFrame:CGRectMake(0, 15, 40, 15)];
-    //            }
-    //            [titleLbl setText:titleArray[i]];
-    //            [titleLbl setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-    //            [titleLbl setTextColor:[UIColor lightGrayColor]];
-    //            [specificationView addSubview:titleLbl];
-    //
-    //            UILabel * valueLbl = [[UILabel alloc]initWithFrame:CGRectMake(titleLbl.jk_right, titleLbl.jk_top, i < 2 ? halfWidth - titleLbl.jk_width: specificationView.jk_width - titleLbl.jk_width, 15)];
-    //            [valueLbl setFont:titleLbl.font];
-    //            [valueLbl setTextColor:titleLbl.textColor];
-    //            [valueLbl setText:valueArray[i]];
-    //            [specificationView addSubview:valueLbl];
-    //        }
-    //    }else
-    if (([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) && self.cartItem.glasses.isBatch)
+    if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && self.cartItem.glasses.isBatch)
     {
         UILabel * degreeLabel = [[UILabel alloc]initWithFrame:specificationView.bounds];
         [degreeLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.batchReadingDegree]];
@@ -133,6 +109,12 @@
         [cylLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
         [cylLabel setTextColor:[UIColor lightGrayColor]];
         [specificationView addSubview:cylLabel];
+    }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch){
+        UILabel * degreeLabel = [[UILabel alloc]initWithFrame:specificationView.bounds];
+        [degreeLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.contactDegree]];
+        [degreeLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
+        [degreeLabel setTextColor:[UIColor lightGrayColor]];
+        [specificationView addSubview:degreeLabel];
     }
 }
 
@@ -145,5 +127,98 @@
     }
 }
 
+- (IBAction)noPointAction:(UIButton *)sender {
+    if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
+        [IPCCustomUI showError:@"请先选择客户!"];
+        return;
+    }
+    if ([IPCPayOrderManager sharedManager].point <= 0) {
+        [IPCCustomUI showError:@"所选客户积分为零!"];
+        return;
+    }
+    [sender setSelected:!sender.selected];
+    self.cartItem.isChoosePoint = sender.selected;
+    
+    if (sender.selected) {
+        self.cartItem.unitPrice = 0;
+        [IPCPayOrderManager sharedManager].realTotalPrice = 0;
+        [IPCPayOrderManager sharedManager].givingAmount = 0;
+    }else{
+        [IPCPayOrderManager sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
+        if ([IPCPayOrderManager sharedManager].usedPoint <= 0) {
+            [IPCPayOrderManager sharedManager].usedPoint = 0;
+        }
+        [IPCPayOrderManager sharedManager].pointPrice -= self.cartItem.pointPrice;
+        if ([IPCPayOrderManager sharedManager].pointPrice <= 0) {
+            [IPCPayOrderManager sharedManager].pointPrice = 0;
+        }
+        self.cartItem.pointValue = 0;
+    }
+    if (self.ReloadBlock) {
+        self.ReloadBlock();
+    }
+}
+
+#pragma mark //UITextField Delegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (self.cartItem.isChoosePoint) {
+        if (![IPCCommon judgeIsIntNumber:string]) {
+            return NO;
+        }
+    }else{
+        if (![IPCCommon judgeIsFloatNumber:string]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField endEditing:YES];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSString * str = [textField.text jk_trimmingWhitespace];
+    
+    if (str.length) {
+        if (self.cartItem.isChoosePoint) {
+            NSInteger usedPoint = [IPCPayOrderManager sharedManager].usedPoint;
+            usedPoint -= self.cartItem.pointValue;
+            NSInteger minumPoint = [IPCPayOrderManager sharedManager].point - usedPoint;
+            
+            if (minumPoint > 0) {
+                if (minumPoint <= [str doubleValue] * self.cartItem.glassCount)
+                {
+                    self.cartItem.pointValue = minumPoint/self.cartItem.glassCount;
+                }else{
+                    self.cartItem.pointValue = [str integerValue];
+                }
+                self.cartItem.pointPrice = self.cartItem.totalPrice;
+                
+                [IPCPayOrderManager sharedManager].usedPoint = [[IPCShoppingCart sharedCart] totalUsedPoint];
+                [IPCPayOrderManager sharedManager].pointPrice = [[IPCShoppingCart sharedCart] totalUsedPointPrice];
+            }
+        }else{
+            if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
+                [IPCCustomUI showError:@"请先选择员工"];
+            }else{
+                if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                    [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
+                }
+                self.cartItem.unitPrice = [str doubleValue];
+                
+                [IPCPayOrderManager sharedManager].realTotalPrice = 0;
+                [IPCPayOrderManager sharedManager].givingAmount = 0;
+                [IPCPayOrderManager sharedManager].remainAmount = 0;
+                [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+            }
+        }
+    }
+    
+    if (self.ReloadBlock) {
+        self.ReloadBlock();
+    }
+}
 
 @end

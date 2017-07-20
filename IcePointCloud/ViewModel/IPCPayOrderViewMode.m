@@ -8,7 +8,7 @@
 
 #import "IPCPayOrderViewMode.h"
 #import "IPCCustomTopCell.h"
-#import "IPCCustomerDetailCell.h"
+#import "IPCPayOrderCustomerCell.h"
 #import "IPCCustomerAddressCell.h"
 #import "IPCCustomerOptometryCell.h"
 #import "IPCPayOrderEmployeeCell.h"
@@ -17,7 +17,7 @@
 #import "IPCPayOrderViewCellHeight.h"
 #import "IPCPayTypeRecordCell.h"
 
-static NSString * const customerIdentifier              = @"IPCCustomerDetailCellIdentifier";
+static NSString * const customerIdentifier              = @"IPCPayOrderCustomerCellIdentifier";
 static NSString * const opometryIdentifier              = @"HistoryOptometryCellIdentifier";
 static NSString * const addressIdentifier                = @"CustomerAddressListCellIdentifier";
 static NSString * const titleIdentifier                      = @"IPCOrderTopTableViewCellIdentifier";
@@ -43,15 +43,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 }
 
 #pragma mark //Request Data
-- (void)requestTradeOrExchangeStatus{
-    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
-        [self reload];
-    } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.domain];
-    }];
-}
-
 - (void)requestOrderPointPrice:(NSInteger)point
 {
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID
@@ -134,7 +125,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         [IPCCustomUI showError:@"员工总份额不足百分之一百"];
         return NO;
     }
-    if ([IPCPayOrderManager sharedManager].realTotalPrice + [IPCPayOrderManager sharedManager].givingAmount + [IPCPayOrderManager sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice])
+    if ([IPCPayOrderManager sharedManager].realTotalPrice + [IPCPayOrderManager sharedManager].givingAmount + [IPCPayOrderManager sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice])
     {
         [IPCCustomUI showError:@"请输入有效实付金额"];
         return NO;
@@ -169,9 +160,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             [cell setLeftTitle:@"客户基本信息"];
             return cell;
         }else{
-            IPCCustomerDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
+            IPCPayOrderCustomerCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerDetailCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderCustomerCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             cell.currentCustomer = [IPCCurrentCustomer sharedManager].currentCustomer;
             return cell;
@@ -238,7 +229,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            cell.optometryMode = [IPCCurrentCustomer sharedManager].currentOpometry;
             return cell;
         }
     }else if((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){

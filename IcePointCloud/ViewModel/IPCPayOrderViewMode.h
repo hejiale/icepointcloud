@@ -35,7 +35,6 @@
  *  @param ebuy WeChat or pay treasure to pay
  */
 - (void)offerOrder;
-- (void)requestTradeOrExchangeStatus;
 - (void)resetPayInfoData;
 
 @end

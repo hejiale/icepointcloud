@@ -19,10 +19,8 @@
  *    To obtain the corresponding number of shopping cart
  */
 - (NSInteger)itemsCount;
-- (NSInteger)selectPayItemsCount;
-- (NSInteger)selectNormalItemsCount;
+- (NSInteger)selectItemsCount;
 - (NSInteger)selectedGlassesCount;
-- (NSInteger)valueCardCount;
 - (NSInteger)allGlassesCount;
 - (NSInteger)itemsCount:(IPCShoppingCartItem *)cartItem;
 - (NSInteger)singleGlassesCount:(IPCGlasses *)glasses;
@@ -30,14 +28,10 @@
  *    Calculate the total price shopping cart selected goods
  */
 - (double)selectedGlassesTotalPrice;
-- (double)selectedValueCardTotalPrice;
-- (double)selectedPayItemTotalPrice;
 /**
  *   The selected shopping cart of goods
  */
 - (NSArray<IPCShoppingCartItem *> *)selectCartItems;
-- (NSArray<IPCShoppingCartItem *>*)selectValueCardCartItems;
-- (NSArray<IPCShoppingCartItem *> *)selectPayCartItems;
 /**
  *    Remove the shopping cart
  */
@@ -51,9 +45,7 @@
  */
 - (void)addLensWithGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl Count:(NSInteger)count;
 - (void)addReadingLensWithGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree  Count:(NSInteger)count;
-- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date  ContactID:(NSString *)contactID Count:(NSInteger)count;
-- (void)addAccessoryWithGlasses:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date Count:(NSInteger)count;
-- (void)addValueCard:(IPCGlasses *)glass;
+- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree  ContactID:(NSString *)contactID Count:(NSInteger)count;
 /**
  *   Plus Cart Item
  */
@@ -69,11 +61,9 @@
 - (IPCShoppingCartItem *)normalItemForGlasses:(IPCGlasses *)glasses;
 - (IPCShoppingCartItem *)batchLensForGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl;
 - (IPCShoppingCartItem *)readingLensForGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree;
-- (IPCShoppingCartItem *)contactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree  BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date;
-- (IPCShoppingCartItem *)batchAccessoryForGlass:(IPCGlasses *)glasses BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date;
-
+- (IPCShoppingCartItem *)contactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree;
 - (IPCShoppingCartItem *)itemAtIndex:(NSInteger)index;
-- (IPCShoppingCartItem *)selectedPayItemAtIndex:(NSInteger)index;
+- (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index;
 
 - (NSArray<IPCShoppingCartItem *> *)batchParameterList:(IPCGlasses *)glasses;
 /**

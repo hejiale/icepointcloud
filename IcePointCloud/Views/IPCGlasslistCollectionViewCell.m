@@ -67,46 +67,42 @@
         self.labelHeightConstraint.constant = labelHeight;
         
         //Shopping cart whether to join the product
-        if ([_glasses filterType] == IPCTopFilterTypeCard) {
-            [self.buyButton setHidden:NO];
-        }else{
-            [self.addCartButton setHidden:NO];
-            
-            __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
-            
-            if (glassCount > 0) {
-                [self.reduceButton setHidden:NO];
-                [self.cartNumLabel setHidden:NO];
-                self.reduceButtonLeading.constant = -46;
-                [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];
-            }
-            
-            //Judge stock
-            if (_glasses.stock > 0) {
-                NSInteger cartCount = [[IPCShoppingCart sharedCart] singleGlassesCount:_glasses];
-                if (cartCount >= _glasses.stock) {
-                    [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-                }else{
-                    [self.addCartButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
-                }
-                if ((([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
-                {
-                    if (cartCount >= _glasses.stock) {
-                        [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
-                    }else{
-                        [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_edit"] forState:UIControlStateNormal];
-                    }
-                }else{
-                    [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract"] forState:UIControlStateNormal];
-                }
-            }else{
+        [self.addCartButton setHidden:NO];
+        
+        __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
+        
+        if (glassCount > 0) {
+            [self.reduceButton setHidden:NO];
+            [self.cartNumLabel setHidden:NO];
+            self.reduceButtonLeading.constant = -46;
+            [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];
+        }
+        
+        //Judge stock
+        if (_glasses.stock > 0) {
+            NSInteger cartCount = [[IPCShoppingCart sharedCart] singleGlassesCount:_glasses];
+            if (cartCount >= _glasses.stock) {
                 [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-                if ((([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType) || [_glasses filterType] == IPCTopFilterTypeContactLenses)
-                {
+            }else{
+                [self.addCartButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
+            }
+            if ((([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
+            {
+                if (cartCount >= _glasses.stock) {
                     [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
                 }else{
-                    [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract_disable"] forState:UIControlStateNormal];
+                    [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_edit"] forState:UIControlStateNormal];
                 }
+            }else{
+                [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract"] forState:UIControlStateNormal];
+            }
+        }else{
+            [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
+            if ((([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType) || [_glasses filterType] == IPCTopFilterTypeContactLenses)
+            {
+                [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
+            }else{
+                [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract_disable"] forState:UIControlStateNormal];
             }
         }
     }
@@ -193,15 +189,6 @@
 }
 
 
-- (IBAction)buyCardAction:(id)sender {
-    if (self.glasses) {
-        [[IPCShoppingCart sharedCart] addValueCard:self.glasses];
-        if ([self.delegate respondsToSelector:@selector(buyValueCard:)]) {
-            [self.delegate buyValueCard:self];
-        }
-    }
-}
-
 - (void)showDetailAction{
     if ([self.delegate respondsToSelector:@selector(showProductDetail:)]) {
         [self.delegate showProductDetail:self];
@@ -210,7 +197,6 @@
 
 
 - (void)resetBuyStatus{
-    [self.buyButton setHidden:YES];
     [self.addCartButton setHidden:YES];
     [self.reduceButton setHidden:YES];
     [self.cartNumLabel setHidden:YES];

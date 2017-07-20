@@ -62,7 +62,7 @@
  */
 - (BOOL)shoppingCartIsEmpty
 {
-    return [[IPCShoppingCart sharedCart] selectNormalItemsCount] == 0;
+    return [[IPCShoppingCart sharedCart] selectItemsCount] == 0;
 }
 
 
@@ -116,6 +116,18 @@
 //    return hasStock;
 //}
 #pragma mark //Request Data
+- (void)requestTradeOrExchangeStatus:(void(^)())complete
+{
+    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
+        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
+        if (complete) {
+            complete();
+        }
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
+}
+
 //- (void)queryContactLensStock:(NSArray *)contactIDs
 //{
 //    [self.contactSpecificationArray  removeAllObjects];

@@ -93,10 +93,6 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
      */
     IPCTopFilterTypeAccessory,
     /**
-     *  CARD
-     */
-    IPCTopFilterTypeCard,
-    /**
      *  OTHERS
      */
     IPCTopFilterTypeOthers,
@@ -118,10 +114,6 @@ typedef NS_ENUM(NSInteger, IPCGlassesImageType) {
      *  PROFILE NORMAL
      */
     IPCGlassesImageTypeProfileNormal,
-    /**
-     *  DEGREE ANGLE
-     */
-    IPCGlassesImageTypeDegreeAngle,
     /**
      *   THUMB
      */

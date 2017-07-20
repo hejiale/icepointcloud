@@ -34,9 +34,7 @@
 
 - (void)updateUI
 {
-    CGFloat width = (self.jk_width - 100)/5;
-    
-    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    CGFloat width = 180;
     
     __weak typeof(self) weakSelf = self;
     
@@ -50,8 +48,10 @@
             [strongSelf removeEmployee:employeeView.employeeResult];
         }];
         employeeView.employeeResult = obj;
-        [self.contentView addSubview:employeeView];
+        [self.employeeScrollView addSubview:employeeView];
     }];
+    
+    [self.employeeScrollView setContentSize:CGSizeMake([IPCPayOrderManager sharedManager].employeeResultArray.count * (width+15), 0)];
 }
 
 

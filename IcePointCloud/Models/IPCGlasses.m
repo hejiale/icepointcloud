@@ -27,8 +27,6 @@
             return self.frontialDisplayImage;
         case IPCGlassesImageTypeProfileNormal:
             return self.profileDisplayImage;
-        case IPCGlassesImageTypeDegreeAngle:
-            return self.degreeAngleImage;
         case IPCGlassesImageTypeThumb:
             return self.thumbImage;
         default:
@@ -62,8 +60,6 @@
         return IPCTopFilterTypeContactLenses;
     }else if ([typeName isEqualToString:@"ACCESSORY"]){
         return IPCTopFilterTypeAccessory;
-    }else if ([typeName isEqualToString:@"VALUECARD"]){
-        return IPCTopFilterTypeCard;
     }
     return IPCTopFilterTypeOthers;
 }

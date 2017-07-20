@@ -17,6 +17,7 @@
     [self.productContentView addSubview:self.pointImageView];
     [self.productContentView addSubview:self.suggestPriceLabel];
     [self.productContentView addSubview:self.productNameLabel];
+    [self.productImageView addBorder:3 Width:0.5];
     
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(10);
@@ -93,10 +94,6 @@
     _glasses = glasses;
     
     if (_glasses) {
-        if ([_glasses filterType] != IPCTopFilterTypeCard) {
-            [self.productImageView addBorder:3 Width:0.5];
-        }
-        
         [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];

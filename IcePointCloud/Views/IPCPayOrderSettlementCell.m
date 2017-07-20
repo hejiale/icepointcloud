@@ -21,7 +21,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 
@@ -33,16 +33,12 @@
 
 - (void)updateUI
 {
-    if ([IPCPayOrderManager sharedManager].isTrade) {
-        [self.selectPointButton setHidden:NO];
-        self.selectPointButtonWidth.constant = 40;
-        [self.pointAmountTextField addBorder:3 Width:0.5];
-    }else{
-        [self.selectPointButton setHidden:YES];
-        self.selectPointButtonWidth.constant = 0;
-        [self.pointAmountTextField addBorder:0 Width:0];
-    }
-
+    //    if ([IPCPayOrderManager sharedManager].isTrade) {
+    //        [self.selectPointButton setHidden:NO];
+    //    }else{
+    //        [self.selectPointButton setHidden:YES];
+    //    }
+    
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {
         [self.pointAmountTextField setEnabled:NO];
         [self.selectPointButton setEnabled:YES];
@@ -66,13 +62,11 @@
             [self.pointAmountTextField setEnabled:NO];
         }
     }
-
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedPayItemTotalPrice]]];
+    
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] selectedGlassesTotalPrice]]];
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].pointPrice]];
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice]];
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].usedPoint]];
-    [self.customerPointLabel setText:[NSString stringWithFormat:@"%d点积分可用",[IPCPayOrderManager sharedManager].point]];
-    [self.givingAmountLabel setText:[NSString stringWithFormat:@"赠送金额 ￥%.2f",[IPCPayOrderManager sharedManager].givingAmount]];
 }
 
 #pragma mark //Clicke Events
@@ -80,8 +74,8 @@
 - (IBAction)selectPayPointAction:(UIButton *)sender {
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint])return;
     
-    [sender setSelected:!sender.selected];
-    [IPCPayOrderManager sharedManager].isSelectPoint = sender.selected;
+    [IPCPayOrderManager sharedManager].isSelectPoint = !sender.selected;
+    
     if (!sender.selected) {
         [IPCPayOrderManager sharedManager].realTotalPrice    += [IPCPayOrderManager sharedManager].pointPrice;// 刷新实际价格
         [IPCPayOrderManager sharedManager].remainAmount  += [IPCPayOrderManager sharedManager].pointPrice;//刷新剩余付款金额
@@ -139,13 +133,13 @@
             }
         }else if ([textField isEqual:self.payAmountTextField]){
             //判断实际输入价格
-            if (([[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice) < [str doubleValue]) {
-                [IPCPayOrderManager sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice;
+            if (([[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice) < [str doubleValue]) {
+                [IPCPayOrderManager sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice;
             }else{
                 [IPCPayOrderManager sharedManager].realTotalPrice = [str doubleValue];
             }
             //计算赠送金额
-            [IPCPayOrderManager sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedPayItemTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].realTotalPrice;
+            [IPCPayOrderManager sharedManager].givingAmount = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].realTotalPrice;
             if ([IPCPayOrderManager sharedManager].givingAmount <= 0) {
                 [IPCPayOrderManager sharedManager].givingAmount = 0;
             }

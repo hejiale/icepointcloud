@@ -21,7 +21,7 @@
 @property (nonatomic, strong, readwrite) IPCGlassesImage *profileDisplayImage;
 @property (nonatomic, strong, readwrite) IPCGlassesImage *frontialDisplayImage;
 @property (nonatomic, strong, readwrite) IPCGlassesImage *frontialTryOnImage;
-@property (nonatomic, strong, readwrite) IPCGlassesImage *degreeAngleImage;
+//@property (nonatomic, strong, readwrite) IPCGlassesImage *degreeAngleImage;
 @property (nonatomic, strong, readwrite) IPCGlassesImage *thumbImage;
 //*************普通商品  批量商品参数**************//
 @property (nonatomic, copy, readonly) NSString * glassCode;//Commodity item no

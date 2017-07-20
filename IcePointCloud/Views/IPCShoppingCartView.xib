@@ -109,7 +109,7 @@
                         <constraint firstItem="Nfj-QX-ovB" firstAttribute="top" secondItem="E3E-SG-Act" secondAttribute="top" id="zCQ-aS-gGQ"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-Lo-IuG">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-Lo-IuG">
                     <rect key="frame" x="0.0" y="50" width="624" height="600"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.070794092465753425" colorSpace="calibratedWhite"/>

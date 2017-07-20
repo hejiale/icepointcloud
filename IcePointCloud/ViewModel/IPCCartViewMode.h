@@ -33,6 +33,8 @@
 
 - (void)changeAllCartItemSelected:(BOOL)isSelected;
 
+- (void)requestTradeOrExchangeStatus:(void(^)())complete;
+
 /**
  *  Query the corresponding nursing liquid inventory
  *

@@ -17,7 +17,22 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="400" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5E-dw-5dD">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="74.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="N5E-dw-5dD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="R6g-zD-f0F"/>
+                    <constraint firstItem="N5E-dw-5dD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="TNS-sr-fLQ"/>
+                    <constraint firstAttribute="trailing" secondItem="N5E-dw-5dD" secondAttribute="trailing" id="WOW-L7-Mdi"/>
+                    <constraint firstAttribute="bottom" secondItem="N5E-dw-5dD" secondAttribute="bottom" id="ZnD-cD-cpC"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="employeeScrollView" destination="N5E-dw-5dD" id="vbx-ug-SS7"/>
+            </connections>
             <point key="canvasLocation" x="123.5" y="89.5"/>
         </tableViewCell>
     </objects>
