@@ -96,35 +96,6 @@
     NSMutableDictionary *attrs = [[NSMutableDictionary alloc]init];
     
     if ([self.glasses filterType] == IPCTopFilterTypeCustomized) {
-        if (self.batchSph.length) {
-            [attrs setObject:self.batchSph forKey:@"sphLeft"];
-            [attrs setObject:self.batchSph forKey:@"sphRight"];
-        }
-        
-        if (self.bacthCyl.length) {
-            [attrs setObject:self.bacthCyl forKey:@"cylLeft"];
-            [attrs setObject:self.bacthCyl forKey:@"cylRight"];
-        }
-        
-        if (self.batchReadingDegree.length)
-            [attrs setObject:self.batchReadingDegree forKey:@"degree"];
-        
-        
-        if (self.contactDegree.length)
-            [attrs setObject:self.contactDegree forKey:@"degree"];
-        
-        if (self.batchNum.length) {
-            [attrs setObject:self.batchNum forKey:@"batchNumber"];
-        }
-        
-        if (self.kindNum.length) {
-            [attrs setObject:self.kindNum forKey:@"approvalNumber"];
-        }
-        
-        if (self.validityDate.length) {
-            [attrs setObject:self.validityDate forKey:@"expireDate"];
-        }
-        
         if (self.IOROptions.length)
             attrs[@"refraction"] = self.IOROptions;
         
@@ -163,18 +134,6 @@
     
     if (self.contactDegree.length)
         [attrs setObject:self.contactDegree forKey:@"degree"];
-    
-    if (self.batchNum.length) {
-        [attrs setObject:self.batchNum forKey:@"batchNumber"];
-    }
-    
-    if (self.kindNum.length) {
-        [attrs setObject:self.kindNum forKey:@"approvalNumber"];
-    }
-    
-    if (self.validityDate.length) {
-        [attrs setObject:self.validityDate forKey:@"expireDate"];
-    }
     
     if (attrs.allKeys.count)
         [params setObject:attrs forKey:@"attributes"];

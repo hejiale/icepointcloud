@@ -12,17 +12,16 @@
 
 @property (strong, nonatomic) IPCGlasses * currentGlass;
 @property (strong, nonatomic) IPCBatchParameterList * batchParameterList;
-@property (strong, nonatomic) NSMutableArray<IPCContactLenSpecList *> * contactSpecificationArray;
-@property (strong, nonatomic) IPCAccessorySpecList * accessorySpecification;
 
 - (instancetype)initWithGlasses:(IPCGlasses *)glass UpdateUI:(void(^)())update;
+
 - (void)queryBatchStockRequest;
 - (void)queryBatchReadingDegreeRequest;
-//- (void)getContactLensSpecification;
-//- (void)queryAccessoryStock;
+- (void)queryContactLensStockRequest;
+
 - (NSInteger)queryLensStock:(IPCShoppingCartItem *)cartItem;
 - (NSInteger)queryReadingLensStock:(IPCShoppingCartItem *)cartItem;
-//- (NSInteger)queryContactLensStock:(IPCShoppingCartItem *)cartItem;
-//- (NSInteger)queryAccessoryStock:(IPCShoppingCartItem *)cartItem;
+- (NSInteger)queryContactLensStock:(IPCShoppingCartItem *)cartItem;
+
 
 @end

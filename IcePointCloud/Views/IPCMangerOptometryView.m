@@ -8,23 +8,57 @@
 
 #import "IPCMangerOptometryView.h"
 
+@interface IPCMangerOptometryView()
+
+@property (weak, nonatomic) IBOutlet UILabel *insertDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *employeeLabel;
+@property (strong, nonatomic) IBOutlet UIView  *optometryContentView;
+
+@end
+
 @implementation IPCMangerOptometryView
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCMangerOptometryView" owner:self];
+        [self addSubview:view];
+    }
+    return self;
+}
 
 - (void)createUIWithOptometry:(IPCOptometryMode *)optometry
 {
-    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.optometryContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj removeFromSuperview];
     }];
     
+    if (optometry.isUpdateStatus) {
+        if (optometry.optometryEmployee) {
+            [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",optometry.optometryEmployee]];
+        }
+        if (optometry.optometryInsertDate) {
+            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate]  IsTime:YES]]];
+        }
+    }else{
+        if (optometry.employeeName) {
+            [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",optometry.employeeName]];
+        }
+        if (optometry.insertDate) {
+            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate]  IsTime:YES]]];
+        }
+    }
+    
     NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"瞳距/PD", @"下加光/ADD"];
     CGFloat  itemWidth = 130;
-    CGFloat  spaceWidth   = (self.jk_width - 34 - 20 -itemWidth * 6) /5;
+    CGFloat  spaceWidth   = (self.optometryContentView.jk_width - 34 - 20 -itemWidth * 6) /5;
     CGFloat  spaceHeight  = 15;
     
     
     for (int i = 0; i < 3; i++) {
-        UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (20 + spaceHeight) * i, self.jk_width, 20)];
-        [self addSubview:lensView];
+        UIView *lensView = [[UIView alloc] initWithFrame:CGRectMake(0, (20 + spaceHeight) * i, self.optometryContentView.jk_width, 20)];
+        [self.optometryContentView addSubview:lensView];
         
         UIImageView *imgView = nil;
         if ( i < 3) {

@@ -13,8 +13,8 @@
 #import "IPCCustomerOptometryCell.h"
 #import "IPCPayTypeRecordCell.h"
 #import "IPCOrderDetailProductCell.h"
-#import "IPCPayOrderPayInfoCell.h"
-#import "IPCPayOrderEmployeeCell.h"
+#import "IPCUpdateOrderPayInfoCell.h"
+#import "IPCUpdateOrderEmployeeCell.h"
 
 static NSString * const titleIdentifier            = @"IPCOrderTopTableViewCellIdentifier";
 static NSString * const customerIdentifier    = @"IPCCustomerDetailCellIdentifier";
@@ -220,16 +220,16 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
             [cell setLeftTitle:@"参与员工"];
             return cell;
         }else{
-            IPCPayOrderEmployeeCell * cell = [tableView dequeueReusableCellWithIdentifier:employeeIdentifier];
+            IPCUpdateOrderEmployeeCell * cell = [tableView dequeueReusableCellWithIdentifier:employeeIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPayOrderEmployeeCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCUpdateOrderEmployeeCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             return cell;
         }
     }else if (indexPath.section == 5){
-        IPCPayOrderPayInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:payInfoIdentifier];
+        IPCUpdateOrderPayInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:payInfoIdentifier];
         if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCPayOrderPayInfoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell = [[UINib nibWithNibName:@"IPCUpdateOrderPayInfoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         return cell;
     }else{
@@ -263,7 +263,7 @@ static NSString * const employeeIdentifier    = @"IPCPayOrderEmployeeCellIdentif
     }else if (indexPath.section == 3 && indexPath.row > 0){
         return 115;
     }else if (indexPath.section == 4 && indexPath.row > 0){
-        return 130;
+        return 110;
     }else if (indexPath.section == 5){
         return 150;
     }else if (indexPath.section == 6 && indexPath.row > 0){

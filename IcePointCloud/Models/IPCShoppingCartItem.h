@@ -34,9 +34,6 @@
 @property (nonatomic, copy, readwrite) NSString * batchReadingDegree;//Batch aging degree
 @property (nonatomic, copy, readwrite) NSString * contactLensID;//Batch contact ID
 @property (nonatomic, copy, readwrite) NSString * contactDegree;//Batch contact degree
-@property (nonatomic, copy, readwrite) NSString * batchNum;//Batch stealth batch number
-@property (nonatomic, copy, readwrite) NSString * kindNum;//Batch invisible kind
-@property (nonatomic, copy, readwrite) NSString * validityDate;//Batch stealth is valid
 
 - (double)totalPrice;
 - (NSDictionary *)paramtersJSONForOrderRequest;

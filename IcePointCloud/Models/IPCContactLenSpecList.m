@@ -16,8 +16,9 @@
         self.contactLensID = contactLensID;
         
         NSDictionary * degreeDic = responseObject[contactLensID];
-        if ([degreeDic isKindOfClass:[NSDictionary class]]) {
-            self.degree = degreeDic[@"degree"];
+        
+        if ([degreeDic isKindOfClass:[NSDictionary class]])
+        {
             if ([degreeDic[@"details"] isKindOfClass:[NSArray class]]) {
                 [degreeDic[@"details"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     IPCContactLenSpec * parameter = [IPCContactLenSpec mj_objectWithKeyValues:obj];

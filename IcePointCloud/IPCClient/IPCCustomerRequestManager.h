@@ -154,12 +154,12 @@
 /**
  *  QUERY HISTORY LIST ORDER
  *
- *  @param phone
+ *  @param customID
  *  @param page
  *  @param success
  *  @param failure
  */
-+ (void)queryHistorySellInfoWithPhone:(NSString *)phone
++ (void)queryHistorySellInfoWithPhone:(NSString *)customID
                                  Page:(NSInteger)page
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure;

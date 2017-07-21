@@ -14,7 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *bottomLine;
 
 @property (copy, nonatomic) IPCCustomerOrderMode * customerOrder;
 

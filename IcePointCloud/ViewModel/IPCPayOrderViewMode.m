@@ -10,7 +10,7 @@
 #import "IPCCustomTopCell.h"
 #import "IPCPayOrderCustomerCell.h"
 #import "IPCCustomerAddressCell.h"
-#import "IPCCustomerOptometryCell.h"
+#import "IPCPayOrderOptometryCell.h"
 #import "IPCPayOrderEmployeeCell.h"
 #import "IPCPayOrderSettlementCell.h"
 #import "IPCPayOrderMemoCell.h"
@@ -225,10 +225,11 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }];
             return cell;
         }else{
-            IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
+            IPCPayOrderOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:opometryIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCPayOrderOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            cell.optometry = [IPCCurrentCustomer sharedManager].currentOpometry;
             return cell;
         }
     }else if((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){

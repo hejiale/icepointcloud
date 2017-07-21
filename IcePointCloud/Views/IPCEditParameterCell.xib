@@ -62,17 +62,6 @@
                             <action selector="reduceCartAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jdA-op-9R0"/>
                         </connections>
                     </button>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8R-iX-paw">
-                        <rect key="frame" x="8" y="13" width="100" height="20"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="Huo-0S-eGd"/>
-                            <constraint firstAttribute="height" constant="20" id="O5B-sF-oWA"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY2-SP-yGW">
                         <rect key="frame" x="432" y="8" width="35" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -96,7 +85,6 @@
                     <constraint firstAttribute="trailingMargin" secondItem="JY2-SP-yGW" secondAttribute="trailing" id="63N-ak-ujv"/>
                     <constraint firstItem="isk-3j-tra" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fl7-4x-DVK"/>
                     <constraint firstItem="JY2-SP-yGW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="J2O-2b-qVo"/>
-                    <constraint firstItem="C8R-iX-paw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="S9L-XG-YWR"/>
                     <constraint firstAttribute="bottomMargin" secondItem="JY2-SP-yGW" secondAttribute="bottom" id="Sjp-TS-uXR"/>
                     <constraint firstItem="JY2-SP-yGW" firstAttribute="leading" secondItem="boh-kY-eq1" secondAttribute="trailing" id="Zik-d1-Ib8"/>
                     <constraint firstAttribute="bottomMargin" secondItem="boh-kY-eq1" secondAttribute="bottom" id="d06-S3-Sec"/>
@@ -105,7 +93,6 @@
                     <constraint firstAttribute="bottomMargin" secondItem="XCf-hF-6T2" secondAttribute="bottom" id="mIM-Qb-86b"/>
                     <constraint firstItem="XCf-hF-6T2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="ns3-ZX-Cqa"/>
                     <constraint firstItem="boh-kY-eq1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="xUK-nB-RZm"/>
-                    <constraint firstItem="C8R-iX-paw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="ym0-MM-pXs"/>
                     <constraint firstItem="isk-3j-tra" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="zLo-D8-DHo"/>
                 </constraints>
             </tableViewCellContentView>
@@ -113,9 +100,6 @@
             <connections>
                 <outlet property="addButton" destination="JY2-SP-yGW" id="CmQ-DM-EZT"/>
                 <outlet property="cartNumLabel" destination="boh-kY-eq1" id="fCM-3d-K8K"/>
-                <outlet property="degreeHeight" destination="O5B-sF-oWA" id="Gt6-oD-Ep3"/>
-                <outlet property="degreeLabel" destination="C8R-iX-paw" id="YQa-Vx-eqt"/>
-                <outlet property="degreeWidthConstraint" destination="Huo-0S-eGd" id="7zt-RJ-YzN"/>
                 <outlet property="parameterLabel" destination="isk-3j-tra" id="47t-4D-0Ah"/>
                 <outlet property="reduceButton" destination="XCf-hF-6T2" id="oea-r0-Nsb"/>
             </connections>

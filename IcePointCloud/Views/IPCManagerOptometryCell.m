@@ -14,10 +14,11 @@
     [super awakeFromNib];
     // Initialization code
     
+    [self.contentView addSubview:self.optometryView];
     [self.contentView addSubview:self.defaultButton];
     [self.contentView bringSubviewToFront:self.defaultButton];
     [self.defaultButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.contentView.mas_right).offset(-20);
+        make.right.equalTo(self.contentView.mas_right).offset(-28);
         make.top.equalTo(self.contentView.mas_top).offset(15);
         make.width.mas_equalTo(120);
         make.height.mas_equalTo(30);
@@ -53,26 +54,18 @@
     _optometryMode = optometryMode;
     
     if (_optometryMode) {
-        if (!self.optometryView) {
-            self.optometryView = [[IPCMangerOptometryView alloc]initWithFrame:self.optometryContentView.bounds];
-            [self.optometryView createUIWithOptometry:_optometryMode];
-            [self.optometryContentView addSubview:self.optometryView];
-            
-            if (_optometryMode.employeeName.length && _optometryMode.employeeName) {
-                [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",_optometryMode.employeeName]];
-            }
-            
-            if (_optometryMode.insertDate && _optometryMode.insertDate.length) {
-                [self.dateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:_optometryMode.insertDate]  IsTime:YES]]];
-            }else{
-                [self.dateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[NSDate date] IsTime:YES]]];
-            }
-        }
+        [self.optometryView createUIWithOptometry:_optometryMode];
     }
 }
 
+- (IPCMangerOptometryView *)optometryView{
+    if (!_optometryView) {
+        _optometryView = [[IPCMangerOptometryView alloc]initWithFrame:self.contentView.bounds];
+    }
+    return _optometryView;
+}
 
-- (IBAction)setDefaultAction:(id)sender {
+- (void)setDefaultAction:(id)sender {
     
 }
 

@@ -10,7 +10,8 @@
 
 @interface IPCPayOrderCustomerCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+@property (weak, nonatomic) IBOutlet UIView *imageContentView;
+@property (strong, nonatomic) UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;

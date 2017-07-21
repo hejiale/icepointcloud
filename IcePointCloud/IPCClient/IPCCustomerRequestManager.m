@@ -141,12 +141,12 @@
 }
 
 
-+ (void)queryHistorySellInfoWithPhone:(NSString *)phone
++ (void)queryHistorySellInfoWithPhone:(NSString *)customID
                                  Page:(NSInteger)page
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerPhone":phone} RequestMethod:@"customerAdmin.listHistoryOrders" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerId":customID} RequestMethod:@"customerAdmin.listHistoryOrdersByCustomerId" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

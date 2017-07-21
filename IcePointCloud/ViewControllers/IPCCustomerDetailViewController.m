@@ -285,12 +285,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.optometryList.count) {
                 IPCOptometryMode * optometry = self.customerViewMode.optometryList[indexPath.row -1];
                 cell.optometryMode = optometry;
-        
-                if (indexPath.row == 1) {
-                    [cell.defaultLabel setHidden:NO];
-                }else{
-                    [cell.defaultLabel setHidden:YES];
-                }
             }
             return cell;
         }
@@ -344,11 +338,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.orderList.count) {
                 IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
                 cell.customerOrder = order;
-                if (!self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count) {
-                    [cell.bottomLine setHidden:YES];
-                }else{
-                    [cell.bottomLine setHidden:NO];
-                }
             }
             return cell;
         }
@@ -362,7 +351,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }else if (indexPath.section == 1 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1)
             return 50;
-        return 160;
+        return 150;
     }else if (indexPath.section == 3 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1)
             return 50;

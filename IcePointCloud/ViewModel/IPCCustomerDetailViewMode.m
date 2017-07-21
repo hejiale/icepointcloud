@@ -92,7 +92,7 @@
 
 - (void)queryHistotyOrderList:(void(^)())completeBlock{
     __weak typeof (self) weakSelf = self;
-    [IPCCustomerRequestManager queryHistorySellInfoWithPhone:self.currentCustomer.customerPhone
+    [IPCCustomerRequestManager queryHistorySellInfoWithPhone:self.currentCustomer.customerID
                                                         Page:_orderCurrentPage
                                                 SuccessBlock:^(id responseValue){
                                                     __strong typeof (weakSelf) strongSelf = weakSelf;

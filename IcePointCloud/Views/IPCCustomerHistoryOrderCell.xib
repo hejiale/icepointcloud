@@ -58,31 +58,20 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OJp-eT-L1S">
-                        <rect key="frame" x="25" y="78.5" width="974" height="1"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.065148758560000006" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="85d-F8-xsx"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="teh-dk-VfR" secondAttribute="trailing" constant="80" id="2Ji-s3-iib"/>
                     <constraint firstItem="etz-3E-DvD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="3cp-Xf-Hfu"/>
-                    <constraint firstItem="OJp-eT-L1S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="25" id="3kh-92-lex"/>
                     <constraint firstAttribute="bottomMargin" secondItem="teh-dk-VfR" secondAttribute="bottom" constant="5" id="5X2-0f-rba"/>
                     <constraint firstItem="etz-3E-DvD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="6wL-vN-Iik"/>
                     <constraint firstItem="8Vv-3v-FPt" firstAttribute="leading" secondItem="2Eg-Mt-fR5" secondAttribute="trailing" constant="50" id="Ue3-Ne-Trf"/>
                     <constraint firstItem="8Vv-3v-FPt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="WTL-fc-un9"/>
-                    <constraint firstAttribute="bottom" secondItem="OJp-eT-L1S" secondAttribute="bottom" id="Xli-a0-aXZ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Vv-3v-FPt" secondAttribute="trailing" constant="20" id="dzG-24-UGE"/>
                     <constraint firstItem="2Eg-Mt-fR5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="fWW-D9-a23"/>
                     <constraint firstItem="teh-dk-VfR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="uQc-IU-DTV"/>
-                    <constraint firstAttribute="trailing" secondItem="OJp-eT-L1S" secondAttribute="trailing" constant="25" id="wxd-Ks-X8X"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="bottomLine" destination="OJp-eT-L1S" id="hTP-ao-zdH"/>
                 <outlet property="orderCodeLabel" destination="etz-3E-DvD" id="A0Q-gI-Fsq"/>
                 <outlet property="orderDateLabel" destination="2Eg-Mt-fR5" id="LjD-zD-peZ"/>
                 <outlet property="orderPriceLabel" destination="teh-dk-VfR" id="si7-sg-uWa"/>

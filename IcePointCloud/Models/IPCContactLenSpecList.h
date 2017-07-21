@@ -12,7 +12,7 @@
 @interface IPCContactLenSpecList : NSObject
 
 @property (nonatomic, copy, readwrite) NSString * contactLensID;
-@property (nonatomic, copy, readwrite) NSString * degree;
+
 @property (nonatomic, strong) NSMutableArray<IPCContactLenSpec *> * parameterList;
 
 - (instancetype)initWithResponseObject:(id)responseObject ContactLensID:(NSString *)contactLensID;

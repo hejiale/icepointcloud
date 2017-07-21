@@ -34,12 +34,12 @@
 
 - (void)updateUI
 {
-    CGFloat width = 180;
+    CGFloat width = (self.jk_width - 76)/3;
     
     __weak typeof(self) weakSelf = self;
     
     [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        __block IPCEmployeePerformanceView * employeeView = [[IPCEmployeePerformanceView alloc]initWithFrame:CGRectMake(20+(width+15)*idx, 45/2, width, 90) Update:^{
+        __block IPCEmployeePerformanceView * employeeView = [[IPCEmployeePerformanceView alloc]initWithFrame:CGRectMake(28+(width+10)*idx, 0, width, 90) Update:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf replaceEmployee:employeeView.employeeResult];
         }];
@@ -51,7 +51,7 @@
         [self.employeeScrollView addSubview:employeeView];
     }];
     
-    [self.employeeScrollView setContentSize:CGSizeMake([IPCPayOrderManager sharedManager].employeeResultArray.count * (width+15), 0)];
+    [self.employeeScrollView setContentSize:CGSizeMake([IPCPayOrderManager sharedManager].employeeResultArray.count * (width+10) + 28, 0)];
 }
 
 

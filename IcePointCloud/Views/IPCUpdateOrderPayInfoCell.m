@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCPayOrderPayInfoCell.h"
+#import "IPCUpdateOrderPayInfoCell.h"
 
-@implementation IPCPayOrderPayInfoCell
+@implementation IPCUpdateOrderPayInfoCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

@@ -43,7 +43,6 @@
     self.payOrderViewMode.delegate = self;
     
     [self.payOrderTableView setTableFooterView:self.tableFootView];
-    [self.payOrderTableView setTableHeaderView:self.tableHeadView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(queryCustomerDetail)
@@ -54,6 +53,11 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
+    }else{
+        [self.payOrderTableView setTableHeaderView:self.tableHeadView];
+    }
     [self setNavigationBarStatus:YES];
     [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
     [self.cartContentView addSubview:self.shopCartView];

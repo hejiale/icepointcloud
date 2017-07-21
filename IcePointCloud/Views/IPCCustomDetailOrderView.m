@@ -190,6 +190,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            cell.optometry = [IPCCustomerOrderDetail instance].optometryMode;
             return cell;
         }
     }else if (indexPath.section == 3){
@@ -253,7 +254,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     }else if (indexPath.section == 1 && ![[IPCCustomerOrderDetail instance].addressMode isEmptyAddress]){
         return 70;
     }else if (indexPath.section == 2 && indexPath.row > 0){
-        return 185;
+        return 190;
     }else if (indexPath.section == 3){
         if ([IPCCustomerOrderDetail instance].products.count) {
             return 115;
@@ -276,7 +277,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width,  (section == 3 ? 0 : 5))];
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
     [footView setBackgroundColor:[UIColor clearColor]];
     return footView;
 }

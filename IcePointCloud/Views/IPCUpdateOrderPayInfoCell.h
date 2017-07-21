@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCPayOrderPayInfoCell : UITableViewCell
+@interface IPCUpdateOrderPayInfoCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *produceIntegerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;

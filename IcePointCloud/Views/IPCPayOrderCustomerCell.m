@@ -13,12 +13,22 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    [self.imageContentView addSubview:self.headImageView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (UIImageView *)headImageView{
+    if (!_headImageView) {
+        _headImageView = [[UIImageView alloc] initWithFrame:self.imageContentView.bounds];
+        [_headImageView zy_cornerRadiusAdvance:self.imageContentView.jk_height/2  rectCornerType:UIRectCornerAllCorners];
+    }
+    return _headImageView;
 }
 
 - (void)setCurrentCustomer:(IPCDetailCustomer *)currentCustomer

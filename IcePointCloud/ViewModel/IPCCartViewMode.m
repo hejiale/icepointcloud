@@ -11,22 +11,22 @@
 
 @implementation IPCCartViewMode
 
-//- (void)reloadContactLensStock{
-//    __block NSMutableArray<NSString *> * batchIDs = [[NSMutableArray alloc]init];
-//    [[[IPCShoppingCart sharedCart] itemList] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([obj.glasses filterType] == IPCTopFilterTypeContactLenses && obj.glasses.isBatch)
-//            [batchIDs addObject:obj.contactLensID];
-//    }];
-//    if ([batchIDs count]) {
-//        [self  queryContactLensStock:batchIDs];
-//    }
-//}
+- (void)reloadContactLensStock{
+    __block NSMutableArray<NSString *> * batchIDs = [[NSMutableArray alloc]init];
+    [[[IPCShoppingCart sharedCart] itemList] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.glasses filterType] == IPCTopFilterTypeContactLenses && obj.glasses.isBatch)
+            [batchIDs addObject:obj.contactLensID];
+    }];
+    if ([batchIDs count]) {
+        [self  queryContactLensStock:batchIDs];
+    }
+}
 
-//- (NSMutableArray<IPCContactLenSpecList *> *)contactSpecificationArray{
-//    if (!_contactSpecificationArray)
-//        _contactSpecificationArray = [[NSMutableArray alloc]init];
-//    return _contactSpecificationArray;
-//}
+- (NSMutableArray<IPCContactLenSpecList *> *)contactSpecificationArray{
+    if (!_contactSpecificationArray)
+        _contactSpecificationArray = [[NSMutableArray alloc]init];
+    return _contactSpecificationArray;
+}
 
 /**
  *  Judge contact lenses in the inventory
@@ -92,30 +92,24 @@
     }
 }
 
-//Get Accessory Cart Stock
-//- (BOOL)accessoryCartStock:(IPCShoppingCartItem *)cartItem
-//{
-//    __block BOOL hasStock = YES;
-//    
-//    [self.accessorySpecification.parameterList enumerateObjectsUsingBlock:^(IPCAccessoryBatchNum * _Nonnull batchNumMode, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ([batchNumMode.batchNumber isEqualToString:cartItem.batchNum]) {
-//            [batchNumMode.kindNumArray enumerateObjectsUsingBlock:^(IPCAccessoryKindNum * _Nonnull kindNumMode, NSUInteger idx, BOOL * _Nonnull stop) {
-//                if ([kindNumMode.kindNum isEqualToString:cartItem.kindNum]) {
-//                    [kindNumMode.expireDateArray enumerateObjectsUsingBlock:^(IPCAccessoryExpireDate * _Nonnull dateMode, NSUInteger idx, BOOL * _Nonnull stop) {
-//                        if ([dateMode.expireDate isEqualToString:cartItem.validityDate]) {
-//                            if (dateMode.stock <= cartItem.glassCount) {
-//                                hasStock = NO;
-//                            }
-//                            *stop = YES;
-//                        }
-//                    }];
-//                }
-//            }];
-//        }
-//    }];
-//    return hasStock;
-//}
+
 #pragma mark //Request Data
+- (void)queryContactLensStock:(NSArray *)contactIDs
+{
+    [self.contactSpecificationArray  removeAllObjects];
+    
+    [IPCBatchRequestManager queryContactGlassBatchSpecification:contactIDs SuccessBlock:^(id responseValue) {
+        [contactIDs enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            IPCContactLenSpecList * contactSpecification = [[IPCContactLenSpecList alloc]initWithResponseObject:responseValue ContactLensID:obj];
+            [self.contactSpecificationArray addObject:contactSpecification];
+        }];
+        [IPCCustomUI hiden];
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
+}
+
+
 - (void)requestTradeOrExchangeStatus:(void(^)())complete
 {
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
@@ -127,35 +121,5 @@
         [IPCCustomUI showError:error.domain];
     }];
 }
-
-//- (void)queryContactLensStock:(NSArray *)contactIDs
-//{
-//    [self.contactSpecificationArray  removeAllObjects];
-//    
-//    [IPCBatchRequestManager queryContactGlassBatchSpecification:contactIDs SuccessBlock:^(id responseValue) {
-//        [contactIDs enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//            IPCContactLenSpecList * contactSpecification = [[IPCContactLenSpecList alloc]initWithResponseObject:responseValue ContactLensID:obj];
-//            [self.contactSpecificationArray addObject:contactSpecification];
-//        }];
-//        [IPCCustomUI hiden];
-//    } FailureBlock:^(NSError *error) {
-//        [IPCCustomUI showError:error.domain];
-//    }];
-//}
-//
-//
-//- (void)queryAccessoryStock:(IPCShoppingCartItem *)cartItem Complete:(void(^)(BOOL hasStock))complete
-//{
-//    [IPCBatchRequestManager queryAccessoryBatchSpecification:[cartItem.glasses glassId]
-//                                                SuccessBlock:^(id responseValue)
-//     {
-//         _accessorySpecification = [[IPCAccessorySpecList alloc]initWithResponseObject:responseValue];
-//         if (complete) {
-//             complete([self accessoryCartStock:cartItem]);
-//         }
-//     } FailureBlock:^(NSError *error) {
-//         [IPCCustomUI showError:error.domain];
-//     }];
-//}
 
 @end
