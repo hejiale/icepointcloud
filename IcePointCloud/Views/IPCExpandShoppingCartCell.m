@@ -73,6 +73,7 @@
             self.inputPriceViewRight.constant = 20;
             
             if (_cartItem.isChoosePoint) {
+                [self.noPointButton setSelected:YES];
                 [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
                 [self.inputPriceTextField setText:[NSString stringWithFormat:@"%d", _cartItem.pointValue]];
             }else{

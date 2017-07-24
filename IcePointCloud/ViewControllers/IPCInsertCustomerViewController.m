@@ -85,7 +85,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                     [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
                     [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
                     [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
-                    [strongSelf popToPayOrderViewController];
+                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
                 }else{
                     [strongSelf.navigationController popViewControllerAnimated:YES];
                 }
@@ -154,7 +154,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+            [cell setRightOperation:@"验光单" AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [[IPCInsertCustomer instance].optometryArray addObject:[[IPCOptometryMode alloc]init]];
                 [tableView reloadData];

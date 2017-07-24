@@ -15,7 +15,6 @@
                 <outlet property="cartContentView" destination="DMG-6E-Dzf" id="QZA-mA-ua2"/>
                 <outlet property="payOrderTableView" destination="Lct-nk-oDR" id="sVr-jD-y7H"/>
                 <outlet property="saveButton" destination="GUo-wl-t5L" id="zFs-VI-8Iq"/>
-                <outlet property="tableFootView" destination="L70-zW-7W1" id="Ugo-9A-79C"/>
                 <outlet property="tableHeadView" destination="fZj-3i-Uah" id="kAA-MT-jqN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,8 +36,8 @@
                     </constraints>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lct-nk-oDR">
-                    <rect key="frame" x="544" y="0.0" width="480" height="768"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="544" y="0.0" width="480" height="718"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="480" id="VVw-Ok-m3F"/>
                     </constraints>
@@ -48,65 +47,63 @@
                         <outlet property="delegate" destination="-1" id="xt8-yh-C3s"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L70-zW-7W1">
+                    <rect key="frame" x="544" y="718" width="480" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
+                            <rect key="frame" x="260.5" y="7.5" width="120" height="35"/>
+                            <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
+                                <constraint firstAttribute="width" constant="120" id="kJE-03-Oh0"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                            <state key="normal" title="保存"/>
+                            <connections>
+                                <action selector="savePayOrder:" destination="-1" eventType="touchUpInside" id="5bC-Gq-3SH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu8-sK-Lh2">
+                            <rect key="frame" x="100" y="7.5" width="120" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="7cr-LA-Npa"/>
+                                <constraint firstAttribute="width" constant="120" id="sh6-Cj-tlV"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                            <state key="normal" title="取消订单">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="cancelPayOrderAction:" destination="-1" eventType="touchUpInside" id="ydv-4W-Bks"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="480" id="L6B-AO-04e"/>
+                        <constraint firstItem="Cu8-sK-Lh2" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="WPM-pc-PDf"/>
+                        <constraint firstItem="Cu8-sK-Lh2" firstAttribute="centerX" secondItem="L70-zW-7W1" secondAttribute="centerX" constant="-80" id="ehN-My-Zj7"/>
+                        <constraint firstItem="GUo-wl-t5L" firstAttribute="centerX" secondItem="L70-zW-7W1" secondAttribute="centerX" constant="80" id="jX6-i7-onh"/>
+                        <constraint firstItem="GUo-wl-t5L" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="oil-9C-ckh"/>
+                        <constraint firstAttribute="height" constant="50" id="smf-Gz-G9X"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="L70-zW-7W1" firstAttribute="top" secondItem="Lct-nk-oDR" secondAttribute="bottom" id="8vA-cr-gM8"/>
                 <constraint firstItem="DMG-6E-Dzf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CCK-vP-RE0"/>
                 <constraint firstItem="f6x-rh-ehn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DR2-Mi-Dmo"/>
                 <constraint firstItem="f6x-rh-ehn" firstAttribute="leading" secondItem="DMG-6E-Dzf" secondAttribute="trailing" id="UMn-Vm-ine"/>
+                <constraint firstAttribute="bottom" secondItem="L70-zW-7W1" secondAttribute="bottom" id="ehx-hl-80J"/>
                 <constraint firstAttribute="trailing" secondItem="Lct-nk-oDR" secondAttribute="trailing" id="kfj-Dm-ND8"/>
                 <constraint firstItem="DMG-6E-Dzf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mrf-jn-fLp"/>
                 <constraint firstAttribute="bottom" secondItem="f6x-rh-ehn" secondAttribute="bottom" id="pVd-bF-oR3"/>
                 <constraint firstItem="Lct-nk-oDR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="px4-oR-J85"/>
                 <constraint firstAttribute="bottom" secondItem="DMG-6E-Dzf" secondAttribute="bottom" id="uXm-QQ-deI"/>
                 <constraint firstItem="Lct-nk-oDR" firstAttribute="leading" secondItem="f6x-rh-ehn" secondAttribute="trailing" id="wKB-Jf-8a5"/>
-                <constraint firstAttribute="bottom" secondItem="Lct-nk-oDR" secondAttribute="bottom" id="wxx-ZT-ZHD"/>
+                <constraint firstAttribute="trailing" secondItem="L70-zW-7W1" secondAttribute="trailing" id="wen-ta-5gO"/>
             </constraints>
-        </view>
-        <view contentMode="scaleToFill" id="L70-zW-7W1">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="60"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
-                    <rect key="frame" x="260" y="12.5" width="120" height="35"/>
-                    <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
-                        <constraint firstAttribute="width" constant="120" id="kJE-03-Oh0"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                    <state key="normal" title="保存"/>
-                    <connections>
-                        <action selector="savePayOrder:" destination="-1" eventType="touchUpInside" id="5bC-Gq-3SH"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu8-sK-Lh2">
-                    <rect key="frame" x="100" y="12.5" width="120" height="35"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="35" id="7cr-LA-Npa"/>
-                        <constraint firstAttribute="width" constant="120" id="sh6-Cj-tlV"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                    <state key="normal" title="取消订单">
-                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="cancelPayOrderAction:" destination="-1" eventType="touchUpInside" id="ydv-4W-Bks"/>
-                    </connections>
-                </button>
-            </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstItem="Cu8-sK-Lh2" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="WPM-pc-PDf"/>
-                <constraint firstItem="Cu8-sK-Lh2" firstAttribute="centerX" secondItem="L70-zW-7W1" secondAttribute="centerX" constant="-80" id="ehN-My-Zj7"/>
-                <constraint firstItem="GUo-wl-t5L" firstAttribute="centerX" secondItem="L70-zW-7W1" secondAttribute="centerX" constant="80" id="jX6-i7-onh"/>
-                <constraint firstItem="GUo-wl-t5L" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="oil-9C-ckh"/>
-            </constraints>
-            <nil key="simulatedStatusBarMetrics"/>
-            <nil key="simulatedTopBarMetrics"/>
-            <nil key="simulatedBottomBarMetrics"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-278" y="571"/>
         </view>
         <view contentMode="scaleToFill" id="fZj-3i-Uah">
             <rect key="frame" x="0.0" y="0.0" width="480" height="50"/>
@@ -132,7 +129,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="9" y="1332"/>
+            <point key="canvasLocation" x="306" y="566"/>
         </view>
     </objects>
     <resources>

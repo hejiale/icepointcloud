@@ -108,15 +108,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)popToPayOrderViewController
-{
-    for (UIViewController *controller in self.navigationController.viewControllers) {
-        if ([controller isKindOfClass:[IPCPayOrderViewController class]]) {
-            IPCPayOrderViewController *revise =(IPCPayOrderViewController *)controller;
-            [self.navigationController popToViewController:revise animated:YES];
-        }
-    }
-}
 
 -(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint
 {

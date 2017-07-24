@@ -49,4 +49,11 @@
 }
 
 
+- (IBAction)chooseCustomerAction:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(selectCustomer)]) {
+        [self.delegate selectCustomer];
+    }
+}
+
+
 @end

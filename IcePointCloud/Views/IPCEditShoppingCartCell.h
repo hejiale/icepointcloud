@@ -22,6 +22,5 @@
 @protocol IPCEditShoppingCartCellDelegate <NSObject>
 
 - (void)chooseParameter:(IPCEditShoppingCartCell *)cell;
-- (void)judgeStock:(IPCEditShoppingCartCell *)cell;
 
 @end

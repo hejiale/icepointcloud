@@ -31,21 +31,22 @@
     [self.leftTitleLabel setText:title];
 }
 
-- (void)setRightTitle:(NSString *)title{
-    [self.rightLabel setHidden:NO];
-    [self.rightLabel setAttributedText:title];
-}
-
 - (void)setNoPayTitle:(NSString *)title{
     [self.noPayPriceView setHidden:NO];
     [self.noPayPriceLabel setText:title];
 }
 
-- (void)setRightOperation:(NSString *)title ButtonTitle:(NSString *)button ButtonImage:(NSString *)buttonImage
+- (void)setRightOperation:(NSString *)title
+          AttributedTitle:(NSAttributedString *)attributedTitle
+              ButtonTitle:(NSString *)button
+              ButtonImage:(NSString *)buttonImage
 {
     [self.rightButton setHidden:NO];
     if (title) {
         [self.leftTitleLabel setText:title];
+    }
+    if (attributedTitle) {
+        [self.leftTitleLabel setAttributedText:attributedTitle];
     }
     if (button) {
         [self.rightButton setTitle:button forState:UIControlStateNormal];

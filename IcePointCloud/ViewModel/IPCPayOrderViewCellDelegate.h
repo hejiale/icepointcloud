@@ -14,4 +14,6 @@
 
 - (void)getPointPrice:(NSInteger)point;
 
+- (void)selectCustomer;
+
 @end

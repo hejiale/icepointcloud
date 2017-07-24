@@ -10,4 +10,8 @@
 
 @interface IPCShoppingCartView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame Complete:(void(^)())complete;
+
+- (void)reload;
+
 @end

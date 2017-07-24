@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="biX-yQ-QNa">
-                    <rect key="frame" x="20" y="165" width="180" height="20"/>
+                    <rect key="frame" x="28" y="165" width="172" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="o3x-bp-O0w"/>
                     </constraints>
@@ -31,7 +31,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSs-tJ-6Zn">
-                    <rect key="frame" x="200" y="165" width="180" height="20"/>
+                    <rect key="frame" x="200" y="165" width="172" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="wZd-K4-pNV"/>
                     </constraints>
@@ -42,9 +42,9 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="VSs-tJ-6Zn" secondAttribute="trailing" constant="20" id="4ig-Kh-5L4"/>
+                <constraint firstAttribute="trailing" secondItem="VSs-tJ-6Zn" secondAttribute="trailing" constant="28" id="4ig-Kh-5L4"/>
                 <constraint firstAttribute="bottom" secondItem="VSs-tJ-6Zn" secondAttribute="bottom" constant="5" id="BaJ-JO-9cp"/>
-                <constraint firstItem="biX-yQ-QNa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="CTl-X0-GyA"/>
+                <constraint firstItem="biX-yQ-QNa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="28" id="CTl-X0-GyA"/>
                 <constraint firstAttribute="bottom" secondItem="biX-yQ-QNa" secondAttribute="bottom" constant="5" id="JO5-oS-AED"/>
                 <constraint firstItem="VSs-tJ-6Zn" firstAttribute="leading" secondItem="biX-yQ-QNa" secondAttribute="trailing" id="KaC-Mw-gxa"/>
                 <constraint firstAttribute="trailing" secondItem="biX-yQ-QNa" secondAttribute="trailing" multiplier="2" id="sLY-rs-tWV"/>

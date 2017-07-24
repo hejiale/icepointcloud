@@ -43,6 +43,20 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 }
 
 #pragma mark //Request Data
+- (void)requestTradeOrExchangeStatus:(void(^)())complete
+{
+    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
+        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
+        
+        if (complete) {
+            complete();
+        }
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
+}
+
+
 - (void)requestOrderPointPrice:(NSInteger)point
 {
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID
@@ -79,10 +93,12 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId
 {
+    [IPCCustomUI show];
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
                                                         SuccessBlock:^(id responseValue)
      {
          [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
+         [IPCCustomUI hiden];
          [self reload];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
@@ -94,9 +110,8 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 {
     [[IPCCurrentCustomer sharedManager] clearData];
     [[IPCPayOrderManager sharedManager] resetData];
-    [[IPCShoppingCart sharedCart] clearAllItemPoint];
-    [[IPCShoppingCart sharedCart] removeAllValueCardCartItem];
-    [[IPCShoppingCart sharedCart] resetSelectCartItemPrice];
+    [[IPCShoppingCart sharedCart] clear];
+    [IPCPayOrderManager sharedManager].currentCustomerId = nil;
 }
 
 - (void)reload{
@@ -133,6 +148,23 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     return YES;
 }
 
+- (void)insertPayRecord{
+    if ([IPCPayOrderManager sharedManager].remainAmount <= 0) {
+        [IPCCustomUI showError:@"剩余应收金额为零"];
+        return;
+    }
+    if ([IPCPayOrderManager sharedManager].isInsertRecordStatus){
+        return;
+    }
+    [IPCPayOrderManager sharedManager].isInsertRecordStatus = YES;
+    IPCPayRecord * record = [[IPCPayRecord alloc]init];
+    record.payTypeInfo = @"现金";
+    [IPCPayOrderManager sharedManager].insertPayRecord = record;
+    if ([self.delegate respondsToSelector:@selector(createNewRecord)]) {
+        [self.delegate createNewRecord];
+    }
+}
+
 #pragma mark //DO Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {
@@ -152,21 +184,13 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && [IPCCurrentCustomer sharedManager].currentCustomer)
     {
-        if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell setLeftTitle:@"客户基本信息"];
-            return cell;
-        }else{
-            IPCPayOrderCustomerCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPayOrderCustomerCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            cell.currentCustomer = [IPCCurrentCustomer sharedManager].currentCustomer;
-            return cell;
+        IPCPayOrderCustomerCell * cell = [tableView dequeueReusableCellWithIdentifier:customerIdentifier];
+        if (!cell) {
+            cell = [[UINib nibWithNibName:@"IPCPayOrderCustomerCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            cell.delegate = self;
         }
+        cell.currentCustomer = [IPCCurrentCustomer sharedManager].currentCustomer;
+        return cell;
     }else if (indexPath.section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer){
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -190,7 +214,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"收货地址" ButtonTitle:@"选择" ButtonImage:nil];
+            [cell setRightOperation:@"收货地址"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_arrow"];
             
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
@@ -214,7 +238,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"验光单" ButtonTitle:@"选择" ButtonImage:nil];
+            [cell setRightOperation:@"验光单"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_arrow"];
             
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
@@ -238,7 +262,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"选择员工" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+            [cell setRightOperation:@"选择员工"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 if ([self.delegate respondsToSelector:@selector(showEmployeeView)]) {
                     [self.delegate showEmployeeView];
@@ -266,11 +290,16 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setLeftTitle:@"收款记录"];
-            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收  ￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
-            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:6 Rang:remainAmountText.length - 6 Font:[UIFont systemFontOfSize:14 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
-            [cell setRightTitle:str];
             
+            NSString * remainAmountText = [NSString stringWithFormat:@"收款金额:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
+            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
+            [cell setRightOperation:nil  AttributedTitle:str ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+            
+            __weak typeof(self) weakSelf = self;
+            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf insertPayRecord];
+            }];
             return cell;
         }else {
             IPCPayTypeRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:recordIdentifier];
@@ -298,6 +327,12 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (void)getPointPrice:(NSInteger)point{
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {
         [self requestOrderPointPrice:point];
+    }
+}
+
+- (void)selectCustomer{
+    if ([self.delegate respondsToSelector:@selector(chooseCustomer)]) {
+        [self.delegate chooseCustomer];
     }
 }
 

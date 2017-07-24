@@ -37,7 +37,6 @@
  */
 - (void)removeItem:(IPCShoppingCartItem *)item;
 - (void)removeSelectCartItem;
-- (void)removeAllValueCardCartItem;
 - (void)removeGlasses:(IPCGlasses *)glasse;
 - (void)clear;
 /**

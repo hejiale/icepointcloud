@@ -137,7 +137,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
         IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.section];
         [IPCCurrentCustomer sharedManager].currentAddress = nil;
         [IPCCurrentCustomer sharedManager].currentAddress = address;
-        [self popToPayOrderViewController];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

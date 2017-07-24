@@ -23,11 +23,11 @@
     
     if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count) {
         [self.payRecordContentView setHidden:NO];
-        self.payRecordHeight.constant = [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 40;
+        self.payRecordHeight.constant = [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 35;
         [self.payRecordContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
         [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull payRecord, NSUInteger idx, BOOL * _Nonnull stop) {
-            IPCSwipeView * swipeView = [[IPCSwipeView alloc]initWithFrame:CGRectMake(0, 40*idx, self.payRecordContentView.jk_width, 40)];
+            IPCSwipeView * swipeView = [[IPCSwipeView alloc]initWithFrame:CGRectMake(0, 35*idx, self.payRecordContentView.jk_width, 35)];
             [self.payRecordContentView addSubview:swipeView];
             [self.recordViews addObject:swipeView];
             
@@ -61,17 +61,22 @@
     
     if ([IPCPayOrderManager sharedManager].isInsertRecordStatus) {
         [self.insertRecordView setHidden:NO];
+        self.insertRecordHeight.constant = 40;
+        
         if ([IPCPayOrderManager sharedManager].insertPayRecord) {
             [self.payTypeTextField setText:[IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo];
+            [self.payTypeImageView setImage:[[IPCAppManager sharedManager] payTypeImage:[IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo]];
+            
             if ([IPCPayOrderManager sharedManager].insertPayRecord.payPrice > 0) {
                 [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].insertPayRecord.payPrice]];
             }
-            if ([[IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo isEqualToString:@"储值余额"]) {
-                [self.payAmountTextField setPlaceholder:[NSString stringWithFormat:@"可用余额%.2f",[IPCPayOrderManager sharedManager].balanceAmount - [IPCPayOrderManager sharedManager].usedBalanceAmount]];
-            }
+//            if ([[IPCPayOrderManager sharedManager].insertPayRecord.payTypeInfo isEqualToString:@"储值余额"]) {
+//                [self.payAmountTextField setPlaceholder:[NSString stringWithFormat:@"可用余额%.2f",[IPCPayOrderManager sharedManager].balanceAmount - [IPCPayOrderManager sharedManager].usedBalanceAmount]];
+//            }
         }
     }else{
         [self.insertRecordView setHidden:YES];
+        self.insertRecordHeight.constant = 0;
     }
 }
 
@@ -89,25 +94,6 @@
 }
 
 #pragma mark //Clicked Events
-- (IBAction)insertRecordAction:(id)sender
-{
-    if ([IPCPayOrderManager sharedManager].remainAmount <= 0) {
-        [IPCCustomUI showError:@"剩余应收金额为零"];
-        return;
-    }
-    if ([IPCPayOrderManager sharedManager].isInsertRecordStatus){
-        return;
-    }
-    [IPCPayOrderManager sharedManager].isInsertRecordStatus = YES;
-    [IPCPayOrderManager sharedManager].insertPayRecord = [[IPCPayRecord alloc]init];
-    
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
-            [self.delegate reloadUI];
-        }
-    }
-}
-
 - (IBAction)sureInsertAction:(id)sender {
     if (!self.payTypeTextField.text.length || !self.payAmountTextField.text.length){
         [IPCCustomUI showError:@"付款方式或付款金额为空!"];

@@ -157,16 +157,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     return 150;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return 5;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-//    [footView setBackgroundColor:[UIColor clearColor]];
-//    return footView;
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
@@ -174,7 +164,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.section];
         [IPCCurrentCustomer sharedManager].currentOpometry = nil;
         [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
-        [self popToPayOrderViewController];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

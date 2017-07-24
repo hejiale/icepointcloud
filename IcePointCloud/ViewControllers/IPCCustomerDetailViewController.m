@@ -245,7 +245,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"客户基本信息" ButtonTitle:nil ButtonImage:@"icon_edit_customer"];
+            [cell setRightOperation:@"客户基本信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_edit_customer"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self loadUpdateCustomerView];
             }];
@@ -266,7 +266,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"历史验光单" ButtonTitle:@"管理" ButtonImage:nil];
+            [cell setRightOperation:@"历史验光单"  AttributedTitle:nil ButtonTitle:@"管理" ButtonImage:nil];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self pushToManagerOptometryViewController];
             }];
@@ -294,7 +294,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"收货地址信息" ButtonTitle:@"管理" ButtonImage:nil];
+            [cell setRightOperation:@"收货地址信息"  AttributedTitle:nil ButtonTitle:@"管理" ButtonImage:nil];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self pushToManagerAddressViewController];
             }];
@@ -307,12 +307,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (self.customerViewMode && self.customerViewMode.addressList.count) {
                 IPCCustomerAddressMode * address = self.customerViewMode.addressList[indexPath.row-1];
                 cell.addressMode = address;
-                
-                if (indexPath.row == 1) {
-                    [cell.defaultLabel setHidden:NO];
-                }else{
-                    [cell.defaultLabel setHidden:YES];
-                }
             }
             return cell;
         }

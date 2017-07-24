@@ -15,6 +15,8 @@
 
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId;
 
+- (void)requestTradeOrExchangeStatus:(void(^)())complete;
+
 /**
  * Judge Is Can Pay Order
 

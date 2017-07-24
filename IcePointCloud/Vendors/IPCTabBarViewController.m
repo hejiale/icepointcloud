@@ -253,7 +253,14 @@
 
 #pragma mark //Clicked Events
 - (void)menuTapAction:(UIButton *)sender {
-    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+    if (sender.tag > 0 && sender.tag < 5) {
+        if (sender.tag != 4) {
+            [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+        }else{
+            [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+        }
+    }
+    
     [self setSelectedIndex:sender.tag];
 }
 

@@ -135,12 +135,10 @@
 {
     [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
     [IPCPayOrderManager sharedManager].point = 0;
-    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
     [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
     [IPCPayOrderManager sharedManager].insertPayRecord = nil;
     [IPCPayOrderManager sharedManager].customerDiscount = 0;
     [IPCPayOrderManager sharedManager].remark = nil;
-    [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
 }
 

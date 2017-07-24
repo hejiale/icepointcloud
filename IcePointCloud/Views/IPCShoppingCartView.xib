@@ -31,7 +31,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="8kD-a6-1w7"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <state key="normal" title="编辑">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -43,12 +43,12 @@
                                 <action selector="onEditAction:" destination="-1" eventType="touchUpInside" id="tBE-FE-Mzu"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="购买列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUU-oS-Y0R">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pUU-oS-Y0R">
                             <rect key="frame" x="20" y="0.0" width="70" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="oBT-9z-7rv"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -83,13 +83,13 @@
                                 <action selector="onSelectAllAction:" destination="-1" eventType="touchUpInside" id="lYH-ng-UCL"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-QX-ovB">
-                            <rect key="frame" x="444" y="0.0" width="100" height="50"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-QX-ovB">
+                            <rect key="frame" x="424" y="0.0" width="120" height="50"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="100" id="B3K-KN-ItY"/>
+                                <constraint firstAttribute="width" constant="120" id="B3K-KN-ItY"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                             <state key="normal" title="删除">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -130,12 +130,12 @@
             <constraints>
                 <constraint firstItem="Pso-uY-QqM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0cI-5F-Rqd"/>
                 <constraint firstAttribute="trailing" secondItem="Pso-uY-QqM" secondAttribute="trailing" id="0h8-mE-dPu"/>
+                <constraint firstItem="E3E-SG-Act" firstAttribute="top" secondItem="ys0-Lo-IuG" secondAttribute="bottom" id="1Yh-es-6TE"/>
                 <constraint firstAttribute="bottom" secondItem="E3E-SG-Act" secondAttribute="bottom" id="52i-hk-ly5"/>
                 <constraint firstAttribute="trailing" secondItem="E3E-SG-Act" secondAttribute="trailing" id="5IF-cC-xvD"/>
                 <constraint firstItem="Pso-uY-QqM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HqE-b9-rIN"/>
                 <constraint firstItem="qHN-1G-gVq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ODH-rH-ZSK"/>
                 <constraint firstAttribute="trailing" secondItem="ys0-Lo-IuG" secondAttribute="trailing" id="Vt1-O6-vsa"/>
-                <constraint firstAttribute="bottom" secondItem="ys0-Lo-IuG" secondAttribute="bottom" constant="50" id="XRr-Sa-CUx"/>
                 <constraint firstItem="E3E-SG-Act" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hUL-sw-x2y"/>
                 <constraint firstAttribute="trailing" secondItem="qHN-1G-gVq" secondAttribute="trailing" id="i9I-l3-cKf"/>
                 <constraint firstItem="qHN-1G-gVq" firstAttribute="top" secondItem="Pso-uY-QqM" secondAttribute="bottom" id="lOi-DW-XwD"/>

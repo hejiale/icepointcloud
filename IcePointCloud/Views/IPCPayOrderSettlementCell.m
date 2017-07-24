@@ -33,11 +33,13 @@
 
 - (void)updateUI
 {
-    //    if ([IPCPayOrderManager sharedManager].isTrade) {
-    //        [self.selectPointButton setHidden:NO];
-    //    }else{
-    //        [self.selectPointButton setHidden:YES];
-    //    }
+        if ([IPCPayOrderManager sharedManager].isTrade) {
+            [self.pointView setHidden:NO];
+            self.pointHeight.constant = 65;
+        }else{
+            [self.pointView setHidden:YES];
+            self.pointHeight.constant = 0;
+        }
     
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {
         [self.pointAmountTextField setEnabled:NO];
@@ -67,6 +69,7 @@
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].pointPrice]];
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice]];
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].usedPoint]];
+    [self.countLabel setText:[NSString stringWithFormat:@"%d件",[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
 }
 
 #pragma mark //Clicke Events

@@ -77,15 +77,8 @@
 
 
 - (IBAction)onPlusAction:(id)sender {
-    if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch)
-    {
-        //隐形眼镜判断库存
-        if ([self.delegate respondsToSelector:@selector(judgeStock:)]) {
-            [self.delegate judgeStock:self];
-        }
-    }else{
-        [[IPCShoppingCart sharedCart] plusItem:self.cartItem];
-    }
+    [[IPCShoppingCart sharedCart] plusItem:self.cartItem];
+    
     if (self.ReloadBlock) {
         self.ReloadBlock();
     }

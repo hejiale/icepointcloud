@@ -13,9 +13,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (weak, nonatomic) IBOutlet UIView *pointView;//使用积分兑换时隐藏
 @property (weak, nonatomic) IBOutlet UILabel *pointAmountLabel;
 @property (weak, nonatomic) IBOutlet UITextField *pointAmountTextField;
-@property (weak, nonatomic) IBOutlet UIButton *selectPointButton;//使用积分兑换时隐藏
+@property (weak, nonatomic) IBOutlet UIButton *selectPointButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointHeight;
 @property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
 
 @property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;

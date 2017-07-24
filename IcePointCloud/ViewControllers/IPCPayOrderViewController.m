@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIView *cartContentView;
 @property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableHeadView;
-@property (strong, nonatomic) IBOutlet UIView *tableFootView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
@@ -34,15 +33,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
     
     [self.cancelButton addBorder:2 Width:0.5];
     [self.saveButton addBorder:2 Width:0];
     
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;
-    
-    [self.payOrderTableView setTableFooterView:self.tableFootView];
+
+    [self.cartContentView addSubview:self.shopCartView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(queryCustomerDetail)
@@ -53,26 +51,26 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    }else{
-        [self.payOrderTableView setTableHeaderView:self.tableHeadView];
-    }
     [self setNavigationBarStatus:YES];
-    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
-    [self.cartContentView addSubview:self.shopCartView];
+    [self reloadTableHead];
+    
+    [self.payOrderViewMode requestTradeOrExchangeStatus:^{
+        [self.shopCartView reload];
+        [self.payOrderTableView setHidden:NO];
+        [self.payOrderTableView reloadData];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self removeCover];
-    [self.shopCartView removeFromSuperview];self.shopCartView = nil;
 }
 
 #pragma mark //Set UI
 - (void)loadEmployeView
 {
     [self.view endEditing:YES];
+    
     __weak typeof(self) weakSelf = self;
     self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -85,7 +83,9 @@
 
 - (IPCShoppingCartView *)shopCartView{
     if (!_shopCartView) {
-        _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:self.cartContentView.bounds];
+        _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:self.cartContentView.bounds Complete:^{
+            [self.payOrderTableView reloadData];
+        }];
     }
     return _shopCartView;
 }
@@ -101,20 +101,39 @@
 
 
 - (IBAction)cancelPayOrderAction:(id)sender {
-    [self.payOrderViewMode resetPayInfoData];
-    [self.navigationController popViewControllerAnimated:YES];
+    __weak typeof(self) weakSelf = self;
+    [IPCCustomUI showAlert:@"冰点云" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.payOrderViewMode resetPayInfoData];
+        [[IPCShoppingCart sharedCart] clear];
+        [strongSelf.shopCartView reload];
+        [strongSelf reloadTableHead];
+        [strongSelf.payOrderTableView reloadData];
+    }];
 }
 
 - (IBAction)selectCustomerAction:(id)sender{
-    IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
-    [self.navigationController pushViewController:customerListVC animated:YES];
+    [self pushToSearchCustomerVC];
 }
 
 - (void)removeCover{
     [self.employeView removeFromSuperview];self.employeView = nil;
 }
 
+- (void)reloadTableHead{
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
+    }else{
+        [self.payOrderTableView setTableHeaderView:self.tableHeadView];
+    }
+}
+
 #pragma mark //Push Method
+- (void)pushToSearchCustomerVC{
+    IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    [self.navigationController pushViewController:customerListVC animated:YES];
+}
+
 - (void)pushToManagerOptometryViewController{
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
     optometryVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
@@ -167,7 +186,7 @@
     return footView;
 }
 
-#pragma mark //IPCPayOrderViewCellDelegate
+#pragma mark //IPCPayOrderViewModelDelegate
 - (void)showEmployeeView{
     [self loadEmployeView];
 }
@@ -184,12 +203,23 @@
     [self.payOrderTableView reloadData];
 }
 
+- (void)createNewRecord{
+    [self.payOrderTableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+    [self.payOrderTableView reloadData];
+}
+
+- (void)chooseCustomer{
+    [self pushToSearchCustomerVC];
+}
+
 - (void)successPayOrder{
     [self.saveButton jk_hideIndicator];
     [IPCCustomUI showSuccess:@"订单付款成功!"];
     [self.payOrderViewMode resetPayInfoData];
     [[IPCShoppingCart sharedCart] removeSelectCartItem];
-    [self performSelector:@selector(popViewControllerAnimated:) afterDelay:2];
+    [self.shopCartView reload];
+    [self reloadTableHead];
+    [self.payOrderTableView reloadData];
 }
 
 - (void)failPayOrder{

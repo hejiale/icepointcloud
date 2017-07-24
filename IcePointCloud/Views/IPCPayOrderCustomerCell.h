@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCPayOrderViewCellDelegate.h"
 
 @interface IPCPayOrderCustomerCell : UITableViewCell
 
@@ -18,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *memberLevlLabel;
 
 @property (copy, nonatomic) IPCDetailCustomer * currentCustomer;
+@property (assign, nonatomic) id<IPCPayOrderViewCellDelegate>delegate;
 
 @end

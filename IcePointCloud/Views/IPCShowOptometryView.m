@@ -62,8 +62,16 @@
             [self.employeeNameLabel setText:[NSString stringWithFormat:@"验光师 %@",optometry.optometryEmployee]];
         }
         
+        if (optometry && optometry.employeeName.length) {
+            [self.employeeNameLabel setText:[NSString stringWithFormat:@"验光师 %@",optometry.employeeName]];
+        }
+        
         if (optometry && optometry.optometryInsertDate.length) {
             [self.insertDateLabel setText:[NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate] IsTime:YES]]];
+        }
+        
+        if (optometry && optometry.insertDate.length) {
+            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:YES]]];
         }
     }
 }

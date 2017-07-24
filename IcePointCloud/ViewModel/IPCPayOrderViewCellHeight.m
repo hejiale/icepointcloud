@@ -20,13 +20,15 @@
         return YES;
     else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return YES;
+    else if ([IPCCurrentCustomer sharedManager].currentCustomer && section == 0)
+        return YES;
     return NO;
 }
 
 - (CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath
 {
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {
-        if (indexPath.section == 0 && indexPath.row > 0){
+        if (indexPath.section == 0){
             return 100;
         }else if ((indexPath.section == 1 || indexPath.section == 2) && indexPath.row > 0){
             return 70;
@@ -39,9 +41,12 @@
         return 100;
     }else if ((indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5))
     {
-        return 180;
+        if ([IPCPayOrderManager sharedManager].isTrade) {
+            return 175;
+        }
+        return 90;
     }else if ((indexPath.section == 2 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6 && indexPath.row > 0)){
-        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 40 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 40 : 0) + 40;
+        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 35 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0);
     }
     return 50;
 }

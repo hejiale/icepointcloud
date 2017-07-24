@@ -14,6 +14,8 @@
 - (void)managerOptometryView;
 - (void)managerAddressView;
 - (void)reloadPayOrderView;
+- (void)createNewRecord;
+- (void)chooseCustomer;
 - (void)successPayOrder;
 - (void)failPayOrder;
 @end

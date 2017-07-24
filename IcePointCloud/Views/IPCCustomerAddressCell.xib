@@ -69,20 +69,9 @@
                                 <color key="textColor" white="0.33333333329999998" alpha="0.70143942640000001" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[默认地址]" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPH-Hk-cgt">
-                                <rect key="frame" x="899" y="0.0" width="70" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="JtB-UY-zSb"/>
-                                    <constraint firstAttribute="height" constant="20" id="f0R-lt-4VJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                                <color key="textColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="wPH-Hk-cgt" secondAttribute="trailing" id="08l-SR-6Sf"/>
                             <constraint firstItem="kkK-ID-1LI" firstAttribute="leading" secondItem="zXC-Lk-1r0" secondAttribute="trailing" id="0HW-js-ujA"/>
                             <constraint firstAttribute="trailing" secondItem="kD9-kj-di3" secondAttribute="trailing" constant="20" id="0Kd-eL-FRp"/>
                             <constraint firstItem="zXC-Lk-1r0" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" constant="5" id="1mY-65-fyE"/>
@@ -94,7 +83,6 @@
                             <constraint firstItem="kkK-ID-1LI" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" constant="5" id="feb-xM-FPX"/>
                             <constraint firstItem="kD9-kj-di3" firstAttribute="leading" secondItem="Ndg-ie-XFJ" secondAttribute="leading" id="pSW-0I-jV9"/>
                             <constraint firstAttribute="bottom" secondItem="kD9-kj-di3" secondAttribute="bottom" constant="5" id="pWq-zV-AzE"/>
-                            <constraint firstItem="wPH-Hk-cgt" firstAttribute="top" secondItem="Ndg-ie-XFJ" secondAttribute="top" id="x1z-Oy-plc"/>
                         </constraints>
                     </view>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="未设置收货地址" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEV-Lq-h2O">
@@ -121,7 +109,6 @@
                 <outlet property="contactNameLabel" destination="zXC-Lk-1r0" id="1ZI-fx-NRI"/>
                 <outlet property="contactNameWidth" destination="KX9-bY-k5g" id="hy5-kl-qO3"/>
                 <outlet property="contactPhoneLabel" destination="nWP-nS-E14" id="X8D-FF-20c"/>
-                <outlet property="defaultLabel" destination="wPH-Hk-cgt" id="hsL-M6-ffM"/>
                 <outlet property="genderLabel" destination="kkK-ID-1LI" id="6ea-hd-LDf"/>
                 <outlet property="noAddressLabel" destination="yEV-Lq-h2O" id="Frf-q4-WhZ"/>
             </connections>

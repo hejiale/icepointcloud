@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightButton;
 
 - (void)setLeftTitle:(NSString *)title;
-- (void)setRightTitle:(NSAttributedString *)title;
 
 /**
  *  Remain PayAmount
@@ -33,6 +32,7 @@
  @param buttonImage
  */
 - (void)setRightOperation:(NSString *)title
+          AttributedTitle:(NSAttributedString *)attributedTitle
               ButtonTitle:(NSString *)button
               ButtonImage:(NSString *)buttonImage;
 
