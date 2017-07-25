@@ -34,9 +34,9 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
-@property (weak, nonatomic) IBOutlet UIView *payBottomView;
-@property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottom;
+//@property (weak, nonatomic) IBOutlet UIView *payBottomView;
+//@property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottom;
 
 @property (copy,  nonatomic) void(^ProductDetailBlock)(IPCGlasses *glass);
 @property (copy,  nonatomic) void(^PayBlock)();
@@ -73,7 +73,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [super layoutSubviews];
 
     [self.topView addBottomLine];
-    [self.payBottomView addTopLine];
+//    [self.payBottomView addTopLine];
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
     self.orderDetailTableView.isHiden = YES;
     self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
@@ -132,13 +132,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
      {
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
          
-         if ([IPCPayOrderManager sharedManager].remainAmount > 0 && ![[IPCAppManager orderStatus:[IPCCustomerOrderDetail instance].orderInfo.status] isEqualToString:@"已退款"])
-         {
-             [self.payBottomView setHidden:NO];
-             self.tableViewBottom.constant = 56;
-             NSString * payPrice = [NSString stringWithFormat:@"支付尾款:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
-             [self.payPriceLabel setAttributedText:[IPCCustomUI subStringWithText:payPrice BeginRang:5 Rang:payPrice.length - 5 Font:self.payPriceLabel.font Color:COLOR_RGB_RED]];
-         }
+//         if ([IPCPayOrderManager sharedManager].remainAmount > 0 && ![[IPCAppManager orderStatus:[IPCCustomerOrderDetail instance].orderInfo.status] isEqualToString:@"已退款"])
+//         {
+//             [self.payBottomView setHidden:NO];
+//             self.tableViewBottom.constant = 56;
+//             NSString * payPrice = [NSString stringWithFormat:@"支付尾款:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
+//             [self.payPriceLabel setAttributedText:[IPCCustomUI subStringWithText:payPrice BeginRang:5 Rang:payPrice.length - 5 Font:self.payPriceLabel.font Color:COLOR_RGB_RED]];
+//         }
          [self.orderDetailTableView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {

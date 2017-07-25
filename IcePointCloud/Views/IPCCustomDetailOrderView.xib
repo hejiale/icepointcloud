@@ -13,9 +13,6 @@
             <connections>
                 <outlet property="orderDetailBgView" destination="lt6-vd-tkg" id="Zk2-SQ-N7N"/>
                 <outlet property="orderDetailTableView" destination="wke-Ri-NY7" id="oRK-PH-wgC"/>
-                <outlet property="payBottomView" destination="AQ9-zd-OgO" id="Cdu-Bb-71r"/>
-                <outlet property="payPriceLabel" destination="7zh-zN-nEC" id="4SR-IV-Pr5"/>
-                <outlet property="tableViewBottom" destination="cxs-D4-OaC" id="uDB-18-dPa"/>
                 <outlet property="topView" destination="ZeS-Jo-NDb" id="bsm-BQ-oLf"/>
             </connections>
         </placeholder>
@@ -84,48 +81,11 @@
                         <outlet property="delegate" destination="-1" id="wh6-wD-vUl"/>
                     </connections>
                 </tableView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AQ9-zd-OgO">
-                    <rect key="frame" x="0.0" y="712" width="400" height="56"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1gV-vt-Zc4">
-                            <rect key="frame" x="288" y="13" width="84" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="x5U-S3-JaV"/>
-                                <constraint firstAttribute="width" constant="84" id="yeI-Dd-64e"/>
-                            </constraints>
-                            <state key="normal" title="Button" image="icon_toPay"/>
-                            <connections>
-                                <action selector="payAction:" destination="-1" eventType="touchUpInside" id="emK-b4-gHt"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7zh-zN-nEC">
-                            <rect key="frame" x="28" y="18" width="240" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="YSI-yL-LjQ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstItem="1gV-vt-Zc4" firstAttribute="leading" secondItem="7zh-zN-nEC" secondAttribute="trailing" constant="20" id="HD6-I4-ESD"/>
-                        <constraint firstItem="7zh-zN-nEC" firstAttribute="centerY" secondItem="AQ9-zd-OgO" secondAttribute="centerY" id="Vlh-qh-Qk0"/>
-                        <constraint firstAttribute="height" constant="56" id="rLP-9V-Mvo"/>
-                        <constraint firstItem="1gV-vt-Zc4" firstAttribute="centerY" secondItem="AQ9-zd-OgO" secondAttribute="centerY" id="s0m-MD-A6Z"/>
-                        <constraint firstAttribute="trailing" secondItem="1gV-vt-Zc4" secondAttribute="trailing" constant="28" id="x7Q-DO-ZRq"/>
-                        <constraint firstItem="7zh-zN-nEC" firstAttribute="leading" secondItem="AQ9-zd-OgO" secondAttribute="leading" constant="28" id="zmc-l7-lrM"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="AQ9-zd-OgO" secondAttribute="bottom" id="4Yw-88-mxy"/>
                 <constraint firstAttribute="trailing" secondItem="wke-Ri-NY7" secondAttribute="trailing" id="HH0-JL-V5t"/>
                 <constraint firstAttribute="height" constant="768" id="IAf-Gg-tsv"/>
-                <constraint firstAttribute="trailing" secondItem="AQ9-zd-OgO" secondAttribute="trailing" id="SiQ-H8-DyL"/>
-                <constraint firstItem="AQ9-zd-OgO" firstAttribute="leading" secondItem="lt6-vd-tkg" secondAttribute="leading" id="ZOZ-2H-PHV"/>
                 <constraint firstItem="ZeS-Jo-NDb" firstAttribute="leading" secondItem="lt6-vd-tkg" secondAttribute="leading" id="cCx-3p-DMB"/>
                 <constraint firstAttribute="bottom" secondItem="wke-Ri-NY7" secondAttribute="bottom" id="cxs-D4-OaC"/>
                 <constraint firstItem="ZeS-Jo-NDb" firstAttribute="top" secondItem="lt6-vd-tkg" secondAttribute="top" id="dEi-Q7-Fpp"/>
@@ -140,7 +100,4 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="icon_toPay" width="84" height="30"/>
-    </resources>
 </document>

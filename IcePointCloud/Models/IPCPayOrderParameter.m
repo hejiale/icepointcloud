@@ -44,6 +44,7 @@
     }
     
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
+    [parameters setObject:@"PayAmount" forKey:@"allPay"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
     
     if (employeeList.count) {

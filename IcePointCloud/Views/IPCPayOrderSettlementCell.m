@@ -98,7 +98,7 @@
 
 #pragma mark //UITextFidle Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if ([textField isEqual:self.pointAmountTextField]) {
+    if ([textField isEqual:self.pointAmountTextField] || [textField isEqual:self.payAmountTextField]) {
         if (![IPCCommon judgeIsIntNumber:string]) {
             return NO;
         }

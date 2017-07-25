@@ -16,7 +16,7 @@
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
 #import "IPCUpdateCustomerView.h"
-#import "IPCUpdateOrderViewController.h"
+//#import "IPCUpdateOrderViewController.h"
 #import "IPCManagerOptometryViewController.h"
 #import "IPCManagerAddressViewController.h"
 
@@ -27,7 +27,7 @@ static NSString * const optometryIdentifier = @"HistoryOptometryCellIdentifier";
 static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifier";
 
-@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,IPCCustomerDetailViewDelegate,IPCUpdateOrderViewControllerDelegate>
+@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,IPCCustomerDetailViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *topBar;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -125,8 +125,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                                                             ProductDetail:^(IPCGlasses *glass) {
 
                                                             } Pay:^{
-                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                                [strongSelf pushToUpdateOrderViewController];
+//                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
+//                                                                [strongSelf pushToUpdateOrderViewController];
                                                             }  Dismiss:^{
                                                                 __strong typeof (weakSelf) strongSelf = weakSelf;
                                                                 [strongSelf removerAllPopView:NO];
@@ -187,11 +187,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 /**
  *  Push Method
  */
-- (void)pushToUpdateOrderViewController{
-    IPCUpdateOrderViewController * updateOrderVC = [[IPCUpdateOrderViewController  alloc]initWithNibName:@"IPCUpdateOrderViewController" bundle:nil];
-    updateOrderVC.delegate = self;
-    [self.navigationController pushViewController:updateOrderVC animated:YES];
-}
+//- (void)pushToUpdateOrderViewController{
+//    IPCUpdateOrderViewController * updateOrderVC = [[IPCUpdateOrderViewController  alloc]initWithNibName:@"IPCUpdateOrderViewController" bundle:nil];
+//    updateOrderVC.delegate = self;
+//    [self.navigationController pushViewController:updateOrderVC animated:YES];
+//}
 
 - (void)pushToManagerOptometryViewController{
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
@@ -391,10 +391,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self removerAllPopView:YES];
 }
 
-#pragma mark //IPCUpdateOrderViewControllerDelegate
-- (void)updatePayOrder{
-    [self removerAllPopView:YES];
-}
+//#pragma mark //IPCUpdateOrderViewControllerDelegate
+//- (void)updatePayOrder{
+//    [self removerAllPopView:YES];
+//}
 
 
 - (void)didReceiveMemoryWarning {

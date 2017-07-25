@@ -17,7 +17,7 @@
 {
     IPCPayOrderParameter * parameter = [[IPCPayOrderParameter alloc]init];
     
-    [self postRequest:[parameter offOrderParameter] RequestMethod:@"bizadmin.saveSalesOrder" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:[parameter offOrderParameter] RequestMethod:@"orderObjectAdmin.savePrototypeOrders" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
