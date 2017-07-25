@@ -29,7 +29,7 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抹零金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQa-39-Fn8">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="实收金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQa-39-Fn8">
                         <rect key="frame" x="28" y="141.5" width="70" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="BnS-LG-S5R"/>
@@ -160,14 +160,37 @@
                             <constraint firstItem="LhZ-4w-Ta1" firstAttribute="top" secondItem="7Sc-VD-jyh" secondAttribute="top" id="uST-Yt-IDN"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQL-sF-fe3">
+                        <rect key="frame" x="382" y="141" width="70" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="dpb-AR-nXh"/>
+                            <constraint firstAttribute="width" constant="70" id="inq-bn-Plc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抹零金额" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYL-UI-LeL">
+                        <rect key="frame" x="307" y="144" width="70" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="9HW-Ce-q4P"/>
+                            <constraint firstAttribute="width" constant="70" id="NmC-fJ-GIl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="VBB-Bw-SlI" firstAttribute="leading" secondItem="cBm-Nh-XVA" secondAttribute="trailing" constant="5" id="0Jk-8W-DEx"/>
                     <constraint firstItem="cBm-Nh-XVA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="0g9-Gt-tM2"/>
+                    <constraint firstItem="AQL-sF-fe3" firstAttribute="leading" secondItem="KYL-UI-LeL" secondAttribute="trailing" constant="5" id="Big-w2-ogg"/>
                     <constraint firstItem="Iaj-w9-tgm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="IrW-wq-Ufs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="oQa-39-Fn8" secondAttribute="bottom" constant="5" id="JWz-Cq-ebt"/>
                     <constraint firstItem="a8i-XM-c8W" firstAttribute="centerY" secondItem="oQa-39-Fn8" secondAttribute="centerY" id="KGr-PN-oy9"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7Sc-VD-jyh" secondAttribute="trailing" constant="20" id="Lcb-Vw-9Ko"/>
+                    <constraint firstItem="KYL-UI-LeL" firstAttribute="top" secondItem="7Sc-VD-jyh" secondAttribute="bottom" constant="20" id="NHJ-F2-dGN"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="AQL-sF-fe3" secondAttribute="bottom" constant="5" id="PRK-oX-yzV"/>
                     <constraint firstItem="7Sc-VD-jyh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="RV8-6A-oHG"/>
                     <constraint firstItem="Ebr-Fp-YjJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Rzo-sp-mSF"/>
                     <constraint firstItem="7Sc-VD-jyh" firstAttribute="top" secondItem="cBm-Nh-XVA" secondAttribute="bottom" constant="20" id="Uku-MV-dMd"/>
@@ -175,12 +198,14 @@
                     <constraint firstItem="a8i-XM-c8W" firstAttribute="leading" secondItem="oQa-39-Fn8" secondAttribute="trailing" constant="5" id="Vcf-YI-ZPJ"/>
                     <constraint firstItem="Iaj-w9-tgm" firstAttribute="leading" secondItem="Ebr-Fp-YjJ" secondAttribute="trailing" constant="5" id="cCp-62-ayt"/>
                     <constraint firstItem="VBB-Bw-SlI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="g94-JO-79d"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="AQL-sF-fe3" secondAttribute="trailing" constant="20" id="gAR-I5-zWt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="VBB-Bw-SlI" secondAttribute="trailing" constant="20" id="kkd-ld-Znu"/>
                     <constraint firstItem="oQa-39-Fn8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="suL-6e-ov0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="countLabel" destination="Iaj-w9-tgm" id="8dD-cu-AAt"/>
+                <outlet property="givingAmountLabel" destination="AQL-sF-fe3" id="Dua-tV-77l"/>
                 <outlet property="payAmountTextField" destination="a8i-XM-c8W" id="feD-Du-QYf"/>
                 <outlet property="pointAmountLabel" destination="dID-MD-cms" id="voM-7Y-Ozl"/>
                 <outlet property="pointAmountTextField" destination="mQq-kE-AnU" id="Jk2-Ke-Nvf"/>

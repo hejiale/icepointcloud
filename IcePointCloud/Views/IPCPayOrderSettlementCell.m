@@ -70,6 +70,7 @@
     [self.payAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice]];
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].usedPoint]];
     [self.countLabel setText:[NSString stringWithFormat:@"%d件",[[IPCShoppingCart sharedCart] selectedGlassesCount]]];
+    [self.givingAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].givingAmount]];
 }
 
 #pragma mark //Clicke Events

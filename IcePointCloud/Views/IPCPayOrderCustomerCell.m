@@ -23,6 +23,12 @@
     // Configure the view for the selected state
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self setCurrentCustomer:[IPCCurrentCustomer sharedManager].currentCustomer];
+}
+
 - (UIImageView *)headImageView{
     if (!_headImageView) {
         _headImageView = [[UIImageView alloc] initWithFrame:self.imageContentView.bounds];
@@ -33,18 +39,16 @@
 
 - (void)setCurrentCustomer:(IPCDetailCustomer *)currentCustomer
 {
-    _currentCustomer = currentCustomer;
-    
-    if (_currentCustomer)
+    if (currentCustomer)
     {
-        if (_currentCustomer.photo_url.length) {
-            [self.headImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
+        if (currentCustomer.photo_url.length) {
+            [self.headImageView setImageURL:[NSURL URLWithString:currentCustomer.photo_url]];
         }
         
-        [self.customerNameLabel setText:_currentCustomer.customerName];
-        [self.phoneLabel setText:_currentCustomer.customerPhone];
-        [self.memberLevlLabel setText:_currentCustomer.memberLevel];
-        [self.pointLabel setText:[NSString stringWithFormat:@"%d",_currentCustomer.integral]];
+        [self.customerNameLabel setText:currentCustomer.customerName];
+        [self.phoneLabel setText:currentCustomer.customerPhone];
+        [self.memberLevlLabel setText:currentCustomer.memberLevel];
+        [self.pointLabel setText:[NSString stringWithFormat:@"%d",currentCustomer.integral]];
     }
 }
 

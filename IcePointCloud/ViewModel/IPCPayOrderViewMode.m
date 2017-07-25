@@ -160,6 +160,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
     IPCPayRecord * record = [[IPCPayRecord alloc]init];
     record.payTypeInfo = @"现金";
     [IPCPayOrderManager sharedManager].insertPayRecord = record;
+    
     if ([self.delegate respondsToSelector:@selector(createNewRecord)]) {
         [self.delegate createNewRecord];
     }
@@ -167,9 +168,8 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 #pragma mark //DO Datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if ([IPCCurrentCustomer sharedManager].currentCustomer) {
+    if ([IPCCurrentCustomer sharedManager].currentCustomer)
         return 7;
-    }
     return 3;
 }
 
@@ -189,7 +189,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             cell = [[UINib nibWithNibName:@"IPCPayOrderCustomerCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             cell.delegate = self;
         }
-        cell.currentCustomer = [IPCCurrentCustomer sharedManager].currentCustomer;
         return cell;
     }else if (indexPath.section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer){
         if (indexPath.row == 0) {
@@ -204,7 +203,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPayOrderMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell.memoTextView setText:[IPCPayOrderManager sharedManager].remark];
             return cell;
         }
     }else if (indexPath.section == 2 &&  [IPCCurrentCustomer sharedManager].currentCustomer)
@@ -291,7 +289,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             
-            NSString * remainAmountText = [NSString stringWithFormat:@"收款金额:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
+            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
             NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
             [cell setRightOperation:nil  AttributedTitle:str ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             

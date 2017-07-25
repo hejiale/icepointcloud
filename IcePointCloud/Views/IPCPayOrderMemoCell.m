@@ -24,6 +24,12 @@
     // Configure the view for the selected state
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self.memoTextView setText:[IPCPayOrderManager sharedManager].remark];
+}
+
 #pragma mark //UITextViewDelegate
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){

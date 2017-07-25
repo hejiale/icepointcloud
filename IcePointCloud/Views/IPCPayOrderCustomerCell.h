@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberLevlLabel;
 
-@property (copy, nonatomic) IPCDetailCustomer * currentCustomer;
 @property (assign, nonatomic) id<IPCPayOrderViewCellDelegate>delegate;
 
 @end
