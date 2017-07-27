@@ -46,7 +46,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self setNavigationBarStatus:YES];
     [self.glassListCollectionView reloadData];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{

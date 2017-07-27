@@ -21,25 +21,27 @@
     self = [super init];
     if (self) {
         self.glasses = glasses;
-        if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-            [self queryBatchContactDegreeRequest];
-        }
     }
     return self;
 }
 
 #pragma mark //Network Request
-- (void)queryBatchContactDegreeRequest
+- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat start, CGFloat end, CGFloat step))complete
 {
-    if (self.glasses.stock <= 0)return;
-    
-    [IPCBatchRequestManager queryBatchContactProductsStockWithLensID:[self.glasses glassId]
-                                                        SuccessBlock:^(id responseValue)
-     {
-         _batchParameterList = [[IPCBatchParameterList alloc]initWithResponseObject:responseValue];
-     } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
-     }];
+    [IPCBatchRequestManager queryBatchContactLensConfig:type
+                                           SuccessBlock:^(id responseValue)
+    {
+        id values = responseValue[@"values"];
+        
+        if ([values isKindOfClass:[NSDictionary class]]) {
+            if (complete) {
+                complete([values[@"startDegree"] floatValue],[values[@"endDegree"] floatValue],[values[@"step"] floatValue]);
+            }
+        }
+    } FailureBlock:^(NSError *error) {
+        
+    }];
 }
+
 
 @end

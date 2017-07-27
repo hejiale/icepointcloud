@@ -76,11 +76,10 @@
                         </constraints>
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c4x-s6-qOV">
-                        <rect key="frame" x="839" y="15" width="160" height="30"/>
+                        <rect key="frame" x="839" y="8" width="160" height="43.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="160" id="6nG-nC-bxh"/>
-                            <constraint firstAttribute="height" constant="30" id="ki5-4n-8VZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -100,8 +99,9 @@
                     <constraint firstAttribute="trailing" secondItem="rjt-kg-R4t" secondAttribute="trailing" constant="28" id="bI3-Df-h94"/>
                     <constraint firstItem="TrO-4s-X3g" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dmU-Lv-V2D"/>
                     <constraint firstItem="rjt-kg-R4t" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="e4c-ea-LbJ"/>
-                    <constraint firstItem="c4x-s6-qOV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eYg-fq-hTo"/>
                     <constraint firstItem="vVb-1E-3FV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lH8-91-Xfm"/>
+                    <constraint firstItem="c4x-s6-qOV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="mv1-zs-DE8"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="c4x-s6-qOV" secondAttribute="bottom" id="vV0-fI-7lK"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

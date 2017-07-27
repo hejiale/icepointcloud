@@ -74,35 +74,17 @@
         if (glassCount > 0) {
             [self.reduceButton setHidden:NO];
             [self.cartNumLabel setHidden:NO];
-            self.reduceButtonLeading.constant = -46;
+            self.reduceButtonLeading.constant = -60;
             [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];
-        }
-        
-        //Judge stock
-        if (_glasses.stock > 0) {
-            NSInteger cartCount = [[IPCShoppingCart sharedCart] singleGlassesCount:_glasses];
-            if (cartCount >= _glasses.stock) {
-                [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-            }else{
-                [self.addCartButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
-            }
-            if ((([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
+            
+            //Judge Cart Count
+            __block NSInteger cartCount = [[IPCShoppingCart sharedCart] singleGlassesCount:_glasses];
+            
+            if (([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && _glasses.isBatch)
             {
-                if (cartCount >= _glasses.stock) {
-                    [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
-                }else{
-                    [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_edit"] forState:UIControlStateNormal];
-                }
+                [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_edit"] forState:UIControlStateNormal];
             }else{
                 [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract"] forState:UIControlStateNormal];
-            }
-        }else{
-            [self.addCartButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-            if ((([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType) || [_glasses filterType] == IPCTopFilterTypeContactLenses)
-            {
-                [self.reduceButton setImage:[UIImage imageNamed:@"icon_cart_unedit"] forState:UIControlStateNormal];
-            }else{
-                [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract_disable"] forState:UIControlStateNormal];
             }
         }
     }
@@ -127,12 +109,8 @@
     if (([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch)
     {
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        if (([strongSelf.glasses filterType] == IPCTopFilterTypeContactLenses && strongSelf.glasses.stock == 0) || ([strongSelf.glasses filterType] == IPCTopFilterTypeAccessory && strongSelf.glasses.stock == 0)) {
-            [IPCCustomUI showError:@"暂无库存，请重新选择!"];
-        }else{
-            if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
-                [strongSelf.delegate chooseParameter:strongSelf];
-            }
+        if ([strongSelf.delegate respondsToSelector:@selector(chooseParameter:)]) {
+            [strongSelf.delegate chooseParameter:strongSelf];
         }
     }else{
         [self addCartAnimation];
@@ -162,7 +140,7 @@
                 [UIView animateWithDuration:2.f delay:0 usingSpringWithDamping:0.75 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseIn animations:^{
                     [self.reduceButton setHidden:NO];
                     [self.cartNumLabel setHidden:NO];
-                    self.reduceButtonLeading.constant = -46;
+                    self.reduceButtonLeading.constant = -60;
                 } completion:^(BOOL finished) {
                     if (finished) {
                         [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];

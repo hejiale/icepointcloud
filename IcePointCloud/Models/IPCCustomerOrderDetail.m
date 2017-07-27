@@ -24,7 +24,7 @@
 - (void)parseResponseValue:(id)responseValue
 {
     [self.products removeAllObjects];
-    [[IPCPayOrderManager sharedManager] resetData];
+    [self.recordArray removeAllObjects];
     self.addressMode = nil;
     self.optometryMode = nil;
     self.orderInfo = nil;
@@ -61,20 +61,11 @@
         if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCPayRecord * payType = [IPCPayRecord mj_objectWithKeyValues:obj];
-                payType.isHavePay = YES;
-                [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:payType];
+                [self.recordArray addObject:payType];
                 totalPayTypePrice += payType.payPrice;
             }];
         }
-        [IPCPayOrderManager sharedManager].remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;
-    }
-   
-    if ([responseValue[@"employeeAchievements"] isKindOfClass:[NSArray class]]) {
-        [responseValue[@"employeeAchievements"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            IPCEmployeeResult * result = [IPCEmployeeResult mj_objectWithKeyValues:obj];
-            result.isUpdateStatus= YES;
-            [[IPCPayOrderManager sharedManager].employeeResultArray addObject:result];
-        }];
+        self.orderInfo.remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;
     }
 }
 
@@ -82,6 +73,13 @@
     if (!_products)
         _products = [[NSMutableArray alloc]init];
     return _products;
+}
+
+-(NSMutableArray<IPCPayRecord *> *)recordArray{
+    if (!_recordArray) {
+        _recordArray = [[NSMutableArray alloc]init];
+    }
+    return _recordArray;
 }
 
 - (void)clearData{
@@ -96,6 +94,15 @@
 @end
 
 @implementation IPCCustomerOrderInfo
+
+- (NSString *)orderStatus{
+    if ([self.auditStatus isEqualToString:@"UN_AUDITED"]) {
+        return @"未审核";
+    }else if ([self.auditStatus isEqualToString:@"AUDITED"]){
+        return @"已审核";
+    }
+    return @"草稿";
+}
 
 @end
 

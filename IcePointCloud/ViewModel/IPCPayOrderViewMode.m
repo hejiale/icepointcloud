@@ -43,20 +43,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 }
 
 #pragma mark //Request Data
-- (void)requestTradeOrExchangeStatus:(void(^)())complete
-{
-    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
-        
-        if (complete) {
-            complete();
-        }
-    } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.domain];
-    }];
-}
-
-
 - (void)requestOrderPointPrice:(NSInteger)point
 {
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID
@@ -106,14 +92,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 }
 
 #pragma mark //Clicked Events
-- (void)resetPayInfoData
-{
-    [[IPCCurrentCustomer sharedManager] clearData];
-    [[IPCPayOrderManager sharedManager] resetData];
-    [[IPCShoppingCart sharedCart] clear];
-    [IPCPayOrderManager sharedManager].currentCustomerId = nil;
-}
-
 - (void)reload{
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadPayOrderView)]) {
@@ -140,16 +118,11 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         [IPCCustomUI showError:@"员工总份额不足百分之一百"];
         return NO;
     }
-    if ([IPCPayOrderManager sharedManager].realTotalPrice + [IPCPayOrderManager sharedManager].givingAmount + [IPCPayOrderManager sharedManager].pointPrice != [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice])
-    {
-        [IPCCustomUI showError:@"请输入有效实付金额"];
-        return NO;
-    }
     return YES;
 }
 
 - (void)insertPayRecord{
-    if ([IPCPayOrderManager sharedManager].remainAmount <= 0) {
+    if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0) {
         [IPCCustomUI showError:@"剩余应收金额为零"];
         return;
     }
@@ -289,7 +262,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             
-            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
+            NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收:￥%.2f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
             NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
             [cell setRightOperation:nil  AttributedTitle:str ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             

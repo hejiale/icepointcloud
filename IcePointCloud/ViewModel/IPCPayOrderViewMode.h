@@ -15,8 +15,6 @@
 
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId;
 
-- (void)requestTradeOrExchangeStatus:(void(^)())complete;
-
 /**
  * Judge Is Can Pay Order
 
@@ -37,7 +35,6 @@
  *  @param ebuy WeChat or pay treasure to pay
  */
 - (void)offerOrder;
-- (void)resetPayInfoData;
 
 @end
 

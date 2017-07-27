@@ -64,11 +64,6 @@ extern NSString *const  IPCChooseCustomerNotification;
 + (UIImage *)modelPhotoWithType:(IPCModelType)type usage:(IPCModelUsage)usage;
 
 /**
- *  The order status
- */
-+ (NSString *)orderStatus:(NSString *)status;
-
-/**
  *  PayTypeInfo Image Name
  */
 - (UIImage *)payTypeImage:(NSString *)payTypeInfo;

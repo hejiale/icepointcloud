@@ -12,8 +12,6 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                      OrderNum:(NSString *)orderNum
-                ProductDetail:(void(^)(IPCGlasses *glass))product
-                          Pay:(void(^)())pay
                       Dismiss:(void(^)())dismiss;
 
 - (void)show;

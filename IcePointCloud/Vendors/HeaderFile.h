@@ -44,8 +44,6 @@
 #import "IPCCustomerOrderDetail.h"
 #import "IPCDetailCustomer.h"
 #import "IPCCurrentCustomer.h"
-#import "IPCBatchParameterList.h"
-#import "IPCContactLenSpecList.h"
 #import "IPCPayOrderManager.h"
 #import "IPCBatchDegreeObject.h"
 #import "IPCEmployeeManager.h"

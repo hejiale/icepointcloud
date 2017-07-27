@@ -37,11 +37,6 @@
         [self.payTypeNameLabel setText:_payRecord.payTypeInfo];
         [self.payAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_payRecord.payPrice]];
         [self.payTypeImageView setImage:[[IPCAppManager sharedManager] payTypeImage:_payRecord.payTypeInfo]];
-    
-        if (_payRecord.isHavePay) {
-            [self.payDateLabel setHidden:NO];
-            [self.payDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_payRecord.payDate] IsTime:YES]];
-        }
     }
 }
 

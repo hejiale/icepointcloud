@@ -15,6 +15,7 @@
                 <outlet property="cartListTableView" destination="ys0-Lo-IuG" id="1v8-eD-wFa"/>
                 <outlet property="deleteButton" destination="Nfj-QX-ovB" id="w9c-bc-ZZx"/>
                 <outlet property="selectAllButton" destination="49h-K3-9u5" id="4bf-hy-QQO"/>
+                <outlet property="tableBottom" destination="X11-bM-3eZ" id="w0k-Lk-FbP"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -64,7 +65,7 @@
                         <constraint firstItem="pUU-oS-Y0R" firstAttribute="top" secondItem="Pso-uY-QqM" secondAttribute="top" id="tF8-y4-YH6"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3E-SG-Act">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3E-SG-Act">
                     <rect key="frame" x="0.0" y="650" width="544" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49h-K3-9u5">
@@ -83,7 +84,7 @@
                                 <action selector="onSelectAllAction:" destination="-1" eventType="touchUpInside" id="lYH-ng-UCL"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-QX-ovB">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nfj-QX-ovB">
                             <rect key="frame" x="424" y="0.0" width="120" height="50"/>
                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -110,7 +111,7 @@
                     </constraints>
                 </view>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-Lo-IuG">
-                    <rect key="frame" x="0.0" y="50" width="544" height="600"/>
+                    <rect key="frame" x="0.0" y="50" width="544" height="650"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.070794092465753425" colorSpace="calibratedWhite"/>
                     <connections>
@@ -130,24 +131,23 @@
             <constraints>
                 <constraint firstItem="Pso-uY-QqM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0cI-5F-Rqd"/>
                 <constraint firstAttribute="trailing" secondItem="Pso-uY-QqM" secondAttribute="trailing" id="0h8-mE-dPu"/>
-                <constraint firstItem="E3E-SG-Act" firstAttribute="top" secondItem="ys0-Lo-IuG" secondAttribute="bottom" id="1Yh-es-6TE"/>
                 <constraint firstAttribute="bottom" secondItem="E3E-SG-Act" secondAttribute="bottom" id="52i-hk-ly5"/>
                 <constraint firstAttribute="trailing" secondItem="E3E-SG-Act" secondAttribute="trailing" id="5IF-cC-xvD"/>
                 <constraint firstItem="Pso-uY-QqM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="HqE-b9-rIN"/>
                 <constraint firstItem="qHN-1G-gVq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ODH-rH-ZSK"/>
                 <constraint firstAttribute="trailing" secondItem="ys0-Lo-IuG" secondAttribute="trailing" id="Vt1-O6-vsa"/>
+                <constraint firstAttribute="bottom" secondItem="ys0-Lo-IuG" secondAttribute="bottom" id="X11-bM-3eZ"/>
                 <constraint firstItem="E3E-SG-Act" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hUL-sw-x2y"/>
                 <constraint firstAttribute="trailing" secondItem="qHN-1G-gVq" secondAttribute="trailing" id="i9I-l3-cKf"/>
                 <constraint firstItem="qHN-1G-gVq" firstAttribute="top" secondItem="Pso-uY-QqM" secondAttribute="bottom" id="lOi-DW-XwD"/>
                 <constraint firstItem="ys0-Lo-IuG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="oH4-fZ-msb"/>
-                <constraint firstItem="E3E-SG-Act" firstAttribute="top" secondItem="ys0-Lo-IuG" secondAttribute="bottom" id="wxU-fu-x5C"/>
-                <constraint firstItem="ys0-Lo-IuG" firstAttribute="top" secondItem="Pso-uY-QqM" secondAttribute="bottom" id="xHY-zC-55g"/>
+                <constraint firstItem="ys0-Lo-IuG" firstAttribute="top" secondItem="qHN-1G-gVq" secondAttribute="top" id="zme-9w-zaF"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="33.5" y="53.5"/>
+            <point key="canvasLocation" x="33" y="53"/>
         </view>
     </objects>
     <resources>

@@ -51,15 +51,12 @@
 @property (nonatomic, copy, readonly) NSString * thumbnailURL;//Thumbnail url
 @property (nonatomic, assign, readonly) BOOL  isBatch;//Whether the batch
 @property (nonatomic, assign, readonly) BOOL  isTryOn;//If you can try
-@property (nonatomic, copy, readonly) NSString * approvalNumber;//A kind
-@property (nonatomic, copy, readonly) NSString * batchNumber;//Batch no.
-@property (nonatomic, copy, readonly) NSString * expireDate;//The period of validity
-@property (nonatomic, assign, readonly) NSInteger  stock;//inventory
+//@property (nonatomic, assign, readonly) NSInteger  stock;//inventory
 @property (nonatomic, copy, readonly) NSString    * supplierName;//supplier
-@property (nonatomic, assign, readonly) BOOL     solutionType;//护理液判断
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (IPCTopFilterType)filterType;
+- (NSString *)glassType;
 - (NSString *)glassId;
 - (NSDictionary *)displayFields;
 

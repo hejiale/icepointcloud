@@ -13,7 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
-@property (nonatomic, weak) IBOutlet UIButton *checkBtn;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
@@ -22,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointButtonWith;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputPriceViewRight;
+@property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
+
 @property (copy, nonatomic) void(^ReloadBlock)();
 
 
@@ -45,7 +46,6 @@
     
     if (_cartItem) {
         self.ReloadBlock = reload;
-        [self.checkBtn setSelected:_cartItem.selected];
         
         IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
@@ -60,7 +60,14 @@
             nameHeight = 20;
         }
         self.glassNameHeight.constant = nameHeight;
-        [self loadContactLensBatchSpecification:nameHeight];
+        
+        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && self.cartItem.glasses.isBatch){
+            [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.batchReadingDegree]];
+        }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeLens && self.cartItem.glasses.isBatch){
+            [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
+        }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch){
+            [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.contactDegree]];
+        }
         
         if ([IPCPayOrderManager sharedManager].isTrade) {
             self.pointButtonWith.constant = 0;
@@ -86,48 +93,7 @@
 }
 
 
-#pragma mark //Set UI
-- (void)loadContactLensBatchSpecification:(CGFloat)height{
-    UIView * specificationView = [[UIView alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right + 10, self.glassesNameLbl.jk_top+height+10, self.jk_width - self.glassesImgView.jk_right - 10, 30)];
-    [self.mainContentView addSubview:specificationView];
-    
-    if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && self.cartItem.glasses.isBatch)
-    {
-        UILabel * degreeLabel = [[UILabel alloc]initWithFrame:specificationView.bounds];
-        [degreeLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.batchReadingDegree]];
-        [degreeLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-        [degreeLabel setTextColor:[UIColor lightGrayColor]];
-        [specificationView addSubview:degreeLabel];
-    }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeLens && self.cartItem.glasses.isBatch){
-        UILabel * sphLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, specificationView.jk_width/2, 20)];
-        [sphLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@",self.cartItem.batchSph]];
-        [sphLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-        [sphLabel setTextColor:[UIColor lightGrayColor]];
-        [specificationView addSubview:sphLabel];
-        
-        UILabel * cylLabel = [[UILabel alloc]initWithFrame:CGRectMake(sphLabel.jk_right, 0, specificationView.jk_width/2, 20)];
-        [cylLabel setText:[NSString stringWithFormat:@"柱镜/CYL: %@",self.cartItem.bacthCyl]];
-        [cylLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-        [cylLabel setTextColor:[UIColor lightGrayColor]];
-        [specificationView addSubview:cylLabel];
-    }else if ([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses && self.cartItem.glasses.isBatch){
-        UILabel * degreeLabel = [[UILabel alloc]initWithFrame:specificationView.bounds];
-        [degreeLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.contactDegree]];
-        [degreeLabel setFont:[UIFont systemFontOfSize:10 weight:UIFontWeightThin]];
-        [degreeLabel setTextColor:[UIColor lightGrayColor]];
-        [specificationView addSubview:degreeLabel];
-    }
-}
-
-
 #pragma mark //Clicked Events
-- (IBAction)onCheckBtnTapped:(id)sender{
-    self.cartItem.selected = !self.cartItem.selected;
-    if (self.ReloadBlock) {
-        self.ReloadBlock();
-    }
-}
-
 - (IBAction)noPointAction:(UIButton *)sender {
     if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
         [IPCCustomUI showError:@"请先选择客户!"];
@@ -140,12 +106,11 @@
     [sender setSelected:!sender.selected];
     self.cartItem.isChoosePoint = sender.selected;
     
-    if (sender.selected) {
+    if (self.cartItem.isChoosePoint) {
         self.cartItem.unitPrice = 0;
-        [IPCPayOrderManager sharedManager].realTotalPrice = 0;
-        [IPCPayOrderManager sharedManager].givingAmount = 0;
     }else{
         [IPCPayOrderManager sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
+        
         if ([IPCPayOrderManager sharedManager].usedPoint <= 0) {
             [IPCPayOrderManager sharedManager].usedPoint = 0;
         }
@@ -155,6 +120,9 @@
         }
         self.cartItem.pointValue = 0;
     }
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [IPCPayOrderManager sharedManager].givingAmount = 0;
+    
     if (self.ReloadBlock) {
         self.ReloadBlock();
     }
@@ -208,14 +176,11 @@
                     [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
                 }
                 self.cartItem.unitPrice = [str doubleValue];
-                
-                [IPCPayOrderManager sharedManager].realTotalPrice = 0;
-                [IPCPayOrderManager sharedManager].givingAmount = 0;
-                [IPCPayOrderManager sharedManager].remainAmount = 0;
-                [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
             }
         }
     }
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [IPCPayOrderManager sharedManager].givingAmount = 0;
     
     if (self.ReloadBlock) {
         self.ReloadBlock();

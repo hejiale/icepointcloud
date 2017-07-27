@@ -64,6 +64,12 @@
     return IPCTopFilterTypeOthers;
 }
 
+- (NSString *)glassType
+{
+    NSRange range = [self.glassesID rangeOfString:@"-"];
+    return [self.glassesID substringToIndex:range.location];
+}
+
 
 - (NSString *)glassId
 {

@@ -33,8 +33,7 @@
         
         [self.orderDateLabel setText:[NSString stringWithFormat:@"下单时间: %@",[IPCCommon formatDate:[IPCCommon dateFromString:_customerOrder.orderDate] IsTime:YES]]];
         
-        [self.orderStatusLabel setText:[IPCAppManager orderStatus:_customerOrder.orderStatus]];
-        [self.orderStatusLabel setTextColor:[UIColor jk_colorWithHexString:@"#ff9900"]];
+        [self.orderStatusLabel setText:[_customerOrder orderStatus]];
     }
 }
 

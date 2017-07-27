@@ -113,7 +113,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //Request Data
 - (void)queryCustomerInfo:(void(^)())complete
 {
-//    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [IPCCustomerRequestManager queryCustomerListWithKeyword:searchKeyWord ? : @""
                                                        Page:currentPage
                                                SuccessBlock:^(id responseValue)
@@ -169,10 +168,10 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [IPCInsertCustomer instance].introducerName = customer.customerName;
         [self.navigationController popViewControllerAnimated:YES];
     }else if ([IPCPayOrderManager sharedManager].isPayOrderStatus){
-        [[IPCShoppingCart sharedCart] clearAllItemPoint];
-        [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
-        //获取选中用户Id
+        [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+        [IPCPayOrderManager sharedManager].givingAmount = 0;
         [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
+        
         [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }else{

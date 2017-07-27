@@ -15,10 +15,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 @interface IPCGlassParameterView()<UITableViewDelegate,UITableViewDataSource>
 {
     BOOL           isLeft;
-    //The currently selected contact lenses ID
-    NSString   * currentContactDegreeID;
-    //The currently selected contact lens inventory
-    NSInteger    currentDegreeStock;
     //Customsized Parameter
     NSArray   *   customsizedArray;
     //CustomsizedLens Funcation
@@ -67,6 +63,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 @property (weak, nonatomic) IBOutlet UILabel *upsetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moveHeartLabel;
 @property (strong, nonatomic) IPCBatchParameterViewMode * parameterViewMode;
+@property (strong, nonatomic) IPCBatchDegreeObject * batchDegree;
 @property (assign, nonatomic) NSInteger   customsizedType;
 @property (copy, nonatomic) void(^CompleteBlock)();
 
@@ -86,6 +83,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                              @[@"0", @"+1", @"+2", @"+3", @"+4"],
                              @[@"0", @"5", @"6", @"7", @"8", @"9"]];
         customsizedLensFunArray  = [[NSMutableArray alloc]init];
+        self.batchDegree = [[IPCBatchDegreeObject alloc]init];
         
         UIView *mainView = [UIView jk_loadInstanceFromNibWithName:@"IPCGlassParameterView" owner:self];
         [mainView setFrame:frame];
@@ -152,13 +150,23 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self.rightParameterView setHidden:NO];
     }
     
-    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses) {
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses)
+    {
         [self loadBatchNormalLensView];
-    }
-    else if ([_glasses filterType] == IPCTopFilterTypeCustomized){
+    }else if ([_glasses filterType] == IPCTopFilterTypeCustomized){
         [self loadCustomsizedLensView];
     }
     self.parameterViewMode = [[IPCBatchParameterViewMode alloc]initWithGlasses:_glasses];
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
+        [self.parameterViewMode queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [self.batchDegree batchReadingDegrees:start End:end Step:step];
+        }];
+    }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
+        [self.parameterViewMode queryBatchDegree:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [self.batchDegree batchContactlensDegrees:start End:end Step:step];
+        }];
+    }
+    [self refreshSureButtonStatus];
     
     CGAffineTransform transform = CGAffineTransformScale(self.parameterContentView.transform, 0.3, 0.3);
     [self.parameterContentView setTransform:transform];
@@ -202,7 +210,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.parameterTableView reloadData];
     
     if ([self.glasses filterType] == IPCTopFilterTypeLens && isLeft){
-        NSInteger startIndex = [[IPCBatchDegreeObject batchSphs] indexOfObject:@"0.00"];
+        NSInteger startIndex = [[self.batchDegree batchSphs] indexOfObject:@"0.00"];
         [self.parameterTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:startIndex inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     }else{
         [self.parameterTableView scrollToTopAnimated:NO];
@@ -277,8 +285,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
     
     if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        [self refreshSureButtonStatus];
-        [self reloadContactLensCartStatus];
+        [self reloadLensCartStatus];
     }
 }
 
@@ -289,8 +296,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
     
     if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        [self refreshSureButtonStatus];
-        [self reloadContactLensCartStatus];
+        [self reloadLensCartStatus];
     }
 }
 
@@ -309,7 +315,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
         [[IPCShoppingCart sharedCart] addContactLensWithGlasses:self.glasses
                                                   ContactDegree:self.leftParameterLabel.text
-                                                      ContactID:currentContactDegreeID
                                                           Count:[self.lensNumLabel.text integerValue]];
     }
 }
@@ -346,13 +351,12 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 
 #pragma mark //Show CartItem Parameter
 - (void)showCartItemParameter{
-    if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeContactLenses) {
+    if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [self.leftParameterLabel setText:self.cartItem.batchReadingDegree];
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens){
         [self.leftParameterLabel setText:self.cartItem.batchSph];
         [self.rightParameterLabel setText:self.cartItem.bacthCyl];
-    }
-    else if ([self.glasses filterType] == IPCTopFilterTypeContactLenses){
+    }else if ([self.glasses filterType] == IPCTopFilterTypeContactLenses){
         [self.leftParameterLabel setText:self.cartItem.contactDegree];
     }else{
         [customsizedLensFunArray addObjectsFromArray:self.cartItem.lensFuncsArray];
@@ -370,13 +374,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 - (void)updateCartParameter{
     if (!self.cartItem)return;
     
-    if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        if (self.cartItem.glassCount > currentDegreeStock && currentDegreeStock > 0) {
-            [IPCCustomUI showError:@"暂无库存,请重新选择"];
-            return;
-        }
-    }
-    
     if ([self.glasses filterType] == IPCTopFilterTypeCustomized) {
         self.cartItem.IOROptions = self.refractionLabel.text;
         [self.cartItem.lensFuncsArray removeAllObjects];
@@ -390,6 +387,8 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens){
         self.cartItem.batchSph = self.leftParameterLabel.text;
         self.cartItem.bacthCyl = self.rightParameterLabel.text;
+    }else if ([self.glasses filterType] == IPCTopFilterTypeContactLenses){
+        self.cartItem.contactDegree = self.leftParameterLabel.text;
     }
     [self removeCover];
 }
@@ -401,33 +400,18 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     __weak typeof (self) weakSelf = self;
     
-    if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *cartNum){
-            return  @(leftParametr.length && [cartNum integerValue] > 0 && currentDegreeStock > 0);
-        }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            if (valid.boolValue) {
-                [strongSelf.lensSureButton setEnabled:YES];
-                strongSelf.lensSureButton.alpha = 1;
-            }else{
-                [strongSelf.lensSureButton setEnabled:NO];
-                strongSelf.lensSureButton.alpha = 0.5;
-            }
-        }];
-    }else{
-        [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum){
-            return  @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
-        }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            if (valid.boolValue) {
-                [strongSelf.lensSureButton setEnabled:YES];
-                strongSelf.lensSureButton.alpha = 1;
-            }else{
-                [strongSelf.lensSureButton setEnabled:NO];
-                strongSelf.lensSureButton.alpha = 0.5;
-            }
-        }];
-    }
+    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum){
+        return  @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
+    }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        if (valid.boolValue) {
+            [strongSelf.lensSureButton setEnabled:YES];
+            strongSelf.lensSureButton.alpha = 1;
+        }else{
+            [strongSelf.lensSureButton setEnabled:NO];
+            strongSelf.lensSureButton.alpha = 0.5;
+        }
+    }];
 }
 
 
@@ -440,24 +424,14 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         self.lensPlusButton.enabled = NO;
 }
 
-//Refresh the contact lenses to increase quantity button state
-- (void)reloadContactLensCartStatus{
-    //The user to select the number of the specifications of the contact lenses before they can start editing
-    if ([self.lensNumLabel.text integerValue] + [self cartItemContactLens].glassCount >= currentDegreeStock || !self.leftParameterLabel.text.length) {
-        self.lensPlusButton.enabled = NO;
-    }else{
-        self.lensPlusButton.enabled = YES;
-    }
-}
-
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        return isLeft ? [[IPCBatchDegreeObject batchSphs]count] : [[IPCBatchDegreeObject batchCyls]count];
+        return isLeft ? [[self.batchDegree batchSphs]count] : [[self.batchDegree batchCyls]count];
     }else if ([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        return [[IPCBatchDegreeObject batchReadingDegrees]count];
+        return [self.batchDegree.readingDegrees count];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        return self.parameterViewMode.batchParameterList.parameterList.count;
+        return self.batchDegree.contactLensDegrees.count;
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         return array.count;
@@ -471,12 +445,11 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         cell = [[UINib nibWithNibName:@"IPCBatchParameterCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        [cell.parameterLabel setText:isLeft ? [IPCBatchDegreeObject batchSphs][indexPath.row] : [IPCBatchDegreeObject batchCyls][indexPath.row]];
+        [cell.parameterLabel setText:isLeft ? [self.batchDegree batchSphs][indexPath.row] : [self.batchDegree batchCyls][indexPath.row]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [cell.parameterLabel setText:[IPCBatchDegreeObject batchReadingDegrees][indexPath.row]];
+        [cell.parameterLabel setText:self.batchDegree.readingDegrees[indexPath.row]];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        BatchParameterObject * parameter = self.parameterViewMode.batchParameterList.parameterList[indexPath.row];
-        [cell.parameterLabel setText:parameter.degree];
+        [cell.parameterLabel setText:self.batchDegree.contactLensDegrees[indexPath.row]];
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         [cell.parameterLabel setText:array[indexPath.row]];
@@ -494,21 +467,17 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([_glasses filterType] == IPCTopFilterTypeLens) {
         if (isLeft) {
-            [self.leftParameterLabel setText:[IPCBatchDegreeObject batchSphs][indexPath.row]];
+            [self.leftParameterLabel setText:[self.batchDegree batchSphs][indexPath.row]];
         }else{
-            [self.rightParameterLabel setText:[IPCBatchDegreeObject batchCyls][indexPath.row]];
+            [self.rightParameterLabel setText:[self.batchDegree batchCyls][indexPath.row]];
         }
         [self reloadLensCartStatus];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [self.leftParameterLabel setText:[IPCBatchDegreeObject batchReadingDegrees][indexPath.row]];
+        [self.leftParameterLabel setText:self.batchDegree.readingDegrees[indexPath.row]];
         [self reloadLensCartStatus];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        BatchParameterObject * parameter = self.parameterViewMode.batchParameterList.parameterList[indexPath.row];
-        [self.leftParameterLabel setText:parameter.degree];
-        currentContactDegreeID =  parameter.batchID;
-        currentDegreeStock = parameter.bizStock;
-        [self refreshSureButtonStatus];
-        [self reloadContactLensCartStatus];
+        [self.leftParameterLabel setText:self.batchDegree.contactLensDegrees[indexPath.row]];
+        [self reloadLensCartStatus];
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         switch (self.customsizedType) {

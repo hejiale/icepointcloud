@@ -19,7 +19,7 @@
  */
 - (BOOL)shoppingCartIsEmpty
 {
-    return [[IPCShoppingCart sharedCart] selectItemsCount] == 0;
+    return [[IPCShoppingCart sharedCart] itemsCount] == 0;
 }
 
 

@@ -122,18 +122,14 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 }
 
 - (IBAction)addToCartAction:(id)sender {
-    if ((([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch) || ([_glasses filterType] == IPCTopFilterTypeAccessory && _glasses.solutionType))
+    if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
     {
-        if ( ([_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeAccessory) && _glasses.stock == 0) {
-            [IPCCustomUI showError:@"暂无库存，请重新选择!"];
-        }else{
-            self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-                [self reloadCartBadge];
-            }];
-            self.parameterView.glasses = _glasses;
-            [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
-            [self.parameterView show];
-        }
+        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+            [self reloadCartBadge];
+        }];
+        self.parameterView.glasses = _glasses;
+        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+        [self.parameterView show];
     }else{
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         [self successAddCartMethod];

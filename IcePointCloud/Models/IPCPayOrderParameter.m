@@ -50,7 +50,7 @@
     if (employeeList.count) {
         [parameters setObject:employeeList forKey:@"employeeAchievements"];
     }
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].realTotalPrice] forKey:@"orderFinalPrice"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCPayOrderManager sharedManager] realTotalPrice]] forKey:@"orderFinalPrice"];
     
     if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {//积分兑换置为0
         [parameters setObject:@(0) forKey:@"integral"];
@@ -74,8 +74,8 @@
 {
     __block NSMutableArray * itemParams = [[NSMutableArray alloc]init];
     
-    for (int i = 0; i < [[IPCShoppingCart sharedCart] selectItemsCount]; i++) {
-        IPCShoppingCartItem *item = [[IPCShoppingCart sharedCart] selectedItemAtIndex:i];
+    for (int i = 0; i < [[IPCShoppingCart sharedCart] itemsCount]; i++) {
+        IPCShoppingCartItem *item = [[IPCShoppingCart sharedCart] itemAtIndex:i];
         [itemParams addObject:[item paramtersJSONForOrderRequest]];
     }
     return itemParams;

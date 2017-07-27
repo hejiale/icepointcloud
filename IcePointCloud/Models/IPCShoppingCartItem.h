@@ -32,7 +32,6 @@
 @property (nonatomic, copy, readwrite) NSString * batchSph;//Batch Sph parameters
 @property (nonatomic, copy, readwrite) NSString * bacthCyl;//Batch cyl.ul parameters
 @property (nonatomic, copy, readwrite) NSString * batchReadingDegree;//Batch aging degree
-@property (nonatomic, copy, readwrite) NSString * contactLensID;//Batch contact ID
 @property (nonatomic, copy, readwrite) NSString * contactDegree;//Batch contact degree
 
 - (double)totalPrice;

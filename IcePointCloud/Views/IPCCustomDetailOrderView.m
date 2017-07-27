@@ -34,12 +34,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
-//@property (weak, nonatomic) IBOutlet UIView *payBottomView;
-//@property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewBottom;
 
-@property (copy,  nonatomic) void(^ProductDetailBlock)(IPCGlasses *glass);
-@property (copy,  nonatomic) void(^PayBlock)();
 @property (copy,  nonatomic) void(^DismissBlock)();
 @property (nonatomic, copy) NSString * currentOrderNum;
 
@@ -49,8 +44,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (instancetype)initWithFrame:(CGRect)frame
                      OrderNum:(NSString *)orderNum
-                ProductDetail:(void(^)(IPCGlasses *glass))product
-                          Pay:(void (^)())pay
                       Dismiss:(void (^)())dismiss
 {
     self = [super initWithFrame:frame];
@@ -59,8 +52,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         [view setFrame:frame];
         [self addSubview: view];
         
-        self.ProductDetailBlock = product;
-        self.PayBlock = pay;
         self.DismissBlock = dismiss;
         self.currentOrderNum = orderNum;
         
@@ -71,9 +62,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-
+    
     [self.topView addBottomLine];
-//    [self.payBottomView addTopLine];
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
     self.orderDetailTableView.isHiden = YES;
     self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
@@ -116,13 +106,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     }];
 }
 
-
-- (IBAction)payAction:(id)sender {
-    if (self.PayBlock) {
-        self.PayBlock();
-    }
-}
-
 #pragma mark //Request Data
 - (void)queryOrderDetail
 {
@@ -131,14 +114,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
                                               SuccessBlock:^(id responseValue)
      {
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
-         
-//         if ([IPCPayOrderManager sharedManager].remainAmount > 0 && ![[IPCAppManager orderStatus:[IPCCustomerOrderDetail instance].orderInfo.status] isEqualToString:@"已退款"])
-//         {
-//             [self.payBottomView setHidden:NO];
-//             self.tableViewBottom.constant = 56;
-//             NSString * payPrice = [NSString stringWithFormat:@"支付尾款:￥%.2f", [IPCPayOrderManager sharedManager].remainAmount];
-//             [self.payPriceLabel setAttributedText:[IPCCustomUI subStringWithText:payPrice BeginRang:5 Rang:payPrice.length - 5 Font:self.payPriceLabel.font Color:COLOR_RGB_RED]];
-//         }
          [self.orderDetailTableView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
@@ -218,7 +193,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailSectionCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.sectionTitleLabel setText:@"收款记录"];
-            [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].remainAmount]];
+            [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCCustomerOrderDetail instance].orderInfo.remainAmount]];
             if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count) {
                 [cell.bottomLine setHidden:NO];
             }else{
@@ -230,6 +205,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailPayRecordCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
+            cell.recordList = [IPCCustomerOrderDetail instance].recordArray;
             return cell;
         }
     }else if(indexPath.section == 6){
@@ -262,7 +238,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     }else if (indexPath.section == 4){
         return 125;
     }else if (indexPath.section == 5 && indexPath.row > 0){
-        return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 40;
+        return [IPCCustomerOrderDetail instance].recordArray.count * 40;
     }else if (indexPath.section == 6){
         return 120;
     }
@@ -284,13 +260,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    
-    if (indexPath.section == 3) {
-        IPCGlasses * product = [IPCCustomerOrderDetail instance].products[indexPath.row];
-        if (self.ProductDetailBlock) {
-            self.ProductDetailBlock(product);
-        }
-    }
 }
 
 #pragma mark //IPCCustomerOrderDetailDelegate

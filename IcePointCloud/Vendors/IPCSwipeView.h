@@ -14,7 +14,6 @@ typedef void(^SwipeBlock) ();
 
 @property (nonatomic, copy) UIView * contentView;
 @property (nonatomic, assign) BOOL isOpen;
-@property (nonatomic, assign) BOOL isCanEdit;
 @property (nonatomic, copy)SwipeBlock swipeBlock;
 
 @end

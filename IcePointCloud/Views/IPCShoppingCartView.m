@@ -24,11 +24,10 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBottom;
 @property (strong, nonatomic) UIView * coverView;
-
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
-
 @property (copy, nonatomic) void(^CompleteBlock)();
 
 @end
@@ -93,8 +92,15 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 #pragma mark //Clicked Events
 - (IBAction)onEditAction:(UIButton *)sender {
     [sender setSelected:!sender.selected];
-    [self.deleteButton setHidden:!sender.selected];
+    
     isEditStatus = sender.selected;
+    if (isEditStatus) {
+        self.tableBottom.constant = 50;
+        [self.cartBottomView setHidden:NO];
+    }else{
+        self.tableBottom.constant = 0;
+        [self.cartBottomView setHidden:YES];
+    }
     [self updateCartUI];
 }
 

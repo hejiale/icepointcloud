@@ -39,19 +39,6 @@
     return self.itemList.count;
 }
 
-- (NSInteger)selectItemsCount{
-    return [self selectCartItems].count;
-}
-
-- (NSInteger)selectedGlassesCount
-{
-    NSInteger count = 0;
-    for (IPCShoppingCartItem *ci in [self selectCartItems]) {
-        if (ci.selected) count += ci.glassCount;
-    }
-    return count;
-}
-
 - (NSInteger)allGlassesCount
 {
     NSInteger count = 0;
@@ -76,10 +63,10 @@
  *  Shopping cart price calculation
  *
  */
-- (double)selectedGlassesTotalPrice
+- (double)allGlassesTotalPrice
 {
     double price = 0;
-    for (IPCShoppingCartItem *ci in [self selectCartItems]) {
+    for (IPCShoppingCartItem *ci in self.itemList) {
         price += ci.totalPrice;
     }
     return price;
@@ -93,7 +80,6 @@
     }]];
 }
 
-
 /**
  *  Specify a shopping cart information
  */
@@ -101,13 +87,6 @@
 {
     return self.itemList[index];
 }
-
-
-- (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index
-{
-    return [self selectCartItems][index];
-}
-
 
 /**
  *  Add a shopping cart
@@ -122,30 +101,32 @@
 
 - (void)plusGlass:(IPCGlasses *)glass{
     if (glass) {
-        [self addGlasses:glass Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil  ContactID:nil  Count:1];
+        [self addGlasses:glass Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil  Count:1];
     }
 }
 
 
 - (void)addLensWithGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl Count:(NSInteger)count
 {
-    [self addGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:nil ContactDegree:nil  ContactID:nil  Count:count];
+    [self addGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:nil ContactDegree:nil  Count:count];
 }
 
 - (void)addReadingLensWithGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree  Count:(NSInteger)count
 {
-    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:readingDegree ContactDegree:nil  ContactID:nil  Count:count];
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:readingDegree ContactDegree:nil Count:count];
 }
 
-- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree  ContactID:(NSString *)contactID Count:(NSInteger)count
+- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree Count:(NSInteger)count
 {
-    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree ContactID:contactID  Count:count];
+    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree Count:count];
 }
 
-- (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree  ContactID:(NSString *)contactID  Count:(NSInteger)count
+- (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree Count:(NSInteger)count
 {
+    if (count <= 0)return;
+    
     IPCShoppingCartItem *item = nil;
-    if (glasses.isBatch || ([glasses filterType] == IPCTopFilterTypeAccessory && glasses.solutionType) || ([glasses filterType] == IPCTopFilterTypeContactLenses) && glasses.stock == 0)
+    if (glasses.isBatch)
     {
         item = [self batchItemForGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:readingDegree ContactDegree:contactDegree];
     }else{
@@ -162,7 +143,6 @@
             item.bacthCyl = cyl;
             item.contactDegree = contactDegree;
             item.batchReadingDegree = readingDegree;
-            item.contactLensID = contactID;
         }
         item.glasses = glasses;
         item.glassCount   = count;
@@ -178,11 +158,11 @@
  *
  */
 - (void)removeGlasses:(IPCGlasses *)glasse{
-    [self removeGlasses:glasse Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil BatchNum:nil KindNum:nil ValidityDate:nil IsOpenBooking:NO];
+    [self removeGlasses:glasse Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:nil];
 }
 
 
-- (void)removeGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree BatchNum:(NSString *)batchNum KindNum:(NSString *)kindNum ValidityDate:(NSString *)date IsOpenBooking:(BOOL)isOpenBooking
+- (void)removeGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree
 {
     IPCShoppingCartItem *item = nil;
     
@@ -211,6 +191,7 @@
     for (IPCShoppingCartItem *ci in [[IPCShoppingCart sharedCart] selectCartItems])
         [[IPCShoppingCart sharedCart] removeItem:ci];
 }
+
 
 - (void)reduceItem:(IPCShoppingCartItem *)cartItem{
     if (cartItem){
@@ -314,7 +295,7 @@
 }
 
 - (void)clearAllItemPoint{
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.isChoosePoint = NO;
         obj.pointValue = 0;
     }];
@@ -322,7 +303,7 @@
 
 - (NSInteger)totalUsedPoint{
     __block NSInteger   totoalPoint = 0;
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
             totoalPoint += obj.pointValue * obj.glassCount;
         }
@@ -332,7 +313,7 @@
 
 - (double)totalUsedPointPrice{
     __block double   totoalPointPrice = 0;
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
             totoalPointPrice += obj.pointPrice;
         }
@@ -342,7 +323,7 @@
 
 - (BOOL)isHaveUsedPoint{
     __block BOOL isHave = NO;
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj.isChoosePoint) {
             isHave = YES;
         }
@@ -352,7 +333,7 @@
 
 
 - (void)resetSelectCartItemPrice{
-    [[self selectCartItems] enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         obj.unitPrice = 0;
     }];
 }

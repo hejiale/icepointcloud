@@ -20,15 +20,13 @@
 @property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
-@property (nonatomic, assign, readwrite) double   realTotalPrice;//实付金额
-@property (nonatomic, assign, readwrite) double   pointPrice;//积分金额
+@property (nonatomic, assign, readwrite) double        pointPrice;//积分金额
 @property (nonatomic, assign, readwrite) NSInteger    usedPoint;//已使用积分
 @property (nonatomic, assign, readwrite) NSInteger    point;//总积分
-@property (nonatomic, assign, readwrite) double   givingAmount;//赠送金额
+@property (nonatomic, assign, readwrite) double        givingAmount;//赠送金额
 
 @property (nonatomic, assign, readwrite) double   balanceAmount;//储值金额
 @property (nonatomic, assign, readwrite) double   usedBalanceAmount;//已使用储值金额
-@property (nonatomic, assign, readwrite) double   remainAmount;//剩余付款金额
 
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//是否已选择客户
@@ -48,15 +46,20 @@
 
 - (double)minimumEmployeeDiscountPrice:(double)originPrice;
 
-- (void)resetData;
-
-- (void)clearSelectCustomerData;
+//实付金额
+- (double)realTotalPrice;
+//剩余付款金额
+- (double)remainPayPrice;
+//已付款金额总计
+- (double)payRecordTotalPrice;
 
 - (void)calculatePointValue:(IPCPointValueMode *)pointValue;
 
 - (double)minumEmployeeResult;
 
 - (BOOL)isExistEmptyEmployeeResult;
+//清空支付信息  选择客户信息  清空商品列表
+- (void)resetData;
 
 
 @end

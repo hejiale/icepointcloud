@@ -54,23 +54,11 @@
 }
 
 
-- (void)reloadAddButtonStatus:(BOOL)hasStock{
-    [self.addButton setUserInteractionEnabled:YES];
-    
-    if (hasStock) {
-        [self.addButton setImage:[UIImage imageNamed:@"icon_add"] forState:UIControlStateNormal];
-    }else{
-        [self.addButton setImage:[UIImage imageNamed:@"icon_add_disable"] forState:UIControlStateNormal];
-        if ([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [_cartItem.glasses filterType] == IPCTopFilterTypeAccessory)
-            [self.addButton setUserInteractionEnabled:hasStock];
-    }
-}
-
-
 #pragma mark //Clicked Events
 - (IBAction)addCartAction:(id)sender {
     [[IPCShoppingCart sharedCart] plusItem:self.cartItem];
-    if (self.ReloadBlcok)self.ReloadBlcok();
+    if (self.ReloadBlcok)
+        self.ReloadBlcok();
 }
 
 
@@ -78,12 +66,13 @@
     NSInteger cartNum = [self.cartNumLabel.text integerValue];
     cartNum--;
     
-    if (cartNum == 0) {
+    if (cartNum <= 0) {
         [[IPCShoppingCart sharedCart] removeItem:self.cartItem];
     }else{
         [[IPCShoppingCart sharedCart] reduceItem:self.cartItem];
     }
-    if (self.ReloadBlcok)self.ReloadBlcok();
+    if (self.ReloadBlcok)
+        self.ReloadBlcok();
 }
 
 

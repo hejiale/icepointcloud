@@ -23,9 +23,12 @@
 @property (nonatomic, copy, readonly) NSString * orderID;
 @property (nonatomic, copy, readonly) NSString * orderCode;
 @property (nonatomic, copy, readonly) NSString * orderDate;
-@property (nonatomic, copy, readonly) NSString * orderStatus;
 @property (nonatomic, assign, readonly) double   orderPrice;
 @property (nonatomic, copy, readonly) NSString * type;
+@property (nonatomic, copy, readonly) NSString * auditResult;
+@property (nonatomic, copy, readonly) NSString * auditStatus;
+
+- (NSString *)orderStatus;
 
 @end
 

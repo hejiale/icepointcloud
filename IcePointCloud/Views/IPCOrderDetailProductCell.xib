@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="119"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W09-WB-702">
@@ -49,40 +49,16 @@
                                 <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iiu-qC-Swi">
-                                <rect key="frame" x="125" y="40" width="65" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="65" id="5wc-3Z-1TF"/>
-                                    <constraint firstAttribute="height" constant="15" id="PDn-hQ-Yk4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uT5-fi-f3j">
-                                <rect key="frame" x="190" y="40" width="190" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="VIw-jh-v6L"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
-                                <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yQ2-to-6Th" firstAttribute="leading" secondItem="dAd-96-0ht" secondAttribute="trailing" constant="10" id="3jD-qg-lSq"/>
-                            <constraint firstAttribute="trailing" secondItem="uT5-fi-f3j" secondAttribute="trailing" constant="20" id="7sz-1M-1gu"/>
-                            <constraint firstItem="yQ2-to-6Th" firstAttribute="top" secondItem="Iiu-qC-Swi" secondAttribute="bottom" constant="5" id="PH0-z1-Cc0"/>
-                            <constraint firstItem="uT5-fi-f3j" firstAttribute="leading" secondItem="Iiu-qC-Swi" secondAttribute="trailing" id="Xe6-tt-9BL"/>
                             <constraint firstAttribute="trailing" secondItem="B5t-Ga-nk8" secondAttribute="trailing" constant="30" id="YMu-yn-wWg"/>
                             <constraint firstItem="B5t-Ga-nk8" firstAttribute="top" secondItem="yQ2-to-6Th" secondAttribute="bottom" constant="5" id="Yi2-Pm-kao"/>
                             <constraint firstItem="dAd-96-0ht" firstAttribute="top" secondItem="W09-WB-702" secondAttribute="top" constant="10" id="aia-fG-o8z"/>
                             <constraint firstItem="dAd-96-0ht" firstAttribute="leading" secondItem="W09-WB-702" secondAttribute="leading" constant="25" id="iJi-CE-aUr"/>
                             <constraint firstAttribute="trailing" secondItem="yQ2-to-6Th" secondAttribute="trailing" constant="20" id="ouI-hd-gdB"/>
                             <constraint firstItem="B5t-Ga-nk8" firstAttribute="bottom" secondItem="dAd-96-0ht" secondAttribute="bottom" id="rf8-GJ-np6"/>
-                            <constraint firstItem="yQ2-to-6Th" firstAttribute="top" secondItem="uT5-fi-f3j" secondAttribute="bottom" constant="5" id="sQC-M6-7Pv"/>
-                            <constraint firstItem="Iiu-qC-Swi" firstAttribute="leading" secondItem="dAd-96-0ht" secondAttribute="trailing" constant="10" id="t2g-b6-Kr1"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -96,10 +72,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="batchNumLabel" destination="uT5-fi-f3j" id="vzn-HC-m0g"/>
-                <outlet property="contactDegreeLabel" destination="Iiu-qC-Swi" id="tuh-vB-sED"/>
                 <outlet property="countLabel" destination="B5t-Ga-nk8" id="E79-BA-fyL"/>
-                <outlet property="degreeWidthConstraint" destination="5wc-3Z-1TF" id="tTu-OT-w91"/>
                 <outlet property="parameterLabel" destination="yQ2-to-6Th" id="me4-2h-EwF"/>
                 <outlet property="productContentView" destination="W09-WB-702" id="x8R-9t-O8K"/>
                 <outlet property="productImageView" destination="dAd-96-0ht" id="h0g-4O-qy5"/>

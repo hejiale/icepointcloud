@@ -7,7 +7,6 @@
 //
 
 #import "IPCEditBatchParameterView.h"
-#import "IPCEditBatchParameterViewMode.h"
 #import "IPCEditParameterCell.h"
 
 static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
@@ -19,8 +18,8 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIImageView *glassImageView;
 @property (weak, nonatomic) IBOutlet UILabel *glassNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *glassPriceLabel;
-@property (strong, nonatomic) IPCEditBatchParameterViewMode * editParameterMode;
 @property (copy, nonatomic) void(^DismissBlock)();
+@property (strong, nonatomic) IPCGlasses * currentGlass;
 
 @end
 
@@ -31,9 +30,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     self = [super initWithFrame:frame];
     if (self) {
         self.DismissBlock = dismiss;
-        self.editParameterMode = [[IPCEditBatchParameterViewMode alloc]initWithGlasses:glasses UpdateUI:^{
-            [self.parameterTableView reloadData];
-        }];
+        self.currentGlass = glasses;
      
         UIView * parameterBgView = [UIView jk_loadInstanceFromNibWithName:@"IPCEditBatchParameterView" owner:self];
         [parameterBgView setFrame:frame];
@@ -44,14 +41,6 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         [self.glassPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
     
         if (glasses){
-            if ([glasses filterType] ==IPCTopFilterTypeLens) {
-                [self.editParameterMode queryBatchStockRequest];
-            }else if([glasses filterType] ==IPCTopFilterTypeReadingGlass){
-                [self.editParameterMode queryBatchReadingDegreeRequest];
-            }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
-                [self.editParameterMode  queryContactLensStockRequest];
-            }
-            
             CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.2, 0.2);
             [self.editParameterView setTransform:transform];
         }
@@ -97,7 +86,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [[IPCShoppingCart sharedCart] batchParameterList:self.editParameterMode.currentGlass].count;
+    return [[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -106,25 +95,11 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         cell = [[UINib nibWithNibName:@"IPCEditParameterCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     __weak typeof (self) weakSelf = self;
-    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] batchParameterList:self.editParameterMode.currentGlass][indexPath.row];
+    IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass][indexPath.row];
     [cell setCartItem:cartItem Reload:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.parameterTableView reloadData];
     }];
-    
-    __block BOOL isHasStock = NO;
-    if ([self.editParameterMode.currentGlass filterType] ==IPCTopFilterTypeLens) {
-        if ([self.editParameterMode queryLensStock:cartItem] > 0)
-            isHasStock = YES;
-    }else if ([self.editParameterMode.currentGlass filterType]== IPCTopFilterTypeReadingGlass){
-        if ([self.editParameterMode queryReadingLensStock:cartItem] > 0)
-            isHasStock = YES;
-    }
-    else if([self.editParameterMode.currentGlass filterType] == IPCTopFilterTypeContactLenses){
-        if ([self.editParameterMode queryContactLensStock:cartItem] > 0 && cartItem.glassCount < [self.editParameterMode queryContactLensStock:cartItem])
-            isHasStock = YES;
-    }
-    [cell reloadAddButtonStatus:isHasStock];
     return cell;
 }
 

@@ -53,12 +53,8 @@
     
     [self setNavigationBarStatus:YES];
     [self reloadTableHead];
-    
-    [self.payOrderViewMode requestTradeOrExchangeStatus:^{
-        [self.shopCartView reload];
-        [self.payOrderTableView setHidden:NO];
-        [self.payOrderTableView reloadData];
-    }];
+    [self.shopCartView reload];
+    [self.payOrderTableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -104,11 +100,7 @@
     __weak typeof(self) weakSelf = self;
     [IPCCustomUI showAlert:@"冰点云" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.payOrderViewMode resetPayInfoData];
-        [[IPCShoppingCart sharedCart] clear];
-        [strongSelf.shopCartView reload];
-        [strongSelf reloadTableHead];
-        [strongSelf.payOrderTableView reloadData];
+        [strongSelf resetPayInfoView];
     }];
 }
 
@@ -126,6 +118,13 @@
     }else{
         [self.payOrderTableView setTableHeaderView:self.tableHeadView];
     }
+}
+
+- (void)resetPayInfoView{
+    [[IPCPayOrderManager sharedManager] resetData];
+    [self.shopCartView reload];
+    [self reloadTableHead];
+    [self.payOrderTableView reloadData];
 }
 
 #pragma mark //Push Method
@@ -215,11 +214,7 @@
 - (void)successPayOrder{
     [self.saveButton jk_hideIndicator];
     [IPCCustomUI showSuccess:@"订单付款成功!"];
-    [self.payOrderViewMode resetPayInfoData];
-    [[IPCShoppingCart sharedCart] removeSelectCartItem];
-    [self.shopCartView reload];
-    [self reloadTableHead];
-    [self.payOrderTableView reloadData];
+    [self resetPayInfoView];
 }
 
 - (void)failPayOrder{

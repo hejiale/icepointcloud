@@ -81,6 +81,23 @@
     return  (minimumDiscount/10) * originPrice;
 }
 
+- (double)realTotalPrice{
+    return [[IPCShoppingCart sharedCart] allGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].givingAmount;
+}
+
+- (double)remainPayPrice{
+    return [[IPCPayOrderManager sharedManager] realTotalPrice] - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
+}
+
+- (double)payRecordTotalPrice
+{
+    __block double totalPrice = 0;
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        totalPrice += obj.payPrice;
+    }];
+    return totalPrice;
+}
+
 
 -(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
     if (!_payTypeRecordArray) {
@@ -101,15 +118,6 @@
     [IPCPayOrderManager sharedManager].pointPrice = pointPrice;
     [IPCPayOrderManager sharedManager].usedPoint = point;
     [IPCPayOrderManager sharedManager].point -= point;
-    
-    if ([[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice <= 0) {
-        [IPCPayOrderManager sharedManager].realTotalPrice = 0;
-    }else{
-        [IPCPayOrderManager sharedManager].realTotalPrice = [[IPCShoppingCart sharedCart] selectedGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice;
-    }
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
-    [IPCPayOrderManager sharedManager].remainAmount = [IPCPayOrderManager sharedManager].realTotalPrice;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
 
 - (double)minumEmployeeResult
@@ -139,19 +147,15 @@
     [IPCPayOrderManager sharedManager].insertPayRecord = nil;
     [IPCPayOrderManager sharedManager].customerDiscount = 0;
     [IPCPayOrderManager sharedManager].remark = nil;
-    [[IPCPayOrderManager sharedManager] clearSelectCustomerData];
-}
-
-- (void)clearSelectCustomerData
-{
     [IPCPayOrderManager sharedManager].isSelectPoint = NO;
     [IPCPayOrderManager sharedManager].usedPoint = 0;
     [IPCPayOrderManager sharedManager].pointPrice = 0;
-    [IPCPayOrderManager sharedManager].realTotalPrice = 0;
     [IPCPayOrderManager sharedManager].givingAmount = 0;
-    [IPCPayOrderManager sharedManager].remainAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [IPCPayOrderManager sharedManager].customerDiscount = 1;
+    [[IPCCurrentCustomer sharedManager] clearData];
+    [IPCPayOrderManager sharedManager].currentCustomerId = nil;
+    [[IPCShoppingCart sharedCart] clear];
 }
 
 

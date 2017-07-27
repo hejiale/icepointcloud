@@ -19,11 +19,11 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ba3-fr-oCi">
-                        <rect key="frame" x="285" y="209" width="26" height="26"/>
+                        <rect key="frame" x="271" y="209" width="40" height="26"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="Qs7-Ib-VDz"/>
-                            <constraint firstAttribute="width" constant="26" id="aEo-us-EKZ"/>
+                            <constraint firstAttribute="width" constant="40" id="aEo-us-EKZ"/>
                         </constraints>
                         <state key="normal" image="icon_add">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -45,7 +45,7 @@
                         <color key="highlightedColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zT7-2e-guu">
-                        <rect key="frame" x="265" y="209" width="20" height="26"/>
+                        <rect key="frame" x="251" y="209" width="20" height="26"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="26" id="8cT-RG-PTz"/>
@@ -56,10 +56,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldI-Dd-6ZV">
-                        <rect key="frame" x="285" y="209" width="26" height="26"/>
+                        <rect key="frame" x="271" y="209" width="40" height="26"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="26" id="DmV-gM-bWp"/>
+                            <constraint firstAttribute="width" constant="40" id="DmV-gM-bWp"/>
                             <constraint firstAttribute="height" constant="26" id="Phb-1Z-q5J"/>
                         </constraints>
                         <state key="normal" image="icon_subtract">

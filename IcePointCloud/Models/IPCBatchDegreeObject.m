@@ -10,20 +10,44 @@
 
 @implementation IPCBatchDegreeObject
 
-+ (NSArray<NSString *> *)batchReadingDegrees{
-    NSMutableArray * degreeArray = [[NSMutableArray alloc]init];
-    float startDegree =0;
-    
-    while (startDegree < 6) {
-        startDegree += 0.25;
-        if (startDegree != 0) {
-            [degreeArray addObject:[NSString stringWithFormat:@"+%.2f",startDegree]];
-        }
+- (NSMutableArray<NSString *> *)readingDegrees{
+    if (!_readingDegrees) {
+        _readingDegrees = [[NSMutableArray alloc]init];
     }
-    return degreeArray;
+    return _readingDegrees;
 }
 
-+ (NSArray<NSString *> *)batchSphs{
+- (NSMutableArray<NSString *> *)contactLensDegrees{
+    if (!_contactLensDegrees) {
+        _contactLensDegrees = [[NSMutableArray alloc]init];
+    }
+    return _contactLensDegrees;
+}
+
+- (void)batchReadingDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step
+{
+    float startDegree =start - step;
+    
+    while (startDegree < end) {
+        startDegree += step;
+        if (startDegree != 0) {
+            [self.readingDegrees addObject:[NSString stringWithFormat:@"+%.2f",startDegree]];
+        }
+    }
+}
+
+- (void)batchContactlensDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step
+{
+    float startDegree = start -step;
+    
+    while (startDegree < end) {
+        startDegree += step;
+        [self.contactLensDegrees addObject:[NSString stringWithFormat:@"%.2f",startDegree]];
+    }
+    
+}
+
+- (NSArray<NSString *> *)batchSphs{
     NSMutableArray * sphArray = [[NSMutableArray alloc]init];
     float startSph = 15.25;
     
@@ -38,7 +62,7 @@
     return sphArray;
 }
 
-+ (NSArray<NSString *> *)batchCyls{
+- (NSArray<NSString *> *)batchCyls{
     NSMutableArray * cylArray = [[NSMutableArray alloc]init];
     float startCyl = 6.25;
     
@@ -53,15 +77,5 @@
     return cylArray;
 }
 
-+ (NSArray<NSString *> *)batchDegrees{
-    NSMutableArray * degreeArray = [[NSMutableArray alloc]init];
-    float startDegree = 0.25;
-    
-    while (startDegree > -20) {
-        startDegree -= 0.25;
-        [degreeArray addObject:[NSString stringWithFormat:@"%.2f",startDegree]];
-    }
-    return degreeArray;
-}
 
 @end

@@ -144,18 +144,10 @@
         }else if ([_glasses filterType] == IPCTopFilterTypeReadingGlass && _glasses.isBatch){
             if (_glasses.batchDegree.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_glasses.batchDegree]];
-        }else if (([_glasses filterType] == IPCTopFilterTypeContactLenses && _glasses.isBatch) || [_glasses filterType] ==IPCTopFilterTypeAccessory && _glasses.solutionType)
+        }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses && _glasses.isBatch)
         {
-            if ([_glasses filterType] ==IPCTopFilterTypeAccessory)
-                self.degreeWidthConstraint.constant = 0;
-            
             if (_glasses.batchDegree.length)
-                [self.contactDegreeLabel setText:[NSString stringWithFormat:@"度数: %@",_glasses.batchDegree]];
-            if (_glasses.batchNumber.length)
-                [self.batchNumLabel setText:[NSString stringWithFormat:@"批次号：%@",_glasses.batchNumber]];
-            if (_glasses.approvalNumber.length && _glasses.expireDate.length)
-                [self.parameterLabel setText:[NSString stringWithFormat:@"准字号：%@  有效期：%@",_glasses.approvalNumber,_glasses.expireDate]];
-
+                [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_glasses.batchDegree]];
         }
     }
 }

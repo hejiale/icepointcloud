@@ -61,7 +61,6 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
     [IPCAppManager sharedManager].profile = nil;
     [[IPCCurrentCustomer sharedManager]clearData];
     [[IPCShoppingCart sharedCart] clear];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [[[UIApplication sharedApplication].keyWindow subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [[UIApplication sharedApplication].keyWindow setRootViewController:[[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil]];
@@ -134,41 +133,6 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
     }
     return nil;
 }
-
-
-+ (NSString *)orderStatus:(NSString *)status{
-    if ([status isEqualToString:@"CONFIRMED"]) {
-        return  @"已确认";
-    }else if ([status isEqualToString:@"DELIVER"]){
-        return  @"已发货";
-    }else if ([status isEqualToString:@"FINISH"]){
-        return  @"已完成";
-    }else if ([status isEqualToString:@"RETURN"]){
-        return  @"退货中";
-    }else if ([status isEqualToString:@"RETURN_FINISH"]){
-        return  @"退货完成";
-    }else if ([status isEqualToString:@"WAITING_FOR_AUTH"] || [status isEqualToString:@"CUSTOM_IN"]){
-        return  @"待审核";
-    }else if ([status isEqualToString:@"WAITING_FOR_PAY_RETAINAGE"]){
-        return  @"等待支付尾款";
-    }else if ([status isEqualToString:@"WAITING_FOR_STORE_OUT"]){
-        return @"等待出库";
-    }else if ([status isEqualToString:@"RETURN_GOODS"]){
-        return @"已退款";
-    }else if ([status isEqualToString:@"FINISH"]){
-        return @"已完成";
-    }else if ([status isEqualToString:@"WAITING_FOR_PREPARE"]){
-        return @"待配货";
-    }else if ([status isEqualToString:@"WAITING_FOR_LINKED_STORE_OUT"]){
-        return @"待出货";
-    }else if ([status isEqualToString:@"LINKED_STORE_HAS_CONFIRMED"]){
-        return @"等待发货";
-    }else if ([status isEqualToString:@"WAITING_FOR_LINKED_STORE_CONFIRMED"]){
-        return @"待商家确认";
-    }
-    return nil;
-}
-
 
 - (UIImage *)payTypeImage:(NSString *)payTypeInfo
 {

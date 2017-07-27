@@ -10,8 +10,8 @@
 
 @interface IPCBatchParameterViewMode : NSObject
 
-@property (nonatomic, strong) IPCBatchParameterList * batchParameterList;
-
 - (instancetype)initWithGlasses:(IPCGlasses *)glasses;
+
+- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat start, CGFloat end, CGFloat step))complete;
 
 @end

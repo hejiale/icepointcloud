@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IPCPayRecord.h"
 
 @class IPCCustomerOrderInfo;
 @interface IPCCustomerOrderDetail : NSObject
@@ -14,6 +15,7 @@
 + (IPCCustomerOrderDetail *)instance;
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *  products;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * recordArray;
 @property (nonatomic, strong, readwrite) IPCCustomerOrderInfo               *  orderInfo;
 @property (nonatomic, strong, readwrite) IPCCustomerAddressMode         *  addressMode;
 @property (nonatomic, strong, readwrite) IPCOptometryMode                    *  optometryMode;
@@ -52,6 +54,11 @@
 @property (nonatomic, assign, readwrite) double   totalPayAmount;
 @property (nonatomic, assign, readwrite) double    totalPointAmount;
 @property (nonatomic, assign, readonly) double    deductionIntegral;
+@property (nonatomic, assign, readwrite) double        remainAmount;//订单详情中剩余付款金额
+@property (nonatomic, copy, readonly) NSString * auditResult;
+@property (nonatomic, copy, readonly) NSString * auditStatus;
+
+- (NSString *)orderStatus;
 
 @end
 

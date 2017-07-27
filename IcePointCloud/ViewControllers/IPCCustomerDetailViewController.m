@@ -16,7 +16,6 @@
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
 #import "IPCUpdateCustomerView.h"
-//#import "IPCUpdateOrderViewController.h"
 #import "IPCManagerOptometryViewController.h"
 #import "IPCManagerAddressViewController.h"
 
@@ -62,7 +61,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
+    
     [self setNavigationBarStatus:YES];
 }
 
@@ -122,15 +121,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     __weak typeof (self) weakSelf = self;
     self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:self.view.bounds
                                                                  OrderNum:orderObject.orderCode
-                                                            ProductDetail:^(IPCGlasses *glass) {
-
-                                                            } Pay:^{
-//                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
-//                                                                [strongSelf pushToUpdateOrderViewController];
-                                                            }  Dismiss:^{
-                                                                __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                                [strongSelf removerAllPopView:NO];
-                                                            }];
+                                                                  Dismiss:^{
+                                                                      __strong typeof (weakSelf) strongSelf = weakSelf;
+                                                                      [strongSelf removerAllPopView:NO];
+                                                                  }];
     [self.view addSubview:self.detailOrderView];
     [self.view bringSubviewToFront:self.detailOrderView];
     [self.detailOrderView show];
@@ -143,8 +137,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     self.updateCustomerView.delegate = self;
     [self.contentView addSubview:self.updateCustomerView];
     [self.contentView bringSubviewToFront:self.updateCustomerView];
-
-     __weak typeof(self) weakSelf = self;
+    
+    __weak typeof(self) weakSelf = self;
     [[self.updateCustomerView rac_signalForSelector:@selector(removeCoverAction:)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView:NO];
@@ -187,12 +181,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 /**
  *  Push Method
  */
-//- (void)pushToUpdateOrderViewController{
-//    IPCUpdateOrderViewController * updateOrderVC = [[IPCUpdateOrderViewController  alloc]initWithNibName:@"IPCUpdateOrderViewController" bundle:nil];
-//    updateOrderVC.delegate = self;
-//    [self.navigationController pushViewController:updateOrderVC animated:YES];
-//}
-
 - (void)pushToManagerOptometryViewController{
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
     optometryVC.customerId = self.customerViewMode.detailCustomer.customerID;
@@ -390,11 +378,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)dismissCoverSubViews{
     [self removerAllPopView:YES];
 }
-
-//#pragma mark //IPCUpdateOrderViewControllerDelegate
-//- (void)updatePayOrder{
-//    [self removerAllPopView:YES];
-//}
 
 
 - (void)didReceiveMemoryWarning {

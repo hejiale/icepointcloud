@@ -66,5 +66,19 @@
                             FailureBlock:(void (^)(NSError *error))failure;
 
 
+/**
+ * QUERY BATCH GLASSES CONFIG
+
+ @param glassType
+ @param success
+ @param failure
+ */
++ (void)queryBatchContactLensConfig:(NSString *)glassType
+                       SuccessBlock:(void (^)(id responseValue))success
+                       FailureBlock:(void (^)(NSError *error))failure;
+
+
+
+
 
 @end

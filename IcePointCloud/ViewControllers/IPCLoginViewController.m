@@ -49,8 +49,6 @@
     if ([self.loginHistory count]){
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
-    
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 - (NSMutableArray<NSString *> *)loginHistory{

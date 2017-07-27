@@ -373,8 +373,6 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     IPCFilterValueCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:filterValueIdentifier forIndexPath:indexPath];
-    [cell.filterValueLabel setTextColor:[UIColor lightGrayColor]];
-    [cell.contentView setBackgroundColor:[UIColor jk_colorWithHexString:@"#e6e6e6"]];
 
     if ([self.dataSource respondsToSelector:@selector(filterKeySource)]) {
         [[[self.dataSource filterKeySource] allValues] enumerateObjectsUsingBlock:^(NSArray *  _Nonnull array, NSUInteger idx, BOOL * _Nonnull stop) {

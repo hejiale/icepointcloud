@@ -135,6 +135,8 @@
     if (self.contactDegree.length)
         [attrs setObject:self.contactDegree forKey:@"degree"];
     
+    [attrs setObject:@[] forKey:@"batchProductInfoList"];
+    
     if (attrs.allKeys.count)
         [params setObject:attrs forKey:@"attributes"];
 

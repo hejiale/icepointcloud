@@ -19,19 +19,13 @@
  *    To obtain the corresponding number of shopping cart
  */
 - (NSInteger)itemsCount;
-- (NSInteger)selectItemsCount;
-- (NSInteger)selectedGlassesCount;
 - (NSInteger)allGlassesCount;
 - (NSInteger)itemsCount:(IPCShoppingCartItem *)cartItem;
 - (NSInteger)singleGlassesCount:(IPCGlasses *)glasses;
 /**
  *    Calculate the total price shopping cart selected goods
  */
-- (double)selectedGlassesTotalPrice;
-/**
- *   The selected shopping cart of goods
- */
-- (NSArray<IPCShoppingCartItem *> *)selectCartItems;
+- (double)allGlassesTotalPrice;
 /**
  *    Remove the shopping cart
  */
@@ -44,7 +38,7 @@
  */
 - (void)addLensWithGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl Count:(NSInteger)count;
 - (void)addReadingLensWithGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree  Count:(NSInteger)count;
-- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree  ContactID:(NSString *)contactID Count:(NSInteger)count;
+- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree Count:(NSInteger)count;
 /**
  *   Plus Cart Item
  */
@@ -62,7 +56,6 @@
 - (IPCShoppingCartItem *)readingLensForGlasses:(IPCGlasses *)glasses ReadingDegree:(NSString *)readingDegree;
 - (IPCShoppingCartItem *)contactLensForGlasses:(IPCGlasses *)glasses  ContactDegree:(NSString *)contactDegree;
 - (IPCShoppingCartItem *)itemAtIndex:(NSInteger)index;
-- (IPCShoppingCartItem *)selectedItemAtIndex:(NSInteger)index;
 
 - (NSArray<IPCShoppingCartItem *> *)batchParameterList:(IPCGlasses *)glasses;
 /**

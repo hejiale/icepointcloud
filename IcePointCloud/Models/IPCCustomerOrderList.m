@@ -20,8 +20,7 @@
             if ([responseValue[@"resultList"] isKindOfClass:[NSArray class]]) {
                 [responseValue[@"resultList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     IPCCustomerOrderMode * order = [IPCCustomerOrderMode mj_objectWithKeyValues:obj];
-                    if (![order.orderStatus isEqualToString:@"REMOVED"] && ![order.orderStatus isEqualToString:@"NORMAL"])
-                        [self.list addObject:order];
+                    [self.list addObject:order];
                 }];
             }
             self.totalCount = [responseValue[@"rowCount"]integerValue];
@@ -45,8 +44,16 @@
     return @{@"orderID"    :@"id",
              @"orderCode"  :@"orderNumber",
              @"orderDate"  :@"orderTime",
-             @"orderStatus":@"status",
              @"orderPrice" :@"totalPrice"};
+}
+
+- (NSString *)orderStatus{
+    if ([self.auditStatus isEqualToString:@"UN_AUDITED"]) {
+        return @"未审核";
+    }else if ([self.auditStatus isEqualToString:@"AUDITED"]){
+        return @"已审核";
+    }
+    return @"草稿";
 }
 
 @end
