@@ -70,7 +70,6 @@
                                                   MenuIndex:index
                                                      Logout:^{
                                                          [[IPCAppManager sharedManager] logout];
-                                                         [[IPCPayOrderManager sharedManager] resetData];
                                                      } Dismiss:^{
                                                          [self removeCover];
                                                      }];

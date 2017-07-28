@@ -61,6 +61,7 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
     [IPCAppManager sharedManager].profile = nil;
     [[IPCCurrentCustomer sharedManager]clearData];
     [[IPCShoppingCart sharedCart] clear];
+    [[IPCPayOrderManager sharedManager] resetData];
     
     [[[UIApplication sharedApplication].keyWindow subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [[UIApplication sharedApplication].keyWindow setRootViewController:[[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil]];

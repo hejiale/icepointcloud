@@ -391,7 +391,8 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 }
 
 #pragma mark //UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     NSString * filterValue = [self filterValue:indexPath];
     if (! [[self getAllChooseValue] containsObject:filterValue]) {
         if (!isFilter) {
@@ -442,6 +443,9 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     if ([[[self.dataSource filterDataSourceResult] allFilterValues] count] && [self.dataSource respondsToSelector:@selector(filterDataSourceResult)]) {
         NSArray * filterValue = [[self.dataSource filterDataSourceResult] allFilterValues][[self filterKey]];
         NSString * filterValueText = nil;
+        if (filterValue.count <= indexPath.row) {
+            return nil;
+        }
         if ([filterValue[indexPath.row] isKindOfClass:[NSNumber class]]) {
             filterValueText = [NSString stringWithFormat:@"%d",[filterValue[indexPath.row] integerValue]];
         }else{
