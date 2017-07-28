@@ -287,17 +287,6 @@
 - (void)reloadCartBadge{
     UIButton * button = (UIButton *)self.menusView.subviews[4];
     [button createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
-    
-    [self requestTradeOrExchangeStatus];
-}
-
-- (void)requestTradeOrExchangeStatus
-{
-    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
-    } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.domain];
-    }];
 }
 
 - (void)didReceiveMemoryWarning {

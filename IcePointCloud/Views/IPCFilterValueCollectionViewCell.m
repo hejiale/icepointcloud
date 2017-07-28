@@ -15,4 +15,7 @@
     // Initialization code
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+}
 @end

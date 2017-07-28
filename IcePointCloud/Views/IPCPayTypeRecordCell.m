@@ -145,24 +145,12 @@
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
-    if ([self.payTypeTextField.text isEqualToString:@"储值余额"]) {
-        if ([IPCPayOrderManager sharedManager].balanceAmount > 0) {
-            if ([IPCPayOrderManager sharedManager].balanceAmount - [IPCPayOrderManager sharedManager].usedBalanceAmount <= 0) {
-                [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = 0;
-            }else{
-                [IPCPayOrderManager sharedManager].usedBalanceAmount += [textField.text doubleValue];
-                [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
-            }
-        }else{
-            [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = 0;
-        }
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= [textField.text doubleValue]) {
+        [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [[IPCPayOrderManager sharedManager] remainPayPrice];
     }else{
-        if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= [textField.text doubleValue]) {
-            [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [[IPCPayOrderManager sharedManager] remainPayPrice];
-        }else{
-            [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
-        }
+        [IPCPayOrderManager sharedManager].insertPayRecord.payPrice = [textField.text doubleValue];
     }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadUI)]) {
@@ -172,7 +160,7 @@
 }
 #pragma mark //uiPickerViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
-    return @[@"储值余额",@"现金",@"刷卡",@"支付宝",@"微信",@"其它"];
+    return @[@"现金",@"刷卡",@"支付宝",@"微信",@"其它"];
 }
 
 

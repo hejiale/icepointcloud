@@ -83,6 +83,9 @@
                                 <state key="normal" title="选择积分抵扣" image="icon_choose_disable">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <state key="selected" image="icon_choose"/>
                                 <connections>
                                     <action selector="selectPayPointAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5wP-af-1Kl"/>
@@ -99,10 +102,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mQq-kE-AnU">
-                                <rect key="frame" x="75" y="55" width="120" height="30"/>
+                                <rect key="frame" x="75" y="55" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FzB-ca-RsS"/>
-                                    <constraint firstAttribute="width" constant="120" id="dgq-rc-PVH"/>
+                                    <constraint firstAttribute="width" constant="100" id="dgq-rc-PVH"/>
                                 </constraints>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
@@ -168,10 +171,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ATM-Bo-29u">
-                        <rect key="frame" x="382" y="136" width="90" height="30"/>
+                        <rect key="frame" x="362" y="136" width="98" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="0kz-BK-Hee"/>
-                            <constraint firstAttribute="width" constant="90" id="nmS-FK-ciQ"/>
                         </constraints>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
@@ -185,7 +187,8 @@
                     <constraint firstItem="VBB-Bw-SlI" firstAttribute="leading" secondItem="cBm-Nh-XVA" secondAttribute="trailing" constant="5" id="0Jk-8W-DEx"/>
                     <constraint firstItem="cBm-Nh-XVA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="0g9-Gt-tM2"/>
                     <constraint firstItem="ATM-Bo-29u" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="3A5-s2-tNJ"/>
-                    <constraint firstItem="ATM-Bo-29u" firstAttribute="leading" secondItem="KYL-UI-LeL" secondAttribute="trailing" constant="25" id="Gj4-5v-Aab"/>
+                    <constraint firstAttribute="trailing" secondItem="ATM-Bo-29u" secondAttribute="trailing" constant="20" id="9qY-9R-EPp"/>
+                    <constraint firstItem="ATM-Bo-29u" firstAttribute="leading" secondItem="KYL-UI-LeL" secondAttribute="trailing" constant="5" id="Gj4-5v-Aab"/>
                     <constraint firstItem="Iaj-w9-tgm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="IrW-wq-Ufs"/>
                     <constraint firstAttribute="bottomMargin" secondItem="oQa-39-Fn8" secondAttribute="bottom" constant="5" id="JWz-Cq-ebt"/>
                     <constraint firstAttribute="trailingMargin" secondItem="7Sc-VD-jyh" secondAttribute="trailing" constant="20" id="Lcb-Vw-9Ko"/>
@@ -193,7 +196,6 @@
                     <constraint firstItem="5nY-a8-6gt" firstAttribute="leading" secondItem="oQa-39-Fn8" secondAttribute="trailing" constant="5" id="Q8w-46-r1E"/>
                     <constraint firstItem="7Sc-VD-jyh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="RV8-6A-oHG"/>
                     <constraint firstItem="Ebr-Fp-YjJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="Rzo-sp-mSF"/>
-                    <constraint firstItem="ATM-Bo-29u" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="UN3-Eq-s3M"/>
                     <constraint firstItem="7Sc-VD-jyh" firstAttribute="top" secondItem="cBm-Nh-XVA" secondAttribute="bottom" id="Uku-MV-dMd"/>
                     <constraint firstItem="Ebr-Fp-YjJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="Uln-NE-HUb"/>
                     <constraint firstItem="Iaj-w9-tgm" firstAttribute="leading" secondItem="Ebr-Fp-YjJ" secondAttribute="trailing" constant="5" id="cCp-62-ayt"/>
@@ -201,6 +203,7 @@
                     <constraint firstItem="5nY-a8-6gt" firstAttribute="centerY" secondItem="oQa-39-Fn8" secondAttribute="centerY" id="jX3-i0-ZVj"/>
                     <constraint firstAttribute="trailingMargin" secondItem="VBB-Bw-SlI" secondAttribute="trailing" constant="20" id="kkd-ld-Znu"/>
                     <constraint firstItem="oQa-39-Fn8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="suL-6e-ov0"/>
+                    <constraint firstItem="ATM-Bo-29u" firstAttribute="leading" secondItem="dID-MD-cms" secondAttribute="leading" id="uhH-s5-EHX"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -125,6 +125,8 @@
 {
     if (count <= 0)return;
     
+    [self requestTradeOrExchangeStatus];
+    
     IPCShoppingCartItem *item = nil;
     if (glasses.isBatch)
     {
@@ -277,6 +279,15 @@
 - (void)postChangedNotification
 {
     [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCNotificationShoppingCartChanged object:nil];
+}
+
+- (void)requestTradeOrExchangeStatus
+{
+    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
+        [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
+    } FailureBlock:^(NSError *error) {
+        [IPCCustomUI showError:error.domain];
+    }];
 }
 
 

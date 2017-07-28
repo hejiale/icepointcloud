@@ -31,26 +31,22 @@
 
 - (void)updateUI
 {
+    [self.pointView setHidden:![IPCPayOrderManager sharedManager].isTrade];
+    
     if ([IPCPayOrderManager sharedManager].isTrade) {
-        [self.pointView setHidden:NO];
         self.pointHeight.constant = 95;
     }else{
-        [self.pointView setHidden:YES];
         self.pointHeight.constant = 0;
     }
     
-    [self.selectPointButton setSelected:[IPCPayOrderManager sharedManager].isSelectPoint];
+    [self.selectPointButton setUserInteractionEnabled:([IPCPayOrderManager sharedManager].point >  0)];
+    [self.selectPointButton setSelected:([IPCPayOrderManager sharedManager].isSelectPoint)];
+    [self.pointAmountTextField setEnabled:([IPCPayOrderManager sharedManager].isSelectPoint)];
     
     if ([IPCPayOrderManager sharedManager].point >  0) {
-        [self.selectPointButton setEnabled:YES];
-        if ([IPCPayOrderManager sharedManager].isSelectPoint) {
-            [self.pointAmountTextField setEnabled:YES];
-        }else{
-            [self.pointAmountTextField setEnabled:NO];
-        }
+        [self.pointView setAlpha:1];
     }else{
-        [self.selectPointButton setEnabled:NO];
-        [self.pointAmountTextField setEnabled:NO];
+        [self.pointView setAlpha:0.5];
     }
     
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] allGlassesTotalPrice]]];
@@ -122,8 +118,8 @@
         }else if ([textField isEqual:self.givingAmountTextField]){
             [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
             
-            if ([[IPCPayOrderManager sharedManager] realTotalPrice] <= [str doubleValue]) {
-                [IPCPayOrderManager sharedManager].givingAmount = [[IPCPayOrderManager sharedManager] realTotalPrice];
+            if ([IPCShoppingCart sharedCart].allGlassesTotalPrice - [IPCPayOrderManager sharedManager].pointPrice<= [str doubleValue]) {
+                [IPCPayOrderManager sharedManager].givingAmount = [IPCShoppingCart sharedCart].allGlassesTotalPrice - [IPCPayOrderManager sharedManager].pointPrice;
             }else{
                 [IPCPayOrderManager sharedManager].givingAmount = [str doubleValue];
             }

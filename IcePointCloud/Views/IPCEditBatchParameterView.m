@@ -62,9 +62,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         CGAffineTransform newTransform =  CGAffineTransformConcat(self.editParameterView.transform,  CGAffineTransformInvert(self.editParameterView.transform));
         [self.editParameterView setTransform:newTransform];
         self.editParameterView.alpha = 1.0;
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
 

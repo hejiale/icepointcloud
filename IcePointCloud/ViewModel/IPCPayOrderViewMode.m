@@ -45,6 +45,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 #pragma mark //Request Data
 - (void)requestOrderPointPrice:(NSInteger)point
 {
+    [IPCCustomUI show];
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID
                                                         Point:point
                                                  SuccessBlock:^(id responseValue)
@@ -52,7 +53,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
          [[IPCPayOrderManager sharedManager] calculatePointValue:pointValue];
          [self reload];
-         
+         [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
          [IPCCustomUI showError:error.domain];
      }];

@@ -137,9 +137,8 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
 - (UIImage *)payTypeImage:(NSString *)payTypeInfo
 {
     NSString * imageName = nil;
-    if ([payTypeInfo isEqualToString:@"储值余额"]) {
-        imageName = @"icon_card";
-    }else if ([payTypeInfo isEqualToString:@"现金"]){
+    
+    if ([payTypeInfo isEqualToString:@"现金"]){
         imageName = @"cash";
     }else if ([payTypeInfo isEqualToString:@"刷卡"]){
         imageName = @"card";

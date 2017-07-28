@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *cartNumLabel;
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
-- (void)reloadAddButtonStatus:(BOOL)hasStock;
 
 @end
 

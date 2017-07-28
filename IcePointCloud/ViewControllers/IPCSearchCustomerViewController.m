@@ -59,12 +59,12 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //Set UI
 - (void)loadCollectionView{
     CGFloat itemWidth = (self.view.jk_width - 20)/3;
+    CGFloat itemHeight = (self.view.jk_height - 20)/5;
+    
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-    layout.itemSize = CGSizeMake(itemWidth, 146);
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
     layout.minimumInteritemSpacing = 5;
     layout.minimumLineSpacing = 5;
-    layout.headerReferenceSize = CGSizeMake(self.view.jk_width-10, 5);
-    layout.footerReferenceSize = CGSizeMake(self.view.jk_width-10, 5);
     
     [_customerCollectionView setCollectionViewLayout:layout];
     _customerCollectionView.emptyAlertImage = @"exception_search";

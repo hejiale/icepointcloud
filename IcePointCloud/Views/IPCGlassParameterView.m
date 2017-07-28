@@ -284,9 +284,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
     [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
     
-    if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        [self reloadLensCartStatus];
-    }
+    [self reloadLensCartStatus];
 }
 
 - (IBAction)plusTapAction:(id)sender {
@@ -295,9 +293,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     cartCount++;
     [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
     
-    if ([self.glasses filterType] == IPCTopFilterTypeContactLenses) {
-        [self reloadLensCartStatus];
-    }
+    [self reloadLensCartStatus];
 }
 
 #pragma mark //加入购物车
@@ -471,13 +467,10 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         }else{
             [self.rightParameterLabel setText:[self.batchDegree batchCyls][indexPath.row]];
         }
-        [self reloadLensCartStatus];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         [self.leftParameterLabel setText:self.batchDegree.readingDegrees[indexPath.row]];
-        [self reloadLensCartStatus];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
         [self.leftParameterLabel setText:self.batchDegree.contactLensDegrees[indexPath.row]];
-        [self reloadLensCartStatus];
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         switch (self.customsizedType) {
@@ -508,6 +501,10 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
             default:
                 break;
         }
+    }
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses)
+    {
+        [self reloadLensCartStatus];
     }
     [tableView removeFromSuperview];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

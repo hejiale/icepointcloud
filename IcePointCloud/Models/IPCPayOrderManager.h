@@ -25,9 +25,6 @@
 @property (nonatomic, assign, readwrite) NSInteger    point;//总积分
 @property (nonatomic, assign, readwrite) double        givingAmount;//赠送金额
 
-@property (nonatomic, assign, readwrite) double   balanceAmount;//储值金额
-@property (nonatomic, assign, readwrite) double   usedBalanceAmount;//已使用储值金额
-
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//是否已选择客户
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
