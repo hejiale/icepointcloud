@@ -880,7 +880,8 @@
 		0444C7441D9CEBA200553032 /* Batch */ = {
 			isa = PBXGroup;
 			children = (
-				CBC41A0C1F0399C700387F9C /* Degree */,
+				CB60C1001E962A45001B11E2 /* IPCBatchDegreeObject.h */,
+				CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */,
 			);
 			name = Batch;
 			sourceTree = "<group>";
@@ -2176,15 +2177,6 @@
 				CB79C0FE1EA1FA5700078CCA /* IPCHeadImage.m */,
 			);
 			name = Head;
-			sourceTree = "<group>";
-		};
-		CBC41A0C1F0399C700387F9C /* Degree */ = {
-			isa = PBXGroup;
-			children = (
-				CB60C1001E962A45001B11E2 /* IPCBatchDegreeObject.h */,
-				CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */,
-			);
-			name = Degree;
 			sourceTree = "<group>";
 		};
 		CBC41A0D1F039A6D00387F9C /* cell */ = {
