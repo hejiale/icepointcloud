@@ -20,10 +20,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3j-Mq-Fne">
-                    <rect key="frame" x="0.0" y="0.0" width="400" height="70"/>
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIy-sW-OOx">
-                            <rect key="frame" x="0.0" y="0.0" width="60" height="70"/>
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="64"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="ZU9-iV-drw"/>
@@ -34,7 +34,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="二维码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECa-Wq-4dQ">
-                            <rect key="frame" x="150" y="0.0" width="100" height="70"/>
+                            <rect key="frame" x="150" y="0.0" width="100" height="64"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="TlS-j5-jSF"/>
                             </constraints>
@@ -51,11 +51,11 @@
                         <constraint firstAttribute="bottom" secondItem="tIy-sW-OOx" secondAttribute="bottom" id="GFL-Jq-6lA"/>
                         <constraint firstItem="tIy-sW-OOx" firstAttribute="top" secondItem="h3j-Mq-Fne" secondAttribute="top" id="HUT-bH-Qxa"/>
                         <constraint firstAttribute="bottom" secondItem="ECa-Wq-4dQ" secondAttribute="bottom" id="h5W-5t-WfO"/>
-                        <constraint firstAttribute="height" constant="70" id="tPv-4X-8Fa"/>
+                        <constraint firstAttribute="height" constant="64" id="tPv-4X-8Fa"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9Q-Od-J9e">
-                    <rect key="frame" x="0.0" y="70" width="400" height="698"/>
+                    <rect key="frame" x="0.0" y="64" width="400" height="704"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="joe-iu-rbq">
                             <rect key="frame" x="35" y="35" width="330" height="300"/>

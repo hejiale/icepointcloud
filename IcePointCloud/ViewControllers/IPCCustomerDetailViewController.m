@@ -28,7 +28,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 @interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,IPCCustomerDetailViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *topBar;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
@@ -44,9 +43,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [self.topBar addBottomLine];
-    
+
+    [self setNavigationTitle:@"个人信息"];
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     self.detailTableView.isHiden = YES;
@@ -61,7 +59,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self setNavigationBarStatus:YES];
+    [self setNavigationBarStatus:NO];
     [self.refreshHeader beginRefreshing];
 }
 
@@ -119,14 +117,14 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)loadOrderDetailView:(IPCCustomerOrderMode *)orderObject{
     [self.view endEditing:YES];
     __weak typeof (self) weakSelf = self;
-    self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:self.view.bounds
+    self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
                                                                  OrderNum:orderObject.orderCode
                                                                   Dismiss:^{
                                                                       __strong typeof (weakSelf) strongSelf = weakSelf;
                                                                       [strongSelf removerAllPopView:NO];
                                                                   }];
-    [self.view addSubview:self.detailOrderView];
-    [self.view bringSubviewToFront:self.detailOrderView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
+    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.detailOrderView];
     [self.detailOrderView show];
 }
 
@@ -153,10 +151,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 }
 
 #pragma mark //ClickEvents
-- (IBAction)backToLastAction{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 /**
  *  Load More
  */
@@ -345,18 +339,17 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (self.customerViewMode.orderList.count == 0 && section == 3)return 0;
-    return 5;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView * headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-    [headView setBackgroundColor:[UIColor clearColor]];
-    return headView;
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 5;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
+    [footView setBackgroundColor:[UIColor clearColor]];
+    return footView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

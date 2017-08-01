@@ -91,6 +91,8 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 #pragma mark //Clicked Events
 - (IBAction)onEditAction:(UIButton *)sender {
+    if ([self.cartViewMode shoppingCartIsEmpty])return;
+    
     [sender setSelected:!sender.selected];
     
     isEditStatus = sender.selected;

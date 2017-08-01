@@ -52,7 +52,7 @@
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.top.equalTo(self.view.mas_top).with.offset(0);
-        make.height.mas_equalTo(70);
+        make.height.mas_equalTo(64);
     }];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(0);
@@ -68,7 +68,7 @@
     }];
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
-        make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(-9);
+        make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(-8);
         make.width.mas_equalTo(92);
         make.height.mas_equalTo(35);
     }];
@@ -86,9 +86,9 @@
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
-        make.top.equalTo(self.menuBarView.mas_top).with.offset(35);
+        make.top.equalTo(self.menuBarView.mas_top).with.offset(30);
         make.width.mas_equalTo(200);
-        make.height.mas_equalTo(20);
+        make.height.mas_equalTo(25);
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -150,7 +150,7 @@
             [button setImage:[UIImage imageNamed:@"icon_login_head_male"] forState:UIControlStateNormal];
         }
         button.adjustsImageWhenHighlighted = NO;
-        [button setFrame:CGRectMake(65 * i, 25, 44, 44)];
+        [button setFrame:CGRectMake(65 * i, 20, 44, 44)];
         [button setTag:i];
         [button addTarget:self action:@selector(menuTapAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.menusView addSubview:button];
