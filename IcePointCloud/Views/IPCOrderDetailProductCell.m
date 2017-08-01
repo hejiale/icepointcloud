@@ -22,7 +22,7 @@
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(10);
         make.top.equalTo(self.productImageView.mas_top).with.offset(0);
-        make.right.equalTo(self.productContentView.mas_right).with.offset(20);
+        make.right.equalTo(self.productContentView.mas_right).with.offset(-20);
     }];
     
     [self.pointImageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,7 +64,7 @@
         _suggestPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_suggestPriceLabel setBackgroundColor:[UIColor clearColor]];
         [_suggestPriceLabel setTextColor:COLOR_RGB_RED];
-        [_suggestPriceLabel setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
+        [_suggestPriceLabel setFont:[UIFont systemFontOfSize:14]];
     }
     return _suggestPriceLabel;
 }
@@ -73,7 +73,7 @@
     if (!_productPriceLabel) {
         _productPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_productPriceLabel setBackgroundColor:[UIColor clearColor]];
-        [_productPriceLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
+        [_productPriceLabel setFont:[UIFont systemFontOfSize:13]];
         [_productPriceLabel setTextColor:[UIColor lightGrayColor]];
     }
     return _productPriceLabel;

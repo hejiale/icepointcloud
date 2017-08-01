@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="400" height="125"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="124.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="400" height="124"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rDe-aP-QhW">
@@ -25,7 +25,7 @@
                             <constraint firstAttribute="width" constant="80" id="4gc-9v-3DJ"/>
                             <constraint firstAttribute="height" constant="20" id="BRh-as-fS5"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,7 +45,7 @@
                             <constraint firstAttribute="height" constant="20" id="9f7-jm-MJY"/>
                             <constraint firstAttribute="width" constant="80" id="xyj-Ku-WBH"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -65,7 +65,7 @@
                             <constraint firstAttribute="height" constant="20" id="9zB-Dl-koD"/>
                             <constraint firstAttribute="width" constant="80" id="pvT-73-1xa"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -92,7 +92,7 @@
                             <constraint firstAttribute="width" constant="80" id="GFc-KC-VRg"/>
                             <constraint firstAttribute="height" constant="20" id="mHy-QT-L73"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

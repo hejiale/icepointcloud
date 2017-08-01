@@ -517,12 +517,12 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZ8-EX-XEI">
-                    <rect key="frame" x="150" y="45" width="320" height="15"/>
+                    <rect key="frame" x="150" y="50" width="320" height="15"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="15" id="Wjf-q1-NTv"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                    <color key="textColor" red="1" green="0.61216042029999995" blue="0.17357420270000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UTZ-4V-H0q">
@@ -910,7 +910,7 @@
                 <constraint firstAttribute="width" constant="475" id="J29-I4-puw"/>
                 <constraint firstItem="lQL-XT-zyc" firstAttribute="leading" secondItem="5vG-q3-xuL" secondAttribute="leading" id="KGF-Rq-sQd"/>
                 <constraint firstAttribute="bottom" secondItem="aBl-QH-qXE" secondAttribute="bottom" id="KdM-ZE-TLk"/>
-                <constraint firstItem="JZ8-EX-XEI" firstAttribute="top" secondItem="i90-FS-NlY" secondAttribute="bottom" id="MJu-Zf-GmS"/>
+                <constraint firstItem="JZ8-EX-XEI" firstAttribute="top" secondItem="i90-FS-NlY" secondAttribute="bottom" constant="5" id="MJu-Zf-GmS"/>
                 <constraint firstItem="i90-FS-NlY" firstAttribute="leading" secondItem="Cz2-DB-lVM" secondAttribute="trailing" constant="20" id="N3A-7o-84w"/>
                 <constraint firstAttribute="trailing" secondItem="lQL-XT-zyc" secondAttribute="trailing" multiplier="2" id="TCP-iE-r9E"/>
                 <constraint firstItem="l9o-PP-Neq" firstAttribute="top" secondItem="urk-hn-2fl" secondAttribute="bottom" constant="18" id="TrG-a4-lTq"/>

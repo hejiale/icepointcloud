@@ -47,7 +47,7 @@
                             <constraint firstAttribute="width" constant="200" id="LkL-fZ-sNa"/>
                             <constraint firstAttribute="height" constant="20" id="Ul1-LQ-5Or"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

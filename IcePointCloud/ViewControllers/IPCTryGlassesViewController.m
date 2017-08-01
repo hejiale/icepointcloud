@@ -105,11 +105,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Set UI ----------------------------------------------------------------------------
 - (void)loadCollectionView{
-    CGFloat height = (self.view.jk_height - 15 - self.sortProductView.jk_height)/3;
+    CGFloat height = (self.productCollectionView.jk_height - 2)/3;
     UICollectionViewFlowLayout * layOut = [[UICollectionViewFlowLayout alloc]init];
     layOut.itemSize = CGSizeMake(self.productCollectionView.jk_width, height);
     layOut.minimumInteritemSpacing = 0;
-    layOut.minimumLineSpacing = 5;
+    layOut.minimumLineSpacing = 1;
     
     [self.productCollectionView setCollectionViewLayout:layOut];
     [self.productCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:glassListCellIdentifier];

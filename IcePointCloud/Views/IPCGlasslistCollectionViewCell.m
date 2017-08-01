@@ -29,8 +29,6 @@
     
     if (_glasses) {
         [self resetBuyStatus];
-        [self.imageScrollView setHidden:NO];
-        [self.imageScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
         __block NSMutableArray<IPCGlassesImage *> * images = [[NSMutableArray alloc]init];
         
@@ -59,16 +57,13 @@
         [self.imageScrollView setContentSize:CGSizeMake(images.count * self.jk_width, 0)];
         [self.imageScrollView setContentOffset:CGPointZero];
         self.imagePageControl.numberOfPages = images.count;
-        
-        [self.priceLabel setAttributedText:[IPCCustomUI subStringWithText:[NSString stringWithFormat:@"￥%.f",_glasses.price] BeginRang:0 Rang:1 Font:[UIFont systemFontOfSize:13 weight:UIFontWeightThin] Color:COLOR_RGB_RED]];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         
         [self.productNameLabel setText:_glasses.glassName];
         CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
         self.labelHeightConstraint.constant = labelHeight;
         
         //Shopping cart whether to join the product
-        [self.addCartButton setHidden:NO];
-        
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
         
         if (glassCount > 0) {
@@ -133,24 +128,6 @@
     if (self.glasses) {
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         
-        __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:self.glasses];
-        
-        if (glassCount > 0) {
-            if (glassCount == 1) {
-                [UIView animateWithDuration:2.f delay:0 usingSpringWithDamping:0.75 initialSpringVelocity:0.8 options:UIViewAnimationOptionCurveEaseIn animations:^{
-                    [self.reduceButton setHidden:NO];
-                    [self.cartNumLabel setHidden:NO];
-                    self.reduceButtonLeading.constant = -60;
-                } completion:^(BOOL finished) {
-                    if (finished) {
-                        [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];
-                    }
-                }];
-            }else{
-                [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];
-            }
-        }
-        
         if ([self.delegate respondsToSelector:@selector(addShoppingCartAnimation:)])
             [self.delegate addShoppingCartAnimation:self];
     }
@@ -175,10 +152,9 @@
 
 
 - (void)resetBuyStatus{
-    [self.addCartButton setHidden:YES];
     [self.reduceButton setHidden:YES];
     [self.cartNumLabel setHidden:YES];
-    [self.imageScrollView setHidden:YES];
+    [self.imageScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
 #pragma mark //UIScrollViewDelegate

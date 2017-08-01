@@ -264,7 +264,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             
             NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收:￥%.2f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
-            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15 weight:UIFontWeightThin] Color:COLOR_RGB_RED];
+            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15] Color:COLOR_RGB_RED];
             [cell setRightOperation:nil  AttributedTitle:str ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             
             __weak typeof(self) weakSelf = self;

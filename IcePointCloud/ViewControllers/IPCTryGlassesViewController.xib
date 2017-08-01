@@ -34,11 +34,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="hl5-Ok-qfz">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="698"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKs-wG-0L7" userLabel="MatchPanel">
-                    <rect key="frame" x="493" y="0.0" width="531" height="698"/>
+                    <rect key="frame" x="493" y="0.0" width="531" height="704"/>
                     <subviews>
                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="pAq-87-Q7I" userLabel="TopBar">
                             <rect key="frame" x="0.0" y="0.0" width="531" height="50"/>
@@ -141,7 +141,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rV0-Dn-hOT">
-                            <rect key="frame" x="0.0" y="0.0" width="531" height="698"/>
+                            <rect key="frame" x="0.0" y="0.0" width="531" height="704"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         </view>
                     </subviews>
@@ -159,7 +159,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="07k-sM-L60">
-                    <rect key="frame" x="0.0" y="55" width="493" height="643"/>
+                    <rect key="frame" x="0.0" y="50" width="493" height="654"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jAr-RF-Oeb">
                         <size key="itemSize" width="50" height="50"/>
@@ -237,7 +237,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyj-54-ihf">
-                    <rect key="frame" x="227" y="650" width="38" height="38"/>
+                    <rect key="frame" x="227" y="656" width="38" height="38"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="38" id="Gq3-a5-HfF"/>
@@ -259,7 +259,7 @@
                 <constraint firstItem="xtk-pY-3gF" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="SIz-af-1bJ"/>
                 <constraint firstAttribute="bottom" secondItem="Nyj-54-ihf" secondAttribute="bottom" constant="10" id="TVF-Tg-Kpy"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="xtk-pY-3gF" secondAttribute="trailing" id="gJC-HP-5JJ"/>
-                <constraint firstItem="07k-sM-L60" firstAttribute="top" secondItem="xtk-pY-3gF" secondAttribute="bottom" constant="5" id="gRQ-Fb-Riw"/>
+                <constraint firstItem="07k-sM-L60" firstAttribute="top" secondItem="xtk-pY-3gF" secondAttribute="bottom" id="gRQ-Fb-Riw"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="07k-sM-L60" secondAttribute="trailing" id="ikC-lq-8VC"/>
                 <constraint firstItem="07k-sM-L60" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="jGA-65-qEo"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="rsC-LP-jbL"/>

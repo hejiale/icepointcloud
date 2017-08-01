@@ -11,8 +11,5 @@
 @interface IPCOrderDetailMemoCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *memoLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *memoHeightConstraint;
-
-- (void)inputMemoText:(NSString *)memo;
 
 @end
