@@ -20,6 +20,20 @@
     return _client;
 }
 
+- (NSMutableArray<IPCEmployeeResult *> *)employeeResultArray{
+    if (!_employeeResultArray) {
+        _employeeResultArray= [[NSMutableArray alloc]init];
+    }
+    return _employeeResultArray;
+}
+
+-(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
+    if (!_payTypeRecordArray) {
+        _payTypeRecordArray = [[NSMutableArray alloc] init];
+    }
+    return _payTypeRecordArray;
+}
+
 - (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult
 {
     __block double  remainResult = 0;
@@ -57,13 +71,6 @@
     return totalResult;
 }
 
-- (NSMutableArray<IPCEmployeeResult *> *)employeeResultArray{
-    if (!_employeeResultArray) {
-        _employeeResultArray= [[NSMutableArray alloc]init];
-    }
-    return _employeeResultArray;
-}
-
 - (double)minimumEmployeeDiscountPrice:(double)originPrice
 {
     __block NSMutableArray * discountArray = [[NSMutableArray alloc]init];
@@ -97,15 +104,6 @@
     }];
     return totalPrice;
 }
-
-
--(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
-    if (!_payTypeRecordArray) {
-        _payTypeRecordArray = [[NSMutableArray alloc] init];
-    }
-    return _payTypeRecordArray;
-}
-
 
 - (void)calculatePointValue:(IPCPointValueMode *)pointValue{
     __block double pointPrice = 0;

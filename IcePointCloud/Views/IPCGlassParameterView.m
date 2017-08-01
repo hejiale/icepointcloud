@@ -98,7 +98,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     [self.normalLensView addBorder:10 Width:0];
     [self.customsizedParameterView addBorder:10 Width:0];
-    
     [self.leftParameterView addBorder:5 Width:0.5];
     [self.rightParameterView addBorder:5 Width:0.5];
     [self.normalLensImageView addBorder:5 Width:0.5];

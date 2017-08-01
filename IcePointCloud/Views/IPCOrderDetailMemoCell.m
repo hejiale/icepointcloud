@@ -30,14 +30,6 @@
 - (void)inputMemoText:(NSString *)memo{
     if (memo && memo.length) {
         [self.memoLabel setText:memo];
-        
-//        CGFloat height = [self.memoLabel.text jk_heightWithFont:self.memoLabel.font constrainedToWidth:self.memoLabel.jk_width];
-//        
-//        if (height >= 45) {
-//            self.memoHeightConstraint.constant = 45;
-//        }else{
-//            self.memoHeightConstraint.constant = MAX(height, 30);
-//        }
     }
 }
 

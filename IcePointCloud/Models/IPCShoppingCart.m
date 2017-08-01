@@ -305,13 +305,6 @@
     return itemArray;
 }
 
-- (void)clearAllItemPoint{
-    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.isChoosePoint = NO;
-        obj.pointValue = 0;
-    }];
-}
-
 - (NSInteger)totalUsedPoint{
     __block NSInteger   totoalPoint = 0;
     [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -340,13 +333,6 @@
         }
     }];
     return isHave;
-}
-
-
-- (void)resetSelectCartItemPrice{
-    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.unitPrice = 0;
-    }];
 }
 
 @end

@@ -66,13 +66,8 @@
 /**
  *   Point Value
  */
-- (void)clearAllItemPoint;
 - (NSInteger)totalUsedPoint;
 - (double)totalUsedPointPrice;
 - (BOOL)isHaveUsedPoint;
-/**
- *   Reset Select Cart UnitPrice
- */
-- (void)resetSelectCartItemPrice;
 
 @end

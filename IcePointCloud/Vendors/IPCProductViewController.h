@@ -14,5 +14,6 @@
 - (void)removeCover;
 - (void)onFilterProducts;
 - (void)onSearchProducts;
+-(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
 
 @end

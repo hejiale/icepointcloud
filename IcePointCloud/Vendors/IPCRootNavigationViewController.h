@@ -15,6 +15,6 @@
 - (void)setRightItem:(NSString *)itemImageName Selection:(SEL)selection;
 - (void)setRightTitle:(NSString *)itemName Selection:(SEL)selection;
 - (void)setRightView:(UIView *)view;
--(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
+
 
 @end
