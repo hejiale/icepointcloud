@@ -53,7 +53,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
     self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
     self.detailTableView.mj_header = self.refreshHeader;
-    [self.refreshHeader beginRefreshing];
     
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
     self.customerViewMode.currentCustomer = self.customer;
@@ -63,6 +62,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:YES];
+    [self.refreshHeader beginRefreshing];
 }
 
 #pragma mark //Request Data

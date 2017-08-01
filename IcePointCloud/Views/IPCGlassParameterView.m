@@ -139,9 +139,25 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
 }
 
+#pragma mark //QUERY BATCH DEGREE
+- (void)queryBatchDegree{
+    self.parameterViewMode = [[IPCBatchParameterViewMode alloc]initWithGlasses:_glasses];
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
+        [self.parameterViewMode queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [self.batchDegree batchReadingDegrees:start End:end Step:step];
+        }];
+    }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
+        [self.parameterViewMode queryBatchDegree:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [self.batchDegree batchContactlensDegrees:start End:end Step:step];
+        }];
+    }
+}
+
 #pragma mark //Set UI
 - (void)showParameterView
 {
+    [self queryBatchDegree];
+    
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeContactLenses) {
         [self.leftTitleLabel setText:@"度数"];
         [self.rightParameterView setHidden:YES];
@@ -155,16 +171,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self loadBatchNormalLensView];
     }else if ([_glasses filterType] == IPCTopFilterTypeCustomized){
         [self loadCustomsizedLensView];
-    }
-    self.parameterViewMode = [[IPCBatchParameterViewMode alloc]initWithGlasses:_glasses];
-    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
-        [self.parameterViewMode queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
-            [self.batchDegree batchReadingDegrees:start End:end Step:step];
-        }];
-    }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [self.parameterViewMode queryBatchDegree:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
-            [self.batchDegree batchContactlensDegrees:start End:end Step:step];
-        }];
     }
     [self refreshSureButtonStatus];
     

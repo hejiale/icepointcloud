@@ -36,9 +36,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
-        [self setNavigationTitle:@"客户"];
-    }
     [self loadCollectionView];
     [self.refreshHeader beginRefreshing];
 }
@@ -46,7 +43,13 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self setNavigationBarStatus:![IPCPayOrderManager sharedManager].isPayOrderStatus];
+    if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
+        [self setNavigationTitle:@"客户"];
+        [self setNavigationBarStatus:NO];
+    }else{
+        [self setNavigationBarStatus:YES];
+    }
+    [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
 }
 
 - (NSMutableArray<IPCCustomerMode *> *)customerArray{

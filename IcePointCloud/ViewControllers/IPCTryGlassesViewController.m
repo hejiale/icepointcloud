@@ -693,30 +693,29 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         UIView *cell = [IPCCustomUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
         NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
         IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
-        if (glass) {
-            OBOvum *ovum = [[OBOvum alloc] init];
-            ovum.dataObject = glass;
-            return ovum;
-        }
+        OBOvum *ovum = [[OBOvum alloc] init];
+        if (glass)ovum.dataObject = glass;
+        return ovum;
     }
     return nil;
 }
+
 
 - (UIView *)createDragRepresentationOfSourceView:(UIView *)sourceView inWindow:(UIWindow*)window
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
         UIView *cell = [IPCCustomUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
         if (cell) {
-            CGRect frame = [sourceView convertRect:sourceView.bounds toView:sourceView.window];
-            frame = [window convertRect:frame fromWindow:sourceView.window];
-            
             NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
             IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
+            CGRect frame = [sourceView convertRect:sourceView.bounds toView:sourceView.window];
+            frame = [window convertRect:frame fromWindow:sourceView.window];
             if (glass) {
                 IPCGlassesImage *gp = [glass imageWithType:IPCGlassesImageTypeFrontialNormal];
-                UIImageView *glassImgView = [[UIImageView alloc] initWithFrame:frame];
-                [glassImgView setBackgroundColor:[UIColor clearColor]];
+                UIImageView *glassImgView = [[UIImageView alloc] init];
+                glassImgView.contentMode = UIViewContentModeScaleAspectFit;
                 [glassImgView setImageWithURL:[NSURL URLWithString:gp.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
+                glassImgView.frame = CGRectMake(frame.origin.x, frame.origin.y, sourceView.frame.size.width*0.9, sourceView.frame.size.height*0.9);
                 return glassImgView;
             }
             return nil;
@@ -732,8 +731,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [UIView animateWithDuration:0.25 animations:^{
         dragView.center = location;
-        dragView.transform = CGAffineTransformMakeScale(1, 1);
-        dragView.alpha = 0.75;
+        dragView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        dragView.alpha = 0.85;
     }];
 }
 

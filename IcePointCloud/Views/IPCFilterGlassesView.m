@@ -451,9 +451,20 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
         }else{
             filterValueText = filterValue[indexPath.row];
         }
-        return filterValueText;
+        return filterValueText.length ? filterValueText : nil;
     }
     return nil;
+}
+
+#pragma mark //UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat sectionHeaderHeight = 50;
+    
+    if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+        scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+    } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+        scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+    }
 }
 
 @end

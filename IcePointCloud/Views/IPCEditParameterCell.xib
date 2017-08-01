@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isk-3j-tra">
-                        <rect key="frame" x="8" y="7.5" width="369" height="30"/>
+                        <rect key="frame" x="8" y="7.5" width="339" height="30"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="aSe-xw-D5h"/>
@@ -30,51 +30,33 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boh-kY-eq1">
-                        <rect key="frame" x="412" y="8" width="20" height="28.5"/>
+                        <rect key="frame" x="397" y="8" width="20" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="CF7-hm-lfn"/>
-                            <constraint firstAttribute="height" constant="35" id="w9b-mW-s9w"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="w9b-mW-s9w"/>
-                            </mask>
-                        </variation>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCf-hF-6T2">
-                        <rect key="frame" x="377" y="8" width="35" height="28.5"/>
+                        <rect key="frame" x="347" y="8" width="50" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="35" id="VP0-w1-x1D"/>
-                            <constraint firstAttribute="height" constant="35" id="jJn-la-fpx"/>
+                            <constraint firstAttribute="width" constant="50" id="VP0-w1-x1D"/>
                         </constraints>
                         <state key="normal" image="icon_subtract"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="jJn-la-fpx"/>
-                            </mask>
-                        </variation>
                         <connections>
                             <action selector="reduceCartAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jdA-op-9R0"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY2-SP-yGW">
-                        <rect key="frame" x="432" y="8" width="35" height="28.5"/>
+                        <rect key="frame" x="417" y="8" width="50" height="28.5"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="UGg-tc-eKQ"/>
-                            <constraint firstAttribute="width" constant="35" id="V9v-wN-6hp"/>
+                            <constraint firstAttribute="width" constant="50" id="V9v-wN-6hp"/>
                         </constraints>
                         <state key="normal" image="icon_add"/>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="UGg-tc-eKQ"/>
-                            </mask>
-                        </variation>
                         <connections>
                             <action selector="addCartAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1aN-Yi-IWQ"/>
                         </connections>

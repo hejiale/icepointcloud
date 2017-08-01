@@ -30,7 +30,7 @@
                         <rect key="frame" x="33" y="1.5" width="439" height="40"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iyg-5X-EZK">
-                                <rect key="frame" x="25" y="5.5" width="100" height="30"/>
+                                <rect key="frame" x="35" y="5.5" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="4e7-qG-aOq"/>
                                     <constraint firstAttribute="height" constant="30" id="5tw-vx-LS9"/>
@@ -43,7 +43,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x31-uN-nC5">
-                                <rect key="frame" x="135" y="5.5" width="100" height="30"/>
+                                <rect key="frame" x="145" y="5.5" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2FX-AI-UIW"/>
                                     <constraint firstAttribute="width" constant="100" id="c3X-1b-imK"/>
@@ -56,7 +56,7 @@
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hpZ-b9-IQU">
-                                <rect key="frame" x="240" y="4.5" width="65" height="30"/>
+                                <rect key="frame" x="250" y="4.5" width="65" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="fV2-hJ-UtF"/>
                                     <constraint firstAttribute="height" constant="30" id="nHy-jZ-nfV"/>
@@ -67,7 +67,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C8d-7O-Ju3">
-                                <rect key="frame" x="305" y="5.5" width="65" height="30"/>
+                                <rect key="frame" x="315" y="5.5" width="65" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lSn-eV-peC"/>
                                     <constraint firstAttribute="width" constant="65" id="tJ8-jM-Xtr"/>
@@ -95,7 +95,7 @@
                             <constraint firstItem="hpZ-b9-IQU" firstAttribute="leading" secondItem="x31-uN-nC5" secondAttribute="trailing" constant="5" id="WtF-np-LAM"/>
                             <constraint firstItem="qyB-aY-Yl2" firstAttribute="centerY" secondItem="lro-0e-6D6" secondAttribute="centerY" id="g3Y-uw-vT9"/>
                             <constraint firstAttribute="height" constant="40" id="ohU-4A-7DT"/>
-                            <constraint firstItem="Iyg-5X-EZK" firstAttribute="leading" secondItem="qyB-aY-Yl2" secondAttribute="trailing" constant="5" id="rIa-iS-bnz"/>
+                            <constraint firstItem="Iyg-5X-EZK" firstAttribute="leading" secondItem="qyB-aY-Yl2" secondAttribute="trailing" constant="15" id="rIa-iS-bnz"/>
                             <constraint firstItem="x31-uN-nC5" firstAttribute="leading" secondItem="Iyg-5X-EZK" secondAttribute="trailing" constant="10" id="sfd-y2-4FL"/>
                             <constraint firstItem="qyB-aY-Yl2" firstAttribute="leading" secondItem="lro-0e-6D6" secondAttribute="leading" id="wYd-P6-tk6"/>
                         </constraints>
