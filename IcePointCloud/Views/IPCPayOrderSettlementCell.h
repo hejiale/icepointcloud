@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointHeight;
 @property (weak, nonatomic) IBOutlet UITextField *givingAmountTextField;
 @property (weak, nonatomic) IBOutlet UILabel *payAmountLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftGivingConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *givingAmountLabel;
 
 @property (nonatomic, assign) id<IPCPayOrderViewCellDelegate>delegate;
 

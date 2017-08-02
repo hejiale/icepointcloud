@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,35 +18,23 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="点击加载更多" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY1-uN-EID">
-                        <rect key="frame" x="115" y="16" width="90" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="90" id="AMQ-fA-gUQ"/>
-                            <constraint firstAttribute="height" constant="20" id="dtg-h0-Sv5"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.33840608596801758" green="0.62763679027557373" blue="0.99870181083679199" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_down_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="yOv-pX-ea5">
-                        <rect key="frame" x="205" y="16" width="19" height="19"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_more_button" translatesAutoresizingMaskIntoConstraints="NO" id="yOv-pX-ea5">
+                        <rect key="frame" x="154" y="16" width="12" height="12"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="19" id="2gS-6F-jG7"/>
-                            <constraint firstAttribute="width" constant="19" id="xzP-Qr-NL6"/>
+                            <constraint firstAttribute="height" constant="12" id="2gS-6F-jG7"/>
+                            <constraint firstAttribute="width" constant="12" id="xzP-Qr-NL6"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="yOv-pX-ea5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="Ehh-hH-uM8"/>
-                    <constraint firstItem="EY1-uN-EID" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="UHc-I2-egI"/>
-                    <constraint firstItem="yOv-pX-ea5" firstAttribute="leading" secondItem="EY1-uN-EID" secondAttribute="trailing" id="ZYy-N3-Qzz"/>
-                    <constraint firstItem="EY1-uN-EID" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="cDl-zh-EMI"/>
+                    <constraint firstItem="yOv-pX-ea5" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="O0S-WF-Qjv"/>
+                    <constraint firstItem="yOv-pX-ea5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mRV-8u-R8X"/>
                 </constraints>
             </tableViewCellContentView>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_down_arrow" width="19" height="19"/>
+        <image name="icon_more_button" width="12" height="8"/>
     </resources>
 </document>

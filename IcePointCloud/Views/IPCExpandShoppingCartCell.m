@@ -103,8 +103,7 @@
         [IPCCustomUI showError:@"所选客户积分为零!"];
         return;
     }
-    [sender setSelected:!sender.selected];
-    self.cartItem.isChoosePoint = sender.selected;
+    self.cartItem.isChoosePoint = !sender.selected;
     
     if (self.cartItem.isChoosePoint) {
         self.cartItem.unitPrice = 0;

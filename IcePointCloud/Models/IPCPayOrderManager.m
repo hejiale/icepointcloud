@@ -116,6 +116,8 @@
     [IPCPayOrderManager sharedManager].pointPrice = pointPrice;
     [IPCPayOrderManager sharedManager].usedPoint = point;
     [IPCPayOrderManager sharedManager].point -= point;
+    [IPCPayOrderManager sharedManager].givingAmount = 0;
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
 
 - (double)minumEmployeeResult

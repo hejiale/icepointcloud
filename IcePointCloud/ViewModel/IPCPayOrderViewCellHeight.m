@@ -42,9 +42,9 @@
     }else if ((indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5))
     {
         if ([IPCPayOrderManager sharedManager].isTrade) {
-            return 175;
+            return 185;
         }
-        return 90;
+        return 135;
     }else if ((indexPath.section == 2 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6 && indexPath.row > 0)){
         return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 35 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0);
     }

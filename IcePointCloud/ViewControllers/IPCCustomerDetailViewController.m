@@ -154,15 +154,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 /**
  *  Load More
  */
-- (void)loadMoreOptometryData{
-    __weak typeof (self) weakSelf = self;
-    self.customerViewMode.optometryCurrentPage++;
-    [self.customerViewMode queryHistoryOptometryList:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.detailTableView reloadData];
-    }];
-}
-
 - (void)loadMoreOrderData{
     __weak typeof (self) weakSelf = self;
     self.customerViewMode.orderCurrentPage++;
@@ -209,15 +200,13 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     if (section == 0) {
         return 2;
     }else if (section == 1){
-        if (self.customerViewMode.isLoadMoreOptometry)
-            return self.customerViewMode.optometryList.count + 2;
-        return self.customerViewMode.optometryList.count + 1;
+        return 2;
     }else if (section == 3){
         if (self.customerViewMode.isLoadMoreOrder)
             return self.customerViewMode.orderList.count+2;
         return self.customerViewMode.orderList.count > 0 ? self.customerViewMode.orderList.count+1 : 0;
     }
-    return self.customerViewMode.addressList.count+1;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -227,7 +216,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"客户基本信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_edit_customer"];
+            [cell setRightOperation:@"客户基本信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_edit"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self loadUpdateCustomerView];
             }];
@@ -248,16 +237,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"历史验光单"  AttributedTitle:nil ButtonTitle:@"管理" ButtonImage:nil];
+            [cell setRightOperation:@"验光单"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_manager"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self pushToManagerOptometryViewController];
             }];
-            return cell;
-        }else if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == [tableView numberOfRowsInSection:indexPath.section] -1){
-            IPCCustomerRefreshCell * cell = [tableView dequeueReusableCellWithIdentifier:footLoadIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerRefreshCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
             return cell;
         }else{
             IPCCustomerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:optometryIdentifier];
@@ -276,7 +259,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"收货地址信息"  AttributedTitle:nil ButtonTitle:@"管理" ButtonImage:nil];
+            [cell setRightOperation:@"收货地址信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_manager"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self pushToManagerAddressViewController];
             }];
@@ -325,8 +308,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     if (indexPath.section == 0 && indexPath.row > 0) {
         return 345;
     }else if (indexPath.section == 1 && indexPath.row > 0){
-        if (self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1)
-            return 50;
         return 150;
     }else if (indexPath.section == 3 && indexPath.row > 0){
         if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1)
@@ -338,26 +319,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     return 50;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 5;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-    [footView setBackgroundColor:[UIColor clearColor]];
-    return footView;
-}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 1) {
-        if(self.customerViewMode.isLoadMoreOptometry && indexPath.row == self.customerViewMode.optometryList.count + 1){
-            [self loadMoreOptometryData];
-        }
-    }else if (indexPath.section == 3 && indexPath.row > 0) {
+    if (indexPath.section == 3 && indexPath.row > 0) {
         if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1) {
             [self loadMoreOrderData];
         }else{

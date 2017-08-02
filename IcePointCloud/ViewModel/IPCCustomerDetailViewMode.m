@@ -40,10 +40,8 @@
 
 #pragma mark //Reset Data
 - (void)resetData{
-    _optometryCurrentPage = 1;
     _orderCurrentPage         = 1;
     _isLoadMoreOrder          = NO;
-    _isLoadMoreOptometry  = NO;
     [self.addressList removeAllObjects];
     [self.optometryList removeAllObjects];
     [self.orderList removeAllObjects];
@@ -70,17 +68,12 @@
 - (void)queryHistoryOptometryList:(void(^)())completeBlock{
     __weak typeof (self) weakSelf = self;
     [IPCCustomerRequestManager queryUserOptometryListWithCustomID:self.currentCustomer.customerID
-                                                             Page:_optometryCurrentPage
+                                                             Page:1
                                                      SuccessBlock:^(id responseValue){
                                                          __strong typeof (weakSelf) strongSelf = weakSelf;
                                                          IPCOptometryList * optometryObject = [[IPCOptometryList alloc]initWithResponseValue:responseValue];
                                                          [strongSelf.optometryList addObjectsFromArray:optometryObject.listArray];
                                                          
-                                                         if ([optometryObject.listArray count] > 0 && strongSelf.optometryList.count < optometryObject.totalCount) {
-                                                             _isLoadMoreOptometry = YES;
-                                                         }else{
-                                                             _isLoadMoreOptometry = NO;
-                                                         }
                                                          if (completeBlock)
                                                              completeBlock();
                                                      } FailureBlock:^(NSError *error) {

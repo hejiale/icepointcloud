@@ -15,9 +15,7 @@
 @property (strong, nonatomic, readwrite) NSMutableArray<IPCCustomerAddressMode *> * addressList;
 @property (strong, nonatomic, readwrite) IPCDetailCustomer * detailCustomer;
 @property (strong, nonatomic, readwrite)  IPCCustomerMode * currentCustomer;
-@property (assign, nonatomic, readwrite) NSInteger  optometryCurrentPage;//It's the current page
 @property (assign, nonatomic, readwrite) NSInteger  orderCurrentPage;//Orders for the current page
-@property (assign, nonatomic, readwrite) BOOL         isLoadMoreOptometry;//If there are more them all loaded
 @property (assign, nonatomic, readwrite) BOOL         isLoadMoreOrder;//If there are more orders to load
 
 

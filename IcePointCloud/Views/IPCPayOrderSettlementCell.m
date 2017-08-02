@@ -14,7 +14,8 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.givingAmountTextField setLeftText:@"￥"];
+    [self.pointAmountTextField addBorder:0 Width:1];
+    [self.givingAmountTextField addBorder:0 Width:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -34,9 +35,11 @@
     [self.pointView setHidden:![IPCPayOrderManager sharedManager].isTrade];
     
     if ([IPCPayOrderManager sharedManager].isTrade) {
-        self.pointHeight.constant = 95;
+        self.pointHeight.constant = 50;
+        self.leftGivingConstraint.constant = 45;
     }else{
         self.pointHeight.constant = 0;
+        self.leftGivingConstraint.constant = 20;
     }
     
     [self.selectPointButton setUserInteractionEnabled:([IPCPayOrderManager sharedManager].point >  0)];
@@ -52,6 +55,7 @@
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCShoppingCart sharedCart] allGlassesTotalPrice]]];
     [self.pointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].pointPrice]];
     [self.givingAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].givingAmount]];
+    [self.givingAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCPayOrderManager sharedManager].givingAmount]];
     [self.pointAmountTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].usedPoint]];
     [self.countLabel setText:[NSString stringWithFormat:@"%d件",[[IPCShoppingCart sharedCart] allGlassesCount]]];
     [self.payAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderManager sharedManager] realTotalPrice]]];

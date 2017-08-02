@@ -69,7 +69,7 @@
         if (glassCount > 0) {
             [self.reduceButton setHidden:NO];
             [self.cartNumLabel setHidden:NO];
-            self.reduceButtonLeading.constant = -60;
+            self.reduceButtonLeading.constant = -70;
             [self.cartNumLabel setText:[[NSNumber numberWithInteger:glassCount]stringValue]];
             
             //Judge Cart Count

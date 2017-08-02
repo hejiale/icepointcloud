@@ -55,8 +55,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Set UI
 - (void)loadCollectionView{
-    __block CGFloat width = (self.glassListCollectionView.jk_width - 2)/3;
-    __block CGFloat height = (self.glassListCollectionView.jk_height-2)/3;
+    __block CGFloat width = (self.view.jk_width-2)/3;
+    __block CGFloat height = (self.view.jk_height-2)/3;
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
     [layout setItemSize:CGSizeMake(width, height)];
     [layout setMinimumLineSpacing:1];
@@ -278,14 +278,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)reloadProductList{
     [self reload];
 }
-
-- (void)buyValueCard:(IPCGlasslistCollectionViewCell *)cell{
-    if ([self.glassListViewMode.glassesList count] > 0) {
-        IPCPayOrderViewController * payOrderVC = [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-        [self.navigationController pushViewController:payOrderVC animated:YES];
-    }
-}
-
 
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword
