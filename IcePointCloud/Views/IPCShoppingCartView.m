@@ -25,6 +25,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 @property (weak, nonatomic) IBOutlet UIButton *selectAllButton;
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBottom;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (strong, nonatomic) UIView * coverView;
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
@@ -74,7 +75,15 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     [self updateCartUI];
 }
 
+- (void)updateBottomStatus:(BOOL)isShown
+{
+    [self.editButton setSelected:isShown];
+    [self.cartBottomView setHidden:!isShown];
+    self.tableBottom.constant = isShown ? 50 : 0;
+}
+
 - (void)updateCartUI{
+    [self.editButton setHidden:[self.cartViewMode shoppingCartIsEmpty]];
     [self.selectAllButton setSelected:[self.cartViewMode judgeCartItemSelectState]];
     [self.cartListTableView reloadData];
     
@@ -83,26 +92,16 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     }
 }
 
-- (void)reload{
+- (void)reload
+{
     [self updateCartUI];
-    [self.cartListTableView setHidden:NO];
-    [self.cartListTableView reloadData];
 }
 
 #pragma mark //Clicked Events
-- (IBAction)onEditAction:(UIButton *)sender {
-    if ([self.cartViewMode shoppingCartIsEmpty])return;
-    
-    [sender setSelected:!sender.selected];
-    
-    isEditStatus = sender.selected;
-    if (isEditStatus) {
-        self.tableBottom.constant = 50;
-        [self.cartBottomView setHidden:NO];
-    }else{
-        self.tableBottom.constant = 0;
-        [self.cartBottomView setHidden:YES];
-    }
+- (IBAction)onEditAction:(UIButton *)sender
+{
+    isEditStatus = !sender.selected;
+    [self updateBottomStatus:isEditStatus];
     [self updateCartUI];
 }
 
@@ -115,14 +114,17 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 - (IBAction)onDeleteProductsAction:(id)sender {
     __weak typeof (self) weakSelf = self;
-    if (! [self.cartViewMode shoppingCartIsEmpty]) {
+    if ([self.cartViewMode isSelectCart]) {
         [IPCCustomUI showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [[IPCShoppingCart sharedCart] removeSelectCartItem];
+            if ([IPCShoppingCart sharedCart].itemsCount == 0) {
+                isEditStatus = NO;
+                [strongSelf updateBottomStatus:isEditStatus];
+            }
             [strongSelf updateCartUI];
+            [[IPCPayOrderManager sharedManager] resetPayPrice];
         }];
-    }else{
-        [IPCCustomUI showError:@"未选中任何商品!"];
     }
 }
 

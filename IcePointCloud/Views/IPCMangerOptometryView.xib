@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fQ3-26-c5V">
-                    <rect key="frame" x="816" y="125" width="180" height="20"/>
+                    <rect key="frame" x="816" y="120" width="180" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="0sC-wF-Ozl"/>
                         <constraint firstAttribute="width" constant="180" id="T5b-8k-Xmc"/>
@@ -32,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxd-Ib-b2v">
-                    <rect key="frame" x="691" y="125" width="120" height="20"/>
+                    <rect key="frame" x="691" y="120" width="120" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="28L-hI-2Ip"/>
                         <constraint firstAttribute="width" constant="120" id="IN8-7X-e53"/>
@@ -51,8 +51,8 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="fQ3-26-c5V" secondAttribute="bottom" constant="5" id="1JB-F1-jvt"/>
-                <constraint firstAttribute="bottom" secondItem="dxd-Ib-b2v" secondAttribute="bottom" constant="5" id="D5Q-9i-961"/>
+                <constraint firstAttribute="bottom" secondItem="fQ3-26-c5V" secondAttribute="bottom" constant="10" id="1JB-F1-jvt"/>
+                <constraint firstAttribute="bottom" secondItem="dxd-Ib-b2v" secondAttribute="bottom" constant="10" id="D5Q-9i-961"/>
                 <constraint firstAttribute="trailing" secondItem="fQ3-26-c5V" secondAttribute="trailing" constant="28" id="bAF-h0-A96"/>
                 <constraint firstAttribute="trailing" secondItem="dDU-YQ-253" secondAttribute="trailing" constant="28" id="cVW-O8-tCs"/>
                 <constraint firstItem="dDU-YQ-253" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="dRb-Kx-8h4"/>

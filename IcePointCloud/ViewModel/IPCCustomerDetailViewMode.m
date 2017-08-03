@@ -26,24 +26,16 @@
     return _orderList;
 }
 
-- (NSMutableArray<IPCOptometryMode *> *)optometryList{
-    if (!_optometryList)
-        _optometryList = [[NSMutableArray alloc]init];
-    return _optometryList;
-}
-
-- (NSMutableArray<IPCCustomerAddressMode *> *)addressList{
-    if (!_addressList)
-        _addressList = [[NSMutableArray alloc]init];
-    return _addressList;
-}
 
 #pragma mark //Reset Data
 - (void)resetData{
     _orderCurrentPage         = 1;
     _isLoadMoreOrder          = NO;
-    [self.addressList removeAllObjects];
-    [self.optometryList removeAllObjects];
+    self.detailCustomer        = nil;
+    self.customerAddress     = nil;
+    self.customerOpometry  = nil;
+    self.isLoadMoreOrder     = NO;
+    self.customerId              = nil;
     [self.orderList removeAllObjects];
 }
 
@@ -51,41 +43,26 @@
 - (void)queryCustomerDetailInfo:(void(^)())completeBlock
 {
     __weak typeof (self) weakSelf = self;
-    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:self.currentCustomer.customerID
-                                                        SuccessBlock:^(id responseValue){
-                                                            __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                            strongSelf.detailCustomer         = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-                                                            if (completeBlock)
-                                                                completeBlock();
-                                                        } FailureBlock:^(NSError *error) {
-                                                            if (completeBlock)
-                                                                completeBlock();
-                                                            [IPCCustomUI showError:error.domain];
-                                                        }];
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:self.customerId
+                                                        SuccessBlock:^(id responseValue)
+     {
+         self.detailCustomer       = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
+         self.customerOpometry = [IPCOptometryMode mj_objectWithKeyValues:self.detailCustomer.optometrys[0]];
+         self.customerAddress    = [IPCCustomerAddressMode mj_objectWithKeyValues:self.detailCustomer.addresses[0]];
+         
+         if (completeBlock)
+             completeBlock();
+     } FailureBlock:^(NSError *error) {
+         if (completeBlock)
+             completeBlock();
+         [IPCCustomUI showError:error.domain];
+     }];
 }
 
-
-- (void)queryHistoryOptometryList:(void(^)())completeBlock{
-    __weak typeof (self) weakSelf = self;
-    [IPCCustomerRequestManager queryUserOptometryListWithCustomID:self.currentCustomer.customerID
-                                                             Page:1
-                                                     SuccessBlock:^(id responseValue){
-                                                         __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                         IPCOptometryList * optometryObject = [[IPCOptometryList alloc]initWithResponseValue:responseValue];
-                                                         [strongSelf.optometryList addObjectsFromArray:optometryObject.listArray];
-                                                         
-                                                         if (completeBlock)
-                                                             completeBlock();
-                                                     } FailureBlock:^(NSError *error) {
-                                                         if (completeBlock)
-                                                             completeBlock();
-                                                         [IPCCustomUI showError:error.domain];
-                                                     }];
-}
 
 - (void)queryHistotyOrderList:(void(^)())completeBlock{
     __weak typeof (self) weakSelf = self;
-    [IPCCustomerRequestManager queryHistorySellInfoWithPhone:self.currentCustomer.customerID
+    [IPCCustomerRequestManager queryHistorySellInfoWithPhone:self.customerId
                                                         Page:_orderCurrentPage
                                                 SuccessBlock:^(id responseValue){
                                                     __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -104,23 +81,6 @@
                                                         completeBlock();
                                                     [IPCCustomUI showError:error.domain];
                                                 }];
-}
-
-- (void)queryCustomerAddressList:(void(^)())completeBlock{
-    __weak typeof (self) weakSelf = self;
-    [self.addressList removeAllObjects];
-    [IPCCustomerRequestManager queryCustomerAddressListWithCustomID:self.currentCustomer.customerID
-                                                       SuccessBlock:^(id responseValue){
-                                                           __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                           IPCCustomerAddressList * addressObject = [[IPCCustomerAddressList alloc]initWithResponseValue:responseValue];
-                                                           [strongSelf.addressList addObjectsFromArray:addressObject.list];
-                                                           if (completeBlock)
-                                                               completeBlock();
-                                                       } FailureBlock:^(NSError *error) {
-                                                           if (completeBlock)
-                                                               completeBlock();
-                                                           [IPCCustomUI showError:error.domain];
-                                                       }];
 }
 
 @end

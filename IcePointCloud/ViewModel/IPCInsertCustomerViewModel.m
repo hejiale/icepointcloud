@@ -90,7 +90,7 @@
                                             IntroducerInteger: [IPCInsertCustomer instance].introducerInteger
                                                  SuccessBlock:^(id responseValue)
      {
-         [IPCCustomUI showSuccess:@"新建用户成功!"];
+         [IPCCustomUI hiden];
          [[IPCInsertCustomer instance] resetData];
          if (complete) {
              complete(responseValue);

@@ -12,6 +12,8 @@
 
 - (BOOL)shoppingCartIsEmpty;
 
+- (BOOL)isSelectCart;
+
 - (BOOL)judgeCartItemSelectState;
 
 - (void)changeAllCartItemSelected:(BOOL)isSelected;

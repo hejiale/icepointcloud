@@ -33,7 +33,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
 @property (strong, nonatomic) IPCUpdateCustomerView * updateCustomerView;
-@property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 
 @end
 
@@ -43,29 +42,28 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    
     [self setNavigationTitle:@"个人信息"];
+    
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
-    self.detailTableView.isHiden = YES;
-    self.detailTableView.emptyAlertTitle = @"暂未查询到该客户信息，请重试！";
-    self.detailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
-    self.detailTableView.mj_header = self.refreshHeader;
     
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
-    self.customerViewMode.currentCustomer = self.customer;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
-    [self.refreshHeader beginRefreshing];
+    [self requestCustomerDetailInfo];
 }
 
 #pragma mark //Request Data
-- (void)requestCustomerDetailInfo{
+- (void)requestCustomerDetailInfo
+{
     [self.customerViewMode resetData];
+    self.customerViewMode.customerId = self.customer.customerID;
+    [IPCCustomUI show];
     
     __weak typeof (self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
@@ -81,25 +79,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.customerViewMode queryHistoryOptometryList:^{
-            dispatch_semaphore_signal(semaphore);
-        }];
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    });
-    
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.customerViewMode queryHistotyOrderList:^{
-            dispatch_semaphore_signal(semaphore);
-        }];
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    });
-    
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [strongSelf.customerViewMode queryCustomerAddressList:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -108,7 +88,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.detailTableView reloadData];
-        [strongSelf.refreshHeader endRefreshing];
+        [IPCCustomUI hiden];
     });
 }
 
@@ -143,12 +123,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }];
 }
 
-- (MJRefreshBackStateFooter *)refreshHeader{
-    if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestCustomerDetailInfo)];
-    }
-    return _refreshHeader;
-}
 
 #pragma mark //ClickEvents
 /**
@@ -193,20 +167,27 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 4;
+    if (self.customerViewMode.detailCustomer) {
+        if (self.customerViewMode.orderList.count) {
+            return 4;
+        }
+        return 3;
+    }
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
         return 2;
     }else if (section == 1){
-        return 2;
-    }else if (section == 3){
+        return self.customerViewMode.customerOpometry ? 2 : 1;
+    }else if (section == 2){
+        return self.customerViewMode.customerAddress ? 2 : 1;
+    }else{
         if (self.customerViewMode.isLoadMoreOrder)
             return self.customerViewMode.orderList.count+2;
         return self.customerViewMode.orderList.count > 0 ? self.customerViewMode.orderList.count+1 : 0;
     }
-    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -226,7 +207,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerDetailCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if (self.customerViewMode && self.customerViewMode.detailCustomer) {
+            if (self.customerViewMode.detailCustomer) {
                 cell.currentCustomer = self.customerViewMode.detailCustomer;
             }
             return cell;
@@ -247,9 +228,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if (self.customerViewMode && self.customerViewMode.optometryList.count) {
-                IPCOptometryMode * optometry = self.customerViewMode.optometryList[indexPath.row -1];
-                cell.optometryMode = optometry;
+            if (self.customerViewMode.customerOpometry) {
+                cell.optometryMode = self.customerViewMode.customerOpometry;
             }
             return cell;
         }
@@ -269,9 +249,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if (self.customerViewMode && self.customerViewMode.addressList.count) {
-                IPCCustomerAddressMode * address = self.customerViewMode.addressList[indexPath.row-1];
-                cell.addressMode = address;
+            if (self.customerViewMode.customerAddress) {
+                cell.addressMode = self.customerViewMode.customerAddress;
             }
             return cell;
         }
@@ -294,7 +273,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerHistoryOrderCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if (self.customerViewMode && self.customerViewMode.orderList.count) {
+            if (self.customerViewMode.orderList.count) {
                 IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
                 cell.customerOrder = order;
             }
@@ -309,12 +288,11 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         return 345;
     }else if (indexPath.section == 1 && indexPath.row > 0){
         return 150;
-    }else if (indexPath.section == 3 && indexPath.row > 0){
-        if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1)
-            return 50;
-        return 80;
     }else if (indexPath.section == 2 && indexPath.row > 0){
         return 70;
+    }else if (indexPath.section == 3 && indexPath.row > 0){
+        if (indexPath.row <= self.customerViewMode.orderList.count)
+            return 80;
     }
     return 50;
 }

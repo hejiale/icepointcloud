@@ -109,6 +109,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     __weak typeof(self) weakSelf = self;
     [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [IPCCustomUI show];
         [strongSelf setDefaultAddress:address.addressID];
     }];
     return cell;

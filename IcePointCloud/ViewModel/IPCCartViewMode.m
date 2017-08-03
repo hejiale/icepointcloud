@@ -22,6 +22,14 @@
     return [[IPCShoppingCart sharedCart] itemsCount] == 0;
 }
 
+- (BOOL)isSelectCart
+{
+    if ([[IPCShoppingCart sharedCart] selectItemsCount] == 0) {
+        return NO;
+    }
+    return YES;
+}
+
 
 - (BOOL)judgeCartItemSelectState
 {

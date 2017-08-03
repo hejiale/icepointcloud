@@ -199,6 +199,7 @@
 }
 
 - (void)reloadPayOrderView{
+    [self.shopCartView reload];
     [self.payOrderTableView reloadData];
 }
 

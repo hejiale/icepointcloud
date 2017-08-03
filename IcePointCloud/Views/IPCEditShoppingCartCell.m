@@ -63,8 +63,7 @@
     if (self.cartItem.glassCount == 1) {
         [IPCCustomUI showAlert:@"冰点云" Message:@"确认要删除该商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             [[IPCShoppingCart sharedCart] reduceItem:self.cartItem];
-            [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-            [IPCPayOrderManager sharedManager].givingAmount = 0;
+            [[IPCPayOrderManager sharedManager] resetPayPrice];
             
             if (self.ReloadBlock) {
                 self.ReloadBlock();
@@ -72,8 +71,7 @@
         }];
     }else{
         [[IPCShoppingCart sharedCart] reduceItem:self.cartItem];
-        [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-        [IPCPayOrderManager sharedManager].givingAmount = 0;
+        [[IPCPayOrderManager sharedManager] resetPayPrice];
         
         if (self.ReloadBlock) {
             self.ReloadBlock();
@@ -84,8 +82,7 @@
 
 - (IBAction)onPlusAction:(id)sender {
     [[IPCShoppingCart sharedCart] plusItem:self.cartItem];
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
+    [[IPCPayOrderManager sharedManager] resetPayPrice];
     
     if (self.ReloadBlock) {
         self.ReloadBlock();

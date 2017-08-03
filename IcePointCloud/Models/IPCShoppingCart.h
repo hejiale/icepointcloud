@@ -19,6 +19,7 @@
  *    To obtain the corresponding number of shopping cart
  */
 - (NSInteger)itemsCount;
+- (NSInteger)selectItemsCount;
 - (NSInteger)allGlassesCount;
 - (NSInteger)itemsCount:(IPCShoppingCartItem *)cartItem;
 - (NSInteger)singleGlassesCount:(IPCGlasses *)glasses;

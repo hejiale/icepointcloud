@@ -14,6 +14,7 @@
                 <outlet property="cartBottomView" destination="E3E-SG-Act" id="Q98-Gc-oyl"/>
                 <outlet property="cartListTableView" destination="ys0-Lo-IuG" id="1v8-eD-wFa"/>
                 <outlet property="deleteButton" destination="Nfj-QX-ovB" id="w9c-bc-ZZx"/>
+                <outlet property="editButton" destination="nec-3f-OCh" id="hNm-ND-XJK"/>
                 <outlet property="selectAllButton" destination="49h-K3-9u5" id="4bf-hy-QQO"/>
                 <outlet property="tableBottom" destination="X11-bM-3eZ" id="w0k-Lk-FbP"/>
             </connections>
@@ -26,7 +27,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pso-uY-QqM">
                     <rect key="frame" x="0.0" y="0.0" width="544" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nec-3f-OCh">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nec-3f-OCh">
                             <rect key="frame" x="459" y="0.0" width="80" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -109,7 +110,7 @@
                         <constraint firstItem="Nfj-QX-ovB" firstAttribute="top" secondItem="E3E-SG-Act" secondAttribute="top" id="zCQ-aS-gGQ"/>
                     </constraints>
                 </view>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-Lo-IuG">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-Lo-IuG">
                     <rect key="frame" x="0.0" y="50" width="544" height="654"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.070794092465753425" colorSpace="calibratedWhite"/>

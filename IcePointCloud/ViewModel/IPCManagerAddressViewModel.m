@@ -47,7 +47,6 @@
     [IPCCustomerRequestManager setDefaultAddressWithCustomID:self.customerId
                                             DefaultAddressID:addressID
                                                 SuccessBlock:^(id responseValue) {
-                                                    [IPCCustomUI showSuccess:@"设置默认收货地址成功!"];
                                                     if (completeBlock) {
                                                         completeBlock();
                                                     }

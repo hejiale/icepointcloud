@@ -103,6 +103,10 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 - (BOOL)isCanPayOrder
 {
+    if ([[IPCShoppingCart sharedCart] itemsCount] == 0) {
+        [IPCCustomUI showError:@"未添加任何商品!"];
+        return NO;
+    }
     if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
         [IPCCustomUI showError:@"请先选择客户信息"];
         return NO;

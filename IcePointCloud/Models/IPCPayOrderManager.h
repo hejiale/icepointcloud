@@ -57,6 +57,7 @@
 - (BOOL)isExistEmptyEmployeeResult;
 //清空支付信息  选择客户信息  清空商品列表
 - (void)resetData;
+- (void)resetPayPrice;
 
 
 @end

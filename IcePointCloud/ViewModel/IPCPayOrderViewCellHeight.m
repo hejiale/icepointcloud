@@ -33,7 +33,7 @@
         }else if ((indexPath.section == 1 || indexPath.section == 2) && indexPath.row > 0){
             return 70;
         }else if (indexPath.section == 3 && indexPath.row > 0 ){
-            return 190;
+            return 195;
         }
     }
     if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))

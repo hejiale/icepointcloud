@@ -230,7 +230,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     }else if (indexPath.section == 1 && ![[IPCCustomerOrderDetail instance].addressMode isEmptyAddress]){
         return 70;
     }else if (indexPath.section == 2 && indexPath.row > 0){
-        return 190;
+        return 195;
     }else if (indexPath.section == 3){
         if ([IPCCustomerOrderDetail instance].products.count) {
             return 115;

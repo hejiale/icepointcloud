@@ -39,6 +39,11 @@
     return self.itemList.count;
 }
 
+- (NSInteger)selectItemsCount
+{
+    return [self selectCartItems].count;
+}
+
 - (NSInteger)allGlassesCount
 {
     NSInteger count = 0;

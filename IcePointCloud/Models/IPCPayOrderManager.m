@@ -153,10 +153,16 @@
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [IPCPayOrderManager sharedManager].customerDiscount = 1;
-    [IPCPayOrderManager sharedManager].isTrade = NO;
     [[IPCCurrentCustomer sharedManager] clearData];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [[IPCShoppingCart sharedCart] clear];
+}
+
+- (void)resetPayPrice{
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [IPCPayOrderManager sharedManager].givingAmount = 0;
+    [IPCPayOrderManager sharedManager].pointPrice = 0;
+    [IPCPayOrderManager sharedManager].usedPoint = 0;
 }
 
 

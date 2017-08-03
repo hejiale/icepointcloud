@@ -147,6 +147,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     __weak typeof(self) weakSelf = self;
     [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [IPCCustomUI show];
         [strongSelf setDefaultOptometryWithOptometryId:optometry.optometryID];
     }];
     return cell;

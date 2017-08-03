@@ -171,8 +171,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [IPCInsertCustomer instance].introducerName = customer.customerName;
         [self.navigationController popViewControllerAnimated:YES];
     }else if ([IPCPayOrderManager sharedManager].isPayOrderStatus){
-        [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-        [IPCPayOrderManager sharedManager].givingAmount = 0;
+        [[IPCPayOrderManager sharedManager] resetPayPrice];
         [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
         
         [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];

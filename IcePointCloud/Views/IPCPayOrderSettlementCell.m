@@ -104,7 +104,7 @@
     
     if (str.length) {
         if ([textField isEqual:self.pointAmountTextField]) {
-            [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+            [[IPCPayOrderManager sharedManager] resetPayPrice];
             //获取积分换取金额
             if ([str integerValue] > [IPCPayOrderManager sharedManager].point) {
                 if (self.delegate) {

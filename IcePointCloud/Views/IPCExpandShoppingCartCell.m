@@ -119,8 +119,7 @@
         }
         self.cartItem.pointValue = 0;
     }
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
+    [[IPCPayOrderManager sharedManager] resetPayPrice];
     
     if (self.ReloadBlock) {
         self.ReloadBlock();
@@ -175,11 +174,10 @@
                     [IPCCustomUI showError:@"该商品售价超出折扣范围！"];
                 }
                 self.cartItem.unitPrice = [str doubleValue];
+                [[IPCPayOrderManager sharedManager] resetPayPrice];
             }
         }
     }
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
     
     if (self.ReloadBlock) {
         self.ReloadBlock();

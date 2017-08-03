@@ -10,7 +10,6 @@
 #import "IPCProductDetailTableViewCell.h"
 #import "IPCProductDetailTopTableViewCell.h"
 #import "IPCGlassParameterView.h"
-#import "IPCShoppingCart.h"
 #import "UIView+Badge.h"
 
 static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellIdentifier";
@@ -38,7 +37,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     [super viewDidLoad];
     
     [self setNavigationTitle:@"商品详情"];
-    [self setRightItem:@"icon_cart_normal" Selection:@selector(pushToCartAction:)];
+    [self setRightItem:@"icon_normal_4" Selection:@selector(pushToCartAction:)];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     
     [self reloadCartBadge];
@@ -117,7 +116,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
-    [IPCCustomUI showSuccess:@"添加购物车成功!"];
+    [IPCCustomUI showSuccess:@"添加商品成功!"];
     [self reloadCartBadge];
 }
 
