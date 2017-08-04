@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) IPCEmptyAlertView * emptyAlertView;
 @property (nonatomic, strong) IPCEmptyAlertView * errorNetworkAlertView;
+@property (nonatomic, copy) NSString * operationTitle;
 @property (nonatomic, copy) NSString * emptyAlertTitle;
 @property (nonatomic, copy) NSString  * emptyAlertImage;
 @property (nonatomic)  BOOL  isHiden;

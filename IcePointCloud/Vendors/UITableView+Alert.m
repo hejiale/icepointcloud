@@ -11,6 +11,7 @@
 static char const *  emptyAlertViewKey = "EmptyAlertViewKey";
 static char const *  emptyAlertTitleKey =  "EmptyAlertTitleKey";
 static char const *  emptyAlertImageKey = "EmptyAlertImageKey";
+static char const *  operationKey      = "OperationKey";
 static char const *  errorNetworkKey = "ErrorNetworkKey";
 static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 
@@ -63,7 +64,11 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 - (void)loadEmptyAlertView{
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
-                                                       AlertTitle:self.emptyAlertTitle];
+                                                       AlertTitle:self.emptyAlertTitle
+                                                   OperationTitle:self.operationTitle
+                                                         Complete:^{
+                                                             [self operationAction];
+                                                         }];
     [self addSubview:self.emptyAlertView];
     [self bringSubviewToFront:self.emptyAlertView];
 }
@@ -71,9 +76,14 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 - (void)loadErrorNetworkAlertView{
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
-                                                              AlertTitle:kIPCErrorNetworkAlertMessage];
+                                                              AlertTitle:kIPCErrorNetworkAlertMessage
+                                                          OperationTitle:self.operationTitle
+                                                                Complete:nil];
     [self addSubview:self.errorNetworkAlertView];
     [self bringSubviewToFront:self.errorNetworkAlertView];
+}
+
+- (void)operationAction{
 }
 
 - (IPCEmptyAlertView *)emptyAlertView{
@@ -106,6 +116,14 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 
 - (NSString *)emptyAlertImage{
     return objc_getAssociatedObject(self, emptyAlertImageKey);
+}
+
+- (void)setOperationTitle:(NSString *)operationTitle{
+    objc_setAssociatedObject(self, operationKey, operationTitle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (NSString *)operationTitle{
+    return objc_getAssociatedObject(self, operationKey);
 }
 
 - (BOOL)isHiden{

@@ -10,6 +10,10 @@
 
 @interface IPCEmptyAlertView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame AlertImage:(NSString *)imageName AlertTitle:(NSString *)title;
+- (instancetype)initWithFrame:(CGRect)frame
+                   AlertImage:(NSString *)imageName
+                   AlertTitle:(NSString *)title
+               OperationTitle:(NSString *)operationTitle
+                     Complete:(void(^)())complete;
 
 @end

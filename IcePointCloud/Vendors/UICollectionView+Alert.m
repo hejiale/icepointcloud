@@ -65,7 +65,9 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 - (void)loadEmptyAlertView{
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
-                                                       AlertTitle:self.emptyAlertTitle];
+                                                       AlertTitle:self.emptyAlertTitle
+                                                   OperationTitle:nil
+                                                         Complete:nil];
     [self addSubview:self.emptyAlertView];
     [self bringSubviewToFront:self.emptyAlertView];
 }
@@ -73,7 +75,9 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 - (void)loadErrorNetworkAlertView{
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
-                                                              AlertTitle:kIPCErrorNetworkAlertMessage];
+                                                              AlertTitle:kIPCErrorNetworkAlertMessage
+                                                          OperationTitle:nil
+                                                                Complete:nil];
     [self addSubview:self.errorNetworkAlertView];
     [self bringSubviewToFront:self.errorNetworkAlertView];
 }
