@@ -48,13 +48,13 @@
             </connections>
         </tapGestureRecognizer>
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lt6-vd-tkg">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="768"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="768"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeS-Jo-NDb">
-                    <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="订单详情" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaF-G5-13Z">
-                            <rect key="frame" x="150" y="25" width="100" height="24"/>
+                            <rect key="frame" x="190" y="25" width="100" height="24"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="xTt-lC-U1o"/>
                             </constraints>
@@ -71,11 +71,11 @@
                         <constraint firstItem="vaF-G5-13Z" firstAttribute="centerX" secondItem="ZeS-Jo-NDb" secondAttribute="centerX" id="gjI-FD-uIK"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wke-Ri-NY7">
-                    <rect key="frame" x="0.0" y="64" width="400" height="704"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wke-Ri-NY7">
+                    <rect key="frame" x="0.0" y="64" width="480" height="704"/>
                     <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.1490469858" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.1041389628" colorSpace="custom" customColorSpace="sRGB"/>
-                    <inset key="separatorInset" minX="30" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="dDs-PI-7yo"/>
                         <outlet property="delegate" destination="-1" id="wh6-wD-vUl"/>
@@ -89,7 +89,7 @@
                 <constraint firstItem="ZeS-Jo-NDb" firstAttribute="leading" secondItem="lt6-vd-tkg" secondAttribute="leading" id="cCx-3p-DMB"/>
                 <constraint firstAttribute="bottom" secondItem="wke-Ri-NY7" secondAttribute="bottom" id="cxs-D4-OaC"/>
                 <constraint firstItem="ZeS-Jo-NDb" firstAttribute="top" secondItem="lt6-vd-tkg" secondAttribute="top" id="dEi-Q7-Fpp"/>
-                <constraint firstAttribute="width" constant="400" id="lij-v5-u27"/>
+                <constraint firstAttribute="width" constant="480" id="lij-v5-u27"/>
                 <constraint firstItem="wke-Ri-NY7" firstAttribute="leading" secondItem="lt6-vd-tkg" secondAttribute="leading" id="p4I-MT-VBp"/>
                 <constraint firstItem="wke-Ri-NY7" firstAttribute="top" secondItem="ZeS-Jo-NDb" secondAttribute="bottom" id="wOn-pi-1cx"/>
                 <constraint firstAttribute="trailing" secondItem="ZeS-Jo-NDb" secondAttribute="trailing" id="yub-CN-Rx2"/>

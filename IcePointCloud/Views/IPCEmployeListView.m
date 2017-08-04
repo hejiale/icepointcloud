@@ -65,7 +65,7 @@ typedef void(^DismissBlock)();
          [self.employeeArray addObjectsFromArray:employeList.employeArray];
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"查询员工信息失败！"];
      }];
 }
 

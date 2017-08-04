@@ -71,7 +71,7 @@ typedef  void(^DismissBlock)();
              self.completeBlock(responseValue[@"id"]);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"新建地址失败!"];
      }];
 }
 

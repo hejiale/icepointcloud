@@ -138,7 +138,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     [self.glassListViewMode reloadGlassListDataWithIsTry:NO IsHot:NO Complete:^(LSRefreshDataStatus status, NSError *error){
         if (status == IPCRefreshError && error) {
-            [IPCCustomUI showError:error.domain];
+            [IPCCustomUI showError:@"查询商品信息失败!"];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             self.glassListCollectionView.mj_footer.hidden = YES;
         }

@@ -54,7 +54,7 @@
                                                      } FailureBlock:^(NSError *error) {
                                                          if (completeBlock)
                                                              completeBlock(NO);
-                                                         [IPCCustomUI showError:error.domain];
+                                                         [IPCCustomUI showError:@"查询客户验光单信息失败!"];
                                                      }];
 }
 
@@ -68,7 +68,7 @@
                                                           completeBlock();
                                                       }
                                                   } FailureBlock:^(NSError *error) {
-                                                      [IPCCustomUI showError:error.domain];
+                                                      [IPCCustomUI showError:@"设置默认验光单失败!"];
                                                   }];
 }
 

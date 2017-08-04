@@ -250,7 +250,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.glassListViewMode reloadGlassListDataWithIsTry:YES IsHot:YES  Complete:^(LSRefreshDataStatus status, NSError *error){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (error && status == IPCRefreshError){
-            [IPCCustomUI showError:error.domain];
+            [IPCCustomUI showError:@"查询商品信息失败!"];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             strongSelf.productCollectionView.mj_footer.hidden = YES;
         }
@@ -474,7 +474,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCCustomUI showError:error.domain];
+                [IPCCustomUI showError:@"人脸验证失败!"];
             }];
         }else{
             [IPCCustomUI showError:@"未检测到人脸轮廓"];

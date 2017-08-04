@@ -77,7 +77,7 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
              [IPCCustomUI hiden];
              self.CloseBlock();
          } FailureBlock:^(NSError *error) {
-             [IPCCustomUI showError:error.domain];
+             [IPCCustomUI showError:@"修改用户密码失败!"];
          }];
     }
 }

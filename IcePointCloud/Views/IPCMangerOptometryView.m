@@ -35,18 +35,22 @@
     }];
     
     if (optometry.isUpdateStatus) {
-        if (optometry.optometryEmployee) {
-            [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",optometry.optometryEmployee]];
+        if (optometry && optometry.optometryEmployee.length) {
+            NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.optometryEmployee];
+            [self.employeeLabel setAttributedText:[IPCCustomUI subStringWithText:employeeStr BeginRang:4 Rang:employeeStr.length - 4 Font:self.employeeLabel.font Color:[UIColor darkGrayColor]]];
         }
-        if (optometry.optometryInsertDate) {
-            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate]  IsTime:YES]]];
+        if (optometry && optometry.optometryInsertDate.length) {
+            NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate] IsTime:YES]];
+            [self.insertDateLabel setAttributedText:[IPCCustomUI subStringWithText:dateStr BeginRang:5 Rang:dateStr.length - 5 Font:self.insertDateLabel.font Color:[UIColor darkGrayColor]]];
         }
     }else{
-        if (optometry.employeeName) {
-            [self.employeeLabel setText:[NSString stringWithFormat:@"验光师:%@",optometry.employeeName]];
+        if (optometry && optometry.employeeName.length) {
+            NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.employeeName];
+            [self.employeeLabel setAttributedText:[IPCCustomUI subStringWithText:employeeStr BeginRang:4 Rang:employeeStr.length-4 Font:self.employeeLabel.font Color:[UIColor darkGrayColor]]];
         }
-        if (optometry.insertDate) {
-            [self.insertDateLabel setText:[NSString stringWithFormat:@"验光时间:%@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate]  IsTime:YES]]];
+        if (optometry && optometry.insertDate.length) {
+            NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:YES]];
+            [self.insertDateLabel setAttributedText:[IPCCustomUI subStringWithText:dateStr BeginRang:5 Rang:dateStr.length - 5 Font:self.insertDateLabel.font Color:[UIColor darkGrayColor]]];
         }
     }
     
@@ -95,7 +99,7 @@
     CGFloat width = [label jk_sizeWithFont:font constrainedToHeight:itemView.jk_height].width;
     
     UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width+5, itemView.jk_height)];
-    lbl.textColor = [UIColor darkGrayColor];
+    lbl.textColor = [UIColor lightGrayColor];
     lbl.text = label;
     lbl.font = font;
     lbl.backgroundColor = [UIColor clearColor];

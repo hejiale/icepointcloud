@@ -124,12 +124,8 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 }
 
 #pragma mark //UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.managerViewModel.optometryList.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.managerViewModel.optometryList.count;;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -139,7 +135,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     }
     IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.section];
     cell.optometryMode = optometry;
-    if (indexPath.section == 0) {
+    if (indexPath.row == 0) {
         [cell.defaultButton setSelected:YES];
     }else{
         [cell.defaultButton setSelected:NO];

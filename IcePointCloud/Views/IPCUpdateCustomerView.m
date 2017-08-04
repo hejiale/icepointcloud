@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
              }
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"更改用户信息失败!"];
      }];
 }
 

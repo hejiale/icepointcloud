@@ -69,8 +69,8 @@
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
         make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(-8);
-        make.width.mas_equalTo(92);
-        make.height.mas_equalTo(35);
+        make.width.mas_equalTo(94);
+        make.height.mas_equalTo(32);
     }];
     [self.menusView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.menuBarView.mas_right).with.offset(0);
@@ -135,6 +135,7 @@
 - (UIImageView *)logoImageView{
     if (!_logoImageView) {
         _logoImageView = [[UIImageView alloc]initWithImage:[UIImage  imageNamed:@"icon_logo"]];
+        _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         [_logoImageView setFrame:CGRectZero];
     }
     return _logoImageView;
@@ -295,7 +296,7 @@
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.domain];
+        [IPCCustomUI showError:@"查询积分定制规则失败!"];
     }];
 }
 

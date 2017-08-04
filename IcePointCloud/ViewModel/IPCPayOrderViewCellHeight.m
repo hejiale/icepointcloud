@@ -30,7 +30,9 @@
     if ([IPCCurrentCustomer sharedManager].currentCustomer) {
         if (indexPath.section == 0){
             return 100;
-        }else if ((indexPath.section == 1 || indexPath.section == 2) && indexPath.row > 0){
+        }else if (indexPath.section == 1 && indexPath.row > 0){
+            return 90;
+        }else if (indexPath.section == 2 && indexPath.row > 0){
             return 70;
         }else if (indexPath.section == 3 && indexPath.row > 0 ){
             return 195;

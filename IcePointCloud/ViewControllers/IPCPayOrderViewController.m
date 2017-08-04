@@ -36,6 +36,8 @@
     
     [self.cancelButton addBorder:2 Width:0.5];
     [self.saveButton addBorder:2 Width:0];
+    [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
+    [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
     
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;

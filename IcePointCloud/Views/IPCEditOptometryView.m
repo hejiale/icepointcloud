@@ -83,7 +83,7 @@ typedef  void(^DismissBlock)();
                                                              self.completeBlock(responseValue[@"id"]);
                                                          }
                                                      } FailureBlock:^(NSError *error) {
-                                                         [IPCCustomUI showError:error.domain];
+                                                         [IPCCustomUI showError:@"保存验光单失败!"];
                                                      }];
 }
 

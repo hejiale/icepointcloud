@@ -203,23 +203,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     return 50;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 2) {
-        return 0;
-    }
-    return 5;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-    [footView setBackgroundColor:[UIColor clearColor]];
-    return footView;
-}
-
 #pragma mark //UserBaseInfoCellDelegate
 - (void)reloadInsertCustomUI{
     [self.userInfoTableView reloadData];

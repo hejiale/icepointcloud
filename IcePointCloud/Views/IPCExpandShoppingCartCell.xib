@@ -39,7 +39,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ljk-K3-9sM">
-                                <rect key="frame" x="589" y="82" width="30" height="25"/>
+                                <rect key="frame" x="574" y="82" width="30" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="6WB-IR-AeY"/>
@@ -109,7 +109,7 @@
                         <constraints>
                             <constraint firstItem="dvH-d7-xk4" firstAttribute="top" secondItem="VrM-56-AOB" secondAttribute="top" constant="20" id="7Q6-VY-3aZ"/>
                             <constraint firstItem="o3t-hE-Vkn" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="Dfc-zT-XeW"/>
-                            <constraint firstAttribute="trailing" secondItem="Ljk-K3-9sM" secondAttribute="trailing" constant="5" id="HLR-ap-sHl"/>
+                            <constraint firstAttribute="trailing" secondItem="Ljk-K3-9sM" secondAttribute="trailing" constant="20" id="HLR-ap-sHl"/>
                             <constraint firstItem="o36-OD-XmA" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="JIf-wA-oea"/>
                             <constraint firstItem="dvH-d7-xk4" firstAttribute="leading" secondItem="o36-OD-XmA" secondAttribute="trailing" constant="10" id="Kk0-cG-8Oi"/>
                             <constraint firstAttribute="trailing" secondItem="1hw-v8-tif" secondAttribute="trailing" constant="20" id="Z5x-ri-Q9Q"/>
@@ -142,7 +142,6 @@
                 <outlet property="glassesNameLbl" destination="o36-OD-XmA" id="zN8-fO-pwI"/>
                 <outlet property="inputPirceView" destination="dvH-d7-xk4" id="pl4-8N-Poz"/>
                 <outlet property="inputPriceTextField" destination="E5w-LJ-wk5" id="7yT-OC-RRW"/>
-                <outlet property="inputPriceViewRight" destination="hjV-uB-tsD" id="wcO-zu-EKr"/>
                 <outlet property="mainContentView" destination="VrM-56-AOB" id="Zvy-uy-z1U"/>
                 <outlet property="noPointButton" destination="1hw-v8-tif" id="Otl-zy-Avr"/>
                 <outlet property="parameterLabel" destination="o3t-hE-Vkn" id="iWe-C4-cbv"/>

@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIView *inputPirceView;
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointButtonWith;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inputPriceViewRight;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
 
 @property (copy, nonatomic) void(^ReloadBlock)();
@@ -71,13 +70,11 @@
         
         if ([IPCPayOrderManager sharedManager].isTrade) {
             self.pointButtonWith.constant = 0;
-            self.inputPriceViewRight.constant = 0;
             [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
             [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
         }else{
             [self.noPointButton setHidden:NO];
             self.pointButtonWith.constant = 130;
-            self.inputPriceViewRight.constant = 20;
             
             if (_cartItem.isChoosePoint) {
                 [self.noPointButton setSelected:YES];

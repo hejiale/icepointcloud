@@ -65,11 +65,11 @@
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_login_logo" translatesAutoresizingMaskIntoConstraints="NO" id="VH3-45-54d">
-                    <rect key="frame" x="392.5" y="200" width="239" height="88"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="337" y="200" width="350" height="88"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="88" id="K1t-3Z-2yr"/>
-                        <constraint firstAttribute="width" constant="239" id="PWN-jD-G6O"/>
+                        <constraint firstAttribute="width" constant="350" id="PWN-jD-G6O"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yf-Un-adf" userLabel="SigninButton">
@@ -116,7 +116,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="icon_login_logo" width="236" height="88"/>
+        <image name="icon_login_logo" width="236" height="79"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

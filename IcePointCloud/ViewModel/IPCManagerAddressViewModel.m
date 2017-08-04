@@ -38,7 +38,7 @@
                                                        } FailureBlock:^(NSError *error) {
                                                            if (completeBlock)
                                                                completeBlock();
-                                                           [IPCCustomUI showError:error.domain];
+                                                           [IPCCustomUI showError:@"查询客户地址信息失败!"];
                                                        }];
 }
 
@@ -51,7 +51,7 @@
                                                         completeBlock();
                                                     }
                                                 } FailureBlock:^(NSError *error) {
-                                                    [IPCCustomUI showError:error.domain];
+                                                    [IPCCustomUI showError:@"设置默认地址失败!"];
                                                 }];
 }
 

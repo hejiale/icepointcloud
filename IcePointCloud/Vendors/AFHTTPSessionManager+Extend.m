@@ -61,7 +61,6 @@
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
-        NSLog(@"-------Service Error  %@",error.localizedDescription);
         if (failure){
             failure(error, task);
         }

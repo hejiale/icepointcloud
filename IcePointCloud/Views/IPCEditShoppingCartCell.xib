@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="624" height="135"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="624" height="134.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="624" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NHG-8H-O9L" userLabel="InnerView">
@@ -55,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgv-GB-9Ly">
-                                <rect key="frame" x="579" y="25" width="40" height="40"/>
+                                <rect key="frame" x="569" y="25" width="40" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="Ik3-0g-egh"/>
@@ -67,7 +67,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jC4-vK-Inv">
-                                <rect key="frame" x="552" y="25" width="27" height="40"/>
+                                <rect key="frame" x="542" y="25" width="27" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="27" id="Ru9-tU-fd7"/>
                                     <constraint firstAttribute="height" constant="40" id="anR-Bm-mzJ"/>
@@ -77,7 +77,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o9i-Xv-K5A">
-                                <rect key="frame" x="512" y="25" width="40" height="40"/>
+                                <rect key="frame" x="502" y="25" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="DW3-Am-tIq"/>
                                     <constraint firstAttribute="width" constant="40" id="eFi-Ck-pWl"/>
@@ -144,7 +144,7 @@
                             <constraint firstItem="akF-8G-o8D" firstAttribute="leading" secondItem="J9I-Bf-ZD5" secondAttribute="trailing" constant="10" id="kpe-PZ-bPP"/>
                             <constraint firstItem="jC4-vK-Inv" firstAttribute="top" secondItem="J9I-Bf-ZD5" secondAttribute="top" id="lLl-4E-DMv"/>
                             <constraint firstItem="G9c-K2-P9t" firstAttribute="leading" secondItem="J9I-Bf-ZD5" secondAttribute="trailing" constant="10" id="lWo-my-JZD"/>
-                            <constraint firstAttribute="trailing" secondItem="mgv-GB-9Ly" secondAttribute="trailing" constant="5" id="qL5-zW-lcs"/>
+                            <constraint firstAttribute="trailing" secondItem="mgv-GB-9Ly" secondAttribute="trailing" constant="15" id="qL5-zW-lcs"/>
                             <constraint firstItem="jC4-vK-Inv" firstAttribute="leading" secondItem="o9i-Xv-K5A" secondAttribute="trailing" id="slT-5A-AJ8"/>
                             <constraint firstItem="61Z-ah-Q7s" firstAttribute="top" secondItem="NHG-8H-O9L" secondAttribute="top" id="uBX-gh-lGF"/>
                             <constraint firstItem="J9I-Bf-ZD5" firstAttribute="leading" secondItem="61Z-ah-Q7s" secondAttribute="trailing" constant="10" id="yZH-Mw-OKN"/>
@@ -180,7 +180,7 @@
     <resources>
         <image name="arrow_icon" width="6" height="12"/>
         <image name="common_btn_check" width="23" height="23"/>
-        <image name="common_btn_check_selected" width="23" height="23"/>
+        <image name="common_btn_check_selected" width="21" height="21"/>
         <image name="icon_small_add" width="21" height="21"/>
         <image name="icon_small_reduce" width="21" height="20"/>
     </resources>

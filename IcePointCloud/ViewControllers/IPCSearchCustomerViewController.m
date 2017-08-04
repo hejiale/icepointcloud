@@ -128,7 +128,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
              complete();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"查询客户信息失败!"];
          if (complete) {
              complete();
          }
@@ -164,22 +164,26 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 #pragma mark //UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    IPCCustomerMode * customer = self.customerArray[indexPath.row];
-    
-    if ([IPCInsertCustomer instance].isInsertStatus) {
-        [IPCInsertCustomer instance].introducerId = customer.customerID;
-        [IPCInsertCustomer instance].introducerName = customer.customerName;
-        [self.navigationController popViewControllerAnimated:YES];
-    }else if ([IPCPayOrderManager sharedManager].isPayOrderStatus){
-        [[IPCPayOrderManager sharedManager] resetPayPrice];
-        [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
+    if (self.customerArray.count) {
+        IPCCustomerMode * customer = self.customerArray[indexPath.row];
         
-        [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
-        [self.navigationController popViewControllerAnimated:YES];
-    }else{
-        IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
-        [detailVC setCustomer:customer];
-        [self.navigationController pushViewController:detailVC animated:YES];
+        if (customer) {
+            if ([IPCInsertCustomer instance].isInsertStatus) {
+                [IPCInsertCustomer instance].introducerId = customer.customerID;
+                [IPCInsertCustomer instance].introducerName = customer.customerName;
+                [self.navigationController popViewControllerAnimated:YES];
+            }else if ([IPCPayOrderManager sharedManager].isPayOrderStatus){
+                [[IPCPayOrderManager sharedManager] resetPayPrice];
+                [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
+                [detailVC setCustomer:customer];
+                [self.navigationController pushViewController:detailVC animated:YES];
+            }
+        }
     }
 }
 

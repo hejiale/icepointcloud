@@ -96,7 +96,7 @@
              complete(responseValue);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"保存客户信息失败!"];
      }];
 }
 
@@ -115,7 +115,7 @@
         }
         
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.domain];
+        [IPCCustomUI showError:@"验证手机号失败!"];
     }];
 }
 @end

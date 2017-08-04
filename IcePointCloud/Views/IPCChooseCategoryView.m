@@ -54,7 +54,7 @@ static NSString * identifier = @"CategoryCellIdentifier";
     [cell.categoryNameLabel setText:self.categoryList[indexPath.row]];
     
     if (self.currentType == indexPath.row) {
-        [cell.chooseImageView setImage:[UIImage imageNamed:@"icon_tick"]];
+        [cell.chooseImageView setImage:[UIImage imageNamed:@"icon_sure"]];
     }else{
         [cell.chooseImageView setImage:nil];
     }

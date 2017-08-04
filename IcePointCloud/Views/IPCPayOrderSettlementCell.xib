@@ -29,11 +29,10 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抹零金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQa-39-Fn8">
-                        <rect key="frame" x="53" y="111.5" width="65" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抹零金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQa-39-Fn8">
+                        <rect key="frame" x="55" y="112" width="63" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="BnS-LG-S5R"/>
-                            <constraint firstAttribute="width" constant="65" id="jXg-kh-Q9S"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,14 +78,14 @@
                                     <constraint firstAttribute="width" constant="90" id="wxW-0i-2G5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                <inset key="titleEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="积分抵扣" image="icon_choose_disable">
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="积分抵扣" image="icon_unSelected_box">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="disabled">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="selected" image="icon_choose"/>
+                                <state key="selected" image="icon_select_box"/>
                                 <connections>
                                     <action selector="selectPayPointAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5wP-af-1Kl"/>
                                 </connections>
@@ -139,7 +138,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="合计:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYL-UI-LeL">
-                        <rect key="frame" x="322" y="151.5" width="40" height="20"/>
+                        <rect key="frame" x="322" y="152" width="40" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="9HW-Ce-q4P"/>
                             <constraint firstAttribute="width" constant="40" id="NmC-fJ-GIl"/>
@@ -149,7 +148,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ATM-Bo-29u">
-                        <rect key="frame" x="123" y="106.5" width="85" height="30"/>
+                        <rect key="frame" x="123" y="107" width="85" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="0kz-BK-Hee"/>
                             <constraint firstAttribute="width" constant="85" id="W8X-XG-DHl"/>
@@ -162,7 +161,7 @@
                         </connections>
                     </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nY-a8-6gt">
-                        <rect key="frame" x="367" y="151.5" width="85" height="20"/>
+                        <rect key="frame" x="367" y="152" width="85" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="84o-Mo-LxT"/>
                             <constraint firstAttribute="width" constant="85" id="pNk-J3-ZrJ"/>
@@ -172,7 +171,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuE-iz-4Da">
-                        <rect key="frame" x="367" y="111.5" width="85" height="20"/>
+                        <rect key="frame" x="367" y="112" width="85" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Psv-dj-5Mi"/>
                             <constraint firstAttribute="width" constant="85" id="Unc-zK-tGK"/>
@@ -202,8 +201,9 @@
                     <constraint firstItem="VBB-Bw-SlI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="g94-JO-79d"/>
                     <constraint firstItem="ATM-Bo-29u" firstAttribute="centerY" secondItem="oQa-39-Fn8" secondAttribute="centerY" id="hZi-Pr-xVd"/>
                     <constraint firstAttribute="trailingMargin" secondItem="VBB-Bw-SlI" secondAttribute="trailing" constant="20" id="kkd-ld-Znu"/>
-                    <constraint firstItem="oQa-39-Fn8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="45" id="s07-ZN-wKs"/>
+                    <constraint firstItem="oQa-39-Fn8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="47" id="s07-ZN-wKs"/>
                     <constraint firstAttribute="trailingMargin" secondItem="cuE-iz-4Da" secondAttribute="trailing" constant="20" id="s64-eC-dHG"/>
+                    <constraint firstItem="oQa-39-Fn8" firstAttribute="trailing" secondItem="LhZ-4w-Ta1" secondAttribute="trailing" id="wzy-BR-oZt"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -223,7 +223,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="icon_choose" width="22" height="22"/>
-        <image name="icon_choose_disable" width="22" height="22"/>
+        <image name="icon_select_box" width="18" height="18"/>
+        <image name="icon_unSelected_box" width="18" height="18"/>
     </resources>
 </document>

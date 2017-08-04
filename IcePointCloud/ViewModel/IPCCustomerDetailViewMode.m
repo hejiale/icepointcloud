@@ -55,7 +55,7 @@
      } FailureBlock:^(NSError *error) {
          if (completeBlock)
              completeBlock();
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"查询客户信息失败!"];
      }];
 }
 
@@ -79,7 +79,7 @@
                                                 } FailureBlock:^(NSError *error) {
                                                     if (completeBlock)
                                                         completeBlock();
-                                                    [IPCCustomUI showError:error.domain];
+                                                    [IPCCustomUI showError:@"查询客户历史订单信息失败!"];
                                                 }];
 }
 

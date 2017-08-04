@@ -12,14 +12,14 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="IPCOrderDetailProductCell">
-            <rect key="frame" x="0.0" y="0.0" width="400" height="120"/>
+            <rect key="frame" x="0.0" y="0.0" width="480" height="120"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="400" height="119.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="480" height="119"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W09-WB-702">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="114.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="119.5"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dAd-96-0ht">
                                 <rect key="frame" x="25" y="10" width="90" height="90"/>
@@ -30,7 +30,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5t-Ga-nk8">
-                                <rect key="frame" x="340" y="80" width="30" height="20"/>
+                                <rect key="frame" x="420" y="80" width="30" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Hkk-8m-J20"/>
                                     <constraint firstAttribute="height" constant="20" id="lyI-Te-mBp"/>
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQ2-to-6Th">
-                                <rect key="frame" x="125" y="60" width="255" height="15"/>
+                                <rect key="frame" x="125" y="60" width="335" height="15"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="15" id="s6E-4W-SO3"/>
@@ -67,7 +67,7 @@
                     <constraint firstItem="W09-WB-702" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Syb-Y6-kuZ"/>
                     <constraint firstItem="W09-WB-702" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Vno-EA-E2J"/>
                     <constraint firstAttribute="trailing" secondItem="W09-WB-702" secondAttribute="trailing" id="hlW-R4-65m"/>
-                    <constraint firstAttribute="bottom" secondItem="W09-WB-702" secondAttribute="bottom" constant="5" id="slr-lx-BhP"/>
+                    <constraint firstAttribute="bottom" secondItem="W09-WB-702" secondAttribute="bottom" id="slr-lx-BhP"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

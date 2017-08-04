@@ -46,7 +46,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         if (self.LogoutBlock)
             self.LogoutBlock();
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:error.domain];
+        [IPCCustomUI showError:@"用户退出登录失败"];
     }];
 }
 

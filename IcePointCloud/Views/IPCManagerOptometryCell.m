@@ -43,7 +43,7 @@
         [_defaultButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_defaultButton.titleLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
         _defaultButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-        _defaultButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 5);
+        _defaultButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 10);
         [_defaultButton setBackgroundColor:[UIColor clearColor]];
         [_defaultButton addTarget:self action:@selector(setDefaultAction:) forControlEvents:UIControlEventTouchUpInside];
     }

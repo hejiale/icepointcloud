@@ -117,7 +117,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
          [self.orderDetailTableView reloadData];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"查询用户订单详情失败!"];
      }];
 }
 
@@ -194,11 +194,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             }
             [cell.sectionTitleLabel setText:@"收款记录"];
             [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCCustomerOrderDetail instance].orderInfo.remainAmount]];
-            if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count) {
-                [cell.bottomLine setHidden:NO];
-            }else{
-                [cell.bottomLine setHidden:YES];
-            }
             return cell;
         }else{
             IPCOrderDetailPayRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:payRecordIdentifier];
@@ -236,26 +231,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             return 115;
         }
     }else if (indexPath.section == 4){
-        return 125;
+        return 120;
     }else if (indexPath.section == 5 && indexPath.row > 0){
         return [IPCCustomerOrderDetail instance].recordArray.count * 40;
     }else if (indexPath.section == 6){
         return 120;
     }
     return 50;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    if (section == 3) {
-        return 0;
-    }
-    return 5;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-    [footView setBackgroundColor:[UIColor clearColor]];
-    return footView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

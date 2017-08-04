@@ -55,7 +55,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          [self reload];
          [IPCCustomUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"查询积分定制规则失败！"];
      }];
 }
 
@@ -69,7 +69,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
              }
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"保存订单失败！"];
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(failPayOrder)]) {
                  [self.delegate failPayOrder];
@@ -88,7 +88,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          [IPCCustomUI hiden];
          [self reload];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:error.domain];
+         [IPCCustomUI showError:@"查询客户信息失败!"];
      }];
 }
 

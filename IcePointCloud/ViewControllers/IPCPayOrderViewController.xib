@@ -41,7 +41,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="480" id="VVw-Ok-m3F"/>
                     </constraints>
-                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.086365582191780824" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Iy9-QA-aQ8"/>
                         <outlet property="delegate" destination="-1" id="xt8-yh-C3s"/>
@@ -51,7 +51,7 @@
                     <rect key="frame" x="544" y="718" width="480" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
-                            <rect key="frame" x="260.5" y="7.5" width="120" height="35"/>
+                            <rect key="frame" x="260" y="8" width="120" height="35"/>
                             <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
@@ -64,7 +64,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu8-sK-Lh2">
-                            <rect key="frame" x="100" y="7.5" width="120" height="35"/>
+                            <rect key="frame" x="100" y="8" width="120" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="7cr-LA-Npa"/>
                                 <constraint firstAttribute="width" constant="120" id="sh6-Cj-tlV"/>
