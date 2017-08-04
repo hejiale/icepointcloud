@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AlE-cF-1Zj" customClass="IQTextView">
-                        <rect key="frame" x="30" y="0.0" width="420" height="117.5"/>
+                        <rect key="frame" x="30" y="0.0" width="420" height="122.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
@@ -33,7 +33,7 @@
                     <constraint firstItem="AlE-cF-1Zj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="83m-CX-vrD"/>
                     <constraint firstAttribute="trailing" secondItem="AlE-cF-1Zj" secondAttribute="trailing" constant="30" id="GtU-h0-n4Y"/>
                     <constraint firstItem="AlE-cF-1Zj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="aXx-ju-GDe"/>
-                    <constraint firstAttribute="bottom" secondItem="AlE-cF-1Zj" secondAttribute="bottom" constant="20" id="hdj-f2-YQZ"/>
+                    <constraint firstAttribute="bottom" secondItem="AlE-cF-1Zj" secondAttribute="bottom" constant="15" id="hdj-f2-YQZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

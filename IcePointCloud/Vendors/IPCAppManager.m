@@ -147,7 +147,7 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
         imageName = @"zhifubao";
     }else if ([payTypeInfo isEqualToString:@"微信"]){
         imageName = @"wexin";
-    }else if ([payTypeInfo isEqualToString:@"其它"]){
+    }else if ([payTypeInfo isEqualToString:@"其他"]){
         imageName = @"icon_ wallet";
     }
     return [UIImage imageNamed:imageName];

@@ -42,8 +42,13 @@
         self.leftGivingConstraint.constant = 20;
     }
     
+    if ([IPCPayOrderManager sharedManager].point == 0) {
+        [self.selectPointButton setSelected:NO];
+    }else{
+        [self.selectPointButton setSelected:([IPCPayOrderManager sharedManager].isSelectPoint)];
+    }
+    
     [self.selectPointButton setUserInteractionEnabled:([IPCPayOrderManager sharedManager].point >  0)];
-    [self.selectPointButton setSelected:([IPCPayOrderManager sharedManager].isSelectPoint)];
     [self.pointAmountTextField setEnabled:([IPCPayOrderManager sharedManager].isSelectPoint)];
     
     if ([IPCPayOrderManager sharedManager].point >  0) {

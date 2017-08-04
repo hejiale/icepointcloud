@@ -148,7 +148,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCurrentCustomer sharedManager].currentCustomer)
         return 7;
-    return 3;
+    return 4;
 }
 
 
@@ -168,22 +168,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             cell.delegate = self;
         }
         return cell;
-    }else if (indexPath.section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer){
-        if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell setLeftTitle:@"订单备注"];
-            return cell;
-        }else{
-            IPCPayOrderMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPayOrderMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            return cell;
-        }
-    }else if (indexPath.section == 2 &&  [IPCCurrentCustomer sharedManager].currentCustomer)
+    }else if (indexPath.section == 1 &&  [IPCCurrentCustomer sharedManager].currentCustomer)
     {
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
@@ -208,7 +193,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             cell.addressMode = [IPCCurrentCustomer sharedManager].currentAddress;
             return cell;
         }
-    }else if(indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer){
+    }else if(indexPath.section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer){
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -232,7 +217,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             cell.optometry = [IPCCurrentCustomer sharedManager].currentOpometry;
             return cell;
         }
-    }else if((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
+    }else if((indexPath.section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 0 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -253,7 +238,22 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             return cell;
         }
-    }else if((indexPath.section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
+    }else if ((indexPath.section == 4 && [IPCCurrentCustomer sharedManager].currentCustomer)||(indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
+        if (indexPath.row == 0) {
+            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell setLeftTitle:@"订单备注"];
+            return cell;
+        }else{
+            IPCPayOrderMemoCell * cell = [tableView dequeueReusableCellWithIdentifier:memoIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCPayOrderMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            return cell;
+        }
+    }else if((indexPath.section == 5 && [IPCCurrentCustomer sharedManager].currentCustomer) || (indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer)){
         IPCPayOrderSettlementCell * cell = [tableView dequeueReusableCellWithIdentifier:settlementIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCPayOrderSettlementCell" bundle:nil]instantiateWithOwner:nil options:nil][0];

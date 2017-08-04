@@ -12,13 +12,13 @@
 
 - (BOOL)tableViewCell:(NSInteger)section
 {
-    if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 1) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 5))
+    if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 5))
         return YES;
-    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 4)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
+    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 3)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
         return YES;
-    else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
+    else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return YES;
-    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 3 && [IPCCurrentCustomer sharedManager].currentCustomer)
+    else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return YES;
     else if ([IPCCurrentCustomer sharedManager].currentCustomer && section == 0)
         return YES;
@@ -31,23 +31,21 @@
         if (indexPath.section == 0){
             return 100;
         }else if (indexPath.section == 1 && indexPath.row > 0){
-            return 90;
-        }else if (indexPath.section == 2 && indexPath.row > 0){
             return 70;
-        }else if (indexPath.section == 3 && indexPath.row > 0 ){
+        }else if (indexPath.section == 2 && indexPath.row > 0 ){
             return 195;
         }
     }
-    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 4 && indexPath.row > 0))
+    if ((indexPath.section == 0 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 3 && indexPath.row > 0))
     {
         return 100;
-    }else if ((indexPath.section == 1 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5))
+    }else if ((indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5))
     {
         if ([IPCPayOrderManager sharedManager].isTrade) {
             return 185;
         }
         return 135;
-    }else if ((indexPath.section == 2 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6 && indexPath.row > 0)){
+    }else if ((indexPath.section == 3 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6 && indexPath.row > 0)){
         return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 35 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0);
     }
     return 50;

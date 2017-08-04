@@ -48,7 +48,7 @@
         
         [images enumerateObjectsUsingBlock:^(IPCGlassesImage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
          {
-             UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width + originX, 20, 183, 112)];
+             UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width, 20, self.jk_width, 112)];
              glassImageView.contentMode = UIViewContentModeScaleAspectFit;
              [glassImageView setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
              [self.imageScrollView addSubview:glassImageView];
@@ -91,8 +91,8 @@
     if (!_imagePageControl) {
         _imagePageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, self.imageScrollView.jk_bottom - 25, self.jk_width, 20)];
         _imagePageControl.hidesForSinglePage = YES;
-        _imagePageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-        _imagePageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
+        _imagePageControl.pageIndicatorTintColor = [[UIColor blackColor]colorWithAlphaComponent:0.2];
+        _imagePageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
     }
     return _imagePageControl;
 }

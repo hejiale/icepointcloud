@@ -92,6 +92,15 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     }
 }
 
+- (void)resetShoppingCartStatus{
+    if ([IPCShoppingCart sharedCart].itemsCount == 0) {
+        isEditStatus = NO;
+        [self updateBottomStatus:isEditStatus];
+    }
+    [[IPCPayOrderManager sharedManager] resetPayPrice];
+    [self updateCartUI];
+}
+
 - (void)reload
 {
     [self updateCartUI];
@@ -118,12 +127,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         [IPCCustomUI showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [[IPCShoppingCart sharedCart] removeSelectCartItem];
-            if ([IPCShoppingCart sharedCart].itemsCount == 0) {
-                isEditStatus = NO;
-                [strongSelf updateBottomStatus:isEditStatus];
-            }
-            [strongSelf updateCartUI];
-            [[IPCPayOrderManager sharedManager] resetPayPrice];
+            [strongSelf resetShoppingCartStatus];
         }];
     }
 }
@@ -144,7 +148,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
         if (cartItem) {
             [cell setCartItem:cartItem Reload:^{
-                [self updateCartUI];
+                [self resetShoppingCartStatus];
             }];
         }
         return cell;
