@@ -112,6 +112,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark //UIInterfaceOrientation
+- (BOOL)shouldAutorotate{
+    return NO;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscapeRight;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation{
+    return  UIInterfaceOrientationLandscapeRight;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

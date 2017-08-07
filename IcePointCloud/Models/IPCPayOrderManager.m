@@ -115,7 +115,7 @@
     
     [IPCPayOrderManager sharedManager].pointPrice = pointPrice;
     [IPCPayOrderManager sharedManager].usedPoint = point;
-    [IPCPayOrderManager sharedManager].point -= point;
+//    [IPCPayOrderManager sharedManager].point -= point;
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
@@ -142,7 +142,6 @@
 - (void)resetData
 {
     [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].point = 0;
     [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
     [IPCPayOrderManager sharedManager].insertPayRecord = nil;
     [IPCPayOrderManager sharedManager].customerDiscount = 0;

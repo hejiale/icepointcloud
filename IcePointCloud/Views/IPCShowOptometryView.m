@@ -150,7 +150,7 @@
     valueLabel.textColor = [UIColor darkGrayColor];
     [valueLabel setText:value];
     valueLabel.textAlignment = NSTextAlignmentCenter;
-    valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    valueLabel.font = font;
     [itemView addSubview:valueLabel];
     
     return itemView;
@@ -160,11 +160,9 @@
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
     
-    UIFont * font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
-    
     UILabel * valueLabel = [[UILabel alloc] initWithFrame:itemView.bounds];
     valueLabel.textColor = [UIColor darkGrayColor];
-    valueLabel.font = font;
+    valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
     [valueLabel setText:value];
     [itemView addSubview:valueLabel];
     

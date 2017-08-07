@@ -20,9 +20,9 @@
 @property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
-@property (nonatomic, assign, readwrite) double        pointPrice;//积分金额
+@property (nonatomic, assign, readwrite) double        pointPrice;//抵扣积分金额
 @property (nonatomic, assign, readwrite) NSInteger    usedPoint;//已使用积分
-@property (nonatomic, assign, readwrite) NSInteger    point;//总积分
+
 @property (nonatomic, assign, readwrite) double        givingAmount;//赠送金额
 
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分

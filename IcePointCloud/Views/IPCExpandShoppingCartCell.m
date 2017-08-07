@@ -96,7 +96,7 @@
         [IPCCustomUI showError:@"请先选择客户!"];
         return;
     }
-    if ([IPCPayOrderManager sharedManager].point <= 0) {
+    if ([IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
         [IPCCustomUI showError:@"所选客户积分为零!"];
         return;
     }
@@ -149,7 +149,7 @@
         if (self.cartItem.isChoosePoint) {
             NSInteger usedPoint = [IPCPayOrderManager sharedManager].usedPoint;
             usedPoint -= self.cartItem.pointValue;
-            NSInteger minumPoint = [IPCPayOrderManager sharedManager].point - usedPoint;
+            NSInteger minumPoint = [IPCCurrentCustomer sharedManager].currentCustomer.integral - usedPoint;
             
             if (minumPoint > 0) {
                 if (minumPoint <= [str doubleValue] * self.cartItem.glassCount)

@@ -123,7 +123,7 @@
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCCustomUI showError:@"登录失败!"];
+        [IPCCustomUI showError:@"用户登录失败!"];
     }];
 }
 

@@ -42,16 +42,16 @@
         self.leftGivingConstraint.constant = 20;
     }
     
-    if ([IPCPayOrderManager sharedManager].point == 0) {
+    if ([IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
         [self.selectPointButton setSelected:NO];
     }else{
         [self.selectPointButton setSelected:([IPCPayOrderManager sharedManager].isSelectPoint)];
     }
     
-    [self.selectPointButton setUserInteractionEnabled:([IPCPayOrderManager sharedManager].point >  0)];
+    [self.selectPointButton setUserInteractionEnabled:([IPCCurrentCustomer sharedManager].currentCustomer.integral >  0)];
     [self.pointAmountTextField setEnabled:([IPCPayOrderManager sharedManager].isSelectPoint)];
     
-    if ([IPCPayOrderManager sharedManager].point >  0) {
+    if ([IPCCurrentCustomer sharedManager].currentCustomer.integral >  0) {
         [self.pointView setAlpha:1];
     }else{
         [self.pointView setAlpha:0.5];
@@ -72,7 +72,6 @@
     [IPCPayOrderManager sharedManager].isSelectPoint = !sender.selected;
     
     if (![IPCPayOrderManager sharedManager].isSelectPoint) {
-        [IPCPayOrderManager sharedManager].point += [IPCPayOrderManager sharedManager].usedPoint;
         [IPCPayOrderManager sharedManager].usedPoint = 0;
         [IPCPayOrderManager sharedManager].pointPrice = 0;
     }
@@ -111,10 +110,10 @@
         if ([textField isEqual:self.pointAmountTextField]) {
             [[IPCPayOrderManager sharedManager] resetPayPrice];
             //获取积分换取金额
-            if ([str integerValue] > [IPCPayOrderManager sharedManager].point) {
+            if ([str integerValue] > [IPCCurrentCustomer sharedManager].currentCustomer.integral) {
                 if (self.delegate) {
                     if ([self.delegate respondsToSelector:@selector(getPointPrice:)]) {
-                        [self.delegate getPointPrice:[IPCPayOrderManager sharedManager].point];
+                        [self.delegate getPointPrice:[IPCCurrentCustomer sharedManager].currentCustomer.integral];
                     }
                 }
             }else{
