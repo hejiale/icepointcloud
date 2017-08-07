@@ -37,6 +37,8 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     [self.optometryTableView setTableFooterView:[[UIView alloc]init]];
     self.optometryTableView.mj_header = self.refreshHeader;
     self.optometryTableView.mj_footer = self.refreshFooter;
+    self.optometryTableView.emptyAlertTitle = @"暂未添加验光单!";
+    self.optometryTableView.emptyAlertImage = @"exception_optometry";
     [self.refreshHeader beginRefreshing];
 }
 
@@ -107,6 +109,9 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 #pragma mark //Clicked Events
 - (void)insertNewOptometryAction
 {
+    if (self.editOptometryView) {
+        [self.editOptometryView removeFromSuperview];self.editOptometryView = nil;
+    }
     [self.view addSubview:self.editOptometryView];
     [self.view bringSubviewToFront:self.editOptometryView];
 }
@@ -120,6 +125,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 
 - (void)loadMoreTableView{
     self.managerViewModel.currentPage ++;
+    [IPCCustomUI show];
     [self loadOptometryData];
 }
 
@@ -133,7 +139,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCManagerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
-    IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.section];
+    IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
     cell.optometryMode = optometry;
     if (indexPath.row == 0) {
         [cell.defaultButton setSelected:YES];
@@ -143,7 +149,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     __weak typeof(self) weakSelf = self;
     [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [IPCCustomUI show];
         [strongSelf setDefaultOptometryWithOptometryId:optometry.optometryID];
     }];
     return cell;
@@ -158,7 +163,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-        IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.section];
+        IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
         [IPCCurrentCustomer sharedManager].currentOpometry = nil;
         [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
         [self.navigationController popViewControllerAnimated:YES];

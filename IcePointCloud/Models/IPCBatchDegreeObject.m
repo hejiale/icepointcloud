@@ -10,6 +10,16 @@
 
 @implementation IPCBatchDegreeObject
 
++ (IPCBatchDegreeObject *)instance
+{
+    static dispatch_once_t token;
+    static IPCBatchDegreeObject *_client;
+    dispatch_once(&token, ^{
+        _client = [[self alloc] init];
+    });
+    return _client;
+}
+
 - (NSMutableArray<NSString *> *)readingDegrees{
     if (!_readingDegrees) {
         _readingDegrees = [[NSMutableArray alloc]init];

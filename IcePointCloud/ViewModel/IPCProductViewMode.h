@@ -62,5 +62,6 @@ typedef void(^ReloadFilterUnCloseBlock)();
                             Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
 - (void)loadFilterCategory:(id)owner InView:(UIView *)coverView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
+- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat start, CGFloat end, CGFloat step))complete;
 
 @end

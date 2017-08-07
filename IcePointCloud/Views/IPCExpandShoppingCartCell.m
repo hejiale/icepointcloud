@@ -33,6 +33,7 @@
 {
     [super awakeFromNib];
     
+    self.glassesNameLbl.lineBreakMode = UILineBreakModeWordWrap | UILineBreakModeTailTruncation;
     [self.inputPirceView addBorder:3 Width:0.5];
     [self.glassesImgView addBorder:3 Width:0.5];
 }

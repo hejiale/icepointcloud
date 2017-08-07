@@ -8,6 +8,6 @@
 
 #import "MJRefresh.h"
 
-@interface IPCRefreshAnimationFooter : MJRefreshBackStateFooter
+@interface IPCRefreshAnimationFooter : MJRefreshAutoFooter
 
 @end

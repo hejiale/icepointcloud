@@ -7,7 +7,6 @@
 //
 
 #import "IPCGlassParameterView.h"
-#import "IPCBatchParameterViewMode.h"
 #import "IPCBatchParameterCell.h"
 
 static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
@@ -62,8 +61,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 @property (weak, nonatomic) IBOutlet UILabel *thinLabel;
 @property (weak, nonatomic) IBOutlet UILabel *upsetLabel;
 @property (weak, nonatomic) IBOutlet UILabel *moveHeartLabel;
-@property (strong, nonatomic) IPCBatchParameterViewMode * parameterViewMode;
-@property (strong, nonatomic) IPCBatchDegreeObject * batchDegree;
 @property (assign, nonatomic) NSInteger   customsizedType;
 @property (copy, nonatomic) void(^CompleteBlock)();
 
@@ -83,7 +80,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                              @[@"0", @"+1", @"+2", @"+3", @"+4"],
                              @[@"0", @"5", @"6", @"7", @"8", @"9"]];
         customsizedLensFunArray  = [[NSMutableArray alloc]init];
-        self.batchDegree = [[IPCBatchDegreeObject alloc]init];
         
         UIView *mainView = [UIView jk_loadInstanceFromNibWithName:@"IPCGlassParameterView" owner:self];
         [mainView setFrame:frame];
@@ -138,25 +134,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
 }
 
-#pragma mark //QUERY BATCH DEGREE
-- (void)queryBatchDegree{
-    self.parameterViewMode = [[IPCBatchParameterViewMode alloc]initWithGlasses:_glasses];
-    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
-        [self.parameterViewMode queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
-            [self.batchDegree batchReadingDegrees:start End:end Step:step];
-        }];
-    }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [self.parameterViewMode queryBatchDegree:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
-            [self.batchDegree batchContactlensDegrees:start End:end Step:step];
-        }];
-    }
-}
-
 #pragma mark //Set UI
 - (void)showParameterView
 {
-    [self queryBatchDegree];
-    
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeContactLenses) {
         [self.leftTitleLabel setText:@"度数"];
         [self.rightParameterView setHidden:YES];
@@ -215,7 +195,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.parameterTableView reloadData];
     
     if ([self.glasses filterType] == IPCTopFilterTypeLens && isLeft){
-        NSInteger startIndex = [[self.batchDegree batchSphs] indexOfObject:@"0.00"];
+        NSInteger startIndex = [[[IPCBatchDegreeObject instance] batchSphs] indexOfObject:@"0.00"];
         [self.parameterTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:startIndex inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
     }else{
         [self.parameterTableView scrollToTopAnimated:NO];
@@ -428,11 +408,11 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        return isLeft ? [[self.batchDegree batchSphs]count] : [[self.batchDegree batchCyls]count];
+        return isLeft ? [[[IPCBatchDegreeObject instance] batchSphs]count] : [[[IPCBatchDegreeObject instance] batchCyls]count];
     }else if ([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        return [self.batchDegree.readingDegrees count];
+        return [[IPCBatchDegreeObject instance].readingDegrees count];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        return self.batchDegree.contactLensDegrees.count;
+        return [IPCBatchDegreeObject instance].contactLensDegrees.count;
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         return array.count;
@@ -446,11 +426,11 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         cell = [[UINib nibWithNibName:@"IPCBatchParameterCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        [cell.parameterLabel setText:isLeft ? [self.batchDegree batchSphs][indexPath.row] : [self.batchDegree batchCyls][indexPath.row]];
+        [cell.parameterLabel setText:isLeft ? [[IPCBatchDegreeObject instance] batchSphs][indexPath.row] : [[IPCBatchDegreeObject instance] batchCyls][indexPath.row]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [cell.parameterLabel setText:self.batchDegree.readingDegrees[indexPath.row]];
+        [cell.parameterLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [cell.parameterLabel setText:self.batchDegree.contactLensDegrees[indexPath.row]];
+        [cell.parameterLabel setText:[IPCBatchDegreeObject instance].contactLensDegrees[indexPath.row]];
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         [cell.parameterLabel setText:array[indexPath.row]];
@@ -468,14 +448,14 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if ([_glasses filterType] == IPCTopFilterTypeLens) {
         if (isLeft) {
-            [self.leftParameterLabel setText:[self.batchDegree batchSphs][indexPath.row]];
+            [self.leftParameterLabel setText:[[IPCBatchDegreeObject instance] batchSphs][indexPath.row]];
         }else{
-            [self.rightParameterLabel setText:[self.batchDegree batchCyls][indexPath.row]];
+            [self.rightParameterLabel setText:[[IPCBatchDegreeObject instance] batchCyls][indexPath.row]];
         }
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [self.leftParameterLabel setText:self.batchDegree.readingDegrees[indexPath.row]];
+        [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
     }else if ([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [self.leftParameterLabel setText:self.batchDegree.contactLensDegrees[indexPath.row]];
+        [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].contactLensDegrees[indexPath.row]];
     }else{
         NSArray * array = customsizedArray[self.customsizedType];
         switch (self.customsizedType) {

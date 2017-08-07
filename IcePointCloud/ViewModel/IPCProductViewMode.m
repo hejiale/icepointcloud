@@ -112,6 +112,21 @@
                                       }];
 }
 
+- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat start, CGFloat end, CGFloat step))complete
+{
+    [IPCBatchRequestManager queryBatchContactLensConfig:type
+                                           SuccessBlock:^(id responseValue)
+     {
+         id values = responseValue[@"values"];
+         
+         if ([values isKindOfClass:[NSDictionary class]]) {
+             if (complete) {
+                 complete([values[@"startDegree"] floatValue],[values[@"endDegree"] floatValue],[values[@"step"] floatValue]);
+             }
+         }
+     } FailureBlock:^(NSError *error) {
+     }];
+}
 
 //Parse Normal Glass Data
 - (void)parseNormalGlassesData:(id)response

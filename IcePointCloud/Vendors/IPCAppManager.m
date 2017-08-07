@@ -56,6 +56,34 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
     return nil;
 }
 
+
+- (NSString *)classTypeName:(IPCTopFilterType)type
+{
+    switch (type)
+    {
+        case IPCTopFIlterTypeFrames:
+            return @"镜架";
+        case IPCTopFilterTypeLens:
+            return @"镜片";
+        case IPCTopFilterTypeSunGlasses:
+            return @"太阳眼镜";
+        case IPCTopFilterTypeCustomized:
+            return @"定制类眼镜";
+        case IPCTopFilterTypeReadingGlass:
+            return @"老花眼镜";
+        case IPCTopFilterTypeContactLenses:
+            return @"隐形眼镜";
+        case IPCTopFilterTypeAccessory:
+            return @"配件";
+        case IPCTopFilterTypeOthers:
+            return @"其它";
+        default:
+            break;
+    }
+    return nil;
+}
+
+
 - (void)logout
 {
     [IPCAppManager sharedManager].profile = nil;

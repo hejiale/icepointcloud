@@ -16,6 +16,7 @@
 @interface IPCSearchViewController : IPCPresentModeViewController <UITextFieldDelegate,UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, assign) id<IPCSearchViewControllerDelegate> searchDelegate;
+@property (nonatomic, assign) IPCTopFilterType filterType;
 
 - (void)showSearchProductViewWithSearchWord:(NSString *)word;
 - (void)showSearchCustomerViewWithSearchWord:(NSString *)word;

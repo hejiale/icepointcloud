@@ -70,19 +70,8 @@
                             <action selector="reduceCartAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="4ur-Hi-Ken"/>
                         </connections>
                     </button>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3A-bO-jTo">
-                        <rect key="frame" x="0.0" y="0.0" width="331" height="140"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="140" id="o8X-Td-61a"/>
-                        </constraints>
-                        <connections>
-                            <outlet property="delegate" destination="gTV-IL-0wX" id="vMo-SC-ueA"/>
-                        </connections>
-                    </scrollView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIP-c3-VGM">
-                        <rect key="frame" x="20" y="150" width="291" height="20"/>
+                        <rect key="frame" x="20" y="145" width="291" height="20"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Djy-mQ-nGY"/>
@@ -91,32 +80,39 @@
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xA6-Vh-bnS">
+                        <rect key="frame" x="50" y="10" width="231" height="120"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="120" id="Ehh-1z-n1f"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="YIP-c3-VGM" firstAttribute="top" secondItem="I3A-bO-jTo" secondAttribute="bottom" constant="10" id="4nU-u2-vOT"/>
-                <constraint firstItem="I3A-bO-jTo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="BoE-Nq-Ma9"/>
+                <constraint firstAttribute="trailing" secondItem="xA6-Vh-bnS" secondAttribute="trailing" constant="50" id="96v-EH-ID2"/>
                 <constraint firstAttribute="trailing" secondItem="ba3-fr-oCi" secondAttribute="trailing" constant="20" id="Cge-ga-qXG"/>
                 <constraint firstAttribute="bottom" secondItem="tjp-2f-ED0" secondAttribute="bottom" constant="20" id="H0O-nV-rGF"/>
                 <constraint firstItem="tjp-2f-ED0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="H6Z-Kn-5Ia"/>
+                <constraint firstItem="xA6-Vh-bnS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="LV4-gO-Ljm"/>
                 <constraint firstItem="ba3-fr-oCi" firstAttribute="leading" secondItem="zT7-2e-guu" secondAttribute="trailing" id="MBC-eJ-21E"/>
                 <constraint firstItem="ldI-Dd-6ZV" firstAttribute="leading" secondItem="zT7-2e-guu" secondAttribute="trailing" id="Q9P-sh-bPh"/>
                 <constraint firstAttribute="bottom" secondItem="ba3-fr-oCi" secondAttribute="bottom" constant="15" id="QCn-kz-KUH"/>
+                <constraint firstItem="xA6-Vh-bnS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="50" id="S25-eL-UiO"/>
                 <constraint firstAttribute="bottom" secondItem="zT7-2e-guu" secondAttribute="bottom" constant="15" id="WCo-kU-arb"/>
-                <constraint firstItem="I3A-bO-jTo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WZJ-Kx-dWK"/>
                 <constraint firstAttribute="bottom" secondItem="ldI-Dd-6ZV" secondAttribute="bottom" constant="15" id="ciU-CD-im0"/>
                 <constraint firstAttribute="trailing" secondItem="YIP-c3-VGM" secondAttribute="trailing" constant="20" id="lw4-Ug-Hey"/>
-                <constraint firstAttribute="trailing" secondItem="I3A-bO-jTo" secondAttribute="trailing" id="q9T-N1-BqF"/>
                 <constraint firstItem="YIP-c3-VGM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="xQa-mT-emw"/>
+                <constraint firstItem="YIP-c3-VGM" firstAttribute="top" secondItem="xA6-Vh-bnS" secondAttribute="bottom" constant="15" id="yTT-77-1Lh"/>
             </constraints>
             <size key="customSize" width="331" height="277"/>
             <connections>
                 <outlet property="addCartButton" destination="ba3-fr-oCi" id="rQh-YD-U60"/>
                 <outlet property="cartNumLabel" destination="zT7-2e-guu" id="3kh-Wd-b18"/>
-                <outlet property="imageScrollView" destination="I3A-bO-jTo" id="0WR-8c-d5a"/>
                 <outlet property="labelHeightConstraint" destination="Djy-mQ-nGY" id="g3j-2i-V8U"/>
                 <outlet property="priceLabel" destination="tjp-2f-ED0" id="2yG-Y4-QN9"/>
+                <outlet property="productImageView" destination="xA6-Vh-bnS" id="rXC-VD-iyh"/>
                 <outlet property="productNameLabel" destination="YIP-c3-VGM" id="Op2-gM-og1"/>
                 <outlet property="reduceButton" destination="ldI-Dd-6ZV" id="omf-xL-EM3"/>
                 <outlet property="reduceButtonLeading" destination="Q9P-sh-bPh" id="B9k-sZ-oVq"/>

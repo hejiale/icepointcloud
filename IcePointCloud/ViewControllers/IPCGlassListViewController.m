@@ -99,13 +99,16 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
+    [IPCCustomUI show];
     [self loadGlassesListData:^{
         [self reload];
+        [IPCCustomUI hiden];
     }];
 }
 
 #pragma mark //Load Data
-- (void)loadNormalProducts{
+- (void)loadNormalProducts
+{
     __weak typeof (self) weakSelf = self;
     
     dispatch_group_t group = dispatch_group_create();
@@ -148,6 +151,19 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
+//QUERY BATCH DEGREE
+- (void)queryBatchDegree
+{
+    if (self.glassListViewMode.currentType  == IPCTopFilterTypeReadingGlass) {
+        [self.glassListViewMode queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [[IPCBatchDegreeObject instance] batchReadingDegrees:start End:end Step:step];
+        }];
+    }else if (self.glassListViewMode.currentType == IPCTopFilterTypeContactLenses){
+        [self.glassListViewMode queryBatchDegree:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [[IPCBatchDegreeObject instance] batchContactlensDegrees:start End:end Step:step];
+        }];
+    }
+}
 
 #pragma mark //Clicked Events
 - (void)removeCover
@@ -192,6 +208,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
             [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf queryBatchDegree];
         } ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.refreshHeader beginRefreshing];
@@ -208,6 +225,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)presentSearchViewController{
     IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
     searchViewMode.searchDelegate = self;
+    searchViewMode.filterType = self.glassListViewMode.currentType;
     [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
     [self presentViewController:searchViewMode animated:YES completion:nil];
 }

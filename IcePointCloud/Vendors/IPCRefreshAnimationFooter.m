@@ -13,12 +13,8 @@
 
 - (void)prepare{
     [super prepare];
-    
-    [self.stateLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-    [self.stateLabel setTextColor:[UIColor lightGrayColor]];
-    [self setTitle:@"" forState: MJRefreshStateIdle];
-    [self setTitle:@"" forState:MJRefreshStatePulling];
-    [self setTitle:@"正在加载中..." forState:MJRefreshStateRefreshing];
+
+    self.mj_h = 0;
 }
 
 @end

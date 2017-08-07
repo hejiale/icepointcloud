@@ -10,9 +10,10 @@
 
 @protocol GlasslistCollectionViewCellDelegate;
 
-@interface IPCGlasslistCollectionViewCell : UICollectionViewCell<UIScrollViewDelegate>
+@interface IPCGlasslistCollectionViewCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIScrollView *imageScrollView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *addCartButton;
@@ -20,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *cartNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reduceButtonLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
-@property (strong, nonatomic) UIPageControl * imagePageControl;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 

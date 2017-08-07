@@ -38,7 +38,7 @@
 {
     [SVProgressHUD setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-    [SVProgressHUD setMinimumDismissTimeInterval:1.5f];
+    [SVProgressHUD setMinimumDismissTimeInterval:1.f];
     [SVProgressHUD showErrorWithStatus:message];
 }
 
@@ -46,7 +46,7 @@
 + (void)showSuccess:(NSString *)message{
     [SVProgressHUD setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-    [SVProgressHUD setMinimumDismissTimeInterval:2];
+    [SVProgressHUD setMinimumDismissTimeInterval:0.5f];
     [SVProgressHUD showSuccessWithStatus:message];
 }
 

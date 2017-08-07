@@ -30,8 +30,12 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     [self setNavigationBarStatus:NO];
     [self setNavigationTitle:@"收货地址"];
     [self setRightItem:@"icon_insert_btn" Selection:@selector(insertNewAddressAction)];
-    [self.addressTableView setTableFooterView:[[UIView alloc]init]];
+    
     [self loadAddressListData];
+    
+    [self.addressTableView setTableFooterView:[[UIView alloc]init]];
+    self.addressTableView.emptyAlertImage = @"icon_nonAddress";
+    self.addressTableView.emptyAlertTitle = @"暂未添加收货地址";
 }
 
 
@@ -80,17 +84,16 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 
 #pragma mark //Clicked Events
 - (void)insertNewAddressAction{
+    if (self.editAddressView) {
+        [self.editAddressView removeFromSuperview];self.editAddressView = nil;
+    }
     [self.view addSubview:self.editAddressView];
     [self.view bringSubviewToFront:self.editAddressView];
 }
 
 #pragma mark //UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return self.addressViewModel.addressList.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.addressViewModel.addressList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -98,10 +101,10 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCManagerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
-    IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.section];
+    IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.row];
     cell.addressMode = address;
     
-    if (indexPath.section == 0) {
+    if (indexPath.row == 0) {
         [cell.defaultButton setSelected:YES];
     }else{
         [cell.defaultButton setSelected:NO];
@@ -109,7 +112,6 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     __weak typeof(self) weakSelf = self;
     [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [IPCCustomUI show];
         [strongSelf setDefaultAddress:address.addressID];
     }];
     return cell;
@@ -125,7 +127,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-        IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.section];
+        IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.row];
         [IPCCurrentCustomer sharedManager].currentAddress = nil;
         [IPCCurrentCustomer sharedManager].currentAddress = address;
         [self.navigationController popViewControllerAnimated:YES];

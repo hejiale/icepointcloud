@@ -14,13 +14,11 @@
     [super awakeFromNib];
     // Initialization code
     
-    __weak typeof (self) weakSelf = self;
-    [self.imageScrollView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf showDetailAction];
+    self.productNameLabel.lineBreakMode = UILineBreakModeWordWrap | UILineBreakModeTailTruncation;
+    
+    [self.productImageView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
+        [self showDetailAction];
     }];
-    [self addSubview:self.imagePageControl];
-    [self bringSubviewToFront:self.imagePageControl];
 }
 
 
@@ -30,33 +28,8 @@
     if (_glasses) {
         [self resetBuyStatus];
         
-        __block NSMutableArray<IPCGlassesImage *> * images = [[NSMutableArray alloc]init];
-        
-        if (_glasses.isTryOn && self.isTrying) {
-            if ([_glasses imageWithType:IPCGlassesImageTypeFrontialNormal])
-                [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeFrontialNormal]];
-            
-            if ([_glasses imageWithType:IPCGlassesImageTypeProfileNormal])
-                [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeProfileNormal]];
-        }else{
-            if ([_glasses imageWithType:IPCGlassesImageTypeThumb]) {
-                [images addObject:[self.glasses imageWithType:IPCGlassesImageTypeThumb]];
-            }
-        }
-        
-        __block CGFloat originX = (self.jk_width - 183)/2;
-        
-        [images enumerateObjectsUsingBlock:^(IPCGlassesImage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
-         {
-             UIImageView * glassImageView = [[UIImageView alloc]initWithFrame:CGRectMake(idx*self.jk_width, 20, self.jk_width, 112)];
-             glassImageView.contentMode = UIViewContentModeScaleAspectFit;
-             [glassImageView setImageWithURL:[NSURL URLWithString:obj.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
-             [self.imageScrollView addSubview:glassImageView];
-         }];
-        
-        [self.imageScrollView setContentSize:CGSizeMake(images.count * self.jk_width, 0)];
-        [self.imageScrollView setContentOffset:CGPointZero];
-        self.imagePageControl.numberOfPages = images.count;
+        IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
+        [self.productImageView setImageURL:[NSURL URLWithString:glassImage.imageURL]];
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         
         [self.productNameLabel setText:_glasses.glassName];
@@ -84,19 +57,6 @@
         }
     }
 }
-
-
-#pragma mark //Set UI
-- (UIPageControl *)imagePageControl{
-    if (!_imagePageControl) {
-        _imagePageControl = [[UIPageControl alloc]initWithFrame:CGRectMake(0, self.imageScrollView.jk_bottom - 25, self.jk_width, 20)];
-        _imagePageControl.hidesForSinglePage = YES;
-        _imagePageControl.pageIndicatorTintColor = [[UIColor blackColor]colorWithAlphaComponent:0.2];
-        _imagePageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
-    }
-    return _imagePageControl;
-}
-
 
 #pragma mark //Clicked Events
 - (IBAction)addCartAction:(id)sender {
@@ -144,7 +104,8 @@
 }
 
 
-- (void)showDetailAction{
+- (void)showDetailAction
+{
     if ([self.delegate respondsToSelector:@selector(showProductDetail:)]) {
         [self.delegate showProductDetail:self];
     }
@@ -154,13 +115,7 @@
 - (void)resetBuyStatus{
     [self.reduceButton setHidden:YES];
     [self.cartNumLabel setHidden:YES];
-    [self.imageScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
 }
 
-#pragma mark //UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSInteger currentPage = scrollView.contentOffset.x / self.jk_width;
-    [self.imagePageControl setCurrentPage:currentPage];
-}
 
 @end

@@ -36,6 +36,12 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [self.searchTableView setTableFooterView:[[UIView alloc]init]];
     self.searchTableView.emptyAlertTitle = @"暂无搜索历史!";
     self.searchTableView.emptyAlertImage = @"exception_search";
+    
+    if (self.searchType == IPCSearchTypeProduct) {
+        [self.keywordTf setPlaceholder:[NSString stringWithFormat:@"搜索%@类商品",[[IPCAppManager sharedManager] classTypeName:self.filterType]]];
+    }else{
+        [self.keywordTf setPlaceholder:@"请输入搜索客户关键词..."];
+    }
 }
 
 

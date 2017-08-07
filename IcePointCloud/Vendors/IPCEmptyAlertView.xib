@@ -22,25 +22,25 @@
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-zk-e89">
-                    <rect key="frame" x="309" y="387" width="150" height="150"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wmF-zk-e89">
+                    <rect key="frame" x="284" y="372" width="200" height="180"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="150" id="UNY-dB-ODD"/>
-                        <constraint firstAttribute="width" constant="150" id="ubT-Dr-5Kk"/>
+                        <constraint firstAttribute="height" constant="180" id="UNY-dB-ODD"/>
+                        <constraint firstAttribute="width" constant="200" id="ubT-Dr-5Kk"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ae5-RC-kBz">
-                    <rect key="frame" x="0.0" y="542" width="768" height="20"/>
+                    <rect key="frame" x="0.0" y="572" width="768" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="4Px-97-HDz"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DZw-eg-jaI">
-                    <rect key="frame" x="384" y="582" width="0.0" height="30"/>
+                    <rect key="frame" x="384" y="612" width="0.0" height="30"/>
                     <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" id="JcU-vH-jgr"/>
@@ -62,7 +62,7 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ae5-RC-kBz" firstAttribute="top" secondItem="wmF-zk-e89" secondAttribute="bottom" constant="5" id="MfX-Bq-XbN"/>
+                <constraint firstItem="ae5-RC-kBz" firstAttribute="top" secondItem="wmF-zk-e89" secondAttribute="bottom" constant="20" id="MfX-Bq-XbN"/>
                 <constraint firstItem="DZw-eg-jaI" firstAttribute="top" secondItem="ae5-RC-kBz" secondAttribute="bottom" constant="20" id="Pno-Rs-BFP"/>
                 <constraint firstItem="DZw-eg-jaI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="R2m-PV-aw4"/>
                 <constraint firstAttribute="trailing" secondItem="ae5-RC-kBz" secondAttribute="trailing" id="eKP-Mi-rzE"/>

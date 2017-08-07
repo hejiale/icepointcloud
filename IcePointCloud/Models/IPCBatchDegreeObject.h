@@ -10,6 +10,8 @@
 
 @interface IPCBatchDegreeObject : NSObject
 
++ (IPCBatchDegreeObject *)instance;
+
 @property (nonatomic, strong) NSMutableArray<NSString *> * readingDegrees;
 @property (nonatomic, strong) NSMutableArray<NSString *> * contactLensDegrees;
 

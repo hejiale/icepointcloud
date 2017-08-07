@@ -207,6 +207,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
 - (void)beginReloadTableView{
+    if (self.recommendedButton.selected){
+        [self.refreshHeader endRefreshing];
+        [self.refreshFooter endRefreshing];
+        return;
+    }
+    
     self.glassListViewMode.currentPage = 0;
     self.glassListViewMode.isBeginLoad = YES;
     self.productCollectionView.mj_footer.hidden = NO;
@@ -237,10 +243,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
+    [IPCCustomUI show];
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf reload];
+        [IPCCustomUI hiden];
     }];
 }
 
@@ -541,6 +549,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)presentSearchViewController{
     IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
     searchViewMode.searchDelegate = self;
+    searchViewMode.filterType = self.glassListViewMode.currentType;
     [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
     [self presentViewController:searchViewMode animated:YES completion:nil];
 }

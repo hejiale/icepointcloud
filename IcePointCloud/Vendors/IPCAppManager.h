@@ -37,6 +37,9 @@ extern NSString *const  IPCChooseCustomerNotification;
  *  Glasses Property Class Type
  */
 - (NSString *)classType:(IPCTopFilterType)type;
+
+- (NSString *)classTypeName:(IPCTopFilterType)type;
+
 /**
  *  Log out
  */
