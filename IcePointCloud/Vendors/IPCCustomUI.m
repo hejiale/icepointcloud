@@ -32,7 +32,7 @@
     for (NSInteger i = 1 ; i< 17; i++) {
         [loadingArray addObject:[NSString stringWithFormat:@"loading_%ld",(long)i]];
     }
-    [IPCProgressHUD showImages:loadingArray status:@"加载中..."];
+    [IPCProgressHUD showImages:loadingArray status:nil];
 }
 
 + (void)hiden{

@@ -11,21 +11,52 @@
 #import "IPCInsertCustomerViewController.h"
 #import "IPCCustomerDetailViewController.h"
 #import "IPCSearchViewController.h"
+#import "IPCSortCustomer.h"
+#import "IPCCollectionViewIndex.h"
 
 static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentifier";
 
-@interface IPCSearchCustomerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewControllerDelegate>
+@interface CollectionHeadView : UICollectionReusableView
+
+@property (strong, nonatomic) UILabel *label;
+
+-(void)setLabelText:(NSString *)text;
+@end
+
+@implementation CollectionHeadView
+
+- (id)initWithFrame:(CGRect)frame
 {
-    NSInteger  currentPage;
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        self.backgroundColor = [UIColor colorWithRed:232.0f/255.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:0.9];
+        self.label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, 40)];
+        self.label.font = [UIFont systemFontOfSize:15];
+        [self.label setTextColor:[UIColor darkGrayColor]];
+        [self addSubview:self.label];
+    }
+    return self;
+}
+
+- (void) setLabelText:(NSString *)text
+{
+    self.label.text = text;
+}
+
+@end
+
+@interface IPCSearchCustomerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewControllerDelegate,IPCCollectionViewIndexDelegate>
+{
     NSString * searchKeyWord;
+    NSArray *_rowArr;//row arr
+    NSArray *_sectionArr;//section arr
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *insertButton;
+@property (strong, nonatomic) IPCCollectionViewIndex * collectionViewIndex;
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
 @property (strong, nonatomic) NSMutableArray<IPCCustomerMode *> * customerArray;
-@property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
-@property (nonatomic, strong) IPCRefreshAnimationFooter     *refreshFooter;
-
 
 @end
 
@@ -37,7 +68,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     // Do any additional setup after loading the view from its nib.
     
     [self loadCollectionView];
-    [self.refreshHeader beginRefreshing];
+    [self beginReloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -72,44 +103,52 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [_customerCollectionView setCollectionViewLayout:layout];
     _customerCollectionView.emptyAlertImage = @"exception_search";
     _customerCollectionView.emptyAlertTitle = @"未查询到客户信息!";
-    _customerCollectionView.mj_header = self.refreshHeader;
-    _customerCollectionView.mj_footer = self.refreshFooter;
+    
     [_customerCollectionView registerNib:[UINib nibWithNibName:@"IPCCustomerCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:customerIdentifier];
+    [_customerCollectionView registerClass:[CollectionHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+    
+    [self.view addSubview:self.collectionViewIndex];
+    [self.view bringSubviewToFront:self.collectionViewIndex];
 }
 
-
-- (IPCRefreshAnimationHeader *)refreshHeader{
-    if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadData)];
+- (IPCCollectionViewIndex *)collectionViewIndex
+{
+    if (!_collectionViewIndex) {
+        _collectionViewIndex = [[IPCCollectionViewIndex alloc]initWithFrame:CGRectMake(self.view.jk_width - 20, 0, 20, self.view.jk_height)];
+        _collectionViewIndex.isFrameLayer = NO;
     }
-    return _refreshHeader;
-}
-
-- (IPCRefreshAnimationFooter *)refreshFooter{
-    if (!_refreshFooter)
-        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreData)];
-    return _refreshFooter;
+    return _collectionViewIndex;
 }
 
 #pragma mark //Refresh Method
 - (void)beginReloadData{
-    currentPage = 1;
     [self.customerArray removeAllObjects];
-    self.customerCollectionView.mj_footer.hidden = NO;
     [self refreshData];
 }
 
-- (void)loadMoreData{
-    currentPage++;
-    [self refreshData];
-}
 
 - (void)refreshData{
     [self queryCustomerInfo:^{
-        [self.customerCollectionView reloadData];
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
+        [self reload];
     }];
+}
+
+- (void)reload{
+    [self.customerCollectionView reloadData];
+    
+    UIEdgeInsets edgeInsets = self.customerCollectionView.contentInset;
+    
+    NSMutableArray * array = [[NSMutableArray alloc]initWithArray:_sectionArr];
+    [array  removeObjectAtIndex:0];
+    
+    self.collectionViewIndex.titleIndexes = array;
+    
+    CGRect rect = _collectionViewIndex.frame;
+    rect.size.height = _collectionViewIndex.titleIndexes.count * 16;
+    rect.origin.y = (self.view.jk_height - rect.size.height - edgeInsets.top - edgeInsets.bottom) / 2 + edgeInsets.top + 20;
+    _collectionViewIndex.frame = rect;
+    
+     _collectionViewIndex.collectionDelegate = self;
 }
 
 
@@ -117,13 +156,14 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)queryCustomerInfo:(void(^)())complete
 {
     [IPCCustomerRequestManager queryCustomerListWithKeyword:searchKeyWord ? : @""
-                                                       Page:currentPage
+                                                       Page:1
                                                SuccessBlock:^(id responseValue)
      {
          IPCCustomerList * customerList = [[IPCCustomerList alloc]initWithResponseValue:responseValue];
-         [customerList.list enumerateObjectsUsingBlock:^(IPCCustomerMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-             [self.customerArray addObject:obj];
-         }];
+         
+         _rowArr = [IPCSortCustomer getCustomerListDataBy:customerList.list];
+         _sectionArr = [IPCSortCustomer getCustomerListSectionBy:[_rowArr mutableCopy]];
+         
          if (complete) {
              complete();
          }
@@ -149,23 +189,50 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 }
 
 #pragma mark //UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
+    return _rowArr.count;
+}
+
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return self.customerArray.count;
+    return [_rowArr[section] count];
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     IPCCustomerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:customerIdentifier forIndexPath:indexPath];
     
-    IPCCustomerMode * customer = self.customerArray[indexPath.row];
+    IPCCustomerMode * customer = _rowArr[indexPath.section][indexPath.row];
     cell.currentCustomer = customer;
     return cell;
 }
 
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    CGSize size = {collectionView.jk_width,40};
+    return size;
+}
+
+- (UICollectionReusableView *) collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    
+    CollectionHeadView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader)
+    {
+        CollectionHeadView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+    
+        [headerView setLabelText:_sectionArr[indexPath.section+1]];
+        reusableview = headerView;
+    }
+    return reusableview;
+}
+
+
 #pragma mark //UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (self.customerArray.count) {
-        IPCCustomerMode * customer = self.customerArray[indexPath.row];
+        IPCCustomerMode * customer = _rowArr[indexPath.section][indexPath.row];
         
         if (customer) {
             if ([IPCInsertCustomer instance].isInsertStatus) {
@@ -187,10 +254,19 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     }
 }
 
+#pragma mark //IPCCollectionViewIndexDelegate
+-(void)collectionViewIndex:(IPCCollectionViewIndex *)collectionViewIndex didselectionAtIndex:(NSInteger)index withTitle:(NSString *)title{
+    
+    if ([self.customerCollectionView numberOfSections] > index && index > -1)
+    {
+        [self.customerCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:index] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+    }
+}
+
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword{
     searchKeyWord = keyword;
-    [self.refreshHeader beginRefreshing];
+    [self beginReloadData];
 }
 
 

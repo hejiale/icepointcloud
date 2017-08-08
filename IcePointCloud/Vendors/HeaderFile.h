@@ -62,5 +62,6 @@
 #import "UITextField+Extend.h"
 #import "NSDictionary+DeleteNull.h"
 #import   "AFHTTPSessionManager+Extend.h"
+#import "NSString+Utils.h"
 
 #endif /* HeaderFile_h */

@@ -102,13 +102,13 @@
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).offset(0);
         make.centerY.equalTo(self.mas_centerY).offset(0);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(100);
+        make.width.mas_equalTo(80);
+        make.height.mas_equalTo(80);
     }];
     
     [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.contentView.mas_centerX).offset(0);
-        make.centerY.equalTo(self.contentView.mas_centerY).offset(-5);
+        make.centerY.equalTo(self.contentView.mas_centerY).offset(0);
         make.width.mas_equalTo(30);
         make.height.mas_equalTo(30);
     }];
@@ -179,7 +179,7 @@
 - (UIVisualEffectView *)contentView{
     if (!_contentView) {
         _contentView = [[UIVisualEffectView alloc]init];
-        [_contentView setBackgroundColor:[UIColor whiteColor]];
+        [_contentView setBackgroundColor:[UIColor clearColor]];
         _contentView.layer.masksToBounds = YES;
         _contentView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
