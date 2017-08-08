@@ -71,7 +71,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     
     [_customerCollectionView setCollectionViewLayout:layout];
     _customerCollectionView.emptyAlertImage = @"exception_search";
-    _customerCollectionView.emptyAlertTitle = @"未查询到该客户信息!";
+    _customerCollectionView.emptyAlertTitle = @"未查询到客户信息!";
     _customerCollectionView.mj_header = self.refreshHeader;
     _customerCollectionView.mj_footer = self.refreshFooter;
     [_customerCollectionView registerNib:[UINib nibWithNibName:@"IPCCustomerCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:customerIdentifier];

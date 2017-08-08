@@ -7,6 +7,7 @@
 //
 
 #import "IPCCustomUI.h"
+#import "IPCProgressHUD.h"
 
 @implementation IPCCustomUI
 
@@ -26,17 +27,21 @@
 
 #pragma mark //Warning prompt box
 + (void)show{
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-    [SVProgressHUD show];
+    NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
+    
+    for (NSInteger i = 1 ; i< 17; i++) {
+        [loadingArray addObject:[NSString stringWithFormat:@"loading_%ld",(long)i]];
+    }
+    [IPCProgressHUD showImages:loadingArray status:@"加载中..."];
 }
 
 + (void)hiden{
-    [SVProgressHUD dismiss];
+    [IPCProgressHUD dismiss];
 }
 
 + (void)showError:(NSString *)message
 {
-    [SVProgressHUD setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
+    [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:1.f];
     [SVProgressHUD showErrorWithStatus:message];
@@ -44,9 +49,9 @@
 
 
 + (void)showSuccess:(NSString *)message{
-    [SVProgressHUD setFont:[UIFont systemFontOfSize:14 weight:UIFontWeightThin]];
+    [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-    [SVProgressHUD setMinimumDismissTimeInterval:0.5f];
+    [SVProgressHUD setMinimumDismissTimeInterval:0.3f];
     [SVProgressHUD showSuccessWithStatus:message];
 }
 

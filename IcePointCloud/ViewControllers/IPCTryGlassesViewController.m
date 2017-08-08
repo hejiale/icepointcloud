@@ -116,7 +116,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.productCollectionView.mj_header = self.refreshHeader;
     self.productCollectionView.mj_footer = self.refreshFooter;
     self.productCollectionView.emptyAlertImage = @"exception_search";
-    self.productCollectionView.emptyAlertTitle = @"没有找到可试戴的眼镜!";
+    self.productCollectionView.emptyAlertTitle = @"未搜索到可试戴的眼镜!";
     [self.refreshHeader beginRefreshing];
 }
 
@@ -184,10 +184,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (IPCSwitch *)compareSwitch{
     if (!_compareSwitch) {
-        _compareSwitch = [[IPCSwitch alloc] initWithFrame:CGRectMake(55, self.topOperationBar.frame.size.height/2-10, 50, 20)];
+        _compareSwitch = [[IPCSwitch alloc] initWithFrame:CGRectMake(5, self.topOperationBar.frame.size.height/2-10, 42, 21)];
         [_compareSwitch addTarget:self action:@selector(onSwitchPressed:) forControlEvents:UIControlEventValueChanged];
-        [_compareSwitch setTintColor:[UIColor darkGrayColor]];
-        [_compareSwitch setOnTintColor:[UIColor darkGrayColor]];
+        [_compareSwitch setTintColor:[UIColor whiteColor]];
+        [_compareSwitch setOnTintColor:COLOR_RGB_BLUE];
         [_compareSwitch setThumbTintColor:[UIColor whiteColor]];
     }
     return _compareSwitch;

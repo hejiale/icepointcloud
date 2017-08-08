@@ -235,6 +235,7 @@
 		CB7408281EC94461001DD704 /* IPCPersonInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7408261EC94461001DD704 /* IPCPersonInputCell.xib */; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
+		CB76E0281F395E570072DCA2 /* IPCProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CB76E0271F395E570072DCA2 /* IPCProgressHUD.m */; };
 		CB79C0FF1EA1FA5700078CCA /* IPCHeadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79C0FE1EA1FA5700078CCA /* IPCHeadImage.m */; };
 		CB79C1021EA20BFE00078CCA /* IPCEmployeePerformanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB79C1011EA20BFE00078CCA /* IPCEmployeePerformanceView.m */; };
 		CB79C1051EA20C3600078CCA /* IPCEmployeePerformanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB79C1041EA20C3600078CCA /* IPCEmployeePerformanceView.xib */; };
@@ -696,6 +697,8 @@
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
+		CB76E0261F395E570072DCA2 /* IPCProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCProgressHUD.h; path = IcePointCloud/Vendors/IPCProgressHUD.h; sourceTree = SOURCE_ROOT; };
+		CB76E0271F395E570072DCA2 /* IPCProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCProgressHUD.m; path = IcePointCloud/Vendors/IPCProgressHUD.m; sourceTree = SOURCE_ROOT; };
 		CB79C0FD1EA1FA5700078CCA /* IPCHeadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCHeadImage.h; sourceTree = "<group>"; };
 		CB79C0FE1EA1FA5700078CCA /* IPCHeadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCHeadImage.m; sourceTree = "<group>"; };
 		CB79C1001EA20BFE00078CCA /* IPCEmployeePerformanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEmployeePerformanceView.h; sourceTree = "<group>"; };
@@ -1725,6 +1728,15 @@
 			name = Employee;
 			sourceTree = "<group>";
 		};
+		CB76E0291F395E640072DCA2 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				CB76E0261F395E570072DCA2 /* IPCProgressHUD.h */,
+				CB76E0271F395E570072DCA2 /* IPCProgressHUD.m */,
+			);
+			name = HUD;
+			sourceTree = "<group>";
+		};
 		CB79C1031EA20C0200078CCA /* EmployeePerformance */ = {
 			isa = PBXGroup;
 			children = (
@@ -1809,11 +1821,12 @@
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				CB76E0291F395E640072DCA2 /* HUD */,
 				CBC419E41F03759500387F9C /* Custom */,
 				CBC419DE1F0343E700387F9C /* Button */,
 				CBC419E01F03441A00387F9C /* EmptyAlert */,
-				CBC419DF1F03440100387F9C /* Progress */,
-				CBC419E11F03445200387F9C /* Swipe */,
+				CBC419DF1F03440100387F9C /* ProgressBar */,
+				CBC419E11F03445200387F9C /* LeftSwipe */,
 				CBC419E21F03446A00387F9C /* Switch */,
 				CBC419E31F03447B00387F9C /* TopCell */,
 				04A202141D7FE3EC00F2A681 /* Refresh */,
@@ -1990,13 +2003,13 @@
 			name = Button;
 			sourceTree = "<group>";
 		};
-		CBC419DF1F03440100387F9C /* Progress */ = {
+		CBC419DF1F03440100387F9C /* ProgressBar */ = {
 			isa = PBXGroup;
 			children = (
 				CBD8DC651EADF5B700AB3DE0 /* IPCProgressView.h */,
 				CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */,
 			);
-			name = Progress;
+			name = ProgressBar;
 			sourceTree = "<group>";
 		};
 		CBC419E01F03441A00387F9C /* EmptyAlert */ = {
@@ -2009,13 +2022,13 @@
 			name = EmptyAlert;
 			sourceTree = "<group>";
 		};
-		CBC419E11F03445200387F9C /* Swipe */ = {
+		CBC419E11F03445200387F9C /* LeftSwipe */ = {
 			isa = PBXGroup;
 			children = (
 				CBAE2AF61EE6493B0081B0BB /* IPCSwipeView.h */,
 				CBAE2AF71EE6493B0081B0BB /* IPCSwipeView.m */,
 			);
-			name = Swipe;
+			name = LeftSwipe;
 			sourceTree = "<group>";
 		};
 		CBC419E21F03446A00387F9C /* Switch */ = {
@@ -2696,6 +2709,7 @@
 				04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */,
 				CB5CC4901E8E00830091D0FD /* UITextField+Extend.m in Sources */,
 				CBBB4CA41EE54945002BA911 /* IPCPayTypeRecordCell.m in Sources */,
+				CB76E0281F395E570072DCA2 /* IPCProgressHUD.m in Sources */,
 				CBCF57D41ECEC43C004747C9 /* IPCPayOrderMemoCell.m in Sources */,
 				CB1B54ED1EA354FB006ED851 /* IPCPointValueMode.m in Sources */,
 				CB3FB0691EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m in Sources */,

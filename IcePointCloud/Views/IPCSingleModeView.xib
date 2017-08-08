@@ -38,7 +38,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="45" id="1mV-rk-srB"/>
                             </constraints>
-                            <state key="normal" image="icon_shrinkscreen">
+                            <state key="normal" image="icon_fullscreen">
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -132,6 +132,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="icon_shrinkscreen" width="22" height="22"/>
+        <image name="icon_fullscreen" width="22" height="23"/>
     </resources>
 </document>

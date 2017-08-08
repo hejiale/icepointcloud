@@ -66,7 +66,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.glassListCollectionView registerNib:[UINib nibWithNibName:@"IPCGlasslistCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:glassListCellIdentifier];
     self.glassListCollectionView.mj_header = self.refreshHeader;
     self.glassListCollectionView.mj_footer = self.refreshFooter;
-    self.glassListCollectionView.emptyAlertTitle = @"没有找到符合条件的商品";
+    self.glassListCollectionView.emptyAlertTitle = @"未搜索到任何商品";
     self.glassListCollectionView.emptyAlertImage = @"exception_search";
     [self.refreshHeader beginRefreshing];
 }

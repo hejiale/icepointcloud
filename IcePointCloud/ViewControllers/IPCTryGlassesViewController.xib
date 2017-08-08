@@ -43,18 +43,8 @@
                         <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="pAq-87-Q7I" userLabel="TopBar">
                             <rect key="frame" x="0.0" y="0.0" width="531" height="50"/>
                             <subviews>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="单个" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7p-EU-slC">
-                                    <rect key="frame" x="20" y="14" width="30" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="hdk-SU-f2w"/>
-                                        <constraint firstAttribute="height" constant="21" id="iHR-bc-Qb2"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="对比" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NHn-vI-avD">
-                                    <rect key="frame" x="109" y="14" width="42" height="21"/>
+                                    <rect key="frame" x="60" y="14" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="1eq-ho-Hf1"/>
                                         <constraint firstAttribute="width" constant="42" id="p0Q-FG-Gvs"/>
@@ -127,15 +117,13 @@
                             <constraints>
                                 <constraint firstItem="bmP-cc-CMv" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="0hm-Em-haS"/>
                                 <constraint firstAttribute="height" constant="50" id="8KR-r8-xcg"/>
-                                <constraint firstItem="NHn-vI-avD" firstAttribute="leading" secondItem="i7p-EU-slC" secondAttribute="trailing" constant="59" id="BZA-Yw-pb5"/>
                                 <constraint firstItem="aGI-mv-LLK" firstAttribute="leading" secondItem="bmP-cc-CMv" secondAttribute="trailing" constant="20" id="IWh-CE-f2c"/>
-                                <constraint firstItem="i7p-EU-slC" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="MgN-Jo-3FO"/>
                                 <constraint firstItem="369-Pi-ySz" firstAttribute="leading" secondItem="aGI-mv-LLK" secondAttribute="trailing" constant="20" id="Stl-Lx-x5o"/>
                                 <constraint firstItem="369-Pi-ySz" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="XZv-to-Yyf"/>
+                                <constraint firstItem="NHn-vI-avD" firstAttribute="leading" secondItem="pAq-87-Q7I" secondAttribute="leading" constant="60" id="bJg-XF-ICM"/>
                                 <constraint firstAttribute="trailing" secondItem="369-Pi-ySz" secondAttribute="trailing" constant="5" id="fdD-Hf-CPh"/>
                                 <constraint firstItem="aGI-mv-LLK" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="jPV-d5-1gm"/>
                                 <constraint firstItem="NHn-vI-avD" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="s2W-WJ-s0a"/>
-                                <constraint firstItem="i7p-EU-slC" firstAttribute="leading" secondItem="pAq-87-Q7I" secondAttribute="leading" constant="20" id="tUf-cj-24B"/>
                                 <constraint firstItem="RwU-zi-wli" firstAttribute="centerY" secondItem="pAq-87-Q7I" secondAttribute="centerY" id="tob-IB-nvm"/>
                                 <constraint firstItem="bmP-cc-CMv" firstAttribute="leading" secondItem="RwU-zi-wli" secondAttribute="trailing" constant="20" id="yuw-TJ-2lQ"/>
                             </constraints>
@@ -189,7 +177,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfO-au-DLq">
-                            <rect key="frame" x="246" y="0.0" width="246.5" height="48"/>
+                            <rect key="frame" x="246.5" y="0.0" width="246.5" height="48"/>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                             <state key="normal" title="热销排行">
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -333,7 +321,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="610" y="-314"/>
+            <point key="canvasLocation" x="424" y="-535"/>
         </view>
         <view contentMode="scaleToFill" id="ef0-Gk-NQM" userLabel="PhotoDeleteConfirmView">
             <rect key="frame" x="0.0" y="0.0" width="135" height="70"/>
@@ -369,7 +357,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="64.5" y="-254"/>
+            <point key="canvasLocation" x="10" y="-419"/>
         </view>
         <view contentMode="scaleToFill" id="uyA-aR-3T6">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="833"/>
@@ -418,7 +406,7 @@
     </objects>
     <resources>
         <image name="icon_scrolls_to_top" width="52" height="52"/>
-        <image name="icon_share" width="23" height="23"/>
+        <image name="icon_share" width="22" height="22"/>
         <image name="icon_try_camera" width="90" height="86"/>
         <image name="icon_try_library" width="91" height="86"/>
         <image name="match_top_btn_camera" width="20" height="19"/>
