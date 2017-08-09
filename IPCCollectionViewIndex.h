@@ -34,14 +34,7 @@
  *  @param index               触发的索引的下标
  *  @param title               触发的索引的文字
  */
--(void)collectionViewIndex:(IPCCollectionViewIndex *)collectionViewIndex didselectionAtIndex:(NSInteger)index withTitle:(NSString *)title;
-
-/**
- *  开始触摸索引
- *
- *  @param tableViewIndex 触发tableViewIndexTouchesBegan对象
- */
-- (void)collectionViewIndexTouchesBegan:(IPCCollectionViewIndex *)collectionViewIndex;
+-(void)collectionViewIndex:(IPCCollectionViewIndex *)collectionViewIndex didselectionAtIndex:(NSInteger)index withTitle:(NSString *)title Point:(CGPoint)point;
 
 
 /**

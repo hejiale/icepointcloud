@@ -28,7 +28,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [super awakeFromNib];
     // Initialization code
     
-    [IPCCustomUI clearAutoCorrection:self.mainView];
+    [IPCCommonUI clearAutoCorrection:self.mainView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.mainView];
     [self.birthdayTextField setRightButton:self Action:@selector(showDatePickViewAction) OnView:self.packUpView];
     [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.mainView];

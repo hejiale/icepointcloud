@@ -69,15 +69,15 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
     __block NSString *cofirmpwd   = [[self inputText:2].text jk_trimmingWhitespace];
     
     if (oldPwd.length && pwd.length && cofirmpwd.length) {
-        [IPCCustomUI show];
+        [IPCCommonUI show];
         [IPCUserRequestManager updatePasswordWithOldPassword:oldPwd
                                               UpdatePassword:cofirmpwd
                                                 SuccessBlock:^(id responseValue)
          {
-             [IPCCustomUI hiden];
+             [IPCCommonUI hiden];
              self.CloseBlock();
          } FailureBlock:^(NSError *error) {
-             [IPCCustomUI showError:@"修改用户密码失败!"];
+             [IPCCommonUI showError:@"修改用户密码失败!"];
          }];
     }
 }

@@ -200,7 +200,7 @@
 		CB5CC4751E8E00500091D0FD /* IPCAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4691E8E00500091D0FD /* IPCAppManager.m */; };
 		CB5CC4761E8E00500091D0FD /* IPCCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC46B1E8E00500091D0FD /* IPCCheckVersion.m */; };
 		CB5CC4771E8E00500091D0FD /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC46D1E8E00500091D0FD /* IPCCommon.m */; };
-		CB5CC4781E8E00500091D0FD /* IPCCustomUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */; };
+		CB5CC4781E8E00500091D0FD /* IPCCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4701E8E00500091D0FD /* IPCCommonUI.m */; };
 		CB5CC4791E8E00500091D0FD /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */; };
 		CB5CC47A1E8E00500091D0FD /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4741E8E00500091D0FD /* IPCReachability.m */; };
 		CB5CC48B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */; };
@@ -635,8 +635,8 @@
 		CB5CC46C1E8E00500091D0FD /* IPCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCommon.h; path = IcePointCloud/Vendors/IPCCommon.h; sourceTree = SOURCE_ROOT; };
 		CB5CC46D1E8E00500091D0FD /* IPCCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCommon.m; path = IcePointCloud/Vendors/IPCCommon.m; sourceTree = SOURCE_ROOT; };
 		CB5CC46E1E8E00500091D0FD /* IPCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCore.h; path = IcePointCloud/Vendors/IPCCore.h; sourceTree = SOURCE_ROOT; };
-		CB5CC46F1E8E00500091D0FD /* IPCCustomUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCustomUI.h; path = IcePointCloud/Vendors/IPCCustomUI.h; sourceTree = SOURCE_ROOT; };
-		CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCustomUI.m; path = IcePointCloud/Vendors/IPCCustomUI.m; sourceTree = SOURCE_ROOT; };
+		CB5CC46F1E8E00500091D0FD /* IPCCommonUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCommonUI.h; path = IcePointCloud/Vendors/IPCCommonUI.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4701E8E00500091D0FD /* IPCCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCommonUI.m; path = IcePointCloud/Vendors/IPCCommonUI.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4711E8E00500091D0FD /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPlatformService.h; path = IcePointCloud/Vendors/IPCPlatformService.h; sourceTree = SOURCE_ROOT; };
 		CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPlatformService.m; path = IcePointCloud/Vendors/IPCPlatformService.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4731E8E00500091D0FD /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCReachability.h; path = IcePointCloud/Vendors/IPCReachability.h; sourceTree = SOURCE_ROOT; };
@@ -1469,28 +1469,28 @@
 		04EAF91B1D53199D00A4A66F /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				CB76E02D1F39AB080072DCA2 /* NSString+Utils.h */,
-				CB76E02E1F39AB080072DCA2 /* NSString+Utils.m */,
 				CB5CC47B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.h */,
 				CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */,
+				CBF68D001E8FA92F001DA929 /* NSDictionary+DeleteNull.h */,
+				CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */,
+				CB76E02D1F39AB080072DCA2 /* NSString+Utils.h */,
+				CB76E02E1F39AB080072DCA2 /* NSString+Utils.m */,
 				CB5CC4C91E8E24B20091D0FD /* UICollectionView+Alert.h */,
 				CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */,
-				CB5CC4C61E8E245B0091D0FD /* UITableView+Alert.h */,
-				CB5CC4C71E8E245B0091D0FD /* UITableView+Alert.m */,
 				CB5CC4811E8E00830091D0FD /* UIImage+Face.h */,
 				CB5CC4821E8E00830091D0FD /* UIImage+Face.m */,
+				CB5CC4C61E8E245B0091D0FD /* UITableView+Alert.h */,
+				CB5CC4C71E8E245B0091D0FD /* UITableView+Alert.m */,
 				CB5CC4851E8E00830091D0FD /* UITextField+Extend.h */,
 				CB5CC4861E8E00830091D0FD /* UITextField+Extend.m */,
+				CBF6CFED1F14768200F02ECF /* UIView+Badge.h */,
+				CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */,
 				CB5CC4C31E8E23F00091D0FD /* UIView+Border.h */,
 				CB5CC4C41E8E23F00091D0FD /* UIView+Border.m */,
 				CB5CC4891E8E00830091D0FD /* UIView+GestureRecognizerBlock.h */,
 				CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */,
 				CB5CC4BD1E8E01670091D0FD /* UIViewController+Extend.h */,
 				CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */,
-				CBF68D001E8FA92F001DA929 /* NSDictionary+DeleteNull.h */,
-				CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */,
-				CBF6CFED1F14768200F02ECF /* UIView+Badge.h */,
-				CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -1748,13 +1748,13 @@
 			name = HUD;
 			sourceTree = "<group>";
 		};
-		CB76E0331F39B7970072DCA2 /* CollectionViewIndex */ = {
+		CB76E0331F39B7970072DCA2 /* CollectionSectionIndex */ = {
 			isa = PBXGroup;
 			children = (
 				CB76E0341F39B7B20072DCA2 /* IPCCollectionViewIndex.h */,
 				CB76E0351F39B7B20072DCA2 /* IPCCollectionViewIndex.m */,
 			);
-			name = CollectionViewIndex;
+			name = CollectionSectionIndex;
 			sourceTree = "<group>";
 		};
 		CB79C1031EA20C0200078CCA /* EmployeePerformance */ = {
@@ -1841,16 +1841,16 @@
 		CB9187131E8CAFDA00D59487 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				CB76E0331F39B7970072DCA2 /* CollectionViewIndex */,
-				CB76E0291F395E640072DCA2 /* HUD */,
-				CBC419E41F03759500387F9C /* Custom */,
-				CBC419DE1F0343E700387F9C /* Button */,
+				CBC419DE1F0343E700387F9C /* DIYButton */,
+				CB76E0331F39B7970072DCA2 /* CollectionSectionIndex */,
+				CBC419E41F03759500387F9C /* Common */,
 				CBC419E01F03441A00387F9C /* EmptyAlert */,
-				CBC419DF1F03440100387F9C /* ProgressBar */,
+				CB76E0291F395E640072DCA2 /* HUD */,
 				CBC419E11F03445200387F9C /* LeftSwipe */,
+				CBC419DF1F03440100387F9C /* ProgressBar */,
+				04A202141D7FE3EC00F2A681 /* Refresh */,
 				CBC419E21F03446A00387F9C /* Switch */,
 				CBC419E31F03447B00387F9C /* TopCell */,
-				04A202141D7FE3EC00F2A681 /* Refresh */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -2015,7 +2015,7 @@
 			name = PayTypeRecord;
 			sourceTree = "<group>";
 		};
-		CBC419DE1F0343E700387F9C /* Button */ = {
+		CBC419DE1F0343E700387F9C /* DIYButton */ = {
 			isa = PBXGroup;
 			children = (
 				CB5CC4931E8E00B70091D0FD /* IPCDynamicImageTextButton.h */,
@@ -2023,7 +2023,7 @@
 				CB5CC4951E8E00B70091D0FD /* IPCStaticImageTextButton.h */,
 				CB5CC4961E8E00B70091D0FD /* IPCStaticImageTextButton.m */,
 			);
-			name = Button;
+			name = DIYButton;
 			sourceTree = "<group>";
 		};
 		CBC419DF1F03440100387F9C /* ProgressBar */ = {
@@ -2073,13 +2073,13 @@
 			name = TopCell;
 			sourceTree = "<group>";
 		};
-		CBC419E41F03759500387F9C /* Custom */ = {
+		CBC419E41F03759500387F9C /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				CB5CC46F1E8E00500091D0FD /* IPCCustomUI.h */,
-				CB5CC4701E8E00500091D0FD /* IPCCustomUI.m */,
+				CB5CC46F1E8E00500091D0FD /* IPCCommonUI.h */,
+				CB5CC4701E8E00500091D0FD /* IPCCommonUI.m */,
 			);
-			name = Custom;
+			name = Common;
 			sourceTree = "<group>";
 		};
 		CBC419E51F038B6900387F9C /* Alert */ = {
@@ -2789,7 +2789,7 @@
 				9EF32099199334DB004FC5B9 /* IPCMatchItem.m in Sources */,
 				04C9F7AC1DEEB6F3001258B2 /* IPCEmployeListCell.m in Sources */,
 				CB76E02F1F39AB080072DCA2 /* NSString+Utils.m in Sources */,
-				CB5CC4781E8E00500091D0FD /* IPCCustomUI.m in Sources */,
+				CB5CC4781E8E00500091D0FD /* IPCCommonUI.m in Sources */,
 				CB5CC4A71E8E00EA0091D0FD /* IPCDatePickViewController.m in Sources */,
 				CBF6CFF51F14BF9A00F02ECF /* IPCTryGlassView.m in Sources */,
 				04760B0A1D3C80A1003A4E16 /* IPCProductList.m in Sources */,

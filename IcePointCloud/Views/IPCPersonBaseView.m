@@ -42,17 +42,17 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (void)logoutRequest
 {
     [IPCUserRequestManager userLogoutWithSuccessBlock:^(id responseValue) {
-        [IPCCustomUI hiden];
+        [IPCCommonUI hiden];
         if (self.LogoutBlock)
             self.LogoutBlock();
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:@"用户退出登录失败"];
+        [IPCCommonUI showError:@"用户退出登录失败"];
     }];
 }
 
 #pragma mark //Clicked Events
 - (IBAction)logoutAction:(id)sender {
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     [self logoutRequest];
 }
 
@@ -197,7 +197,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         YYImageCache *cache = [YYWebImageManager sharedManager].cache;
         [cache.memoryCache removeAllObjects];
         [cache.diskCache removeAllObjects];
-        [IPCCustomUI showSuccess:@"缓存清理成功"];
+        [IPCCommonUI showSuccess:@"缓存清理成功"];
     }
 }
 

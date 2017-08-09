@@ -109,15 +109,15 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Request Data
 - (void)queryOrderDetail
 {
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
          [self.orderDetailTableView reloadData];
-         [IPCCustomUI hiden];
+         [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"查询用户订单详情失败!"];
+         [IPCCommonUI showError:@"查询用户订单详情失败!"];
      }];
 }
 

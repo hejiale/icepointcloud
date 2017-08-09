@@ -39,7 +39,7 @@
     [self.passwordTf addBorder:5 Width:0.5];
     [self.usernameTf setLeftSpace:10];
     [self.passwordTf setLeftSpace:10];
-    [IPCCustomUI clearAutoCorrection:self.loginBgView];
+    [IPCCommonUI clearAutoCorrection:self.loginBgView];
 
     if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {
         [self.usernameTf setText:[NSUserDefaults jk_stringForKey:IPCUserNameKey]];
@@ -98,11 +98,11 @@
     NSString *password = [self.passwordTf.text jk_trimmingWhitespace];
     
     if (!username.length){
-        [IPCCustomUI showError:@"登录帐号不能为空"];
+        [IPCCommonUI showError:@"登录帐号不能为空"];
         return;
     }
     if (!password.length) {
-        [IPCCustomUI showError:@"登录密码不能为空"];
+        [IPCCommonUI showError:@"登录密码不能为空"];
         return;
     }
     [self.loginButton jk_showIndicator];
@@ -123,7 +123,7 @@
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCCustomUI showError:@"用户登录失败!"];
+        [IPCCommonUI showError:@"用户登录失败!"];
     }];
 }
 

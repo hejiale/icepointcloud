@@ -41,7 +41,7 @@ typedef void(^DismissBlock)();
         self.employeTableView.emptyAlertTitle = @"没有搜索到该员工";
         
         [self.searchTextField setLeftImageView:@"text_searchIcon"];
-        [IPCCustomUI show];
+        [IPCCommonUI show];
         [self queryEmploye];
     }
     return self;
@@ -60,12 +60,12 @@ typedef void(^DismissBlock)();
     
     [IPCPayOrderRequestManager queryEmployeWithKeyword:self.searchTextField.text SuccessBlock:^(id responseValue)
      {
-         [IPCCustomUI hiden];
+         [IPCCommonUI hiden];
          IPCEmployeeList * employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
          [self.employeeArray addObjectsFromArray:employeList.employeArray];
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"查询员工信息失败！"];
+         [IPCCommonUI showError:@"查询员工信息失败！"];
      }];
 }
 
@@ -107,7 +107,7 @@ typedef void(^DismissBlock)();
     IPCEmployee * employe = self.employeeArray[indexPath.row];
     if (employe) {
         if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 5){
-            [IPCCustomUI showError:@"至多选择五名员工"];
+            [IPCCommonUI showError:@"至多选择五名员工"];
             return;
         }
 

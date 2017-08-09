@@ -125,7 +125,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 
 - (void)loadMoreTableView{
     self.managerViewModel.currentPage ++;
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     [self loadOptometryData];
 }
 

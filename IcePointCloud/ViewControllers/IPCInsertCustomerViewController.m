@@ -76,7 +76,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 - (IBAction)saveNewCustomerAction:(id)sender
 {
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
         __weak typeof(self) weakSelf = self;
         [self.insertCustomerModel saveNewCustomer:^(NSString *customerId){
@@ -94,7 +94,7 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
             }
         }];
     }else{
-        [IPCCustomUI showError:@"请输入完整客户名或手机号!"];
+        [IPCCommonUI showError:@"请输入完整客户名或手机号!"];
     }
 }
 

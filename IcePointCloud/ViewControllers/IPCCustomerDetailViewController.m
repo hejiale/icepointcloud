@@ -63,7 +63,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 {
     [self.customerViewMode resetData];
     self.customerViewMode.customerId = self.customer.customerID;
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     
     __weak typeof (self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
@@ -88,7 +88,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.detailTableView reloadData];
-        [IPCCustomUI hiden];
+        [IPCCommonUI hiden];
     });
 }
 
@@ -104,7 +104,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                                                                       [strongSelf removerAllPopView:NO];
                                                                   }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.detailOrderView];
     [self.detailOrderView show];
 }
 

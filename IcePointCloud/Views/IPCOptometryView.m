@@ -77,7 +77,7 @@ typedef void(^UpdateBlock)(void);
             functionTag = 0;
             [lensView addSubview:[self createFunctionView:CGRectMake(34 + 30, 0, itemWidth, lensView.jk_height)]];
         }
-        [IPCCustomUI clearAutoCorrection:lensView];
+        [IPCCommonUI clearAutoCorrection:lensView];
     }
 }
 

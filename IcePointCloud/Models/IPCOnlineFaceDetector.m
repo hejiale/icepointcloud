@@ -32,7 +32,7 @@
         self.iFlySpFaceRequest=[IFlyFaceRequest sharedInstance];
         [self.iFlySpFaceRequest setDelegate:self];
         
-        [IPCCustomUI show];
+        [IPCCommonUI show];
     }
     return self;
 }
@@ -115,7 +115,7 @@
             self.FaceFrameBlock(cameraEyePoint,cameraEyeSize);
         
         self.resultStings = [[NSString alloc]init];
-        [IPCCustomUI hiden];
+        [IPCCommonUI hiden];
     } @catch (NSException *exception) {
         
     }

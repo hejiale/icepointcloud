@@ -17,6 +17,8 @@
     CGFloat _letterHeight;
 }
 
+@property (strong, nonatomic) NSMutableArray<CATextLayer *> * textLayers;
+
 @end
 
 @implementation IPCCollectionViewIndex
@@ -30,6 +32,14 @@
     }
     
     return self;
+}
+
+- (NSMutableArray<CATextLayer *> *)textLayers
+{
+    if (!_textLayers) {
+        _textLayers = [[NSMutableArray alloc]init];
+    }
+    return _textLayers;
 }
 
 -(void)setCollectionDelegate:(id<IPCCollectionViewIndexDelegate>)collectionDelegate{
@@ -64,6 +74,7 @@
                                               andFrame:CGRectMake(0, originY, self.frame.size.width, _letterHeight)];
             
             [self.layer addSublayer:ctl];
+            [self.textLayers addObject:ctl];
             
             [bezierPath moveToPoint:CGPointMake(0, originY)];
             [bezierPath addLineToPoint:CGPointMake(ctl.frame.size.width, originY)];
@@ -119,7 +130,15 @@
         return;
     }
     
-    [self.collectionDelegate collectionViewIndex:self didselectionAtIndex:indx withTitle:self.titleIndexes[indx]];
+    [self.textLayers enumerateObjectsUsingBlock:^(CATextLayer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx == indx) {
+            [obj setForegroundColor:COLOR_RGB_BLUE.CGColor];
+        }else{
+            [obj setForegroundColor:RGB(168, 168, 168, 1).CGColor];
+        }
+    }];
+    
+    [self.collectionDelegate collectionViewIndex:self didselectionAtIndex:indx withTitle:self.titleIndexes[indx] Point:point];
 }
 #pragma mark- response事件
 
@@ -127,7 +146,6 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
     [self sendEventToDelegate:event];
-    [self.collectionDelegate collectionViewIndexTouchesBegan:self];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{

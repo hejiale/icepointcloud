@@ -90,13 +90,13 @@
                                             IntroducerInteger: [IPCInsertCustomer instance].introducerInteger
                                                  SuccessBlock:^(id responseValue)
      {
-         [IPCCustomUI hiden];
+         [IPCCommonUI hiden];
          [[IPCInsertCustomer instance] resetData];
          if (complete) {
              complete(responseValue);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"保存客户信息失败!"];
+         [IPCCommonUI showError:@"保存客户信息失败!"];
      }];
 }
 
@@ -111,11 +111,11 @@
                 complete();
             }
         }else{
-            [IPCCustomUI showError:@"该手机号已注册过了"];
+            [IPCCommonUI showError:@"该手机号已注册过了"];
         }
         
     } FailureBlock:^(NSError *error) {
-        [IPCCustomUI showError:@"验证手机号失败!"];
+        [IPCCommonUI showError:@"验证手机号失败!"];
     }];
 }
 @end

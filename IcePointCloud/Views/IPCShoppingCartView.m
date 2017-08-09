@@ -52,7 +52,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         self.cartListTableView.operationTitle = @"前去添加商品";
         self.cartListTableView.emptyAlertTitle = @"暂无任何商品";
         [[self.cartListTableView rac_signalForSelector:@selector(operationAction)] subscribeNext:^(RACTuple * _Nullable x) {
-            [IPCCustomUI pushToRootIndex:1];
+            [IPCCommonUI pushToRootIndex:1];
         }];
     }
     return self;
@@ -128,7 +128,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 - (IBAction)onDeleteProductsAction:(id)sender {
     __weak typeof (self) weakSelf = self;
     if ([self.cartViewMode isSelectCart]) {
-        [IPCCustomUI showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
+        [IPCCommonUI showAlert:@"冰点云" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [[IPCShoppingCart sharedCart] removeSelectCartItem];
             [strongSelf resetShoppingCartStatus];

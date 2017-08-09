@@ -1,15 +1,15 @@
 //
-//  IPCCustomUI.m
+//  IPCCommonUI.m
 //  IcePointCloud
 //
 //  Created by mac on 8/14/14.
 //  Copyright (c) 2014 Doray. All rights reserved.
 //
 
-#import "IPCCustomUI.h"
+#import "IPCCommonUI.h"
 #import "IPCProgressHUD.h"
 
-@implementation IPCCustomUI
+@implementation IPCCommonUI
 
 #pragma mark //Gaussian blur
 + (UIVisualEffectView *)showBlurView:(CGRect)frame Target:(nullable id)target action:(nullable SEL)action
@@ -32,7 +32,7 @@
     for (NSInteger i = 1 ; i< 17; i++) {
         [loadingArray addObject:[NSString stringWithFormat:@"loading_%ld",(long)i]];
     }
-    [IPCProgressHUD showImages:loadingArray status:nil];
+    [IPCProgressHUD showAnimationImages:loadingArray];
 }
 
 + (void)hiden{

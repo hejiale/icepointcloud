@@ -11,7 +11,9 @@
 @interface IPCProgressHUD()
 
 @property (nonatomic, readonly) UIWindow *frontWindow;
-@property (strong, nonatomic) UIVisualEffectView   *  contentView;
+@property (nonatomic, strong) UIControl *controlView;
+@property (nonatomic, strong) UIView *backgroundView;
+@property (strong, nonatomic) UIVisualEffectView   *  hudView;
 @property (strong, nonatomic) UILabel  *  statusLabel;
 @property (strong, nonatomic) UIImageView * statusImageView;
 
@@ -35,28 +37,33 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.4]];
         self.userInteractionEnabled = NO;
         
-        self.maxSupportedWindowLevel = UIWindowLevelNormal;
+        self.hudView.contentView.alpha = 0.0f;
+        self.backgroundView.alpha = 0.0f;
+        
+        self.maxSupportedWindowLevel = UIWindowLevelAlert;
     }
     return self;
 }
 
-+ (void)show {
-    [[self sharedView] setStatus:nil];
-}
-
 + (void)showWithStatus:(NSString *)status
 {
-    [self showImages:nil status:status];
+    [self showAnimationImages:nil status:status];
 }
 
-+ (void)showImages:(NSArray<NSString *> *)images status:(NSString*)status
++ (void)showAnimationImages:(NSArray<NSString *> *)images
+{
+    [self showAnimationImages:images status:nil];
+}
+
++ (void)showAnimationImages:(NSArray<NSString *> *)images status:(NSString*)status
 {
     [[self sharedView] setStatus:status];
     [[self sharedView] setAnimationImages:images];
-    [[self sharedView] updateStatusFrame];
+    [[self sharedView] updateViewHierarchy];
+    [[self sharedView] updateContentFrame];
+    [[self sharedView] showWithDuration:0.15f];
 }
 
 + (void)dismiss{
@@ -90,33 +97,46 @@
     [self.statusImageView startAnimating];
 }
 
+- (void)updateViewHierarchy {
+    // Add the overlay to the application window if necessary
+    if(!self.controlView.superview) {
+        [self.frontWindow addSubview:self.controlView];
+    } else {
+        [self.controlView.superview bringSubviewToFront:self.controlView];
+    }
+    
+    // Add self to the overlay view
+    if(!self.superview) {
+        [self.controlView addSubview:self];
+    }
+}
+
 - (void)updateContentFrame
 {
-    [self.frontWindow addSubview:self];
-    [self addSubview:self.contentView];
-    [self.contentView addBorder:10 Width:0];
-    [self bringSubviewToFront:self.contentView];
-    [self.contentView addSubview:self.statusLabel];
-    [self.contentView addSubview:self.statusImageView];
+    [self insertSubview:self.backgroundView belowSubview:self.hudView];
+    [self addSubview:self.hudView];
     
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.hudView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(self.mas_centerX).offset(0);
         make.centerY.equalTo(self.mas_centerY).offset(0);
         make.width.mas_equalTo(80);
         make.height.mas_equalTo(80);
     }];
     
+    [self.hudView addSubview:self.statusLabel];
+    [self updateStatusLabelFrame];
+    
+    [self.hudView addSubview:self.statusImageView];
     [self.statusImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_centerX).offset(0);
-        make.centerY.equalTo(self.contentView.mas_centerY).offset(0);
+        make.centerX.equalTo(self.hudView.mas_centerX).offset(0);
+        make.centerY.equalTo(self.hudView.mas_centerY).offset(0);
         make.width.mas_equalTo(30);
         make.height.mas_equalTo(30);
     }];
 }
 
-- (void)updateStatusFrame
+- (void)updateStatusLabelFrame
 {
-    [self updateContentFrame];
     // Calculate size of string
     CGRect labelRect = CGRectZero;
     CGFloat labelHeight = 0.0f;
@@ -133,11 +153,42 @@
     }
     
     [self.statusLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self.contentView.mas_centerX).offset(0);
-        make.bottom.equalTo(self.contentView.mas_bottom).offset(-10);
+        make.centerX.equalTo(self.hudView.mas_centerX).offset(0);
+        make.bottom.equalTo(self.hudView.mas_bottom).offset(-10);
         make.width.mas_equalTo(labelWidth);
         make.height.mas_equalTo(labelHeight);
     }];
+}
+
+- (void)showWithDuration:(NSTimeInterval)duration
+{
+    if(self.hudView.contentView.alpha != 1.0f){
+        // Zoom HUD a little to make a nice appear / pop up animation
+        self.hudView.transform = CGAffineTransformScale(self.hudView.transform, 1.3, 1.3);
+        
+        // Define blocks
+        __block void (^animationsBlock)(void) = ^{
+            // Shrink HUD to finish pop up animation
+            self.hudView.transform = CGAffineTransformScale(self.hudView.transform, 1/1.3f, 1/1.3f);
+            // Update alpha
+            self.hudView.contentView.alpha = 1.0f;
+            self.backgroundView.alpha = 1.0f;
+        };
+        
+        __block void (^completionBlock)(void) = ^{
+        };
+        
+        [UIView animateWithDuration:duration
+                              delay:0
+                            options:(UIViewAnimationOptions) (UIViewAnimationOptionAllowUserInteraction | UIViewAnimationCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState)
+                         animations:^{
+                             animationsBlock();
+                         } completion:^(BOOL finished) {
+                             completionBlock();
+                         }];
+        
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)dismissWithDuration:(NSTimeInterval)duration Delay:(NSTimeInterval)delay completion:(void(^)())completion
@@ -148,14 +199,14 @@
         
         __block void (^animationsBlock)(void) = ^{
             // Shrink HUD a little to make a nice disappear animation
-            strongSelf.contentView.transform = CGAffineTransformScale(strongSelf.contentView.transform, 1/1.3f, 1/1.3f);
-            strongSelf.contentView.alpha = 0.f;
+            strongSelf.hudView.transform = CGAffineTransformScale(strongSelf.hudView.transform, 1/1.3f, 1/1.3f);
+            strongSelf.hudView.alpha = 0.f;
         };
         
         __block void (^completionBlock)(void) = ^{
-            [strongSelf.statusImageView removeFromSuperview];strongSelf.statusImageView = nil;
-            [strongSelf.statusLabel removeFromSuperview];strongSelf.statusLabel = nil;
-            [strongSelf.contentView removeFromSuperview];strongSelf.contentView = nil;
+            [strongSelf.hudView removeFromSuperview];strongSelf.hudView = nil;
+            [strongSelf.backgroundView removeFromSuperview];strongSelf.backgroundView = nil;
+            [strongSelf.controlView removeFromSuperview];strongSelf.controlView = nil;
             [strongSelf removeFromSuperview];
         };
         
@@ -176,16 +227,41 @@
 }
 
 #pragma mark //Set UI
-- (UIVisualEffectView *)contentView{
-    if (!_contentView) {
-        _contentView = [[UIVisualEffectView alloc]init];
-        [_contentView setBackgroundColor:[UIColor clearColor]];
-        _contentView.layer.masksToBounds = YES;
-        _contentView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
-        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-        _contentView.effect = blurEffect;
+- (UIControl*)controlView {
+    if(!_controlView) {
+        _controlView = [UIControl new];
+        _controlView.frame = [[[UIApplication sharedApplication] delegate] window].bounds;
+        _controlView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _controlView.backgroundColor = [UIColor clearColor];
     }
-    return _contentView;
+    return _controlView;
+}
+
+
+-(UIView *)backgroundView {
+    if(!_backgroundView){
+        _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
+        _backgroundView.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.2];
+    }
+    return _backgroundView;
+}
+
+
+- (UIVisualEffectView *)hudView{
+    if (!_hudView) {
+        _hudView = [[UIVisualEffectView alloc]init];
+        [_hudView setBackgroundColor:[UIColor clearColor]];
+        _hudView.layer.masksToBounds = YES;
+        _hudView.layer.cornerRadius = 10;
+        _hudView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        _hudView.effect = blurEffect;
+    }
+    
+    if(!_hudView.superview) {
+        [self addSubview:_hudView];
+    }
+    return _hudView;
 }
 
 - (UILabel *)statusLabel{
@@ -212,7 +288,6 @@
 }
 
 - (UIWindow *)frontWindow {
-#if !defined(SV_APP_EXTENSIONS)
     NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
         BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
@@ -223,7 +298,6 @@
             return window;
         }
     }
-#endif
     return nil;
 }
 

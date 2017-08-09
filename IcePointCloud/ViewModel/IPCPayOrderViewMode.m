@@ -45,7 +45,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 #pragma mark //Request Data
 - (void)requestOrderPointPrice:(NSInteger)point
 {
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     [IPCPayOrderRequestManager getIntegralRulesWithCustomerID:[IPCCurrentCustomer sharedManager].currentCustomer.customerID
                                                         Point:point
                                                  SuccessBlock:^(id responseValue)
@@ -53,9 +53,9 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          IPCPointValueMode * pointValue = [[IPCPointValueMode alloc] initWithResponseObject:responseValue];
          [[IPCPayOrderManager sharedManager] calculatePointValue:pointValue];
          [self reload];
-         [IPCCustomUI hiden];
+         [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"查询积分定制规则失败！"];
+         [IPCCommonUI showError:@"查询积分定制规则失败！"];
      }];
 }
 
@@ -69,7 +69,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
              }
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"保存订单失败！"];
+         [IPCCommonUI showError:@"保存订单失败！"];
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(failPayOrder)]) {
                  [self.delegate failPayOrder];
@@ -80,15 +80,15 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId
 {
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
                                                         SuccessBlock:^(id responseValue)
      {
          [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
-         [IPCCustomUI hiden];
+         [IPCCommonUI hiden];
          [self reload];
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"查询客户信息失败!"];
+         [IPCCommonUI showError:@"查询客户信息失败!"];
      }];
 }
 
@@ -104,23 +104,23 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (BOOL)isCanPayOrder
 {
     if ([[IPCShoppingCart sharedCart] itemsCount] == 0) {
-        [IPCCustomUI showError:@"未添加任何商品!"];
+        [IPCCommonUI showError:@"未添加任何商品!"];
         return NO;
     }
     if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
-        [IPCCustomUI showError:@"请先选择客户信息"];
+        [IPCCommonUI showError:@"请先选择客户信息"];
         return NO;
     }
     if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-        [IPCCustomUI showError:@"请选择员工"];
+        [IPCCommonUI showError:@"请选择员工"];
         return NO;
     }
     if ([[IPCPayOrderManager sharedManager] isExistEmptyEmployeeResult]) {
-        [IPCCustomUI showError:@"参与比例必须填写且大于零"];
+        [IPCCommonUI showError:@"参与比例必须填写且大于零"];
         return NO;
     }
     if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
-        [IPCCustomUI showError:@"员工总份额不足百分之一百"];
+        [IPCCommonUI showError:@"员工总份额不足百分之一百"];
         return NO;
     }
     return YES;
@@ -128,7 +128,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 - (void)insertPayRecord{
     if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0) {
-        [IPCCustomUI showError:@"剩余应收金额为零"];
+        [IPCCommonUI showError:@"剩余应收金额为零"];
         return;
     }
     if ([IPCPayOrderManager sharedManager].isInsertRecordStatus){
@@ -268,7 +268,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             
             NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收:￥%.2f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
-            NSAttributedString * str = [IPCCustomUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15] Color:COLOR_RGB_RED];
+            NSAttributedString * str = [IPCCommonUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15] Color:COLOR_RGB_RED];
             [cell setRightOperation:nil  AttributedTitle:str ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             
             __weak typeof(self) weakSelf = self;

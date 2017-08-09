@@ -10,7 +10,7 @@
 
 @interface IPCSortCustomer : NSObject
 
-+ (NSMutableArray *) getCustomerListDataBy:(NSMutableArray<IPCCustomerMode *> *)array;
-+ (NSMutableArray *)getCustomerListSectionBy:(NSMutableArray<IPCCustomerMode *> *)array;
++ (NSMutableArray *)PinYingData:(NSMutableArray<IPCCustomerMode *> *)array;
++ (NSMutableArray *)PinYingSection:(NSMutableArray<IPCCustomerMode *> *)array;
 
 @end

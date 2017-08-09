@@ -116,7 +116,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
-    [IPCCustomUI showSuccess:@"添加商品成功!"];
+    [IPCCommonUI showSuccess:@"添加商品成功!"];
     [self reloadCartBadge];
 }
 
@@ -137,7 +137,7 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
 - (void)pushToCartAction:(id)sender {
     [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
-    [IPCCustomUI pushToRootIndex:4];
+    [IPCCommonUI pushToRootIndex:4];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

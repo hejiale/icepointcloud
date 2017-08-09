@@ -1,5 +1,5 @@
 //
-//  IPCCustomUI.h
+//  IPCCommonUI.h
 //  IcePointCloud
 //
 //  Created by mac on 8/14/14.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface IPCCustomUI : NSObject
+@interface IPCCommonUI : NSObject
 
 + (nonnull UIVisualEffectView *)showBlurView:(CGRect)frame Target:(nullable id)target action:(nullable SEL)action;
 

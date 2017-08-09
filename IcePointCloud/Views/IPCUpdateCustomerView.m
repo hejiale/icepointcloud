@@ -85,14 +85,14 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                       PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : (self.currentDetailCustomer.photoIdForPos ? : @""))
                                                  SuccessBlock:^(id responseValue)
      {
-         [IPCCustomUI showSuccess:@"更改用户信息成功!"];
+         [IPCCommonUI showSuccess:@"更改用户信息成功!"];
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(dismissCoverSubViews)]) {
                  [self.delegate dismissCoverSubViews];
              }
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCustomUI showError:@"更改用户信息失败!"];
+         [IPCCommonUI showError:@"更改用户信息失败!"];
      }];
 }
 
@@ -119,7 +119,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 - (IBAction)updateCustomerAction:(id)sender {
     if (!self.userNameTextField.text.length || !self.phoneTextField.text.length) {
-        [IPCCustomUI showError:@"用户名或手机号输入为空!"];
+        [IPCCommonUI showError:@"用户名或手机号输入为空!"];
     }else{
         [self updateCustomerRequest];
     }

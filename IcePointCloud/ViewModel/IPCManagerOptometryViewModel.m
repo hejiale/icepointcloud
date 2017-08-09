@@ -38,7 +38,7 @@
                                                          __strong typeof (weakSelf) strongSelf = weakSelf;
                                                          IPCOptometryList * optometryObject = [[IPCOptometryList alloc]initWithResponseValue:responseValue];
                                                          [strongSelf.optometryList addObjectsFromArray:optometryObject.listArray];
-                                                         [IPCCustomUI hiden];
+                                                         [IPCCommonUI hiden];
                                                          
                                                          if ([optometryObject.listArray count] > 0 && strongSelf.optometryList.count < optometryObject.totalCount) {
                                                              if (completeBlock)
@@ -50,7 +50,7 @@
                                                      } FailureBlock:^(NSError *error) {
                                                          if (completeBlock)
                                                              completeBlock(NO);
-                                                         [IPCCustomUI showError:@"查询客户验光单信息失败!"];
+                                                         [IPCCommonUI showError:@"查询客户验光单信息失败!"];
                                                      }];
 }
 
@@ -60,12 +60,12 @@
     [IPCCustomerRequestManager setDefaultOptometryWithCustomID:self.customerId
                                             DefaultOptometryID:optometryID
                                                   SuccessBlock:^(id responseValue) {
-                                                      [IPCCustomUI showSuccess:@"设置默认验光单成功!"];
+                                                      [IPCCommonUI showSuccess:@"设置默认验光单成功!"];
                                                       if (completeBlock) {
                                                           completeBlock();
                                                       }
                                                   } FailureBlock:^(NSError *error) {
-                                                      [IPCCustomUI showError:@"设置默认验光单失败!"];
+                                                      [IPCCommonUI showError:@"设置默认验光单失败!"];
                                                   }];
 }
 

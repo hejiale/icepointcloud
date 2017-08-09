@@ -19,7 +19,7 @@
 
 - (void)queryCustomerAddressList:(void(^)())completeBlock
 {
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     __weak typeof (self) weakSelf = self;
     [self.addressList removeAllObjects];
     
@@ -28,13 +28,13 @@
                                                            __strong typeof (weakSelf) strongSelf = weakSelf;
                                                            IPCCustomerAddressList * addressObject = [[IPCCustomerAddressList alloc]initWithResponseValue:responseValue];
                                                            [strongSelf.addressList addObjectsFromArray:addressObject.list];
-                                                           [IPCCustomUI hiden];
+                                                           [IPCCommonUI hiden];
                                                            if (completeBlock)
                                                                completeBlock();
                                                        } FailureBlock:^(NSError *error) {
                                                            if (completeBlock)
                                                                completeBlock();
-                                                           [IPCCustomUI showError:@"查询客户地址信息失败!"];
+                                                           [IPCCommonUI showError:@"查询客户地址信息失败!"];
                                                        }];
 }
 
@@ -47,7 +47,7 @@
                                                         completeBlock();
                                                     }
                                                 } FailureBlock:^(NSError *error) {
-                                                    [IPCCustomUI showError:@"设置默认地址失败!"];
+                                                    [IPCCommonUI showError:@"设置默认地址失败!"];
                                                 }];
 }
 

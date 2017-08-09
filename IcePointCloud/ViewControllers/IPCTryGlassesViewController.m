@@ -123,7 +123,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (UIVisualEffectView *)blurBgView{
     if (!_blurBgView)
-        _blurBgView = [IPCCustomUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeCover)];
+        _blurBgView = [IPCCommonUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeCover)];
     return _blurBgView;
 }
 
@@ -243,12 +243,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
-    [IPCCustomUI show];
+    [IPCCommonUI show];
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf reload];
-        [IPCCustomUI hiden];
+        [IPCCommonUI hiden];
     }];
 }
 
@@ -258,7 +258,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.glassListViewMode reloadGlassListDataWithIsTry:YES IsHot:YES  Complete:^(LSRefreshDataStatus status, NSError *error){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (error && status == IPCRefreshError){
-            [IPCCustomUI showError:@"查询商品信息失败!"];
+            [IPCCommonUI showError:@"查询商品信息失败!"];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
             strongSelf.productCollectionView.mj_footer.hidden = YES;
         }
@@ -482,10 +482,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCCustomUI showError:@"人脸验证失败!"];
+                [IPCCommonUI showError:@"人脸验证失败!"];
             }];
         }else{
-            [IPCCustomUI showError:@"未检测到人脸轮廓"];
+            [IPCCommonUI showError:@"未检测到人脸轮廓"];
         }
     }];
     [self.faceRecognition postFaceRequest:image];
@@ -540,7 +540,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super onSearchProducts];
     [self removeCover];
     if (self.recommendedButton.selected){
-        [IPCCustomUI showError:@"暂无可查询的热门推荐商品"];
+        [IPCCommonUI showError:@"暂无可查询的热门推荐商品"];
         return;
     }
     [self presentSearchViewController];
@@ -699,7 +699,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 -(OBOvum *)createOvumFromView:(UIView*)sourceView
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
-        UIView *cell = [IPCCustomUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
+        UIView *cell = [IPCCommonUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
         NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
         IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
         OBOvum *ovum = [[OBOvum alloc] init];
@@ -713,7 +713,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (UIView *)createDragRepresentationOfSourceView:(UIView *)sourceView inWindow:(UIWindow*)window
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
-        UIView *cell = [IPCCustomUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
+        UIView *cell = [IPCCommonUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
         if (cell) {
             NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
             IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
@@ -767,7 +767,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
                 [self.signleModeView dropGlasses:glass onLocaton:location];
             }else{
                 UIView *target = [self.compareBgView hitTest:location withEvent:nil];
-                target = [IPCCustomUI nearestAncestorForView:target withClass:[IPCCompareItemView class]];
+                target = [IPCCommonUI nearestAncestorForView:target withClass:[IPCCompareItemView class]];
                 if (target && [target isKindOfClass:[IPCCompareItemView class]]) {
                     IPCCompareItemView * itemView = (IPCCompareItemView *)target;
                     location = [self.compareBgView convertPoint:location toView:itemView];

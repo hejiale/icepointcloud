@@ -12,9 +12,9 @@
 
 @property (assign, nonatomic) UIWindowLevel maxSupportedWindowLevel; // default is UIWindowLevelNormal
 
-+ (void)show;
 + (void)showWithStatus:(NSString *)status;
-+ (void)showImages:(NSArray<NSString *> *)images status:(NSString*)status;
++ (void)showAnimationImages:(NSArray<NSString *> *)images;
++ (void)showAnimationImages:(NSArray<NSString *> *)images status:(NSString*)status;
 
 + (void)dismiss;
 + (void)dismissWithDuration:(NSTimeInterval)duration Delay:(NSTimeInterval)delay;

@@ -70,7 +70,7 @@
 {
     [[IPCReachability manager] monitoringNetwork:^(AFNetworkReachabilityStatus status) {
         if (status == AFNetworkReachabilityStatusUnknown || status == AFNetworkReachabilityStatusNotReachable) {
-            [IPCCustomUI showError:kIPCErrorNetworkAlertMessage];
+            [IPCCommonUI showError:kIPCErrorNetworkAlertMessage];
         }
     }];
 }
@@ -86,7 +86,7 @@
          */
         NSString *strTitle = [NSString stringWithFormat:@"微信请求App提供内容"];
         NSString *strMsg = [NSString stringWithFormat:@"openID: %@", temp.openID];
-        [IPCCustomUI showAlert:strTitle Message:strMsg];
+        [IPCCommonUI showAlert:strTitle Message:strMsg];
     }else if([req isKindOfClass:[ShowMessageFromWXReq class]]){
         ShowMessageFromWXReq* temp = (ShowMessageFromWXReq*)req;
         WXMediaMessage *msg = temp.message;
@@ -97,7 +97,7 @@
         
         NSString *strTitle = [NSString stringWithFormat:@"微信请求App显示内容"];
         NSString *strMsg = [NSString stringWithFormat:@"openID: %@, 标题：%@ \n内容：%@ \n附带信息：%@ \n缩略图:%zu bytes\n附加消息:%@\n", temp.openID, msg.title, msg.description, obj.extInfo, (unsigned long)msg.thumbData.length, msg.messageExt];
-        [IPCCustomUI showAlert:strTitle Message:strMsg];
+        [IPCCommonUI showAlert:strTitle Message:strMsg];
     }else if([req isKindOfClass:[LaunchFromWXReq class]]){
         LaunchFromWXReq *temp = (LaunchFromWXReq *)req;
         WXMediaMessage *msg = temp.message;
@@ -106,7 +106,7 @@
          */
         NSString *strTitle = [NSString stringWithFormat:@"从微信启动"];
         NSString *strMsg = [NSString stringWithFormat:@"openID: %@, messageExt:%@", temp.openID, msg.messageExt];
-        [IPCCustomUI showAlert:strTitle Message:strMsg];
+        [IPCCommonUI showAlert:strTitle Message:strMsg];
     }
 }
 
@@ -114,11 +114,11 @@
 {
     if([resp isKindOfClass:[SendMessageToWXResp class]]){
         if (resp.errCode == WXSuccess) {
-            [IPCCustomUI showSuccess:@"发送图片成功!"];
+            [IPCCommonUI showSuccess:@"发送图片成功!"];
         }else if(resp.errCode == WXErrCodeSentFail){
-            [IPCCustomUI showError:@"发送图片失败!"];
+            [IPCCommonUI showError:@"发送图片失败!"];
         }else if (resp.errCode == WXErrCodeUserCancel){
-            [IPCCustomUI showError:@"取消分享!"];
+            [IPCCommonUI showError:@"取消分享!"];
         }
     }
 }
