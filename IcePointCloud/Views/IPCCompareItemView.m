@@ -348,8 +348,10 @@
 
 #pragma mark //Show or hide to shut down
 - (void)showClose{
-    [self.glassesView addBorder:3 Width:0.5];
-    [self.closeButton setHidden:NO];
+    if (self.matchItem.glass) {
+        [self.glassesView addBorder:3 Width:0.5];
+        [self.closeButton setHidden:NO];
+    }
 }
 
 - (void)hidenClose{

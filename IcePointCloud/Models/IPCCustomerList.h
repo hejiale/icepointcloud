@@ -19,19 +19,13 @@
 
 @interface IPCCustomerMode : NSObject
 
-@property (copy, nonatomic, readwrite) NSString * photoIdForPos;
-@property (copy, nonatomic, readwrite) NSString * photo_url;
+@property (copy, nonatomic, readwrite) NSString * photoUrl;
 @property (copy, nonatomic, readwrite) NSString * customerName;
 @property (copy, nonatomic, readwrite) NSString * customerID;
 @property (copy, nonatomic, readwrite) NSString * customerAddress;
 @property (copy, nonatomic, readwrite) NSString * customerPhone;
-@property (copy, nonatomic, readwrite) NSString * email;
-@property (copy, nonatomic, readwrite) NSString * birthday;
-@property (copy, nonatomic, readwrite) NSString * gender;
-@property (copy, nonatomic, readwrite) NSString * age;
-@property (copy, nonatomic, readwrite) NSString * remark;
 @property (copy, nonatomic, readwrite) NSString * integral;
-@property (copy, nonatomic, readwrite) NSString * memberLevel;
+@property (copy, nonatomic, readwrite) NSString * memberlevel;
 
 
 @end

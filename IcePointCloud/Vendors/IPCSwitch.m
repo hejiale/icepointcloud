@@ -152,9 +152,20 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
     if (_on != on)
         _on = on;
     
-    if (_on){
+    if (_on)
+    {
+        [self.onBackgroundView setAlpha:1.0];
+        [self.offBackgroundView setAlpha:0.0];
+        self.offBackgroundView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+        
         self.thumbView.center = CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y);
-    }else{
+    }
+    else
+    {
+        [self.onBackgroundView setAlpha:0.0];
+        [self.offBackgroundView setAlpha:1.0];
+        self.offBackgroundView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+        
         self.thumbView.center = CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y);
     }
 }
@@ -245,7 +256,7 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
 }
 
 #pragma mark - Animation
-- (void)animateToDestination:(CGPoint)centerPoint withDuration:(CGFloat)duration switch:(BOOL)on
+- (void)animateToDestination:(CGPoint)centerPoint withDuration:(CGFloat)duration IsOn:(BOOL)on
 {
     [UIView animateWithDuration:duration
                           delay:0.0f
@@ -299,10 +310,10 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
             
             if (velocity.x >= 0){
                 // Animate move to right
-                [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration switch:YES];
+                [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration IsOn:YES];
             }else{
                 // Animate move to left
-                [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration switch:NO];
+                [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration IsOn:NO];
             }
         }
         return;
@@ -319,11 +330,11 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
         if (velocity.x >= 0){
             if (recognizer.view.center.x < self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2){
                 // Animate move to right
-                [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration switch:YES];
+                [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration IsOn:YES];
             }
         }else{
             // Animate move to left
-            [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration switch:NO];
+            [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration IsOn:NO];
         }
     }
 }
@@ -332,10 +343,10 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
     if (recognizer.state == UIGestureRecognizerStateEnded){
         if (self.isOn){
             // Animate move to left
-            [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration switch:NO];
+            [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration IsOn:NO];
         }else{
             // Animate move to right
-            [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration switch:YES];
+            [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, recognizer.view.center.y) withDuration:kAnimateDuration IsOn:YES];
         }
     }
 }
@@ -345,10 +356,10 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
     if (recognizer.state == UIGestureRecognizerStateEnded){
         if (self.isOn){
             // Animate move to left
-            [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y) withDuration:kAnimateDuration switch:NO];
+            [self animateToDestination:CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y) withDuration:kAnimateDuration IsOn:NO];
         }else{
             // Animate move to right
-            [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y) withDuration:kAnimateDuration switch:YES];
+            [self animateToDestination:CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y) withDuration:kAnimateDuration IsOn:YES];
         }
     }
 }

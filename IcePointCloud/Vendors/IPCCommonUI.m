@@ -26,7 +26,11 @@
 }
 
 #pragma mark //Warning prompt box
-+ (void)show{
++ (void)show
+{
+    if ([SVProgressHUD isVisible]) {
+        [SVProgressHUD dismiss];
+    }
     NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 1 ; i< 17; i++) {
@@ -39,8 +43,10 @@
     [IPCProgressHUD dismiss];
 }
 
-+ (void)showError:(NSString *)message
-{
++ (void)showError:(NSString *)message{
+    if ([IPCProgressHUD isVisible]) {
+        [IPCProgressHUD dismiss];
+    }
     [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:1.f];
@@ -49,6 +55,9 @@
 
 
 + (void)showSuccess:(NSString *)message{
+    if ([IPCProgressHUD isVisible]) {
+        [IPCProgressHUD dismiss];
+    }
     [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:0.3f];

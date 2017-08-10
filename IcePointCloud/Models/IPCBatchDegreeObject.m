@@ -36,6 +36,8 @@
 
 - (void)batchReadingDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step
 {
+    [self.readingDegrees removeAllObjects];
+    
     float startDegree =start - step;
     
     while (startDegree < end) {
@@ -48,6 +50,8 @@
 
 - (void)batchContactlensDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step
 {
+    [self.contactLensDegrees removeAllObjects];
+    
     float startDegree = start -step;
     
     while (startDegree < end) {

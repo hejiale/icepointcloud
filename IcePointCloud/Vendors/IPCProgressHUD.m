@@ -16,7 +16,8 @@
 @property (strong, nonatomic) UIVisualEffectView   *  hudView;
 @property (strong, nonatomic) UILabel  *  statusLabel;
 @property (strong, nonatomic) UIImageView * statusImageView;
-
+@property (strong, nonatomic) UIImage *successImage;
+@property (strong, nonatomic) UIImage *errorImage;
 
 @end
 
@@ -42,6 +43,9 @@
         self.hudView.contentView.alpha = 0.0f;
         self.backgroundView.alpha = 0.0f;
         
+        self.errorImage = [UIImage imageNamed:@"icon_cancel"];
+        self.successImage = [UIImage imageNamed:@"icon_sure"];
+        
         self.maxSupportedWindowLevel = UIWindowLevelAlert;
     }
     return self;
@@ -57,6 +61,24 @@
     [self showAnimationImages:images status:nil];
 }
 
++ (void)showError:(NSString *)error Duration:(NSTimeInterval)duration
+{
+    [[self sharedView] setStatus:error];
+    [[self sharedView].statusImageView setImage:[self sharedView].errorImage];
+    [[self sharedView] updateViewHierarchy];
+    [[self sharedView] updateContentFrame];
+    [[self sharedView] showWithDuration:duration];
+}
+
++(void)showSuccess:(NSString *)success Duration:(NSTimeInterval)duration
+{
+    [[self sharedView] setStatus:success];
+    [[self sharedView].statusImageView setImage:[self sharedView].successImage];
+    [[self sharedView] updateViewHierarchy];
+    [[self sharedView] updateContentFrame];
+    [[self sharedView] showWithDuration:duration];
+}
+
 + (void)showAnimationImages:(NSArray<NSString *> *)images status:(NSString*)status
 {
     [[self sharedView] setStatus:status];
@@ -65,6 +87,8 @@
     [[self sharedView] updateContentFrame];
     [[self sharedView] showWithDuration:0.15f];
 }
+
+
 
 + (void)dismiss{
     [[self sharedView] dismissWithDuration:0.15f Delay:0 completion:nil];
@@ -96,6 +120,7 @@
     [self.statusImageView setAnimationDuration:0.1*imageArray.count];
     [self.statusImageView startAnimating];
 }
+
 
 - (void)updateViewHierarchy {
     // Add the overlay to the application window if necessary
@@ -176,6 +201,7 @@
         };
         
         __block void (^completionBlock)(void) = ^{
+            [self dismissWithDuration:0 Delay:0 completion:nil];
         };
         
         [UIView animateWithDuration:duration
@@ -287,6 +313,7 @@
     return _statusImageView;
 }
 
+
 - (UIWindow *)frontWindow {
     NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
     for (UIWindow *window in frontToBackWindows) {
@@ -299,6 +326,10 @@
         }
     }
     return nil;
+}
+
++ (BOOL)isVisible{
+    return [self sharedView].hudView.alpha > 0;
 }
 
 

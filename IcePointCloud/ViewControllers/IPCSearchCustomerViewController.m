@@ -68,7 +68,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     // Do any additional setup after loading the view from its nib.
     
     [self loadCollectionView];
-    [self refreshData];
+    [self queryCustomerInfo];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -137,16 +137,10 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 }
 
 #pragma mark //Refresh Method
-- (void)refreshData
+- (void)reload
 {
-    [IPCCommonUI show];
-    [self queryCustomerInfo:^{
-        [self reload];
-        [IPCCommonUI hiden];
-    }];
-}
-
-- (void)reload{
+    [IPCCommonUI hiden];
+    
     [self.customerCollectionView reloadData];
     
     UIEdgeInsets edgeInsets = self.customerCollectionView.contentInset;
@@ -163,26 +157,31 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 
 #pragma mark //Request Data
-- (void)queryCustomerInfo:(void(^)())complete
+- (void)queryCustomerInfo
 {
+    [IPCCommonUI show];
+    
     [IPCCustomerRequestManager queryCustomerListWithKeyword:searchKeyWord ? : @""
                                                        Page:1
                                                SuccessBlock:^(id responseValue)
      {
          IPCCustomerList * customerList = [[IPCCustomerList alloc]initWithResponseValue:responseValue];
          
-         _rowArr = [IPCSortCustomer PinYingData:customerList.list];
-         _sectionArr = [IPCSortCustomer PinYingSection:[_rowArr mutableCopy]];
-         
-         if (complete) {
-             complete();
-         }
+         dispatch_async(dispatch_get_global_queue(0, 0), ^{
+             [self parseCustomerListData:customerList.list];
+             dispatch_async(dispatch_get_main_queue(), ^{
+                 [self reload];
+             });  
+         });
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:@"查询客户信息失败!"];
-         if (complete) {
-             complete();
-         }
      }];
+}
+
+- (void)parseCustomerListData:(NSArray<IPCCustomerMode *> *)list
+{
+    _rowArr = [IPCSortCustomer PinYingData:list];
+    _sectionArr = [IPCSortCustomer PinYingSection:[_rowArr mutableCopy]];
 }
 
 #pragma mark //Clicked Events
@@ -286,7 +285,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword{
     searchKeyWord = keyword;
-    [self refreshData];
 }
 
 #pragma mark //Visable Rect

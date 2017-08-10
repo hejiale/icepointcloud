@@ -29,30 +29,17 @@
 - (void)setCurrentCustomer:(IPCCustomerMode *)currentCustomer{
     _currentCustomer = currentCustomer;
     
-    if (_currentCustomer) {
+    if (_currentCustomer)
+    {
         NSString * pointText = [NSString stringWithFormat:@"%@积分",_currentCustomer.integral];
         CGFloat pointWidth = [pointText jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
         self.pointViewWidth.constant = pointWidth + 25;
         
-        [self.customImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
+        [self.customImageView setImageURL:[NSURL URLWithString:_currentCustomer.photoUrl]];
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
         [self.pointLabel setText:pointText];
-        if (_currentCustomer.memberLevel && _currentCustomer.memberLevel.length) {
-            [self.memberLevelLabel setText:_currentCustomer.memberLevel];
-        }else{
-            [self.memberLevelLabel setText:@""];
-        }
-        
-        if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-            if ([_currentCustomer.customerID isEqualToString:[IPCCurrentCustomer sharedManager].currentCustomer.customerID]) {
-                [self.hasChooseImageView setHidden:NO];
-            }else{
-                [self.hasChooseImageView setHidden:YES];
-            }
-        }else{
-            [self.hasChooseImageView setHidden:YES];
-        }
+        [self.memberLevelLabel setText:_currentCustomer.memberlevel];
     }
 }
 

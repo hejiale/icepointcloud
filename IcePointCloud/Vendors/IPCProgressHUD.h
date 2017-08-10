@@ -16,7 +16,12 @@
 + (void)showAnimationImages:(NSArray<NSString *> *)images;
 + (void)showAnimationImages:(NSArray<NSString *> *)images status:(NSString*)status;
 
++ (void)showError:(NSString *)error Duration:(NSTimeInterval)duration;
++ (void)showSuccess:(NSString *)success Duration:(NSTimeInterval)duration;
+
 + (void)dismiss;
 + (void)dismissWithDuration:(NSTimeInterval)duration Delay:(NSTimeInterval)delay;
+
++ (BOOL)isVisible;
 
 @end
