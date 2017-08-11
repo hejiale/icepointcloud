@@ -983,7 +983,7 @@
 			isa = PBXGroup;
 			children = (
 				CBC75A621F0B810D0029F956 /* SearchCustomer */,
-				CBC75A631F0B81180029F956 /* NewCustomer */,
+				CBC75A631F0B81180029F956 /* InsertCustomer */,
 				CBC75A641F0B81340029F956 /* CustomerDetail */,
 				CBC75A611F0B80F90029F956 /* Manager */,
 			);
@@ -2249,14 +2249,14 @@
 			name = SearchCustomer;
 			sourceTree = "<group>";
 		};
-		CBC75A631F0B81180029F956 /* NewCustomer */ = {
+		CBC75A631F0B81180029F956 /* InsertCustomer */ = {
 			isa = PBXGroup;
 			children = (
 				0492B64F1D2A48E600A70A3C /* IPCInsertCustomerViewController.h */,
 				0492B6501D2A48E600A70A3C /* IPCInsertCustomerViewController.m */,
 				0492B6511D2A48E600A70A3C /* IPCInsertCustomerViewController.xib */,
 			);
-			name = NewCustomer;
+			name = InsertCustomer;
 			sourceTree = "<group>";
 		};
 		CBC75A641F0B81340029F956 /* CustomerDetail */ = {

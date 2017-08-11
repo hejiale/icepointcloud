@@ -41,10 +41,9 @@
 
 + (NSError *)parseErrorResponse:(id)responseValue
 {
-    NSLog(@"----request Local Error message %@",responseValue);
-    
     if (responseValue) {
         IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];
+        NSLog(@"---error %@",errorMessage.message);
         
         if (errorMessage){
             if (errorMessage.code == kIPCServiceErrorCode){

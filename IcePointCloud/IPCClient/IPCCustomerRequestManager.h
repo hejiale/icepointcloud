@@ -134,7 +134,6 @@
  *  @param failure
  */
 + (void)queryCustomerListWithKeyword:(NSString *)keyword
-                                Page:(NSInteger )page
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure;
 

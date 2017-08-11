@@ -124,11 +124,10 @@
 
 
 + (void)queryCustomerListWithKeyword:(NSString *)keyword
-                                Page:(NSInteger )page
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"keyword":keyword,@"pageNo":@(page),@"maxPageSize":@(15)} RequestMethod:@"customerAdmin.listCustomer" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"keyword":keyword} RequestMethod:@"customerAdmin.listCustomerForPos" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

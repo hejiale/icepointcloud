@@ -34,13 +34,13 @@
         CGFloat pointWidth = [pointText jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
         self.pointViewWidth.constant = pointWidth + 25;
         
-        [self.customImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
+        [self.customImageView setImageURL:[NSURL URLWithString:_currentCustomer.photoUrl]];
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
         [self.pointLabel setText:pointText];
         
-        if (_currentCustomer.memberLevel && _currentCustomer.memberLevel.length) {
-            [self.memberLevelLabel setText:_currentCustomer.memberLevel];
+        if (_currentCustomer.memberlevel && _currentCustomer.memberlevel.length) {
+            [self.memberLevelLabel setText:_currentCustomer.memberlevel];
         }else{
             [self.memberLevelLabel setText:@""];
         }
