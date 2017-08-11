@@ -19,7 +19,6 @@
 
 - (void)queryCustomerAddressList:(void(^)())completeBlock
 {
-    [IPCCommonUI show];
     __weak typeof (self) weakSelf = self;
     [self.addressList removeAllObjects];
     
@@ -28,7 +27,6 @@
                                                            __strong typeof (weakSelf) strongSelf = weakSelf;
                                                            IPCCustomerAddressList * addressObject = [[IPCCustomerAddressList alloc]initWithResponseValue:responseValue];
                                                            [strongSelf.addressList addObjectsFromArray:addressObject.list];
-                                                           [IPCCommonUI hiden];
                                                            if (completeBlock)
                                                                completeBlock();
                                                        } FailureBlock:^(NSError *error) {

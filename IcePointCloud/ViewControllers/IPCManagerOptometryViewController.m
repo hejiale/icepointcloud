@@ -92,7 +92,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         [strongSelf.refreshFooter endRefreshing];
         
         if (!canLoadMore) {
-            self.optometryTableView.mj_footer.hidden = YES;
+            [self.refreshFooter noticeNoDataStatus];
         }
     }];
 }
@@ -119,13 +119,12 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 #pragma mark //Refresh Method
 - (void)beginReloadTableView{
     self.managerViewModel.currentPage = 1;
-    self.optometryTableView.mj_footer.hidden = NO;
+    [self.refreshFooter resetDataStatus];
     [self loadOptometryData];
 }
 
 - (void)loadMoreTableView{
     self.managerViewModel.currentPage ++;
-    [IPCCommonUI show];
     [self loadOptometryData];
 }
 

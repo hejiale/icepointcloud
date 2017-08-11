@@ -88,9 +88,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Method
 - (void)beginReloadTableView{
+    [self.refreshFooter resetDataStatus];
     self.glassListViewMode.isBeginLoad = YES;
     self.glassListViewMode.currentPage = 0;
-    self.glassListCollectionView.mj_footer.hidden = NO;
     
     [self loadNormalProducts];
 }
@@ -99,10 +99,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
-    [IPCCommonUI show];
     [self loadGlassesListData:^{
         [self reload];
-        [IPCCommonUI hiden];
     }];
 }
 
@@ -143,7 +141,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         if (status == IPCRefreshError && error) {
             [IPCCommonUI showError:@"查询商品信息失败!"];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
-            self.glassListCollectionView.mj_footer.hidden = YES;
+            [self.refreshFooter noticeNoDataStatus];
         }
         if (complete) {
             complete();
@@ -186,6 +184,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super reload];
     
     [self.glassListCollectionView reloadData];
+    
     if (self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
     }

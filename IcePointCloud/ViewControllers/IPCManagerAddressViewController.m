@@ -18,6 +18,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 @property (weak, nonatomic) IBOutlet UITableView *addressTableView;
 @property (strong, nonatomic) IPCEditAddressView * editAddressView;
 @property (strong, nonatomic) IPCManagerAddressViewModel * addressViewModel;
+@property (nonatomic, strong) IPCRefreshAnimationHeader    *refreshHeader;
 
 @end
 
@@ -31,11 +32,11 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     [self setNavigationTitle:@"收货地址"];
     [self setRightItem:@"icon_insert_btn" Selection:@selector(insertNewAddressAction)];
     
-    [self loadAddressListData];
-    
     [self.addressTableView setTableFooterView:[[UIView alloc]init]];
     self.addressTableView.emptyAlertImage = @"icon_nonAddress";
     self.addressTableView.emptyAlertTitle = @"暂未添加收货地址";
+    self.addressTableView.mj_header = self.refreshHeader;
+    [self.refreshHeader beginRefreshing];
 }
 
 
@@ -55,6 +56,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     [self.addressViewModel queryCustomerAddressList:^ {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.addressTableView reloadData];
+        [strongSelf.refreshHeader endRefreshing];
     }];
 }
 
@@ -63,7 +65,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     __weak typeof(self) weakSelf = self;
     [self.addressViewModel setCurrentAddress:addressId Complete:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf loadAddressListData];
+        [strongSelf.refreshHeader beginRefreshing];
     }];
 }
 
@@ -80,6 +82,13 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
                                                            }];
     }
     return _editAddressView;
+}
+
+- (MJRefreshBackStateFooter *)refreshHeader{
+    if (!_refreshHeader){
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadAddressListData)];
+    }
+    return _refreshHeader;
 }
 
 #pragma mark //Clicked Events

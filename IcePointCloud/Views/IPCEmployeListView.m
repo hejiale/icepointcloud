@@ -19,6 +19,7 @@ typedef void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (copy, nonatomic) DismissBlock dismissBlock;
 @property (strong, nonatomic) NSMutableArray<IPCEmployee *> *employeeArray;
+@property (strong, nonatomic) IPCRefreshAnimationHeader * refreshHeader;
 
 @end
 
@@ -36,13 +37,13 @@ typedef void(^DismissBlock)();
         [self addSubview:view];
         
         [self.employeBgView addBorder:5 Width:0];
+        [self.searchTextField setLeftImageView:@"text_searchIcon"];
+        
         [self.employeTableView setTableFooterView:[[UIView alloc]init]];
         self.employeTableView.emptyAlertImage = @"exception_search";
         self.employeTableView.emptyAlertTitle = @"没有搜索到该员工";
-        
-        [self.searchTextField setLeftImageView:@"text_searchIcon"];
-        [IPCCommonUI show];
-        [self queryEmploye];
+        self.employeTableView.mj_header = self.refreshHeader;
+        [self.refreshHeader beginRefreshing];
     }
     return self;
 }
@@ -54,16 +55,24 @@ typedef void(^DismissBlock)();
     return _employeeArray;
 }
 
+#pragma mark //Set UI
+- (IPCRefreshAnimationHeader *)refreshHeader{
+    if (!_refreshHeader) {
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(queryEmploye)];
+    }
+    return  _refreshHeader;
+}
+
 #pragma mark //Network Request
 - (void)queryEmploye{
     [self.employeeArray removeAllObjects];
     
     [IPCPayOrderRequestManager queryEmployeWithKeyword:self.searchTextField.text SuccessBlock:^(id responseValue)
      {
-         [IPCCommonUI hiden];
          IPCEmployeeList * employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
          [self.employeeArray addObjectsFromArray:employeList.employeArray];
          [self.employeTableView reloadData];
+         [self.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:@"查询员工信息失败！"];
      }];
@@ -139,7 +148,7 @@ typedef void(^DismissBlock)();
 
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self queryEmploye];
+    [self.refreshHeader beginRefreshing];
     [textField endEditing:YES];
     return YES;
 }

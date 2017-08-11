@@ -215,7 +215,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     self.glassListViewMode.currentPage = 0;
     self.glassListViewMode.isBeginLoad = YES;
-    self.productCollectionView.mj_footer.hidden = NO;
+    [self.refreshFooter resetDataStatus];
     
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -243,12 +243,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
-    [IPCCommonUI show];
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf reload];
-        [IPCCommonUI hiden];
     }];
 }
 
@@ -260,7 +258,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         if (error && status == IPCRefreshError){
             [IPCCommonUI showError:@"查询商品信息失败!"];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
-            strongSelf.productCollectionView.mj_footer.hidden = YES;
+            [strongSelf.refreshFooter noticeNoDataStatus];
         }
         if (complete) {
             complete();

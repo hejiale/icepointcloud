@@ -33,6 +33,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
 @property (strong, nonatomic) IPCUpdateCustomerView * updateCustomerView;
+@property (strong, nonatomic) IPCRefreshAnimationHeader * refreshHeader;
 
 @end
 
@@ -47,6 +48,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+    self.detailTableView.mj_header = self.refreshHeader;
     
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
 }
@@ -55,7 +57,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
-    [self requestCustomerDetailInfo];
+    [self.refreshHeader beginRefreshing];
 }
 
 #pragma mark //Request Data
@@ -63,7 +65,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 {
     [self.customerViewMode resetData];
     self.customerViewMode.customerId = self.customer.customerID;
-    [IPCCommonUI show];
     
     __weak typeof (self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
@@ -88,7 +89,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.detailTableView reloadData];
-        [IPCCommonUI hiden];
+        [strongSelf.refreshHeader endRefreshing];
     });
 }
 
@@ -122,6 +123,12 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }];
 }
 
+- (MJRefreshBackStateFooter *)refreshHeader{
+    if (!_refreshHeader){
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestCustomerDetailInfo)];
+    }
+    return _refreshHeader;
+}
 
 #pragma mark //ClickEvents
 /**

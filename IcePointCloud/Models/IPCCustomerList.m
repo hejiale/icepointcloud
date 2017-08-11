@@ -14,10 +14,12 @@
 - (instancetype)initWithResponseValue:(id)responseValue{
     self = [super init];
     if (self) {
-        [self.list removeAllObjects];
-    
-        if ([responseValue isKindOfClass:[NSArray class]]) {
-            [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([self.list count] > 0)[self.list removeAllObjects];
+        
+        NSArray * list = responseValue[@"resultList"];
+        
+        if ([list isKindOfClass:[NSArray class]]) {
+            [list enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCCustomerMode * glasses = [IPCCustomerMode mj_objectWithKeyValues:obj];
                 [self.list addObject:glasses];
             }];

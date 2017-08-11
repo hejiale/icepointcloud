@@ -196,8 +196,8 @@
 - (void)clearAllFilterDataSource{
     [self.filterValue clear];
     
-    if (self.reloadFilterCloseBlock) {
-        self.reloadFilterCloseBlock();
+    if (self.reloadFilterUnCloseBlock) {
+        self.reloadFilterUnCloseBlock();
     }
 }
 
@@ -207,8 +207,8 @@
     [self.filterValue clear];
     self.filterDataSource = [[IPCFilterDataSourceResult alloc] init];
     
-    if (self.reloadFilterCloseBlock) {
-        self.reloadFilterCloseBlock();
+    if (self.reloadFilterUnCloseBlock) {
+        self.reloadFilterUnCloseBlock();
     }
 }
 
@@ -224,8 +224,8 @@
     self.filterValue.currentStartPirce = startPirce;
     self.filterValue.currentEndPrice = endPrice;
     
-    if (self.reloadFilterCloseBlock) {
-        self.reloadFilterCloseBlock();
+    if (self.reloadFilterUnCloseBlock) {
+        self.reloadFilterUnCloseBlock();
     }
 }
 

@@ -146,7 +146,7 @@
                         <constraint firstItem="rV0-Dn-hOT" firstAttribute="leading" secondItem="dKs-wG-0L7" secondAttribute="leading" id="xHF-wr-3PM"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="07k-sM-L60">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="07k-sM-L60">
                     <rect key="frame" x="0.0" y="50" width="493" height="654"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jAr-RF-Oeb">

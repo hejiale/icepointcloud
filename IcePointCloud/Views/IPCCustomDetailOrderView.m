@@ -34,6 +34,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
+@property (strong, nonatomic) IPCRefreshAnimationHeader * refreshHeader;
 
 @property (copy,  nonatomic) void(^DismissBlock)();
 @property (nonatomic, copy) NSString * currentOrderNum;
@@ -54,8 +55,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         
         self.DismissBlock = dismiss;
         self.currentOrderNum = orderNum;
-        
-        [self queryOrderDetail];
     }
     return self;
 }
@@ -68,12 +67,22 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     self.orderDetailTableView.isHiden = YES;
     self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
     self.orderDetailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
+    self.orderDetailTableView.mj_header = self.refreshHeader;
+    [self.refreshHeader beginRefreshing];
     
     [self addSubview:self.orderDetailBgView];
     [self.orderDetailBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.mas_right).offset(-self.orderDetailBgView.jk_width);
         make.top.mas_equalTo(self.mas_top).offset(0);
     }];
+}
+
+#pragma mark //Set UI
+- (IPCRefreshAnimationHeader *)refreshHeader{
+    if (!_refreshHeader) {
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(queryOrderDetail)];
+    }
+    return _refreshHeader;
 }
 
 
@@ -109,13 +118,12 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Request Data
 - (void)queryOrderDetail
 {
-    [IPCCommonUI show];
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
          [self.orderDetailTableView reloadData];
-         [IPCCommonUI hiden];
+         [self.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:@"查询用户订单详情失败!"];
      }];
@@ -124,7 +132,9 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 8;
+    if ([IPCCustomerOrderDetail instance].orderInfo)
+        return 8;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
