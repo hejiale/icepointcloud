@@ -19,9 +19,9 @@
  *  @param failure
  */
 + (void)getAllCateTypeWithType:(NSString *)type
-                    FilterKey:(NSDictionary *)key
-                 SuccessBlock:(void (^)(id responseValue))success
-                 FailureBlock:(void (^)(NSError * error))failure;
+                     FilterKey:(NSDictionary *)key
+                  SuccessBlock:(void (^)(id responseValue))success
+                  FailureBlock:(void (^)(NSError * error))failure;
 
 /**
  *  QUERY GLASSLIST

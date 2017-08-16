@@ -30,9 +30,10 @@
 #import "IPCRootViewController.h"
 #import "IPCParameterTableViewController.h"
 #import "IPCDatePickViewController.h"
-#import "IPCNavigationViewController.h"
+#import "IPCPortraitNavigationViewController.h"
 #import "IPCRootNavigationViewController.h"
 #import "IPCProductViewController.h"
+#import "IPCPortraitViewController.h"
 /**
  *  Model
  */
@@ -50,6 +51,7 @@
 #import "IPCInsertCustomer.h"
 #import "IPCPointValueMode.h"
 #import "IPCHeadImage.h"
+#import "IPCTryMatch.h"
 /**
  *  Category
  */

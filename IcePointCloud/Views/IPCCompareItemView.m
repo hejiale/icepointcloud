@@ -80,6 +80,7 @@
 - (UIImageView *)glassImageView{
     if (!_glassImageView) {
         _glassImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
+        _glassImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _glassImageView;
 }

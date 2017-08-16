@@ -204,12 +204,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf removeCover];
         }];
         [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf removeCover];
-            [strongSelf.refreshHeader beginRefreshing];
-            [strongSelf queryBatchDegree];
+        
         } ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf queryBatchDegree];
             [strongSelf.refreshHeader beginRefreshing];
         }];
     }
@@ -256,7 +254,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self addCartAnimationInCell:cell];
 }
 
-- (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{    
+- (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
         

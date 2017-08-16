@@ -6,13 +6,13 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCNavigationViewController.h"
+#import "IPCPortraitNavigationViewController.h"
 
-@interface IPCNavigationViewController ()
+@interface IPCPortraitNavigationViewController ()
 
 @end
 
-@implementation IPCNavigationViewController
+@implementation IPCPortraitNavigationViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

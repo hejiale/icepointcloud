@@ -22,7 +22,6 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 @property (strong, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (weak, nonatomic) IBOutlet UIButton *addCartButton;
-@property (weak, nonatomic) IBOutlet UIButton *customsizedButton;
 @property (strong, nonatomic) UIView * specHostView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
 @property (strong, nonatomic) IPCGlassParameterView  *parameterView;
@@ -141,8 +140,6 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
-- (IBAction)onCustomsizedAction:(id)sender {
-}
 
 - (void)reloadCartBadge{
     [self.navigationItem.rightBarButtonItem.customView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];

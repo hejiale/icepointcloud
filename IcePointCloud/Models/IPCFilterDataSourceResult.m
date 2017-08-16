@@ -37,7 +37,7 @@
 
 - (void)parseFilterData:(id)responseObject IsTry:(BOOL)isTry
 {
-    self.isTryOn = isTry;  
+    self.isTryOn = isTry;
     
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         for (NSString * key in [responseObject allKeys]) {

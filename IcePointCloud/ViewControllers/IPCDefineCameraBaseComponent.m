@@ -43,7 +43,7 @@
             self.ResultImageBlock(image);
         }
     }];
-    IPCNavigationViewController * cameraNav = [[IPCNavigationViewController alloc]initWithRootViewController:cameraVC];
+    IPCPortraitNavigationViewController * cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:cameraVC];
     [controller presentViewController:cameraNav  animated:YES completion:nil];
 }
 @end

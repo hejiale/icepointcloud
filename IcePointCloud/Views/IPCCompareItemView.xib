@@ -107,7 +107,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="icon_fullscreen" width="22" height="22"/>
+        <image name="icon_fullscreen" width="22" height="23"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

@@ -460,7 +460,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf outPutCameraImage:image];
     }];
-    IPCNavigationViewController * pickNav = [[IPCNavigationViewController alloc]initWithRootViewController:pickVC];
+    IPCPortraitNavigationViewController * pickNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:pickVC];
     [self presentViewController:pickNav animated:YES completion:nil];
 }
 

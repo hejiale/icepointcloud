@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCNavigationViewController : UINavigationController
+@interface IPCPortraitNavigationViewController : UINavigationController
 
 @end

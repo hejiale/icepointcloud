@@ -186,10 +186,11 @@
 		9EFAC1FC19D6E8F700C1EFBF /* IPCError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EFAC1FB19D6E8F700C1EFBF /* IPCError.m */; };
 		CB1234F21E762D9100AB29DF /* IPCSideBarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1234F11E762D9100AB29DF /* IPCSideBarMenuView.m */; };
 		CB1234F41E762D9A00AB29DF /* IPCSideBarMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB1234F31E762D9A00AB29DF /* IPCSideBarMenuView.xib */; };
+		CB1AAED61F42E049004EE038 /* IPCPortraitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1AAED51F42E049004EE038 /* IPCPortraitViewController.m */; };
+		CB1AAED91F42F082004EE038 /* IPCTryMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1AAED81F42F082004EE038 /* IPCTryMatch.m */; };
 		CB1B54ED1EA354FB006ED851 /* IPCPointValueMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B54EC1EA354FB006ED851 /* IPCPointValueMode.m */; };
 		CB31F1251EA446B200CBEC67 /* IPCPayOrderParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB31F1241EA446B200CBEC67 /* IPCPayOrderParameter.m */; };
 		CB38DF131F3BEC41003258F0 /* IPCCollectionViewIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CB38DF121F3BEC41003258F0 /* IPCCollectionViewIndex.m */; };
-		CB38DF1B1F3C4312003258F0 /* logo-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = CB38DF1A1F3C4312003258F0 /* logo-animation.gif */; };
 		CB3FB0641EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3FB0621EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m */; };
 		CB3FB0651EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */; };
 		CB3FB0691EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3FB0671EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m */; };
@@ -216,7 +217,7 @@
 		CB5CC49E1E8E00D60091D0FD /* IPCPhotoPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC49D1E8E00D60091D0FD /* IPCPhotoPickerViewController.m */; };
 		CB5CC4A71E8E00EA0091D0FD /* IPCDatePickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4A31E8E00EA0091D0FD /* IPCDatePickViewController.m */; };
 		CB5CC4A81E8E00EA0091D0FD /* IPCDatePickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB5CC4A41E8E00EA0091D0FD /* IPCDatePickViewController.xib */; };
-		CB5CC4AF1E8E01040091D0FD /* IPCNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4AA1E8E01040091D0FD /* IPCNavigationViewController.m */; };
+		CB5CC4AF1E8E01040091D0FD /* IPCPortraitNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4AA1E8E01040091D0FD /* IPCPortraitNavigationViewController.m */; };
 		CB5CC4B01E8E01040091D0FD /* IPCPresentModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */; };
 		CB5CC4B41E8E01170091D0FD /* IPCTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4B31E8E01170091D0FD /* IPCTabBarViewController.m */; };
 		CB5CC4B61E8E01220091D0FD /* TuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */; };
@@ -609,13 +610,16 @@
 		CB1234F11E762D9100AB29DF /* IPCSideBarMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSideBarMenuView.m; sourceTree = "<group>"; };
 		CB1234F31E762D9A00AB29DF /* IPCSideBarMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSideBarMenuView.xib; sourceTree = "<group>"; };
 		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		CB1AAED41F42E049004EE038 /* IPCPortraitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPortraitViewController.h; path = IcePointCloud/Vendors/IPCPortraitViewController.h; sourceTree = SOURCE_ROOT; };
+		CB1AAED51F42E049004EE038 /* IPCPortraitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPortraitViewController.m; path = IcePointCloud/Vendors/IPCPortraitViewController.m; sourceTree = SOURCE_ROOT; };
+		CB1AAED71F42F082004EE038 /* IPCTryMatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryMatch.h; sourceTree = "<group>"; };
+		CB1AAED81F42F082004EE038 /* IPCTryMatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTryMatch.m; sourceTree = "<group>"; };
 		CB1B54EB1EA354FB006ED851 /* IPCPointValueMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPointValueMode.h; sourceTree = "<group>"; };
 		CB1B54EC1EA354FB006ED851 /* IPCPointValueMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPointValueMode.m; sourceTree = "<group>"; };
 		CB31F1231EA446B200CBEC67 /* IPCPayOrderParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderParameter.h; sourceTree = "<group>"; };
 		CB31F1241EA446B200CBEC67 /* IPCPayOrderParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderParameter.m; sourceTree = "<group>"; };
 		CB38DF111F3BEC41003258F0 /* IPCCollectionViewIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCollectionViewIndex.h; path = IcePointCloud/Vendors/IPCCollectionViewIndex.h; sourceTree = SOURCE_ROOT; };
 		CB38DF121F3BEC41003258F0 /* IPCCollectionViewIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCollectionViewIndex.m; path = IcePointCloud/Vendors/IPCCollectionViewIndex.m; sourceTree = SOURCE_ROOT; };
-		CB38DF1A1F3C4312003258F0 /* logo-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "logo-animation.gif"; sourceTree = "<group>"; };
 		CB3FB0611EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailTopOptometryCell.h; sourceTree = "<group>"; };
 		CB3FB0621EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailTopOptometryCell.m; sourceTree = "<group>"; };
 		CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailTopOptometryCell.xib; sourceTree = "<group>"; };
@@ -666,8 +670,8 @@
 		CB5CC4A21E8E00EA0091D0FD /* IPCDatePickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCDatePickViewController.h; path = IcePointCloud/Vendors/IPCDatePickViewController.h; sourceTree = SOURCE_ROOT; };
 		CB5CC4A31E8E00EA0091D0FD /* IPCDatePickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCDatePickViewController.m; path = IcePointCloud/Vendors/IPCDatePickViewController.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4A41E8E00EA0091D0FD /* IPCDatePickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IPCDatePickViewController.xib; path = IcePointCloud/Vendors/IPCDatePickViewController.xib; sourceTree = SOURCE_ROOT; };
-		CB5CC4A91E8E01040091D0FD /* IPCNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCNavigationViewController.h; path = IcePointCloud/Vendors/IPCNavigationViewController.h; sourceTree = SOURCE_ROOT; };
-		CB5CC4AA1E8E01040091D0FD /* IPCNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCNavigationViewController.m; path = IcePointCloud/Vendors/IPCNavigationViewController.m; sourceTree = SOURCE_ROOT; };
+		CB5CC4A91E8E01040091D0FD /* IPCPortraitNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPortraitNavigationViewController.h; path = IcePointCloud/Vendors/IPCPortraitNavigationViewController.h; sourceTree = SOURCE_ROOT; };
+		CB5CC4AA1E8E01040091D0FD /* IPCPortraitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPortraitNavigationViewController.m; path = IcePointCloud/Vendors/IPCPortraitNavigationViewController.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4AB1E8E01040091D0FD /* IPCPresentModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPresentModeViewController.h; path = IcePointCloud/Vendors/IPCPresentModeViewController.h; sourceTree = SOURCE_ROOT; };
 		CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPresentModeViewController.m; path = IcePointCloud/Vendors/IPCPresentModeViewController.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4B21E8E01170091D0FD /* IPCTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCTabBarViewController.h; path = IcePointCloud/Vendors/IPCTabBarViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1050,6 +1054,8 @@
 		0485F40A1D34BDD400A42DE3 /* TryGlass */ = {
 			isa = PBXGroup;
 			children = (
+				CB1AAED71F42F082004EE038 /* IPCTryMatch.h */,
+				CB1AAED81F42F082004EE038 /* IPCTryMatch.m */,
 				9EF32097199334DB004FC5B9 /* IPCMatchItem.h */,
 				9EF32098199334DB004FC5B9 /* IPCMatchItem.m */,
 				042402581D87F26400E1DD1A /* IPCOnlineFaceDetector.h */,
@@ -1577,7 +1583,6 @@
 		9E03C2DB1978D5D5007389D0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CB38DF1A1F3C4312003258F0 /* logo-animation.gif */,
 				9E03C2EC1978D5D5007389D0 /* Images.xcassets */,
 				9E03C2DC1978D5D5007389D0 /* IcePointCloud-Info.plist */,
 				9E03C2E01978D5D5007389D0 /* main.m */,
@@ -1646,8 +1651,8 @@
 			children = (
 				048C213A1D34F89800EC4214 /* Login */,
 				04924AF31D6AC0D7006D7374 /* Product */,
-				04A2020E1D7FDF5800F2A681 /* TryGlasses */,
 				0485F3F91D3491C200A42DE3 /* Customer */,
+				04A2020E1D7FDF5800F2A681 /* TryGlasses */,
 				0446067A1E68055E00C9FFCF /* PayOrder */,
 			);
 			path = ViewControllers;
@@ -1874,8 +1879,10 @@
 		CB9187181E8CB63500D59487 /* CustomVC */ = {
 			isa = PBXGroup;
 			children = (
-				CB5CC4A91E8E01040091D0FD /* IPCNavigationViewController.h */,
-				CB5CC4AA1E8E01040091D0FD /* IPCNavigationViewController.m */,
+				CB5CC4A91E8E01040091D0FD /* IPCPortraitNavigationViewController.h */,
+				CB5CC4AA1E8E01040091D0FD /* IPCPortraitNavigationViewController.m */,
+				CB1AAED41F42E049004EE038 /* IPCPortraitViewController.h */,
+				CB1AAED51F42E049004EE038 /* IPCPortraitViewController.m */,
 				CB5CC4AB1E8E01040091D0FD /* IPCPresentModeViewController.h */,
 				CB5CC4AC1E8E01040091D0FD /* IPCPresentModeViewController.m */,
 				CB6AC2071E9F12C6008031DD /* IPCRootNavigationViewController.h */,
@@ -2486,7 +2493,6 @@
 				CB5CC4A81E8E00EA0091D0FD /* IPCDatePickViewController.xib in Resources */,
 				CB457FA41F09E23000BB2077 /* IPCSingleModeView.xib in Resources */,
 				CBE4C8401E9CCF5300F09D2A /* IPCUpdateCustomerView.xib in Resources */,
-				CB38DF1B1F3C4312003258F0 /* logo-animation.gif in Resources */,
 				CBC6AF541EA0A88400F7914D /* IPCPayOrderSettlementCell.xib in Resources */,
 				9E9C68301B8F43B300695FED /* IPCExpandShoppingCartCell.xib in Resources */,
 				9E5C858B1B60E5D300A879BB /* IPCGlassDetailsViewController.xib in Resources */,
@@ -2639,7 +2645,7 @@
 				04EAF91E1D531A4300A4A66F /* IPCShoppingCart.m in Sources */,
 				046497871D483EBD00137A3E /* IPCProductDetailTableViewCell.m in Sources */,
 				04BF93611E165EB800D14A14 /* IPCBatchRequestManager.m in Sources */,
-				CB5CC4AF1E8E01040091D0FD /* IPCNavigationViewController.m in Sources */,
+				CB5CC4AF1E8E01040091D0FD /* IPCPortraitNavigationViewController.m in Sources */,
 				CB5CC4661E8DFFB50091D0FD /* IPCGuideViewManager.m in Sources */,
 				040174D41D8F8D6F00C21A92 /* IPCShareChatView.m in Sources */,
 				CBC75A7C1F0B935C0029F956 /* IPCMangerOptometryView.m in Sources */,
@@ -2650,6 +2656,7 @@
 				0492B6521D2A48E600A70A3C /* IPCInsertCustomerViewController.m in Sources */,
 				CB80F4361F21B0E800F4A9FE /* IPCShowOptometryView.m in Sources */,
 				043B87571DBDF6F300AFB858 /* IPCOrderDetailProductPriceCell.m in Sources */,
+				CB1AAED91F42F082004EE038 /* IPCTryMatch.m in Sources */,
 				CBD7B1501EE79F20008EE3E3 /* IPCOrderDetailSectionCell.m in Sources */,
 				9EC3C5A8198672D900C07396 /* IPCLoginViewController.m in Sources */,
 				04CB1B081D470FF300B19A96 /* IPCCustomerRefreshCell.m in Sources */,
@@ -2675,6 +2682,7 @@
 				CB5CC49A1E8E00B70091D0FD /* IPCStaticImageTextButton.m in Sources */,
 				9E03CEFA1989694700B69825 /* IPCTryGlassesViewController.m in Sources */,
 				04CBD9851D58619700C7CAA4 /* IPCPersonMenuCell.m in Sources */,
+				CB1AAED61F42E049004EE038 /* IPCPortraitViewController.m in Sources */,
 				CB6AC2091E9F12C6008031DD /* IPCRootNavigationViewController.m in Sources */,
 				0464978C1D4886F800137A3E /* IPCProductDetailTopTableViewCell.m in Sources */,
 				044E0EC01E03B2CE00FD2525 /* IPCEditOptometryView.m in Sources */,
