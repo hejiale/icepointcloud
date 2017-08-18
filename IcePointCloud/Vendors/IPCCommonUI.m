@@ -31,7 +31,7 @@
     if ([SVProgressHUD isVisible]) {
         [SVProgressHUD dismiss];
     }
-    NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
+    __block NSMutableArray<NSString *> * loadingArray = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 1 ; i< 17; i++) {
         [loadingArray addObject:[NSString stringWithFormat:@"loading_%ld",(long)i]];

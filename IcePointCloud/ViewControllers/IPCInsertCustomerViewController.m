@@ -130,8 +130,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerBaseCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
                 cell.delegate = self;
             }
+            __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(showCustomerListAction)] subscribeNext:^(RACTuple * _Nullable x) {
-                [self selectIntroducerMethod];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf selectIntroducerMethod];
             }];
             return cell;
         }
@@ -209,9 +211,11 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 }
 
 - (void)judgePhone:(NSString *)phone{
+    __weak typeof(self) weakSelf = self;
     [self.insertCustomerModel judgeCustomerPhone:phone :^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         [IPCInsertCustomer instance].customerPhone = phone;
-        [self.userInfoTableView reloadData];
+        [strongSelf.userInfoTableView reloadData];
     }];
 }
 

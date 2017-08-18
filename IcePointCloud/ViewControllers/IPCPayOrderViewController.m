@@ -81,8 +81,10 @@
 
 - (IPCShoppingCartView *)shopCartView{
     if (!_shopCartView) {
+        __weak typeof(self) weakSelf = self;
         _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:self.cartContentView.bounds Complete:^{
-            [self.payOrderTableView reloadData];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.payOrderTableView reloadData];
         }];
     }
     return _shopCartView;

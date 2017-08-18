@@ -217,10 +217,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = YES;
     [self.refreshFooter resetDataStatus];
     
+    __weak typeof (self) weakSelf = self;
+    
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self loadGlassesListData:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf loadGlassesListData:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -228,14 +231,16 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self.glassListViewMode filterGlassCategoryWithFilterSuccess:^(NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.glassListViewMode filterGlassCategoryWithFilterSuccess:^(NSError *error) {
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        [self reload];
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf reload];
     });
 }
 
@@ -523,11 +528,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self addCoverWithAlpha:0.2 Complete:^{
             [self removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf removeCover];
-            [strongSelf.refreshHeader beginRefreshing];
-        } ReloadUnClose:^{
+        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.refreshHeader beginRefreshing];
         }];

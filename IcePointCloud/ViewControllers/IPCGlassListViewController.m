@@ -72,7 +72,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 
-- (MJRefreshBackStateFooter *)refreshHeader{
+- (IPCRefreshAnimationHeader *)refreshHeader{
     if (!_refreshHeader){
         _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadTableView)];
     }
@@ -99,8 +99,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 9;
     
+    __weak typeof(self) weakSelf = self;
     [self loadGlassesListData:^{
-        [self reload];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf reload];
     }];
 }
 
@@ -195,6 +197,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)onFilterProducts{
     [super onFilterProducts];
+    
     if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
@@ -203,9 +206,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
-        
-        } ReloadUnClose:^{
+        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf queryBatchDegree];
             [strongSelf.refreshHeader beginRefreshing];
@@ -215,6 +216,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)onSearchProducts{
     [super onSearchProducts];
+    
     [self removeCover];
     [self presentSearchViewController];
 }

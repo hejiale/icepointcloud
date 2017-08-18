@@ -156,9 +156,8 @@
 }
 
 #pragma mark //Load Filter Category View
-- (void)loadFilterCategory:(id)owner InView:(UIView *)coverView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose
+- (void)loadFilterCategory:(id)owner InView:(UIView *)coverView ReloadUnClose:(void(^)())reloadUnClose
 {
-    self.reloadFilterCloseBlock = reloadClose;
     self.reloadFilterUnCloseBlock = reloadUnClose;
     
     _filterView = [UIView jk_loadInstanceFromNibWithName:@"IPCFilterGlassesView" owner:owner];

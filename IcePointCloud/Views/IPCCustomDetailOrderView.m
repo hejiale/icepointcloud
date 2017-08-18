@@ -71,9 +71,12 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [self.refreshHeader beginRefreshing];
     
     [self addSubview:self.orderDetailBgView];
+    
+    __weak typeof(self) weakSelf = self;
     [self.orderDetailBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.mas_right).offset(-self.orderDetailBgView.jk_width);
-        make.top.mas_equalTo(self.mas_top).offset(0);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        make.left.mas_equalTo(strongSelf.mas_right).offset(-strongSelf.orderDetailBgView.jk_width);
+        make.top.mas_equalTo(strongSelf.mas_top).offset(0);
     }];
 }
 
@@ -89,10 +92,12 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Clicked Events
 - (void)show
 {
+     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect frame = self.orderDetailBgView.frame;
-        frame.origin.x -= self.orderDetailBgView.jk_width;
-        self.orderDetailBgView.frame = frame;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect frame = strongSelf.orderDetailBgView.frame;
+        frame.origin.x -= strongSelf.orderDetailBgView.jk_width;
+        strongSelf.orderDetailBgView.frame = frame;
     } completion:^(BOOL finished) {
         
     }];
@@ -102,14 +107,17 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [[IPCCustomerOrderDetail instance] clearData];
     [[IPCPayOrderManager sharedManager] resetData];
     
+     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        CGRect frame = self.orderDetailBgView.frame;
-        frame.origin.x += self.orderDetailBgView.jk_width;
-        self.orderDetailBgView.frame = frame;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect frame = strongSelf.orderDetailBgView.frame;
+        frame.origin.x += strongSelf.orderDetailBgView.jk_width;
+        strongSelf.orderDetailBgView.frame = frame;
     } completion:^(BOOL finished) {
         if (finished) {
-            if (self.DismissBlock) {
-                self.DismissBlock();
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf.DismissBlock) {
+                strongSelf.DismissBlock();
             }
         }
     }];
@@ -118,12 +126,14 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Request Data
 - (void)queryOrderDetail
 {
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
-         [self.orderDetailTableView reloadData];
-         [self.refreshHeader endRefreshing];
+         [strongSelf.orderDetailTableView reloadData];
+         [strongSelf.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:@"查询用户订单详情失败!"];
      }];

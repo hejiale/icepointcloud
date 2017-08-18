@@ -92,7 +92,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         [strongSelf.refreshFooter endRefreshing];
         
         if (!canLoadMore) {
-            [self.refreshFooter noticeNoDataStatus];
+            [strongSelf.refreshFooter noticeNoDataStatus];
         }
     }];
 }

@@ -8,23 +8,15 @@
 
 #import "IPCGlassDetailsViewController.h"
 #import "IPCProductDetailTableViewCell.h"
-#import "IPCProductDetailTopTableViewCell.h"
-#import "IPCGlassParameterView.h"
 #import "UIView+Badge.h"
 
 static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellIdentifier";
-static NSString * const topIdentifier           = @"DetailTopTableViewCellIdentifier";
-static NSString * const specIdentifier         = @"SpecificationCellIdentifier";
-static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 
-@interface IPCGlassDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
+@interface IPCGlassDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UIScrollViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UITableView *detailTableView;
-@property (weak, nonatomic) IBOutlet UIButton *addCartButton;
-@property (strong, nonatomic) UIView * specHostView;
+@property (strong, nonatomic) UITableView * detailTableView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
-@property (strong, nonatomic) IPCGlassParameterView  *parameterView;
+@property (strong, nonatomic) UILabel * headerLabel;
 
 @end
 
@@ -37,16 +29,14 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     
     [self setNavigationTitle:@"商品详情"];
     [self setRightItem:@"icon_normal_4" Selection:@selector(pushToCartAction:)];
-    [self.detailTableView setTableFooterView:[[UIView alloc]init]];
-    
     [self reloadCartBadge];
-    [self buildSpecificationViews];
-    [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+    
+    [self.view addSubview:self.detailTableView];
+    [self.view addSubview:self.productDetailWebView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
     [self setNavigationBarStatus:NO];
 }
 
@@ -54,11 +44,11 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
     //清除网页内容
     [self.productDetailWebView reload];
     [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     [self.productDetailWebView jk_clearCookies];
+    [self.productDetailWebView.scrollView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 
@@ -67,51 +57,56 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 }
 
 #pragma mark //Set UI
-- (UIView *)specHostView{
-    if (!_specHostView) {
-        _specHostView = [[UIView alloc]initWithFrame:CGRectMake(30, 0, self.detailTableView.jk_width-50, 0)];
-        [_specHostView setBackgroundColor:[UIColor clearColor]];
-    }
-    return _specHostView;
-}
-
-- (void)buildSpecificationViews
+- (UITableView *)detailTableView
 {
-    __block CGFloat yMargin   = 35;
-    __block CGFloat lblWidth  = self.specHostView.jk_width/3;
-    
-    __block NSArray<NSString *> * keys = [self.glasses displayFields].allKeys;
-    NSInteger numOfRows = ceil(keys.count / 3);
-    
-    [keys enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(lblWidth*(idx%3), floor(idx / 3) * yMargin, lblWidth, 30)];
-        label.textAlignment = NSTextAlignmentLeft;
-        label.textColor = [UIColor lightGrayColor];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
-        label.text = [NSString stringWithFormat:@"%@: %@", obj, [self.glasses displayFields][obj]];
-        [self.specHostView addSubview:label];
-    }];
-    
-    CGRect rect = self.specHostView.frame;
-    rect.size.height = yMargin * numOfRows + 35;
-    self.specHostView.frame = rect;
-    
-    [self.detailTableView reloadData];
+    if (!_detailTableView) {
+        _detailTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _detailTableView.dataSource = self;
+        _detailTableView.delegate = self;
+        _detailTableView.backgroundColor = [UIColor whiteColor];
+        
+        UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 30)];
+        [footView setBackgroundColor:[UIColor whiteColor]];
+        
+        UILabel *footLabel = [[UILabel alloc]initWithFrame:footView.bounds];
+        footLabel.text = @"继续拖动，查看图文详情";
+        footLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+        footLabel.textColor = [UIColor lightGrayColor];
+        footLabel.backgroundColor = [UIColor whiteColor];
+        footLabel.textAlignment = NSTextAlignmentCenter;
+        [footView addSubview:footLabel];
+        
+        _detailTableView.tableFooterView = footView;
+    }
+    return _detailTableView;
 }
 
-- (UIWebView *)productDetailWebView{
+-(UIWebView *)productDetailWebView{
     if (!_productDetailWebView) {
-        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(25, 0, self.detailTableView.jk_width-50, 0)];
-        [_productDetailWebView setBackgroundColor:[UIColor clearColor]];
-        _productDetailWebView.delegate = self;
-        _productDetailWebView.scrollView.scrollEnabled = NO;
-        _productDetailWebView.scrollView.showsVerticalScrollIndicator = NO;
-        _productDetailWebView.scrollView.showsHorizontalScrollIndicator = NO;
-        [_productDetailWebView jk_makeTransparentAndRemoveShadow];
+        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        [_productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+        _productDetailWebView.backgroundColor = [UIColor whiteColor];
+        _productDetailWebView.scrollView.delegate = self;
+        [_productDetailWebView addSubview:self.headerLabel];
+        [_productDetailWebView.scrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     }
     return _productDetailWebView;
 }
+
+
+- (UILabel *)headerLabel{
+    if (!_headerLabel) {
+        _headerLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.jk_width, 30)];
+        _headerLabel.text = @"上拉，返回详情";
+        _headerLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+        _headerLabel.textColor = [UIColor lightGrayColor];
+        _headerLabel.backgroundColor = [UIColor whiteColor];
+        _headerLabel.textAlignment = NSTextAlignmentCenter;
+        _headerLabel.alpha = 0;
+    }
+    return _headerLabel;
+}
+
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
@@ -119,20 +114,37 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
     [self reloadCartBadge];
 }
 
-- (IBAction)addToCartAction:(id)sender {
-    if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
-    {
-        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-            [self reloadCartBadge];
-        }];
-        self.parameterView.glasses = _glasses;
-        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
-        [self.parameterView show];
-    }else{
-        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
-        [self successAddCartMethod];
-    }
+- (void)goToDetailAnimation
+{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+        self.productDetailWebView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.detailTableView.frame = CGRectMake(0, -self.view.frame.size.height , self.view.frame.size.width, self.view.frame.size.height);
+    } completion:nil];
 }
+
+- (void)backToFirstPageAnimation
+{
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionLayoutSubviews animations:^{
+        self.detailTableView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.bounds.size.height);
+        self.productDetailWebView.frame = CGRectMake(0, self.detailTableView.contentSize.height, self.view.frame.size.width, self.view.frame.size.height);
+        [self.detailTableView scrollToTop];
+    } completion:nil];
+}
+
+//- (IBAction)addToCartAction:(id)sender {
+//    if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
+//    {
+//        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+//            [self reloadCartBadge];
+//        }];
+//        self.parameterView.glasses = _glasses;
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+//        [self.parameterView show];
+//    }else{
+//        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
+//        [self successAddCartMethod];
+//    }
+//}
 
 - (void)pushToCartAction:(id)sender {
     [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
@@ -146,83 +158,60 @@ static NSString * const webIdentifier          = @"WebViewCellIdentifier";
 }
 
 #pragma mark //UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section == 1 || section == 2)
-        return 2;
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        IPCProductDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:infoDetailIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCProductDetailTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        }
-        cell.glasses = self.glasses;
-        return cell;
-    }else if(indexPath.section == 1){
-        if (indexPath.row == 0) {
-            IPCProductDetailTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCProductDetailTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell.topTitleLabel setText:@"基本信息"];
-            return cell;
-        }else{
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:specIdentifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:specIdentifier];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            }
-            [cell.contentView addSubview:self.specHostView];
-            return cell;
-        }
-    }else{
-        if (indexPath.row == 0) {
-            IPCProductDetailTopTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:topIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCProductDetailTopTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell.topTitleLabel setText:@"图文详情"];
-            return cell;
-        }else{
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:webIdentifier];
-            if (!cell) {
-                cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:webIdentifier];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell.contentView addSubview:self.productDetailWebView];
-            }
-            return cell;
-        }
+    IPCProductDetailTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:infoDetailIdentifier];
+    if (!cell) {
+        cell = [[UINib nibWithNibName:@"IPCProductDetailTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
+    cell.glasses = self.glasses;
+    return cell;
 }
 
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 300;
-    }else if (indexPath.section == 1 && indexPath.row > 0){
-        return self.specHostView.jk_height;
-    }else if (indexPath.section == 2 && indexPath.row > 0){
-        return self.productDetailWebView.jk_height;
+    return SCREEN_HEIGHT;
+}
+
+
+#pragma mark //UIScrollView Delegate
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    CGFloat offsetY = scrollView.contentOffset.y;
+    
+    if([scrollView isKindOfClass:[UITableView class]]){
+        CGFloat valueNum = self.detailTableView.contentSize.height - self.view.frame.size.height;
+        if ((offsetY - valueNum) > 0){
+            [self goToDetailAnimation];
+        }
+    }else{
+        if(offsetY < 0 && -offsetY > 0){
+            [self backToFirstPageAnimation];
+        }
     }
-    return 55;
 }
 
-#pragma mark //UIWebView Delegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
-    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"]floatValue];
-    CGRect frame = webView.frame;
-    frame.size.height = height;
-    webView.frame = frame;
-    [self.detailTableView reloadData];
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if(object == self.productDetailWebView.scrollView && [keyPath isEqualToString:@"contentOffset"])
+    {
+        [self headLabAnimation:[change[@"new"] CGPointValue].y];
+    }
 }
 
+- (void)headLabAnimation:(CGFloat)offsetY
+{
+    self.headerLabel.alpha = -offsetY/30;
+    self.headerLabel.center = CGPointMake(self.view.frame.size.width/2, -offsetY/2.f);
 
-
+    if(-offsetY > 30){
+        self.headerLabel.text = @"释放，返回详情";
+    }else{
+        self.headerLabel.text = @"上拉，返回详情";
+    }
+}
 
 @end

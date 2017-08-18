@@ -82,12 +82,15 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 }
 
 #pragma mark //Refresh Method
-- (void)refreshData{
+- (void)refreshData
+{
+    __weak typeof(self) weakSelf = self;
     [self queryCustomerInfo:^{
-        [self.customerCollectionView reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.customerCollectionView reloadData];
         
-        if (self.refreshHeader.isRefreshing) {
-            [self.refreshHeader endRefreshing];
+        if (strongSelf.refreshHeader.isRefreshing) {
+            [strongSelf.refreshHeader endRefreshing];
         }
     }];
 }

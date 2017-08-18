@@ -33,7 +33,6 @@
 #import "IPCPortraitNavigationViewController.h"
 #import "IPCRootNavigationViewController.h"
 #import "IPCProductViewController.h"
-#import "IPCPortraitViewController.h"
 /**
  *  Model
  */

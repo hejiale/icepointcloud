@@ -11,9 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCGlassDetailsViewController">
             <connections>
-                <outlet property="addCartButton" destination="ABO-6O-xCi" id="z01-8I-qdi"/>
-                <outlet property="bottomView" destination="Lcp-kQ-Mst" id="iGs-RP-pGP"/>
-                <outlet property="detailTableView" destination="Q07-8o-Fhi" id="XBf-oS-ttm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,75 +18,8 @@
         <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Q07-8o-Fhi">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="sectionIndexColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="sectionIndexTrackingBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="qwR-bw-CGC"/>
-                        <outlet property="delegate" destination="-1" id="arK-ii-5iC"/>
-                    </connections>
-                </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcp-kQ-Mst">
-                    <rect key="frame" x="0.0" y="713" width="1024" height="55"/>
-                    <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productDetailBottom" translatesAutoresizingMaskIntoConstraints="NO" id="4za-0S-ZKG">
-                            <rect key="frame" x="0.0" y="0.0" width="1024" height="55"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ABO-6O-xCi">
-                            <rect key="frame" x="774" y="0.0" width="250" height="55"/>
-                            <color key="backgroundColor" red="0.38823529411764707" green="0.62745098039215685" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="250" id="qig-AM-6le"/>
-                                <constraint firstAttribute="height" constant="35" id="w4b-cg-IPg"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                            <state key="normal" title="添加商品"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="w4b-cg-IPg"/>
-                                </mask>
-                            </variation>
-                            <connections>
-                                <action selector="addToCartAction:" destination="-1" eventType="touchUpInside" id="SBQ-WI-LrM"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="55" id="4ML-6d-XUO"/>
-                        <constraint firstAttribute="trailing" secondItem="4za-0S-ZKG" secondAttribute="trailing" id="96T-ao-mth"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="MUX-c0-Tig"/>
-                        <constraint firstAttribute="trailing" secondItem="ABO-6O-xCi" secondAttribute="trailing" id="Mr7-kc-wBS"/>
-                        <constraint firstAttribute="bottom" secondItem="ABO-6O-xCi" secondAttribute="bottom" id="XG2-F2-rhj"/>
-                        <constraint firstItem="4za-0S-ZKG" firstAttribute="top" secondItem="Lcp-kQ-Mst" secondAttribute="top" id="e2F-nd-pLp"/>
-                        <constraint firstAttribute="bottom" secondItem="4za-0S-ZKG" secondAttribute="bottom" id="itc-lb-V8x"/>
-                        <constraint firstItem="ABO-6O-xCi" firstAttribute="top" secondItem="Lcp-kQ-Mst" secondAttribute="top" id="ogE-uq-Rei"/>
-                        <constraint firstItem="4za-0S-ZKG" firstAttribute="leading" secondItem="Lcp-kQ-Mst" secondAttribute="leading" id="tCN-ur-GzF"/>
-                    </constraints>
-                </view>
-            </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="trailing" secondItem="Lcp-kQ-Mst" secondAttribute="trailing" id="75V-cH-keG"/>
-                <constraint firstAttribute="trailing" secondItem="Q07-8o-Fhi" secondAttribute="trailing" id="7wU-rR-2iD"/>
-                <constraint firstItem="Q07-8o-Fhi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="V7N-tA-yI1"/>
-                <constraint firstItem="Q07-8o-Fhi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="dAD-OD-Q2U"/>
-                <constraint firstAttribute="bottom" secondItem="Q07-8o-Fhi" secondAttribute="bottom" id="dUU-iJ-w7W"/>
-                <constraint firstAttribute="bottom" secondItem="Lcp-kQ-Mst" secondAttribute="bottom" id="fAw-Mb-vrd"/>
-                <constraint firstItem="Lcp-kQ-Mst" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="iJw-k9-Uwu"/>
-            </constraints>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <point key="canvasLocation" x="427" y="370"/>
         </view>
     </objects>
-    <resources>
-        <image name="productDetailBottom" width="1024" height="55"/>
-    </resources>
 </document>

@@ -225,8 +225,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"验光单"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_manager"];
+            __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-                [self pushToManagerOptometryViewController];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf pushToManagerOptometryViewController];
             }];
             return cell;
         }else{
@@ -246,8 +248,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"收货地址信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_manager"];
+            __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-                [self pushToManagerAddressViewController];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf pushToManagerAddressViewController];
             }];
             return cell;
         }else{
