@@ -26,7 +26,7 @@
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCTryGlassesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GlasslistCollectionViewCellDelegate,OBOvumSource,OBDropZone,UIScrollViewDelegate,CompareItemViewDelegate,IPCSearchViewControllerDelegate>
+@interface IPCTryGlassesViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,GlasslistCollectionViewCellDelegate,CompareItemViewDelegate,IPCSearchViewControllerDelegate>
 {
     NSInteger    activeMatchItemIndex;
 }
@@ -40,15 +40,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @property (weak, nonatomic) IBOutlet UIView *topOperationBar;
 @property (weak, nonatomic) IBOutlet UIView *compareBgView;
 @property (strong, nonatomic)  IPCSingleModeView * signleModeView;
-@property (strong, nonatomic) IBOutlet UIView *sortProductView;
-@property (weak, nonatomic) IBOutlet UIButton *recommendedButton;
-@property (weak, nonatomic) IBOutlet UIButton *sellButton;
-@property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftBottomConstraint;
 @property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *cameraButton;
 @property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *librayButton;
 @property (strong, nonatomic) IBOutlet UIView *cameraBgView;
-@property (weak, nonatomic) IBOutlet UIButton *toTopButton;
 @property (strong, nonatomic) UIVisualEffectView * blurBgView;
 @property (strong, nonatomic)  IPCShareChatView  *shareButtonView;
 @property (strong, nonatomic) IPCSwitch *compareSwitch;
@@ -74,10 +68,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self.cameraButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     [self.librayButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
-    self.matchPanelView.dropZoneHandler = self;
     
     [self loadSingleModelView];
-    self.leftBottomConstraint.constant = self.sortProductView.jk_width/2 + 15;
     [self.matchPanelView bringSubviewToFront:self.topOperationBar];
     [self.topOperationBar addSubview:self.compareSwitch];
     [self loadCollectionView];
@@ -207,12 +199,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
 - (void)beginReloadTableView{
-    if (self.recommendedButton.selected){
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
-        return;
-    }
-    
     self.glassListViewMode.currentPage = 0;
     self.glassListViewMode.isBeginLoad = YES;
     [self.refreshFooter resetDataStatus];
@@ -272,23 +258,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 #pragma mark //Clicked Events ----------------------------------------------------------------------------
-//Choose recommend or sales methods
-- (IBAction)onChooseRecommendedAction:(id)sender {
-    [self.sellButton setSelected:NO];
-    [self.recommendedButton setSelected:YES];
-    self.leftBottomConstraint.constant = 15;
-    [self.glassListViewMode.glassesList removeAllObjects];
-    [self reload];
-}
-
-
-- (IBAction)onChooseSelledAction:(id)sender {
-    [self.sellButton setSelected:YES];
-    [self.recommendedButton setSelected:NO];
-    self.leftBottomConstraint.constant = self.sellButton.jk_width + 15;
-    [self.refreshHeader beginRefreshing];
-}
-
 //Clean bg cover methods
 - (void)removeCover{
     [super removeCover];
@@ -519,7 +488,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Filter Products \ Search Products
 - (void)onFilterProducts{
     [super onFilterProducts];
-    if (self.recommendedButton.selected)return;
     
     __weak typeof (self) weakSelf = self;
     if ([self.glassListViewMode.filterView superview]) {
@@ -544,10 +512,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)onSearchProducts{
     [super onSearchProducts];
     [self removeCover];
-    if (self.recommendedButton.selected){
-        [IPCCommonUI showError:@"暂无可查询的热门推荐商品"];
-        return;
-    }
     [self presentSearchViewController];
 }
 
@@ -643,12 +607,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         IPCGlasses * glass = self.glassListViewMode.glassesList[indexPath.row];
         cell.isTrying = self.glassListViewMode.isTrying;
         [cell setGlasses:glass];
-        
-        if (glass) {
-            OBDragDropManager *dragDropManager = [OBDragDropManager sharedManager];
-            UILongPressGestureRecognizer *dragDropRecognizer = [dragDropManager createLongPressDragDropGestureRecognizerWithSource:self];
-            [cell addGestureRecognizer:dragDropRecognizer];
-        }
     }
     return cell;
 }
@@ -698,99 +656,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)reloadProductList{
     [self reload];
-}
-
-#pragma mark - OBOvumSource ---------------------------------------------------------------------------
--(OBOvum *)createOvumFromView:(UIView*)sourceView
-{
-    if ([self.glassListViewMode.glassesList count] > 0) {
-        UIView *cell = [IPCCommonUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
-        NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
-        IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
-        OBOvum *ovum = [[OBOvum alloc] init];
-        if (glass)ovum.dataObject = glass;
-        return ovum;
-    }
-    return nil;
-}
-
-
-- (UIView *)createDragRepresentationOfSourceView:(UIView *)sourceView inWindow:(UIWindow*)window
-{
-    if ([self.glassListViewMode.glassesList count] > 0) {
-        UIView *cell = [IPCCommonUI nearestAncestorForView:sourceView withClass:[UICollectionViewCell class]];
-        if (cell) {
-            NSIndexPath *indexPath = [self.productCollectionView indexPathForCell:(UICollectionViewCell *)cell];
-            IPCGlasses *glass = self.glassListViewMode.glassesList[indexPath.row];
-            CGRect frame = [sourceView convertRect:sourceView.bounds toView:sourceView.window];
-            frame = [window convertRect:frame fromWindow:sourceView.window];
-            if (glass) {
-                IPCGlassesImage *gp = [glass imageWithType:IPCGlassesImageTypeFrontialNormal];
-                UIImageView *glassImgView = [[UIImageView alloc] init];
-                glassImgView.contentMode = UIViewContentModeScaleAspectFit;
-                [glassImgView setImageWithURL:[NSURL URLWithString:gp.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
-                glassImgView.frame = CGRectMake(frame.origin.x, frame.origin.y, sourceView.frame.size.width*0.9, sourceView.frame.size.height*0.9);
-                return glassImgView;
-            }
-            return nil;
-        }
-    }
-    return nil;
-}
-
-- (void) dragViewWillAppear:(UIView *)dragView inWindow:(UIWindow*)window atLocation:(CGPoint)location
-{
-    dragView.transform = CGAffineTransformIdentity;
-    dragView.alpha = 0.0;
-    
-    [UIView animateWithDuration:0.25 animations:^{
-        dragView.center = location;
-        dragView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        dragView.alpha = 0.85;
-    }];
-}
-
-
-#pragma mark - OBDropZone
-- (void)ovumExited:(OBOvum *)ovum inView:(UIView *)view atLocation:(CGPoint)location{
-}
-
-- (OBDropAction)ovumEntered:(OBOvum*)ovum inView:(UIView*)view atLocation:(CGPoint)location{
-    return OBDropActionMove;
-}
-
-- (OBDropAction)ovumMoved:(OBOvum*)ovum inView:(UIView*)view atLocation:(CGPoint)location{
-    return OBDropActionMove;
-}
-
-- (void)ovumDropped:(OBOvum*)ovum inView:(UIView*)view atLocation:(CGPoint)location
-{
-    if (ovum) {
-        IPCGlasses * glass = (IPCGlasses *)ovum.dataObject;
-        if (glass) {
-            if (!self.compareSwitch.isOn) {
-                [self.signleModeView dropGlasses:glass onLocaton:location];
-            }else{
-                UIView *target = [self.compareBgView hitTest:location withEvent:nil];
-                target = [IPCCommonUI nearestAncestorForView:target withClass:[IPCCompareItemView class]];
-                if (target && [target isKindOfClass:[IPCCompareItemView class]]) {
-                    IPCCompareItemView * itemView = (IPCCompareItemView *)target;
-                    location = [self.compareBgView convertPoint:location toView:itemView];
-                    [itemView dropGlasses:glass onLocaton:location];
-                }
-            }
-        }
-    }
-}
-
-
-#pragma mark //UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    if (scrollView.contentOffset.y > 3*self.view.jk_height) {
-        [self.toTopButton setHidden:NO];
-    }else{
-        [self.toTopButton setHidden:YES];
-    }
 }
 
 #pragma mark //IPCSearchViewControllerDelegate

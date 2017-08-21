@@ -6,28 +6,21 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCTryGlassesViewController">
             <connections>
-                <outlet property="bottomImageView" destination="dTG-om-If4" id="Zf7-Nt-79a"/>
                 <outlet property="cameraBgView" destination="uyA-aR-3T6" id="vC0-Qm-MTy"/>
                 <outlet property="cameraBtn" destination="369-Pi-ySz" id="fsd-wI-hXh"/>
                 <outlet property="cameraButton" destination="wGK-JQ-GRN" id="0P4-YF-kZC"/>
                 <outlet property="compareBgView" destination="rV0-Dn-hOT" id="ST9-G6-bft"/>
-                <outlet property="leftBottomConstraint" destination="pyg-7L-HLb" id="sVz-l4-xOg"/>
                 <outlet property="librayButton" destination="dVd-4Q-55W" id="Y37-af-Vea"/>
                 <outlet property="matchPanelView" destination="dKs-wG-0L7" id="OHI-UZ-K9g"/>
                 <outlet property="modelsPicker" destination="RAf-5R-8ba" id="q33-Ak-SQh"/>
                 <outlet property="photoDeleteBtn" destination="bmP-cc-CMv" id="mVz-XC-HzD"/>
                 <outlet property="photoDeleteConfirmView" destination="ef0-Gk-NQM" id="2ny-ns-rYy"/>
                 <outlet property="productCollectionView" destination="07k-sM-L60" id="UFb-Kf-hDe"/>
-                <outlet property="recommendedButton" destination="iZQ-dN-yr3" id="qw2-kq-tNa"/>
-                <outlet property="sellButton" destination="QfO-au-DLq" id="Oxl-fu-3Vc"/>
-                <outlet property="sortProductView" destination="xtk-pY-3gF" id="cca-Q3-1Wn"/>
-                <outlet property="toTopButton" destination="Nyj-54-ihf" id="L4G-PI-FZW"/>
                 <outlet property="topOperationBar" destination="pAq-87-Q7I" id="S08-ZJ-Hka"/>
                 <outlet property="view" destination="hl5-Ok-qfz" id="3S3-zs-Ain"/>
             </connections>
@@ -147,7 +140,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="07k-sM-L60">
-                    <rect key="frame" x="0.0" y="50" width="493" height="654"/>
+                    <rect key="frame" x="0.0" y="0.0" width="493" height="704"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jAr-RF-Oeb">
                         <size key="itemSize" width="50" height="50"/>
@@ -160,98 +153,15 @@
                         <outlet property="delegate" destination="-1" id="bPm-Hf-vjm"/>
                     </connections>
                 </collectionView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtk-pY-3gF">
-                    <rect key="frame" x="0.0" y="0.0" width="493" height="50"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZQ-dN-yr3">
-                            <rect key="frame" x="0.0" y="0.0" width="246.5" height="48"/>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <state key="normal" title="热门推荐">
-                                <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onChooseRecommendedAction:" destination="-1" eventType="touchUpInside" id="c3L-DC-1ts"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfO-au-DLq">
-                            <rect key="frame" x="246.5" y="0.0" width="246.5" height="48"/>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <state key="normal" title="热销排行">
-                                <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <state key="selected">
-                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="onChooseSelledAction:" destination="-1" eventType="touchUpInside" id="6OA-uN-sgP"/>
-                            </connections>
-                        </button>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dTG-om-If4">
-                            <rect key="frame" x="10" y="48" width="200" height="2"/>
-                            <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="2" id="aqA-zO-R2r"/>
-                                <constraint firstAttribute="width" constant="200" id="dKr-bb-rih"/>
-                            </constraints>
-                        </imageView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y0S-fg-3tu">
-                            <rect key="frame" x="246" y="12" width="1" height="26"/>
-                            <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="0.29698581560283688" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="0.5" id="3i7-MD-HDU"/>
-                            </constraints>
-                        </imageView>
-                    </subviews>
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="Y0S-fg-3tu" firstAttribute="centerX" secondItem="xtk-pY-3gF" secondAttribute="centerX" id="3eh-Ob-dNS"/>
-                        <constraint firstItem="dTG-om-If4" firstAttribute="top" secondItem="iZQ-dN-yr3" secondAttribute="bottom" id="7zB-mP-wSV"/>
-                        <constraint firstAttribute="trailing" secondItem="QfO-au-DLq" secondAttribute="trailing" id="Eak-Jn-yJC"/>
-                        <constraint firstItem="Y0S-fg-3tu" firstAttribute="top" secondItem="xtk-pY-3gF" secondAttribute="top" constant="12" id="MCE-GF-loj"/>
-                        <constraint firstItem="QfO-au-DLq" firstAttribute="top" secondItem="xtk-pY-3gF" secondAttribute="top" id="R4I-Pr-1nB"/>
-                        <constraint firstAttribute="height" constant="50" id="XMc-ew-Vui"/>
-                        <constraint firstItem="iZQ-dN-yr3" firstAttribute="top" secondItem="xtk-pY-3gF" secondAttribute="top" id="hVa-iX-A4n"/>
-                        <constraint firstItem="iZQ-dN-yr3" firstAttribute="leading" secondItem="xtk-pY-3gF" secondAttribute="leading" id="hdd-X4-EnO"/>
-                        <constraint firstAttribute="bottom" secondItem="Y0S-fg-3tu" secondAttribute="bottom" constant="12" id="iRY-P1-IXh"/>
-                        <constraint firstAttribute="bottom" secondItem="dTG-om-If4" secondAttribute="bottom" id="j89-Ep-xw2"/>
-                        <constraint firstItem="QfO-au-DLq" firstAttribute="leading" secondItem="iZQ-dN-yr3" secondAttribute="trailing" id="mAg-zV-tyV"/>
-                        <constraint firstItem="QfO-au-DLq" firstAttribute="bottom" secondItem="iZQ-dN-yr3" secondAttribute="bottom" id="mz3-n3-gig"/>
-                        <constraint firstItem="dTG-om-If4" firstAttribute="leading" secondItem="xtk-pY-3gF" secondAttribute="leading" constant="10" id="pyg-7L-HLb"/>
-                        <constraint firstAttribute="trailing" secondItem="iZQ-dN-yr3" secondAttribute="trailing" multiplier="2" id="wD3-h1-tEl"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nyj-54-ihf">
-                    <rect key="frame" x="227" y="656" width="38" height="38"/>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="38" id="Gq3-a5-HfF"/>
-                        <constraint firstAttribute="height" constant="38" id="d7U-CG-hmE"/>
-                    </constraints>
-                    <state key="normal" image="icon_scrolls_to_top">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="onGoToTopAction:" destination="-1" eventType="touchUpInside" id="CD3-7L-745"/>
-                    </connections>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="07k-sM-L60" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="7TY-ov-iQh"/>
                 <constraint firstAttribute="trailing" secondItem="dKs-wG-0L7" secondAttribute="trailing" id="ElI-7W-Yes"/>
                 <constraint firstAttribute="bottom" secondItem="07k-sM-L60" secondAttribute="bottom" id="FVX-0V-rtZ"/>
-                <constraint firstItem="xtk-pY-3gF" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="MRI-jU-vhk"/>
-                <constraint firstItem="xtk-pY-3gF" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="SIz-af-1bJ"/>
-                <constraint firstAttribute="bottom" secondItem="Nyj-54-ihf" secondAttribute="bottom" constant="10" id="TVF-Tg-Kpy"/>
-                <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="xtk-pY-3gF" secondAttribute="trailing" id="gJC-HP-5JJ"/>
-                <constraint firstItem="07k-sM-L60" firstAttribute="top" secondItem="xtk-pY-3gF" secondAttribute="bottom" id="gRQ-Fb-Riw"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="07k-sM-L60" secondAttribute="trailing" id="ikC-lq-8VC"/>
                 <constraint firstItem="07k-sM-L60" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="jGA-65-qEo"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="rsC-LP-jbL"/>
-                <constraint firstItem="Nyj-54-ihf" firstAttribute="centerX" secondItem="07k-sM-L60" secondAttribute="centerX" id="rtc-BL-qdz"/>
                 <constraint firstAttribute="bottom" secondItem="dKs-wG-0L7" secondAttribute="bottom" id="vU1-sF-7p1"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -405,7 +315,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_scrolls_to_top" width="52" height="52"/>
         <image name="icon_share" width="22" height="22"/>
         <image name="icon_try_camera" width="90" height="86"/>
         <image name="icon_try_library" width="91" height="86"/>

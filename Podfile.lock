@@ -21,7 +21,6 @@ PODS:
   - Masonry (1.0.2)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
-  - OBDragDrop (1.0.3)
   - ReactiveObjC (3.0.0)
   - SNWeChatSDK (1.7.5)
   - SVProgressHUD (2.1.2)
@@ -49,7 +48,6 @@ DEPENDENCIES:
   - Masonry
   - MJExtension
   - MJRefresh
-  - OBDragDrop
   - ReactiveObjC
   - SNWeChatSDK
   - SVProgressHUD
@@ -66,7 +64,6 @@ SPEC CHECKSUMS:
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
-  OBDragDrop: 827cd5cecede6b5320b18106e3695f030900d8cf
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
@@ -74,6 +71,6 @@ SPEC CHECKSUMS:
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 8a031703d009e131402f5dbf2d63dbeed0b3cda9
+PODFILE CHECKSUM: f0158014db9292761058dbbadbf065d3c8f15ca5
 
 COCOAPODS: 1.2.0

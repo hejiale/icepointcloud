@@ -34,9 +34,6 @@
         [self.window setRootViewController:lanuchVC];
     }
     [self.window makeKeyAndVisible];
-    
-    OBDragDropManager *manager = [OBDragDropManager sharedManager];
-    [manager prepareOverlayWindowUsingMainWindow:self.window];
 
     return YES;
 }

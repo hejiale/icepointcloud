@@ -53,10 +53,10 @@
 {
     [super notifyProcessingWithResult:result];
     
-    UIImage *image = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
+//    UIImage *image = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
     
     if (self.ResultImageBlock)
-        self.ResultImageBlock(image);
+        self.ResultImageBlock(result.image);
     
     [self backActionHadAnimated];
 }

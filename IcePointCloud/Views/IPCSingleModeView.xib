@@ -30,89 +30,20 @@
                         <outletCollection property="gestureRecognizers" destination="A02-B9-Ao7" appends="YES" id="d7g-js-4eW"/>
                     </connections>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="td9-Pn-5Ow" userLabel="Bg">
-                    <rect key="frame" x="0.0" y="974" width="768" height="50"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kxf-bi-tRt" userLabel="MoreButton">
-                            <rect key="frame" x="723" y="0.0" width="45" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="45" id="1mV-rk-srB"/>
-                            </constraints>
-                            <state key="normal" image="icon_fullscreen">
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="scaleAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="7ry-Dq-9kt"/>
-                            </connections>
-                        </button>
-                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUi-55-Jpn" userLabel="GlassNameLbl">
-                            <rect key="frame" x="10" y="0.0" width="713" height="20"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="BWn-xG-jXX"/>
-                                <constraint firstAttribute="width" constant="150" id="i0p-uh-FCY"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="i0p-uh-FCY"/>
-                                </mask>
-                            </variation>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2iY-L3-16M">
-                            <rect key="frame" x="10" y="25" width="713" height="20"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="20" id="cAm-A4-5Mc"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20004986704042557" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="Kxf-bi-tRt" firstAttribute="leading" secondItem="2iY-L3-16M" secondAttribute="trailing" id="2nc-Ts-Pdq"/>
-                        <constraint firstItem="2iY-L3-16M" firstAttribute="leading" secondItem="td9-Pn-5Ow" secondAttribute="leading" constant="10" id="Agv-jv-tq9"/>
-                        <constraint firstAttribute="bottom" secondItem="2iY-L3-16M" secondAttribute="bottom" constant="5" id="Gab-Kk-Vax"/>
-                        <constraint firstAttribute="trailing" secondItem="Kxf-bi-tRt" secondAttribute="trailing" id="NmF-jb-EGC"/>
-                        <constraint firstAttribute="bottom" secondItem="Kxf-bi-tRt" secondAttribute="bottom" id="SLj-7B-Uwu"/>
-                        <constraint firstItem="Kxf-bi-tRt" firstAttribute="leading" secondItem="WUi-55-Jpn" secondAttribute="trailing" id="SvH-Ee-v8z"/>
-                        <constraint firstItem="Kxf-bi-tRt" firstAttribute="top" secondItem="td9-Pn-5Ow" secondAttribute="top" id="ZWZ-Hp-Tj9"/>
-                        <constraint firstItem="WUi-55-Jpn" firstAttribute="top" secondItem="td9-Pn-5Ow" secondAttribute="top" id="e05-Uc-ZYQ"/>
-                        <constraint firstAttribute="height" constant="50" id="jGn-9M-gMg"/>
-                        <constraint firstItem="WUi-55-Jpn" firstAttribute="leading" secondItem="td9-Pn-5Ow" secondAttribute="leading" constant="10" id="ohm-ln-DjD"/>
-                        <constraint firstAttribute="bottom" secondItem="WUi-55-Jpn" secondAttribute="bottom" id="v7n-X6-zOb"/>
-                    </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="v7n-X6-zOb"/>
-                        </mask>
-                    </variation>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="zlN-fB-4fK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3dO-Wu-CJu"/>
                 <constraint firstAttribute="bottom" secondItem="zlN-fB-4fK" secondAttribute="bottom" id="JAT-DW-8ZE"/>
                 <constraint firstItem="zlN-fB-4fK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YCA-by-5bV"/>
-                <constraint firstAttribute="bottom" secondItem="td9-Pn-5Ow" secondAttribute="bottom" id="b0k-zl-daz"/>
                 <constraint firstAttribute="trailing" secondItem="zlN-fB-4fK" secondAttribute="trailing" id="i31-jv-JGf"/>
-                <constraint firstAttribute="trailing" secondItem="td9-Pn-5Ow" secondAttribute="trailing" id="kS5-xJ-b0U"/>
-                <constraint firstItem="td9-Pn-5Ow" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="zhC-ap-rIL"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="glassNameLabel" destination="WUi-55-Jpn" id="chO-vP-1JN"/>
                 <outlet property="modelView" destination="zlN-fB-4fK" id="2sR-h5-Ic7"/>
-                <outlet property="priceLabel" destination="2iY-L3-16M" id="dh2-Mp-ZR2"/>
             </connections>
         </view>
         <pinchGestureRecognizer id="hhc-pt-bYh">
@@ -131,7 +62,4 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
-    <resources>
-        <image name="icon_fullscreen" width="22" height="23"/>
-    </resources>
 </document>

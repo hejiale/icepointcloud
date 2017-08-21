@@ -308,16 +308,16 @@
     imgView.backgroundColor = lsqRGB(60, 60, 60);
     imgView.contentMode = UIViewContentModeScaleAspectFit;
     
-    UIImage *image = [result.image lsqImageCorpWithRatio:1];
+//    UIImage *image = [result.image lsqImageCorpWithRatio:1];
     UIImage *sourceImage = [result.image lsqImageCorpResizeWithSize:CGSizeMake(531, 698)];
 //    UIImage *sourceImage = [image lsqImageCorpWithSize:image.size rect:self.view.bounds outputSize:CGSizeMake(531, 698) orientation:UIImageOrientationUp interpolationQuality:kCGInterpolationHigh];
-    lsqLDebug(@"image: %@", NSStringFromCGSize(image.size));
-    
-    imgView.image = image;
+
+    imgView.image = sourceImage;
     [_preview addSubview:imgView];
     
     _preview.alpha = 0;
     _preview.hidden = NO;
+    
     [UIView animateWithDuration:0.32 animations:^{
         _preview.alpha = 1;
     } completion:^(BOOL finished) {

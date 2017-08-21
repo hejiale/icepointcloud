@@ -14,8 +14,6 @@
     CGSize   cameraEyeSize;
 }
 @property (nonatomic, weak)  IBOutlet UIImageView *modelView;
-@property (weak, nonatomic) IBOutlet UILabel *glassNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (strong, nonatomic) UIView *glassesView;
 @property (strong, nonatomic) UIImageView *glassImageView;
 @property (strong, nonatomic) UIButton *closeButton;
@@ -191,13 +189,6 @@
     [self.glassesView addBorder:0 Width:0];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];
-    
-    if (self.matchItem.glass) {
-        self.glassNameLabel.text = self.matchItem.glass.glassName;
-        self.priceLabel.text = [NSString stringWithFormat:@"￥%.f", self.matchItem.glass.price];
-    }else{
-        [self.glassNameLabel setText:@""];[self.priceLabel setText:@""];
-    }
 }
 
 
