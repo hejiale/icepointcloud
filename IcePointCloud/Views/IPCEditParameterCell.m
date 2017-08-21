@@ -37,18 +37,14 @@
     self.ReloadBlcok = reload;
     
     if (_cartItem) {        
-        if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens) {
+        if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens || [_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) {
             if (_cartItem.batchSph.length && _cartItem.bacthCyl.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH:  %@   柱镜/CYL:  %@",_cartItem.batchSph,_cartItem.bacthCyl]];
         }else if ([_cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass){
             if (_cartItem.batchReadingDegree.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.batchReadingDegree]];
         }
-        else if([_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses){
-            if (_cartItem.contactDegree.length){
-                [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.contactDegree]];
-            }
-        }
+      
         [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.glassCount]stringValue]];
     }
 }

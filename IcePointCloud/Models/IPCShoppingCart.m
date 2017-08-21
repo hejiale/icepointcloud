@@ -121,9 +121,9 @@
     [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:readingDegree ContactDegree:nil Count:count];
 }
 
-- (void)addContactLensWithGlasses:(IPCGlasses *)glasses ContactDegree:(NSString *)contactDegree Count:(NSInteger)count
+- (void)addContactLensWithGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl Count:(NSInteger)count
 {
-    [self addGlasses:glasses Sph:nil Cyl:nil ReadingDegree:nil ContactDegree:contactDegree Count:count];
+    [self addGlasses:glasses Sph:sph Cyl:cyl ReadingDegree:nil ContactDegree:nil Count:count];
 }
 
 - (void)addGlasses:(IPCGlasses *)glasses Sph:(NSString *)sph Cyl:(NSString *)cyl ReadingDegree:(NSString *)readingDegree ContactDegree:(NSString *)contactDegree Count:(NSInteger)count
@@ -146,7 +146,6 @@
         {
             item.batchSph = sph;
             item.bacthCyl = cyl;
-            item.contactDegree = contactDegree;
             item.batchReadingDegree = readingDegree;
         }
         item.glasses = glasses;
@@ -266,14 +265,11 @@
 {
     for (IPCShoppingCartItem *ci in self.itemList)
         if (([ci.glasses.glassesID isEqualToString:glasses.glassesID])){
-            if ([glasses filterType] == IPCTopFilterTypeLens) {
+            if ([glasses filterType] == IPCTopFilterTypeLens || [glasses filterType] == IPCTopFilterTypeContactLenses) {
                 if ([cyl isEqualToString:ci.bacthCyl] && [sph isEqualToString:ci.batchSph])
                     return ci;
             }else if ([glasses filterType] == IPCTopFilterTypeReadingGlass){
                 if ([readingDegree isEqualToString:ci.batchReadingDegree])
-                    return ci;
-            }else if([glasses filterType] == IPCTopFilterTypeContactLenses){
-                if ([contactDegree isEqualToString:ci.contactDegree])
                     return ci;
             }
         }

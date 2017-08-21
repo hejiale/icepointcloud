@@ -151,20 +151,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
-//QUERY BATCH DEGREE
-- (void)queryBatchDegree
-{
-    if (self.glassListViewMode.currentType  == IPCTopFilterTypeReadingGlass) {
-        [self.glassListViewMode queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
-            [[IPCBatchDegreeObject instance] batchReadingDegrees:start End:end Step:step];
-        }];
-    }else if (self.glassListViewMode.currentType == IPCTopFilterTypeContactLenses){
-        [self.glassListViewMode queryBatchDegree:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
-            [[IPCBatchDegreeObject instance] batchContactlensDegrees:start End:end Step:step];
-        }];
-    }
-}
-
 #pragma mark //Clicked Events
 - (void)removeCover
 {
@@ -206,9 +192,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadUnClose:^{
+        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf queryBatchDegree];
+            [strongSelf removeCover];
+            [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf.glassListViewMode queryBatchDegree];
+        } ReloadUnClose:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.refreshHeader beginRefreshing];
         }];
     }

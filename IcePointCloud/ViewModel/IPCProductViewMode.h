@@ -35,12 +35,14 @@ typedef enum : NSUInteger {
 
 typedef void(^CompleteBlock)(LSRefreshDataStatus status, NSError * error);
 typedef void(^FilterSucceedBlock)(NSError * error);
+typedef void(^ReloadFilterCloseBlock)();
 typedef void(^ReloadFilterUnCloseBlock)();
 
 @interface IPCProductViewMode : NSObject
 
 @property (nonatomic, copy) CompleteBlock              completeBlock;
 @property (nonatomic, copy) FilterSucceedBlock         filterSuccessBlock;
+@property (nonatomic, copy) ReloadFilterCloseBlock    reloadFilterCloseBlock;
 @property (nonatomic, copy) ReloadFilterUnCloseBlock    reloadFilterUnCloseBlock;
 
 @property (strong, nonatomic, readwrite) IPCFilterGlassesView   * filterView;
@@ -59,7 +61,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
                                IsHot:(BOOL)isHot
                             Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
-- (void)loadFilterCategory:(id)owner InView:(UIView *)coverView ReloadUnClose:(void(^)())reloadUnClose;
-- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat start, CGFloat end, CGFloat step))complete;
+- (void)loadFilterCategory:(id)owner InView:(UIView *)coverView  ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
+- (void)queryBatchDegree;
 
 @end

@@ -60,6 +60,23 @@
                                      FilterSource:[self.filterValue getStoreFilterSource]];
 }
 
+- (void)queryBatchDegree
+{
+    if (self.currentType  == IPCTopFilterTypeReadingGlass) {
+        [self queryBatchDegree:@"READING_GLASSES_DEGREE" Complete:^(CGFloat start, CGFloat end, CGFloat step) {
+            [[IPCBatchDegreeObject instance] batchReadingDegrees:start End:end Step:step];
+        }];
+    }else if (self.currentType == IPCTopFilterTypeContactLenses){
+        [self queryBatchSphCyl:@"CONTACT_LENS_DEGREE" Complete:^(CGFloat startSph, CGFloat endSph, CGFloat stepSph, CGFloat startCyl, CGFloat endCyl, CGFloat stepCyl) {
+            [[IPCBatchDegreeObject instance] batchContactlensWithStartSph:startSph EndSph:endSph StepSph:stepSph StartCyl:startCyl EndCyl:endCyl StepCyl:stepCyl];
+        }];
+    }else if (self.currentType == IPCTopFilterTypeLens){
+        [self queryBatchSphCyl:@"LENS_DEGREE" Complete:^(CGFloat startSph, CGFloat endSph, CGFloat stepSph, CGFloat startCyl, CGFloat endCyl, CGFloat stepCyl) {
+            [[IPCBatchDegreeObject instance] batchContactlensWithStartSph:startSph EndSph:endSph StepSph:stepSph StartCyl:startCyl EndCyl:endCyl StepCyl:stepCyl];
+        }];
+    }
+}
+
 #pragma mark //Request Data
 - (void)getGlassesListInfoWithPage:(NSInteger)page
                          ClassType:(NSString *)classType
@@ -112,16 +129,39 @@
                                       }];
 }
 
-- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat start, CGFloat end, CGFloat step))complete
+- (void)queryBatchDegree:(NSString *)type Complete:(void(^)(CGFloat startDegree, CGFloat endDegree, CGFloat stepDegree))complete
 {
-    [IPCBatchRequestManager queryBatchContactLensConfig:type
+    [IPCBatchRequestManager queryBatchLensConfig:type
+                                    SuccessBlock:^(id responseValue)
+     {
+         if ([responseValue isKindOfClass:[NSArray class]]) {
+             id values = responseValue[0][@"values"];
+             
+             if ([values isKindOfClass:[NSDictionary class]]) {
+                 if (complete) {
+                     complete([values[@"startSph"] floatValue],[values[@"endSph"] floatValue],[values[@"sphStep"] floatValue]);
+                 }
+             }
+         }
+     } FailureBlock:^(NSError *error) {
+     }];
+}
+
+- (void)queryBatchSphCyl:(NSString *)type Complete:(void(^)(CGFloat startSph, CGFloat endSph, CGFloat stepSph,CGFloat startCyl, CGFloat endCyl, CGFloat stepCyl))complete
+{
+    [IPCBatchRequestManager queryBatchLensConfig:type
                                            SuccessBlock:^(id responseValue)
      {
-         id values = responseValue[@"values"];
-         
-         if ([values isKindOfClass:[NSDictionary class]]) {
-             if (complete) {
-                 complete([values[@"startDegree"] floatValue],[values[@"endDegree"] floatValue],[values[@"step"] floatValue]);
+         if ([responseValue isKindOfClass:[NSArray class]] && responseValue) {
+             NSArray * result = responseValue;
+             if (result.count) {
+                 id values = result[0][@"values"];
+                 
+                 if ([values isKindOfClass:[NSDictionary class]]) {
+                     if (complete) {
+                         complete([values[@"startSph"] floatValue],[values[@"endSph"] floatValue],[values[@"sphStep"] floatValue],[values[@"startCyl"] floatValue],[values[@"endCyl"] floatValue],[values[@"cylStep"] floatValue]);
+                     }
+                 }
              }
          }
      } FailureBlock:^(NSError *error) {
@@ -156,15 +196,16 @@
 }
 
 #pragma mark //Load Filter Category View
-- (void)loadFilterCategory:(id)owner InView:(UIView *)coverView ReloadUnClose:(void(^)())reloadUnClose
+- (void)loadFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose
 {
+    self.reloadFilterCloseBlock = reloadClose;
     self.reloadFilterUnCloseBlock = reloadUnClose;
     
     _filterView = [UIView jk_loadInstanceFromNibWithName:@"IPCFilterGlassesView" owner:owner];
-    [_filterView setFrame:CGRectMake(-_filterView.jk_width, 0, _filterView.jk_width, coverView.jk_height)];
+    [_filterView setFrame:CGRectMake(-_filterView.jk_width, 0, _filterView.jk_width, backgroundView.jk_height)];
     [_filterView setDataSource:self];
     [_filterView setDelegate:self];
-    [coverView addSubview:_filterView];
+    [backgroundView addSubview:_filterView];
     [_filterView show];
     [_filterView reloadFilterView];
 }
@@ -195,8 +236,8 @@
 - (void)clearAllFilterDataSource{
     [self.filterValue clear];
     
-    if (self.reloadFilterUnCloseBlock) {
-        self.reloadFilterUnCloseBlock();
+    if (self.reloadFilterCloseBlock) {
+        self.reloadFilterCloseBlock();
     }
 }
 
@@ -206,8 +247,8 @@
     [self.filterValue clear];
     self.filterDataSource = [[IPCFilterDataSourceResult alloc] init];
     
-    if (self.reloadFilterUnCloseBlock) {
-        self.reloadFilterUnCloseBlock();
+    if (self.reloadFilterCloseBlock) {
+        self.reloadFilterCloseBlock();
     }
 }
 
@@ -223,8 +264,8 @@
     self.filterValue.currentStartPirce = startPirce;
     self.filterValue.currentEndPrice = endPrice;
     
-    if (self.reloadFilterUnCloseBlock) {
-        self.reloadFilterUnCloseBlock();
+    if (self.reloadFilterCloseBlock) {
+        self.reloadFilterCloseBlock();
     }
 }
 

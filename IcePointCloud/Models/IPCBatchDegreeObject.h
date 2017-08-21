@@ -13,12 +13,12 @@
 + (IPCBatchDegreeObject *)instance;
 
 @property (nonatomic, strong) NSMutableArray<NSString *> * readingDegrees;
-@property (nonatomic, strong) NSMutableArray<NSString *> * contactLensDegrees;
+@property (nonatomic, strong) NSMutableArray<NSString *> * lensSph;
+@property (nonatomic, strong) NSMutableArray<NSString *> * lensCyl;
 
 - (void)batchReadingDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step;
-- (void)batchContactlensDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step;
 
-- (NSArray<NSString *> *)batchSphs;
-- (NSArray<NSString *> *)batchCyls;
+- (void)batchContactlensWithStartSph:(CGFloat)startSph EndSph:(CGFloat)endSph StepSph:(CGFloat)stepSph StartCyl:(CGFloat)startCyl EndCyl:(CGFloat)endCyl StepCyl:(CGFloat)stepCyl;
 
 @end
+

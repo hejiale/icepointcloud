@@ -8,6 +8,7 @@
 
 #import "IPCGlassDetailsViewController.h"
 #import "IPCProductDetailTableViewCell.h"
+#import "IPCGlassParameterView.h"
 #import "UIView+Badge.h"
 
 static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellIdentifier";
@@ -17,6 +18,7 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
 @property (strong, nonatomic) UITableView * detailTableView;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
 @property (strong, nonatomic) UILabel * headerLabel;
+@property (strong, nonatomic) IPCGlassParameterView * parameterView;
 
 @end
 
@@ -28,7 +30,7 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
     [super viewDidLoad];
     
     [self setNavigationTitle:@"商品详情"];
-    [self setRightItem:@"icon_normal_4" Selection:@selector(pushToCartAction:)];
+    [self setRightItem:@"icon_orderBage" Selection:@selector(pushToCartAction:)];
     [self reloadCartBadge];
     
     [self.view addSubview:self.detailTableView];
@@ -110,7 +112,6 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
-    [IPCCommonUI showSuccess:@"添加商品成功!"];
     [self reloadCartBadge];
 }
 
@@ -131,20 +132,21 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
     } completion:nil];
 }
 
-//- (IBAction)addToCartAction:(id)sender {
-//    if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
-//    {
-//        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-//            [self reloadCartBadge];
-//        }];
-//        self.parameterView.glasses = _glasses;
-//        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
-//        [self.parameterView show];
-//    }else{
-//        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
-//        [self successAddCartMethod];
-//    }
-//}
+- (void)addToCartAction
+{
+    if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
+    {
+        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+            [self reloadCartBadge];
+        }];
+        self.parameterView.glasses = _glasses;
+        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+        [self.parameterView show];
+    }else{
+        [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
+        [self successAddCartMethod];
+    }
+}
 
 - (void)pushToCartAction:(id)sender {
     [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
@@ -168,6 +170,11 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
         cell = [[UINib nibWithNibName:@"IPCProductDetailTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     cell.glasses = self.glasses;
+    __weak typeof(self) weakSelf = self;
+    [[cell rac_signalForSelector:@selector(addCartAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf addToCartAction];
+    }];
     return cell;
 }
 

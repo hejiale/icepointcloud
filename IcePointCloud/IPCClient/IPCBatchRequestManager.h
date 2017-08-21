@@ -67,15 +67,15 @@
 
 
 /**
- * QUERY BATCH GLASSES CONFIG
+ * QUERY  GLASSES CONFIG
 
  @param glassType
  @param success
  @param failure
  */
-+ (void)queryBatchContactLensConfig:(NSString *)glassType
-                       SuccessBlock:(void (^)(id responseValue))success
-                       FailureBlock:(void (^)(NSError *error))failure;
++ (void)queryBatchLensConfig:(NSString *)glassType
+                SuccessBlock:(void (^)(id responseValue))success
+                FailureBlock:(void (^)(NSError *error))failure;
 
 
 

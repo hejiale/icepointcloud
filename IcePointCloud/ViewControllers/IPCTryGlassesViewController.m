@@ -528,12 +528,18 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self addCoverWithAlpha:0.2 Complete:^{
             [self removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadUnClose:^{
+        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
+            __strong typeof (weakSelf) strongSelf = weakSelf;
+            [strongSelf removeCover];
+            [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf.glassListViewMode queryBatchDegree];
+        } ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.refreshHeader beginRefreshing];
         }];
     }
 }
+
 
 - (void)onSearchProducts{
     [super onSearchProducts];

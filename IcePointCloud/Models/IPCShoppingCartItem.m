@@ -132,9 +132,6 @@
     if (self.batchReadingDegree.length)
         [attrs setObject:self.batchReadingDegree forKey:@"degree"];
     
-    if (self.contactDegree.length)
-        [attrs setObject:self.contactDegree forKey:@"degree"];
-    
     [attrs setObject:@[] forKey:@"batchProductInfoList"];
     
     if (attrs.allKeys.count)
