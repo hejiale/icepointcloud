@@ -187,6 +187,8 @@
 		CB1AAED91F42F082004EE038 /* IPCTryMatch.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1AAED81F42F082004EE038 /* IPCTryMatch.m */; };
 		CB1B54ED1EA354FB006ED851 /* IPCPointValueMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CB1B54EC1EA354FB006ED851 /* IPCPointValueMode.m */; };
 		CB31F1251EA446B200CBEC67 /* IPCPayOrderParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB31F1241EA446B200CBEC67 /* IPCPayOrderParameter.m */; };
+		CB3669971F4D58FA00457202 /* IPCTryGlassesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3669951F4D58FA00457202 /* IPCTryGlassesCell.m */; };
+		CB3669981F4D58FA00457202 /* IPCTryGlassesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */; };
 		CB38DF131F3BEC41003258F0 /* IPCCollectionViewIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CB38DF121F3BEC41003258F0 /* IPCCollectionViewIndex.m */; };
 		CB3FB0641EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3FB0621EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m */; };
 		CB3FB0651EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */; };
@@ -294,6 +296,8 @@
 		CBD8DC671EADF5B700AB3DE0 /* IPCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBD8DC661EADF5B700AB3DE0 /* IPCProgressView.m */; };
 		CBDB8F391E9BC05300363F10 /* IPCInsertCustomerAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDB8F371E9BC05300363F10 /* IPCInsertCustomerAddressCell.m */; };
 		CBDB8F3A1E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */; };
+		CBE43B991F4E6C90009CEF88 /* IPCTryGlassesView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE43B981F4E6C90009CEF88 /* IPCTryGlassesView.m */; };
+		CBE43B9B1F4E6CA1009CEF88 /* IPCTryGlassesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE43B9A1F4E6CA1009CEF88 /* IPCTryGlassesView.xib */; };
 		CBE4C83E1E9CCE8700F09D2A /* IPCUpdateCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */; };
 		CBE4C8401E9CCF5300F09D2A /* IPCUpdateCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */; };
 		CBF68D021E8FA92F001DA929 /* NSDictionary+DeleteNull.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */; };
@@ -610,6 +614,9 @@
 		CB1B54EC1EA354FB006ED851 /* IPCPointValueMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPointValueMode.m; sourceTree = "<group>"; };
 		CB31F1231EA446B200CBEC67 /* IPCPayOrderParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderParameter.h; sourceTree = "<group>"; };
 		CB31F1241EA446B200CBEC67 /* IPCPayOrderParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderParameter.m; sourceTree = "<group>"; };
+		CB3669941F4D58FA00457202 /* IPCTryGlassesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryGlassesCell.h; sourceTree = "<group>"; };
+		CB3669951F4D58FA00457202 /* IPCTryGlassesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTryGlassesCell.m; sourceTree = "<group>"; };
+		CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCTryGlassesCell.xib; sourceTree = "<group>"; };
 		CB38DF111F3BEC41003258F0 /* IPCCollectionViewIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCollectionViewIndex.h; path = IcePointCloud/Vendors/IPCCollectionViewIndex.h; sourceTree = SOURCE_ROOT; };
 		CB38DF121F3BEC41003258F0 /* IPCCollectionViewIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCollectionViewIndex.m; path = IcePointCloud/Vendors/IPCCollectionViewIndex.m; sourceTree = SOURCE_ROOT; };
 		CB3FB0611EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailTopOptometryCell.h; sourceTree = "<group>"; };
@@ -801,6 +808,9 @@
 		CBDB8F361E9BC05300363F10 /* IPCInsertCustomerAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomerAddressCell.h; sourceTree = "<group>"; };
 		CBDB8F371E9BC05300363F10 /* IPCInsertCustomerAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCInsertCustomerAddressCell.m; sourceTree = "<group>"; };
 		CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCInsertCustomerAddressCell.xib; sourceTree = "<group>"; };
+		CBE43B971F4E6C90009CEF88 /* IPCTryGlassesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryGlassesView.h; sourceTree = "<group>"; };
+		CBE43B981F4E6C90009CEF88 /* IPCTryGlassesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTryGlassesView.m; sourceTree = "<group>"; };
+		CBE43B9A1F4E6CA1009CEF88 /* IPCTryGlassesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCTryGlassesView.xib; sourceTree = "<group>"; };
 		CBE4C83C1E9CCE8700F09D2A /* IPCUpdateCustomerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUpdateCustomerView.h; sourceTree = "<group>"; };
 		CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUpdateCustomerView.m; sourceTree = "<group>"; };
 		CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdateCustomerView.xib; sourceTree = "<group>"; };
@@ -1089,6 +1099,12 @@
 				9ECE988F1B7DDFF800A13C8F /* IPCSearchItemTableViewCell.h */,
 				9ECE98901B7DDFF800A13C8F /* IPCSearchItemTableViewCell.m */,
 				9ECE98911B7DDFF800A13C8F /* IPCSearchItemTableViewCell.xib */,
+				CB3669941F4D58FA00457202 /* IPCTryGlassesCell.h */,
+				CB3669951F4D58FA00457202 /* IPCTryGlassesCell.m */,
+				CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */,
+				CBE43B971F4E6C90009CEF88 /* IPCTryGlassesView.h */,
+				CBE43B981F4E6C90009CEF88 /* IPCTryGlassesView.m */,
+				CBE43B9A1F4E6CA1009CEF88 /* IPCTryGlassesView.xib */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -2486,6 +2502,7 @@
 				CB3FB0651EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib in Resources */,
 				046CF1461E5FE0B00098B6BF /* IPCEditShoppingCartCell.xib in Resources */,
 				9E5C85841B60DDFB00A879BB /* IPCGlassListViewController.xib in Resources */,
+				CB3669981F4D58FA00457202 /* IPCTryGlassesCell.xib in Resources */,
 				0470ADAD1D407183003AF4F4 /* IPCCustomerOptometryCell.xib in Resources */,
 				04CBD97F1D585BBD00C7CAA4 /* IPCPersonQRCodeCell.xib in Resources */,
 				04443C551D23C8A800596519 /* IPCFilterGlassesView.xib in Resources */,
@@ -2497,6 +2514,7 @@
 				9E6F1FCF1992DEA5003E1A04 /* IPCTryGlassesViewController.xib in Resources */,
 				046497881D483EBD00137A3E /* IPCProductDetailTableViewCell.xib in Resources */,
 				04EC1A791D6BEBED00E9A9F7 /* IPCGlassParameterView.xib in Resources */,
+				CBE43B9B1F4E6CA1009CEF88 /* IPCTryGlassesView.xib in Resources */,
 				04443C5B1D23CADA00596519 /* IPCFilterClassViewCell.xib in Resources */,
 				04687ACD1E16010B0000A053 /* IPCCustomerDetailViewController.xib in Resources */,
 				CBC75A5B1F0B80DE0029F956 /* IPCManagerAddressViewController.xib in Resources */,
@@ -2658,6 +2676,7 @@
 				04B35DB01DE67ADF00281B71 /* IPCOrderDetailTopCell.m in Sources */,
 				04443C5A1D23CADA00596519 /* IPCFilterClassViewCell.m in Sources */,
 				CB9B1BF31F04CCCE00642242 /* IPCInsertCustomerViewModel.m in Sources */,
+				CB3669971F4D58FA00457202 /* IPCTryGlassesCell.m in Sources */,
 				CB6AC2191E9F915D008031DD /* IPCCustomerTypeList.m in Sources */,
 				CB6AC2121E9F51B9008031DD /* IPCEmployeeManager.m in Sources */,
 				9E15729919F858DD00EC93D1 /* IPCHttpRequest.m in Sources */,
@@ -2753,6 +2772,7 @@
 				CB5CC4CB1E8E24B20091D0FD /* UICollectionView+Alert.m in Sources */,
 				04CBD95C1D582A4C00C7CAA4 /* IPCRootViewController.m in Sources */,
 				04B1D2001D867C9C00D9B865 /* IPCPhotoDatas.m in Sources */,
+				CBE43B991F4E6C90009CEF88 /* IPCTryGlassesView.m in Sources */,
 				047D3FBB1D4300FB00638526 /* IPCOrderDetailProductCell.m in Sources */,
 				04EB43971D42190600027B42 /* IPCCustomerDetailCell.m in Sources */,
 				04A415461D7D093F0093FF6E /* IPCEditBatchParameterView.m in Sources */,

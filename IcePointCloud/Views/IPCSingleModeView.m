@@ -229,14 +229,9 @@
             self.glassesView.center = CGPointMake(p.x + bounds.size.width / 2, p.y + bounds.size.height / 2);
         }
         [self.glassImageView setFrame:CGRectMake(0,0, bounds.size.width, bounds.size.height)];
-        [self.closeButton setFrame:CGRectMake(bounds.size.width-23, -5, 28, 28)];
+        [self.closeButton setFrame:CGRectMake(bounds.size.width-25, 0, 25, 25)];
         [self.glassesView bringSubviewToFront:self.closeButton];
     }
-}
-
-
-
-- (IBAction)scaleAction:(id)sender {
 }
 
 

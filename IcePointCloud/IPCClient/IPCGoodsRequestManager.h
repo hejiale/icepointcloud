@@ -42,10 +42,23 @@
                             SearchType:(NSDictionary *)searchType
                             StartPrice:(double)startPrice
                               EndPrice:(double)endPrice
-                                 IsHot:(BOOL)isHot
                               IsTrying:(BOOL)isTrying
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+  QUERY RECOMMD GLASSES
+
+ @param classType
+ @param style
+ @param success
+ @param failure 
+ */
++ (void)queryRecommdGlassesWithClassType:(NSString *)classType
+                                   Style:(NSString *)style
+                            SuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError * error))failure;
 
 
 

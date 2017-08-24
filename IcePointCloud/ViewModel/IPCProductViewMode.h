@@ -46,8 +46,8 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, copy) ReloadFilterUnCloseBlock    reloadFilterUnCloseBlock;
 
 @property (strong, nonatomic, readwrite) IPCFilterGlassesView   * filterView;
-
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *>   *glassesList;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *>   *recommdGlassesList;
 @property (nonatomic, strong, readwrite) IPCFilterDataSourceResult   * filterDataSource;
 @property (strong, nonatomic, readwrite) IPCFilterCategoryMode               *filterValue;
 
@@ -58,10 +58,10 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, assign, readwrite) BOOL  isBeginLoad;
 
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                               IsHot:(BOOL)isHot
                             Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
 - (void)loadFilterCategory:(id)owner InView:(UIView *)coverView  ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 - (void)queryBatchDegree;
+- (void)queryRecommdGlasses:(IPCGlasses *)glass Complete:(void(^)())complete;
 
 @end

@@ -139,7 +139,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadGlassesListData:(void(^)())complete
 {
-    [self.glassListViewMode reloadGlassListDataWithIsTry:NO IsHot:NO Complete:^(LSRefreshDataStatus status, NSError *error){
+    [self.glassListViewMode reloadGlassListDataWithIsTry:NO Complete:^(LSRefreshDataStatus status, NSError *error){
         if (status == IPCRefreshError && error) {
             [IPCCommonUI showError:@"查询商品信息失败!"];
         }else if (status == IPCFooterRefresh_HasNoMoreData){
@@ -233,7 +233,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     cell.delegate = self;
     
     if ([self.glassListViewMode.glassesList count] && self.glassListViewMode){
-        cell.isTrying = self.glassListViewMode.isTrying;
         IPCGlasses * glasses = self.glassListViewMode.glassesList[indexPath.row];
         [cell setGlasses:glasses];
     }

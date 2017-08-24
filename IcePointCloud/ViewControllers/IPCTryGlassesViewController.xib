@@ -20,7 +20,10 @@
                 <outlet property="modelsPicker" destination="RAf-5R-8ba" id="q33-Ak-SQh"/>
                 <outlet property="photoDeleteBtn" destination="bmP-cc-CMv" id="mVz-XC-HzD"/>
                 <outlet property="photoDeleteConfirmView" destination="ef0-Gk-NQM" id="2ny-ns-rYy"/>
-                <outlet property="productCollectionView" destination="07k-sM-L60" id="UFb-Kf-hDe"/>
+                <outlet property="productTableView" destination="t6z-hk-WyO" id="YeJ-QD-UQt"/>
+                <outlet property="recommdBgView" destination="2oF-fM-k1a" id="m9u-ek-5Xt"/>
+                <outlet property="recommdScrollView" destination="SLS-fm-9NF" id="fpc-ac-D01"/>
+                <outlet property="tableViewTopConstant" destination="YrV-AH-ULM" id="dMm-IY-ukp"/>
                 <outlet property="topOperationBar" destination="pAq-87-Q7I" id="S08-ZJ-Hka"/>
                 <outlet property="view" destination="hl5-Ok-qfz" id="3S3-zs-Ain"/>
             </connections>
@@ -139,28 +142,43 @@
                         <constraint firstItem="rV0-Dn-hOT" firstAttribute="leading" secondItem="dKs-wG-0L7" secondAttribute="leading" id="xHF-wr-3PM"/>
                     </constraints>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="07k-sM-L60">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oF-fM-k1a">
+                    <rect key="frame" x="493" y="554" width="531" height="150"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLS-fm-9NF">
+                            <rect key="frame" x="0.0" y="0.0" width="531" height="150"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="SLS-fm-9NF" secondAttribute="bottom" id="DHT-ZB-vDD"/>
+                        <constraint firstItem="SLS-fm-9NF" firstAttribute="leading" secondItem="2oF-fM-k1a" secondAttribute="leading" id="Fud-Q1-hn8"/>
+                        <constraint firstAttribute="trailing" secondItem="SLS-fm-9NF" secondAttribute="trailing" id="GLn-1p-Xh9"/>
+                        <constraint firstAttribute="height" constant="150" id="Sqc-FU-UqC"/>
+                        <constraint firstItem="SLS-fm-9NF" firstAttribute="top" secondItem="2oF-fM-k1a" secondAttribute="top" id="sZJ-cJ-PAS"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t6z-hk-WyO">
                     <rect key="frame" x="0.0" y="0.0" width="493" height="704"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jAr-RF-Oeb">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.062419734589041098" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="aVR-wg-tJS"/>
-                        <outlet property="delegate" destination="-1" id="bPm-Hf-vjm"/>
+                        <outlet property="dataSource" destination="-1" id="18a-ZE-y3m"/>
+                        <outlet property="delegate" destination="-1" id="x2V-jE-K1F"/>
                     </connections>
-                </collectionView>
+                </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="07k-sM-L60" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="7TY-ov-iQh"/>
+                <constraint firstItem="2oF-fM-k1a" firstAttribute="leading" secondItem="dKs-wG-0L7" secondAttribute="leading" id="4dJ-0m-elX"/>
+                <constraint firstItem="t6z-hk-WyO" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="6H8-yf-8yS"/>
                 <constraint firstAttribute="trailing" secondItem="dKs-wG-0L7" secondAttribute="trailing" id="ElI-7W-Yes"/>
-                <constraint firstAttribute="bottom" secondItem="07k-sM-L60" secondAttribute="bottom" id="FVX-0V-rtZ"/>
-                <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="07k-sM-L60" secondAttribute="trailing" id="ikC-lq-8VC"/>
-                <constraint firstItem="07k-sM-L60" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="jGA-65-qEo"/>
+                <constraint firstAttribute="bottom" secondItem="t6z-hk-WyO" secondAttribute="bottom" id="Ivj-gn-NFT"/>
+                <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="t6z-hk-WyO" secondAttribute="trailing" id="Oie-Fk-YvF"/>
+                <constraint firstAttribute="trailing" secondItem="2oF-fM-k1a" secondAttribute="trailing" id="V1l-5g-S5g"/>
+                <constraint firstItem="t6z-hk-WyO" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="YrV-AH-ULM"/>
+                <constraint firstAttribute="bottom" secondItem="2oF-fM-k1a" secondAttribute="bottom" id="dkC-pc-4YT"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="rsC-LP-jbL"/>
                 <constraint firstAttribute="bottom" secondItem="dKs-wG-0L7" secondAttribute="bottom" id="vU1-sF-7p1"/>
             </constraints>

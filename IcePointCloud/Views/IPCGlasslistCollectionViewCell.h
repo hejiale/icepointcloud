@@ -23,8 +23,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
-
-@property (nonatomic) BOOL  isTrying;//Whether to try the page
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;
 
 @end

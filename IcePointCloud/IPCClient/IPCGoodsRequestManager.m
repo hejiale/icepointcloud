@@ -26,7 +26,6 @@
                             SearchType:(NSDictionary *)searchType
                             StartPrice:(double)startPrice
                               EndPrice:(double)endPrice
-                                 IsHot:(BOOL)isHot
                               IsTrying:(BOOL)isTrying
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
@@ -36,7 +35,7 @@
                              @"type": classType,
                              @"keyword": searchWord,
                              @"delFlag":@"false",
-                             @"hot":isHot? @"true":@"false",
+                             @"hot":@"false",
                              @"searchSupplier": @"true",
                              @"proAvailable":@"true",
                              @"startPrice":@(startPrice),
@@ -44,6 +43,22 @@
                              @"isTryProduct": isTrying ? @"true":@"false"};
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
+
+
++ (void)queryRecommdGlassesWithClassType:(NSString *)classType
+                                   Style:(NSString *)style
+                            SuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError * error))failure
+{
+    NSDictionary *params = @{
+                             @"type": classType,
+                             @"keyword": style,
+                             @"isTryProduct": @"true",
+                             @"hot":@"false",
+                             @"limit": @(9),};
+    [self postRequest:params RequestMethod:@"productAdmin.searchTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+}
+
 
 
 @end

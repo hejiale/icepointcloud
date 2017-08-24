@@ -32,10 +32,16 @@
     return _glassesList;
 }
 
+- (NSMutableArray<IPCGlasses *> *)recommdGlassesList{
+    if (!_recommdGlassesList) {
+        _recommdGlassesList = [[NSMutableArray alloc]init];
+    }
+    return _recommdGlassesList;
+}
+
 
 #pragma mark //Get Data
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                               IsHot:(BOOL)isHot
                             Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
 {
     if (self.isBeginLoad){
@@ -48,8 +54,7 @@
                           SearchType:[self.filterValue getStoreFilterSource]
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
-                            IsTrying:isTry
-                               IsHot:isHot];
+                            IsTrying:isTry];
 }
 
 
@@ -84,7 +89,6 @@
                         StartPrice:(double)startPrice
                           EndPrice:(double)endPrice
                           IsTrying:(BOOL)isTrying
-                             IsHot:(BOOL)isHot
 
 {
     __weak typeof (self) weakSelf = self;
@@ -94,7 +98,6 @@
                                                 SearchType:searchType
                                                 StartPrice:startPrice
                                                   EndPrice:endPrice
-                                                     IsHot:isHot
                                                   IsTrying:isTrying
                                               SuccessBlock:^(id responseValue){
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -150,7 +153,7 @@
 - (void)queryBatchSphCyl:(NSString *)type Complete:(void(^)(CGFloat startSph, CGFloat endSph, CGFloat stepSph,CGFloat startCyl, CGFloat endCyl, CGFloat stepCyl))complete
 {
     [IPCBatchRequestManager queryBatchLensConfig:type
-                                           SuccessBlock:^(id responseValue)
+                                    SuccessBlock:^(id responseValue)
      {
          if ([responseValue isKindOfClass:[NSArray class]] && responseValue) {
              NSArray * result = responseValue;
@@ -165,6 +168,24 @@
              }
          }
      } FailureBlock:^(NSError *error) {
+     }];
+}
+
+- (void)queryRecommdGlasses:(IPCGlasses *)glass Complete:(void(^)())complete
+{
+    [self.recommdGlassesList removeAllObjects];
+    
+    [IPCGoodsRequestManager queryRecommdGlassesWithClassType:[glass glassType]
+                                                       Style:glass.style
+                                                SuccessBlock:^(id responseValue)
+     {
+         IPCProductList * result = [[IPCProductList alloc]initWithResponseValue:responseValue];
+         [self.recommdGlassesList addObjectsFromArray:result.glassesList];
+         if (complete) {
+             complete();
+         }
+     } FailureBlock:^(NSError *error) {
+         
      }];
 }
 
