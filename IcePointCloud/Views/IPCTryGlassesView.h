@@ -19,4 +19,6 @@
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 
+- (void)setDefaultGlasses;
+
 @end

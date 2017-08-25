@@ -71,7 +71,7 @@
 #pragma mark //Set UI
 - (UIView *)glassesView{
     if (!_glassesView) {
-        _glassesView = [[UIView alloc]initWithFrame:self.bounds];
+        _glassesView = [[UIView alloc]init];
         [_glassesView addBorder:0 Width:0];
     }
     return _glassesView;
@@ -112,6 +112,7 @@
 - (void)amplificationLargeModelView
 {
     [super amplificationLargeModelView];
+    
     [self.superview.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (obj != self) {
             [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
@@ -131,8 +132,10 @@
             self.parentSingleModeView.transform = CGAffineTransformIdentity;
             self.parentSingleModeView.hidden = NO;
             
-            if (self.delegate && [self.delegate respondsToSelector:@selector(didAnimateToSingleMode:withIndex:)])
-                [self.delegate didAnimateToSingleMode:self withIndex:self.tag];
+            [IPCTryMatch instance].activeMatchItemIndex = self.tag;
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(didAnimateToSingleMode:)])
+                [self.delegate didAnimateToSingleMode:self];
             
             [UIView animateWithDuration:.3 animations:^{
                 self.alpha = 0;
@@ -194,6 +197,7 @@
 - (void)updateItem:(BOOL)isDroped
 {
     [super updateItem:isDroped];
+    
     [self.glassesView addBorder:0 Width:0];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];
@@ -210,7 +214,12 @@
 
 
 - (IBAction)tapModelViewAction:(id)sender {
-    [self hidenClose];
+    if (!self.closeButton.isHidden) {
+        [self hidenClose];
+    }else{
+        [IPCTryMatch instance].activeMatchItemIndex = self.tag;
+        //加边框
+    }
 }
 
 

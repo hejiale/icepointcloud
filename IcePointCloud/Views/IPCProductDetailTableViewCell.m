@@ -37,6 +37,7 @@
         __block CGFloat orignX = self.baseTitleLabel.jk_left;
         __block CGFloat orignY = self.baseTitleLabel.jk_bottom + 15;
         __block CGFloat lblWidth = self.rightContentView.jk_width - orignX - 120;
+        __block CGFloat totalHeight = 0;
         
         NSDictionary * fileds = [self.glasses displayFields];
         [fileds.allKeys enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
@@ -60,14 +61,24 @@
             valueLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
             valueLabel.text = [NSString stringWithFormat:@"%@", fileds[obj]];
             [specHostView addSubview:valueLabel];
+            
+            totalHeight += 40;
         }];
         
+        if (_glasses.isTryOn) {
+            [self.tryButton setHidden:NO];
+            self.tryTopConstant.constant += (totalHeight + 50);
+        }
     }
 }
 
 - (IBAction)addCartAction:(id)sender {
 }
 
+
+
+- (IBAction)tryGlassesAction:(id)sender {
+}
 
 
 @end

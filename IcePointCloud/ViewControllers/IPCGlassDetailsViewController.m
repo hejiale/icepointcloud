@@ -159,6 +159,17 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
     [self.navigationItem.rightBarButtonItem.customView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
 
+
+- (void)tryGlassesMethod{
+    if ([IPCTryMatch instance].matchItems.count == 0) {
+        [[IPCTryMatch instance] initMatchItems];
+    }
+    [IPCTryMatch instance].currentMatchItem.glass = self.glasses;
+    [IPCCommonUI pushToRootIndex:3];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 1;
@@ -174,6 +185,10 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
     [[cell rac_signalForSelector:@selector(addCartAction:)] subscribeNext:^(RACTuple * _Nullable x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf addToCartAction];
+    }];
+    [[cell rac_signalForSelector:@selector(tryGlassesAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf tryGlassesMethod];
     }];
     return cell;
 }

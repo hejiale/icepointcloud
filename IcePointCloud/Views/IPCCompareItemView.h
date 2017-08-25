@@ -24,7 +24,7 @@
 @protocol CompareItemViewDelegate<NSObject>
 
 @optional
-- (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView withIndex:(NSInteger)index;
+- (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView;
 - (void)deleteCompareGlasses:(IPCCompareItemView *)itemView;
 
 @end

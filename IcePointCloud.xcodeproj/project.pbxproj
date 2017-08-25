@@ -1093,18 +1093,10 @@
 		049753B71D4AF49C00E6579F /* Product */ = {
 			isa = PBXGroup;
 			children = (
-				04A0659E1D2231C100A62291 /* IPCGlasslistCollectionViewCell.h */,
-				04A0659F1D2231C100A62291 /* IPCGlasslistCollectionViewCell.m */,
-				04A065A01D2231C100A62291 /* IPCGlasslistCollectionViewCell.xib */,
-				9ECE988F1B7DDFF800A13C8F /* IPCSearchItemTableViewCell.h */,
-				9ECE98901B7DDFF800A13C8F /* IPCSearchItemTableViewCell.m */,
-				9ECE98911B7DDFF800A13C8F /* IPCSearchItemTableViewCell.xib */,
-				CB3669941F4D58FA00457202 /* IPCTryGlassesCell.h */,
-				CB3669951F4D58FA00457202 /* IPCTryGlassesCell.m */,
-				CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */,
 				CBE43B971F4E6C90009CEF88 /* IPCTryGlassesView.h */,
 				CBE43B981F4E6C90009CEF88 /* IPCTryGlassesView.m */,
 				CBE43B9A1F4E6CA1009CEF88 /* IPCTryGlassesView.xib */,
+				CBAC23221F500E03001F748F /* Cell */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -2016,6 +2008,22 @@
 				CB9B1BF21F04CCCE00642242 /* IPCInsertCustomerViewModel.m */,
 			);
 			name = InsertCustomer;
+			sourceTree = "<group>";
+		};
+		CBAC23221F500E03001F748F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				04A0659E1D2231C100A62291 /* IPCGlasslistCollectionViewCell.h */,
+				04A0659F1D2231C100A62291 /* IPCGlasslistCollectionViewCell.m */,
+				04A065A01D2231C100A62291 /* IPCGlasslistCollectionViewCell.xib */,
+				9ECE988F1B7DDFF800A13C8F /* IPCSearchItemTableViewCell.h */,
+				9ECE98901B7DDFF800A13C8F /* IPCSearchItemTableViewCell.m */,
+				9ECE98911B7DDFF800A13C8F /* IPCSearchItemTableViewCell.xib */,
+				CB3669941F4D58FA00457202 /* IPCTryGlassesCell.h */,
+				CB3669951F4D58FA00457202 /* IPCTryGlassesCell.m */,
+				CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		CBAE2AFB1EE674440081B0BB /* PayTypeRecord */ = {

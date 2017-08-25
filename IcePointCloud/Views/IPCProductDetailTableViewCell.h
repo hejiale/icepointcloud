@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *baseTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *tryButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryTopConstant;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 

@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="1024" height="767.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="1024" height="767"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SeS-cZ-aTF">
@@ -93,10 +93,23 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBe-E3-7pZ">
+                                <rect key="frame" x="61.5" y="175" width="245" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="BC0-Aw-2dc"/>
+                                    <constraint firstAttribute="width" constant="245" id="bma-ro-fZ2"/>
+                                </constraints>
+                                <state key="normal" image="icon_tryGlass"/>
+                                <connections>
+                                    <action selector="tryGlassesAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kVl-K8-6ky"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hHB-GW-pIh" firstAttribute="top" secondItem="gkc-38-ifE" secondAttribute="bottom" constant="35" id="1Qs-8W-L8S"/>
+                            <constraint firstItem="CBe-E3-7pZ" firstAttribute="centerX" secondItem="qh4-ZT-JzZ" secondAttribute="centerX" id="Grk-Dz-EO2"/>
+                            <constraint firstItem="CBe-E3-7pZ" firstAttribute="top" secondItem="hHB-GW-pIh" secondAttribute="bottom" id="LKP-rO-98x"/>
                             <constraint firstItem="gkc-38-ifE" firstAttribute="leading" secondItem="qh4-ZT-JzZ" secondAttribute="leading" constant="30" id="brK-kT-5nS"/>
                             <constraint firstItem="hHB-GW-pIh" firstAttribute="leading" secondItem="qh4-ZT-JzZ" secondAttribute="leading" constant="30" id="fkO-D4-PfJ"/>
                             <constraint firstAttribute="trailing" secondItem="gkc-38-ifE" secondAttribute="trailing" constant="20" id="thR-YB-zGX"/>
@@ -121,8 +134,13 @@
                 <outlet property="productImageView" destination="Fjn-Hu-fjB" id="cA1-y7-7N0"/>
                 <outlet property="productNameLabel" destination="gkc-38-ifE" id="cWs-a6-lPU"/>
                 <outlet property="rightContentView" destination="qh4-ZT-JzZ" id="cYC-KA-Xx8"/>
+                <outlet property="tryButton" destination="CBe-E3-7pZ" id="FIx-0x-Ufg"/>
+                <outlet property="tryTopConstant" destination="LKP-rO-98x" id="qDq-4j-cER"/>
             </connections>
             <point key="canvasLocation" x="548" y="594"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="icon_tryGlass" width="245" height="35"/>
+    </resources>
 </document>

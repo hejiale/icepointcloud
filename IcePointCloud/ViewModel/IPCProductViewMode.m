@@ -185,7 +185,9 @@
              complete();
          }
      } FailureBlock:^(NSError *error) {
-         
+         if (complete) {
+             complete();
+         }
      }];
 }
 
