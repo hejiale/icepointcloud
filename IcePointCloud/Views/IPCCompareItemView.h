@@ -26,6 +26,7 @@
 @optional
 - (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView;
 - (void)deleteCompareGlasses:(IPCCompareItemView *)itemView;
+- (void)selectCompareIndex:(IPCCompareItemView *)itemView;
 
 @end
 

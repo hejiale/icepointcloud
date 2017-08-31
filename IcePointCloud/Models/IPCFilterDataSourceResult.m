@@ -42,7 +42,7 @@
     if ([responseObject isKindOfClass:[NSDictionary class]]) {
         for (NSString * key in [responseObject allKeys]) {
             NSArray * array = responseObject[key];
-            if ([array count] > 0 && key &&key.length)
+            if ([array count] > 0 && key && key.length)
                 [self.filterSource setObject:array forKey:key];
         }
         self.filterKeysList = self.filterSource.allKeys;

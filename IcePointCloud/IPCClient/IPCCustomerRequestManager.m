@@ -127,7 +127,7 @@
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"keyword":keyword} RequestMethod:@"customerAdmin.listCustomerForPos" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"keyWord":keyword} RequestMethod:@"customerAdmin.listCustomerForPos" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

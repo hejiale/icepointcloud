@@ -51,7 +51,7 @@
 @property (nonatomic, copy, readonly) NSString * thumbnailURL;//Thumbnail url
 @property (nonatomic, assign, readonly) BOOL  isBatch;//Whether the batch
 @property (nonatomic, assign, readonly) BOOL  isTryOn;//If you can try
-//@property (nonatomic, assign, readonly) NSInteger  stock;//inventory
+@property (nonatomic, assign, readonly) NSInteger  stock;//inventory
 @property (nonatomic, copy, readonly) NSString    * supplierName;//supplier
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;

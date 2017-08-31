@@ -15,7 +15,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *glassNameHeight;
 @property (weak, nonatomic) IBOutlet UIButton *noPointButton;
 @property (weak, nonatomic) IBOutlet UIView *inputPirceView;
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
@@ -33,9 +32,8 @@
 {
     [super awakeFromNib];
     
-    self.glassesNameLbl.lineBreakMode = UILineBreakModeWordWrap | UILineBreakModeTailTruncation;
-    [self.inputPirceView addBorder:3 Width:0.5];
-    [self.glassesImgView addBorder:3 Width:0.5];
+    [self.inputPirceView addBorder:3 Width:0.5 Color:nil];
+    [self.glassesImgView addBorder:3 Width:0.5 Color:nil];
 }
 
 
@@ -54,12 +52,12 @@
         self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
         [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.glasses.price]];
         
-        CGFloat nameHeight = [self.glassesNameLbl.text jk_sizeWithFont:self.glassesNameLbl.font constrainedToWidth:self.glassesNameLbl.jk_width].height;
-        if (([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch)
-        {
-            nameHeight = 20;
-        }
-        self.glassNameHeight.constant = nameHeight;
+//        CGFloat nameHeight = [self.glassesNameLbl.text jk_sizeWithFont:self.glassesNameLbl.font constrainedToWidth:self.glassesNameLbl.jk_width].height;
+//        if (([self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses || [self.cartItem.glasses filterType] == IPCTopFilterTypeAccessory) && self.cartItem.glasses.isBatch)
+//        {
+//            nameHeight = 20;
+//        }
+//        self.glassNameHeight.constant = nameHeight;
         
         if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && self.cartItem.glasses.isBatch){
             [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.batchReadingDegree]];

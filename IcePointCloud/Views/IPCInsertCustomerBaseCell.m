@@ -39,7 +39,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.mainView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *)obj;
-            [textField addBorder:3 Width:0.5];
+            [textField addBorder:3 Width:0.5 Color:nil];
             [textField setLeftSpace:10];
         }
     }];
@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.packUpView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *)obj;
-            [textField addBorder:3 Width:0.5];
+            [textField addBorder:3 Width:0.5 Color:nil];
             [textField setLeftSpace:10];
         }
     }];
@@ -55,7 +55,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.introducerView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UITextField class]]) {
             UITextField * textField = (UITextField *)obj;
-            [textField addBorder:3 Width:0.5];
+            [textField addBorder:3 Width:0.5 Color:nil];
             [textField setLeftSpace:10];
         }
     }];

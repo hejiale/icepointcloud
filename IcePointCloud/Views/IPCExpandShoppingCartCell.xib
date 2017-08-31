@@ -97,7 +97,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3t-hE-Vkn">
-                                <rect key="frame" x="120" y="61.5" width="494" height="20"/>
+                                <rect key="frame" x="120" y="51.5" width="494" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="WET-M4-wzf"/>
                                 </constraints>
@@ -114,7 +114,7 @@
                             <constraint firstItem="o36-OD-XmA" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="JIf-wA-oea"/>
                             <constraint firstItem="dvH-d7-xk4" firstAttribute="leading" secondItem="o36-OD-XmA" secondAttribute="trailing" constant="10" id="Kk0-cG-8Oi"/>
                             <constraint firstAttribute="trailing" secondItem="1hw-v8-tif" secondAttribute="trailing" constant="20" id="Z5x-ri-Q9Q"/>
-                            <constraint firstItem="o3t-hE-Vkn" firstAttribute="top" secondItem="o36-OD-XmA" secondAttribute="bottom" constant="20" id="cEj-f8-r2i"/>
+                            <constraint firstItem="o3t-hE-Vkn" firstAttribute="top" secondItem="o36-OD-XmA" secondAttribute="bottom" constant="10" id="cEj-f8-r2i"/>
                             <constraint firstItem="iQh-If-xpo" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="cc5-93-VhS"/>
                             <constraint firstItem="o36-OD-XmA" firstAttribute="top" secondItem="U8U-48-ede" secondAttribute="top" id="cog-6A-IcI"/>
                             <constraint firstItem="1hw-v8-tif" firstAttribute="leading" secondItem="dvH-d7-xk4" secondAttribute="trailing" constant="10" id="hjV-uB-tsD"/>
@@ -138,7 +138,6 @@
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="countLbl" destination="Ljk-K3-9sM" id="sxi-wZ-zR8"/>
-                <outlet property="glassNameHeight" destination="Kbl-uZ-ljK" id="9cl-pN-OG8"/>
                 <outlet property="glassesImgView" destination="U8U-48-ede" id="kyp-OI-2Xg"/>
                 <outlet property="glassesNameLbl" destination="o36-OD-XmA" id="zN8-fO-pwI"/>
                 <outlet property="inputPirceView" destination="dvH-d7-xk4" id="pl4-8N-Poz"/>

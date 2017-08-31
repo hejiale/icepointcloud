@@ -45,7 +45,9 @@
 
 - (IPCMatchItem *)currentMatchItem
 {
-    return self.matchItems[self.activeMatchItemIndex];
+    if (self.matchItems.count)
+        return self.matchItems[self.activeMatchItemIndex];
+    return nil;
 }
 
 @end

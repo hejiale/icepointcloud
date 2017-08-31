@@ -35,8 +35,8 @@
 {
     [super viewDidLoad];
     
-    [self.usernameTf addBorder:5 Width:0.5];
-    [self.passwordTf addBorder:5 Width:0.5];
+    [self.usernameTf addBorder:5 Width:0.5 Color:nil];
+    [self.passwordTf addBorder:5 Width:0.5 Color:nil];
     [self.usernameTf setLeftSpace:10];
     [self.passwordTf setLeftSpace:10];
     [IPCCommonUI clearAutoCorrection:self.loginBgView];

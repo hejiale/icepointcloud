@@ -51,8 +51,8 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 - (void)layoutSubviews{
     [super layoutSubviews];
 
-    [self.editParameterView addBorder:8 Width:0];
-    [self.glassImageView addBorder:5 Width:0.5];
+    [self.editParameterView addBorder:8 Width:0 Color:nil];
+    [self.glassImageView addBorder:5 Width:0.5 Color:nil];
     [self.parameterTableView setTableFooterView:[[UIView alloc]init]];
 }
 

@@ -23,9 +23,8 @@
 }
 
 
-- (void)checkVersion{
-    if ( ! [NSUserDefaults jk_boolForKey:IPCFirstLanuchKey])return;
-    
+- (void)checkVersion
+{
     [self getAppStoreVersion:^(IPCVersionModel *model) {
         if (model) {
             [IPCCommonUI showAlert:@"有新版本更新" Message:model.releaseNotes Owner:[[UIApplication sharedApplication] keyWindow].rootViewController Done:^{

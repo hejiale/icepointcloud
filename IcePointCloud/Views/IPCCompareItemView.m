@@ -72,7 +72,7 @@
 - (UIView *)glassesView{
     if (!_glassesView) {
         _glassesView = [[UIView alloc]init];
-        [_glassesView addBorder:0 Width:0];
+        [_glassesView addBorder:0 Width:0 Color:nil];
     }
     return _glassesView;
 }
@@ -198,7 +198,7 @@
 {
     [super updateItem:isDroped];
     
-    [self.glassesView addBorder:0 Width:0];
+    [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];
     
@@ -217,8 +217,10 @@
     if (!self.closeButton.isHidden) {
         [self hidenClose];
     }else{
-        [IPCTryMatch instance].activeMatchItemIndex = self.tag;
         //加边框
+        if ([self.delegate respondsToSelector:@selector(selectCompareIndex:)]) {
+            [self.delegate selectCompareIndex:self];
+        }
     }
 }
 
@@ -359,13 +361,13 @@
 #pragma mark //Show or hide to shut down
 - (void)showClose{
     if (self.matchItem.glass) {
-        [self.glassesView addBorder:3 Width:0.5];
+        [self.glassesView addBorder:3 Width:0.5 Color:nil];
         [self.closeButton setHidden:NO];
     }
 }
 
 - (void)hidenClose{
-    [self.glassesView addBorder:0 Width:0];
+    [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
 }
 
@@ -387,6 +389,7 @@
     
     [self updateGlassFrame];
 }
+
 
 
 @end

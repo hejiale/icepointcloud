@@ -35,9 +35,9 @@ typedef void(^UpdateUIBlock)(void);
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.contacterTextField addBorder:3 Width:0.5];
-    [self.phoneTextField addBorder:3 Width:0.5];
-    [self.addressTextField addBorder:3 Width:0.5];
+    [self.contacterTextField addBorder:3 Width:0.5 Color:nil];
+    [self.phoneTextField addBorder:3 Width:0.5 Color:nil];
+    [self.addressTextField addBorder:3 Width:0.5 Color:nil];
     [self.contacterTextField setLeftSpace:5];
     [self.phoneTextField setLeftSpace:5];
     [self.addressTextField setLeftSpace:5];

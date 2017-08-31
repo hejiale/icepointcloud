@@ -17,7 +17,7 @@
     [self.productContentView addSubview:self.pointImageView];
     [self.productContentView addSubview:self.suggestPriceLabel];
     [self.productContentView addSubview:self.productNameLabel];
-    [self.productImageView addBorder:3 Width:0.5];
+    [self.productImageView addBorder:3 Width:0.5 Color:nil];
     
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(10);

@@ -112,6 +112,7 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
+    [IPCCommonUI showSuccess:@"添加商品成功!"];
     [self reloadCartBadge];
 }
 
@@ -164,7 +165,7 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
     if ([IPCTryMatch instance].matchItems.count == 0) {
         [[IPCTryMatch instance] initMatchItems];
     }
-    [IPCTryMatch instance].currentMatchItem.glass = self.glasses;
+    [[IPCTryMatch instance] currentMatchItem].glass = self.glasses;
     [IPCCommonUI pushToRootIndex:3];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

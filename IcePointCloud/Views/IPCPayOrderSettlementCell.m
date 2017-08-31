@@ -14,8 +14,8 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.pointAmountTextField addBorder:0 Width:1];
-    [self.givingAmountTextField addBorder:0 Width:1];
+    [self.pointAmountTextField addBorder:0 Width:1 Color:nil];
+    [self.givingAmountTextField addBorder:0 Width:1 Color:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

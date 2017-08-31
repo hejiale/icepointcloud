@@ -85,7 +85,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
                                                         SuccessBlock:^(id responseValue)
      {
          [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
-         [IPCCommonUI hiden];
          [self reload];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:@"查询客户信息失败!"];

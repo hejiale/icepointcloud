@@ -32,8 +32,8 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self addBorder:3 Width:0.5];
-    [self.amountTextField addBorder:3 Width:0.5];
+    [self addBorder:3 Width:0.5 Color:nil];
+    [self.amountTextField addBorder:3 Width:0.5 Color:nil];
     [self.amountTextField setLeftSpace:5];
     [self.progressBarView addSubview:self.progress];
 }

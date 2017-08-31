@@ -81,7 +81,7 @@
     if (!_glassesView) {
         _glassesView = [[UIView alloc]initWithFrame:self.bounds];
         _glassesView.userInteractionEnabled = YES;
-        [_glassesView addBorder:0 Width:0];
+        [_glassesView addBorder:0 Width:0 Color:nil];
         [_glassesView setHidden:YES];
     }
     return _glassesView;
@@ -186,7 +186,7 @@
 
 - (void)updateItem:(BOOL)isDroped{
     [super updateItem:isDroped];
-    [self.glassesView addBorder:0 Width:0];
+    [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];
 }
@@ -281,13 +281,13 @@
 #pragma mark //Show or hide to shut down
 - (void)showClose{
     if (self.matchItem.glass) {
-        [self.glassesView addBorder:3 Width:0.5];
+        [self.glassesView addBorder:3 Width:0.5 Color:nil];
         [self.closeButton setHidden:NO];
     }
 }
 
 - (void)hidenClose{
-    [self.glassesView addBorder:0 Width:0];
+    [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
 }
 

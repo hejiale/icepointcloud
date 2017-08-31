@@ -71,7 +71,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIP-c3-VGM">
-                        <rect key="frame" x="20" y="145" width="291" height="20"/>
+                        <rect key="frame" x="64" y="145" width="247" height="20"/>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Djy-mQ-nGY"/>
@@ -87,12 +87,32 @@
                             <constraint firstAttribute="height" constant="120" id="Ehh-1z-n1f"/>
                         </constraints>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tryOn" translatesAutoresizingMaskIntoConstraints="NO" id="HLG-0X-Gih">
+                        <rect key="frame" x="294" y="5" width="37" height="14"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="37" id="XAE-3b-I4e"/>
+                            <constraint firstAttribute="height" constant="14" id="YaN-Xf-Vb7"/>
+                        </constraints>
+                    </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_unStock" translatesAutoresizingMaskIntoConstraints="NO" id="nud-R4-Mta">
+                        <rect key="frame" x="20" y="145" width="39" height="17"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="2cY-1p-3jQ"/>
+                            <constraint firstAttribute="width" constant="39" id="A5v-tt-hsS"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="HLG-0X-Gih" secondAttribute="trailing" id="1pI-i4-CWe"/>
                 <constraint firstAttribute="trailing" secondItem="xA6-Vh-bnS" secondAttribute="trailing" constant="50" id="96v-EH-ID2"/>
                 <constraint firstAttribute="trailing" secondItem="ba3-fr-oCi" secondAttribute="trailing" constant="20" id="Cge-ga-qXG"/>
+                <constraint firstItem="nud-R4-Mta" firstAttribute="top" secondItem="xA6-Vh-bnS" secondAttribute="bottom" constant="15" id="EyW-Rp-XW7"/>
+                <constraint firstItem="HLG-0X-Gih" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="FJ2-lx-1PC"/>
+                <constraint firstItem="nud-R4-Mta" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="GRx-re-ICh"/>
                 <constraint firstAttribute="bottom" secondItem="tjp-2f-ED0" secondAttribute="bottom" constant="20" id="H0O-nV-rGF"/>
                 <constraint firstItem="tjp-2f-ED0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="H6Z-Kn-5Ia"/>
                 <constraint firstItem="xA6-Vh-bnS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="LV4-gO-Ljm"/>
@@ -101,16 +121,19 @@
                 <constraint firstAttribute="bottom" secondItem="ba3-fr-oCi" secondAttribute="bottom" constant="15" id="QCn-kz-KUH"/>
                 <constraint firstItem="xA6-Vh-bnS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="50" id="S25-eL-UiO"/>
                 <constraint firstAttribute="bottom" secondItem="zT7-2e-guu" secondAttribute="bottom" constant="15" id="WCo-kU-arb"/>
+                <constraint firstItem="YIP-c3-VGM" firstAttribute="leading" secondItem="nud-R4-Mta" secondAttribute="trailing" constant="5" id="aky-nl-ojO"/>
                 <constraint firstAttribute="bottom" secondItem="ldI-Dd-6ZV" secondAttribute="bottom" constant="15" id="ciU-CD-im0"/>
                 <constraint firstAttribute="trailing" secondItem="YIP-c3-VGM" secondAttribute="trailing" constant="20" id="lw4-Ug-Hey"/>
-                <constraint firstItem="YIP-c3-VGM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="xQa-mT-emw"/>
                 <constraint firstItem="YIP-c3-VGM" firstAttribute="top" secondItem="xA6-Vh-bnS" secondAttribute="bottom" constant="15" id="yTT-77-1Lh"/>
             </constraints>
             <size key="customSize" width="331" height="277"/>
             <connections>
                 <outlet property="addCartButton" destination="ba3-fr-oCi" id="rQh-YD-U60"/>
                 <outlet property="cartNumLabel" destination="zT7-2e-guu" id="3kh-Wd-b18"/>
+                <outlet property="defaultImageView" destination="HLG-0X-Gih" id="cgm-lD-CeV"/>
                 <outlet property="labelHeightConstraint" destination="Djy-mQ-nGY" id="g3j-2i-V8U"/>
+                <outlet property="nameLeft" destination="aky-nl-ojO" id="f6x-mj-6Fh"/>
+                <outlet property="noStockImageView" destination="nud-R4-Mta" id="HF9-3r-uWH"/>
                 <outlet property="priceLabel" destination="tjp-2f-ED0" id="2yG-Y4-QN9"/>
                 <outlet property="productImageView" destination="xA6-Vh-bnS" id="rXC-VD-iyh"/>
                 <outlet property="productNameLabel" destination="YIP-c3-VGM" id="Op2-gM-og1"/>
@@ -123,5 +146,7 @@
     <resources>
         <image name="icon_add" width="27" height="27"/>
         <image name="icon_subtract" width="27" height="27"/>
+        <image name="icon_tryOn" width="35" height="16"/>
+        <image name="icon_unStock" width="39" height="17"/>
     </resources>
 </document>

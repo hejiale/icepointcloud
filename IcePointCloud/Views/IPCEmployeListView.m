@@ -36,7 +36,7 @@ typedef void(^DismissBlock)();
         view.frame = frame;
         [self addSubview:view];
         
-        [self.employeBgView addBorder:5 Width:0];
+        [self.employeBgView addBorder:5 Width:0 Color:nil];
         [self.searchTextField setLeftImageView:@"text_searchIcon"];
         
         [self.employeTableView setTableFooterView:[[UIView alloc]init]];

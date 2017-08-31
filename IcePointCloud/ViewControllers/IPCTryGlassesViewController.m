@@ -82,7 +82,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self setNavigationBarStatus:YES];
     [self initMatchItems];
     [self reload];
-    [self queryRecommdGlasses];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -126,7 +125,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Initialize the default try wearing glasses compare mode
 - (void)initMatchItems
 {
-    if ([[IPCTryMatch instance].matchItems count] == 0 || [self.compareBgView.subviews count] == 0)
+    if ([[IPCTryMatch instance].matchItems count] == 0)
         [[IPCTryMatch instance] initMatchItems];
     
     self.signleModeView.matchItem = [[IPCTryMatch instance] currentMatchItem];
@@ -201,6 +200,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 [[IPCTryMatch instance] currentMatchItem].glass = glass;
                 [strongSelf.productTableView reloadData];
+                [strongSelf updateCurrentGlass];
                 [strongSelf updateTryGlasses];
             }];
             [self.recommdScrollView addSubview:imageView];
@@ -226,10 +226,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
         } AddCart:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf reload];
+            _tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
         } ReduceCart:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf reload];
+            _tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
         } TryGlasses:nil];
         [_tryGlassesView addBottomLine];
         [_tryGlassesView setDefaultGlasses];
@@ -257,6 +257,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.editParameterView removeFromSuperview];strongSelf.editParameterView = nil;
         [strongSelf reload];
+        strongSelf.tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
     }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
     [self.editParameterView show];
@@ -267,6 +268,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf reload];
+        strongSelf.tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
     }];
     self.parameterView.glasses = glass;
     [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -302,7 +304,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf reload];
+        [strongSelf.productTableView reloadData];
         [strongSelf.refreshHeader endRefreshing];
         [strongSelf.refreshFooter endRefreshing];
     });
@@ -315,7 +317,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf reload];
+        [strongSelf.productTableView reloadData];
         [strongSelf.refreshHeader endRefreshing];
         [strongSelf.refreshFooter endRefreshing];
     }];
@@ -339,7 +341,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)queryRecommdGlasses
 {
-    if ([[IPCTryMatch instance] currentMatchItem].glass) {
+    if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn) {
         [IPCCommonUI show];
         __weak typeof(self) weakSelf = self;
         [self.glassListViewMode queryRecommdGlasses:[[IPCTryMatch instance] currentMatchItem].glass Complete:^{
@@ -618,6 +620,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         item.center = item.originalCenter;
         [item updateItem:NO];
     }
+    [self updateCompareBorder];
     
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
     
@@ -653,16 +656,26 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super reload];
     
     [self.productTableView reloadData];
-    [self updateCurrentGlass];
+    
+    if (self.compareSwitch.isOn) {
+        if (self.compareBgView.subviews.count) {
+            IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
+            itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
+        }
+    }else{
+        [self updateCurrentGlass];
+        [self updateTryGlasses];
+    }
 }
 
 - (void)updateTryGlasses
 {
     self.signleModeView.matchItem = [[IPCTryMatch instance] currentMatchItem];
-    IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
-    itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
-    [itemView updateItem:NO];
-    
+    if (self.compareBgView.subviews.count) {
+        IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
+        itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
+        [itemView updateItem:NO];
+    }
     [self queryRecommdGlasses];
 }
 
@@ -670,7 +683,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     if (!status && [[IPCTryMatch instance] currentMatchItem].glass) {
         [self updateCurrentGlass];
-        [self queryRecommdGlasses];
+        [self updateTryGlasses];
     }else{
         self.tableViewTopConstant.constant = 0;
         [self.recommdBgView setHidden:YES];
@@ -678,6 +691,19 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }
 }
 
+- (void)updateCompareBorder
+{
+    [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[IPCCompareItemView class]]) {
+            IPCCompareItemView * item = (IPCCompareItemView *)obj;
+            if (item.tag == [IPCTryMatch instance].activeMatchItemIndex) {
+                [item addBorder:0 Width:5 Color:COLOR_RGB_BLUE];
+            }else{
+                [item addBorder:0 Width:0 Color:nil];
+            }
+        }
+    }];
+}
 
 #pragma mark //CompareItemViewDelegate
 - (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView
@@ -692,6 +718,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self updateCurrentGlass];
 }
 
+- (void)selectCompareIndex:(IPCCompareItemView *)itemView{
+    [IPCTryMatch instance].activeMatchItemIndex = itemView.tag;
+    [self updateCompareBorder];
+}
 
 #pragma mark //UITableViewDataSource ----------------------------------------------------------------------------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -736,7 +766,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)reloadProductList
 {
-    [self reload];
+    [self.productTableView reloadData];
 }
 
 
@@ -750,6 +780,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
             itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
         }else{
+            [self updateCurrentGlass];
             [self updateTryGlasses];
         }
     }

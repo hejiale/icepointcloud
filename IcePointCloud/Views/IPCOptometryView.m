@@ -84,7 +84,7 @@ typedef void(^UpdateBlock)(void);
 - (UIView *)createLensView:(CGRect)rect Label:(NSString *)label Tag:(NSInteger)tag InputText:(NSString *)text
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
-    [itemView addBorder:3 Width:0.5];
+    [itemView addBorder:3 Width:0.5 Color:nil];
     
     UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(5, 0, itemView.jk_width-5, itemView.jk_height)];
     tf.textColor = [UIColor darkGrayColor];
@@ -107,7 +107,7 @@ typedef void(^UpdateBlock)(void);
 - (UIView *)createFunctionView:(CGRect)rect
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
-    [itemView addBorder:3 Width:0.5];
+    [itemView addBorder:3 Width:0.5 Color:nil];
     
     UITextField *tf = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, itemView.jk_width-10, itemView.jk_height)];
     tf.textColor = [UIColor darkGrayColor];

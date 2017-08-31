@@ -171,6 +171,8 @@
         [fields setObject:self.type forKey:@"类型"];
         [fields setObject:self.glassName forKey:@"商品名称"];
         [fields setObject:self.glassCode forKey:@"商品货号"];
+    }else if ([self filterType] == IPCTopFilterTypeOthers){//others
+        [fields setObject:self.supplierName forKey:@"供应商"];
     }
     return fields;
 }

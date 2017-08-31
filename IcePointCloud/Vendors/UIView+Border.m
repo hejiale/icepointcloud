@@ -27,10 +27,14 @@
     [self jk_addRightBorderWithColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.2] width:0.5];
 }
 
-- (void)addBorder:(CGFloat)corner Width:(CGFloat)width
+- (void)addBorder:(CGFloat)corner Width:(CGFloat)width Color:(UIColor *)color
 {
     [self.layer setBorderWidth:width];
-    [self.layer setBorderColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.3].CGColor];
+    if (color) {
+        [self.layer setBorderColor:color.CGColor];
+    }else{
+        [self.layer setBorderColor:[[UIColor lightGrayColor]colorWithAlphaComponent:0.3].CGColor];
+    }
     [self.layer setCornerRadius:corner];
 }
 

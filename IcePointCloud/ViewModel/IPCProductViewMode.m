@@ -50,7 +50,7 @@
     self.completeBlock = complete;
     
     [self getGlassesListInfoWithPage:self.currentPage
-                           ClassType:[[IPCAppManager sharedManager]classType:self.currentType]
+                           ClassType:[[IPCAppManager sharedManager]classType:self.currentType] ? : @""
                           SearchType:[self.filterValue getStoreFilterSource]
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
@@ -61,7 +61,7 @@
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess
 {
     self.filterSuccessBlock = filterSuccess;
-    [self getProductFilterDataSourceWithClassType:[[IPCAppManager sharedManager]classType:self.currentType]
+    [self getProductFilterDataSourceWithClassType:[[IPCAppManager sharedManager]classType:self.currentType] ? : @""
                                      FilterSource:[self.filterValue getStoreFilterSource]];
 }
 

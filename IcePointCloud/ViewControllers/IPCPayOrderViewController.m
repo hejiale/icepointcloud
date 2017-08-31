@@ -34,8 +34,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self.cancelButton addBorder:2 Width:0.5];
-    [self.saveButton addBorder:2 Width:0];
+    [self.cancelButton addBorder:2 Width:0.5 Color:nil];
+    [self.saveButton addBorder:2 Width:0 Color:nil];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
     [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
     
@@ -205,6 +205,7 @@
 - (void)reloadPayOrderView{
     [self.shopCartView reload];
     [self.payOrderTableView reloadData];
+    [IPCCommonUI hiden];
 }
 
 - (void)createNewRecord{

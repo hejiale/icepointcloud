@@ -92,19 +92,19 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.normalLensView addBorder:10 Width:0];
-    [self.customsizedParameterView addBorder:10 Width:0];
-    [self.leftParameterView addBorder:5 Width:0.5];
-    [self.rightParameterView addBorder:5 Width:0.5];
-    [self.normalLensImageView addBorder:5 Width:0.5];
-    [self.customsizedImageView addBorder:5 Width:0.5];
-    [self.refractionView addBorder:5 Width:0.5];
-    [self.lensStyleView addBorder:5 Width:0.5];
-    [self.lensFunctionView addBorder:5 Width:0.5];
-    [self.thinView addBorder:5 Width:0.5];
-    [self.upsetView addBorder:5 Width:0.5];
-    [self.moveHeartView addBorder:5 Width:0.5];
-    [self.customsizedMemoView addBorder:5 Width:0.5];
+    [self.normalLensView addBorder:10 Width:0 Color:nil];
+    [self.customsizedParameterView addBorder:10 Width:0 Color:nil];
+    [self.leftParameterView addBorder:5 Width:0.5 Color:nil];
+    [self.rightParameterView addBorder:5 Width:0.5 Color:nil];
+    [self.normalLensImageView addBorder:5 Width:0.5 Color:nil];
+    [self.customsizedImageView addBorder:5 Width:0.5 Color:nil];
+    [self.refractionView addBorder:5 Width:0.5 Color:nil];
+    [self.lensStyleView addBorder:5 Width:0.5 Color:nil];
+    [self.lensFunctionView addBorder:5 Width:0.5 Color:nil];
+    [self.thinView addBorder:5 Width:0.5 Color:nil];
+    [self.upsetView addBorder:5 Width:0.5 Color:nil];
+    [self.moveHeartView addBorder:5 Width:0.5 Color:nil];
+    [self.customsizedMemoView addBorder:5 Width:0.5 Color:nil];
     
     [self.lensSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.customsizedSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
@@ -188,7 +188,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 
 - (void)showParameterTableView:(UITapGestureRecognizer *)sender InView:(UIView *)contentView
 {
-    [self.parameterTableView addBorder:3 Width:0.5];
+    [self.parameterTableView addBorder:3 Width:0.5 Color:nil];
     [self.parameterTableView setFrame:CGRectMake(sender.view.jk_left + contentView.jk_left, sender.view.jk_bottom + contentView.jk_top, sender.view.jk_width, 300)];
     [self.parameterTableView setTableFooterView:[[UIView alloc]init]];
     [self addSubview:self.parameterTableView];

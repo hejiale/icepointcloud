@@ -21,6 +21,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *cartNumLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *reduceButtonLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *defaultImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *noStockImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameLeft;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;

@@ -53,8 +53,13 @@
 - (void)removeCover{
     [self.sideBarView removeFromSuperview];
     [self removerFilterCover];
-    [self.productVC reload];
-    [self.tryVC reload];
+    
+    if (self.selectedIndex == 1) {
+        [self.productVC reload];
+    }
+    if (self.selectedIndex == 3) {
+        [self.tryVC reload];
+    }
 }
 
 - (void)removerFilterCover{

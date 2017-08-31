@@ -15,7 +15,7 @@
     // Initialization code
     
     [self.memoTextView setPlaceholder:@"请输入订单备注信息..."];
-    [self.memoTextView addBorder:3 Width:0.5];
+    [self.memoTextView addBorder:3 Width:0.5 Color:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

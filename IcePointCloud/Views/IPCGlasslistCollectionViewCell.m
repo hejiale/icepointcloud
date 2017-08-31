@@ -55,6 +55,20 @@
                 [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract"] forState:UIControlStateNormal];
             }
         }
+        
+        if (_glasses.isTryOn) {
+            [self.defaultImageView setHidden:NO];
+        }else{
+            [self.defaultImageView setHidden:YES];
+        }
+        
+        if (_glasses.stock > 0) {
+            [self.noStockImageView setHidden:YES];
+            self.nameLeft.constant = - 39;
+        }else{
+            [self.noStockImageView setHidden:NO];
+            self.nameLeft.constant = 5;
+        }
     }
 }
 

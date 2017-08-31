@@ -87,6 +87,9 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
 - (void)logout
 {
     [IPCAppManager sharedManager].profile = nil;
+    [[IPCTryMatch instance].matchItems removeAllObjects];
+    [IPCTryMatch instance].matchItems = nil;
+    [IPCTryMatch instance].activeMatchItemIndex = 0;
     [[IPCCurrentCustomer sharedManager]clearData];
     [[IPCShoppingCart sharedCart] clear];
     [[IPCPayOrderManager sharedManager] resetData];
