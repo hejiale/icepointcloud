@@ -46,6 +46,7 @@
 {
     if (self.isBeginLoad){
         [self.glassesList removeAllObjects];
+        self.glassesList = nil;
     }
     self.completeBlock = complete;
     

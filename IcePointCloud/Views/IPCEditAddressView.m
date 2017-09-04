@@ -59,6 +59,7 @@ typedef  void(^DismissBlock)();
 #pragma mark //Requst Method
 - (void)saveNewAddress
 {
+    [self.saveAddressButton jk_showIndicator];
     [IPCCustomerRequestManager saveNewCustomerAddressWithAddressID:@""
                                                           CustomID:self.customerID
                                                        ContactName:self.addressView.contacterTextField.text
@@ -67,10 +68,12 @@ typedef  void(^DismissBlock)();
                                                            Address:self.addressView.addressTextField.text
                                                       SuccessBlock:^(id responseValue)
      {
+         [self.saveAddressButton jk_hideIndicator];
          if (self.completeBlock) {
              self.completeBlock(responseValue[@"id"]);
          }
      } FailureBlock:^(NSError *error) {
+         [self.saveAddressButton jk_hideIndicator];
          [IPCCommonUI showError:@"新建地址失败!"];
      }];
 }
@@ -84,11 +87,13 @@ typedef  void(^DismissBlock)();
 
 
 - (IBAction)completeAction:(id)sender {
-    if (self.customerID) {
-        [self saveNewAddress];
-    }else{
-        if (self.completeBlock) {
-            self.completeBlock(nil);
+    if (self.addressView.addressTextField.text.length) {
+        if (self.customerID) {
+            [self saveNewAddress];
+        }else{
+            if (self.completeBlock) {
+                self.completeBlock(nil);
+            }
         }
     }
 }

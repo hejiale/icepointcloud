@@ -23,7 +23,7 @@
     __weak typeof(self) weakSelf = self;
     self.optometryView = [[IPCOptometryView alloc]initWithFrame:CGRectMake(15, 15, self.jk_width-35, 145) Update:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.delegate) {
+        if (strongSelf.delegate && strongSelf) {
             if ([strongSelf.delegate respondsToSelector:@selector(updateOptometryMode:Cell:)]) {
                 [strongSelf.delegate updateOptometryMode:strongSelf.optometryView.insertOptometry Cell:strongSelf];
             }

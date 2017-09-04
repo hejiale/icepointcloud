@@ -61,6 +61,7 @@ typedef  void(^DismissBlock)();
 
 #pragma mark //Request Method
 - (void)saveNewOpometryRequest{
+    [self.saveButton jk_showIndicator];
     [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:self.customerID
                                                           SphLeft:self.optometryView.insertOptometry.sphLeft
                                                          SphRight:self.optometryView.insertOptometry.sphRight
@@ -78,11 +79,12 @@ typedef  void(^DismissBlock)();
                                                        EmployeeId:self.optometryView.insertOptometry.employeeId
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
                                                      SuccessBlock:^(id responseValue) {
-                                                         
+                                                         [self.saveButton jk_hideIndicator];
                                                          if (self.completeBlock) {
                                                              self.completeBlock(responseValue[@"id"]);
                                                          }
                                                      } FailureBlock:^(NSError *error) {
+                                                         [self.saveButton jk_hideIndicator];
                                                          [IPCCommonUI showError:@"保存验光单失败!"];
                                                      }];
 }
@@ -92,7 +94,8 @@ typedef  void(^DismissBlock)();
 #pragma mark //Clicked Event
 - (IBAction)completeAction:(id)sender {
     [self endEditing:YES];
-    if (!self.optometryView.insertOptometry.employeeName.length && !self.optometryView.insertOptometry.purpose.length) {
+    
+    if (!self.optometryView.insertOptometry.employeeName.length || !self.optometryView.insertOptometry.purpose.length) {
         [IPCCommonUI showError:@"请填写验光师和用途!"];
     }else{
         if (self.customerID) {

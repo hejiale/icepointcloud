@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCInsertCustomerViewController">
             <connections>
+                <outlet property="saveButton" destination="5C5-Ky-r8d" id="Ycc-ey-5gv"/>
                 <outlet property="tableFootView" destination="0Pm-Iu-SbG" id="FA5-eb-LKA"/>
                 <outlet property="userInfoTableView" destination="aPT-fP-hol" id="36T-aY-dSX"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -69,11 +70,18 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5C5-Ky-r8d">
                     <rect key="frame" x="534.5" y="12.5" width="195" height="35"/>
+                    <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="35" id="i9O-Gm-4wt"/>
                         <constraint firstAttribute="width" constant="195" id="j3e-Cc-viB"/>
                     </constraints>
-                    <state key="normal" image="icon_save_customer"/>
+                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                    <state key="normal" title="保存"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <action selector="saveNewCustomerAction:" destination="-1" eventType="touchUpInside" id="jjZ-sK-5QA"/>
                     </connections>
@@ -95,6 +103,5 @@
     </objects>
     <resources>
         <image name="icon_insert_customer" width="195" height="35"/>
-        <image name="icon_save_customer" width="195" height="35"/>
     </resources>
 </document>

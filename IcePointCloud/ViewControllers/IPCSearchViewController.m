@@ -50,6 +50,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     
     [self.keywordTf becomeFirstResponder];
     [self.keywordTf setText:self.currentSearchword];
+    [self.view endEditing:YES];
 }
 
 - (NSMutableArray<NSString *> *)keywordHistory{

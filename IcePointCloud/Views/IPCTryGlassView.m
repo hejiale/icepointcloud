@@ -19,11 +19,7 @@
 {
     
 }
-//Switch glasses
-- (void)dropGlasses:(IPCGlasses *)glasses onLocaton:(CGPoint)location
-{
-    
-}
+
 - (void)initGlassView
 {
     

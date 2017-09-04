@@ -31,14 +31,10 @@ typedef void(^UpdateBlock)(void);
         
         [self createOptometryView:frame];
         self.insertOptometry = [[IPCOptometryMode alloc]init];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification
-                                                   object:nil];
     }
     return self;
 }
+
 
 #pragma mark //Set UI
 - (void)createOptometryView:(CGRect)frame{
@@ -153,34 +149,37 @@ typedef void(^UpdateBlock)(void);
 }
 
 
-- (void)insertOptometryInfo{
-    self.insertOptometry.purpose = [IPCCommon purpose:[self subTextField:0].text];
-    
-    if ([self subTextField:1].text.length) {
-        self.insertOptometry.sphRight = [self subTextField:1].text;
-    }
-    if ([self subTextField:2].text.length) {
-        self.insertOptometry.cylRight = [self subTextField:2].text;
-    }
-    self.insertOptometry.axisRight = [self subTextField:3].text;
-    self.insertOptometry.correctedVisionRight = [self subTextField:4].text;
-    self.insertOptometry.distanceRight = [self subTextField:5].text;
-    self.insertOptometry.addRight = [self subTextField:6].text;
-    if ([self  subTextField:7].text.length) {
-        self.insertOptometry.sphLeft = [self subTextField:7].text;
-    }
-    if ([self subTextField:8].text.length) {
-        self.insertOptometry.cylLeft = [self subTextField:8].text;
-    }
-    self.insertOptometry.axisLeft = [self subTextField:9].text;
-    self.insertOptometry.correctedVisionLeft = [self subTextField:10].text;
-    self.insertOptometry.distanceLeft = [self subTextField:11].text;
-    self.insertOptometry.addLeft = [self subTextField:12].text;
-    self.insertOptometry.employeeName = [self subTextField:13].text;
-    self.insertOptometry.employeeId = [[IPCEmployeeeManager sharedManager] employeeId:self.insertOptometry.employeeName];
-    
-    if (self.updateBlock) {
-        self.updateBlock();
+- (void)insertOptometryInfo
+{
+    if (self.insertOptometry && self) {
+        self.insertOptometry.purpose = [IPCCommon purpose:[self subTextField:0].text];
+        
+        if ([self subTextField:1].text.length) {
+            self.insertOptometry.sphRight = [self subTextField:1].text;
+        }
+        if ([self subTextField:2].text.length) {
+            self.insertOptometry.cylRight = [self subTextField:2].text;
+        }
+        self.insertOptometry.axisRight = [self subTextField:3].text;
+        self.insertOptometry.correctedVisionRight = [self subTextField:4].text;
+        self.insertOptometry.distanceRight = [self subTextField:5].text;
+        self.insertOptometry.addRight = [self subTextField:6].text;
+        if ([self  subTextField:7].text.length) {
+            self.insertOptometry.sphLeft = [self subTextField:7].text;
+        }
+        if ([self subTextField:8].text.length) {
+            self.insertOptometry.cylLeft = [self subTextField:8].text;
+        }
+        self.insertOptometry.axisLeft = [self subTextField:9].text;
+        self.insertOptometry.correctedVisionLeft = [self subTextField:10].text;
+        self.insertOptometry.distanceLeft = [self subTextField:11].text;
+        self.insertOptometry.addLeft = [self subTextField:12].text;
+        self.insertOptometry.employeeName = [self subTextField:13].text;
+        self.insertOptometry.employeeId = [[IPCEmployeeeManager sharedManager] employeeId:self.insertOptometry.employeeName];
+        
+        if (self.updateBlock) {
+            self.updateBlock();
+        }
     }
 }
 
@@ -230,6 +229,7 @@ typedef void(^UpdateBlock)(void);
             [textField setText:@"+0.00"];
         }
     }
+    [self insertOptometry];
 }
 
 #pragma mark //IPCParameterTableViewDataSource
@@ -243,13 +243,6 @@ typedef void(^UpdateBlock)(void);
 #pragma mark /IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView{
     [[self subTextField:tableView.view.tag] setText:parameter];
-    [self insertOptometryInfo];
-}
-
-
-#pragma mark //UIKeyboard Hiden Notification
-- (void)keyboardWillHide:(NSNotification *)notification
-{
     [self insertOptometryInfo];
 }
 

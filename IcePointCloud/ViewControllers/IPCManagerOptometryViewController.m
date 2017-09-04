@@ -61,7 +61,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
                                                                Complete:^(NSString *optometryId) {
                                                                    __strong typeof(weakSelf) strongSelf = weakSelf;
                                                                    [_editOptometryView removeFromSuperview];
-                                                                   [strongSelf.refreshHeader beginRefreshing];
+                                                                   [strongSelf setDefaultOptometryWithOptometryId:optometryId];
                                                                } Dismiss:^{
                                                                    [_editOptometryView removeFromSuperview];
                                                                }];

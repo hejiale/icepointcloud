@@ -27,9 +27,6 @@
     
         if (_currentCustomer.photo_url.length) {
             [self.headImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
-        }else{
-            NSString * headImage  = [IPCHeadImage gender:_currentCustomer.contactorGengerString Size:@"Large" Tag:_currentCustomer.photoIdForPos];
-            [self.headImageView setImage:[UIImage imageNamed:headImage]];
         }
     
         [self.customerNameLabel setText:_currentCustomer.customerName];

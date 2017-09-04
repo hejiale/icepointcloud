@@ -76,7 +76,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
                                                          CustomerID:self.addressViewModel.customerId
                                                            Complete:^(NSString *addressId) {
                                                                [_editAddressView removeFromSuperview];
-                                                               [self loadAddressListData];
+                                                               [self.refreshHeader beginRefreshing];
                                                            } Dismiss:^{
                                                                [_editAddressView removeFromSuperview];
                                                            }];

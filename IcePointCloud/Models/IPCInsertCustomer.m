@@ -16,7 +16,6 @@
     static dispatch_once_t token;
     dispatch_once(&token, ^{
         mgr = [[self alloc] init];
-        [mgr resetData];
     });
     return mgr;
 }
@@ -49,10 +48,10 @@
     self.introducerInteger = @"";
     self.isInsertStatus = NO;
     self.isPackUp = NO;
-    
     [self.optometryArray removeAllObjects];
+    self.optometryArray = nil;
     IPCOptometryMode * optometry = [[IPCOptometryMode alloc]init];
-    [self.optometryArray addObject:optometry];
+    [[IPCInsertCustomer instance].optometryArray addObject:optometry];
 }
 
 - (NSMutableArray<IPCOptometryMode *> *)optometryArray{

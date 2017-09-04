@@ -14,10 +14,12 @@
 {
     self = [super init];
     if (self) {
+        //初始化
+        [[IPCInsertCustomer instance] resetData];
+        
         [[IPCEmployeeeManager sharedManager] queryEmployee];
         [[IPCEmployeeeManager sharedManager] queryMemberLevel];
         [[IPCEmployeeeManager sharedManager] queryCustomerType];
-        [[IPCInsertCustomer instance] resetData];
         [IPCInsertCustomer instance].isInsertStatus = YES;
     }
     return self;
@@ -90,13 +92,15 @@
                                             IntroducerInteger: [IPCInsertCustomer instance].introducerInteger
                                                  SuccessBlock:^(id responseValue)
      {
-         [IPCCommonUI hiden];
          [[IPCInsertCustomer instance] resetData];
          if (complete) {
              complete(responseValue);
          }
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:@"保存客户信息失败!"];
+         if (complete) {
+             complete(nil);
+         }
      }];
 }
 

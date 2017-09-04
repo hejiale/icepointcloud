@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.introducerTextField setText:[IPCInsertCustomer instance].introducerName];
     [self.introducerInteger setText:[IPCInsertCustomer instance].introducerInteger];
     
-    NSString * headImage  = [IPCHeadImage gender:[IPCInsertCustomer instance].gender Size:@"middle" Tag:[IPCInsertCustomer instance].photo_udid];
+    NSString * headImage  = [IPCHeadImage gender:[IPCInsertCustomer instance].gender Tag:[IPCInsertCustomer instance].photo_udid];
     [self.customerImageView setImage:[UIImage imageNamed:headImage]];
     
     if ([[IPCInsertCustomer instance].customerType isEqualToString:@"转介绍"]) {

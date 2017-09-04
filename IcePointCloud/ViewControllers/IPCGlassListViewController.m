@@ -37,7 +37,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
-    
     [self loadCollectionView];
 }
 

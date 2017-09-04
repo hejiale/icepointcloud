@@ -29,6 +29,8 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *jobTextField;
 @property (weak, nonatomic) IBOutlet UITextField *memoTextField;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+
 @property (assign, nonatomic) InsertCustomerType insertType;
 
 @end
@@ -68,6 +70,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     if ( ![self.currentDetailCustomer.contactorGengerString isEqualToString:[IPCCommon gender:self.genderTextField.text]]) {
         isUpdateGender = YES;
     }
+    [self.saveButton jk_showIndicator];
     [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.currentDetailCustomer.customerID
                                                  CustomerName:self.userNameTextField.text
                                                   CustomPhone:self.phoneTextField.text
@@ -85,6 +88,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                       PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : (self.currentDetailCustomer.photoIdForPos ? : @""))
                                                  SuccessBlock:^(id responseValue)
      {
+         [self.saveButton jk_hideIndicator];
          [IPCCommonUI showSuccess:@"更改用户信息成功!"];
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(dismissCoverSubViews)]) {
@@ -92,6 +96,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
              }
          }
      } FailureBlock:^(NSError *error) {
+         [self.saveButton jk_hideIndicator];
          [IPCCommonUI showError:@"更改用户信息失败!"];
      }];
 }

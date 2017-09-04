@@ -57,15 +57,16 @@
 
 - (void)setCurrentOptometry:(NSString *)optometryID Complete:(void (^)())completeBlock
 {
+    [IPCCommonUI show];
     [IPCCustomerRequestManager setDefaultOptometryWithCustomID:self.customerId
                                             DefaultOptometryID:optometryID
                                                   SuccessBlock:^(id responseValue) {
-                                                      [IPCCommonUI showSuccess:@"设置默认验光单成功!"];
+                                                      [IPCCommonUI hiden];
                                                       if (completeBlock) {
                                                           completeBlock();
                                                       }
                                                   } FailureBlock:^(NSError *error) {
-                                                      [IPCCommonUI showError:@"设置默认验光单失败!"];
+                                                      [IPCCommonUI hiden];
                                                   }];
 }
 

@@ -126,9 +126,9 @@
 
 - (void)resetPayInfoView{
     [[IPCPayOrderManager sharedManager] resetData];
+    [self.payOrderTableView reloadData];
     [self.shopCartView reload];
     [self reloadTableHead];
-    [self.payOrderTableView reloadData];
 }
 
 #pragma mark //Push Method

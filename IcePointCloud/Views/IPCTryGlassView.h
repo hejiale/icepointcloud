@@ -15,8 +15,6 @@
 //Update the model picture
 - (void)updateModelPhoto;
 - (void)updateItem:(BOOL)isDroped;
-//Switch glasses
-- (void)dropGlasses:(IPCGlasses *)glasses onLocaton:(CGPoint)location;
 - (void)initGlassView;
 /**
  *  Updated photo like glasses

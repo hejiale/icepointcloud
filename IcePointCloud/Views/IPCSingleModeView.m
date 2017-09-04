@@ -176,16 +176,10 @@
 }
 
 //Place the glasses
-- (void)dropGlasses:(IPCGlasses *)glasses onLocaton:(CGPoint)location
-{
-    [super dropGlasses:glasses onLocaton:location];
-    self.matchItem.glass = glasses;
-    [self initGlassView];
-    [self updateItem:YES];
-}
-
 - (void)updateItem:(BOOL)isDroped{
     [super updateItem:isDroped];
+    
+    self.glassesView.transform = CGAffineTransformIdentity;
     [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];

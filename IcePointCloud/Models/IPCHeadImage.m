@@ -18,21 +18,9 @@
 
 //---------------------------------根据性别 尺寸 标记来生成头像----------------------------------------//
 
-+ (NSString *)gender:(NSString *)gender Size:(NSString *)size  Tag:(NSString *)tag
++ (NSString *)gender:(NSString *)gender Tag:(NSString *)tag
 {
-    NSString * headImage = nil;
-    
-    if ([gender isEqualToString:@"NOTSET"]) {
-        headImage = [NSString stringWithFormat:@"MALE_%@_11", size];
-    }else{
-        if (tag.length && tag && [tag integerValue] > 0) {
-            headImage = [NSString stringWithFormat:@"%@_%@_%@", gender, size, tag];
-        }else{
-            headImage = [IPCHeadImage  gender:gender Size:size Tag:@"1"];
-        }
-    }
-
-    return headImage;
+    return [NSString stringWithFormat:@"%@_middle_%@", gender, tag];
 }
 
 @end

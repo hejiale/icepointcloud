@@ -14,15 +14,16 @@
 #import "IPCInsertCustomerAddressCell.h"
 #import "IPCInsertCustomerViewModel.h"
 
-static NSString * const topIdentifier = @"UserBaseTopTitleCellIdentifier";
-static NSString * const baseIdentifier = @"UserBaseInfoCellIdentifier";
-static NSString * const opometryIdentifier = @"UserBaseOpometryCellIdentifier";
-static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdentifier";
+static NSString * const topIdentifier           = @"IPCCustomTopCellIdentifier";
+static NSString * const baseIdentifier         = @"IPCInsertCustomerBaseCellIdentifier";
+static NSString * const opometryIdentifier = @"IPCInsertCustomerOpometryCellIdentifier";
+static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIdentifier";
 
 @interface IPCInsertCustomerViewController ()<UITableViewDelegate,UITableViewDataSource,UserBaseInfoCellDelegate,IPCInsertCustomerOpometryCellDelegate>
 
 @property (weak,   nonatomic) IBOutlet UITableView *userInfoTableView;
 @property (strong, nonatomic) IBOutlet UIView *tableFootView;
+@property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (strong, nonatomic) IPCInsertCustomerViewModel * insertCustomerModel;
 
 @end
@@ -33,13 +34,13 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
+    
     [self.userInfoTableView setTableFooterView:self.tableFootView];
     
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
     }];
-    
-    self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -56,17 +57,6 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 }
 
 
-#pragma mark //Set UI
-- (IPCInsertCustomerBaseCell *)baseInfoCell{
-    IPCInsertCustomerBaseCell * cell = (IPCInsertCustomerBaseCell *)[self.userInfoTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-    return cell;
-}
-
-- (IPCInsertCustomerOpometryCell *)opometryCell{
-    IPCInsertCustomerOpometryCell * cell = (IPCInsertCustomerOpometryCell *)[self.userInfoTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    return cell;
-}
-
 #pragma mark //Clicked Events
 - (IBAction)insertNewCustomerAction:(id)sender {
     [[IPCInsertCustomer instance] resetData];
@@ -76,12 +66,14 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 
 - (IBAction)saveNewCustomerAction:(id)sender
 {
-    [IPCCommonUI show];
     if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
+        [self.saveButton jk_showIndicator];
         __weak typeof(self) weakSelf = self;
         [self.insertCustomerModel saveNewCustomer:^(NSString *customerId){
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            if ([customerId integerValue] > 0 ) {
+            [strongSelf.saveButton jk_hideIndicator];
+            
+            if ([customerId integerValue] > 0 && customerId) {
                 if ([IPCPayOrderManager sharedManager].isPayOrderStatus)
                 {
                     [[IPCPayOrderManager sharedManager] resetPayPrice];
@@ -171,18 +163,22 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerOpometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
                 cell.delegate = self;
             }
-            if (indexPath.row == 1) {
-                [cell.removeButton setHidden:YES];
-            }else{
-                [cell.removeButton setHidden:NO];
+    
+            if ([IPCInsertCustomer instance].optometryArray.count) {
+                IPCOptometryMode * optometry = [IPCInsertCustomer instance].optometryArray[indexPath.row-1];
+                cell.optometryMode = optometry;
+                
+                if (indexPath.row == 1) {
+                    [cell.removeButton setHidden:YES];
+                }else{
+                    [cell.removeButton setHidden:NO];
+                    
+                }
+                [[cell rac_signalForSelector:@selector(removeOptometryAction:)] subscribeNext:^(id x) {
+                    [[IPCInsertCustomer instance] .optometryArray removeObjectAtIndex:indexPath.row-1];
+                    [tableView reloadData];
+                }];
             }
-            IPCOptometryMode * optometry = [IPCInsertCustomer instance].optometryArray[indexPath.row-1];
-            cell.optometryMode = optometry;
-            
-            [[cell rac_signalForSelector:@selector(removeOptometryAction:)] subscribeNext:^(id x) {
-                [[IPCInsertCustomer instance] .optometryArray removeObjectAtIndex:indexPath.row-1];
-                [tableView reloadData];
-            }];
             return cell;
         }
     }
@@ -211,8 +207,10 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 }
 
 - (void)judgePhone:(NSString *)phone{
+    [IPCCommonUI show];
     __weak typeof(self) weakSelf = self;
     [self.insertCustomerModel judgeCustomerPhone:phone :^{
+        [IPCCommonUI hiden];
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [IPCInsertCustomer instance].customerPhone = phone;
         [strongSelf.userInfoTableView reloadData];
@@ -222,7 +220,9 @@ static NSString * const addressIdentifier = @"IPCInsertCustomerAddressCellIdenti
 #pragma mark //IPCInsertCustomerOpometryCellDelegate
 - (void)updateOptometryMode:(IPCOptometryMode *)optometry Cell:(IPCInsertCustomerOpometryCell *)cell{
     NSIndexPath * indexPath = [self.userInfoTableView indexPathForCell:cell];
-    [[IPCInsertCustomer instance].optometryArray replaceObjectAtIndex:indexPath.row-1 withObject:optometry];
+    if ([IPCInsertCustomer instance].optometryArray.count) {
+        [[IPCInsertCustomer instance].optometryArray replaceObjectAtIndex:indexPath.row-1 withObject:optometry];
+    }
     [self.userInfoTableView reloadData];
 }
 

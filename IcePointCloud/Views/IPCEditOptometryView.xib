@@ -34,12 +34,18 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DCE-tb-lBF">
                             <rect key="frame" x="327.5" y="257" width="245" height="35"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="NtI-TC-f5k"/>
                                 <constraint firstAttribute="width" constant="245" id="Uhy-tg-cAW"/>
                             </constraints>
-                            <state key="normal" image="icon_sure_customer"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <state key="normal" title="保存"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="3"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="completeAction:" destination="-1" eventType="touchUpInside" id="8MC-Ig-3Fc"/>
                             </connections>
@@ -122,7 +128,4 @@
             </connections>
         </tapGestureRecognizer>
     </objects>
-    <resources>
-        <image name="icon_sure_customer" width="245" height="35"/>
-    </resources>
 </document>
