@@ -96,7 +96,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadMoreTableView{
     self.glassListViewMode.isBeginLoad = NO;
-    self.glassListViewMode.currentPage += 9;
+    self.glassListViewMode.currentPage += 30;
     
     __weak typeof(self) weakSelf = self;
     [self loadGlassesListData:^{
@@ -236,6 +236,15 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [cell setGlasses:glasses];
     }
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == self.glassListViewMode.glassesList.count - 29) {
+        if (self.refreshFooter.state != MJRefreshStateNoMoreData) {
+            [self.refreshFooter beginRefreshing];
+        }
+    }
 }
 
 #pragma mark //GlassListViewCellDelegate

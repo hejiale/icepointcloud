@@ -124,6 +124,7 @@
 - (void)initGlassView{
     [super initGlassView];
     
+    self.modelView.transform = CGAffineTransformIdentity;
     self.glassesView.transform = CGAffineTransformIdentity;
     self.draggedPosition = CGPointMake(-100, -100);
     [self.glassImageView setImage:nil];
@@ -133,6 +134,10 @@
 - (void)updateModelPhoto
 {
     [super updateModelPhoto];
+    
+    self.modelView.transform = CGAffineTransformIdentity;
+    self.glassesView.transform = CGAffineTransformIdentity;
+    
     UIImage *img;
     switch (self.matchItem.photoType) {
         case IPCPhotoTypeModel:
@@ -157,6 +162,10 @@
 - (void)updateFaceUI:(CGPoint)point :(CGSize)size
 {
     [super updateFaceUI:point :size];
+    
+    self.modelView.transform = CGAffineTransformIdentity;
+    self.glassesView.transform = CGAffineTransformIdentity;
+    
     cameraEyePoint = point;
     cameraEyeSize = size;
     [self updateGlassFrame];
@@ -179,7 +188,9 @@
 - (void)updateItem:(BOOL)isDroped{
     [super updateItem:isDroped];
     
+    self.modelView.transform = CGAffineTransformIdentity;
     self.glassesView.transform = CGAffineTransformIdentity;
+    
     [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
     [self updateGlassesPhoto:isDroped];

@@ -31,7 +31,7 @@
                           FailureBlock:(void (^)(NSError * error))failure
 {
     NSDictionary *params = @{@"start": @(page),
-                             @"limit": @(9),
+                             @"limit": @(30),
                              @"type": classType,
                              @"keyword": searchWord,
                              @"delFlag":@"false",

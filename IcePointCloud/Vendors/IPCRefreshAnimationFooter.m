@@ -15,10 +15,8 @@
     [super prepare];
 
     self.mj_h = 0;
-    [self setTitle:@"全部加载完毕!" forState:MJRefreshStateNoMoreData];
-    [self.stateLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-    [self.stateLabel setTextColor:[UIColor lightGrayColor]];
     self.refreshingTitleHidden = YES;
+    self.pullingPercent = 0;
 }
 
 - (void)resetDataStatus{
