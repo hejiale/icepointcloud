@@ -15,6 +15,7 @@
     [super prepare];
 
     self.mj_h = 0;
+    [self.stateLabel setHidden:YES];
     self.refreshingTitleHidden = YES;
     self.pullingPercent = 0;
 }

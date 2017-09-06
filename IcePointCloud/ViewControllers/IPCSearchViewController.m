@@ -50,6 +50,10 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     
     [self.keywordTf becomeFirstResponder];
     [self.keywordTf setText:self.currentSearchword];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self.view endEditing:YES];
 }
 

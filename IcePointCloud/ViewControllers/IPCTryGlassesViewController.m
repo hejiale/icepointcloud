@@ -328,9 +328,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     __weak typeof (self) weakSelf = self;
     [self.glassListViewMode reloadGlassListDataWithIsTry:YES Complete:^(LSRefreshDataStatus status, NSError *error){
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        if (error && status == IPCRefreshError){
-            [IPCCommonUI showError:@"查询商品信息失败!"];
-        }else if (status == IPCFooterRefresh_HasNoMoreData){
+        if (status == IPCFooterRefresh_HasNoMoreData){
             [strongSelf.refreshFooter noticeNoDataStatus];
         }
         if (complete) {
@@ -743,7 +741,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.refreshFooter.state != MJRefreshStateNoMoreData) {
+    if (self.refreshFooter.state != MJRefreshStateNoMoreData && !self.refreshFooter.isRefreshing) {
         if (indexPath.row == self.glassListViewMode.glassesList.count -29) {
             [self.refreshFooter beginRefreshing];
         }

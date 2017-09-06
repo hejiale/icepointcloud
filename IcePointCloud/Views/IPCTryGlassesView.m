@@ -66,7 +66,10 @@
         [self resetBuyStatus];
         
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
-        [self.productImageView setImageURL:[NSURL URLWithString:glassImage.imageURL]];
+        if (glassImage.imageURL.length) {
+            [self.productImageView setImageURL:[NSURL URLWithString:glassImage.imageURL]];
+        }
+        
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         [self.productNameLabel setText:_glasses.glassName];
         
