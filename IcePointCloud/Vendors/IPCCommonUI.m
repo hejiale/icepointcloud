@@ -28,11 +28,8 @@
 #pragma mark //Warning prompt box
 + (void)show
 {
-//    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-//    [SVProgressHUD show];
-    if ([SVProgressHUD isVisible]) {
-        [SVProgressHUD dismiss];
-    }
+    [SVProgressHUD dismiss];
+    
     __block NSMutableArray<NSString *> * loadingArray = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 1 ; i< 17; i++) {
@@ -42,12 +39,8 @@
 }
 
 + (void)hiden{
-    if ([IPCProgressHUD isVisible]) {
-        [IPCProgressHUD dismiss];
-    }
-    if ([SVProgressHUD isVisible]) {
-        [SVProgressHUD dismiss];
-    }
+    [IPCProgressHUD dismiss];
+    [SVProgressHUD dismiss];
 }
 
 + (void)showError:(NSString *)message{

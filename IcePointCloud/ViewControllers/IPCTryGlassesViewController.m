@@ -84,6 +84,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self reload];
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self removeCover];
@@ -199,15 +200,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [imageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
                 [[IPCTryMatch instance] currentMatchItem].glass = glass;
-                [strongSelf.productTableView reloadData];
-                [strongSelf updateCurrentGlass];
-                [strongSelf updateTryGlasses];
+                [strongSelf reload];
             }];
             [self.recommdScrollView addSubview:imageView];
         }];
         [self.recommdScrollView setContentOffset:CGPointZero];
         [self.recommdScrollView setContentSize:CGSizeMake(self.glassListViewMode.recommdGlassesList.count * width, 0)];
-        [IPCCommonUI hiden];
     }else{
         [self.recommdBgView setHidden:YES];
     }
@@ -340,7 +338,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)queryRecommdGlasses
 {
     if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn) {
-        [IPCCommonUI show];
         __weak typeof(self) weakSelf = self;
         [self.glassListViewMode queryRecommdGlasses:[[IPCTryMatch instance] currentMatchItem].glass Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -604,7 +601,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Try switching to wear glasses a single or more patterns
 - (void)switchToSingleMode
 {
-    [self setRecommdStatus:NO];
     IPCCompareItemView *targetItemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
     [targetItemView amplificationLargeModelView];
 }
@@ -668,20 +664,19 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)updateTryGlasses
 {
+    [self queryRecommdGlasses];
     self.signleModeView.matchItem = [[IPCTryMatch instance] currentMatchItem];
     if (self.compareBgView.subviews.count) {
         IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
         itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
         [itemView updateItem:NO];
     }
-    [self queryRecommdGlasses];
 }
 
 - (void)setRecommdStatus:(BOOL)status
 {
     if (!status && [[IPCTryMatch instance] currentMatchItem].glass) {
-        [self updateCurrentGlass];
-        [self updateTryGlasses];
+        [self reload];
     }else{
         self.tableViewTopConstant.constant = 0;
         [self.recommdBgView setHidden:YES];
@@ -707,8 +702,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)didAnimateToSingleMode:(IPCCompareItemView *)itemView
 {
     [self.compareSwitch setOn:NO];
-    [self setRecommdStatus:NO];
     self.signleModeView.matchItem = itemView.matchItem;
+    [self setRecommdStatus:NO];
 }
 
 - (void)deleteCompareGlasses:(IPCCompareItemView *)itemView{
@@ -781,14 +776,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productTableView indexPathForCell:cell];
         [[IPCTryMatch instance] currentMatchItem].glass = self.glassListViewMode.glassesList[indexPath.row];
-        
-        if (self.compareSwitch.isOn) {
-            IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
-            itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
-        }else{
-            [self updateCurrentGlass];
-            [self updateTryGlasses];
-        }
+        [self reload];
     }
 }
 
