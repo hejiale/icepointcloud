@@ -737,7 +737,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.refreshFooter.state != MJRefreshStateNoMoreData && !self.refreshFooter.isRefreshing) {
-        if (indexPath.row == self.glassListViewMode.glassesList.count -29) {
+        if (indexPath.row == self.glassListViewMode.glassesList.count -20) {
             [self.refreshFooter beginRefreshing];
         }
     }
