@@ -16,19 +16,15 @@
 
     self.mj_h = 0;
     [self.stateLabel setHidden:YES];
-    self.refreshingTitleHidden = YES;
-    self.pullingPercent = 0;
 }
 
 - (void)resetDataStatus{
-    self.mj_h = 0;
     [self resetNoMoreData];
 }
 
 
 - (void)noticeNoDataStatus
 {
-    self.mj_h = 50;
     [self endRefreshingWithNoMoreData];
 }
 

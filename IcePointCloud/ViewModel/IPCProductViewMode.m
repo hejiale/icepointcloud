@@ -42,7 +42,7 @@
 
 #pragma mark //Get Data
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                            Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete
+                            Complete:(void(^)())complete
 {
     if (self.isBeginLoad){
         [self.glassesList removeAllObjects];
@@ -105,8 +105,9 @@
                                                   [strongSelf parseNormalGlassesData:responseValue];
                                               } FailureBlock:^(NSError *error) {
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
+                                                  strongSelf.status == IPCRefreshError;
                                                   if (strongSelf.completeBlock) {
-                                                      strongSelf.completeBlock(IPCRefreshError,error);
+                                                      strongSelf.completeBlock();
                                                   }
                                               }];
 }
@@ -200,22 +201,24 @@
     if (result) {
         if (result.glassesList.count){
             [self.glassesList addObjectsFromArray:result.glassesList];
-            
+            self.status = IPCFooterRefresh_HasMoreData;
             if (self.completeBlock) {
-                self.completeBlock(IPCFooterRefresh_HasMoreData,nil);
+                self.completeBlock();
             }
         }else{
             if ([self.glassesList count] > 0) {
+                self.status = IPCFooterRefresh_HasNoMoreData;
                 if (self.completeBlock) {
-                    self.completeBlock(IPCFooterRefresh_HasNoMoreData,nil);
+                    self.completeBlock();
                 }
             }
         }
-    }
-    
-    if ([self.glassesList count] == 0) {
-        if (self.completeBlock)
-            self.completeBlock(IPCFooterRefresh_NoData,nil);
+    }else{
+        if ([self.glassesList count] == 0) {
+            self.status = IPCFooterRefresh_NoData;
+            if (self.completeBlock)
+                self.completeBlock();
+        }
     }
 }
 

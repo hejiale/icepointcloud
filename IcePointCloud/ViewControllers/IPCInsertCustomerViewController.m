@@ -54,6 +54,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.view endEditing:YES];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 

@@ -33,7 +33,7 @@ typedef enum : NSUInteger {
     
 } LSRefreshDataStatus;
 
-typedef void(^CompleteBlock)(LSRefreshDataStatus status, NSError * error);
+typedef void(^CompleteBlock)();
 typedef void(^FilterSucceedBlock)(NSError * error);
 typedef void(^ReloadFilterCloseBlock)();
 typedef void(^ReloadFilterUnCloseBlock)();
@@ -56,9 +56,10 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic) IPCTopFilterType   currentType;
 @property (nonatomic, assign, readwrite) BOOL  isTrying;
 @property (nonatomic, assign, readwrite) BOOL  isBeginLoad;
+@property (nonatomic, assign) LSRefreshDataStatus status;
 
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                            Complete:(void(^)(LSRefreshDataStatus status, NSError * error))complete;
+                            Complete:(void(^)())complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
 - (void)loadFilterCategory:(id)owner InView:(UIView *)coverView  ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 - (void)queryBatchDegree;

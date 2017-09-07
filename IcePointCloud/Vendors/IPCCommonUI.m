@@ -44,9 +44,7 @@
 }
 
 + (void)showError:(NSString *)message{
-    if ([IPCProgressHUD isVisible]) {
-        [IPCProgressHUD dismiss];
-    }
+    [IPCProgressHUD dismiss];
     [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:1.f];
@@ -55,9 +53,7 @@
 
 
 + (void)showSuccess:(NSString *)message{
-    if ([IPCProgressHUD isVisible]) {
-        [IPCProgressHUD dismiss];
-    }
+    [IPCProgressHUD dismiss];
     [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
     [SVProgressHUD setMinimumDismissTimeInterval:0.3f];

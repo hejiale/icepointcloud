@@ -60,6 +60,15 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.refreshHeader beginRefreshing];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
+    }
+}
+
 #pragma mark //Request Data
 - (void)requestCustomerDetailInfo
 {

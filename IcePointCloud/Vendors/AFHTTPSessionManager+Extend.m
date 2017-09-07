@@ -61,7 +61,7 @@
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
-        if (![error.localizedDescription isEqualToString:@"cancelled"]) {
+        if ([error code] != NSURLErrorCancelled){
             if (failure){
                 failure(error, task);
             }

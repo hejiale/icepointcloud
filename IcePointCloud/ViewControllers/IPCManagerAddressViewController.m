@@ -39,6 +39,15 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     [self.refreshHeader beginRefreshing];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
+    }
+}
+
 
 - (void)setCustomerId:(NSString *)customerId
 {

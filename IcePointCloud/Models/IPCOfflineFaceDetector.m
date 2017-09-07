@@ -85,7 +85,6 @@ typedef void(^ErrorBlock)(NSError*error);
                         }
                     }
                 }
-                [IPCCommonUI hiden];
             }
         }
     }

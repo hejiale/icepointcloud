@@ -44,12 +44,18 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:YES];
-    [self.glassListCollectionView reloadData];
+    [self.refreshHeader beginRefreshing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self removeCover];
+    
+    if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+        [self.refreshFooter endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
+    }
 }
 
 #pragma mark //Set UI
@@ -67,7 +73,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListCollectionView.mj_footer = self.refreshFooter;
     self.glassListCollectionView.emptyAlertTitle = @"未搜索到任何商品";
     self.glassListCollectionView.emptyAlertImage = @"exception_search";
-    [self.refreshHeader beginRefreshing];
 }
 
 
@@ -87,6 +92,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 #pragma mark //Refresh Method
 - (void)beginReloadTableView{
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
+    }
+    
     [self.refreshFooter resetDataStatus];
     self.glassListViewMode.isBeginLoad = YES;
     self.glassListViewMode.currentPage = 0;
@@ -95,6 +105,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)loadMoreTableView{
+    if (self.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData)return;
+    
     self.glassListViewMode.isBeginLoad = NO;
     self.glassListViewMode.currentPage += 30;
     
@@ -138,9 +150,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadGlassesListData:(void(^)())complete
 {
-    [self.glassListViewMode reloadGlassListDataWithIsTry:NO Complete:^(LSRefreshDataStatus status, NSError *error){
-        if (status == IPCFooterRefresh_HasNoMoreData){
-            [self.refreshFooter noticeNoDataStatus];
+    __weak typeof(self) weakSelf = self;
+    [self.glassListViewMode reloadGlassListDataWithIsTry:NO Complete:^(){
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
+            [strongSelf.refreshFooter noticeNoDataStatus];
         }
         if (complete) {
             complete();
@@ -238,9 +252,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.refreshFooter.state != MJRefreshStateNoMoreData && !self.refreshFooter.isRefreshing) {
-        if (indexPath.row == self.glassListViewMode.glassesList.count -20) {
-            [self.refreshFooter beginRefreshing];
+    if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
+        if (!self.refreshFooter.isRefreshing) {
+            if (indexPath.row == self.glassListViewMode.glassesList.count -10) {
+                [self.refreshFooter beginRefreshing];
+            }
         }
     }
 }

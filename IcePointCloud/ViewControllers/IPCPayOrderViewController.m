@@ -62,6 +62,7 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self removeCover];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 #pragma mark //Set UI
