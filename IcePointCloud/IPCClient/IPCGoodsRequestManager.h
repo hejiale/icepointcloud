@@ -43,6 +43,7 @@
                             StartPrice:(double)startPrice
                               EndPrice:(double)endPrice
                               IsTrying:(BOOL)isTrying
+                               StoreId:(NSString *)storeId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
@@ -61,5 +62,13 @@
                             FailureBlock:(void (^)(NSError * error))failure;
 
 
+/**
+ QUERY Repository
+
+ @param success
+ @param failure 
+ */
++ (void)queryRepositoryWithSuccessBlock:(void (^)(id responseValue))success
+                           FailureBlock:(void (^)(NSError * error))failure;
 
 @end

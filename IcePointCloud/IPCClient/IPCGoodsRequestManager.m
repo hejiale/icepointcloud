@@ -27,6 +27,7 @@
                             StartPrice:(double)startPrice
                               EndPrice:(double)endPrice
                               IsTrying:(BOOL)isTrying
+                               StoreId:(NSString *)storeId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -40,7 +41,8 @@
                              @"proAvailable":@"true",
                              @"startPrice":@(startPrice),
                              @"endPrice":endPrice > 0 ? @(endPrice) : @"",
-                             @"isTryProduct": isTrying ? @"true":@"false"};
+                             @"isTryProduct": isTrying ? @"true":@"false",
+                             @"storeId":storeId ? : @""};
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -59,6 +61,12 @@
     [self postRequest:params RequestMethod:@"productAdmin.searchTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
+
++ (void)queryRepositoryWithSuccessBlock:(void (^)(id responseValue))success
+                           FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:@{@"isRepository":@"true"} RequestMethod:@"bizadmin.listStoreOrRepositoryByCompanyId" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+}
 
 
 @end

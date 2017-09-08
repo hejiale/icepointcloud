@@ -52,11 +52,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [self.keywordTf setText:self.currentSearchword];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.view endEditing:YES];
-}
-
 - (NSMutableArray<NSString *> *)keywordHistory{
     if (!_keywordHistory) {
         _keywordHistory = [[NSMutableArray alloc]init];
@@ -179,12 +174,12 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     NSString *curKeyword = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     [self syncSearchHistory:curKeyword];
     
+    [textField endEditing:YES];
+    
     if (self.searchDelegate) {
         if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
         [self.searchDelegate didSearchWithKeyword:curKeyword];
     }
-    
-    [textField endEditing:YES];
     
     [self dismissViewControllerAnimated:YES completion:nil];
     

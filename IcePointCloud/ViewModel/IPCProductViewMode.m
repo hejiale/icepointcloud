@@ -28,7 +28,7 @@
 
 - (NSMutableArray<IPCGlasses *> *)glassesList{
     if (!_glassesList)
-        _glassesList = [[NSMutableArray alloc]init];
+    _glassesList = [[NSMutableArray alloc]init];
     return _glassesList;
 }
 
@@ -55,7 +55,8 @@
                           SearchType:[self.filterValue getStoreFilterSource]
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
-                            IsTrying:isTry];
+                            IsTrying:isTry
+                             StoreId:self.currentStoreId];
 }
 
 
@@ -90,6 +91,7 @@
                         StartPrice:(double)startPrice
                           EndPrice:(double)endPrice
                           IsTrying:(BOOL)isTrying
+                           StoreId:(NSString *)storeId
 
 {
     __weak typeof (self) weakSelf = self;
@@ -100,6 +102,7 @@
                                                 StartPrice:startPrice
                                                   EndPrice:endPrice
                                                   IsTrying:isTrying
+                                                   StoreId:storeId
                                               SuccessBlock:^(id responseValue){
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
                                                   [strongSelf parseNormalGlassesData:responseValue];
@@ -123,14 +126,14 @@
                                           strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
                                           [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying];
                                           if (strongSelf.filterView)
-                                              [strongSelf.filterView reloadFilterView];
+                                          [strongSelf.filterView reloadFilterView];
                                           
                                           if (strongSelf.filterSuccessBlock)
-                                              strongSelf.filterSuccessBlock(nil);
+                                          strongSelf.filterSuccessBlock(nil);
                                       } FailureBlock:^(NSError *error) {
                                           __strong typeof (weakSelf) strongSelf = weakSelf;
                                           if (strongSelf.filterSuccessBlock)
-                                              strongSelf.filterSuccessBlock(error);
+                                          strongSelf.filterSuccessBlock(error);
                                       }];
 }
 
@@ -193,6 +196,16 @@
      }];
 }
 
+- (void)queryRepository
+{
+    [IPCGoodsRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
+     {
+         NSLog(@"----Repository %@", responseValue);
+     } FailureBlock:^(NSError *error) {
+         
+     }];
+}
+
 //Parse Normal Glass Data
 - (void)parseNormalGlassesData:(id)response
 {
@@ -213,12 +226,12 @@
                 }
             }
         }
-    }else{
-        if ([self.glassesList count] == 0) {
-            self.status = IPCFooterRefresh_NoData;
-            if (self.completeBlock)
-                self.completeBlock();
-        }
+    }
+    
+    if ([self.glassesList count] == 0) {
+        self.status = IPCFooterRefresh_NoData;
+        if (self.completeBlock)
+        self.completeBlock();
     }
 }
 

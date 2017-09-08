@@ -57,6 +57,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, assign, readwrite) BOOL  isTrying;
 @property (nonatomic, assign, readwrite) BOOL  isBeginLoad;
 @property (nonatomic, assign) LSRefreshDataStatus status;
+@property (nonatomic, copy) NSString * currentStoreId;
 
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
                             Complete:(void(^)())complete;
@@ -64,5 +65,6 @@ typedef void(^ReloadFilterUnCloseBlock)();
 - (void)loadFilterCategory:(id)owner InView:(UIView *)coverView  ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 - (void)queryBatchDegree;
 - (void)queryRecommdGlasses:(IPCGlasses *)glass Complete:(void(^)())complete;
+- (void)queryRepository;
 
 @end

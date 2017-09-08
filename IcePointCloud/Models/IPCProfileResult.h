@@ -17,5 +17,6 @@
 @property (nonatomic, copy, readonly) NSString *userID;
 @property (nonatomic, copy, readwrite) NSString *contacterName;
 @property (nonatomic, copy, readwrite) NSString *contacterPhone;
+@property (nonatomic, copy, readwrite) NSString *storeId;
 
 @end
