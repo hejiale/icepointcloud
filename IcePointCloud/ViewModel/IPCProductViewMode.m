@@ -214,6 +214,7 @@
     if (result) {
         if (result.glassesList.count){
             [self.glassesList addObjectsFromArray:result.glassesList];
+            
             self.status = IPCFooterRefresh_HasMoreData;
             if (self.completeBlock) {
                 self.completeBlock();

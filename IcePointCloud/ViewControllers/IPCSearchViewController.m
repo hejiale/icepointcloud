@@ -44,13 +44,15 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     }
 }
 
-
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [self.keywordTf becomeFirstResponder];
     [self.keywordTf setText:self.currentSearchword];
 }
+
 
 - (NSMutableArray<NSString *> *)keywordHistory{
     if (!_keywordHistory) {
