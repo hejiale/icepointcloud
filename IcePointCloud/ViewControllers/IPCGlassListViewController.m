@@ -183,6 +183,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super reload];
     
     [self.glassListCollectionView reloadData];
+    [self.glassListViewMode.filterView setCoverStatus:YES];
     
     if (self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
@@ -203,6 +204,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
         }];
+        
         [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];

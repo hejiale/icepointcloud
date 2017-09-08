@@ -59,6 +59,11 @@
                         <constraint firstItem="uax-uO-DMr" firstAttribute="leading" secondItem="EnB-PJ-DfA" secondAttribute="leading" id="uTp-oz-V5V"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NcK-tI-xV7">
+                    <rect key="frame" x="-1" y="0.0" width="492" height="600"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
@@ -75,6 +80,7 @@
             </variation>
             <connections>
                 <outlet property="completeButton" destination="UTe-eI-3L7" id="I2l-V0-e2S"/>
+                <outlet property="coverView" destination="NcK-tI-xV7" id="BIj-8i-tQN"/>
                 <outlet property="leftBgView" destination="EnB-PJ-DfA" id="Lo1-3A-kxn"/>
                 <outlet property="leftClassTableView" destination="uax-uO-DMr" id="ABc-Sq-cyP"/>
                 <outlet property="rightValueCollectionView" destination="mBK-T2-UOf" id="Fft-zX-UXZ"/>

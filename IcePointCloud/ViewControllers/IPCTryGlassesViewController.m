@@ -191,6 +191,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)updateRecommdUI
 {
     if (self.glassListViewMode.recommdGlassesList.count && !self.compareSwitch.isOn) {
+        [self.recommdBgView setHidden:NO];
         [self.recommdScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
         __block CGFloat width = self.recommdBgView.jk_width/3;
@@ -215,7 +216,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }else{
         [self.recommdBgView setHidden:YES];
     }
-    [self.recommdBgView setHidden:NO];
 }
 
 - (IPCTryGlassesView *)tryGlassesView
@@ -313,9 +313,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.productTableView reloadData];
-        [strongSelf.refreshHeader endRefreshing];
-        [strongSelf.refreshFooter endRefreshing];
+        [strongSelf reloadTableView];
     });
 }
 
@@ -329,10 +327,15 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.productTableView reloadData];
-        [strongSelf.refreshHeader endRefreshing];
-        [strongSelf.refreshFooter endRefreshing];
+        [strongSelf reloadTableView];
     }];
+}
+
+- (void)reloadTableView{
+    [self.productTableView reloadData];
+    [self.refreshHeader endRefreshing];
+    [self.refreshFooter endRefreshing];
+    [self.glassListViewMode.filterView setCoverStatus:YES];
 }
 
 #pragma mark //Request Data
@@ -621,6 +624,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)switchToCompareMode
 {
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self setRecommdStatus:YES];
     
     for (IPCCompareItemView * item in self.compareBgView.subviews) {

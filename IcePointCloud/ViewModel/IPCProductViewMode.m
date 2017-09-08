@@ -294,6 +294,7 @@
 
 - (void)filterGlassesWithFilterKey:(NSString *)key FilterName:(NSString *)filterName{
     [self.filterValue storeFilterSource:filterName Key:key];
+    [self.filterView setCoverStatus:NO];
     
     if (self.reloadFilterUnCloseBlock) {
         self.reloadFilterUnCloseBlock();
@@ -311,6 +312,7 @@
 
 - (void)deleteFilterSourceWithValue:(NSString *)value{
     [self.filterValue deleteFilterSource:value];
+    [self.filterView setCoverStatus:NO];
     
     if (self.reloadFilterUnCloseBlock) {
         self.reloadFilterUnCloseBlock();

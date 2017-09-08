@@ -30,6 +30,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
 @property (weak, nonatomic) IBOutlet UICollectionView *rightValueCollectionView;
 @property (weak, nonatomic) IBOutlet UIView                *leftBgView;
 @property (weak, nonatomic) IBOutlet UIButton *completeButton;
+@property (weak, nonatomic) IBOutlet UIView *coverView;
 
 @property (strong, nonatomic) IPCChooseCategoryView      *categoryView;
 @property (strong, nonatomic) UIView                           *topChooseView;
@@ -140,6 +141,11 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     if ([self.delegate respondsToSelector:@selector(filterProductsPrice:EndPrice:)]) {
         [self.delegate filterProductsPrice:[startPrice doubleValue]  EndPrice:[endPrice doubleValue]];
     }
+}
+
+- (void)setCoverStatus:(BOOL)status
+{
+    [self.coverView setHidden:status];
 }
 
 

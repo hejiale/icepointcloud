@@ -19,6 +19,7 @@
 
 - (void)show;
 - (void)reloadFilterView;
+- (void)setCoverStatus:(BOOL)status;
 
 @end
 

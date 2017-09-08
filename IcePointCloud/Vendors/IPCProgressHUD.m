@@ -194,7 +194,7 @@
 -(UIView *)backgroundView {
     if(!_backgroundView){
         _backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-        _backgroundView.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.2];
+//        _backgroundView.backgroundColor =  [UIColor colorWithWhite:0 alpha:0.2];
         _backgroundView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin;
     }
     return _backgroundView;

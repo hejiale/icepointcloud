@@ -149,24 +149,25 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
 }
 
 - (void)setOn:(BOOL)on{
-    if (_on != on)
+    if (_on != on){
         _on = on;
-    
-    if (_on)
-    {
-        [self.onBackgroundView setAlpha:1.0];
-        [self.offBackgroundView setAlpha:0.0];
-        self.offBackgroundView.transform = CGAffineTransformMakeScale(0.0, 0.0);
         
-        self.thumbView.center = CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y);
-    }
-    else
-    {
-        [self.onBackgroundView setAlpha:0.0];
-        [self.offBackgroundView setAlpha:1.0];
-        self.offBackgroundView.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        
-        self.thumbView.center = CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y);
+        if (_on)
+        {
+            [self.onBackgroundView setAlpha:1.0];
+            [self.offBackgroundView setAlpha:0.0];
+            self.offBackgroundView.transform = CGAffineTransformMakeScale(0.0, 0.0);
+            
+            self.thumbView.center = CGPointMake(self.onBackgroundView.frame.size.width - (self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y);
+        }
+        else
+        {
+            [self.onBackgroundView setAlpha:0.0];
+            [self.offBackgroundView setAlpha:1.0];
+            self.offBackgroundView.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            
+            self.thumbView.center = CGPointMake((self.thumbView.frame.size.width+kHorizontalAdjustment)/2, self.thumbView.center.y);
+        }
     }
 }
 
