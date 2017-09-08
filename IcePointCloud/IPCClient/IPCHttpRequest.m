@@ -10,8 +10,6 @@
 
 @interface IPCHttpRequest()
 
-@property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *>  *  allTasks;
-
 @end
 
 @implementation IPCHttpRequest
@@ -25,14 +23,6 @@
     });
     return _client;
 }
-
-
-- (NSMutableArray<NSURLSessionDataTask *> *)allTasks{
-    if (!_allTasks)
-        _allTasks = [[NSMutableArray alloc]init];
-    return _allTasks;
-}
-
 
 #pragma mark //AFNetworking Request Method
 - (void)callRequestWithParams:(IPCAppendRequestParameter *)request
@@ -60,7 +50,7 @@
             }
         }
     }else{
-        NSURLSessionDataTask * urlSessionDataTask = [[AFHTTPSessionManager manager] sendRequestWithParams:request
+        [[AFHTTPSessionManager manager] sendRequestWithParams:request
                                                                                                 ImageData:imageData
                                                                                                 ImageName:imageName
                                                                                               RequestType:requestType
@@ -70,7 +60,6 @@
                                                          if (success) {
                                                              success(responseValue);
                                                          }
-                                                         [self.allTasks removeObject:task];
                                                      } ProgressBlock:^(NSProgress *uploadProgress) {
                                                          if (progress) {
                                                              progress(uploadProgress);
@@ -79,24 +68,14 @@
                                                          if (failure) {
                                                              failure(error);
                                                          }
-                                                         [self.allTasks removeObject:task];
                                                      }];
-        
-        if (urlSessionDataTask){
-            [self.allTasks addObject:urlSessionDataTask];
-        }
     }
 }
 
 
 - (void)cancelAllRequest
 {
-    if (self.allTasks.count) {
-        [self.allTasks enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull task, NSUInteger idx, BOOL * _Nonnull stop) {
-            [task cancel];
-        }];
-        [self.allTasks removeAllObjects];
-    }
+    [[AFHTTPSessionManager manager].operationQueue cancelAllOperations];
 }
 
 

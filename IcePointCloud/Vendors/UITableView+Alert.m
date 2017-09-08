@@ -62,6 +62,8 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 }
 
 - (void)loadEmptyAlertView{
+    [self setContentOffset:CGPointZero];
+    
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
                                                        AlertTitle:self.emptyAlertTitle

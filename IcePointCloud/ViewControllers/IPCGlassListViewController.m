@@ -254,7 +254,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
         if (!self.refreshFooter.isRefreshing) {
-            if (indexPath.row == self.glassListViewMode.glassesList.count -10) {
+            if (indexPath.row == self.glassListViewMode.glassesList.count -20) {
                 [self.refreshFooter beginRefreshing];
             }
         }
@@ -313,5 +313,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.searchWord = keyword;
     [self.refreshHeader beginRefreshing];
 }
+
+
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+    
+    self.glassListViewMode = nil;
+}
+
 
 @end

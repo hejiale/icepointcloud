@@ -752,7 +752,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
         if (!self.refreshFooter.isRefreshing) {
-            if (indexPath.row == self.glassListViewMode.glassesList.count -10) {
+            if (indexPath.row == self.glassListViewMode.glassesList.count -20) {
                 [self.refreshFooter beginRefreshing];
             }
         }
@@ -807,6 +807,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.glassListViewMode = nil;
 }
 
 @end

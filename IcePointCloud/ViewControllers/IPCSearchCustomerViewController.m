@@ -181,5 +181,10 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [self.refreshHeader beginRefreshing];
 }
 
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+    self.customerList = nil;
+}
+
 
 @end
