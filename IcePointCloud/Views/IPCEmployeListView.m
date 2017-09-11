@@ -74,7 +74,7 @@ typedef void(^DismissBlock)();
          [self.employeTableView reloadData];
          [self.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showError:@"查询员工信息失败！"];
+         [IPCCommonUI showInfo:@"查询员工信息失败！"];
      }];
 }
 
@@ -116,7 +116,7 @@ typedef void(^DismissBlock)();
     IPCEmployee * employe = self.employeeArray[indexPath.row];
     if (employe) {
         if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 5){
-            [IPCCommonUI showError:@"至多选择五名员工"];
+            [IPCCommonUI showInfo:@"至多选择五名员工"];
             return;
         }
 

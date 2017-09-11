@@ -53,6 +53,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    
     [self.view endEditing:YES];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
@@ -87,7 +88,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
             }
         }];
     }else{
-        [IPCCommonUI showError:@"请输入完整客户名或手机号!"];
+        [IPCCommonUI showInfo:@"请输入完整客户名或手机号!"];
     }
 }
 

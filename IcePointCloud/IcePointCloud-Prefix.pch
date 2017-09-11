@@ -21,7 +21,6 @@
 #import <AdSupport/AdSupport.h>
 #import <WebKit/WebKit.h>
 //Third Framework
-#import "SVProgressHUD.h"
 #import "AFNetworking.h"
 #import "WXApi.h"
 #import "JSONKit.h"

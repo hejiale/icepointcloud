@@ -98,11 +98,11 @@
     NSString *password = [self.passwordTf.text jk_trimmingWhitespace];
     
     if (!username.length){
-        [IPCCommonUI showError:@"登录帐号不能为空"];
+        [IPCCommonUI showInfo:@"登录帐号不能为空"];
         return;
     }
     if (!password.length) {
-        [IPCCommonUI showError:@"登录密码不能为空"];
+        [IPCCommonUI showInfo:@"登录密码不能为空"];
         return;
     }
     [self.loginButton jk_showIndicator];
@@ -123,7 +123,7 @@
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCCommonUI showError:@"用户登录失败!"];
+        [IPCCommonUI showInfo:@"用户登录失败!"];
     }];
 }
 

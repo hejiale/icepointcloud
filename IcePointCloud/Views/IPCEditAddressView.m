@@ -74,12 +74,14 @@ typedef  void(^DismissBlock)();
          }
      } FailureBlock:^(NSError *error) {
          [self.saveAddressButton jk_hideIndicator];
-         [IPCCommonUI showError:@"新建地址失败!"];
+         [IPCCommonUI showInfo:@"新建地址失败!"];
      }];
 }
 
 #pragma mark //Clicked Events
 - (IBAction)backAction:(id)sender {
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    
     if (self.dismissBlock) {
         self.dismissBlock();
     }

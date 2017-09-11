@@ -18,6 +18,8 @@
     AFJSONResponseSerializer *responseSerializer  = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];
     responseSerializer.acceptableContentTypes      = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     responseSerializer.removesKeysWithNullValues = YES;
+    self.requestSerializer.timeoutInterval = 30.f;
+    self.operationQueue.maxConcurrentOperationCount = 3;
     return responseSerializer;
 }
 

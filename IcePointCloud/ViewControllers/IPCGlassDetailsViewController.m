@@ -112,7 +112,7 @@ static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellI
 
 #pragma mark //Clicked Events
 - (void)successAddCartMethod{
-    [IPCCommonUI showSuccess:@"添加商品成功!"];
+    [IPCCommonUI showInfo:@"添加商品成功!"];
     [self reloadCartBadge];
 }
 

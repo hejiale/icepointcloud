@@ -7,7 +7,7 @@
 //
 
 #import "IPCCommonUI.h"
-#import "IPCProgressHUD.h"
+#import "MBProgressHUD.h"
 
 @implementation IPCCommonUI
 
@@ -28,36 +28,43 @@
 #pragma mark //Warning prompt box
 + (void)show
 {
-    [SVProgressHUD dismiss];
-    
-    __block NSMutableArray<NSString *> * loadingArray = [[NSMutableArray alloc]init];
+    __block NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 1 ; i< 17; i++) {
-        [loadingArray addObject:[NSString stringWithFormat:@"loading_%ld",(long)i]];
+        [loadingArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"loading_%ld",(long)i]]];
     }
-    [IPCProgressHUD showAnimationImages:loadingArray];
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    UIImageView *imaegCustomView = [[UIImageView alloc] init];
+    imaegCustomView.animationImages = loadingArray;
+    [imaegCustomView setAnimationRepeatCount:0];
+    [imaegCustomView setAnimationDuration:loadingArray.count * 0.1];
+    [imaegCustomView startAnimating];
+    hud.customView = imaegCustomView;
+    hud.square = NO;
+    hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
+    hud.bezelView.color = [UIColor clearColor];
+    hud.backgroundView.color = [UIColor colorWithWhite:0 alpha:0.1];
+    hud.removeFromSuperViewOnHide = YES;
+}
+
++ (void)showInfo:(NSString *)message
+{
+    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
+        [IPCCommonUI hiden];
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+    hud.label.text = message;
+    [hud hideAnimated:YES afterDelay:1.f];
+    hud.removeFromSuperViewOnHide = YES;
 }
 
 + (void)hiden{
-    [IPCProgressHUD dismiss];
-    [SVProgressHUD dismiss];
-}
-
-+ (void)showError:(NSString *)message{
-    [IPCProgressHUD dismiss];
-    [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-    [SVProgressHUD setMinimumDismissTimeInterval:1.f];
-    [SVProgressHUD showErrorWithStatus:message];
-}
-
-
-+ (void)showSuccess:(NSString *)message{
-    [IPCProgressHUD dismiss];
-    [SVProgressHUD setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeCustom];
-    [SVProgressHUD setMinimumDismissTimeInterval:0.3f];
-    [SVProgressHUD showSuccessWithStatus:message];
+    [MBProgressHUD hideHUDForView:[[UIApplication sharedApplication].delegate window] animated:YES];
 }
 
 + (void)showAlert:(NSString *)alertTitle Message:(NSString *)alertMesg

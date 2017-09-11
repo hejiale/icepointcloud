@@ -89,7 +89,8 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                  SuccessBlock:^(id responseValue)
      {
          [self.saveButton jk_hideIndicator];
-         [IPCCommonUI showSuccess:@"更改用户信息成功!"];
+         [IPCCommonUI showInfo:@"更改用户信息成功!"];
+         
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(dismissCoverSubViews)]) {
                  [self.delegate dismissCoverSubViews];
@@ -97,14 +98,14 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
          }
      } FailureBlock:^(NSError *error) {
          [self.saveButton jk_hideIndicator];
-         [IPCCommonUI showError:@"更改用户信息失败!"];
+         [IPCCommonUI showInfo:@"更改用户信息失败!"];
      }];
 }
 
 
 #pragma mark //Clicked Events
 - (IBAction)removeCoverAction:(id)sender {
-    
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 
@@ -124,7 +125,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 - (IBAction)updateCustomerAction:(id)sender {
     if (!self.userNameTextField.text.length || !self.phoneTextField.text.length) {
-        [IPCCommonUI showError:@"用户名或手机号输入为空!"];
+        [IPCCommonUI showInfo:@"用户名或手机号输入为空!"];
     }else{
         [self updateCustomerRequest];
     }

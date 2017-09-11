@@ -78,10 +78,10 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
                  [IPCCommonUI hiden];
                  self.CloseBlock();
              } FailureBlock:^(NSError *error) {
-                 [IPCCommonUI showError:@"修改用户密码失败!"];
+                 [IPCCommonUI showInfo:@"修改用户密码失败!"];
              }];
         }else{
-            [IPCCommonUI showError:@"两次输入新密码不一致!"];
+            [IPCCommonUI showInfo:@"两次输入新密码不一致!"];
         }
     }
 }

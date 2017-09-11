@@ -106,6 +106,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 - (IBAction)dismissViewAction:(id)sender {
     [[IPCCustomerOrderDetail instance] clearData];
     [[IPCPayOrderManager sharedManager] resetData];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
      __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -135,7 +136,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
          [strongSelf.orderDetailTableView reloadData];
          [strongSelf.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showError:@"查询用户订单详情失败!"];
+         [IPCCommonUI showInfo:@"查询用户订单详情失败!"];
      }];
 }
 

@@ -91,7 +91,7 @@
 #pragma mark //Clicked Events
 - (IBAction)sureInsertAction:(id)sender {
     if (!self.payTypeTextField.text.length || !self.payAmountTextField.text.length){
-        [IPCCommonUI showError:@"付款方式或付款金额为空!"];
+        [IPCCommonUI showInfo:@"付款方式或付款金额为空!"];
         return;
     }
     

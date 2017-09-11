@@ -15,11 +15,9 @@
 
 + (void)show;
 
++ (void)showInfo:(nonnull NSString *)message;
+
 + (void)hiden;
-
-+ (void)showError:(nonnull NSString *)message;
-
-+ (void)showSuccess:(nonnull NSString *)message;
 
 + (void)showAlert:(NSString *)alertTitle Message:(NSString *)alertMesg;
 

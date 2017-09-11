@@ -355,10 +355,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)queryRecommdGlasses
 {
     if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn) {
+        [IPCCommonUI show];
         __weak typeof(self) weakSelf = self;
         [self.glassListViewMode queryRecommdGlasses:[[IPCTryMatch instance] currentMatchItem].glass Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf updateRecommdUI];
+            [IPCCommonUI hiden];
         }];
     }
 }
@@ -546,10 +548,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCCommonUI showError:@"人脸验证失败!"];
+                [IPCCommonUI showInfo:@"人脸验证失败!"];
             }];
         }else{
-            [IPCCommonUI showError:@"未检测到人脸轮廓"];
+            [IPCCommonUI showInfo:@"未检测到人脸轮廓"];
         }
     }];
     [self.faceRecognition postFaceRequest:image];

@@ -139,7 +139,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 {
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [self.leftTitleLabel setText:@"度数"];
-        [self.rightParameterView setHidden:YES];
     }else if([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses){
         [self.leftTitleLabel setText:@"球镜/SPH"];
         [self.rightParameterView setHidden:NO];

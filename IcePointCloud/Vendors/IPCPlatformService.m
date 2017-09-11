@@ -70,7 +70,7 @@
 {
     [[IPCReachability manager] monitoringNetwork:^(AFNetworkReachabilityStatus status) {
         if (status == AFNetworkReachabilityStatusUnknown || status == AFNetworkReachabilityStatusNotReachable) {
-            [IPCCommonUI showError:kIPCErrorNetworkAlertMessage];
+            [IPCCommonUI showInfo:kIPCErrorNetworkAlertMessage];
         }
     }];
 }
@@ -114,11 +114,11 @@
 {
     if([resp isKindOfClass:[SendMessageToWXResp class]]){
         if (resp.errCode == WXSuccess) {
-            [IPCCommonUI showSuccess:@"发送图片成功!"];
+            [IPCCommonUI showInfo:@"发送图片成功!"];
         }else if(resp.errCode == WXErrCodeSentFail){
-            [IPCCommonUI showError:@"发送图片失败!"];
+            [IPCCommonUI showInfo:@"发送图片失败!"];
         }else if (resp.errCode == WXErrCodeUserCancel){
-            [IPCCommonUI showError:@"取消分享!"];
+            [IPCCommonUI showInfo:@"取消分享!"];
         }
     }
 }

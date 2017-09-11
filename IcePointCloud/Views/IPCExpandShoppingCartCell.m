@@ -90,11 +90,11 @@
 #pragma mark //Clicked Events
 - (IBAction)noPointAction:(UIButton *)sender {
     if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
-        [IPCCommonUI showError:@"请先选择客户!"];
+        [IPCCommonUI showInfo:@"请先选择客户!"];
         return;
     }
     if ([IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
-        [IPCCommonUI showError:@"所选客户积分为零!"];
+        [IPCCommonUI showInfo:@"所选客户积分为零!"];
         return;
     }
     self.cartItem.isChoosePoint = !sender.selected;
@@ -162,10 +162,10 @@
             }
         }else{
             if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-                [IPCCommonUI showError:@"请先选择员工"];
+                [IPCCommonUI showInfo:@"请先选择员工"];
             }else{
                 if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-                    [IPCCommonUI showError:@"该商品售价超出折扣范围！"];
+                    [IPCCommonUI showInfo:@"该商品售价超出折扣范围！"];
                 }
                 self.cartItem.unitPrice = [str doubleValue];
                 [[IPCPayOrderManager sharedManager] resetPayPrice];

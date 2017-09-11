@@ -120,7 +120,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
              complete();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showError:@"查询客户信息失败!"];
+         [IPCCommonUI showInfo:@"查询客户信息失败!"];
      }];
 }
 

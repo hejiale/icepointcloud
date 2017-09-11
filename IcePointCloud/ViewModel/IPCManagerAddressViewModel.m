@@ -32,7 +32,7 @@
                                                        } FailureBlock:^(NSError *error) {
                                                            if (completeBlock)
                                                                completeBlock();
-                                                           [IPCCommonUI showError:@"查询客户地址信息失败!"];
+                                                           [IPCCommonUI showInfo:@"查询客户地址信息失败!"];
                                                        }];
 }
 
@@ -45,7 +45,7 @@
                                                         completeBlock();
                                                     }
                                                 } FailureBlock:^(NSError *error) {
-                                                    [IPCCommonUI showError:@"设置默认地址失败!"];
+                                                    [IPCCommonUI showInfo:@"设置默认地址失败!"];
                                                 }];
 }
 
