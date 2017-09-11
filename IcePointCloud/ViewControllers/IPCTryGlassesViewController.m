@@ -81,7 +81,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self setNavigationBarStatus:YES];
     [self initMatchItems];
-    [self.refreshHeader beginRefreshing];
     [self reload];
 }
 
@@ -105,6 +104,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.productTableView.mj_footer = self.refreshFooter;
     self.productTableView.emptyAlertImage = @"exception_search";
     self.productTableView.emptyAlertTitle = @"未搜索到可试戴的眼镜!";
+    [self.refreshHeader beginRefreshing];
 }
 
 

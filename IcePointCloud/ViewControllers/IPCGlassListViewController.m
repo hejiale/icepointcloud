@@ -44,7 +44,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:YES];
-    [self.refreshHeader beginRefreshing];
+    [self.glassListCollectionView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -73,6 +73,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListCollectionView.mj_footer = self.refreshFooter;
     self.glassListCollectionView.emptyAlertTitle = @"未搜索到任何商品";
     self.glassListCollectionView.emptyAlertImage = @"exception_search";
+    [self.refreshHeader beginRefreshing];
 }
 
 
@@ -121,7 +122,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)loadNormalProducts
 {
     __weak typeof (self) weakSelf = self;
-    
+
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
