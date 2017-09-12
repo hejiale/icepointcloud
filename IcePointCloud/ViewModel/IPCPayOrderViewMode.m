@@ -55,7 +55,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          [self reload];
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showInfo:@"查询积分定制规则失败！"];
+         [IPCCommonUI showError:@"查询积分定制规则失败！"];
      }];
 }
 
@@ -69,7 +69,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
              }
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showInfo:@"保存订单失败！"];
+         [IPCCommonUI showError:@"保存订单失败！"];
          if (self.delegate) {
              if ([self.delegate respondsToSelector:@selector(failPayOrder)]) {
                  [self.delegate failPayOrder];
@@ -87,7 +87,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
          [self reload];
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showInfo:@"查询客户信息失败!"];
+         [IPCCommonUI showError:@"查询客户信息失败!"];
      }];
 }
 
@@ -103,23 +103,23 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 - (BOOL)isCanPayOrder
 {
     if ([[IPCShoppingCart sharedCart] itemsCount] == 0) {
-        [IPCCommonUI showInfo:@"未添加任何商品!"];
+        [IPCCommonUI showError:@"未添加任何商品!"];
         return NO;
     }
     if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
-        [IPCCommonUI showInfo:@"请先选择客户信息"];
+        [IPCCommonUI showError:@"请先选择客户信息"];
         return NO;
     }
     if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-        [IPCCommonUI showInfo:@"请选择员工"];
+        [IPCCommonUI showError:@"请选择员工"];
         return NO;
     }
     if ([[IPCPayOrderManager sharedManager] isExistEmptyEmployeeResult]) {
-        [IPCCommonUI showInfo:@"参与比例必须填写且大于零"];
+        [IPCCommonUI showError:@"参与比例必须填写且大于零"];
         return NO;
     }
     if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
-        [IPCCommonUI showInfo:@"员工总份额不足百分之一百"];
+        [IPCCommonUI showError:@"员工总份额不足百分之一百"];
         return NO;
     }
     return YES;
@@ -127,7 +127,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 - (void)insertPayRecord{
     if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0) {
-        [IPCCommonUI showInfo:@"剩余应收金额为零"];
+        [IPCCommonUI showError:@"剩余应收金额为零"];
         return;
     }
     if ([IPCPayOrderManager sharedManager].isInsertRecordStatus){

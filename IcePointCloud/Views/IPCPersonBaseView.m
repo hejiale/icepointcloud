@@ -46,7 +46,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         if (self.LogoutBlock)
             self.LogoutBlock();
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showInfo:@"用户退出登录失败"];
+        [IPCCommonUI showError:@"用户退出登录失败"];
     }];
 }
 
@@ -197,7 +197,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         YYImageCache *cache = [YYWebImageManager sharedManager].cache;
         [cache.memoryCache removeAllObjects];
         [cache.diskCache removeAllObjects];
-        [IPCCommonUI showInfo:@"缓存清理成功"];
+        [IPCCommonUI showSuccess:@"缓存清理成功"];
     }
 }
 

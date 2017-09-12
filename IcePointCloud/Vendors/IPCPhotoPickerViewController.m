@@ -87,7 +87,7 @@
     }
     
     if ([self.photoArray count] == 0) {
-        [IPCCommonUI showInfo:@"相册中未查询到任何照片!"];
+        [IPCCommonUI showError:@"相册中未查询到任何照片!"];
     }
     [self.picsCollection reloadData];
 }

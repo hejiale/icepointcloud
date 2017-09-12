@@ -50,7 +50,7 @@
                                                      } FailureBlock:^(NSError *error) {
                                                          if (completeBlock)
                                                              completeBlock(NO);
-                                                         [IPCCommonUI showInfo:@"查询客户验光单信息失败!"];
+                                                         [IPCCommonUI showError:@"查询客户验光单信息失败!"];
                                                      }];
 }
 

@@ -85,7 +85,7 @@ typedef  void(^DismissBlock)();
                                                          }
                                                      } FailureBlock:^(NSError *error) {
                                                          [self.saveButton jk_hideIndicator];
-                                                         [IPCCommonUI showInfo:@"保存验光单失败!"];
+                                                         [IPCCommonUI showError:@"保存验光单失败!"];
                                                      }];
 }
 
@@ -96,7 +96,7 @@ typedef  void(^DismissBlock)();
     [self endEditing:YES];
     
     if (!self.optometryView.insertOptometry.employeeName.length || !self.optometryView.insertOptometry.purpose.length) {
-        [IPCCommonUI showInfo:@"请填写验光师和用途!"];
+        [IPCCommonUI showError:@"请填写验光师和用途!"];
     }else{
         if (self.customerID) {
             [self saveNewOpometryRequest];

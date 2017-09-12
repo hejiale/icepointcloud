@@ -176,7 +176,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.updateCustomerView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
     if (isLoad) {
-        [self requestCustomerDetailInfo];
+        [self.refreshHeader beginRefreshing];
     }
 }
 

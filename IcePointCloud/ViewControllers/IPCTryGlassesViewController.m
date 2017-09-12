@@ -548,10 +548,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCCommonUI showInfo:@"人脸验证失败!"];
+                [IPCCommonUI showError:@"人脸验证失败!"];
             }];
         }else{
-            [IPCCommonUI showInfo:@"未检测到人脸轮廓"];
+            [IPCCommonUI showError:@"未检测到人脸轮廓"];
         }
     }];
     [self.faceRecognition postFaceRequest:image];

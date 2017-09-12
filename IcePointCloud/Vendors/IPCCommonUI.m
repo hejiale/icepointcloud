@@ -36,6 +36,7 @@
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
     hud.mode = MBProgressHUDModeCustomView;
+    
     UIImageView *imaegCustomView = [[UIImageView alloc] init];
     imaegCustomView.animationImages = loadingArray;
     [imaegCustomView setAnimationRepeatCount:0];
@@ -49,16 +50,38 @@
     hud.removeFromSuperViewOnHide = YES;
 }
 
-+ (void)showInfo:(NSString *)message
++ (void)showSuccess:(NSString *)message
 {
     if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
         [IPCCommonUI hiden];
     }
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
-    hud.mode = MBProgressHUDModeText;
-    hud.label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+    hud.mode = MBProgressHUDModeCustomView;
     hud.label.text = message;
+    hud.label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+    
+    UIImageView * imageView = [[UIImageView alloc]init];
+    imageView.image = [UIImage imageNamed:@"hud_complete"];
+    hud.customView = imageView;
+    [hud hideAnimated:YES afterDelay:1.f];
+    hud.removeFromSuperViewOnHide = YES;
+}
+
++ (void)showError:(NSString *)message
+{
+    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
+        [IPCCommonUI hiden];
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+    hud.mode = MBProgressHUDModeCustomView;
+    hud.label.text = message;
+    hud.label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+    
+    UIImageView * imageView = [[UIImageView alloc]init];
+    imageView.image = [UIImage imageNamed:@"icon_back"];
+    hud.customView = imageView;
     [hud hideAnimated:YES afterDelay:1.f];
     hud.removeFromSuperViewOnHide = YES;
 }

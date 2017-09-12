@@ -136,7 +136,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
          [strongSelf.orderDetailTableView reloadData];
          [strongSelf.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showInfo:@"查询用户订单详情失败!"];
+         [IPCCommonUI showError:@"查询用户订单详情失败!"];
      }];
 }
 

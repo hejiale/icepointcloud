@@ -97,7 +97,7 @@
              complete(responseValue);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showInfo:@"保存客户信息失败!"];
+         [IPCCommonUI showError:@"保存客户信息失败!"];
          if (complete) {
              complete(nil);
          }
@@ -115,10 +115,10 @@
                 complete();
             }
         }else{
-            [IPCCommonUI showInfo:@"该手机号已注册过了"];
+            [IPCCommonUI showError:@"该手机号已注册过了"];
         }
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showInfo:@"验证手机号失败!"];
+        [IPCCommonUI showError:@"验证手机号失败!"];
     }];
 }
 @end

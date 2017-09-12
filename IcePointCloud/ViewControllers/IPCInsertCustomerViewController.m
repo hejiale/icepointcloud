@@ -88,7 +88,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
             }
         }];
     }else{
-        [IPCCommonUI showInfo:@"请输入完整客户名或手机号!"];
+        [IPCCommonUI showError:@"请输入完整客户名或手机号!"];
     }
 }
 

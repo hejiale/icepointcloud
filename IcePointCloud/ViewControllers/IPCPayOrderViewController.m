@@ -220,7 +220,7 @@
 
 - (void)successPayOrder{
     [self.saveButton jk_hideIndicator];
-    [IPCCommonUI showInfo:@"订单付款成功!"];
+    [IPCCommonUI showSuccess:@"订单付款成功!"];
     [self resetPayInfoView];
 }
 

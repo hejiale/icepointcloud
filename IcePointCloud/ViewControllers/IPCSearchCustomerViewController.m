@@ -39,7 +39,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.customerCollectionView reloadData];
+    [self.refreshHeader beginRefreshing];
     
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
         [self setNavigationTitle:@"客户"];
@@ -83,7 +83,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     _customerCollectionView.emptyAlertTitle = @"未查询到客户信息!";
     _customerCollectionView.mj_header = self.refreshHeader;
     [_customerCollectionView registerNib:[UINib nibWithNibName:@"IPCCustomerCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:customerIdentifier];
-    [self.refreshHeader beginRefreshing];
 }
 
 - (IPCRefreshAnimationHeader *)refreshHeader{
@@ -120,7 +119,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
              complete();
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showInfo:@"查询客户信息失败!"];
+         [IPCCommonUI showError:@"查询客户信息失败!"];
      }];
 }
 

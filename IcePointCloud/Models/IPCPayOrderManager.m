@@ -49,9 +49,9 @@
     
     if (remainResult < result) {
         if (remainResult > 0) {
-            [IPCCommonUI showInfo:[NSString stringWithFormat:@"该员工至多百分之%.f份额",remainResult]];
+            [IPCCommonUI showError:[NSString stringWithFormat:@"该员工至多百分之%.f份额",remainResult]];
         }else{
-            [IPCCommonUI showInfo:@"请调整其他员工的份额"];
+            [IPCCommonUI showError:@"请调整其他员工的份额"];
         }
     }else{
         remainResult = result;
