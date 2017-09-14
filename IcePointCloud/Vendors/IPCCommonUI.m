@@ -28,6 +28,10 @@
 #pragma mark //Warning prompt box
 + (void)show
 {
+    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
+        [IPCCommonUI hiden];
+    }
+    
     __block NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 1 ; i< 17; i++) {

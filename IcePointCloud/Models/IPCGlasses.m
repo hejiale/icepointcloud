@@ -99,7 +99,7 @@
              @"isTryOn"              : @"proTry",
              @"productCount"        : @"count",
              @"lensType"            : @"glassLensType",
-             @"isBatch"               : @"batch"
+             @"isBatch"               : @"batch",
              };
 }
 

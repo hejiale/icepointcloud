@@ -55,7 +55,6 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, assign, readwrite) NSInteger   currentPage;
 @property (nonatomic) IPCTopFilterType   currentType;
 @property (nonatomic, assign, readwrite) BOOL  isTrying;
-@property (nonatomic, assign, readwrite) BOOL  isBeginLoad;
 @property (nonatomic, assign) LSRefreshDataStatus status;
 @property (nonatomic, copy) NSString * currentStoreId;
 

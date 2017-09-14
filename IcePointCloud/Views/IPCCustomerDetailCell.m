@@ -26,7 +26,7 @@
         self.pointWidth.constant = width + 25;
     
         if (_currentCustomer.photo_url.length) {
-            [self.headImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
+            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url]];
         }
     
         [self.customerNameLabel setText:_currentCustomer.customerName];

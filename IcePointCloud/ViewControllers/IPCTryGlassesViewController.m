@@ -201,7 +201,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(width*idx, 0, width, height)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             IPCGlassesImage * glassImage = [glass imageWithType:IPCGlassesImageTypeThumb];
-            [imageView setImageURL:[NSURL URLWithString:glassImage.imageURL]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:[glassImage.imageURL stringByAppendingString:@"-320x160"]]];
             [imageView setUserInteractionEnabled:YES];
             __weak typeof(self) weakSelf = self;
             [imageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -280,15 +280,16 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
-- (void)beginReloadTableView{
+- (void)beginReloadTableView{    
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [self.refreshFooter resetDataStatus];
     self.glassListViewMode.currentPage = 0;
-    self.glassListViewMode.isBeginLoad = YES;
+    [self.glassListViewMode.glassesList removeAllObjects];
+    self.glassListViewMode.glassesList = nil;
     
     __weak typeof (self) weakSelf = self;
     
@@ -319,9 +320,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadMoreTableView
 {
-    if (self.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData)return;
-    
-    self.glassListViewMode.isBeginLoad = NO;
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof (self) weakSelf = self;
@@ -331,11 +330,17 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
-- (void)reloadTableView{
+- (void)reloadTableView
+{
     [self.productTableView reloadData];
-    [self.refreshHeader endRefreshing];
-    [self.refreshFooter endRefreshing];
     [self.glassListViewMode.filterView setCoverStatus:YES];
+    
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+    }
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+    }
 }
 
 #pragma mark //Request Data

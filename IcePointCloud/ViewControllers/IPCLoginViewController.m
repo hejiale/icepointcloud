@@ -11,7 +11,7 @@
 #import "IPCLoginHistoryViewController.h"
 #import "IPCRootViewController.h"
 
-@interface IPCLoginViewController ()<LoginHistoryViewControllerDelegate,UITextFieldDelegate>
+@interface IPCLoginViewController ()<LoginHistoryViewControllerDelegate,UITextFieldDelegate> 
 
 @property (weak, nonatomic) IBOutlet UIView *loginBgView;
 @property (nonatomic, weak) IBOutlet UITextField *usernameTf;

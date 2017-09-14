@@ -31,11 +31,17 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
     AFNetworkReachabilityStatus status = [IPCReachability manager].currentNetStatus;
     if (status == AFNetworkReachabilityStatusUnknown || status == AFNetworkReachabilityStatusNotReachable){
         if ([self checkIsEmpty]) {
+            [self.mj_footer setHidden:YES];
             [self loadErrorNetworkAlertView];
+        }else{
+            [self.mj_footer setHidden:NO];
         }
     }else{
         if ([self checkIsEmpty]) {
+            [self.mj_footer setHidden:YES];
             [self loadEmptyAlertView];
+        }else{
+            [self.mj_footer setHidden:NO];
         }
     }
     [self customReload];

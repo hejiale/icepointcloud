@@ -35,6 +35,7 @@
 #import "YYKit.h"
 #import "JKCategories.h"
 #import "ReactiveObjC.h"
+#import "UIImageView+WebCache.h"
 //Head File
 #import "HeaderFile.h"
 

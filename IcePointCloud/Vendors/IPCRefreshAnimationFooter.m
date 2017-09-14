@@ -14,8 +14,12 @@
 - (void)prepare{
     [super prepare];
 
-    self.mj_h = 0;
-    [self.stateLabel setHidden:YES];
+    self.mj_h = 30;
+    
+    [self.stateLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
+    [self setTitle:@"" forState:MJRefreshStateIdle];
+    [self setTitle:@"正在加载中..." forState:MJRefreshStateRefreshing];
+    [self setTitle:@"没有更多数据了" forState:MJRefreshStateNoMoreData];
 }
 
 - (void)resetDataStatus{

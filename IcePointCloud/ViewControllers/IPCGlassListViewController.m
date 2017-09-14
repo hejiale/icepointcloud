@@ -92,23 +92,22 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 
 #pragma mark //Refresh Method
-- (void)beginReloadTableView{
+- (void)beginReloadTableView{    
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [self.refreshFooter resetDataStatus];
-    self.glassListViewMode.isBeginLoad = YES;
     self.glassListViewMode.currentPage = 0;
+    [self.glassListViewMode.glassesList removeAllObjects];
+    self.glassListViewMode.glassesList = nil;
     
     [self loadNormalProducts];
 }
 
 - (void)loadMoreTableView{
-    if (self.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData)return;
-    
-    self.glassListViewMode.isBeginLoad = NO;
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof(self) weakSelf = self;

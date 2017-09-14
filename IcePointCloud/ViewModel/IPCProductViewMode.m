@@ -44,10 +44,6 @@
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
                             Complete:(void(^)())complete
 {
-    if (self.isBeginLoad){
-        [self.glassesList removeAllObjects];
-        self.glassesList = nil;
-    }
     self.completeBlock = complete;
     
     [self getGlassesListInfoWithPage:self.currentPage
@@ -215,7 +211,12 @@
         if (result.glassesList.count){
             [self.glassesList addObjectsFromArray:result.glassesList];
             
-            self.status = IPCFooterRefresh_HasMoreData;
+            if (self.glassesList.count < result.totalCount) {
+                self.status = IPCFooterRefresh_HasMoreData;
+            }else{
+                self.status = IPCFooterRefresh_HasNoMoreData;
+            }
+            
             if (self.completeBlock) {
                 self.completeBlock();
             }

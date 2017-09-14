@@ -11,6 +11,7 @@
 @interface IPCProductList : NSObject
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *glassesList;
+@property (nonatomic, assign, readwrite) NSInteger  totalCount;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 

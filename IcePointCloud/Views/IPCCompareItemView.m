@@ -281,7 +281,7 @@
     IPCGlassesImage *gi = [self.matchItem.glass imageWithType:IPCGlassesImageTypeFrontialMatch];
     
     if (gi.imageURL.length){
-        [self.glassImageView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
+        [self.glassImageView sd_setImageWithURL:[NSURL URLWithString:gi.imageURL]  placeholderImage:[UIImage imageNamed:@"glasses_placeholder"]];
     }else{
         [self.glassImageView setImage:nil];
     }

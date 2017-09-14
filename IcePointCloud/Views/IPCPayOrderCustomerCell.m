@@ -42,7 +42,7 @@
     if (currentCustomer)
     {
         if (currentCustomer.photo_url.length) {
-            [self.headImageView setImageURL:[NSURL URLWithString:currentCustomer.photo_url]];
+            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:currentCustomer.photo_url]];
         }
         
         [self.customerNameLabel setText:currentCustomer.customerName];

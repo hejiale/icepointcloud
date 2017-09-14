@@ -29,7 +29,7 @@
     if (_glasses) {
         IPCGlassesImage *gp = [_glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gp){
-            [self.productImageView setImageURL:gp.imageURL];
+            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL]];
         }
         self.productNameLabel.text = [NSString stringWithFormat:@"%@", _glasses.glassName];
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];

@@ -25,6 +25,7 @@
                     }
                 }];
             }
+            self.totalCount = [responseValue[@"total"] integerValue];
         }else if ([responseValue isKindOfClass:[NSArray class]]){
             [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 if ( ![obj isKindOfClass:[NSNull class]]) {
