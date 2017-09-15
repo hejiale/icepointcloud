@@ -74,6 +74,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = YES;
+    [self beginFilterClass];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -104,7 +105,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.productTableView.mj_footer = self.refreshFooter;
     self.productTableView.emptyAlertImage = @"exception_search";
     self.productTableView.emptyAlertTitle = @"未搜索到可试戴的眼镜!";
-    [self.refreshHeader beginRefreshing];
 }
 
 
@@ -178,13 +178,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (IPCRefreshAnimationHeader *)refreshHeader{
     if (!_refreshHeader)
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadTableView)];
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginRefresh)];
     return _refreshHeader;
 }
 
 - (IPCRefreshAnimationFooter *)refreshFooter{
     if (!_refreshFooter)
-        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTableView)];
+        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     return _refreshFooter;
 }
 
@@ -280,13 +280,40 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
-- (void)beginReloadTableView{    
+- (void)beginRefresh
+{
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    
     [self.refreshFooter resetDataStatus];
+    [self beginReloadTableView];
+}
+
+
+- (void)beginFilterClass
+{
+    [self.glassListViewMode.glassesList removeAllObjects];
+    self.productTableView.isBeginLoad = YES;
+    [self.productTableView reloadData];
+    [self beginReloadTableView];
+}
+
+- (void)loadMore
+{
+    if (self.refreshHeader.isRefreshing)return;
+    
+    self.glassListViewMode.currentPage += 30;
+    
+    __weak typeof (self) weakSelf = self;
+    [self loadGlassesListData:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf reloadTableView];
+    }];
+}
+
+- (void)beginReloadTableView
+{
     self.glassListViewMode.currentPage = 0;
     [self.glassListViewMode.glassesList removeAllObjects];
     self.glassListViewMode.glassesList = nil;
@@ -318,20 +345,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     });
 }
 
-- (void)loadMoreTableView
-{
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    self.glassListViewMode.currentPage += 30;
-    
-    __weak typeof (self) weakSelf = self;
-    [self loadGlassesListData:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf reloadTableView];
-    }];
-}
-
 - (void)reloadTableView
 {
+    self.productTableView.isBeginLoad = NO;
     [self.productTableView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
     
@@ -598,11 +614,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
-            [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf beginFilterClass];
             [strongSelf.glassListViewMode queryBatchDegree];
         } ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf beginFilterClass];
         }];
     }
 }

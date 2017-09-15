@@ -227,7 +227,6 @@
 		CB5CC4C81E8E245B0091D0FD /* UITableView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4C71E8E245B0091D0FD /* UITableView+Alert.m */; };
 		CB5CC4CB1E8E24B20091D0FD /* UICollectionView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */; };
 		CB60C0FC1E9612A7001B11E2 /* IPCEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */; };
-		CB60C0FD1E9612A7001B11E2 /* IPCEmptyAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */; };
 		CB60C1021E962A45001B11E2 /* IPCBatchDegreeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */; };
 		CB6AC2091E9F12C6008031DD /* IPCRootNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6AC2081E9F12C6008031DD /* IPCRootNavigationViewController.m */; };
 		CB6AC2121E9F51B9008031DD /* IPCEmployeeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6AC2111E9F51B9008031DD /* IPCEmployeeManager.m */; };
@@ -690,7 +689,6 @@
 		CB5CC4CA1E8E24B20091D0FD /* UICollectionView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+Alert.m"; path = "IcePointCloud/Vendors/UICollectionView+Alert.m"; sourceTree = SOURCE_ROOT; };
 		CB60C0F91E9612A7001B11E2 /* IPCEmptyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCEmptyAlertView.h; path = IcePointCloud/Vendors/IPCEmptyAlertView.h; sourceTree = SOURCE_ROOT; };
 		CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCEmptyAlertView.m; path = IcePointCloud/Vendors/IPCEmptyAlertView.m; sourceTree = SOURCE_ROOT; };
-		CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IPCEmptyAlertView.xib; path = IcePointCloud/Vendors/IPCEmptyAlertView.xib; sourceTree = SOURCE_ROOT; };
 		CB60C1001E962A45001B11E2 /* IPCBatchDegreeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchDegreeObject.h; sourceTree = "<group>"; };
 		CB60C1011E962A45001B11E2 /* IPCBatchDegreeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchDegreeObject.m; sourceTree = "<group>"; };
 		CB6AC2071E9F12C6008031DD /* IPCRootNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCRootNavigationViewController.h; path = IcePointCloud/Vendors/IPCRootNavigationViewController.h; sourceTree = SOURCE_ROOT; };
@@ -2061,7 +2059,6 @@
 			children = (
 				CB60C0F91E9612A7001B11E2 /* IPCEmptyAlertView.h */,
 				CB60C0FA1E9612A7001B11E2 /* IPCEmptyAlertView.m */,
-				CB60C0FB1E9612A7001B11E2 /* IPCEmptyAlertView.xib */,
 			);
 			name = EmptyAlert;
 			sourceTree = "<group>";
@@ -2480,7 +2477,6 @@
 				CB3FB06A1EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.xib in Resources */,
 				04186E061E69011C00758646 /* IPCPayOrderEmployeeCell.xib in Resources */,
 				CBDB8F3A1E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib in Resources */,
-				CB60C0FD1E9612A7001B11E2 /* IPCEmptyAlertView.xib in Resources */,
 				CB80F4331F219B5A00F4A9FE /* IPCMangerOptometryView.xib in Resources */,
 				0472C1641D35CA9900C52F86 /* IPCPriceRangeTableViewCell.xib in Resources */,
 				04A202201D801A8A00F2A681 /* IPCLanuchViewController.xib in Resources */,

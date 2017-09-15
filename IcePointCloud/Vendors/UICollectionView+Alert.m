@@ -73,6 +73,7 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
     
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
+                                                    LoadingImages:nil
                                                        AlertTitle:self.emptyAlertTitle
                                                    OperationTitle:nil
                                                          Complete:nil];
@@ -83,6 +84,7 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 - (void)loadErrorNetworkAlertView{
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
+                                                           LoadingImages:nil
                                                               AlertTitle:kIPCErrorNetworkAlertMessage
                                                           OperationTitle:nil
                                                                 Complete:nil];

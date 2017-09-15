@@ -82,12 +82,13 @@
                     </label>
                     <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xA6-Vh-bnS">
                         <rect key="frame" x="50" y="10" width="231" height="120"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="height" constant="120" id="Ehh-1z-n1f"/>
                         </constraints>
                     </imageView>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tryOn" translatesAutoresizingMaskIntoConstraints="NO" id="HLG-0X-Gih">
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tag_tryGlass" translatesAutoresizingMaskIntoConstraints="NO" id="HLG-0X-Gih">
                         <rect key="frame" x="294" y="5" width="37" height="14"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -146,7 +147,7 @@
     <resources>
         <image name="icon_add" width="27" height="27"/>
         <image name="icon_subtract" width="27" height="27"/>
-        <image name="icon_tryOn" width="35" height="16"/>
         <image name="icon_unStock" width="39" height="17"/>
+        <image name="tag_tryGlass" width="33" height="17"/>
     </resources>
 </document>

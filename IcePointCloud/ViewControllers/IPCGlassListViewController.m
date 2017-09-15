@@ -95,8 +95,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)beginReloadTableView{    
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [self.refreshFooter resetDataStatus];
     self.glassListViewMode.currentPage = 0;
@@ -107,7 +107,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 - (void)loadMoreTableView{
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    if (self.refreshHeader.isRefreshing)return;
+    
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof(self) weakSelf = self;
