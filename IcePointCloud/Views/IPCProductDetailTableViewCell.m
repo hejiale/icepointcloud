@@ -68,6 +68,8 @@
         if (_glasses.isTryOn) {
             [self.tryButton setHidden:NO];
             self.tryTopConstant.constant += (totalHeight + 50);
+        }else{
+            self.tryTopConstant.constant += totalHeight;
         }
     }
 }
@@ -80,5 +82,8 @@
 - (IBAction)tryGlassesAction:(id)sender {
 }
 
+
+- (IBAction)showMoreAction:(id)sender {
+}
 
 @end

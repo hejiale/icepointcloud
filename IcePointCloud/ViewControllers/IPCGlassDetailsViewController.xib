@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCGlassDetailsViewController">
             <connections>
+                <outlet property="detailTableView" destination="dbZ-jf-ur5" id="4Nh-xW-3du"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +19,25 @@
         <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dbZ-jf-ur5">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.075824058219178064" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="hll-8G-hXC"/>
+                        <outlet property="delegate" destination="-1" id="MwK-iW-Aaa"/>
+                    </connections>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="dbZ-jf-ur5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1EY-S4-49K"/>
+                <constraint firstItem="dbZ-jf-ur5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FJN-L5-Hc5"/>
+                <constraint firstAttribute="bottom" secondItem="dbZ-jf-ur5" secondAttribute="bottom" id="LrX-ei-wBL"/>
+                <constraint firstAttribute="trailing" secondItem="dbZ-jf-ur5" secondAttribute="trailing" id="NcG-Ff-ADG"/>
+            </constraints>
             <point key="canvasLocation" x="427" y="370"/>
         </view>
     </objects>

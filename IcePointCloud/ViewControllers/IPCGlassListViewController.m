@@ -38,6 +38,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
     [self loadCollectionView];
+    [self beginFilterClass];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -45,6 +46,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self setNavigationBarStatus:YES];
     [self.glassListCollectionView reloadData];
+//    [self.glassListViewMode queryRepository];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -73,42 +75,35 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListCollectionView.mj_footer = self.refreshFooter;
     self.glassListCollectionView.emptyAlertTitle = @"未搜索到任何商品";
     self.glassListCollectionView.emptyAlertImage = @"exception_search";
-    [self.refreshHeader beginRefreshing];
 }
 
 
 - (IPCRefreshAnimationHeader *)refreshHeader{
     if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadTableView)];
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginRefresh)];
     }
     return _refreshHeader;
 }
 
 - (IPCRefreshAnimationFooter *)refreshFooter{
     if (!_refreshFooter)
-        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTableView)];
+        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     return _refreshFooter;
 }
 
 
 #pragma mark //Refresh Method
-- (void)beginReloadTableView{    
+- (void)beginRefresh{
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     
     [self.refreshFooter resetDataStatus];
-    self.glassListViewMode.currentPage = 0;
-    [self.glassListViewMode.glassesList removeAllObjects];
-    self.glassListViewMode.glassesList = nil;
-    
     [self loadNormalProducts];
 }
 
-- (void)loadMoreTableView{
-    if (self.refreshHeader.isRefreshing)return;
-    
+- (void)loadMore{
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof(self) weakSelf = self;
@@ -118,9 +113,21 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }];
 }
 
-#pragma mark //Load Data
+- (void)beginFilterClass
+{
+    [self.glassListViewMode.glassesList removeAllObjects];
+    self.glassListCollectionView.isBeginLoad = YES;
+    [self.glassListCollectionView reloadData];
+    [self loadNormalProducts];
+}
+
+//Load Data
 - (void)loadNormalProducts
 {
+    self.glassListViewMode.currentPage = 0;
+    [self.glassListViewMode.glassesList removeAllObjects];
+    self.glassListViewMode.glassesList = nil;
+    
     __weak typeof (self) weakSelf = self;
 
     dispatch_group_t group = dispatch_group_create();
@@ -183,6 +190,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)reload{
     [super reload];
     
+    self.glassListCollectionView.isBeginLoad = NO;
     [self.glassListCollectionView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
     
@@ -209,11 +217,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
-            [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf beginFilterClass];
             [strongSelf.glassListViewMode queryBatchDegree];
         } ReloadUnClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.refreshHeader beginRefreshing];
+            [strongSelf beginFilterClass];
         }];
     }
 }
@@ -314,7 +322,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)didSearchWithKeyword:(NSString *)keyword
 {
     self.glassListViewMode.searchWord = keyword;
-    [self.refreshHeader beginRefreshing];
+    [self beginFilterClass];
 }
 
 

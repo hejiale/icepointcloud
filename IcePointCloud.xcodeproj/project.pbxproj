@@ -190,6 +190,7 @@
 		CB3669971F4D58FA00457202 /* IPCTryGlassesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3669951F4D58FA00457202 /* IPCTryGlassesCell.m */; };
 		CB3669981F4D58FA00457202 /* IPCTryGlassesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */; };
 		CB38DF131F3BEC41003258F0 /* IPCCollectionViewIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CB38DF121F3BEC41003258F0 /* IPCCollectionViewIndex.m */; };
+		CB3B62691F6F96B900C90EB5 /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3B62681F6F96B900C90EB5 /* IPCReachability.m */; };
 		CB3FB0641EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3FB0621EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m */; };
 		CB3FB0651EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */; };
 		CB3FB0691EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3FB0671EB4BB6A00DDF59F /* IPCOrderDetailOptometryCell.m */; };
@@ -204,7 +205,6 @@
 		CB5CC4771E8E00500091D0FD /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC46D1E8E00500091D0FD /* IPCCommon.m */; };
 		CB5CC4781E8E00500091D0FD /* IPCCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4701E8E00500091D0FD /* IPCCommonUI.m */; };
 		CB5CC4791E8E00500091D0FD /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */; };
-		CB5CC47A1E8E00500091D0FD /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4741E8E00500091D0FD /* IPCReachability.m */; };
 		CB5CC48B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */; };
 		CB5CC48C1E8E00830091D0FD /* IPCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC47E1E8E00830091D0FD /* IPCAlertController.m */; };
 		CB5CC48E1E8E00830091D0FD /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = CB5CC4821E8E00830091D0FD /* UIImage+Face.m */; };
@@ -618,6 +618,8 @@
 		CB3669961F4D58FA00457202 /* IPCTryGlassesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCTryGlassesCell.xib; sourceTree = "<group>"; };
 		CB38DF111F3BEC41003258F0 /* IPCCollectionViewIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCCollectionViewIndex.h; path = IcePointCloud/Vendors/IPCCollectionViewIndex.h; sourceTree = SOURCE_ROOT; };
 		CB38DF121F3BEC41003258F0 /* IPCCollectionViewIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCollectionViewIndex.m; path = IcePointCloud/Vendors/IPCCollectionViewIndex.m; sourceTree = SOURCE_ROOT; };
+		CB3B62671F6F96B900C90EB5 /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCReachability.h; sourceTree = "<group>"; };
+		CB3B62681F6F96B900C90EB5 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
 		CB3FB0611EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailTopOptometryCell.h; sourceTree = "<group>"; };
 		CB3FB0621EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailTopOptometryCell.m; sourceTree = "<group>"; };
 		CB3FB0631EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailTopOptometryCell.xib; sourceTree = "<group>"; };
@@ -645,8 +647,6 @@
 		CB5CC4701E8E00500091D0FD /* IPCCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCCommonUI.m; path = IcePointCloud/Vendors/IPCCommonUI.m; sourceTree = SOURCE_ROOT; };
 		CB5CC4711E8E00500091D0FD /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCPlatformService.h; path = IcePointCloud/Vendors/IPCPlatformService.h; sourceTree = SOURCE_ROOT; };
 		CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCPlatformService.m; path = IcePointCloud/Vendors/IPCPlatformService.m; sourceTree = SOURCE_ROOT; };
-		CB5CC4731E8E00500091D0FD /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCReachability.h; path = IcePointCloud/Vendors/IPCReachability.h; sourceTree = SOURCE_ROOT; };
-		CB5CC4741E8E00500091D0FD /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IPCReachability.m; path = IcePointCloud/Vendors/IPCReachability.m; sourceTree = SOURCE_ROOT; };
 		CB5CC47B1E8E00830091D0FD /* AFHTTPSessionManager+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AFHTTPSessionManager+Extend.h"; path = "IcePointCloud/Vendors/AFHTTPSessionManager+Extend.h"; sourceTree = SOURCE_ROOT; };
 		CB5CC47C1E8E00830091D0FD /* AFHTTPSessionManager+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AFHTTPSessionManager+Extend.m"; path = "IcePointCloud/Vendors/AFHTTPSessionManager+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CB5CC47D1E8E00830091D0FD /* IPCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IPCAlertController.h; path = IcePointCloud/Vendors/IPCAlertController.h; sourceTree = SOURCE_ROOT; };
@@ -1146,8 +1146,6 @@
 				CB5CC46D1E8E00500091D0FD /* IPCCommon.m */,
 				CB5CC4711E8E00500091D0FD /* IPCPlatformService.h */,
 				CB5CC4721E8E00500091D0FD /* IPCPlatformService.m */,
-				CB5CC4731E8E00500091D0FD /* IPCReachability.h */,
-				CB5CC4741E8E00500091D0FD /* IPCReachability.m */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -1355,6 +1353,8 @@
 		04BF93661E16610300D14A14 /* IPCRequest */ = {
 			isa = PBXGroup;
 			children = (
+				CB3B62671F6F96B900C90EB5 /* IPCReachability.h */,
+				CB3B62681F6F96B900C90EB5 /* IPCReachability.m */,
 				045A61F21D1A3BA10053ADD8 /* IPCRequest.h */,
 				045A61F31D1A3BA10053ADD8 /* IPCRequest.m */,
 				9EFAC1F119D6E2D000C1EFBF /* IPCHttpRequest.h */,
@@ -2793,6 +2793,7 @@
 				CBAE2B091EE6A61E0081B0BB /* IPCOrderDetailPayRecordCell.m in Sources */,
 				CBC419F41F038E8F00387F9C /* IPCCartViewMode.m in Sources */,
 				04B1D2071D867D5500D9B865 /* IPCPhoto.m in Sources */,
+				CB3B62691F6F96B900C90EB5 /* IPCReachability.m in Sources */,
 				042402011D87AA6400E1DD1A /* IPCEditFilterSampleController.m in Sources */,
 				9E03C2E11978D5D5007389D0 /* main.m in Sources */,
 				CBA749AB1E9DC25800160088 /* IPCParameterTableViewController.m in Sources */,
@@ -2823,7 +2824,6 @@
 				CB76E0321F39AC1F0072DCA2 /* IPCSortCustomer.m in Sources */,
 				9EFAC1F619D6E71A00C1EFBF /* IPCAppendRequestParameter.m in Sources */,
 				CBC75A701F0B8A8D0029F956 /* IPCManagerOptometryCell.m in Sources */,
-				CB5CC47A1E8E00500091D0FD /* IPCReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

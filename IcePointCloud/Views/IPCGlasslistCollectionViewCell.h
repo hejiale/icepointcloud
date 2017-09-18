@@ -23,7 +23,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *defaultImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *noStockImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noStockWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryWidth;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;

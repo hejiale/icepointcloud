@@ -104,12 +104,25 @@
                                     <action selector="tryGlassesAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kVl-K8-6ky"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVO-gf-PPK">
+                                <rect key="frame" x="61.5" y="230" width="245" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="TbF-k5-6V4"/>
+                                    <constraint firstAttribute="width" constant="245" id="wBO-gT-FSO"/>
+                                </constraints>
+                                <state key="normal" image="icon_detailMore"/>
+                                <connections>
+                                    <action selector="showMoreAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Tw4-kZ-htb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hHB-GW-pIh" firstAttribute="top" secondItem="gkc-38-ifE" secondAttribute="bottom" constant="35" id="1Qs-8W-L8S"/>
+                            <constraint firstItem="JVO-gf-PPK" firstAttribute="centerX" secondItem="qh4-ZT-JzZ" secondAttribute="centerX" id="F8D-1r-lcs"/>
                             <constraint firstItem="CBe-E3-7pZ" firstAttribute="centerX" secondItem="qh4-ZT-JzZ" secondAttribute="centerX" id="Grk-Dz-EO2"/>
                             <constraint firstItem="CBe-E3-7pZ" firstAttribute="top" secondItem="hHB-GW-pIh" secondAttribute="bottom" id="LKP-rO-98x"/>
+                            <constraint firstItem="JVO-gf-PPK" firstAttribute="top" secondItem="CBe-E3-7pZ" secondAttribute="bottom" constant="20" id="RWa-P8-TOp"/>
                             <constraint firstItem="gkc-38-ifE" firstAttribute="leading" secondItem="qh4-ZT-JzZ" secondAttribute="leading" constant="30" id="brK-kT-5nS"/>
                             <constraint firstItem="hHB-GW-pIh" firstAttribute="leading" secondItem="qh4-ZT-JzZ" secondAttribute="leading" constant="30" id="fkO-D4-PfJ"/>
                             <constraint firstAttribute="trailing" secondItem="gkc-38-ifE" secondAttribute="trailing" constant="20" id="thR-YB-zGX"/>
@@ -141,6 +154,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="icon_detailMore" width="245" height="35"/>
         <image name="icon_tryGlass" width="245" height="35"/>
     </resources>
 </document>

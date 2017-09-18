@@ -44,6 +44,7 @@
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
                             Complete:(void(^)())complete
 {
+//    self.currentStoreId = @"249";
     self.completeBlock = complete;
     
     [self getGlassesListInfoWithPage:self.currentPage

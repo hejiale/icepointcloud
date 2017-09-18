@@ -294,6 +294,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)beginFilterClass
 {
     [self.glassListViewMode.glassesList removeAllObjects];
+    self.glassListViewMode.glassesList = nil;
     self.productTableView.isBeginLoad = YES;
     [self.productTableView reloadData];
     [self beginReloadTableView];
@@ -301,8 +302,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadMore
 {
-    if (self.refreshHeader.isRefreshing)return;
-    
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof (self) weakSelf = self;
@@ -376,12 +375,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)queryRecommdGlasses
 {
     if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn) {
-        [IPCCommonUI show];
         __weak typeof(self) weakSelf = self;
         [self.glassListViewMode queryRecommdGlasses:[[IPCTryMatch instance] currentMatchItem].glass Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf updateRecommdUI];
-            [IPCCommonUI hiden];
         }];
     }
 }
@@ -827,7 +824,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)didSearchWithKeyword:(NSString *)keyword
 {
     self.glassListViewMode.searchWord = keyword;
-    [self.refreshHeader beginRefreshing];
+    [self beginFilterClass];
 }
 
 - (void)didReceiveMemoryWarning

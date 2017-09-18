@@ -9,10 +9,14 @@
 #import "UICollectionView+Alert.h"
 
 static char const *  emptyAlertViewKey = "EmptyAlertViewKey";
+static char const *  errorNetworkKey = "ErrorNetworkKey";
+static char const *  loadingAlertImageKey = "LoadingAlertImageKey";
+
 static char const *  emptyAlertTitleKey =  "EmptyAlertTitleKey";
 static char const *  emptyAlertImageKey = "EmptyAlertImageKey";
-static char const *  errorNetworkKey = "ErrorNetworkKey";
+
 static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
+static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 
 @implementation UICollectionView (Alert)
 
@@ -27,21 +31,31 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 {
     [self.errorNetworkAlertView removeFromSuperview];self.errorNetworkAlertView = nil;
     [self.emptyAlertView removeFromSuperview];self.emptyAlertView = nil;
+    [self.loadingAlertView removeFromSuperview];self.loadingAlertView = nil;
     
     AFNetworkReachabilityStatus status = [IPCReachability manager].currentNetStatus;
     if (status == AFNetworkReachabilityStatusUnknown || status == AFNetworkReachabilityStatusNotReachable){
         if ([self checkIsEmpty]) {
+            self.scrollEnabled = NO;
             [self.mj_footer setHidden:YES];
             [self loadErrorNetworkAlertView];
         }else{
+            self.scrollEnabled = YES;
             [self.mj_footer setHidden:NO];
         }
     }else{
         if ([self checkIsEmpty]) {
+            self.scrollEnabled = NO;
             [self.mj_footer setHidden:YES];
-            [self loadEmptyAlertView];
+            
+            if (self.isBeginLoad) {
+                [self loadIsRefreshingView];
+            }else{
+                [self loadEmptyAlertView];
+            }
         }else{
             [self.mj_footer setHidden:NO];
+            self.scrollEnabled = YES;
         }
     }
     [self customReload];
@@ -82,6 +96,8 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 }
 
 - (void)loadErrorNetworkAlertView{
+    [self setContentOffset:CGPointZero];
+    
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
                                                            LoadingImages:nil
@@ -90,6 +106,25 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
                                                                 Complete:nil];
     [self addSubview:self.errorNetworkAlertView];
     [self bringSubviewToFront:self.errorNetworkAlertView];
+}
+
+- (void)loadIsRefreshingView{
+    [self setContentOffset:CGPointZero];
+    
+    __block NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
+    
+    for (NSInteger i = 1 ; i< 17; i++) {
+        [loadingArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"loading_%ld",(long)i]]];
+    }
+    
+    self.loadingAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
+                                                         AlertImage:nil
+                                                      LoadingImages:loadingArray
+                                                         AlertTitle:nil
+                                                     OperationTitle:nil
+                                                           Complete:nil];
+    [self addSubview:self.loadingAlertView];
+    [self bringSubviewToFront:self.loadingAlertView];
 }
 
 
@@ -108,6 +143,14 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 
 - (void)setErrorNetworkAlertView:(IPCEmptyAlertView *)errorNetworkAlertView{
     objc_setAssociatedObject(self, errorNetworkKey, errorNetworkAlertView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (IPCEmptyAlertView *)loadingAlertView{
+    return objc_getAssociatedObject(self, loadingAlertImageKey);
+}
+
+- (void)setLoadingAlertView:(IPCEmptyAlertView *)loadingAlertView{
+    objc_setAssociatedObject(self, loadingAlertImageKey, loadingAlertView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (NSString *)emptyAlertTitle{
@@ -132,6 +175,14 @@ static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 
 - (void)setIsHiden:(BOOL)isHiden{
     objc_setAssociatedObject(self, isHidenAlertKey, @(isHiden), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)isBeginLoad{
+    return [objc_getAssociatedObject(self, isBeginLoadKey) boolValue];
+}
+
+- (void)setIsBeginLoad:(BOOL)isBeginLoad{
+    objc_setAssociatedObject(self, isBeginLoadKey, @(isBeginLoad), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 @end

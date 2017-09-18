@@ -62,16 +62,18 @@
         
         if (_glasses.isTryOn) {
             [self.defaultImageView setHidden:NO];
+            self.tryWidth.constant = 33;
         }else{
             [self.defaultImageView setHidden:YES];
+            self.tryWidth.constant = 0;
         }
         
         if (_glasses.stock > 0) {
             [self.noStockImageView setHidden:YES];
-            self.nameLeft.constant = - 39;
+            self.noStockWidth.constant = 0;
         }else{
             [self.noStockImageView setHidden:NO];
-            self.nameLeft.constant = 5;
+            self.noStockWidth.constant = 39;
         }
     }
 }
