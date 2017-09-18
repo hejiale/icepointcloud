@@ -32,10 +32,14 @@
             [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL]];
         }
         self.productNameLabel.text = [NSString stringWithFormat:@"%@", _glasses.glassName];
+        
+        CGFloat height = [self.productNameLabel.text jk_sizeWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width].height;
+        self.nameHeightConstraint.constant = height;
+        
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         
         __block CGFloat orignX = self.baseTitleLabel.jk_left;
-        __block CGFloat orignY = self.baseTitleLabel.jk_bottom + 15;
+        __block CGFloat orignY = self.baseTitleLabel.jk_bottom + 15 + height;
         __block CGFloat lblWidth = self.rightContentView.jk_width - orignX - 120;
         __block CGFloat totalHeight = 0;
         
@@ -70,6 +74,10 @@
             self.tryTopConstant.constant += (totalHeight + 50);
         }else{
             self.tryTopConstant.constant += totalHeight;
+        }
+        
+        if (self.glasses.detailLinkURl.length) {
+            [self.showMoreButton setHidden:NO];
         }
     }
 }

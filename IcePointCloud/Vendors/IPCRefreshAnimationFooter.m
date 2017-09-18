@@ -19,7 +19,7 @@
     [self.stateLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [self setTitle:@"" forState:MJRefreshStateIdle];
     [self setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
-    [self setTitle:@"～没有更多商品了～" forState:MJRefreshStateNoMoreData];
+    [self setTitle:@"～抱歉，没有更多了～" forState:MJRefreshStateNoMoreData];
 }
 
 - (void)resetDataStatus{

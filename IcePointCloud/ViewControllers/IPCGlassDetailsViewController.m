@@ -14,9 +14,10 @@
 static NSString * const infoDetailIdentifier = @"ProductInfoDetailTableViewCellIdentifier";
 static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 
-@interface IPCGlassDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
+@interface IPCGlassDetailsViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView * detailTableView;
+@property (weak, nonatomic) IBOutlet UIButton *goTopButton;
 @property (strong, nonatomic) UIWebView * productDetailWebView;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
 
@@ -33,6 +34,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     [self setRightItem:@"icon_orderBage" Selection:@selector(pushToCartAction:)];
     [self reloadCartBadge];
     
+    [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
 }
 
@@ -56,7 +58,9 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     _glasses = glasses;
     
     if (_glasses) {
-        [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+        if (self.glasses.detailLinkURl.length) {
+            [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+        }
     }
 }
 
@@ -117,10 +121,17 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+- (IBAction)goTopAction:(id)sender {
+    [self.goTopButton setHidden:YES];
+    [self.detailTableView scrollToTopAnimated:NO];
+}
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    if (self.glasses.detailLinkURl.length) {
+        return 2;
+    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -176,6 +187,15 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     frame.size.height = height;
     webView.frame = frame;
     [self.detailTableView reloadData];
+}
+
+#pragma mark //UIScrollView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y > (self.view.jk_height * 2)) {
+        [self.goTopButton setHidden:NO];
+    }else{
+        [self.goTopButton setHidden:YES];
+    }
 }
 
 @end

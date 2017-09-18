@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCGlassDetailsViewController">
             <connections>
                 <outlet property="detailTableView" destination="dbZ-jf-ur5" id="4Nh-xW-3du"/>
+                <outlet property="goTopButton" destination="yts-ev-y5k" id="q6b-JD-fwr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,10 +31,24 @@
                         <outlet property="delegate" destination="-1" id="MwK-iW-Aaa"/>
                     </connections>
                 </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yts-ev-y5k">
+                    <rect key="frame" x="961" y="685" width="43" height="43"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="43" id="0Nb-Xp-Pg1"/>
+                        <constraint firstAttribute="height" constant="43" id="zi2-4f-phE"/>
+                    </constraints>
+                    <state key="normal" image="icon_ToTop"/>
+                    <connections>
+                        <action selector="goTopAction:" destination="-1" eventType="touchUpInside" id="Ka2-a5-vbz"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="dbZ-jf-ur5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1EY-S4-49K"/>
+                <constraint firstAttribute="trailing" secondItem="yts-ev-y5k" secondAttribute="trailing" constant="20" id="A14-FX-ocb"/>
+                <constraint firstAttribute="bottom" secondItem="yts-ev-y5k" secondAttribute="bottom" constant="40" id="CfC-hS-VnU"/>
                 <constraint firstItem="dbZ-jf-ur5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="FJN-L5-Hc5"/>
                 <constraint firstAttribute="bottom" secondItem="dbZ-jf-ur5" secondAttribute="bottom" id="LrX-ei-wBL"/>
                 <constraint firstAttribute="trailing" secondItem="dbZ-jf-ur5" secondAttribute="trailing" id="NcG-Ff-ADG"/>
@@ -41,4 +56,7 @@
             <point key="canvasLocation" x="427" y="370"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon_ToTop" width="43" height="43"/>
+    </resources>
 </document>

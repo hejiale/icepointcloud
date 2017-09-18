@@ -35,10 +35,7 @@
         }
        
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
-        
         [self.productNameLabel setText:_glasses.glassName];
-        CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
-        self.labelHeightConstraint.constant = labelHeight;
         
         //Shopping cart whether to join the product
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
@@ -75,6 +72,17 @@
             [self.noStockImageView setHidden:NO];
             self.noStockWidth.constant = 39;
         }
+        
+        CGFloat width = SCREEN_WIDTH/3 - 40 - 10 - (_glasses.isTryOn ? 33 : 0) - (_glasses.stock > 0 ? 39 : 0);
+        
+        CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:width];
+        
+        if (labelHeight < 20) {
+            labelHeight = 17;
+        }else{
+            labelHeight = 34;
+        }
+        self.labelHeightConstraint.constant = labelHeight;
     }
 }
 
