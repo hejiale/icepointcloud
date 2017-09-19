@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *noStockImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noStockWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryLeft;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;

@@ -31,10 +31,11 @@
         if (gp){
             [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL]];
         }
-        self.productNameLabel.text = [NSString stringWithFormat:@"%@", _glasses.glassName];
+
+        [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:5 WordSpace:0];
         
         CGFloat height = [self.productNameLabel.text jk_sizeWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width].height;
-        self.nameHeightConstraint.constant = height;
+        self.nameHeightConstraint.constant = height+5;
         
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         

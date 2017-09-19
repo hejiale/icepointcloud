@@ -27,12 +27,6 @@
 
 + (void)showAlert:(NSString *)title Message:(NSString *)message Owner:(id)owner Done:(void(^)())done;
 
-+ (nonnull NSAttributedString *)subStringWithText:(nonnull NSString *)text
-                                BeginRang:(NSInteger)beginRang
-                                     Rang:(NSInteger)rang
-                                     Font:(nonnull UIFont *)font
-                                    Color:(nonnull UIColor *)color;
-
 + (void)pushToRootIndex:(NSInteger)index;
 
 + (void)clearAutoCorrection:(UIView *)view;

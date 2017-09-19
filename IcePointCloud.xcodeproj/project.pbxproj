@@ -299,6 +299,7 @@
 		CBE43B9B1F4E6CA1009CEF88 /* IPCTryGlassesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE43B9A1F4E6CA1009CEF88 /* IPCTryGlassesView.xib */; };
 		CBE4C83E1E9CCE8700F09D2A /* IPCUpdateCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */; };
 		CBE4C8401E9CCF5300F09D2A /* IPCUpdateCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */; };
+		CBF258C01F70F6D200F9437A /* UILabel+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF258BF1F70F6D200F9437A /* UILabel+Extend.m */; };
 		CBF68D021E8FA92F001DA929 /* NSDictionary+DeleteNull.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */; };
 		CBF6CFEF1F14768200F02ECF /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF6CFEE1F14768200F02ECF /* UIView+Badge.m */; };
 		CBF6CFF21F14B3EF00F02ECF /* IPCProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF6CFF11F14B3EF00F02ECF /* IPCProductViewController.m */; };
@@ -812,6 +813,8 @@
 		CBE4C83C1E9CCE8700F09D2A /* IPCUpdateCustomerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUpdateCustomerView.h; sourceTree = "<group>"; };
 		CBE4C83D1E9CCE8700F09D2A /* IPCUpdateCustomerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUpdateCustomerView.m; sourceTree = "<group>"; };
 		CBE4C83F1E9CCF5300F09D2A /* IPCUpdateCustomerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdateCustomerView.xib; sourceTree = "<group>"; };
+		CBF258BE1F70F6D200F9437A /* UILabel+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+Extend.h"; path = "IcePointCloud/Vendors/UILabel+Extend.h"; sourceTree = SOURCE_ROOT; };
+		CBF258BF1F70F6D200F9437A /* UILabel+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+Extend.m"; path = "IcePointCloud/Vendors/UILabel+Extend.m"; sourceTree = SOURCE_ROOT; };
 		CBF68D001E8FA92F001DA929 /* NSDictionary+DeleteNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+DeleteNull.h"; path = "IcePointCloud/Vendors/NSDictionary+DeleteNull.h"; sourceTree = SOURCE_ROOT; };
 		CBF68D011E8FA92F001DA929 /* NSDictionary+DeleteNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+DeleteNull.m"; path = "IcePointCloud/Vendors/NSDictionary+DeleteNull.m"; sourceTree = SOURCE_ROOT; };
 		CBF6CFED1F14768200F02ECF /* UIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Badge.h"; path = "IcePointCloud/Vendors/UIView+Badge.h"; sourceTree = SOURCE_ROOT; };
@@ -1494,6 +1497,8 @@
 				CB5CC48A1E8E00830091D0FD /* UIView+GestureRecognizerBlock.m */,
 				CB5CC4BD1E8E01670091D0FD /* UIViewController+Extend.h */,
 				CB5CC4BE1E8E01670091D0FD /* UIViewController+Extend.m */,
+				CBF258BE1F70F6D200F9437A /* UILabel+Extend.h */,
+				CBF258BF1F70F6D200F9437A /* UILabel+Extend.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -2655,6 +2660,7 @@
 				04BF93611E165EB800D14A14 /* IPCBatchRequestManager.m in Sources */,
 				CB5CC4AF1E8E01040091D0FD /* IPCPortraitNavigationViewController.m in Sources */,
 				CB5CC4661E8DFFB50091D0FD /* IPCGuideViewManager.m in Sources */,
+				CBF258C01F70F6D200F9437A /* UILabel+Extend.m in Sources */,
 				040174D41D8F8D6F00C21A92 /* IPCShareChatView.m in Sources */,
 				CBC75A7C1F0B935C0029F956 /* IPCMangerOptometryView.m in Sources */,
 				0470AD8C1D4052BF003AF4F4 /* IPCCustomerDetailViewController.m in Sources */,

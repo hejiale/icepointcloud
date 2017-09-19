@@ -8,7 +8,7 @@
 
 #import "MJRefresh.h"
 
-@interface IPCRefreshAnimationFooter : MJRefreshAutoStateFooter
+@interface IPCRefreshAnimationFooter : MJRefreshAutoGifFooter
 
 - (void)resetDataStatus;
 - (void)noticeNoDataStatus;

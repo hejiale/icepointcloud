@@ -60,22 +60,22 @@
         
         if (optometry && optometry.optometryEmployee.length) {
             NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.optometryEmployee];
-            [self.employeeNameLabel setAttributedText:[IPCCommonUI subStringWithText:employeeStr BeginRang:4 Rang:employeeStr.length - 4 Font:self.employeeNameLabel.font Color:[UIColor darkGrayColor]]];
+            [self.employeeNameLabel subStringWithText:employeeStr BeginRang:4 Font:nil Color:[UIColor darkGrayColor]];
         }
         
         if (optometry && optometry.employeeName.length) {
             NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.employeeName];
-            [self.employeeNameLabel setAttributedText:[IPCCommonUI subStringWithText:employeeStr BeginRang:4 Rang:employeeStr.length-4 Font:self.employeeNameLabel.font Color:[UIColor darkGrayColor]]];
+            [self.employeeNameLabel subStringWithText:employeeStr BeginRang:4 Font:nil Color:[UIColor darkGrayColor]];
         }
         
         if (optometry && optometry.optometryInsertDate.length) {
             NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate] IsTime:YES]];
-            [self.insertDateLabel setAttributedText:[IPCCommonUI subStringWithText:dateStr BeginRang:5 Rang:dateStr.length - 5 Font:self.insertDateLabel.font Color:[UIColor darkGrayColor]]];
+            [self.insertDateLabel subStringWithText:dateStr BeginRang:5  Font:nil Color:[UIColor darkGrayColor]];
         }
         
         if (optometry && optometry.insertDate.length) {
             NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:YES]];
-            [self.insertDateLabel setAttributedText:[IPCCommonUI subStringWithText:dateStr BeginRang:5 Rang:dateStr.length - 5 Font:self.insertDateLabel.font Color:[UIColor darkGrayColor]]];
+            [self.insertDateLabel subStringWithText:dateStr BeginRang:5 Font:nil Color:[UIColor darkGrayColor]];
         }
     }
 }

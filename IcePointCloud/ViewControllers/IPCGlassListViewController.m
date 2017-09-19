@@ -17,9 +17,10 @@
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic)   IBOutlet UICollectionView               *glassListCollectionView;
+@property (weak, nonatomic) IBOutlet UIButton *goTopButton;
 @property (strong, nonatomic) IPCGlassParameterView                  *parameterView;
 @property (strong, nonatomic) IPCEditBatchParameterView           *editParameterView;
 @property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
@@ -63,7 +64,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 #pragma mark //Set UI
 - (void)loadCollectionView{
     __block CGFloat width = (self.view.jk_width-2)/3;
-    __block CGFloat height = (self.view.jk_height-2)/3;
+    __block CGFloat height = (self.view.jk_height-2)/2;
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
     [layout setItemSize:CGSizeMake(width, height)];
     [layout setMinimumLineSpacing:1];
@@ -233,6 +234,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self presentSearchViewController];
 }
 
+- (IBAction)onGoTopAction:(id)sender {
+    [self.goTopButton setHidden:YES];
+    [self.glassListCollectionView scrollToTopAnimated:NO];
+}
+
+
 - (void)presentSearchViewController{
     IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
     searchViewMode.searchDelegate = self;
@@ -330,6 +337,15 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super didReceiveMemoryWarning];
     
     self.glassListViewMode = nil;
+}
+
+#pragma mark //UIScrollView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y > self.view.jk_height * 2) {
+        [self.goTopButton setHidden:NO];
+    }else{
+        [self.goTopButton setHidden:YES];
+    }
 }
 
 

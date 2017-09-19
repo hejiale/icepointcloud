@@ -14,8 +14,19 @@
 - (void)prepare{
     [super prepare];
 
-    self.mj_h = 30;
+    self.mj_h = 35;
     
+    NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
+    
+    for (NSInteger i = 1 ; i< 17; i++) {
+        UIImage * loadImg = [UIImage imageNamed:[NSString stringWithFormat:@"loading_%ld",(long)i]];
+        [loadingArray addObject:loadImg];
+    }
+    
+    [self setImages:@[[UIImage imageNamed:@"loading_normal"]] forState:MJRefreshStateIdle];
+    [self setImages:loadingArray duration:1.6 forState:MJRefreshStateRefreshing];
+    
+    self.labelLeftInset = 10;
     [self.stateLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
     [self setTitle:@"" forState:MJRefreshStateIdle];
     [self setTitle:@"加载中..." forState:MJRefreshStateRefreshing];

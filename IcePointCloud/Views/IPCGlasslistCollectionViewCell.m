@@ -14,8 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     
-    self.productNameLabel.lineBreakMode = UILineBreakModeWordWrap | UILineBreakModeTailTruncation;
-    
     [self.productImageView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
         [self showDetailAction];
     }];
@@ -35,7 +33,10 @@
         }
        
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
-        [self.productNameLabel setText:_glasses.glassName];
+        [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:10 WordSpace:0];
+        
+       CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
+        self.labelHeightConstraint.constant = labelHeight + 10;
         
         //Shopping cart whether to join the product
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
@@ -59,7 +60,7 @@
         
         if (_glasses.isTryOn) {
             [self.defaultImageView setHidden:NO];
-            self.tryWidth.constant = 33;
+            self.tryWidth.constant = 39;
         }else{
             [self.defaultImageView setHidden:YES];
             self.tryWidth.constant = 0;
@@ -73,16 +74,11 @@
             self.noStockWidth.constant = 39;
         }
         
-        CGFloat width = SCREEN_WIDTH/3 - 40 - 10 - (_glasses.isTryOn ? 33 : 0) - (_glasses.stock > 0 ? 39 : 0);
-        
-        CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:width];
-        
-        if (labelHeight < 20) {
-            labelHeight = 17;
+        if (_glasses.isTryOn && _glasses.stock > 0) {
+            self.tryLeft.constant = 0;
         }else{
-            labelHeight = 34;
+            self.tryLeft.constant = 5;
         }
-        self.labelHeightConstraint.constant = labelHeight;
     }
 }
 

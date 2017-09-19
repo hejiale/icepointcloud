@@ -174,7 +174,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"收货地址"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_arrow"];
+            [cell setRightOperation:@"收货地址" ButtonTitle:nil ButtonImage:@"icon_arrow"];
             
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
@@ -198,7 +198,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"验光单"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_arrow"];
+            [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_arrow"];
             
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {
@@ -222,7 +222,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"选择员工"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+            [cell setRightOperation:@"选择员工" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 if ([self.delegate respondsToSelector:@selector(showEmployeeView)]) {
                     [self.delegate showEmployeeView];
@@ -267,8 +267,8 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             }
             
             NSString * remainAmountText = [NSString stringWithFormat:@"剩余应收:￥%.2f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
-            NSAttributedString * str = [IPCCommonUI subStringWithText:remainAmountText BeginRang:5 Rang:remainAmountText.length - 5 Font:[UIFont systemFontOfSize:15] Color:COLOR_RGB_RED];
-            [cell setRightOperation:nil  AttributedTitle:str ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+            [cell.leftTitleLabel subStringWithText:remainAmountText BeginRang:5 Font:[UIFont systemFontOfSize:15] Color:COLOR_RGB_RED];
+            [cell setRightOperation:nil ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(RACTuple * _Nullable x) {

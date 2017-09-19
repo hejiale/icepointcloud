@@ -130,23 +130,6 @@
     }
 }
 
-#pragma mark //UILabel String manipulation
-+ (NSAttributedString *)subStringWithText:(NSString *)text BeginRang:(NSInteger)beginRang Rang:(NSInteger)rang Font:(UIFont *)font Color:(UIColor *)color
-{
-    NSMutableAttributedString * aAttributedString = [[NSMutableAttributedString alloc] initWithString:text];
-    
-    if (color)
-        [aAttributedString addAttribute:NSForegroundColorAttributeName
-                                  value:color
-                                  range:NSMakeRange(beginRang, rang)];
-    if (font)
-        [aAttributedString addAttribute:NSFontAttributeName
-                                  value:font
-                                  range:NSMakeRange(beginRang, rang)];
-    
-    return aAttributedString;
-}
-
 
 #pragma mark//TabBar Push Methods
 + (void)pushToRootIndex:(NSInteger)index{

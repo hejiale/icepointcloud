@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCGlassListViewController">
             <connections>
                 <outlet property="glassListCollectionView" destination="1va-Bf-15V" id="Lh7-VE-UM4"/>
+                <outlet property="goTopButton" destination="exR-4F-Inv" id="pNi-0N-X2R"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -34,17 +35,34 @@
                         <outlet property="delegate" destination="-1" id="6dH-ee-5UV"/>
                     </connections>
                 </collectionView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exR-4F-Inv">
+                    <rect key="frame" x="950" y="610" width="54" height="54"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="54" id="E4I-nx-ShC"/>
+                        <constraint firstAttribute="width" constant="54" id="tkk-TP-GFd"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="icon_scrolls_to_top"/>
+                    <connections>
+                        <action selector="onGoTopAction:" destination="-1" eventType="touchUpInside" id="OMd-9L-7q6"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="1va-Bf-15V" secondAttribute="bottom" id="9g3-GB-RtN"/>
+                <constraint firstAttribute="bottom" secondItem="exR-4F-Inv" secondAttribute="bottom" constant="40" id="Fev-Wo-gn6"/>
                 <constraint firstAttribute="trailing" secondItem="1va-Bf-15V" secondAttribute="trailing" id="IDx-IH-BBe"/>
                 <constraint firstItem="1va-Bf-15V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ogq-26-AtL"/>
                 <constraint firstItem="1va-Bf-15V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="P00-9a-TOs"/>
+                <constraint firstAttribute="trailing" secondItem="exR-4F-Inv" secondAttribute="trailing" constant="20" id="ixf-Cg-3UX"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="479" y="394"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon_scrolls_to_top" width="52" height="52"/>
+    </resources>
 </document>

@@ -64,7 +64,7 @@
         make.top.equalTo(self.menuBarView.mas_bottom).with.offset(0);
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
-        make.height.mas_equalTo(5.5);
+        make.height.mas_equalTo(1);
     }];
     [self.logoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
@@ -118,8 +118,7 @@
 - (UIImageView *)coverLine{
     if (!_coverLine) {
         _coverLine = [[UIImageView alloc]initWithFrame:CGRectZero];
-        [_coverLine setImage:[UIImage imageNamed:@"icon_cover"]];
-        [_coverLine setBackgroundColor:[UIColor clearColor]];
+        [_coverLine setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.1]];
     }
     return _coverLine;
 }

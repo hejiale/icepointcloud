@@ -204,7 +204,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"客户基本信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_edit"];
+            [cell setRightOperation:@"客户基本信息" ButtonTitle:nil ButtonImage:@"icon_edit"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [self loadUpdateCustomerView];
             }];
@@ -225,7 +225,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"验光单"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_manager"];
+            [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_manager"];
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -248,7 +248,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"收货地址信息"  AttributedTitle:nil ButtonTitle:nil ButtonImage:@"icon_manager"];
+            [cell setRightOperation:@"收货地址信息" ButtonTitle:nil ButtonImage:@"icon_manager"];
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 __strong typeof(weakSelf) strongSelf = weakSelf;

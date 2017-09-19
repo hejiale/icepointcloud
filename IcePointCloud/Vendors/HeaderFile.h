@@ -64,5 +64,6 @@
 #import "NSDictionary+DeleteNull.h"
 #import   "AFHTTPSessionManager+Extend.h"
 #import "NSString+Utils.h"
+#import "UILabel+Extend.h"
 
 #endif /* HeaderFile_h */

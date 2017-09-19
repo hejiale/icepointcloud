@@ -28,10 +28,6 @@
     // Do any additional setup after loading the view.
     
     [self setBackground];
-    
-    UINavigationBar *navigationBar = self.navigationController.navigationBar;
-    [navigationBar setBackgroundImage:[[UIImage alloc] init] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
-    [navigationBar setShadowImage:[UIImage imageNamed:@"icon_cover"]];
 }
 
 #pragma mark //Set Navigation Bar

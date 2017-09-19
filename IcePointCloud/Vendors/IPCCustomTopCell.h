@@ -32,7 +32,6 @@
  @param buttonImage
  */
 - (void)setRightOperation:(NSString *)title
-          AttributedTitle:(NSAttributedString *)attributedTitle
               ButtonTitle:(NSString *)button
               ButtonImage:(NSString *)buttonImage;
 
