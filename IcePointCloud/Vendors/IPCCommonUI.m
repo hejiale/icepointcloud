@@ -54,6 +54,19 @@
     hud.removeFromSuperViewOnHide = YES;
 }
 
++ (void)showInfo:(NSString *)message
+{
+    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
+        [IPCCommonUI hiden];
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
+    hud.mode = MBProgressHUDModeText;
+    hud.label.text = message;
+    hud.label.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+    hud.removeFromSuperViewOnHide = YES;
+}
+
 + (void)showSuccess:(NSString *)message
 {
     if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {

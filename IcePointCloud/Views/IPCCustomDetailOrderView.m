@@ -34,7 +34,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
-@property (strong, nonatomic) IPCRefreshAnimationHeader * refreshHeader;
 
 @property (copy,  nonatomic) void(^DismissBlock)();
 @property (nonatomic, copy) NSString * currentOrderNum;
@@ -63,12 +62,14 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [super layoutSubviews];
     
     [self.topView addBottomLine];
+    [self.orderDetailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
-    self.orderDetailTableView.isHiden = YES;
+    self.orderDetailTableView.estimatedSectionFooterHeight = 0;
+    self.orderDetailTableView.estimatedSectionHeaderHeight = 0;
     self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
     self.orderDetailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
-    self.orderDetailTableView.mj_header = self.refreshHeader;
-    [self.refreshHeader beginRefreshing];
+    self.orderDetailTableView.isBeginLoad = YES;
+    [self queryOrderDetail];
     
     [self addSubview:self.orderDetailBgView];
     
@@ -78,14 +79,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         make.left.mas_equalTo(strongSelf.mas_right).offset(-strongSelf.orderDetailBgView.jk_width);
         make.top.mas_equalTo(strongSelf.mas_top).offset(0);
     }];
-}
-
-#pragma mark //Set UI
-- (IPCRefreshAnimationHeader *)refreshHeader{
-    if (!_refreshHeader) {
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(queryOrderDetail)];
-    }
-    return _refreshHeader;
 }
 
 
@@ -133,9 +126,12 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
+         strongSelf.orderDetailTableView.isBeginLoad = NO;
          [strongSelf.orderDetailTableView reloadData];
-         [strongSelf.refreshHeader endRefreshing];
      } FailureBlock:^(NSError *error) {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         strongSelf.orderDetailTableView.isBeginLoad = NO;
+         [strongSelf.orderDetailTableView reloadData];
          [IPCCommonUI showError:@"查询用户订单详情失败!"];
      }];
 }

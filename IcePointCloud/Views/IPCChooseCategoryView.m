@@ -26,6 +26,8 @@ static NSString * identifier = @"CategoryCellIdentifier";
     if (self) {
         [self setBackgroundColor:[UIColor clearColor]];
         [self setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        self.estimatedSectionFooterHeight = 0;
+        self.estimatedSectionHeaderHeight = 0;
         
         _categoryList = categoryList;
         _currentType = type;

@@ -38,6 +38,8 @@
     [self.saveButton addBorder:2 Width:0 Color:nil];
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
     [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
+    self.payOrderTableView.estimatedSectionHeaderHeight = 0;
+    self.payOrderTableView.estimatedSectionFooterHeight = 0;
     
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;

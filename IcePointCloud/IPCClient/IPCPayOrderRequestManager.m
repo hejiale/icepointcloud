@@ -25,8 +25,8 @@
                    SuccessBlock:(void (^)(id responseValue))success
                    FailureBlock:(void (^)(NSError *error))failure
 {
-    NSDictionary * responseParameter = @{@"pageNo":@(1),@"maxPageSize":@(10000),@"keyWord":keyword,@"isOnJob":@"true"};
-    [self postRequest:responseParameter RequestMethod:@"employeeadmin.listEmployeeForStroe" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    NSDictionary * responseParameter = @{@"keyWord":keyword,@"isOnJob":@"true"};
+    [self postRequest:responseParameter RequestMethod:@"employeeadmin.listEmployee" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID

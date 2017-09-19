@@ -13,8 +13,6 @@
 - (instancetype)initWithFrame:(CGRect)frame
                    AlertImage:(NSString *)imageName
                 LoadingImages:(NSArray<UIImage *> *)images
-                   AlertTitle:(NSString *)title
-               OperationTitle:(NSString *)operationTitle
-                     Complete:(void(^)())complete;
+                   AlertTitle:(NSString *)title;
 
 @end

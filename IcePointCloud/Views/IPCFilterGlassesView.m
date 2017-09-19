@@ -66,7 +66,11 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     tagLayout.itemHeigh    = 27;
     tagLayout.delegate     = self;
     
+    [self.leftClassTableView setTableHeaderView:[[UIView alloc]init]];
     [self.leftClassTableView setTableFooterView:[[UIView alloc]init]];
+    self.leftClassTableView.estimatedSectionHeaderHeight = 0;
+    self.leftClassTableView.estimatedSectionFooterHeight = 0;
+    
     [self.rightValueCollectionView setCollectionViewLayout:tagLayout animated:YES];
     self.rightValueCollectionView.isHiden = YES;
     [self.rightValueCollectionView registerNib:[UINib nibWithNibName:@"IPCFilterValueCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:filterValueIdentifier];

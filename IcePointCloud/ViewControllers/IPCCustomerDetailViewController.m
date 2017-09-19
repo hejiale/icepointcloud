@@ -33,7 +33,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
 @property (strong, nonatomic) IPCUpdateCustomerView * updateCustomerView;
-@property (strong, nonatomic) IPCRefreshAnimationHeader * refreshHeader;
 
 @end
 
@@ -48,7 +47,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
-    self.detailTableView.mj_header = self.refreshHeader;
+    self.detailTableView.estimatedSectionFooterHeight = 0;
+    self.detailTableView.estimatedSectionHeaderHeight = 0;
     
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
 }
@@ -57,22 +57,21 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:NO];
-    [self.refreshHeader beginRefreshing];
+    [self requestCustomerDetailInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
-    }
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 #pragma mark //Request Data
 - (void)requestCustomerDetailInfo
 {
+    self.detailTableView.isBeginLoad = YES;
     [self.customerViewMode resetData];
+    [self.detailTableView reloadData];
     self.customerViewMode.customerId = self.customer.customerID;
     
     __weak typeof (self) weakSelf = self;
@@ -97,8 +96,8 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
+        strongSelf.detailTableView.isBeginLoad = NO;
         [strongSelf.detailTableView reloadData];
-        [strongSelf.refreshHeader endRefreshing];
     });
 }
 
@@ -130,13 +129,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf removerAllPopView:NO];
     }];
-}
-
-- (MJRefreshBackStateFooter *)refreshHeader{
-    if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestCustomerDetailInfo)];
-    }
-    return _refreshHeader;
 }
 
 #pragma mark //ClickEvents
@@ -176,7 +168,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     [self.updateCustomerView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
     if (isLoad) {
-        [self.refreshHeader beginRefreshing];
+        [self requestCustomerDetailInfo];
     }
 }
 

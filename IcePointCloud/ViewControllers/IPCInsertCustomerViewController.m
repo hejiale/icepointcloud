@@ -36,7 +36,10 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
     
     self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
     
+    [self.userInfoTableView setTableHeaderView:[[UIView alloc]init]];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
+    self.userInfoTableView.estimatedSectionHeaderHeight = 0;
+    self.userInfoTableView.estimatedSectionFooterHeight = 0;
     
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];

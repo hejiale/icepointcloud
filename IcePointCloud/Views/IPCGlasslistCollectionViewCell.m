@@ -87,7 +87,7 @@
 }
 
 #pragma mark //Clicked Events
-- (IBAction)addCartAction:(id)sender {
+- (IBAction)addCartAction:(id)sender {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     __weak typeof (self) weakSelf = self;
     if (([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch)
     {

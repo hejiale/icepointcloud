@@ -26,6 +26,11 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
     if (self) {
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCUpdatePasswordView" owner:self];
         [self addSubview:view];
+        
+        [self.updateTableView setTableHeaderView:[[UIView alloc]init]];
+        [self.updateTableView setTableFooterView:[[UIView alloc]init]];
+        self.updateTableView.estimatedSectionHeaderHeight = 0;
+        self.updateTableView.estimatedSectionFooterHeight = 0;
     }
     return self;
 }

@@ -13,7 +13,6 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.currentPage = 1;
     }
     return self;
 }
@@ -25,31 +24,21 @@
     return _optometryList;
 }
 
-- (void)queryCustomerOptometryList:(void(^)(BOOL canLoadMore))completeBlock
+- (void)queryCustomerOptometryList:(void(^)())completeBlock
 {
-    if (self.currentPage == 1) {
-        [self.optometryList removeAllObjects];
-    }
-    
     __weak typeof (self) weakSelf = self;
     [IPCCustomerRequestManager queryUserOptometryListWithCustomID:self.customerId
-                                                             Page:self.currentPage
                                                      SuccessBlock:^(id responseValue){
                                                          __strong typeof (weakSelf) strongSelf = weakSelf;
                                                          IPCOptometryList * optometryObject = [[IPCOptometryList alloc]initWithResponseValue:responseValue];
                                                          [strongSelf.optometryList addObjectsFromArray:optometryObject.listArray];
                                                          [IPCCommonUI hiden];
                                                          
-                                                         if ([optometryObject.listArray count] > 0 && strongSelf.optometryList.count < optometryObject.totalCount) {
-                                                             if (completeBlock)
-                                                                 completeBlock(YES);
-                                                         }else{
-                                                             if (completeBlock)
-                                                                 completeBlock(NO);
-                                                         }
+                                                         if (completeBlock)
+                                                             completeBlock();
                                                      } FailureBlock:^(NSError *error) {
                                                          if (completeBlock)
-                                                             completeBlock(NO);
+                                                             completeBlock();
                                                          [IPCCommonUI showError:@"查询客户验光单信息失败!"];
                                                      }];
 }

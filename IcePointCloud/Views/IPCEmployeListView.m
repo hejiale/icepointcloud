@@ -19,7 +19,6 @@ typedef void(^DismissBlock)();
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (copy, nonatomic) DismissBlock dismissBlock;
 @property (strong, nonatomic) NSMutableArray<IPCEmployee *> *employeeArray;
-@property (strong, nonatomic) IPCRefreshAnimationHeader * refreshHeader;
 
 @end
 
@@ -39,11 +38,13 @@ typedef void(^DismissBlock)();
         [self.employeBgView addBorder:5 Width:0 Color:nil];
         [self.searchTextField setLeftImageView:@"text_searchIcon"];
         
+        [self.employeTableView setTableHeaderView:[[UIView alloc]init]];
         [self.employeTableView setTableFooterView:[[UIView alloc]init]];
+        self.employeTableView.estimatedSectionHeaderHeight = 0;
+        self.employeTableView.estimatedSectionFooterHeight = 0;
         self.employeTableView.emptyAlertImage = @"exception_search";
         self.employeTableView.emptyAlertTitle = @"没有搜索到该员工";
-        self.employeTableView.mj_header = self.refreshHeader;
-        [self.refreshHeader beginRefreshing];
+        [self queryEmploye];
     }
     return self;
 }
@@ -55,25 +56,26 @@ typedef void(^DismissBlock)();
     return _employeeArray;
 }
 
-#pragma mark //Set UI
-- (IPCRefreshAnimationHeader *)refreshHeader{
-    if (!_refreshHeader) {
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(queryEmploye)];
-    }
-    return  _refreshHeader;
-}
 
 #pragma mark //Network Request
 - (void)queryEmploye{
     [self.employeeArray removeAllObjects];
+    self.employeeArray = nil;
+    self.employeTableView.isBeginLoad = YES;
+    [self.employeTableView reloadData];
     
+    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager queryEmployeWithKeyword:self.searchTextField.text SuccessBlock:^(id responseValue)
      {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
          IPCEmployeeList * employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
-         [self.employeeArray addObjectsFromArray:employeList.employeArray];
-         [self.employeTableView reloadData];
-         [self.refreshHeader endRefreshing];
+         [strongSelf.employeeArray addObjectsFromArray:employeList.employeArray];
+         strongSelf.employeTableView.isBeginLoad = NO;
+         [strongSelf.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         strongSelf.employeTableView.isBeginLoad = NO;
+         [strongSelf.employeTableView reloadData];
          [IPCCommonUI showError:@"查询员工信息失败！"];
      }];
 }
@@ -148,7 +150,7 @@ typedef void(^DismissBlock)();
 
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.refreshHeader beginRefreshing];
+    [self queryEmploye];
     [textField endEditing:YES];
     return YES;
 }

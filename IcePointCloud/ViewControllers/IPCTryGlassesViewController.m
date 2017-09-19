@@ -103,6 +103,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.productTableView setTableFooterView:[[UIView alloc]init]];
     self.productTableView.mj_header = self.refreshHeader;
     self.productTableView.mj_footer = self.refreshFooter;
+    self.productTableView.estimatedSectionHeaderHeight = 0;
+    self.productTableView.estimatedSectionFooterHeight = 0;
     self.productTableView.emptyAlertImage = @"exception_search";
     self.productTableView.emptyAlertTitle = @"未搜索到可试戴的眼镜!";
 }

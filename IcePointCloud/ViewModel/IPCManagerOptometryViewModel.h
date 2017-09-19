@@ -10,11 +10,10 @@
 
 @interface IPCManagerOptometryViewModel : NSObject
 
-@property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, copy) NSString * customerId;
 @property (nonatomic, strong) NSMutableArray<IPCOptometryMode *> * optometryList;
 
-- (void)queryCustomerOptometryList:(void(^)(BOOL canLoadMore))completeBlock;
+- (void)queryCustomerOptometryList:(void(^)())completeBlock;
 - (void)setCurrentOptometry:(NSString *)optometryID Complete:(void(^)())completeBlock;
 
 @end

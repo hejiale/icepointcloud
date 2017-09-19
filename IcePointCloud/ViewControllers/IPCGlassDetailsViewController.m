@@ -36,6 +36,8 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
+    self.detailTableView.estimatedSectionFooterHeight = 0;
+    self.detailTableView.estimatedSectionHeaderHeight = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -18,8 +18,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 @property (weak, nonatomic) IBOutlet UITableView *optometryTableView;
 @property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
 @property (strong, nonatomic) IPCManagerOptometryViewModel * managerViewModel;
-@property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
-@property (nonatomic, strong) IPCRefreshAnimationFooter           *refreshFooter;
 
 @end
 
@@ -34,21 +32,20 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     [self setNavigationBarStatus:NO];
     [self setNavigationTitle:@"验光单"];
     [self setRightItem:@"icon_insert_btn" Selection:@selector(insertNewOptometryAction)];
+    
+    [self.optometryTableView setTableHeaderView:[[UIView alloc]init]];
     [self.optometryTableView setTableFooterView:[[UIView alloc]init]];
-    self.optometryTableView.mj_header = self.refreshHeader;
-    self.optometryTableView.mj_footer = self.refreshFooter;
+    self.optometryTableView.estimatedSectionFooterHeight = 0;
+    self.optometryTableView.estimatedSectionHeaderHeight = 0;
     self.optometryTableView.emptyAlertTitle = @"暂未添加验光单!";
     self.optometryTableView.emptyAlertImage = @"exception_optometry";
-    [self.refreshHeader beginRefreshing];
+    [self loadOptometryData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
-    }
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 
@@ -79,31 +76,19 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     return _editOptometryView;
 }
 
-- (MJRefreshBackStateFooter *)refreshHeader{
-    if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginReloadTableView)];
-    }
-    return _refreshHeader;
-}
-
-- (IPCRefreshAnimationFooter *)refreshFooter{
-    if (!_refreshFooter)
-        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTableView)];
-    return _refreshFooter;
-}
-
 #pragma mark //Request Method
-- (void)loadOptometryData{
+- (void)loadOptometryData
+{
+    [self.managerViewModel.optometryList removeAllObjects];
+    self.managerViewModel.optometryList = nil;
+    self.optometryTableView.isBeginLoad = YES;
+    [self.optometryTableView reloadData];
+
     __weak typeof(self) weakSelf = self;
-    [self.managerViewModel queryCustomerOptometryList:^(BOOL canLoadMore) {
+    [self.managerViewModel queryCustomerOptometryList:^() {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.optometryTableView.isBeginLoad = NO;
         [strongSelf.optometryTableView reloadData];
-        [strongSelf.refreshHeader endRefreshing];
-        [strongSelf.refreshFooter endRefreshing];
-        
-        if (!canLoadMore) {
-            [strongSelf.refreshFooter noticeNoDataStatus];
-        }
     }];
 }
 
@@ -112,7 +97,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     __weak typeof(self) weakSelf = self;
     [self.managerViewModel setCurrentOptometry:optometryId Complete:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.refreshHeader beginRefreshing];
+        [strongSelf loadOptometryData];
     }];
 }
 
@@ -124,18 +109,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     }
     [self.view addSubview:self.editOptometryView];
     [self.view bringSubviewToFront:self.editOptometryView];
-}
-
-#pragma mark //Refresh Method
-- (void)beginReloadTableView{
-    self.managerViewModel.currentPage = 1;
-    [self.refreshFooter resetDataStatus];
-    [self loadOptometryData];
-}
-
-- (void)loadMoreTableView{
-    self.managerViewModel.currentPage ++;
-    [self loadOptometryData];
 }
 
 #pragma mark //UITableViewDataSource

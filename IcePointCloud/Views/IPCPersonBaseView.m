@@ -34,6 +34,11 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     if (self) {
         UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCPersonBaseView" owner:self];
         [self addSubview:view];
+        
+        [self.personTableView setTableHeaderView:[[UIView alloc]init]];
+        [self.personTableView setTableFooterView:[[UIView alloc]init]];
+        self.personTableView.estimatedSectionHeaderHeight = 0;
+        self.personTableView.estimatedSectionFooterHeight = 0;
     }
     return self;
 }

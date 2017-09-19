@@ -22,7 +22,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 @property (weak, nonatomic) IBOutlet UIButton *insertButton;
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
 @property (nonatomic, strong) IPCCustomerList * customerList;
-@property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 
 @end
 
@@ -39,8 +38,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self.refreshHeader beginRefreshing];
-    
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
         [self setNavigationTitle:@"客户"];
         [self setNavigationBarStatus:NO];
@@ -48,15 +45,13 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [self setNavigationBarStatus:YES];
     }
     [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
+    [self refreshData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
-    }
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 
@@ -81,28 +76,23 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [_customerCollectionView setCollectionViewLayout:layout];
     _customerCollectionView.emptyAlertImage = @"exception_search";
     _customerCollectionView.emptyAlertTitle = @"未查询到客户信息!";
-    _customerCollectionView.mj_header = self.refreshHeader;
     [_customerCollectionView registerNib:[UINib nibWithNibName:@"IPCCustomerCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:customerIdentifier];
 }
 
-- (IPCRefreshAnimationHeader *)refreshHeader{
-    if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
-    }
-    return _refreshHeader;
-}
 
 #pragma mark //Refresh Method
 - (void)refreshData
 {
+    [self.customerList.list removeAllObjects];
+    self.customerList.list = nil;
+    self.customerCollectionView.isBeginLoad = YES;
+    [self.customerCollectionView reloadData];
+    
     __weak typeof(self) weakSelf = self;
     [self queryCustomerInfo:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.customerCollectionView.isBeginLoad = NO;
         [strongSelf.customerCollectionView reloadData];
-        
-        if (strongSelf.refreshHeader.isRefreshing) {
-            [strongSelf.refreshHeader endRefreshing];
-        }
     }];
 }
 
@@ -178,7 +168,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword{
     searchKeyWord = keyword;
-    [self.refreshHeader beginRefreshing];
+    [self refreshData];
 }
 
 - (void)didReceiveMemoryWarning{

@@ -12,8 +12,6 @@
 
 @property (strong, nonatomic)  UIImageView *alertImageView;
 @property (strong, nonatomic)  UILabel *alertLabel;
-@property (strong, nonatomic)  UIButton *operationButton;
-@property (copy, nonatomic) void(^CompleteBlock)();
 
 @end
 
@@ -23,13 +21,9 @@
                    AlertImage:(NSString *)imageName
                 LoadingImages:(NSArray<UIImage *> *)images
                    AlertTitle:(NSString *)title
-               OperationTitle:(NSString *)operationTitle
-                     Complete:(void(^)())complete
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        self.CompleteBlock = complete;
-        
+    if (self) {        
         if (images && images.count) {
             UIImage * image = images[0];
             
@@ -71,20 +65,6 @@
                 make.height.mas_equalTo(30);
             }];
         }
-
-        if (operationTitle) {
-            [self addSubview:self.operationButton];
-            [self.operationButton setTitle:operationTitle forState:UIControlStateNormal];
-            
-            CGFloat width = [operationTitle jk_widthWithFont:self.operationButton.titleLabel.font constrainedToHeight:30];
-            
-            [self.operationButton mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.centerX.mas_equalTo(self.mas_centerX);
-                make.top.equalTo(self.alertLabel.mas_bottom).with.offset(20);
-                make.width.mas_equalTo(width);
-                make.height.mas_equalTo(30);
-            }];
-        }
     }
     return self;
 }
@@ -109,23 +89,5 @@
     return _alertLabel;
 }
 
-- (UIButton *)operationButton{
-    if (!_operationButton) {
-        _operationButton = [[UIButton alloc]init];
-        [_operationButton setBackgroundColor:COLOR_RGB_BLUE];
-        [_operationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_operationButton.titleLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
-        [_operationButton addSignleCorner:UIRectCornerAllCorners Size:3];
-        [_operationButton addTarget:self action:@selector(operationAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _operationButton;
-}
-
-#pragma mark //Methods
-- (void)operationAction:(id)sender {
-    if (self.CompleteBlock) {
-        self.CompleteBlock();
-    }
-}
 
 @end

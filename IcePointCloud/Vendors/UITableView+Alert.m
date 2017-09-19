@@ -14,7 +14,6 @@ static char const *  loadingAlertImageKey = "LoadingAlertImageKey";
 
 static char const *  emptyAlertTitleKey =  "EmptyAlertTitleKey";
 static char const *  emptyAlertImageKey = "EmptyAlertImageKey";
-static char const *  operationKey      = "OperationKey";
 
 static char const *  isHidenAlertKey  =  "IsHidenAlertKey";
 static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
@@ -88,11 +87,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
                                                     LoadingImages:nil
-                                                       AlertTitle:self.emptyAlertTitle
-                                                   OperationTitle:self.operationTitle
-                                                         Complete:^{
-                                                             [self operationAction];
-                                                         }];
+                                                       AlertTitle:self.emptyAlertTitle];
     [self addSubview:self.emptyAlertView];
     [self bringSubviewToFront:self.emptyAlertView];
 }
@@ -103,9 +98,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
                                                            LoadingImages:nil
-                                                              AlertTitle:kIPCErrorNetworkAlertMessage
-                                                          OperationTitle:self.operationTitle
-                                                                Complete:nil];
+                                                              AlertTitle:kIPCErrorNetworkAlertMessage];
     [self addSubview:self.errorNetworkAlertView];
     [self bringSubviewToFront:self.errorNetworkAlertView];
 }
@@ -122,9 +115,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     self.loadingAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:nil
                                                            LoadingImages:loadingArray
-                                                              AlertTitle:nil
-                                                          OperationTitle:nil
-                                                                Complete:nil];
+                                                              AlertTitle:nil];
     [self addSubview:self.loadingAlertView];
     [self bringSubviewToFront:self.loadingAlertView];
 }
@@ -170,14 +161,6 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 
 - (NSString *)emptyAlertImage{
     return objc_getAssociatedObject(self, emptyAlertImageKey);
-}
-
-- (void)setOperationTitle:(NSString *)operationTitle{
-    objc_setAssociatedObject(self, operationKey, operationTitle, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (NSString *)operationTitle{
-    return objc_getAssociatedObject(self, operationKey);
 }
 
 - (BOOL)isHiden{

@@ -88,9 +88,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
                                                     LoadingImages:nil
-                                                       AlertTitle:self.emptyAlertTitle
-                                                   OperationTitle:nil
-                                                         Complete:nil];
+                                                       AlertTitle:self.emptyAlertTitle];
     [self addSubview:self.emptyAlertView];
     [self bringSubviewToFront:self.emptyAlertView];
 }
@@ -101,9 +99,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
                                                            LoadingImages:nil
-                                                              AlertTitle:kIPCErrorNetworkAlertMessage
-                                                          OperationTitle:nil
-                                                                Complete:nil];
+                                                              AlertTitle:kIPCErrorNetworkAlertMessage];
     [self addSubview:self.errorNetworkAlertView];
     [self bringSubviewToFront:self.errorNetworkAlertView];
 }
@@ -120,9 +116,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     self.loadingAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                          AlertImage:nil
                                                       LoadingImages:loadingArray
-                                                         AlertTitle:nil
-                                                     OperationTitle:nil
-                                                           Complete:nil];
+                                                         AlertTitle:nil];
     [self addSubview:self.loadingAlertView];
     [self bringSubviewToFront:self.loadingAlertView];
 }

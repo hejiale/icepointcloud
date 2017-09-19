@@ -14,7 +14,6 @@
 @property (nonatomic, strong) IPCEmptyAlertView * errorNetworkAlertView;
 @property (nonatomic, strong) IPCEmptyAlertView * loadingAlertView;
 @property (nonatomic, strong) UIView * footerView;
-@property (nonatomic, copy) NSString * operationTitle;
 @property (nonatomic, copy) NSString * emptyAlertTitle;
 @property (nonatomic, copy) NSString  * emptyAlertImage;
 @property (nonatomic, copy) NSString * noDataTitle;

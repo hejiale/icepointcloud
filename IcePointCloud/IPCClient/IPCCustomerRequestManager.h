@@ -14,12 +14,10 @@
  *  QUERY HISTORY OPTOMETORY INFO
  *
  *  @param customID
- *  @param page
  *  @param success
  *  @param failure
  */
 + (void)queryUserOptometryListWithCustomID:(NSString *)customID
-                                      Page:(NSInteger)page
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;
 

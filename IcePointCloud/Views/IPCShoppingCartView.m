@@ -47,9 +47,11 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         
         [self addLeftLine];
         [self.cartBottomView addTopLine];
+        [self.cartListTableView setTableHeaderView:[[UIView alloc]init]];
         [self.cartListTableView setTableFooterView:[[UIView alloc]init]];
+        self.cartListTableView.estimatedSectionFooterHeight = 0;
+        self.cartListTableView.estimatedSectionHeaderHeight = 0;
         self.cartListTableView.emptyAlertImage = @"exception_cart";
-        self.cartListTableView.operationTitle = @"前去添加商品";
         self.cartListTableView.emptyAlertTitle = @"暂无任何商品";
         [[self.cartListTableView rac_signalForSelector:@selector(operationAction)] subscribeNext:^(RACTuple * _Nullable x) {
             [IPCCommonUI pushToRootIndex:1];
