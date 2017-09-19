@@ -26,7 +26,7 @@
 
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
-@interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewControllerDelegate,IPCTryGlassesCellDelegate>
+@interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewControllerDelegate,IPCTryGlassesCellDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *productTableView;
 @property (nonatomic, weak) IBOutlet UIView *matchPanelView;
@@ -38,6 +38,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @property (weak, nonatomic) IBOutlet UIView *compareBgView;
 @property (strong, nonatomic)  IPCSingleModeView * signleModeView;
 @property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UIButton *goTopButton;
 @property (weak, nonatomic) IBOutlet IPCStaticImageTextButton *librayButton;
 @property (strong, nonatomic) IBOutlet UIView *cameraBgView;
 @property (weak, nonatomic) IBOutlet UIView *recommdBgView;
@@ -396,6 +397,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.blurBgView removeFromSuperview];
     [self.glassListViewMode.filterView removeFromSuperview];
     [self.coverView removeFromSuperview];
+}
+
+- (IBAction)onGoTopAction:(id)sender {
+    [self.goTopButton setHidden:YES];
+    [self.productTableView scrollToTopAnimated:YES];
 }
 
 //signle show or compare show methods
@@ -828,6 +834,16 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.glassListViewMode.searchWord = keyword;
     [self beginFilterClass];
 }
+
+#pragma mark //UIScrollView Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (scrollView.contentOffset.y > self.view.jk_height * 2) {
+        [self.goTopButton setHidden:NO];
+    }else{
+        [self.goTopButton setHidden:YES];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {

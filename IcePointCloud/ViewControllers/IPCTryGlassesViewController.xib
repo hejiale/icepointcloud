@@ -15,6 +15,7 @@
                 <outlet property="cameraBtn" destination="369-Pi-ySz" id="fsd-wI-hXh"/>
                 <outlet property="cameraButton" destination="wGK-JQ-GRN" id="0P4-YF-kZC"/>
                 <outlet property="compareBgView" destination="rV0-Dn-hOT" id="ST9-G6-bft"/>
+                <outlet property="goTopButton" destination="KEp-3K-1Ou" id="llr-a4-KcN"/>
                 <outlet property="librayButton" destination="dVd-4Q-55W" id="Y37-af-Vea"/>
                 <outlet property="matchPanelView" destination="dKs-wG-0L7" id="OHI-UZ-K9g"/>
                 <outlet property="modelsPicker" destination="RAf-5R-8ba" id="q33-Ak-SQh"/>
@@ -168,15 +169,29 @@
                         <outlet property="delegate" destination="-1" id="x2V-jE-K1F"/>
                     </connections>
                 </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEp-3K-1Ou">
+                    <rect key="frame" x="435" y="631" width="38" height="38"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="38" id="SSL-Yk-MPZ"/>
+                        <constraint firstAttribute="height" constant="38" id="uRn-Tc-pKQ"/>
+                    </constraints>
+                    <state key="normal" image="icon_scrolls_to_top"/>
+                    <connections>
+                        <action selector="onGoTopAction:" destination="-1" eventType="touchUpInside" id="LoC-T7-2FI"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="2oF-fM-k1a" firstAttribute="leading" secondItem="dKs-wG-0L7" secondAttribute="leading" id="4dJ-0m-elX"/>
                 <constraint firstItem="t6z-hk-WyO" firstAttribute="leading" secondItem="hl5-Ok-qfz" secondAttribute="leading" id="6H8-yf-8yS"/>
                 <constraint firstAttribute="trailing" secondItem="dKs-wG-0L7" secondAttribute="trailing" id="ElI-7W-Yes"/>
+                <constraint firstAttribute="bottom" secondItem="KEp-3K-1Ou" secondAttribute="bottom" constant="35" id="GNg-xx-Xig"/>
                 <constraint firstAttribute="bottom" secondItem="t6z-hk-WyO" secondAttribute="bottom" id="Ivj-gn-NFT"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="leading" secondItem="t6z-hk-WyO" secondAttribute="trailing" id="Oie-Fk-YvF"/>
                 <constraint firstAttribute="trailing" secondItem="2oF-fM-k1a" secondAttribute="trailing" id="V1l-5g-S5g"/>
+                <constraint firstItem="2oF-fM-k1a" firstAttribute="leading" secondItem="KEp-3K-1Ou" secondAttribute="trailing" constant="20" id="VNE-5h-krg"/>
                 <constraint firstItem="t6z-hk-WyO" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="YrV-AH-ULM"/>
                 <constraint firstAttribute="bottom" secondItem="2oF-fM-k1a" secondAttribute="bottom" id="dkC-pc-4YT"/>
                 <constraint firstItem="dKs-wG-0L7" firstAttribute="top" secondItem="hl5-Ok-qfz" secondAttribute="top" id="rsC-LP-jbL"/>
@@ -333,6 +348,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon_scrolls_to_top" width="37" height="37"/>
         <image name="icon_share" width="22" height="22"/>
         <image name="icon_try_camera" width="90" height="86"/>
         <image name="icon_try_library" width="91" height="86"/>

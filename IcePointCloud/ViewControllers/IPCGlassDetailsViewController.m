@@ -125,7 +125,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 
 - (IBAction)goTopAction:(id)sender {
     [self.goTopButton setHidden:YES];
-    [self.detailTableView scrollToTopAnimated:NO];
+    [self.detailTableView scrollToTopAnimated:YES];
 }
 
 #pragma mark //UITableViewDataSource

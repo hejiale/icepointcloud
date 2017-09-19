@@ -236,7 +236,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (IBAction)onGoTopAction:(id)sender {
     [self.goTopButton setHidden:YES];
-    [self.glassListCollectionView scrollToTopAnimated:NO];
+    [self.glassListCollectionView scrollToTopAnimated:YES];
 }
 
 
