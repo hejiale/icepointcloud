@@ -29,7 +29,7 @@
     if (_glasses) {
         IPCGlassesImage *gp = [_glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gp){
-            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL]];
+            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL] placeholderImage:[UIImage imageNamed:@""]];
         }
 
         [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:5 WordSpace:0];
@@ -40,7 +40,7 @@
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         
         __block CGFloat orignX = self.baseTitleLabel.jk_left;
-        __block CGFloat orignY = self.baseTitleLabel.jk_bottom + 15 + height;
+        __block CGFloat orignY = self.baseTitleLabel.jk_bottom + 20 + height;
         __block CGFloat lblWidth = self.rightContentView.jk_width - orignX - 120;
         __block CGFloat totalHeight = 0;
         
@@ -53,17 +53,17 @@
             
             UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 30)];
             titleLabel.textAlignment = NSTextAlignmentLeft;
-            titleLabel.textColor = [UIColor lightGrayColor];
+            titleLabel.textColor = [UIColor colorWithHexString:@"#8C8C8C"];
             titleLabel.backgroundColor = [UIColor clearColor];
-            titleLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+            titleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
             titleLabel.text = [NSString stringWithFormat:@"%@", obj];
             [specHostView addSubview:titleLabel];
             
             UILabel * valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabel.jk_right + 20, 0, lblWidth, 30)];
             valueLabel.textAlignment = NSTextAlignmentLeft;
-            valueLabel.textColor = [UIColor lightGrayColor];
+            valueLabel.textColor = [UIColor colorWithHexString:@"#8C8C8C"];
             valueLabel.backgroundColor = [UIColor clearColor];
-            valueLabel.font = [UIFont systemFontOfSize:13 weight:UIFontWeightThin];
+            valueLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
             valueLabel.text = [NSString stringWithFormat:@"%@", fileds[obj]];
             [specHostView addSubview:valueLabel];
             

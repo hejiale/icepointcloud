@@ -12,6 +12,7 @@
 @interface IPCCustomerList : NSObject
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCCustomerMode *> * list;
+@property (nonatomic, assign) NSInteger totalCount;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 
@@ -19,12 +20,12 @@
 
 @interface IPCCustomerMode : NSObject
 
-@property (copy, nonatomic, readwrite) NSString * photoUrl;
+@property (copy, nonatomic, readwrite) NSString * photo_url;
 @property (copy, nonatomic, readwrite) NSString * customerName;
 @property (copy, nonatomic, readwrite) NSString * customerID;
 @property (copy, nonatomic, readwrite) NSString * customerPhone;
 @property (copy, nonatomic, readwrite) NSString * integral;
-@property (copy, nonatomic, readwrite) NSString * memberlevel;
+@property (copy, nonatomic, readwrite) NSString * memberLevel;
 
 
 @end

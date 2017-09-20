@@ -233,10 +233,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf showGlassesParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
         } AddCart:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            _tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
+            [_tryGlassesView reload];
+            [strongSelf.productTableView reloadData];
         } ReduceCart:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            _tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
+            [_tryGlassesView reload];;
+            [strongSelf.productTableView reloadData];
         } TryGlasses:nil];
         [_tryGlassesView addBottomLine];
         [_tryGlassesView setDefaultGlasses];
@@ -248,7 +250,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)updateCurrentGlass{
     if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn)
     {
-        self.tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
+        [self.tryGlassesView reload];;
         self.tableViewTopConstant.constant = (SCREEN_HEIGHT - 70)/4;
         [self.tryGlassesView setHidden:NO];
     }else{
@@ -264,7 +266,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.editParameterView removeFromSuperview];strongSelf.editParameterView = nil;
         [strongSelf.productTableView reloadData];
-        strongSelf.tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
+        [strongSelf.tryGlassesView reload];;
     }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
     [self.editParameterView show];
@@ -275,7 +277,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.productTableView reloadData];
-        strongSelf.tryGlassesView.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
+        [strongSelf.tryGlassesView reload];;
     }];
     self.parameterView.glasses = glass;
     [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -296,15 +298,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)beginFilterClass
 {
-    [self.glassListViewMode.glassesList removeAllObjects];
-    self.glassListViewMode.glassesList = nil;
     self.productTableView.isBeginLoad = YES;
-    [self.productTableView reloadData];
     [self beginReloadTableView];
+    [self.productTableView reloadData];
 }
 
 - (void)loadMore
 {
+    if (self.refreshHeader.isRefreshing)return;
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof (self) weakSelf = self;
@@ -815,6 +816,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)reloadProductList
 {
+    [self.tryGlassesView reload];;
     [self.productTableView reloadData];
 }
 

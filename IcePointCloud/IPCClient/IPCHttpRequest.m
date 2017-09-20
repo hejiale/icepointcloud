@@ -10,6 +10,8 @@
 
 @interface IPCHttpRequest()
 
+@property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *> * taskArray;
+
 @end
 
 @implementation IPCHttpRequest
@@ -22,6 +24,13 @@
         _client = [[self alloc] init];
     });
     return _client;
+}
+
+- (NSMutableArray<NSURLSessionDataTask *> *)taskArray{
+    if (!_taskArray) {
+        _taskArray = [[NSMutableArray alloc]init];
+    }
+    return _taskArray;
 }
 
 #pragma mark //AFNetworking Request Method
@@ -50,32 +59,36 @@
             }
         }
     }else{
-        [[AFHTTPSessionManager manager] sendRequestWithParams:request
-                                                                                                ImageData:imageData
-                                                                                                ImageName:imageName
-                                                                                              RequestType:requestType
-                                                                                              CacheEnable:cacheEnable
-                                                                                             SuccessBlock:^(id responseValue, NSURLSessionDataTask * _Nonnull task)
-                                                     {
-                                                         if (success) {
-                                                             success(responseValue);
-                                                         }
-                                                     } ProgressBlock:^(NSProgress *uploadProgress) {
-                                                         if (progress) {
-                                                             progress(uploadProgress);
-                                                         }
-                                                     } FailureBlock:^(NSError *error, NSURLSessionDataTask * _Nonnull task) {
-                                                         if (failure) {
-                                                             failure(error);
-                                                         }
-                                                     }];
+        NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request
+                                                                                  ImageData:imageData
+                                                                                  ImageName:imageName
+                                                                                RequestType:requestType
+                                                                                CacheEnable:cacheEnable
+                                                                               SuccessBlock:^(id responseValue, NSURLSessionDataTask * _Nonnull task)
+                                       {
+                                           if (success) {
+                                               success(responseValue);
+                                           }
+                                       } ProgressBlock:^(NSProgress *uploadProgress) {
+                                           if (progress) {
+                                               progress(uploadProgress);
+                                           }
+                                       } FailureBlock:^(NSError *error, NSURLSessionDataTask * _Nonnull task) {
+                                           if (failure) {
+                                               failure(error);
+                                           }
+                                       }];
+        [self.taskArray addObject:task];
+        [task resume];
     }
 }
 
 
 - (void)cancelAllRequest
 {
-    [[AFHTTPSessionManager manager].operationQueue cancelAllOperations];
+    [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj cancel];
+    }];
 }
 
 

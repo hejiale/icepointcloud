@@ -47,7 +47,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self setNavigationBarStatus:YES];
     [self.glassListCollectionView reloadData];
-//    [self.glassListViewMode queryRepository];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -99,12 +98,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self.refreshFooter endRefreshing];
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
-    
     [self.refreshFooter resetDataStatus];
     [self loadNormalProducts];
 }
 
 - (void)loadMore{
+    if (self.refreshHeader.isRefreshing)return;
+    
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof(self) weakSelf = self;
@@ -116,10 +116,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)beginFilterClass
 {
-    [self.glassListViewMode.glassesList removeAllObjects];
     self.glassListCollectionView.isBeginLoad = YES;
-    [self.glassListCollectionView reloadData];
     [self loadNormalProducts];
+    [self.glassListCollectionView reloadData];
 }
 
 //Load Data

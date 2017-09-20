@@ -32,30 +32,28 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     [self.errorNetworkAlertView removeFromSuperview];self.errorNetworkAlertView = nil;
     [self.emptyAlertView removeFromSuperview];self.emptyAlertView = nil;
     [self.loadingAlertView removeFromSuperview];self.loadingAlertView = nil;
+    self.scrollEnabled = YES;
     
     AFNetworkReachabilityStatus status = [IPCReachability manager].currentNetStatus;
     if (status == AFNetworkReachabilityStatusUnknown || status == AFNetworkReachabilityStatusNotReachable){
         if ([self checkIsEmpty]) {
-            self.scrollEnabled = NO;
             [self.mj_footer setHidden:YES];
             [self loadErrorNetworkAlertView];
         }else{
-            self.scrollEnabled = YES;
             [self.mj_footer setHidden:NO];
         }
     }else{
         if ([self checkIsEmpty]) {
-            self.scrollEnabled = NO;
             [self.mj_footer setHidden:YES];
             
             if (self.isBeginLoad) {
+                self.scrollEnabled = NO;
                 [self loadIsRefreshingView];
             }else{
                 [self loadEmptyAlertView];
             }
         }else{
             [self.mj_footer setHidden:NO];
-            self.scrollEnabled = YES;
         }
     }
     [self customReload];

@@ -120,6 +120,26 @@ typedef NS_ENUM(NSInteger, IPCGlassesImageType) {
     IPCGlassesImageTypeThumb
 };
 
+typedef enum : NSUInteger {
+    /**
+     *  More Data
+     */
+    IPCFooterRefresh_HasMoreData,
+    /**
+     *  No More Data
+     */
+    IPCFooterRefresh_HasNoMoreData,
+    /**
+     *  None Data
+     */
+    IPCFooterRefresh_NoData,
+    /**
+     *  Error
+     */
+    IPCRefreshError
+    
+} LSRefreshDataStatus;
+
 
 //Frame
 #define SCREEN_WIDTH                  [UIScreen mainScreen].bounds.size.width

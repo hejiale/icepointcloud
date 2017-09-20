@@ -127,7 +127,7 @@
                 [label setText:obj];
                 [label setFont:font];
                 [label setBackgroundColor:[UIColor clearColor]];
-                [label setTextColor:[UIColor lightGrayColor]];
+                [label setTextColor:[UIColor colorWithHexString:@"#333333"]];
                 [self.parameterContentView addSubview:label];
                 
                 UIImageView * line = [[UIImageView alloc]init];
@@ -156,6 +156,12 @@
 }
 
 #pragma mark //Clicked Events
+- (void)reload
+{
+     self.glasses = [[IPCTryMatch instance] currentMatchItem].glass;
+}
+
+
 - (IBAction)addCartAction:(id)sender {
     if (([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch)
     {
@@ -181,6 +187,7 @@
 
 - (void)addCartAnimation{
     if (self.glasses) {
+        [IPCCommonUI showSuccess:@"添加商品成功!"];
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         
         if (self.AddCartBlock) {

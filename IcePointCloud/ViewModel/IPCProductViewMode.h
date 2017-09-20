@@ -13,26 +13,6 @@
 #import "IPCFilterGlassesView.h"
 
 
-typedef enum : NSUInteger {
-    /**
-     *  More Data
-     */
-    IPCFooterRefresh_HasMoreData,
-    /**
-     *  No More Data
-     */
-    IPCFooterRefresh_HasNoMoreData,
-    /**
-     *  None Data
-     */
-    IPCFooterRefresh_NoData,
-    /**
-     *  Error
-     */
-    IPCRefreshError
-    
-} LSRefreshDataStatus;
-
 typedef void(^CompleteBlock)();
 typedef void(^FilterSucceedBlock)(NSError * error);
 typedef void(^ReloadFilterCloseBlock)();

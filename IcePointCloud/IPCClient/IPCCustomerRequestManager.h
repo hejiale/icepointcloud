@@ -124,14 +124,17 @@
                                  FailureBlock:(void (^)(NSError * error))failure;
 
 
+
 /**
- *  QUERY CUSTOMER LIST
- *
- *  @param keyword
- *  @param success
- *  @param failure
+ QUERY CUSTOMER LIST
+
+ @param keyword
+ @param page
+ @param success
+ @param failure 
  */
 + (void)queryCustomerListWithKeyword:(NSString *)keyword
+                                Page:(NSInteger )page
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure;
 
