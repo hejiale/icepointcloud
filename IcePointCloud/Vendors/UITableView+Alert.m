@@ -48,7 +48,15 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
             
             if (self.isBeginLoad) {
                 self.scrollEnabled = NO;
-                [self loadIsRefreshingView];
+                
+                [UIView animateWithDuration:30.f animations:^{
+                    [self loadIsRefreshingView];
+                } completion:^(BOOL finished) {
+                    if (finished) {
+                        self.isBeginLoad = NO;
+                        [self customReload];
+                    }
+                }];
             }else{
                 [self loadEmptyAlertView];
             }

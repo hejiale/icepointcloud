@@ -175,8 +175,11 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     IPCCustomerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:customerIdentifier forIndexPath:indexPath];
     
-    IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
-    cell.currentCustomer = customer;
+    if (self.viewModel && self.viewModel.customerArray.count) {
+        IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
+        cell.currentCustomer = customer;
+    }
+    
     return cell;
 }
 
@@ -193,7 +196,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 #pragma mark //UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.viewModel.customerArray.count) {
+    if (self.viewModel.customerArray.count && self.viewModel) {
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         
         if (customer) {

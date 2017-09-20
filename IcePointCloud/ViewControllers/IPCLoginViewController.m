@@ -134,6 +134,7 @@
         [self.passwordTf becomeFirstResponder];
     }else{
         [textField resignFirstResponder];
+        [self userLoginMethod];
     }
     return YES;
 }

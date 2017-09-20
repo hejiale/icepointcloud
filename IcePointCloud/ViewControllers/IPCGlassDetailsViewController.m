@@ -61,6 +61,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     
     if (_glasses) {
         if (self.glasses.detailLinkURl.length) {
+            [IPCCommonUI show];
             [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
         }
     }
@@ -189,6 +190,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     frame.size.height = height;
     webView.frame = frame;
     [self.detailTableView reloadData];
+    [IPCCommonUI hiden];
 }
 
 #pragma mark //UIScrollView Delegate
