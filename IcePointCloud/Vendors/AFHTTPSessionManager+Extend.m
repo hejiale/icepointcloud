@@ -63,10 +63,8 @@
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
-        if ([error code] != NSURLErrorCancelled){
-            if (failure){
-                failure(error, task);
-            }
+        if (failure){
+            failure(error, task);
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };

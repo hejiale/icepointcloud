@@ -48,15 +48,7 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
             
             if (self.isBeginLoad) {
                 self.scrollEnabled = NO;
-                
-                [UIView animateWithDuration:30.f animations:^{
-                    [self loadIsRefreshingView];
-                } completion:^(BOOL finished) {
-                    if (finished) {
-                        self.isBeginLoad = NO;
-                        [self customReload];
-                    }
-                }];
+                [self loadIsRefreshingView];
             }else{
                 [self loadEmptyAlertView];
             }
@@ -90,6 +82,10 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 - (void)loadEmptyAlertView{
     [self setContentOffset:CGPointZero];
     
+    if ([self.emptyAlertView superview]) {
+        [self.emptyAlertView removeFromSuperview];
+        self.emptyAlertView = nil;
+    }
     self.emptyAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                        AlertImage:self.emptyAlertImage
                                                     LoadingImages:nil
@@ -101,6 +97,10 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 - (void)loadErrorNetworkAlertView{
     [self setContentOffset:CGPointZero];
     
+    if ([self.errorNetworkAlertView superview]) {
+        [self.errorNetworkAlertView removeFromSuperview];
+        self.errorNetworkAlertView = nil;
+    }
     self.errorNetworkAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:@"exception_network"
                                                            LoadingImages:nil
@@ -117,7 +117,10 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     for (NSInteger i = 1 ; i< 17; i++) {
         [loadingArray addObject:[UIImage imageNamed:[NSString stringWithFormat:@"loading_%ld",(long)i]]];
     }
-    
+    if ([self.loadingAlertView superview]) {
+        [self.loadingAlertView removeFromSuperview];
+        self.loadingAlertView = nil;
+    }
     self.loadingAlertView = [[IPCEmptyAlertView alloc]initWithFrame:self.bounds
                                                               AlertImage:nil
                                                            LoadingImages:loadingArray
@@ -147,6 +150,12 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 
 - (IPCEmptyAlertView *)loadingAlertView{
     return objc_getAssociatedObject(self, loadingAlertImageKey);
+}
+
+- (void)hideRefresh
+{
+    self.isBeginLoad = NO;
+    [self customReload];
 }
 
 - (void)setLoadingAlertView:(IPCEmptyAlertView *)loadingAlertView{

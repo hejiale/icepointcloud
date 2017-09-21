@@ -85,7 +85,10 @@ typedef  void(^DismissBlock)();
                                                          }
                                                      } FailureBlock:^(NSError *error) {
                                                          [self.saveButton jk_hideIndicator];
-                                                         [IPCCommonUI showError:@"保存验光单失败!"];
+                                                         if ([error code] != NSURLErrorCancelled ) {
+                                                             [IPCCommonUI showError:@"保存验光单失败!"];
+                                                         }
+                                                         
                                                      }];
 }
 

@@ -55,7 +55,9 @@
      } FailureBlock:^(NSError *error) {
          if (completeBlock)
              completeBlock();
-         [IPCCommonUI showError:@"查询客户信息失败!"];
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"查询客户信息失败!"];
+         }
      }];
 }
 
@@ -79,7 +81,9 @@
                                                 } FailureBlock:^(NSError *error) {
                                                     if (completeBlock)
                                                         completeBlock();
-                                                    [IPCCommonUI showError:@"查询客户历史订单信息失败!"];
+                                                    if ([error code] != NSURLErrorCancelled) {
+                                                        [IPCCommonUI showError:@"查询客户历史订单信息失败!"];
+                                                    }
                                                 }];
 }
 

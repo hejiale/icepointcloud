@@ -253,7 +253,10 @@
 
 
 #pragma mark //Clicked Events
-- (void)menuTapAction:(UIButton *)sender {
+- (void)menuTapAction:(UIButton *)sender
+{
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    
     if (sender.tag > 0 && sender.tag < 5) {
         if (sender.tag != 4) {
             [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
@@ -295,7 +298,10 @@
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"查询积分定制规则失败!"];
+        if ([error code] != NSURLErrorCancelled) {
+            [IPCCommonUI showError:@"查询积分定制规则失败!"];
+        }
+        
     }];
 }
 

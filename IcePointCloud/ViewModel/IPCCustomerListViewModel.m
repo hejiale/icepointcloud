@@ -18,7 +18,7 @@
     return _customerArray;
 }
 
-- (void)queryCustomerList:(void(^)())complete
+- (void)queryCustomerList:(void(^)(NSError *error))complete
 {
     self.completeBlock = complete;
     
@@ -31,9 +31,9 @@
          [strongSelf parseCustomerListData:responseValue];
      } FailureBlock:^(NSError *error) {
          __strong typeof (weakSelf) strongSelf = weakSelf;
-         strongSelf.status == IPCRefreshError;
+         strongSelf.status = IPCRefreshError;
          if (strongSelf.completeBlock) {
-             strongSelf.completeBlock();
+             strongSelf.completeBlock(error);
          }
      }];
 }
@@ -54,13 +54,13 @@
             }
             
             if (self.completeBlock) {
-                self.completeBlock();
+                self.completeBlock(nil);
             }
         }else{
             if ([self.customerArray count] > 0) {
                 self.status = IPCFooterRefresh_HasNoMoreData;
                 if (self.completeBlock) {
-                    self.completeBlock();
+                    self.completeBlock(nil);
                 }
             }
         }
@@ -69,7 +69,7 @@
     if ([self.customerArray count] == 0) {
         self.status = IPCFooterRefresh_NoData;
         if (self.completeBlock)
-            self.completeBlock();
+            self.completeBlock(nil);
     }
 }
 

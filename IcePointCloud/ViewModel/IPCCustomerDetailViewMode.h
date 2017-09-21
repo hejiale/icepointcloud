@@ -20,7 +20,6 @@
 @property (assign, nonatomic, readwrite) NSInteger  orderCurrentPage;//Orders for the current page
 @property (assign, nonatomic, readwrite) BOOL         isLoadMoreOrder;//If there are more orders to load
 
-
 - (void)resetData;
 - (void)queryCustomerDetailInfo:(void(^)())completeBlock;
 - (void)queryHistotyOrderList:(void(^)())completeBlock;

@@ -92,7 +92,9 @@
     [IPCPayOrderRequestManager queryEmployeWithKeyword:keyWord SuccessBlock:^(id responseValue){
          self.employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showError:@"查询员工信息失败 ！"];
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"查询员工信息失败 ！"];
+         }
      }];
 }
 
@@ -101,7 +103,9 @@
     [IPCCustomerRequestManager getMemberLevelWithSuccessBlock:^(id responseValue) {
         self.memberLevelList = [[IPCMemberLevelList alloc]initWithResponseValue:responseValue];
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"查询会员等级信息失败 ！"];
+        if ([error code] != NSURLErrorCancelled) {
+            [IPCCommonUI showError:@"查询会员等级信息失败 ！"];
+        }
     }];
 }
 
@@ -110,7 +114,9 @@
     [IPCCustomerRequestManager getCustomerTypeSuccessBlock:^(id responseValue) {
         self.customerTypeList = [[IPCCustomerTypeList alloc]initWithResponseValue:responseValue];
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"查询客户类型信息失败 ！"];
+        if ([error code] != NSURLErrorCancelled) {
+            [IPCCommonUI showError:@"查询客户类型信息失败 ！"];
+        }
     }];
 }
 

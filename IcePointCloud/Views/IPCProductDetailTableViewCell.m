@@ -29,7 +29,7 @@
     if (_glasses) {
         IPCGlassesImage *gp = [_glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gp){
-            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL] placeholderImage:[UIImage imageNamed:@""]];
+            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:gp.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
         }
 
         [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:5 WordSpace:0];

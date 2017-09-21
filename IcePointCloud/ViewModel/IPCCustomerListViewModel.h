@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^CompleteBlock)();
+typedef void(^CompleteBlock)(NSError *error);
 
 @interface IPCCustomerListViewModel : NSObject
 
@@ -18,7 +18,7 @@ typedef void(^CompleteBlock)();
 @property (nonatomic, copy) CompleteBlock    completeBlock;
 @property (nonatomic, strong) NSMutableArray<IPCCustomerMode *> * customerArray;
 
-- (void)queryCustomerList:(void(^)())complete;
+- (void)queryCustomerList:(void(^)(NSError *error))complete;
 - (void)resetData;
 
 @end

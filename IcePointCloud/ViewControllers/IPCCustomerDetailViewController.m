@@ -103,8 +103,10 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 
 #pragma mark //Set UI
-- (void)loadOrderDetailView:(IPCCustomerOrderMode *)orderObject{
+- (void)loadOrderDetailView:(IPCCustomerOrderMode *)orderObject
+{
     [self.view endEditing:YES];
+    
     __weak typeof (self) weakSelf = self;
     self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
                                                                  OrderNum:orderObject.orderCode
@@ -136,11 +138,13 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
  *  Load More
  */
 - (void)loadMoreOrderData{
+    [IPCCommonUI show];
     __weak typeof (self) weakSelf = self;
     self.customerViewMode.orderCurrentPage++;
     [self.customerViewMode queryHistotyOrderList:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.detailTableView reloadData];
+        [IPCCommonUI hiden];
     }];
 }
 
@@ -167,6 +171,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 {
     [self.updateCustomerView removeFromSuperview];
     [self.detailOrderView removeFromSuperview];
+ 
     if (isLoad) {
         [self requestCustomerDetailInfo];
     }
@@ -284,7 +289,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomerHistoryOrderCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            if (self.customerViewMode.orderList.count) {
+            if (self.customerViewMode.orderList.count && self.customerViewMode) {
                 IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
                 cell.customerOrder = order;
             }
@@ -310,12 +315,14 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 3 && indexPath.row > 0) {
-        if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1) {
-            [self loadMoreOrderData];
-        }else{
-            IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
-            [self loadOrderDetailView:order];
+    if (self.customerViewMode && self.customerViewMode.orderList.count) {
+        if (indexPath.section == 3 && indexPath.row > 0) {
+            if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1) {
+                [self loadMoreOrderData];
+            }else{
+                IPCCustomerOrderMode * order = self.customerViewMode.orderList[indexPath.row-1];
+                [self loadOrderDetailView:order];
+            }
         }
     }
 }

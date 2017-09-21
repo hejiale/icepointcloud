@@ -13,7 +13,7 @@
 #import "IPCFilterGlassesView.h"
 
 
-typedef void(^CompleteBlock)();
+typedef void(^CompleteBlock)(NSError * error);
 typedef void(^FilterSucceedBlock)(NSError * error);
 typedef void(^ReloadFilterCloseBlock)();
 typedef void(^ReloadFilterUnCloseBlock)();
@@ -39,7 +39,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, copy) NSString * currentStoreId;
 
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                            Complete:(void(^)())complete;
+                            Complete:(void(^)(NSError * error))complete;
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess;
 - (void)loadFilterCategory:(id)owner InView:(UIView *)coverView  ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose;
 - (void)queryBatchDegree;

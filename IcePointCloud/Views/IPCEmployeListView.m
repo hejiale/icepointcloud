@@ -76,7 +76,9 @@ typedef void(^DismissBlock)();
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.employeTableView.isBeginLoad = NO;
          [strongSelf.employeTableView reloadData];
-         [IPCCommonUI showError:@"查询员工信息失败！"];
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"查询员工信息失败！"];
+         }
      }];
 }
 

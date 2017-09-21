@@ -42,9 +42,8 @@
 
 #pragma mark //Get Data
 - (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                            Complete:(void(^)())complete
+                            Complete:(void(^)(NSError * error))complete
 {
-//    self.currentStoreId = @"249";
     self.completeBlock = complete;
     
     [self getGlassesListInfoWithPage:self.currentPage
@@ -105,9 +104,9 @@
                                                   [strongSelf parseNormalGlassesData:responseValue];
                                               } FailureBlock:^(NSError *error) {
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                  strongSelf.status == IPCRefreshError;
+                                                  strongSelf.status = IPCRefreshError;
                                                   if (strongSelf.completeBlock) {
-                                                      strongSelf.completeBlock();
+                                                      strongSelf.completeBlock(error);
                                                   }
                                               }];
 }
@@ -219,13 +218,13 @@
             }
             
             if (self.completeBlock) {
-                self.completeBlock();
+                self.completeBlock(nil);
             }
         }else{
             if ([self.glassesList count] > 0) {
                 self.status = IPCFooterRefresh_HasNoMoreData;
                 if (self.completeBlock) {
-                    self.completeBlock();
+                    self.completeBlock(nil);
                 }
             }
         }
@@ -234,7 +233,7 @@
     if ([self.glassesList count] == 0) {
         self.status = IPCFooterRefresh_NoData;
         if (self.completeBlock)
-        self.completeBlock();
+        self.completeBlock(nil);
     }
 }
 

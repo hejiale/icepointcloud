@@ -28,9 +28,7 @@
 #pragma mark //Warning prompt box
 + (void)show
 {
-    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
-        [IPCCommonUI hiden];
-    }
+    [IPCCommonUI hiden];
     
     __block NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
     
@@ -56,9 +54,7 @@
 
 + (void)showInfo:(NSString *)message
 {
-    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
-        [IPCCommonUI hiden];
-    }
+    [IPCCommonUI hiden];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
     hud.mode = MBProgressHUDModeText;
@@ -69,9 +65,7 @@
 
 + (void)showSuccess:(NSString *)message
 {
-    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
-        [IPCCommonUI hiden];
-    }
+    [IPCCommonUI hiden];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
     hud.mode = MBProgressHUDModeCustomView;
@@ -87,9 +81,7 @@
 
 + (void)showError:(NSString *)message
 {
-    if ([[MBProgressHUD HUDForView:[[UIApplication sharedApplication].delegate window]] superview]) {
-        [IPCCommonUI hiden];
-    }
+    [IPCCommonUI hiden];
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[[UIApplication sharedApplication].delegate window] animated:YES];
     hud.mode = MBProgressHUDModeCustomView;

@@ -98,7 +98,10 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
          }
      } FailureBlock:^(NSError *error) {
          [self.saveButton jk_hideIndicator];
-         [IPCCommonUI showError:@"更改用户信息失败!"];
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"更改用户信息失败!"];
+         }
+         
      }];
 }
 

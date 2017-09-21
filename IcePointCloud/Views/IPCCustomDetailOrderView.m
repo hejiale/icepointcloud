@@ -66,8 +66,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
     self.orderDetailTableView.estimatedSectionFooterHeight = 0;
     self.orderDetailTableView.estimatedSectionHeaderHeight = 0;
-    self.orderDetailTableView.emptyAlertTitle = @"暂未查询到订单详细信息，请重试！";
-    self.orderDetailTableView.emptyAlertImage = [UIImage imageNamed:@"exception_history"];
     self.orderDetailTableView.isBeginLoad = YES;
     [self queryOrderDetail];
     
@@ -132,7 +130,9 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.orderDetailTableView.isBeginLoad = NO;
          [strongSelf.orderDetailTableView reloadData];
-         [IPCCommonUI showError:@"查询用户订单详情失败!"];
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"查询用户订单详情失败!"];
+         }
      }];
 }
 

@@ -168,7 +168,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self.normalLensStepperView setHidden:YES];
         self.normalLensHeight.constant -= 55;
     }
-    [self.normalLensImageView sd_setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL]];
+    [self.normalLensImageView sd_setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
     [self.normalLensNameLabel setText:self.glasses.glassName];
     [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
 }
@@ -180,7 +180,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         make.centerX.equalTo(self.mas_centerX).with.offset(0);
         make.centerY.equalTo(self.mas_centerY).with.offset(0);
     }];
-    [self. customsizedImageView  sd_setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL]];
+    [self. customsizedImageView  sd_setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
     [self.customsizedNameLabel setText:self.glasses.glassName];
     [self.customsizedPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
 }

@@ -57,7 +57,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
 }
 
@@ -132,17 +131,26 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)loadCustomerList
 {
     __weak typeof(self) weakSelf = self;
-    [self.viewModel queryCustomerList:^{
+    [self.viewModel queryCustomerList:^(NSError *error){
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (self.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
+            [self.refreshFooter noticeNoDataStatus];
+        }else if (self.viewModel.status == IPCRefreshError){
+            if ([error code] == NSURLErrorCancelled) {
+                if (strongSelf.viewModel.customerArray.count == 0) {
+                    [strongSelf refreshData];
+                    return;
+                }
+            }else{
+                [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
+            }
+        }
         [strongSelf reloadCustomerListView];
     }];
 }
 
  - (void)reloadCustomerListView
 {
-    if (self.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
-        [self.refreshFooter noticeNoDataStatus];
-    }
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
     if (self.refreshHeader.isRefreshing) {

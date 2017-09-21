@@ -93,6 +93,7 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
     [[IPCCurrentCustomer sharedManager]clearData];
     [[IPCShoppingCart sharedCart] clear];
     [[IPCPayOrderManager sharedManager] resetData];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [[[UIApplication sharedApplication].keyWindow subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [[UIApplication sharedApplication].keyWindow setRootViewController:[[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil]];

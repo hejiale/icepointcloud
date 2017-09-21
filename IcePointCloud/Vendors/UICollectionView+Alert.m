@@ -119,6 +119,11 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
     [self bringSubviewToFront:self.loadingAlertView];
 }
 
+- (void)hideRefresh
+{
+    self.isBeginLoad = NO;
+    [self customReload];
+}
 
 - (IPCEmptyAlertView *)emptyAlertView{
     return objc_getAssociatedObject(self, emptyAlertViewKey);
@@ -127,7 +132,6 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 - (void)setEmptyAlertView:(IPCEmptyAlertView *)emptyAlertView{
     objc_setAssociatedObject(self, emptyAlertViewKey, emptyAlertView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
-
 
 - (IPCEmptyAlertView *)errorNetworkAlertView{
     return objc_getAssociatedObject(self, errorNetworkKey);
@@ -176,5 +180,6 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 - (void)setIsBeginLoad:(BOOL)isBeginLoad{
     objc_setAssociatedObject(self, isBeginLoadKey, @(isBeginLoad), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
+
 
 @end

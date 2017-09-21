@@ -332,7 +332,10 @@
     [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
         [IPCPayOrderManager sharedManager].isTrade = [responseValue boolValue];
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"查询积分定制规则失败！"];
+        if ([error code] != NSURLErrorCancelled) {
+            [IPCCommonUI showError:@"查询积分定制规则失败！"];
+        }
+        
     }];
 }
 

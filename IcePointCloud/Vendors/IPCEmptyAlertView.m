@@ -23,7 +23,7 @@
                    AlertTitle:(NSString *)title
 {
     self = [super initWithFrame:frame];
-    if (self) {        
+    if (self) {
         if (images && images.count) {
             UIImage * image = images[0];
             
@@ -38,18 +38,18 @@
             [self.alertImageView setAnimationRepeatCount:0];
             [self.alertImageView setAnimationDuration:images.count * 0.1];
             [self.alertImageView startAnimating];
-        }else if(imageName && imageName.length)
+        }else if(imageName && [imageName isKindOfClass:[NSString class]])
         {
-            __block UIImage * image = [UIImage imageNamed:imageName];
-            
+            UIImage * image = [UIImage imageNamed:imageName];
+            [self.alertImageView setImage:image];
             [self addSubview:self.alertImageView];
+            
             [self.alertImageView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(self.mas_centerX);
                 make.centerY.mas_equalTo(self.mas_centerY);
                 make.width.mas_equalTo(image.size.width);
                 make.height.mas_equalTo(image.size.height);
             }];
-            [self.alertImageView setImage:[UIImage imageNamed:imageName]];
         }
         
         if (title && title.length) {

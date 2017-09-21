@@ -87,14 +87,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
     [self removeCover];
     
     if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
 }
 
@@ -365,10 +365,19 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 #pragma mark //Request Data
 - (void)loadGlassesListData:(void(^)())complete{
     __weak typeof (self) weakSelf = self;
-    [self.glassListViewMode reloadGlassListDataWithIsTry:YES Complete:^(){
+    [self.glassListViewMode reloadGlassListDataWithIsTry:YES Complete:^(NSError * error){
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
             [strongSelf.refreshFooter noticeNoDataStatus];
+        }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
+            if ([error code] == NSURLErrorCancelled) {
+                if (strongSelf.glassListViewMode.glassesList.count == 0) {
+                    [strongSelf beginFilterClass];
+                    return;
+                }
+            }else{
+                [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
+            }
         }
         if (complete) {
             complete();
@@ -695,7 +704,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Reload Table View
 - (void)reload{
     [super reload];
-    
+
     [self.productTableView reloadData];
     
     if (self.compareSwitch.isOn) {

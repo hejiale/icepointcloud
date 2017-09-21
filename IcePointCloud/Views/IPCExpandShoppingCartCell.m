@@ -46,7 +46,7 @@
         self.ReloadBlock = reload;
         
         IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
-        if (gi)[self.glassesImgView sd_setImageWithURL:[NSURL URLWithString:[gi.imageURL stringByAppendingString:@"-320x160"]]];
+        if (gi)[self.glassesImgView sd_setImageWithURL:[NSURL URLWithString:[gi.imageURL stringByAppendingString:@"-320x160"]] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
         
         self.glassesNameLbl.text = _cartItem.glasses.glassName;
         self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
