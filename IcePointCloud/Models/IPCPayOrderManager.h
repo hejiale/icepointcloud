@@ -33,7 +33,7 @@
 @property (nonatomic, assign) BOOL      isInsertRecordStatus;//是否正在输入付款记录的状态
 
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
-@property (nonatomic, copy, readwrite) NSString * currentStoreId;//当前店铺Id
+@property (nonatomic, strong, readwrite) IPCWareHouse * currentHouse;//当前店铺
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;//付款记录方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩

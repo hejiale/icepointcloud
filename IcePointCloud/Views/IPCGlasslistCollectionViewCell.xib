@@ -70,14 +70,6 @@
                             <action selector="reduceCartAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="4ur-Hi-Ken"/>
                         </connections>
                     </button>
-                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xA6-Vh-bnS">
-                        <rect key="frame" x="50" y="20" width="231" height="180"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="180" id="Ehh-1z-n1f"/>
-                        </constraints>
-                    </imageView>
                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_unStock" translatesAutoresizingMaskIntoConstraints="NO" id="nud-R4-Mta">
                         <rect key="frame" x="20" y="220" width="39" height="17"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -104,39 +96,60 @@
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="highlightedColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjq-UH-mLY">
+                        <rect key="frame" x="0.0" y="0.0" width="331" height="200"/>
+                        <subviews>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KF4-Lb-Kx2">
+                                <rect key="frame" x="25" y="100" width="280" height="0.0"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="280" id="2tA-ae-g0Y"/>
+                                    <constraint firstAttribute="height" id="6ns-et-JWX"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="200" id="KO9-jj-0DN"/>
+                            <constraint firstItem="KF4-Lb-Kx2" firstAttribute="centerY" secondItem="kjq-UH-mLY" secondAttribute="centerY" id="XYh-DK-gI8"/>
+                            <constraint firstItem="KF4-Lb-Kx2" firstAttribute="centerX" secondItem="kjq-UH-mLY" secondAttribute="centerX" id="agw-6z-jQa"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="YIP-c3-VGM" firstAttribute="top" secondItem="HLG-0X-Gih" secondAttribute="bottom" constant="10" id="0w1-3O-lUP"/>
                 <constraint firstAttribute="trailing" secondItem="YIP-c3-VGM" secondAttribute="trailing" constant="20" id="6XR-Xz-qvE"/>
-                <constraint firstAttribute="trailing" secondItem="xA6-Vh-bnS" secondAttribute="trailing" constant="50" id="96v-EH-ID2"/>
+                <constraint firstItem="kjq-UH-mLY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ATL-fR-Bhd"/>
                 <constraint firstAttribute="trailing" secondItem="ba3-fr-oCi" secondAttribute="trailing" constant="20" id="Cge-ga-qXG"/>
-                <constraint firstItem="nud-R4-Mta" firstAttribute="top" secondItem="xA6-Vh-bnS" secondAttribute="bottom" constant="20" id="EyW-Rp-XW7"/>
                 <constraint firstItem="nud-R4-Mta" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="GRx-re-ICh"/>
                 <constraint firstAttribute="bottom" secondItem="tjp-2f-ED0" secondAttribute="bottom" constant="30" id="H0O-nV-rGF"/>
                 <constraint firstItem="tjp-2f-ED0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="H6Z-Kn-5Ia"/>
-                <constraint firstItem="xA6-Vh-bnS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="20" id="LV4-gO-Ljm"/>
                 <constraint firstItem="ba3-fr-oCi" firstAttribute="leading" secondItem="zT7-2e-guu" secondAttribute="trailing" id="MBC-eJ-21E"/>
                 <constraint firstItem="ldI-Dd-6ZV" firstAttribute="leading" secondItem="zT7-2e-guu" secondAttribute="trailing" id="Q9P-sh-bPh"/>
                 <constraint firstAttribute="bottom" secondItem="ba3-fr-oCi" secondAttribute="bottom" constant="30" id="QCn-kz-KUH"/>
-                <constraint firstItem="xA6-Vh-bnS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="50" id="S25-eL-UiO"/>
+                <constraint firstItem="kjq-UH-mLY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Rsp-Ep-d65"/>
                 <constraint firstAttribute="bottom" secondItem="zT7-2e-guu" secondAttribute="bottom" constant="30" id="WCo-kU-arb"/>
+                <constraint firstAttribute="trailing" secondItem="kjq-UH-mLY" secondAttribute="trailing" id="Zuc-CU-15A"/>
+                <constraint firstItem="HLG-0X-Gih" firstAttribute="top" secondItem="kjq-UH-mLY" secondAttribute="bottom" constant="20" id="ceB-rz-JzE"/>
                 <constraint firstAttribute="bottom" secondItem="ldI-Dd-6ZV" secondAttribute="bottom" constant="30" id="ciU-CD-im0"/>
                 <constraint firstItem="YIP-c3-VGM" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="dkM-EX-3Sw"/>
                 <constraint firstItem="HLG-0X-Gih" firstAttribute="leading" secondItem="nud-R4-Mta" secondAttribute="trailing" constant="5" id="hZ6-Ap-7CY"/>
-                <constraint firstItem="HLG-0X-Gih" firstAttribute="top" secondItem="xA6-Vh-bnS" secondAttribute="bottom" constant="20" id="lFf-8g-OsZ"/>
+                <constraint firstItem="nud-R4-Mta" firstAttribute="top" secondItem="kjq-UH-mLY" secondAttribute="bottom" constant="20" id="wsA-XR-f1N"/>
             </constraints>
             <size key="customSize" width="331" height="308"/>
             <connections>
                 <outlet property="addCartButton" destination="ba3-fr-oCi" id="rQh-YD-U60"/>
                 <outlet property="cartNumLabel" destination="zT7-2e-guu" id="3kh-Wd-b18"/>
                 <outlet property="defaultImageView" destination="HLG-0X-Gih" id="cgm-lD-CeV"/>
+                <outlet property="imageContentView" destination="kjq-UH-mLY" id="Q2C-mi-dAr"/>
+                <outlet property="imageHeight" destination="6ns-et-JWX" id="ihG-zw-hDQ"/>
                 <outlet property="labelHeightConstraint" destination="Djy-mQ-nGY" id="p4x-96-70n"/>
                 <outlet property="noStockImageView" destination="nud-R4-Mta" id="HF9-3r-uWH"/>
                 <outlet property="noStockWidth" destination="A5v-tt-hsS" id="Agh-Jx-OGu"/>
                 <outlet property="priceLabel" destination="tjp-2f-ED0" id="2yG-Y4-QN9"/>
-                <outlet property="productImageView" destination="xA6-Vh-bnS" id="rXC-VD-iyh"/>
+                <outlet property="productImageView" destination="KF4-Lb-Kx2" id="g3u-kC-dp8"/>
                 <outlet property="productNameLabel" destination="YIP-c3-VGM" id="Op2-gM-og1"/>
                 <outlet property="reduceButton" destination="ldI-Dd-6ZV" id="omf-xL-EM3"/>
                 <outlet property="reduceButtonLeading" destination="Q9P-sh-bPh" id="B9k-sZ-oVq"/>

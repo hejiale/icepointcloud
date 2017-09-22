@@ -46,10 +46,8 @@
         NSLog(@"---error %@",errorMessage.message);
         
         if (errorMessage){
-            if (errorMessage.code == kIPCServiceErrorCode){
-                if (errorMessage.message) {
-                    return HTTPError(errorMessage.message, kIPCServiceErrorCode);
-                }
+            if (errorMessage.message) {
+                return HTTPError(errorMessage.message, NSURLErrorDomain);
             }
         }
     }

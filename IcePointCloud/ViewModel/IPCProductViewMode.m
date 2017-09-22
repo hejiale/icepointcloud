@@ -52,7 +52,7 @@
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
                             IsTrying:isTry
-                             StoreId:self.currentStoreId];
+                             StoreId:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""];
 }
 
 
@@ -189,16 +189,6 @@
          if (complete) {
              complete();
          }
-     }];
-}
-
-- (void)queryRepository
-{
-    [IPCGoodsRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
-     {
-         NSLog(@"----Repository %@", responseValue);
-     } FailureBlock:^(NSError *error) {
-         
      }];
 }
 

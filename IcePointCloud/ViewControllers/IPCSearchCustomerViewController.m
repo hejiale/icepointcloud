@@ -16,7 +16,9 @@
 static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentifier";
 
 @interface IPCSearchCustomerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewControllerDelegate>
-
+{
+    BOOL isCancelRequest;
+}
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *insertButton;
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
@@ -48,7 +50,12 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [self setNavigationBarStatus:YES];
     }
     [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
-    [self.customerCollectionView reloadData];
+    
+    if (isCancelRequest && self.viewModel.currentPage <= 1) {
+        [self refreshData];
+    }else{
+        [self.customerCollectionView reloadData];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -137,10 +144,8 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
             [self.refreshFooter noticeNoDataStatus];
         }else if (self.viewModel.status == IPCRefreshError){
             if ([error code] == NSURLErrorCancelled) {
-                if (strongSelf.viewModel.customerArray.count == 0) {
-                    [strongSelf refreshData];
-                    return;
-                }
+                isCancelRequest = YES;
+                return;
             }else{
                 [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
             }
@@ -151,8 +156,10 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
  - (void)reloadCustomerListView
 {
+    isCancelRequest = NO;
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
+    
     if (self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
     }

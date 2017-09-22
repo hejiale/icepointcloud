@@ -17,6 +17,7 @@ NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingC
 NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCountKey";
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerkey";
 NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNotification";
+NSString *const  IPCChooseWareHouseNotification       = @"IPCChooseWareHouseNotification";
 
 @implementation IPCAppManager
 
@@ -183,6 +184,23 @@ NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNoti
         imageName = @"icon_ wallet";
     }
     return [UIImage imageNamed:imageName];
+}
+
+- (void)loadWareHouse:(void (^)(NSError *))complete
+{
+    [IPCGoodsRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
+     {
+         self.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
+         self.currentWareHouse = self.wareHouse.wareHouseArray[0];
+         
+         if (complete) {
+             complete(nil);
+         }
+     } FailureBlock:^(NSError *error) {
+         if (complete) {
+             complete(error);
+         }
+     }];
 }
 
 

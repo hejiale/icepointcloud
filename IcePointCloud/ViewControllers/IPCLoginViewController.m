@@ -91,7 +91,6 @@
     }];
 }
 
-#pragma mark //Request Methods
 - (void)userLoginMethod
 {
     NSString *username = [self.usernameTf.text jk_trimmingWhitespace];
@@ -109,7 +108,7 @@
     [self signinRequestWithUserName:username Password:password];
 }
 
-
+#pragma mark //Request Methods
 - (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password
 {
     __weak typeof (self) weakSelf = self;
@@ -118,12 +117,24 @@
          __strong typeof (weakSelf) strongSelf = weakSelf;
         [IPCAppManager sharedManager].profile = [IPCProfileResult mj_objectWithKeyValues:responseValue];
         [strongSelf syncUserAccountHistory:userName];
-        [strongSelf showMainRootViewController];
-        [strongSelf.loginButton jk_hideIndicator];
+         [strongSelf loadStoreWareHouse];
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
         [IPCCommonUI showError:@"用户登录失败!"];
+    }];
+}
+
+- (void)loadStoreWareHouse
+{
+    [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
+//        if (!error) {
+//            [self showMainRootViewController];
+//        }else{
+//            [IPCCommonUI showError:@"用户登录失败!"];
+//        }
+        [self showMainRootViewController];
+        [self.loginButton jk_hideIndicator];
     }];
 }
 

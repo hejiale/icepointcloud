@@ -51,6 +51,7 @@
 #import "IPCPointValueMode.h"
 #import "IPCHeadImage.h"
 #import "IPCTryMatch.h"
+#import "IPCWareHouse.h"
 /**
  *  Category
  */

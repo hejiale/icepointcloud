@@ -12,8 +12,11 @@
 
 - (void)showWithLogout:(void(^)())logout
            UpdateBlock:(void(^)())update
-           QRCodeBlock:(void(^)())qrcode;
+           QRCodeBlock:(void(^)())qrcode
+        WareHouseBlock:(void(^)())wareHouse;
 
+- (void)reload;
 - (void)dismiss:(void(^)())complete;
+
 
 @end

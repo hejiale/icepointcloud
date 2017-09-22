@@ -11,9 +11,12 @@
 
 static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 
-@interface IPCUpdatePasswordView()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCUpdatePasswordView()<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *updateTableView;
+@property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UITextField *oldWordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *insertWordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmWordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
 @property (copy, nonatomic) void(^CloseBlock)(void);
 
@@ -27,10 +30,13 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCUpdatePasswordView" owner:self];
         [self addSubview:view];
         
-        [self.updateTableView setTableHeaderView:[[UIView alloc]init]];
-        [self.updateTableView setTableFooterView:[[UIView alloc]init]];
-        self.updateTableView.estimatedSectionHeaderHeight = 0;
-        self.updateTableView.estimatedSectionFooterHeight = 0;
+        [self.topView addBottomLine];
+        [self.oldWordTextField addBorder:3 Width:0.5 Color:nil];
+        [self.insertWordTextField addBorder:3 Width:0.5 Color:nil];
+        [self.confirmWordTextField addBorder:3 Width:0.5 Color:nil];
+        [self.oldWordTextField setLeftSpace:10];
+        [self.insertWordTextField setLeftSpace:10];
+        [self.confirmWordTextField setLeftSpace:10];
     }
     return self;
 }
@@ -38,8 +44,6 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 - (void)showWithClose:(void (^)())closeBlock
 {
     self.CloseBlock = closeBlock;
-
-    [self.updateTableView setTableFooterView:[[UIView alloc]init]];
 
     [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.frame;
@@ -69,9 +73,9 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 
 #pragma mark //Request Data
 - (void)updateNewPassword{
-    __block NSString *oldPwd = [[self inputText:0].text jk_trimmingWhitespace];
-    __block NSString *pwd     = [[self inputText:1].text jk_trimmingWhitespace];
-    __block NSString *cofirmpwd   = [[self inputText:2].text jk_trimmingWhitespace];
+    __block NSString *oldPwd = [self.oldWordTextField.text jk_trimmingWhitespace];
+    __block NSString *pwd     = [self.insertWordTextField.text jk_trimmingWhitespace];
+    __block NSString *cofirmpwd   = [self.confirmWordTextField.text jk_trimmingWhitespace];
     
     if (oldPwd.length && pwd.length && cofirmpwd.length) {
         if ([pwd isEqualToString:cofirmpwd]) {
@@ -81,7 +85,9 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
                                                     SuccessBlock:^(id responseValue)
              {
                  [IPCCommonUI hiden];
-                 self.CloseBlock();
+                 if (self.CloseBlock) {
+                     self.CloseBlock;
+                 }
              } FailureBlock:^(NSError *error) {
                  if ([error code] != NSURLErrorCancelled) {
                      [IPCCommonUI showError:@"修改用户密码失败!"];
@@ -93,50 +99,16 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
     }
 }
 
-#pragma mark //UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    IPCPersonInputCell * cell = [tableView dequeueReusableCellWithIdentifier:inputIdentifier];
-    if (!cell) {
-        cell = [[UINib nibWithNibName:@"IPCPersonInputCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        [cell.inputTextField setSecureTextEntry:YES];
-        [cell.inputTextField setTextAlignment:NSTextAlignmentCenter];
-    }
-    if (indexPath.row == 0) {
-        [cell.classNameLabel setText:@"原密码"];
-    }else if (indexPath.row == 1){
-        [cell.classNameLabel setText:@"新密码"];
+#pragma mark //UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if ([textField isEqual:self.oldWordTextField]) {
+        [self.insertWordTextField becomeFirstResponder];
+    }else if ([textField isEqual:self.insertWordTextField]){
+        [self.confirmWordTextField becomeFirstResponder];
     }else{
-        [cell.classNameLabel setText:@"确认新密码"];
+        [textField resignFirstResponder];
     }
-    return cell;
+    return YES;
 }
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 50;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 5;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.1;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIView * headView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 5)];
-    [headView setBackgroundColor:[UIColor clearColor]];
-    return headView;
-}
-
-- (UITextField *)inputText:(NSInteger)row{
-    IPCPersonInputCell * cell = (IPCPersonInputCell *)[self.updateTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:0]];
-    return cell.inputTextField;
-}
-
 
 @end

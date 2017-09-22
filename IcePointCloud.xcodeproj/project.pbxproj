@@ -253,7 +253,13 @@
 		CB80F4381F21B0F800F4A9FE /* IPCShowOptometryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB80F4371F21B0F800F4A9FE /* IPCShowOptometryView.xib */; };
 		CB84F3551F2082F700EEBC29 /* IPCPayOrderCustomerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB84F3531F2082F700EEBC29 /* IPCPayOrderCustomerCell.m */; };
 		CB84F3561F2082F700EEBC29 /* IPCPayOrderCustomerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB84F3541F2082F700EEBC29 /* IPCPayOrderCustomerCell.xib */; };
+		CB8675CA1F73C02600CAC9BD /* IPCWarehouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8675C91F73C02600CAC9BD /* IPCWarehouseView.m */; };
+		CB8675CD1F73C07000CAC9BD /* IPCWarehouseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8675CC1F73C07000CAC9BD /* IPCWarehouseView.xib */; };
 		CB869D131F71FFB500D24923 /* IPCCustomerListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB869D121F71FFB500D24923 /* IPCCustomerListViewModel.m */; };
+		CB8F71681F74A10E00EEADCF /* IPCWareHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F71661F74A10E00EEADCF /* IPCWareHouseCell.m */; };
+		CB8F71691F74A10E00EEADCF /* IPCWareHouseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB8F71671F74A10E00EEADCF /* IPCWareHouseCell.xib */; };
+		CB8F716C1F74A9ED00EEADCF /* IPCWareHouseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F716B1F74A9ED00EEADCF /* IPCWareHouseResult.m */; };
+		CB8F716F1F74E14A00EEADCF /* IPCWareHouse.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8F716E1F74E14A00EEADCF /* IPCWareHouse.m */; };
 		CB9B1BF31F04CCCE00642242 /* IPCInsertCustomerViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CB9B1BF21F04CCCE00642242 /* IPCInsertCustomerViewModel.m */; };
 		CBA749A71E9DB5D200160088 /* IPCInsertCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA749A61E9DB5D200160088 /* IPCInsertCustomer.m */; };
 		CBA749AB1E9DC25800160088 /* IPCParameterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA749A91E9DC25800160088 /* IPCParameterTableViewController.m */; };
@@ -735,8 +741,18 @@
 		CB84F3521F2082F700EEBC29 /* IPCPayOrderCustomerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderCustomerCell.h; sourceTree = "<group>"; };
 		CB84F3531F2082F700EEBC29 /* IPCPayOrderCustomerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderCustomerCell.m; sourceTree = "<group>"; };
 		CB84F3541F2082F700EEBC29 /* IPCPayOrderCustomerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderCustomerCell.xib; sourceTree = "<group>"; };
+		CB8675C81F73C02600CAC9BD /* IPCWarehouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWarehouseView.h; sourceTree = "<group>"; };
+		CB8675C91F73C02600CAC9BD /* IPCWarehouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWarehouseView.m; sourceTree = "<group>"; };
+		CB8675CC1F73C07000CAC9BD /* IPCWarehouseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWarehouseView.xib; sourceTree = "<group>"; };
 		CB869D111F71FFB500D24923 /* IPCCustomerListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerListViewModel.h; sourceTree = "<group>"; };
 		CB869D121F71FFB500D24923 /* IPCCustomerListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerListViewModel.m; sourceTree = "<group>"; };
+		CB8F71651F74A10E00EEADCF /* IPCWareHouseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWareHouseCell.h; sourceTree = "<group>"; };
+		CB8F71661F74A10E00EEADCF /* IPCWareHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouseCell.m; sourceTree = "<group>"; };
+		CB8F71671F74A10E00EEADCF /* IPCWareHouseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWareHouseCell.xib; sourceTree = "<group>"; };
+		CB8F716A1F74A9ED00EEADCF /* IPCWareHouseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWareHouseResult.h; sourceTree = "<group>"; };
+		CB8F716B1F74A9ED00EEADCF /* IPCWareHouseResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouseResult.m; sourceTree = "<group>"; };
+		CB8F716D1F74E14A00EEADCF /* IPCWareHouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWareHouse.h; sourceTree = "<group>"; };
+		CB8F716E1F74E14A00EEADCF /* IPCWareHouse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouse.m; sourceTree = "<group>"; };
 		CB9B1BF11F04CCCE00642242 /* IPCInsertCustomerViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomerViewModel.h; sourceTree = "<group>"; };
 		CB9B1BF21F04CCCE00642242 /* IPCInsertCustomerViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCInsertCustomerViewModel.m; sourceTree = "<group>"; };
 		CBA749A51E9DB5D200160088 /* IPCInsertCustomer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertCustomer.h; sourceTree = "<group>"; };
@@ -962,7 +978,7 @@
 			name = ProductDetail;
 			sourceTree = "<group>";
 		};
-		046CF1411E5FDE3F0098B6BF /* shoppingCart */ = {
+		046CF1411E5FDE3F0098B6BF /* ShoppingCart */ = {
 			isa = PBXGroup;
 			children = (
 				044A91AB1E56943A00C9DF1A /* IPCShoppingCartView.h */,
@@ -970,7 +986,7 @@
 				046CF1471E5FE1280098B6BF /* IPCShoppingCartView.xib */,
 				04186E071E6902E400758646 /* cell */,
 			);
-			name = shoppingCart;
+			name = ShoppingCart;
 			sourceTree = "<group>";
 		};
 		0470ADA51D407042003AF4F4 /* Customer */ = {
@@ -1015,6 +1031,10 @@
 			children = (
 				04760B0B1D3C80B0003A4E16 /* IPCProfileResult.h */,
 				04760B0C1D3C80B0003A4E16 /* IPCProfileResult.m */,
+				CB8F716A1F74A9ED00EEADCF /* IPCWareHouseResult.h */,
+				CB8F716B1F74A9ED00EEADCF /* IPCWareHouseResult.m */,
+				CB8F716D1F74E14A00EEADCF /* IPCWareHouse.h */,
+				CB8F716E1F74E14A00EEADCF /* IPCWareHouse.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1440,6 +1460,9 @@
 				04CBD98F1D58808A00C7CAA4 /* IPCQRCodeView.h */,
 				04CBD9901D58808A00C7CAA4 /* IPCQRCodeView.m */,
 				0482B0CB1D596F990099AFD3 /* IPCQRCodeView.xib */,
+				CB8675C81F73C02600CAC9BD /* IPCWarehouseView.h */,
+				CB8675C91F73C02600CAC9BD /* IPCWarehouseView.m */,
+				CB8675CC1F73C07000CAC9BD /* IPCWarehouseView.xib */,
 				04CBD98C1D586D4300C7CAA4 /* cell */,
 			);
 			name = PersonCenter;
@@ -1463,6 +1486,9 @@
 				04CBD9741D585A0900C7CAA4 /* IPCPersonTitleCell.h */,
 				04CBD9751D585A0900C7CAA4 /* IPCPersonTitleCell.m */,
 				04CBD9761D585A0900C7CAA4 /* IPCPersonTitleCell.xib */,
+				CB8F71651F74A10E00EEADCF /* IPCWareHouseCell.h */,
+				CB8F71661F74A10E00EEADCF /* IPCWareHouseCell.m */,
+				CB8F71671F74A10E00EEADCF /* IPCWareHouseCell.xib */,
 			);
 			name = cell;
 			sourceTree = "<group>";
@@ -1624,7 +1650,7 @@
 				049753B71D4AF49C00E6579F /* Product */,
 				046497811D483E6300137A3E /* ProductDetail */,
 				CB91871F1E8CF66400D59487 /* ShareChat */,
-				046CF1411E5FDE3F0098B6BF /* shoppingCart */,
+				046CF1411E5FDE3F0098B6BF /* ShoppingCart */,
 				CB1234EF1E762D3400AB29DF /* Sidebar */,
 				04C555411D1B78C80083496D /* TakeGlasses */,
 			);
@@ -2483,6 +2509,7 @@
 				CBC75A6B1F0B8A6B0029F956 /* IPCManagerAddressCell.xib in Resources */,
 				CBBB4CA51EE54945002BA911 /* IPCPayTypeRecordCell.xib in Resources */,
 				CBAE2B051EE674E30081B0BB /* IPCPayTypeRecordView.xib in Resources */,
+				CB8F71691F74A10E00EEADCF /* IPCWareHouseCell.xib in Resources */,
 				043B87581DBDF6F300AFB858 /* IPCOrderDetailProductPriceCell.xib in Resources */,
 				CBD7B1561EE7A8FA008EE3E3 /* IPCCustomDetailOrderPayRecordView.xib in Resources */,
 				CB7C41F91E9B62BC008174A6 /* IPCAddressView.xib in Resources */,
@@ -2522,6 +2549,7 @@
 				9E5C858B1B60E5D300A879BB /* IPCGlassDetailsViewController.xib in Resources */,
 				04CBD95D1D582A4C00C7CAA4 /* IPCRootViewController.xib in Resources */,
 				CB3FB0651EB4872700DDF59F /* IPCOrderDetailTopOptometryCell.xib in Resources */,
+				CB8675CD1F73C07000CAC9BD /* IPCWarehouseView.xib in Resources */,
 				046CF1461E5FE0B00098B6BF /* IPCEditShoppingCartCell.xib in Resources */,
 				9E5C85841B60DDFB00A879BB /* IPCGlassListViewController.xib in Resources */,
 				CB3669981F4D58FA00457202 /* IPCTryGlassesCell.xib in Resources */,
@@ -2676,6 +2704,7 @@
 				CBF258C01F70F6D200F9437A /* UILabel+Extend.m in Sources */,
 				040174D41D8F8D6F00C21A92 /* IPCShareChatView.m in Sources */,
 				CBC75A7C1F0B935C0029F956 /* IPCMangerOptometryView.m in Sources */,
+				CB8F71681F74A10E00EEADCF /* IPCWareHouseCell.m in Sources */,
 				0470AD8C1D4052BF003AF4F4 /* IPCCustomerDetailViewController.m in Sources */,
 				CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */,
 				CB5CC4651E8DFFB50091D0FD /* IPCGuideViewCell.m in Sources */,
@@ -2743,6 +2772,7 @@
 				0470ADB11D407C24003AF4F4 /* IPCCustomerHistoryOrderCell.m in Sources */,
 				04BF93641E165F0C00D14A14 /* IPCPayOrderRequestManager.m in Sources */,
 				044E0EBB1E03AA4A00FD2525 /* IPCEditAddressView.m in Sources */,
+				CB8F716F1F74E14A00EEADCF /* IPCWareHouse.m in Sources */,
 				CB5CC4C81E8E245B0091D0FD /* UITableView+Alert.m in Sources */,
 				04CBD98B1D586D3C00C7CAA4 /* IPCUpdatePasswordView.m in Sources */,
 				CBC419F81F038EEA00387F9C /* IPCCustomerDetailViewMode.m in Sources */,
@@ -2766,6 +2796,7 @@
 				CBC419FF1F03900E00387F9C /* IPCPayOrderViewCellHeight.m in Sources */,
 				04443C511D23C89300596519 /* IPCFilterGlassesView.m in Sources */,
 				0470ADA11D406E6D003AF4F4 /* IPCCustomerOrderList.m in Sources */,
+				CB8675CA1F73C02600CAC9BD /* IPCWarehouseView.m in Sources */,
 				044A91AD1E56943A00C9DF1A /* IPCShoppingCartView.m in Sources */,
 				047D3FC01D43039400638526 /* IPCOrderDetailInfoCell.m in Sources */,
 				04EC1A751D6BEBDE00E9A9F7 /* IPCGlassParameterView.m in Sources */,
@@ -2833,6 +2864,7 @@
 				CB5CC4781E8E00500091D0FD /* IPCCommonUI.m in Sources */,
 				CB5CC4A71E8E00EA0091D0FD /* IPCDatePickViewController.m in Sources */,
 				CBF6CFF51F14BF9A00F02ECF /* IPCTryGlassView.m in Sources */,
+				CB8F716C1F74A9ED00EEADCF /* IPCWareHouseResult.m in Sources */,
 				04760B0A1D3C80A1003A4E16 /* IPCProductList.m in Sources */,
 				04760B0F1D3C80B0003A4E16 /* IPCProfileResult.m in Sources */,
 				04CBD9631D582CCA00C7CAA4 /* IPCPersonBaseView.m in Sources */,

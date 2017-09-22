@@ -64,7 +64,7 @@
     }
     [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
     [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
-    [parameters setObject:[IPCPayOrderManager sharedManager].currentStoreId ? : @"" forKey:@"repository"];
+    [parameters setObject:[IPCPayOrderManager sharedManager].currentHouse.wareHouseId ? : @"" forKey:@"repository"];
     
     return parameters;
 }

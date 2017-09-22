@@ -27,7 +27,9 @@
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
 @interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewControllerDelegate,IPCTryGlassesCellDelegate,UIScrollViewDelegate>
-
+{
+    BOOL isCancelRequest;
+}
 @property (weak, nonatomic) IBOutlet UITableView *productTableView;
 @property (nonatomic, weak) IBOutlet UIView *matchPanelView;
 @property (nonatomic, strong) IBOutlet UIView *modelsPicker;
@@ -83,14 +85,21 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     [self setNavigationBarStatus:YES];
     [self initMatchItems];
-    [self reload];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
+    
+    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
+        [self beginFilterClass];
+    }else{
+        [self reload];
+    }
 }
 
 
-- (void)viewDidDisappear:(BOOL)animated{
-    [super viewDidDisappear:animated];
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     
     [self removeCover];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCChooseWareHouseNotification object:nil];
     
     if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
@@ -247,19 +256,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     return _tryGlassesView;
 }
 
-- (void)updateCurrentGlass{
-    if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn)
-    {
-        [self.tryGlassesView reload];;
-        self.tableViewTopConstant.constant = (SCREEN_HEIGHT - 70)/4;
-        [self.tryGlassesView setHidden:NO];
-    }else{
-        self.tableViewTopConstant.constant = 0;
-        [self.tryGlassesView setHidden:YES];
-        [self.recommdBgView setHidden:YES];
-    }
-}
-
 - (void)showGlassesParameterView:(IPCGlasses *)glass{
     __weak typeof(self) weakSelf = self;
     self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:glass Dismiss:^{
@@ -282,6 +278,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     self.parameterView.glasses = glass;
     [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
     [self.parameterView show];
+}
+
+- (void)presentSearchViewController{
+    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    searchViewMode.searchDelegate = self;
+    searchViewMode.filterType = self.glassListViewMode.currentType;
+    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
+    [self presentViewController:searchViewMode animated:YES completion:nil];
 }
 
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
@@ -350,6 +354,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)reloadTableView
 {
+    isCancelRequest = NO;
     self.productTableView.isBeginLoad = NO;
     [self.productTableView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
@@ -371,10 +376,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.refreshFooter noticeNoDataStatus];
         }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
             if ([error code] == NSURLErrorCancelled) {
-                if (strongSelf.glassListViewMode.glassesList.count == 0) {
-                    [strongSelf beginFilterClass];
-                    return;
-                }
+                isCancelRequest = YES;
+                return;
             }else{
                 [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
             }
@@ -444,6 +447,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Delete camera image
 - (IBAction)onConfirmDeleteBtnTapped:(id)sender
 {
+    [self removeCover];
+    self.photoDeleteBtn.enabled = NO;
+    
     for (IPCMatchItem *mi in [IPCTryMatch instance].matchItems) {
         mi.frontialPhoto = nil;
         mi.photoType = IPCPhotoTypeModel;
@@ -452,8 +458,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [v updateModelPhoto];
     
     [self.signleModeView updateModelPhoto];
-    self.photoDeleteBtn.enabled = NO;
-    [self removeCover];
 }
 
 //Choose Model Method
@@ -487,6 +491,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (IBAction)onModelPhotoTapped:(UIButton *)sender
 {
     if ([self.coverView superview])[self removeCover];
+    self.photoDeleteBtn.enabled = NO;
     
     IPCMatchItem *mi = [IPCTryMatch instance].matchItems[0];
     if (mi.photoType == IPCPhotoTypeModel && mi.modelType == index) return;
@@ -497,11 +502,10 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         item.frontialPhoto = nil;
     }
     
+    [self.signleModeView updateModelPhoto];
+    
     for (IPCCompareItemView *v in self.compareBgView.subviews)
         [v updateModelPhoto];
-    
-    [self.signleModeView updateModelPhoto];
-    self.photoDeleteBtn.enabled = NO;
 }
 
 //Share Tryglass Image
@@ -584,7 +588,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
                 [strongSelf updateModelFace:rect.origin Size:rect.size];
             } ErrorBlock:^(NSError *error) {
-                [IPCCommonUI showError:@"人脸验证失败!"];
+                [IPCCommonUI showError:@"未检测到人脸轮廓"];
             }];
         }else{
             [IPCCommonUI showError:@"未检测到人脸轮廓"];
@@ -638,20 +642,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }
 }
 
-
 - (void)onSearchProducts{
     [super onSearchProducts];
     [self removeCover];
     [self presentSearchViewController];
 }
 
-- (void)presentSearchViewController{
-    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
-    searchViewMode.searchDelegate = self;
-    searchViewMode.filterType = self.glassListViewMode.currentType;
-    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
-    [self presentViewController:searchViewMode animated:YES completion:nil];
-}
 
 //Try switching to wear glasses a single or more patterns
 - (void)switchToSingleMode
@@ -704,7 +700,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Reload Table View
 - (void)reload{
     [super reload];
-
+    
     [self.productTableView reloadData];
     
     if (self.compareSwitch.isOn) {
@@ -715,6 +711,20 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }else{
         [self updateCurrentGlass];
         [self updateTryGlasses];
+    }
+}
+
+//更换当前试戴眼镜
+- (void)updateCurrentGlass{
+    if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn)
+    {
+        [self.tryGlassesView reload];;
+        self.tableViewTopConstant.constant = (SCREEN_HEIGHT - 70)/4;
+        [self.tryGlassesView setHidden:NO];
+    }else{
+        self.tableViewTopConstant.constant = 0;
+        [self.tryGlassesView setHidden:YES];
+        [self.recommdBgView setHidden:YES];
     }
 }
 

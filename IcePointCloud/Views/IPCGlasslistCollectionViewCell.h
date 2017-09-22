@@ -12,7 +12,7 @@
 
 @interface IPCGlasslistCollectionViewCell : UICollectionViewCell
 
-
+@property (weak, nonatomic) IBOutlet UIView *imageContentView;
 @property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *noStockWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryLeft;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;

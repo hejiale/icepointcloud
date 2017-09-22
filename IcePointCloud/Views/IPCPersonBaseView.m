@@ -24,6 +24,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 @property (copy, nonatomic) void(^LogoutBlock)();
 @property (copy, nonatomic) void(^UpdateBlock)();
 @property (copy, nonatomic) void(^QRCodeBlock)();
+@property (copy, nonatomic) void(^WareHouseBlock)();
 
 @end
 
@@ -61,11 +62,12 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     [self logoutRequest];
 }
 
-- (void)showWithLogout:(void(^)())logout UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode
+- (void)showWithLogout:(void(^)())logout UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode WareHouseBlock:(void (^)())wareHouse
 {
     self.LogoutBlock  = logout;
     self.UpdateBlock  = update;
     self.QRCodeBlock  = qrcode;
+    self.WareHouseBlock = wareHouse;
     
     [self.personTableView setTableFooterView:[[UIView alloc]init]];
     
@@ -93,6 +95,11 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     }];
 }
 
+- (void)reload
+{
+    [self.personTableView reloadData];
+}
+
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -103,7 +110,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     if (section == 0 || section == 3)
         return 1;
     if (section == 1) {
-        return 3;
+        return 4;
     }
     return 2;
 }
@@ -126,6 +133,15 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             [cell.companyNameLabel setText:[IPCAppManager sharedManager].profile.storeName];
             return cell;
         }else if (indexPath.row == 1) {
+            IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
+            if (!cell) {
+                cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+            }
+            [cell.menuTitleLabel setText:@"仓库"];
+            [cell.menuValueTitle setText:[IPCAppManager sharedManager].currentWareHouse.wareHouseName];
+            
+            return cell;
+        }else if (indexPath.row == 2) {
             IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -193,9 +209,15 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             if (self.UpdateBlock)
                 self.UpdateBlock();
         }
-    }else if (indexPath.section == 1 && indexPath.row == 2){
-        if (self.QRCodeBlock) {
-            self.QRCodeBlock();
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 1) {
+//            if (self.WareHouseBlock) {
+//                self.WareHouseBlock();
+//            }
+        }else if (indexPath.row == 3) {
+            if (self.QRCodeBlock) {
+                self.QRCodeBlock();
+            }
         }
     }else if (indexPath.section == 3){
         [[IPCNetworkCache sharedCache] removeAllHttpCache];

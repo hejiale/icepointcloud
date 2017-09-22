@@ -35,7 +35,6 @@ typedef NS_ENUM(NSUInteger, IPCRequestCache){
     IPCRequestCacheEnable
 };
 
-static NSInteger const  kIPCServiceErrorCode   =  490;
 static NSString * const kIPCNetworkResult       =  @"result";
 static NSString * const kIPCNetworkError         =  @"error";
 static NSString * const kIPCErrorNetworkAlertMessage = @"请检查您的设备->设置->无线局域网选项";
@@ -47,7 +46,7 @@ static NSError *HTTPError(NSString *domain, int code) {
  *  The  client url
  */
 #ifdef DEBUG
-//#define   IPC_ProductAPI_URL       @"http://10.0.0.18:8080/pos"
+//#define   IPC_ProductAPI_URL       @"http://10.0.0.11:8080/pos"
 #define   IPC_ProductAPI_URL       @"https://dev.icepointcloud.com"
 #elif BETA
 #define   IPC_ProductAPI_URL       @"https://icepointcloud.com"

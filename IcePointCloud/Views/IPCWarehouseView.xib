@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCWarehouseView">
+            <connections>
+                <outlet property="topView" destination="NuH-Ee-rw0" id="ghW-M7-BvV"/>
+                <outlet property="wareHouseTableView" destination="9Yi-h4-xTb" id="gzY-8s-eXx"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9Yi-h4-xTb">
+                    <rect key="frame" x="0.0" y="64" width="400" height="704"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="0.077536386986301373" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="43" minY="0.0" maxX="35" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="SGn-h3-0qK"/>
+                        <outlet property="delegate" destination="-1" id="fbr-0u-BHY"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NuH-Ee-rw0">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NfX-9f-R0q">
+                            <rect key="frame" x="0.0" y="0.0" width="60" height="64"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="ssB-0o-vPV"/>
+                            </constraints>
+                            <state key="normal" image="icon_back"/>
+                            <connections>
+                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="V29-q9-PmI"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="切换仓库" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cjf-IE-Suj">
+                            <rect key="frame" x="150" y="0.0" width="100" height="64"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="SUI-Ty-6oP"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="Cjf-IE-Suj" firstAttribute="centerX" secondItem="NuH-Ee-rw0" secondAttribute="centerX" id="5cM-Xf-kJ0"/>
+                        <constraint firstAttribute="bottom" secondItem="NfX-9f-R0q" secondAttribute="bottom" id="60L-cC-QlY"/>
+                        <constraint firstItem="Cjf-IE-Suj" firstAttribute="top" secondItem="NuH-Ee-rw0" secondAttribute="top" id="BoO-27-vBE"/>
+                        <constraint firstItem="NfX-9f-R0q" firstAttribute="top" secondItem="NuH-Ee-rw0" secondAttribute="top" id="CZb-Hn-AVk"/>
+                        <constraint firstItem="NfX-9f-R0q" firstAttribute="leading" secondItem="NuH-Ee-rw0" secondAttribute="leading" id="UHG-js-X3j"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="hSK-CQ-c9D"/>
+                        <constraint firstAttribute="bottom" secondItem="Cjf-IE-Suj" secondAttribute="bottom" id="tPr-GA-FSc"/>
+                        <constraint firstAttribute="height" constant="64" id="yOd-20-yLZ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="NuH-Ee-rw0" secondAttribute="trailing" id="AzL-tl-iCN"/>
+                <constraint firstAttribute="bottom" secondItem="9Yi-h4-xTb" secondAttribute="bottom" id="KD5-DE-hxU"/>
+                <constraint firstItem="NuH-Ee-rw0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NfT-pL-oU4"/>
+                <constraint firstItem="9Yi-h4-xTb" firstAttribute="top" secondItem="NuH-Ee-rw0" secondAttribute="bottom" id="O1Q-SE-2vq"/>
+                <constraint firstAttribute="trailing" secondItem="9Yi-h4-xTb" secondAttribute="trailing" id="Zx2-Md-ccD"/>
+                <constraint firstItem="NuH-Ee-rw0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="aQh-Ms-4nz"/>
+                <constraint firstItem="9Yi-h4-xTb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ufe-xe-7Co"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="5"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="73" y="-134"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_back" width="22" height="22"/>
+    </resources>
+</document>

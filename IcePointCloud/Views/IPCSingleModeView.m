@@ -299,18 +299,26 @@
 #pragma mark //Figure eye position detecting local models
 - (void)updateEyeRect
 {
+    __block CGFloat orignX = 0;
     __block CGFloat orignY = 0;
+    __block CGFloat width = 0;
     
     if (self.matchItem.modelType == IPCModelTypeGirlWithLongHair) {
-        orignY = 170;
+        orignX = 75;
+        orignY = 180;
+        width = 420;
     }else if (self.matchItem.modelType == IPCModelTypeGirlWithShortHair){
+        orignX = 32;
         orignY = 225;
+        width = 460;
     }else{
+        orignX = 32;
         orignY = 200;
+        width = 460;
     }
     
-    cameraEyePoint = CGPointMake(32, orignY);
-    cameraEyeSize  = CGSizeMake(460, 0);
+    cameraEyePoint = CGPointMake(orignX, orignY);
+    cameraEyeSize  = CGSizeMake(width, 0);
     
     [self updateGlassFrame];
 }

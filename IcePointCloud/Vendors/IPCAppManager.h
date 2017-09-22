@@ -8,6 +8,7 @@
 
 
 #import "IPCProfileResult.h"
+#import "IPCWareHouseResult.h"
 
 //The App for the first time login
 extern NSString *const IPCFirstLanuchKey;
@@ -25,10 +26,14 @@ extern NSString *const IPCNotificationShoppingCartChanged;
 extern NSString *const IPCShoppingCartCountKey;
 //Choose Customer notification
 extern NSString *const  IPCChooseCustomerNotification;
+//Choose WareHouse notification
+extern NSString *const  IPCChooseWareHouseNotification;
 
 @interface IPCAppManager : NSObject
 
 @property (nonatomic, strong)    IPCProfileResult * profile;
+@property (nonatomic, strong)    IPCWareHouseResult * wareHouse;
+@property (nonatomic, strong)    IPCWareHouse * currentWareHouse;
 
 
 + (IPCAppManager *)sharedManager;
@@ -70,6 +75,8 @@ extern NSString *const  IPCChooseCustomerNotification;
  *  PayTypeInfo Image Name
  */
 - (UIImage *)payTypeImage:(NSString *)payTypeInfo;
+
+- (void)loadWareHouse:(void(^)(NSError * error))complete;
 
 
 @end

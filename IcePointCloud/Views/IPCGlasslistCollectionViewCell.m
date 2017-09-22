@@ -29,7 +29,17 @@
         //-----Image尺寸   400x200  320x160------//
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (glassImage.imageURL.length) {
-            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:[glassImage.imageURL stringByAppendingString:@"-320x160"]] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+            __block CGFloat scale = 0;
+            if (glassImage.width > glassImage.height) {
+                scale = glassImage.width/glassImage.height;
+            }else{
+                scale = glassImage.height/glassImage.width;
+            }
+            __block CGFloat width = 280;
+            __block CGFloat height = 280/scale;
+            self.imageHeight.constant = MIN(height, 120);
+            
+            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
         }
        
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];

@@ -70,7 +70,11 @@ static NSString * identifier = @"CategoryCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    self.CompleteBlock(indexPath.row);
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    
+    if (self.CompleteBlock) {
+        self.CompleteBlock(indexPath.row);
+    }
 }
 
 

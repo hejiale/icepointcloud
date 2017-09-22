@@ -229,7 +229,7 @@ typedef void(^UpdateBlock)(void);
             [textField setText:@"+0.00"];
         }
     }
-    [self insertOptometry];
+    [self insertOptometryInfo];
 }
 
 #pragma mark //IPCParameterTableViewDataSource

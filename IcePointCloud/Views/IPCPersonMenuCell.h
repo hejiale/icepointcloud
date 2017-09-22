@@ -11,5 +11,6 @@
 @interface IPCPersonMenuCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *menuTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *menuValueTitle;
 
 @end

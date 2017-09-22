@@ -228,7 +228,6 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
     if ([IPCInsertCustomer instance].optometryArray.count) {
         [[IPCInsertCustomer instance].optometryArray replaceObjectAtIndex:indexPath.row-1 withObject:optometry];
     }
-    [self.userInfoTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

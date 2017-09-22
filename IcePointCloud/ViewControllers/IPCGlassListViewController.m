@@ -18,7 +18,9 @@
 static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
 
 @interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
-
+{
+    BOOL isCancelRequest;
+}
 @property (weak, nonatomic)   IBOutlet UICollectionView               *glassListCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *goTopButton;
 @property (strong, nonatomic) IPCGlassParameterView                  *parameterView;
@@ -46,7 +48,13 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [super viewWillAppear:animated];
     
     [self setNavigationBarStatus:YES];
-    [self.glassListCollectionView reloadData];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
+    
+    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
+        [self beginFilterClass];
+    }else{
+        [self.glassListCollectionView reloadData];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -57,6 +65,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self.refreshHeader endRefreshing];
         [self.refreshFooter endRefreshing];
     }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCChooseWareHouseNotification object:nil];
 }
 
 #pragma mark //Set UI
@@ -88,6 +97,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if (!_refreshFooter)
         _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
     return _refreshFooter;
+}
+
+- (void)presentSearchViewController{
+    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    searchViewMode.searchDelegate = self;
+    searchViewMode.filterType = self.glassListViewMode.currentType;
+    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
+    [self presentViewController:searchViewMode animated:YES completion:nil];
 }
 
 
@@ -164,10 +181,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [strongSelf.refreshFooter noticeNoDataStatus];
         }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
             if ([error code] == NSURLErrorCancelled) {
-                if (strongSelf.glassListViewMode.glassesList.count == 0) {
-                    [strongSelf beginFilterClass];
-                    return ;
-                }
+                isCancelRequest = YES;
+                return ;
             }else{
                 [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
             }
@@ -198,6 +213,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)reload{
     [super reload];
     
+    isCancelRequest = NO;
     self.glassListCollectionView.isBeginLoad = NO;
     [self.glassListCollectionView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
@@ -244,15 +260,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (IBAction)onGoTopAction:(id)sender {
     [self.goTopButton setHidden:YES];
     [self.glassListCollectionView scrollToTopAnimated:YES];
-}
-
-
-- (void)presentSearchViewController{
-    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
-    searchViewMode.searchDelegate = self;
-    searchViewMode.filterType = self.glassListViewMode.currentType;
-    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
-    [self presentViewController:searchViewMode animated:YES completion:nil];
 }
 
 #pragma mark //UICollectionViewDataSoure
@@ -339,13 +346,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self beginFilterClass];
 }
 
-
-- (void)didReceiveMemoryWarning{
-    [super didReceiveMemoryWarning];
-    
-    self.glassListViewMode = nil;
-}
-
 #pragma mark //UIScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if (scrollView.contentOffset.y > self.view.jk_height * 2) {
@@ -353,6 +353,12 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }else{
         [self.goTopButton setHidden:YES];
     }
+}
+
+- (void)didReceiveMemoryWarning{
+    [super didReceiveMemoryWarning];
+    
+    self.glassListViewMode = nil;
 }
 
 
