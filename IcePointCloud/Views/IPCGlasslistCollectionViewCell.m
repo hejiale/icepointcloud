@@ -26,7 +26,6 @@
     if (_glasses) {
         [self resetBuyStatus];
         
-        //-----Image尺寸   400x200  320x160------//
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (glassImage.imageURL.length) {
             __block CGFloat scale = 0;

@@ -163,11 +163,13 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="addButton" destination="mgv-GB-9Ly" id="Ij8-Ez-y5p"/>
                 <outlet property="arrowImage" destination="RI6-5u-aHD" id="wxl-X6-JIk"/>
                 <outlet property="cartCountLabel" destination="jC4-vK-Inv" id="k6T-lO-SDl"/>
                 <outlet property="checkBtn" destination="61Z-ah-Q7s" id="wKM-F3-RBX"/>
                 <outlet property="glassesImgView" destination="J9I-Bf-ZD5" id="1nj-cB-Wlu"/>
                 <outlet property="glassesNameLbl" destination="1V9-z5-irH" id="aMn-2t-lJA"/>
+                <outlet property="reduceButton" destination="o9i-Xv-K5A" id="cmi-Kf-Ogk"/>
             </connections>
             <point key="canvasLocation" x="90" y="97.5"/>
         </tableViewCell>

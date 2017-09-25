@@ -67,7 +67,7 @@
         
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (glassImage.imageURL.length) {
-            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:[glassImage.imageURL stringByAppendingString:@"-320x160"]] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
         }
         
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];

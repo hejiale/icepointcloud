@@ -213,7 +213,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(width*idx, 0, width, height)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             IPCGlassesImage * glassImage = [glass imageWithType:IPCGlassesImageTypeThumb];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:[glassImage.imageURL stringByAppendingString:@"-320x160"]]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL]];
             [imageView setUserInteractionEnabled:YES];
             __weak typeof(self) weakSelf = self;
             [imageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {

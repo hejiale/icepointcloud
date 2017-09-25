@@ -15,7 +15,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (weak, nonatomic) IBOutlet UILabel *cartCountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImage;
-
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIButton *reduceButton;
 
 @property (copy, nonatomic) void(^ReloadBlock)();
 
@@ -27,6 +28,8 @@
     [super awakeFromNib];
     // Initialization code
     [self.glassesImgView addBorder:3 Width:0.5 Color:nil];
+    [self.addButton setLargeEdgeWithTop:5 right:5 bottom:5 left:5];
+    [self.reduceButton setLargeEdgeWithTop:5 right:5 bottom:5 left:5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -43,7 +46,7 @@
     [self.checkBtn setSelected:_cartItem.selected];
     
     IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
-    if (gi)[self.glassesImgView sd_setImageWithURL:[NSURL URLWithString:[gi.imageURL stringByAppendingString:@"-320x160"]] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+    if (gi)[self.glassesImgView sd_setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
     
     self.glassesNameLbl.text = _cartItem.glasses.glassName;
     [self.cartCountLabel setText:[NSString stringWithFormat:@"%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]]];

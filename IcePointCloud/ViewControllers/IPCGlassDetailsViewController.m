@@ -38,6 +38,15 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     self.detailTableView.estimatedSectionFooterHeight = 0;
     self.detailTableView.estimatedSectionHeaderHeight = 0;
+    
+    if (self.glasses) {
+        if (self.glasses.detailLinkURl.length) {
+            [IPCCommonUI show];
+            [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+        }else{
+            [self.detailTableView setHidden:NO];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -58,13 +67,6 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
-    
-    if (_glasses) {
-        if (self.glasses.detailLinkURl.length) {
-            [IPCCommonUI show];
-            [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
-        }
-    }
 }
 
 #pragma mark //Set UI
@@ -189,6 +191,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     CGRect frame = webView.frame;
     frame.size.height = height;
     webView.frame = frame;
+    [self.detailTableView setHidden:NO];
     [self.detailTableView reloadData];
     [IPCCommonUI hiden];
 }

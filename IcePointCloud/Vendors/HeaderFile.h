@@ -66,5 +66,6 @@
 #import   "AFHTTPSessionManager+Extend.h"
 #import "NSString+Utils.h"
 #import "UILabel+Extend.h"
+#import "UIButton+TouchArea.h"
 
 #endif /* HeaderFile_h */

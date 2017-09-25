@@ -48,7 +48,7 @@
     hud.square = NO;
     hud.bezelView.style = MBProgressHUDBackgroundStyleSolidColor;
     hud.bezelView.color = [UIColor clearColor];
-    hud.backgroundView.color = [UIColor colorWithWhite:0 alpha:0.1];
+    hud.backgroundView.color = [UIColor clearColor];
     hud.removeFromSuperViewOnHide = YES;
 }
 
