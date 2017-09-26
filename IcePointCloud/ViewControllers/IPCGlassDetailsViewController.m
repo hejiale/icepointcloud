@@ -41,17 +41,19 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     
     if (self.glasses) {
         if (self.glasses.detailLinkURl.length) {
-            [IPCCommonUI show];
             [self.productDetailWebView loadHTMLString:self.glasses.detailLinkURl baseURL:nil];
+            self.detailTableView.isBeginLoad = YES;
         }else{
-            [self.detailTableView setHidden:NO];
+            self.detailTableView.isBeginLoad = NO;
         }
     }
+    [self.detailTableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNavigationBarStatus:NO];
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 
@@ -133,10 +135,13 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    if (self.glasses.detailLinkURl.length) {
-        return 2;
+    if (!tableView.isBeginLoad) {
+        if (self.glasses.detailLinkURl.length) {
+            return 2;
+        }
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -191,7 +196,8 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     CGRect frame = webView.frame;
     frame.size.height = height;
     webView.frame = frame;
-    [self.detailTableView setHidden:NO];
+    
+    self.detailTableView.isBeginLoad = NO;
     [self.detailTableView reloadData];
     [IPCCommonUI hiden];
 }

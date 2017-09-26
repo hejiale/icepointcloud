@@ -109,8 +109,8 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0 || section == 3)
         return 1;
-    if (section == 1) {
-        return 4;
+    else if (section == 1) {
+        return 3;
     }
     return 2;
 }
@@ -132,16 +132,18 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             [cell.companyTitleLabel setText:@"所属店铺"];
             [cell.companyNameLabel setText:[IPCAppManager sharedManager].profile.storeName];
             return cell;
-        }else if (indexPath.row == 1) {
-            IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell.menuTitleLabel setText:@"仓库"];
-            [cell.menuValueTitle setText:[IPCAppManager sharedManager].currentWareHouse.wareHouseName];
-            
-            return cell;
-        }else if (indexPath.row == 2) {
+        }
+//        else if (indexPath.row == 1) {
+//            IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
+//            if (!cell) {
+//                cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+//            }
+//            [cell.menuTitleLabel setText:@"仓库"];
+//            [cell.menuValueTitle setText:[IPCAppManager sharedManager].currentWareHouse.wareHouseName];
+//            
+//            return cell;
+//        }
+        else if (indexPath.row == 1) {
             IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -210,11 +212,12 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 self.UpdateBlock();
         }
     }else if (indexPath.section == 1){
-        if (indexPath.row == 1) {
+//        if (indexPath.row == 1) {
 //            if (self.WareHouseBlock) {
 //                self.WareHouseBlock();
 //            }
-        }else if (indexPath.row == 3) {
+//        }else
+            if (indexPath.row == 2) {
             if (self.QRCodeBlock) {
                 self.QRCodeBlock();
             }

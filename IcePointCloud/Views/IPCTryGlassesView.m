@@ -115,7 +115,7 @@
         if (array.count) {
             [array enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
             {
-                UIFont * font = [UIFont systemFontOfSize:14 weight:UIFontWeightThin];
+                UIFont * font = [UIFont systemFontOfSize:13];
                 CGFloat width = [obj jk_sizeWithFont:font constrainedToHeight:height].width;
                 
                 UILabel * label = [[UILabel alloc]init];
@@ -127,7 +127,7 @@
                 [label setText:obj];
                 [label setFont:font];
                 [label setBackgroundColor:[UIColor clearColor]];
-                [label setTextColor:[UIColor colorWithHexString:@"#333333"]];
+                [label setTextColor:[UIColor colorWithHexString:@"#666666"]];
                 [self.parameterContentView addSubview:label];
                 
                 UIImageView * line = [[UIImageView alloc]init];

@@ -40,6 +40,6 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then
     rvm use default
 fi
 
-fir p ${out_path}/$project_name.ipa -T $api_token -c 发布TestRelease版本
+fir p ${out_path}/$project_name.ipa -T $api_token -c
 
 exit 0

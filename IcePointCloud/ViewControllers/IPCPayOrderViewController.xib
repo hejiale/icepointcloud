@@ -21,22 +21,22 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DMG-6E-Dzf">
-                    <rect key="frame" x="0.0" y="0.0" width="543" height="768"/>
+                    <rect key="frame" x="0.0" y="0.0" width="543" height="704"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f6x-rh-ehn">
-                    <rect key="frame" x="543" y="0.0" width="1" height="768"/>
+                    <rect key="frame" x="543" y="0.0" width="1" height="704"/>
                     <color key="backgroundColor" white="0.0" alpha="0.068011558219178078" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="1" id="zvD-3C-Iec"/>
                     </constraints>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Lct-nk-oDR">
-                    <rect key="frame" x="544" y="0.0" width="480" height="718"/>
+                    <rect key="frame" x="544" y="0.0" width="480" height="654"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="480" id="VVw-Ok-m3F"/>
@@ -48,7 +48,7 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L70-zW-7W1">
-                    <rect key="frame" x="544" y="718" width="480" height="50"/>
+                    <rect key="frame" x="544" y="654" width="480" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
                             <rect key="frame" x="260" y="8" width="120" height="35"/>
@@ -104,6 +104,10 @@
                 <constraint firstItem="Lct-nk-oDR" firstAttribute="leading" secondItem="f6x-rh-ehn" secondAttribute="trailing" id="wKB-Jf-8a5"/>
                 <constraint firstAttribute="trailing" secondItem="L70-zW-7W1" secondAttribute="trailing" id="wen-ta-5gO"/>
             </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
         <view contentMode="scaleToFill" id="fZj-3i-Uah">
             <rect key="frame" x="0.0" y="0.0" width="480" height="50"/>
