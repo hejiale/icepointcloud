@@ -14,6 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Bugtags (2.3.2):
+    - Bugtags/Core (= 2.3.2)
+  - Bugtags/Core (2.3.2)
   - GPUImage (0.1.7)
   - IQKeyboardManager (4.0.10)
   - JKCategories (1.5)
@@ -44,6 +47,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - Bugtags
   - GPUImage
   - IQKeyboardManager
   - JKCategories
@@ -61,6 +65,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Bugtags: 2ec94ad18b279ce00073ccc7a42cbd4870704882
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   IQKeyboardManager: 593ee99b88381f4b9ccb22bd680f22606351bd41
   JKCategories: 863f4c7ed2d521ee6bf72ceea97948da23bb5af4
@@ -76,6 +81,6 @@ SPEC CHECKSUMS:
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 3eb2227ca0f8824126bb921a70238f5158d2fc5d
+PODFILE CHECKSUM: 3f2e95507696114d038adc26bc465fc3801bfb32
 
 COCOAPODS: 1.2.0

@@ -51,7 +51,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     }
     [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
     
-    if (isCancelRequest && self.viewModel.currentPage <= 1) {
+    if (isCancelRequest && self.viewModel.currentPage == 1) {
         [self refreshData];
     }else{
         [self.customerCollectionView reloadData];
@@ -140,9 +140,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     __weak typeof(self) weakSelf = self;
     [self.viewModel queryCustomerList:^(NSError *error){
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (self.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
-            [self.refreshFooter noticeNoDataStatus];
-        }else if (self.viewModel.status == IPCRefreshError){
+        if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
+            [strongSelf.refreshFooter noticeNoDataStatus];
+        }else if (strongSelf.viewModel.status == IPCRefreshError){
             if ([error code] == NSURLErrorCancelled) {
                 isCancelRequest = YES;
                 return;

@@ -64,7 +64,7 @@
 
 - (IBAction)onMinusAction:(id)sender {
     if (self.cartItem.glassCount == 1) {
-        [IPCCommonUI showAlert:@"冰点云" Message:@"确认要删除该商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
+        [IPCCommonUI showAlert:@"温馨提示" Message:@"确认要删除该商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             [[IPCShoppingCart sharedCart] reduceItem:self.cartItem];
             [[IPCPayOrderManager sharedManager] resetPayPrice];
             

@@ -63,8 +63,12 @@
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
-        if (failure){
-            failure(error, task);
+        if ([error code] == NSURLErrorNotConnectedToInternet) {
+            [IPCCommonUI showError:@"连接服务出错了，请检查当前网络环境!"];
+        }else{
+            if (failure){
+                failure(error, task);
+            }
         }
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };

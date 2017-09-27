@@ -49,7 +49,8 @@
 
 - (void)setCurrentOptometry:(NSString *)optometryID Complete:(void (^)())completeBlock
 {
-    [IPCCommonUI show];
+    [IPCCommonUI showInfo:@"正在设置默认验光单..."];
+    
     [IPCCustomerRequestManager setDefaultOptometryWithCustomID:self.customerId
                                             DefaultOptometryID:optometryID
                                                   SuccessBlock:^(id responseValue) {

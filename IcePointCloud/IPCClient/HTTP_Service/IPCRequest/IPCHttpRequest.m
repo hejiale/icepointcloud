@@ -54,9 +54,7 @@
                 success(cache);
             }
         }else{
-            if (failure){
-                failure(HTTPError(kIPCErrorNetworkAlertMessage, NSURLErrorNotConnectedToInternet));
-            }
+            [IPCCommonUI showError:@"连接服务出错了，请检查当前网络环境!"];
         }
     }else{
         NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request

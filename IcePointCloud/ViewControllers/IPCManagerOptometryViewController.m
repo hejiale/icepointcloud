@@ -97,7 +97,8 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     __weak typeof(self) weakSelf = self;
     [self.managerViewModel setCurrentOptometry:optometryId Complete:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf loadOptometryData];
+        [IPCCommonUI showSuccess:@"设置成功!"];
+        [strongSelf performSelector:@selector(loadOptometryData) withObject:nil afterDelay:1.f];
     }];
 }
 

@@ -40,14 +40,10 @@ typedef  void(^DismissBlock)();
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditOptometryView" owner:self];
         [view setFrame:frame];
         [self addSubview:view];
+        
+        [self createOptometryView];
     }
     return self;
-}
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    [self createOptometryView];
 }
 
 #pragma mark //Set UI
@@ -62,6 +58,8 @@ typedef  void(^DismissBlock)();
 #pragma mark //Request Method
 - (void)saveNewOpometryRequest{
     [self.saveButton jk_showIndicator];
+    
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:self.customerID
                                                           SphLeft:self.optometryView.insertOptometry.sphLeft
                                                          SphRight:self.optometryView.insertOptometry.sphRight
@@ -79,16 +77,17 @@ typedef  void(^DismissBlock)();
                                                        EmployeeId:self.optometryView.insertOptometry.employeeId
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
                                                      SuccessBlock:^(id responseValue) {
-                                                         [self.saveButton jk_hideIndicator];
-                                                         if (self.completeBlock) {
-                                                             self.completeBlock(responseValue[@"id"]);
+                                                         __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                         [strongSelf.saveButton jk_hideIndicator];
+                                                         if (strongSelf.completeBlock) {
+                                                             strongSelf.completeBlock(responseValue[@"id"]);
                                                          }
                                                      } FailureBlock:^(NSError *error) {
-                                                         [self.saveButton jk_hideIndicator];
+                                                         __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                         [strongSelf.saveButton jk_hideIndicator];
                                                          if ([error code] != NSURLErrorCancelled ) {
                                                              [IPCCommonUI showError:@"保存验光单失败!"];
                                                          }
-                                                         
                                                      }];
 }
 

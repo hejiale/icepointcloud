@@ -62,14 +62,17 @@
 
 
 //Show Methods
-- (void)showSideBarView:(NSInteger)index{
+- (void)showSideBarView:(NSInteger)index
+{
     [self removerFilterCover];
+    __weak typeof(self) weakSelf = self;
     _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
                                                   MenuIndex:index
                                                      Logout:^{
                                                          [[IPCAppManager sharedManager] logout];
                                                      } Dismiss:^{
-                                                         [self removeCover];
+                                                         __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                         [strongSelf removeCover];
                                                      }];
     [self.view addSubview:_sideBarView];
 }

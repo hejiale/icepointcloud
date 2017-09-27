@@ -39,15 +39,12 @@ typedef  void(^DismissBlock)();
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditAddressView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
+        
+        [self createAddressView];
     }
     return self;
 }
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    [self createAddressView];
-}
 
 #pragma mark //Set UI
 - (void)createAddressView{
@@ -59,6 +56,7 @@ typedef  void(^DismissBlock)();
 #pragma mark //Requst Method
 - (void)saveNewAddress
 {
+    __weak typeof(self) weakSelf = self;
     [self.saveAddressButton jk_showIndicator];
     [IPCCustomerRequestManager saveNewCustomerAddressWithAddressID:@""
                                                           CustomID:self.customerID
@@ -68,12 +66,14 @@ typedef  void(^DismissBlock)();
                                                            Address:self.addressView.addressTextField.text
                                                       SuccessBlock:^(id responseValue)
      {
-         [self.saveAddressButton jk_hideIndicator];
-         if (self.completeBlock) {
-             self.completeBlock(responseValue[@"id"]);
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         [strongSelf.saveAddressButton jk_hideIndicator];
+         if (strongSelf.completeBlock) {
+             strongSelf.completeBlock(responseValue[@"id"]);
          }
      } FailureBlock:^(NSError *error) {
-         [self.saveAddressButton jk_hideIndicator];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         [strongSelf.saveAddressButton jk_hideIndicator];
          if ([error code] != NSURLErrorCancelled) {
              [IPCCommonUI showError:@"新建地址失败!"];
          }

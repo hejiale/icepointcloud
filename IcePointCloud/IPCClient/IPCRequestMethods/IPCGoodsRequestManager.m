@@ -42,7 +42,8 @@
                              @"startPrice":@(startPrice),
                              @"endPrice":endPrice > 0 ? @(endPrice) : @"",
                              @"isTryProduct": isTrying ? @"true":@"false",
-                             @"storeId":storeId ? : @""};
+//                             @"storeId":storeId ? : @""
+                             };
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 

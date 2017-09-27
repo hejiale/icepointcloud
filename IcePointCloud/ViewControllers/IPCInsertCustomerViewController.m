@@ -43,6 +43,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
     
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }];
 }
 
@@ -58,19 +59,25 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
     [super viewWillDisappear:animated];
     
     [self.view endEditing:YES];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 
 #pragma mark //Clicked Events
-- (IBAction)insertNewCustomerAction:(id)sender {
-    [[IPCInsertCustomer instance] resetData];
-    [self.userInfoTableView reloadData];
+- (IBAction)insertNewCustomerAction:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定新建客户并清除所有信息吗?" Owner:self Done:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [[IPCInsertCustomer instance] resetData];
+        [strongSelf.userInfoTableView reloadData];
+    }];
 }
 
 
 - (IBAction)saveNewCustomerAction:(id)sender
 {
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    
     if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
         [self.saveButton jk_showIndicator];
         __weak typeof(self) weakSelf = self;

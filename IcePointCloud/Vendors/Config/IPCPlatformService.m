@@ -8,7 +8,7 @@
 
 #import "IPCPlatformService.h"
 #import "IPCCheckVersion.h"
-
+#import <Bugtags/Bugtags.h>
 
 @implementation IPCPlatformService
 
@@ -21,6 +21,7 @@
         [self enableSkin];
         [self enableKeyboard];
         [self bindWechat];
+        [self configBugtags];
     }
     return self;
 }
@@ -73,6 +74,13 @@
             [IPCCommonUI showError:kIPCErrorNetworkAlertMessage];
         }
     }];
+}
+
+- (void)configBugtags
+{
+    BugtagsOptions *options = [[BugtagsOptions alloc] init];
+    options.trackingNetwork = YES;
+    [Bugtags startWithAppKey:IPCBugtags_Key invocationEvent:BTGInvocationEventNone options:options];
 }
 
 

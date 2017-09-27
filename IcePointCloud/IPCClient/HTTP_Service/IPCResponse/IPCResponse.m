@@ -13,11 +13,12 @@
 
 + (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed
 {
+    NSLog(@"---responseValue --- \n %@",responseData);
+    
     if (responseData) {
         if ([responseData isKindOfClass:[NSDictionary class]]){
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {
-//                NSLog(@"---responseValue --- \n %@",responseData[kIPCNetworkResult]);
                 id responseValue = [NSDictionary changeType:responseData[kIPCNetworkResult]];
                 
                 if (responseValue) {
@@ -43,7 +44,7 @@
 {
     if (responseValue) {
         IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];
-//        NSLog(@"---error %@",errorMessage.message);
+        NSLog(@"---error %@",errorMessage.message);
         
         if (errorMessage){
             if (errorMessage.message) {

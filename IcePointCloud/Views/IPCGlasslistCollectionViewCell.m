@@ -35,7 +35,7 @@
                 scale = glassImage.height/glassImage.width;
             }
             __block CGFloat width = 280;
-            __block CGFloat height = 280/scale;
+            __block CGFloat height = width/scale;
             self.imageHeight.constant = MIN(height, 120);
             
             [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];

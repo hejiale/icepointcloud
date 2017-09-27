@@ -53,6 +53,11 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 }
 
 - (IBAction)backAction:(id)sender {
+    [self dismiss];
+}
+
+
+- (void)dismiss{
     [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.frame;
         frame.origin.x += self.jk_width;
@@ -64,7 +69,6 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
             }
         }
     }];
-    
 }
 
 - (IBAction)saveAction:(id)sender {
@@ -84,10 +88,8 @@ static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
                                                   UpdatePassword:cofirmpwd
                                                     SuccessBlock:^(id responseValue)
              {
-                 [IPCCommonUI hiden];
-                 if (self.CloseBlock) {
-                     self.CloseBlock;
-                 }
+                 [IPCCommonUI showSuccess:@"修改用户密码成功!"];
+                 [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.f];
              } FailureBlock:^(NSError *error) {
                  if ([error code] != NSURLErrorCancelled) {
                      [IPCCommonUI showError:@"修改用户密码失败!"];
