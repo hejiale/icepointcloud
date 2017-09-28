@@ -149,11 +149,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     
     self.signleModeView.matchItem = [[IPCTryMatch instance] currentMatchItem];
     [self.signleModeView updateModelPhoto];
-    [self initCompareModeView];
+    //获取模特眼镜位置
+    if ([self initCompareModeView]) {
+        [self updateModelPhototPosition];
+    }
 }
 
 
-- (void)initCompareModeView
+- (BOOL)initCompareModeView
 {
     if ([self.compareBgView.subviews count] == 0) {
         __weak typeof (self) weakSelf = self;
@@ -173,7 +176,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [item updateModelPhoto];
             [strongSelf.compareBgView addSubview:item];
         }];
+        return YES;
     }
+    return NO;
 }
 
 
@@ -458,6 +463,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [v updateModelPhoto];
     
     [self.signleModeView updateModelPhoto];
+    [self updateModelPhototPosition];
 }
 
 //Choose Model Method
@@ -501,11 +507,21 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         item.photoType = IPCPhotoTypeModel;
         item.frontialPhoto = nil;
     }
-    
+    //更换模特照片
     [self.signleModeView updateModelPhoto];
-    
     for (IPCCompareItemView *v in self.compareBgView.subviews)
         [v updateModelPhoto];
+    //获取模特眼镜位置
+    [self updateModelPhototPosition];
+}
+
+//获取模特眼镜位置
+- (void)updateModelPhototPosition
+{
+    IPCMatchItem * item = [IPCTryMatch instance].currentMatchItem;
+    UIImage * image =  [IPCAppManager modelPhotoWithType:item.modelType usage:IPCModelUsageSingleMode];
+    
+    [self outPutCameraImage:[image lsqImageScale:0.5]];
 }
 
 //Share Tryglass Image
@@ -555,6 +571,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     IPCDefineCameraBaseComponent * baseComponent = [[IPCDefineCameraBaseComponent alloc]initWithResultImage:^(UIImage *image) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf outPutCameraImage:image];
+        strongSelf.photoDeleteBtn.enabled = YES;
     }];
     [baseComponent showSampleWithController:self];
 }
@@ -567,6 +584,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     IPCPhotoPickerViewController * pickVC = [[IPCPhotoPickerViewController alloc]initWithCompleteImage:^(UIImage *image) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf outPutCameraImage:image];
+        strongSelf.photoDeleteBtn.enabled = YES;
     }];
     IPCPortraitNavigationViewController * pickNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:pickVC];
     [self presentViewController:pickNav animated:YES completion:nil];
@@ -575,6 +593,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //His head shot head modification model refresh glasses
 - (void)outPutCameraImage:(UIImage *)image
 {
+    [IPCCommonUI showInfo:@"正在获取眼镜位置..."];
     __weak typeof (self) weakSelf = self;
     //A network under the condition of priority calls online face recognition, if network error or request wrong call the offline face recognition
     self.offlineFaceDetector = [[IPCOfflineFaceDetector alloc]init];
@@ -603,6 +622,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self.signleModeView updateFaceUI:position :size];
     for (IPCCompareItemView * item in self.compareBgView.subviews)
         [item updateFaceUI:position :size];
+    [IPCCommonUI hiden];
 }
 
 //Modify the model photos
@@ -616,7 +636,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [item updateModelPhoto];
     
     [self.signleModeView updateModelPhoto];
-    self.photoDeleteBtn.enabled = YES;
 }
 
 //Filter Products \ Search Products

@@ -79,7 +79,7 @@ typedef void(^ErrorBlock)(NSError*error);
                         CGFloat width = right- left;
                         CGFloat height = bottom- top;
                         
-                        CGRect innerRect = CGRectMake( x-30, y-20, width+70, 0);
+                        CGRect innerRect = CGRectMake( x-40, y-30, width+90, 0);
                         if (self.faceBlock) {
                             self.faceBlock(innerRect);
                         }

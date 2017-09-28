@@ -96,7 +96,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
     {
         self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-            [self reloadCartBadge];
+            [self successAddCartMethod];
         }];
         self.parameterView.glasses = _glasses;
         [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];

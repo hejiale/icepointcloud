@@ -168,10 +168,6 @@
             break;
     }
     self.modelView.image = img;
-    
-    if (self.matchItem.photoType == IPCPhotoTypeModel){
-        [self updateEyeRect];
-    }
 }
 
 
@@ -374,30 +370,5 @@
     [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
 }
-
-#pragma mark //Figure eye position detecting local models
-- (void)updateEyeRect
-{
-    __block CGFloat orignX = 0;
-    __block CGFloat orignY = 0;
-    
-    if (self.matchItem.modelType == IPCModelTypeGirlWithLongHair) {
-        orignX = 32;
-        orignY = 90;
-    }else if (self.matchItem.modelType == IPCModelTypeGirlWithShortHair){
-        orignX = 20;
-        orignY = 110;
-    }else{
-        orignX = 20;
-        orignY = 100;
-    }
-    
-    cameraEyePoint = CGPointMake(orignX, orignY);
-    cameraEyeSize  = CGSizeMake(220, 0);
-    
-    [self updateGlassFrame];
-}
-
-
 
 @end

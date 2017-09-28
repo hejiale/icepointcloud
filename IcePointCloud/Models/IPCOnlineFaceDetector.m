@@ -106,8 +106,8 @@
             }
         }
         
-        CGPoint cameraEyePoint = CGPointMake(leftEyeX-30, MIN(leftEyeY, rightEyeY)-20);
-        CGSize  cameraEyeSize   = CGSizeMake(rightEyeX - leftEyeX + 70, 0);
+        CGPoint cameraEyePoint = CGPointMake(leftEyeX-45, MIN(leftEyeY, rightEyeY)-40);
+        CGSize  cameraEyeSize   = CGSizeMake(rightEyeX - leftEyeX + 90, 0);
         
         if (self.FaceFrameBlock)
             self.FaceFrameBlock(cameraEyePoint,cameraEyeSize);

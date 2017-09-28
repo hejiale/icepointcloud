@@ -242,12 +242,14 @@
 + (void)getMemberLevelWithSuccessBlock:(void (^)(id))success
                           FailureBlock:(void (^)(NSError *))failure
 {
+    //customerConfigAdmin 替换
     [self postRequest:nil RequestMethod:@"customerAdmin.listMemberLevel" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getCustomerTypeSuccessBlock:(void (^)(id))success
                        FailureBlock:(void (^)(NSError *))failure
 {
+    //customerConfigAdmin 替换
     [self postRequest:nil RequestMethod:@"customerAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
