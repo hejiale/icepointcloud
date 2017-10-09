@@ -255,6 +255,7 @@
 
 + (void)judgePhoneIsExistWithPhone:(NSString *)phone SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
+    //需要替换
     [self postRequest:phone RequestMethod:@"customerAdmin.getCusomerInfoByPhone" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 

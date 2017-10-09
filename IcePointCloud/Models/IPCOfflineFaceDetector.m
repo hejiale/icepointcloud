@@ -8,7 +8,7 @@
 
 #import "IPCOfflineFaceDetector.h"
 
-typedef void(^FaceBlock)(CGRect rect);
+typedef void(^FaceBlock)(CGPoint position,CGSize sizer);
 typedef void(^ErrorBlock)(NSError*error);
 
 @interface IPCOfflineFaceDetector()
@@ -21,7 +21,7 @@ typedef void(^ErrorBlock)(NSError*error);
 
 @implementation IPCOfflineFaceDetector
 
-- (void)offLineDecectorFace:(UIImage *)faceImage Face:(void(^)(CGRect rect))face ErrorBlock:(void(^)(NSError*error))error
+- (void)offLineDecectorFace:(UIImage *)faceImage Face:(void(^)(CGPoint position,CGSize sizer))face ErrorBlock:(void(^)(NSError*error))error
 {
     self.faceBlock = face;
     self.errorBlock = error;
@@ -79,9 +79,11 @@ typedef void(^ErrorBlock)(NSError*error);
                         CGFloat width = right- left;
                         CGFloat height = bottom- top;
                         
-                        CGRect innerRect = CGRectMake( x-60, y-45, width+120, 0);
+                        CGPoint center = CGPointMake(x+(width/2), y+(height/2));
+                        CGSize size = CGSizeMake(width+120, 0);
+                        
                         if (self.faceBlock) {
-                            self.faceBlock(innerRect);
+                            self.faceBlock(center,size);
                         }
                     }
                 }

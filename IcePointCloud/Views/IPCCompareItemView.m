@@ -10,14 +10,12 @@
 
 @interface IPCCompareItemView()<UIGestureRecognizerDelegate>
 {
-    CGPoint  draggedPosition;
     CGPoint  cameraEyePoint;
     CGSize   cameraEyeSize;
 }
 @property (nonatomic, weak) IBOutlet UIImageView *modelView;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *glassesPriceLbl;
-
 @property (strong, nonatomic) UIView *glassesView;
 @property (strong, nonatomic) UIImageView *glassImageView;
 @property (strong, nonatomic) UIButton *closeButton;
@@ -65,7 +63,7 @@
 
 - (void)setMatchItem:(IPCMatchItem *)matchItem{
     _matchItem = matchItem;
-    [self updateItem:NO];
+    [self updateItem];
 }
 
 #pragma mark //Set UI
@@ -79,7 +77,7 @@
 
 - (UIImageView *)glassImageView{
     if (!_glassImageView) {
-        _glassImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
+        _glassImageView = [[UIImageView alloc]init];
         _glassImageView.contentMode = UIViewContentModeScaleAspectFit;
     }
     return _glassImageView;
@@ -103,7 +101,6 @@
     
     self.modelView.transform = CGAffineTransformIdentity;
     self.glassesView.transform = CGAffineTransformIdentity;
-    draggedPosition = CGPointMake(-100, -100);
 }
 
 - (IBAction)onScaleTapped:(id)sender
@@ -192,24 +189,23 @@
  */
 - (void)updateGlassFrame{
     CGRect frame           = self.glassesView.frame;
-    frame.origin.y         = [self defaultGlassesPosition].y;
-    frame.size.width       = [self defaultGlassesSize].width;
+    frame.size.width       = cameraEyeSize.width;
     self.glassesView.frame = frame;
     
-    [self updateItem:NO];
+    [self updateItem];
 }
 
 
-- (void)updateItem:(BOOL)isDroped
+- (void)updateItem
 {
-    [super updateItem:isDroped];
+    [super updateItem];
     
     self.modelView.transform = CGAffineTransformIdentity;
     self.glassesView.transform = CGAffineTransformIdentity;
     
     [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
-    [self updateGlassesPhoto:isDroped];
+    [self updateGlassesPhoto];
     
     IPCGlasses *glasses = self.matchItem.glass;
     
@@ -255,8 +251,6 @@
         finalPoint.x = MIN(MAX(finalPoint.x, 0), self.bounds.size.width);
         finalPoint.y = MIN(MAX(finalPoint.y, 0), self.bounds.size.height);
         recognizer.view.center = finalPoint;
-        
-        draggedPosition = finalPoint;
     }
 }
 
@@ -264,7 +258,7 @@
     [self.glassesView setHidden:YES];
     [self initGlassView];
     self.matchItem.glass = nil;
-    [self updateItem:NO];
+    [self updateItem];
     if ([self.delegate respondsToSelector:@selector(deleteCompareGlasses:)]) {
         [self.delegate deleteCompareGlasses:self];
     }
@@ -272,7 +266,7 @@
 
 
 #pragma mark //Modify the glasses location
-- (void)updateGlassesPhoto:(BOOL)isDroped
+- (void)updateGlassesPhoto
 {
     IPCGlassesImage *gi = [self.matchItem.glass imageWithType:IPCGlassesImageTypeFrontialMatch];
     
@@ -287,26 +281,9 @@
         
         CGFloat scale = self.glassesView.bounds.size.width / gi.width;
         CGRect bounds = self.glassesView.bounds;
-        bounds.size.height = (gi ?  gi.height*scale : [self defaultGlassesSize].height);
+        bounds.size.height = gi.height * scale;
         self.glassesView.bounds = bounds;
-        
-        if (isDroped) {
-            CGPoint center;
-            if ([self isDraggedPositionDefault]) {
-                CGPoint p = [self defaultGlassesPosition];
-                center = CGPointMake(p.x + bounds.size.width / 2, p.y + bounds.size.height / 2);
-            } else {
-                center = draggedPosition;
-            }
-            __weak typeof (self) weakSelf = self;
-            [UIView animateWithDuration:.2 animations:^{
-                __strong typeof (weakSelf) strongSelf = weakSelf;
-                strongSelf.glassesView.center = center;
-            }];
-        }else {
-            CGPoint p = [self defaultGlassesPosition];
-            self.glassesView.center = CGPointMake(p.x + bounds.size.width / 2, p.y + bounds.size.height / 2);
-        }
+        self.glassesView.center = cameraEyePoint;
         
         [self.glassImageView setFrame:CGRectMake(0, 0, bounds.size.width, bounds.size.height)];
         [self.closeButton setFrame:CGRectMake(bounds.size.width - 20, 0, 20, 20)];
@@ -314,16 +291,6 @@
 }
 
 #pragma mark //Default Position
-- (CGPoint)defaultGlassesPosition
-{
-    return cameraEyePoint;
-}
-
-- (CGSize)defaultGlassesSize
-{
-    return cameraEyeSize;
-}
-
 //Access to the anchor
 - (CGPoint)singleModeViewAnchorPoint
 {
@@ -341,11 +308,6 @@
     }
 }
 
-- (BOOL)isDraggedPositionDefault
-{
-    return draggedPosition.x == -100 && draggedPosition.y == -100;
-}
-
 #pragma mark -  UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer{
     return YES;
@@ -353,7 +315,6 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer{
     [self showClose];
-    
     return YES;
 }
 

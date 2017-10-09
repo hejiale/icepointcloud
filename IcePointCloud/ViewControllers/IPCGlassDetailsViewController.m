@@ -80,6 +80,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
         _productDetailWebView.scrollView.scrollEnabled = NO;
         _productDetailWebView.scrollView.showsVerticalScrollIndicator = NO;
         _productDetailWebView.scrollView.showsHorizontalScrollIndicator = NO;
+        _productDetailWebView.scalesPageToFit = YES;
         [_productDetailWebView jk_makeTransparentAndRemoveShadow];
     }
     return _productDetailWebView;
@@ -191,7 +192,21 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 }
 
 #pragma mark //UIWebView Delegate
-- (void)webViewDidFinishLoad:(UIWebView *)webView{
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    img.style.maxWidth = %f;   \
+    } \
+    }";
+    js = [NSString stringWithFormat:js, self.view.jk_width - 20];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
+    
+    
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"]floatValue];
     CGRect frame = webView.frame;
     frame.size.height = height;

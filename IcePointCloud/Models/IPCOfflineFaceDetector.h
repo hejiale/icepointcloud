@@ -10,6 +10,6 @@
 
 @interface IPCOfflineFaceDetector : NSObject
 
-- (void)offLineDecectorFace:(UIImage *)faceImage Face:(void(^)(CGRect rect))face ErrorBlock:(void(^)(NSError*error))error;
+- (void)offLineDecectorFace:(UIImage *)faceImage Face:(void(^)(CGPoint position,CGSize sizer))face ErrorBlock:(void(^)(NSError*error))error;
 
 @end

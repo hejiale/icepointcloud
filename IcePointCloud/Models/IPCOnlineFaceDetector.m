@@ -63,7 +63,7 @@
 - (void) onCompleted:(IFlySpeechError*)error
 {
     @try {
-        __block CGFloat leftEyeX = 0.0,rightEyeX = 0.0,leftEyeY = 0.0,rightEyeY = 0.0;
+        __block CGFloat leftEyeX = 0.0,rightEyeX = 0.0,leftEyeY = 0.0,rightEyeY = 0.0,leftNose = 0.0,rightNose = 0.0, leftEyeMideleY = 0.0, rightEyeMiddleY = 0.0,leftEyeCenterY = 0.0,rightEyeCenterY = 0.0;
         
         
         if([error errorCode] != 0){
@@ -75,6 +75,7 @@
         if (self.resultStings.length && self.resultStings){
             NSDictionary * dic = [self.resultStings objectFromJSONString];
             NSArray* resultArray=[dic objectForKey:@"result"];
+            NSLog(@"---result %@",resultArray);
             
             if ([resultArray count] > 0) {
                 for (id anRst in resultArray) {
@@ -94,6 +95,18 @@
                                 }else if ([key isEqualToString:@"right_eyebrow_right_corner"]){
                                     rightEyeX=[[attr objectForKey:@"x"] floatValue];
                                     rightEyeY=[[attr objectForKey:@"y"] floatValue];
+                                }else if ([key isEqualToString:@"left_eyebrow_middle"]){
+                                    leftEyeMideleY=[[attr objectForKey:@"y"] floatValue];
+                                }else if ([key isEqualToString:@"right_eyebrow_middle"]){
+                                    rightEyeMiddleY=[[attr objectForKey:@"y"] floatValue];
+                                }else if ([key isEqualToString:@"nose_left"]){
+                                    leftNose=[[attr objectForKey:@"x"] floatValue];
+                                }else if ([key isEqualToString:@"nose_right"]){
+                                    rightNose=[[attr objectForKey:@"x"] floatValue];
+                                }else if ([key isEqualToString:@"left_eye_center"]){
+                                    leftEyeCenterY=[[attr objectForKey:@"y"] floatValue];
+                                }else if ([key isEqualToString:@"right_eye_center"]){
+                                    rightEyeCenterY=[[attr objectForKey:@"y"] floatValue];
                                 }
                             }
                         }
@@ -106,11 +119,11 @@
             }
         }
         
-        CGPoint cameraEyePoint = CGPointMake(leftEyeX-60, MIN(leftEyeY, rightEyeY)-45);
-        CGSize  cameraEyeSize   = CGSizeMake(rightEyeX - leftEyeX + 120, 0);
+        CGPoint eyeCenter = CGPointMake((rightNose - leftNose)/2 + leftNose, MAX(leftEyeCenterY, rightEyeCenterY));
+        CGSize  eyeSize   = CGSizeMake(rightEyeX - leftEyeX + 120, 0);
         
         if (self.FaceFrameBlock)
-            self.FaceFrameBlock(cameraEyePoint,cameraEyeSize);
+            self.FaceFrameBlock(eyeCenter,eyeSize);
         
         self.resultStings = [[NSString alloc]init];
        

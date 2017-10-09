@@ -15,7 +15,7 @@
 {
     
 }
-- (void)updateItem:(BOOL)isDroped
+- (void)updateItem
 {
     
 }

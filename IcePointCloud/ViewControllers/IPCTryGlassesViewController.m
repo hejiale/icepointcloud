@@ -604,8 +604,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     } Error:^(IFlySpeechError *error) {
         if (error) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGRect rect) {
-                [strongSelf updateModelFace:rect.origin Size:rect.size];
+            [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGPoint position,CGSize sizer) {
+                [strongSelf updateModelFace:position Size:sizer];
             } ErrorBlock:^(NSError *error) {
                 [IPCCommonUI showError:@"未检测到人脸轮廓"];
             }];
@@ -683,7 +683,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     for (IPCCompareItemView * item in self.compareBgView.subviews) {
         item.transform = CGAffineTransformIdentity;
         item.center = item.originalCenter;
-        [item updateItem:NO];
+        [item updateItem];
     }
     [self updateCompareBorder];
     
@@ -754,7 +754,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     if (self.compareBgView.subviews.count) {
         IPCCompareItemView * itemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
         itemView.matchItem = [[IPCTryMatch instance] currentMatchItem];
-        [itemView updateItem:NO];
+        [itemView updateItem];
     }
 }
 

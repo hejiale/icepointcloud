@@ -14,7 +14,7 @@
 
 //Update the model picture
 - (void)updateModelPhoto;
-- (void)updateItem:(BOOL)isDroped;
+- (void)updateItem;
 - (void)initGlassView;
 /**
  *  Updated photo like glasses
