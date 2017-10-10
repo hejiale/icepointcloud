@@ -109,7 +109,7 @@ typedef void(^DismissBlock)();
                 [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
             }
         }];
-        [cell.employeLabel setText:[NSString stringWithFormat:@"员工号:%@   员工名:%@",employe.jobNumber,employe.name]];
+        [cell.employeLabel setText:[NSString stringWithFormat:@"员工号:%@   员工名:%@",employe.jobNumber ? : @"",employe.name]];
     }
     return cell;
 }

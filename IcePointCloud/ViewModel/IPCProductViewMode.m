@@ -52,7 +52,7 @@
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
                             IsTrying:isTry
-                             StoreId:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""];
+                             StoreId:[IPCAppManager sharedManager].currentWareHouse.wareHouseId];
 }
 
 

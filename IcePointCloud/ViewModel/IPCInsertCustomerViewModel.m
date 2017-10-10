@@ -108,22 +108,36 @@
 }
 
 
-- (void)judgeCustomerPhone:(NSString *)phone :(void(^)())complete
+- (void)judgeCustomerPhone:(NSString *)phone
 {
     [IPCCustomerRequestManager judgePhoneIsExistWithPhone:phone
                                              SuccessBlock:^(id responseValue)
-    {
-        if (![responseValue boolValue]) {
-            if (complete) {
-                complete();
-            }
-        }else{
-            [IPCCommonUI showError:@"该手机号已注册过了"];
-        }
-    } FailureBlock:^(NSError *error) {
-        if ([error code] != NSURLErrorCancelled) {
-            [IPCCommonUI showError:@"验证手机号失败!"];
-        }
-    }];
+     {
+         if ([responseValue boolValue]) {
+             [IPCCommonUI showError:@"该手机号已注册过了"];
+         }
+     } FailureBlock:^(NSError *error) {
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"验证手机号失败!"];
+         }
+     }];
 }
+
+
+- (void)judgeCustomerName:(NSString *)name
+{
+    [IPCCustomerRequestManager judgeCustomerNameIsExistWithName:name
+                                                   SuccessBlock:^(id responseValue)
+     {
+         if ([responseValue boolValue]) {
+             [IPCCommonUI showError:@"该客户名已注册过了"];
+         }
+     } FailureBlock:^(NSError *error) {
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:@"验证客户名失败!"];
+         }
+     }];
+}
+
+
 @end

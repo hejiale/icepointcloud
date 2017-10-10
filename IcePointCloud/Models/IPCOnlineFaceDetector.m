@@ -75,7 +75,6 @@
         if (self.resultStings.length && self.resultStings){
             NSDictionary * dic = [self.resultStings objectFromJSONString];
             NSArray* resultArray=[dic objectForKey:@"result"];
-            NSLog(@"---result %@",resultArray);
             
             if ([resultArray count] > 0) {
                 for (id anRst in resultArray) {

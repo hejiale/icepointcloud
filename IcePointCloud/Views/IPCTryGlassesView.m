@@ -10,7 +10,6 @@
 
 @interface IPCTryGlassesView()
 
-@property (weak, nonatomic) IBOutlet UIView *imageContentView;
 @property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *productNameLabel;
@@ -19,8 +18,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *cartNumLabel;
 @property (weak, nonatomic) IBOutlet UIView *parameterContentView;
 @property (weak, nonatomic) IBOutlet UIImageView *defaultGlassImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
-
 
 @property (copy, nonatomic) void(^ChooseBlock)();
 @property (copy, nonatomic) void(^EditBlock)();
@@ -70,16 +67,6 @@
         
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (glassImage.imageURL.length) {
-            __block CGFloat scale = 0;
-            if (glassImage.width > glassImage.height) {
-                scale = glassImage.width/glassImage.height;
-            }else{
-                scale = glassImage.height/glassImage.width;
-            }
-            __block CGFloat width = self.productImageView.jk_width;
-            __block CGFloat height = width/scale;
-            self.imageHeight.constant = MIN(height, self.imageContentView.jk_height);
-            
             [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
         }
         

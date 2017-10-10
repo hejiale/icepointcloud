@@ -90,6 +90,7 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
     
     IPCWareHouse * house = [IPCAppManager sharedManager].wareHouse.wareHouseArray[indexPath.row];
     [IPCAppManager sharedManager].currentWareHouse = house;
+    [IPCAppManager sharedManager].isChangeHouse = YES;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:IPCChooseWareHouseNotification object:nil];
     

@@ -15,8 +15,8 @@
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure
 {
-//    [self postRequest:@{@"customerId":customID} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
-    [self postRequest:@{@"customerId":customID,@"pageNo":@(1),@"maxPageSize":@(100000)} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+//    [self postRequest:@{@"customerId":customID,@"pageNo":@(1),@"maxPageSize":@(100000)} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -242,21 +242,23 @@
 + (void)getMemberLevelWithSuccessBlock:(void (^)(id))success
                           FailureBlock:(void (^)(NSError *))failure
 {
-    //customerConfigAdmin 替换
-    [self postRequest:nil RequestMethod:@"customerAdmin.listMemberLevel" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:nil RequestMethod:@"customerConfigAdmin.listMemberLevel" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getCustomerTypeSuccessBlock:(void (^)(id))success
                        FailureBlock:(void (^)(NSError *))failure
 {
-    //customerConfigAdmin 替换
-    [self postRequest:nil RequestMethod:@"customerAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:nil RequestMethod:@"customerConfigAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)judgePhoneIsExistWithPhone:(NSString *)phone SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    //需要替换
-    [self postRequest:phone RequestMethod:@"customerAdmin.getCusomerInfoByPhone" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":@"0",@"customerName":@"",@"customerPhone":phone} RequestMethod:@"customerAdmin.getCusomerByPhoneOrName" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)judgeCustomerNameIsExistWithName:(NSString *)name SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:@{@"customerId":@"0",@"customerName":name,@"customerPhone":@""} RequestMethod:@"customerAdmin.getCusomerByPhoneOrName" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

@@ -229,7 +229,7 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
-            [cell setRightOperation:@"选择员工" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
+            [cell setRightOperation:@"选择经办人" ButtonTitle:nil ButtonImage:@"icon_insert_btn"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 if ([self.delegate respondsToSelector:@selector(showEmployeeView)]) {
                     [self.delegate showEmployeeView];

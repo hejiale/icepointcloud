@@ -16,7 +16,7 @@
                   SuccessBlock:(void (^)(id responseValue))success
                   FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@[key,@{@"type":type,@"searchSupplier":@"true",@"proAvailable":@"true"}] RequestMethod:@"bizadmin.getCategoryType" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@[key,@{@"type":type,@"searchSupplier":@"true",@"proAvailable":@"true",@"storeId":[IPCAppManager sharedManager].currentWareHouse.wareHouseId}] RequestMethod:@"bizadmin.getCategoryType" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -42,7 +42,7 @@
                              @"startPrice":@(startPrice),
                              @"endPrice":endPrice > 0 ? @(endPrice) : @"",
                              @"isTryProduct": isTrying ? @"true":@"false",
-//                             @"storeId":storeId ? : @""
+                             @"storeId":storeId ? : @""
                              };
     [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }

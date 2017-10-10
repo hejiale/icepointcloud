@@ -115,8 +115,7 @@
 }
 
 - (IBAction)doubleTapPhotoAction:(UITapGestureRecognizer *)recognizer{
-    self.modelView.transform = CGAffineTransformIdentity;
-    self.glassesView.transform = CGAffineTransformIdentity;
+    [self updateItem];
 }
 
 - (void)initGlassView{

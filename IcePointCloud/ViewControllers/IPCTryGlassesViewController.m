@@ -28,7 +28,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 @interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewControllerDelegate,IPCTryGlassesCellDelegate,UIScrollViewDelegate>
 {
-    BOOL isCancelRequest;
+    BOOL   isCancelRequest;
 }
 @property (weak, nonatomic) IBOutlet UITableView *productTableView;
 @property (nonatomic, weak) IBOutlet UIView *matchPanelView;
@@ -87,8 +87,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self initMatchItems];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
     
-    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
+    if ((isCancelRequest && self.glassListViewMode.currentPage == 0) || [IPCAppManager sharedManager].isChangeHouse) {
         [self beginFilterClass];
+        [IPCAppManager sharedManager].isChangeHouse = NO;
     }else{
         [self reload];
     }
@@ -296,10 +297,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
 - (void)beginRefresh
 {
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
-    }
     [self.refreshFooter resetDataStatus];
     [self beginReloadTableView];
 }
@@ -314,7 +311,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadMore
 {
-    if (self.refreshHeader.isRefreshing)return;
     self.glassListViewMode.currentPage += 30;
     
     __weak typeof (self) weakSelf = self;
@@ -820,16 +816,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
-        if (!self.refreshFooter.isRefreshing) {
-            if (indexPath.row == self.glassListViewMode.glassesList.count -20) {
-                [self.refreshFooter beginRefreshing];
-            }
-        }
-    }
-}
-
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.view.jk_height/4;
@@ -889,7 +875,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    self.glassListViewMode = nil;
 }
 
 @end

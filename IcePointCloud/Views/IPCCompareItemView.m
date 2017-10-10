@@ -231,8 +231,7 @@
 
 
 - (IBAction)doubleTapAction:(id)sender {
-    self.modelView.transform = CGAffineTransformIdentity;
-    self.glassesView.transform = CGAffineTransformIdentity;
+    [self updateItem];
 }
 
 
@@ -259,6 +258,7 @@
     [self initGlassView];
     self.matchItem.glass = nil;
     [self updateItem];
+    
     if ([self.delegate respondsToSelector:@selector(deleteCompareGlasses:)]) {
         [self.delegate deleteCompareGlasses:self];
     }

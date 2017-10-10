@@ -80,7 +80,11 @@
 {
     BugtagsOptions *options = [[BugtagsOptions alloc] init];
     options.trackingNetwork = YES;
-    [Bugtags startWithAppKey:IPCBugtags_Key invocationEvent:BTGInvocationEventNone options:options];
+#ifdef DEBUG
+    [Bugtags startWithAppKey:IPCBugtags_BetaKey invocationEvent:BTGInvocationEventNone];
+#else
+    [Bugtags startWithAppKey:IPCBugtags_ProductKey invocationEvent:BTGInvocationEventNone];
+#endif
 }
 
 

@@ -220,13 +220,12 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 
 - (void)judgePhone:(NSString *)phone{
     [IPCCommonUI show];
-    __weak typeof(self) weakSelf = self;
-    [self.insertCustomerModel judgeCustomerPhone:phone :^{
-        [IPCCommonUI hiden];
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [IPCInsertCustomer instance].customerPhone = phone;
-        [strongSelf.userInfoTableView reloadData];
-    }];
+    [self.insertCustomerModel judgeCustomerPhone:phone];
+}
+
+- (void)judgeName:(NSString *)name{
+    [IPCCommonUI show];
+    [self.insertCustomerModel judgeCustomerName:name];
 }
 
 #pragma mark //IPCInsertCustomerOpometryCellDelegate

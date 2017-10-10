@@ -50,8 +50,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     [self setNavigationBarStatus:YES];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
     
-    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
+    if ((isCancelRequest && self.glassListViewMode.currentPage == 0) || [IPCAppManager sharedManager].isChangeHouse) {
         [self beginFilterClass];
+        [IPCAppManager sharedManager].isChangeHouse = NO;
     }else{
         [self.glassListCollectionView reloadData];
     }
@@ -357,8 +358,6 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    
-    self.glassListViewMode = nil;
 }
 
 

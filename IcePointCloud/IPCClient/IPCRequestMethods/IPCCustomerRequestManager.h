@@ -307,4 +307,16 @@
                       SuccessBlock:(void (^)(id responseValue))success
                       FailureBlock:(void (^)(NSError * error))failure;
 
+
+/**
+ Judge Customer Name Is Exist
+
+ @param name
+ @param success
+ @param failure 
+ */
++ (void)judgeCustomerNameIsExistWithName:(NSString *)name
+                            SuccessBlock:(void (^)(id))success
+                            FailureBlock:(void (^)(NSError *))failure;
+
 @end
