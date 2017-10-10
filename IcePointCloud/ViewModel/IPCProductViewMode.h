@@ -33,6 +33,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 
 @property (nonatomic, copy, readwrite) NSString *  searchWord;
 @property (nonatomic, assign, readwrite) NSInteger   currentPage;
+@property (nonatomic, assign, readwrite) NSInteger   limit;
 @property (nonatomic) IPCTopFilterType   currentType;
 @property (nonatomic, assign, readwrite) BOOL  isTrying;
 @property (nonatomic, assign) LSRefreshDataStatus status;

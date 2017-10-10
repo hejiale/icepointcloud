@@ -27,6 +27,7 @@
  *  QUERY GLASSLIST
  *
  *  @param page
+ *  @param limit
  *  @param searchWord
  *  @param classType
  *  @param searchType
@@ -37,6 +38,7 @@
  *  @param failure
  */
 + (void)queryFilterGlassesListWithPage:(NSInteger)page
+                                 Limit:(NSInteger)limit
                             SearchWord:(NSString *)searchWord
                              ClassType:(NSString *)classType
                             SearchType:(NSDictionary *)searchType

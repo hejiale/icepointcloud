@@ -15,7 +15,7 @@
 #import "IPCPayOrderViewController.h"
 #import "IPCSearchViewController.h"
 
-static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
+static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCellIdentifier";
 
 @interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 {
@@ -122,7 +122,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 - (void)loadMore{
     if (self.refreshHeader.isRefreshing)return;
     
-    self.glassListViewMode.currentPage += 30;
+    self.glassListViewMode.currentPage += self.glassListViewMode.limit;
     
     __weak typeof(self) weakSelf = self;
     [self loadGlassesListData:^{
@@ -141,6 +141,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 //Load Data
 - (void)loadNormalProducts
 {
+    self.glassListViewMode.limit = 30;
     self.glassListViewMode.currentPage = 0;
     [self.glassListViewMode.glassesList removeAllObjects];
     self.glassListViewMode.glassesList = nil;
@@ -287,7 +288,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 {
     if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
         if (!self.refreshFooter.isRefreshing) {
-            if (indexPath.row == self.glassListViewMode.glassesList.count -20) {
+            if (indexPath.row == self.glassListViewMode.glassesList.count - (self.glassListViewMode.limit - 10)) {
                 [self.refreshFooter beginRefreshing];
             }
         }

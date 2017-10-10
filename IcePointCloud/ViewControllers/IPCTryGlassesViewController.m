@@ -7,7 +7,7 @@
 //
 
 #import "IPCTryGlassesViewController.h"
-#import "IPCTryGlassesCell.h"
+#import "IPCTryGlassesListViewCell.h"
 #import "IPCSearchViewController.h"
 #import "IPCDefineCameraBaseComponent.h"
 #import "IPCPhotoPickerViewController.h"
@@ -22,9 +22,9 @@
 #import "IPCOfflineFaceDetector.h"
 #import "IPCGlassParameterView.h"
 #import "IPCEditBatchParameterView.h"
-#import "IPCTryGlassesView.h"
+#import "IPCCurrentTryGlassesView.h"
 
-static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellIdentifier";
+static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIdentifier";
 
 @interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewControllerDelegate,IPCTryGlassesCellDelegate,UIScrollViewDelegate>
 {
@@ -56,7 +56,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
 @property (strong, nonatomic) IPCProductViewMode  *glassListViewMode;
 @property (nonatomic, strong) IPCOfflineFaceDetector  * offlineFaceDetector;
-@property (nonatomic, strong) IPCTryGlassesView  *  tryGlassesView;
+@property (nonatomic, strong) IPCCurrentTryGlassesView  *  tryGlassesView;
 
 @end
 
@@ -212,14 +212,14 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
         [self.recommdBgView setHidden:NO];
         [self.recommdScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
-        __block CGFloat width = self.recommdBgView.jk_width/3;
+        __block CGFloat width = (self.recommdBgView.jk_width-20)/3;
         __block CGFloat height = self.recommdBgView.jk_height;
         
         [self.glassListViewMode.recommdGlassesList enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
-            UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake(width*idx, 0, width, height)];
+            UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake((width+5)*idx+5, 0, width, height)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             IPCGlassesImage * glassImage = [glass imageWithType:IPCGlassesImageTypeThumb];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL]];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
             [imageView setUserInteractionEnabled:YES];
             __weak typeof(self) weakSelf = self;
             [imageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -230,17 +230,17 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
             [self.recommdScrollView addSubview:imageView];
         }];
         [self.recommdScrollView setContentOffset:CGPointZero];
-        [self.recommdScrollView setContentSize:CGSizeMake(self.glassListViewMode.recommdGlassesList.count * width, 0)];
+        [self.recommdScrollView setContentSize:CGSizeMake(self.glassListViewMode.recommdGlassesList.count * (width+5), 0)];
     }else{
         [self.recommdBgView setHidden:YES];
     }
 }
 
-- (IPCTryGlassesView *)tryGlassesView
+- (IPCCurrentTryGlassesView *)tryGlassesView
 {
     if (!_tryGlassesView) {
         __weak typeof(self) weakSelf = self;
-        _tryGlassesView = [[IPCTryGlassesView alloc]initWithFrame:CGRectMake(0, 0, self.productTableView.jk_width, (SCREEN_HEIGHT-70)/4) ChooseParameter:^{
+        _tryGlassesView = [[IPCCurrentTryGlassesView alloc]initWithFrame:CGRectMake(0, 0, self.productTableView.jk_width, (SCREEN_HEIGHT-70)/4) ChooseParameter:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
         } EditParameter:^{
@@ -297,6 +297,11 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 #pragma mark //Refresh Methods ----------------------------------------------------------------------------
 - (void)beginRefresh
 {
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
+    }
+    
     [self.refreshFooter resetDataStatus];
     [self beginReloadTableView];
 }
@@ -311,7 +316,8 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)loadMore
 {
-    self.glassListViewMode.currentPage += 30;
+    if (self.refreshHeader.isRefreshing)return;
+    self.glassListViewMode.currentPage += self.glassListViewMode.limit;
     
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
@@ -322,6 +328,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (void)beginReloadTableView
 {
+    self.glassListViewMode.limit = 50;
     self.glassListViewMode.currentPage = 0;
     [self.glassListViewMode.glassesList removeAllObjects];
     self.glassListViewMode.glassesList = nil;
@@ -804,9 +811,9 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    IPCTryGlassesCell * cell = [tableView dequeueReusableCellWithIdentifier:glassListCellIdentifier];
+    IPCTryGlassesListViewCell * cell = [tableView dequeueReusableCellWithIdentifier:glassListCellIdentifier];
     if (!cell) {
-        cell = [[UINib nibWithNibName:@"IPCTryGlassesCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        cell = [[UINib nibWithNibName:@"IPCTryGlassesListViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         cell.delegate = self;
     }
     if ([self.glassListViewMode.glassesList count] && self.glassListViewMode){
@@ -816,13 +823,23 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
+        if (!self.refreshFooter.isRefreshing) {
+            if (indexPath.row == self.glassListViewMode.glassesList.count -(self.glassListViewMode.limit - 10)) {
+                [self.refreshFooter beginRefreshing];
+            }
+        }
+    }
+}
+
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return self.view.jk_height/4;
 }
 
 #pragma mark //IPCTryGlassesCellDelegate
-- (void)chooseParameter:(IPCTryGlassesCell *)cell
+- (void)chooseParameter:(IPCTryGlassesListViewCell *)cell
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productTableView indexPathForCell:cell];
@@ -830,7 +847,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
     }
 }
 
-- (void)editBatchParameter:(IPCTryGlassesCell *)cell
+- (void)editBatchParameter:(IPCTryGlassesListViewCell *)cell
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productTableView indexPathForCell:cell];
@@ -845,7 +862,7 @@ static NSString * const glassListCellIdentifier = @"GlasslistCollectionViewCellI
 }
 
 
-- (void)tryGlasses:(IPCTryGlassesCell *)cell
+- (void)tryGlasses:(IPCTryGlassesListViewCell *)cell
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productTableView indexPathForCell:cell];

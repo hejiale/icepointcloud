@@ -29,7 +29,7 @@
                                          @"maxPageSize":@(10000),
                                          @"keyWord":keyword,
                                          @"isOnJob":@"true",
-                                         @"storeId":[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""
+                                         @"storeId" : [IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""
                                          };
     [self postRequest:responseParameter RequestMethod:@"employeeadmin.listEmployee" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }

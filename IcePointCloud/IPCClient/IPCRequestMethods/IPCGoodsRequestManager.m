@@ -16,11 +16,18 @@
                   SuccessBlock:(void (^)(id responseValue))success
                   FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@[key,@{@"type":type,@"searchSupplier":@"true",@"proAvailable":@"true",@"storeId":[IPCAppManager sharedManager].currentWareHouse.wareHouseId}] RequestMethod:@"bizadmin.getCategoryType" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    NSArray * paremeter = @[key,@{
+                                  @"type" : type,
+                                  @"searchSupplier" : @"true",
+                                  @"proAvailable" : @"true",
+                                  @"storeId" : [IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""}
+                            ];
+    [self postRequest:paremeter RequestMethod:@"bizadmin.getCategoryType" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
 + (void)queryFilterGlassesListWithPage:(NSInteger)page
+                                 Limit:(NSInteger)limit
                             SearchWord:(NSString *)searchWord
                              ClassType:(NSString *)classType
                             SearchType:(NSDictionary *)searchType
@@ -32,7 +39,7 @@
                           FailureBlock:(void (^)(NSError * error))failure
 {
     NSDictionary *params = @{@"start": @(page),
-                             @"limit": @(30),
+                             @"limit": @(limit),
                              @"type": classType,
                              @"keyword": searchWord,
                              @"delFlag":@"false",

@@ -28,7 +28,7 @@
 
 - (NSMutableArray<IPCGlasses *> *)glassesList{
     if (!_glassesList)
-    _glassesList = [[NSMutableArray alloc]init];
+        _glassesList = [[NSMutableArray alloc]init];
     return _glassesList;
 }
 
@@ -47,12 +47,13 @@
     self.completeBlock = complete;
     
     [self getGlassesListInfoWithPage:self.currentPage
+                               Limit:self.limit
                            ClassType:[[IPCAppManager sharedManager]classType:self.currentType] ? : @""
                           SearchType:[self.filterValue getStoreFilterSource]
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
                             IsTrying:isTry
-                             StoreId:[IPCAppManager sharedManager].currentWareHouse.wareHouseId];
+                             StoreId:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""];
 }
 
 
@@ -82,6 +83,7 @@
 
 #pragma mark //Request Data
 - (void)getGlassesListInfoWithPage:(NSInteger)page
+                             Limit:(NSInteger)limit
                          ClassType:(NSString *)classType
                         SearchType:(NSString *)searchType
                         StartPrice:(double)startPrice
@@ -92,6 +94,7 @@
 {
     __weak typeof (self) weakSelf = self;
     [IPCGoodsRequestManager queryFilterGlassesListWithPage:page
+                                                     Limit:limit
                                                 SearchWord:self.searchWord
                                                  ClassType:classType
                                                 SearchType:searchType
@@ -122,14 +125,14 @@
                                           strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
                                           [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying];
                                           if (strongSelf.filterView)
-                                          [strongSelf.filterView reloadFilterView];
+                                              [strongSelf.filterView reloadFilterView];
                                           
                                           if (strongSelf.filterSuccessBlock)
-                                          strongSelf.filterSuccessBlock(nil);
+                                              strongSelf.filterSuccessBlock(nil);
                                       } FailureBlock:^(NSError *error) {
                                           __strong typeof (weakSelf) strongSelf = weakSelf;
                                           if (strongSelf.filterSuccessBlock)
-                                          strongSelf.filterSuccessBlock(error);
+                                              strongSelf.filterSuccessBlock(error);
                                       }];
 }
 
@@ -223,7 +226,7 @@
     if ([self.glassesList count] == 0) {
         self.status = IPCFooterRefresh_NoData;
         if (self.completeBlock)
-        self.completeBlock(nil);
+            self.completeBlock(nil);
     }
 }
 

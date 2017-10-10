@@ -10,6 +10,7 @@
 #import "IPCEmployeListCell.h"
 
 static NSString * const employeIdentifier = @"IPCEmployeeListTableViewCellIdentifier";
+
 typedef void(^DismissBlock)();
 
 @interface IPCEmployeListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>

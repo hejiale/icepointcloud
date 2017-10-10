@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCTryGlassesView : UIView
+@interface IPCCurrentTryGlassesView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame
               ChooseParameter:(void(^)())choose

@@ -195,7 +195,17 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 #pragma mark //UIWebView Delegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [webView jk_setImgWidth:self.view.jk_width];
+    NSString *js = @"function imgAutoFit() { \
+    var imgs = document.getElementsByTagName('img'); \
+    for (var i = 0; i < imgs.length; ++i) {\
+    var img = imgs[i];   \
+    img.style.maxWidth = %f;   \
+    } \
+    }";
+    js = [NSString stringWithFormat:js, self.view.jk_width];
+    
+    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
     
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"]floatValue];
     CGRect frame = webView.frame;

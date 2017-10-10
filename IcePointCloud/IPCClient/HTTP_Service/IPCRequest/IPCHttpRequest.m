@@ -57,6 +57,7 @@
             [IPCCommonUI showError:@"连接服务出错了，请检查当前网络环境!"];
         }
     }else{
+        __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request
                                                                                   ImageData:imageData
                                                                                   ImageName:imageName
@@ -64,6 +65,9 @@
                                                                                 CacheEnable:cacheEnable
                                                                                SuccessBlock:^(id responseValue, NSURLSessionDataTask * _Nonnull task)
                                        {
+                                           __strong typeof(weakSelf) strongSelf = weakSelf;
+                                           [strongSelf.taskArray removeObject:task];
+                                           
                                            if (success) {
                                                success(responseValue);
                                            }
@@ -72,6 +76,9 @@
                                                progress(uploadProgress);
                                            }
                                        } FailureBlock:^(NSError *error, NSURLSessionDataTask * _Nonnull task) {
+                                           __strong typeof(weakSelf) strongSelf = weakSelf;
+                                           [strongSelf.taskArray removeObject:task];
+                                           
                                            if (failure) {
                                                failure(error);
                                            }
