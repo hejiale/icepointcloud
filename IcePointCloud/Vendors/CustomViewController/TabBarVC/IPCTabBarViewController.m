@@ -295,14 +295,16 @@
 
 - (void)requestTradeOrExchangeStatus
 {
-    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-        [IPCPayOrderManager sharedManager].isTrade = YES;
-    } FailureBlock:^(NSError *error) {
-        if ([error code] != NSURLErrorCancelled) {
-            [IPCCommonUI showError:@"查询积分定制规则失败!"];
-        }
-        
-    }];
+    [IPCPayOrderManager sharedManager].isTrade = YES;
+    
+//    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
+//        [IPCPayOrderManager sharedManager].isTrade = YES;
+//    } FailureBlock:^(NSError *error) {
+//        if ([error code] != NSURLErrorCancelled) {
+//            [IPCCommonUI showError:@"查询积分定制规则失败!"];
+//        }
+//        
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {
