@@ -8,7 +8,6 @@
 
 #import "IPCPlatformService.h"
 #import "IPCCheckVersion.h"
-#import <Bugtags/Bugtags.h>
 
 @implementation IPCPlatformService
 
@@ -21,7 +20,6 @@
         [self enableSkin];
         [self enableKeyboard];
         [self bindWechat];
-        [self configBugtags];
     }
     return self;
 }
@@ -75,18 +73,6 @@
         }
     }];
 }
-
-- (void)configBugtags
-{
-    BugtagsOptions *options = [[BugtagsOptions alloc] init];
-    options.trackingNetwork = YES;
-#ifdef DEBUG
-    [Bugtags startWithAppKey:IPCBugtags_BetaKey invocationEvent:BTGInvocationEventNone];
-#else
-    [Bugtags startWithAppKey:IPCBugtags_ProductKey invocationEvent:BTGInvocationEventNone];
-#endif
-}
-
 
 #pragma mark //WXApiDelegate
 - (void)onReq:(BaseReq *)req

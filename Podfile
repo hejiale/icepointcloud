@@ -21,7 +21,6 @@ pod 'TuSDK'
 pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
 pod 'SDWebImage'
-pod 'Bugtags'
 end
 
 target "IcePointCloudTests" do

@@ -77,19 +77,16 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "Bugtags/Bugtags.bundle"
   install_resource "TuSDK/Localization/Base.lproj"
   install_resource "TuSDK/Localization/En.lproj"
   install_resource "TuSDK/Localization/zh-Hant.lproj"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "Bugtags/Bugtags.bundle"
   install_resource "TuSDK/Localization/Base.lproj"
   install_resource "TuSDK/Localization/En.lproj"
   install_resource "TuSDK/Localization/zh-Hant.lproj"
 fi
 if [[ "$CONFIGURATION" == "TestRelease" ]]; then
-  install_resource "Bugtags/Bugtags.bundle"
   install_resource "TuSDK/Localization/Base.lproj"
   install_resource "TuSDK/Localization/En.lproj"
   install_resource "TuSDK/Localization/zh-Hant.lproj"
