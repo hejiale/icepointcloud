@@ -109,8 +109,10 @@
 - (IBAction)handlePhotoPinch:(UIPinchGestureRecognizer *)recognizer
 {
     CGFloat scale = recognizer.scale;
+    
     self.modelView.transform = CGAffineTransformScale(self.modelView.transform, scale, scale);
     self.glassesView.transform = CGAffineTransformScale(self.glassesView.transform, scale, scale);
+
     recognizer.scale = 1;
 }
 

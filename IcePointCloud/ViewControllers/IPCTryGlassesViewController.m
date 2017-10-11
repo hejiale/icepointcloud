@@ -168,7 +168,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
             if (idx == 1 || idx == 3) frame.origin.x = frame.size.width;
             if (idx == 2 || idx == 3) frame.origin.y = frame.size.height;
             item.frame  = frame;
-            item.origin = frame.origin;
             item.originalCenter = item.center;
             item.parentSingleModeView = strongSelf.signleModeView;
             item.tag = idx;

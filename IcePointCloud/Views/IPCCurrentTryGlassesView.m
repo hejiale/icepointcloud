@@ -69,19 +69,17 @@
         
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (glassImage.imageURL.length) {
-            if (!self.productImageView.image) {
-                __block CGFloat scale = 0;
-                if (glassImage.width > glassImage.height) {
-                    scale = glassImage.width/glassImage.height;
-                }else{
-                    scale = glassImage.height/glassImage.width;
-                }
-                __block CGFloat width = self.productImageView.jk_width;
-                __block CGFloat height = width/scale;
-                self.imageHeight.constant = MIN(height, 100);
-                
-                [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+            __block CGFloat scale = 0;
+            if (glassImage.width > glassImage.height) {
+                scale = glassImage.width/glassImage.height;
+            }else{
+                scale = glassImage.height/glassImage.width;
             }
+            __block CGFloat width = self.productImageView.jk_width;
+            __block CGFloat height = width/scale;
+            self.imageHeight.constant = MIN(height, 100);
+            
+            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
         }
         
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];

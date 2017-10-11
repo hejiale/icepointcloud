@@ -6,14 +6,13 @@
 //  Copyright (c) 2014 Doray. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "IPCTryGlassView.h"
 
 @protocol CompareItemViewDelegate;
+
 @interface IPCCompareItemView : IPCTryGlassView
 
 @property (nonatomic, strong, readwrite) UIView * parentSingleModeView;
-@property (nonatomic, assign, readwrite) CGPoint origin;
 @property (nonatomic, assign, readwrite) CGPoint originalCenter;
 @property (nonatomic, assign, readwrite) CGPoint singleModeViewAnchorPoint;
 @property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
