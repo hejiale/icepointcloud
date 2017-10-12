@@ -178,13 +178,13 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 {
     __weak typeof(self) weakSelf = self;
     [self.glassListViewMode reloadGlassListDataWithIsTry:NO Complete:^(NSError * error){
+        isCancelRequest = NO;
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
             [strongSelf.refreshFooter noticeNoDataStatus];
         }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
             if ([error code] == NSURLErrorCancelled) {
                 isCancelRequest = YES;
-                return ;
             }else{
                 [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
             }
@@ -215,7 +215,6 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)reload{
     [super reload];
     
-    isCancelRequest = NO;
     self.glassListCollectionView.isBeginLoad = NO;
     [self.glassListCollectionView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];

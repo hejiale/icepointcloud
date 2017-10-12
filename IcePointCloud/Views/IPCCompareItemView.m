@@ -98,8 +98,6 @@
 
 - (void)hidenGlassBgView
 {
-    [self.glassesView setHidden:YES];
-    [self resetGlassView];
     self.matchItem.glass = nil;
     [self updateItem];
     

@@ -40,6 +40,7 @@
 
 @protocol UserBaseInfoCellDelegate <NSObject>
 
+- (void)selectIntroducer;
 - (void)reloadInsertCustomUI;
 - (void)judgePhone:(NSString *)phone;
 - (void)judgeName:(NSString *)name;

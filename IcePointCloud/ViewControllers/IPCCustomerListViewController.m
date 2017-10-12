@@ -138,25 +138,25 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)loadCustomerList
 {
     __weak typeof(self) weakSelf = self;
-    [self.viewModel queryCustomerList:^(NSError *error){
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
-            [strongSelf.refreshFooter noticeNoDataStatus];
-        }else if (strongSelf.viewModel.status == IPCRefreshError){
-            if ([error code] == NSURLErrorCancelled) {
-                isCancelRequest = YES;
-                return;
-            }else{
-                [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
-            }
-        }
-        [strongSelf reloadCustomerListView];
-    }];
+    [self.viewModel queryCustomerList:^(NSError *error)
+     {
+         isCancelRequest = NO;
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
+             [strongSelf.refreshFooter noticeNoDataStatus];
+         }else if (strongSelf.viewModel.status == IPCRefreshError){
+             if ([error code] == NSURLErrorCancelled) {
+                 isCancelRequest = YES;
+             }else{
+                 [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
+             }
+         }
+         [strongSelf reloadCustomerListView];
+     }];
 }
 
- - (void)reloadCustomerListView
+- (void)reloadCustomerListView
 {
-    isCancelRequest = NO;
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
     
@@ -242,7 +242,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 - (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
-    self.viewModel = nil;
 }
 
 

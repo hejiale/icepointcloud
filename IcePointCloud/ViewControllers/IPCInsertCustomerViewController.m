@@ -134,11 +134,6 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
                 cell = [[UINib nibWithNibName:@"IPCInsertCustomerBaseCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
                 cell.delegate = self;
             }
-            __weak typeof(self) weakSelf = self;
-            [[cell rac_signalForSelector:@selector(showCustomerListAction)] subscribeNext:^(RACTuple * _Nullable x) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf selectIntroducerMethod];
-            }];
             return cell;
         }
     }else if (indexPath.section == 1){
@@ -226,6 +221,11 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 - (void)judgeName:(NSString *)name{
     [IPCCommonUI show];
     [self.insertCustomerModel judgeCustomerName:name];
+}
+
+- (void)selectIntroducer
+{
+    [self selectIntroducerMethod];
 }
 
 #pragma mark //IPCInsertCustomerOpometryCellDelegate

@@ -60,7 +60,7 @@
 
 - (void)hidenGlassBgView
 {
-    self.matchItem = nil;
+    self.matchItem.glass = nil;
     [self updateItem];
     [self deleteModel];
 }

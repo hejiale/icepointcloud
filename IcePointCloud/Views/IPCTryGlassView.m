@@ -113,9 +113,10 @@
 
 - (void)updateGlassesPositionWithMatchItem:(IPCMatchItem *)item
 {
+    [self.glassesView setHidden:YES];
     [self.glassesView addBorder:0 Width:0 Color:nil];
     [self.closeButton setHidden:YES];
-    [self.glassImageView setImage:nil];
+    [self resetGlassView];
     
     if (item) {
         IPCGlassesImage *gi = [item.glass imageWithType:IPCGlassesImageTypeFrontialMatch];

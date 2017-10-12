@@ -327,7 +327,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
 - (void)beginReloadTableView
 {
-    self.glassListViewMode.limit = 50;
+    self.glassListViewMode.limit = 30;
     self.glassListViewMode.currentPage = 0;
     [self.glassListViewMode.glassesList removeAllObjects];
     self.glassListViewMode.glassesList = nil;
@@ -361,7 +361,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
 - (void)reloadTableView
 {
-    isCancelRequest = NO;
     self.productTableView.isBeginLoad = NO;
     [self.productTableView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
@@ -378,13 +377,13 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (void)loadGlassesListData:(void(^)())complete{
     __weak typeof (self) weakSelf = self;
     [self.glassListViewMode reloadGlassListDataWithIsTry:YES Complete:^(NSError * error){
+        isCancelRequest = NO;
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
             [strongSelf.refreshFooter noticeNoDataStatus];
         }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
             if ([error code] == NSURLErrorCancelled) {
                 isCancelRequest = YES;
-                return;
             }else{
                 [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
             }
@@ -595,7 +594,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 //His head shot head modification model refresh glasses
 - (void)outPutCameraImage:(UIImage *)image
 {
-    [IPCCommonUI showInfo:@"正在获取眼镜位置..."];
+    [IPCCommonUI showInfo:@"加载中..."];
     __weak typeof (self) weakSelf = self;
     //A network under the condition of priority calls online face recognition, if network error or request wrong call the offline face recognition
     self.offlineFaceDetector = [[IPCOfflineFaceDetector alloc]init];

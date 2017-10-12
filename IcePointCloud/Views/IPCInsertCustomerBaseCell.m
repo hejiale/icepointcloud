@@ -148,6 +148,9 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 }
 
 - (void)showCustomerListAction{
+    if ([self.delegate respondsToSelector:@selector(selectIntroducer)]) {
+        [self.delegate selectIntroducer];
+    }
 }
 
 #pragma mark //Clicked Events
@@ -240,14 +243,14 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     
     if (str.length) {
         if ([textField isEqual:self.phoneTextField]) {
-            if ([self.delegate respondsToSelector:@selector(judgePhone:)]) {
-                [self.delegate judgePhone:str];
-            }
+//            if ([self.delegate respondsToSelector:@selector(judgePhone:)]) {
+//                [self.delegate judgePhone:str];
+//            }
             [IPCInsertCustomer instance].customerPhone = str;
         }else if ([textField isEqual:self.userNameTextField]){
-            if ([self.delegate respondsToSelector:@selector(judgeName:)]) {
-                [self.delegate judgeName:str];
-            }
+//            if ([self.delegate respondsToSelector:@selector(judgeName:)]) {
+//                [self.delegate judgeName:str];
+//            }
             [IPCInsertCustomer instance].customerName = str;
         }else if ([textField isEqual:self.memberNumTextField]){
             [IPCInsertCustomer instance].memberNum = str;
