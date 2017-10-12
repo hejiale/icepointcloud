@@ -7,9 +7,6 @@
 //
 
 #import "IPCUpdatePasswordView.h"
-#import "IPCPersonInputCell.h"
-
-static NSString * const inputIdentifier = @"PersonInputCellIdentifier";
 
 @interface IPCUpdatePasswordView()<UITextFieldDelegate>
 

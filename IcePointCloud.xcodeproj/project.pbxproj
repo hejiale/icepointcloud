@@ -192,8 +192,6 @@
 		CB6AC2121E9F51B9008031DD /* IPCEmployeeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6AC2111E9F51B9008031DD /* IPCEmployeeManager.m */; };
 		CB6AC2191E9F915D008031DD /* IPCCustomerTypeList.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6AC2181E9F915D008031DD /* IPCCustomerTypeList.m */; };
 		CB6AC21C1E9F9175008031DD /* IPCMemberLevelList.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6AC21B1E9F9175008031DD /* IPCMemberLevelList.m */; };
-		CB7408271EC94461001DD704 /* IPCPersonInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB7408251EC94461001DD704 /* IPCPersonInputCell.m */; };
-		CB7408281EC94461001DD704 /* IPCPersonInputCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB7408261EC94461001DD704 /* IPCPersonInputCell.xib */; };
 		CB75FD451E6CFD9A00EB2A52 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */; };
 		CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */; };
 		CB76E0321F39AC1F0072DCA2 /* IPCSortCustomer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB76E0311F39AC1F0072DCA2 /* IPCSortCustomer.m */; };
@@ -241,7 +239,6 @@
 		CBAE92411F7A2608002D939D /* IPCCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE923A1F7A2608002D939D /* IPCCheckVersion.m */; };
 		CBAE92421F7A2608002D939D /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE923C1F7A2608002D939D /* IPCCommon.m */; };
 		CBAE92431F7A2608002D939D /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE923F1F7A2608002D939D /* IPCPlatformService.m */; };
-		CBAE92681F7A2875002D939D /* IPCCollectionViewIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92471F7A2875002D939D /* IPCCollectionViewIndex.m */; };
 		CBAE92691F7A2875002D939D /* IPCCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE924A1F7A2875002D939D /* IPCCommonUI.m */; };
 		CBAE926A1F7A2875002D939D /* IPCDynamicImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE924D1F7A2875002D939D /* IPCDynamicImageTextButton.m */; };
 		CBAE926B1F7A2875002D939D /* IPCStaticImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE924F1F7A2875002D939D /* IPCStaticImageTextButton.m */; };
@@ -287,8 +284,8 @@
 		CBC41A061F03908B00387F9C /* IPCProductViewMode.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC41A051F03908B00387F9C /* IPCProductViewMode.m */; };
 		CBC6AF531EA0A88400F7914D /* IPCPayOrderSettlementCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC6AF511EA0A88400F7914D /* IPCPayOrderSettlementCell.m */; };
 		CBC6AF541EA0A88400F7914D /* IPCPayOrderSettlementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC6AF521EA0A88400F7914D /* IPCPayOrderSettlementCell.xib */; };
-		CBC6AF581EA0BAA400F7914D /* IPCSearchCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC6AF561EA0BAA400F7914D /* IPCSearchCustomerViewController.m */; };
-		CBC6AF591EA0BAA400F7914D /* IPCSearchCustomerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC6AF571EA0BAA400F7914D /* IPCSearchCustomerViewController.xib */; };
+		CBC6AF581EA0BAA400F7914D /* IPCCustomerListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC6AF561EA0BAA400F7914D /* IPCCustomerListViewController.m */; };
+		CBC6AF591EA0BAA400F7914D /* IPCCustomerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC6AF571EA0BAA400F7914D /* IPCCustomerListViewController.xib */; };
 		CBC75A5A1F0B80DE0029F956 /* IPCManagerAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC75A581F0B80DE0029F956 /* IPCManagerAddressViewController.m */; };
 		CBC75A5B1F0B80DE0029F956 /* IPCManagerAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBC75A591F0B80DE0029F956 /* IPCManagerAddressViewController.xib */; };
 		CBC75A5F1F0B80F50029F956 /* IPCManagerOptometryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC75A5D1F0B80F50029F956 /* IPCManagerOptometryViewController.m */; };
@@ -627,9 +624,6 @@
 		CB6AC2181E9F915D008031DD /* IPCCustomerTypeList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerTypeList.m; sourceTree = "<group>"; };
 		CB6AC21A1E9F9175008031DD /* IPCMemberLevelList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCMemberLevelList.h; sourceTree = "<group>"; };
 		CB6AC21B1E9F9175008031DD /* IPCMemberLevelList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCMemberLevelList.m; sourceTree = "<group>"; };
-		CB7408241EC94461001DD704 /* IPCPersonInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonInputCell.h; sourceTree = "<group>"; };
-		CB7408251EC94461001DD704 /* IPCPersonInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPersonInputCell.m; sourceTree = "<group>"; };
-		CB7408261EC94461001DD704 /* IPCPersonInputCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPersonInputCell.xib; sourceTree = "<group>"; };
 		CB75FD421E6CFD9A00EB2A52 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB75FD431E6CFD9A00EB2A52 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB75FD441E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
@@ -715,8 +709,6 @@
 		CBAE923D1F7A2608002D939D /* IPCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCore.h; sourceTree = "<group>"; };
 		CBAE923E1F7A2608002D939D /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPlatformService.h; sourceTree = "<group>"; };
 		CBAE923F1F7A2608002D939D /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPlatformService.m; sourceTree = "<group>"; };
-		CBAE92461F7A2875002D939D /* IPCCollectionViewIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCollectionViewIndex.h; sourceTree = "<group>"; };
-		CBAE92471F7A2875002D939D /* IPCCollectionViewIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCollectionViewIndex.m; sourceTree = "<group>"; };
 		CBAE92491F7A2875002D939D /* IPCCommonUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCommonUI.h; sourceTree = "<group>"; };
 		CBAE924A1F7A2875002D939D /* IPCCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCommonUI.m; sourceTree = "<group>"; };
 		CBAE924C1F7A2875002D939D /* IPCDynamicImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDynamicImageTextButton.h; sourceTree = "<group>"; };
@@ -805,9 +797,9 @@
 		CBC6AF501EA0A88400F7914D /* IPCPayOrderSettlementCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderSettlementCell.h; sourceTree = "<group>"; };
 		CBC6AF511EA0A88400F7914D /* IPCPayOrderSettlementCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderSettlementCell.m; sourceTree = "<group>"; };
 		CBC6AF521EA0A88400F7914D /* IPCPayOrderSettlementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderSettlementCell.xib; sourceTree = "<group>"; };
-		CBC6AF551EA0BAA400F7914D /* IPCSearchCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSearchCustomerViewController.h; sourceTree = "<group>"; };
-		CBC6AF561EA0BAA400F7914D /* IPCSearchCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSearchCustomerViewController.m; sourceTree = "<group>"; };
-		CBC6AF571EA0BAA400F7914D /* IPCSearchCustomerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSearchCustomerViewController.xib; sourceTree = "<group>"; };
+		CBC6AF551EA0BAA400F7914D /* IPCCustomerListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerListViewController.h; sourceTree = "<group>"; };
+		CBC6AF561EA0BAA400F7914D /* IPCCustomerListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerListViewController.m; sourceTree = "<group>"; };
+		CBC6AF571EA0BAA400F7914D /* IPCCustomerListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomerListViewController.xib; sourceTree = "<group>"; };
 		CBC75A571F0B80DE0029F956 /* IPCManagerAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCManagerAddressViewController.h; sourceTree = "<group>"; };
 		CBC75A581F0B80DE0029F956 /* IPCManagerAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCManagerAddressViewController.m; sourceTree = "<group>"; };
 		CBC75A591F0B80DE0029F956 /* IPCManagerAddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCManagerAddressViewController.xib; sourceTree = "<group>"; };
@@ -968,7 +960,6 @@
 				04CBD95B1D582A4C00C7CAA4 /* IPCRootViewController.xib */,
 			);
 			name = Root;
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		046497811D483E6300137A3E /* ProductDetail */ = {
@@ -1008,10 +999,11 @@
 		0485F3F91D3491C200A42DE3 /* Customer */ = {
 			isa = PBXGroup;
 			children = (
-				CBC75A621F0B810D0029F956 /* SearchCustomer */,
-				CBC75A631F0B81180029F956 /* InsertCustomer */,
+				CBC75A621F0B810D0029F956 /* CustomerList */,
+				CBC75A631F0B81180029F956 /* CreateCustomer */,
 				CBC75A641F0B81340029F956 /* CustomerDetail */,
-				CBC75A611F0B80F90029F956 /* Manager */,
+				CBC75A611F0B80F90029F956 /* ManagerAddress */,
+				CB809D961F8F415400E0D0CD /* ManagerOptometry */,
 			);
 			name = Customer;
 			sourceTree = "<group>";
@@ -1112,7 +1104,6 @@
 				9E5C85811B60DDFB00A879BB /* IPCGlassListViewController.m */,
 				9E5C85821B60DDFB00A879BB /* IPCGlassListViewController.xib */,
 				CB91871E1E8CF5C500D59487 /* ProductDetail */,
-				04A2020D1D7FDF4600F2A681 /* Search */,
 			);
 			name = Product;
 			sourceTree = "<group>";
@@ -1160,14 +1151,14 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
-		04A2020D1D7FDF4600F2A681 /* Search */ = {
+		04A2020D1D7FDF4600F2A681 /* SearchProduct&Customer */ = {
 			isa = PBXGroup;
 			children = (
 				9ECE98881B7DD8E000A13C8F /* IPCSearchViewController.h */,
 				9ECE98891B7DD8E000A13C8F /* IPCSearchViewController.m */,
 				9ECE988A1B7DD8E000A13C8F /* IPCSearchViewController.xib */,
 			);
-			name = Search;
+			name = "SearchProduct&Customer";
 			sourceTree = "<group>";
 		};
 		04A2020E1D7FDF5800F2A681 /* TryGlasses */ = {
@@ -1255,7 +1246,6 @@
 				04A2021E1D801A8A00F2A681 /* IPCLanuchViewController.xib */,
 			);
 			name = Lanuch;
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		04A2DF801DC6F58F00159EE7 /* AppDelegate */ = {
@@ -1263,8 +1253,6 @@
 			children = (
 				9E03C2E31978D5D5007389D0 /* IPCAppDelegate.h */,
 				9E03C2E41978D5D5007389D0 /* IPCAppDelegate.m */,
-				04A2021B1D801A5B00F2A681 /* Lanuch */,
-				046439D81E0A50D600291FDB /* Root */,
 			);
 			name = AppDelegate;
 			sourceTree = "<group>";
@@ -1326,14 +1314,14 @@
 		04C555411D1B78C80083496D /* TakeGlasses */ = {
 			isa = PBXGroup;
 			children = (
-				CBF6CFF31F14BF9A00F02ECF /* IPCTryGlassView.h */,
-				CBF6CFF41F14BF9A00F02ECF /* IPCTryGlassView.m */,
-				9E18E8AB199D30CD0085704B /* IPCSingleModeView.h */,
-				9E18E8AC199D30CD0085704B /* IPCSingleModeView.m */,
-				CB457FA21F09E23000BB2077 /* IPCSingleModeView.xib */,
 				9EF3209419931EE7004FC5B9 /* IPCCompareItemView.h */,
 				9EF3209519931EE7004FC5B9 /* IPCCompareItemView.m */,
 				CB457FA11F09E23000BB2077 /* IPCCompareItemView.xib */,
+				9E18E8AB199D30CD0085704B /* IPCSingleModeView.h */,
+				9E18E8AC199D30CD0085704B /* IPCSingleModeView.m */,
+				CB457FA21F09E23000BB2077 /* IPCSingleModeView.xib */,
+				CBF6CFF31F14BF9A00F02ECF /* IPCTryGlassView.h */,
+				CBF6CFF41F14BF9A00F02ECF /* IPCTryGlassView.m */,
 			);
 			name = TakeGlasses;
 			sourceTree = "<group>";
@@ -1373,9 +1361,6 @@
 				04CBD9681D5852A200C7CAA4 /* IPCPersonHeadCell.h */,
 				04CBD9691D5852A200C7CAA4 /* IPCPersonHeadCell.m */,
 				04CBD96A1D5852A200C7CAA4 /* IPCPersonHeadCell.xib */,
-				CB7408241EC94461001DD704 /* IPCPersonInputCell.h */,
-				CB7408251EC94461001DD704 /* IPCPersonInputCell.m */,
-				CB7408261EC94461001DD704 /* IPCPersonInputCell.xib */,
 				04CBD9821D58619700C7CAA4 /* IPCPersonMenuCell.h */,
 				04CBD9831D58619700C7CAA4 /* IPCPersonMenuCell.m */,
 				04CBD9841D58619700C7CAA4 /* IPCPersonMenuCell.xib */,
@@ -1546,11 +1531,14 @@
 		9EC3C5A4198672AD00C07396 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				04A2021B1D801A5B00F2A681 /* Lanuch */,
+				046439D81E0A50D600291FDB /* Root */,
 				048C213A1D34F89800EC4214 /* Login */,
 				04924AF31D6AC0D7006D7374 /* Product */,
 				0485F3F91D3491C200A42DE3 /* Customer */,
 				04A2020E1D7FDF5800F2A681 /* TryGlasses */,
 				0446067A1E68055E00C9FFCF /* PayOrder */,
+				04A2020D1D7FDF4600F2A681 /* SearchProduct&Customer */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1701,6 +1689,16 @@
 				CBDB8F381E9BC05300363F10 /* IPCInsertCustomerAddressCell.xib */,
 			);
 			name = InsertNewCustomer;
+			sourceTree = "<group>";
+		};
+		CB809D961F8F415400E0D0CD /* ManagerOptometry */ = {
+			isa = PBXGroup;
+			children = (
+				CBC75A5C1F0B80F50029F956 /* IPCManagerOptometryViewController.h */,
+				CBC75A5D1F0B80F50029F956 /* IPCManagerOptometryViewController.m */,
+				CBC75A5E1F0B80F50029F956 /* IPCManagerOptometryViewController.xib */,
+			);
+			name = ManagerOptometry;
 			sourceTree = "<group>";
 		};
 		CB80F4391F21CE4300F4A9FE /* PayOrder */ = {
@@ -1928,7 +1926,6 @@
 		CBAE92441F7A2875002D939D /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				CBAE92451F7A2875002D939D /* CollectionSectionIndex */,
 				CBAE92481F7A2875002D939D /* Common */,
 				CBAE924B1F7A2875002D939D /* DIYButton */,
 				CBAE92501F7A2875002D939D /* EmptyAlert */,
@@ -1942,15 +1939,6 @@
 			name = CustomView;
 			path = IcePointCloud/Vendors/CustomView;
 			sourceTree = SOURCE_ROOT;
-		};
-		CBAE92451F7A2875002D939D /* CollectionSectionIndex */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92461F7A2875002D939D /* IPCCollectionViewIndex.h */,
-				CBAE92471F7A2875002D939D /* IPCCollectionViewIndex.m */,
-			);
-			path = CollectionSectionIndex;
-			sourceTree = "<group>";
 		};
 		CBAE92481F7A2875002D939D /* Common */ = {
 			isa = PBXGroup;
@@ -2301,37 +2289,34 @@
 			name = Employee;
 			sourceTree = "<group>";
 		};
-		CBC75A611F0B80F90029F956 /* Manager */ = {
+		CBC75A611F0B80F90029F956 /* ManagerAddress */ = {
 			isa = PBXGroup;
 			children = (
 				CBC75A571F0B80DE0029F956 /* IPCManagerAddressViewController.h */,
 				CBC75A581F0B80DE0029F956 /* IPCManagerAddressViewController.m */,
 				CBC75A591F0B80DE0029F956 /* IPCManagerAddressViewController.xib */,
-				CBC75A5C1F0B80F50029F956 /* IPCManagerOptometryViewController.h */,
-				CBC75A5D1F0B80F50029F956 /* IPCManagerOptometryViewController.m */,
-				CBC75A5E1F0B80F50029F956 /* IPCManagerOptometryViewController.xib */,
 			);
-			name = Manager;
+			name = ManagerAddress;
 			sourceTree = "<group>";
 		};
-		CBC75A621F0B810D0029F956 /* SearchCustomer */ = {
+		CBC75A621F0B810D0029F956 /* CustomerList */ = {
 			isa = PBXGroup;
 			children = (
-				CBC6AF551EA0BAA400F7914D /* IPCSearchCustomerViewController.h */,
-				CBC6AF561EA0BAA400F7914D /* IPCSearchCustomerViewController.m */,
-				CBC6AF571EA0BAA400F7914D /* IPCSearchCustomerViewController.xib */,
+				CBC6AF551EA0BAA400F7914D /* IPCCustomerListViewController.h */,
+				CBC6AF561EA0BAA400F7914D /* IPCCustomerListViewController.m */,
+				CBC6AF571EA0BAA400F7914D /* IPCCustomerListViewController.xib */,
 			);
-			name = SearchCustomer;
+			name = CustomerList;
 			sourceTree = "<group>";
 		};
-		CBC75A631F0B81180029F956 /* InsertCustomer */ = {
+		CBC75A631F0B81180029F956 /* CreateCustomer */ = {
 			isa = PBXGroup;
 			children = (
 				0492B64F1D2A48E600A70A3C /* IPCInsertCustomerViewController.h */,
 				0492B6501D2A48E600A70A3C /* IPCInsertCustomerViewController.m */,
 				0492B6511D2A48E600A70A3C /* IPCInsertCustomerViewController.xib */,
 			);
-			name = InsertCustomer;
+			name = CreateCustomer;
 			sourceTree = "<group>";
 		};
 		CBC75A641F0B81340029F956 /* CustomerDetail */ = {
@@ -2543,7 +2528,6 @@
 				0472C1641D35CA9900C52F86 /* IPCPriceRangeTableViewCell.xib in Resources */,
 				04A202201D801A8A00F2A681 /* IPCLanuchViewController.xib in Resources */,
 				044E0EC71E03B88400FD2525 /* IPCCustomDetailOrderView.xib in Resources */,
-				CB7408281EC94461001DD704 /* IPCPersonInputCell.xib in Resources */,
 				CBC75A601F0B80F50029F956 /* IPCManagerOptometryViewController.xib in Resources */,
 				04CBD9651D58316D00C7CAA4 /* IPCPersonBaseView.xib in Resources */,
 				0446067F1E68079B00C9FFCF /* IPCPayOrderViewController.xib in Resources */,
@@ -2588,7 +2572,7 @@
 				04CBD96C1D5852A200C7CAA4 /* IPCPersonHeadCell.xib in Resources */,
 				CB75FD461E6CFD9A00EB2A52 /* IPCBatchParameterCell.xib in Resources */,
 				CB80F4311F219AA200F4A9FE /* IPCPayOrderOptometryCell.xib in Resources */,
-				CBC6AF591EA0BAA400F7914D /* IPCSearchCustomerViewController.xib in Resources */,
+				CBC6AF591EA0BAA400F7914D /* IPCCustomerListViewController.xib in Resources */,
 				CB5CC4B61E8E01220091D0FD /* TuSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2707,7 +2691,7 @@
 				CB1234F21E762D9100AB29DF /* IPCSideBarMenuView.m in Sources */,
 				CBAE92691F7A2875002D939D /* IPCCommonUI.m in Sources */,
 				9E5C85831B60DDFB00A879BB /* IPCGlassListViewController.m in Sources */,
-				CBC6AF581EA0BAA400F7914D /* IPCSearchCustomerViewController.m in Sources */,
+				CBC6AF581EA0BAA400F7914D /* IPCCustomerListViewController.m in Sources */,
 				9EF3209619931EE7004FC5B9 /* IPCCompareItemView.m in Sources */,
 				0470ADB51D409233003AF4F4 /* IPCCustomerAddressList.m in Sources */,
 				04EAF91E1D531A4300A4A66F /* IPCShoppingCart.m in Sources */,
@@ -2772,12 +2756,10 @@
 				CBAE92711F7A2875002D939D /* IPCRefreshAnimationHeader.m in Sources */,
 				04CBD9771D585A0900C7CAA4 /* IPCPersonTitleCell.m in Sources */,
 				CB31F1251EA446B200CBEC67 /* IPCPayOrderParameter.m in Sources */,
-				CBAE92681F7A2875002D939D /* IPCCollectionViewIndex.m in Sources */,
 				CB6AC21C1E9F9175008031DD /* IPCMemberLevelList.m in Sources */,
 				9E9C684C1B92E47F00695FED /* IPCShoppingCartItem.m in Sources */,
 				CBBB4CA01EE548BD002BA911 /* IPCPayRecord.m in Sources */,
 				0472C1631D35CA9900C52F86 /* IPCPriceRangeTableViewCell.m in Sources */,
-				CB7408271EC94461001DD704 /* IPCPersonInputCell.m in Sources */,
 				9ECE98921B7DDFF800A13C8F /* IPCSearchItemTableViewCell.m in Sources */,
 				CBAE92BD1F7A2AB2002D939D /* IPCAppendRequestParameter.m in Sources */,
 				04F6B2A11DEC367A00626A53 /* IPCOfflineFaceDetector.m in Sources */,
@@ -3050,7 +3032,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "80067c3b-66d4-4879-8824-d06d338b7b44";
+				PROVISIONING_PROFILE = "af25e21e-2654-4be7-917a-4fb134d5981c";
 				PROVISIONING_PROFILE_SPECIFIER = IcePointCloudDevelopment;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;

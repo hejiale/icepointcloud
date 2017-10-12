@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCSearchCustomerViewController.h"
+#import "IPCCustomerListViewController.h"
 #import "IPCCustomerCollectionViewCell.h"
 #import "IPCInsertCustomerViewController.h"
 #import "IPCCustomerDetailViewController.h"
@@ -15,7 +15,7 @@
 
 static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentifier";
 
-@interface IPCSearchCustomerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewControllerDelegate>
+@interface IPCCustomerListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewControllerDelegate>
 {
     BOOL isCancelRequest;
 }
@@ -28,7 +28,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 @end
 
-@implementation IPCSearchCustomerViewController
+@implementation IPCCustomerListViewController
 
 
 - (void)viewDidLoad {

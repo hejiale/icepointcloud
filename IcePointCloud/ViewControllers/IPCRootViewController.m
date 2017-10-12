@@ -10,14 +10,14 @@
 #import "IPCTryGlassesViewController.h"
 #import "IPCGlassListViewController.h"
 #import "IPCPayOrderViewController.h"
-#import "IPCSearchCustomerViewController.h"
+#import "IPCCustomerListViewController.h"
 #import "IPCSideBarMenuView.h"
 
 @interface IPCRootViewController ()<IPCRootMenuViewControllerDelegate>
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
-@property (nonatomic, strong) IPCSearchCustomerViewController * customerInfoVC;
+@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
 @property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 @property (nonatomic, strong) IPCSideBarMenuView * sideBarView;
 
@@ -33,7 +33,7 @@
     
     _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    _customerInfoVC =  [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    _customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
     _payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
     
     [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC,_payOrderVC]];

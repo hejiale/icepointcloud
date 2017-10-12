@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Doray. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+
 #import "IPCTryGlassView.h"
 
-@interface IPCSingleModeView : IPCTryGlassView<UIGestureRecognizerDelegate>
+@interface IPCSingleModeView : IPCTryGlassView
 
 @property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
 

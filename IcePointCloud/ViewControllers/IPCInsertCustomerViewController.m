@@ -7,7 +7,7 @@
 //
 
 #import "IPCInsertCustomerViewController.h"
-#import "IPCSearchCustomerViewController.h"
+#import "IPCCustomerListViewController.h"
 #import "IPCCustomTopCell.h"
 #import "IPCInsertCustomerBaseCell.h"
 #import "IPCInsertCustomerOpometryCell.h"
@@ -103,7 +103,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 }
 
 - (void)selectIntroducerMethod{
-    IPCSearchCustomerViewController * searchCustomerVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    IPCCustomerListViewController * searchCustomerVC = [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
     [self.navigationController pushViewController:searchCustomerVC animated:YES];
 }
 

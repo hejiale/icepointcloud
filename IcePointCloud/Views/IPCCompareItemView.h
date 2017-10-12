@@ -12,9 +12,6 @@
 
 @interface IPCCompareItemView : IPCTryGlassView
 
-@property (nonatomic, strong, readwrite) UIView * parentSingleModeView;
-@property (nonatomic, assign, readwrite) CGPoint originalCenter;
-@property (nonatomic, assign, readwrite) CGPoint singleModeViewAnchorPoint;
 @property (nonatomic, strong, readwrite) IPCMatchItem *matchItem;
 @property (nonatomic, weak) id<CompareItemViewDelegate> delegate;
 

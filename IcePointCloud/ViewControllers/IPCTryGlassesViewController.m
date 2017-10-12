@@ -137,7 +137,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         IPCCompareItemView * compareView = strongSelf.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
-        [compareView initGlassView];
+        [compareView resetGlassView];
         [strongSelf updateCurrentGlass];
     }];
 }
@@ -794,7 +794,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 }
 
 - (void)deleteCompareGlasses:(IPCCompareItemView *)itemView{
-    [self.signleModeView initGlassView];
+    [self.signleModeView resetGlassView];
     [self updateCurrentGlass];
 }
 

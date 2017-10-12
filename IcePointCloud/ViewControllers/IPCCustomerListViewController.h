@@ -8,6 +8,6 @@
 
 #import "IPCRootNavigationViewController.h"
 
-@interface IPCSearchCustomerViewController : IPCRootNavigationViewController
+@interface IPCCustomerListViewController : IPCRootNavigationViewController
 
 @end

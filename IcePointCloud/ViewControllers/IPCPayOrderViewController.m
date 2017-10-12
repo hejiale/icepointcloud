@@ -8,7 +8,7 @@
 
 #import "IPCPayOrderViewController.h"
 #import "IPCPayOrderViewMode.h"
-#import "IPCSearchCustomerViewController.h"
+#import "IPCCustomerListViewController.h"
 #import "IPCManagerOptometryViewController.h"
 #import "IPCManagerAddressViewController.h"
 #import "IPCEmployeListView.h"
@@ -135,7 +135,7 @@
 
 #pragma mark //Push Method
 - (void)pushToSearchCustomerVC{
-    IPCSearchCustomerViewController * customerListVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
+    IPCCustomerListViewController * customerListVC = [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
     [self.navigationController pushViewController:customerListVC animated:YES];
 }
 
