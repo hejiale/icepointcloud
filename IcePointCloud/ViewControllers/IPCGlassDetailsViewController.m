@@ -61,9 +61,13 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 {
     [super viewDidDisappear:animated];
     //清除网页内容
-    [self.productDetailWebView reload];
-    [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
-    [self.productDetailWebView jk_clearCookies];
+//    [self.productDetailWebView reload];
+//    [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+    self.productDetailWebView.delegate = nil;
+    [self.productDetailWebView loadHTMLString:@"" baseURL:nil];
+    [self.productDetailWebView stopLoading];
+//    [self.productDetailWebView jk_clearCookies];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 
@@ -74,13 +78,13 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 #pragma mark //Set UI
 -(UIWebView *)productDetailWebView{
     if (!_productDetailWebView) {
-        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(30, 0, SCREEN_WIDTH-60, 0)];
+        _productDetailWebView = [[UIWebView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0)];
         [_productDetailWebView setBackgroundColor:[UIColor clearColor]];
         _productDetailWebView.delegate = self;
         _productDetailWebView.scrollView.scrollEnabled = NO;
         _productDetailWebView.scrollView.showsVerticalScrollIndicator = NO;
         _productDetailWebView.scrollView.showsHorizontalScrollIndicator = NO;
-        _productDetailWebView.scalesPageToFit = YES;
+        [_productDetailWebView scalesPageToFit];
         _productDetailWebView.userInteractionEnabled = NO;
         [_productDetailWebView jk_makeTransparentAndRemoveShadow];
     }
@@ -199,15 +203,14 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     var imgs = document.getElementsByTagName('img'); \
     for (var i = 0; i < imgs.length; ++i) {\
     var img = imgs[i];   \
-    img.style.maxWidth = %f;   \
+    if(img.width > 1024){ img.style.width = '100%%'; } \
     } \
     }";
-    js = [NSString stringWithFormat:js, self.view.jk_width];
     
-    [webView stringByEvaluatingJavaScriptFromString:js];
+    [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:js, [UIScreen jk_width]]];
     [webView stringByEvaluatingJavaScriptFromString:@"imgAutoFit()"];
     
-    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"]floatValue];
+    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"]floatValue];
     CGRect frame = webView.frame;
     frame.size.height = height;
     webView.frame = frame;

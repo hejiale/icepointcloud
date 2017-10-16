@@ -238,19 +238,20 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     return YES;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length) {
         if ([textField isEqual:self.phoneTextField]) {
-//            if ([self.delegate respondsToSelector:@selector(judgePhone:)]) {
-//                [self.delegate judgePhone:str];
-//            }
+            if ([self.delegate respondsToSelector:@selector(judgePhone:)]) {
+                [self.delegate judgePhone:str];
+            }
             [IPCInsertCustomer instance].customerPhone = str;
         }else if ([textField isEqual:self.userNameTextField]){
-//            if ([self.delegate respondsToSelector:@selector(judgeName:)]) {
-//                [self.delegate judgeName:str];
-//            }
+            if ([self.delegate respondsToSelector:@selector(judgeName:)]) {
+                [self.delegate judgeName:str];
+            }
             [IPCInsertCustomer instance].customerName = str;
         }else if ([textField isEqual:self.memberNumTextField]){
             [IPCInsertCustomer instance].memberNum = str;
@@ -262,11 +263,6 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
             [IPCInsertCustomer instance].remark = str;
         }else if ([textField isEqual:self.introducerInteger]){
             [IPCInsertCustomer instance].introducerInteger = str;
-        }
-    }
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(reloadInsertCustomUI)]) {
-            [self.delegate reloadInsertCustomUI];
         }
     }
 }

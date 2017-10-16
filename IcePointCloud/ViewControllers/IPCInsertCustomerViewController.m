@@ -211,6 +211,7 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 #pragma mark //UserBaseInfoCellDelegate
 - (void)reloadInsertCustomUI{
     [self.userInfoTableView reloadData];
+    [self.view endEditing:YES];
 }
 
 - (void)judgePhone:(NSString *)phone{

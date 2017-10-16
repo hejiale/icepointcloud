@@ -115,6 +115,8 @@
      {
          if ([responseValue boolValue]) {
              [IPCCommonUI showError:@"该手机号已注册过了"];
+         }else{
+             [IPCCommonUI hiden];
          }
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
@@ -131,6 +133,8 @@
      {
          if ([responseValue boolValue]) {
              [IPCCommonUI showError:@"该客户名已注册过了"];
+         }else{
+             [IPCCommonUI hiden];
          }
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
