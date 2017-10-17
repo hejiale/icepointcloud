@@ -42,35 +42,35 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    //Set Up NavigationBar
     [self setNavigationTitle:@"个人信息"];
-    
+    [self setNavigationBarStatus:NO];
+    //Set Up TableView
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
     self.detailTableView.estimatedSectionFooterHeight = 0;
     self.detailTableView.estimatedSectionHeaderHeight = 0;
-    
+    // Init ViewModel
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self setNavigationBarStatus:NO];
+    //Request Customer Detail Info
     [self requestCustomerDetailInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    //Stop Other Request
     [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 #pragma mark //Request Data
 - (void)requestCustomerDetailInfo
 {
-    self.detailTableView.isBeginLoad = YES;
     [self.customerViewMode resetData];
+    self.detailTableView.isBeginLoad = YES;
     [self.detailTableView reloadData];
     self.customerViewMode.customerId = self.customer.customerID;
     

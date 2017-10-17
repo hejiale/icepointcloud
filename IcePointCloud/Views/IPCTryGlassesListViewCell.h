@@ -21,7 +21,7 @@
 
 - (void)chooseParameter:(IPCTryGlassesListViewCell *)cell;
 - (void)editBatchParameter:(IPCTryGlassesListViewCell *)cell;
-- (void)reloadProductList;
+- (void)reloadProductList:(IPCTryGlassesListViewCell *)cell;
 - (void)tryGlasses:(IPCTryGlassesListViewCell *)cell;
 
 @end

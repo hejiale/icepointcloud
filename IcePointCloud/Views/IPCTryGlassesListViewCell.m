@@ -173,8 +173,8 @@
         [IPCCommonUI showSuccess:@"添加商品成功!"];
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         
-        if ([self.delegate respondsToSelector:@selector(reloadProductList)]) {
-            [self.delegate reloadProductList];
+        if ([self.delegate respondsToSelector:@selector(reloadProductList:)]) {
+            [self.delegate reloadProductList:self];
         }
     }
 }
@@ -184,8 +184,8 @@
     if (self.glasses) {
         [[IPCShoppingCart sharedCart] removeGlasses:self.glasses];
         
-        if ([self.delegate respondsToSelector:@selector(reloadProductList)]) {
-            [self.delegate reloadProductList];
+        if ([self.delegate respondsToSelector:@selector(reloadProductList:)]) {
+            [self.delegate reloadProductList:self];
         }
     }
 }

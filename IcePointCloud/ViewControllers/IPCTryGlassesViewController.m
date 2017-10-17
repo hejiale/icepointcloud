@@ -54,9 +54,10 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 @property (nonatomic, strong) IPCRefreshAnimationHeader *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter *refreshFooter;
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
-@property (strong, nonatomic) IPCProductViewMode  *glassListViewMode;
 @property (nonatomic, strong) IPCOfflineFaceDetector  * offlineFaceDetector;
 @property (nonatomic, strong) IPCCurrentTryGlassesView  *  tryGlassesView;
+//Glasses View Model
+@property (strong, nonatomic) IPCProductViewMode  *glassListViewMode;
 
 @end
 
@@ -65,7 +66,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //Set UI
     [self.recommdBgView addLeftLine];
     [self.cameraButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
     [self.librayButton setButtonTitleWithImageAlignment:UIButtonTitleWithImageAlignmentDown];
@@ -74,16 +75,16 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self.topOperationBar addSubview:self.compareSwitch];
     [self loadTableView];
     [self.view addSubview:self.tryGlassesView];
-    
+    //Init View Model
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = YES;
+    //Load Data
     [self beginFilterClass];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self setNavigationBarStatus:YES];
     [self initMatchItems];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
     
@@ -95,16 +96,26 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     }
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
     [self removeCover];
+    [self stopRefresh];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCChooseWareHouseNotification object:nil];
+}
+
+
+//Initialize the default try wearing glasses compare mode
+- (void)initMatchItems
+{
+    if ([[IPCTryMatch instance].matchItems count] == 0)
+        [[IPCTryMatch instance] initMatchItems];
     
-    if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
+    self.signleModeView.matchItem = [[IPCTryMatch instance] currentMatchItem];
+    [self.signleModeView updateModelPhoto];
+    //获取模特眼镜位置
+    if ([self loadCompareModeViews]) {
+        [self updateModelPhototPosition];
     }
 }
 
@@ -142,22 +153,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     }];
 }
 
-//Initialize the default try wearing glasses compare mode
-- (void)initMatchItems
-{
-    if ([[IPCTryMatch instance].matchItems count] == 0)
-        [[IPCTryMatch instance] initMatchItems];
-    
-    self.signleModeView.matchItem = [[IPCTryMatch instance] currentMatchItem];
-    [self.signleModeView updateModelPhoto];
-    //获取模特眼镜位置
-    if ([self initCompareModeView]) {
-        [self updateModelPhototPosition];
-    }
-}
-
-
-- (BOOL)initCompareModeView
+- (BOOL)loadCompareModeViews
 {
     if ([self.compareBgView.subviews count] == 0) {
         __weak typeof (self) weakSelf = self;
@@ -239,33 +235,27 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     if (!_tryGlassesView) {
         __weak typeof(self) weakSelf = self;
-        _tryGlassesView = [[IPCCurrentTryGlassesView alloc]initWithFrame:CGRectMake(0, 0, self.productTableView.jk_width, (SCREEN_HEIGHT-70)/4) ChooseParameter:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
-        } EditParameter:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf showGlassesParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
-        } AddCart:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [_tryGlassesView reload];
-            [strongSelf.productTableView reloadData];
-        } ReduceCart:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [_tryGlassesView reload];;
-            [strongSelf.productTableView reloadData];
-        } TryGlasses:nil];
-        [_tryGlassesView addBottomLine];
+        _tryGlassesView = [[IPCCurrentTryGlassesView alloc]initWithFrame:CGRectMake(0, 0, self.productTableView.jk_width, (SCREEN_HEIGHT-70)/4)
+                                                         ChooseParameter:^{
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                             [strongSelf showGlassesParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
+                                                         } EditParameter:^{
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                             [strongSelf editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
+                                                         } Reload:^{
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                             [_tryGlassesView reload];
+                                                             [strongSelf.productTableView reloadData];
+                                                         }];
         [_tryGlassesView setDefaultGlasses];
-        [_tryGlassesView setHidden:YES];
     }
     return _tryGlassesView;
 }
 
-- (void)showGlassesParameterView:(IPCGlasses *)glass{
+- (void)editGlassParameterView:(IPCGlasses *)glass{
     __weak typeof(self) weakSelf = self;
     self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:glass Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.editParameterView removeFromSuperview];strongSelf.editParameterView = nil;
         [strongSelf.productTableView reloadData];
         [strongSelf.tryGlassesView reload];;
     }];
@@ -273,7 +263,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self.editParameterView show];
 }
 
-- (void)editGlassParameterView:(IPCGlasses *)glass{
+- (void)showGlassesParameterView:(IPCGlasses *)glass{
     __weak typeof(self) weakSelf = self;
     self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -293,29 +283,19 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self presentViewController:searchViewMode animated:YES completion:nil];
 }
 
-#pragma mark //Refresh Methods ----------------------------------------------------------------------------
+#pragma mark //UITableView Header & Footer Refresh Methods ----------------------------------------------------------------------------
 - (void)beginRefresh
 {
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
-    
     [self.refreshFooter resetDataStatus];
     [self beginReloadTableView];
 }
 
-
-- (void)beginFilterClass
-{
-    self.productTableView.isBeginLoad = YES;
-    [self beginReloadTableView];
-    [self.productTableView reloadData];
-}
-
 - (void)loadMore
 {
-    if (self.refreshHeader.isRefreshing)return;
     self.glassListViewMode.currentPage += self.glassListViewMode.limit;
     
     __weak typeof (self) weakSelf = self;
@@ -325,12 +305,37 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     }];
 }
 
+#pragma mark //Load Normal Method
+- (void)beginFilterClass
+{
+    self.productTableView.isBeginLoad = YES;
+    [self beginReloadTableView];
+    [self.productTableView reloadData];
+}
+
+#pragma mark //Reload View
+- (void)reloadTableView
+{
+    self.productTableView.isBeginLoad = NO;
+    [self.productTableView reloadData];
+    [self.glassListViewMode.filterView setCoverStatus:YES];
+    [self stopRefresh];
+}
+
+- (void)stopRefresh
+{
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+    }
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+    }
+}
+
+#pragma mark //Request Data
 - (void)beginReloadTableView
 {
-    self.glassListViewMode.limit = 30;
-    self.glassListViewMode.currentPage = 0;
-    [self.glassListViewMode.glassesList removeAllObjects];
-    self.glassListViewMode.glassesList = nil;
+    [self.glassListViewMode resetData];
     
     __weak typeof (self) weakSelf = self;
     
@@ -359,24 +364,10 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     });
 }
 
-- (void)reloadTableView
-{
-    self.productTableView.isBeginLoad = NO;
-    [self.productTableView reloadData];
-    [self.glassListViewMode.filterView setCoverStatus:YES];
-    
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-    }
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-    }
-}
 
-#pragma mark //Request Data
 - (void)loadGlassesListData:(void(^)())complete{
     __weak typeof (self) weakSelf = self;
-    [self.glassListViewMode reloadGlassListDataWithIsTry:YES Complete:^(NSError * error){
+    [self.glassListViewMode reloadGlassListDataWithComplete:^(NSError * error){
         isCancelRequest = NO;
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
@@ -521,23 +512,28 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     IPCMatchItem * item = [IPCTryMatch instance].currentMatchItem;
     UIImage * image =  [IPCAppManager modelPhotoWithType:item.modelType usage:IPCModelUsageSingleMode];
-    
+    //人脸识别
     [self outPutCameraImage:[image lsqImageScale:0.5]];
 }
 
 //Share Tryglass Image
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
+    __weak typeof(self) weakSelf = self;
     [self addCoverWithAlpha:0.2 Complete:^{
-        [self removeCover];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf removeCover];
     }];
     _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.coverView.jk_width,80 )
                                                          Chat:^{
-                                                             [self onShareToWechat:WXSceneSession];
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                             [strongSelf onShareToWechat:WXSceneSession];
                                                          } Line:^{
-                                                             [self onShareToWechat:WXSceneTimeline];
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                             [strongSelf onShareToWechat:WXSceneTimeline];
                                                          } Favorite:^{
-                                                             [self onShareToWechat:WXSceneFavorite];
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                             [strongSelf onShareToWechat:WXSceneFavorite];
                                                          }];
     [self.coverView addSubview:_shareButtonView];
     [self.coverView bringSubviewToFront:_shareButtonView];
@@ -618,6 +614,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self changeCameraImage:image];
 }
 
+//Update Model Image Position & Size
 - (void)updateModelFace:(CGPoint)position Size:(CGSize)size
 {
     [self.signleModeView updateFaceUI:position :size];
@@ -650,7 +647,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         [self addCoverWithAlpha:0.2 Complete:^{
             [self removeCover];
         }];
-        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
+        [self.glassListViewMode showFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
             [strongSelf beginFilterClass];
@@ -679,6 +676,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (void)switchToCompareMode
 {
     [[IPCHttpRequest sharedClient] cancelAllRequest];
+    [self updateCompareBorder];
     [self setRecommdStatus:YES];
     
     for (IPCCompareItemView * item in self.compareBgView.subviews) {
@@ -686,12 +684,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         item.center = item.originalCenter;
         [item updateItem];
     }
-    [self updateCompareBorder];
-    
-    IPCCompareItemView *targetItemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
     
     CGRect frame = self.signleModeView.frame;
-    self.signleModeView.layer.anchorPoint = targetItemView.singleModeViewAnchorPoint;
+    self.signleModeView.layer.anchorPoint = [[IPCTryMatch instance] singleModeViewAnchorPoint];
     self.signleModeView.frame = frame;
     
     [UIView animateWithDuration:.2 delay:0 options:0 animations:^{
@@ -853,7 +848,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     }
 }
 
-- (void)reloadProductList
+- (void)reloadProductList:(IPCTryGlassesListViewCell *)cell
 {
     [self.tryGlassesView reload];;
     [self.productTableView reloadData];

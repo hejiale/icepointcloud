@@ -51,18 +51,12 @@
         [parameters setObject:employeeList forKey:@"employeeAchievements"];
     }
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCPayOrderManager sharedManager] realTotalPrice]] forKey:@"orderFinalPrice"];
-    
-    if ([[IPCShoppingCart sharedCart] isHaveUsedPoint]) {//积分兑换置为0
-        [parameters setObject:@(0) forKey:@"integral"];
-    }else{
-        [parameters setObject:@([IPCPayOrderManager sharedManager].usedPoint) forKey:@"integral"];
-    }
+    [parameters setObject:@([IPCPayOrderManager sharedManager].usedPoint) forKey:@"integral"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].givingAmount] forKey:@"donationAmount"];
     
     if (otherTypeList.count) {
         [parameters setObject:otherTypeList forKey:@"orderPayInfos"];
     }
-    [parameters setObject:([[IPCShoppingCart sharedCart] isHaveUsedPoint] ? @"true" : @"false") forKey:@"isIntegralExchange"];
     [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
     [parameters setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @"" forKey:@"repository"];
     

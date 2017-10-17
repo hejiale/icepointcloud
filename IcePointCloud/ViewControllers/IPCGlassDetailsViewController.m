@@ -56,17 +56,13 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
-
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     //清除网页内容
-//    [self.productDetailWebView reload];
-//    [self.productDetailWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
     self.productDetailWebView.delegate = nil;
     [self.productDetailWebView loadHTMLString:@"" baseURL:nil];
     [self.productDetailWebView stopLoading];
-//    [self.productDetailWebView jk_clearCookies];
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
@@ -101,8 +97,10 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 {
     if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
     {
+        __weak typeof(self) weakSelf = self;
         self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-            [self successAddCartMethod];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf successAddCartMethod];
         }];
         self.parameterView.glasses = _glasses;
         [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -123,7 +121,6 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 - (void)reloadCartBadge{
     [self.navigationItem.rightBarButtonItem.customView createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
-
 
 - (void)tryGlassesMethod{
     if ([IPCTryMatch instance].matchItems.count == 0) {

@@ -112,8 +112,6 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
 - (void)loadIsRefreshingView{
     [self setContentOffset:CGPointZero];
     
-//    NSLog(@"----originX %.f  orignY %.f  width %.f  height %.f", self.origin.x, self.origin.y, self.jk_width, self.jk_height);
-    
     __block NSMutableArray<UIImage *> * loadingArray = [[NSMutableArray alloc]init];
     
     for (NSInteger i = 1 ; i< 17; i++) {
@@ -129,9 +127,6 @@ static char const *  isBeginLoadKey  =  "IsBeginLoadKey";
                                                               AlertTitle:nil];
     [self addSubview:self.loadingAlertView];
     [self bringSubviewToFront:self.loadingAlertView];
-}
-
-- (void)operationAction{
 }
 
 - (IPCEmptyAlertView *)emptyAlertView{

@@ -71,9 +71,13 @@ static NSString * const historyIdentifier = @"HistoryCellIdentifier";
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if ([self.delegate respondsToSelector:@selector(chooseHistoryLoginName:)])
-    [self.delegate chooseHistoryLoginName:self.loginHistory[indexPath.row]];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if ([self.delegate respondsToSelector:@selector(chooseHistoryLoginName:)]){
+        [self.delegate chooseHistoryLoginName:self.loginHistory[indexPath.row]];
+    }
     
     [self dismissViewControllerAnimated:YES completion:nil];
 }

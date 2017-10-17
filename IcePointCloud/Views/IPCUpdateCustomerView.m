@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-        
+    
     [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.contentView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.contentView];
     [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.contentView];
@@ -58,6 +58,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
 
 - (void)setCurrentDetailCustomer:(IPCDetailCustomer *)currentDetailCustomer{
     _currentDetailCustomer = currentDetailCustomer;
+    
     if (_currentDetailCustomer) {
         [self insertCustomerInfo];
     }
@@ -78,7 +79,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
                                                         Email:self.emailTextField.text
                                                      Birthday:self.birthdayTextField.text
                                                    EmployeeId:[[IPCEmployeeeManager sharedManager] employeeId:self.handlersTextField.text]
-                                                    MemberNum:self.memberNumTextField.text 
+                                                    MemberNum:self.memberNumTextField.text
                                                 MemberLevelId:[[IPCEmployeeeManager sharedManager] memberLevelId:self.memberLevelTextField.text]
                                                CustomerTypeId:self.currentDetailCustomer.customerTypeId
                                                  EmployeeName:self.handlersTextField.text
@@ -98,10 +99,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
          }
      } FailureBlock:^(NSError *error) {
          [self.saveButton jk_hideIndicator];
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"更改用户信息失败!"];
-         }
-         
      }];
 }
 
@@ -193,7 +190,6 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
         [self.memberLevelTextField setText:parameter];
     }else{
         [self.genderTextField setText:parameter];
-        
     }
 }
 

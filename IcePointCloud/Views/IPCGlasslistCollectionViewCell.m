@@ -14,8 +14,10 @@
     [super awakeFromNib];
     // Initialization code
     
+    __weak typeof(self) weakSelf = self;
     [self.productImageView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
-        [self showDetailAction];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf showDetailAction];
     }];
 }
 
@@ -23,30 +25,30 @@
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
     
-    if (_glasses) {
+    if (_glasses)
+    {
+        //Reset Buy Icon Show Status
         [self resetBuyStatus];
-        
+        //Reload Product Image And Auto Fit
         IPCGlassesImage * glassImage = [self.glasses imageWithType:IPCGlassesImageTypeThumb];
-        if (glassImage.imageURL.length) {
-            __block CGFloat scale = 0;
-            if (glassImage.width > glassImage.height) {
-                scale = glassImage.width/glassImage.height;
-            }else{
-                scale = glassImage.height/glassImage.width;
-            }
-            __block CGFloat width = 280;
-            __block CGFloat height = width/scale;
-            self.imageHeight.constant = MIN(height, 120);
-            
-            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+        
+        __block CGFloat scale = 0;
+        if (glassImage.width > glassImage.height) {
+            scale = glassImage.width/glassImage.height;
+        }else{
+            scale = glassImage.height/glassImage.width;
         }
-       
+        __block CGFloat width = 280;
+        __block CGFloat height = width/scale;
+        self.imageHeight.constant = MIN(height, 120);
+        
+        [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+        //Input Price And Name Text
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:10 WordSpace:0];
-        
+        //Get Name Text Height And Auto Fit
        CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
         self.labelHeightConstraint.constant = labelHeight + 10;
-        
         //Shopping cart whether to join the product
         __block NSInteger glassCount = [[IPCShoppingCart sharedCart]singleGlassesCount:_glasses];
         
@@ -66,7 +68,7 @@
                 [self.reduceButton setImage:[UIImage imageNamed:@"icon_subtract"] forState:UIControlStateNormal];
             }
         }
-        
+        //Glasses Try Icon And Stock Icon
         if (_glasses.isTryOn) {
             [self.defaultImageView setHidden:NO];
             self.tryWidth.constant = 39;
@@ -130,8 +132,8 @@
 - (void)reduceCartAnimation{
     if (self.glasses) {
         [[IPCShoppingCart sharedCart] removeGlasses:self.glasses];
-        if ([self.delegate respondsToSelector:@selector(reloadProductList)]) {
-            [self.delegate reloadProductList];
+        if ([self.delegate respondsToSelector:@selector(reloadProductList:)]) {
+            [self.delegate reloadProductList:self];
         }
     }
 }

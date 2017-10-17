@@ -25,9 +25,7 @@
         CGFloat width = [pointValue jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
         self.pointWidth.constant = width + 25;
     
-        if (_currentCustomer.photo_url.length) {
-            [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url]];
-        }
+        [self.headImageView sd_setImageWithURL:[NSURL URLWithString:_currentCustomer.photo_url]];
     
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.phoneLabel setText:_currentCustomer.customerPhone];

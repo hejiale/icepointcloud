@@ -23,15 +23,13 @@
 
 @property (copy, nonatomic) void(^ChooseBlock)();
 @property (copy, nonatomic) void(^EditBlock)();
-@property (copy, nonatomic) void(^AddCartBlock)();
-@property (copy, nonatomic) void(^ReduceCartBlock)();
-@property (copy, nonatomic) void(^TryGlassesBlock)();
+@property (copy, nonatomic) void(^ReloadBlock)();
 
 @end
 
 @implementation IPCCurrentTryGlassesView
 
-- (instancetype)initWithFrame:(CGRect)frame ChooseParameter:(void (^)())choose EditParameter:(void (^)())edit AddCart:(void (^)())addCart ReduceCart:(void (^)())reduceCart TryGlasses:(void (^)())tryGlasses
+- (instancetype)initWithFrame:(CGRect)frame ChooseParameter:(void (^)())choose EditParameter:(void (^)())edit Reload:(void (^)())reload
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -39,26 +37,12 @@
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
         
+        [self addBottomLine];
         self.ChooseBlock = choose;
         self.EditBlock = edit;
-        self.AddCartBlock = addCart;
-        self.ReduceCartBlock = reduceCart;
-        self.TryGlassesBlock = tryGlasses;
+        self.ReloadBlock = reload;
     }
     return self;
-}
-
-
-- (void)layoutSubviews{
-    [super layoutSubviews];
-    
-    __weak typeof(self) weakSelf = self;
-    [self.productImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.TryGlassesBlock) {
-            strongSelf.TryGlassesBlock();
-        }
-    }];
 }
 
 - (void)setGlasses:(IPCGlasses *)glasses{
@@ -202,8 +186,8 @@
         [IPCCommonUI showSuccess:@"添加商品成功!"];
         [[IPCShoppingCart sharedCart] plusGlass:self.glasses];
         
-        if (self.AddCartBlock) {
-            self.AddCartBlock();
+        if (self.ReloadBlock) {
+            self.ReloadBlock();
         }
     }
 }
@@ -213,8 +197,8 @@
     if (self.glasses) {
         [[IPCShoppingCart sharedCart] removeGlasses:self.glasses];
         
-        if (self.ReduceCartBlock) {
-            self.ReduceCartBlock();
+        if (self.ReloadBlock) {
+            self.ReloadBlock();
         }
     }
 }

@@ -18,7 +18,6 @@
 
 @property (nonatomic, strong, readwrite) UIView * parentSingleModeView;
 @property (nonatomic, assign, readwrite) CGPoint originalCenter;
-@property (nonatomic, assign, readwrite) CGPoint singleModeViewAnchorPoint;
 
 @property (nonatomic, assign, readwrite) CGPoint  cameraEyePoint;
 @property (nonatomic, assign, readwrite) CGSize   cameraEyeSize;

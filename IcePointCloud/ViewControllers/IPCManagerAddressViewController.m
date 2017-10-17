@@ -26,23 +26,19 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    //Set Up NavigationBar
     [self setNavigationBarStatus:NO];
     [self setNavigationTitle:@"收货地址"];
     [self setRightItem:@"icon_insert_btn" Selection:@selector(insertNewAddressAction)];
-    
-    [self.addressTableView setTableHeaderView:[[UIView alloc]init]];
-    [self.addressTableView setTableFooterView:[[UIView alloc]init]];
-    self.addressTableView.estimatedSectionHeaderHeight = 0;
-    self.addressTableView.estimatedSectionFooterHeight = 0;
-    self.addressTableView.emptyAlertImage = @"icon_nonAddress";
-    self.addressTableView.emptyAlertTitle = @"暂未添加收货地址";
+    //Load TableView
+    [self loadTableView];
+    //Load Data
     [self loadAddressListData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    //Cancel Request
     [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
@@ -58,7 +54,8 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 }
 
 #pragma mark //Request Data
-- (void)loadAddressListData{
+- (void)loadAddressListData
+{
     [self.addressViewModel.addressList removeAllObjects];
     self.addressViewModel.addressList = nil;
     self.addressTableView.isBeginLoad = YES;
@@ -85,6 +82,16 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 }
 
 #pragma mark //Set UI
+- (void)loadTableView{
+    [self.addressTableView setTableHeaderView:[[UIView alloc]init]];
+    [self.addressTableView setTableFooterView:[[UIView alloc]init]];
+    self.addressTableView.estimatedSectionHeaderHeight = 0;
+    self.addressTableView.estimatedSectionFooterHeight = 0;
+    self.addressTableView.emptyAlertImage = @"icon_nonAddress";
+    self.addressTableView.emptyAlertTitle = @"暂未添加收货地址";
+}
+
+
 - (IPCEditAddressView *)editAddressView{
     __weak typeof(self) weakSelf = self;
     if (!_editAddressView) {

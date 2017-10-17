@@ -64,11 +64,4 @@
  */
 - (void)postChangedNotification;
 
-/**
- *   Point Value
- */
-- (NSInteger)totalUsedPoint;
-- (double)totalUsedPointPrice;
-- (BOOL)isHaveUsedPoint;
-
 @end

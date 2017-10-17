@@ -64,11 +64,6 @@
     [self userLoginMethod];
 }
 
-
-- (IBAction)tapBgViewAction:(id)sender {
-    [self.view endEditing:YES];
-}
-
 - (void)chooseLoginUserAction:(UIButton *)sender{
     [self.view endEditing:YES];
     
@@ -127,16 +122,16 @@
 
 - (void)loadStoreWareHouse
 {
-//    [self showMainRootViewController];
-//    [self.loginButton jk_hideIndicator];
+    [self showMainRootViewController];
+    [self.loginButton jk_hideIndicator];
     
-    [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
-        if (!error) {
-            [self showMainRootViewController];
-        }else{
-            [IPCCommonUI showError:@"用户登录失败!"];
-        }
-    }];
+//    [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
+//        if (!error) {
+//            [self showMainRootViewController];
+//        }else{
+//            [IPCCommonUI showError:@"用户登录失败!"];
+//        }
+//    }];
 }
 
 #pragma mark //UITextFieldDelegate

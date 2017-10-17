@@ -154,7 +154,6 @@
         [self.itemList addObject:item];
     }
     [self postChangedNotification];
-    [self requestTradeOrExchangeStatus];
 }
 
 
@@ -296,49 +295,5 @@
     return itemArray;
 }
 
-- (NSInteger)totalUsedPoint{
-    __block NSInteger   totoalPoint = 0;
-    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.isChoosePoint) {
-            totoalPoint += obj.pointValue * obj.glassCount;
-        }
-    }];
-    return totoalPoint;
-}
-
-- (double)totalUsedPointPrice{
-    __block double   totoalPointPrice = 0;
-    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.isChoosePoint) {
-            totoalPointPrice += obj.pointPrice;
-        }
-    }];
-    return totoalPointPrice;
-}
-
-- (BOOL)isHaveUsedPoint{
-    __block BOOL isHave = NO;
-    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.isChoosePoint) {
-            isHave = YES;
-        }
-    }];
-    return isHave;
-}
-
-
-- (void)requestTradeOrExchangeStatus
-{
-    [IPCPayOrderManager sharedManager].isTrade = YES;
-    
-//    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-//        [IPCPayOrderManager sharedManager].isTrade = YES;
-//    } FailureBlock:^(NSError *error) {
-//        if ([error code] != NSURLErrorCancelled) {
-//            [IPCCommonUI showError:@"查询积分定制规则失败！"];
-//        }
-//        
-//    }];
-}
 
 @end

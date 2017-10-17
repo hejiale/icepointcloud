@@ -77,6 +77,8 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         self.editParameterView.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished) {
+            [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [self removeFromSuperview];
             if (self.DismissBlock)self.DismissBlock();
         }
     }];

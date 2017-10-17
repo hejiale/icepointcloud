@@ -40,6 +40,6 @@
 - (void)editBatchParameter:(IPCGlasslistCollectionViewCell *)cell;
 - (void)addShoppingCartAnimation:(IPCGlasslistCollectionViewCell *)cell;
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell;
-- (void)reloadProductList;
+- (void)reloadProductList:(IPCGlasslistCollectionViewCell *)cell;
 
 @end

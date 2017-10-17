@@ -33,10 +33,11 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [super viewDidLoad];
     
     [IPCCommonUI clearAutoCorrection:self.topSearchView];
+    //Set TableView
     [self.searchTableView setTableFooterView:[[UIView alloc]init]];
     self.searchTableView.emptyAlertTitle = @"暂无搜索历史!";
     self.searchTableView.emptyAlertImage = @"exception_search";
-    
+    //Set TextField PlaceHolder
     if (self.searchType == IPCSearchTypeProduct) {
         [self.keywordTf setPlaceholder:[NSString stringWithFormat:@"搜索%@类商品",[[IPCAppManager sharedManager] classTypeName:self.filterType]]];
     }else{
@@ -48,7 +49,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [super viewDidAppear:animated];
     
     [[IPCHttpRequest sharedClient] cancelAllRequest];
-    
+    //Set TextField FirstResponder
     [self.keywordTf becomeFirstResponder];
     [self.keywordTf setText:self.currentSearchword];
 }
@@ -103,17 +104,18 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCSearchItemTableViewCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
-    
     NSString * searchText = self.keywordHistory[indexPath.row];
     [cell.seachTitleLabel setText:searchText];
+    
+    __weak typeof(self) weakSelf = self;
     [[cell rac_signalForSelector:@selector(deleteSearchValueAction:)] subscribeNext:^(id x) {
-        if ([self.keywordHistory containsObject:searchText]) {
-            [self.keywordHistory removeObject:searchText];
-            [self syncSearchHistory];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if ([strongSelf.keywordHistory containsObject:searchText]) {
+            [strongSelf.keywordHistory removeObject:searchText];
+            [strongSelf syncSearchHistory];
             [tableView reloadData];
         }
     }];
-    
     return cell;
 }
 
@@ -164,7 +166,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     
     if (self.searchDelegate) {
         if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
-        [self.searchDelegate didSearchWithKeyword:searchText];
+            [self.searchDelegate didSearchWithKeyword:searchText];
     }
     [self.keywordTf endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -173,22 +175,22 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 #pragma mark //UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [textField endEditing:YES];
+    
     NSString *curKeyword = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     [self syncSearchHistory:curKeyword];
     
-    [textField endEditing:YES];
-    
     if (self.searchDelegate) {
-        if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
-        [self.searchDelegate didSearchWithKeyword:curKeyword];
+        if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)]){
+            [self.searchDelegate didSearchWithKeyword:curKeyword];
+        }
     }
-    
     [self dismissViewControllerAnimated:YES completion:nil];
     
     return YES;
 }
 
-#pragma mark //Store History Methods
+#pragma mark //Store Or Clear History Methods
 - (void)syncSearchHistory{
     [self syncSearchHistory:nil];
 }
@@ -209,7 +211,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     }else{
         [NSUserDefaults jk_setObject:historyData forKey:IPCSearchCustomerkey];
     }
-    
 }
 
 - (void)clearSearchHistory

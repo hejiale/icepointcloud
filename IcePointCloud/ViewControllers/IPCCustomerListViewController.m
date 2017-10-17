@@ -22,7 +22,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet UIButton *insertButton;
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
-@property (nonatomic, strong) IPCCustomerListViewModel * viewModel;
+@property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
 
@@ -34,25 +34,29 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.viewModel = [[IPCCustomerListViewModel alloc]init];
+    // Load CollectionView
     [self loadCollectionView];
-    [self refreshData];
+    // Init ViewModel
+    self.viewModel = [[IPCCustomerListViewModel alloc]init];
+    // Load Data
+    [self loadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
-    
+    //Refresh NavigationBar Status
     if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
         [self setNavigationTitle:@"客户"];
         [self setNavigationBarStatus:NO];
     }else{
         [self setNavigationBarStatus:YES];
     }
+    //Refresh Insert Button Status
     [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
-    
+    //According To NetWorkStatus To Reload Customer List
     if (isCancelRequest && self.viewModel.currentPage == 1) {
-        [self refreshData];
+        [self loadData];
     }else{
         [self.customerCollectionView reloadData];
     }
@@ -60,13 +64,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
-    if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
-    }
+    // Clear Refresh Animation
+    [self stopRefresh];
 }
-
 
 - (NSMutableArray<NSString *> *)keywordHistory
 {
@@ -108,9 +108,10 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 }
 
 
-#pragma mark //Refresh Method
+#pragma mark //UICollectionView Refresh Method
 - (void)beginRefresh
 {
+    //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
         [[IPCHttpRequest sharedClient] cancelAllRequest];
@@ -122,19 +123,20 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 - (void)loadMore
 {
-    if (self.refreshHeader.isRefreshing)return;
     self.viewModel.currentPage++;
     [self loadCustomerList];
 }
 
-- (void)refreshData
+#pragma mark //Load Normal Method
+- (void)loadData
 {
     [self.viewModel resetData];
     self.customerCollectionView.isBeginLoad = YES;
-    [self.customerCollectionView reloadData];
     [self loadCustomerList];
+    [self.customerCollectionView reloadData];
 }
 
+#pragma mark //Request Data
 - (void)loadCustomerList
 {
     __weak typeof(self) weakSelf = self;
@@ -151,15 +153,19 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
                  [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
              }
          }
-         [strongSelf reloadCustomerListView];
+         [strongSelf reload];
      }];
 }
 
-- (void)reloadCustomerListView
+#pragma mark //Reload CollectionView
+- (void)reload
 {
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
-    
+    [self stopRefresh];
+}
+
+- (void)stopRefresh{
     if (self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
     }
@@ -194,12 +200,12 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         cell.currentCustomer = customer;
     }
-    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //Prereload Data
     if (self.viewModel.status == IPCFooterRefresh_HasMoreData) {
         if (!self.refreshFooter.isRefreshing) {
             if (indexPath.row == self.viewModel.customerArray.count -10) {
@@ -237,7 +243,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword{
     self.viewModel.searchWord = keyword;
-    [self refreshData];
+    [self loadData];
 }
 
 - (void)didReceiveMemoryWarning{

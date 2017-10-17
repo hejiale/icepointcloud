@@ -18,6 +18,7 @@
     return _customerArray;
 }
 
+#pragma mark //Request Data
 - (void)queryCustomerList:(void(^)(NSError *error))complete
 {
     self.completeBlock = complete;
@@ -38,7 +39,7 @@
      }];
 }
 
-//Parse Normal Glass Data
+#pragma mark //Parse Normal Glass Data
 - (void)parseCustomerListData:(id)response
 {
     IPCCustomerList * result = [[IPCCustomerList alloc]initWithResponseValue:response];
@@ -73,7 +74,7 @@
     }
 }
 
-
+#pragma mark //Clear All Data
 - (void)resetData
 {
     [self.customerArray removeAllObjects];

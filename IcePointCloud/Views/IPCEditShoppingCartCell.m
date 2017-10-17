@@ -64,12 +64,14 @@
 
 - (IBAction)onMinusAction:(id)sender {
     if (self.cartItem.glassCount == 1) {
+        __weak typeof(self) weakSelf = self;
         [IPCCommonUI showAlert:@"温馨提示" Message:@"确认要删除该商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
-            [[IPCShoppingCart sharedCart] reduceItem:self.cartItem];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [[IPCShoppingCart sharedCart] reduceItem:strongSelf.cartItem];
             [[IPCPayOrderManager sharedManager] resetPayPrice];
             
-            if (self.ReloadBlock) {
-                self.ReloadBlock();
+            if (strongSelf.ReloadBlock) {
+                strongSelf.ReloadBlock();
             }
         }];
     }else{

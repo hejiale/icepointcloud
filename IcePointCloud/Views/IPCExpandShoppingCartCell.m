@@ -15,10 +15,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
-@property (weak, nonatomic) IBOutlet UIButton *noPointButton;
 @property (weak, nonatomic) IBOutlet UIView *inputPirceView;
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointButtonWith;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
 
 @property (copy, nonatomic) void(^ReloadBlock)();
@@ -35,8 +33,6 @@
     [self.inputPirceView addBorder:3 Width:0.5 Color:nil];
     [self.glassesImgView addBorder:3 Width:0.5 Color:nil];
 }
-
-
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload
 {
@@ -58,71 +54,15 @@
             [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
         }
         
-        if ([IPCPayOrderManager sharedManager].isTrade) {
-            self.pointButtonWith.constant = 0;
-            [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
-            [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
-        }else{
-            [self.noPointButton setHidden:NO];
-            self.pointButtonWith.constant = 130;
-            
-            if (_cartItem.isChoosePoint) {
-                [self.noPointButton setSelected:YES];
-                [self.inputPriceTextField setLeftImageView:@"icon_pointtype"];
-                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%d", _cartItem.pointValue]];
-            }else{
-                [self.noPointButton setSelected:NO];
-                [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
-                [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
-            }
-        }
-    }
-}
-
-
-#pragma mark //Clicked Events
-- (IBAction)noPointAction:(UIButton *)sender {
-    if ( ![IPCCurrentCustomer sharedManager].currentCustomer) {
-        [IPCCommonUI showError:@"请先选择客户!"];
-        return;
-    }
-    if ([IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
-        [IPCCommonUI showError:@"所选客户积分为零!"];
-        return;
-    }
-    self.cartItem.isChoosePoint = !sender.selected;
-    
-    if (self.cartItem.isChoosePoint) {
-        self.cartItem.unitPrice = 0;
-    }else{
-        [IPCPayOrderManager sharedManager].usedPoint -= self.cartItem.pointValue * self.cartItem.glassCount;
-        
-        if ([IPCPayOrderManager sharedManager].usedPoint <= 0) {
-            [IPCPayOrderManager sharedManager].usedPoint = 0;
-        }
-        [IPCPayOrderManager sharedManager].pointPrice -= self.cartItem.pointPrice;
-        if ([IPCPayOrderManager sharedManager].pointPrice <= 0) {
-            [IPCPayOrderManager sharedManager].pointPrice = 0;
-        }
-        self.cartItem.pointValue = 0;
-    }
-    [[IPCPayOrderManager sharedManager] resetPayPrice];
-    
-    if (self.ReloadBlock) {
-        self.ReloadBlock();
+        [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
+        [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
     }
 }
 
 #pragma mark //UITextField Delegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (self.cartItem.isChoosePoint) {
-        if (![IPCCommon judgeIsIntNumber:string]) {
-            return NO;
-        }
-    }else{
-        if (![IPCCommon judgeIsFloatNumber:string]) {
-            return NO;
-        }
+    if (![IPCCommon judgeIsFloatNumber:string]) {
+        return NO;
     }
     return YES;
 }
@@ -136,33 +76,14 @@
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length) {
-        if (self.cartItem.isChoosePoint) {
-            NSInteger usedPoint = [IPCPayOrderManager sharedManager].usedPoint;
-            usedPoint -= self.cartItem.pointValue;
-            NSInteger minumPoint = [IPCCurrentCustomer sharedManager].currentCustomer.integral - usedPoint;
-            
-            if (minumPoint > 0) {
-                if (minumPoint <= [str doubleValue] * self.cartItem.glassCount)
-                {
-                    self.cartItem.pointValue = minumPoint/self.cartItem.glassCount;
-                }else{
-                    self.cartItem.pointValue = [str integerValue];
-                }
-                self.cartItem.pointPrice = self.cartItem.totalPrice;
-                
-                [IPCPayOrderManager sharedManager].usedPoint = [[IPCShoppingCart sharedCart] totalUsedPoint];
-                [IPCPayOrderManager sharedManager].pointPrice = [[IPCShoppingCart sharedCart] totalUsedPointPrice];
-            }
+        if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
+            [IPCCommonUI showError:@"请先选择员工"];
         }else{
-            if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-                [IPCCommonUI showError:@"请先选择员工"];
-            }else{
-                if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-                    [IPCCommonUI showError:@"该商品售价超出折扣范围！"];
-                }
-                self.cartItem.unitPrice = [str doubleValue];
-                [[IPCPayOrderManager sharedManager] resetPayPrice];
+            if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
+                [IPCCommonUI showError:@"该商品售价超出折扣范围！"];
             }
+            self.cartItem.unitPrice = [str doubleValue];
+            [[IPCPayOrderManager sharedManager] resetPayPrice];
         }
     }
     

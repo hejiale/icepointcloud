@@ -51,12 +51,6 @@
     [self postRequest:parameters RequestMethod:@"integralTradeAdmin.getSaleOrderDetailIntegralList" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
-
-+ (void)getStatusTradeOrExchangeWithSuccessBlock:(void (^)(id))success
-                                    FailureBlock:(void (^)(NSError *))failure{
-    [self postRequest:nil RequestMethod:@"integralTradeAdmin.getStatusTradeOrExchange" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-}
-
 +(void)payRemainOrderWithOrderNum:(NSString *)orderNum
                          PayInfos:(NSArray *)payInfos
                      SuccessBlock:(void (^)(id))success

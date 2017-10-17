@@ -26,25 +26,21 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [[IPCEmployeeeManager sharedManager] queryEmployee];
-    
+    //Set Up NavigationBar
     [self setNavigationBarStatus:NO];
     [self setNavigationTitle:@"验光单"];
     [self setRightItem:@"icon_insert_btn" Selection:@selector(insertNewOptometryAction)];
-    
-    [self.optometryTableView setTableHeaderView:[[UIView alloc]init]];
-    [self.optometryTableView setTableFooterView:[[UIView alloc]init]];
-    self.optometryTableView.estimatedSectionFooterHeight = 0;
-    self.optometryTableView.estimatedSectionHeaderHeight = 0;
-    self.optometryTableView.emptyAlertTitle = @"暂未添加验光单!";
-    self.optometryTableView.emptyAlertImage = @"exception_optometry";
+    //Load TableView
+    [self loadTableView];
+    //Load Employee Data
+    [[IPCEmployeeeManager sharedManager] queryEmployee];
+    //Load Optometry Data
     [self loadOptometryData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    //Cancel Request
     [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
@@ -60,6 +56,16 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 }
 
 #pragma mark //Set UI
+- (void)loadTableView{
+    [self.optometryTableView setTableHeaderView:[[UIView alloc]init]];
+    [self.optometryTableView setTableFooterView:[[UIView alloc]init]];
+    self.optometryTableView.estimatedSectionFooterHeight = 0;
+    self.optometryTableView.estimatedSectionHeaderHeight = 0;
+    self.optometryTableView.emptyAlertTitle = @"暂未添加验光单!";
+    self.optometryTableView.emptyAlertImage = @"exception_optometry";
+}
+
+
 - (IPCEditOptometryView *)editOptometryView{
     if (!_editOptometryView) {
         __weak typeof(self) weakSelf = self;
@@ -94,6 +100,8 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 
 - (void)setDefaultOptometryWithOptometryId:(NSString *)optometryId
 {
+    [IPCCommonUI showInfo:@"正在设置默认验光单.."];
+    
     __weak typeof(self) weakSelf = self;
     [self.managerViewModel setCurrentOptometry:optometryId Complete:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -124,6 +132,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     }
     IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
     cell.optometryMode = optometry;
+    
     if (indexPath.row == 0) {
         [cell.defaultButton setSelected:YES];
     }else{

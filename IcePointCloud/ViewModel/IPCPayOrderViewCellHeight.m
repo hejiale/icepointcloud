@@ -41,10 +41,10 @@
         return 100;
     }else if ((indexPath.section == 2 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 5))
     {
-        if ([IPCPayOrderManager sharedManager].isTrade) {
-            return 185;
-        }
-        return 135;
+//        if ([IPCPayOrderManager sharedManager].isTrade) {
+//            return 185;
+//        }
+        return 185;
     }else if ((indexPath.section == 3 && indexPath.row > 0 && ![IPCCurrentCustomer sharedManager].currentCustomer) || ([IPCCurrentCustomer sharedManager].currentCustomer && indexPath.section == 6 && indexPath.row > 0)){
         return [IPCPayOrderManager sharedManager].payTypeRecordArray.count * 35 + ([IPCPayOrderManager sharedManager].isInsertRecordStatus ? 50 : 0);
     }

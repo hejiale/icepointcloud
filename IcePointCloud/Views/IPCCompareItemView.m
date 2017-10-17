@@ -178,24 +178,5 @@
     [self updateGlassesPositionWithMatchItem:self.matchItem];
 }
 
-#pragma mark //Default AnchorPoint
-//Access to the anchor
-- (CGPoint)singleModeViewAnchorPoint
-{
-    switch (self.tag) {
-        case 0:
-            return CGPointMake(0, 0);
-        case 1:
-            return CGPointMake(1, 0);
-        case 2:
-            return CGPointMake(0, 1);
-        case 3:
-            return CGPointMake(1, 1);
-        default:
-            return CGPointZero;
-    }
-}
-
-
 
 @end

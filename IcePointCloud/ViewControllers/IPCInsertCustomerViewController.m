@@ -22,8 +22,8 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 @interface IPCInsertCustomerViewController ()<UITableViewDelegate,UITableViewDataSource,UserBaseInfoCellDelegate,IPCInsertCustomerOpometryCellDelegate>
 
 @property (weak,   nonatomic) IBOutlet UITableView *userInfoTableView;
-@property (strong, nonatomic) IBOutlet UIView *tableFootView;
-@property (weak, nonatomic) IBOutlet UIButton *saveButton;
+@property (strong, nonatomic) IBOutlet UIView         *tableFootView;
+@property (weak, nonatomic)   IBOutlet UIButton      *saveButton;
 @property (strong, nonatomic) IPCInsertCustomerViewModel * insertCustomerModel;
 
 @end
@@ -33,31 +33,32 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
-    
+    //Set Up NavigationBar
+    [self setNavigationTitle:@"新增客户"];
+    [self setNavigationBarStatus:NO];
+    //Set Up TableView
     [self.userInfoTableView setTableHeaderView:[[UIView alloc]init]];
     [self.userInfoTableView setTableFooterView:self.tableFootView];
     self.userInfoTableView.estimatedSectionHeaderHeight = 0;
     self.userInfoTableView.estimatedSectionFooterHeight = 0;
-    
+    //Set Up Pop Back Method
     [[self rac_signalForSelector:@selector(backAction)] subscribeNext:^(RACTuple * _Nullable x) {
         [[IPCInsertCustomer instance] resetData];
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }];
+    // Init ViewModel
+    self.insertCustomerModel = [[IPCInsertCustomerViewModel alloc]init];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self setNavigationTitle:@"新增客户"];
-    [self setNavigationBarStatus:NO];
+    //Reload TableView
     [self.userInfoTableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    
+    //Register Keyboard
     [self.view endEditing:YES];
 }
 
@@ -76,8 +77,6 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
 
 - (IBAction)saveNewCustomerAction:(id)sender
 {
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    
     if ([IPCInsertCustomer instance].customerName.length && [IPCInsertCustomer instance].customerPhone.length) {
         [self.saveButton jk_showIndicator];
         __weak typeof(self) weakSelf = self;

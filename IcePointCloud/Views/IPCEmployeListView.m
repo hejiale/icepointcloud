@@ -35,10 +35,10 @@ typedef void(^DismissBlock)();
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEmployeListView" owner:self];
         view.frame = frame;
         [self addSubview:view];
-        
+        //Set UI
         [self.employeBgView addBorder:5 Width:0 Color:nil];
         [self.searchTextField setLeftImageView:@"text_searchIcon"];
-        
+        //Set TableView
         [self.employeTableView setTableHeaderView:[[UIView alloc]init]];
         [self.employeTableView setTableFooterView:[[UIView alloc]init]];
         self.employeTableView.estimatedSectionHeaderHeight = 0;
@@ -77,9 +77,6 @@ typedef void(^DismissBlock)();
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.employeTableView.isBeginLoad = NO;
          [strongSelf.employeTableView reloadData];
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"查询员工信息失败！"];
-         }
      }];
 }
 
@@ -96,7 +93,8 @@ typedef void(^DismissBlock)();
     return self.employeeArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     IPCEmployeListCell * cell = [tableView dequeueReusableCellWithIdentifier:employeIdentifier];
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCEmployeListCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -104,6 +102,7 @@ typedef void(^DismissBlock)();
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
     IPCEmployee * employe = self.employeeArray[indexPath.row];
+    
     if (employe) {
         [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj.employee.jobID isEqualToString:employe.jobID]) {
@@ -117,7 +116,8 @@ typedef void(^DismissBlock)();
 
 
 #pragma mark //UITableView Delegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     IPCEmployee * employe = self.employeeArray[indexPath.row];
     if (employe) {
         if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 5){

@@ -33,19 +33,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    //Set UI
     [self.cancelButton addBorder:2 Width:0.5 Color:nil];
     [self.saveButton addBorder:2 Width:0 Color:nil];
+    //Set TableView
     [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
     [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
     self.payOrderTableView.estimatedSectionHeaderHeight = 0;
     self.payOrderTableView.estimatedSectionFooterHeight = 0;
-    
+    //Init View Model
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;
-
+    //Set Shopping Cart View
     [self.cartContentView addSubview:self.shopCartView];
-    
+    //Set Notification
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(queryCustomerDetail)
                                                  name:IPCChooseCustomerNotification
@@ -54,8 +55,9 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    //Set Naviagtion Bar
     [self setNavigationBarStatus:YES];
+    //Reload Method
     [self reloadTableHead];
     [self.shopCartView reload];
     [self.payOrderTableView reloadData];

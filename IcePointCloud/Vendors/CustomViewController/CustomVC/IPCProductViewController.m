@@ -19,6 +19,13 @@
     // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self setNavigationBarStatus:YES];
+}
+
+#pragma mark //Clicked Events
 - (void)reload
 {
     
@@ -40,6 +47,7 @@
     
 }
 
+//Add To Shopping Cart Animation
 -(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint
 {
     UIBezierPath * path = [UIBezierPath bezierPath];

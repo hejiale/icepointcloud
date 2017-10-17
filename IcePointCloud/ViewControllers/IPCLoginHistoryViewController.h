@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol LoginHistoryViewControllerDelegate;
+
 @interface IPCLoginHistoryViewController : UIViewController
 
 @property (nonatomic, weak) id<LoginHistoryViewControllerDelegate>delegate;

@@ -18,7 +18,6 @@
     self = [super init];
     if (self) {
         self.searchWord =  @"";
-        self.currentPage =  0;
         self.currentType =  IPCTopFIlterTypeFrames;
         self.filterValue    =  [[IPCFilterCategoryMode alloc]init];
     }
@@ -39,20 +38,27 @@
     return _recommdGlassesList;
 }
 
+- (void)resetData
+{
+    self.limit = 30;
+    self.currentPage = 0;
+    [self.glassesList removeAllObjects];
+    self.glassesList = nil;
+}
+
 
 #pragma mark //Get Data
-- (void)reloadGlassListDataWithIsTry:(BOOL)isTry
-                            Complete:(void(^)(NSError * error))complete
+- (void)reloadGlassListDataWithComplete:(void(^)(NSError * error))complete
 {
     self.completeBlock = complete;
     
     [self getGlassesListInfoWithPage:self.currentPage
                                Limit:self.limit
-                           ClassType:[[IPCAppManager sharedManager]classType:self.currentType] ? : @""
+                           ClassType:[[IPCAppManager sharedManager] classType:self.currentType] ? : @""
                           SearchType:[self.filterValue getStoreFilterSource]
                           StartPrice:self.filterValue.currentStartPirce
                             EndPrice:self.filterValue.currentEndPrice
-                            IsTrying:isTry
+                            IsTrying:self.isTrying
                              StoreId:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""];
 }
 
@@ -60,6 +66,7 @@
 - (void)filterGlassCategoryWithFilterSuccess:(void(^)(NSError * error))filterSuccess
 {
     self.filterSuccessBlock = filterSuccess;
+    
     [self getProductFilterDataSourceWithClassType:[[IPCAppManager sharedManager]classType:self.currentType] ? : @""
                                      FilterSource:[self.filterValue getStoreFilterSource]];
 }
@@ -195,7 +202,7 @@
      }];
 }
 
-//Parse Normal Glass Data
+#pragma mark //Parse Normal Glass Data
 - (void)parseNormalGlassesData:(id)response
 {
     IPCProductList * result = [[IPCProductList alloc]initWithResponseValue:response];
@@ -231,7 +238,7 @@
 }
 
 #pragma mark //Load Filter Category View
-- (void)loadFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose
+- (void)showFilterCategory:(id)owner InView:(UIView *)backgroundView ReloadClose:(void(^)())reloadClose ReloadUnClose:(void(^)())reloadUnClose
 {
     self.reloadFilterCloseBlock = reloadClose;
     self.reloadFilterUnCloseBlock = reloadUnClose;

@@ -48,15 +48,6 @@
 
 
 /**
- * Get Trade Or Exchange Status
-
- @param success
- @param failure 
- */
-+ (void)getStatusTradeOrExchangeWithSuccessBlock:(void (^)(id responseValue))success
-                                    FailureBlock:(void (^)(NSError *error))failure;
-
-/**
  * Pay Remain Order Info
  */
 + (void)payRemainOrderWithOrderNum:(NSString *)orderNum

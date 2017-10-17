@@ -12,13 +12,25 @@ typedef void(^CompleteBlock)(NSError *error);
 
 @interface IPCCustomerListViewModel : NSObject
 
+@property (nonatomic, copy) CompleteBlock    completeBlock;
+//Search Customer Data
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, copy) NSString * searchWord;
+//Refresh Status
 @property (nonatomic, assign) LSRefreshDataStatus status;
-@property (nonatomic, copy) CompleteBlock    completeBlock;
+
 @property (nonatomic, strong) NSMutableArray<IPCCustomerMode *> * customerArray;
 
+
+/**
+  Load Customer List Data
+ */
 - (void)queryCustomerList:(void(^)(NSError *error))complete;
+
+
+/**
+  Clear All Data
+ */
 - (void)resetData;
 
 @end

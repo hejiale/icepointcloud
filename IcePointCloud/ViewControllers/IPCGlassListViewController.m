@@ -37,19 +37,20 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    // Load CollectionView
+    [self loadCollectionView];
+    // Init ViewModel
     self.glassListViewMode =  [[IPCProductViewMode alloc]init];
     self.glassListViewMode.isTrying = NO;
-    [self loadCollectionView];
+    // Load Data
     [self beginFilterClass];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self setNavigationBarStatus:YES];
+    //Choose WareHouse To Reload Products
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
-    
+    //According To NetWorkStatus And Judge Is Choose WareHouse To Reload Products
     if ((isCancelRequest && self.glassListViewMode.currentPage == 0) || [IPCAppManager sharedManager].isChangeHouse) {
         [self beginFilterClass];
         [IPCAppManager sharedManager].isChangeHouse = NO;
@@ -60,17 +61,17 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    //Clear All Cover View
     [self removeCover];
-    
-    if (self.refreshFooter.isRefreshing || self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-        [self.refreshFooter endRefreshing];
-    }
+    // Clear Refresh Animation
+    [self stopRefresh];
+    //Remove Notification
     [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCChooseWareHouseNotification object:nil];
 }
 
 #pragma mark //Set UI
-- (void)loadCollectionView{
+- (void)loadCollectionView
+{
     __block CGFloat width = (self.view.jk_width-2)/3;
     __block CGFloat height = (self.view.jk_height-2)/2;
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
@@ -100,17 +101,9 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     return _refreshFooter;
 }
 
-- (void)presentSearchViewController{
-    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
-    searchViewMode.searchDelegate = self;
-    searchViewMode.filterType = self.glassListViewMode.currentType;
-    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
-    [self presentViewController:searchViewMode animated:YES completion:nil];
-}
-
-
-#pragma mark //Refresh Method
+#pragma mark //UICollectionView Refresh Method
 - (void)beginRefresh{
+    //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
         [[IPCHttpRequest sharedClient] cancelAllRequest];
@@ -119,9 +112,8 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self loadNormalProducts];
 }
 
-- (void)loadMore{
-    if (self.refreshHeader.isRefreshing)return;
-    
+- (void)loadMore
+{
     self.glassListViewMode.currentPage += self.glassListViewMode.limit;
     
     __weak typeof(self) weakSelf = self;
@@ -131,6 +123,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     }];
 }
 
+#pragma mark //Normal Load Method
 - (void)beginFilterClass
 {
     self.glassListCollectionView.isBeginLoad = YES;
@@ -138,13 +131,11 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self.glassListCollectionView reloadData];
 }
 
-//Load Data
+#pragma mark //Load Glasses Data And Filter Data Request
 - (void)loadNormalProducts
 {
-    self.glassListViewMode.limit = 30;
-    self.glassListViewMode.currentPage = 0;
-    [self.glassListViewMode.glassesList removeAllObjects];
-    self.glassListViewMode.glassesList = nil;
+    //Reset Glasses Data
+    [self.glassListViewMode resetData];
     
     __weak typeof (self) weakSelf = self;
 
@@ -177,7 +168,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)loadGlassesListData:(void(^)())complete
 {
     __weak typeof(self) weakSelf = self;
-    [self.glassListViewMode reloadGlassListDataWithIsTry:NO Complete:^(NSError * error){
+    [self.glassListViewMode reloadGlassListDataWithComplete:^(NSError * error){
         isCancelRequest = NO;
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
@@ -196,35 +187,12 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 }
 
 #pragma mark //Clicked Events
-- (void)removeCover
-{
-    [super removeCover];
-    
-    [self.glassListViewMode.filterView removeFromSuperview];
-    [self.coverView removeFromSuperview];
-}
-
-//Add a shopping cart animation
+//Add to shopping cart animation
 - (void)addCartAnimationInCell:(IPCGlasslistCollectionViewCell *)cell{
     [self reload];
     CGPoint startPoint  = [cell convertRect:cell.addCartButton.frame toView:self.view.superview].origin;
-    CGPoint endPoint   = CGPointMake(self.view.superview.jk_width-85, -30);
+    CGPoint endPoint   = CGPointMake(self.view.superview.jk_width-100, -30);
     [self startAnimationWithStartPoint:startPoint EndPoint:endPoint];
-}
-
-- (void)reload{
-    [super reload];
-    
-    self.glassListCollectionView.isBeginLoad = NO;
-    [self.glassListCollectionView reloadData];
-    [self.glassListViewMode.filterView setCoverStatus:YES];
-    
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-    }
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-    }
 }
 
 - (void)onFilterProducts{
@@ -239,7 +207,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
             [strongSelf removeCover];
         }];
         
-        [self.glassListViewMode loadFilterCategory:self InView:self.coverView ReloadClose:^{
+        [self.glassListViewMode showFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf removeCover];
             [strongSelf beginFilterClass];
@@ -255,12 +223,46 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [super onSearchProducts];
     
     [self removeCover];
-    [self presentSearchViewController];
+    //Present To Search ViewController
+    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    searchViewMode.searchDelegate = self;
+    searchViewMode.filterType = self.glassListViewMode.currentType;
+    [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];
+    [self presentViewController:searchViewMode animated:YES completion:nil];
 }
+
 
 - (IBAction)onGoTopAction:(id)sender {
     [self.goTopButton setHidden:YES];
     [self.glassListCollectionView scrollToTopAnimated:YES];
+}
+
+//Reload Glasses CollectionView
+- (void)reload{
+    [super reload];
+    
+    self.glassListCollectionView.isBeginLoad = NO;
+    [self.glassListCollectionView reloadData];
+    [self.glassListViewMode.filterView setCoverStatus:YES];
+    [self stopRefresh];
+}
+
+- (void)stopRefresh{
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+    }
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+    }
+}
+
+//Remover All Cover
+- (void)removeCover
+{
+    [super removeCover];
+    
+    [self.glassListViewMode.filterView removeFromSuperview];
+    [self.coverView removeFromSuperview];
 }
 
 #pragma mark //UICollectionViewDataSoure
@@ -285,6 +287,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //Preload Glasses Data
     if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
         if (!self.refreshFooter.isRefreshing) {
             if (indexPath.row == self.glassListViewMode.glassesList.count - (self.glassListViewMode.limit - 10)) {
@@ -303,7 +306,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)showProductDetail:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
-        
+        //Push To Detail ViewController
         IPCGlassDetailsViewController * detailVC = [[IPCGlassDetailsViewController alloc]initWithNibName:@"IPCGlassDetailsViewController" bundle:nil];
         detailVC.glasses  = self.glassListViewMode.glassesList[indexPath.row];
         [self.navigationController pushViewController:detailVC animated:YES];
@@ -313,8 +316,11 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)chooseParameter:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
+        //Show Choose Glasses Batch Paremeter View
+        __weak typeof(self) weakSelf = self;
         self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-            [self reload];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf reload];
         }];
         self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];
         [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -326,9 +332,9 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     __weak typeof (self) weakSelf = self;
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
+        //Show Edit Batch Paremeter View
         self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:self.glassListViewMode.glassesList[indexPath.row] Dismiss:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf.editParameterView removeFromSuperview];strongSelf.editParameterView = nil;
             [strongSelf reload];
         }];
         [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
@@ -336,7 +342,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     }
 }
 
-- (void)reloadProductList{
+- (void)reloadProductList:(IPCGlasslistCollectionViewCell *)cell{
     [self reload];
 }
 

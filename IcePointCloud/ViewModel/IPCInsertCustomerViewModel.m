@@ -16,11 +16,11 @@
     if (self) {
         //初始化
         [[IPCInsertCustomer instance] resetData];
-        
+        [IPCInsertCustomer instance].isInsertStatus = YES;
+        //Query Employee & MemberLevel & CustomerType
         [[IPCEmployeeeManager sharedManager] queryEmployee];
         [[IPCEmployeeeManager sharedManager] queryMemberLevel];
         [[IPCEmployeeeManager sharedManager] queryCustomerType];
-        [IPCInsertCustomer instance].isInsertStatus = YES;
     }
     return self;
 }

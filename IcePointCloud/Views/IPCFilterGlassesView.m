@@ -17,7 +17,7 @@
 static NSString * const filterClassIdentifier = @"FilterClassViewCellIdentifier";
 static NSString * const filterValueIdentifier = @"FilterValueCollectionViewCellIdentifier";
 static NSString * const priceRandIdentifier = @"PriceRangeTableViewCellIdentifier";
-static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
+static NSString * const chooseIdentifier     = @"ChooseTypeCellIdentifier";
 
 @interface IPCFilterGlassesView()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate,IPCTagCollectionLayoutDelegate>
 {
@@ -59,6 +59,7 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     self.allButtonsArray = [[NSMutableArray alloc]init];
     isFilter = NO;
     
+    //Load CollectionView
     IPCTagCollectionLayout *tagLayout = [[IPCTagCollectionLayout alloc] init];
     tagLayout.sectionInset = UIEdgeInsetsMake(18, 15, 0, 0);
     tagLayout.lineSpacing  = 10;
@@ -66,17 +67,18 @@ static NSString * const chooseIdentifier = @"ChooseTypeCellIdentifier";
     tagLayout.itemHeigh    = 27;
     tagLayout.delegate     = self;
     
+    [self.rightValueCollectionView setCollectionViewLayout:tagLayout animated:YES];
+    self.rightValueCollectionView.isHiden = YES;
+    [self.rightValueCollectionView registerNib:[UINib nibWithNibName:@"IPCFilterValueCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:filterValueIdentifier];
+    
+    //Load UITableView
     [self.leftClassTableView setTableHeaderView:[[UIView alloc]init]];
     [self.leftClassTableView setTableFooterView:[[UIView alloc]init]];
     self.leftClassTableView.estimatedSectionHeaderHeight = 0;
     self.leftClassTableView.estimatedSectionFooterHeight = 0;
-    
-    [self.rightValueCollectionView setCollectionViewLayout:tagLayout animated:YES];
-    self.rightValueCollectionView.isHiden = YES;
-    [self.rightValueCollectionView registerNib:[UINib nibWithNibName:@"IPCFilterValueCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:filterValueIdentifier];
 }
 
-#pragma mark //Request Data
+#pragma mark //Reload Filter View
 - (void)reloadFilterView
 {
     isFilter = NO;

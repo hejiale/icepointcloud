@@ -13,9 +13,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
               ChooseParameter:(void(^)())choose
                 EditParameter:(void(^)())edit
-                      AddCart:(void(^)())addCart
-                   ReduceCart:(void(^)())reduceCart
-                   TryGlasses:(void(^)())tryGlasses;
+                   Reload:(void(^)())reload;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 

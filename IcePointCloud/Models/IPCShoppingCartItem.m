@@ -34,22 +34,16 @@
 
 - (double)unitPrice
 {
-    if (self.isChoosePoint) {
-        if (_unitPrice == 0){
-            return self.glasses.price;
+    //下订单页面 选择客户的折扣计算
+    if ([IPCPayOrderManager sharedManager].isChooseCustomer) {
+        _unitPrice = 0;
+        [IPCPayOrderManager sharedManager].isChooseCustomer = NO;
+    }
+    if (_unitPrice == 0){
+        if ([IPCPayOrderManager sharedManager].customerDiscount > 0) {
+            return self.glasses.price * [IPCPayOrderManager sharedManager].customerDiscount;
         }
-    }else{
-        //下订单页面 选择客户的折扣计算
-        if ([IPCPayOrderManager sharedManager].isChooseCustomer) {
-            _unitPrice = 0;
-            [IPCPayOrderManager sharedManager].isChooseCustomer = NO;
-        }
-        if (_unitPrice == 0){
-            if ([IPCPayOrderManager sharedManager].customerDiscount > 0) {
-                return self.glasses.price * [IPCPayOrderManager sharedManager].customerDiscount;
-            }
-            return self.glasses.price;
-        }
+        return self.glasses.price;
     }
     return _unitPrice;
 }
@@ -59,16 +53,7 @@
 - (NSDictionary *)paramtersJSONForOrderRequest
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    if (self.isChoosePoint) {
-        [params setObject:@(0) forKey:@"afterDiscountPrice"];
-    }else{
-        [params setObject:[NSString stringWithFormat:@"%.2f",self.unitPrice] forKey:@"afterDiscountPrice"];
-    }
-    
-    if ( ![IPCPayOrderManager sharedManager].isTrade) {
-        [params setObject:@(self.pointValue) forKey:@"exchangeIntegral"];
-        [params setObject:(self.isChoosePoint ? @"true" : @"false") forKey:@"isIntegralExchange"];
-    }
+    [params setObject:[NSString stringWithFormat:@"%.2f",self.unitPrice] forKey:@"afterDiscountPrice"];
 
     if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
     {

@@ -58,7 +58,6 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
          if ([error code] != NSURLErrorCancelled) {
              [IPCCommonUI showError:@"查询积分定制规则失败！"];
          }
-         
      }];
 }
 

@@ -47,15 +47,13 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         
         [self addLeftLine];
         [self.cartBottomView addTopLine];
+        //Load UITableView
         [self.cartListTableView setTableHeaderView:[[UIView alloc]init]];
         [self.cartListTableView setTableFooterView:[[UIView alloc]init]];
         self.cartListTableView.estimatedSectionFooterHeight = 0;
         self.cartListTableView.estimatedSectionHeaderHeight = 0;
         self.cartListTableView.emptyAlertImage = @"exception_cart";
         self.cartListTableView.emptyAlertTitle = @"暂无任何商品";
-        [[self.cartListTableView rac_signalForSelector:@selector(operationAction)] subscribeNext:^(RACTuple * _Nullable x) {
-            [IPCCommonUI pushToRootIndex:1];
-        }];
     }
     return self;
 }
@@ -153,8 +151,10 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         }
         IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
         if (cartItem) {
+            __weak typeof(self) weakSelf = self;
             [cell setCartItem:cartItem Reload:^{
-                [self resetShoppingCartStatus];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf resetShoppingCartStatus];
             }];
         }
         return cell;
@@ -166,8 +166,10 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
         
         if (cartItem){
+            __weak typeof(self) weakSelf = self;
             [cell setCartItem:cartItem Reload:^{
-                [self updateCartUI];
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                [strongSelf updateCartUI];
             }];
         }
         return cell;
@@ -186,9 +188,11 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
     
+    __weak typeof(self) weakSelf = self;
     _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         [_parameterView removeFromSuperview];
-        [self.coverView removeFromSuperview];
+        [strongSelf.coverView removeFromSuperview];
     }];
     _parameterView.cartItem = cartItem;
     [[UIApplication sharedApplication].keyWindow addSubview:_parameterView];

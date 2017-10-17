@@ -30,7 +30,7 @@
     _addressMode = addressMode;
 
     if (_addressMode) {
-        if (addressMode.detailAddress.length || addressMode.contactorAddress.length)
+        if (_addressMode.detailAddress.length || _addressMode.contactorAddress.length)
         {
             [self.addressContentView setHidden:NO];
             

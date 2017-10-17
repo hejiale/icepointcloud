@@ -91,7 +91,6 @@
         make.height.mas_equalTo(25);
     }];
     
-    [self requestTradeOrExchangeStatus];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadCartBadge)
                                                  name:IPCNotificationShoppingCartChanged
@@ -291,20 +290,6 @@
 - (void)reloadCartBadge{
     UIButton * button = (UIButton *)self.menusView.subviews[4];
     [button createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
-}
-
-- (void)requestTradeOrExchangeStatus
-{
-    [IPCPayOrderManager sharedManager].isTrade = YES;
-    
-//    [IPCPayOrderRequestManager getStatusTradeOrExchangeWithSuccessBlock:^(id responseValue) {
-//        [IPCPayOrderManager sharedManager].isTrade = YES;
-//    } FailureBlock:^(NSError *error) {
-//        if ([error code] != NSURLErrorCancelled) {
-//            [IPCCommonUI showError:@"查询积分定制规则失败!"];
-//        }
-//        
-//    }];
 }
 
 - (void)didReceiveMemoryWarning {

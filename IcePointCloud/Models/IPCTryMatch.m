@@ -32,22 +32,38 @@
     for (NSInteger i = 0; i < 4; i++) {
         IPCMatchItem *mi = [[IPCMatchItem alloc]init];
         mi.modelType = IPCModelTypeGirlWithLongHair;//current model
-        [self.matchItems addObject:mi];
+        [[IPCTryMatch instance].matchItems addObject:mi];
     }
-    self.activeMatchItemIndex = 0;
+    [IPCTryMatch instance].activeMatchItemIndex = 0;
 }
 
 - (void)setCurrentMatchItem:(IPCGlasses *)glass
 {
-    IPCMatchItem * item = self.matchItems[self.activeMatchItemIndex];
+    IPCMatchItem * item = [IPCTryMatch instance].matchItems[[IPCTryMatch instance].activeMatchItemIndex];
     item.glass = glass;
 }
 
 - (IPCMatchItem *)currentMatchItem
 {
-    if (self.matchItems.count)
-        return self.matchItems[self.activeMatchItemIndex];
+    if ([IPCTryMatch instance].matchItems.count)
+        return [IPCTryMatch instance].matchItems[[IPCTryMatch instance].activeMatchItemIndex];
     return nil;
+}
+
+- (CGPoint)singleModeViewAnchorPoint
+{
+    switch ([IPCTryMatch instance].activeMatchItemIndex) {
+        case 0:
+            return CGPointMake(0, 0);
+        case 1:
+            return CGPointMake(1, 0);
+        case 2:
+            return CGPointMake(0, 1);
+        case 3:
+            return CGPointMake(1, 1);
+        default:
+            return CGPointZero;
+    }
 }
 
 @end

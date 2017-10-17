@@ -60,15 +60,15 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
+    //Set Top View Bottom Line
     [self.topView addBottomLine];
+    //Load TableView
     [self.orderDetailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.orderDetailTableView setTableFooterView:[[UIView alloc]init]];
     self.orderDetailTableView.estimatedSectionFooterHeight = 0;
     self.orderDetailTableView.estimatedSectionHeaderHeight = 0;
     self.orderDetailTableView.isBeginLoad = YES;
-    [self queryOrderDetail];
-    
+    //Load OrderDetail View
     [self addSubview:self.orderDetailBgView];
     
     __weak typeof(self) weakSelf = self;
@@ -77,6 +77,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         make.left.mas_equalTo(strongSelf.mas_right).offset(-strongSelf.orderDetailBgView.jk_width);
         make.top.mas_equalTo(strongSelf.mas_top).offset(0);
     }];
+    //Load Data
+    [self queryOrderDetail];
 }
 
 
@@ -130,9 +132,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.orderDetailTableView.isBeginLoad = NO;
          [strongSelf.orderDetailTableView reloadData];
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"查询用户订单详情失败!"];
-         }
      }];
 }
 

@@ -105,15 +105,7 @@
                 <constraint firstItem="9yf-Un-adf" firstAttribute="top" secondItem="j9y-Mo-81p" secondAttribute="bottom" constant="37" id="tw4-gi-Buz"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="jGl-ME-wIm" appends="YES" id="qf2-vv-3WB"/>
-            </connections>
         </view>
-        <tapGestureRecognizer id="jGl-ME-wIm">
-            <connections>
-                <action selector="tapBgViewAction:" destination="-1" id="ukD-vq-fUA"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="icon_login_logo" width="236" height="79"/>
