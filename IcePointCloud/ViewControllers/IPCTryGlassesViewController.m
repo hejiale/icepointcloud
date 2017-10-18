@@ -20,8 +20,6 @@
 #import "IPCCompareItemView.h"
 #import "IPCProductViewMode.h"
 #import "IPCOfflineFaceDetector.h"
-#import "IPCGlassParameterView.h"
-#import "IPCEditBatchParameterView.h"
 #import "IPCCurrentTryGlassesView.h"
 
 static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIdentifier";
@@ -49,10 +47,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 @property (strong, nonatomic) UIVisualEffectView * blurBgView;
 @property (strong, nonatomic)  IPCShareChatView  *shareButtonView;
 @property (strong, nonatomic) IPCSwitch *compareSwitch;
-@property (strong, nonatomic) IPCGlassParameterView   *parameterView;
-@property (strong, nonatomic) IPCEditBatchParameterView  *editParameterView;
-@property (nonatomic, strong) IPCRefreshAnimationHeader *refreshHeader;
-@property (nonatomic, strong) IPCRefreshAnimationFooter *refreshFooter;
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
 @property (nonatomic, strong) IPCOfflineFaceDetector  * offlineFaceDetector;
 @property (nonatomic, strong) IPCCurrentTryGlassesView  *  tryGlassesView;
@@ -189,18 +183,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     return _compareSwitch;
 }
 
-- (IPCRefreshAnimationHeader *)refreshHeader{
-    if (!_refreshHeader)
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginRefresh)];
-    return _refreshHeader;
-}
-
-- (IPCRefreshAnimationFooter *)refreshFooter{
-    if (!_refreshFooter)
-        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-    return _refreshFooter;
-}
-
 - (void)updateRecommdUI
 {
     if (self.glassListViewMode.recommdGlassesList.count && !self.compareSwitch.isOn) {
@@ -214,7 +196,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
             UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake((width+5)*idx+5, 0, width, height)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             IPCGlassesImage * glassImage = [glass imageWithType:IPCGlassesImageTypeThumb];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+            [imageView setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
             [imageView setUserInteractionEnabled:YES];
             __weak typeof(self) weakSelf = self;
             [imageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
@@ -320,16 +302,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self.productTableView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
     [self stopRefresh];
-}
-
-- (void)stopRefresh
-{
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-    }
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-    }
 }
 
 #pragma mark //Request Data
@@ -879,7 +851,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         [self.goTopButton setHidden:YES];
     }
 }
-
 
 - (void)didReceiveMemoryWarning
 {

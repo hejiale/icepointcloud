@@ -17,7 +17,6 @@
 
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;//当前客户Id
 
-//@property (nonatomic, assign, readwrite) BOOL    isTrade;//是否使用积分抵扣
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
 @property (nonatomic, assign, readwrite) double        pointPrice;//抵扣积分金额

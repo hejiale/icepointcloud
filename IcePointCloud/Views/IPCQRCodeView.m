@@ -29,7 +29,7 @@
         self.frame = frame;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.qrcodeImageView sd_setImageWithURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.QRCodeURL]];
+            [self.qrcodeImageView setImageURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.QRCodeURL]];
         }
     }];
 }

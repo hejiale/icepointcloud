@@ -7,13 +7,23 @@
 //
 
 #import "IPCRootNavigationViewController.h"
+#import "IPCGlassParameterView.h"
+#import "IPCEditBatchParameterView.h"
 
 @interface IPCProductViewController : IPCRootNavigationViewController
+
+@property (strong, nonatomic) IPCGlassParameterView         *parameterView;
+@property (strong, nonatomic) IPCEditBatchParameterView   *editParameterView;
+@property (nonatomic, strong) IPCRefreshAnimationHeader  *refreshHeader;
+@property (nonatomic, strong) IPCRefreshAnimationFooter   *refreshFooter;
 
 - (void)reload;
 - (void)removeCover;
 - (void)onFilterProducts;
 - (void)onSearchProducts;
--(void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
+- (void)startAnimationWithStartPoint:(CGPoint)startPoint EndPoint:(CGPoint)endPoint;
+- (void)showGlassesParameterView:(IPCGlasses *)glasses;
+- (void)editGlassesParemeterView:(IPCGlasses *)glasses;
+- (void)stopRefresh;
 
 @end

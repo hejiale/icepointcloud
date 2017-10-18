@@ -9,10 +9,7 @@
 #import "IPCGlassListViewController.h"
 #import "IPCGlassDetailsViewController.h"
 #import "IPCGlasslistCollectionViewCell.h"
-#import "IPCGlassParameterView.h"
-#import "IPCEditBatchParameterView.h"
 #import "IPCProductViewMode.h"
-#import "IPCPayOrderViewController.h"
 #import "IPCSearchViewController.h"
 
 static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCellIdentifier";
@@ -21,13 +18,9 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 {
     BOOL isCancelRequest;
 }
-@property (weak, nonatomic)   IBOutlet UICollectionView               *glassListCollectionView;
-@property (weak, nonatomic) IBOutlet UIButton *goTopButton;
-@property (strong, nonatomic) IPCGlassParameterView                  *parameterView;
-@property (strong, nonatomic) IPCEditBatchParameterView           *editParameterView;
-@property (nonatomic, strong) IPCRefreshAnimationHeader          *refreshHeader;
-@property (nonatomic, strong) IPCRefreshAnimationFooter           *refreshFooter;
-@property (strong, nonatomic) IPCProductViewMode                   *glassListViewMode;
+@property (weak, nonatomic)   IBOutlet UICollectionView   *glassListCollectionView;
+@property (weak, nonatomic)   IBOutlet UIButton                *goTopButton;
+@property (strong, nonatomic) IPCProductViewMode          *glassListViewMode;
 
 @end
 
@@ -85,20 +78,6 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     self.glassListCollectionView.mj_footer = self.refreshFooter;
     self.glassListCollectionView.emptyAlertTitle = @"未搜索到任何商品";
     self.glassListCollectionView.emptyAlertImage = @"exception_search";
-}
-
-
-- (IPCRefreshAnimationHeader *)refreshHeader{
-    if (!_refreshHeader){
-        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginRefresh)];
-    }
-    return _refreshHeader;
-}
-
-- (IPCRefreshAnimationFooter *)refreshFooter{
-    if (!_refreshFooter)
-        _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
-    return _refreshFooter;
 }
 
 #pragma mark //UICollectionView Refresh Method
@@ -247,15 +226,6 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self stopRefresh];
 }
 
-- (void)stopRefresh{
-    if (self.refreshHeader.isRefreshing) {
-        [self.refreshHeader endRefreshing];
-    }
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-    }
-}
-
 //Remover All Cover
 - (void)removeCover
 {
@@ -316,29 +286,14 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)chooseParameter:(IPCGlasslistCollectionViewCell *)cell{
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
-        //Show Choose Glasses Batch Paremeter View
-        __weak typeof(self) weakSelf = self;
-        self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf reload];
-        }];
-        self.parameterView.glasses = self.glassListViewMode.glassesList[indexPath.row];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
-        [self.parameterView show];
+        [self showGlassesParameterView:self.glassListViewMode.glassesList[indexPath.row]];
     }
 }
 
 - (void)editBatchParameter:(IPCGlasslistCollectionViewCell *)cell{
-    __weak typeof (self) weakSelf = self;
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.glassListCollectionView indexPathForCell:cell];
-        //Show Edit Batch Paremeter View
-        self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:self.glassListViewMode.glassesList[indexPath.row] Dismiss:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
-            [strongSelf reload];
-        }];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
-        [self.editParameterView show];
+        [self editGlassesParemeterView:self.glassListViewMode.glassesList[indexPath.row]];
     }
 }
 

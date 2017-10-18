@@ -63,7 +63,7 @@
             __block CGFloat height = width/scale;
             self.imageHeight.constant = MIN(height, 100);
             
-            [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+            [self.productImageView setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         }
         
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];

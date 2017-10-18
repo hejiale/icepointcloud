@@ -46,7 +46,7 @@
     [self.checkBtn setSelected:_cartItem.selected];
     
     IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
-    if (gi)[self.glassesImgView sd_setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+    if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     
     self.glassesNameLbl.text = _cartItem.glasses.glassName;
     [self.cartCountLabel setText:[NSString stringWithFormat:@"%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]]];

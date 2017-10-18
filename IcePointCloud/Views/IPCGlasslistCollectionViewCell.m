@@ -42,8 +42,8 @@
         __block CGFloat height = width/scale;
         self.imageHeight.constant = MIN(height, 120);
         
-        [self.productImageView sd_setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
-        //Input Price And Name Text
+        [self.productImageView setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
+
         [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
         [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:10 WordSpace:0];
         //Get Name Text Height And Auto Fit

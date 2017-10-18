@@ -123,15 +123,15 @@
         
         if (gi.imageURL.length)
         {
-            [self.glassImageView sd_setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholderImage:[UIImage imageNamed:@"glasses_placeholder"]];
+            [self.glassImageView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"glasses_placeholder"]];
             
             if (self.glassImageView.image)
             {
                 [self.glassesView setHidden:NO];
                 
-                CGFloat scale          = self.glassesView.bounds.size.width / gi.width;
+                CGFloat scale          = self.glassesView.bounds.size.width / MAX(gi.width, 410);
                 CGRect bounds       = self.glassesView.bounds;
-                bounds.size.height = gi.height * scale;
+                bounds.size.height = MAX(gi.height, 140) * scale;
                 self.glassesView.bounds = bounds;
                 self.glassesView.center = self.cameraEyePoint;
                 

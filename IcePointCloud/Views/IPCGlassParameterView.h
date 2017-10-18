@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCGlasses.h"
+#import "IPCShoppingCartItem.h"
 
 @interface IPCGlassParameterView : UIView
 

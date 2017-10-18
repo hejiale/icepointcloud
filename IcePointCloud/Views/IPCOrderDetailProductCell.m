@@ -94,7 +94,7 @@
     _glasses = glasses;
     
     if (_glasses) {
-        [self.productImageView sd_setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+        [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];
         

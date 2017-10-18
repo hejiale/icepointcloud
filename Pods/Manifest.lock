@@ -23,9 +23,6 @@ PODS:
   - MJExtension (3.0.13)
   - MJRefresh (3.1.12)
   - ReactiveObjC (3.0.0)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
   - SNWeChatSDK (1.7.5)
   - TuSDK (2.8.0):
     - TuSDK/Core (= 2.8.0)
@@ -53,7 +50,6 @@ DEPENDENCIES:
   - MJExtension
   - MJRefresh
   - ReactiveObjC
-  - SDWebImage
   - SNWeChatSDK
   - TuSDK
   - YYKit
@@ -70,12 +66,11 @@ SPEC CHECKSUMS:
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   TuSDK: 0ee6705d4943e124a9b5bfea94f7bf5d100fcdfd
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 3eb2227ca0f8824126bb921a70238f5158d2fc5d
+PODFILE CHECKSUM: 81a42b953a292844aa2b32c034e7050f215b46b9
 
 COCOAPODS: 1.2.0

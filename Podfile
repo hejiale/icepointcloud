@@ -20,7 +20,6 @@ pod 'MJRefresh'
 pod 'TuSDK'
 pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
-pod 'SDWebImage'
 end
 
 target "IcePointCloudTests" do

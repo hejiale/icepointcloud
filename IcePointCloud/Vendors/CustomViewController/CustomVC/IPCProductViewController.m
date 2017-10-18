@@ -25,6 +25,19 @@
     [self setNavigationBarStatus:YES];
 }
 
+- (IPCRefreshAnimationHeader *)refreshHeader{
+    if (!_refreshHeader){
+        _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginRefresh)];
+    }
+    return _refreshHeader;
+}
+
+- (IPCRefreshAnimationFooter *)refreshFooter{
+    if (!_refreshFooter)
+    _refreshFooter = [IPCRefreshAnimationFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMore)];
+    return _refreshFooter;
+}
+
 #pragma mark //Clicked Events
 - (void)reload
 {
@@ -45,6 +58,32 @@
 - (void)onSearchProducts
 {
     
+}
+
+//Show Choose Glasses Batch Paremeter View
+- (void)showGlassesParameterView:(IPCGlasses *)glasses
+{
+    
+    __weak typeof(self) weakSelf = self;
+    self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf reload];
+    }];
+    self.parameterView.glasses = glasses;
+    [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
+    [self.parameterView show];
+}
+
+//Show Edit Batch Paremeter View
+- (void)editGlassesParemeterView:(IPCGlasses *)glasses
+{
+    __weak typeof (self) weakSelf = self;
+    self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:glasses Dismiss:^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf reload];
+    }];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
+    [self.editParameterView show];
 }
 
 //Add To Shopping Cart Animation
@@ -80,6 +119,15 @@
 
 - (void)removeFromLayer:(CALayer *)layerAnimation{
     [layerAnimation removeFromSuperlayer];
+}
+
+- (void)stopRefresh{
+    if (self.refreshHeader.isRefreshing) {
+        [self.refreshHeader endRefreshing];
+    }
+    if (self.refreshFooter.isRefreshing) {
+        [self.refreshFooter endRefreshing];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -36,7 +36,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         [parameterBgView setFrame:frame];
         [self addSubview:parameterBgView];
         
-        [self.glassImageView sd_setImageWithURL:[NSURL URLWithString:glasses.thumbImage.imageURL] placeholderImage:[UIImage imageNamed:@"default_placeHolder"]];
+        [self.glassImageView setImageWithURL:[NSURL URLWithString:glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         [self.glassNameLabel setText:glasses.glassName];
         [self.glassPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
     
