@@ -23,7 +23,7 @@
     return responseSerializer;
 }
 
-- (NSURLSessionDataTask *)sendRequestWithParams:(IPCAppendRequestParameter *)request
+- (NSURLSessionDataTask *)sendRequestWithParams:(IPCRequestParameter *)request
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName
                                     RequestType:(IPCRequestType)requestType

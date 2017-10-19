@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCEmployeListView">
+            <connections>
+                <outlet property="employeBgView" destination="SOz-xf-co9" id="ziI-1m-GqG"/>
+                <outlet property="employeTableView" destination="3K8-1k-qfc" id="pwH-NP-frS"/>
+                <outlet property="searchTextField" destination="sc0-P9-EAa" id="XZl-xD-DHI"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOz-xf-co9">
+                    <rect key="frame" x="362" y="134" width="300" height="500"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3K8-1k-qfc">
+                            <rect key="frame" x="5" y="90" width="290" height="410"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="0.19764019691780821" colorSpace="custom" customColorSpace="sRGB"/>
+                            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="FpJ-3e-yLm"/>
+                                <outlet property="delegate" destination="-1" id="pQJ-ui-OMS"/>
+                            </connections>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择员工" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fIf-eL-bWE">
+                            <rect key="frame" x="115" y="0.0" width="70" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="HXE-0o-Bej"/>
+                                <constraint firstAttribute="height" constant="50" id="UQ5-Ch-baL"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bl-LM-2tv">
+                            <rect key="frame" x="254" y="0.0" width="46" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="4nD-u4-iR1"/>
+                                <constraint firstAttribute="height" constant="50" id="DuV-tN-3dD"/>
+                            </constraints>
+                            <state key="normal" image="icon_back"/>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="Phd-BL-7TL"/>
+                            </connections>
+                        </button>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="搜索员工名/员工号" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="sc0-P9-EAa">
+                            <rect key="frame" x="5" y="50" width="290" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="c83-wR-gFG"/>
+                            </constraints>
+                            <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="OSo-or-9jJ"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="3K8-1k-qfc" firstAttribute="leading" secondItem="SOz-xf-co9" secondAttribute="leading" constant="5" id="0td-5R-GGC"/>
+                        <constraint firstItem="fIf-eL-bWE" firstAttribute="centerX" secondItem="SOz-xf-co9" secondAttribute="centerX" id="5na-0X-pCa"/>
+                        <constraint firstAttribute="height" constant="500" id="C8k-0Q-DFs"/>
+                        <constraint firstAttribute="width" constant="300" id="CsU-GQ-Oh3"/>
+                        <constraint firstItem="3K8-1k-qfc" firstAttribute="top" secondItem="sc0-P9-EAa" secondAttribute="bottom" constant="5" id="Elj-mz-b3q"/>
+                        <constraint firstAttribute="trailing" secondItem="9Bl-LM-2tv" secondAttribute="trailing" id="KWv-B7-Seu"/>
+                        <constraint firstItem="sc0-P9-EAa" firstAttribute="top" secondItem="9Bl-LM-2tv" secondAttribute="bottom" id="Ogb-ua-yzw"/>
+                        <constraint firstItem="9Bl-LM-2tv" firstAttribute="top" secondItem="SOz-xf-co9" secondAttribute="top" id="QLf-Ec-YPE"/>
+                        <constraint firstAttribute="trailing" secondItem="3K8-1k-qfc" secondAttribute="trailing" constant="5" id="T4t-pV-whc"/>
+                        <constraint firstItem="fIf-eL-bWE" firstAttribute="top" secondItem="SOz-xf-co9" secondAttribute="top" id="ZBd-B0-2j4"/>
+                        <constraint firstAttribute="bottom" secondItem="3K8-1k-qfc" secondAttribute="bottom" id="c5a-BN-qqy"/>
+                        <constraint firstAttribute="trailing" secondItem="sc0-P9-EAa" secondAttribute="trailing" constant="5" id="ctp-Pm-Mvv"/>
+                        <constraint firstItem="sc0-P9-EAa" firstAttribute="leading" secondItem="SOz-xf-co9" secondAttribute="leading" constant="5" id="xmv-A8-jCb"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20197452910958905" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="SOz-xf-co9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DPQ-NI-u29"/>
+                <constraint firstItem="SOz-xf-co9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Qbc-jT-wyk"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_back" width="22" height="22"/>
+    </resources>
+</document>

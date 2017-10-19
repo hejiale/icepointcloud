@@ -34,7 +34,7 @@
 }
 
 #pragma mark //AFNetworking Request Method
-- (void)callRequestWithParams:(IPCAppendRequestParameter *)request
+- (void)callRequestWithParams:(IPCRequestParameter *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
                   RequestType:(IPCRequestType)requestType

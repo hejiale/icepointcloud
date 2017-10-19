@@ -76,6 +76,12 @@ extern NSString *const  IPCChooseWareHouseNotification;
  */
 - (UIImage *)payTypeImage:(NSString *)payTypeInfo;
 
+
+/**
+ * Load WareHouse
+
+ @param complete 
+ */
 - (void)loadWareHouse:(void(^)(NSError * error))complete;
 
 
