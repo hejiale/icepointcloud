@@ -33,10 +33,6 @@
 		9E03C3001978D5D5007389D0 /* IcePointCloudTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E03C2FF1978D5D5007389D0 /* IcePointCloudTests.m */; };
 		9EF39A241B28053200CEE1D3 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF39A231B28053200CEE1D3 /* CoreVideo.framework */; };
 		9EF39A2C1B28054F00CEE1D3 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EF39A2B1B28054F00CEE1D3 /* CoreImage.framework */; };
-		CB0F53221F9872FB003707F2 /* IPCDefineCameraBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F531F1F9872FB003707F2 /* IPCDefineCameraBaseComponent.m */; };
-		CB0F53231F9872FB003707F2 /* IPCEditFilterSampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53211F9872FB003707F2 /* IPCEditFilterSampleController.m */; };
-		CB0F53281F98739C003707F2 /* IPCPhotoPickerBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53251F98739C003707F2 /* IPCPhotoPickerBaseComponent.m */; };
-		CB0F53291F98739C003707F2 /* IPCPortraitNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53271F98739C003707F2 /* IPCPortraitNavigationViewController.m */; };
 		CB0F53351F9874D8003707F2 /* IPCGlassDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F532D1F9874D8003707F2 /* IPCGlassDetailsViewController.m */; };
 		CB0F53361F9874D8003707F2 /* IPCGlassDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F532E1F9874D8003707F2 /* IPCGlassDetailsViewController.xib */; };
 		CB0F53371F9874D8003707F2 /* IPCGlassListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53311F9874D8003707F2 /* IPCGlassListViewController.m */; };
@@ -267,40 +263,44 @@
 		CB0F55D51F9884DD003707F2 /* IPCUserRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55D01F9884DD003707F2 /* IPCUserRequestManager.m */; };
 		CB0F55DC1F98854A003707F2 /* IPCRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55D81F98854A003707F2 /* IPCRequestParameter.m */; };
 		CB0F55DD1F98854A003707F2 /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55DB1F98854A003707F2 /* IPCReachability.m */; };
-		CB5CC4B61E8E01220091D0FD /* TuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */; };
-		CBAE92281F7A257D002D939D /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE920F1F7A257D002D939D /* AFHTTPSessionManager+Extend.m */; };
-		CBAE92291F7A257D002D939D /* NSDictionary+DeleteNull.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92111F7A257D002D939D /* NSDictionary+DeleteNull.m */; };
-		CBAE922B1F7A257D002D939D /* UIButton+TouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92151F7A257D002D939D /* UIButton+TouchArea.m */; };
-		CBAE922C1F7A257D002D939D /* UICollectionView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92171F7A257D002D939D /* UICollectionView+Alert.m */; };
-		CBAE922D1F7A257D002D939D /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92191F7A257D002D939D /* UIImage+Face.m */; };
-		CBAE922E1F7A257D002D939D /* UILabel+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE921B1F7A257D002D939D /* UILabel+Extend.m */; };
-		CBAE922F1F7A257D002D939D /* UITableView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE921D1F7A257D002D939D /* UITableView+Alert.m */; };
-		CBAE92301F7A257D002D939D /* UITextField+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE921F1F7A257D002D939D /* UITextField+Extend.m */; };
-		CBAE92311F7A257D002D939D /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92211F7A257D002D939D /* UIView+Badge.m */; };
-		CBAE92321F7A257D002D939D /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92231F7A257D002D939D /* UIView+Border.m */; };
-		CBAE92331F7A257D002D939D /* UIView+GestureRecognizerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92251F7A257D002D939D /* UIView+GestureRecognizerBlock.m */; };
-		CBAE92341F7A257D002D939D /* UIViewController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92271F7A257D002D939D /* UIViewController+Extend.m */; };
-		CBAE92401F7A2608002D939D /* IPCAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92381F7A2608002D939D /* IPCAppManager.m */; };
-		CBAE92411F7A2608002D939D /* IPCCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE923A1F7A2608002D939D /* IPCCheckVersion.m */; };
-		CBAE92421F7A2608002D939D /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE923C1F7A2608002D939D /* IPCCommon.m */; };
-		CBAE92431F7A2608002D939D /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE923F1F7A2608002D939D /* IPCPlatformService.m */; };
-		CBAE92691F7A2875002D939D /* IPCCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE924A1F7A2875002D939D /* IPCCommonUI.m */; };
-		CBAE926A1F7A2875002D939D /* IPCDynamicImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE924D1F7A2875002D939D /* IPCDynamicImageTextButton.m */; };
-		CBAE926B1F7A2875002D939D /* IPCStaticImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE924F1F7A2875002D939D /* IPCStaticImageTextButton.m */; };
-		CBAE926C1F7A2875002D939D /* IPCEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92521F7A2875002D939D /* IPCEmptyAlertView.m */; };
-		CBAE926E1F7A2875002D939D /* IPCSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92581F7A2875002D939D /* IPCSwipeView.m */; };
-		CBAE926F1F7A2875002D939D /* IPCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE925B1F7A2875002D939D /* IPCProgressView.m */; };
-		CBAE92701F7A2875002D939D /* IPCRefreshAnimationFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE925E1F7A2875002D939D /* IPCRefreshAnimationFooter.m */; };
-		CBAE92711F7A2875002D939D /* IPCRefreshAnimationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92601F7A2875002D939D /* IPCRefreshAnimationHeader.m */; };
-		CBAE92721F7A2875002D939D /* IPCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92631F7A2875002D939D /* IPCSwitch.m */; };
-		CBAE92731F7A2875002D939D /* IPCCustomTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92661F7A2875002D939D /* IPCCustomTopCell.m */; };
-		CBAE92741F7A2875002D939D /* IPCCustomTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBAE92671F7A2875002D939D /* IPCCustomTopCell.xib */; };
-		CBAE928F1F7A2960002D939D /* IPCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92781F7A2960002D939D /* IPCAlertController.m */; };
-		CBAE92941F7A2960002D939D /* IPCRootNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92841F7A2960002D939D /* IPCRootNavigationViewController.m */; };
-		CBAE92951F7A2960002D939D /* IPCDatePickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92871F7A2960002D939D /* IPCDatePickViewController.m */; };
-		CBAE92961F7A2960002D939D /* IPCDatePickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBAE92881F7A2960002D939D /* IPCDatePickViewController.xib */; };
-		CBAE92971F7A2960002D939D /* IPCParameterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE928A1F7A2960002D939D /* IPCParameterTableViewController.m */; };
-		CBAE92981F7A2960002D939D /* IPCParameterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBAE928B1F7A2960002D939D /* IPCParameterTableViewController.xib */; };
+		CB0F55E21F988A23003707F2 /* IPCCustomTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55E01F988A23003707F2 /* IPCCustomTopCell.m */; };
+		CB0F55E31F988A23003707F2 /* IPCCustomTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F55E11F988A23003707F2 /* IPCCustomTopCell.xib */; };
+		CB0F563B1F988B05003707F2 /* AFHTTPSessionManager+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55E71F988B05003707F2 /* AFHTTPSessionManager+Extend.m */; };
+		CB0F563C1F988B05003707F2 /* NSDictionary+DeleteNull.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55E91F988B05003707F2 /* NSDictionary+DeleteNull.m */; };
+		CB0F563D1F988B05003707F2 /* UIButton+TouchArea.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55EB1F988B05003707F2 /* UIButton+TouchArea.m */; };
+		CB0F563E1F988B05003707F2 /* UICollectionView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55ED1F988B05003707F2 /* UICollectionView+Alert.m */; };
+		CB0F563F1F988B05003707F2 /* UIImage+Face.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55EF1F988B05003707F2 /* UIImage+Face.m */; };
+		CB0F56401F988B05003707F2 /* UILabel+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55F11F988B05003707F2 /* UILabel+Extend.m */; };
+		CB0F56411F988B05003707F2 /* UITableView+Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55F31F988B05003707F2 /* UITableView+Alert.m */; };
+		CB0F56421F988B05003707F2 /* UITextField+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55F51F988B05003707F2 /* UITextField+Extend.m */; };
+		CB0F56431F988B05003707F2 /* UIView+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55F71F988B05003707F2 /* UIView+Badge.m */; };
+		CB0F56441F988B05003707F2 /* UIView+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55F91F988B05003707F2 /* UIView+Border.m */; };
+		CB0F56451F988B05003707F2 /* UIView+GestureRecognizerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55FB1F988B05003707F2 /* UIView+GestureRecognizerBlock.m */; };
+		CB0F56461F988B05003707F2 /* UIViewController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55FD1F988B05003707F2 /* UIViewController+Extend.m */; };
+		CB0F56471F988B05003707F2 /* IPCAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56011F988B05003707F2 /* IPCAppManager.m */; };
+		CB0F56481F988B05003707F2 /* IPCCheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56031F988B05003707F2 /* IPCCheckVersion.m */; };
+		CB0F56491F988B05003707F2 /* IPCCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56051F988B05003707F2 /* IPCCommon.m */; };
+		CB0F564A1F988B05003707F2 /* IPCPlatformService.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56081F988B05003707F2 /* IPCPlatformService.m */; };
+		CB0F564B1F988B05003707F2 /* IPCCommonUI.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F560C1F988B05003707F2 /* IPCCommonUI.m */; };
+		CB0F564C1F988B05003707F2 /* IPCDynamicImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F560F1F988B05003707F2 /* IPCDynamicImageTextButton.m */; };
+		CB0F564D1F988B05003707F2 /* IPCStaticImageTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56111F988B05003707F2 /* IPCStaticImageTextButton.m */; };
+		CB0F564E1F988B05003707F2 /* IPCEmptyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56141F988B05003707F2 /* IPCEmptyAlertView.m */; };
+		CB0F564F1F988B05003707F2 /* IPCSwipeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56171F988B05003707F2 /* IPCSwipeView.m */; };
+		CB0F56501F988B05003707F2 /* IPCProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F561A1F988B05003707F2 /* IPCProgressView.m */; };
+		CB0F56511F988B05003707F2 /* IPCRefreshAnimationFooter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F561D1F988B05003707F2 /* IPCRefreshAnimationFooter.m */; };
+		CB0F56521F988B05003707F2 /* IPCRefreshAnimationHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F561F1F988B05003707F2 /* IPCRefreshAnimationHeader.m */; };
+		CB0F56531F988B05003707F2 /* IPCSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56221F988B05003707F2 /* IPCSwitch.m */; };
+		CB0F56541F988B05003707F2 /* IPCAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56261F988B05003707F2 /* IPCAlertController.m */; };
+		CB0F56551F988B05003707F2 /* IPCRootNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56291F988B05003707F2 /* IPCRootNavigationViewController.m */; };
+		CB0F56561F988B05003707F2 /* IPCDatePickViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F562C1F988B05003707F2 /* IPCDatePickViewController.m */; };
+		CB0F56571F988B05003707F2 /* IPCDatePickViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F562D1F988B05003707F2 /* IPCDatePickViewController.xib */; };
+		CB0F56581F988B05003707F2 /* IPCParameterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F562F1F988B05003707F2 /* IPCParameterTableViewController.m */; };
+		CB0F56591F988B05003707F2 /* IPCParameterTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F56301F988B05003707F2 /* IPCParameterTableViewController.xib */; };
+		CB0F565A1F988B05003707F2 /* IPCDefineCameraBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56331F988B05003707F2 /* IPCDefineCameraBaseComponent.m */; };
+		CB0F565B1F988B05003707F2 /* IPCEditFilterSampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56351F988B05003707F2 /* IPCEditFilterSampleController.m */; };
+		CB0F565C1F988B05003707F2 /* IPCPhotoPickerBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56371F988B05003707F2 /* IPCPhotoPickerBaseComponent.m */; };
+		CB0F565D1F988B05003707F2 /* IPCPortraitNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */; };
+		CB0F565E1F988B05003707F2 /* TuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB0F563A1F988B05003707F2 /* TuSDK.bundle */; };
 		CBAE92BC1F7A2AB2002D939D /* IPCNetworkCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92AD1F7A2AB2002D939D /* IPCNetworkCache.m */; };
 		CBAE92BE1F7A2AB2002D939D /* IPCHttpRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92B21F7A2AB2002D939D /* IPCHttpRequest.m */; };
 		CBAE92C01F7A2AB2002D939D /* IPCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE92B61F7A2AB2002D939D /* IPCRequest.m */; };
@@ -361,14 +361,6 @@
 		9EF39A231B28053200CEE1D3 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		9EF39A2B1B28054F00CEE1D3 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		BF26672DE267EDD850D9C0A2 /* Pods-IcePointCloudTests.testrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloudTests.testrelease.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloudTests/Pods-IcePointCloudTests.testrelease.xcconfig"; sourceTree = "<group>"; };
-		CB0F531E1F9872FB003707F2 /* IPCDefineCameraBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDefineCameraBaseComponent.h; sourceTree = "<group>"; };
-		CB0F531F1F9872FB003707F2 /* IPCDefineCameraBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDefineCameraBaseComponent.m; sourceTree = "<group>"; };
-		CB0F53201F9872FB003707F2 /* IPCEditFilterSampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditFilterSampleController.h; sourceTree = "<group>"; };
-		CB0F53211F9872FB003707F2 /* IPCEditFilterSampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditFilterSampleController.m; sourceTree = "<group>"; };
-		CB0F53241F98739C003707F2 /* IPCPhotoPickerBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPhotoPickerBaseComponent.h; sourceTree = "<group>"; };
-		CB0F53251F98739C003707F2 /* IPCPhotoPickerBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPhotoPickerBaseComponent.m; sourceTree = "<group>"; };
-		CB0F53261F98739C003707F2 /* IPCPortraitNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPortraitNavigationViewController.h; sourceTree = "<group>"; };
-		CB0F53271F98739C003707F2 /* IPCPortraitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPortraitNavigationViewController.m; sourceTree = "<group>"; };
 		CB0F532C1F9874D8003707F2 /* IPCGlassDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCGlassDetailsViewController.h; sourceTree = "<group>"; };
 		CB0F532D1F9874D8003707F2 /* IPCGlassDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCGlassDetailsViewController.m; sourceTree = "<group>"; };
 		CB0F532E1F9874D8003707F2 /* IPCGlassDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCGlassDetailsViewController.xib; sourceTree = "<group>"; };
@@ -751,73 +743,81 @@
 		CB0F55D81F98854A003707F2 /* IPCRequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRequestParameter.m; sourceTree = "<group>"; };
 		CB0F55DA1F98854A003707F2 /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCReachability.h; sourceTree = "<group>"; };
 		CB0F55DB1F98854A003707F2 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
+		CB0F55DF1F988A23003707F2 /* IPCCustomTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomTopCell.h; sourceTree = "<group>"; };
+		CB0F55E01F988A23003707F2 /* IPCCustomTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomTopCell.m; sourceTree = "<group>"; };
+		CB0F55E11F988A23003707F2 /* IPCCustomTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomTopCell.xib; sourceTree = "<group>"; };
+		CB0F55E61F988B05003707F2 /* AFHTTPSessionManager+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPSessionManager+Extend.h"; sourceTree = "<group>"; };
+		CB0F55E71F988B05003707F2 /* AFHTTPSessionManager+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+Extend.m"; sourceTree = "<group>"; };
+		CB0F55E81F988B05003707F2 /* NSDictionary+DeleteNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DeleteNull.h"; sourceTree = "<group>"; };
+		CB0F55E91F988B05003707F2 /* NSDictionary+DeleteNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DeleteNull.m"; sourceTree = "<group>"; };
+		CB0F55EA1F988B05003707F2 /* UIButton+TouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TouchArea.h"; sourceTree = "<group>"; };
+		CB0F55EB1F988B05003707F2 /* UIButton+TouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TouchArea.m"; sourceTree = "<group>"; };
+		CB0F55EC1F988B05003707F2 /* UICollectionView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Alert.h"; sourceTree = "<group>"; };
+		CB0F55ED1F988B05003707F2 /* UICollectionView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Alert.m"; sourceTree = "<group>"; };
+		CB0F55EE1F988B05003707F2 /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
+		CB0F55EF1F988B05003707F2 /* UIImage+Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Face.m"; sourceTree = "<group>"; };
+		CB0F55F01F988B05003707F2 /* UILabel+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extend.h"; sourceTree = "<group>"; };
+		CB0F55F11F988B05003707F2 /* UILabel+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extend.m"; sourceTree = "<group>"; };
+		CB0F55F21F988B05003707F2 /* UITableView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Alert.h"; sourceTree = "<group>"; };
+		CB0F55F31F988B05003707F2 /* UITableView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Alert.m"; sourceTree = "<group>"; };
+		CB0F55F41F988B05003707F2 /* UITextField+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extend.h"; sourceTree = "<group>"; };
+		CB0F55F51F988B05003707F2 /* UITextField+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extend.m"; sourceTree = "<group>"; };
+		CB0F55F61F988B05003707F2 /* UIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Badge.h"; sourceTree = "<group>"; };
+		CB0F55F71F988B05003707F2 /* UIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Badge.m"; sourceTree = "<group>"; };
+		CB0F55F81F988B05003707F2 /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Border.h"; sourceTree = "<group>"; };
+		CB0F55F91F988B05003707F2 /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Border.m"; sourceTree = "<group>"; };
+		CB0F55FA1F988B05003707F2 /* UIView+GestureRecognizerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GestureRecognizerBlock.h"; sourceTree = "<group>"; };
+		CB0F55FB1F988B05003707F2 /* UIView+GestureRecognizerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GestureRecognizerBlock.m"; sourceTree = "<group>"; };
+		CB0F55FC1F988B05003707F2 /* UIViewController+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extend.h"; sourceTree = "<group>"; };
+		CB0F55FD1F988B05003707F2 /* UIViewController+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extend.m"; sourceTree = "<group>"; };
+		CB0F55FF1F988B05003707F2 /* HeaderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderFile.h; sourceTree = "<group>"; };
+		CB0F56001F988B05003707F2 /* IPCAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCAppManager.h; sourceTree = "<group>"; };
+		CB0F56011F988B05003707F2 /* IPCAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCAppManager.m; sourceTree = "<group>"; };
+		CB0F56021F988B05003707F2 /* IPCCheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCheckVersion.h; sourceTree = "<group>"; };
+		CB0F56031F988B05003707F2 /* IPCCheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCheckVersion.m; sourceTree = "<group>"; };
+		CB0F56041F988B05003707F2 /* IPCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCommon.h; sourceTree = "<group>"; };
+		CB0F56051F988B05003707F2 /* IPCCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCommon.m; sourceTree = "<group>"; };
+		CB0F56061F988B05003707F2 /* IPCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCore.h; sourceTree = "<group>"; };
+		CB0F56071F988B05003707F2 /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPlatformService.h; sourceTree = "<group>"; };
+		CB0F56081F988B05003707F2 /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPlatformService.m; sourceTree = "<group>"; };
+		CB0F560B1F988B05003707F2 /* IPCCommonUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCommonUI.h; sourceTree = "<group>"; };
+		CB0F560C1F988B05003707F2 /* IPCCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCommonUI.m; sourceTree = "<group>"; };
+		CB0F560E1F988B05003707F2 /* IPCDynamicImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDynamicImageTextButton.h; sourceTree = "<group>"; };
+		CB0F560F1F988B05003707F2 /* IPCDynamicImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDynamicImageTextButton.m; sourceTree = "<group>"; };
+		CB0F56101F988B05003707F2 /* IPCStaticImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCStaticImageTextButton.h; sourceTree = "<group>"; };
+		CB0F56111F988B05003707F2 /* IPCStaticImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCStaticImageTextButton.m; sourceTree = "<group>"; };
+		CB0F56131F988B05003707F2 /* IPCEmptyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEmptyAlertView.h; sourceTree = "<group>"; };
+		CB0F56141F988B05003707F2 /* IPCEmptyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEmptyAlertView.m; sourceTree = "<group>"; };
+		CB0F56161F988B05003707F2 /* IPCSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSwipeView.h; sourceTree = "<group>"; };
+		CB0F56171F988B05003707F2 /* IPCSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSwipeView.m; sourceTree = "<group>"; };
+		CB0F56191F988B05003707F2 /* IPCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCProgressView.h; sourceTree = "<group>"; };
+		CB0F561A1F988B05003707F2 /* IPCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCProgressView.m; sourceTree = "<group>"; };
+		CB0F561C1F988B05003707F2 /* IPCRefreshAnimationFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRefreshAnimationFooter.h; sourceTree = "<group>"; };
+		CB0F561D1F988B05003707F2 /* IPCRefreshAnimationFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRefreshAnimationFooter.m; sourceTree = "<group>"; };
+		CB0F561E1F988B05003707F2 /* IPCRefreshAnimationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRefreshAnimationHeader.h; sourceTree = "<group>"; };
+		CB0F561F1F988B05003707F2 /* IPCRefreshAnimationHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRefreshAnimationHeader.m; sourceTree = "<group>"; };
+		CB0F56211F988B05003707F2 /* IPCSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSwitch.h; sourceTree = "<group>"; };
+		CB0F56221F988B05003707F2 /* IPCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSwitch.m; sourceTree = "<group>"; };
+		CB0F56251F988B05003707F2 /* IPCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCAlertController.h; sourceTree = "<group>"; };
+		CB0F56261F988B05003707F2 /* IPCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCAlertController.m; sourceTree = "<group>"; };
+		CB0F56281F988B05003707F2 /* IPCRootNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRootNavigationViewController.h; sourceTree = "<group>"; };
+		CB0F56291F988B05003707F2 /* IPCRootNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRootNavigationViewController.m; sourceTree = "<group>"; };
+		CB0F562B1F988B05003707F2 /* IPCDatePickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDatePickViewController.h; sourceTree = "<group>"; };
+		CB0F562C1F988B05003707F2 /* IPCDatePickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDatePickViewController.m; sourceTree = "<group>"; };
+		CB0F562D1F988B05003707F2 /* IPCDatePickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCDatePickViewController.xib; sourceTree = "<group>"; };
+		CB0F562E1F988B05003707F2 /* IPCParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCParameterTableViewController.h; sourceTree = "<group>"; };
+		CB0F562F1F988B05003707F2 /* IPCParameterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCParameterTableViewController.m; sourceTree = "<group>"; };
+		CB0F56301F988B05003707F2 /* IPCParameterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCParameterTableViewController.xib; sourceTree = "<group>"; };
+		CB0F56321F988B05003707F2 /* IPCDefineCameraBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDefineCameraBaseComponent.h; sourceTree = "<group>"; };
+		CB0F56331F988B05003707F2 /* IPCDefineCameraBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDefineCameraBaseComponent.m; sourceTree = "<group>"; };
+		CB0F56341F988B05003707F2 /* IPCEditFilterSampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditFilterSampleController.h; sourceTree = "<group>"; };
+		CB0F56351F988B05003707F2 /* IPCEditFilterSampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditFilterSampleController.m; sourceTree = "<group>"; };
+		CB0F56361F988B05003707F2 /* IPCPhotoPickerBaseComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPhotoPickerBaseComponent.h; sourceTree = "<group>"; };
+		CB0F56371F988B05003707F2 /* IPCPhotoPickerBaseComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPhotoPickerBaseComponent.m; sourceTree = "<group>"; };
+		CB0F56381F988B05003707F2 /* IPCPortraitNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPortraitNavigationViewController.h; sourceTree = "<group>"; };
+		CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPortraitNavigationViewController.m; sourceTree = "<group>"; };
+		CB0F563A1F988B05003707F2 /* TuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TuSDK.bundle; sourceTree = "<group>"; };
 		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
-		CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TuSDK.bundle; path = IcePointCloud/Vendors/TuSDK.bundle; sourceTree = SOURCE_ROOT; };
-		CBAE920E1F7A257D002D939D /* AFHTTPSessionManager+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFHTTPSessionManager+Extend.h"; sourceTree = "<group>"; };
-		CBAE920F1F7A257D002D939D /* AFHTTPSessionManager+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFHTTPSessionManager+Extend.m"; sourceTree = "<group>"; };
-		CBAE92101F7A257D002D939D /* NSDictionary+DeleteNull.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DeleteNull.h"; sourceTree = "<group>"; };
-		CBAE92111F7A257D002D939D /* NSDictionary+DeleteNull.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DeleteNull.m"; sourceTree = "<group>"; };
-		CBAE92141F7A257D002D939D /* UIButton+TouchArea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TouchArea.h"; sourceTree = "<group>"; };
-		CBAE92151F7A257D002D939D /* UIButton+TouchArea.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TouchArea.m"; sourceTree = "<group>"; };
-		CBAE92161F7A257D002D939D /* UICollectionView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UICollectionView+Alert.h"; sourceTree = "<group>"; };
-		CBAE92171F7A257D002D939D /* UICollectionView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UICollectionView+Alert.m"; sourceTree = "<group>"; };
-		CBAE92181F7A257D002D939D /* UIImage+Face.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Face.h"; sourceTree = "<group>"; };
-		CBAE92191F7A257D002D939D /* UIImage+Face.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Face.m"; sourceTree = "<group>"; };
-		CBAE921A1F7A257D002D939D /* UILabel+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Extend.h"; sourceTree = "<group>"; };
-		CBAE921B1F7A257D002D939D /* UILabel+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Extend.m"; sourceTree = "<group>"; };
-		CBAE921C1F7A257D002D939D /* UITableView+Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Alert.h"; sourceTree = "<group>"; };
-		CBAE921D1F7A257D002D939D /* UITableView+Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Alert.m"; sourceTree = "<group>"; };
-		CBAE921E1F7A257D002D939D /* UITextField+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extend.h"; sourceTree = "<group>"; };
-		CBAE921F1F7A257D002D939D /* UITextField+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extend.m"; sourceTree = "<group>"; };
-		CBAE92201F7A257D002D939D /* UIView+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Badge.h"; sourceTree = "<group>"; };
-		CBAE92211F7A257D002D939D /* UIView+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Badge.m"; sourceTree = "<group>"; };
-		CBAE92221F7A257D002D939D /* UIView+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Border.h"; sourceTree = "<group>"; };
-		CBAE92231F7A257D002D939D /* UIView+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Border.m"; sourceTree = "<group>"; };
-		CBAE92241F7A257D002D939D /* UIView+GestureRecognizerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+GestureRecognizerBlock.h"; sourceTree = "<group>"; };
-		CBAE92251F7A257D002D939D /* UIView+GestureRecognizerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+GestureRecognizerBlock.m"; sourceTree = "<group>"; };
-		CBAE92261F7A257D002D939D /* UIViewController+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Extend.h"; sourceTree = "<group>"; };
-		CBAE92271F7A257D002D939D /* UIViewController+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Extend.m"; sourceTree = "<group>"; };
-		CBAE92361F7A2608002D939D /* HeaderFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderFile.h; sourceTree = "<group>"; };
-		CBAE92371F7A2608002D939D /* IPCAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCAppManager.h; sourceTree = "<group>"; };
-		CBAE92381F7A2608002D939D /* IPCAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCAppManager.m; sourceTree = "<group>"; };
-		CBAE92391F7A2608002D939D /* IPCCheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCheckVersion.h; sourceTree = "<group>"; };
-		CBAE923A1F7A2608002D939D /* IPCCheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCheckVersion.m; sourceTree = "<group>"; };
-		CBAE923B1F7A2608002D939D /* IPCCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCommon.h; sourceTree = "<group>"; };
-		CBAE923C1F7A2608002D939D /* IPCCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCommon.m; sourceTree = "<group>"; };
-		CBAE923D1F7A2608002D939D /* IPCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCore.h; sourceTree = "<group>"; };
-		CBAE923E1F7A2608002D939D /* IPCPlatformService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPlatformService.h; sourceTree = "<group>"; };
-		CBAE923F1F7A2608002D939D /* IPCPlatformService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPlatformService.m; sourceTree = "<group>"; };
-		CBAE92491F7A2875002D939D /* IPCCommonUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCommonUI.h; sourceTree = "<group>"; };
-		CBAE924A1F7A2875002D939D /* IPCCommonUI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCommonUI.m; sourceTree = "<group>"; };
-		CBAE924C1F7A2875002D939D /* IPCDynamicImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDynamicImageTextButton.h; sourceTree = "<group>"; };
-		CBAE924D1F7A2875002D939D /* IPCDynamicImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDynamicImageTextButton.m; sourceTree = "<group>"; };
-		CBAE924E1F7A2875002D939D /* IPCStaticImageTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCStaticImageTextButton.h; sourceTree = "<group>"; };
-		CBAE924F1F7A2875002D939D /* IPCStaticImageTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCStaticImageTextButton.m; sourceTree = "<group>"; };
-		CBAE92511F7A2875002D939D /* IPCEmptyAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEmptyAlertView.h; sourceTree = "<group>"; };
-		CBAE92521F7A2875002D939D /* IPCEmptyAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEmptyAlertView.m; sourceTree = "<group>"; };
-		CBAE92571F7A2875002D939D /* IPCSwipeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSwipeView.h; sourceTree = "<group>"; };
-		CBAE92581F7A2875002D939D /* IPCSwipeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSwipeView.m; sourceTree = "<group>"; };
-		CBAE925A1F7A2875002D939D /* IPCProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCProgressView.h; sourceTree = "<group>"; };
-		CBAE925B1F7A2875002D939D /* IPCProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCProgressView.m; sourceTree = "<group>"; };
-		CBAE925D1F7A2875002D939D /* IPCRefreshAnimationFooter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRefreshAnimationFooter.h; sourceTree = "<group>"; };
-		CBAE925E1F7A2875002D939D /* IPCRefreshAnimationFooter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRefreshAnimationFooter.m; sourceTree = "<group>"; };
-		CBAE925F1F7A2875002D939D /* IPCRefreshAnimationHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRefreshAnimationHeader.h; sourceTree = "<group>"; };
-		CBAE92601F7A2875002D939D /* IPCRefreshAnimationHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRefreshAnimationHeader.m; sourceTree = "<group>"; };
-		CBAE92621F7A2875002D939D /* IPCSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSwitch.h; sourceTree = "<group>"; };
-		CBAE92631F7A2875002D939D /* IPCSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSwitch.m; sourceTree = "<group>"; };
-		CBAE92651F7A2875002D939D /* IPCCustomTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomTopCell.h; sourceTree = "<group>"; };
-		CBAE92661F7A2875002D939D /* IPCCustomTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomTopCell.m; sourceTree = "<group>"; };
-		CBAE92671F7A2875002D939D /* IPCCustomTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomTopCell.xib; sourceTree = "<group>"; };
-		CBAE92771F7A2960002D939D /* IPCAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCAlertController.h; sourceTree = "<group>"; };
-		CBAE92781F7A2960002D939D /* IPCAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCAlertController.m; sourceTree = "<group>"; };
-		CBAE92831F7A2960002D939D /* IPCRootNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCRootNavigationViewController.h; sourceTree = "<group>"; };
-		CBAE92841F7A2960002D939D /* IPCRootNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCRootNavigationViewController.m; sourceTree = "<group>"; };
-		CBAE92861F7A2960002D939D /* IPCDatePickViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCDatePickViewController.h; sourceTree = "<group>"; };
-		CBAE92871F7A2960002D939D /* IPCDatePickViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCDatePickViewController.m; sourceTree = "<group>"; };
-		CBAE92881F7A2960002D939D /* IPCDatePickViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCDatePickViewController.xib; sourceTree = "<group>"; };
-		CBAE92891F7A2960002D939D /* IPCParameterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCParameterTableViewController.h; sourceTree = "<group>"; };
-		CBAE928A1F7A2960002D939D /* IPCParameterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCParameterTableViewController.m; sourceTree = "<group>"; };
-		CBAE928B1F7A2960002D939D /* IPCParameterTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCParameterTableViewController.xib; sourceTree = "<group>"; };
 		CBAE92AC1F7A2AB2002D939D /* IPCNetworkCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCNetworkCache.h; sourceTree = "<group>"; };
 		CBAE92AD1F7A2AB2002D939D /* IPCNetworkCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCNetworkCache.m; sourceTree = "<group>"; };
 		CBAE92B11F7A2AB2002D939D /* IPCHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCHttpRequest.h; sourceTree = "<group>"; };
@@ -883,14 +883,6 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
-		04EADDA41DC72DA70025AAE0 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				CB5CC4B51E8E01220091D0FD /* TuSDK.bundle */,
-			);
-			name = Lib;
-			sourceTree = "<group>";
-		};
 		9E03C2C81978D5D5007389D0 = {
 			isa = PBXGroup;
 			children = (
@@ -954,7 +946,7 @@
 				CB0F54451F98819B003707F2 /* Cells */,
 				9EA3537A197AB815005960AD /* Models */,
 				9EFAC1F019D6E24A00C1EFBF /* IPCClient */,
-				9EF3209A19933609004FC5B9 /* Vendors */,
+				CB0F55E41F988B05003707F2 /* Vendors */,
 				9E03C2DB1978D5D5007389D0 /* Supporting Files */,
 			);
 			path = IcePointCloud;
@@ -1049,19 +1041,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		9EF3209A19933609004FC5B9 /* Vendors */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE920D1F7A257D002D939D /* Category */,
-				CBAE92351F7A2608002D939D /* Config */,
-				CBAE92441F7A2875002D939D /* CustomView */,
-				CBAE92751F7A2960002D939D /* CustomViewController */,
-				04EADDA41DC72DA70025AAE0 /* Lib */,
-			);
-			name = Vendors;
-			path = Vendors/Common;
-			sourceTree = "<group>";
-		};
 		9EFAC1F019D6E24A00C1EFBF /* IPCClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1083,21 +1062,6 @@
 				BF26672DE267EDD850D9C0A2 /* Pods-IcePointCloudTests.testrelease.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		CB0F531D1F9872FB003707F2 /* SkinCare */ = {
-			isa = PBXGroup;
-			children = (
-				CB0F53241F98739C003707F2 /* IPCPhotoPickerBaseComponent.h */,
-				CB0F53251F98739C003707F2 /* IPCPhotoPickerBaseComponent.m */,
-				CB0F531E1F9872FB003707F2 /* IPCDefineCameraBaseComponent.h */,
-				CB0F531F1F9872FB003707F2 /* IPCDefineCameraBaseComponent.m */,
-				CB0F53201F9872FB003707F2 /* IPCEditFilterSampleController.h */,
-				CB0F53211F9872FB003707F2 /* IPCEditFilterSampleController.m */,
-				CB0F53261F98739C003707F2 /* IPCPortraitNavigationViewController.h */,
-				CB0F53271F98739C003707F2 /* IPCPortraitNavigationViewController.m */,
-			);
-			path = SkinCare;
 			sourceTree = "<group>";
 		};
 		CB0F532A1F9874D8003707F2 /* Product */ = {
@@ -1528,6 +1492,7 @@
 				CB0F54CD1F98819C003707F2 /* ProductDetail */,
 				CB0F54D11F98819C003707F2 /* Search */,
 				CB0F54D51F98819C003707F2 /* ShoppingCart */,
+				CB0F55DE1F988A23003707F2 /* TopCell */,
 				CB0F54DC1F98819C003707F2 /* TryGlasses */,
 				CB0F54E01F98819C003707F2 /* WareHouse */,
 			);
@@ -2070,190 +2035,212 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		CBAE920D1F7A257D002D939D /* Category */ = {
+		CB0F55DE1F988A23003707F2 /* TopCell */ = {
 			isa = PBXGroup;
 			children = (
-				CBAE920E1F7A257D002D939D /* AFHTTPSessionManager+Extend.h */,
-				CBAE920F1F7A257D002D939D /* AFHTTPSessionManager+Extend.m */,
-				CBAE92101F7A257D002D939D /* NSDictionary+DeleteNull.h */,
-				CBAE92111F7A257D002D939D /* NSDictionary+DeleteNull.m */,
-				CBAE92141F7A257D002D939D /* UIButton+TouchArea.h */,
-				CBAE92151F7A257D002D939D /* UIButton+TouchArea.m */,
-				CBAE92161F7A257D002D939D /* UICollectionView+Alert.h */,
-				CBAE92171F7A257D002D939D /* UICollectionView+Alert.m */,
-				CBAE92181F7A257D002D939D /* UIImage+Face.h */,
-				CBAE92191F7A257D002D939D /* UIImage+Face.m */,
-				CBAE921A1F7A257D002D939D /* UILabel+Extend.h */,
-				CBAE921B1F7A257D002D939D /* UILabel+Extend.m */,
-				CBAE921C1F7A257D002D939D /* UITableView+Alert.h */,
-				CBAE921D1F7A257D002D939D /* UITableView+Alert.m */,
-				CBAE921E1F7A257D002D939D /* UITextField+Extend.h */,
-				CBAE921F1F7A257D002D939D /* UITextField+Extend.m */,
-				CBAE92201F7A257D002D939D /* UIView+Badge.h */,
-				CBAE92211F7A257D002D939D /* UIView+Badge.m */,
-				CBAE92221F7A257D002D939D /* UIView+Border.h */,
-				CBAE92231F7A257D002D939D /* UIView+Border.m */,
-				CBAE92241F7A257D002D939D /* UIView+GestureRecognizerBlock.h */,
-				CBAE92251F7A257D002D939D /* UIView+GestureRecognizerBlock.m */,
-				CBAE92261F7A257D002D939D /* UIViewController+Extend.h */,
-				CBAE92271F7A257D002D939D /* UIViewController+Extend.m */,
-			);
-			name = Category;
-			path = IcePointCloud/Vendors/Category;
-			sourceTree = SOURCE_ROOT;
-		};
-		CBAE92351F7A2608002D939D /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92361F7A2608002D939D /* HeaderFile.h */,
-				CBAE923D1F7A2608002D939D /* IPCCore.h */,
-				CBAE92371F7A2608002D939D /* IPCAppManager.h */,
-				CBAE92381F7A2608002D939D /* IPCAppManager.m */,
-				CBAE92391F7A2608002D939D /* IPCCheckVersion.h */,
-				CBAE923A1F7A2608002D939D /* IPCCheckVersion.m */,
-				CBAE923B1F7A2608002D939D /* IPCCommon.h */,
-				CBAE923C1F7A2608002D939D /* IPCCommon.m */,
-				CBAE923E1F7A2608002D939D /* IPCPlatformService.h */,
-				CBAE923F1F7A2608002D939D /* IPCPlatformService.m */,
-			);
-			name = Config;
-			path = IcePointCloud/Vendors/Config;
-			sourceTree = SOURCE_ROOT;
-		};
-		CBAE92441F7A2875002D939D /* CustomView */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92481F7A2875002D939D /* Common */,
-				CBAE924B1F7A2875002D939D /* DIYButton */,
-				CBAE92501F7A2875002D939D /* EmptyAlert */,
-				CBAE92561F7A2875002D939D /* LeftSwipe */,
-				CBAE92591F7A2875002D939D /* ProgressBar */,
-				CBAE925C1F7A2875002D939D /* Refresh */,
-				CBAE92611F7A2875002D939D /* Switch */,
-				CBAE92641F7A2875002D939D /* TopCell */,
-			);
-			name = CustomView;
-			path = IcePointCloud/Vendors/CustomView;
-			sourceTree = SOURCE_ROOT;
-		};
-		CBAE92481F7A2875002D939D /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92491F7A2875002D939D /* IPCCommonUI.h */,
-				CBAE924A1F7A2875002D939D /* IPCCommonUI.m */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		CBAE924B1F7A2875002D939D /* DIYButton */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE924C1F7A2875002D939D /* IPCDynamicImageTextButton.h */,
-				CBAE924D1F7A2875002D939D /* IPCDynamicImageTextButton.m */,
-				CBAE924E1F7A2875002D939D /* IPCStaticImageTextButton.h */,
-				CBAE924F1F7A2875002D939D /* IPCStaticImageTextButton.m */,
-			);
-			path = DIYButton;
-			sourceTree = "<group>";
-		};
-		CBAE92501F7A2875002D939D /* EmptyAlert */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92511F7A2875002D939D /* IPCEmptyAlertView.h */,
-				CBAE92521F7A2875002D939D /* IPCEmptyAlertView.m */,
-			);
-			path = EmptyAlert;
-			sourceTree = "<group>";
-		};
-		CBAE92561F7A2875002D939D /* LeftSwipe */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92571F7A2875002D939D /* IPCSwipeView.h */,
-				CBAE92581F7A2875002D939D /* IPCSwipeView.m */,
-			);
-			path = LeftSwipe;
-			sourceTree = "<group>";
-		};
-		CBAE92591F7A2875002D939D /* ProgressBar */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE925A1F7A2875002D939D /* IPCProgressView.h */,
-				CBAE925B1F7A2875002D939D /* IPCProgressView.m */,
-			);
-			path = ProgressBar;
-			sourceTree = "<group>";
-		};
-		CBAE925C1F7A2875002D939D /* Refresh */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE925D1F7A2875002D939D /* IPCRefreshAnimationFooter.h */,
-				CBAE925E1F7A2875002D939D /* IPCRefreshAnimationFooter.m */,
-				CBAE925F1F7A2875002D939D /* IPCRefreshAnimationHeader.h */,
-				CBAE92601F7A2875002D939D /* IPCRefreshAnimationHeader.m */,
-			);
-			path = Refresh;
-			sourceTree = "<group>";
-		};
-		CBAE92611F7A2875002D939D /* Switch */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92621F7A2875002D939D /* IPCSwitch.h */,
-				CBAE92631F7A2875002D939D /* IPCSwitch.m */,
-			);
-			path = Switch;
-			sourceTree = "<group>";
-		};
-		CBAE92641F7A2875002D939D /* TopCell */ = {
-			isa = PBXGroup;
-			children = (
-				CBAE92651F7A2875002D939D /* IPCCustomTopCell.h */,
-				CBAE92661F7A2875002D939D /* IPCCustomTopCell.m */,
-				CBAE92671F7A2875002D939D /* IPCCustomTopCell.xib */,
+				CB0F55DF1F988A23003707F2 /* IPCCustomTopCell.h */,
+				CB0F55E01F988A23003707F2 /* IPCCustomTopCell.m */,
+				CB0F55E11F988A23003707F2 /* IPCCustomTopCell.xib */,
 			);
 			path = TopCell;
 			sourceTree = "<group>";
 		};
-		CBAE92751F7A2960002D939D /* CustomViewController */ = {
+		CB0F55E41F988B05003707F2 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				CB0F531D1F9872FB003707F2 /* SkinCare */,
-				CBAE92761F7A2960002D939D /* Alert */,
-				CBAE927C1F7A2960002D939D /* CustomVC */,
-				CBAE92851F7A2960002D939D /* PopoverVC */,
+				CB0F55E51F988B05003707F2 /* Category */,
+				CB0F55FE1F988B05003707F2 /* Config */,
+				CB0F56091F988B05003707F2 /* CustomView */,
+				CB0F56231F988B05003707F2 /* CustomViewController */,
+				CB0F563A1F988B05003707F2 /* TuSDK.bundle */,
 			);
-			name = CustomViewController;
-			path = IcePointCloud/Vendors/CustomViewController;
-			sourceTree = SOURCE_ROOT;
+			path = Vendors;
+			sourceTree = "<group>";
 		};
-		CBAE92761F7A2960002D939D /* Alert */ = {
+		CB0F55E51F988B05003707F2 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				CBAE92771F7A2960002D939D /* IPCAlertController.h */,
-				CBAE92781F7A2960002D939D /* IPCAlertController.m */,
+				CB0F55E61F988B05003707F2 /* AFHTTPSessionManager+Extend.h */,
+				CB0F55E71F988B05003707F2 /* AFHTTPSessionManager+Extend.m */,
+				CB0F55E81F988B05003707F2 /* NSDictionary+DeleteNull.h */,
+				CB0F55E91F988B05003707F2 /* NSDictionary+DeleteNull.m */,
+				CB0F55EA1F988B05003707F2 /* UIButton+TouchArea.h */,
+				CB0F55EB1F988B05003707F2 /* UIButton+TouchArea.m */,
+				CB0F55EC1F988B05003707F2 /* UICollectionView+Alert.h */,
+				CB0F55ED1F988B05003707F2 /* UICollectionView+Alert.m */,
+				CB0F55EE1F988B05003707F2 /* UIImage+Face.h */,
+				CB0F55EF1F988B05003707F2 /* UIImage+Face.m */,
+				CB0F55F01F988B05003707F2 /* UILabel+Extend.h */,
+				CB0F55F11F988B05003707F2 /* UILabel+Extend.m */,
+				CB0F55F21F988B05003707F2 /* UITableView+Alert.h */,
+				CB0F55F31F988B05003707F2 /* UITableView+Alert.m */,
+				CB0F55F41F988B05003707F2 /* UITextField+Extend.h */,
+				CB0F55F51F988B05003707F2 /* UITextField+Extend.m */,
+				CB0F55F61F988B05003707F2 /* UIView+Badge.h */,
+				CB0F55F71F988B05003707F2 /* UIView+Badge.m */,
+				CB0F55F81F988B05003707F2 /* UIView+Border.h */,
+				CB0F55F91F988B05003707F2 /* UIView+Border.m */,
+				CB0F55FA1F988B05003707F2 /* UIView+GestureRecognizerBlock.h */,
+				CB0F55FB1F988B05003707F2 /* UIView+GestureRecognizerBlock.m */,
+				CB0F55FC1F988B05003707F2 /* UIViewController+Extend.h */,
+				CB0F55FD1F988B05003707F2 /* UIViewController+Extend.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		CB0F55FE1F988B05003707F2 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F55FF1F988B05003707F2 /* HeaderFile.h */,
+				CB0F56001F988B05003707F2 /* IPCAppManager.h */,
+				CB0F56011F988B05003707F2 /* IPCAppManager.m */,
+				CB0F56021F988B05003707F2 /* IPCCheckVersion.h */,
+				CB0F56031F988B05003707F2 /* IPCCheckVersion.m */,
+				CB0F56041F988B05003707F2 /* IPCCommon.h */,
+				CB0F56051F988B05003707F2 /* IPCCommon.m */,
+				CB0F56061F988B05003707F2 /* IPCCore.h */,
+				CB0F56071F988B05003707F2 /* IPCPlatformService.h */,
+				CB0F56081F988B05003707F2 /* IPCPlatformService.m */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		CB0F56091F988B05003707F2 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F560A1F988B05003707F2 /* Common */,
+				CB0F560D1F988B05003707F2 /* DIYButton */,
+				CB0F56121F988B05003707F2 /* EmptyAlert */,
+				CB0F56151F988B05003707F2 /* LeftSwipe */,
+				CB0F56181F988B05003707F2 /* ProgressBar */,
+				CB0F561B1F988B05003707F2 /* Refresh */,
+				CB0F56201F988B05003707F2 /* Switch */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		CB0F560A1F988B05003707F2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F560B1F988B05003707F2 /* IPCCommonUI.h */,
+				CB0F560C1F988B05003707F2 /* IPCCommonUI.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CB0F560D1F988B05003707F2 /* DIYButton */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F560E1F988B05003707F2 /* IPCDynamicImageTextButton.h */,
+				CB0F560F1F988B05003707F2 /* IPCDynamicImageTextButton.m */,
+				CB0F56101F988B05003707F2 /* IPCStaticImageTextButton.h */,
+				CB0F56111F988B05003707F2 /* IPCStaticImageTextButton.m */,
+			);
+			path = DIYButton;
+			sourceTree = "<group>";
+		};
+		CB0F56121F988B05003707F2 /* EmptyAlert */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56131F988B05003707F2 /* IPCEmptyAlertView.h */,
+				CB0F56141F988B05003707F2 /* IPCEmptyAlertView.m */,
+			);
+			path = EmptyAlert;
+			sourceTree = "<group>";
+		};
+		CB0F56151F988B05003707F2 /* LeftSwipe */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56161F988B05003707F2 /* IPCSwipeView.h */,
+				CB0F56171F988B05003707F2 /* IPCSwipeView.m */,
+			);
+			path = LeftSwipe;
+			sourceTree = "<group>";
+		};
+		CB0F56181F988B05003707F2 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56191F988B05003707F2 /* IPCProgressView.h */,
+				CB0F561A1F988B05003707F2 /* IPCProgressView.m */,
+			);
+			path = ProgressBar;
+			sourceTree = "<group>";
+		};
+		CB0F561B1F988B05003707F2 /* Refresh */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F561C1F988B05003707F2 /* IPCRefreshAnimationFooter.h */,
+				CB0F561D1F988B05003707F2 /* IPCRefreshAnimationFooter.m */,
+				CB0F561E1F988B05003707F2 /* IPCRefreshAnimationHeader.h */,
+				CB0F561F1F988B05003707F2 /* IPCRefreshAnimationHeader.m */,
+			);
+			path = Refresh;
+			sourceTree = "<group>";
+		};
+		CB0F56201F988B05003707F2 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56211F988B05003707F2 /* IPCSwitch.h */,
+				CB0F56221F988B05003707F2 /* IPCSwitch.m */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
+		CB0F56231F988B05003707F2 /* CustomViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56241F988B05003707F2 /* Alert */,
+				CB0F56271F988B05003707F2 /* CustomVC */,
+				CB0F562A1F988B05003707F2 /* PopoverVC */,
+				CB0F56311F988B05003707F2 /* SkinCare */,
+			);
+			path = CustomViewController;
+			sourceTree = "<group>";
+		};
+		CB0F56241F988B05003707F2 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56251F988B05003707F2 /* IPCAlertController.h */,
+				CB0F56261F988B05003707F2 /* IPCAlertController.m */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
 		};
-		CBAE927C1F7A2960002D939D /* CustomVC */ = {
+		CB0F56271F988B05003707F2 /* CustomVC */ = {
 			isa = PBXGroup;
 			children = (
-				CBAE92831F7A2960002D939D /* IPCRootNavigationViewController.h */,
-				CBAE92841F7A2960002D939D /* IPCRootNavigationViewController.m */,
+				CB0F56281F988B05003707F2 /* IPCRootNavigationViewController.h */,
+				CB0F56291F988B05003707F2 /* IPCRootNavigationViewController.m */,
 			);
 			path = CustomVC;
 			sourceTree = "<group>";
 		};
-		CBAE92851F7A2960002D939D /* PopoverVC */ = {
+		CB0F562A1F988B05003707F2 /* PopoverVC */ = {
 			isa = PBXGroup;
 			children = (
-				CBAE92861F7A2960002D939D /* IPCDatePickViewController.h */,
-				CBAE92871F7A2960002D939D /* IPCDatePickViewController.m */,
-				CBAE92881F7A2960002D939D /* IPCDatePickViewController.xib */,
-				CBAE92891F7A2960002D939D /* IPCParameterTableViewController.h */,
-				CBAE928A1F7A2960002D939D /* IPCParameterTableViewController.m */,
-				CBAE928B1F7A2960002D939D /* IPCParameterTableViewController.xib */,
+				CB0F562B1F988B05003707F2 /* IPCDatePickViewController.h */,
+				CB0F562C1F988B05003707F2 /* IPCDatePickViewController.m */,
+				CB0F562D1F988B05003707F2 /* IPCDatePickViewController.xib */,
+				CB0F562E1F988B05003707F2 /* IPCParameterTableViewController.h */,
+				CB0F562F1F988B05003707F2 /* IPCParameterTableViewController.m */,
+				CB0F56301F988B05003707F2 /* IPCParameterTableViewController.xib */,
 			);
 			path = PopoverVC;
+			sourceTree = "<group>";
+		};
+		CB0F56311F988B05003707F2 /* SkinCare */ = {
+			isa = PBXGroup;
+			children = (
+				CB0F56321F988B05003707F2 /* IPCDefineCameraBaseComponent.h */,
+				CB0F56331F988B05003707F2 /* IPCDefineCameraBaseComponent.m */,
+				CB0F56341F988B05003707F2 /* IPCEditFilterSampleController.h */,
+				CB0F56351F988B05003707F2 /* IPCEditFilterSampleController.m */,
+				CB0F56361F988B05003707F2 /* IPCPhotoPickerBaseComponent.h */,
+				CB0F56371F988B05003707F2 /* IPCPhotoPickerBaseComponent.m */,
+				CB0F56381F988B05003707F2 /* IPCPortraitNavigationViewController.h */,
+				CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */,
+			);
+			path = SkinCare;
 			sourceTree = "<group>";
 		};
 		CBAE929A1F7A2A1A002D939D /* IPCRequestMethods */ = {
@@ -2431,12 +2418,13 @@
 				CB0F55241F98819C003707F2 /* IPCPayOrderOptometryCell.xib in Resources */,
 				CB0F536F1F9876AF003707F2 /* IPCCustomerDetailViewController.xib in Resources */,
 				CB0F55141F98819C003707F2 /* IPCOrderDetailProductCell.xib in Resources */,
+				CB0F56591F988B05003707F2 /* IPCParameterTableViewController.xib in Resources */,
 				CB0F55021F98819C003707F2 /* IPCInsertCustomerAddressCell.xib in Resources */,
 				CB0F54E51F98819C003707F2 /* IPCBatchParameterCell.xib in Resources */,
 				CB0F54FB1F98819C003707F2 /* IPCFilterValueCollectionViewCell.xib in Resources */,
 				CB0F553F1F98819C003707F2 /* IPCWareHouseCell.xib in Resources */,
 				CB0F54241F988191003707F2 /* IPCShowOptometryView.xib in Resources */,
-				CBAE92961F7A2960002D939D /* IPCDatePickViewController.xib in Resources */,
+				CB0F55E31F988A23003707F2 /* IPCCustomTopCell.xib in Resources */,
 				CB0F53811F9876AF003707F2 /* IPCRootViewController.xib in Resources */,
 				CB0F54FF1F98819C003707F2 /* IPCGlasslistCollectionViewCell.xib in Resources */,
 				CB0F54F51F98819C003707F2 /* IPCEmployeListCell.xib in Resources */,
@@ -2450,6 +2438,7 @@
 				CB0F551C1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.xib in Resources */,
 				CB0F54F91F98819C003707F2 /* IPCFilterClassViewCell.xib in Resources */,
 				CB0F54ED1F98819C003707F2 /* IPCCustomerHistoryOrderCell.xib in Resources */,
+				CB0F56571F988B05003707F2 /* IPCDatePickViewController.xib in Resources */,
 				CB0F54E71F98819C003707F2 /* IPCEditParameterCell.xib in Resources */,
 				CB0F54281F988191003707F2 /* IPCCustomDetailOrderView.xib in Resources */,
 				CB0F542E1F988191003707F2 /* IPCPersonBaseView.xib in Resources */,
@@ -2459,6 +2448,7 @@
 				CB0F55371F98819C003707F2 /* IPCSearchItemTableViewCell.xib in Resources */,
 				CB0F551A1F98819C003707F2 /* IPCOrderDetailTopCell.xib in Resources */,
 				CB0F54161F988191003707F2 /* IPCGlassParameterView.xib in Resources */,
+				CB0F565E1F988B05003707F2 /* TuSDK.bundle in Resources */,
 				CB0F542C1F988191003707F2 /* IPCPayTypeRecordView.xib in Resources */,
 				CB0F552E1F98819C003707F2 /* IPCPersonQRCodeCell.xib in Resources */,
 				CB0F541F1F988191003707F2 /* IPCEditOptometryView.xib in Resources */,
@@ -2477,9 +2467,7 @@
 				CB0F53791F9876AF003707F2 /* IPCLanuchViewController.xib in Resources */,
 				CB0F54401F988191003707F2 /* IPCCurrentTryGlassesView.xib in Resources */,
 				9E03C2ED1978D5D5007389D0 /* Images.xcassets in Resources */,
-				CBAE92741F7A2875002D939D /* IPCCustomTopCell.xib in Resources */,
 				CB0F54341F988191003707F2 /* IPCWarehouseView.xib in Resources */,
-				CBAE92981F7A2960002D939D /* IPCParameterTableViewController.xib in Resources */,
 				CB0F541B1F988191003707F2 /* IPCFilterGlassesView.xib in Resources */,
 				CB0F54261F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib in Resources */,
 				CB0F55301F98819C003707F2 /* IPCPersonTitleCell.xib in Resources */,
@@ -2501,7 +2489,6 @@
 				CB0F55261F98819C003707F2 /* IPCPayOrderSettlementCell.xib in Resources */,
 				CB0F55331F98819C003707F2 /* LibraryTypeTableViewCell.xib in Resources */,
 				CB0F54141F988191003707F2 /* IPCEditBatchParameterView.xib in Resources */,
-				CB5CC4B61E8E01220091D0FD /* TuSDK.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2620,23 +2607,19 @@
 				CB0F54201F988191003707F2 /* IPCMangerOptometryView.m in Sources */,
 				CB0F54FA1F98819C003707F2 /* IPCFilterValueCollectionViewCell.m in Sources */,
 				CB0F550B1F98819C003707F2 /* IPCOrderDetailInfoCell.m in Sources */,
-				CBAE92691F7A2875002D939D /* IPCCommonUI.m in Sources */,
 				CB0F537E1F9876AF003707F2 /* IPCPayOrderViewController.m in Sources */,
 				CB0F55A41F98845A003707F2 /* IPCEmployeeResult.m in Sources */,
 				CB0F55B91F98845A003707F2 /* IPCPhotoDatas.m in Sources */,
 				CB0F550D1F98819C003707F2 /* IPCOrderDetailMemoCell.m in Sources */,
 				CB0F53881F987739003707F2 /* IPCTabBarViewController.m in Sources */,
-				CBAE922E1F7A257D002D939D /* UILabel+Extend.m in Sources */,
 				CBAE92C21F7A2AB2002D939D /* IPCResponse.m in Sources */,
 				CB0F55B31F98845A003707F2 /* IPCPayOrderManager.m in Sources */,
 				CB0F55311F98819C003707F2 /* IPCPhotoPickerCell.m in Sources */,
+				CB0F56521F988B05003707F2 /* IPCRefreshAnimationHeader.m in Sources */,
 				CB0F553E1F98819C003707F2 /* IPCWareHouseCell.m in Sources */,
 				CBAE92C01F7A2AB2002D939D /* IPCRequest.m in Sources */,
 				CB0F55051F98819C003707F2 /* IPCInsertCustomerOpometryCell.m in Sources */,
 				CB0F55B51F98845A003707F2 /* IPCPayRecord.m in Sources */,
-				CBAE92321F7A257D002D939D /* UIView+Border.m in Sources */,
-				CBAE92411F7A2608002D939D /* IPCCheckVersion.m in Sources */,
-				CBAE922D1F7A257D002D939D /* UIImage+Face.m in Sources */,
 				CB0F55271F98819C003707F2 /* IPCPayTypeRecordCell.m in Sources */,
 				CB0F55AC1F98845A003707F2 /* IPCCurrentCustomer.m in Sources */,
 				CB0F55031F98819C003707F2 /* IPCInsertCustomerBaseCell.m in Sources */,
@@ -2649,12 +2632,10 @@
 				CB0F53721F9876AF003707F2 /* IPCInsertCustomerViewController.m in Sources */,
 				CB0F54351F988191003707F2 /* IPCLibraryTypeTableView.m in Sources */,
 				CB0F55011F98819C003707F2 /* IPCInsertCustomerAddressCell.m in Sources */,
-				CBAE922B1F7A257D002D939D /* UIButton+TouchArea.m in Sources */,
 				CB0F55091F98819C003707F2 /* IPCManagerOptometryCell.m in Sources */,
 				CB0F536E1F9876AF003707F2 /* IPCCustomerDetailViewController.m in Sources */,
 				CB0F552F1F98819C003707F2 /* IPCPersonTitleCell.m in Sources */,
 				CB0F53A41F987903003707F2 /* IPCCustomerListViewModel.m in Sources */,
-				CBAE92731F7A2875002D939D /* IPCCustomTopCell.m in Sources */,
 				CB0F540F1F988191003707F2 /* IPCAddressView.m in Sources */,
 				CB0F542D1F988191003707F2 /* IPCPersonBaseView.m in Sources */,
 				CB0F55A21F98845A003707F2 /* IPCEmployeeList.m in Sources */,
@@ -2665,37 +2646,39 @@
 				CB0F55DD1F98854A003707F2 /* IPCReachability.m in Sources */,
 				CB0F541D1F988191003707F2 /* IPCGuideViewManager.m in Sources */,
 				CB0F55341F98819C003707F2 /* IPCProductDetailTableViewCell.m in Sources */,
-				CBAE92721F7A2875002D939D /* IPCSwitch.m in Sources */,
 				CB0F54331F988191003707F2 /* IPCWarehouseView.m in Sources */,
 				CB0F55B41F98845A003707F2 /* IPCPayOrderParameter.m in Sources */,
+				CB0F563D1F988B05003707F2 /* UIButton+TouchArea.m in Sources */,
 				CB0F54F41F98819C003707F2 /* IPCEmployeListCell.m in Sources */,
+				CB0F56541F988B05003707F2 /* IPCAlertController.m in Sources */,
 				CB0F54F21F98819C003707F2 /* IPCCustomerCollectionViewCell.m in Sources */,
+				CB0F56441F988B05003707F2 /* UIView+Border.m in Sources */,
 				CB0F55BA1F98845A003707F2 /* IPCPhotoListModel.m in Sources */,
 				CB0F54411F988191003707F2 /* IPCShareChatView.m in Sources */,
-				CBAE92341F7A257D002D939D /* UIViewController+Extend.m in Sources */,
+				CB0F565A1F988B05003707F2 /* IPCDefineCameraBaseComponent.m in Sources */,
+				CB0F564E1F988B05003707F2 /* IPCEmptyAlertView.m in Sources */,
 				CB0F54131F988191003707F2 /* IPCEditBatchParameterView.m in Sources */,
+				CB0F564F1F988B05003707F2 /* IPCSwipeView.m in Sources */,
 				CB0F551B1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.m in Sources */,
 				CB0F54E61F98819C003707F2 /* IPCEditParameterCell.m in Sources */,
 				CB0F55231F98819C003707F2 /* IPCPayOrderOptometryCell.m in Sources */,
-				CBAE92701F7A2875002D939D /* IPCRefreshAnimationFooter.m in Sources */,
 				CB0F55191F98819C003707F2 /* IPCOrderDetailTopCell.m in Sources */,
 				CB0F54111F988191003707F2 /* IPCEditAddressView.m in Sources */,
 				CB0F54151F988191003707F2 /* IPCGlassParameterView.m in Sources */,
 				CB0F55AD1F98845A003707F2 /* IPCCustomerTypeList.m in Sources */,
 				CB0F53801F9876AF003707F2 /* IPCRootViewController.m in Sources */,
-				CBAE92331F7A257D002D939D /* UIView+GestureRecognizerBlock.m in Sources */,
 				CB0F55D31F9884DD003707F2 /* IPCGoodsRequestManager.m in Sources */,
 				CB0F55AE1F98845A003707F2 /* IPCHeadImage.m in Sources */,
 				CB0F55B11F98845A003707F2 /* IPCOptometryList.m in Sources */,
 				CB0F54191F988191003707F2 /* IPCChooseCategoryView.m in Sources */,
 				CB0F54F01F98819C003707F2 /* IPCCustomerRefreshCell.m in Sources */,
+				CB0F56581F988B05003707F2 /* IPCParameterTableViewController.m in Sources */,
 				CB0F55DC1F98854A003707F2 /* IPCRequestParameter.m in Sources */,
 				CB0F559F1F98845A003707F2 /* IPCCustomerOrderList.m in Sources */,
 				CB0F53A71F987903003707F2 /* IPCManagerOptometryViewModel.m in Sources */,
 				CB0F55A51F98845A003707F2 /* IPCOfflineFaceDetector.m in Sources */,
-				CBAE92941F7A2960002D939D /* IPCRootNavigationViewController.m in Sources */,
-				CBAE92711F7A2875002D939D /* IPCRefreshAnimationHeader.m in Sources */,
 				CB0F53AA1F987903003707F2 /* IPCPayOrderViewMode.m in Sources */,
+				CB0F56531F988B05003707F2 /* IPCSwitch.m in Sources */,
 				CB0F559E1F98845A003707F2 /* IPCBatchDegreeObject.m in Sources */,
 				CB0F54F61F98819C003707F2 /* IPCChooseCategoryCell.m in Sources */,
 				CB0F551F1F98819C003707F2 /* IPCPayOrderEmployeeCell.m in Sources */,
@@ -2703,12 +2686,14 @@
 				CB0F55D51F9884DD003707F2 /* IPCUserRequestManager.m in Sources */,
 				CB0F55321F98819C003707F2 /* LibraryTypeTableViewCell.m in Sources */,
 				CB0F54E41F98819C003707F2 /* IPCBatchParameterCell.m in Sources */,
-				CBAE92431F7A2608002D939D /* IPCPlatformService.m in Sources */,
-				CBAE922F1F7A257D002D939D /* UITableView+Alert.m in Sources */,
 				CB0F55A71F98845A003707F2 /* IPCFilterCategoryMode.m in Sources */,
+				CB0F565D1F988B05003707F2 /* IPCPortraitNavigationViewController.m in Sources */,
+				CB0F563C1F988B05003707F2 /* NSDictionary+DeleteNull.m in Sources */,
+				CB0F56511F988B05003707F2 /* IPCRefreshAnimationFooter.m in Sources */,
 				CB0F54FC1F98819C003707F2 /* IPCPriceRangeTableViewCell.m in Sources */,
 				CB0F559D1F98845A003707F2 /* IPCCustomerAddressList.m in Sources */,
 				CB0F53A31F987903003707F2 /* IPCCustomerDetailViewMode.m in Sources */,
+				CB0F56411F988B05003707F2 /* UITableView+Alert.m in Sources */,
 				CB0F55C01F98845A003707F2 /* IPCWareHouse.m in Sources */,
 				CB0F543A1F988191003707F2 /* IPCCompareItemView.m in Sources */,
 				CB0F537C1F9876AF003707F2 /* IPCLoginViewController.m in Sources */,
@@ -2716,76 +2701,77 @@
 				CB0F55A91F98845A003707F2 /* IPCGlasses.m in Sources */,
 				CB0F53821F9876AF003707F2 /* IPCPresentModeViewController.m in Sources */,
 				CB0F55A31F98845A003707F2 /* IPCEmployeeManager.m in Sources */,
-				CBAE922C1F7A257D002D939D /* UICollectionView+Alert.m in Sources */,
 				CB0F55071F98819C003707F2 /* IPCManagerAddressCell.m in Sources */,
-				CBAE926B1F7A2875002D939D /* IPCStaticImageTextButton.m in Sources */,
+				CB0F565B1F988B05003707F2 /* IPCEditFilterSampleController.m in Sources */,
 				CB0F54EA1F98819C003707F2 /* IPCCustomerDetailCell.m in Sources */,
 				CB0F55BB1F98845A003707F2 /* IPCShareManager.m in Sources */,
 				CB0F54171F988191003707F2 /* IPCEmployeListView.m in Sources */,
 				CB0F55D11F9884DD003707F2 /* IPCBatchRequestManager.m in Sources */,
 				CBAE92BC1F7A2AB2002D939D /* IPCNetworkCache.m in Sources */,
+				CB0F564B1F988B05003707F2 /* IPCCommonUI.m in Sources */,
 				CB0F54E81F98819C003707F2 /* IPCCustomerAddressCell.m in Sources */,
 				CB0F55211F98819C003707F2 /* IPCPayOrderMemoCell.m in Sources */,
 				CB0F54311F988191003707F2 /* IPCUpdatePasswordView.m in Sources */,
 				CB0F55251F98819C003707F2 /* IPCPayOrderSettlementCell.m in Sources */,
 				CB0F55361F98819C003707F2 /* IPCSearchItemTableViewCell.m in Sources */,
 				CB0F54EE1F98819C003707F2 /* IPCCustomerOptometryCell.m in Sources */,
-				CBAE92301F7A257D002D939D /* UITextField+Extend.m in Sources */,
 				CB0F53A81F987903003707F2 /* IPCProductViewMode.m in Sources */,
-				CB0F53291F98739C003707F2 /* IPCPortraitNavigationViewController.m in Sources */,
+				CB0F565C1F988B05003707F2 /* IPCPhotoPickerBaseComponent.m in Sources */,
+				CB0F56421F988B05003707F2 /* UITextField+Extend.m in Sources */,
 				CB0F53A21F987903003707F2 /* IPCCartViewMode.m in Sources */,
-				CB0F53281F98739C003707F2 /* IPCPhotoPickerBaseComponent.m in Sources */,
 				CB0F53391F9874D8003707F2 /* IPCProductViewController.m in Sources */,
 				CB0F53A51F987903003707F2 /* IPCInsertCustomerViewModel.m in Sources */,
+				CB0F56401F988B05003707F2 /* UILabel+Extend.m in Sources */,
+				CB0F563E1F988B05003707F2 /* UICollectionView+Alert.m in Sources */,
 				CB0F553A1F98819C003707F2 /* IPCExpandShoppingCartCell.m in Sources */,
-				CBAE928F1F7A2960002D939D /* IPCAlertController.m in Sources */,
 				CB0F53741F9876AF003707F2 /* IPCManagerAddressViewController.m in Sources */,
 				CB0F54EC1F98819C003707F2 /* IPCCustomerHistoryOrderCell.m in Sources */,
 				CB0F55D41F9884DD003707F2 /* IPCPayOrderRequestManager.m in Sources */,
-				CBAE926A1F7A2875002D939D /* IPCDynamicImageTextButton.m in Sources */,
 				CB0F54221F988191003707F2 /* IPCOptometryView.m in Sources */,
-				CB0F53231F9872FB003707F2 /* IPCEditFilterSampleController.m in Sources */,
+				CB0F56461F988B05003707F2 /* UIViewController+Extend.m in Sources */,
 				9E03C2E51978D5D5007389D0 /* IPCAppDelegate.m in Sources */,
-				CBAE92291F7A257D002D939D /* NSDictionary+DeleteNull.m in Sources */,
 				CB0F55B71F98845A003707F2 /* IPCProfileResult.m in Sources */,
 				CBAE92C11F7A2AB2002D939D /* IPCError.m in Sources */,
 				CB0F55AF1F98845A003707F2 /* IPCInsertCustomer.m in Sources */,
 				CB0F54361F988191003707F2 /* IPCShoppingCartView.m in Sources */,
+				CB0F564C1F988B05003707F2 /* IPCDynamicImageTextButton.m in Sources */,
 				CB0F55BE1F98845A003707F2 /* IPCMatchItem.m in Sources */,
 				CB0F55B81F98845A003707F2 /* IPCPhoto.m in Sources */,
 				CB0F543E1F988191003707F2 /* IPCTryGlassView.m in Sources */,
 				CB0F54251F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m in Sources */,
-				CBAE926E1F7A2875002D939D /* IPCSwipeView.m in Sources */,
 				CB0F541C1F988191003707F2 /* IPCTagCollectionLayout.m in Sources */,
 				CB0F55111F98819C003707F2 /* IPCOrderDetailPayRecordCell.m in Sources */,
 				CB0F55131F98819C003707F2 /* IPCOrderDetailProductCell.m in Sources */,
 				CB0F55A11F98845A003707F2 /* IPCCustomerList.m in Sources */,
 				CB0F55AB1F98845A003707F2 /* IPCProductList.m in Sources */,
 				CB0F53A91F987903003707F2 /* IPCPayOrderViewCellHeight.m in Sources */,
-				CBAE92951F7A2960002D939D /* IPCDatePickViewController.m in Sources */,
-				CBAE92401F7A2608002D939D /* IPCAppManager.m in Sources */,
 				CB0F55171F98819C003707F2 /* IPCOrderDetailSectionCell.m in Sources */,
 				CB0F54231F988191003707F2 /* IPCShowOptometryView.m in Sources */,
 				CB0F54291F988191003707F2 /* IPCEmployeePerformanceView.m in Sources */,
-				CBAE92281F7A257D002D939D /* AFHTTPSessionManager+Extend.m in Sources */,
-				CBAE92971F7A2960002D939D /* IPCParameterTableViewController.m in Sources */,
 				9E03C2E11978D5D5007389D0 /* main.m in Sources */,
+				CB0F563F1F988B05003707F2 /* UIImage+Face.m in Sources */,
+				CB0F563B1F988B05003707F2 /* AFHTTPSessionManager+Extend.m in Sources */,
 				CB0F542F1F988191003707F2 /* IPCQRCodeView.m in Sources */,
 				CB0F55381F98819C003707F2 /* IPCEditShoppingCartCell.m in Sources */,
 				CB0F55B01F98845A003707F2 /* IPCMemberLevelList.m in Sources */,
+				CB0F56481F988B05003707F2 /* IPCCheckVersion.m in Sources */,
+				CB0F56431F988B05003707F2 /* UIView+Badge.m in Sources */,
 				CB0F55A01F98845A003707F2 /* IPCDetailCustomer.m in Sources */,
 				CB0F533E1F987523003707F2 /* IPCTryGlassesViewController.m in Sources */,
+				CB0F56451F988B05003707F2 /* UIView+GestureRecognizerBlock.m in Sources */,
+				CB0F56471F988B05003707F2 /* IPCAppManager.m in Sources */,
+				CB0F564A1F988B05003707F2 /* IPCPlatformService.m in Sources */,
+				CB0F564D1F988B05003707F2 /* IPCStaticImageTextButton.m in Sources */,
 				CB0F54381F988191003707F2 /* IPCSideBarMenuView.m in Sources */,
-				CBAE92311F7A257D002D939D /* UIView+Badge.m in Sources */,
+				CB0F56491F988B05003707F2 /* IPCCommon.m in Sources */,
 				CB0F553C1F98819C003707F2 /* IPCTryGlassesListViewCell.m in Sources */,
-				CBAE92421F7A2608002D939D /* IPCCommon.m in Sources */,
 				CB0F541E1F988191003707F2 /* IPCEditOptometryView.m in Sources */,
-				CB0F53221F9872FB003707F2 /* IPCDefineCameraBaseComponent.m in Sources */,
 				CB0F54FE1F98819C003707F2 /* IPCGlasslistCollectionViewCell.m in Sources */,
 				CB0F55A81F98845A003707F2 /* IPCFilterDataSourceResult.m in Sources */,
 				CB0F53371F9874D8003707F2 /* IPCGlassListViewController.m in Sources */,
 				CB0F55A61F98845A003707F2 /* IPCOnlineFaceDetector.m in Sources */,
 				CB0F552D1F98819C003707F2 /* IPCPersonQRCodeCell.m in Sources */,
+				CB0F56501F988B05003707F2 /* IPCProgressView.m in Sources */,
 				CB0F55BC1F98845A003707F2 /* IPCShoppingCart.m in Sources */,
 				CB0F55B21F98845A003707F2 /* IPCCustomerOrderDetail.m in Sources */,
 				CB0F55AA1F98845A003707F2 /* IPCGlassesImage.m in Sources */,
@@ -2793,12 +2779,13 @@
 				CB0F55B61F98845A003707F2 /* IPCPointValueMode.m in Sources */,
 				CB0F53A61F987903003707F2 /* IPCManagerAddressViewModel.m in Sources */,
 				CB0F54271F988191003707F2 /* IPCCustomDetailOrderView.m in Sources */,
+				CB0F56551F988B05003707F2 /* IPCRootNavigationViewController.m in Sources */,
 				CB0F55C11F98845A003707F2 /* IPCWareHouseResult.m in Sources */,
 				CBAE92BE1F7A2AB2002D939D /* IPCHttpRequest.m in Sources */,
 				CB0F541A1F988191003707F2 /* IPCFilterGlassesView.m in Sources */,
-				CBAE926C1F7A2875002D939D /* IPCEmptyAlertView.m in Sources */,
+				CB0F55E21F988A23003707F2 /* IPCCustomTopCell.m in Sources */,
 				CB0F55001F98819C003707F2 /* IPCGuideViewCell.m in Sources */,
-				CBAE926F1F7A2875002D939D /* IPCProgressView.m in Sources */,
+				CB0F56561F988B05003707F2 /* IPCDatePickViewController.m in Sources */,
 				CB0F54F81F98819C003707F2 /* IPCFilterClassViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
