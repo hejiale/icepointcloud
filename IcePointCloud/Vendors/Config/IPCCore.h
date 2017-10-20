@@ -154,9 +154,6 @@ typedef enum : NSUInteger {
 #define IPCTuSdkKey                      @"76f28d5c99160928-00-rzltq1"
 //IFLY_FACE_KEY
 #define IPCIflyFaceDetectorKey       @"5774da82"
-//Bugtags_Key
-#define IPCBugtags_BetaKey            @"9de4eef22d4f7cdefe1972a78a2a2dbd"
-#define IPCBugtags_ProductKey       @"a059abe3e994d5cbb6db1a01d63f29d0"
 
 #ifdef DEBUG
 #define DLog(fmt, ...)                     NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);

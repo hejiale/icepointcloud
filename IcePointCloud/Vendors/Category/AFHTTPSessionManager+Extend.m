@@ -19,7 +19,7 @@
     responseSerializer.acceptableContentTypes      = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     responseSerializer.removesKeysWithNullValues = YES;
     self.requestSerializer.timeoutInterval = 30.f;
-//    self.operationQueue.maxConcurrentOperationCount = 3;
+    //    self.operationQueue.maxConcurrentOperationCount = 3;
     return responseSerializer;
 }
 
@@ -38,7 +38,7 @@
     
     void(^successCall)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
-        [IPCResponse parseResponseData:responseObject Complete:^(id responseValue)
+        [[IPCResponseManager manager] parseResponseData:responseObject Complete:^(id responseValue)
          {
              if (cacheEnable == IPCRequestCacheEnable) {
                  [[IPCNetworkCache sharedCache] setHttpCache:responseValue RequestMethod:request.requestMethod parameters:request.parameters];

@@ -18,6 +18,7 @@ NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCou
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerkey";
 NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNotification";
 NSString *const  IPCChooseWareHouseNotification       = @"IPCChooseWareHouseNotification";
+NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设备->设置->无线局域网选项";
 
 @implementation IPCAppManager
 

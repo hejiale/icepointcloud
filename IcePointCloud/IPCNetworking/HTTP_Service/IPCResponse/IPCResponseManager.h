@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 
-@interface IPCResponse : NSObject
+@interface IPCResponseManager : NSObject
+
+
++ (IPCResponseManager *)manager;
 
 
 /**
@@ -19,6 +22,6 @@
  @param complete
  @param failed 
  */
-+ (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed;
+- (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed;
 
 @end

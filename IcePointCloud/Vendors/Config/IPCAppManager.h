@@ -28,6 +28,8 @@ extern NSString *const IPCShoppingCartCountKey;
 extern NSString *const  IPCChooseCustomerNotification;
 //Choose WareHouse notification
 extern NSString *const  IPCChooseWareHouseNotification;
+//Error Networking Status Message
+extern NSString * const kIPCErrorNetworkAlertMessage;
 
 @interface IPCAppManager : NSObject
 
