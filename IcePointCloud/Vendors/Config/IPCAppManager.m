@@ -189,7 +189,7 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
 
 - (void)loadWareHouse:(void (^)(NSError *))complete
 {
-    [IPCGoodsRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
+    [IPCUserRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
      {
          self.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
          self.currentWareHouse = self.wareHouse.wareHouseArray[0];
