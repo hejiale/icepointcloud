@@ -17,7 +17,7 @@
 {
     IPCPayOrderParameter * parameter = [[IPCPayOrderParameter alloc]init];
     
-    [self postRequest:[parameter offOrderParameter] RequestMethod:@"orderObjectAdmin.savePrototypeOrders" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:[parameter offOrderParameter] RequestMethod:PayOrderRequest_SaveNewOrder CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -31,7 +31,7 @@
                                          @"isOnJob":@"true",
                                          @"storeId" : [IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""
                                          };
-    [self postRequest:responseParameter RequestMethod:@"employeeadmin.listEmployee" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:responseParameter RequestMethod:PayOrderRequest_EmployeeList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getIntegralRulesWithCustomerID:(NSString *)customID
@@ -48,14 +48,7 @@
                                   @"detailList": [productParameter productListParamter],
                                   };
     
-    [self postRequest:parameters RequestMethod:@"integralTradeAdmin.getSaleOrderDetailIntegralList" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-}
-
-+(void)payRemainOrderWithOrderNum:(NSString *)orderNum
-                         PayInfos:(NSArray *)payInfos
-                     SuccessBlock:(void (^)(id))success
-                     FailureBlock:(void (^)(NSError *))failure{
-    [self postRequest:@{@"orderNumber":orderNum,@"orderPayInfos":payInfos} RequestMethod:@"bizadmin.saveOrderPayInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:parameters RequestMethod:PayOrderRequest_Integral CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

@@ -829,6 +829,7 @@
 		CB64D2431F99C9A600FBC5F2 /* IPCReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCReachability.h; sourceTree = "<group>"; };
 		CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
 		CB64D2451F99C9A600FBC5F2 /* IPCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCNetworking.h; sourceTree = "<group>"; };
+		CB64D24C1F99CADF00FBC5F2 /* IPCNetworkingAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCNetworkingAPI.h; sourceTree = "<group>"; };
 		D57A18F14EE64419E926539B /* Pods-IcePointCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.release.xcconfig"; sourceTree = "<group>"; };
 		E35277241B301C48004E245C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -2185,6 +2186,7 @@
 		CB64D21C1F99C96C00FBC5F2 /* IPCNetworkingApi */ = {
 			isa = PBXGroup;
 			children = (
+				CB64D24C1F99CADF00FBC5F2 /* IPCNetworkingAPI.h */,
 				CB64D21D1F99C96C00FBC5F2 /* BatchParameter */,
 				CB64D2201F99C96C00FBC5F2 /* Customer */,
 				CB64D2231F99C96C00FBC5F2 /* Glasses */,

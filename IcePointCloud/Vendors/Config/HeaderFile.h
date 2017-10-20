@@ -16,6 +16,7 @@
 #import "IPCCommon.h"
 #import "IPCCommonUI.h"
 #import "IPCNetworking.h"
+#import "IPCNetworkingAPI.h"
 #import "IPCAppManager.h"
 #import "IPCRefreshAnimationHeader.h"
 #import "IPCRefreshAnimationFooter.h"

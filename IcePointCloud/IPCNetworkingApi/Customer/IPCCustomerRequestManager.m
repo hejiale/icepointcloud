@@ -1,4 +1,4 @@
- //
+//
 //  IPCCustomerRequestManager.m
 //  IcePointCloud
 //
@@ -15,8 +15,7 @@
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
-//    [self postRequest:@{@"customerId":customID,@"pageNo":@(1),@"maxPageSize":@(100000)} RequestMethod:@"customerAdmin.listOptometry" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID} RequestMethod:CustomerRequest_OptometryList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -55,7 +54,7 @@
                              @"purpose":purpose,
                              @"employeeId":employeeId,
                              @"employeeName":employeeName};
-    [self postRequest:params RequestMethod:@"customerAdmin.saveOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:params RequestMethod:CustomerRequest_SaveNewOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -79,7 +78,7 @@
                          MemberLevelId:(NSString *)memberLevelId
                              MemberNum:(NSString *)memberNum
                                PhotoId:(NSString *)photoId
-                            IntroducerId:(NSString *)introducerId
+                          IntroducerId:(NSString *)introducerId
                      IntroducerInteger:(NSString *)introducerInteger
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
@@ -111,7 +110,7 @@
         [paramterDic setObject:introducerId forKey:@"introducerId"];
         [paramterDic setObject:introducerInteger forKey:@"introducerIntegral"];
     }
-    [self postRequest:paramterDic RequestMethod:@"customerAdmin.saveCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:paramterDic RequestMethod:CustomerRequest_SaveNewCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -119,7 +118,7 @@
                                  SuccessBlock:(void (^)(id responseValue))success
                                  FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customerID,@"needMoreInfo":@"true"} RequestMethod:@"customerAdmin.getCusomerInfo" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customerID,@"needMoreInfo":@"true"} RequestMethod:CustomerRequest_CustomerDetail CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -128,7 +127,7 @@
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"keyword":keyword,@"pageNo":@(page),@"maxPageSize":@(30)} RequestMethod:@"customerAdmin.listCustomer" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"keyword":keyword,@"pageNo":@(page),@"maxPageSize":@(30)} RequestMethod:CustomerRequest_CustomerList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -137,7 +136,7 @@
                            SuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID,@"optometryId":optometryID} RequestMethod:@"customerAdmin.setCurrentOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"optometryId":optometryID} RequestMethod:CustomerRequest_SetCurrentOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -146,7 +145,7 @@
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerId":customID} RequestMethod:@"customerAdmin.listHistoryOrdersByCustomerId" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerId":customID} RequestMethod:CustomerRequest_CustomerOrderList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -165,7 +164,7 @@
                                   @"genderstring":gender,
                                   @"contactorPhone":phone,
                                   @"detailAdress":address};
-    [self postRequest:parameters RequestMethod:@"customerAdmin.saveAddress" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:parameters RequestMethod:CustomerRequest_SaveNewAddress CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -173,7 +172,7 @@
                                 SuccessBlock:(void (^)(id responseValue))success
                                 FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID} RequestMethod:@"customerAdmin.getAllAddress" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID} RequestMethod:CustomerRequest_AddressList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -181,8 +180,7 @@
                        SuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"orderNumber":orderNumber} RequestMethod:@"bizadmin.getSalesOrderByOrderNumberForPos" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
-//    [self postRequest:@{@"orderNumber":orderNumber} RequestMethod:@"bizadmin.getSalesOrderByOrderNumber" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"orderNumber":orderNumber} RequestMethod:CustomerRequest_OrderDetail CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -220,7 +218,7 @@
                                   @"memberLevel":memberLevel,
                                   @"photoIdForPos":photoId,
                                   @"isPos":@"true"};
-    [self postRequest:parameters RequestMethod:@"customerAdmin.updateCustomerInfo" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:parameters RequestMethod:CustomerRequest_UpdateCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)setDefaultOptometryWithCustomID:(NSString *)customID
@@ -228,7 +226,7 @@
                            SuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID,@"optometryId":defaultOptometryID} RequestMethod:@"customerAdmin.setCurrentOptometry" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"optometryId":defaultOptometryID} RequestMethod:CustomerRequest_SetCurrentOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -237,32 +235,29 @@
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID,@"id":defaultAddressID} RequestMethod:@"customerAdmin.setCurrentAddress" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"id":defaultAddressID} RequestMethod:CustomerRequest_SetCurrentAddress CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getMemberLevelWithSuccessBlock:(void (^)(id))success
                           FailureBlock:(void (^)(NSError *))failure
 {
-//    [self postRequest:nil RequestMethod:@"customerAdmin.listMemberLevel" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-    [self postRequest:nil RequestMethod:@"customerConfigAdmin.listMemberLevel" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:nil RequestMethod:CustomerRequest_ListMemberLevel CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getCustomerTypeSuccessBlock:(void (^)(id))success
                        FailureBlock:(void (^)(NSError *))failure
 {
-//    [self postRequest:nil RequestMethod:@"customerAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-    [self postRequest:nil RequestMethod:@"customerConfigAdmin.listCustomerType" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:nil RequestMethod:CustomerRequest_ListCustomerType CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)judgePhoneIsExistWithPhone:(NSString *)phone SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-//    [self postRequest:phone RequestMethod:@"customerAdmin.getCusomerInfoByPhone" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-    [self postRequest:@{@"customerId":@"0",@"customerName":@"",@"customerPhone":phone} RequestMethod:@"customerAdmin.getCusomerByPhoneOrName" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":@"0",@"customerName":@"",@"customerPhone":phone} RequestMethod:CustomerRequest_JudgeNameOrPhone CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)judgeCustomerNameIsExistWithName:(NSString *)name SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:@{@"customerId":@"0",@"customerName":name,@"customerPhone":@""} RequestMethod:@"customerAdmin.getCusomerByPhoneOrName" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":@"0",@"customerName":name,@"customerPhone":@""} RequestMethod:CustomerRequest_JudgeNameOrPhone CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

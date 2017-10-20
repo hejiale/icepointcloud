@@ -22,7 +22,7 @@
                                   @"proAvailable" : @"true",
                                   @"storeId" : [IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""}
                             ];
-    [self postRequest:paremeter RequestMethod:@"bizadmin.getCategoryType" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:paremeter RequestMethod:GoodsRequest_FilterCategory CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -51,7 +51,7 @@
                              @"isTryProduct": isTrying ? @"true":@"false",
                              @"storeId":storeId ? : @""
                              };
-    [self postRequest:@[searchType,params] RequestMethod:@"bizadmin.filterTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@[searchType,params] RequestMethod:GoodsRequest_GoodsList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -66,7 +66,7 @@
                              @"isTryProduct": @"true",
                              @"hot":@"false",
                              @"limit": @(9),};
-    [self postRequest:params RequestMethod:@"productAdmin.searchTryGlasses" CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:params RequestMethod:GoodsRequest_RecommdList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

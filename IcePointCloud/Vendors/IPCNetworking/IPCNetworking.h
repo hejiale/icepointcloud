@@ -17,12 +17,4 @@
 #import   "IPCReachability.h"
 #import   "IPCNetworkCache.h"
 
-#import   "IPCUserRequestManager.h"
-#import   "IPCGoodsRequestManager.h"
-#import   "IPCCustomerRequestManager.h"
-#import   "IPCBatchRequestManager.h"
-#import   "IPCPayOrderRequestManager.h"
-
-
-
 #endif /* IPCNetworking_h */

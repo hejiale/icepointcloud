@@ -15,7 +15,7 @@
                                  SuccessBlock:(void (^)(id responseValue))success
                                  FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:lenID RequestMethod:@"batchAdmin.getBatchLenInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:BatchRequest_LensStock  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -23,7 +23,7 @@
                                     SuccessBlock:(void (^)(id responseValue))success
                                     FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:lenID RequestMethod:@"batchAdmin.getBatchReadingGlassesInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:BatchRequest_ReadingGlassesStock  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -31,7 +31,7 @@
                                     SuccessBlock:(void (^)(id responseValue))success
                                     FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:lenID RequestMethod:@"batchAdmin.getBatchContactLensInventory"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:BatchRequest_ContactLensGlassesStock  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -40,21 +40,21 @@
                                FailureBlock:(void (^)(NSError *error))failure
 {
     NSString * contactLens = [contactLensID componentsJoinedByString:@","];
-    [self postRequest:contactLens RequestMethod:@"batchAdmin.getBatchContactLensInventoryDetailsByContactLensIds"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:contactLens RequestMethod:BatchRequest_ContactLensSpecification  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)queryAccessoryBatchSpecification:(NSString *)lenID
                             SuccessBlock:(void (^)(id responseValue))success
                             FailureBlock:(void (^)(NSError *error))failure
 {
-    [self postRequest:lenID RequestMethod:@"batchAdmin.getContactSolutionDetailsWithProdIdForPos"  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:lenID RequestMethod:BatchRequest_AccessorySpecification  CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)queryBatchLensConfig:(NSString *)glassType
                 SuccessBlock:(void (^)(id responseValue))success
                 FailureBlock:(void (^)(NSError *error))failure
 {
-    [self postRequest:@{@"configurationType":glassType} RequestMethod:@"sphCylCfgAdmin.getAllConfig" CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"configurationType":glassType} RequestMethod:BatchRequest_LensConfig CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
