@@ -34,6 +34,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"客户";
     // Load CollectionView
     [self loadCollectionView];
     // Init ViewModel

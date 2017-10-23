@@ -103,14 +103,6 @@
 		CB0F542A1F988191003707F2 /* IPCEmployeePerformanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53DF1F988191003707F2 /* IPCEmployeePerformanceView.xib */; };
 		CB0F542B1F988191003707F2 /* IPCPayTypeRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53E11F988191003707F2 /* IPCPayTypeRecordView.m */; };
 		CB0F542C1F988191003707F2 /* IPCPayTypeRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53E21F988191003707F2 /* IPCPayTypeRecordView.xib */; };
-		CB0F542D1F988191003707F2 /* IPCPersonBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53E51F988191003707F2 /* IPCPersonBaseView.m */; };
-		CB0F542E1F988191003707F2 /* IPCPersonBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53E61F988191003707F2 /* IPCPersonBaseView.xib */; };
-		CB0F542F1F988191003707F2 /* IPCQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53E81F988191003707F2 /* IPCQRCodeView.m */; };
-		CB0F54301F988191003707F2 /* IPCQRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53E91F988191003707F2 /* IPCQRCodeView.xib */; };
-		CB0F54311F988191003707F2 /* IPCUpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53EB1F988191003707F2 /* IPCUpdatePasswordView.m */; };
-		CB0F54321F988191003707F2 /* IPCUpdatePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53EC1F988191003707F2 /* IPCUpdatePasswordView.xib */; };
-		CB0F54331F988191003707F2 /* IPCWarehouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53EE1F988191003707F2 /* IPCWarehouseView.m */; };
-		CB0F54341F988191003707F2 /* IPCWarehouseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53EF1F988191003707F2 /* IPCWarehouseView.xib */; };
 		CB0F54351F988191003707F2 /* IPCLibraryTypeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F21F988191003707F2 /* IPCLibraryTypeTableView.m */; };
 		CB0F54361F988191003707F2 /* IPCShoppingCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F51F988191003707F2 /* IPCShoppingCartView.m */; };
 		CB0F54371F988191003707F2 /* IPCShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53F61F988191003707F2 /* IPCShoppingCartView.xib */; };
@@ -217,8 +209,6 @@
 		CB0F553B1F98819C003707F2 /* IPCExpandShoppingCartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54DB1F98819C003707F2 /* IPCExpandShoppingCartCell.xib */; };
 		CB0F553C1F98819C003707F2 /* IPCTryGlassesListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54DE1F98819C003707F2 /* IPCTryGlassesListViewCell.m */; };
 		CB0F553D1F98819C003707F2 /* IPCTryGlassesListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54DF1F98819C003707F2 /* IPCTryGlassesListViewCell.xib */; };
-		CB0F553E1F98819C003707F2 /* IPCWareHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54E21F98819C003707F2 /* IPCWareHouseCell.m */; };
-		CB0F553F1F98819C003707F2 /* IPCWareHouseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54E31F98819C003707F2 /* IPCWareHouseCell.xib */; };
 		CB0F559D1F98845A003707F2 /* IPCCustomerAddressList.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55421F98845A003707F2 /* IPCCustomerAddressList.m */; };
 		CB0F559E1F98845A003707F2 /* IPCBatchDegreeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55451F98845A003707F2 /* IPCBatchDegreeObject.m */; };
 		CB0F559F1F98845A003707F2 /* IPCCustomerOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F55481F98845A003707F2 /* IPCCustomerOrderList.m */; };
@@ -294,6 +284,16 @@
 		CB0F565C1F988B05003707F2 /* IPCPhotoPickerBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56371F988B05003707F2 /* IPCPhotoPickerBaseComponent.m */; };
 		CB0F565D1F988B05003707F2 /* IPCPortraitNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */; };
 		CB0F565E1F988B05003707F2 /* TuSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CB0F563A1F988B05003707F2 /* TuSDK.bundle */; };
+		CB15A1D61F9DB90500ABBF72 /* IPCPersonBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1CB1F9DB90500ABBF72 /* IPCPersonBaseView.m */; };
+		CB15A1D71F9DB90500ABBF72 /* IPCPersonBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1CC1F9DB90500ABBF72 /* IPCPersonBaseView.xib */; };
+		CB15A1D81F9DB90500ABBF72 /* IPCQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1CE1F9DB90500ABBF72 /* IPCQRCodeView.m */; };
+		CB15A1D91F9DB90500ABBF72 /* IPCQRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1CF1F9DB90500ABBF72 /* IPCQRCodeView.xib */; };
+		CB15A1DA1F9DB90500ABBF72 /* IPCUpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1D11F9DB90500ABBF72 /* IPCUpdatePasswordView.m */; };
+		CB15A1DB1F9DB90500ABBF72 /* IPCUpdatePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1D21F9DB90500ABBF72 /* IPCUpdatePasswordView.xib */; };
+		CB15A1DC1F9DB90500ABBF72 /* IPCWarehouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1D41F9DB90500ABBF72 /* IPCWarehouseView.m */; };
+		CB15A1DD1F9DB90500ABBF72 /* IPCWarehouseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1D51F9DB90500ABBF72 /* IPCWarehouseView.xib */; };
+		CB15A1E11F9DBAAE00ABBF72 /* IPCWareHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */; };
+		CB15A1E21F9DBAAE00ABBF72 /* IPCWareHouseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */; };
 		CB64D1E91F99A26100FBC5F2 /* IPCError.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D1E81F99A26100FBC5F2 /* IPCError.m */; };
 		CB64D22C1F99C96C00FBC5F2 /* IPCBatchRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D21F1F99C96C00FBC5F2 /* IPCBatchRequestManager.m */; };
 		CB64D22D1F99C96C00FBC5F2 /* IPCCustomerRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2221F99C96C00FBC5F2 /* IPCCustomerRequestManager.m */; };
@@ -477,18 +477,6 @@
 		CB0F53E01F988191003707F2 /* IPCPayTypeRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayTypeRecordView.h; sourceTree = "<group>"; };
 		CB0F53E11F988191003707F2 /* IPCPayTypeRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayTypeRecordView.m; sourceTree = "<group>"; };
 		CB0F53E21F988191003707F2 /* IPCPayTypeRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayTypeRecordView.xib; sourceTree = "<group>"; };
-		CB0F53E41F988191003707F2 /* IPCPersonBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonBaseView.h; sourceTree = "<group>"; };
-		CB0F53E51F988191003707F2 /* IPCPersonBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPersonBaseView.m; sourceTree = "<group>"; };
-		CB0F53E61F988191003707F2 /* IPCPersonBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPersonBaseView.xib; sourceTree = "<group>"; };
-		CB0F53E71F988191003707F2 /* IPCQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCQRCodeView.h; sourceTree = "<group>"; };
-		CB0F53E81F988191003707F2 /* IPCQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCQRCodeView.m; sourceTree = "<group>"; };
-		CB0F53E91F988191003707F2 /* IPCQRCodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCQRCodeView.xib; sourceTree = "<group>"; };
-		CB0F53EA1F988191003707F2 /* IPCUpdatePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUpdatePasswordView.h; sourceTree = "<group>"; };
-		CB0F53EB1F988191003707F2 /* IPCUpdatePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUpdatePasswordView.m; sourceTree = "<group>"; };
-		CB0F53EC1F988191003707F2 /* IPCUpdatePasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdatePasswordView.xib; sourceTree = "<group>"; };
-		CB0F53ED1F988191003707F2 /* IPCWarehouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWarehouseView.h; sourceTree = "<group>"; };
-		CB0F53EE1F988191003707F2 /* IPCWarehouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWarehouseView.m; sourceTree = "<group>"; };
-		CB0F53EF1F988191003707F2 /* IPCWarehouseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWarehouseView.xib; sourceTree = "<group>"; };
 		CB0F53F11F988191003707F2 /* IPCLibraryTypeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCLibraryTypeTableView.h; sourceTree = "<group>"; };
 		CB0F53F21F988191003707F2 /* IPCLibraryTypeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCLibraryTypeTableView.m; sourceTree = "<group>"; };
 		CB0F53F41F988191003707F2 /* IPCShoppingCartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCShoppingCartView.h; sourceTree = "<group>"; };
@@ -650,9 +638,6 @@
 		CB0F54DD1F98819C003707F2 /* IPCTryGlassesListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCTryGlassesListViewCell.h; sourceTree = "<group>"; };
 		CB0F54DE1F98819C003707F2 /* IPCTryGlassesListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCTryGlassesListViewCell.m; sourceTree = "<group>"; };
 		CB0F54DF1F98819C003707F2 /* IPCTryGlassesListViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCTryGlassesListViewCell.xib; sourceTree = "<group>"; };
-		CB0F54E11F98819C003707F2 /* IPCWareHouseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWareHouseCell.h; sourceTree = "<group>"; };
-		CB0F54E21F98819C003707F2 /* IPCWareHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouseCell.m; sourceTree = "<group>"; };
-		CB0F54E31F98819C003707F2 /* IPCWareHouseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWareHouseCell.xib; sourceTree = "<group>"; };
 		CB0F55411F98845A003707F2 /* IPCCustomerAddressList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerAddressList.h; sourceTree = "<group>"; };
 		CB0F55421F98845A003707F2 /* IPCCustomerAddressList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerAddressList.m; sourceTree = "<group>"; };
 		CB0F55441F98845A003707F2 /* IPCBatchDegreeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchDegreeObject.h; sourceTree = "<group>"; };
@@ -803,6 +788,21 @@
 		CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPortraitNavigationViewController.m; sourceTree = "<group>"; };
 		CB0F563A1F988B05003707F2 /* TuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TuSDK.bundle; sourceTree = "<group>"; };
 		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
+		CB15A1CA1F9DB90500ABBF72 /* IPCPersonBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonBaseView.h; sourceTree = "<group>"; };
+		CB15A1CB1F9DB90500ABBF72 /* IPCPersonBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPersonBaseView.m; sourceTree = "<group>"; };
+		CB15A1CC1F9DB90500ABBF72 /* IPCPersonBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPersonBaseView.xib; sourceTree = "<group>"; };
+		CB15A1CD1F9DB90500ABBF72 /* IPCQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCQRCodeView.h; sourceTree = "<group>"; };
+		CB15A1CE1F9DB90500ABBF72 /* IPCQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCQRCodeView.m; sourceTree = "<group>"; };
+		CB15A1CF1F9DB90500ABBF72 /* IPCQRCodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCQRCodeView.xib; sourceTree = "<group>"; };
+		CB15A1D01F9DB90500ABBF72 /* IPCUpdatePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUpdatePasswordView.h; sourceTree = "<group>"; };
+		CB15A1D11F9DB90500ABBF72 /* IPCUpdatePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUpdatePasswordView.m; sourceTree = "<group>"; };
+		CB15A1D21F9DB90500ABBF72 /* IPCUpdatePasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdatePasswordView.xib; sourceTree = "<group>"; };
+		CB15A1D31F9DB90500ABBF72 /* IPCWarehouseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWarehouseView.h; sourceTree = "<group>"; };
+		CB15A1D41F9DB90500ABBF72 /* IPCWarehouseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWarehouseView.m; sourceTree = "<group>"; };
+		CB15A1D51F9DB90500ABBF72 /* IPCWarehouseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWarehouseView.xib; sourceTree = "<group>"; };
+		CB15A1DE1F9DBAAE00ABBF72 /* IPCWareHouseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWareHouseCell.h; sourceTree = "<group>"; };
+		CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouseCell.m; sourceTree = "<group>"; };
+		CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWareHouseCell.xib; sourceTree = "<group>"; };
 		CB64D1E71F99A26100FBC5F2 /* IPCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCError.h; sourceTree = "<group>"; };
 		CB64D1E81F99A26100FBC5F2 /* IPCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCError.m; sourceTree = "<group>"; };
 		CB64D21E1F99C96C00FBC5F2 /* IPCBatchRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchRequestManager.h; sourceTree = "<group>"; };
@@ -993,7 +993,6 @@
 				CB0F53C91F988191003707F2 /* Optometry */,
 				CB0F53D51F988191003707F2 /* OrderDetail */,
 				CB0F53DC1F988191003707F2 /* PayOrder */,
-				CB0F53E31F988191003707F2 /* PersonCenter */,
 				CB0F53F01F988191003707F2 /* PhotoLibrary */,
 				CB0F53F31F988191003707F2 /* ShoppingCart */,
 				CB0F53F71F988191003707F2 /* SideBar */,
@@ -1379,25 +1378,6 @@
 			path = PayOrder;
 			sourceTree = "<group>";
 		};
-		CB0F53E31F988191003707F2 /* PersonCenter */ = {
-			isa = PBXGroup;
-			children = (
-				CB0F53E41F988191003707F2 /* IPCPersonBaseView.h */,
-				CB0F53E51F988191003707F2 /* IPCPersonBaseView.m */,
-				CB0F53E61F988191003707F2 /* IPCPersonBaseView.xib */,
-				CB0F53E71F988191003707F2 /* IPCQRCodeView.h */,
-				CB0F53E81F988191003707F2 /* IPCQRCodeView.m */,
-				CB0F53E91F988191003707F2 /* IPCQRCodeView.xib */,
-				CB0F53EA1F988191003707F2 /* IPCUpdatePasswordView.h */,
-				CB0F53EB1F988191003707F2 /* IPCUpdatePasswordView.m */,
-				CB0F53EC1F988191003707F2 /* IPCUpdatePasswordView.xib */,
-				CB0F53ED1F988191003707F2 /* IPCWarehouseView.h */,
-				CB0F53EE1F988191003707F2 /* IPCWarehouseView.m */,
-				CB0F53EF1F988191003707F2 /* IPCWarehouseView.xib */,
-			);
-			path = PersonCenter;
-			sourceTree = "<group>";
-		};
 		CB0F53F01F988191003707F2 /* PhotoLibrary */ = {
 			isa = PBXGroup;
 			children = (
@@ -1423,6 +1403,7 @@
 				CB0F53F81F988191003707F2 /* IPCSideBarMenuView.h */,
 				CB0F53F91F988191003707F2 /* IPCSideBarMenuView.m */,
 				CB0F53FA1F988191003707F2 /* IPCSideBarMenuView.xib */,
+				CB15A1C91F9DB90500ABBF72 /* PersonCenter */,
 			);
 			path = SideBar;
 			sourceTree = "<group>";
@@ -1487,7 +1468,6 @@
 				CB0F54D51F98819C003707F2 /* ShoppingCart */,
 				CB0F55DE1F988A23003707F2 /* TopCell */,
 				CB0F54DC1F98819C003707F2 /* TryGlasses */,
-				CB0F54E01F98819C003707F2 /* WareHouse */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1695,6 +1675,9 @@
 				CB0F54C41F98819C003707F2 /* IPCPersonTitleCell.h */,
 				CB0F54C51F98819C003707F2 /* IPCPersonTitleCell.m */,
 				CB0F54C61F98819C003707F2 /* IPCPersonTitleCell.xib */,
+				CB15A1DE1F9DBAAE00ABBF72 /* IPCWareHouseCell.h */,
+				CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */,
+				CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */,
 			);
 			path = Person;
 			sourceTree = "<group>";
@@ -1752,16 +1735,6 @@
 				CB0F54DF1F98819C003707F2 /* IPCTryGlassesListViewCell.xib */,
 			);
 			path = TryGlasses;
-			sourceTree = "<group>";
-		};
-		CB0F54E01F98819C003707F2 /* WareHouse */ = {
-			isa = PBXGroup;
-			children = (
-				CB0F54E11F98819C003707F2 /* IPCWareHouseCell.h */,
-				CB0F54E21F98819C003707F2 /* IPCWareHouseCell.m */,
-				CB0F54E31F98819C003707F2 /* IPCWareHouseCell.xib */,
-			);
-			path = WareHouse;
 			sourceTree = "<group>";
 		};
 		CB0F55401F98845A003707F2 /* Address */ = {
@@ -2174,6 +2147,25 @@
 			path = SkinCare;
 			sourceTree = "<group>";
 		};
+		CB15A1C91F9DB90500ABBF72 /* PersonCenter */ = {
+			isa = PBXGroup;
+			children = (
+				CB15A1CA1F9DB90500ABBF72 /* IPCPersonBaseView.h */,
+				CB15A1CB1F9DB90500ABBF72 /* IPCPersonBaseView.m */,
+				CB15A1CC1F9DB90500ABBF72 /* IPCPersonBaseView.xib */,
+				CB15A1CD1F9DB90500ABBF72 /* IPCQRCodeView.h */,
+				CB15A1CE1F9DB90500ABBF72 /* IPCQRCodeView.m */,
+				CB15A1CF1F9DB90500ABBF72 /* IPCQRCodeView.xib */,
+				CB15A1D01F9DB90500ABBF72 /* IPCUpdatePasswordView.h */,
+				CB15A1D11F9DB90500ABBF72 /* IPCUpdatePasswordView.m */,
+				CB15A1D21F9DB90500ABBF72 /* IPCUpdatePasswordView.xib */,
+				CB15A1D31F9DB90500ABBF72 /* IPCWarehouseView.h */,
+				CB15A1D41F9DB90500ABBF72 /* IPCWarehouseView.m */,
+				CB15A1D51F9DB90500ABBF72 /* IPCWarehouseView.xib */,
+			);
+			path = PersonCenter;
+			sourceTree = "<group>";
+		};
 		CB64D1E61F99A26100FBC5F2 /* HttpError */ = {
 			isa = PBXGroup;
 			children = (
@@ -2430,14 +2422,16 @@
 				CB0F55241F98819C003707F2 /* IPCPayOrderOptometryCell.xib in Resources */,
 				CB0F536F1F9876AF003707F2 /* IPCCustomerDetailViewController.xib in Resources */,
 				CB0F55141F98819C003707F2 /* IPCOrderDetailProductCell.xib in Resources */,
+				CB15A1D71F9DB90500ABBF72 /* IPCPersonBaseView.xib in Resources */,
 				CB0F56591F988B05003707F2 /* IPCParameterTableViewController.xib in Resources */,
 				CB0F55021F98819C003707F2 /* IPCInsertCustomerAddressCell.xib in Resources */,
+				CB15A1E21F9DBAAE00ABBF72 /* IPCWareHouseCell.xib in Resources */,
 				CB0F54E51F98819C003707F2 /* IPCBatchParameterCell.xib in Resources */,
 				CB0F54FB1F98819C003707F2 /* IPCFilterValueCollectionViewCell.xib in Resources */,
-				CB0F553F1F98819C003707F2 /* IPCWareHouseCell.xib in Resources */,
 				CB0F54241F988191003707F2 /* IPCShowOptometryView.xib in Resources */,
 				CB0F55E31F988A23003707F2 /* IPCCustomTopCell.xib in Resources */,
 				CB0F53811F9876AF003707F2 /* IPCRootViewController.xib in Resources */,
+				CB15A1DB1F9DB90500ABBF72 /* IPCUpdatePasswordView.xib in Resources */,
 				CB0F54FF1F98819C003707F2 /* IPCGlasslistCollectionViewCell.xib in Resources */,
 				CB0F54F51F98819C003707F2 /* IPCEmployeListCell.xib in Resources */,
 				CB0F54E91F98819C003707F2 /* IPCCustomerAddressCell.xib in Resources */,
@@ -2453,10 +2447,8 @@
 				CB0F56571F988B05003707F2 /* IPCDatePickViewController.xib in Resources */,
 				CB0F54E71F98819C003707F2 /* IPCEditParameterCell.xib in Resources */,
 				CB0F54281F988191003707F2 /* IPCCustomDetailOrderView.xib in Resources */,
-				CB0F542E1F988191003707F2 /* IPCPersonBaseView.xib in Resources */,
 				CB0F55351F98819C003707F2 /* IPCProductDetailTableViewCell.xib in Resources */,
 				CB0F54391F988191003707F2 /* IPCSideBarMenuView.xib in Resources */,
-				CB0F54301F988191003707F2 /* IPCQRCodeView.xib in Resources */,
 				CB0F55371F98819C003707F2 /* IPCSearchItemTableViewCell.xib in Resources */,
 				CB0F551A1F98819C003707F2 /* IPCOrderDetailTopCell.xib in Resources */,
 				CB0F54161F988191003707F2 /* IPCGlassParameterView.xib in Resources */,
@@ -2467,7 +2459,6 @@
 				CB0F54371F988191003707F2 /* IPCShoppingCartView.xib in Resources */,
 				CB0F55121F98819C003707F2 /* IPCOrderDetailPayRecordCell.xib in Resources */,
 				CB0F53731F9876AF003707F2 /* IPCInsertCustomerViewController.xib in Resources */,
-				CB0F54321F988191003707F2 /* IPCUpdatePasswordView.xib in Resources */,
 				CB0F54F71F98819C003707F2 /* IPCChooseCategoryCell.xib in Resources */,
 				CB0F54EF1F98819C003707F2 /* IPCCustomerOptometryCell.xib in Resources */,
 				CB0F54121F988191003707F2 /* IPCEditAddressView.xib in Resources */,
@@ -2477,9 +2468,9 @@
 				CB0F552A1F98819C003707F2 /* IPCPersonHeadCell.xib in Resources */,
 				CB0F54101F988191003707F2 /* IPCAddressView.xib in Resources */,
 				CB0F53791F9876AF003707F2 /* IPCLanuchViewController.xib in Resources */,
+				CB15A1DD1F9DB90500ABBF72 /* IPCWarehouseView.xib in Resources */,
 				CB0F54401F988191003707F2 /* IPCCurrentTryGlassesView.xib in Resources */,
 				9E03C2ED1978D5D5007389D0 /* Images.xcassets in Resources */,
-				CB0F54341F988191003707F2 /* IPCWarehouseView.xib in Resources */,
 				CB0F541B1F988191003707F2 /* IPCFilterGlassesView.xib in Resources */,
 				CB0F54261F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib in Resources */,
 				CB0F55301F98819C003707F2 /* IPCPersonTitleCell.xib in Resources */,
@@ -2501,6 +2492,7 @@
 				CB0F55261F98819C003707F2 /* IPCPayOrderSettlementCell.xib in Resources */,
 				CB0F55331F98819C003707F2 /* LibraryTypeTableViewCell.xib in Resources */,
 				CB0F54141F988191003707F2 /* IPCEditBatchParameterView.xib in Resources */,
+				CB15A1D91F9DB90500ABBF72 /* IPCQRCodeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2629,7 +2621,6 @@
 				CB0F55B31F98845A003707F2 /* IPCPayOrderManager.m in Sources */,
 				CB0F55311F98819C003707F2 /* IPCPhotoPickerCell.m in Sources */,
 				CB0F56521F988B05003707F2 /* IPCRefreshAnimationHeader.m in Sources */,
-				CB0F553E1F98819C003707F2 /* IPCWareHouseCell.m in Sources */,
 				CB0F55051F98819C003707F2 /* IPCInsertCustomerOpometryCell.m in Sources */,
 				CB0F55B51F98845A003707F2 /* IPCPayRecord.m in Sources */,
 				CB0F55271F98819C003707F2 /* IPCPayTypeRecordCell.m in Sources */,
@@ -2650,7 +2641,6 @@
 				CB0F552F1F98819C003707F2 /* IPCPersonTitleCell.m in Sources */,
 				CB0F53A41F987903003707F2 /* IPCCustomerListViewModel.m in Sources */,
 				CB0F540F1F988191003707F2 /* IPCAddressView.m in Sources */,
-				CB0F542D1F988191003707F2 /* IPCPersonBaseView.m in Sources */,
 				CB0F55A21F98845A003707F2 /* IPCEmployeeList.m in Sources */,
 				CB0F55291F98819C003707F2 /* IPCPersonHeadCell.m in Sources */,
 				CB0F550F1F98819C003707F2 /* IPCOrderDetailOptometryCell.m in Sources */,
@@ -2658,7 +2648,7 @@
 				CB0F54431F988191003707F2 /* IPCUpdateCustomerView.m in Sources */,
 				CB0F541D1F988191003707F2 /* IPCGuideViewManager.m in Sources */,
 				CB0F55341F98819C003707F2 /* IPCProductDetailTableViewCell.m in Sources */,
-				CB0F54331F988191003707F2 /* IPCWarehouseView.m in Sources */,
+				CB15A1D61F9DB90500ABBF72 /* IPCPersonBaseView.m in Sources */,
 				CB0F55B41F98845A003707F2 /* IPCPayOrderParameter.m in Sources */,
 				CB64D24A1F99C9A600FBC5F2 /* IPCRequestParameter.m in Sources */,
 				CB0F563D1F988B05003707F2 /* UIButton+TouchArea.m in Sources */,
@@ -2717,13 +2707,13 @@
 				CB0F565B1F988B05003707F2 /* IPCEditFilterSampleController.m in Sources */,
 				CB0F54EA1F98819C003707F2 /* IPCCustomerDetailCell.m in Sources */,
 				CB0F55BB1F98845A003707F2 /* IPCShareManager.m in Sources */,
+				CB15A1D81F9DB90500ABBF72 /* IPCQRCodeView.m in Sources */,
 				CB0F54171F988191003707F2 /* IPCEmployeListView.m in Sources */,
 				CB0F564B1F988B05003707F2 /* IPCCommonUI.m in Sources */,
 				CB64D2481F99C9A600FBC5F2 /* IPCRequest.m in Sources */,
 				CB64D24B1F99C9A600FBC5F2 /* IPCReachability.m in Sources */,
 				CB0F54E81F98819C003707F2 /* IPCCustomerAddressCell.m in Sources */,
 				CB0F55211F98819C003707F2 /* IPCPayOrderMemoCell.m in Sources */,
-				CB0F54311F988191003707F2 /* IPCUpdatePasswordView.m in Sources */,
 				CB0F55251F98819C003707F2 /* IPCPayOrderSettlementCell.m in Sources */,
 				CB0F55361F98819C003707F2 /* IPCSearchItemTableViewCell.m in Sources */,
 				CB0F54EE1F98819C003707F2 /* IPCCustomerOptometryCell.m in Sources */,
@@ -2753,6 +2743,8 @@
 				CB0F55111F98819C003707F2 /* IPCOrderDetailPayRecordCell.m in Sources */,
 				CB0F55131F98819C003707F2 /* IPCOrderDetailProductCell.m in Sources */,
 				CB0F55A11F98845A003707F2 /* IPCCustomerList.m in Sources */,
+				CB15A1E11F9DBAAE00ABBF72 /* IPCWareHouseCell.m in Sources */,
+				CB15A1DA1F9DB90500ABBF72 /* IPCUpdatePasswordView.m in Sources */,
 				CB0F55AB1F98845A003707F2 /* IPCProductList.m in Sources */,
 				CB0F53A91F987903003707F2 /* IPCPayOrderViewCellHeight.m in Sources */,
 				CB0F55171F98819C003707F2 /* IPCOrderDetailSectionCell.m in Sources */,
@@ -2762,7 +2754,6 @@
 				9E03C2E11978D5D5007389D0 /* main.m in Sources */,
 				CB0F563F1F988B05003707F2 /* UIImage+Face.m in Sources */,
 				CB0F563B1F988B05003707F2 /* AFHTTPSessionManager+Extend.m in Sources */,
-				CB0F542F1F988191003707F2 /* IPCQRCodeView.m in Sources */,
 				CB0F55381F98819C003707F2 /* IPCEditShoppingCartCell.m in Sources */,
 				CB0F55B01F98845A003707F2 /* IPCMemberLevelList.m in Sources */,
 				CB0F56481F988B05003707F2 /* IPCCheckVersion.m in Sources */,
@@ -2775,6 +2766,7 @@
 				CB0F564A1F988B05003707F2 /* IPCPlatformService.m in Sources */,
 				CB0F564D1F988B05003707F2 /* IPCStaticImageTextButton.m in Sources */,
 				CB0F54381F988191003707F2 /* IPCSideBarMenuView.m in Sources */,
+				CB15A1DC1F9DB90500ABBF72 /* IPCWarehouseView.m in Sources */,
 				CB0F56491F988B05003707F2 /* IPCCommon.m in Sources */,
 				CB0F553C1F98819C003707F2 /* IPCTryGlassesListViewCell.m in Sources */,
 				CB0F541E1F988191003707F2 /* IPCEditOptometryView.m in Sources */,

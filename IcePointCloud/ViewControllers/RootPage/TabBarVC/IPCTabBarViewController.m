@@ -10,6 +10,11 @@
 #import "IPCSearchViewController.h"
 #import "UIView+Badge.h"
 
+#define NavigationBarHeight  64
+#define StatusBarHeight         ([UIApplication sharedApplication].statusBarFrame.size.height)
+#define MenuBarHeight          (NavigationBarHeight - StatusBarHeight)
+#define MenuItemWidth         65
+
 @interface IPCTabBarViewController ()
 
 @property (strong, nonatomic)  UIView  *  contentView;
@@ -19,7 +24,6 @@
 @property (strong, nonatomic)  UIImageView *logoImageView;
 @property (strong, nonatomic)  UIButton * filterButton;
 @property (strong, nonatomic)  UILabel  * titleLabel;
-@property (copy, nonatomic) NSString * customerKeyword;
 
 @end
 
@@ -29,6 +33,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
+        
+        [self setDelegate:self];
     }
     return self;
 }
@@ -37,13 +43,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self setBackground];
     [self.view addSubview:self.menuBarView];
     [self.view addSubview:self.contentView];
     [self.view addSubview:self.coverLine];
     [self.view bringSubviewToFront:self.coverLine];
+    
     [self.menuBarView addSubview:self.menusView];
-    [self setMenuButtons];
     [self.menuBarView addSubview:self.logoImageView];
     [self.menuBarView addSubview:self.filterButton];
     [self.menuBarView addSubview:self.titleLabel];
@@ -52,7 +57,7 @@
         make.left.equalTo(self.view.mas_left).with.offset(0);
         make.right.equalTo(self.view.mas_right).with.offset(0);
         make.top.equalTo(self.view.mas_top).with.offset(0);
-        make.height.mas_equalTo(64);
+        make.height.mas_equalTo(NavigationBarHeight);
     }];
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view.mas_left).with.offset(0);
@@ -76,7 +81,7 @@
         make.right.equalTo(self.menuBarView.mas_right).with.offset(0);
         make.top.equalTo(self.menuBarView.mas_top).with.offset(0);
         make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(0);
-        make.width.mas_equalTo(390);
+        make.width.mas_equalTo((MenuItemWidth * 6));
     }];
     [self.filterButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.menuBarView.mas_left).with.offset(5);
@@ -87,7 +92,6 @@
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
         make.top.equalTo(self.menuBarView.mas_top).with.offset(30);
-        make.width.mas_equalTo(200);
         make.height.mas_equalTo(25);
     }];
     
@@ -126,6 +130,7 @@
     if (!_menusView) {
         _menusView = [[UIView alloc]initWithFrame:CGRectZero];
         [_menusView setBackgroundColor:[UIColor clearColor]];
+        [self setMenuButtons];
     }
     return _menusView;
 }
@@ -137,24 +142,6 @@
         [_logoImageView setFrame:CGRectZero];
     }
     return _logoImageView;
-}
-
-- (void)setMenuButtons{
-    for (NSInteger i = 0; i < 6; i ++) {
-        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundColor:[UIColor clearColor]];
-        if (i < 5) {
-            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_normal_%ld",(long)i]] forState:UIControlStateNormal];
-            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_selected_%ld",(long)i]] forState:UIControlStateSelected];
-        }else{
-            [button setImage:[UIImage imageNamed:@"icon_login_head_male"] forState:UIControlStateNormal];
-        }
-        button.adjustsImageWhenHighlighted = NO;
-        [button setFrame:CGRectMake(65 * i, 20, 44, 44)];
-        [button setTag:i];
-        [button addTarget:self action:@selector(menuTapAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.menusView addSubview:button];
-    }
 }
 
 - (UIButton *)filterButton{
@@ -179,6 +166,24 @@
         [_titleLabel setTextAlignment:NSTextAlignmentCenter];
     }
     return _titleLabel;
+}
+
+- (void)setMenuButtons{
+    for (NSInteger i = 0; i < 6; i ++) {
+        UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundColor:[UIColor clearColor]];
+        if (i < 5) {
+            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_normal_%ld",(long)i]] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_selected_%ld",(long)i]] forState:UIControlStateSelected];
+        }else{
+            [button setImage:[UIImage imageNamed:@"icon_login_head_male"] forState:UIControlStateNormal];
+        }
+        button.adjustsImageWhenHighlighted = NO;
+        [button setFrame:CGRectMake(MenuItemWidth * i, StatusBarHeight, MenuItemWidth, MenuBarHeight)];
+        [button setTag:i];
+        [button addTarget:self action:@selector(menuTapAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.menusView addSubview:button];
+    }
 }
 
 #pragma mark //Update SelectViewController
@@ -228,6 +233,21 @@
     }
 }
 
+#pragma mark //Clicked Events
+- (void)menuTapAction:(UIButton *)sender
+{
+    /****Remove All Request****/
+    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    
+    if (sender.tag > 0 && sender.tag < 5) {
+        if (sender.tag != 4) {
+            [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+        }else{
+            [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+        }
+    }
+    [self setSelectedIndex:sender.tag];
+}
 
 - (void)updateTopView
 {
@@ -240,31 +260,18 @@
             [self.filterButton setHidden:YES];
         }
         
-        if(_selectedIndex == 2){
-            [self.titleLabel setText:@"客户"];
-        }else if (_selectedIndex == 4){
-            [self.titleLabel setText:@"确认订单"];
+        if(_selectedIndex == 2 || _selectedIndex == 4){
+            UIViewController * viewController = (UIViewController *)[self.viewControllers objectAtIndex:_selectedIndex-1];
+            [self.titleLabel setText:viewController.title];
         }else{
             [self.titleLabel setText:@""];
         }
+        /****Reset Title Label Frame***/
+        CGFloat width = [self.titleLabel.text jk_sizeWithFont:self.titleLabel.font constrainedToHeight:self.titleLabel.jk_height].width;
+        CGRect frame = self.titleLabel.frame;
+        frame.size.width = width;
+        self.titleLabel.frame = frame;
     }
-}
-
-
-#pragma mark //Clicked Events
-- (void)menuTapAction:(UIButton *)sender
-{
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-    
-    if (sender.tag > 0 && sender.tag < 5) {
-        if (sender.tag != 4) {
-            [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
-        }else{
-            [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
-        }
-    }
-    
-    [self setSelectedIndex:sender.tag];
 }
 
 - (void)updateSidebar

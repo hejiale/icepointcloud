@@ -29,8 +29,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.delegate = self;
-    
     _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
     _customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
@@ -62,12 +60,11 @@
 
 
 //Show Methods
-- (void)showSideBarView:(NSInteger)index
+- (void)showSideBarView
 {
     [self removerFilterCover];
     __weak typeof(self) weakSelf = self;
     _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
-                                                  MenuIndex:index
                                                      Logout:^{
                                                          [[IPCAppManager sharedManager] logout];
                                                      } Dismiss:^{
@@ -91,7 +88,7 @@
             [self.tryVC onSearchProducts];
         }
     }else if (index == 5){
-        [self showSideBarView:index];
+        [self showSideBarView];
     }
 }
 

@@ -122,9 +122,6 @@
 
 - (void)loadStoreWareHouse
 {
-//    [self showMainRootViewController];
-//    [self.loginButton jk_hideIndicator];
-    
     [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
         if (!error) {
             [self showMainRootViewController];

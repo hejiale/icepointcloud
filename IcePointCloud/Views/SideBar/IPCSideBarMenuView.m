@@ -25,7 +25,6 @@
 @implementation IPCSideBarMenuView
 
 - (instancetype)initWithFrame:(CGRect)frame
-                    MenuIndex:(NSInteger)index
                        Logout:(void (^)())logout
                       Dismiss:(void (^)())dismiss
 {
@@ -38,9 +37,7 @@
         [view setFrame:frame];
         [self addSubview:view];
         
-        if (index == 5){
-            [self showPersonView];
-        }
+        [self showPersonView];
     }
     return self;
 }

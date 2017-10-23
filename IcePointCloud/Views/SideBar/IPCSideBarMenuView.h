@@ -11,7 +11,6 @@
 @interface IPCSideBarMenuView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame
-                    MenuIndex:(NSInteger)index
                        Logout:(void(^)())logout
                       Dismiss:(void(^)())dismiss;
 
