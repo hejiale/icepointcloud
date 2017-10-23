@@ -92,11 +92,12 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    IPCWareHouse * house = [IPCAppManager sharedManager].wareHouse.wareHouseArray[indexPath.row];
-    [IPCAppManager sharedManager].currentWareHouse = house;
-    [IPCAppManager sharedManager].isChangeHouse = YES;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:IPCChooseWareHouseNotification object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        IPCWareHouse * house = [IPCAppManager sharedManager].wareHouse.wareHouseArray[indexPath.row];
+        [IPCAppManager sharedManager].currentWareHouse = house;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCChooseWareHouseNotification object:nil];
+    });
     
     [self dismiss];
 }

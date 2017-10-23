@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol IPCManagerAddressCellDelegate;
+
 @interface IPCManagerAddressCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
@@ -17,5 +19,12 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contactNameWidth;
 @property (weak, nonatomic) IBOutlet UIButton *defaultButton;
 @property (copy, nonatomic) IPCCustomerAddressMode * addressMode;
+@property (assign, nonatomic) id<IPCManagerAddressCellDelegate>delegate;
+
+@end
+
+@protocol IPCManagerAddressCellDelegate <NSObject>
+
+- (void)setDefaultAddressForCell:(IPCManagerAddressCell *)cell;
 
 @end

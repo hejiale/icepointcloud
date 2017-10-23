@@ -36,7 +36,6 @@ extern NSString * const kIPCErrorNetworkAlertMessage;
 @property (nonatomic, strong)    IPCProfileResult * profile;
 @property (nonatomic, strong)    IPCWareHouseResult * wareHouse;
 @property (nonatomic, strong)    IPCWareHouse * currentWareHouse;
-@property (nonatomic, assign)    BOOL   isChangeHouse;
 
 + (IPCAppManager *)sharedManager;
 

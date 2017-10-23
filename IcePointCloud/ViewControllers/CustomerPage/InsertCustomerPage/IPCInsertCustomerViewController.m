@@ -92,7 +92,8 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
                     [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
                     [strongSelf.navigationController popToRootViewControllerAnimated:YES];
                 }else{
-                    [strongSelf.navigationController popViewControllerAnimated:YES];
+                    [IPCCommonUI showSuccess:@"新建客户成功!"];
+                    [self performSelector:@selector(popViewControllerAnimated:) withObject:nil afterDelay:1];
                 }
             }
         }];

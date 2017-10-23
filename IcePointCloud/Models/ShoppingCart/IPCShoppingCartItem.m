@@ -54,6 +54,12 @@
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
     [params setObject:[NSString stringWithFormat:@"%.2f",self.unitPrice] forKey:@"afterDiscountPrice"];
+    [params setObject:@"false" forKey:@"isIntegralExchange"];
+    [params  setObject:[self.glasses glassId] forKey:@"id"];
+    [params setObject:[self.glasses glassType] forKey:@"type"];
+    [params setObject:@(self.unitPrice) forKey:@"sale_price"];
+    [params setObject:@(self.glassCount) forKey:@"count"];
+    [params setObject:[NSString stringWithFormat:@"%.2f",(self.unitPrice*self.glassCount)] forKey:@"totalPrice"];
 
     if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
     {

@@ -37,16 +37,15 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     self.glassListViewMode.isTrying = NO;
     // Load Data
     [self beginFilterClass];
+    //Choose WareHouse To Reload Products
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    //Choose WareHouse To Reload Products
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
-    //According To NetWorkStatus And Judge Is Choose WareHouse To Reload Products
-    if ((isCancelRequest && self.glassListViewMode.currentPage == 0) || [IPCAppManager sharedManager].isChangeHouse) {
+    //According To NetWorkStatus To Reload Products
+    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
         [self beginFilterClass];
-        [IPCAppManager sharedManager].isChangeHouse = NO;
     }else{
         [self.glassListCollectionView reloadData];
     }
@@ -58,8 +57,6 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self removeCover];
     // Clear Refresh Animation
     [self stopRefresh];
-    //Remove Notification
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCChooseWareHouseNotification object:nil];
 }
 
 #pragma mark //Set UI

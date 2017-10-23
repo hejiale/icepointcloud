@@ -45,7 +45,7 @@
                                   @"orderType": @"FOR_SALES",
                                   @"integral": @(point),
                                   @"customerId": customID,
-                                  @"detailList": [productParameter productListParamter],
+                                  @"detailList": [productParameter productListParamter]
                                   };
     
     [self postRequest:parameters RequestMethod:PayOrderRequest_Integral CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];

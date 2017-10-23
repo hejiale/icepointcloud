@@ -13,7 +13,7 @@
 
 static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier";
 
-@interface IPCManagerOptometryViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCManagerOptometryViewController ()<UITableViewDelegate,UITableViewDataSource,IPCManagerOptometryCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *optometryTableView;
 @property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
@@ -129,6 +129,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     IPCManagerOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:managerIdentifier];
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCManagerOptometryCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        cell.delegate = self;
     }
     IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
     cell.optometryMode = optometry;
@@ -138,11 +139,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     }else{
         [cell.defaultButton setSelected:NO];
     }
-    __weak typeof(self) weakSelf = self;
-    [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf setDefaultOptometryWithOptometryId:optometry.optometryID];
-    }];
     return cell;
 }
 
@@ -160,6 +156,15 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark //IPCManagerOptometryCellDelegate
+- (void)setDefaultOptometry:(IPCManagerOptometryCell *)cell
+{
+    NSIndexPath * indexPath = [self.optometryTableView indexPathForCell:cell];
+    IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
+    
+    [self setDefaultOptometryWithOptometryId:optometry.optometryID];
 }
 
 - (void)didReceiveMemoryWarning {

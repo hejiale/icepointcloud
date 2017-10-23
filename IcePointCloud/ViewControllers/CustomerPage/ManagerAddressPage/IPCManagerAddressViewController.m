@@ -13,7 +13,7 @@
 
 static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
 
-@interface IPCManagerAddressViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCManagerAddressViewController ()<UITableViewDelegate,UITableViewDataSource,IPCManagerAddressCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *addressTableView;
 @property (strong, nonatomic) IPCEditAddressView * editAddressView;
@@ -126,6 +126,7 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     IPCManagerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCManagerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        cell.delegate = self;
     }
     IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.row];
     cell.addressMode = address;
@@ -135,11 +136,6 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     }else{
         [cell.defaultButton setSelected:NO];
     }
-    __weak typeof(self) weakSelf = self;
-    [[cell rac_signalForSelector:@selector(setDefaultAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf setDefaultAddress:address.addressID];
-    }];
     return cell;
 }
 
@@ -158,6 +154,15 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
         [IPCCurrentCustomer sharedManager].currentAddress = address;
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+#pragma mark //
+- (void)setDefaultAddressForCell:(IPCManagerAddressCell *)cell
+{
+    NSIndexPath * indexPath = [self.addressTableView indexPathForCell:cell];
+    IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.row];
+    
+    [self setDefaultAddress:address.addressID];
 }
 
 - (void)didReceiveMemoryWarning {

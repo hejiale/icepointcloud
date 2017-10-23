@@ -74,17 +74,17 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     self.glassListViewMode.isTrying = YES;
     //Load Data
     [self beginFilterClass];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     [self initMatchItems];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
-    
-    if ((isCancelRequest && self.glassListViewMode.currentPage == 0) || [IPCAppManager sharedManager].isChangeHouse) {
+    //According To NetWorkStatus To Reload Products
+    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
         [self beginFilterClass];
-        [IPCAppManager sharedManager].isChangeHouse = NO;
     }else{
         [self reload];
     }
@@ -95,7 +95,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     
     [self removeCover];
     [self stopRefresh];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCChooseWareHouseNotification object:nil];
 }
 
 
@@ -229,6 +228,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
                                                              [_tryGlassesView reload];
                                                              [strongSelf.productTableView reloadData];
                                                          }];
+        [_tryGlassesView setHidden:YES];
         [_tryGlassesView setDefaultGlasses];
     }
     return _tryGlassesView;

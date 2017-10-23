@@ -66,7 +66,9 @@
 }
 
 - (void)setDefaultAction:(id)sender {
-    
+    if ([self.delegate respondsToSelector:@selector(setDefaultOptometry:)]) {
+        [self.delegate setDefaultOptometry:self];
+    }
 }
 
 
