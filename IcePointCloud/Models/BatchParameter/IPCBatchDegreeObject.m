@@ -76,35 +76,4 @@
     }
 }
 
-//- (NSArray<NSString *> *)batchSphs{
-//    NSMutableArray * sphArray = [[NSMutableArray alloc]init];
-//    float startSph = 15.25;
-//    
-//    while (startSph > -15) {
-//        startSph -= 0.25;
-//        if (startSph > 0) {
-//            [sphArray addObject:[NSString stringWithFormat:@"+%.2f",startSph]];
-//        }else{
-//            [sphArray addObject:[NSString stringWithFormat:@"%.2f",startSph]];
-//        }
-//    }
-//    return sphArray;
-//}
-//
-//- (NSArray<NSString *> *)batchCyls{
-//    NSMutableArray * cylArray = [[NSMutableArray alloc]init];
-//    float startCyl = 6.25;
-//    
-//    while (startCyl > -6) {
-//        startCyl -= 0.25;
-//        if (startCyl > 0) {
-//            [cylArray addObject:[NSString stringWithFormat:@"+%.2f",startCyl]];
-//        }else{
-//            [cylArray addObject:[NSString stringWithFormat:@"%.2f",startCyl]];
-//        }
-//    }
-//    return cylArray;
-//}
-
-
 @end

@@ -10,6 +10,8 @@
 
 @interface IPCPersonBaseView : UIView
 
+@property (nonatomic, assign) BOOL  isHiden;
+
 - (void)showWithLogout:(void(^)())logout
            UpdateBlock:(void(^)())update
            QRCodeBlock:(void(^)())qrcode

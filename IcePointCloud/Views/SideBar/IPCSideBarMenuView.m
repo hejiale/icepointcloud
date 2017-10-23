@@ -44,20 +44,29 @@
 
 
 #pragma mark //Set UI
-- (void)showUpdatePasswordView{
+- (void)showUpdatePasswordView
+{
+    __weak typeof(self) weakSelf = self;
     IPCUpdatePasswordView * updateView = [[IPCUpdatePasswordView alloc]initWithFrame:CGRectMake(self.jk_width, 0, IPCMenuShowWidth, self.jk_height)];
     [self addSubview:updateView];
     
     [updateView showWithClose:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         [updateView removeFromSuperview];
+        [strongSelf.personBaseView reload];
     }];
 }
 
-- (void)showQRCodeView{
+- (void)showQRCodeView
+{
+    __weak typeof(self) weakSelf = self;
     IPCQRCodeView * codeView = [[IPCQRCodeView alloc]initWithFrame:CGRectMake(self.jk_width, 0, IPCMenuShowWidth, self.jk_height)];
     [self addSubview:codeView];
+    
     [codeView showWithClose:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         [codeView removeFromSuperview];
+        [strongSelf.personBaseView reload];
     }];
 }
 
@@ -86,27 +95,36 @@
     } UpdateBlock:^{
          __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf showUpdatePasswordView];
+        strongSelf.personBaseView.isHiden = YES;
     } QRCodeBlock:^{
          __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf showQRCodeView];
+        strongSelf.personBaseView.isHiden = YES;
     } WareHouseBlock:^{
          __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf showWareHouseView];
+        strongSelf.personBaseView.isHiden = YES;
     }];
 }
 
 #pragma mark //Clicked Events
-- (IBAction)tapBgAction:(id)sender {
+- (IBAction)tapBgAction:(id)sender
+{
     __weak typeof(self) weakSelf = self;
     
-    if ([self.personBaseView superview]){
+    if (!self.personBaseView.isHiden){
         [self.personBaseView dismiss:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.personBaseView removeFromSuperview];
+            
             if (strongSelf.DismissBlock) {
                 strongSelf.DismissBlock();
             }
         }];
+    }else{
+        if (self.DismissBlock) {
+            self.DismissBlock();
+        }
     }
 }
 

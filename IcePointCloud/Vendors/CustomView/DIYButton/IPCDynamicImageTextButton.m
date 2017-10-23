@@ -169,65 +169,6 @@
         default:
             break;
     }
-    
-//    switch (self.alignment) {
-//        case IPCCustomButtonAlignmentLeft:{
-//            [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.size.mas_equalTo(titleSize);
-//                make.center.equalTo(self);
-//            }];
-//            
-//            [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.left.equalTo(self.titleLabel.mas_right).with.offset(ImageIndexButtonWidth);
-//                make.centerY.mas_equalTo(self.mas_centerY);
-//                make.size.mas_equalTo(imageSize);
-//            }];
-//        }
-//            break;
-//        case IPCCustomButtonAlignmentRight:{
-//            [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.size.mas_equalTo(titleSize);
-//                make.center.equalTo(self);
-//            }];
-//            
-//            [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.right.equalTo(self.titleLabel.mas_left).width.offset(ImageIndexButtonWidth);
-//                make.centerY.mas_equalTo(self.mas_centerY);
-//                make.size.mas_equalTo(imageSize);
-//            }];
-//        }
-//            break;
-//        case IPCCustomButtonAlignmentTop:{
-//            [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.centerX.mas_equalTo(self.mas_centerX);
-//                make.top.equalTo(self.mas_top).width.offset(0);
-//                make.size.mas_equalTo(titleSize);
-//            }];
-//            
-//            [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.centerX.mas_equalTo(self.mas_centerX);
-//                make.top.equalTo(self.titleLabel.mas_bottom).width.offset(ImageIndexButtonWidth);
-//                make.size.mas_equalTo(imageSize);
-//            }];
-//        }
-//            break;
-//        case IPCCustomButtonAlignmentBottom:{
-//            [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.centerX.mas_equalTo(self.mas_centerX);
-//                make.bottom.equalTo(self.mas_bottom).width.offset(0);
-//                make.size.mas_equalTo(titleSize);
-//            }];
-//            
-//            [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.centerX.mas_equalTo(self.mas_centerX);
-//                make.top.equalTo(self.mas_top).width.offset(ImageIndexButtonWidth);
-//                make.size.mas_equalTo(imageSize);
-//            }];
-//        }
-//            break;
-//        default:
-//            break;
-//    }
 }
 
 

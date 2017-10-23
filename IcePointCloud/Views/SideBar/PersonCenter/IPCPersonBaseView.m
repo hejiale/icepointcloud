@@ -75,18 +75,16 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     
     [self.personTableView setTableFooterView:[[UIView alloc]init]];
     
-    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.frame;
         frame.origin.x -= self.jk_width;
         self.frame = frame;
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
 - (void)dismiss:(void(^)())complete
 {
-    [UIView animateKeyframesWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0.5f animations:^{
         CGRect frame = self.frame;
         frame.origin.x += self.jk_width;
         self.frame = frame;
@@ -102,6 +100,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (void)reload
 {
     [self.personTableView reloadData];
+    self.isHiden = NO;
 }
 
 

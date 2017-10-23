@@ -25,7 +25,6 @@
 		0479F29B1E09205900816E02 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0479F29A1E09205900816E02 /* JavaScriptCore.framework */; };
 		04AD9C851DE2DB93001EB959 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AD9C841DE2DB93001EB959 /* MapKit.framework */; };
 		04B1D2021D867CC800D9B865 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B1D2011D867CC800D9B865 /* Photos.framework */; };
-		04C7C8E81D7818F10012AE6B /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C7C8E71D7818F10012AE6B /* AddressBook.framework */; };
 		9741E702A9B8997F42586CAB /* Pods_IcePointCloudTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5AEA0BBB9FDC80B063BCBC /* Pods_IcePointCloudTests.framework */; };
 		9E03C2E11978D5D5007389D0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E03C2E01978D5D5007389D0 /* main.m */; };
 		9E03C2E51978D5D5007389D0 /* IPCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E03C2E41978D5D5007389D0 /* IPCAppDelegate.m */; };
@@ -294,6 +293,7 @@
 		CB15A1DD1F9DB90500ABBF72 /* IPCWarehouseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1D51F9DB90500ABBF72 /* IPCWarehouseView.xib */; };
 		CB15A1E11F9DBAAE00ABBF72 /* IPCWareHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */; };
 		CB15A1E21F9DBAAE00ABBF72 /* IPCWareHouseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */; };
+		CB15A1E41F9DEFD000ABBF72 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */; };
 		CB64D1E91F99A26100FBC5F2 /* IPCError.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D1E81F99A26100FBC5F2 /* IPCError.m */; };
 		CB64D22C1F99C96C00FBC5F2 /* IPCBatchRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D21F1F99C96C00FBC5F2 /* IPCBatchRequestManager.m */; };
 		CB64D22D1F99C96C00FBC5F2 /* IPCCustomerRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2221F99C96C00FBC5F2 /* IPCCustomerRequestManager.m */; };
@@ -306,7 +306,7 @@
 		CB64D2491F99C9A600FBC5F2 /* IPCResponseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D23E1F99C9A600FBC5F2 /* IPCResponseManager.m */; };
 		CB64D24A1F99C9A600FBC5F2 /* IPCRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2411F99C9A600FBC5F2 /* IPCRequestParameter.m */; };
 		CB64D24B1F99C9A600FBC5F2 /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */; };
-		E35277251B301C48004E245C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35277241B301C48004E245C /* AssetsLibrary.framework */; };
+		CBCC02701F9DF5C500165646 /* IPCPersonContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CBCC026F1F9DF5C500165646 /* IPCPersonContentView.m */; };
 		ECDD59C7CBA94A09985ECE0B /* Pods_IcePointCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9EBA06F5C3B9B3AD1DD5B4 /* Pods_IcePointCloud.framework */; };
 /* End PBXBuildFile section */
 
@@ -338,8 +338,6 @@
 		04870F7D1D70050C009F3574 /* iflyMSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iflyMSC.framework; path = IcePointCloud/lib/iflyMSC.framework; sourceTree = "<group>"; };
 		04AD9C841DE2DB93001EB959 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		04B1D2011D867CC800D9B865 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
-		04C34CBE1E012BB300979001 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		04C7C8E71D7818F10012AE6B /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		04C9B1391D70028A001E94FB /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		0594E2CBFA962B68974A2571 /* Pods-IcePointCloud.testrelease.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.testrelease.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.testrelease.xcconfig"; sourceTree = "<group>"; };
 		05C97962CD653FAA996B65D3 /* Pods-IcePointCloud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.debug.xcconfig"; sourceTree = "<group>"; };
@@ -787,7 +785,6 @@
 		CB0F56381F988B05003707F2 /* IPCPortraitNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPortraitNavigationViewController.h; sourceTree = "<group>"; };
 		CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPortraitNavigationViewController.m; sourceTree = "<group>"; };
 		CB0F563A1F988B05003707F2 /* TuSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TuSDK.bundle; sourceTree = "<group>"; };
-		CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SVProgressHUD.framework; path = Carthage/Build/iOS/SVProgressHUD.framework; sourceTree = "<group>"; };
 		CB15A1CA1F9DB90500ABBF72 /* IPCPersonBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonBaseView.h; sourceTree = "<group>"; };
 		CB15A1CB1F9DB90500ABBF72 /* IPCPersonBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPersonBaseView.m; sourceTree = "<group>"; };
 		CB15A1CC1F9DB90500ABBF72 /* IPCPersonBaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPersonBaseView.xib; sourceTree = "<group>"; };
@@ -803,6 +800,7 @@
 		CB15A1DE1F9DBAAE00ABBF72 /* IPCWareHouseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCWareHouseCell.h; sourceTree = "<group>"; };
 		CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouseCell.m; sourceTree = "<group>"; };
 		CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWareHouseCell.xib; sourceTree = "<group>"; };
+		CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		CB64D1E71F99A26100FBC5F2 /* IPCError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCError.h; sourceTree = "<group>"; };
 		CB64D1E81F99A26100FBC5F2 /* IPCError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCError.m; sourceTree = "<group>"; };
 		CB64D21E1F99C96C00FBC5F2 /* IPCBatchRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchRequestManager.h; sourceTree = "<group>"; };
@@ -830,8 +828,10 @@
 		CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
 		CB64D2451F99C9A600FBC5F2 /* IPCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCNetworking.h; sourceTree = "<group>"; };
 		CB64D24C1F99CADF00FBC5F2 /* IPCNetworkingAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCNetworkingAPI.h; sourceTree = "<group>"; };
+		CBCC026E1F9DF5C500165646 /* IPCPersonContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonContentView.h; sourceTree = "<group>"; };
+		CBCC026F1F9DF5C500165646 /* IPCPersonContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPersonContentView.m; sourceTree = "<group>"; };
+		CBCC02711F9DF9BC00165646 /* IPCPersonConetentViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonConetentViewDelegate.h; sourceTree = "<group>"; };
 		D57A18F14EE64419E926539B /* Pods-IcePointCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.release.xcconfig"; sourceTree = "<group>"; };
-		E35277241B301C48004E245C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -839,6 +839,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB15A1E41F9DEFD000ABBF72 /* AddressBook.framework in Frameworks */,
 				0479F29B1E09205900816E02 /* JavaScriptCore.framework in Frameworks */,
 				044EB1241D7013A4009CE553 /* libz.tbd in Frameworks */,
 				0460CE1B1DF8054E00700A18 /* WebKit.framework in Frameworks */,
@@ -854,11 +855,9 @@
 				04378D681D90F45900E37096 /* AdSupport.framework in Frameworks */,
 				0421BE601D80FC39002C4FE4 /* AVFoundation.framework in Frameworks */,
 				04B1D2021D867CC800D9B865 /* Photos.framework in Frameworks */,
-				04C7C8E81D7818F10012AE6B /* AddressBook.framework in Frameworks */,
 				044EB12A1D701407009CE553 /* libc.tbd in Frameworks */,
 				044EB1261D7013D6009CE553 /* AudioToolbox.framework in Frameworks */,
 				044EB11F1D701335009CE553 /* iflyMSC.framework in Frameworks */,
-				E35277251B301C48004E245C /* AssetsLibrary.framework in Frameworks */,
 				9EF39A2C1B28054F00CEE1D3 /* CoreImage.framework in Frameworks */,
 				9EF39A241B28053200CEE1D3 /* CoreVideo.framework in Frameworks */,
 				ECDD59C7CBA94A09985ECE0B /* Pods_IcePointCloud.framework in Frameworks */,
@@ -908,13 +907,10 @@
 		9E03C2D31978D5D5007389D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CB158E1F1E790AA70015A4C9 /* SVProgressHUD.framework */,
+				CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */,
 				0479F29A1E09205900816E02 /* JavaScriptCore.framework */,
-				04C34CBE1E012BB300979001 /* StoreKit.framework */,
 				0460CE1A1DF8054E00700A18 /* WebKit.framework */,
-				04C7C8E71D7818F10012AE6B /* AddressBook.framework */,
 				04378D671D90F45900E37096 /* AdSupport.framework */,
-				E35277241B301C48004E245C /* AssetsLibrary.framework */,
 				044EB1251D7013D6009CE553 /* AudioToolbox.framework */,
 				0421BE5F1D80FC39002C4FE4 /* AVFoundation.framework */,
 				04378D6C1D90F55E00E37096 /* CFNetwork.framework */,
@@ -2150,6 +2146,9 @@
 		CB15A1C91F9DB90500ABBF72 /* PersonCenter */ = {
 			isa = PBXGroup;
 			children = (
+				CBCC02711F9DF9BC00165646 /* IPCPersonConetentViewDelegate.h */,
+				CBCC026E1F9DF5C500165646 /* IPCPersonContentView.h */,
+				CBCC026F1F9DF5C500165646 /* IPCPersonContentView.m */,
 				CB15A1CA1F9DB90500ABBF72 /* IPCPersonBaseView.h */,
 				CB15A1CB1F9DB90500ABBF72 /* IPCPersonBaseView.m */,
 				CB15A1CC1F9DB90500ABBF72 /* IPCPersonBaseView.xib */,
@@ -2672,6 +2671,7 @@
 				CB0F55AD1F98845A003707F2 /* IPCCustomerTypeList.m in Sources */,
 				CB0F53801F9876AF003707F2 /* IPCRootViewController.m in Sources */,
 				CB0F55AE1F98845A003707F2 /* IPCHeadImage.m in Sources */,
+				CBCC02701F9DF5C500165646 /* IPCPersonContentView.m in Sources */,
 				CB0F55B11F98845A003707F2 /* IPCOptometryList.m in Sources */,
 				CB0F54191F988191003707F2 /* IPCChooseCategoryView.m in Sources */,
 				CB0F54F01F98819C003707F2 /* IPCCustomerRefreshCell.m in Sources */,

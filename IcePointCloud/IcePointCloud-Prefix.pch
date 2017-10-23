@@ -14,10 +14,6 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <Photos/Photos.h>
 #import <AVFoundation/AVFoundation.h>
-#import <AssetsLibrary/ALAsset.h>
-#import <AssetsLibrary/ALAssetsLibrary.h>
-#import <AssetsLibrary/ALAssetsGroup.h>
-#import <AssetsLibrary/ALAssetRepresentation.h>
 #import <AdSupport/AdSupport.h>
 #import <WebKit/WebKit.h>
 //Third Framework

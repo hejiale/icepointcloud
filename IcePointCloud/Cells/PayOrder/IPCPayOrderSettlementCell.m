@@ -32,16 +32,6 @@
 
 - (void)updateUI
 {
-//    [self.pointView setHidden:![IPCPayOrderManager sharedManager].isTrade];
-    
-//    if ([IPCPayOrderManager sharedManager].isTrade) {
-//        self.pointHeight.constant = 50;
-//        self.leftGivingConstraint.constant = 45;
-//    }else{
-//        self.pointHeight.constant = 0;
-//        self.leftGivingConstraint.constant = 20;
-//    }
-    
     if ([IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
         [self.selectPointButton setSelected:NO];
     }else{

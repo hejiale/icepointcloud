@@ -74,16 +74,19 @@
 
 - (void)showMainRootViewController
 {
-    [UIView transitionWithView:[UIApplication sharedApplication].keyWindow duration:0.8f options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        BOOL oldState = [UIView areAnimationsEnabled];
-        [UIView setAnimationsEnabled:NO];
-        IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
-        UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
-        menuNav.navigationBarHidden = YES;
-        [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
-        [UIView setAnimationsEnabled:oldState];
-    } completion:^(BOOL finished) {
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIView transitionWithView:[UIApplication sharedApplication].keyWindow
+                          duration:0.8f
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+            BOOL oldState = [UIView areAnimationsEnabled];
+            [UIView setAnimationsEnabled:NO];
+            IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
+            UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
+            [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
+            [UIView setAnimationsEnabled:oldState];
+        } completion:nil];
+    });
 }
 
 - (void)userLoginMethod
@@ -116,7 +119,7 @@
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCCommonUI showError:@"用户登录失败!"];
+        [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
     }];
 }
 
@@ -126,7 +129,7 @@
         if (!error) {
             [self showMainRootViewController];
         }else{
-            [IPCCommonUI showError:@"用户登录失败!"];
+            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
         }
     }];
 }
