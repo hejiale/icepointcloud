@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#ifndef IPCNetworkingAPI_h
+#ifndef IPCNetworkingAPI_h/Users/mac/Desktop/icepointcloud
 #define IPCNetworkingAPI_h
 
 #import   "IPCUserRequestManager.h"
