@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCWarehouseView : UIView
+@interface IPCWarehouseView : IPCPersonContentView
 
-- (void)showWithClose:(void(^)())closeBlock;
 
 @end

@@ -10,8 +10,4 @@
 
 @interface IPCSideBarMenuView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame
-                       Logout:(void(^)())logout
-                      Dismiss:(void(^)())dismiss;
-
 @end

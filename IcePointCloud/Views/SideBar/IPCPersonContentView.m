@@ -26,11 +26,7 @@
         CGRect frame = self.frame;
         frame.origin.x += self.jk_width;
         self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            
-        }
-    }];
+    } completion:nil];
 }
 
 

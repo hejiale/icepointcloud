@@ -30,11 +30,23 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 
 @implementation IPCPersonBaseView
 
-- (instancetype)initWithFrame:(CGRect)frame{
+- (instancetype)initWithFrame:(CGRect)frame
+                       Logout:(void(^)())logout
+                  UpdateBlock:(void(^)())update
+                  QRCodeBlock:(void(^)())qrcode
+               WareHouseBlock:(void(^)())wareHouse
+{
     self = [super initWithFrame:frame];
     if (self) {
         UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCPersonBaseView" owner:self];
         [self addSubview:view];
+        
+        self.LogoutBlock  = logout;
+        self.UpdateBlock  = update;
+        self.QRCodeBlock  = qrcode;
+        self.WareHouseBlock = wareHouse;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:IPCChooseWareHouseNotification object:nil];
     }
     return self;
 }
@@ -46,6 +58,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     [self.personTableView setTableFooterView:[[UIView alloc]init]];
     self.personTableView.estimatedSectionHeaderHeight = 0;
     self.personTableView.estimatedSectionFooterHeight = 0;
+    [self.personTableView reloadData];
 }
 
 #pragma mark //Request Data
@@ -66,43 +79,9 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     [self logoutRequest];
 }
 
-- (void)showWithLogout:(void(^)())logout UpdateBlock:(void (^)())update QRCodeBlock:(void (^)())qrcode WareHouseBlock:(void (^)())wareHouse
-{
-    self.LogoutBlock  = logout;
-    self.UpdateBlock  = update;
-    self.QRCodeBlock  = qrcode;
-    self.WareHouseBlock = wareHouse;
-    
-    [self.personTableView setTableFooterView:[[UIView alloc]init]];
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame = frame;
-    } completion:nil];
-}
-
-- (void)dismiss:(void(^)())complete
-{
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if (complete) {
-                complete();
-            }
-        }
-    }];
-}
-
-- (void)reload
-{
+- (void)reload{
     [self.personTableView reloadData];
-    self.isHiden = NO;
 }
-
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -221,10 +200,10 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             }
         }else
             if (indexPath.row == 3) {
-            if (self.QRCodeBlock) {
-                self.QRCodeBlock();
+                if (self.QRCodeBlock) {
+                    self.QRCodeBlock();
+                }
             }
-        }
     }else if (indexPath.section == 3){
         dispatch_async(dispatch_get_main_queue(), ^{
             [[IPCNetworkCache sharedCache] removeAllHttpCache];

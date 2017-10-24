@@ -24,6 +24,7 @@
 #import "IPCDynamicImageTextButton.h"
 #import "IPCEmptyAlertView.h"
 #import "IPCAlertController.h"
+#import "IPCPersonContentView.h"
 /**
  *  ViewController
  */

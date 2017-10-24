@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *insertWordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmWordTextField;
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
-@property (copy, nonatomic) void(^CloseBlock)(void);
 
 @end
 
@@ -43,34 +42,8 @@
 }
 
 #pragma mark //Clicked Events
-- (void)showWithClose:(void (^)())closeBlock
-{
-    self.CloseBlock = closeBlock;
-
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame = frame;
-    } completion:nil];
-}
-
 - (IBAction)backAction:(id)sender {
     [self dismiss];
-}
-
-
-- (void)dismiss{
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if (self.CloseBlock) {
-                self.CloseBlock();
-            }
-        }
-    }];
 }
 
 - (IBAction)saveAction:(id)sender {

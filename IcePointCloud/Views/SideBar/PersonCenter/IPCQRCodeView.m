@@ -8,6 +8,12 @@
 
 #import "IPCQRCodeView.h"
 
+@interface IPCQRCodeView()
+
+@property (weak, nonatomic) IBOutlet UIImageView *qrcodeImageView;
+
+@end
+
 @implementation IPCQRCodeView
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -15,38 +21,14 @@
     if (self) {
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCQRCodeView" owner:self];
         [self addSubview:view];
+        
+        [self.qrcodeImageView setImageURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.QRCodeURL]];
     }
     return self;
 }
 
-- (void)showWithClose:(void (^)())closeBlock
-{
-    self.CloseBlock = closeBlock;
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [self.qrcodeImageView setImageURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.QRCodeURL]];
-        }
-    }];
-}
-
-
 - (IBAction)closeAction:(id)sender {
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if (self.CloseBlock) {
-                self.CloseBlock();
-            }
-        }
-    }];
+    [self dismiss];
 }
 
 @end

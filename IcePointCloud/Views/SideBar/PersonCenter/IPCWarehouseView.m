@@ -15,7 +15,6 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
 
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UITableView *wareHouseTableView;
-@property (copy, nonatomic) void(^CloseBlock)(void);
 
 @end
 
@@ -45,32 +44,6 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
 - (IBAction)cancelAction:(id)sender {
     [self dismiss];
 }
-
-- (void)showWithClose:(void (^)())closeBlock
-{
-    self.CloseBlock = closeBlock;
-    
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame = frame;
-    } completion:nil];
-}
-
-- (void)dismiss{
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if (self.CloseBlock) {
-                self.CloseBlock();
-            }
-        }
-    }];
-}
-
 
 #pragma mark //UITabelViewDataSource 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

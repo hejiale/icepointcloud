@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCQRCodeView : UIView
-
-@property (weak, nonatomic) IBOutlet UIImageView *qrcodeImageView;
-@property (copy, nonatomic) void(^CloseBlock)(void);
-
-- (void)showWithClose:(void(^)())closeBlock;
+@interface IPCQRCodeView : IPCPersonContentView
 
 @end

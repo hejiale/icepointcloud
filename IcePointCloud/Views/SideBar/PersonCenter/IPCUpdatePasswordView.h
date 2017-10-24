@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCUpdatePasswordView : UIView
+@interface IPCUpdatePasswordView : IPCPersonContentView
 
-- (void)showWithClose:(void(^)())closeBlock;
 
 @end

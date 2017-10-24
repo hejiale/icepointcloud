@@ -8,17 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCPersonBaseView : UIView
+@interface IPCPersonBaseView : IPCPersonContentView
 
-@property (nonatomic, assign) BOOL  isHiden;
-
-- (void)showWithLogout:(void(^)())logout
-           UpdateBlock:(void(^)())update
-           QRCodeBlock:(void(^)())qrcode
-        WareHouseBlock:(void(^)())wareHouse;
-
-- (void)reload;
-- (void)dismiss:(void(^)())complete;
-
+- (instancetype)initWithFrame:(CGRect)frame
+                       Logout:(void(^)())logout
+                  UpdateBlock:(void(^)())update
+                  QRCodeBlock:(void(^)())qrcode
+               WareHouseBlock:(void(^)())wareHouse;
 
 @end

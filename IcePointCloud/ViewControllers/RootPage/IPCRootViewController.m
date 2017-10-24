@@ -50,11 +50,6 @@
 }
 
 #pragma mark //Clicked Events
-- (void)removeCover{
-    [self.sideBarView removeFromSuperview];
-    [self removerFilterCover];
-}
-
 - (void)removerFilterCover{
     [self.productVC removeCover];
     [self.tryVC removeCover];
@@ -65,14 +60,8 @@
 - (void)showSideBarView
 {
     [self removerFilterCover];
-    __weak typeof(self) weakSelf = self;
-    _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds
-                                                     Logout:^{
-                                                         [[IPCAppManager sharedManager] logout];
-                                                     } Dismiss:^{
-                                                         __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                         [strongSelf removeCover];
-                                                     }];
+   
+    _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:_sideBarView];
 }
 
