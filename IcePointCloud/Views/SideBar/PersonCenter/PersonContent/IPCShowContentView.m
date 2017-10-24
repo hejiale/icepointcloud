@@ -25,9 +25,13 @@
 -(void)setViewArray:(NSArray<IPCPersonContentView *> *)viewArray
 {
     _viewArray = [viewArray copy];
-    [_viewArray enumerateObjectsUsingBlock:^(IPCPersonContentView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
-        [self addSubview:view];
-    }];
+    
+    if (_viewArray.count) {
+        [_viewArray enumerateObjectsUsingBlock:^(IPCPersonContentView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self addSubview:view];
+        }];
+    }
+    
     self.selectedIndex = 0;
 }
 
@@ -46,7 +50,7 @@
     return (IPCPersonContentView *)[self.viewArray objectAtIndex:self.selectedIndex];
 }
 
-- (void)show
+- (void)showContent
 {
     IPCPersonBaseView * personBaseView = [[IPCPersonBaseView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)
                                                                           Logout:^{
@@ -65,17 +69,11 @@
     [self setViewArray:@[personBaseView,houseView,codeView,updateView]];
 }
 
-- (void)dismiss
+- (void)dismissContent:(void (^)())completeBlock
 {
-    [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        if (finished) {
-            if ([self.delegate respondsToSelector:@selector(dismissContentView)]) {
-                [self.delegate dismissContentView];
-            }
+    [self dismiss:^{
+        if (completeBlock) {
+            completeBlock();
         }
     }];
 }

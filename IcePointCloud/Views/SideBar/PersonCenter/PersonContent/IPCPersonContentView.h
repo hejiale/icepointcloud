@@ -14,4 +14,6 @@
 
 - (void)dismiss;
 
+- (void)dismiss:(void(^)())finishedBlock;
+
 @end

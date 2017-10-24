@@ -11,10 +11,9 @@
 
 #define IPCMenuShowWidth  400
 
-@interface IPCSideBarMenuView()<IPCPersonConetentViewDelegate>
+@interface IPCSideBarMenuView()
 
 @property (nonatomic, strong) IPCShowContentView * showContentView;
-@property (nonatomic, copy) void(^DismissBlock)();
 
 @end
 
@@ -44,7 +43,7 @@
 {
     [super layoutSubviews];
     
-    [self.showContentView show];
+    [self.showContentView showContent];
 }
 
 
@@ -53,7 +52,6 @@
 {
     if (!_showContentView) {
         _showContentView = [[IPCShowContentView alloc]init];
-        _showContentView.delegate = self;
     }
     return _showContentView;
 }
@@ -61,14 +59,9 @@
 #pragma mark //Clicked Events
 - (IBAction)tapBgAction:(id)sender
 {
-    [self.showContentView dismiss];
+    [self.showContentView dismissContent:^{
+        [self removeFromSuperview];
+    }];
 }
-
-#pragma mark //
-- (void)dismissContentView
-{
-    [self removeFromSuperview];
-}
-
 
 @end

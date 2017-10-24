@@ -30,4 +30,19 @@
 }
 
 
+- (void)dismiss:(void(^)())finishedBlock
+{
+    [UIView animateWithDuration:0.5f animations:^{
+        CGRect frame = self.frame;
+        frame.origin.x += self.jk_width;
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        if (finished) {
+            if (finishedBlock) {
+                finishedBlock();
+            }
+        }
+    }];
+}
+
 @end
