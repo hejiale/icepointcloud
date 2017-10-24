@@ -77,7 +77,7 @@
     
     if (str.length) {
         if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-            [IPCCommonUI showError:@"请先选择员工"];
+            [IPCCommonUI showError:@"请先选择经办人"];
         }else{
             if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
                 [IPCCommonUI showError:@"该商品售价超出折扣范围！"];

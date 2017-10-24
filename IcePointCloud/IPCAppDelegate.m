@@ -11,12 +11,6 @@
 #import "IPCLanuchViewController.h"
 #import "IPCPlatformService.h"
 
-@interface IPCAppDelegate()
-
-@property (nonatomic, strong) IPCPlatformService * platformService;
-
-@end
-
 @implementation IPCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -24,8 +18,14 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    _platformService = [[IPCPlatformService alloc] init];
+    /*
+     *Initialize the configuration
+     */
+    [[IPCPlatformService instance] setUp];
     
+    /*
+     *Initialize the RootController
+     */
     if ([NSUserDefaults jk_boolForKey:IPCFirstLanuchKey]) {
         IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
         [self.window setRootViewController:loginVC];
@@ -33,8 +33,8 @@
         IPCLanuchViewController *lanuchVC = [[IPCLanuchViewController alloc]initWithNibName:@"IPCLanuchViewController" bundle:nil];
         [self.window setRootViewController:lanuchVC];
     }
+    
     [self.window makeKeyAndVisible];
-
     return YES;
 }
 
@@ -64,12 +64,11 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-//    [[DDLoggerClient sharedInstance] stopLog];
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    return  [WXApi handleOpenURL:url delegate:self.platformService];
+    return  [WXApi handleOpenURL:url delegate:[IPCPlatformService instance]];
 }
 
 

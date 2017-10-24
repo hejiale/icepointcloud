@@ -50,6 +50,7 @@
 }
 
 #pragma mark //Clicked Events
+//Remove Filter Cover
 - (void)removerFilterCover{
     [self.productVC removeCover];
     [self.tryVC removeCover];

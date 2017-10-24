@@ -11,17 +11,24 @@
 
 @implementation IPCPlatformService
 
-- (instancetype)init{
-    self = [super init];
-    if (self) {
-        [self checkNetwork];
-        [self checkVersion];
-        [self enableFace];
-        [self enableSkin];
-        [self enableKeyboard];
-        [self bindWechat];
-    }
-    return self;
++ (IPCPlatformService *)instance
+{
+    static IPCPlatformService * service = nil;
+    static dispatch_once_t token;
+    dispatch_once(&token, ^{
+        service = [[self alloc] init];
+    });
+    return service;
+}
+
+- (void)setUp
+{
+    [self checkNetwork];
+    [self checkVersion];
+    [self enableFace];
+    [self enableSkin];
+    [self enableKeyboard];
+    [self bindWechat];
 }
 
 /**

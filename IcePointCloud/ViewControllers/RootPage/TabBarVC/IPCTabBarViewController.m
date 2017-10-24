@@ -290,7 +290,8 @@
     }
 }
 
-- (void)filterProductAction{
+- (void)filterProductAction
+{
 }
 
 #pragma mark //Notification

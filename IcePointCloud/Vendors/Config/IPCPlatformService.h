@@ -10,4 +10,8 @@
 
 @interface IPCPlatformService : NSObject<WXApiDelegate>
 
++ (IPCPlatformService *)instance;
+
+- (void)setUp;
+
 @end

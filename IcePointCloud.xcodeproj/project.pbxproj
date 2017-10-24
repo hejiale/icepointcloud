@@ -1351,12 +1351,12 @@
 		CB0F53D51F988191003707F2 /* OrderDetail */ = {
 			isa = PBXGroup;
 			children = (
-				CB0F53D61F988191003707F2 /* IPCCustomDetailOrderPayRecordView.h */,
-				CB0F53D71F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m */,
-				CB0F53D81F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib */,
 				CB0F53D91F988191003707F2 /* IPCCustomDetailOrderView.h */,
 				CB0F53DA1F988191003707F2 /* IPCCustomDetailOrderView.m */,
 				CB0F53DB1F988191003707F2 /* IPCCustomDetailOrderView.xib */,
+				CB0F53D61F988191003707F2 /* IPCCustomDetailOrderPayRecordView.h */,
+				CB0F53D71F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m */,
+				CB0F53D81F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib */,
 			);
 			path = OrderDetail;
 			sourceTree = "<group>";
@@ -1992,13 +1992,13 @@
 			isa = PBXGroup;
 			children = (
 				CB0F55FF1F988B05003707F2 /* HeaderFile.h */,
+				CB0F56061F988B05003707F2 /* IPCCore.h */,
 				CB0F56001F988B05003707F2 /* IPCAppManager.h */,
 				CB0F56011F988B05003707F2 /* IPCAppManager.m */,
 				CB0F56021F988B05003707F2 /* IPCCheckVersion.h */,
 				CB0F56031F988B05003707F2 /* IPCCheckVersion.m */,
 				CB0F56041F988B05003707F2 /* IPCCommon.h */,
 				CB0F56051F988B05003707F2 /* IPCCommon.m */,
-				CB0F56061F988B05003707F2 /* IPCCore.h */,
 				CB0F56071F988B05003707F2 /* IPCPlatformService.h */,
 				CB0F56081F988B05003707F2 /* IPCPlatformService.m */,
 			);
