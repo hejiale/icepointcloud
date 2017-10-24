@@ -2306,11 +2306,11 @@
 		CB64D2361F99C9A600FBC5F2 /* IPCRequest */ = {
 			isa = PBXGroup;
 			children = (
+				CB64D23B1F99C9A600FBC5F2 /* IPCRequestConstant.h */,
 				CB64D2371F99C9A600FBC5F2 /* IPCHttpRequest.h */,
 				CB64D2381F99C9A600FBC5F2 /* IPCHttpRequest.m */,
 				CB64D2391F99C9A600FBC5F2 /* IPCRequest.h */,
 				CB64D23A1F99C9A600FBC5F2 /* IPCRequest.m */,
-				CB64D23B1F99C9A600FBC5F2 /* IPCRequestConstant.h */,
 			);
 			path = IPCRequest;
 			sourceTree = "<group>";

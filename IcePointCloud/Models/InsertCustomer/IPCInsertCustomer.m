@@ -27,8 +27,6 @@
     self.gender = @"MALE";
     self.contactorGenger = @"MALE";
     self.customerPhone = @"";
-    self.empName= @"";
-    self.empNameId = @"";
     self.memberNum= @"";
     self.memberLevel= @"";
     self.memberLevelId = @"";

@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *genderTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *memberNumTextField;
-@property (weak, nonatomic) IBOutlet UITextField *handlersTextField;//经手人
 @property (weak, nonatomic) IBOutlet UITextField *memberLevelTextField;
 @property (weak, nonatomic) IBOutlet UITextField *birthdayTextField;
 //展开页面

@@ -10,7 +10,6 @@
 #import "IPCParameterTableViewController.h"
 
 typedef NS_ENUM(NSInteger, IPCInsertType){
-    IPCInsertTypeEmployee,
     IPCInsertTypeMemberLevel,
     IPCInsertTypeCustomerType,
     IPCInsertTypeGender
@@ -31,7 +30,6 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [IPCCommonUI clearAutoCorrection:self.mainView];
     [self.genderTextField setRightButton:self Action:@selector(showGenderPickViewAction) OnView:self.mainView];
     [self.birthdayTextField setRightButton:self Action:@selector(showDatePickViewAction) OnView:self.packUpView];
-    [self.handlersTextField setRightButton:self Action:@selector(showEmployeeAction) OnView:self.mainView];
     [self.memberLevelTextField setRightButton:self Action:@selector(showMemberLevelAction) OnView:self.mainView];
     [self.customerCategoryTextField setRightButton:self Action:@selector(showCustomerTypeAction) OnView:self.packUpView];
     [self.introducerTextField setRightButton:self Action:@selector(showCustomerListAction) OnView:self.introducerView];
@@ -85,7 +83,6 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     [self.memoTextField setText:[IPCInsertCustomer instance].remark];
     [self.customerCategoryTextField setText:[IPCInsertCustomer instance].customerType];
     [self.genderTextField setText:[IPCCommon formatGender:[IPCInsertCustomer instance].gender]];
-    [self.handlersTextField setText:[IPCInsertCustomer instance].empName];
     [self.birthdayTextField setText:[IPCInsertCustomer instance].birthday];
     [self.memberNumTextField setText:[IPCInsertCustomer instance].memberNum];
     [self.memberLevelTextField setText:[IPCInsertCustomer instance].memberLevel];
@@ -105,12 +102,6 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
         self.introduceTop.constant = 0;
         self.introduceHeight.constant = 0;
     }
-}
-
-
-- (void)showEmployeeAction{
-    self.insertType = IPCInsertTypeEmployee;
-    [self showParameterTabelView:self.handlersTextField];
 }
 
 - (void)showMemberLevelAction{
@@ -173,9 +164,7 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
 
 #pragma mark //uiPickerViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView{
-    if (self.insertType == IPCInsertTypeEmployee) {
-        return [[IPCEmployeeeManager sharedManager] employeeNameArray];
-    }else if (self.insertType == IPCInsertTypeCustomerType){
+    if (self.insertType == IPCInsertTypeCustomerType){
         return [[IPCEmployeeeManager sharedManager] customerTypeNameArray];
     }else if (self.insertType == IPCInsertTypeMemberLevel){
         return [[IPCEmployeeeManager sharedManager] memberLevelNameArray];
@@ -194,9 +183,6 @@ typedef NS_ENUM(NSInteger, IPCInsertType){
     }else if (self.insertType == IPCInsertTypeMemberLevel){
         [IPCInsertCustomer instance].memberLevel = parameter;
         [IPCInsertCustomer instance].memberLevelId = [[IPCEmployeeeManager sharedManager] memberLevelId:parameter];
-    }else if (self.insertType == IPCInsertTypeEmployee){
-        [IPCInsertCustomer instance].empName = parameter;
-        [IPCInsertCustomer instance].empNameId = [[IPCEmployeeeManager sharedManager] employeeId:parameter];
     }else if (self.insertType == IPCInsertTypeCustomerType){
         if (![[IPCInsertCustomer instance].customerType isEqualToString:parameter]) {
             [IPCInsertCustomer instance].customerType =parameter;

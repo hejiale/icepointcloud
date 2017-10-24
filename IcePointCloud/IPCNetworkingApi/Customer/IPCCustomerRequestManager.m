@@ -69,8 +69,6 @@
                          ContactGender:(NSString *)contactGender
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
-                          EmployeeName:(NSString *)employeeName
-                            EmployeeId:(NSString *)employeeId
                           CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId
                             Occupation:(NSString *)occupation
@@ -93,8 +91,6 @@
                              @"contactorGengerString":contactGender,
                              @"contactorPhone":contactPhone,
                              @"contactorAddress":contactAddress,
-                             @"empName":employeeName,
-                             @"employeeId":employeeId,
                              @"customerType":customerType,
                              @"customerTypeId":customerTypeId,
                              @"memberLevel":memberLevel,
@@ -190,11 +186,9 @@
                                 Gender:(NSString *)gender
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
-                            EmployeeId:(NSString *)employeeId
                              MemberNum:(NSString *)memberNum
                          MemberLevelId:(NSString *)memberLevelId
                         CustomerTypeId:(NSString *)customerTypeId
-                          EmployeeName:(NSString *)employeeName
                            MemberLevel:(NSString *)memberLevel
                                    Job:(NSString *)job
                                 Remark:(NSString *)remark
@@ -209,12 +203,10 @@
                                   @"email":email,
                                   @"birthday":birthday,
                                   @"remark":remark,
-                                  @"employeeId":employeeId,
                                   @"memberId":memberNum,
                                   @"memberLevelId":memberLevelId,
                                   @"customerTypeId":customerTypeId,
                                   @"occupation":job,
-                                  @"empName":employeeName,
                                   @"memberLevel":memberLevel,
                                   @"photoIdForPos":photoId,
                                   @"isPos":@"true"};

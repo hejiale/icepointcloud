@@ -21,8 +21,6 @@
 @property (nonatomic, copy, readwrite) NSString * genderString;
 @property (nonatomic, copy, readwrite) NSString * gender;//MALE   FEMALE
 @property (nonatomic, copy, readwrite) NSString * customerPhone;
-@property (nonatomic, copy, readwrite) NSString * empName;//经手人
-@property (nonatomic, copy, readwrite) NSString * empNameId;//经手人ID
 @property (nonatomic, copy, readwrite) NSString * memberNum;//会员号
 @property (nonatomic, copy, readwrite) NSString * memberLevel;//会员级别
 @property (nonatomic, copy, readwrite) NSString * memberLevelId;//会员级别ID

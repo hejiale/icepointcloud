@@ -98,8 +98,6 @@
                          ContactGender:(NSString *)contactGender
                           ContactPhone:(NSString *)contactPhone
                         ContactAddress:(NSString *)contactAddress
-                          EmployeeName:(NSString *)employeeName
-                            EmployeeId:(NSString *)employeeId
                           CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId
                             Occupation:(NSString *)occupation
@@ -235,11 +233,9 @@
                                 Gender:(NSString *)gender
                                  Email:(NSString *)email
                               Birthday:(NSString *)birthday
-                            EmployeeId:(NSString *)employeeId
                              MemberNum:(NSString *)memberNum
                          MemberLevelId:(NSString *)memberLevelId
                         CustomerTypeId:(NSString *)customerTypeId
-                          EmployeeName:(NSString *)employeeName
                            MemberLevel:(NSString *)memberLevel
                                    Job:(NSString *)job
                                 Remark:(NSString *)remark
