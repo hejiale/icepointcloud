@@ -10,8 +10,8 @@
 
 @interface IPCWareHouse : NSObject
 
-@property (nonatomic, copy, readonly) NSString * wareHouseName;
-@property (nonatomic, copy, readonly) NSString * wareHouseId;
-@property (nonatomic, copy, readonly) NSString * storeStatus;
+@property (nonatomic, copy) NSString * wareHouseName;
+@property (nonatomic, copy) NSString * wareHouseId;
+@property (nonatomic, copy) NSString * storeStatus;
 
 @end

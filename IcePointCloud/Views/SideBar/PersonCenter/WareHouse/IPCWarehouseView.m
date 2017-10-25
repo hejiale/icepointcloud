@@ -37,8 +37,8 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
     [self.wareHouseTableView setTableFooterView:[[UIView alloc]init]];
     self.wareHouseTableView.estimatedSectionHeaderHeight = 0;
     self.wareHouseTableView.estimatedSectionFooterHeight = 0;
+    [self.wareHouseTableView reloadData];
 }
-
 
 #pragma mark //Clicked Events
 - (IBAction)cancelAction:(id)sender {

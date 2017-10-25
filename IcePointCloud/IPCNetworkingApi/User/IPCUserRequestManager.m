@@ -41,7 +41,13 @@
 + (void)queryRepositoryWithSuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"isRepository":@"true"} RequestMethod:UserRequest_WareHouseList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"isRepository":@"true"} RequestMethod:UserRequest_WareHouseList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)queryEmployeeAccountWithSuccessBlock:(void (^)(id responseValue))success
+                                FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:nil RequestMethod:UserRequest_EmployeeAccount CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

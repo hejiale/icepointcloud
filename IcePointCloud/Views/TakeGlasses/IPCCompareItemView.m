@@ -149,8 +149,7 @@
     CGRect frame           = self.glassesView.frame;
     frame.size.width       = self.cameraEyeSize.width;
     self.glassesView.frame = frame;
-    
-    [self updateGlassesDescription];
+
     [self updateItem];
 }
 
@@ -175,6 +174,7 @@
     self.modelView.transform = CGAffineTransformIdentity;
     self.glassesView.transform = CGAffineTransformIdentity;
     
+    [self updateGlassesDescription];
     [self updateGlassesPositionWithMatchItem:self.matchItem];
 }
 

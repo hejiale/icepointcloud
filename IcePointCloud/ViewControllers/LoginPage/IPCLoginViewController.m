@@ -7,7 +7,6 @@
 //
 
 #import "IPCLoginViewController.h"
-#import "IPCProfileResult.h"
 #import "IPCLoginHistoryViewController.h"
 #import "IPCRootViewController.h"
 
@@ -112,10 +111,14 @@
     __weak typeof (self) weakSelf = self;
     [IPCUserRequestManager userLoginWithUserName:userName Password:password SuccessBlock:^(id responseValue)
      {
+         //query login info
          __strong typeof (weakSelf) strongSelf = weakSelf;
-        [IPCAppManager sharedManager].profile = [IPCProfileResult mj_objectWithKeyValues:responseValue];
+         [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
+         [IPCAppManager sharedManager].companyName = responseValue[@"companyName"];
+         //storeage account info
         [strongSelf syncUserAccountHistory:userName];
-         [strongSelf loadStoreWareHouse];
+         //query responsity wareHouse
+         [strongSelf queryEmployeeAccount];
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
@@ -123,9 +126,27 @@
     }];
 }
 
-- (void)loadStoreWareHouse
+- (void)queryEmployeeAccount
+{
+    [IPCUserRequestManager queryEmployeeAccountWithSuccessBlock:^(id responseValue)
+    {
+        //Query Responsity WareHouse
+        [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
+        IPCWareHouse *  wareHouse = [[IPCWareHouse alloc]init];
+        wareHouse.wareHouseId       = [IPCAppManager sharedManager].storeResult.wareHouseId;
+        wareHouse.wareHouseName = [IPCAppManager sharedManager].storeResult.wareHouseName;
+        [IPCAppManager sharedManager].currentWareHouse = wareHouse;
+        //load wareHouse
+        [self loadWareHouse];
+    } FailureBlock:^(NSError *error) {
+        [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+    }];
+}
+
+- (void)loadWareHouse
 {
     [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
+        //Load Main View
         if (!error) {
             [self showMainRootViewController];
         }else{
@@ -155,7 +176,7 @@
 #pragma mark //Save UserName History
 - (void)syncUserAccountHistory:(NSString *)userName
 {
-    if ([IPCAppManager sharedManager].profile.token.length && userName.length)
+    if ([IPCAppManager sharedManager].deviceToken.length && userName.length)
     {
         [NSUserDefaults jk_setObject:userName forKey:IPCUserNameKey];
         

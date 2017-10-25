@@ -17,9 +17,6 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
-@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
-@property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
-@property (nonatomic, strong) IPCSideBarMenuView * sideBarView;
 
 @end
 
@@ -33,13 +30,14 @@
     
     _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    _customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
-    _payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+    IPCCustomerListViewController * customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
+    IPCPayOrderViewController * payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
     
-    [self setViewControllers:@[_productVC, _customerInfoVC,_tryVC,_payOrderVC]];
+    [self setViewControllers:@[_productVC,customerInfoVC,_tryVC,payOrderVC]];
     
     __weak typeof(self) weakSelf = self;
-    [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x) {
+    [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x)
+     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.selectedIndex == 1) {
             [strongSelf.productVC onFilterProducts];
@@ -62,8 +60,8 @@
 {
     [self removerFilterCover];
    
-    _sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds];
-    [self.view addSubview:_sideBarView];
+    IPCSideBarMenuView * sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds];
+    [self.view addSubview:sideBarView];
 }
 
 #pragma mark //RootMenuViewControllerDelegate

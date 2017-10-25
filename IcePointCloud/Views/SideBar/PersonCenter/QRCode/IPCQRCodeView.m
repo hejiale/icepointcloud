@@ -22,7 +22,7 @@
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCQRCodeView" owner:self];
         [self addSubview:view];
         
-        [self.qrcodeImageView setImageURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.QRCodeURL]];
+//        [self.qrcodeImageView setImageURL:[NSURL URLWithString:[IPCAppManager sharedManager].profile.QRCodeURL]];
     }
     return self;
 }

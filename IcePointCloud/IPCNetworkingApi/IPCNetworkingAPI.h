@@ -50,6 +50,7 @@
 #define UserRequest_LoginOut                              @"bizadmin.logout"
 #define UserRequest_UpdatePassword                   @"bizadmin.updateUserPassword"
 #define UserRequest_WareHouseList                      @"bizadmin.listStoreOrRepositoryByCompanyId"
+#define UserRequest_EmployeeAccount                  @"employeeadmin.getEmployeeObjectFromAccount"
 
 
 #endif /* IPCNetworkingAPI_h */

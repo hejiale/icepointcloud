@@ -56,4 +56,14 @@
 + (void)queryRepositoryWithSuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure;
 
+
+/**
+ QUERY Employee Account
+
+ @param success
+ @param failure
+ */
++ (void)queryEmployeeAccountWithSuccessBlock:(void (^)(id responseValue))success
+                                FailureBlock:(void (^)(NSError * error))failure;
+
 @end

@@ -92,7 +92,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     if (section == 0 || section == 3)
         return 1;
     else if (section == 1) {
-        return 4;
+        return 3;
     }
     return 2;
 }
@@ -112,26 +112,34 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.companyTitleLabel setText:@"所属店铺"];
-            [cell.companyNameLabel setText:[IPCAppManager sharedManager].profile.storeName];
+            [cell.companyNameLabel setText:[IPCAppManager sharedManager].storeResult.storeName];
             return cell;
-        }
-        else if (indexPath.row == 1) {
-            IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        }else if (indexPath.row == 1) {
+            if ([IPCAppManager sharedManager].storeResult.wareHouseId) {
+                IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+                if (!cell) {
+                    cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                }
+                [cell.companyTitleLabel setText:@"仓库"];
+                [cell.companyNameLabel setText:[IPCAppManager sharedManager].storeResult.wareHouseName];
+                return cell;
+            }else{
+                IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
+                if (!cell) {
+                    cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                }
+                [cell.menuTitleLabel setText:@"仓库"];
+                [cell.menuValueTitle setText:[IPCAppManager sharedManager].currentWareHouse.wareHouseName];
+                
+                return cell;
             }
-            [cell.menuTitleLabel setText:@"仓库"];
-            [cell.menuValueTitle setText:[IPCAppManager sharedManager].currentWareHouse.wareHouseName];
-            
-            return cell;
-        }
-        else if (indexPath.row == 2) {
+        }else if (indexPath.row == 2) {
             IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.companyTitleLabel setText:@"公司"];
-            [cell.companyNameLabel setText:[IPCAppManager sharedManager].profile.company];
+            [cell.companyNameLabel setText:[IPCAppManager sharedManager].companyName];
             return cell;
         }else{
             IPCPersonQRCodeCell * cell = [tableView dequeueReusableCellWithIdentifier:QRCodeIdentifier];
@@ -194,7 +202,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 self.UpdateBlock();
         }
     }else if (indexPath.section == 1){
-        if (indexPath.row == 1) {
+        if (indexPath.row == 1 && ![IPCAppManager sharedManager].storeResult.wareHouseId) {
             if (self.WareHouseBlock) {
                 self.WareHouseBlock();
             }

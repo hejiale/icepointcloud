@@ -807,7 +807,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productTableView indexPathForCell:cell];
-        [self editGlassParameterView:self.glassListViewMode.glassesList[indexPath.row]];
+        [self showGlassesParameterView:self.glassListViewMode.glassesList[indexPath.row]];
     }
 }
 
@@ -815,7 +815,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     if ([self.glassListViewMode.glassesList count] > 0) {
         NSIndexPath * indexPath = [self.productTableView indexPathForCell:cell];
-        [self showGlassesParameterView:self.glassListViewMode.glassesList[indexPath.row]];
+        [self editGlassParameterView:self.glassListViewMode.glassesList[indexPath.row]];
     }
 }
 

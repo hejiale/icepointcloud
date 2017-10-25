@@ -7,7 +7,7 @@
 //
 
 
-#import "IPCProfileResult.h"
+#import "IPCStoreResult.h"
 #import "IPCWareHouseResult.h"
 
 //The App for the first time login
@@ -33,7 +33,9 @@ extern NSString * const kIPCErrorNetworkAlertMessage;
 
 @interface IPCAppManager : NSObject
 
-@property (nonatomic, strong)    IPCProfileResult * profile;
+@property (nonatomic, copy, readwrite)  NSString * companyName;
+@property (nonatomic, copy, readwrite) NSString * deviceToken;
+@property (nonatomic, strong)    IPCStoreResult * storeResult;
 @property (nonatomic, strong)    IPCWareHouseResult * wareHouse;
 @property (nonatomic, strong)    IPCWareHouse * currentWareHouse;
 

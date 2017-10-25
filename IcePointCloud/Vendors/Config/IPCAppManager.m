@@ -27,11 +27,10 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
     static IPCAppManager *mgr = nil;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        mgr = [[IPCAppManager alloc] init];
+        mgr = [[self alloc] init];
     });
     return mgr;
 }
-
 
 - (NSString *)classType:(IPCTopFilterType)type{
     switch (type)
@@ -88,7 +87,7 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
 
 - (void)logout
 {
-    [IPCAppManager sharedManager].profile = nil;
+    [IPCAppManager sharedManager].storeResult = nil;
     [[IPCTryMatch instance].matchItems removeAllObjects];
     [IPCTryMatch instance].matchItems = nil;
     [IPCTryMatch instance].activeMatchItemIndex = 0;
@@ -192,7 +191,10 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
     [IPCUserRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
      {
          self.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
-         self.currentWareHouse = self.wareHouse.wareHouseArray[0];
+         
+         if (!self.storeResult.wareHouseId) {
+             self.currentWareHouse = self.wareHouse.wareHouseArray[0];
+         }
          
          if (complete) {
              complete(nil);
