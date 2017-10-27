@@ -188,13 +188,12 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
 
 - (void)loadWareHouse:(void (^)(NSError *))complete
 {
+    __weak typeof(self) weakSelf = self;
     [IPCUserRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
      {
-         self.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
-         
-         if (!self.storeResult.wareHouseId) {
-             self.currentWareHouse = self.wareHouse.wareHouseArray[0];
-         }
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         strongSelf.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
+         [strongSelf loadCurrentWareHouse];
          
          if (complete) {
              complete(nil);
@@ -206,5 +205,16 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
      }];
 }
 
+- (void)loadCurrentWareHouse
+{
+    if (self.storeResult.wareHouseId) {
+        IPCWareHouse *  wareHouse = [[IPCWareHouse alloc]init];
+        wareHouse.wareHouseId       = self.storeResult.wareHouseId;
+        wareHouse.wareHouseName = self.storeResult.wareHouseName;
+        self.currentWareHouse = wareHouse;
+    }else{
+        self.currentWareHouse = self.wareHouse.wareHouseArray[0];
+    }
+}
 
 @end

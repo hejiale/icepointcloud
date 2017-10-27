@@ -39,7 +39,7 @@
     [self.usernameTf setLeftSpace:10];
     [self.passwordTf setLeftSpace:10];
     [IPCCommonUI clearAutoCorrection:self.loginBgView];
-
+    
     if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {
         [self.usernameTf setText:[NSUserDefaults jk_stringForKey:IPCUserNameKey]];
     }
@@ -78,13 +78,13 @@
                           duration:0.8f
                            options:UIViewAnimationOptionTransitionCrossDissolve
                         animations:^{
-            BOOL oldState = [UIView areAnimationsEnabled];
-            [UIView setAnimationsEnabled:NO];
-            IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
-            UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
-            [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
-            [UIView setAnimationsEnabled:oldState];
-        } completion:nil];
+                            BOOL oldState = [UIView areAnimationsEnabled];
+                            [UIView setAnimationsEnabled:NO];
+                            IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
+                            UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
+                            [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
+                            [UIView setAnimationsEnabled:oldState];
+                        } completion:nil];
     });
 }
 
@@ -109,16 +109,15 @@
 - (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password
 {
     __weak typeof (self) weakSelf = self;
-    [IPCUserRequestManager userLoginWithUserName:userName Password:password SuccessBlock:^(id responseValue)
-     {
-         //query login info
-         __strong typeof (weakSelf) strongSelf = weakSelf;
-         [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
-         [IPCAppManager sharedManager].companyName = responseValue[@"companyName"];
-         //storeage account info
+    [IPCUserRequestManager userLoginWithUserName:userName Password:password SuccessBlock:^(id responseValue){
+        //query login info
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
+        [IPCAppManager sharedManager].companyName = responseValue[@"companyName"];
+        //storeage account info
         [strongSelf syncUserAccountHistory:userName];
-         //query responsity wareHouse
-         [strongSelf queryEmployeeAccount];
+        //query responsity wareHouse
+        [strongSelf queryEmployeeAccount];
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
@@ -128,16 +127,13 @@
 
 - (void)queryEmployeeAccount
 {
-    [IPCUserRequestManager queryEmployeeAccountWithSuccessBlock:^(id responseValue)
-    {
+    __weak typeof (self) weakSelf = self;
+    [IPCUserRequestManager queryEmployeeAccountWithSuccessBlock:^(id responseValue){
+        __strong typeof (weakSelf) strongSelf = weakSelf;
         //Query Responsity WareHouse
         [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
-        IPCWareHouse *  wareHouse = [[IPCWareHouse alloc]init];
-        wareHouse.wareHouseId       = [IPCAppManager sharedManager].storeResult.wareHouseId;
-        wareHouse.wareHouseName = [IPCAppManager sharedManager].storeResult.wareHouseName;
-        [IPCAppManager sharedManager].currentWareHouse = wareHouse;
         //load wareHouse
-        [self loadWareHouse];
+        [strongSelf loadWareHouse];
     } FailureBlock:^(NSError *error) {
         [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
     }];
@@ -145,10 +141,12 @@
 
 - (void)loadWareHouse
 {
+    __weak typeof (self) weakSelf = self;
     [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
         //Load Main View
         if (!error) {
-            [self showMainRootViewController];
+            [strongSelf showMainRootViewController];
         }else{
             [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
         }
