@@ -33,10 +33,7 @@
 #pragma mark //Clicked Events
 - (void)resetGlassView{
     [super resetGlassView];
-    
     self.modelView.transform = CGAffineTransformIdentity;
-    self.glassesView.transform = CGAffineTransformIdentity;
-    [self.glassImageView setImage:nil];
 }
 
 - (IBAction)onScaleTapped:(id)sender

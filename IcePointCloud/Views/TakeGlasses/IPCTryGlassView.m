@@ -96,7 +96,9 @@
 
 - (void)resetGlassView
 {
-    
+    self.glassesView.transform = CGAffineTransformIdentity;
+    self.glassImageView.transform = CGAffineTransformIdentity;
+    [self.glassImageView setImage:nil];
 }
 /**
  *  Updated photo like glasses

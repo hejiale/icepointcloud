@@ -48,10 +48,7 @@
 - (void)resetGlassView
 {
     [super resetGlassView];
-    
     self.modelView.transform = CGAffineTransformIdentity;
-    self.glassesView.transform = CGAffineTransformIdentity;
-    [self.glassImageView setImage:nil];
 }
 
 - (IBAction)tapModelViewAction:(id)sender {
@@ -74,8 +71,7 @@
 - (void)updateModelPhoto
 {
     [super updateModelPhoto];
-    
-    self.modelView.transform = CGAffineTransformIdentity;
+    [self resetGlassView];
     
     UIImage *img;
     switch (self.matchItem.photoType) {
