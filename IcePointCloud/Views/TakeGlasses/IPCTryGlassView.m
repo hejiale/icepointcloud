@@ -87,7 +87,7 @@
 //Update the model picture
 - (void)updateModelPhoto
 {
-    
+    [self resetGlassView];
 }
 - (void)updateItem
 {

@@ -71,7 +71,6 @@
 - (void)updateModelPhoto
 {
     [super updateModelPhoto];
-    [self resetGlassView];
     
     UIImage *img;
     switch (self.matchItem.photoType) {
@@ -115,10 +114,7 @@
 //Place the glasses
 - (void)updateItem{
     [super updateItem];
-    
-    self.modelView.transform = CGAffineTransformIdentity;
-    self.glassesView.transform = CGAffineTransformIdentity;
-    
+
     [self updateGlassesPositionWithMatchItem:self.matchItem];
 }
 

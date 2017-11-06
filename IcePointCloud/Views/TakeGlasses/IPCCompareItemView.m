@@ -110,8 +110,6 @@
 {
     [super updateModelPhoto];
     
-    self.modelView.transform = CGAffineTransformIdentity;
-    
     UIImage *img;
     switch (self.matchItem.photoType) {
         case IPCPhotoTypeModel:
@@ -167,9 +165,6 @@
 - (void)updateItem
 {
     [super updateItem];
-    
-    self.modelView.transform = CGAffineTransformIdentity;
-    self.glassesView.transform = CGAffineTransformIdentity;
     
     [self updateGlassesDescription];
     [self updateGlassesPositionWithMatchItem:self.matchItem];
