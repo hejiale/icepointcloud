@@ -8,7 +8,7 @@
 
 #import "IPCLoginViewController.h"
 #import "IPCLoginHistoryViewController.h"
-#import "IPCRootViewController.h"
+#import "IPCLoginViewModel.h"
 
 @interface IPCLoginViewController ()<LoginHistoryViewControllerDelegate,UITextFieldDelegate> 
 
@@ -16,7 +16,7 @@
 @property (nonatomic, weak) IBOutlet UITextField *usernameTf;
 @property (nonatomic, weak) IBOutlet UITextField *passwordTf;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (nonatomic, strong) NSMutableArray<NSString *> * loginHistory;
+@property (nonatomic, strong) IPCLoginViewModel * loginViewModel;
 
 @end
 
@@ -26,6 +26,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
+        
+        self.loginViewModel = [[IPCLoginViewModel alloc]init];
     }
     return self;
 }
@@ -40,21 +42,9 @@
     [self.passwordTf setLeftSpace:10];
     [IPCCommonUI clearAutoCorrection:self.loginBgView];
     
-    if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {
-        [self.usernameTf setText:[NSUserDefaults jk_stringForKey:IPCUserNameKey]];
-    }
-    
-    [self.loginHistory addObjectsFromArray:[IPCAppManager sharedManager].loginAccountHistory];
-    if ([self.loginHistory count]){
+    if ([self.loginViewModel.loginHistory count]){
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
-}
-
-- (NSMutableArray<NSString *> *)loginHistory{
-    if (!_loginHistory) {
-        _loginHistory = [[NSMutableArray alloc]init];
-    }
-    return _loginHistory;
 }
 
 #pragma mark //ClickEvents
@@ -71,85 +61,14 @@
     [historyVC showWithSize:CGSizeMake(self.loginBgView.jk_width-50, 150) Position:CGPointMake(self.loginBgView.jk_width/2, self.usernameTf.jk_bottom) Owner:self.loginBgView];
 }
 
-- (void)showMainRootViewController
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [UIView transitionWithView:[UIApplication sharedApplication].keyWindow
-                          duration:0.8f
-                           options:UIViewAnimationOptionTransitionCrossDissolve
-                        animations:^{
-                            BOOL oldState = [UIView areAnimationsEnabled];
-                            [UIView setAnimationsEnabled:NO];
-                            IPCRootViewController * menuVC = [[IPCRootViewController alloc]initWithNibName:@"IPCRootViewController" bundle:nil];
-                            UINavigationController * menuNav = [[UINavigationController alloc]initWithRootViewController:menuVC];
-                            [[UIApplication sharedApplication].keyWindow setRootViewController:menuNav];
-                            [UIView setAnimationsEnabled:oldState];
-                        } completion:nil];
-    });
-}
-
 - (void)userLoginMethod
 {
-    NSString *username = [self.usernameTf.text jk_trimmingWhitespace];
-    NSString *password = [self.passwordTf.text jk_trimmingWhitespace];
-    
-    if (!username.length){
-        [IPCCommonUI showError:@"登录帐号不能为空"];
-        return;
-    }
-    if (!password.length) {
-        [IPCCommonUI showError:@"登录密码不能为空"];
-        return;
-    }
     [self.loginButton jk_showIndicator];
-    [self signinRequestWithUserName:username Password:password];
-}
-
-#pragma mark //Request Methods
-- (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password
-{
+    
     __weak typeof (self) weakSelf = self;
-    [IPCUserRequestManager userLoginWithUserName:userName Password:password SuccessBlock:^(id responseValue){
-        //query login info
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
-        [IPCAppManager sharedManager].companyName = responseValue[@"companyName"];
-        //storeage account info
-        [strongSelf syncUserAccountHistory:userName];
-        //query responsity wareHouse
-        [strongSelf queryEmployeeAccount];
-    } FailureBlock:^(NSError *error) {
+    [self.loginViewModel signinRequestWithUserName:self.usernameTf.text Password:self.passwordTf.text Failed:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf.loginButton jk_hideIndicator];
-        [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
-    }];
-}
-
-- (void)queryEmployeeAccount
-{
-    __weak typeof (self) weakSelf = self;
-    [IPCUserRequestManager queryEmployeeAccountWithSuccessBlock:^(id responseValue){
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        //Query Responsity WareHouse
-        [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
-        //load wareHouse
-        [strongSelf loadWareHouse];
-    } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
-    }];
-}
-
-- (void)loadWareHouse
-{
-    __weak typeof (self) weakSelf = self;
-    [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        //Load Main View
-        if (!error) {
-            [strongSelf showMainRootViewController];
-        }else{
-            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
-        }
     }];
 }
 
@@ -170,23 +89,6 @@
     [self.usernameTf setText:loginName];
     [self.passwordTf setText:@""];
 }
-
-#pragma mark //Save UserName History
-- (void)syncUserAccountHistory:(NSString *)userName
-{
-    if ([IPCAppManager sharedManager].deviceToken.length && userName.length)
-    {
-        [NSUserDefaults jk_setObject:userName forKey:IPCUserNameKey];
-        
-        if (![self.loginHistory containsObject:userName])
-            [self.loginHistory insertObject:userName atIndex:0];
-        
-        NSData *historyData  = [NSKeyedArchiver archivedDataWithRootObject:self.loginHistory];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCListLoginHistoryKey];
-        [NSUserDefaults jk_setObject:historyData forKey:IPCListLoginHistoryKey];
-    }
-}
-
 
 - (void)didReceiveMemoryWarning
 {

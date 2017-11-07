@@ -308,6 +308,7 @@
 		CB64D2491F99C9A600FBC5F2 /* IPCResponseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D23E1F99C9A600FBC5F2 /* IPCResponseManager.m */; };
 		CB64D24A1F99C9A600FBC5F2 /* IPCRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2411F99C9A600FBC5F2 /* IPCRequestParameter.m */; };
 		CB64D24B1F99C9A600FBC5F2 /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */; };
+		CBBB4CA91FB15982008D31F5 /* IPCLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */; };
 		ECDD59C7CBA94A09985ECE0B /* Pods_IcePointCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9EBA06F5C3B9B3AD1DD5B4 /* Pods_IcePointCloud.framework */; };
 /* End PBXBuildFile section */
 
@@ -832,6 +833,8 @@
 		CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
 		CB64D2451F99C9A600FBC5F2 /* IPCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCNetworking.h; sourceTree = "<group>"; };
 		CB64D24C1F99CADF00FBC5F2 /* IPCNetworkingAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCNetworkingAPI.h; sourceTree = "<group>"; };
+		CBBB4CA71FB15982008D31F5 /* IPCLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCLoginViewModel.h; sourceTree = "<group>"; };
+		CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCLoginViewModel.m; sourceTree = "<group>"; };
 		D57A18F14EE64419E926539B /* Pods-IcePointCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2342,9 +2345,19 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		CBBB4CA61FB1594B008D31F5 /* LoginViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				CBBB4CA71FB15982008D31F5 /* IPCLoginViewModel.h */,
+				CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */,
+			);
+			path = LoginViewModel;
+			sourceTree = "<group>";
+		};
 		CBC419E91F038D7C00387F9C /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				CBBB4CA61FB1594B008D31F5 /* LoginViewModel */,
 				CB0F53891F987903003707F2 /* CartViewModel */,
 				CB0F538C1F987903003707F2 /* CustomerViewModel */,
 				CB0F53981F987903003707F2 /* GlassesViewModel */,
@@ -2785,6 +2798,7 @@
 				CB15A1E11F9DBAAE00ABBF72 /* IPCWareHouseCell.m in Sources */,
 				CB0F55AB1F98845A003707F2 /* IPCProductList.m in Sources */,
 				CB0F53A91F987903003707F2 /* IPCPayOrderViewCellHeight.m in Sources */,
+				CBBB4CA91FB15982008D31F5 /* IPCLoginViewModel.m in Sources */,
 				CB0F55171F98819C003707F2 /* IPCOrderDetailSectionCell.m in Sources */,
 				CB0F54231F988191003707F2 /* IPCShowOptometryView.m in Sources */,
 				CB32B95F1F9F122C002E006C /* IPCPersonContentView.m in Sources */,
