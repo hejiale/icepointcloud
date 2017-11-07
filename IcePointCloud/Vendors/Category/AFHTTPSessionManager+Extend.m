@@ -26,7 +26,7 @@
 - (NSURLSessionDataTask *)sendRequestWithParams:(IPCRequestParameter *)request
                                       ImageData:(NSData *)imageData
                                       ImageName:(NSString *)imageName
-                                    RequestType:(IPCRequestType)requestType
+                                    RequestType:(IPCRequestMethod)requestType
                                     CacheEnable:(IPCRequestCache)cacheEnable
                                    SuccessBlock:(void (^)(id responseValue, NSURLSessionDataTask * _Nonnull task))success
                                   ProgressBlock:(void (^)(NSProgress *))progress
@@ -73,27 +73,20 @@
         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };
     
-    if (requestType == IPCRequestTypeGet)
-    {
+    if (requestType == IPCRequestTypeGET){
         urlSessionDataTask = [self GET:[IPC_ProductAPI_URL stringByAppendingString:IPC_ProductAPI_Port]
                             parameters:request.requestParameter
                               progress:nil
                                success:successCall
                                failure:failureCall];
-    }else if (requestType == IPCRequestTypePost)
-    {
-        urlSessionDataTask = [self POST:[IPC_ProductAPI_URL stringByAppendingString:IPC_ProductAPI_Port]
-                             parameters:request.requestParameter
-                               progress:nil
-                                success:successCall
-                                failure:failureCall];
-    }else if (requestType == IPCRequestTypeUpload)
-    {
+    }else if (requestType == IPCRequestTypePOST){
         urlSessionDataTask = [self POST:[IPC_ProductAPI_URL stringByAppendingString:IPC_ProductAPI_Port]
                              parameters:request.requestParameter
               constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData)
                               {
-                                  [formData appendPartWithFileData:imageData name:imageName fileName:@"" mimeType:@"image/png"];
+                                  if (imageData) {
+                                      [formData appendPartWithFileData:imageData name:imageName fileName:@"" mimeType:@"image/png"];
+                                  }
                               }
                                progress:progressCall
                                 success:successCall

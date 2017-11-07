@@ -47,7 +47,7 @@
 - (void)callRequestWithParams:(IPCRequestParameter *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
-                  RequestType:(IPCRequestType)requestType
+                  RequestType:(IPCRequestMethod)requestType
                   CacheEnable:(IPCRequestCache)cacheEnable
                  SuccessBlock:(void (^)(id responseValue))success
                 ProgressBlock:(void (^)(NSProgress *))progress
