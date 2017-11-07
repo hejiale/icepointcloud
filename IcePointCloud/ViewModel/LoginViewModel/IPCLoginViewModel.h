@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSMutableArray<NSString *> * loginHistory;
 
+- (NSString *)userName;
 - (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password Failed:(void(^)())failed;
 
 @end

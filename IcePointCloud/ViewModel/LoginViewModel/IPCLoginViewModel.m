@@ -20,6 +20,13 @@
     return self;
 }
 
+- (NSMutableArray<NSString *> *)loginHistory{
+    if (!_loginHistory) {
+        _loginHistory = [[NSMutableArray alloc]init];
+    }
+    return _loginHistory;
+}
+
 - (NSString *)userName
 {
     if ([NSUserDefaults jk_stringForKey:IPCUserNameKey].length) {

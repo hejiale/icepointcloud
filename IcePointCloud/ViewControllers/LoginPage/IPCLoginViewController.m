@@ -45,6 +45,7 @@
     if ([self.loginViewModel.loginHistory count]){
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
+    [self.usernameTf setText:[self.loginViewModel userName]];
 }
 
 #pragma mark //ClickEvents
