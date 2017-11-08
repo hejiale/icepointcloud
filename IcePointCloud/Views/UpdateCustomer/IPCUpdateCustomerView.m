@@ -69,6 +69,7 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
         isUpdateGender = YES;
     }
     [self.saveButton jk_showIndicator];
+   
     [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.currentDetailCustomer.customerID
                                                  CustomerName:self.userNameTextField.text
                                                   CustomPhone:self.phoneTextField.text

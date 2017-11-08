@@ -66,4 +66,10 @@
     }
 }
 
+- (void)clearData{
+    [[IPCTryMatch instance].matchItems removeAllObjects];
+    [IPCTryMatch instance].matchItems = nil;
+    [IPCTryMatch instance].activeMatchItemIndex = 0;
+}
+
 @end

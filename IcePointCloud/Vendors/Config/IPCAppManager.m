@@ -87,11 +87,10 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
 
 - (void)logout
 {
-    [IPCAppManager sharedManager].storeResult = nil;
-    [[IPCTryMatch instance].matchItems removeAllObjects];
-    [IPCTryMatch instance].matchItems = nil;
-    [IPCTryMatch instance].activeMatchItemIndex = 0;
-    [[IPCCurrentCustomer sharedManager]clearData];
+    ///Clear All Data & Clear HTTP Request
+    [[IPCAppManager sharedManager] clearData];
+    [[IPCTryMatch instance] clearData];
+    [[IPCCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
     [[IPCPayOrderManager sharedManager] resetData];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
@@ -100,7 +99,7 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
     [[UIApplication sharedApplication].keyWindow setRootViewController:[[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil]];
 }
 
-
+///Load Search Customer Keywords In LocalDatabase
 - (NSArray *)localCustomerHistory
 {
     __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
@@ -115,7 +114,7 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
     return keywordHistory;
 }
 
-
+///Load Search Product Keywords In LocalDatabase
 - (NSArray *)localProductsHistory
 {
     __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
@@ -130,6 +129,7 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
     return keywordHistory;
 }
 
+///Load Login Account History In LocalDatabase
 - (NSArray *)loginAccountHistory
 {
     __block NSArray * accountHistory = [[NSMutableArray alloc]init];
@@ -215,6 +215,15 @@ NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设�
     }else{
         self.currentWareHouse = self.wareHouse.wareHouseArray[0];
     }
+}
+
+- (void)clearData
+{
+    self.storeResult = nil;
+    self.wareHouse = nil;
+    self.currentWareHouse = nil;
+    self.companyName = nil;
+    self.deviceToken = nil;
 }
 
 @end

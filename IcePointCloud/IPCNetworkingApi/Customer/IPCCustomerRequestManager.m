@@ -233,13 +233,13 @@
 + (void)getMemberLevelWithSuccessBlock:(void (^)(id))success
                           FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:nil RequestMethod:CustomerRequest_ListMemberLevel CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:nil RequestMethod:CustomerRequest_ListMemberLevel CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getCustomerTypeSuccessBlock:(void (^)(id))success
                        FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:nil RequestMethod:CustomerRequest_ListCustomerType CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:nil RequestMethod:CustomerRequest_ListCustomerType CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)judgePhoneIsExistWithPhone:(NSString *)phone SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure

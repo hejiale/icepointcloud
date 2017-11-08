@@ -19,5 +19,6 @@
 -  (void)setCurrentMatchItem:(IPCGlasses *)glass;
 -  (IPCMatchItem *)currentMatchItem;
 - (CGPoint)singleModeViewAnchorPoint;
+- (void)clearData;
 
 @end

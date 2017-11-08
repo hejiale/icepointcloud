@@ -87,4 +87,10 @@ extern NSString * const kIPCErrorNetworkAlertMessage;
  */
 - (void)loadWareHouse:(void(^)(NSError * error))complete;
 
+
+/**
+  Clear All Data
+ */
+- (void)clearData;
+
 @end
