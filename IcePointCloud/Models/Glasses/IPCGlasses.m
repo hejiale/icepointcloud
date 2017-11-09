@@ -80,7 +80,6 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"glassName"           : @"name",
              @"glassesID"                  : @"id",
-             @"glassCode"                : @"stockNumber",
              @"price"                        : @"suggestPrice",
              @"border"                     : @"frame",
              @"detailLinkURl"           : @"desc",

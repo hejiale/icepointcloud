@@ -27,8 +27,8 @@
     if (self) {
         self.FaceFrameBlock = face;
         self.FaceErrorBlock   = error;
-        
         self.resultStings = [[NSString alloc]init];
+        
         self.iFlySpFaceRequest=[IFlyFaceRequest sharedInstance];
         [self.iFlySpFaceRequest setDelegate:self];
     }

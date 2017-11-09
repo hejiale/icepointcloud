@@ -11,20 +11,15 @@
 
 @interface IPCGlasses : NSObject
 
-@property (nonatomic, copy, readonly) NSString * glassName;//name
-@property (nonatomic, copy, readonly) NSString * glassesID;// id
-@property (nonatomic, assign, readonly) double    price;//Recommended retail price
-@property (nonatomic, assign, readonly) double    afterDiscountPrice;//折后价
-@property (nonatomic, assign, readonly) BOOL      integralExchange;//判断是否积分兑换
-@property (nonatomic, assign, readonly) double    exchangeIntegral;//兑换积分
-//*************Each Image******************//
+///Each Image
 @property (nonatomic, strong, readwrite) IPCGlassesImage *profileDisplayImage;
 @property (nonatomic, strong, readwrite) IPCGlassesImage *frontialDisplayImage;
 @property (nonatomic, strong, readwrite) IPCGlassesImage *frontialTryOnImage;
-/*@property (nonatomic, strong, readwrite) IPCGlassesImage *degreeAngleImage;*/
 @property (nonatomic, strong, readwrite) IPCGlassesImage *thumbImage;
-//*************普通商品  批量商品参数**************//
-@property (nonatomic, copy, readonly) NSString * glassCode;//Commodity item no
+///商品参数
+@property (nonatomic, copy, readonly) NSString * glassName;//name
+@property (nonatomic, copy, readonly) NSString * glassesID;// id
+@property (nonatomic, assign, readonly) double    price;//Recommended retail price
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 @property (nonatomic, copy, readonly) NSString * brand;//brand
 @property (nonatomic, copy, readonly) NSString * color;//color
@@ -47,12 +42,18 @@
 @property (nonatomic, copy, readonly) NSString * baseOfArc;//The base of arc
 @property (nonatomic, copy, readonly) NSString * watercontent;//The water content
 @property (nonatomic, copy, readonly) NSString * type;//type
+///OrderDetail Product List Parameter
 @property (nonatomic, assign, readonly) NSInteger productCount;//The order quantity
-@property (nonatomic, copy, readonly) NSString * thumbnailURL;//Thumbnail url
+@property (nonatomic, copy, readonly) NSString * thumbnailURL;//OrderDetail Product Thumbnail url
+@property (nonatomic, assign, readonly) double    afterDiscountPrice;//折后价
+@property (nonatomic, assign, readonly) BOOL      integralExchange;//判断是否积分兑换
+@property (nonatomic, assign, readonly) double    exchangeIntegral;//兑换积分
+///判断是否批量
 @property (nonatomic, assign, readonly) BOOL  isBatch;//Whether the batch
+///判断是否试戴
 @property (nonatomic, assign, readonly) BOOL  isTryOn;//If you can try
+///库存
 @property (nonatomic, assign, readonly) NSInteger  stock;//inventory
-@property (nonatomic, copy, readonly) NSString    * supplierName;//supplier
 
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (IPCTopFilterType)filterType;
