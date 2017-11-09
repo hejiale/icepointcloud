@@ -18,6 +18,11 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
+    if ([[IPCAppManager sharedManager].storeResult.sex isEqualToString:@"女"]) {
+        [self.loginHeadImage setImage:[UIImage imageNamed:@"icon_login_head_femal"]];
+    }else{
+        [self.loginHeadImage setImage:[UIImage imageNamed:@"icon_login_head_male"]];
+    }
     [self.loginUserNameLabel setText:[IPCAppManager sharedManager].storeResult.name];
     [self.loginPhoneLabel setText:[IPCAppManager sharedManager].storeResult.contacterPhone];
 }

@@ -19,6 +19,7 @@ NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomer
 NSString *const  IPCChooseCustomerNotification         = @"IPCChooseCustomerNotification";
 NSString *const  IPCChooseWareHouseNotification       = @"IPCChooseWareHouseNotification";
 NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设备->设置->无线局域网选项";
+NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了，请检查当前网络环境!";
 
 @implementation IPCAppManager
 

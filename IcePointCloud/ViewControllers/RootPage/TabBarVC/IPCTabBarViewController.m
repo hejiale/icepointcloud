@@ -176,7 +176,11 @@
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_normal_%ld",(long)i]] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_selected_%ld",(long)i]] forState:UIControlStateSelected];
         }else{
-            [button setImage:[UIImage imageNamed:@"icon_login_head_male"] forState:UIControlStateNormal];
+            if ([[IPCAppManager sharedManager].storeResult.sex isEqualToString:@"女"]) {
+                [button setImage:[UIImage imageNamed:@"icon_login_head_femal"] forState:UIControlStateNormal];
+            }else{
+                [button setImage:[UIImage imageNamed:@"icon_login_head_male"] forState:UIControlStateNormal];
+            }
         }
         button.adjustsImageWhenHighlighted = NO;
         [button setFrame:CGRectMake(MenuItemWidth * i, StatusBarHeight, MenuItemWidth, MenuBarHeight)];

@@ -37,7 +37,7 @@
     self.responseSerializer = [self responseSerializer];
     
     void(^successCall)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
-    {
+    {        
         [[IPCResponseManager manager] parseResponseData:responseObject Complete:^(id responseValue)
          {
              if (cacheEnable == IPCRequestCacheEnable) {
@@ -63,8 +63,8 @@
     
     void(^failureCall)(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) = ^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error)
     {
-        if ([error code] == NSURLErrorNotConnectedToInternet) {
-            [IPCCommonUI showError:@"连接服务出错了，请检查当前网络环境!"];
+        if ([error code] == NSURLErrorNotConnectedToInternet || [error code] == NSURLErrorTimedOut ) {
+            [IPCCommonUI showError:kIPCNotConnectInternetMessage];
         }else{
             if (failure){
                 failure(error, task);
@@ -85,7 +85,7 @@
               constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData)
                               {
                                   if (imageData) {
-                                      [formData appendPartWithFileData:imageData name:imageName fileName:@"" mimeType:@"image/png"];
+                                      [formData appendPartWithFileData:imageData name:imageName ? : @""  fileName:@"" mimeType:@"image/png"];
                                   }
                               }
                                progress:progressCall

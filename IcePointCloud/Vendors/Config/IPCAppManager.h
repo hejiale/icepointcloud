@@ -30,6 +30,7 @@ extern NSString *const  IPCChooseCustomerNotification;
 extern NSString *const  IPCChooseWareHouseNotification;
 //Error Networking Status Message
 extern NSString * const kIPCErrorNetworkAlertMessage;
+extern NSString * const kIPCNotConnectInternetMessage;
 
 @interface IPCAppManager : NSObject
 
