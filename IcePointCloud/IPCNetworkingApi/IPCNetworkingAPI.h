@@ -25,7 +25,7 @@
 #define CustomerRequest_OptometryList              @"customerAdmin.listOptometry"
 #define CustomerRequest_SaveNewOptometry      @"customerAdmin.saveOptometry"
 #define CustomerRequest_SaveNewCustomer       @"customerAdmin.saveCustomerInfo"
-#define CustomerRequest_CustomerDetail            @"customerAdmin.getCusomerInfo"
+#define CustomerRequest_CustomerDetail            @"customerAdmin.getCustomerInfo"
 #define CustomerRequest_CustomerList               @"customerAdmin.listCustomer"
 #define CustomerRequest_CustomerOrderList      @"customerAdmin.listHistoryOrdersByCustomerId"
 #define CustomerRequest_SaveNewAddress          @"customerAdmin.saveAddress"
@@ -36,7 +36,7 @@
 #define CustomerRequest_SetCurrentAddress       @"customerAdmin.setCurrentAddress"
 #define CustomerRequest_ListMemberLevel          @"customerConfigAdmin.listMemberLevel"
 #define CustomerRequest_ListCustomerType        @"customerConfigAdmin.listCustomerType"
-#define CustomerRequest_JudgeNameOrPhone     @"customerAdmin.getCusomerByPhoneOrName"
+#define CustomerRequest_JudgeNameOrPhone     @"customerAdmin.getCustomerByPhoneOrName"
 
 #define GoodsRequest_FilterCategory                    @"bizadmin.getCategoryType"
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"

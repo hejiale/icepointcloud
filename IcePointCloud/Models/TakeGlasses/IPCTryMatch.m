@@ -45,8 +45,8 @@
 
 - (IPCMatchItem *)currentMatchItem
 {
-    if ([IPCTryMatch instance].matchItems.count)
-        return [IPCTryMatch instance].matchItems[[IPCTryMatch instance].activeMatchItemIndex];
+    if (self.matchItems.count)
+        return self.matchItems[self.activeMatchItemIndex];
     return nil;
 }
 

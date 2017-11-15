@@ -67,7 +67,6 @@
             [IPCCommonUI showError:@"连接服务出错了，请检查当前网络环境!"];
         }
     }else{
-        [self.lock lock];
         __weak typeof(self) weakSelf = self;
         NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request
                                                                                   ImageData:imageData
@@ -95,8 +94,6 @@
                                            }
                                        }];
         [self.taskArray addObject:task];
-        [self.lock unlock];
-        
         [task resume];
     }
 }

@@ -10,7 +10,6 @@
 
 static NSString * const kIPCNetworkResult       =  @"result";
 static NSString * const kIPCNetworkError         =  @"error";
-static NSString * const IPCResponseValueLockName   =  @"com.response.value.lock";
 static NSError *HTTPError(NSString *domain, int code) {
     return [NSError errorWithDomain:domain code:code userInfo:nil];
 }
@@ -33,7 +32,7 @@ static NSError *HTTPError(NSString *domain, int code) {
     self = [super init];
     if (self) {
         self.lock = [[NSLock alloc]init];
-        self.lock.name = IPCResponseValueLockName;
+        self.lock.name = @"com.response.value.lock";
     }
     return self;
 }
@@ -45,7 +44,7 @@ static NSError *HTTPError(NSString *domain, int code) {
     
     [self.lock lock];
     
-    if (responseData) {
+    if (responseData && ![responseData isKindOfClass:[NSNull class]]) {
         if ([responseData isKindOfClass:[NSDictionary class]]){
             if ([[responseData allKeys] containsObject:kIPCNetworkResult])
             {

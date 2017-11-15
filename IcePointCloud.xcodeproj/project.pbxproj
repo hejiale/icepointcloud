@@ -308,6 +308,8 @@
 		CB64D2491F99C9A600FBC5F2 /* IPCResponseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D23E1F99C9A600FBC5F2 /* IPCResponseManager.m */; };
 		CB64D24A1F99C9A600FBC5F2 /* IPCRequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2411F99C9A600FBC5F2 /* IPCRequestParameter.m */; };
 		CB64D24B1F99C9A600FBC5F2 /* IPCReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */; };
+		CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */; };
+		CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */; };
 		CBBB4CA91FB15982008D31F5 /* IPCLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */; };
 		ECDD59C7CBA94A09985ECE0B /* Pods_IcePointCloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A9EBA06F5C3B9B3AD1DD5B4 /* Pods_IcePointCloud.framework */; };
 /* End PBXBuildFile section */
@@ -833,6 +835,9 @@
 		CB64D2441F99C9A600FBC5F2 /* IPCReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCReachability.m; sourceTree = "<group>"; };
 		CB64D2451F99C9A600FBC5F2 /* IPCNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCNetworking.h; sourceTree = "<group>"; };
 		CB64D24C1F99CADF00FBC5F2 /* IPCNetworkingAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCNetworkingAPI.h; sourceTree = "<group>"; };
+		CB958F561FBAEF3800B882B7 /* IPCCustomKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomKeyboard.h; sourceTree = "<group>"; };
+		CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomKeyboard.m; sourceTree = "<group>"; };
+		CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCCustomKeyboard.xib; sourceTree = "<group>"; };
 		CBBB4CA71FB15982008D31F5 /* IPCLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCLoginViewModel.h; sourceTree = "<group>"; };
 		CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCLoginViewModel.m; sourceTree = "<group>"; };
 		D57A18F14EE64419E926539B /* Pods-IcePointCloud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IcePointCloud.release.xcconfig"; path = "Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud.release.xcconfig"; sourceTree = "<group>"; };
@@ -985,6 +990,7 @@
 		9E981F1D197B779B00019E2F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CB958F551FBAEEED00B882B7 /* CustomKeyboard */,
 				CB0F53AB1F988191003707F2 /* Address */,
 				CB0F53B21F988191003707F2 /* BatchParameter */,
 				CB0F53B91F988191003707F2 /* Employee */,
@@ -2345,6 +2351,16 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
+		CB958F551FBAEEED00B882B7 /* CustomKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				CB958F561FBAEF3800B882B7 /* IPCCustomKeyboard.h */,
+				CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */,
+				CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */,
+			);
+			path = CustomKeyboard;
+			sourceTree = "<group>";
+		};
 		CBBB4CA61FB1594B008D31F5 /* LoginViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2473,6 +2489,7 @@
 				CB0F55221F98819C003707F2 /* IPCPayOrderMemoCell.xib in Resources */,
 				CB0F550A1F98819C003707F2 /* IPCManagerOptometryCell.xib in Resources */,
 				CB0F55241F98819C003707F2 /* IPCPayOrderOptometryCell.xib in Resources */,
+				CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */,
 				CB0F536F1F9876AF003707F2 /* IPCCustomerDetailViewController.xib in Resources */,
 				CB0F55141F98819C003707F2 /* IPCOrderDetailProductCell.xib in Resources */,
 				CB32B95E1F9F122C002E006C /* IPCPersonBaseView.xib in Resources */,
@@ -2710,6 +2727,7 @@
 				CB0F56541F988B05003707F2 /* IPCAlertController.m in Sources */,
 				CB0F54F21F98819C003707F2 /* IPCCustomerCollectionViewCell.m in Sources */,
 				CB0F56441F988B05003707F2 /* UIView+Border.m in Sources */,
+				CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */,
 				CB0F55BA1F98845A003707F2 /* IPCPhotoListModel.m in Sources */,
 				CB0F54411F988191003707F2 /* IPCShareChatView.m in Sources */,
 				CB0F565A1F988B05003707F2 /* IPCDefineCameraBaseComponent.m in Sources */,
