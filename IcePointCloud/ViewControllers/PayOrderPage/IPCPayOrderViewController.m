@@ -13,18 +13,26 @@
 #import "IPCManagerAddressViewController.h"
 #import "IPCEmployeListView.h"
 #import "IPCShoppingCartView.h"
+#import "IPCPayorderScrollPageView.h"
+#import "IPCCustomKeyboard.h"
 
-@interface IPCPayOrderViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderViewModelDelegate>
+@interface IPCPayOrderViewController ()<UIScrollViewDelegate,IPCPayOrderViewModelDelegate,IPCPayorderScrollPageViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIView *cartContentView;
-@property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
-@property (strong, nonatomic) IBOutlet UIView *tableHeadView;
+//@property (weak, nonatomic) IBOutlet UIView *cartContentView;
+//@property (weak, nonatomic) IBOutlet UITableView *payOrderTableView;
+//@property (strong, nonatomic) IBOutlet UIView *tableHeadView;
+
+@property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (strong, nonatomic) IPCEmployeListView * employeView;
 @property (strong, nonatomic) IPCPayOrderViewMode * payOrderViewMode;
 @property (strong, nonatomic) IPCShoppingCartView * shopCartView;
+
+@property (strong, nonatomic) IPCPayorderScrollPageView * pageView;
+
+
 
 @end
 
@@ -38,20 +46,31 @@
     [self.cancelButton addBorder:2 Width:0.5 Color:nil];
     [self.saveButton addBorder:2 Width:0 Color:nil];
     //Set TableView
-    [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
-    self.payOrderTableView.estimatedSectionHeaderHeight = 0;
-    self.payOrderTableView.estimatedSectionFooterHeight = 0;
+//    [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
+//    [self.payOrderTableView setTableFooterView:[[UIView alloc]init]];
+//    self.payOrderTableView.estimatedSectionHeaderHeight = 0;
+//    self.payOrderTableView.estimatedSectionFooterHeight = 0;
     //Init View Model
     self.payOrderViewMode = [[IPCPayOrderViewMode alloc]init];
     self.payOrderViewMode.delegate = self;
     //Set Shopping Cart View
-    [self.cartContentView addSubview:self.shopCartView];
+//    [self.cartContentView addSubview:self.shopCartView];
     //Set Notification
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(queryCustomerDetail)
-                                                 name:IPCChooseCustomerNotification
-                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(queryCustomerDetail)
+//                                                 name:IPCChooseCustomerNotification
+//                                               object:nil];
+    _pageView = [[IPCPayorderScrollPageView alloc]initWithFrame:CGRectMake(10, 0, 50, self.contentScrollView.jk_height)];
+    [_pageView setPageImages:@[@"icon_unpage_0",@"icon_unpage_1",@"icon_unpage_2",@"icon_unpage_3"]];
+    [_pageView setOnPageImages:@[@"icon_page_0",@"icon_page_1",@"icon_page_2",@"icon_page_3"]];
+    [_pageView setNumberPages:4];
+    [_pageView setDelegate:self];
+    [self.view addSubview:_pageView];
+    
+    [self.contentScrollView setContentSize:CGSizeMake(self.contentScrollView.jk_width, _pageView.numberPages*self.contentScrollView.jk_height)];
+    
+//    IPCCustomKeyboard * ke = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(300, 300, 250, 250)];
+//    [self.view addSubview:ke];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -61,7 +80,7 @@
     //Reload Method
     [self reloadTableHead];
     [self.shopCartView reload];
-    [self.payOrderTableView reloadData];
+//    [self.payOrderTableView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -78,22 +97,22 @@
     self.employeView = [[IPCEmployeListView alloc]initWithFrame:self.view.bounds DismissBlock:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf removeCover];
-        [strongSelf.payOrderTableView reloadData];
+//        [strongSelf.payOrderTableView reloadData];
     }];
     [self.view addSubview:self.employeView];
     [self.view bringSubviewToFront:self.employeView];
 }
 
-- (IPCShoppingCartView *)shopCartView{
-    if (!_shopCartView) {
-        __weak typeof(self) weakSelf = self;
-        _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:self.cartContentView.bounds Complete:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.payOrderTableView reloadData];
-        }];
-    }
-    return _shopCartView;
-}
+//- (IPCShoppingCartView *)shopCartView{
+//    if (!_shopCartView) {
+//        __weak typeof(self) weakSelf = self;
+//        _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:self.cartContentView.bounds Complete:^{
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            [strongSelf.payOrderTableView reloadData];
+//        }];
+//    }
+//    return _shopCartView;
+//}
 
 #pragma mark //Clicked Events
 - (IBAction)savePayOrder:(id)sender
@@ -109,50 +128,50 @@
     __weak typeof(self) weakSelf = self;
     [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf resetPayInfoView];
+//        [strongSelf resetPayInfoView];
     }];
 }
 
-- (IBAction)selectCustomerAction:(id)sender{
-    [self pushToSearchCustomerVC];
-}
+//- (IBAction)selectCustomerAction:(id)sender{
+//    [self pushToSearchCustomerVC];
+//}
 
 - (void)removeCover{
     [self.employeView removeFromSuperview];self.employeView = nil;
 }
 
 - (void)reloadTableHead{
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
-    }else{
-        [self.payOrderTableView setTableHeaderView:self.tableHeadView];
-    }
+//    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+//        [self.payOrderTableView setTableHeaderView:[[UIView alloc]init]];
+//    }else{
+//        [self.payOrderTableView setTableHeaderView:self.tableHeadView];
+//    }
 }
 
-- (void)resetPayInfoView{
-    [[IPCPayOrderManager sharedManager] resetData];
-    [self.payOrderTableView reloadData];
-    [self.shopCartView reload];
-    [self reloadTableHead];
-}
+//- (void)resetPayInfoView{
+//    [[IPCPayOrderManager sharedManager] resetData];
+//    [self.payOrderTableView reloadData];
+//    [self.shopCartView reload];
+//    [self reloadTableHead];
+//}
 
 #pragma mark //Push Method
-- (void)pushToSearchCustomerVC{
-    IPCCustomerListViewController * customerListVC = [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
-    [self.navigationController pushViewController:customerListVC animated:YES];
-}
-
-- (void)pushToManagerOptometryViewController{
-    IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
-    optometryVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
-    [self.navigationController pushViewController:optometryVC animated:YES];
-}
-
-- (void)pushToManagerAddressViewController{
-    IPCManagerAddressViewController * addressVC = [[IPCManagerAddressViewController alloc]initWithNibName:@"IPCManagerAddressViewController" bundle:nil];
-    addressVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
-    [self.navigationController pushViewController:addressVC animated:YES];
-}
+//- (void)pushToSearchCustomerVC{
+//    IPCCustomerListViewController * customerListVC = [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
+//    [self.navigationController pushViewController:customerListVC animated:YES];
+//}
+//
+//- (void)pushToManagerOptometryViewController{
+//    IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
+//    optometryVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
+//    [self.navigationController pushViewController:optometryVC animated:YES];
+//}
+//
+//- (void)pushToManagerAddressViewController{
+//    IPCManagerAddressViewController * addressVC = [[IPCManagerAddressViewController alloc]initWithNibName:@"IPCManagerAddressViewController" bundle:nil];
+//    addressVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
+//    [self.navigationController pushViewController:addressVC animated:YES];
+//}
 
 #pragma mark //ChooseCustomer Notification
 - (void)queryCustomerDetail{
@@ -162,74 +181,87 @@
 }
 
 #pragma mark //UITableViewDataSource
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [self.payOrderViewMode numberOfSectionsInTableView:tableView];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.payOrderViewMode tableView:tableView numberOfRowsInSection:section];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return [self.payOrderViewMode tableView:tableView cellForRowAtIndexPath:indexPath];
-}
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return [self.payOrderViewMode numberOfSectionsInTableView:tableView];
+//}
+//
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return [self.payOrderViewMode tableView:tableView numberOfRowsInSection:section];
+//}
+//
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return [self.payOrderViewMode tableView:tableView cellForRowAtIndexPath:indexPath];
+//}
 
 #pragma mark //UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.payOrderViewMode tableView:tableView heightForRowAtIndexPath:indexPath];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 0.1;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0.5;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 0.5)];
-    [footView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.1]];
-    return footView;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return [self.payOrderViewMode tableView:tableView heightForRowAtIndexPath:indexPath];
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 0.1;
+//}
+//
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+//    return 0.5;
+//}
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    UIView * footView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, tableView.jk_width, 0.5)];
+//    [footView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.1]];
+//    return footView;
+//}
 
 #pragma mark //IPCPayOrderViewModelDelegate
-- (void)showEmployeeView{
-    [self loadEmployeView];
+//- (void)showEmployeeView{
+//    [self loadEmployeView];
+//}
+//
+//- (void)managerOptometryView{
+//    [self pushToManagerOptometryViewController];
+//}
+//
+//- (void)managerAddressView{
+//    [self pushToManagerAddressViewController];
+//}
+//
+//- (void)reloadPayOrderView{
+//    [self.shopCartView reload];
+//    [self.payOrderTableView reloadData];
+//    [IPCCommonUI hiden];
+//}
+//
+//- (void)createNewRecord{
+//    [self.payOrderTableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+//    [self.payOrderTableView reloadData];
+//}
+//
+//- (void)chooseCustomer{
+//    [self pushToSearchCustomerVC];
+//}
+//
+//- (void)successPayOrder{
+//    [self.saveButton jk_hideIndicator];
+//    [IPCCommonUI showSuccess:@"订单付款成功!"];
+//    [self resetPayInfoView];
+//}
+//
+//- (void)failPayOrder{
+//    [self.saveButton jk_hideIndicator];
+//}
+
+#pragma mark //UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    CGFloat currentPage = scrollView.contentOffset.y/scrollView.jk_height;
+    [self.pageView setCurrentPage:currentPage];
 }
 
-- (void)managerOptometryView{
-    [self pushToManagerOptometryViewController];
-}
-
-- (void)managerAddressView{
-    [self pushToManagerAddressViewController];
-}
-
-- (void)reloadPayOrderView{
-    [self.shopCartView reload];
-    [self.payOrderTableView reloadData];
-    [IPCCommonUI hiden];
-}
-
-- (void)createNewRecord{
-    [self.payOrderTableView setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
-    [self.payOrderTableView reloadData];
-}
-
-- (void)chooseCustomer{
-    [self pushToSearchCustomerVC];
-}
-
-- (void)successPayOrder{
-    [self.saveButton jk_hideIndicator];
-    [IPCCommonUI showSuccess:@"订单付款成功!"];
-    [self resetPayInfoView];
-}
-
-- (void)failPayOrder{
-    [self.saveButton jk_hideIndicator];
+#pragma mark //IPCPayorderScrollPageViewDelegate
+- (void)changePageIndex:(NSInteger)index
+{
+    [self.contentScrollView setContentOffset:CGPointMake(0, index*self.contentScrollView.jk_height) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
