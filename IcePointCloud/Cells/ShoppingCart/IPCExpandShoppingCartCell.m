@@ -15,7 +15,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
-@property (weak, nonatomic) IBOutlet UIView *inputPirceView;
 @property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
 
@@ -30,8 +29,7 @@
 {
     [super awakeFromNib];
     
-    [self.inputPirceView addBorder:3 Width:0.5 Color:nil];
-    [self.glassesImgView addBorder:3 Width:0.5 Color:nil];
+    [self.inputPriceTextField addBottomLine];
 }
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload
@@ -53,9 +51,6 @@
         }else if (([self.cartItem.glasses filterType] == IPCTopFilterTypeLens || [self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) && self.cartItem.glasses.isBatch){
             [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
         }
-        
-        [self.inputPriceTextField setLeftImageView:@"icon_pricetype"];
-        [self.inputPriceTextField setText:[NSString stringWithFormat:@"%.2f", _cartItem.unitPrice]];
     }
 }
 

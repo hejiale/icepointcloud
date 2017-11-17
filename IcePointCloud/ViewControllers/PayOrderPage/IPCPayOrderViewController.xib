@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderViewController">
             <connections>
+                <outlet property="bottomView" destination="L70-zW-7W1" id="uT8-tP-stw"/>
                 <outlet property="cancelButton" destination="Cu8-sK-Lh2" id="5i9-1R-Gjk"/>
                 <outlet property="contentScrollView" destination="kgY-7F-fDB" id="6GV-Lh-lxw"/>
                 <outlet property="saveButton" destination="GUo-wl-t5L" id="zFs-VI-8Iq"/>
@@ -33,7 +34,7 @@
                                 <constraint firstAttribute="width" constant="120" id="kJE-03-Oh0"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <state key="normal" title="保存"/>
+                            <state key="normal" title="下一步"/>
                             <connections>
                                 <action selector="savePayOrder:" destination="-1" eventType="touchUpInside" id="5bC-Gq-3SH"/>
                             </connections>
@@ -62,7 +63,7 @@
                         <constraint firstAttribute="trailing" secondItem="GUo-wl-t5L" secondAttribute="trailing" constant="50" id="uCb-kZ-APA"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-7F-fDB">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-7F-fDB">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="654"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <connections>

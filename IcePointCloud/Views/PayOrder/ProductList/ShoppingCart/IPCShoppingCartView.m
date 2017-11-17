@@ -43,9 +43,9 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         self.CompleteBlock = complete;
         
         UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCShoppingCartView" owner:self];
+        [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
         
-        [self addLeftLine];
         [self.cartBottomView addTopLine];
         //Load UITableView
         [self.cartListTableView setTableHeaderView:[[UIView alloc]init]];
@@ -83,7 +83,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 {
     [self.editButton setSelected:isShown];
     [self.cartBottomView setHidden:!isShown];
-    self.tableBottom.constant = isShown ? 50 : 0;
+    self.tableBottom.constant = isShown ? 60 : 10;
 }
 
 - (void)updateCartUI{

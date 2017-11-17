@@ -31,6 +31,8 @@ extern NSString *const  IPCChooseWareHouseNotification;
 //Error Networking Status Message
 extern NSString * const kIPCErrorNetworkAlertMessage;
 extern NSString * const kIPCNotConnectInternetMessage;
+///PayOrder Page  Reset Offset
+extern NSString * const kIPCPayOrderResetOffset;
 
 @interface IPCAppManager : NSObject
 
