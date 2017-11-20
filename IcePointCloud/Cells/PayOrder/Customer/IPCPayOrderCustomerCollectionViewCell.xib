@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gTV-IL-0wX" customClass="IPCPayOrderCustomerCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="158" height="70"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="158" height="70"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nw-hs-Ps6">
+                        <rect key="frame" x="10" y="10" width="55" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="55" id="VH3-OJ-gaZ"/>
+                            <constraint firstAttribute="height" constant="20" id="tgm-wz-Im8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOk-C2-YgE">
+                        <rect key="frame" x="65" y="10" width="83" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="nkm-pH-Pbg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekR-Z4-gDw">
+                        <rect key="frame" x="10" y="40" width="148" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="hzH-gd-wNx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ekR-Z4-gDw" secondAttribute="bottom" constant="10" id="39U-Iw-HFI"/>
+                <constraint firstItem="0nw-hs-Ps6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="6o3-Kr-qND"/>
+                <constraint firstItem="0nw-hs-Ps6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="7pu-Vv-v5M"/>
+                <constraint firstAttribute="trailing" secondItem="ekR-Z4-gDw" secondAttribute="trailing" id="ODj-Z6-amb"/>
+                <constraint firstItem="ekR-Z4-gDw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="U2S-gj-ca5"/>
+                <constraint firstItem="fOk-C2-YgE" firstAttribute="leading" secondItem="0nw-hs-Ps6" secondAttribute="trailing" id="gwD-d8-8mK"/>
+                <constraint firstItem="fOk-C2-YgE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="mYl-iZ-hec"/>
+                <constraint firstAttribute="trailing" secondItem="fOk-C2-YgE" secondAttribute="trailing" constant="10" id="oM6-sz-Zc0"/>
+            </constraints>
+            <size key="customSize" width="186" height="84"/>
+            <connections>
+                <outlet property="customerLevelLabel" destination="fOk-C2-YgE" id="Lcq-hO-Sco"/>
+                <outlet property="customerNameLabel" destination="0nw-hs-Ps6" id="bUK-8h-C00"/>
+                <outlet property="customerPhoneLabel" destination="ekR-Z4-gDw" id="ZSd-Vz-kI5"/>
+            </connections>
+            <point key="canvasLocation" x="102" y="71"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="654" width="1024" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
-                            <rect key="frame" x="854" y="8" width="120" height="35"/>
+                            <rect key="frame" x="884" y="8" width="120" height="35"/>
                             <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
@@ -40,7 +40,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu8-sK-Lh2">
-                            <rect key="frame" x="704" y="8" width="120" height="35"/>
+                            <rect key="frame" x="734" y="8" width="120" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="7cr-LA-Npa"/>
                                 <constraint firstAttribute="width" constant="120" id="sh6-Cj-tlV"/>
@@ -60,7 +60,7 @@
                         <constraint firstItem="Cu8-sK-Lh2" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="WPM-pc-PDf"/>
                         <constraint firstItem="GUo-wl-t5L" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="oil-9C-ckh"/>
                         <constraint firstAttribute="height" constant="50" id="smf-Gz-G9X"/>
-                        <constraint firstAttribute="trailing" secondItem="GUo-wl-t5L" secondAttribute="trailing" constant="50" id="uCb-kZ-APA"/>
+                        <constraint firstAttribute="trailing" secondItem="GUo-wl-t5L" secondAttribute="trailing" constant="20" id="uCb-kZ-APA"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-7F-fDB">

@@ -16,7 +16,7 @@
 
 #import "IPCPayOrderCustomerViewController.h"
 #import "IPCPayOrderOptometryViewController.h"
-#import "IPCPayOrderProductListViewController.h"
+#import "IPCPayOrderOfferOrderViewController.h"
 #import "IPCPayOrderPayCashViewController.h"
 
 #import "IPCPayorderScrollPageView.h"
@@ -80,7 +80,7 @@
     
     IPCPayOrderCustomerViewController * customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
     IPCPayOrderOptometryViewController * optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
-    IPCPayOrderProductListViewController * productVC = [[IPCPayOrderProductListViewController alloc]initWithNibName:@"IPCPayOrderProductListViewController" bundle:nil];
+    IPCPayOrderOfferOrderViewController * productVC = [[IPCPayOrderOfferOrderViewController alloc]initWithNibName:@"IPCPayOrderOfferOrderViewController" bundle:nil];
     IPCPayOrderPayCashViewController * cashVC = [[IPCPayOrderPayCashViewController alloc]initWithNibName:@"IPCPayOrderPayCashViewController" bundle:nil];
     
     [self insertScrollSubView:@[customerVC,optometryVC,productVC,cashVC]];

@@ -19,6 +19,7 @@
 @property (nonatomic, copy, readwrite) NSString * email;
 @property (nonatomic, copy, readwrite) NSString * contactorGengerString;
 @property (nonatomic, copy, readwrite) NSString * customerAddress;
+@property (nonatomic, copy, readwrite) NSString * gender;
 @property (nonatomic, copy, readwrite) NSString * genderString;
 @property (nonatomic, copy, readwrite) NSString * customerName;
 @property (nonatomic, copy, readwrite) NSString * contactorAddress;
@@ -28,6 +29,7 @@
 @property (nonatomic, copy, readwrite) NSString * memberLevel;
 @property (nonatomic, copy, readwrite) NSString * memberLevelId;
 @property (nonatomic, copy, readwrite) NSString * membergrowth;
+@property (nonatomic, copy, readwrite) NSString * memberPhone;
 @property (nonatomic, assign, readwrite) double   consumptionAmount;
 @property (nonatomic, assign, readwrite) double   balance;
 @property (nonatomic, copy, readwrite) NSString * createDate;

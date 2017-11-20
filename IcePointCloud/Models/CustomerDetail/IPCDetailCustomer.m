@@ -11,7 +11,10 @@
 @implementation IPCDetailCustomer
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"customerID": @"id"};
+    return @{@"customerID": @"id",
+             @"memberLevel":@"memberLevel.memberLevel",
+             @"discount":@"memberLevel.discount"
+             };
 }
 
 @end

@@ -51,6 +51,8 @@
         }else if (([self.cartItem.glasses filterType] == IPCTopFilterTypeLens || [self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) && self.cartItem.glasses.isBatch){
             [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
         }
+        
+        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%.f", _cartItem.glasses.price]];
     }
 }
 

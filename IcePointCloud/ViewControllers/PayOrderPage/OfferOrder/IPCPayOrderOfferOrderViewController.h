@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCPayOrderProductListViewController : UIViewController
+@interface IPCPayOrderOfferOrderViewController : UIViewController
 
 @end
