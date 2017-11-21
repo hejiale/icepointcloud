@@ -9,7 +9,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderOptometryInfoView"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderOptometryInfoView">
+            <connections>
+                <outlet property="leftAddLabel" destination="Vxb-jr-OOW" id="qiX-FD-uZe"/>
+                <outlet property="leftAxisLabel" destination="Xet-jR-ehl" id="hZH-iT-cbb"/>
+                <outlet property="leftCorrectionLabel" destination="rTZ-VH-L7D" id="gV5-4v-Hhb"/>
+                <outlet property="leftCylLabel" destination="zbv-Ap-Bhy" id="0vu-D7-gLb"/>
+                <outlet property="leftDistanceLabel" destination="iHv-Gc-Kjv" id="Smr-xZ-ICg"/>
+                <outlet property="leftSphLabel" destination="ILo-Lh-i1y" id="KdZ-Do-INa"/>
+                <outlet property="rightAddLabel" destination="ji5-Ll-ycc" id="yfC-O8-HcL"/>
+                <outlet property="rightAxisLabel" destination="bwN-8G-063" id="NaT-Q4-iij"/>
+                <outlet property="rightCorrectionLabel" destination="qCY-hU-Fgg" id="JAQ-vc-er0"/>
+                <outlet property="rightCylLabel" destination="pKm-KO-qTC" id="fu1-7q-lkV"/>
+                <outlet property="rightDistanceLabel" destination="9gb-HP-blT" id="3tB-kQ-h1C"/>
+                <outlet property="rightSphLabel" destination="oiH-xC-OQ4" id="BKB-SX-aRd"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="920" height="375"/>

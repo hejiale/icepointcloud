@@ -10,6 +10,6 @@
 
 @interface IPCEmployeListView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame DismissBlock:(void(^)())dismiss;
+- (instancetype)initWithFrame:(CGRect)frame DismissBlock:(void(^)(IPCEmployee *))dismiss;
 
 @end

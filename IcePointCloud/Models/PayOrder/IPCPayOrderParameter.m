@@ -14,14 +14,14 @@
 - (NSDictionary *)offOrderParameter
 {
     //员工份额
-    __block NSMutableArray * employeeList = [[NSMutableArray alloc]init];
-    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
-        [employeeResultDic setObject:@(obj.achievement) forKey:@"achievement"];
-        [employeeResultDic setObject:obj.employee.jobID forKey:@"employeeId"];
-        [employeeList addObject:employeeResultDic];
-    }];
-    
+//    __block NSMutableArray * employeeList = [[NSMutableArray alloc]init];
+//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
+//        [employeeResultDic setObject:@(obj.achievement) forKey:@"achievement"];
+//        [employeeResultDic setObject:obj.employee.jobID forKey:@"employeeId"];
+//        [employeeList addObject:employeeResultDic];
+//    }];
+//
     //支付方式
     __block NSMutableArray * otherTypeList = [[NSMutableArray alloc]init];
     [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -47,9 +47,9 @@
     [parameters setObject:@"PayAmount" forKey:@"allPay"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
     
-    if (employeeList.count) {
-        [parameters setObject:employeeList forKey:@"employeeAchievements"];
-    }
+//    if (employeeList.count) {
+//        [parameters setObject:employeeList forKey:@"employeeAchievements"];
+//    }
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCPayOrderManager sharedManager] realTotalPrice]] forKey:@"orderFinalPrice"];
     [parameters setObject:@([IPCPayOrderManager sharedManager].usedPoint) forKey:@"integral"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].givingAmount] forKey:@"donationAmount"];

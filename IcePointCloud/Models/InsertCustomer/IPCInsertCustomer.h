@@ -14,8 +14,6 @@
 
 - (void)resetData;
 
-- (BOOL)isEmpty;
-
 @property (nonatomic, copy, readwrite) NSString * photo_udid;//头像
 @property (nonatomic, copy, readwrite) NSString * customerName;
 @property (nonatomic, copy, readwrite) NSString * genderString;

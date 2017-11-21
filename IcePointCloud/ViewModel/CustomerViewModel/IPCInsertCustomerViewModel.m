@@ -88,6 +88,7 @@
                                                       PhotoId:[IPCInsertCustomer instance].photo_udid
                                                  IntroducerId:[IPCInsertCustomer instance].introducerId
                                             IntroducerInteger: [IPCInsertCustomer instance].introducerInteger
+                                                          Age:nil
                                                  SuccessBlock:^(id responseValue)
      {
          [[IPCInsertCustomer instance] resetData];

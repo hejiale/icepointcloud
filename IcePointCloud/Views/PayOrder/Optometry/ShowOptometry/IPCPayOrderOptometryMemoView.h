@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderOptometryMemoView : UIView
 
+- (void)updateOptometryInfo;
+
 @end

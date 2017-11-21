@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderOptometryViewController : UIViewController
 
+- (void)reload;
+
 @end

@@ -86,12 +86,12 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    double  result = [[IPCPayOrderManager sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
-    
-    if (result > 0) {
-        self.employeeResult.achievement = result;
-    }
-    
+//    double  result = [[IPCPayOrderManager sharedManager] judgeEmployeeResult:[textField.text doubleValue] Employee:self.employeeResult];
+//    
+//    if (result > 0) {
+//        self.employeeResult.achievement = result;
+//    }
+//    
     if (self.UpdateBlock) {
         self.UpdateBlock();
     }

@@ -13,8 +13,11 @@
             <connections>
                 <outlet property="ageTextField" destination="XjD-yJ-Lyj" id="0Db-pb-oyg"/>
                 <outlet property="birthDayTextField" destination="EwE-GD-izC" id="FXo-7H-aBK"/>
+                <outlet property="contentView" destination="SXF-bN-63p" id="zOC-aM-f9r"/>
                 <outlet property="customerNameTextField" destination="VEH-OU-Fdd" id="Yy9-ab-8qY"/>
                 <outlet property="editContentView" destination="xU1-a0-G6G" id="TTQ-uJ-aQo"/>
+                <outlet property="femaleButton" destination="bqe-KO-bXa" id="37O-2J-8Xc"/>
+                <outlet property="maleButton" destination="anJ-gT-hEr" id="WrS-59-vuf"/>
                 <outlet property="phoneTextField" destination="P0T-75-g4B" id="udB-mS-zR0"/>
             </connections>
         </placeholder>
@@ -108,9 +111,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="9MS-aQ-Yav"/>
                                     </constraints>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="9Xn-vh-Ma7"/>
                                     </connections>
@@ -149,9 +152,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="b4R-6f-aG8"/>
                                     </constraints>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="e4s-Vc-AjY"/>
                                     </connections>
@@ -170,9 +173,9 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Hjt-UV-dIU"/>
                                     </constraints>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="uwt-4B-uRc"/>
                                     </connections>
@@ -191,14 +194,11 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="QAp-uC-Cnw"/>
                                     </constraints>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="2pD-zE-hUG"/>
-                                    </connections>
                                 </textField>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anJ-gT-hEr">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="anJ-gT-hEr">
                                     <rect key="frame" x="165" y="89.5" width="60" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="prq-qg-PZs"/>
@@ -210,8 +210,11 @@
                                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="selected" image="common_btn_check_selected"/>
+                                    <connections>
+                                        <action selector="selectMaleAction:" destination="-1" eventType="touchUpInside" id="gp1-Xn-k9P"/>
+                                    </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqe-KO-bXa">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqe-KO-bXa">
                                     <rect key="frame" x="395" y="89" width="60" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Q5W-5S-cEp"/>
@@ -223,6 +226,9 @@
                                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="selected" image="common_btn_check_selected"/>
+                                    <connections>
+                                        <action selector="selectFemaleAction:" destination="-1" eventType="touchUpInside" id="hLZ-Hd-URj"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

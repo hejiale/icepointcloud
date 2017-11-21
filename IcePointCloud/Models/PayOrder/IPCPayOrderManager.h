@@ -31,17 +31,20 @@
 @property (nonatomic, strong) IPCPayRecord * insertPayRecord;//正在输入中的付款方式记录
 @property (nonatomic, assign) BOOL      isInsertRecordStatus;//是否正在输入付款记录的状态
 
+@property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
+@property (nonatomic, strong) IPCDetailCustomer  * insertCustomer;///新建客户
+
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
 @property (nonatomic, strong, readwrite) IPCWareHouse * currentHouse;//当前店铺
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;//付款记录方式
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩
+//@property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩
 
-- (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult;
+//- (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult;
 
-- (double)totalEmployeeResult;
+//- (double)totalEmployeeResult;
 
-- (double)minimumEmployeeDiscountPrice:(double)originPrice;
+//- (double)minimumEmployeeDiscountPrice:(double)originPrice;
 
 //实付金额
 - (double)realTotalPrice;

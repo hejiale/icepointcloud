@@ -10,4 +10,8 @@
 
 @interface IPCPayOrderOptometryHeadView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame ChooseBlock:(void(^)())choose;
+
+- (void)updateOptometryInfo;
+
 @end

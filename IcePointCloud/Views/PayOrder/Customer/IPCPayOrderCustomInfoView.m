@@ -51,6 +51,7 @@
     IPCDetailCustomer * customer = [IPCCurrentCustomer sharedManager].currentCustomer;
     
     [self.customerNameLabel setText:customer.customerName];
+    [self.ageLabel setText:customer.age];
     [self.phoneLabel setText:customer.customerPhone];
     [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
     [self.birthdayLabel setText:customer.birthday];

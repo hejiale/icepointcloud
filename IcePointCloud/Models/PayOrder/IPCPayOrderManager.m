@@ -20,12 +20,22 @@
     return _client;
 }
 
-- (NSMutableArray<IPCEmployeeResult *> *)employeeResultArray{
-    if (!_employeeResultArray) {
-        _employeeResultArray= [[NSMutableArray alloc]init];
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.insertCustomer = [[IPCDetailCustomer alloc]init];
+        self.insertOptometry = [[IPCOptometryMode alloc]init];
     }
-    return _employeeResultArray;
+    return self;
 }
+
+//- (NSMutableArray<IPCEmployeeResult *> *)employeeResultArray{
+//    if (!_employeeResultArray) {
+//        _employeeResultArray= [[NSMutableArray alloc]init];
+//    }
+//    return _employeeResultArray;
+//}
 
 -(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
     if (!_payTypeRecordArray) {
@@ -34,59 +44,59 @@
     return _payTypeRecordArray;
 }
 
-- (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult
-{
-    __block double  remainResult = 0;
-    __block double  otherTotalResult = 0;//计算除当前员工下的总份额
-    
-    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ( ! [obj.employee.jobID isEqualToString:employeeResult.employee.jobID]) {
-            otherTotalResult += obj.achievement;
-        }
-    }];
-    
-    remainResult = 100 - otherTotalResult;// 剩余份额
-    
-    if (remainResult < result) {
-        if (remainResult > 0) {
-            [IPCCommonUI showError:[NSString stringWithFormat:@"该员工至多百分之%.f份额",remainResult]];
-        }else{
-            [IPCCommonUI showError:@"请调整其他员工的份额"];
-        }
-    }else{
-        remainResult = result;
-    }
-    
-    return remainResult;
-}
+//- (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult
+//{
+//    __block double  remainResult = 0;
+//    __block double  otherTotalResult = 0;//计算除当前员工下的总份额
+//    
+//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if ( ! [obj.employee.jobID isEqualToString:employeeResult.employee.jobID]) {
+//            otherTotalResult += obj.achievement;
+//        }
+//    }];
+//    
+//    remainResult = 100 - otherTotalResult;// 剩余份额
+//    
+//    if (remainResult < result) {
+//        if (remainResult > 0) {
+//            [IPCCommonUI showError:[NSString stringWithFormat:@"该员工至多百分之%.f份额",remainResult]];
+//        }else{
+//            [IPCCommonUI showError:@"请调整其他员工的份额"];
+//        }
+//    }else{
+//        remainResult = result;
+//    }
+//    
+//    return remainResult;
+//}
 
 
-- (double)totalEmployeeResult
-{
-    __block double  totalResult = 0;//计算所有员工下的总份额
-    
-    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        totalResult += obj.achievement;
-    }];
-    return totalResult;
-}
-
-- (double)minimumEmployeeDiscountPrice:(double)originPrice
-{
-    __block NSMutableArray * discountArray = [[NSMutableArray alloc]init];
-    
-    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [discountArray addObject:[NSNumber numberWithDouble:obj.employee.discount]];
-    }];
-    
-    [discountArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-        return [obj1 doubleValue] < [obj2 doubleValue];
-    }];
-
-    double minimumDiscount = [discountArray[0] doubleValue];
-
-    return  (minimumDiscount/10) * originPrice;
-}
+//- (double)totalEmployeeResult
+//{
+//    __block double  totalResult = 0;//计算所有员工下的总份额
+//
+//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        totalResult += obj.achievement;
+//    }];
+//    return totalResult;
+//}
+//
+//- (double)minimumEmployeeDiscountPrice:(double)originPrice
+//{
+//    __block NSMutableArray * discountArray = [[NSMutableArray alloc]init];
+//
+//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [discountArray addObject:[NSNumber numberWithDouble:obj.employee.discount]];
+//    }];
+//
+//    [discountArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//        return [obj1 doubleValue] < [obj2 doubleValue];
+//    }];
+//
+//    double minimumDiscount = [discountArray[0] doubleValue];
+//
+//    return  (minimumDiscount/10) * originPrice;
+//}
 
 - (double)realTotalPrice{
     return [[IPCShoppingCart sharedCart] allGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].givingAmount;
@@ -118,29 +128,29 @@
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
-
-- (double)minumEmployeeResult
-{
-    __block double totalResult = 0;
-    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        totalResult += obj.achievement;
-    }];
-    return MAX(100 - totalResult, 0);
-}
-
-- (BOOL)isExistEmptyEmployeeResult{
-    __block BOOL isExist = NO;
-    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.achievement == 0 ) {
-            isExist = YES;
-        }
-    }];
-    return isExist;
-}
+//
+//- (double)minumEmployeeResult
+//{
+//    __block double totalResult = 0;
+//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        totalResult += obj.achievement;
+//    }];
+//    return MAX(100 - totalResult, 0);
+//}
+//
+//- (BOOL)isExistEmptyEmployeeResult{
+//    __block BOOL isExist = NO;
+//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj.achievement == 0 ) {
+//            isExist = YES;
+//        }
+//    }];
+//    return isExist;
+//}
 
 - (void)resetData
 {
-    [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
+//    [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
     [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
     [IPCPayOrderManager sharedManager].insertPayRecord = nil;
     [IPCPayOrderManager sharedManager].customerDiscount = 0;

@@ -8,7 +8,7 @@
 
 #import "IPCPayOrderInputOptometryMemoView.h"
 
-@interface IPCPayOrderInputOptometryMemoView()
+@interface IPCPayOrderInputOptometryMemoView()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *memoTextField;
 
@@ -28,6 +28,18 @@
         [self.memoTextField addBottomLine];
     }
     return self;
+}
+
+#pragma mark //UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [IPCPayOrderManager sharedManager].insertOptometry.remark = [textField.text jk_trimmingWhitespace];
 }
 
 @end

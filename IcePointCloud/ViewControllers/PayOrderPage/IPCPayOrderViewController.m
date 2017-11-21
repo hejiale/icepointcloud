@@ -38,6 +38,7 @@
 //@property (strong, nonatomic) IPCShoppingCartView * shopCartView;
 
 @property (strong, nonatomic) IPCPayorderScrollPageView * pageView;
+@property (strong, nonatomic) IPCPayOrderOptometryViewController * optometryVC;
 
 
 
@@ -79,11 +80,11 @@
     [self.contentScrollView setContentSize:CGSizeMake(self.contentScrollView.jk_width, _pageView.numberPages*self.contentScrollView.jk_height)];
     
     IPCPayOrderCustomerViewController * customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
-    IPCPayOrderOptometryViewController * optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
+    _optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
     IPCPayOrderOfferOrderViewController * productVC = [[IPCPayOrderOfferOrderViewController alloc]initWithNibName:@"IPCPayOrderOfferOrderViewController" bundle:nil];
     IPCPayOrderPayCashViewController * cashVC = [[IPCPayOrderPayCashViewController alloc]initWithNibName:@"IPCPayOrderPayCashViewController" bundle:nil];
     
-    [self insertScrollSubView:@[customerVC,optometryVC,productVC,cashVC]];
+    [self insertScrollSubView:@[customerVC,_optometryVC,productVC,cashVC]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetOptometryOffset:) name:UIKeyboardWillHideNotification object:nil];
 }
@@ -299,6 +300,10 @@
 - (void)changePageIndex:(NSInteger)index
 {
     [self.contentScrollView setContentOffset:CGPointMake(0, index*self.contentScrollView.jk_height)];
+    
+    if (index == 1) {
+        [self.optometryVC reload];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

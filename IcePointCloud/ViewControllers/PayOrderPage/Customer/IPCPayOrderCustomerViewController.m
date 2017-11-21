@@ -72,8 +72,13 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (IPCPayOrderCustomInfoView *)infoView
 {
+    __weak typeof(self) weakSelf = self;
     if (!_infoView) {
         _infoView = [[IPCPayOrderCustomInfoView alloc]initWithFrame:self.customInfoContentView.bounds];
+        [[_infoView rac_signalForSelector:@selector(editCustomerInfoAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf showEditCustomerView:YES];
+        }];
     }
     return _infoView;
 }
@@ -128,6 +133,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId
 {
+    [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+    
     [IPCCommonUI show];
     __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
@@ -165,10 +172,22 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 }
 
 #pragma mark //Clicked Events
-- (IBAction)insertNewCustomerAction:(id)sender {
-    IPCPayOrderEditCustomerView * editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
-    [[UIApplication sharedApplication].keyWindow addSubview:editCustomerView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:editCustomerView];
+- (IBAction)insertNewCustomerAction:(id)sender
+{
+    [self showEditCustomerView:NO];
+}
+
+- (void)showEditCustomerView:(BOOL)isUpdate
+{
+    IPCPayOrderEditCustomerView * editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:self.view.superview.superview.bounds
+                                                                                           UpdateBlock:^(NSString *customerId) {
+                                                                                               [self queryCustomerDetailWithCustomerId:customerId];
+                                                                                           }];
+    [self.view.superview.superview addSubview:editCustomerView];
+    [self.view.superview.superview bringSubviewToFront:editCustomerView];
+    if (isUpdate) {
+        [editCustomerView updateCustomerInfo];
+    }
 }
 
 #pragma mark //UICollectionViewDataSource
@@ -202,9 +221,12 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
-    [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
     [self queryCustomerDetailWithCustomerId:customer.customerID];
+    
+    [IPCPayOrderManager sharedManager].insertOptometry = [[IPCOptometryMode alloc]init];
 }
+
+#pragma mark //UITextField Delegate
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

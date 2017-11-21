@@ -8,6 +8,12 @@
 
 #import "IPCPayOrderOptometryMemoView.h"
 
+@interface IPCPayOrderOptometryMemoView()
+
+@property (weak, nonatomic) IBOutlet UILabel *memoLabel;
+
+@end
+
 @implementation IPCPayOrderOptometryMemoView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -19,6 +25,15 @@
         [self addSubview:view];
     }
     return self;
+}
+
+- (void)updateOptometryInfo
+{
+    IPCOptometryMode * optometry = [IPCCurrentCustomer sharedManager].currentOpometry;
+    
+    if (optometry) {
+        [self.memoLabel setText:optometry.remark];
+    }
 }
 
 @end

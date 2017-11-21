@@ -116,18 +116,18 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
         [IPCCommonUI showError:@"请先选择客户信息"];
         return NO;
     }
-    if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-        [IPCCommonUI showError:@"请选择员工"];
-        return NO;
-    }
+//    if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
+//        [IPCCommonUI showError:@"请选择员工"];
+//        return NO;
+//    }
     if ([[IPCPayOrderManager sharedManager] isExistEmptyEmployeeResult]) {
         [IPCCommonUI showError:@"参与比例必须填写且大于零"];
         return NO;
     }
-    if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
-        [IPCCommonUI showError:@"员工总份额不足百分之一百"];
-        return NO;
-    }
+//    if ([[IPCPayOrderManager sharedManager] totalEmployeeResult] < 100) {
+//        [IPCCommonUI showError:@"员工总份额不足百分之一百"];
+//        return NO;
+//    }
     return YES;
 }
 

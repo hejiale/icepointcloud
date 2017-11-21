@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderInputOptometryHeadView : UIView
 
+- (void)updateInsertOptometryInfo;
+
 @end

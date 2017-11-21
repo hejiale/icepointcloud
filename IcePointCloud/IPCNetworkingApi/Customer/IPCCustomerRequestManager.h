@@ -107,6 +107,7 @@
                                PhotoId:(NSString *)photoId
                           IntroducerId:(NSString *)introducerId
                      IntroducerInteger:(NSString *)introducerInteger
+                                   Age:(NSString *)age
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
@@ -125,11 +126,11 @@
 
 /**
  QUERY CUSTOMER LIST
-
+ 
  @param keyword
  @param page
  @param success
- @param failure 
+ @param failure
  */
 + (void)queryCustomerListWithKeyword:(NSString *)keyword
                                 Page:(NSInteger )page
@@ -294,10 +295,10 @@
 
 /**
  Judge Customer Phone Is Exist
-
+ 
  @param phone
  @param success
- @param failure 
+ @param failure
  */
 + (void)judgePhoneIsExistWithPhone:(NSString *)phone
                       SuccessBlock:(void (^)(id responseValue))success
@@ -306,10 +307,10 @@
 
 /**
  Judge Customer Name Is Exist
-
+ 
  @param name
  @param success
- @param failure 
+ @param failure
  */
 + (void)judgeCustomerNameIsExistWithName:(NSString *)name
                             SuccessBlock:(void (^)(id))success

@@ -11,7 +11,7 @@
 
 static NSString * const employeIdentifier = @"IPCEmployeeListTableViewCellIdentifier";
 
-typedef void(^DismissBlock)();
+typedef void(^DismissBlock)(IPCEmployee *);
 
 @interface IPCEmployeListView()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
@@ -26,7 +26,7 @@ typedef void(^DismissBlock)();
 @implementation IPCEmployeListView
 
 
-- (instancetype)initWithFrame:(CGRect)frame DismissBlock:(void(^)())dismiss
+- (instancetype)initWithFrame:(CGRect)frame DismissBlock:(void(^)(IPCEmployee *))dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -82,9 +82,7 @@ typedef void(^DismissBlock)();
 
 #pragma mark //Clicked Events
 - (IBAction)backAction:(id)sender {
-    if (self.dismissBlock) {
-        self.dismissBlock();
-    }
+    [self removeFromSuperview];
 }
 
 
@@ -102,15 +100,8 @@ typedef void(^DismissBlock)();
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
     IPCEmployee * employe = self.employeeArray[indexPath.row];
-    
-    if (employe) {
-        [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj.employee.jobID isEqualToString:employe.jobID]) {
-                [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
-            }
-        }];
-        [cell.employeLabel setText:[NSString stringWithFormat:@"员工号:%@   员工名:%@",employe.jobNumber ? : @"",employe.name]];
-    }
+    [cell.employeLabel setText:employe.name];
+
     return cell;
 }
 
@@ -120,35 +111,11 @@ typedef void(^DismissBlock)();
 {
     IPCEmployee * employe = self.employeeArray[indexPath.row];
     if (employe) {
-        if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 5){
-            [IPCCommonUI showError:@"至多选择五名员工"];
-            return;
-        }
-
-        __block BOOL isExist = NO;
-        [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([employe.jobID isEqualToString:obj.employee.jobID]) {
-                isExist = YES;
-            }
-        }];
-        if (!isExist){
-            IPCEmployeeResult * result = [[IPCEmployeeResult alloc]init];
-            result.employee = employe;
-            
-            if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-                result.achievement = 100;
-            }
-            [[IPCPayOrderManager sharedManager].employeeResultArray addObject:result];
-            
-            if ([[IPCPayOrderManager sharedManager].employeeResultArray count] > 1) {
-                [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                    obj.achievement = 0;
-                }];
-            }
+        if (self.dismissBlock) {
+            self.dismissBlock(employe);
         }
     }
-    if (self.dismissBlock)
-        self.dismissBlock();
+    [self removeFromSuperview];
 }
 
 #pragma mark //UITextField Delegate

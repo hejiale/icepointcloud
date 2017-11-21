@@ -14,8 +14,8 @@
 {
     if ((![IPCCurrentCustomer sharedManager].currentCustomer && section == 2) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 5))
         return YES;
-    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 3)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
-        return YES;
+//    else if (((![IPCCurrentCustomer sharedManager].currentCustomer && section == 0) || ([IPCCurrentCustomer sharedManager].currentCustomer && section == 3)) && [IPCPayOrderManager sharedManager].employeeResultArray.count == 0 )
+//        return YES;
     else if (![IPCCurrentCustomer sharedManager].currentAddress && section == 1 && [IPCCurrentCustomer sharedManager].currentCustomer)
         return YES;
     else if (![IPCCurrentCustomer sharedManager].currentOpometry && section == 2 && [IPCCurrentCustomer sharedManager].currentCustomer)

@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderInputOptometryView : UIView<UITextFieldDelegate>
 
+- (void)updateInsertOptometry;
+
 @end

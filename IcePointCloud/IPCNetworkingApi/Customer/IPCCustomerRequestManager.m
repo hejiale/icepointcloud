@@ -78,12 +78,14 @@
                                PhotoId:(NSString *)photoId
                           IntroducerId:(NSString *)introducerId
                      IntroducerInteger:(NSString *)introducerInteger
+                                   Age:(NSString *)age
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
     NSDictionary *params = @{@"customerName": customName,
                              @"customerPhone":phone,
                              @"genderString":gender,
+                             @"gender":gender,
                              @"email":email,
                              @"birthday":birthday,
                              @"remark":remark,
@@ -99,6 +101,7 @@
                              @"occupation":occupation,
                              @"optometrys":optometryList,
                              @"photoIdForPos":photoId,
+                             @"age":age,
                              @"isPos":@"true"};
     NSMutableDictionary * paramterDic = [[NSMutableDictionary alloc]initWithDictionary:params];
     
