@@ -79,6 +79,7 @@
                           IntroducerId:(NSString *)introducerId
                      IntroducerInteger:(NSString *)introducerInteger
                                    Age:(NSString *)age
+                            CustomerId:(NSString *)customerId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -102,6 +103,7 @@
                              @"optometrys":optometryList,
                              @"photoIdForPos":photoId,
                              @"age":age,
+                             @"id":customerId,
                              @"isPos":@"true"};
     NSMutableDictionary * paramterDic = [[NSMutableDictionary alloc]initWithDictionary:params];
     
@@ -208,7 +210,7 @@
                                   @"remark":remark,
                                   @"memberId":memberNum,
                                   @"memberLevelId":memberLevelId,
-                                  @"customerTypeId":customerTypeId,
+                                  @"customerTypeId":(customerTypeId ? : @""),
                                   @"occupation":job,
                                   @"memberLevel":memberLevel,
                                   @"photoIdForPos":photoId,

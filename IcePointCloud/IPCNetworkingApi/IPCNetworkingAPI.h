@@ -42,9 +42,11 @@
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"
 
-#define PayOrderRequest_SaveNewOrder               @"orderObjectAdmin.savePrototypeOrders"
+#define PayOrderRequest_SaveNewOrder               @"orderObjectAdmin.commitAuthOrders"//保存 编辑草稿
+#define PayOrderRequest_ConfirmOrder                @"orderObjectAdmin.confirmOrder"//审核订单
 #define PayOrderRequest_EmployeeList                 @"employeeadmin.listEmployee"
 #define PayOrderRequest_Integral                          @"integralTradeAdmin.getSaleOrderDetailIntegralList"
+
 
 #define UserRequest_Login                                    @"bizadmin.login"
 #define UserRequest_LoginOut                              @"bizadmin.logout"

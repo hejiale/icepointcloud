@@ -65,6 +65,20 @@
 }
 
 /**
+*  Shopping cart price calculation
+*
+*/
+- (double)allGlassesTotalPrePrice
+{
+    double price = 0;
+    for (IPCShoppingCartItem *ci in self.itemList) {
+        price += ci.totalPrePrice;
+    }
+    return price;
+}
+
+
+/**
  *  Shopping cart price calculation
  *
  */
@@ -295,5 +309,15 @@
     return itemArray;
 }
 
+- (void)updateAllCartItemDiscount
+{
+    if ([IPCPayOrderManager sharedManager].isPayOrderStatus && [IPCPayOrderManager sharedManager].discount > 0)
+    {
+        [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+            item.unitDiscount = 1 - [IPCPayOrderManager sharedManager].discount/100;
+            item.unitPrice = 0;
+        }];
+    }
+}
 
 @end

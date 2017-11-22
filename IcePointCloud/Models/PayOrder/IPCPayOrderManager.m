@@ -24,8 +24,10 @@
 {
     self = [super init];
     if (self) {
-        self.insertCustomer = [[IPCDetailCustomer alloc]init];
         self.insertOptometry = [[IPCOptometryMode alloc]init];
+        self.employee = [[IPCEmployee alloc]init];
+        self.employee.name = [IPCAppManager sharedManager].storeResult.name;
+        self.employee.jobNumber = [IPCAppManager sharedManager].storeResult.jobNumber;
     }
     return self;
 }
@@ -98,9 +100,9 @@
 //    return  (minimumDiscount/10) * originPrice;
 //}
 
-- (double)realTotalPrice{
-    return [[IPCShoppingCart sharedCart] allGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].givingAmount;
-}
+//- (double)realTotalPrice{
+//    return [[IPCShoppingCart sharedCart] allGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].givingAmount;
+//}
 
 - (double)remainPayPrice{
     return [[IPCPayOrderManager sharedManager] realTotalPrice] - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
@@ -128,6 +130,19 @@
     [IPCPayOrderManager sharedManager].givingAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
+
+- (double)calculateDiscount
+{
+    if ([IPCPayOrderManager sharedManager].payAmount <= 0 || [IPCPayOrderManager sharedManager].payAmount >= [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]) {
+        return 0;
+    }
+    double discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
+    double discount = (double)discountAmount/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
+    NSString * discountStr = [NSString stringWithFormat:@"%.4f",discount];
+    return [discountStr doubleValue] * 100;
+}
+
+
 //
 //- (double)minumEmployeeResult
 //{

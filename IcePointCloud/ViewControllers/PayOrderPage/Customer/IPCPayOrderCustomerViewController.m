@@ -14,7 +14,7 @@
 
 static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionViewCellIdentifier";
 
-@interface IPCPayOrderCustomerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface IPCPayOrderCustomerViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *customInfoContentView;
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
@@ -227,6 +227,18 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 }
 
 #pragma mark //UITextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    self.viewModel.searchWord = [textField.text jk_trimmingWhitespace];
+    [self loadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

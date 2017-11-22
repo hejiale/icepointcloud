@@ -19,9 +19,9 @@
 
 @interface IPCEmployee : NSObject
 
-@property (nonatomic, copy, readonly) NSString *  jobNumber;
-@property (nonatomic, copy, readonly) NSString *  name;
-@property (nonatomic, assign,readonly) double  discount;
-@property (nonatomic, copy, readonly) NSString * jobID;
+@property (nonatomic, copy, readwrite) NSString *  jobNumber;
+@property (nonatomic, copy, readwrite) NSString *  name;
+@property (nonatomic, assign,readwrite) double  discount;
+@property (nonatomic, copy, readwrite) NSString * jobID;
 
 @end

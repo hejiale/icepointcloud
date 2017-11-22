@@ -10,6 +10,8 @@
 
 @interface IPCPayOrderOfferOrderInfoView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame EndEditing:(void(^)())end;
 
+- (void)updateOrderInfo;
 
 @end

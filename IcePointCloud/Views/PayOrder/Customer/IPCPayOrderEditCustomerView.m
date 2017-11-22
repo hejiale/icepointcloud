@@ -9,7 +9,9 @@
 #import "IPCPayOrderEditCustomerView.h"
 
 @interface IPCPayOrderEditCustomerView()<UITextFieldDelegate,IPCDatePickViewControllerDelegate>
-
+{
+    NSString * gender;
+}
 @property (weak, nonatomic) IBOutlet UITextField *customerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *ageTextField;
@@ -63,11 +65,18 @@
 #pragma mark //Request Methods
 - (void)saveCustomerRequest
 {
-    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:[IPCPayOrderManager sharedManager].insertCustomer.customerName
-                                                  CustomPhone:[IPCPayOrderManager sharedManager].insertCustomer.customerPhone
-                                                       Gender:[IPCPayOrderManager sharedManager].insertCustomer.gender
+    if (!gender) {
+        if ([self isCustomer]) {
+            gender = [IPCCurrentCustomer sharedManager].currentCustomer.gender;
+        }else{
+            gender = @"MALE";
+        }
+    }
+    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:self.customerNameTextField.text
+                                                  CustomPhone:self.phoneTextField.text
+                                                       Gender:gender
                                                         Email:@""
-                                                     Birthday:[IPCPayOrderManager sharedManager].insertCustomer.birthday
+                                                     Birthday:self.birthDayTextField.text
                                                        Remark:@""
                                                 OptometryList:@""
                                                   ContactName:@""
@@ -83,14 +92,14 @@
                                                       PhotoId:@""
                                                  IntroducerId:@""
                                             IntroducerInteger:@""
-                                                          Age:[IPCPayOrderManager sharedManager].insertCustomer.age
+                                                          Age:self.ageTextField.text
+                                                   CustomerId:([self isCustomer] ? [IPCPayOrderManager sharedManager].currentCustomerId : @"")
                                                  SuccessBlock:^(id responseValue)
      {
          if (self.UpdateBlock) {
              self.UpdateBlock(responseValue[@"id"]);
          }
          [self removeFromSuperview];
-         
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
              [IPCCommonUI showError:@"保存客户信息失败!"];
@@ -113,23 +122,13 @@
 - (IBAction)selectMaleAction:(id)sender {
     [self.maleButton setSelected:YES];
     [self.femaleButton setSelected:NO];
-    
-    if ([self isCustomer]) {
-        [IPCCurrentCustomer sharedManager].currentCustomer.gender = @"MALE";
-    }else{
-        [IPCPayOrderManager sharedManager].insertCustomer.gender = @"MALE";
-    }
+    gender = @"MALE";
 }
 
 - (IBAction)selectFemaleAction:(id)sender {
     [self.maleButton setSelected:NO];
     [self.femaleButton setSelected:YES];
-    
-    if ([self isCustomer]) {
-        [IPCCurrentCustomer sharedManager].currentCustomer.gender = @"FEMALE";
-    }else{
-        [IPCPayOrderManager sharedManager].insertCustomer.gender = @"FEMALE";
-    }
+    gender = @"FEMALE";
 }
 
 - (void)showDatePickerAction
@@ -148,28 +147,8 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if ([textField isEqual:self.customerNameTextField]) {
-        if ([self isCustomer]) {
-            [IPCCurrentCustomer sharedManager].currentCustomer.customerName = [textField.text jk_trimmingWhitespace];
-        }else{
-            [IPCPayOrderManager sharedManager].insertCustomer.customerName = [textField.text jk_trimmingWhitespace];
-        }
-    }else if ([textField isEqual:self.phoneTextField]){
-        if ([self isCustomer]) {
-            [IPCCurrentCustomer sharedManager].currentCustomer.customerPhone = [textField.text jk_trimmingWhitespace];
-        }else{
-            [IPCPayOrderManager sharedManager].insertCustomer.customerPhone = [textField.text jk_trimmingWhitespace];
-        }
-    }else{
+    if([textField isEqual:self.ageTextField]){
         NSString * birthday = [NSDate jk_stringWithDate:[[NSDate date] jk_dateBySubtractingYears:[textField.text integerValue]] format:@"yyyy-01-01"];
-        
-        if ([self isCustomer]) {
-            [IPCCurrentCustomer sharedManager].currentCustomer.age = [textField.text jk_trimmingWhitespace];
-            [IPCCurrentCustomer sharedManager].currentCustomer.birthday = birthday;
-        }else{
-            [IPCPayOrderManager sharedManager].insertCustomer.age = [textField.text jk_trimmingWhitespace];
-            [IPCPayOrderManager sharedManager].insertCustomer.birthday = birthday;
-        }
         [self.birthDayTextField setText:birthday];
     }
 }
@@ -181,14 +160,6 @@
     
     [self.birthDayTextField setText:date];
     [self.ageTextField setText:age];
-    
-    if ([self isCustomer]) {
-        [IPCCurrentCustomer sharedManager].currentCustomer.birthday = date;
-        [IPCCurrentCustomer sharedManager].currentCustomer.age = age;
-    }else{
-        [IPCPayOrderManager sharedManager].insertCustomer.birthday = date;
-        [IPCPayOrderManager sharedManager].insertCustomer.age = age;
-    }
 }
 
 - (BOOL)isCustomer

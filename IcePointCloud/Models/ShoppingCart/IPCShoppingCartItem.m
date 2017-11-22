@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         self.lensFuncsArray = [[NSMutableArray alloc]init];
+        self.unitDiscount = 1;
     }
     return self;
 }
@@ -26,6 +27,12 @@
     [[IPCShoppingCart sharedCart] postChangedNotification];
 }
 
+- (double)totalPrePrice
+{
+    NSString * priceStr = [NSString stringWithFormat:@"%.2f",self.glasses.price];
+    return [priceStr doubleValue] * self.glassCount;
+}
+
 - (double)totalPrice
 {
     NSString * priceStr = [NSString stringWithFormat:@"%.2f",self.unitPrice];
@@ -34,18 +41,10 @@
 
 - (double)unitPrice
 {
-    //下订单页面 选择客户的折扣计算
-    if ([IPCPayOrderManager sharedManager].isChooseCustomer) {
-        _unitPrice = 0;
-        [IPCPayOrderManager sharedManager].isChooseCustomer = NO;
-    }
     if (_unitPrice == 0){
-        if ([IPCPayOrderManager sharedManager].customerDiscount > 0) {
-            return self.glasses.price * [IPCPayOrderManager sharedManager].customerDiscount;
-        }
-        return self.glasses.price;
+        return self.glasses.price * self.unitDiscount;
     }
-    return _unitPrice;
+    return _unitPrice * self.unitDiscount;
 }
 
 

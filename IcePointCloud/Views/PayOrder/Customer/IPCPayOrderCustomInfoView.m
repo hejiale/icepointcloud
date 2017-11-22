@@ -21,6 +21,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *encryptedPhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *growthValueLabel;
+@property (weak, nonatomic) IBOutlet UIView *memberIdentifyView;
+@property (weak, nonatomic) IBOutlet UIView *memberRightView;
+@property (weak, nonatomic) IBOutlet UILabel *memberIdentityLabel;
 
 
 @end
@@ -55,12 +58,45 @@
     [self.phoneLabel setText:customer.customerPhone];
     [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
     [self.birthdayLabel setText:customer.birthday];
-    [self.pointLabel setText:[NSString stringWithFormat:@"%d",customer.integral]];
-    [self.memberLevelLabel setText:customer.memberLevel];
-    [self.growthValueLabel setText:customer.membergrowth];
-    [self.encryptedPhoneLabel setText:customer.memberPhone];
-    [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%",customer.discount*10]];
-    [self.balanceLabel setText:[NSString stringWithFormat:@"%.f",customer.balance]];
+    [self.memberIdentityLabel setText:(customer.memberFlag ? @"会员" : @"非会员")];
+    
+    if (customer.memberFlag) {
+        [self showMemberInfoView];
+        [self.pointLabel setText:[NSString stringWithFormat:@"%d",customer.integral]];
+        [self.memberLevelLabel setText:customer.memberLevel];
+        [self.growthValueLabel setText:customer.membergrowth];
+        [self.encryptedPhoneLabel setText:customer.memberPhone];
+        [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%",customer.discount*10]];
+        [self.balanceLabel setText:[NSString stringWithFormat:@"%.f",customer.balance]];
+    }else{
+        [self hideMemberInfoView];
+    }
+}
+
+- (void)showMemberInfoView
+{
+    [self.memberRightView setHidden:NO];
+    [self.memberIdentifyView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UILabel class]]) {
+            UILabel * label = (UILabel *)obj;
+            if (label.tag > 0) {
+                [label setHidden:NO];
+            }
+        }
+    }];
+}
+
+- (void)hideMemberInfoView
+{
+    [self.memberRightView setHidden:YES];
+    [self.memberIdentifyView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UILabel class]]) {
+            UILabel * label = (UILabel *)obj;
+            if (label.tag > 0) {
+                [label setHidden:YES];
+            }
+        }
+    }];
 }
 
 

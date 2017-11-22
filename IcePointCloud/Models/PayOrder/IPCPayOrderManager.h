@@ -24,6 +24,10 @@
 
 @property (nonatomic, assign, readwrite) double        givingAmount;//赠送金额
 
+@property (nonatomic, assign, readwrite) double   payAmount;//合计金额
+@property (nonatomic, assign, readwrite) double   discount;//折扣率
+@property (nonatomic, assign, readwrite) double   discountAmount;//优惠金额
+
 @property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
 @property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//是否已选择客户
 @property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
@@ -32,8 +36,8 @@
 @property (nonatomic, assign) BOOL      isInsertRecordStatus;//是否正在输入付款记录的状态
 
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
-@property (nonatomic, strong) IPCDetailCustomer  * insertCustomer;///新建客户
 
+@property (nonatomic, strong, readwrite) IPCEmployee * employee;//经办人
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
 @property (nonatomic, strong, readwrite) IPCWareHouse * currentHouse;//当前店铺
 
@@ -56,6 +60,8 @@
 - (void)calculatePointValue:(IPCPointValueMode *)pointValue;
 
 - (double)minumEmployeeResult;
+
+- (double)calculateDiscount;
 
 - (BOOL)isExistEmptyEmployeeResult;
 //清空支付信息  选择客户信息  清空商品列表

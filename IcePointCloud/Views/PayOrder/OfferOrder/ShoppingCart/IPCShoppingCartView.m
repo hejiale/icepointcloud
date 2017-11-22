@@ -76,7 +76,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 - (void)commitUI{
     self.cartViewMode = [[IPCCartViewMode alloc]init];
-    [self updateCartUI];
+    [self updateCartUI:YES];
 }
 
 - (void)updateBottomStatus:(BOOL)isShown
@@ -86,13 +86,16 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     self.tableBottom.constant = isShown ? 60 : 10;
 }
 
-- (void)updateCartUI{
+- (void)updateCartUI:(BOOL)isUpdateStatus
+{
     [self.editButton setHidden:[self.cartViewMode shoppingCartIsEmpty]];
     [self.selectAllButton setSelected:[self.cartViewMode judgeCartItemSelectState]];
     [self.cartListTableView reloadData];
     
-    if (self.CompleteBlock) {
-        self.CompleteBlock();
+    if (isUpdateStatus) {
+        if (self.CompleteBlock) {
+            self.CompleteBlock();
+        }
     }
 }
 
@@ -102,12 +105,12 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         [self updateBottomStatus:isEditStatus];
     }
     [[IPCPayOrderManager sharedManager] resetPayPrice];
-    [self updateCartUI];
+    [self updateCartUI:YES];
 }
 
 - (void)reload
 {
-    [self updateCartUI];
+    [self updateCartUI:NO];
 }
 
 #pragma mark //Clicked Events
@@ -115,13 +118,13 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 {
     isEditStatus = !sender.selected;
     [self updateBottomStatus:isEditStatus];
-    [self updateCartUI];
+    [self updateCartUI:NO];
 }
 
 - (IBAction)onSelectAllAction:(UIButton *)sender {
     [sender setSelected:!sender.selected];
     [self.cartViewMode changeAllCartItemSelected:sender.selected];
-    [self updateCartUI];
+    [self updateCartUI:NO];
 }
 
 
@@ -169,7 +172,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
             __weak typeof(self) weakSelf = self;
             [cell setCartItem:cartItem Reload:^{
                 __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf updateCartUI];
+                [strongSelf updateCartUI:YES];
             }];
         }
         return cell;

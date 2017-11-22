@@ -44,7 +44,7 @@
         
         self.glassesNameLbl.text = _cartItem.glasses.glassName;
         self.countLbl.text      = [NSString stringWithFormat:@"x%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]];
-        [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.glasses.price]];
+        [self.unitPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.glasses.price]];
         
         if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass && self.cartItem.glasses.isBatch){
             [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.batchReadingDegree]];
@@ -52,7 +52,7 @@
             [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
         }
         
-        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%.f", _cartItem.glasses.price]];
+        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.unitPrice]];
     }
 }
 
@@ -73,15 +73,12 @@
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length) {
-//        if ([IPCPayOrderManager sharedManager].employeeResultArray.count == 0) {
-//            [IPCCommonUI showError:@"请先选择经办人"];
-//        }else{
-//            if ([[IPCPayOrderManager sharedManager] minimumEmployeeDiscountPrice:self.cartItem.glasses.price] > [str doubleValue]) {
-//                [IPCCommonUI showError:@"该商品售价超出折扣范围！"];
-//            }
-//            self.cartItem.unitPrice = [str doubleValue];
-//            [[IPCPayOrderManager sharedManager] resetPayPrice];
-//        }
+        if ([str doubleValue] >= self.cartItem.glasses.price) {
+            self.cartItem.unitPrice = self.cartItem.glasses.price;
+        }else{
+            self.cartItem.unitPrice = [str doubleValue];
+        }
+        self.cartItem.unitDiscount = 1;
     }
     
     if (self.ReloadBlock) {

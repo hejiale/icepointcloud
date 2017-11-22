@@ -26,6 +26,7 @@
 /**
  *    Calculate the total price shopping cart selected goods
  */
+- (double)allGlassesTotalPrePrice;
 - (double)allGlassesTotalPrice;
 /**
  *    Remove the shopping cart
@@ -63,5 +64,7 @@
  *   Send the shopping cart number change notification
  */
 - (void)postChangedNotification;
+
+- (void)updateAllCartItemDiscount;
 
 @end
