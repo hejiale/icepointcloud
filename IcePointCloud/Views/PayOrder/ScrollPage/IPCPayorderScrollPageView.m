@@ -9,7 +9,7 @@
 #import "IPCPayorderScrollPageView.h"
 
 #define   SpaceRectSize    80
-#define   RoundRectSize   50
+#define   RoundRectSize   40
 
 @interface IPCPayorderScrollPageView()
 
@@ -50,9 +50,11 @@
     
     [self.allCornerViews enumerateObjectsUsingBlock:^(UIImageView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx == currentPage) {
+            [obj addBorder:RoundRectSize/2 Width:2 Color:COLOR_RGB_BLUE];
             UIImage * onImage = [UIImage imageNamed:self.onPageImages[idx]];
             [obj setImage:onImage];
         }else{
+            [obj addBorder:RoundRectSize/2 Width:1 Color:nil];
             UIImage * image = [UIImage imageNamed:self.pageImages[idx]];
             [obj setImage:image];
         }
@@ -67,7 +69,7 @@
     __block CGFloat space = lineHeight/(self.numberPages-1);
     
     for (NSInteger i = 0; i < self.numberPages; i++) {
-        UIImageView * cornerView = [[UIImageView alloc]initWithFrame:CGRectMake(self.jk_width/2-RoundRectSize/2, i*space+SpaceRectSize, RoundRectSize, RoundRectSize)];
+        UIImageView * cornerView = [[UIImageView alloc]initWithFrame:CGRectMake(self.jk_centerX-RoundRectSize/2, i*space+SpaceRectSize, RoundRectSize, RoundRectSize)];
         [cornerView setBackgroundColor:[UIColor clearColor]];
         [cornerView setUserInteractionEnabled:YES];
         [cornerView setTag:i];
@@ -84,10 +86,15 @@
 {
     if ([sender.view tag] == _currentPage)return;
     
-    self.currentPage = [sender.view tag];
-    
-    if ([self.delegate respondsToSelector:@selector(changePageIndex:)]) {
-        [self.delegate changePageIndex:[sender.view tag]];
+    if (![IPCPayOrderManager sharedManager].currentCustomerId && ([sender.view tag] == 1 || [sender.view tag] == 3))
+    {
+        [IPCCommonUI showError:@"请先选择客户信息!"];
+    }else{
+        self.currentPage = [sender.view tag];
+        
+        if ([self.delegate respondsToSelector:@selector(changePageIndex:)]) {
+            [self.delegate changePageIndex:[sender.view tag]];
+        }
     }
 }
 

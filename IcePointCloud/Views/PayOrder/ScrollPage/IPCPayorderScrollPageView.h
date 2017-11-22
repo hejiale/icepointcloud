@@ -14,6 +14,7 @@
 
 @property (nonatomic, assign) NSInteger currentPage;
 @property (nonatomic, assign) NSInteger numberPages;
+@property (nonatomic, copy) NSArray<NSString *> * pageTitles;
 @property (nonatomic, copy) NSArray<NSString *> * onPageImages;
 @property (nonatomic, copy) NSArray<NSString *> * pageImages;
 @property (nonatomic, assign) id<IPCPayorderScrollPageViewDelegate>delegate;
