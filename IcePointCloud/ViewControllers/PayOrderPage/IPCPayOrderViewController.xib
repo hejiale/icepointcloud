@@ -14,7 +14,8 @@
                 <outlet property="bottomView" destination="L70-zW-7W1" id="uT8-tP-stw"/>
                 <outlet property="cancelButton" destination="Cu8-sK-Lh2" id="5i9-1R-Gjk"/>
                 <outlet property="contentScrollView" destination="kgY-7F-fDB" id="6GV-Lh-lxw"/>
-                <outlet property="saveButton" destination="GUo-wl-t5L" id="zFs-VI-8Iq"/>
+                <outlet property="nextStepButton" destination="GUo-wl-t5L" id="VM4-hz-sSf"/>
+                <outlet property="saveButton" destination="C46-IC-KRa" id="wZz-7c-FVD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,41 +27,70 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L70-zW-7W1">
                     <rect key="frame" x="0.0" y="654" width="1024" height="50"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
-                            <rect key="frame" x="884" y="8" width="120" height="35"/>
-                            <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUo-wl-t5L">
+                            <rect key="frame" x="869" y="0.0" width="155" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="35" id="H92-3h-REx"/>
-                                <constraint firstAttribute="width" constant="120" id="kJE-03-Oh0"/>
+                                <constraint firstAttribute="width" constant="155" id="kJE-03-Oh0"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <state key="normal" title="下一步"/>
+                            <state key="normal" image="icon_nextStep"/>
                             <connections>
-                                <action selector="savePayOrder:" destination="-1" eventType="touchUpInside" id="5bC-Gq-3SH"/>
+                                <action selector="nextStepAction:" destination="-1" eventType="touchUpInside" id="VeS-DC-hRO"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu8-sK-Lh2">
-                            <rect key="frame" x="734" y="8" width="120" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cu8-sK-Lh2">
+                            <rect key="frame" x="719" y="0.0" width="150" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="35" id="7cr-LA-Npa"/>
-                                <constraint firstAttribute="width" constant="120" id="sh6-Cj-tlV"/>
+                                <constraint firstAttribute="width" constant="150" id="sh6-Cj-tlV"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <state key="normal" title="取消订单">
+                            <state key="normal" image="icon_AreCancelOrder">
                                 <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <connections>
-                                <action selector="cancelPayOrderAction:" destination="-1" eventType="touchUpInside" id="ydv-4W-Bks"/>
+                                <action selector="areCancelOrderAction:" destination="-1" eventType="touchUpInside" id="3ke-oh-sWi"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDP-1h-qRU">
+                            <rect key="frame" x="569" y="0.0" width="150" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="150" id="fh1-Fc-U4y"/>
+                            </constraints>
+                            <state key="normal" image="icon_cancelOrder"/>
+                            <connections>
+                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="Raw-p2-rhT"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C46-IC-KRa">
+                            <rect key="frame" x="869" y="0.0" width="155" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="155" id="geF-Fw-Q1O"/>
+                            </constraints>
+                            <state key="normal" image="icon_payCash"/>
+                            <connections>
+                                <action selector="payCashAction:" destination="-1" eventType="touchUpInside" id="asc-uy-qsk"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="GUo-wl-t5L" firstAttribute="leading" secondItem="Cu8-sK-Lh2" secondAttribute="trailing" constant="30" id="1cn-qe-izo"/>
-                        <constraint firstItem="Cu8-sK-Lh2" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="WPM-pc-PDf"/>
+                        <constraint firstItem="GUo-wl-t5L" firstAttribute="leading" secondItem="Cu8-sK-Lh2" secondAttribute="trailing" id="1cn-qe-izo"/>
+                        <constraint firstItem="GUo-wl-t5L" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="2NT-AU-ogr"/>
+                        <constraint firstItem="Cu8-sK-Lh2" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="8is-YG-Lk8"/>
+                        <constraint firstAttribute="bottom" secondItem="Cu8-sK-Lh2" secondAttribute="bottom" id="BzC-aD-0JO"/>
+                        <constraint firstItem="C46-IC-KRa" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="FE9-hZ-1YA"/>
+                        <constraint firstAttribute="bottom" secondItem="GUo-wl-t5L" secondAttribute="bottom" id="Pxv-QL-aMn"/>
+                        <constraint firstAttribute="bottom" secondItem="sDP-1h-qRU" secondAttribute="bottom" id="VdP-av-VBN"/>
+                        <constraint firstAttribute="trailing" secondItem="C46-IC-KRa" secondAttribute="trailing" id="ZDR-ai-Qkj"/>
+                        <constraint firstItem="Cu8-sK-Lh2" firstAttribute="leading" secondItem="sDP-1h-qRU" secondAttribute="trailing" id="ebX-rq-KdC"/>
                         <constraint firstItem="GUo-wl-t5L" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="oil-9C-ckh"/>
                         <constraint firstAttribute="height" constant="50" id="smf-Gz-G9X"/>
-                        <constraint firstAttribute="trailing" secondItem="GUo-wl-t5L" secondAttribute="trailing" constant="20" id="uCb-kZ-APA"/>
+                        <constraint firstAttribute="trailing" secondItem="GUo-wl-t5L" secondAttribute="trailing" id="uCb-kZ-APA"/>
+                        <constraint firstAttribute="bottom" secondItem="C46-IC-KRa" secondAttribute="bottom" id="wEi-ma-TGg"/>
+                        <constraint firstItem="sDP-1h-qRU" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="ydQ-dg-Ov3"/>
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-7F-fDB">
@@ -87,4 +117,10 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
+    <resources>
+        <image name="icon_AreCancelOrder" width="161" height="51"/>
+        <image name="icon_cancelOrder" width="160" height="51"/>
+        <image name="icon_nextStep" width="154" height="50"/>
+        <image name="icon_payCash" width="158" height="51"/>
+    </resources>
 </document>

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IPCEmployee.h"
 
-@class IPCEmployee;
 @interface IPCEmployeeList : NSObject
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployee *> * employeArray;
@@ -17,11 +17,3 @@
 
 @end
 
-@interface IPCEmployee : NSObject
-
-@property (nonatomic, copy, readwrite) NSString *  jobNumber;
-@property (nonatomic, copy, readwrite) NSString *  name;
-@property (nonatomic, assign,readwrite) double  discount;
-@property (nonatomic, copy, readwrite) NSString * jobID;
-
-@end

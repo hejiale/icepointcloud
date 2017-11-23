@@ -33,7 +33,8 @@ typedef NS_ENUM(NSInteger, IPCCustomButtonAlignment) {
 
 @interface IPCDynamicImageTextButton : UIView
 
-@property(nonatomic,getter=isSelected) BOOL selected;  
+@property(nonatomic,getter=isSelected) BOOL selected;
+@property(nonatomic, copy) NSString * title;
 
 - (void)setTitle:(nullable NSString *)title;
 - (void)setTitleColor:(nullable UIColor *)color UI_APPEARANCE_SELECTOR;

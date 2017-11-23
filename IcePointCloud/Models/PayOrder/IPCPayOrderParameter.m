@@ -11,25 +11,16 @@
 @implementation IPCPayOrderParameter
 
 
-- (NSDictionary *)offOrderParameter
+- (NSDictionary *)prototyOrderParameter
 {
     //员工份额
-//    __block NSMutableArray * employeeList = [[NSMutableArray alloc]init];
-//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
-//        [employeeResultDic setObject:@(obj.achievement) forKey:@"achievement"];
-//        [employeeResultDic setObject:obj.employee.jobID forKey:@"employeeId"];
-//        [employeeList addObject:employeeResultDic];
-//    }];
-//
-    //支付方式
-    __block NSMutableArray * otherTypeList = [[NSMutableArray alloc]init];
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSMutableDictionary * otherResultDic = [[NSMutableDictionary alloc]init];
-        [otherResultDic setObject:[NSString stringWithFormat:@"%.2f",obj.payPrice] forKey:@"payAmount"];
-        [otherResultDic setObject:obj.payTypeInfo forKey:@"payType"];
-        [otherTypeList addObject:otherResultDic];
-    }];
+    __block NSMutableArray * employeeList = [[NSMutableArray alloc]init];
+    NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
+    [employeeResultDic setObject:@(100) forKey:@"achievement"];
+    [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobID forKey:@"employeeId"];
+    [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.name forKey:@"name"];
+    [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobNumber forKey:@"jobNumber"];
+    [employeeList addObject:employeeResultDic];
     
     __block NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
     
@@ -39,31 +30,39 @@
     if ([IPCCurrentCustomer sharedManager].currentOpometry) {
         [parameters setObject:[IPCCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
     }
-    if ([IPCCurrentCustomer sharedManager].currentAddress) {
-        [parameters setObject:[IPCCurrentCustomer sharedManager].currentAddress.addressID forKey:@"addressId"];
-    }
-    
+
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
-    [parameters setObject:@"PayAmount" forKey:@"allPay"];
     [parameters setObject:[self productListParamter] forKey:@"detailList"];
-    
-//    if (employeeList.count) {
-//        [parameters setObject:employeeList forKey:@"employeeAchievements"];
-//    }
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCPayOrderManager sharedManager] realTotalPrice]] forKey:@"orderFinalPrice"];
-    [parameters setObject:@([IPCPayOrderManager sharedManager].usedPoint) forKey:@"integral"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].givingAmount] forKey:@"donationAmount"];
-    
-    if (otherTypeList.count) {
-        [parameters setObject:otherTypeList forKey:@"orderPayInfos"];
+
+    if (employeeList.count) {
+        [parameters setObject:employeeList forKey:@"employeeAchievements"];
     }
+    
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].payAmount] forKey:@"orderFinalPrice"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].discountAmount] forKey:@"donationAmount"];
+    
     [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
     [parameters setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @"" forKey:@"repository"];
     
     return parameters;
 }
 
-
+- (NSArray *)payTypeInfos
+{
+    __block NSMutableArray * array = [[NSMutableArray alloc]init];
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+        if ([obj.payTypeInfo isEqualToString:@"积分"]) {
+            [dic setObject:@(obj.pointPrice) forKey:@"payAmount"];
+        }else{
+            [dic setObject:@(obj.payPrice) forKey:@"payAmount"];
+        }
+        [dic setObject:obj.payTypeInfo forKey:@"payType"];
+        [array addObject:dic];
+    }];
+    return array;
+}
 
 - (NSArray *)productListParamter
 {

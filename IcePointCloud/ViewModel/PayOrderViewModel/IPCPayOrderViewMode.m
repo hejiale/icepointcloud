@@ -63,23 +63,23 @@ static NSString * const recordIdentifier                 = @"IPCPayTypeRecordCel
 
 
 - (void)offerOrder{
-    [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue)
-     {
-         if (self.delegate) {
-             if ([self.delegate respondsToSelector:@selector(successPayOrder)]) {
-                 [self.delegate successPayOrder];
-             }
-         }
-     } FailureBlock:^(NSError *error) {
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"保存订单失败！"];
-         }
-         if (self.delegate) {
-             if ([self.delegate respondsToSelector:@selector(failPayOrder)]) {
-                 [self.delegate failPayOrder];
-             }
-         }
-     }];
+//    [IPCPayOrderRequestManager offerOrderWithSuccessBlock:^(id responseValue)
+//     {
+//         if (self.delegate) {
+//             if ([self.delegate respondsToSelector:@selector(successPayOrder)]) {
+//                 [self.delegate successPayOrder];
+//             }
+//         }
+//     } FailureBlock:^(NSError *error) {
+//         if ([error code] != NSURLErrorCancelled) {
+//             [IPCCommonUI showError:@"保存订单失败！"];
+//         }
+//         if (self.delegate) {
+//             if ([self.delegate respondsToSelector:@selector(failPayOrder)]) {
+//                 [self.delegate failPayOrder];
+//             }
+//         }
+//     }];
 }
 
 - (void)queryCustomerDetailWithCustomerId:(NSString *)customerId

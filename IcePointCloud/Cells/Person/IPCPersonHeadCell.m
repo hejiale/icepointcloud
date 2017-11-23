@@ -23,7 +23,7 @@
     }else{
         [self.loginHeadImage setImage:[UIImage imageNamed:@"icon_login_head_male"]];
     }
-    [self.loginUserNameLabel setText:[IPCAppManager sharedManager].storeResult.name];
+    [self.loginUserNameLabel setText:[IPCAppManager sharedManager].storeResult.employee.name];
     [self.loginPhoneLabel setText:[IPCAppManager sharedManager].storeResult.contacterPhone];
 }
 

@@ -52,6 +52,8 @@
 
 
 - (void)setTitle:(nullable NSString *)title{
+    _title = title;
+    
     [self.titleLabel setText:title];
     [self buildUI];
 }

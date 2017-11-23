@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderPayCashViewController : UIViewController
 
+- (void)reload;
+
 @end

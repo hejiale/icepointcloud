@@ -21,4 +21,25 @@
     // Configure the view for the selected state
 }
 
+- (void)setPayRecord:(IPCPayRecord *)payRecord{
+    _payRecord = payRecord;
+    
+    if (_payRecord) {
+        [self.payTypeNameLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payTypeInfo]];
+        [self.payTypeImageView setImage:[[IPCAppManager sharedManager] payTypeImage:_payRecord.payTypeInfo]];
+        [self.createDateLabel setText:[NSDate jk_stringWithDate:_payRecord.payDate format:@"yyyy-MM-dd"]];
+        
+        if ([_payRecord.payTypeInfo isEqualToString:@"积分"]) {
+            [self.payTypeAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_payRecord.pointPrice]];
+            [self.pointLabel setText:[NSString stringWithFormat:@"%d积分",_payRecord.integral]];
+        }else{
+            [self.payTypeAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_payRecord.payPrice]];
+        }
+    }
+}
+
+
+- (IBAction)removePayRecordAction:(id)sender {
+}
+
 @end

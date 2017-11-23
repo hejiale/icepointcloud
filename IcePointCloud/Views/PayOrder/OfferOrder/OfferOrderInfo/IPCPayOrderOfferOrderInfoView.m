@@ -123,5 +123,10 @@
     return YES;
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [IPCPayOrderManager sharedManager].remark =  [textView.text jk_trimmingWhitespace];
+}
+
 
 @end

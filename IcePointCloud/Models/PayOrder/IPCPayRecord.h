@@ -12,6 +12,8 @@
 
 @property (nonatomic, copy) NSString * payTypeInfo;
 @property (nonatomic, assign) double   payPrice;
-@property (nonatomic, copy) NSString * payDate;
+@property (nonatomic, copy) NSDate * payDate;
+@property (nonatomic, assign) NSInteger  integral;
+@property (nonatomic, assign) double   pointPrice;
 
 @end

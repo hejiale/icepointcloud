@@ -10,13 +10,13 @@
 #import "IPCEmployeeResult.h"
 #import "IPCPointValueMode.h"
 #import "IPCPayRecord.h"
+#import "IPCPayCashIntegralTrade.h"
 
 @interface IPCPayOrderManager : NSObject
 
 + (IPCPayOrderManager *)sharedManager;
 
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;//当前客户Id
-
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
 @property (nonatomic, assign, readwrite) double        pointPrice;//抵扣积分金额
@@ -41,14 +41,9 @@
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
 @property (nonatomic, strong, readwrite) IPCWareHouse * currentHouse;//当前店铺
 
+@property (nonatomic, strong, readwrite) IPCPayCashIntegralTrade * integralTrade;//积分规则
+
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;//付款记录方式
-//@property (nonatomic, strong, readwrite) NSMutableArray<IPCEmployeeResult *> * employeeResultArray;//保存员工业绩
-
-//- (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult;
-
-//- (double)totalEmployeeResult;
-
-//- (double)minimumEmployeeDiscountPrice:(double)originPrice;
 
 //实付金额
 - (double)realTotalPrice;

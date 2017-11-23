@@ -83,6 +83,7 @@
         __strong typeof (weakSelf) strongSelf = weakSelf;
         //Query Responsity WareHouse
         [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
+        [IPCAppManager sharedManager].storeResult.employee = [IPCEmployee mj_objectWithKeyValues:responseValue];
         //load wareHouse
         [strongSelf loadWareHouse];
     } FailureBlock:^(NSError *error) {

@@ -176,14 +176,14 @@ NSString * const kIPCPayOrderResetOffset                     = @"IPCPayOrderRese
     
     if ([payTypeInfo isEqualToString:@"现金"]){
         imageName = @"cash";
-    }else if ([payTypeInfo isEqualToString:@"刷卡"]){
-        imageName = @"card";
+    }else if ([payTypeInfo isEqualToString:@"储值卡"]){
+        imageName = @"storeValue";
     }else if ([payTypeInfo isEqualToString:@"支付宝"]){
         imageName = @"zhifubao";
     }else if ([payTypeInfo isEqualToString:@"微信"]){
         imageName = @"wexin";
-    }else if ([payTypeInfo isEqualToString:@"其他"]){
-        imageName = @"icon_ wallet";
+    }else if ([payTypeInfo isEqualToString:@"积分"]){
+        imageName = @"point";
     }
     return [UIImage imageNamed:imageName];
 }

@@ -36,10 +36,3 @@
 
 @end
 
-@implementation IPCEmployee
-
-+ (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"jobID"    : @"id"};
-}
-
-@end

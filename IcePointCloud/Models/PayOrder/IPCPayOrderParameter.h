@@ -10,7 +10,9 @@
 
 @interface IPCPayOrderParameter : NSObject
 
-- (NSDictionary *)offOrderParameter;
+- (NSDictionary *)prototyOrderParameter;
+
+- (NSArray *)payTypeInfos;
 
 - (NSArray *)productListParamter;
 

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IPCEmployee.h"
 
 @interface IPCStoreResult : NSObject
 
-@property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, copy, readwrite) NSString *phone;
 @property (nonatomic, copy, readwrite) NSString *storeId;
 @property (nonatomic, copy, readwrite) NSString *storeName;
@@ -20,7 +20,7 @@
 @property (nonatomic, copy, readwrite) NSString *wareHouseId;
 @property (nonatomic, copy, readonly) NSString *wareHouseName;
 @property (nonatomic, copy, readwrite) NSString *companyId;
-@property (nonatomic, copy, readwrite) NSString *jobNumber;
 @property (nonatomic, copy, readwrite) NSString *sex;
+@property (nonatomic, strong, readwrite) IPCEmployee * employee;
 
 @end

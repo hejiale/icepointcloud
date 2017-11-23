@@ -26,8 +26,7 @@
     if (self) {
         self.insertOptometry = [[IPCOptometryMode alloc]init];
         self.employee = [[IPCEmployee alloc]init];
-        self.employee.name = [IPCAppManager sharedManager].storeResult.name;
-        self.employee.jobNumber = [IPCAppManager sharedManager].storeResult.jobNumber;
+        self.employee = [IPCAppManager sharedManager].storeResult.employee;
     }
     return self;
 }
@@ -105,14 +104,18 @@
 //}
 
 - (double)remainPayPrice{
-    return [[IPCPayOrderManager sharedManager] realTotalPrice] - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
+    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
 }
 
 - (double)payRecordTotalPrice
 {
     __block double totalPrice = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        totalPrice += obj.payPrice;
+        if ([obj.payTypeInfo isEqualToString:@"积分"]) {
+            totalPrice += obj.pointPrice;
+        }else{
+            totalPrice += obj.payPrice;
+        }
     }];
     return totalPrice;
 }

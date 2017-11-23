@@ -63,14 +63,17 @@ static NSString * const parameterIdentifier = @"ParameterIdentifier";
 
 
 #pragma mark //UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if ([self.dataSource respondsToSelector:@selector(parameterDataInTableView:)]) {
         NSArray * parameterData = [self.dataSource parameterDataInTableView:self];
         if ([self.delegate respondsToSelector:@selector(didSelectParameter:InTableView:)]) {
             [self.delegate didSelectParameter:parameterData[indexPath.row] InTableView:self];
-            [self dismissViewControllerAnimated:NO completion:nil];
         }
     }
+    [self dismissViewControllerAnimated:NO completion:nil];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
 }
 
 - (void)didReceiveMemoryWarning {
