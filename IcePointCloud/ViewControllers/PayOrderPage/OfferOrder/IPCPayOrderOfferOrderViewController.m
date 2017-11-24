@@ -55,6 +55,7 @@
     if (!_shopCartView) {
         _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
+            [[IPCPayOrderManager sharedManager] clearPayRecord];
             [strongSelf reloadOfferOrderInfo];
         }];
     }
@@ -70,6 +71,11 @@
     [self.offerInfoView updateOrderInfo];
 }
 
+- (void)updateUI
+{
+    [self.shopCartView reload];
+    [self reloadOfferOrderInfo];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

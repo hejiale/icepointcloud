@@ -31,80 +31,12 @@
     return self;
 }
 
-//- (NSMutableArray<IPCEmployeeResult *> *)employeeResultArray{
-//    if (!_employeeResultArray) {
-//        _employeeResultArray= [[NSMutableArray alloc]init];
-//    }
-//    return _employeeResultArray;
-//}
 
 -(NSMutableArray<IPCPayRecord *> *)payTypeRecordArray{
     if (!_payTypeRecordArray) {
         _payTypeRecordArray = [[NSMutableArray alloc] init];
     }
     return _payTypeRecordArray;
-}
-
-//- (double)judgeEmployeeResult:(double)result Employee:(IPCEmployeeResult *)employeeResult
-//{
-//    __block double  remainResult = 0;
-//    __block double  otherTotalResult = 0;//计算除当前员工下的总份额
-//    
-//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if ( ! [obj.employee.jobID isEqualToString:employeeResult.employee.jobID]) {
-//            otherTotalResult += obj.achievement;
-//        }
-//    }];
-//    
-//    remainResult = 100 - otherTotalResult;// 剩余份额
-//    
-//    if (remainResult < result) {
-//        if (remainResult > 0) {
-//            [IPCCommonUI showError:[NSString stringWithFormat:@"该员工至多百分之%.f份额",remainResult]];
-//        }else{
-//            [IPCCommonUI showError:@"请调整其他员工的份额"];
-//        }
-//    }else{
-//        remainResult = result;
-//    }
-//    
-//    return remainResult;
-//}
-
-
-//- (double)totalEmployeeResult
-//{
-//    __block double  totalResult = 0;//计算所有员工下的总份额
-//
-//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        totalResult += obj.achievement;
-//    }];
-//    return totalResult;
-//}
-//
-//- (double)minimumEmployeeDiscountPrice:(double)originPrice
-//{
-//    __block NSMutableArray * discountArray = [[NSMutableArray alloc]init];
-//
-//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        [discountArray addObject:[NSNumber numberWithDouble:obj.employee.discount]];
-//    }];
-//
-//    [discountArray sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-//        return [obj1 doubleValue] < [obj2 doubleValue];
-//    }];
-//
-//    double minimumDiscount = [discountArray[0] doubleValue];
-//
-//    return  (minimumDiscount/10) * originPrice;
-//}
-
-//- (double)realTotalPrice{
-//    return [[IPCShoppingCart sharedCart] allGlassesTotalPrice] - [IPCPayOrderManager sharedManager].pointPrice - [IPCPayOrderManager sharedManager].givingAmount;
-//}
-
-- (double)remainPayPrice{
-    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
 }
 
 - (double)payRecordTotalPrice
@@ -120,18 +52,8 @@
     return totalPrice;
 }
 
-- (void)calculatePointValue:(IPCPointValueMode *)pointValue{
-    __block double pointPrice = 0;
-    __block NSInteger point = 0;
-    [pointValue.pointArray enumerateObjectsUsingBlock:^(IPCPointValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        pointPrice += obj.integralDeductionAmount;
-        point += obj.deductionIntegral;
-    }];
-    
-    [IPCPayOrderManager sharedManager].pointPrice = pointPrice;
-    [IPCPayOrderManager sharedManager].usedPoint = point;
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+- (double)remainPayPrice{
+    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
 }
 
 - (double)calculateDiscount
@@ -145,50 +67,51 @@
     return [discountStr doubleValue] * 100;
 }
 
+- (BOOL)isCanPayOrder
+{
+    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+        [IPCCommonUI showError:@"请选择客户!"];
+        return NO;
+    }else if ([[IPCShoppingCart sharedCart] allGlassesCount] == 0){
+        [IPCCommonUI showError:@"购物列表为空!"];
+        return NO;
+    }else if ([[IPCPayOrderManager sharedManager] payTypeRecordArray].count == 0){
+        [IPCCommonUI showError:@"收银记录为空!"];
+        return NO;
+    }
+    return YES;
+}
 
-//
-//- (double)minumEmployeeResult
-//{
-//    __block double totalResult = 0;
-//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        totalResult += obj.achievement;
-//    }];
-//    return MAX(100 - totalResult, 0);
-//}
-//
-//- (BOOL)isExistEmptyEmployeeResult{
-//    __block BOOL isExist = NO;
-//    [[IPCPayOrderManager sharedManager].employeeResultArray enumerateObjectsUsingBlock:^(IPCEmployeeResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        if (obj.achievement == 0 ) {
-//            isExist = YES;
-//        }
-//    }];
-//    return isExist;
-//}
+- (BOOL)judgeIsHaveEditPayRecord
+{
+    __block BOOL isHaveEdit = NO;
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+    {
+        if (obj.isEditStatus) {
+            isHaveEdit = YES;
+            *stop = YES;
+        }
+    }];
+    return isHaveEdit;
+}
+
+- (void)clearPayRecord
+{
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+}
 
 - (void)resetData
 {
-//    [[IPCPayOrderManager sharedManager].employeeResultArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].isInsertRecordStatus = NO;
-    [IPCPayOrderManager sharedManager].insertPayRecord = nil;
-    [IPCPayOrderManager sharedManager].customerDiscount = 0;
     [IPCPayOrderManager sharedManager].remark = nil;
-    [IPCPayOrderManager sharedManager].isSelectPoint = NO;
-    [IPCPayOrderManager sharedManager].usedPoint = 0;
-    [IPCPayOrderManager sharedManager].pointPrice = 0;
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].customerDiscount = 1;
     [[IPCCurrentCustomer sharedManager] clearData];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
-    [[IPCShoppingCart sharedCart] clear];
-}
-
-- (void)resetPayPrice{
+    [IPCPayOrderManager sharedManager].payAmount = 0;
+    [IPCPayOrderManager sharedManager].discount = 0;
+    [IPCPayOrderManager sharedManager].discountAmount = 0;
+    [IPCPayOrderManager sharedManager].employee = [IPCAppManager sharedManager].storeResult.employee;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [IPCPayOrderManager sharedManager].givingAmount = 0;
-    [IPCPayOrderManager sharedManager].pointPrice = 0;
-    [IPCPayOrderManager sharedManager].usedPoint = 0;
+    [[IPCShoppingCart sharedCart] clear];
 }
 
 

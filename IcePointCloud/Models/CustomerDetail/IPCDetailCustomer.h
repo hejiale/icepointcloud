@@ -33,7 +33,7 @@
 @property (nonatomic, copy, readwrite) NSString * memberPhone;
 @property (nonatomic, assign, readwrite) double   consumptionAmount;
 @property (nonatomic, assign, readwrite) double   balance;
-@property (nonatomic, copy, readwrite) NSString * createDate;
+@property (nonatomic, copy, readwrite) NSDate   * createDate;
 @property (nonatomic, copy, readwrite) NSString * customerType;
 @property (nonatomic, copy, readwrite) NSString * customerTypeId;
 @property (nonatomic, copy, readwrite) NSString * employeeId;

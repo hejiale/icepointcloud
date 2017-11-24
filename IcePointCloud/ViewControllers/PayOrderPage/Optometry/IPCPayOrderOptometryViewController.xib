@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderOptometryViewController">
             <connections>
+                <outlet property="infoContentView" destination="ib1-ar-DeF" id="zGN-S4-5qm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +19,32 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="944" height="654"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5f-Qd-S9F">
+                    <rect key="frame" x="412" y="302" width="120" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="Gvn-mZ-Q0t"/>
+                        <constraint firstAttribute="height" constant="50" id="exe-sr-hNV"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="editOptometryAction:" destination="-1" eventType="touchUpInside" id="Bn4-rb-lH8"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ib1-ar-DeF">
+                    <rect key="frame" x="0.0" y="0.0" width="944" height="654"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="ib1-ar-DeF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4h6-vl-Bib"/>
+                <constraint firstItem="J5f-Qd-S9F" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eXj-dK-CtY"/>
+                <constraint firstItem="ib1-ar-DeF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hE5-3r-H7h"/>
+                <constraint firstAttribute="bottom" secondItem="ib1-ar-DeF" secondAttribute="bottom" id="hij-Oc-RDE"/>
+                <constraint firstAttribute="trailing" secondItem="ib1-ar-DeF" secondAttribute="trailing" id="m29-LU-Ykv"/>
+                <constraint firstItem="J5f-Qd-S9F" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="uk1-97-SqF"/>
+            </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

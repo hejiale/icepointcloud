@@ -28,9 +28,6 @@
     [IPCCurrentCustomer sharedManager].currentCustomer = detailCustomer;
     [IPCCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
     [IPCCurrentCustomer sharedManager].currentAddress    = [IPCCustomerAddressMode mj_objectWithKeyValues:detailCustomer.addresses[0]];
-    
-    [IPCPayOrderManager sharedManager].customerDiscount = detailCustomer.discount/10;
-    [IPCPayOrderManager sharedManager].isChooseCustomer = YES;
 }
 
 - (void)clearData{

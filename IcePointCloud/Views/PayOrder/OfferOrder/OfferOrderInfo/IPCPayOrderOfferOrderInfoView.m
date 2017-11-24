@@ -96,12 +96,14 @@
             }
             [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * ([IPCPayOrderManager sharedManager].discount/100);
             [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].discountAmount;
+            [[IPCPayOrderManager sharedManager] clearPayRecord];
         }else{
             if ([str doubleValue] >= [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] || [str doubleValue] <= 0) {
                 [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
             }else{
                 [IPCPayOrderManager sharedManager].payAmount = [str doubleValue];
-            }
+                [[IPCPayOrderManager sharedManager] clearPayRecord];
+             }
             [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
             [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * ([IPCPayOrderManager sharedManager].discount/100);
         }

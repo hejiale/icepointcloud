@@ -11,19 +11,14 @@
 #import "IPCPayOrderOptometryHeadView.h"
 #import "IPCPayOrderOptometryInfoView.h"
 #import "IPCPayOrderOptometryMemoView.h"
-#import "IPCPayOrderInputOptometryHeadView.h"
-#import "IPCPayOrderInputOptometryView.h"
-#import "IPCPayOrderInputOptometryMemoView.h"
+#import "IPCInsertNewOptometryView.h"
 
 @interface IPCPayOrderOptometryViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *infoContentView;
 @property (strong, nonatomic) IPCPayOrderOptometryInfoView    * infoView;
 @property (strong, nonatomic) IPCPayOrderOptometryHeadView  * headView;
 @property (strong, nonatomic) IPCPayOrderOptometryMemoView * memoView;
-
-@property (strong, nonatomic) IPCPayOrderInputOptometryHeadView  * inputHeadView;
-@property (strong, nonatomic) IPCPayOrderInputOptometryView          * inputInfoView;
-@property (strong, nonatomic) IPCPayOrderInputOptometryMemoView * inputMemoView;
 
 @end
 
@@ -69,44 +64,13 @@
     return _memoView;
 }
 
-- (IPCPayOrderInputOptometryHeadView *)inputHeadView
-{
-    if (!_inputHeadView) {
-        _inputHeadView = [[IPCPayOrderInputOptometryHeadView alloc]initWithFrame:CGRectMake(0, 20, self.view.jk_width-20, 150)];
-    }
-    return _inputHeadView;
-}
-
-- (IPCPayOrderInputOptometryView *)inputInfoView
-{
-    if (!_inputInfoView) {
-        _inputInfoView = [[IPCPayOrderInputOptometryView alloc]initWithFrame:CGRectMake(0, self.inputHeadView.jk_bottom+20, self.view.jk_width-20, 375)];
-    }
-    return _inputInfoView;
-}
-
-- (IPCPayOrderInputOptometryMemoView *)inputMemoView
-{
-    if (!_inputMemoView) {
-        _inputMemoView = [[IPCPayOrderInputOptometryMemoView alloc]initWithFrame:CGRectMake(0, _inputInfoView.jk_bottom+20, self.view.jk_width-20, 60)];
-    }
-    return _inputMemoView;
-}
-
 - (void)loadShowOptometryView
 {
-    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.view addSubview:self.headView];
-    [self.view addSubview:self.infoView];
-    [self.view addSubview:self.memoView];
-}
-
-- (void)loadInputOptometryView
-{
-    [self.view.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.view addSubview:self.inputHeadView];
-    [self.view addSubview:self.inputInfoView];
-    [self.view addSubview:self.inputMemoView];
+    [self.infoContentView setHidden:NO];
+    [self.infoContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.infoContentView addSubview:self.headView];
+    [self.infoContentView addSubview:self.infoView];
+    [self.infoContentView addSubview:self.memoView];
 }
 
 #pragma mark //Clicked Events
@@ -118,11 +82,18 @@
         [self.headView updateOptometryInfo];
         [self.memoView updateOptometryInfo];
     }else{
-        [self loadInputOptometryView];
-        [self.inputInfoView updateInsertOptometry];
-        [self.inputHeadView updateInsertOptometryInfo];
+        [self.infoContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        [self.infoContentView setHidden:YES];
     }
 }
+
+- (IBAction)editOptometryAction:(id)sender {
+    IPCInsertNewOptometryView * optometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:self.view.superview.superview.bounds Complete:^{
+        [self reload];
+    }];
+    [self.view.superview.superview addSubview:optometryView];
+}
+
 
 - (void)pushToManagerOptometryViewController{
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];

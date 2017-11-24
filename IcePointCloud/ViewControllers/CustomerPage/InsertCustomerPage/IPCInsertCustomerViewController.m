@@ -85,16 +85,8 @@ static NSString * const addressIdentifier    = @"IPCInsertCustomerAddressCellIde
             [strongSelf.saveButton jk_hideIndicator];
             
             if ([customerId integerValue] > 0 && customerId) {
-                if ([IPCPayOrderManager sharedManager].isPayOrderStatus)
-                {
-                    [[IPCPayOrderManager sharedManager] resetPayPrice];
-                    [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-                    [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
-                    [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-                }else{
-                    [IPCCommonUI showSuccess:@"新建客户成功!"];
-                    [self performSelector:@selector(popViewControllerAnimated:) withObject:nil afterDelay:1];
-                }
+                [IPCCommonUI showSuccess:@"新建客户成功!"];
+                [self performSelector:@selector(popViewControllerAnimated:) withObject:nil afterDelay:1];
             }
         }];
     }else{

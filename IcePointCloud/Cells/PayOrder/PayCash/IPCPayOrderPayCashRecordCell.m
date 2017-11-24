@@ -26,7 +26,7 @@
     
     if (_payRecord) {
         [self.payTypeNameLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payTypeInfo]];
-        [self.payTypeImageView setImage:[[IPCAppManager sharedManager] payTypeImage:_payRecord.payTypeInfo]];
+        
         [self.createDateLabel setText:[NSDate jk_stringWithDate:_payRecord.payDate format:@"yyyy-MM-dd"]];
         
         if ([_payRecord.payTypeInfo isEqualToString:@"积分"]) {

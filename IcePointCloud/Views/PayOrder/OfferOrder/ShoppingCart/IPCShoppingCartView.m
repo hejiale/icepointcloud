@@ -104,7 +104,6 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         isEditStatus = NO;
         [self updateBottomStatus:isEditStatus];
     }
-    [[IPCPayOrderManager sharedManager] resetPayPrice];
     [self updateCartUI:YES];
 }
 

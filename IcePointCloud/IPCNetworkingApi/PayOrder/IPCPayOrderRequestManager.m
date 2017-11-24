@@ -65,23 +65,6 @@
     [self postRequest:responseParameter RequestMethod:PayOrderRequest_EmployeeList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
-+ (void)getIntegralRulesWithCustomerID:(NSString *)customID
-                                 Point:(NSInteger)point
-                          SuccessBlock:(void (^)(id responseValue))success
-                          FailureBlock:(void (^)(NSError *error))failure
-{
-    IPCPayOrderParameter * productParameter = [[IPCPayOrderParameter alloc]init];
-    
-    NSDictionary * parameters = @{
-                                  @"orderType": @"FOR_SALES",
-                                  @"integral": @(point),
-                                  @"customerId": customID,
-                                  @"detailList": [productParameter productListParamter]
-                                  };
-    
-    [self postRequest:parameters RequestMethod:PayOrderRequest_Integral CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-}
-
 + (void)queryIntegralRuleWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
     [self postRequest:nil RequestMethod:PayOrderRequest_IntegralRule CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];

@@ -38,7 +38,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self loadData];
 }
 
-
 #pragma mark //Set UI
 - (void)loadCollectionView{
     CGFloat itemWidth = (self.customerCollectionView.jk_width-10)/3;
@@ -188,6 +187,12 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     if (isUpdate) {
         [editCustomerView updateCustomerInfo];
     }
+}
+
+- (void)updateUI
+{
+    [self.infoView removeFromSuperview];
+    [self loadData];
 }
 
 #pragma mark //UICollectionViewDataSource

@@ -66,21 +66,6 @@
 
 
 /**
- * Get Point Price
- 
- @param customID
- @param presellStatus
- @param point
- @param success
- @param failure
- */
-+ (void)getIntegralRulesWithCustomerID:(NSString *)customID
-                                 Point:(NSInteger)point
-                          SuccessBlock:(void (^)(id responseValue))success
-                          FailureBlock:(void (^)(NSError *error))failure;
-
-
-/**
  Query Integral Rule
 
  @param success 

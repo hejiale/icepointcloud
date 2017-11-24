@@ -11,7 +11,6 @@
 @interface IPCPayOrderPayCashRecordCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *createDateLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *payTypeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payTypeAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;

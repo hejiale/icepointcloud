@@ -7,34 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCPayOrderViewModelDelegate.h"
+
+typedef NS_ENUM(NSInteger, IPCPayOrderError)
+{
+    IPCPayOrderErrorSavePrototy = 0,
+    IPCPayOrderErrorOfferOrder,
+    IPCPayOrderErrorAuthOrder,
+    IPCPayOrderErrorPayCashOrder
+};
 
 @interface IPCPayOrderViewMode : NSObject
 
-@property (nonatomic, assign, readwrite) id<IPCPayOrderViewModelDelegate>delegate;
+- (void)queryIntegralRule;
 
-- (void)queryCustomerDetailWithCustomerId:(NSString *)customerId;
+- (void)saveProtyOrder:(BOOL)isProty
+               Prototy:(void(^)())prototy
+               PayCash:(void(^)())payCash
+                 Error:(void(^)(IPCPayOrderError errorType))error;
 
-/**
- * Judge Is Can Pay Order
-
- */
-- (BOOL)isCanPayOrder;
-/**
- *   UITableView DataSource \ Delegate
- */
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView;
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
-
-/**
- *  Submit a new order
- *
- *  @param cash A credit card or cash
- *  @param ebuy WeChat or pay treasure to pay
- */
-- (void)offerOrder;
 
 @end
 

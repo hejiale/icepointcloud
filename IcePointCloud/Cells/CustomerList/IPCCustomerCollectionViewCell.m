@@ -29,8 +29,14 @@
 - (void)setCurrentCustomer:(IPCCustomerMode *)currentCustomer{
     _currentCustomer = currentCustomer;
     
-    if (_currentCustomer) {
-        NSString * pointText = [NSString stringWithFormat:@"%@积分",_currentCustomer.integral];
+    if (_currentCustomer)
+    {
+        NSString * pointText = @"0积分";
+        
+        if (_currentCustomer.integral) {
+            pointText = [NSString stringWithFormat:@"%@积分",_currentCustomer.integral];
+        }
+        
         CGFloat pointWidth = [pointText jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
         self.pointViewWidth.constant = pointWidth + 25;
         

@@ -89,7 +89,7 @@
                                                   MemberLevel:@""
                                                 MemberLevelId:@""
                                                     MemberNum:@""
-                                                      PhotoId:@""
+                                                      PhotoId:@([IPCHeadImage genderArcdom])
                                                  IntroducerId:@""
                                             IntroducerInteger:@""
                                                           Age:self.ageTextField.text

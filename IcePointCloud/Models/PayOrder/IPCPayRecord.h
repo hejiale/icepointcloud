@@ -15,5 +15,6 @@
 @property (nonatomic, copy) NSDate * payDate;
 @property (nonatomic, assign) NSInteger  integral;
 @property (nonatomic, assign) double   pointPrice;
+@property (nonatomic, assign) BOOL   isEditStatus;
 
 @end

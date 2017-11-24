@@ -50,7 +50,6 @@
 #import "IPCBatchDegreeObject.h"
 #import "IPCEmployeeManager.h"
 #import "IPCInsertCustomer.h"
-#import "IPCPointValueMode.h"
 #import "IPCHeadImage.h"
 #import "IPCTryMatch.h"
 #import "IPCWareHouse.h"

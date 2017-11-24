@@ -226,12 +226,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
                 [IPCInsertCustomer instance].introducerId = customer.customerID;
                 [IPCInsertCustomer instance].introducerName = customer.customerName;
                 [self.navigationController popViewControllerAnimated:YES];
-            }else if ([IPCPayOrderManager sharedManager].isPayOrderStatus){
-                [[IPCPayOrderManager sharedManager] resetPayPrice];
-                [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
-                
-                [[NSNotificationCenter defaultCenter]postNotificationName:IPCChooseCustomerNotification object:nil];
-                [self.navigationController popViewControllerAnimated:YES];
             }else{
                 IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
                 [detailVC setCustomer:customer];

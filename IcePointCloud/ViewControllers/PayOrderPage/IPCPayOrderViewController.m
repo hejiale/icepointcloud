@@ -12,7 +12,7 @@
 #import "IPCPayOrderOfferOrderViewController.h"
 #import "IPCPayOrderPayCashViewController.h"
 #import "IPCPayorderScrollPageView.h"
-#import "IPCCustomKeyboard.h"
+#import "IPCPayOrderViewMode.h"
 
 @interface IPCPayOrderViewController ()<IPCPayorderScrollPageViewDelegate>
 
@@ -22,8 +22,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IPCPayorderScrollPageView * pageView;
+@property (strong, nonatomic) IPCPayOrderCustomerViewController * customerVC;
 @property (strong, nonatomic) IPCPayOrderOptometryViewController * optometryVC;
+@property (strong, nonatomic) IPCPayOrderOfferOrderViewController * offerOrderVC;
 @property (strong, nonatomic) IPCPayOrderPayCashViewController * cashVC;
+@property (strong, nonatomic) IPCPayOrderViewMode * viewMode;
 
 @end
 
@@ -37,7 +40,8 @@
     [self.bottomView addTopLine];
     [self.cancelButton addBorder:2 Width:0.5 Color:nil];
     [self.saveButton addBorder:2 Width:0 Color:nil];
-
+    self.viewMode = [[IPCPayOrderViewMode alloc]init];
+    
     _pageView = [[IPCPayorderScrollPageView alloc]initWithFrame:CGRectMake(0, 0, 80, self.contentScrollView.jk_height)];
     [_pageView setPageImages:@[@"icon_unpage_0",@"icon_unpage_1",@"icon_unpage_2",@"icon_unpage_3"]];
     [_pageView setOnPageImages:@[@"icon_page_0",@"icon_page_1",@"icon_page_2",@"icon_page_3"]];
@@ -47,29 +51,19 @@
     
     [self.contentScrollView setContentSize:CGSizeMake(self.contentScrollView.jk_width, _pageView.numberPages*self.contentScrollView.jk_height)];
     
-    IPCPayOrderCustomerViewController * customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
+    _customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
     _optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
-    IPCPayOrderOfferOrderViewController * productVC = [[IPCPayOrderOfferOrderViewController alloc]initWithNibName:@"IPCPayOrderOfferOrderViewController" bundle:nil];
+    _offerOrderVC = [[IPCPayOrderOfferOrderViewController alloc]initWithNibName:@"IPCPayOrderOfferOrderViewController" bundle:nil];
     _cashVC = [[IPCPayOrderPayCashViewController alloc]initWithNibName:@"IPCPayOrderPayCashViewController" bundle:nil];
-    
-    [self insertScrollSubView:@[customerVC,_optometryVC,productVC,_cashVC]];
+    [self insertScrollSubView:@[_customerVC,_optometryVC,_offerOrderVC,_cashVC]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //Set Naviagtion Bar
     [self setNavigationBarStatus:YES];
-    
-    [self queryIntegralRule];
-}
-
-#pragma mark //Request Method
-- (void)queryIntegralRule
-{
-    [IPCPayOrderRequestManager queryIntegralRuleWithSuccessBlock:^(id responseValue){
-        [IPCPayOrderManager sharedManager].integralTrade = [IPCPayCashIntegralTrade mj_objectWithKeyValues:responseValue];
-    } FailureBlock:^(NSError *error) {
-    }];
+    //获取积分规则
+    [self.viewMode queryIntegralRule];
 }
 
 #pragma mark //Set UI
@@ -91,43 +85,28 @@
 }
 
 #pragma mark //Request Methods
-- (void)saveProtyOrder
+- (void)offerOrder:(BOOL)isPrototy
 {
-    [IPCPayOrderRequestManager savePrototyOrderWithSuccessBlock:^(id responseValue)
+    __weak typeof(self) weakSelf = self;
+    if (isPrototy) {
+        [self.nextStepButton jk_showIndicator];
+    }else{
+        [self.saveButton jk_showIndicator];
+    }
+    
+    [self.viewMode saveProtyOrder:isPrototy Prototy:^
     {
-        [self offertOrderWithOrderId:responseValue[@"id"]];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
-
-- (void)offertOrderWithOrderId:(NSString *)orderId
-{
-    [IPCPayOrderRequestManager offerOrderWithOrderId:orderId SuccessBlock:^(id responseValue)
-    {
-        [self authOrderWithOrderNum:responseValue[@"orderNumber"]];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
-
-- (void)authOrderWithOrderNum:(NSString *)orderNum
-{
-    [IPCPayOrderRequestManager authOrderWithOrderNum:orderNum SuccessBlock:^(id responseValue)
-    {
-        [self payCashWithOrderNum:responseValue[@"orderNumber"]];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
-
-- (void)payCashWithOrderNum:(NSString *)orderNum
-{
-    [IPCPayOrderRequestManager payCashOrderWithOrderNumber:orderNum SuccessBlock:^(id responseValue)
-    {
-        
-    } FailureBlock:^(NSError *error) {
-        
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.nextStepButton jk_hideIndicator];
+        [strongSelf clearAllPayInfo];
+    } PayCash:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf clearAllPayInfo];
+        [strongSelf.saveButton jk_hideIndicator];
+    } Error:^(IPCPayOrderError errorType) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.nextStepButton jk_hideIndicator];
+        [strongSelf.saveButton jk_hideIndicator];
     }];
 }
 
@@ -135,7 +114,9 @@
 ///收银
 - (IBAction)payCashAction:(id)sender
 {
-    [self saveProtyOrder];
+    if ([[IPCPayOrderManager sharedManager] isCanPayOrder]) {
+        [self offerOrder:NO];
+    }
 }
 
 - (IBAction)nextStepAction:(id)sender
@@ -152,6 +133,12 @@
 
 - (IBAction)areCancelOrderAction:(id)sender
 {
+    //挂单
+    if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
+        [self offerOrder:YES];
+    }else{
+        [IPCCommonUI showError:@"购物列表为空"];
+    }
 }
 
 - (IBAction)cancelAction:(id)sender
@@ -159,12 +146,17 @@
     __weak typeof(self) weakSelf = self;
     [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:self Done:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.pageView setCurrentPage:0];
-        [strongSelf reloadBottomStatus];
-        [strongSelf.contentScrollView setContentOffset:CGPointZero];
+        [strongSelf clearAllPayInfo];
     }];
 }
 
+- (void)clearAllPayInfo
+{
+    [self.pageView setCurrentPage:0];
+    [self.contentScrollView setContentOffset:CGPointZero];
+    [[IPCPayOrderManager sharedManager] resetData];
+    [self.customerVC updateUI];
+}
 
 #pragma mark //IPCPayorderScrollPageViewDelegate
 - (void)changePageIndex:(NSInteger)index
@@ -185,7 +177,9 @@
     
     if (self.pageView.currentPage == 1) {
         [self.optometryVC reload];
-    }else if (self.pageView.currentPage == 3){
+    }else if (self.pageView.currentPage == 2){
+        [self.offerOrderVC updateUI];
+    } else if (self.pageView.currentPage == 3){
         [self.cashVC reload];
     }
 }

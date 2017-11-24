@@ -24,15 +24,11 @@ extern NSString *const IPCSearchCustomerkey;
 //Shopping cart change notification
 extern NSString *const IPCNotificationShoppingCartChanged;
 extern NSString *const IPCShoppingCartCountKey;
-//Choose Customer notification
-extern NSString *const  IPCChooseCustomerNotification;
 //Choose WareHouse notification
 extern NSString *const  IPCChooseWareHouseNotification;
 //Error Networking Status Message
 extern NSString * const kIPCErrorNetworkAlertMessage;
 extern NSString * const kIPCNotConnectInternetMessage;
-///PayOrder Page  Reset Offset
-extern NSString * const kIPCPayOrderResetOffset;
 
 @interface IPCAppManager : NSObject
 

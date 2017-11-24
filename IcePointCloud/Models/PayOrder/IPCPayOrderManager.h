@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "IPCEmployeeResult.h"
-#import "IPCPointValueMode.h"
 #import "IPCPayRecord.h"
 #import "IPCPayCashIntegralTrade.h"
 
@@ -19,21 +17,9 @@
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;//当前客户Id
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
-@property (nonatomic, assign, readwrite) double        pointPrice;//抵扣积分金额
-@property (nonatomic, assign, readwrite) NSInteger    usedPoint;//已使用积分
-
-@property (nonatomic, assign, readwrite) double        givingAmount;//赠送金额
-
 @property (nonatomic, assign, readwrite) double   payAmount;//合计金额
 @property (nonatomic, assign, readwrite) double   discount;//折扣率
 @property (nonatomic, assign, readwrite) double   discountAmount;//优惠金额
-
-@property (nonatomic, assign, readwrite) BOOL     isSelectPoint;// 是否选择积分
-@property (nonatomic, assign, readwrite) BOOL     isChooseCustomer;//是否已选择客户
-@property (nonatomic, assign, readwrite) double  customerDiscount;//客户折扣
-
-@property (nonatomic, strong) IPCPayRecord * insertPayRecord;//正在输入中的付款方式记录
-@property (nonatomic, assign) BOOL      isInsertRecordStatus;//是否正在输入付款记录的状态
 
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
 
@@ -45,23 +31,26 @@
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;//付款记录方式
 
-//实付金额
-- (double)realTotalPrice;
 //剩余付款金额
 - (double)remainPayPrice;
+
 //已付款金额总计
 - (double)payRecordTotalPrice;
 
-- (void)calculatePointValue:(IPCPointValueMode *)pointValue;
-
-- (double)minumEmployeeResult;
-
+//计算优惠折扣
 - (double)calculateDiscount;
 
-- (BOOL)isExistEmptyEmployeeResult;
+//判断订单可否支付
+- (BOOL)isCanPayOrder;
+
+//清空收银记录
+- (void)clearPayRecord;
+
+//判断当前是否有编辑收银记录
+- (BOOL)judgeIsHaveEditPayRecord;
+
 //清空支付信息  选择客户信息  清空商品列表
 - (void)resetData;
-- (void)resetPayPrice;
 
 
 @end

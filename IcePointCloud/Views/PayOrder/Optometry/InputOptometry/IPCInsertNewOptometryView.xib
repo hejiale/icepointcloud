@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCInsertNewOptometryView">
+            <connections>
+                <outlet property="editContentView" destination="CzV-Hx-APZ" id="2OK-kI-3IQ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kLA-wM-5go">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.2041416952" colorSpace="calibratedWhite"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CzV-Hx-APZ">
+                    <rect key="frame" x="52" y="10" width="920" height="650"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaS-4h-tu9">
+                            <rect key="frame" x="162.5" y="595" width="195" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="35" id="D5k-6H-nmS"/>
+                                <constraint firstAttribute="width" constant="195" id="WyD-39-m8m"/>
+                            </constraints>
+                            <state key="normal" image="icon_cancel_payOrder"/>
+                            <connections>
+                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="XRv-pC-8GN"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Rd-44-puK">
+                            <rect key="frame" x="562.5" y="595" width="195" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="195" id="t2X-BD-Chj"/>
+                                <constraint firstAttribute="height" constant="35" id="vBj-ED-7Mx"/>
+                            </constraints>
+                            <state key="normal" image="icon_save_customer"/>
+                            <connections>
+                                <action selector="saveAction:" destination="-1" eventType="touchUpInside" id="2bS-k4-Mat"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="650" id="5CW-jC-TbH"/>
+                        <constraint firstItem="zaS-4h-tu9" firstAttribute="centerX" secondItem="CzV-Hx-APZ" secondAttribute="centerX" constant="-200" id="Ci0-C2-z0N"/>
+                        <constraint firstAttribute="bottom" secondItem="5Rd-44-puK" secondAttribute="bottom" constant="20" id="JSB-jn-aYp"/>
+                        <constraint firstItem="5Rd-44-puK" firstAttribute="centerX" secondItem="CzV-Hx-APZ" secondAttribute="centerX" constant="200" id="MWF-TP-Xv3"/>
+                        <constraint firstAttribute="bottom" secondItem="zaS-4h-tu9" secondAttribute="bottom" constant="20" id="gCf-nr-b4U"/>
+                        <constraint firstAttribute="width" constant="920" id="lfS-ui-8Lo"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="kLA-wM-5go" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Kw6-Cz-Qda"/>
+                <constraint firstItem="CzV-Hx-APZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="dsB-D4-7il"/>
+                <constraint firstAttribute="trailing" secondItem="kLA-wM-5go" secondAttribute="trailing" id="l9S-PV-zdH"/>
+                <constraint firstAttribute="bottom" secondItem="kLA-wM-5go" secondAttribute="bottom" id="m0d-Ku-RC3"/>
+                <constraint firstItem="CzV-Hx-APZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uvn-E8-BJL"/>
+                <constraint firstItem="kLA-wM-5go" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="xR9-16-nSm"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_cancel_payOrder" width="195" height="35"/>
+        <image name="icon_save_customer" width="195" height="35"/>
+    </resources>
+</document>

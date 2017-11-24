@@ -39,7 +39,7 @@
         [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
         [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.consumptionAmount]];
         [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.balance]];
-        [self.bookDateLabel setText:_currentCustomer.createDate];
+        [self.bookDateLabel setText:[IPCCommon formatDate:_currentCustomer.createDate IsTime:NO]];
         [self.pointLabel setText:pointValue];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         
