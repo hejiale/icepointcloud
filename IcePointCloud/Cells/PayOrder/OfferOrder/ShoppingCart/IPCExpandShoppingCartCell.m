@@ -7,18 +7,16 @@
 //
 
 #import "IPCExpandShoppingCartCell.h"
+#import "IPCCustomTextField.h"
 
-@interface IPCExpandShoppingCartCell()<UITextFieldDelegate>
+@interface IPCExpandShoppingCartCell()<IPCCustomTextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *mainContentView;
 @property (weak, nonatomic) IBOutlet UILabel *unitPriceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *glassesImgView;
 @property (nonatomic, weak) IBOutlet UILabel *glassesNameLbl;
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
-@property (weak, nonatomic) IBOutlet UITextField *inputPriceTextField;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
-
-@property (copy, nonatomic) void(^ReloadBlock)();
 
 
 @end
@@ -29,16 +27,16 @@
 {
     [super awakeFromNib];
     
-    [self.inputPriceTextField addBottomLine];
+    [self.mainContentView addSubview:self.inputPriceTextField];
+  
+    [[IPCTextFiledControl instance] addTextField:self.inputPriceTextField];
 }
 
-- (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload
+- (void)setCartItem:(IPCShoppingCartItem *)cartItem
 {
     _cartItem = cartItem;
     
     if (_cartItem) {
-        self.ReloadBlock = reload;
-        
         IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
         if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         
@@ -56,20 +54,33 @@
     }
 }
 
-#pragma mark //UITextField Delegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (![IPCCommon judgeIsFloatNumber:string]) {
-        return NO;
+- (IPCCustomTextField *)inputPriceTextField
+{
+    if (!_inputPriceTextField) {
+        _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-30, 150, 30)];
+        _inputPriceTextField.clearOnEditing = YES;
+        [_inputPriceTextField setDelegate:self];
     }
-    return YES;
+    return _inputPriceTextField;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField endEditing:YES];
-    return YES;
+#pragma mark //UITextField Delegate
+- (void)textFieldPreEditing:(IPCCustomTextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(preEditing:)]) {
+        [self.delegate preEditing:self];
+    }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldNextEditing:(IPCCustomTextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(nextEditing:)]) {
+        [self.delegate nextEditing:self];
+    }
+}
+
+- (void)textFieldEndEditing:(IPCCustomTextField *)textField
+{
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length) {
@@ -81,8 +92,8 @@
         self.cartItem.unitDiscount = 1;
     }
     
-    if (self.ReloadBlock) {
-        self.ReloadBlock();
+    if ([self.delegate respondsToSelector:@selector(endEditing:)]) {
+        [self.delegate endEditing:self];
     }
 }
 

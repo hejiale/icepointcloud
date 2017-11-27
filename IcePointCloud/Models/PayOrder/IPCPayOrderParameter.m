@@ -19,7 +19,7 @@
     [employeeResultDic setObject:@(100) forKey:@"achievement"];
     [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobID forKey:@"employeeId"];
     [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.name forKey:@"name"];
-    [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobNumber forKey:@"jobNumber"];
+    [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobNumber ? : @"" forKey:@"jobNumber"];
     [employeeList addObject:employeeResultDic];
     
     __block NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];

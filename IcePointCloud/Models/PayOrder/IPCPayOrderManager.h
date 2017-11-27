@@ -21,8 +21,6 @@
 @property (nonatomic, assign, readwrite) double   discount;//折扣率
 @property (nonatomic, assign, readwrite) double   discountAmount;//优惠金额
 
-@property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
-
 @property (nonatomic, strong, readwrite) IPCEmployee * employee;//经办人
 @property (nonatomic, copy, readwrite) NSString * remark;//订单备注
 @property (nonatomic, strong, readwrite) IPCWareHouse * currentHouse;//当前店铺

@@ -226,4 +226,5 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     self.deviceToken = nil;
 }
 
+
 @end

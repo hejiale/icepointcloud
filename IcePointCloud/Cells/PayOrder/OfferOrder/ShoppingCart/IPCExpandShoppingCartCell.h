@@ -9,11 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "IPCShoppingCartItem.h"
 
+@protocol IPCExpandShoppingCartCellDelegate;
+
 @interface IPCExpandShoppingCartCell : UITableViewCell
 
 @property (nonatomic, strong) IPCShoppingCartItem * cartItem;
 
-- (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
+@property (strong, nonatomic)  IPCCustomTextField * inputPriceTextField;
+
+@property (nonatomic, assign) id<IPCExpandShoppingCartCellDelegate>delegate;
+
+
+@end
+
+@protocol IPCExpandShoppingCartCellDelegate <NSObject>
+
+- (void)preEditing:(IPCExpandShoppingCartCell *)cell;
+
+- (void)nextEditing:(IPCExpandShoppingCartCell *)cell;
+
+- (void)endEditing:(IPCExpandShoppingCartCell *)cell;
 
 @end
 

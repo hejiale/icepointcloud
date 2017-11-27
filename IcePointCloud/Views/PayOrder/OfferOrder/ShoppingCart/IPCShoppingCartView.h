@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPCCustomKeyboard.h"
 
 @interface IPCShoppingCartView : UIView
+
+@property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 
 - (instancetype)initWithFrame:(CGRect)frame Complete:(void(^)())complete;
 

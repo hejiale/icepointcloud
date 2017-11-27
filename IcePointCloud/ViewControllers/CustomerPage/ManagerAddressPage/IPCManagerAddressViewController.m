@@ -144,16 +144,8 @@ static NSString * const addressIdentifier = @"IPCEditAddressCellIdentifier";
     return 80;
 }
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-        IPCCustomerAddressMode * address = self.addressViewModel.addressList[indexPath.row];
-        [IPCCurrentCustomer sharedManager].currentAddress = nil;
-        [IPCCurrentCustomer sharedManager].currentAddress = address;
-        [self.navigationController popViewControllerAnimated:YES];
-    }
 }
 
 #pragma mark //

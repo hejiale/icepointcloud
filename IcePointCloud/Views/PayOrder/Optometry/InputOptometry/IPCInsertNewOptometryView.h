@@ -7,16 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IPCPayOrderInputOptometryHeadView.h"
-#import "IPCPayOrderInputOptometryView.h"
-#import "IPCPayOrderInputOptometryMemoView.h"
 
 @interface IPCInsertNewOptometryView : UIView
-
-@property (strong, nonatomic) IPCPayOrderInputOptometryHeadView  * inputHeadView;
-@property (strong, nonatomic) IPCPayOrderInputOptometryView          * inputInfoView;
-@property (strong, nonatomic) IPCPayOrderInputOptometryMemoView * inputMemoView;
-@property (weak, nonatomic) IBOutlet UIView *editContentView;
 
 - (instancetype)initWithFrame:(CGRect)frame Complete:(void(^)())complete;
 

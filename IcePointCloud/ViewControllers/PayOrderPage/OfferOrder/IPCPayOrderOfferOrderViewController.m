@@ -9,11 +9,13 @@
 #import "IPCPayOrderOfferOrderViewController.h"
 #import "IPCShoppingCartView.h"
 #import "IPCPayOrderOfferOrderInfoView.h"
+#import "IPCCustomKeyboard.h"
 
 @interface IPCPayOrderOfferOrderViewController ()
 
 @property (nonatomic, strong) IPCShoppingCartView * shopCartView ;
 @property (nonatomic, strong) IPCPayOrderOfferOrderInfoView * offerInfoView;
+@property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 
 @end
 
@@ -25,6 +27,7 @@
     
     [self.view addSubview:self.shopCartView];
     [self.view addSubview:self.offerInfoView];
+    [self.view addSubview:self.keyboard];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -58,8 +61,17 @@
             [[IPCPayOrderManager sharedManager] clearPayRecord];
             [strongSelf reloadOfferOrderInfo];
         }];
+        _shopCartView.keyboard = self.keyboard;
     }
     return _shopCartView;
+}
+
+- (IPCCustomKeyboard *)keyboard
+{
+    if (!_keyboard) {
+        _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, self.offerInfoView.jk_bottom+10, 428, 335)];
+    }
+    return _keyboard;
 }
 
 #pragma mark //Clicked Events

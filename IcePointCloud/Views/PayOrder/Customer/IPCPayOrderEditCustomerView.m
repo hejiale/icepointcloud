@@ -11,6 +11,7 @@
 @interface IPCPayOrderEditCustomerView()<UITextFieldDelegate,IPCDatePickViewControllerDelegate>
 {
     NSString * gender;
+    BOOL        isUpdateStaus;
 }
 @property (weak, nonatomic) IBOutlet UITextField *customerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -26,11 +27,12 @@
 
 @implementation IPCPayOrderEditCustomerView
 
-- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void(^)(NSString *))update
+- (instancetype)initWithFrame:(CGRect)frame IsUpdate:(BOOL)isUpdate UpdateBlock:(void (^)(NSString *))update
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.UpdateBlock = update;
+        isUpdateStaus = isUpdate;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderEditCustomerView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -44,6 +46,10 @@
         }];
         
         [self.birthDayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
+        
+        if (isUpdate) {
+            [self updateCustomerInfo];
+        }
     }
     return self;
 }
@@ -66,7 +72,7 @@
 - (void)saveCustomerRequest
 {
     if (!gender) {
-        if ([self isCustomer]) {
+        if (isUpdateStaus) {
             gender = [IPCCurrentCustomer sharedManager].currentCustomer.gender;
         }else{
             gender = @"MALE";
@@ -93,7 +99,7 @@
                                                  IntroducerId:@""
                                             IntroducerInteger:@""
                                                           Age:self.ageTextField.text
-                                                   CustomerId:([self isCustomer] ? [IPCPayOrderManager sharedManager].currentCustomerId : @"")
+                                                   CustomerId:(isUpdateStaus ? [IPCPayOrderManager sharedManager].currentCustomerId : @"")
                                                  SuccessBlock:^(id responseValue)
      {
          if (self.UpdateBlock) {
@@ -160,14 +166,6 @@
     
     [self.birthDayTextField setText:date];
     [self.ageTextField setText:age];
-}
-
-- (BOOL)isCustomer
-{
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        return YES;
-    }
-    return NO;
 }
 
 @end

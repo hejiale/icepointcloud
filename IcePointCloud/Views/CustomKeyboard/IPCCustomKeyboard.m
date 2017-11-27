@@ -8,10 +8,26 @@
 
 #import "IPCCustomKeyboard.h"
 
+#define PreKeyboardType      101
+#define NextKeyboardType    102
+#define PointKeboardType     100
+#define ClearKeyboardType   103
+#define SureKeyboardType    104
+
+NSString * const IPCCustomKeyboardBeginNotification  =  @"IPCCustomKeyboardBeginNotification";
+NSString * const IPCCustomKeyboardChangeNotification = @"IPCCustomKeyboardChangeNotification";
+NSString * const IPCCustomKeyboardDoneNotification = @"IPCCustomKeyboardDoneNotification";
+NSString * const IPCCustomKeyboardClearNotification = @"IPCCustomKeyboardClearNotification";
+NSString * const IPCCustomKeyboardPreNotification = @"IPCCustomKeyboardPreNotification";
+NSString * const IPCCustomKeyboardNextNotification = @"IPCCustomKeyboardNextNotification";
+NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
+
+
 @interface IPCCustomKeyboard()
 
 @property (nonatomic, strong) NSMutableArray<UIButton *> * buttons;
 @property (nonatomic, strong) NSMutableString * appendString;
+
 
 @end
 
@@ -38,6 +54,8 @@
         }];
         
         self.appendString = [[NSMutableString alloc]init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEditing) name:IPCCustomKeyboardBeginNotification object:nil];
     }
     return self;
 }
@@ -49,8 +67,13 @@
     return _buttons;
 }
 
+- (void)beginEditing
+{
+    self.appendString = [[NSMutableString alloc]init];
+}
+
 - (IBAction)numberTapAction:(UIButton *)sender {
-    if (sender.tag <=11)
+    if (sender.tag <= PointKeboardType)
     {
         NSInteger suffixLength = 0;
         NSString * suffixString = nil;
@@ -66,38 +89,29 @@
         }
         
         NSString * number = sender.titleLabel.text;
-        if (sender.tag == 11) {
+        if (sender.tag == PointKeboardType) {
             if ([self.appendString containsString:@"."] || [self.appendString isEqualToString:@"0"] || self.appendString.length == 0) {
                 return;
             }
         }
-        if (sender.tag == 0 || sender.tag == 10) {
+        if (sender.tag == 0) {
             if ([self.appendString isEqualToString:@"0"] || self.appendString.length == 0 ) {
                 return;
             }
-            if (sender.tag == 10) {
-                if ([suffixString isEqualToString:@"0"] ) {
-                    return;
-                }
-            }
         }
         [self.appendString appendString:number];
-    }else if (sender.tag == 100){
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardChangeNotification object:nil userInfo:@{IPCCustomKeyboardValue : self.appendString}];
+    }else if (sender.tag == ClearKeyboardType){
         if (self.appendString.length) {
             [self.appendString deleteCharactersInRange:NSMakeRange(self.appendString.length-1, 1)];
         }
-    }else if (sender.tag == 101){
-        if ([self.delegate respondsToSelector:@selector(beginEditPrefixTextFieldForKeyboard:)]) {
-            [self.delegate beginEditPrefixTextFieldForKeyboard:self];
-        }
-    }else if (sender.tag == 102){
-        if ([self.delegate respondsToSelector:@selector(beginEditSuffixTextFieldForKeyboard:)]) {
-            [self.delegate beginEditSuffixTextFieldForKeyboard:self];
-        }
-    }else if (sender.tag == 103){
-        if ([self.delegate respondsToSelector:@selector(endEditingForKeyboard:Text:)]) {
-            [self.delegate endEditingForKeyboard:self Text:self.appendString];
-        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardClearNotification object:nil userInfo:@{IPCCustomKeyboardValue : self.appendString}];
+    }else if (sender.tag == PreKeyboardType){
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardPreNotification object:nil];
+    }else if (sender.tag == NextKeyboardType){
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardNextNotification object:nil];
+    }else if (sender.tag == SureKeyboardType){
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardDoneNotification object:nil userInfo:@{IPCCustomKeyboardValue : self.appendString}];
     }
 }
 

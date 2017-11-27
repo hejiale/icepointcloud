@@ -10,8 +10,8 @@
 
 @interface IPCPayOrderEditCustomerView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void(^)(NSString *))update;
-
-- (void)updateCustomerInfo;
+- (instancetype)initWithFrame:(CGRect)frame
+                     IsUpdate:(BOOL)isUpdate
+                  UpdateBlock:(void(^)(NSString *))update;
 
 @end

@@ -9,6 +9,7 @@
 
 #import "IPCStoreResult.h"
 #import "IPCWareHouseResult.h"
+#import "IPCCustomTextField.h"
 
 //The App for the first time login
 extern NSString *const IPCFirstLanuchKey;
@@ -91,5 +92,6 @@ extern NSString * const kIPCNotConnectInternetMessage;
   Clear All Data
  */
 - (void)clearData;
+
 
 @end

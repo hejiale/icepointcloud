@@ -25,6 +25,7 @@
 #import "IPCEmptyAlertView.h"
 #import "IPCAlertController.h"
 #import "IPCPersonContentView.h"
+#import "IPCCustomKeyboard.h"
 /**
  *  ViewController
  */
@@ -53,6 +54,7 @@
 #import "IPCHeadImage.h"
 #import "IPCTryMatch.h"
 #import "IPCWareHouse.h"
+#import "IPCTextFiledControl.h"
 /**
  *  Category
  */

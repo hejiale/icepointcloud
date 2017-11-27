@@ -8,17 +8,13 @@
 
 #import "IPCPayOrderOptometryViewController.h"
 #import "IPCManagerOptometryViewController.h"
-#import "IPCPayOrderOptometryHeadView.h"
-#import "IPCPayOrderOptometryInfoView.h"
-#import "IPCPayOrderOptometryMemoView.h"
+#import "IPCShowOptometryInfoView.h"
 #import "IPCInsertNewOptometryView.h"
 
 @interface IPCPayOrderOptometryViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *infoContentView;
-@property (strong, nonatomic) IPCPayOrderOptometryInfoView    * infoView;
-@property (strong, nonatomic) IPCPayOrderOptometryHeadView  * headView;
-@property (strong, nonatomic) IPCPayOrderOptometryMemoView * memoView;
+@property (strong, nonatomic) IPCShowOptometryInfoView * showOptometryView;
 
 @end
 
@@ -36,41 +32,24 @@
 }
 
 #pragma mark //Set UI
-- (IPCPayOrderOptometryHeadView *)headView
+- (IPCShowOptometryInfoView *)showOptometryView
 {
-    if (!_headView) {
+    if (!_showOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _headView = [[IPCPayOrderOptometryHeadView alloc]initWithFrame:CGRectMake(20, 20, self.view.jk_width-40, 150) ChooseBlock:^{
+        _showOptometryView = [[IPCShowOptometryInfoView alloc]initWithFrame:CGRectMake(20, 20, self.infoContentView.jk_width-40, self.infoContentView.jk_height-40) ChooseBlock:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf pushToManagerOptometryViewController];
         }];
     }
-    return _headView;
+    return _showOptometryView;
 }
 
-- (IPCPayOrderOptometryInfoView *)infoView
-{
-    if (!_infoView) {
-        _infoView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(20, self.headView.jk_bottom+20, self.view.jk_width-40, 375)];
-    }
-    return _infoView;
-}
-
-- (IPCPayOrderOptometryMemoView *)memoView
-{
-    if (!_memoView) {
-        _memoView = [[IPCPayOrderOptometryMemoView alloc]initWithFrame:CGRectMake(20, self.infoView.jk_bottom+20, self.view.jk_width-40, 60)];
-    }
-    return _memoView;
-}
 
 - (void)loadShowOptometryView
 {
     [self.infoContentView setHidden:NO];
     [self.infoContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.infoContentView addSubview:self.headView];
-    [self.infoContentView addSubview:self.infoView];
-    [self.infoContentView addSubview:self.memoView];
+    [self.infoContentView addSubview:self.showOptometryView];
 }
 
 #pragma mark //Clicked Events
@@ -78,9 +57,7 @@
 {
     if ([IPCCurrentCustomer sharedManager].currentOpometry) {
         [self loadShowOptometryView];
-        [self.infoView updateOptometryInfo];
-        [self.headView updateOptometryInfo];
-        [self.memoView updateOptometryInfo];
+        [self.showOptometryView updateOptometryInfo];
     }else{
         [self.infoContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         [self.infoContentView setHidden:YES];

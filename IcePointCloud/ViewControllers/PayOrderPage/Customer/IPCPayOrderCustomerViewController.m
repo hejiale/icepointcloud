@@ -179,14 +179,12 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 - (void)showEditCustomerView:(BOOL)isUpdate
 {
     IPCPayOrderEditCustomerView * editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:self.view.superview.superview.bounds
+                                                                                              IsUpdate:isUpdate
                                                                                            UpdateBlock:^(NSString *customerId) {
                                                                                                [self queryCustomerDetailWithCustomerId:customerId];
                                                                                            }];
     [self.view.superview.superview addSubview:editCustomerView];
     [self.view.superview.superview bringSubviewToFront:editCustomerView];
-    if (isUpdate) {
-        [editCustomerView updateCustomerInfo];
-    }
 }
 
 - (void)updateUI
@@ -227,8 +225,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
     [self queryCustomerDetailWithCustomerId:customer.customerID];
-    
-    [IPCPayOrderManager sharedManager].insertOptometry = [[IPCOptometryMode alloc]init];
 }
 
 #pragma mark //UITextField Delegate

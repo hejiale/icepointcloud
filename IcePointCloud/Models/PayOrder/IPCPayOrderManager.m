@@ -24,7 +24,6 @@
 {
     self = [super init];
     if (self) {
-        self.insertOptometry = [[IPCOptometryMode alloc]init];
         self.employee = [[IPCEmployee alloc]init];
         self.employee = [IPCAppManager sharedManager].storeResult.employee;
     }

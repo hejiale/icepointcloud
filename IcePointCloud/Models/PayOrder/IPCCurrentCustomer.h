@@ -17,6 +17,7 @@
 @property (nonatomic, strong, readwrite) IPCOptometryMode             * currentOpometry;
 
 - (void)loadCurrentCustomer:(id)responseValue;
+
 - (void)clearData;
 
 @end

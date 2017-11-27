@@ -50,19 +50,6 @@
                                 <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E5w-LJ-wk5">
-                                <rect key="frame" x="130" y="87" width="180" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Lmt-By-sP6"/>
-                                    <constraint firstAttribute="width" constant="180" id="NJI-WS-UlW"/>
-                                </constraints>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                                <connections>
-                                    <outlet property="delegate" destination="kFC-ef-115" id="Ew9-Co-77G"/>
-                                </connections>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3t-hE-Vkn">
                                 <rect key="frame" x="120" y="51.5" width="494" height="20"/>
                                 <constraints>
@@ -85,7 +72,6 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="E5w-LJ-wk5" firstAttribute="bottom" secondItem="U8U-48-ede" secondAttribute="bottom" id="0FP-kp-fTx"/>
                             <constraint firstItem="o3t-hE-Vkn" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="Dfc-zT-XeW"/>
                             <constraint firstAttribute="trailing" secondItem="Ljk-K3-9sM" secondAttribute="trailing" constant="30" id="HLR-ap-sHl"/>
                             <constraint firstItem="o36-OD-XmA" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="10" id="JIf-wA-oea"/>
@@ -93,7 +79,6 @@
                             <constraint firstItem="o3t-hE-Vkn" firstAttribute="top" secondItem="o36-OD-XmA" secondAttribute="bottom" constant="10" id="cEj-f8-r2i"/>
                             <constraint firstItem="o36-OD-XmA" firstAttribute="top" secondItem="U8U-48-ede" secondAttribute="top" id="cog-6A-IcI"/>
                             <constraint firstItem="iQh-If-xpo" firstAttribute="centerY" secondItem="o36-OD-XmA" secondAttribute="centerY" id="huo-rL-ybT"/>
-                            <constraint firstItem="E5w-LJ-wk5" firstAttribute="leading" secondItem="U8U-48-ede" secondAttribute="trailing" constant="20" id="jwt-ka-xRx"/>
                             <constraint firstItem="U8U-48-ede" firstAttribute="leading" secondItem="VrM-56-AOB" secondAttribute="leading" constant="20" id="kWQ-0x-aG0"/>
                             <constraint firstAttribute="trailing" secondItem="o3t-hE-Vkn" secondAttribute="trailing" constant="10" id="qXS-b5-233"/>
                             <constraint firstItem="U8U-48-ede" firstAttribute="centerY" secondItem="VrM-56-AOB" secondAttribute="centerY" id="vqC-QX-kC7"/>
@@ -114,7 +99,6 @@
                 <outlet property="countLbl" destination="Ljk-K3-9sM" id="sxi-wZ-zR8"/>
                 <outlet property="glassesImgView" destination="U8U-48-ede" id="kyp-OI-2Xg"/>
                 <outlet property="glassesNameLbl" destination="o36-OD-XmA" id="zN8-fO-pwI"/>
-                <outlet property="inputPriceTextField" destination="E5w-LJ-wk5" id="7yT-OC-RRW"/>
                 <outlet property="mainContentView" destination="VrM-56-AOB" id="Zvy-uy-z1U"/>
                 <outlet property="parameterLabel" destination="o3t-hE-Vkn" id="iWe-C4-cbv"/>
                 <outlet property="unitPriceLabel" destination="iQh-If-xpo" id="Zg4-ZF-KiX"/>

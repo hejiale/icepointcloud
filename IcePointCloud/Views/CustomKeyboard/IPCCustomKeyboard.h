@@ -8,20 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol IPCCustomKeyboardDelegate;
+extern NSString * const IPCCustomKeyboardBeginNotification;
+extern NSString * const IPCCustomKeyboardChangeNotification;
+extern NSString * const IPCCustomKeyboardDoneNotification;
+extern NSString * const IPCCustomKeyboardClearNotification;
+extern NSString * const IPCCustomKeyboardPreNotification;
+extern NSString * const IPCCustomKeyboardNextNotification;
+extern NSString * const IPCCustomKeyboardValue;
+
 
 @interface IPCCustomKeyboard : UIView
 
-@property (nonatomic, assign) id<IPCCustomKeyboardDelegate>delegate;
-
 @end
 
-@protocol IPCCustomKeyboardDelegate <NSObject>
-
-- (void)endEditingForKeyboard:(IPCCustomKeyboard *)keyboard Text:(NSString *)text;
-
-- (void)beginEditPrefixTextFieldForKeyboard:(IPCCustomKeyboard *)keyboard;
-
-- (void)beginEditSuffixTextFieldForKeyboard:(IPCCustomKeyboard *)keyboard;
-
-@end
