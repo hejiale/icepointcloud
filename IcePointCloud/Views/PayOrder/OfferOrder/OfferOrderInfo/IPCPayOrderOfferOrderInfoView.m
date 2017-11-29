@@ -147,7 +147,7 @@
             [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].discountAmount;
             [[IPCPayOrderManager sharedManager] clearPayRecord];
         }else{
-            if ([str doubleValue] >= [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] || [str doubleValue] <= 0) {
+            if ([str doubleValue] >= [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]) {
                 [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
             }else{
                 [IPCPayOrderManager sharedManager].payAmount = [str doubleValue];

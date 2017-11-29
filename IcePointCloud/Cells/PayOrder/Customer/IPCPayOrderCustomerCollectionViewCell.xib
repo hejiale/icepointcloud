@@ -19,9 +19,9 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nw-hs-Ps6">
-                        <rect key="frame" x="10" y="10" width="55" height="20"/>
+                        <rect key="frame" x="10" y="10" width="70" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="55" id="VH3-OJ-gaZ"/>
+                            <constraint firstAttribute="width" constant="70" id="VH3-OJ-gaZ"/>
                             <constraint firstAttribute="height" constant="20" id="tgm-wz-Im8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -29,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOk-C2-YgE">
-                        <rect key="frame" x="65" y="10" width="83" height="20"/>
+                        <rect key="frame" x="80" y="10" width="68" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="nkm-pH-Pbg"/>
                         </constraints>

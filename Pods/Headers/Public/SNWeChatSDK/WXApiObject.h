@@ -1,1 +1,0 @@
-../../../SNWeChatSDK/SDK/WXApiObject.h

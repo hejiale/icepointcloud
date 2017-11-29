@@ -61,15 +61,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-3g-g51">
                     <rect key="frame" x="428" y="10" width="496" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_search" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-Mz-6jk">
-                            <rect key="frame" x="10" y="15" width="20" height="20"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payOrder_searchCustomer" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-Mz-6jk">
+                            <rect key="frame" x="0.0" y="5" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="20" id="iIV-Z1-k8a"/>
-                                <constraint firstAttribute="width" constant="20" id="nnG-Ny-Goc"/>
+                                <constraint firstAttribute="height" constant="40" id="iIV-Z1-k8a"/>
+                                <constraint firstAttribute="width" constant="40" id="nnG-Ny-Goc"/>
                             </constraints>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入搜索关键词" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EbI-Lx-eqa">
-                            <rect key="frame" x="35" y="0.0" width="461" height="50"/>
+                            <rect key="frame" x="45" y="0.0" width="451" height="50"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -84,7 +84,7 @@
                         <constraint firstItem="EbI-Lx-eqa" firstAttribute="top" secondItem="Wk3-3g-g51" secondAttribute="top" id="GWX-4V-geM"/>
                         <constraint firstAttribute="height" constant="50" id="J1e-mU-to7"/>
                         <constraint firstItem="HWQ-Mz-6jk" firstAttribute="centerY" secondItem="Wk3-3g-g51" secondAttribute="centerY" id="VjE-RP-1yP"/>
-                        <constraint firstItem="HWQ-Mz-6jk" firstAttribute="leading" secondItem="Wk3-3g-g51" secondAttribute="leading" constant="10" id="h30-bt-bSq"/>
+                        <constraint firstItem="HWQ-Mz-6jk" firstAttribute="leading" secondItem="Wk3-3g-g51" secondAttribute="leading" id="h30-bt-bSq"/>
                         <constraint firstItem="EbI-Lx-eqa" firstAttribute="leading" secondItem="HWQ-Mz-6jk" secondAttribute="trailing" constant="5" id="pcW-xy-IuL"/>
                         <constraint firstAttribute="trailing" secondItem="EbI-Lx-eqa" secondAttribute="trailing" id="s77-gb-OWT"/>
                     </constraints>
@@ -126,6 +126,6 @@
     </objects>
     <resources>
         <image name="icon_alert_selectCustomer" width="91" height="125"/>
-        <image name="icon_search" width="22" height="22"/>
+        <image name="payOrder_searchCustomer" width="50" height="50"/>
     </resources>
 </document>

@@ -104,9 +104,10 @@ NSString * const IPCCustomKeyboardStringNotification  = @"IPCCustomKeyboardStrin
         
         NSString * number = sender.titleLabel.text;
         if (sender.tag == PointKeboardType) {
-            if ([self.appendString containsString:@"."] || [self.appendString isEqualToString:@"0"] || self.appendString.length == 0) {
+            if ([self.appendString containsString:@"."]) {
                 return;
             }
+            number = @".";
         }
         if (sender.tag == 0) {
             if ([self.appendString isEqualToString:@"0"] || self.appendString.length == 0) {

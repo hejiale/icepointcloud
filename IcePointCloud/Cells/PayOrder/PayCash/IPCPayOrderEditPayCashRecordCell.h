@@ -24,7 +24,7 @@
 
 @protocol IPCPayOrderEditPayCashRecordCellDelegate <NSObject>
 
-- (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell;
+- (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
 
 @end
 

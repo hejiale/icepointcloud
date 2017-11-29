@@ -308,6 +308,7 @@
 - (void)postChangedNotification
 {
     [IPCPayOrderManager sharedManager].customDiscount = -1;
+    [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
     [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCNotificationShoppingCartChanged object:nil];
 }
 

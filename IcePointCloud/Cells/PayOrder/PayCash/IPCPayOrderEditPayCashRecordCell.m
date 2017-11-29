@@ -54,33 +54,39 @@
 #pragma mark //UITextFieldDelegate
 - (void)textFieldEndEditing:(IPCCustomTextField *)textField
 {
+    BOOL isInsert = NO;
+    
     if ([self.payRecord.payTypeInfo isEqualToString:@"积分"])
     {
         double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
         if (pointPrice > [[IPCPayOrderManager sharedManager] remainPayPrice]) {
             [IPCCommonUI showError:@"输入积分兑换金额大于剩余应付金额"];
-        }else if (pointPrice <= 0){
+        }else if ([textField.text integerValue] > [IPCCurrentCustomer sharedManager].currentCustomer.integral){
+            [IPCCommonUI showError:@"输入积分大于客户积分"];
+        } else if (pointPrice <= 0){
             [IPCCommonUI showError:@"请输入有效积分"];
         }else{
             self.payRecord.pointPrice = pointPrice;
             self.payRecord.integral = [textField.text integerValue];
             [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
-            self.payRecord = nil;
+            isInsert = YES;
         }
     }else{
         if ([textField.text doubleValue] > [[IPCPayOrderManager sharedManager] remainPayPrice]) {
             [IPCCommonUI showError:@"输入有效付款金额"];
-        }else  if ([textField.text doubleValue] == 0) {
+        }else if ([textField.text doubleValue] > [IPCCurrentCustomer sharedManager].currentCustomer.balance){
+            [IPCCommonUI showError:@"输入金额大于客户金额"];
+        } else  if ([textField.text doubleValue] == 0) {
             [IPCCommonUI showError:@"输入有效付款金额"];
         }else{
             self.payRecord.payPrice = [textField.text doubleValue];
             [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
-            self.payRecord = nil;
+            isInsert = YES;
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(reloadRecord:)]) {
-        [self.delegate reloadRecord:self];
+    if ([self.delegate respondsToSelector:@selector(reloadRecord:IsInsert:)]) {
+        [self.delegate reloadRecord:self IsInsert:isInsert];
     }
 }
 
