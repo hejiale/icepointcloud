@@ -86,8 +86,23 @@
 {
     double price = 0;
     for (IPCShoppingCartItem *ci in self.itemList) {
-        price += ci.totalPrice;
+        double total = ci.totalPrice + price;
+        double floor = (total * 100)/100;
+        NSString * floorStr = [NSString stringWithFormat:@"%.2f",floor];
+        price = [floorStr doubleValue];
     }
+    return price;
+}
+
+- (double)allGlassesJudgePrice
+{
+    __block double price = 0;
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        double itemPrice = obj.unitPrice * obj.glassCount;
+        double floor = floorf(itemPrice*100)/100;
+        NSString * itemPriceStr = [NSString stringWithFormat:@"%.2f",floor];
+        price += [itemPriceStr doubleValue];
+    }];
     return price;
 }
 
@@ -163,6 +178,7 @@
             item.batchReadingDegree = readingDegree;
         }
         item.glasses = glasses;
+        item.unitPrice = glasses.price;
         item.glassCount   = count;
         item.selected = YES;
         [self.itemList addObject:item];
@@ -291,6 +307,7 @@
 
 - (void)postChangedNotification
 {
+    [IPCPayOrderManager sharedManager].customDiscount = -1;
     [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCNotificationShoppingCartChanged object:nil];
 }
 
@@ -309,15 +326,37 @@
     return itemArray;
 }
 
-- (void)updateAllCartItemDiscount
+- (void)updateAllCartUnitPrice
 {
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus && [IPCPayOrderManager sharedManager].discount > 0)
-    {
-        [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-            item.unitDiscount = 1 - [IPCPayOrderManager sharedManager].discount/100;
-            item.unitPrice = 0;
-        }];
-    }
+    __block double lastAmount = 0;
+    __block  double  total = 0;
+
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (idx != self.itemList.count - 1) {
+            obj.unitPrice =  obj.glasses.price * ([[IPCPayOrderManager sharedManager] calculateDiscount]/100);
+            double floor = floorf(obj.unitPrice*100)/100;
+            NSString * floorStr = [NSString stringWithFormat:@"%.2f",floor];
+            total += [floorStr doubleValue] * obj.glassCount;
+        }else{
+            obj.unitPrice = (double)(([IPCPayOrderManager sharedManager].payAmount - total)/obj.glassCount);
+        }
+    }];
+    
+//    double discount = (double)((obj.glasses.price * [IPCPayOrderManager sharedManager].payAmount)/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]);
+    //        obj.unitPrice = discount;
 }
+
+- (IPCShoppingCartItem *)lastJudgeCartItem
+{
+    __block NSMutableArray * judgeList = [[NSMutableArray alloc]init];
+    
+    [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.unitPrice != obj.glasses.price) {
+            [judgeList addObject:obj];
+        }
+    }];
+    return [judgeList lastObject];
+}
+
 
 @end

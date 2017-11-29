@@ -65,6 +65,10 @@
  */
 - (void)postChangedNotification;
 
-- (void)updateAllCartItemDiscount;
+- (void)updateAllCartUnitPrice;
+
+- (double)allGlassesJudgePrice;
+
+- (IPCShoppingCartItem *)lastJudgeCartItem;
 
 @end

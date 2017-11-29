@@ -38,9 +38,9 @@
         [parameters setObject:employeeList forKey:@"employeeAchievements"];
     }
     
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].payAmount] forKey:@"orderFinalPrice"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].discountAmount] forKey:@"donationAmount"];
+    [parameters setObject:[NSString stringWithFormat:@"%f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];
+    [parameters setObject:[NSString stringWithFormat:@"%f",[IPCPayOrderManager sharedManager].payAmount] forKey:@"orderFinalPrice"];
+    [parameters setObject:[NSString stringWithFormat:@"%f",[IPCPayOrderManager sharedManager].discountAmount] forKey:@"donationAmount"];
     
     [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
     [parameters setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @"" forKey:@"repository"];

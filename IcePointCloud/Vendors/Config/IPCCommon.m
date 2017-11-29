@@ -119,5 +119,14 @@
     return NO;
 }
 
++ (NSString *)formatNumber:(double)number
+{
+    if (number > 0) {
+        NSString * numberStr = [NSString stringWithFormat:@"%f",number];
+        NSRange rang = [numberStr rangeOfString:@"."];
+        return [numberStr substringToIndex:rang.location + 3];
+    }
+    return @"0.00";
+}
 
 @end

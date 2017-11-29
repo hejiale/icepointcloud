@@ -22,19 +22,23 @@
 
 @property(nonatomic, assign) BOOL clearOnEditing;
 
-@property(nonatomic, assign) id<IPCCustomTextFieldDelegate>delegate;
+@property(nonatomic, assign) NSTextAlignment textAlignment;
 
-- (void)reload;
+@property(nonatomic, assign) id<IPCCustomTextFieldDelegate>delegate;
 
 @end
 
 @protocol IPCCustomTextFieldDelegate <NSObject>
 
 @optional
+- (void)textFieldBeginEditing:(IPCCustomTextField *)textField;
+
 - (void)textFieldPreEditing:(IPCCustomTextField *)textField;
 
 - (void)textFieldNextEditing:(IPCCustomTextField *)textField;
 
 - (void)textFieldEndEditing:(IPCCustomTextField *)textField;
+
+
 
 @end

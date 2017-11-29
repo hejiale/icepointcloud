@@ -76,6 +76,7 @@ typedef  void(^DismissBlock)();
                                                           Purpose:self.optometryView.insertOptometry.purpose
                                                        EmployeeId:self.optometryView.insertOptometry.employeeId
                                                      EmployeeName:self.optometryView.insertOptometry.employeeName
+                                                           Remark:@""
                                                      SuccessBlock:^(id responseValue) {
                                                          __strong typeof(weakSelf) strongSelf = weakSelf;
                                                          [strongSelf.saveButton jk_hideIndicator];

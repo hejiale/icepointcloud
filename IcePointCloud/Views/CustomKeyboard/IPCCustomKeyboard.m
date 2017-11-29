@@ -21,6 +21,7 @@ NSString * const IPCCustomKeyboardClearNotification = @"IPCCustomKeyboardClearNo
 NSString * const IPCCustomKeyboardPreNotification = @"IPCCustomKeyboardPreNotification";
 NSString * const IPCCustomKeyboardNextNotification = @"IPCCustomKeyboardNextNotification";
 NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
+NSString * const IPCCustomKeyboardStringNotification  = @"IPCCustomKeyboardStringNotification";
 
 
 @interface IPCCustomKeyboard()
@@ -49,6 +50,7 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
                 UIButton * button = (UIButton *)obj;
                 [button addBottomLine];
                 [button addRightLine];
+                [button setBackgroundImage:[UIImage jk_imageWithColor:[UIColor jk_colorWithHexString:@"#999999"]] forState:UIControlStateHighlighted];
                 [self.buttons addObject:button];
             }
         }];
@@ -56,6 +58,7 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
         self.appendString = [[NSMutableString alloc]init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEditing) name:IPCCustomKeyboardBeginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateString:) name:IPCCustomKeyboardStringNotification object:nil];
     }
     return self;
 }
@@ -69,7 +72,18 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
 
 - (void)beginEditing
 {
+    ///开始编辑时清空处理
     self.appendString = [[NSMutableString alloc]init];
+}
+
+- (void)updateString:(NSNotification *)notification
+{
+//    self.appendString = [[NSMutableString alloc]init];
+//    if ([notification.userInfo[@"text"] isEqualToString:@"0.00"]) {
+//        [self.appendString appendString:@"0"];
+//    }else{
+//        [self.appendString appendString:notification.userInfo[@"text"]];
+//    }
 }
 
 - (IBAction)numberTapAction:(UIButton *)sender {
@@ -95,8 +109,9 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
             }
         }
         if (sender.tag == 0) {
-            if ([self.appendString isEqualToString:@"0"] || self.appendString.length == 0 ) {
-                return;
+            if ([self.appendString isEqualToString:@"0"] || self.appendString.length == 0) {
+                self.appendString = [[NSMutableString alloc]init];
+                number = @"0";
             }
         }
         [self.appendString appendString:number];
@@ -112,6 +127,8 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
         [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardNextNotification object:nil];
     }else if (sender.tag == SureKeyboardType){
         [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardDoneNotification object:nil userInfo:@{IPCCustomKeyboardValue : self.appendString}];
+        ///清空
+        self.appendString = [[NSMutableString alloc]init];
     }
 }
 

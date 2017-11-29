@@ -18,10 +18,9 @@
 @property (nonatomic, copy, readwrite) NSString  *shiftOptions;//移心
 
 @property (nonatomic, strong, readwrite) IPCGlasses *glasses;
-@property (nonatomic, assign, readwrite) int            glassCount;
+@property (nonatomic, assign, readwrite) NSInteger    glassCount;
 @property (nonatomic, assign, readwrite) BOOL        selected;
 @property (nonatomic, assign, readwrite) double      unitPrice;//可修改单价
-@property (nonatomic, assign, readwrite) double      unitDiscount;//优惠折扣
 @property (nonatomic, copy, readwrite)   NSString   *remarks;//note
 
 /**

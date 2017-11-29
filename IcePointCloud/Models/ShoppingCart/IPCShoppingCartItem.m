@@ -15,13 +15,12 @@
     self = [super init];
     if (self) {
         self.lensFuncsArray = [[NSMutableArray alloc]init];
-        self.unitDiscount = 1;
     }
     return self;
 }
 
 
-- (void)setGlassCount:(int)glassCount
+- (void)setGlassCount:(NSInteger)glassCount
 {
     _glassCount = glassCount;
     [[IPCShoppingCart sharedCart] postChangedNotification];
@@ -29,22 +28,20 @@
 
 - (double)totalPrePrice
 {
-    NSString * priceStr = [NSString stringWithFormat:@"%.2f",self.glasses.price];
-    return [priceStr doubleValue] * self.glassCount;
+    return self.glasses.price * self.glassCount;
 }
 
 - (double)totalPrice
 {
-    NSString * priceStr = [NSString stringWithFormat:@"%.2f",self.unitPrice];
-    return [priceStr doubleValue] * self.glassCount;
+    double price = self.unitPrice * self.glassCount;
+    double floor = floorf(price*100)/100;
+    NSString * itemPriceStr = [NSString stringWithFormat:@"%.2f",floor];
+    return [itemPriceStr doubleValue];
 }
 
 - (double)unitPrice
 {
-    if (_unitPrice == 0){
-        return self.glasses.price * self.unitDiscount;
-    }
-    return _unitPrice * self.unitDiscount;
+    return _unitPrice;
 }
 
 
@@ -52,13 +49,13 @@
 - (NSDictionary *)paramtersJSONForOrderRequest
 {
     NSMutableDictionary *params = [[NSMutableDictionary alloc]init];
-    [params setObject:[NSString stringWithFormat:@"%.2f",self.unitPrice] forKey:@"afterDiscountPrice"];
+    [params setObject:[NSString stringWithFormat:@"%f",self.unitPrice] forKey:@"afterDiscountPrice"];
     [params setObject:@"false" forKey:@"isIntegralExchange"];
     [params  setObject:[self.glasses glassId] forKey:@"id"];
     [params setObject:[self.glasses glassType] forKey:@"type"];
     [params setObject:@(self.unitPrice) forKey:@"sale_price"];
     [params setObject:@(self.glassCount) forKey:@"count"];
-    [params setObject:[NSString stringWithFormat:@"%.2f",(self.unitPrice*self.glassCount)] forKey:@"totalPrice"];
+    [params setObject:[NSString stringWithFormat:@"%f",(self.unitPrice*self.glassCount)] forKey:@"totalPrice"];
 
     if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
     {

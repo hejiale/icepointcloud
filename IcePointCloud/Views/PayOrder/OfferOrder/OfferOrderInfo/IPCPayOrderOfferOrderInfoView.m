@@ -9,14 +9,17 @@
 #import "IPCPayOrderOfferOrderInfoView.h"
 #import "IPCEmployeListView.h"
 
-@interface IPCPayOrderOfferOrderInfoView()<UITextFieldDelegate,UITextViewDelegate>
+@interface IPCPayOrderOfferOrderInfoView()<IPCCustomTextFieldDelegate,UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *discountAmountLabel;
-@property (weak, nonatomic) IBOutlet UITextField *discountAmountTextField;
-@property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
+@property (weak, nonatomic) IBOutlet UIView *discountView;
+@property (weak, nonatomic) IBOutlet UIView *payAmountView;
 @property (weak, nonatomic) IBOutlet UILabel *employeeNameLabel;
 @property (weak, nonatomic) IBOutlet UITextView *memoTextView;
+@property (strong, nonatomic)  IPCCustomTextField *discountAmountTextField;
+@property (strong, nonatomic)  IPCCustomTextField *payAmountTextField;
+
 @property (copy, nonatomic) void(^EndEditingBlock)();
 
 @end
@@ -40,9 +43,38 @@
 {
     [super layoutSubviews];
     
-    [self.discountAmountTextField addBottomLine];
-    [self.payAmountTextField addBottomLine];
+    [self.discountView addBottomLine];
+    [self.payAmountView addBottomLine];
+    
     [self.memoTextView addBorder:0 Width:1 Color:nil];
+    
+    [self.discountView addSubview:self.discountAmountTextField];
+    [self.payAmountView addSubview:self.payAmountTextField];
+    
+    [[IPCTextFiledControl instance] addTextField:self.discountAmountTextField];
+    [[IPCTextFiledControl instance] addTextField:self.payAmountTextField];
+}
+
+- (IPCCustomTextField *)discountAmountTextField
+{
+    if (!_discountAmountTextField) {
+        _discountAmountTextField = [[IPCCustomTextField alloc]initWithFrame:self.discountView.bounds];
+        [_discountAmountTextField setDelegate:self];
+        _discountAmountTextField.clearOnEditing = YES;
+        _discountAmountTextField.textAlignment = NSTextAlignmentRight;
+    }
+    return _discountAmountTextField;
+}
+
+- (IPCCustomTextField *)payAmountTextField
+{
+    if (!_payAmountTextField) {
+        _payAmountTextField = [[IPCCustomTextField alloc]initWithFrame:self.payAmountView.bounds];
+        [_payAmountTextField setDelegate:self];
+        _payAmountTextField.clearOnEditing = YES;
+        _payAmountTextField.textAlignment = NSTextAlignmentRight;
+    }
+    return _payAmountTextField;
 }
 
 #pragma mark //Clicked Events
@@ -58,30 +90,47 @@
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:listView];
 }
 
+
 - (void)updateOrderInfo
 {
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]]];
-    [self.payAmountTextField setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].payAmount]];
-    [self.discountAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCPayOrderManager sharedManager].discountAmount]];
-    [self.discountAmountTextField setText:[NSString stringWithFormat:@"%.2f",[IPCPayOrderManager sharedManager].discount]];
+    [self.payAmountTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber:[IPCPayOrderManager sharedManager].payAmount]]];
+    [self.discountAmountLabel setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber:[IPCPayOrderManager sharedManager].discountAmount]]];
+    if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
+        [self.discountAmountTextField setText:[NSString stringWithFormat:@"%@",[IPCCommon formatNumber:[IPCPayOrderManager sharedManager].customDiscount]]];
+    }else{
+        [self.discountAmountTextField setText:[NSString stringWithFormat:@"%@",[IPCCommon formatNumber:[IPCPayOrderManager sharedManager].discount]]];
+    }
+    
     [self.employeeNameLabel setText:[IPCPayOrderManager sharedManager].employee.name];
+    [self.memoTextView setText:[IPCPayOrderManager sharedManager].remark ? : @""];
 }
 
 #pragma mark //UITextField Delegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (void)textFieldBeginEditing:(IPCCustomTextField *)textField
 {
-    if (![IPCCommon judgeIsFloatNumber:string]) {
-        return NO;
+    [self updateOrderInfo];
+}
+
+- (void)textFieldPreEditing:(IPCCustomTextField *)textField
+{
+    if ([textField isEqual:self.payAmountTextField]) {
+        [[IPCTextFiledControl instance] clearAllEditingAddition:self.discountAmountTextField];
+        [self.discountAmountTextField setIsEditing:YES];
+        [self updateOrderInfo];
     }
-    return YES;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [textField resignFirstResponder];
-    return YES;
+- (void)textFieldNextEditing:(IPCCustomTextField *)textField
+{
+    if ([textField isEqual:self.discountAmountTextField]) {
+        [[IPCTextFiledControl instance] clearAllEditingAddition:self.payAmountTextField];
+        [self.payAmountTextField setIsEditing:YES];
+        [self updateOrderInfo];
+    }
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldEndEditing:(IPCCustomTextField *)textField
 {
     NSString * str = [textField.text jk_trimmingWhitespace];
     
@@ -94,7 +143,7 @@
             }else{
                 [IPCPayOrderManager sharedManager].discount = [str doubleValue];
             }
-            [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * ([IPCPayOrderManager sharedManager].discount/100);
+            [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * (1 - [IPCPayOrderManager sharedManager].discount/100);
             [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].discountAmount;
             [[IPCPayOrderManager sharedManager] clearPayRecord];
         }else{
@@ -103,15 +152,17 @@
             }else{
                 [IPCPayOrderManager sharedManager].payAmount = [str doubleValue];
                 [[IPCPayOrderManager sharedManager] clearPayRecord];
-             }
+            }
             [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
-            [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * ([IPCPayOrderManager sharedManager].discount/100);
+            [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [str doubleValue];
         }
-        [self updateOrderInfo];
-        
-        if (self.EndEditingBlock) {
-            self.EndEditingBlock();
-        }
+        [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    }
+    [IPCPayOrderManager sharedManager].customDiscount = -1;
+    [self updateOrderInfo];
+    
+    if (self.EndEditingBlock) {
+        self.EndEditingBlock();
     }
 }
 

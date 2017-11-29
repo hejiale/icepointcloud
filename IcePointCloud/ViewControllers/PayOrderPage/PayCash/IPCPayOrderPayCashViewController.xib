@@ -16,6 +16,7 @@
                 <outlet property="payTypeNameLabel" destination="lfb-DA-iQv" id="u35-V7-73B"/>
                 <outlet property="remainPayAmountLabel" destination="xZT-1q-EsG" id="GaH-Ax-R1O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="walletButton" destination="2fl-WL-IxN" id="CsC-Va-gqr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -57,10 +58,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ode-Pr-2UP">
-                    <rect key="frame" x="0.0" y="70" width="490" height="500"/>
+                    <rect key="frame" x="0.0" y="70" width="490" height="563"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DXf-QH-1uN">
-                            <rect key="frame" x="0.0" y="0.0" width="490" height="500"/>
+                            <rect key="frame" x="0.0" y="0.0" width="490" height="563"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="uqo-jo-vdU"/>
@@ -70,7 +71,7 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="500" id="AW6-IK-sG4"/>
+                        <constraint firstAttribute="height" constant="563" id="AW6-IK-sG4"/>
                         <constraint firstItem="DXf-QH-1uN" firstAttribute="top" secondItem="ode-Pr-2UP" secondAttribute="top" id="GRf-bE-SfO"/>
                         <constraint firstAttribute="width" constant="490" id="L9X-lX-o1Z"/>
                         <constraint firstAttribute="bottom" secondItem="DXf-QH-1uN" secondAttribute="bottom" id="LYY-qf-hh4"/>
@@ -91,7 +92,7 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfb-DA-iQv">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfb-DA-iQv">
                             <rect key="frame" x="100" y="20" width="80" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="LeK-lU-Ltk"/>
@@ -101,14 +102,14 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fl-WL-IxN">
+                        <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fl-WL-IxN">
                             <rect key="frame" x="30" y="60" width="70" height="70"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="70" id="GrY-8q-UNh"/>
                                 <constraint firstAttribute="height" constant="70" id="jyE-Ye-rPE"/>
                             </constraints>
-                            <state key="normal" image="icon_weixin_unSelected"/>
-                            <state key="selected" image="icon_weixin_selected"/>
+                            <state key="normal" image="icon_wallet_unSelected"/>
+                            <state key="selected" image="icon_wallet_selected"/>
                             <connections>
                                 <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="AoG-lh-sVT"/>
                             </connections>
@@ -131,8 +132,8 @@
                                 <constraint firstAttribute="width" constant="70" id="690-Ph-abt"/>
                                 <constraint firstAttribute="height" constant="70" id="nog-Jx-WMx"/>
                             </constraints>
-                            <state key="normal" image="icon_wallet_unSelected"/>
-                            <state key="selected" image="icon_wallet_selected"/>
+                            <state key="normal" image="icon_weixin_unSelected"/>
+                            <state key="selected" image="icon_weixin_selected"/>
                             <connections>
                                 <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="8CD-FW-sr0"/>
                             </connections>

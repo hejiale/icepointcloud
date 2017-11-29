@@ -30,7 +30,9 @@
 
 - (void)addTextField:(IPCCustomTextField *)textField
 {
-    [self.textFiledArray addObject:textField];
+    if (![self.textFiledArray containsObject:textField]) {
+        [self.textFiledArray addObject:textField];
+    }
 }
 
 - (void)clearAllTextField
@@ -43,12 +45,16 @@
     [self.textFiledArray enumerateObjectsUsingBlock:^(IPCCustomTextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (![obj isEqual:textField]) {
             [obj setIsEditing:NO];
-            [obj reload];
             [[NSNotificationCenter defaultCenter] removeObserver:obj];
-        }else{
-            [obj setIsEditing:YES];
         }
     }];
+}
+
+- (void)clearTextField:(IPCCustomTextField *)textField
+{
+    if ([self.textFiledArray containsObject:textField]) {
+        [self.textFiledArray removeObject:textField];
+    }
 }
 
 @end

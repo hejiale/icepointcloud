@@ -71,49 +71,51 @@
 #pragma mark //Request Methods
 - (void)saveCustomerRequest
 {
-    if (!gender) {
-        if (isUpdateStaus) {
-            gender = [IPCCurrentCustomer sharedManager].currentCustomer.gender;
-        }else{
-            gender = @"MALE";
+    if (self.customerNameTextField.text.length) {
+        if (!gender) {
+            if (isUpdateStaus) {
+                gender = [IPCCurrentCustomer sharedManager].currentCustomer.gender;
+            }else{
+                gender = @"MALE";
+            }
         }
+        [IPCCustomerRequestManager saveCustomerInfoWithCustomName:self.customerNameTextField.text
+                                                      CustomPhone:self.phoneTextField.text
+                                                           Gender:gender
+                                                            Email:@""
+                                                         Birthday:self.birthDayTextField.text
+                                                           Remark:@""
+                                                    OptometryList:@""
+                                                      ContactName:@""
+                                                    ContactGender:@""
+                                                     ContactPhone:@""
+                                                   ContactAddress:@""
+                                                     CustomerType:@""
+                                                   CustomerTypeId:@""
+                                                       Occupation:@""
+                                                      MemberLevel:@""
+                                                    MemberLevelId:@""
+                                                        MemberNum:@""
+                                                          PhotoId:@([IPCHeadImage genderArcdom])
+                                                     IntroducerId:@""
+                                                IntroducerInteger:@""
+                                                              Age:self.ageTextField.text
+                                                       CustomerId:(isUpdateStaus ? [IPCPayOrderManager sharedManager].currentCustomerId : @"")
+                                                     SuccessBlock:^(id responseValue)
+         {
+             if (self.UpdateBlock) {
+                 self.UpdateBlock(responseValue[@"id"]);
+             }
+             [self removeFromSuperview];
+         } FailureBlock:^(NSError *error) {
+             if ([error code] != NSURLErrorCancelled) {
+                 [IPCCommonUI showError:@"保存客户信息失败!"];
+             }
+             if (self.UpdateBlock) {
+                 self.UpdateBlock(nil);
+             }
+         }];
     }
-    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:self.customerNameTextField.text
-                                                  CustomPhone:self.phoneTextField.text
-                                                       Gender:gender
-                                                        Email:@""
-                                                     Birthday:self.birthDayTextField.text
-                                                       Remark:@""
-                                                OptometryList:@""
-                                                  ContactName:@""
-                                                ContactGender:@""
-                                                 ContactPhone:@""
-                                               ContactAddress:@""
-                                                 CustomerType:@""
-                                               CustomerTypeId:@""
-                                                   Occupation:@""
-                                                  MemberLevel:@""
-                                                MemberLevelId:@""
-                                                    MemberNum:@""
-                                                      PhotoId:@([IPCHeadImage genderArcdom])
-                                                 IntroducerId:@""
-                                            IntroducerInteger:@""
-                                                          Age:self.ageTextField.text
-                                                   CustomerId:(isUpdateStaus ? [IPCPayOrderManager sharedManager].currentCustomerId : @"")
-                                                 SuccessBlock:^(id responseValue)
-     {
-         if (self.UpdateBlock) {
-             self.UpdateBlock(responseValue[@"id"]);
-         }
-         [self removeFromSuperview];
-     } FailureBlock:^(NSError *error) {
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"保存客户信息失败!"];
-         }
-         if (self.UpdateBlock) {
-             self.UpdateBlock(nil);
-         }
-     }];
 }
 
 #pragma mark //Clicked Events

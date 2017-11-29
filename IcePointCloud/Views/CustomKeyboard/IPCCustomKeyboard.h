@@ -15,6 +15,7 @@ extern NSString * const IPCCustomKeyboardClearNotification;
 extern NSString * const IPCCustomKeyboardPreNotification;
 extern NSString * const IPCCustomKeyboardNextNotification;
 extern NSString * const IPCCustomKeyboardValue;
+extern NSString * const IPCCustomKeyboardStringNotification;
 
 
 @interface IPCCustomKeyboard : UIView

@@ -18,7 +18,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *countLbl;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
 
-
 @end
 
 @implementation IPCExpandShoppingCartCell
@@ -27,8 +26,8 @@
 {
     [super awakeFromNib];
     
+    [self.inputPriceTextField addBottomLine];
     [self.mainContentView addSubview:self.inputPriceTextField];
-  
     [[IPCTextFiledControl instance] addTextField:self.inputPriceTextField];
 }
 
@@ -49,15 +48,27 @@
         }else if (([self.cartItem.glasses filterType] == IPCTopFilterTypeLens || [self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) && self.cartItem.glasses.isBatch){
             [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
         }
-        
-        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.unitPrice]];
+     
+//        if ([[[IPCShoppingCart sharedCart] lastJudgeCartItem] isEqual:self.cartItem]) {
+//            if ([IPCPayOrderManager sharedManager].payAmount >= [[IPCShoppingCart sharedCart] allGlassesJudgePrice])
+//            {
+//                double remain = [IPCPayOrderManager sharedManager].payAmount - [[IPCShoppingCart sharedCart] allGlassesJudgePrice];
+//                [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber: _cartItem.unitPrice + remain]]];
+//            }else{
+//                double remain = [IPCPayOrderManager sharedManager].payAmount - [[IPCShoppingCart sharedCart] allGlassesJudgePrice];
+//                [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber: _cartItem.unitPrice - remain]]];
+//            }
+//        }else{
+//
+//        }
+        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber: _cartItem.unitPrice]]];
     }
 }
 
 - (IPCCustomTextField *)inputPriceTextField
 {
     if (!_inputPriceTextField) {
-        _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-30, 150, 30)];
+        _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-30, 200, 30)];
         _inputPriceTextField.clearOnEditing = YES;
         [_inputPriceTextField setDelegate:self];
     }
@@ -65,6 +76,13 @@
 }
 
 #pragma mark //UITextField Delegate
+- (void)textFieldBeginEditing:(IPCCustomTextField *)textField
+{
+    if ([self.delegate respondsToSelector:@selector(endEditing:)]) {
+        [self.delegate endEditing:self];
+    }
+}
+
 - (void)textFieldPreEditing:(IPCCustomTextField *)textField
 {
     if ([self.delegate respondsToSelector:@selector(preEditing:)]) {
@@ -89,7 +107,6 @@
         }else{
             self.cartItem.unitPrice = [str doubleValue];
         }
-        self.cartItem.unitDiscount = 1;
     }
     
     if ([self.delegate respondsToSelector:@selector(endEditing:)]) {

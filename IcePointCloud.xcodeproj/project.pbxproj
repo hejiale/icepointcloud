@@ -1403,7 +1403,6 @@
 			isa = PBXGroup;
 			children = (
 				CBFFE9C41FBE7D9F00937A8F /* ScrollPage */,
-				CBFFE9C31FBE7D7600937A8F /* PayCash */,
 				CBFFE9C21FBE7D6600937A8F /* OfferOrder */,
 				CBFFE9C11FBE7D5E00937A8F /* Optometry */,
 				CBFFE9C01FBE7D4F00937A8F /* Customer */,
@@ -2486,13 +2485,6 @@
 				CB0F53F31F988191003707F2 /* ShoppingCart */,
 			);
 			path = OfferOrder;
-			sourceTree = "<group>";
-		};
-		CBFFE9C31FBE7D7600937A8F /* PayCash */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = PayCash;
 			sourceTree = "<group>";
 		};
 		CBFFE9C41FBE7D9F00937A8F /* ScrollPage */ = {

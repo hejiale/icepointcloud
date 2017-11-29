@@ -35,6 +35,7 @@
                                    Purpose:(NSString *)purpose
                                 EmployeeId:(NSString *)employeeId
                               EmployeeName:(NSString *)employeeName
+                                    Remark:(NSString *)remark
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure
 {
@@ -53,7 +54,9 @@
                              @"correctedVisionRight":correctedVisionRight,
                              @"purpose":purpose,
                              @"employeeId":employeeId,
-                             @"employeeName":employeeName};
+                             @"employeeName":employeeName,
+                             @"remark":(remark ? : @"")
+                             };
     [self postRequest:params RequestMethod:CustomerRequest_SaveNewOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -102,7 +105,7 @@
                              @"occupation":occupation,
                              @"optometrys":optometryList,
                              @"photoIdForPos":photoId,
-                             @"age":age,
+                             @"age":(age ? : @""),
                              @"id":customerId,
                              @"isPos":@"true"};
     NSMutableDictionary * paramterDic = [[NSMutableDictionary alloc]initWithDictionary:params];
@@ -129,15 +132,6 @@
                         FailureBlock:(void (^)(NSError * error))failure
 {
     [self postRequest:@{@"keyword":keyword,@"pageNo":@(page),@"maxPageSize":@(30)} RequestMethod:CustomerRequest_CustomerList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
-}
-
-
-+ (void)setCurrentOptometryWithCustomID:(NSString *)customID
-                            OptometryID:(NSString *)optometryID
-                           SuccessBlock:(void (^)(id responseValue))success
-                           FailureBlock:(void (^)(NSError * error))failure
-{
-    [self postRequest:@{@"customerId":customID,@"optometryId":optometryID} RequestMethod:CustomerRequest_SetCurrentOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 
@@ -223,7 +217,7 @@
                            SuccessBlock:(void (^)(id responseValue))success
                            FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"customerId":customID,@"optometryId":defaultOptometryID} RequestMethod:CustomerRequest_SetCurrentOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"customerId":customID,@"id":defaultOptometryID} RequestMethod:CustomerRequest_SetCurrentOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 

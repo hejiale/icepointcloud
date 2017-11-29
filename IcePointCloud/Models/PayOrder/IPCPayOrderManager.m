@@ -52,16 +52,18 @@
 }
 
 - (double)remainPayPrice{
+    if ([IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice] < 0) {
+        return 0;
+    }
     return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
 }
 
 - (double)calculateDiscount
 {
     if ([IPCPayOrderManager sharedManager].payAmount <= 0 || [IPCPayOrderManager sharedManager].payAmount >= [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]) {
-        return 0;
+        return 100;
     }
-    double discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
-    double discount = (double)discountAmount/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
+    double discount = (double)[IPCPayOrderManager sharedManager].payAmount/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
     NSString * discountStr = [NSString stringWithFormat:@"%.4f",discount];
     return [discountStr doubleValue] * 100;
 }
@@ -79,19 +81,6 @@
         return NO;
     }
     return YES;
-}
-
-- (BOOL)judgeIsHaveEditPayRecord
-{
-    __block BOOL isHaveEdit = NO;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
-    {
-        if (obj.isEditStatus) {
-            isHaveEdit = YES;
-            *stop = YES;
-        }
-    }];
-    return isHaveEdit;
 }
 
 - (void)clearPayRecord

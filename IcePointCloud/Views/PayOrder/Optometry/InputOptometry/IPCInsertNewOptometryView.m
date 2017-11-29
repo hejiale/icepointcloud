@@ -47,7 +47,7 @@
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCInsertNewOptometryView" owner:self];
         [self addSubview:view];
-    
+        
         self.insertOptometry = [[IPCOptometryMode alloc]init];
     }
     return self;
@@ -95,6 +95,7 @@
                                                           Purpose:self.insertOptometry.purpose
                                                        EmployeeId:self.insertOptometry.employeeId
                                                      EmployeeName:self.insertOptometry.employeeName
+                                                           Remark:self.insertOptometry.remark
                                                      SuccessBlock:^(id responseValue)
      {
          [IPCCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
@@ -103,9 +104,9 @@
          if (self.CompleteBlock) {
              self.CompleteBlock();
          }
-    } FailureBlock:^(NSError *error) {
-        
-    }];
+     } FailureBlock:^(NSError *error) {
+         
+     }];
 }
 
 #pragma mark //Clicked Events
@@ -115,7 +116,14 @@
 
 
 - (IBAction)saveAction:(id)sender {
-    [self saveNewOptometry];
+    if (!self.insertOptometry.purpose.length) {
+        self.insertOptometry.purpose = @"FAR";
+    }
+    if (!self.insertOptometry.employeeName.length){
+        [IPCCommonUI showError:@"请选择验光师"];
+    }else{
+        [self saveNewOptometry];
+    }
 }
 
 #pragma mark //Clicked Events
@@ -205,7 +213,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     NSString * str = [textField.text jk_trimmingWhitespace];
-
+    
     if (str.length > 0) {
         if (textField.tag != 8 && textField.tag != 9) {
             if (textField.tag == 4 || textField.tag == 5)
@@ -230,7 +238,7 @@
             [textField setText:@"+0.00"];
         }
     }
-
+    
     switch (textField.tag) {
         case 0:
             self.insertOptometry.sphLeft = textField.text;

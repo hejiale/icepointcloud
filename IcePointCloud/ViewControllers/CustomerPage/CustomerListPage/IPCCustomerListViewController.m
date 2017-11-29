@@ -20,7 +20,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     BOOL isCancelRequest;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
-@property (weak, nonatomic) IBOutlet UIButton *insertButton;
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
@@ -54,7 +53,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         [self setNavigationBarStatus:YES];
     }
     //Refresh Insert Button Status
-    [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
+//    [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
     //According To NetWorkStatus To Reload Customer List
     if (isCancelRequest && self.viewModel.currentPage == 1) {
         [self loadData];

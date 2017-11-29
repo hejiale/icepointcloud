@@ -57,6 +57,7 @@
                                    Purpose:(NSString *)purpose
                                 EmployeeId:(NSString *)employeeId
                               EmployeeName:(NSString *)employeeName
+                                    Remark:(NSString *)remark
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;
 
@@ -138,18 +139,6 @@
                         SuccessBlock:(void (^)(id responseValue))success
                         FailureBlock:(void (^)(NSError * error))failure;
 
-/**
- *  SET DEFAULT OPTOMETRY
- *
- *  @param customID
- *  @param optometryID
- *  @param success
- *  @param failure
- */
-+ (void)setCurrentOptometryWithCustomID:(NSString *)customID
-                            OptometryID:(NSString *)optometryID
-                           SuccessBlock:(void (^)(id responseValue))success
-                           FailureBlock:(void (^)(NSError * error))failure;
 
 /**
  *  QUERY HISTORY LIST ORDER

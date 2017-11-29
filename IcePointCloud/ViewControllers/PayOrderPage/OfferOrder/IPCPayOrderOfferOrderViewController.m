@@ -35,7 +35,7 @@
     [super viewWillAppear:animated];
     
     [self.shopCartView reload];
-    [self reloadOfferOrderInfo];
+    [self updateUI];
 }
 
 #pragma mark //Set UI
@@ -45,7 +45,7 @@
         _offerInfoView = [[IPCPayOrderOfferOrderInfoView alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, 10, 428, 290)
                                                                   EndEditing:^{
                                                                       __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                      [[IPCShoppingCart sharedCart] updateAllCartItemDiscount];
+                                                                      [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
                                                                       [strongSelf.shopCartView reload];
                                                                   }];
     }
@@ -59,7 +59,8 @@
         _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [[IPCPayOrderManager sharedManager] clearPayRecord];
-            [strongSelf reloadOfferOrderInfo];
+            [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
+            [strongSelf updateUI];
         }];
         _shopCartView.keyboard = self.keyboard;
     }
@@ -75,18 +76,19 @@
 }
 
 #pragma mark //Clicked Events
-- (void)reloadOfferOrderInfo
-{
-    [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
-    [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
-    [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * ([IPCPayOrderManager sharedManager].discount/100);
-    [self.offerInfoView updateOrderInfo];
-}
-
 - (void)updateUI
 {
+    if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
+        [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * (double)([IPCPayOrderManager sharedManager].customDiscount/100);
+        [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
+        [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
+    }else{
+        [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
+        [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
+    }
+    
+    [self.offerInfoView updateOrderInfo];
     [self.shopCartView reload];
-    [self reloadOfferOrderInfo];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -21,4 +21,6 @@
 
 - (void)clearAllTextField;
 
+- (void)clearTextField:(IPCCustomTextField *)textField;
+
 @end

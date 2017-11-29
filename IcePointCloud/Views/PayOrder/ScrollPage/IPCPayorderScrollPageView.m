@@ -86,7 +86,7 @@
 {
     if ([sender.view tag] == _currentPage)return;
     
-    if (![IPCPayOrderManager sharedManager].currentCustomerId && ([sender.view tag] == 1 || [sender.view tag] == 3))
+    if (![IPCPayOrderManager sharedManager].currentCustomerId)
     {
         [IPCCommonUI showError:@"请先选择客户信息!"];
     }else{

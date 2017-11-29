@@ -10,12 +10,14 @@
 
 @protocol IPCPayOrderEditPayCashRecordCellDelegate;
 
-@interface IPCPayOrderEditPayCashRecordCell : UITableViewCell<UITextFieldDelegate>
+@interface IPCPayOrderEditPayCashRecordCell : UITableViewCell<IPCCustomTextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payTypeLabel;
-@property (weak, nonatomic) IBOutlet UITextField *payAmountTextField;
-@property (nonatomic, copy) IPCPayRecord * payRecord;
+@property (weak, nonatomic) IBOutlet UIView *payAmountView;
+
+@property (strong, nonatomic)  IPCCustomTextField * payAmountTextField;
+@property (nonatomic, strong) IPCPayRecord * payRecord;
 @property (nonatomic, assign) id<IPCPayOrderEditPayCashRecordCellDelegate>delegate;
 
 @end

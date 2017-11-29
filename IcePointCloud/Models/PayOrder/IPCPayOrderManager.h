@@ -18,7 +18,9 @@
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
 @property (nonatomic, assign, readwrite) double   payAmount;//合计金额
+
 @property (nonatomic, assign, readwrite) double   discount;//折扣率
+@property (nonatomic, assign, readwrite) double   customDiscount;//客户折扣率
 @property (nonatomic, assign, readwrite) double   discountAmount;//优惠金额
 
 @property (nonatomic, strong, readwrite) IPCEmployee * employee;//经办人
@@ -43,9 +45,6 @@
 
 //清空收银记录
 - (void)clearPayRecord;
-
-//判断当前是否有编辑收银记录
-- (BOOL)judgeIsHaveEditPayRecord;
 
 //清空支付信息  选择客户信息  清空商品列表
 - (void)resetData;

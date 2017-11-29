@@ -100,7 +100,7 @@ typedef void(^DismissBlock)(IPCEmployee *);
     [cell setAccessoryType:UITableViewCellAccessoryNone];
     
     IPCEmployee * employe = self.employeeArray[indexPath.row];
-    [cell.employeLabel setText:employe.name];
+    [cell.employeLabel setText:[NSString stringWithFormat:@"%@%@",(employe.jobNumber ? : @""), employe.name]];
 
     return cell;
 }

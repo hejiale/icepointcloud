@@ -11,7 +11,6 @@
 @interface IPCCustomTextField()
 
 @property (nonatomic, strong) UILabel * textLabel;
-@property (nonatomic, copy) NSString * preText;
 
 @end
 
@@ -23,14 +22,12 @@
     if (self) {
         [self addSubview:self.textLabel];
         
-        __weak typeof(self) weakSelf =self;
-        [self jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf beginEditAction];
-        }];
+        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(beginEditAction)];
+        [self addGestureRecognizer:tap];
         
         self.backgroundNormalColor = [UIColor clearColor];
-        self.backgroundEditingColor = [[UIColor lightGrayColor]colorWithAlphaComponent:0.2];
+        self.backgroundEditingColor = [[UIColor jk_colorWithHexString:@"#4D9FD8"] colorWithAlphaComponent:0.2];
+        self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
 }
@@ -39,12 +36,19 @@
 - (UILabel *)textLabel
 {
     if (!_textLabel) {
-        _textLabel = [[UILabel alloc]initWithFrame:self.bounds];
+        _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, self.jk_width-10, self.jk_height)];
         [_textLabel setTextColor:[UIColor redColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
-        [_textLabel setFont:[UIFont systemFontOfSize:14]];
+        [_textLabel setFont:[UIFont systemFontOfSize:15]];
     }
     return _textLabel;
+}
+
+- (void)setTextAlignment:(NSTextAlignment)textAlignment
+{
+    _textAlignment = textAlignment;
+    
+    [self.textLabel setTextAlignment:textAlignment];
 }
 
 
@@ -54,36 +58,39 @@
     
     if (isEditing) {
         [self registerNotification];
-        
-        [self setBackgroundColor:self.backgroundEditingColor];
+        [self addBorder:0 Width:1 Color:COLOR_RGB_BLUE];
         
         if (self.clearOnEditing) {
-            [self.textLabel setText:@""];
             [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
         }
     }else{
-        [self setBackgroundColor:self.backgroundNormalColor];
+        [self removeNotification];
+        [self addBorder:0 Width:0 Color:nil];
     }
 }
 
 - (void)setText:(NSString *)text
 {
     _text = text;
-    ///原始值
-    _preText = text;
     
    [self.textLabel setText:text];
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardStringNotification object:nil userInfo:@{@"text":text}];
 }
 
 - (void)beginEditAction
 {
     [[IPCTextFiledControl instance] clearAllEditingAddition:self];
+    
+    if (self.delegate) {
+        if ([self.delegate respondsToSelector:@selector(textFieldBeginEditing:)]) {
+            [self.delegate textFieldBeginEditing:self];
+        }
+    }
+    
+    [self setIsEditing:YES];
 }
 
-- (void)reload
-{
-    [self.textLabel setText:self.preText];
-}
 
 #pragma mark //Notification Methods
 - (void)endEditingNotification:(NSNotification *)notification
@@ -97,8 +104,6 @@
             [self.delegate textFieldEndEditing:self];
         }
     }
-    
-    [self removeNotification];
 }
 
 - (void)clearEdingingNotification:(NSNotification *)notification
@@ -150,9 +155,5 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
-
-
 
 @end

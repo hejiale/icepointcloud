@@ -97,10 +97,12 @@
     [self.viewMode saveProtyOrder:isPrototy Prototy:^
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [IPCCommonUI showSuccess:@"挂单成功!"];
         [strongSelf.nextStepButton jk_hideIndicator];
         [strongSelf clearAllPayInfo];
     } PayCash:^{
         __strong typeof(weakSelf) strongSelf = weakSelf;
+        [IPCCommonUI showSuccess:@"收银成功!"];
         [strongSelf clearAllPayInfo];
         [strongSelf.saveButton jk_hideIndicator];
     } Error:^(IPCPayOrderError errorType) {
@@ -121,8 +123,8 @@
 
 - (IBAction)nextStepAction:(id)sender
 {
-    if (self.pageView.currentPage == 3) {
-        
+    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+        [IPCCommonUI showError:@"请先选择客户信息!"];
     }else{
         [self.pageView setCurrentPage:self.pageView.currentPage+1];
         [self reloadBottomStatus];
@@ -156,6 +158,7 @@
     [self.contentScrollView setContentOffset:CGPointZero];
     [[IPCPayOrderManager sharedManager] resetData];
     [self.customerVC updateUI];
+    [self reloadBottomStatus];
 }
 
 #pragma mark //IPCPayorderScrollPageViewDelegate

@@ -181,9 +181,9 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if (self.customerViewMode.detailCustomer) {
         if (self.customerViewMode.orderList.count) {
-            return 4;
+            return 3;
         }
-        return 3;
+        return 2;
     }
     return 0;
 }
@@ -193,8 +193,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
         return 2;
     }else if (section == 1){
         return self.customerViewMode.customerOpometry ? 2 : 1;
-    }else if (section == 2){
-        return self.customerViewMode.customerAddress ? 2 : 1;
     }else{
         if (self.customerViewMode.isLoadMoreOrder)
             return self.customerViewMode.orderList.count+2;
@@ -247,29 +245,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             return cell;
         }
-    }else if(indexPath.section == 2){
-        if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            [cell setRightOperation:@"收货地址信息" ButtonTitle:nil ButtonImage:@"icon_manager"];
-            __weak typeof(self) weakSelf = self;
-            [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf pushToManagerAddressViewController];
-            }];
-            return cell;
-        }else{
-            IPCCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:addressIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
-            if (self.customerViewMode.customerAddress) {
-                cell.addressMode = self.customerViewMode.customerAddress;
-            }
-            return cell;
-        }
     }else{
         if (indexPath.row == 0) {
             IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
@@ -305,8 +280,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     }else if (indexPath.section == 1 && indexPath.row > 0){
         return 150;
     }else if (indexPath.section == 2 && indexPath.row > 0){
-        return 70;
-    }else if (indexPath.section == 3 && indexPath.row > 0){
         if (indexPath.row <= self.customerViewMode.orderList.count)
             return 80;
     }
@@ -316,7 +289,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.customerViewMode && self.customerViewMode.orderList.count) {
-        if (indexPath.section == 3 && indexPath.row > 0) {
+        if (indexPath.section == 2 && indexPath.row > 0) {
             if (self.customerViewMode.isLoadMoreOrder && indexPath.row == self.customerViewMode.orderList.count + 1) {
                 [self loadMoreOrderData];
             }else{

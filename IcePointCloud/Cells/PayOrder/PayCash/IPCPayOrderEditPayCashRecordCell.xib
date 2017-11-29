@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" indentationWidth="10" id="KGk-i7-Jjw" customClass="IPCPayOrderEditPayCashRecordCell">
+        <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" indentationWidth="10" reuseIdentifier="IPCPayOrderEditPayCashRecordCellIdentifier" id="KGk-i7-Jjw" customClass="IPCPayOrderEditPayCashRecordCell">
             <rect key="frame" x="0.0" y="0.0" width="460" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -50,36 +50,31 @@
                             <action selector="cancelAddRecordAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OQK-nt-NYF"/>
                         </connections>
                     </button>
-                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="att-NH-l2g">
-                        <rect key="frame" x="272" y="25" width="120" height="30"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3G-RO-mhN">
+                        <rect key="frame" x="272" y="24" width="120" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="Cc7-4N-aqH"/>
-                            <constraint firstAttribute="width" constant="120" id="E9a-s5-Pti"/>
+                            <constraint firstAttribute="width" constant="120" id="7g5-ap-H3L"/>
+                            <constraint firstAttribute="height" constant="30" id="zzx-Ri-HNh"/>
                         </constraints>
-                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
-                        <connections>
-                            <outlet property="delegate" destination="KGk-i7-Jjw" id="EDj-46-wL8"/>
-                        </connections>
-                    </textField>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Chb-mK-GGK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2VZ-er-WE2"/>
                     <constraint firstAttribute="trailingMargin" secondItem="sOw-Ms-Wto" secondAttribute="trailing" id="3gL-PQ-Er6"/>
                     <constraint firstItem="Chb-mK-GGK" firstAttribute="leading" secondItem="pJG-Pr-QBg" secondAttribute="trailing" constant="20" id="AVr-SH-zoW"/>
-                    <constraint firstItem="sOw-Ms-Wto" firstAttribute="leading" secondItem="att-NH-l2g" secondAttribute="trailing" id="CPW-u7-UIs"/>
                     <constraint firstItem="sOw-Ms-Wto" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HHH-D1-3mB"/>
+                    <constraint firstItem="B3G-RO-mhN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HLB-wn-ZTB"/>
                     <constraint firstItem="pJG-Pr-QBg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LKI-HC-rTJ"/>
                     <constraint firstItem="sOw-Ms-Wto" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PE7-IB-aCE"/>
-                    <constraint firstItem="att-NH-l2g" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PV4-K3-dtG"/>
                     <constraint firstAttribute="bottomMargin" secondItem="sOw-Ms-Wto" secondAttribute="bottom" id="Wme-mu-GsC"/>
+                    <constraint firstItem="sOw-Ms-Wto" firstAttribute="leading" secondItem="B3G-RO-mhN" secondAttribute="trailing" id="s8s-AX-501"/>
                     <constraint firstItem="pJG-Pr-QBg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="sNc-dJ-LqV"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dateLabel" destination="pJG-Pr-QBg" id="QT1-vE-2Sc"/>
-                <outlet property="payAmountTextField" destination="att-NH-l2g" id="Lsh-Yg-bag"/>
+                <outlet property="payAmountView" destination="B3G-RO-mhN" id="vDU-8x-uaH"/>
                 <outlet property="payTypeLabel" destination="Chb-mK-GGK" id="4JQ-3l-4ur"/>
             </connections>
         </tableViewCell>

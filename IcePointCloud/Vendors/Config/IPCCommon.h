@@ -54,4 +54,6 @@
  */
 + (BOOL)checkTelNumber:(NSString*)telNumber;
 
++ (NSString *)formatNumber:(double)number;
+
 @end

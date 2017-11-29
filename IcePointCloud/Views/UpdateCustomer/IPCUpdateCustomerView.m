@@ -70,32 +70,41 @@ typedef NS_ENUM(NSInteger, InsertCustomerType){
     }
     [self.saveButton jk_showIndicator];
    
-    [IPCCustomerRequestManager updateCustomerInfoWithCustomID:self.currentDetailCustomer.customerID
-                                                 CustomerName:self.userNameTextField.text
+    [IPCCustomerRequestManager saveCustomerInfoWithCustomName:self.userNameTextField.text
                                                   CustomPhone:self.phoneTextField.text
                                                        Gender:[IPCCommon gender:self.genderTextField.text]
-                                                        Email:self.emailTextField.text
+                                                        Email:@""
                                                      Birthday:self.birthdayTextField.text
-                                                    MemberNum:self.memberNumTextField.text
-                                                MemberLevelId:[[IPCEmployeeeManager sharedManager] memberLevelId:self.memberLevelTextField.text]
-                                               CustomerTypeId:self.currentDetailCustomer.customerTypeId
-                                                  MemberLevel:self.memberLevelTextField.text
-                                                          Job:self.jobTextField.text
-                                                       Remark:self.memoTextField.text
+                                                       Remark:@""
+                                                OptometryList:@[]
+                                                  ContactName:@""
+                                                ContactGender:@""
+                                                 ContactPhone:@""
+                                               ContactAddress:@""
+                                                 CustomerType:@""
+                                               CustomerTypeId:@""
+                                                   Occupation:@""
+                                                  MemberLevel:@""
+                                                MemberLevelId:@""
+                                                    MemberNum:@""
                                                       PhotoId:(isUpdateGender ? [NSString stringWithFormat:@"%d",[IPCHeadImage genderArcdom]] : (self.currentDetailCustomer.photoIdForPos ? : @""))
+                                                 IntroducerId:@""
+                                            IntroducerInteger:@""
+                                                          Age:@""
+                                                   CustomerId:self.currentDetailCustomer.customerID
                                                  SuccessBlock:^(id responseValue)
-     {
-         [self.saveButton jk_hideIndicator];
-         [IPCCommonUI showSuccess:@"更改用户信息成功!"];
-         
-         if (self.delegate) {
-             if ([self.delegate respondsToSelector:@selector(dismissCoverSubViews)]) {
-                 [self.delegate dismissCoverSubViews];
-             }
-         }
-     } FailureBlock:^(NSError *error) {
-         [self.saveButton jk_hideIndicator];
-     }];
+    {
+        [self.saveButton jk_hideIndicator];
+        [IPCCommonUI showSuccess:@"更改用户信息成功!"];
+        
+        if (self.delegate) {
+            if ([self.delegate respondsToSelector:@selector(dismissCoverSubViews)]) {
+                [self.delegate dismissCoverSubViews];
+            }
+        }
+    } FailureBlock:^(NSError *error) {
+        [self.saveButton jk_hideIndicator];
+    }];
 }
 
 

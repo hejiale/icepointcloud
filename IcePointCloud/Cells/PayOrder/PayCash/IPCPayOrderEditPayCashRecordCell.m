@@ -14,7 +14,9 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.payAmountTextField addBottomLine];
+    [self.payAmountView addBottomLine];
+    [self.payAmountView addSubview:self.payAmountTextField];
+    [[IPCTextFiledControl instance] addTextField:self.payAmountTextField];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,6 +25,16 @@
     // Configure the view for the selected state
 }
 
+- (IPCCustomKeyboard *)payAmountTextField
+{
+    if (!_payAmountTextField) {
+        _payAmountTextField = [[IPCCustomTextField alloc]initWithFrame:self.payAmountView.bounds];
+        [_payAmountTextField setDelegate:self];
+        _payAmountTextField.clearOnEditing = YES;
+        _payAmountTextField.textAlignment = NSTextAlignmentRight;
+    }
+    return _payAmountTextField;
+}
 
 - (void)setPayRecord:(IPCPayRecord *)payRecord{
     _payRecord = payRecord;
@@ -30,6 +42,8 @@
     if (_payRecord) {
         [self.payTypeLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payTypeInfo]];
         [self.dateLabel setText:[NSDate jk_stringWithDate:_payRecord.payDate format:@"yyyy-MM-dd"]];
+        [self.payAmountTextField setIsEditing:YES];
+        [self.payAmountTextField setText:@""];
     }
 }
 
@@ -38,23 +52,32 @@
 }
 
 #pragma mark //UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void)textFieldEndEditing:(IPCCustomTextField *)textField
 {
-    [textField resignFirstResponder];
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
-    
-    if ([self.payRecord.payTypeInfo isEqualToString:@"积分"]) {
-        self.payRecord.pointPrice = pointPrice;
-        self.payRecord.integral = [textField.text integerValue];
+    if ([self.payRecord.payTypeInfo isEqualToString:@"积分"])
+    {
+        double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
+        if (pointPrice > [[IPCPayOrderManager sharedManager] remainPayPrice]) {
+            [IPCCommonUI showError:@"输入积分兑换金额大于剩余应付金额"];
+        }else if (pointPrice <= 0){
+            [IPCCommonUI showError:@"请输入有效积分"];
+        }else{
+            self.payRecord.pointPrice = pointPrice;
+            self.payRecord.integral = [textField.text integerValue];
+            [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
+            self.payRecord = nil;
+        }
     }else{
-        self.payRecord.payPrice = [textField.text doubleValue];
+        if ([textField.text doubleValue] > [[IPCPayOrderManager sharedManager] remainPayPrice]) {
+            [IPCCommonUI showError:@"输入有效付款金额"];
+        }else  if ([textField.text doubleValue] == 0) {
+            [IPCCommonUI showError:@"输入有效付款金额"];
+        }else{
+            self.payRecord.payPrice = [textField.text doubleValue];
+            [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
+            self.payRecord = nil;
+        }
     }
-    self.payRecord.isEditStatus = NO;
     
     if ([self.delegate respondsToSelector:@selector(reloadRecord:)]) {
         [self.delegate reloadRecord:self];
