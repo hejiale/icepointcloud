@@ -225,9 +225,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     if (indexPath.row > 0)
     {
         IPCExpandShoppingCartCell * preCell = (IPCExpandShoppingCartCell *)[self.cartListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row - 1 inSection:0]];
-        [[IPCTextFiledControl instance] clearAllEditingAddition:preCell.inputPriceTextField];
-        [self.cartListTableView reloadData];
-        [preCell.inputPriceTextField setIsEditing:YES];
+        [preCell.inputPriceTextField becomFirstResponder];
     }
 }
 
@@ -237,16 +235,12 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     if (indexPath.row < [[IPCShoppingCart sharedCart] itemsCount] - 1)
     {
         IPCExpandShoppingCartCell * nextCell = (IPCExpandShoppingCartCell *)[self.cartListTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:0]];
-        [[IPCTextFiledControl instance] clearAllEditingAddition:nextCell.inputPriceTextField];
-        [self.cartListTableView reloadData];
-        [nextCell.inputPriceTextField setIsEditing:YES];
+        [nextCell.inputPriceTextField becomFirstResponder];
     }
 }
 
 - (void)endEditing:(IPCExpandShoppingCartCell *)cell
 {
-    [IPCPayOrderManager sharedManager].customDiscount = -1;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [self updateCartUI:YES];
 }
 

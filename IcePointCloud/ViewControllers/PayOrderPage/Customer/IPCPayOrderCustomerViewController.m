@@ -149,7 +149,11 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
-         [IPCPayOrderManager sharedManager].customDiscount = (double)([IPCCurrentCustomer sharedManager].currentCustomer.discount*10);
+         if ([IPCCurrentCustomer sharedManager].currentCustomer.discount) {
+             [IPCPayOrderManager sharedManager].customDiscount = (double)([IPCCurrentCustomer sharedManager].currentCustomer.discount*10);
+         }else{
+             [IPCPayOrderManager sharedManager].customDiscount = 100;
+         }
          [strongSelf loadCustomerInfoView];
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {

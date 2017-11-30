@@ -24,7 +24,7 @@
         
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(beginEditAction)];
         [self addGestureRecognizer:tap];
-        
+    
         self.backgroundNormalColor = [UIColor clearColor];
         self.backgroundEditingColor = [[UIColor jk_colorWithHexString:@"#4D9FD8"] colorWithAlphaComponent:0.2];
         self.textAlignment = NSTextAlignmentLeft;
@@ -59,10 +59,8 @@
     if (isEditing) {
         [self registerNotification];
         [self addBorder:0 Width:1 Color:COLOR_RGB_BLUE];
-        
-        if (self.clearOnEditing) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
-        }
+        [IPCTextFiledControl instance].preTextField = self;
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
     }else{
         [self removeNotification];
         [self addBorder:0 Width:0 Color:nil];
@@ -74,23 +72,18 @@
     _text = text;
     
    [self.textLabel setText:text];
-    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardStringNotification object:nil userInfo:@{@"text":text}];
 }
 
 - (void)beginEditAction
 {
-    [[IPCTextFiledControl instance] clearAllEditingAddition:self];
-    
-    if (self.delegate) {
-        if ([self.delegate respondsToSelector:@selector(textFieldBeginEditing:)]) {
-            [self.delegate textFieldBeginEditing:self];
-        }
-    }
-    
-    [self setIsEditing:YES];
+    [self becomFirstResponder];
 }
 
+- (void)becomFirstResponder
+{
+    [[IPCTextFiledControl  instance] clearPreTextField];
+    [self setIsEditing:YES];
+}
 
 #pragma mark //Notification Methods
 - (void)endEditingNotification:(NSNotification *)notification
@@ -118,9 +111,6 @@
 
 - (void)preEditingNotification:(NSNotification *)notification
 {
-    if (!self.isEditing) {
-        return;
-    }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(textFieldPreEditing:)]) {
             [self.delegate textFieldPreEditing:self];
@@ -130,9 +120,6 @@
 
 - (void)nextEditingNotification:(NSNotification *)notification
 {
-    if (!self.isEditing) {
-        return;
-    }
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(textFieldNextEditing:)]) {
             [self.delegate textFieldNextEditing:self];
@@ -153,7 +140,11 @@
 
 - (void)removeNotification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCCustomKeyboardDoneNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCCustomKeyboardClearNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCCustomKeyboardChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCCustomKeyboardPreNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:IPCCustomKeyboardNextNotification object:nil];
 }
 
 @end

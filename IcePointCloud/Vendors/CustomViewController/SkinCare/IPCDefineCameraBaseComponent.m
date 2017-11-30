@@ -38,6 +38,7 @@
 {
     if (!controller) return;
     
+    
     IPCDefineCameraViewController * cameraVC = [[IPCDefineCameraViewController alloc]initWithImageBlock:^(UIImage *image) {
         if (self.ResultImageBlock) {
             self.ResultImageBlock(image);

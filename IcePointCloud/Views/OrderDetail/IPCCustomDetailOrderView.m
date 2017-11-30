@@ -8,7 +8,6 @@
 
 #import "IPCCustomDetailOrderView.h"
 #import "IPCOrderDetailTopCell.h"
-#import "IPCCustomerAddressCell.h"
 #import "IPCOrderDetailProductCell.h"
 #import "IPCOrderDetailInfoCell.h"
 #import "IPCOrderDetailMemoCell.h"
@@ -20,7 +19,6 @@
 
 static NSString * const topIdentifier        = @"OrderDetailTopTableViewCellIdentifier";
 static NSString * const memoIdentifier    = @"OrderDetailMemoCellIdentifier";
-static NSString * const contactIdentifier  = @"IPCCustomerAddressCellIdentifier";
 static NSString * const productIdentifier = @"OrderProductTableViewCellIdentifier";
 static NSString * const detailIdetifier      = @"OrderDetailInfoTableViewCellIdentifier";
 static NSString * const priceIdentifier     = @"OrderProductPriceCellIdentifier";
@@ -139,14 +137,14 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     if ([IPCCustomerOrderDetail instance].orderInfo)
-        return 8;
+        return 7;
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if ((section == 2 && [IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry) || section == 5){
+    if ((section == 1 && [IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry) || section == 4){
         return 2;
-    }else if (section == 3){
+    }else if (section == 2){
         return [IPCCustomerOrderDetail instance].products.count;
     }
     return 1;
@@ -161,14 +159,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             cell = [[UINib nibWithNibName:@"IPCOrderDetailTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         return cell;
-    }else if (indexPath.section == 1) {
-        IPCCustomerAddressCell * cell = [tableView dequeueReusableCellWithIdentifier:contactIdentifier];
-        if (!cell) {
-            cell = [[UINib nibWithNibName:@"IPCCustomerAddressCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-        }
-        cell.addressMode = [IPCCustomerOrderDetail instance].addressMode;
-        return cell;
-    }else if (indexPath.section == 2){
+    }else if (indexPath.section == 1){
         if (indexPath.row == 0) {
             IPCOrderDetailTopOptometryCell * cell = [tableView dequeueReusableCellWithIdentifier:topOptometryIdentifier];
             if (!cell) {
@@ -184,7 +175,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             cell.optometry = [IPCCustomerOrderDetail instance].optometryMode;
             return cell;
         }
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 2){
         IPCOrderDetailProductCell * cell = [tableView dequeueReusableCellWithIdentifier:productIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailProductCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -196,13 +187,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             cell.glasses = product;
         }
         return cell;
-    }else if (indexPath.section == 4){
+    }else if (indexPath.section == 3){
         IPCOrderDetailProductPriceCell * cell = [tableView dequeueReusableCellWithIdentifier:priceIdentifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailProductPriceCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
         return cell;
-    }else if (indexPath.section == 5){
+    }else if (indexPath.section == 4){
         if (indexPath.row == 0) {
             IPCOrderDetailSectionCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
@@ -219,7 +210,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
             cell.recordList = [IPCCustomerOrderDetail instance].recordArray;
             return cell;
         }
-    }else if(indexPath.section == 6){
+    }else if(indexPath.section == 5){
         IPCOrderDetailInfoCell * cell = [tableView dequeueReusableCellWithIdentifier:detailIdetifier];
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailInfoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
@@ -238,19 +229,17 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 75;
-    }else if (indexPath.section == 1 && ![[IPCCustomerOrderDetail instance].addressMode isEmptyAddress]){
-        return 70;
-    }else if (indexPath.section == 2 && indexPath.row > 0){
+    }else if (indexPath.section == 1 && indexPath.row > 0){
         return 195;
-    }else if (indexPath.section == 3){
+    }else if (indexPath.section == 2){
         if ([IPCCustomerOrderDetail instance].products.count) {
             return 115;
         }
-    }else if (indexPath.section == 4){
+    }else if (indexPath.section == 3){
         return 120;
-    }else if (indexPath.section == 5 && indexPath.row > 0){
+    }else if (indexPath.section == 4 && indexPath.row > 0){
         return [IPCCustomerOrderDetail instance].recordArray.count * 40;
-    }else if (indexPath.section == 6){
+    }else if (indexPath.section == 5){
         return 120;
     }
     return 50;

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <GPUImage/GPUImage.h>
+#import "GPUImageImport.h"
 #import "TuSDKDataJson.h"
 
 #pragma mark - RuntimeTextureDelegate
@@ -148,9 +148,9 @@
 /**
  *  获取语言资源名称
  *
- *
+ *  @return 获取语言资源名称
  */
-- (NSString *)nameKey;
+- (NSString *)getFilterName;
 
 /**
  *  获取预览图名称

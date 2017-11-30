@@ -17,9 +17,9 @@ pod 'JKCategories'
 pod 'YYKit'
 pod 'ReactiveObjC'
 pod 'MJRefresh'
-pod 'TuSDK'
 pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
+pod 'TuSDK'
 end
 
 target "IcePointCloudTests" do

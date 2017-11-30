@@ -10,7 +10,7 @@
 
 @protocol IPCCustomTextFieldDelegate;
 
-@interface IPCCustomTextField : UIView
+@interface IPCCustomTextField : UIControl
 
 @property(nonatomic,copy)   NSString   * text;
 
@@ -20,25 +20,11 @@
 
 @property(nonatomic, assign) BOOL isEditing;
 
-@property(nonatomic, assign) BOOL clearOnEditing;
-
 @property(nonatomic, assign) NSTextAlignment textAlignment;
 
 @property(nonatomic, assign) id<IPCCustomTextFieldDelegate>delegate;
 
-@end
-
-@protocol IPCCustomTextFieldDelegate <NSObject>
-
-@optional
-- (void)textFieldBeginEditing:(IPCCustomTextField *)textField;
-
-- (void)textFieldPreEditing:(IPCCustomTextField *)textField;
-
-- (void)textFieldNextEditing:(IPCCustomTextField *)textField;
-
-- (void)textFieldEndEditing:(IPCCustomTextField *)textField;
-
-
+- (void)becomFirstResponder;
 
 @end
+

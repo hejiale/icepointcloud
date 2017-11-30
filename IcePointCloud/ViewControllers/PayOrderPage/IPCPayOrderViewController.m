@@ -66,6 +66,12 @@
     [self.viewMode queryIntegralRule];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[IPCTextFiledControl instance] resignTextField];
+}
+
 #pragma mark //Set UI
 - (void)insertScrollSubView:(NSArray<UIViewController *> *)subViews
 {
@@ -170,6 +176,8 @@
 
 - (void)reloadBottomStatus
 {
+    [[IPCTextFiledControl instance] resignTextField];
+    
     if (self.pageView.currentPage == 3) {
         [self.nextStepButton setHidden:YES];
         [self.saveButton setHidden:NO];

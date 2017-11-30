@@ -89,9 +89,29 @@
     [self loadPhotoData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+}
+
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
 }
+
+
+//- (void)viewWillDisappear:(BOOL)animated{
+//    [super viewWillDisappear:animated];
+//
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//
+//}
 
 
 #pragma mark //Declaration Array

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
-#import <GPUImage/GPUImage.h>
+#import "GPUImageImport.h"
 
 #pragma mark - TuSDKTSFaceFeature
 /**
@@ -88,4 +88,12 @@
  *  @return 图像方向
  */
 + (UIImageOrientation)convertGPURotation:(GPUImageRotationMode)rotation;
+
+/**
+ Get real orientation without mirror
+ 
+ @param rotation
+ @return
+ */
++ (int)getOriByGPURotation:(GPUImageRotationMode)rotation;
 @end

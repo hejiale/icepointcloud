@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 tusdk.com. All rights reserved.
 //
 
-#import <GPUImage/GPUImage.h>
+#import "GPUImageImport.h"
 #import "TuSDKVideoCameraInterface.h"
 
 /**
@@ -154,16 +154,6 @@
  *  @return 是否支持曝光模式
  */
 - (BOOL)exposureWithMode:(AVCaptureExposureMode)exposureMode;
-
-/**
- *  设置曝光模式
- *
- *  @param focusMode 曝光模式
- *  @param point     曝光坐标
- *
- *  @return 是否支持曝光模式
- */
-- (BOOL)exposureWithMode:(AVCaptureExposureMode)exposureMode point:(CGPoint)point;
 
 /**
  *  当前聚焦状态

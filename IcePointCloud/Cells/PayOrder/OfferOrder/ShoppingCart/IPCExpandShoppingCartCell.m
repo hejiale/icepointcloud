@@ -28,7 +28,6 @@
     
     [self.inputPriceTextField addBottomLine];
     [self.mainContentView addSubview:self.inputPriceTextField];
-    [[IPCTextFiledControl instance] addTextField:self.inputPriceTextField];
 }
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem
@@ -61,7 +60,7 @@
 //        }else{
 //
 //        }
-        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber: _cartItem.unitPrice]]];
+        [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber: _cartItem.unitPrice Location:3]]];
     }
 }
 
@@ -69,7 +68,6 @@
 {
     if (!_inputPriceTextField) {
         _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-30, 200, 30)];
-        _inputPriceTextField.clearOnEditing = YES;
         [_inputPriceTextField setDelegate:self];
     }
     return _inputPriceTextField;
@@ -78,9 +76,7 @@
 #pragma mark //UITextField Delegate
 - (void)textFieldBeginEditing:(IPCCustomTextField *)textField
 {
-    if ([self.delegate respondsToSelector:@selector(endEditing:)]) {
-        [self.delegate endEditing:self];
-    }
+   
 }
 
 - (void)textFieldPreEditing:(IPCCustomTextField *)textField
@@ -100,14 +96,18 @@
 - (void)textFieldEndEditing:(IPCCustomTextField *)textField
 {
     NSString * str = [textField.text jk_trimmingWhitespace];
+    NSString * priceStr = str;
     
-    if (str.length) {
-        if ([str doubleValue] >= self.cartItem.glasses.price) {
-            self.cartItem.unitPrice = self.cartItem.glasses.price;
-        }else{
-            self.cartItem.unitPrice = [str doubleValue];
-        }
+    if ([str containsString:@"￥"]) {
+        priceStr =  [str substringFromIndex:1];
     }
+    
+    if (priceStr.length) {
+        self.cartItem.unitPrice = [priceStr doubleValue];
+    }
+    
+    [IPCPayOrderManager sharedManager].customDiscount = -1;
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     
     if ([self.delegate respondsToSelector:@selector(endEditing:)]) {
         [self.delegate endEditing:self];

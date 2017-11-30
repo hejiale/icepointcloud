@@ -44,7 +44,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 @property (weak, nonatomic) IBOutlet UIView *recommdBgView;
 @property (weak, nonatomic) IBOutlet UIScrollView *recommdScrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstant;
-@property (strong, nonatomic) UIVisualEffectView * blurBgView;
 @property (strong, nonatomic)  IPCShareChatView  *shareButtonView;
 @property (strong, nonatomic) IPCSwitch *compareSwitch;
 @property (nonatomic, strong) IPCOnlineFaceDetector *faceRecognition;
@@ -122,13 +121,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     self.productTableView.estimatedSectionFooterHeight = 0;
     self.productTableView.emptyAlertImage = @"exception_search";
     self.productTableView.emptyAlertTitle = @"未搜索到可试戴的眼镜!";
-}
-
-
-- (UIVisualEffectView *)blurBgView{
-    if (!_blurBgView)
-        _blurBgView = [IPCCommonUI showBlurView:[UIApplication sharedApplication].keyWindow.bounds Target:self action:@selector(removeCover)];
-    return _blurBgView;
 }
 
 //Create Single Model View
@@ -376,7 +368,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self.shareButtonView removeFromSuperview];
     [self.photoDeleteConfirmView removeFromSuperview];
     [self.modelsPicker removeFromSuperview];
-    [self.blurBgView removeFromSuperview];
+    [self.cameraBgView removeFromSuperview];
     [self.glassListViewMode.filterView removeFromSuperview];
     [self.coverView removeFromSuperview];
 }
@@ -520,15 +512,17 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 }
 
 //Shooting head
+- (IBAction)removeCameraBgViewAction:(id)sender {
+    [self removeCover];
+}
+
 - (IBAction)onCameraBtnTapped:(id)sender
 {
-    if ([self.blurBgView superview]) {
+    if ([self.cameraBgView superview]) {
         [self removeCover];
     }else{
-        [[UIApplication sharedApplication].keyWindow addSubview:self.blurBgView];
-        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.blurBgView];
-        [self.cameraBgView setFrame:self.blurBgView.bounds];
-        [self.blurBgView addSubview:self.cameraBgView];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.cameraBgView];
+        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.cameraBgView];
     }
 }
 
@@ -548,7 +542,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 //Library method
 - (IBAction)onPickerLibBtnTapped:(id)sender
 {
-    [self.blurBgView removeFromSuperview];
+    [self removeCover];
     __weak typeof (self) weakSelf = self;
     IPCPhotoPickerBaseComponent * pickVC = [[IPCPhotoPickerBaseComponent alloc]initWithResultImage:^(UIImage *image) {
         __strong typeof (weakSelf) strongSelf = weakSelf;

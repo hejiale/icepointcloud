@@ -333,7 +333,8 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.30200022163120566" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40127354452054792" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="wGK-JQ-GRN" firstAttribute="leading" secondItem="uyA-aR-3T6" secondAttribute="leading" constant="380" id="EbK-lN-3bH"/>
                 <constraint firstItem="dVd-4Q-55W" firstAttribute="centerY" secondItem="uyA-aR-3T6" secondAttribute="centerY" id="Irf-Ni-LBJ"/>
@@ -344,8 +345,16 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="aKq-4N-l6R" appends="YES" id="096-R1-eFQ"/>
+            </connections>
             <point key="canvasLocation" x="1656" y="-728.5"/>
         </view>
+        <tapGestureRecognizer id="aKq-4N-l6R">
+            <connections>
+                <action selector="removeCameraBgViewAction:" destination="-1" id="yGE-8L-bEj"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="icon_scrolls_to_top" width="37" height="37"/>

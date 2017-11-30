@@ -20,40 +20,22 @@
     return _client;
 }
 
-- (NSMutableArray<IPCCustomTextField *> *)textFiledArray
+- (void)clearPreTextField
 {
-    if (!_textFiledArray) {
-        _textFiledArray = [[NSMutableArray alloc]init];
-    }
-    return _textFiledArray;
-}
-
-- (void)addTextField:(IPCCustomTextField *)textField
-{
-    if (![self.textFiledArray containsObject:textField]) {
-        [self.textFiledArray addObject:textField];
-    }
-}
-
-- (void)clearAllTextField
-{
-    [self.textFiledArray removeAllObjects];
-}
-
-- (void)clearAllEditingAddition:(IPCCustomTextField *)textField
-{
-    [self.textFiledArray enumerateObjectsUsingBlock:^(IPCCustomTextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (![obj isEqual:textField]) {
-            [obj setIsEditing:NO];
-            [[NSNotificationCenter defaultCenter] removeObserver:obj];
+    if (self.preTextField) {
+        [self.preTextField setIsEditing:NO];
+        if ([self.preTextField.delegate respondsToSelector:@selector(textFieldEndEditing:)]) {
+            [self.preTextField.delegate textFieldEndEditing:self.preTextField];
         }
-    }];
+    }
 }
 
-- (void)clearTextField:(IPCCustomTextField *)textField
+- (void)resignTextField
 {
-    if ([self.textFiledArray containsObject:textField]) {
-        [self.textFiledArray removeObject:textField];
+    if (self.preTextField) {
+        if (self.preTextField.isEditing) {
+            [self clearPreTextField];
+        }
     }
 }
 

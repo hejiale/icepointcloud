@@ -109,6 +109,7 @@
 "lsq_edit_entry_filter" = "滤镜";
 "lsq_edit_entry_cuter" = "裁切";
 "lsq_edit_entry_sticker" = "贴纸";
+"lsq_edit_entry_text" = "文字";
 "lsq_edit_entry_smudge" = "涂抹";
 "lsq_edit_entry_smudge_filter" = "模糊";
 "lsq_edit_cuter_ratio_orgin" = "原始";
@@ -125,6 +126,17 @@
 "lsq_edit_holy_light" = "圣光";
 "lsq_edit_smudge_brush" = "笔触";
 "lsq_edit_smudge_eraser" = "橡皮";
+
+"lsq_edit_text_input_tip" = "点击输入内容";
+"lsq_edit_text_color_text" = "字体颜色";
+"lsq_edit_text_color_backgroud" = "背景颜色";
+"lsq_edit_text_color_stroke" = "线条颜色";
+"lsq_edit_text_style_leftToRight" = "从左到右";
+"lsq_edit_text_style_rightToLeft" = "从右到左";
+"lsq_edit_text_style_underline" = "下划线";
+"lsq_edit_text_style_alignmentLeft" = "左对齐";
+"lsq_edit_text_style_alignmentRight" = "右对齐";
+"lsq_edit_text_style_alignmentCenter" = "居中";
 
 "lsq_edit_fragment_turn_left" = "左转";
 "lsq_edit_fragment_turn_right" = "右转";
@@ -179,17 +191,49 @@
 // FilterGroup
 "lsq_filter_group_Leica" = "莱卡";
 "lsq_filter_group_Lomo" = "LOMO";
-"lsq_filter_group_Food" = "Retro";
+"lsq_filter_group_Food" = "美食";
 "lsq_filter_group_Enhance" = "增强";
 "lsq_filter_group_Glare" = "光效";
-"lsq_filter_group_Beauty" = "人像";
 "lsq_filter_group_Magic" = "魔法色";
 "lsq_filter_group_GailyColoured" = "鲜艳";
 "lsq_filter_group_Oldtimes" = "叙旧";
+"lsq_filter_group_Lip001" = "唇魅";
+"lsq_filter_group_Mottle" = "斑驳";
+"lsq_filter_group_LipGloss" = "唇魅";
 
+"lsq_filter_group_Beauty" = "自然美颜";
+"lsq_filter_group_MeituBeauty" = "柔光美颜";
+"lsq_filter_group_EdgeEffects" = "热力图";
+"lsq_filter_group_EdgeEffects001" = "边缘特效";
 
+"lsq_filter_Multicolor" = "多彩";
+"lsq_filter_Azure" = "科幻蓝";
+"lsq_filter_Infrared" = "红外线";
+"lsq_filter_Fluorescence" = "荧光绿";
+"lsq_filter_Starshine" = "星尘";
+
+"lsq_filter_Flame" = "红外";
+"lsq_filter_Polychrome" = "热力";
+"lsq_filter_Angulation" = "科幻";
+"lsq_filter_Hallucination" = "迷幻";
+"lsq_filter_Nighttime" = "夜视";
+"lsq_filter_Splendid" = "多普勒";
+
+"lsq_filter_Nature" = "柔和";
+"lsq_filter_Blusher" = "粉色";
+"lsq_filter_Jelly" = "果酱";
+"lsq_filter_Jam" = "黑白";
+"lsq_filter_Ruddy" = "日出";
+"lsq_filter_Sugar" = "甜蜜";
+"lsq_filter_Powder" = "暮光";
+"lsq_filter_Whitening" = "唯美";
 
 // Filters
+"lsq_filter_Sweet002" = "甜蜜";
+"lsq_filter_Sweet" = "甜蜜";
+"lsq_filter_Coffee" = "咖啡";
+"lsq_filter_Gold" = "金黄";
+"lsq_filter_Rum" = "朗姆";
 "lsq_filter_online_title" = "在线滤镜";
 "lsq_filter_remove_title" = "删除滤镜";
 "lsq_filter_remove_msg%@" = "您是否需要删除滤镜「%@」？";
@@ -251,6 +295,23 @@
 "lsq_filter_Purplemoon" = "紫月亮";
 "lsq_filter_Summersunshine" = "夏日";
 "lsq_filter_Wintersunshine" = "冬日";
+"lsq_filter_Summer" = "夏日";
+"lsq_filter_Winter" = "冬日";
+
+// 唇魅，斑驳
+"lsq_filter_group_SnapSeed" = "斑驳";
+"lsq_filter_Time" = "流年";
+"lsq_filter_Recall" = "追忆";
+"lsq_filter_Yellowing" = "泛黄";
+"lsq_filter_Years" = "经年";
+"lsq_filter_Age" = "岁月";
+"lsq_filter_group_Lip001" = "唇魅";
+"lsq_filter_Missing" = "想你色";
+"lsq_filter_Grapefruit" = "西柚色";
+"lsq_filter_RoseCarmine" = "玫红色";
+"lsq_filter_Nude" = "裸色";
+"lsq_filter_Orange" = "橘色";
+"lsq_filter_BabyPink" = "粉色";
 
 // Filters Definition skin
 "lsq_filter_set_skinMultiple" = "多功能美肤";
@@ -269,6 +330,7 @@
 "lsq_filter_set_distanceNormalizationFactor" = "边缘";
 "lsq_filter_set_blurSigma" = "西格玛";
 "lsq_filter_set_mixied" = "效果";
+"lsq_filter_set_texture" = "纹理";
 "lsq_filter_set_saturation" = "饱和度";
 "lsq_filter_set_contrast" = "对比度";
 "lsq_filter_set_sharpness" = "锐化";
@@ -289,6 +351,11 @@
 "lsq_filter_set_linear" = "线性";
 "lsq_filter_set_radial" = "径向";
 
+"lsq_filter_set_edgeStrength" = "强度";
+"lsq_filter_set_thresholdLevel" = "位置";
+"lsq_filter_set_speed" = "速度";
+"lsq_filter_set_showType" = "模式";
+
 // Filters Definition Bokeh
 "lsq_filter_set_radius" = "内半径";
 "lsq_filter_set_centerX" = "中心X";
@@ -296,6 +363,11 @@
 "lsq_filter_set_excessive" = "边缘";
 "lsq_filter_set_maskAlpha" = "强调";
 "lsq_filter_set_degree" = "角度";
+
+// text Definition option
+"lsq_filter_set_text_addText" = "添加";
+"lsq_filter_set_text_color" = "颜色";
+"lsq_filter_set_text_style" = "样式";
 
 // Brush Definition
 "lsq_brush_Eraser" = "橡皮擦";
@@ -320,3 +392,19 @@
 "lsq_network_connection_failed" = "网络连接失败";
 "lsq_network_connection_timeout" = "服务器连接超时";
 "lsq_network_paser_data_failed" = "数据处理失败";
+
+// camera
+"lsq_camera_Grid_on" = "网格开";
+"lsq_camera_Grid_off" = "网格关";
+"lsq_camera_ratio_9_16" = "9:16";
+"lsq_camera_ratio_3_4" = " 3:4";
+"lsq_camera_ratio_2_3" = " 2:3";
+"lsq_camera_ratio_1_1" = " 1:1";
+"lsq_camera_ratio_3_2" = " 3:2";
+"lsq_camera_ratio_4_3" = " 4:3";
+"lsq_camera_ratio_16_9" = "16:9";
+"lsq_camera_ratio_origin" = "全屏";
+"lsq_camera_flash_mode_on" = "闪光灯开启";
+"lsq_camera_flash_mode_off" = "闪光灯关闭";
+"lsq_camera_flash_mode_auto" = "闪光灯自动";
+

@@ -8,19 +8,17 @@
 
 #import <Foundation/Foundation.h>
 #import "IPCCustomTextField.h"
+#import "IPCCustomTextFieldDelegate.h"
 
 @interface IPCTextFiledControl : NSObject
 
 + (IPCTextFiledControl *)instance;
 
-@property (nonatomic, strong) NSMutableArray<IPCCustomTextField *> * textFiledArray;
+@property (nonatomic, strong) IPCCustomTextField * preTextField;
 
-- (void)addTextField:(IPCCustomTextField *)textField;
+- (void)clearPreTextField;
 
-- (void)clearAllEditingAddition:(IPCCustomTextField *)textField;
+- (void)resignTextField;
 
-- (void)clearAllTextField;
-
-- (void)clearTextField:(IPCCustomTextField *)textField;
 
 @end

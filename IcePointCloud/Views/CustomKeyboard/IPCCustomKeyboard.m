@@ -56,9 +56,7 @@ NSString * const IPCCustomKeyboardStringNotification  = @"IPCCustomKeyboardStrin
         }];
         
         self.appendString = [[NSMutableString alloc]init];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEditing) name:IPCCustomKeyboardBeginNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateString:) name:IPCCustomKeyboardStringNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEdit) name:IPCCustomKeyboardBeginNotification object:nil];
     }
     return self;
 }
@@ -70,20 +68,9 @@ NSString * const IPCCustomKeyboardStringNotification  = @"IPCCustomKeyboardStrin
     return _buttons;
 }
 
-- (void)beginEditing
+- (void)beginEdit
 {
-    ///开始编辑时清空处理
     self.appendString = [[NSMutableString alloc]init];
-}
-
-- (void)updateString:(NSNotification *)notification
-{
-//    self.appendString = [[NSMutableString alloc]init];
-//    if ([notification.userInfo[@"text"] isEqualToString:@"0.00"]) {
-//        [self.appendString appendString:@"0"];
-//    }else{
-//        [self.appendString appendString:notification.userInfo[@"text"]];
-//    }
 }
 
 - (IBAction)numberTapAction:(UIButton *)sender {

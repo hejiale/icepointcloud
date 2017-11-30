@@ -6,7 +6,7 @@
 //  Copyright © 2017 tusdk.com. All rights reserved.
 //
 
-#import <GPUImage/GPUImage.h>
+#import "GPUImageImport.h"
 #import "TuSDKFilterParameter.h"
 #import "TuSDKFilterAdapter.h"
 
@@ -27,6 +27,13 @@
  unlock input frameBuffer
  */
 - (void)inputFramebufferUnlock;
+
+/**
+ 根据某个时间设置贴纸 index
+ 
+ @param time 时间参数
+ */
+- (void)seekToStickerIndexByTime:(CMTime)time;
 
 #pragma mark - TuSDKFilterStickerProtocol
 /**
@@ -65,11 +72,11 @@
 
 #pragma mark - TuSDKFilterFacePositionProtocol
 /**
- *  更新位置
+ *  更新信息
  *
- *  @param points 特征点坐标
+ *  @param faces  特征点数据
  *  @param angle  设备角度
  */
-- (void)updateFaceFeatures:(NSArray<NSValue *> *)points angle:(float)angle;
+- (void)updateFaceFeatures:(NSArray<TuSDKFaceAligment *> *)faces angle:(CGFloat)angle;
 
 @end

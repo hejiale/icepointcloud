@@ -119,12 +119,12 @@
     return NO;
 }
 
-+ (NSString *)formatNumber:(double)number
++ (NSString *)formatNumber:(double)number Location:(NSInteger)location
 {
-    if (number > 0) {
-        NSString * numberStr = [NSString stringWithFormat:@"%f",number];
+    if (number != 0) {
+        NSString * numberStr = [NSString stringWithFormat:@"%.9f",number];
         NSRange rang = [numberStr rangeOfString:@"."];
-        return [numberStr substringToIndex:rang.location + 3];
+        return [numberStr substringToIndex:rang.location + location];
     }
     return @"0.00";
 }
