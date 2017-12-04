@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJG-Pr-QBg">
-                        <rect key="frame" x="28" y="30" width="80" height="20"/>
+                        <rect key="frame" x="18" y="30" width="80" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="Kdd-TX-ZWW"/>
                             <constraint firstAttribute="height" constant="20" id="nCa-bb-EfV"/>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chb-mK-GGK">
-                        <rect key="frame" x="128" y="30" width="100" height="20"/>
+                        <rect key="frame" x="118" y="30" width="100" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7bM-49-qad"/>
                             <constraint firstAttribute="width" constant="100" id="ABx-aA-e57"/>
@@ -69,7 +69,7 @@
                     <constraint firstItem="sOw-Ms-Wto" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PE7-IB-aCE"/>
                     <constraint firstAttribute="bottomMargin" secondItem="sOw-Ms-Wto" secondAttribute="bottom" id="Wme-mu-GsC"/>
                     <constraint firstItem="sOw-Ms-Wto" firstAttribute="leading" secondItem="B3G-RO-mhN" secondAttribute="trailing" id="s8s-AX-501"/>
-                    <constraint firstItem="pJG-Pr-QBg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="sNc-dJ-LqV"/>
+                    <constraint firstItem="pJG-Pr-QBg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="sNc-dJ-LqV"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

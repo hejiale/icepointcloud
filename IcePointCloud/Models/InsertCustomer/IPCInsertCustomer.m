@@ -48,8 +48,6 @@
     self.isPackUp = NO;
     [self.optometryArray removeAllObjects];
     self.optometryArray = nil;
-    IPCOptometryMode * optometry = [[IPCOptometryMode alloc]init];
-    [[IPCInsertCustomer instance].optometryArray addObject:optometry];
 }
 
 - (NSMutableArray<IPCOptometryMode *> *)optometryArray{

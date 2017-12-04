@@ -70,7 +70,7 @@
                     <rect key="frame" x="0.0" y="654" width="490" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="49h-K3-9u5">
-                            <rect key="frame" x="20" y="0.0" width="80" height="50"/>
+                            <rect key="frame" x="15" y="0.0" width="80" height="50"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="eBI-cc-Rwa"/>
@@ -106,7 +106,7 @@
                         <constraint firstAttribute="height" constant="50" id="Nh7-Xm-kqQ"/>
                         <constraint firstAttribute="trailing" secondItem="Nfj-QX-ovB" secondAttribute="trailing" id="QAh-ml-PeA"/>
                         <constraint firstAttribute="bottom" secondItem="49h-K3-9u5" secondAttribute="bottom" id="Rix-D8-9tc"/>
-                        <constraint firstItem="49h-K3-9u5" firstAttribute="leading" secondItem="E3E-SG-Act" secondAttribute="leading" constant="20" id="Zrh-Qr-kvR"/>
+                        <constraint firstItem="49h-K3-9u5" firstAttribute="leading" secondItem="E3E-SG-Act" secondAttribute="leading" constant="15" id="Zrh-Qr-kvR"/>
                         <constraint firstAttribute="bottom" secondItem="Nfj-QX-ovB" secondAttribute="bottom" id="yAl-hg-u2M"/>
                         <constraint firstItem="Nfj-QX-ovB" firstAttribute="top" secondItem="E3E-SG-Act" secondAttribute="top" id="zCQ-aS-gGQ"/>
                     </constraints>

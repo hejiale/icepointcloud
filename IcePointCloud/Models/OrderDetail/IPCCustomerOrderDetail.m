@@ -84,10 +84,10 @@
 
 - (void)clearData{
     [self.products removeAllObjects];
+    [self.recordArray removeAllObjects];
     self.orderInfo = nil;
     self.addressMode = nil;
     self.optometryMode = nil;
-    
 }
 
 

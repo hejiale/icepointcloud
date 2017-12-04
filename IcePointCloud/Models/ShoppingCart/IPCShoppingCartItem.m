@@ -34,16 +34,8 @@
 - (double)totalPrice
 {
     double price = self.unitPrice * self.glassCount;
-    double floor = floorf(price*100)/100;
-    NSString * itemPriceStr = [NSString stringWithFormat:@"%.2f",floor];
-    return [itemPriceStr doubleValue];
+    return [IPCCommon floorNumber:price];
 }
-
-- (double)unitPrice
-{
-    return _unitPrice;
-}
-
 
 //Joining together to upload the order parameter
 - (NSDictionary *)paramtersJSONForOrderRequest

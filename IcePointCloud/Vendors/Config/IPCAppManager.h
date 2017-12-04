@@ -81,6 +81,15 @@ extern NSString * const kIPCNotConnectInternetMessage;
 
 
 /**
+ Load PayType Image
+
+ @param index
+ @return 
+ */
+- (NSString *)payType:(NSInteger)index;
+
+
+/**
  * Load WareHouse
 
  @param complete 

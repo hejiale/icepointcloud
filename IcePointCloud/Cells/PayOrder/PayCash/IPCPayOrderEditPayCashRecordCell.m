@@ -73,26 +73,26 @@
         }else if ([self.payRecord.payTypeInfo isEqualToString:@"储值卡"]){
             if ([textField.text doubleValue] > [IPCCurrentCustomer sharedManager].currentCustomer.balance){
                 [IPCCommonUI showError:@"输入金额大于客户储值余额"];
-            }else if ([textField.text doubleValue] > [[IPCPayOrderManager sharedManager] remainPayPrice] || [textField.text doubleValue] == 0){
-                [IPCCommonUI showError:@"输入有效付款金额"];
-            }else{
+            }else if ([textField.text doubleValue] <= [[IPCPayOrderManager sharedManager] remainPayPrice] && [textField.text doubleValue] > 0){
                 self.payRecord.payPrice = [textField.text doubleValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
                 isInsert = YES;
+            }else{
+                [IPCCommonUI showError:@"输入有效付款金额"];
             }
         }else{
-            if ([textField.text doubleValue] > [[IPCPayOrderManager sharedManager] remainPayPrice] || [textField.text doubleValue] == 0) {
-                [IPCCommonUI showError:@"输入有效付款金额"];
-            }else{
+            if ([textField.text doubleValue] <= [[IPCPayOrderManager sharedManager] remainPayPrice] && [textField.text doubleValue] > 0) {
                 self.payRecord.payPrice = [textField.text doubleValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
                 isInsert = YES;
+            }else{
+                [IPCCommonUI showError:@"输入有效付款金额"];
             }
         }
-        
-        if ([self.delegate respondsToSelector:@selector(reloadRecord:IsInsert:)]) {
-            [self.delegate reloadRecord:self IsInsert:isInsert];
-        }
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(reloadRecord:IsInsert:)]) {
+        [self.delegate reloadRecord:self IsInsert:isInsert];
     }
 }
 

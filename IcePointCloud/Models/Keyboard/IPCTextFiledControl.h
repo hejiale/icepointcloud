@@ -18,7 +18,5 @@
 
 - (void)clearPreTextField;
 
-- (void)resignTextField;
-
 
 @end

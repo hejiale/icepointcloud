@@ -8,7 +8,7 @@
 
 #import "IPCPayorderScrollPageView.h"
 
-#define   SpaceRectSize    80
+#define   SpaceRectSize    100
 #define   RoundRectSize   40
 
 @interface IPCPayorderScrollPageView()

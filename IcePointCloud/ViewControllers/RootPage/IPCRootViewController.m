@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
+@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
+@property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 
 @end
 
@@ -30,10 +32,9 @@
     
     _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    IPCCustomerListViewController * customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
-    IPCPayOrderViewController * payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-    
-    [self setViewControllers:@[_productVC,customerInfoVC,_tryVC,payOrderVC]];
+    _customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
+    _payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+    [self setViewControllers:@[_productVC,_customerInfoVC,_tryVC,_payOrderVC]];
     
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x)
@@ -48,17 +49,11 @@
 }
 
 #pragma mark //Clicked Events
-//Remove Filter Cover
-- (void)removerFilterCover{
-    [self.productVC removeCover];
-    [self.tryVC removeCover];
-}
-
-
 //Show Methods
 - (void)showSideBarView
 {
-    [self removerFilterCover];
+    [self.productVC removeCover];
+    [self.tryVC removeCover];
    
     IPCSideBarMenuView * sideBarView = [[IPCSideBarMenuView alloc]initWithFrame:self.view.bounds];
     [self.view addSubview:sideBarView];

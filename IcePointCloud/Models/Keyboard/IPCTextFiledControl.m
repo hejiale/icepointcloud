@@ -30,13 +30,5 @@
     }
 }
 
-- (void)resignTextField
-{
-    if (self.preTextField) {
-        if (self.preTextField.isEditing) {
-            [self clearPreTextField];
-        }
-    }
-}
 
 @end

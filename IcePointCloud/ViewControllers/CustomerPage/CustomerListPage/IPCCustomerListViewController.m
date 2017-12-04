@@ -52,8 +52,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     }else{
         [self setNavigationBarStatus:YES];
     }
-    //Refresh Insert Button Status
-//    [self.insertButton setHidden:[IPCInsertCustomer instance].isInsertStatus];
     //According To NetWorkStatus To Reload Customer List
     if (isCancelRequest && self.viewModel.currentPage == 1) {
         [self loadData];

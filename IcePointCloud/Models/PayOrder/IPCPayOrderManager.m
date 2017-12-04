@@ -94,6 +94,7 @@
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [[IPCCurrentCustomer sharedManager] clearData];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
+    [IPCPayOrderManager sharedManager].currentOptometryId = nil;
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;
     [IPCPayOrderManager sharedManager].discountAmount = 0;

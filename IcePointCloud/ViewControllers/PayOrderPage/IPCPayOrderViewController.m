@@ -14,19 +14,21 @@
 #import "IPCPayorderScrollPageView.h"
 #import "IPCPayOrderViewMode.h"
 
-@interface IPCPayOrderViewController ()<IPCPayorderScrollPageViewDelegate>
+@interface IPCPayOrderViewController ()
 
-@property (weak, nonatomic) IBOutlet UIScrollView *contentScrollView;
+@property (weak, nonatomic) IBOutlet UIView *leftButtonView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextStepButton;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (strong, nonatomic) IPCPayorderScrollPageView * pageView;
 @property (strong, nonatomic) IPCPayOrderCustomerViewController * customerVC;
 @property (strong, nonatomic) IPCPayOrderOptometryViewController * optometryVC;
 @property (strong, nonatomic) IPCPayOrderOfferOrderViewController * offerOrderVC;
 @property (strong, nonatomic) IPCPayOrderPayCashViewController * cashVC;
 @property (strong, nonatomic) IPCPayOrderViewMode * viewMode;
+@property (strong, nonatomic) NSMutableArray<UIViewController *> * viewControllers;
+@property (assign, nonatomic) NSInteger currentPage;
 
 @end
 
@@ -36,26 +38,23 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"提交订单";
+    _currentPage = NSNotFound;
     //Set UI
     [self.bottomView addTopLine];
     [self.cancelButton addBorder:2 Width:0.5 Color:nil];
     [self.saveButton addBorder:2 Width:0 Color:nil];
+    
     self.viewMode = [[IPCPayOrderViewMode alloc]init];
-    
-    _pageView = [[IPCPayorderScrollPageView alloc]initWithFrame:CGRectMake(0, 0, 80, self.contentScrollView.jk_height)];
-    [_pageView setPageImages:@[@"icon_unpage_0",@"icon_unpage_1",@"icon_unpage_2",@"icon_unpage_3"]];
-    [_pageView setOnPageImages:@[@"icon_page_0",@"icon_page_1",@"icon_page_2",@"icon_page_3"]];
-    [_pageView setNumberPages:4];
-    [_pageView setDelegate:self];
-    [self.view addSubview:_pageView];
-    
-    [self.contentScrollView setContentSize:CGSizeMake(self.contentScrollView.jk_width, _pageView.numberPages*self.contentScrollView.jk_height)];
     
     _customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
     _optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
     _offerOrderVC = [[IPCPayOrderOfferOrderViewController alloc]initWithNibName:@"IPCPayOrderOfferOrderViewController" bundle:nil];
     _cashVC = [[IPCPayOrderPayCashViewController alloc]initWithNibName:@"IPCPayOrderPayCashViewController" bundle:nil];
-    [self insertScrollSubView:@[_customerVC,_optometryVC,_offerOrderVC,_cashVC]];
+    [self.viewControllers addObjectsFromArray:@[_customerVC,_optometryVC,_offerOrderVC,_cashVC]];
+    
+    [self addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    [self setCurrentPage:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -66,28 +65,41 @@
     [self.viewMode queryIntegralRule];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (NSMutableArray<UIViewController *> *)viewControllers
 {
-    [super viewWillDisappear:animated];
-    [[IPCTextFiledControl instance] resignTextField];
+    if (!_viewControllers) {
+        _viewControllers = [[NSMutableArray alloc]init];
+    }
+    return _viewControllers;
 }
 
-#pragma mark //Set UI
-- (void)insertScrollSubView:(NSArray<UIViewController *> *)subViews
+- (void)setCurrentPage:(NSInteger)currentPage
 {
-    __block CGFloat left = self.pageView.jk_right;
-    __block CGFloat width = self.contentScrollView.jk_width - self.pageView.jk_right;
-    __block CGFloat height = self.contentScrollView.jk_height;
-    
-    __weak typeof(self) weakSelf = self;
-    
-    [subViews enumerateObjectsUsingBlock:^(UIViewController * _Nonnull controller, NSUInteger idx, BOOL * _Nonnull stop) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf addChildViewController:controller];
-        [controller.view setFrame:CGRectMake(left, idx*height, width, height)];
-        [strongSelf.contentScrollView addSubview:controller.view];
-        [controller didMoveToParentViewController:strongSelf];
-    }];
+    if (currentPage >= 0 && currentPage <= 3 && currentPage != _currentPage && currentPage != NSNotFound)
+    {
+        [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
+        UIViewController * currentViewController = self.viewControllers[currentPage];
+        [self addChildViewController:currentViewController];
+        [currentViewController.view setFrame:self.contentView.bounds];
+        [self.contentView addSubview:currentViewController.view];
+        [currentViewController didMoveToParentViewController:self];
+        
+        if (currentPage != _currentPage && _currentPage != NSNotFound) {
+            UIViewController * preViewController = self.viewControllers[_currentPage];
+            [preViewController.view removeFromSuperview];
+            [preViewController removeFromParentViewController];
+        }
+        _currentPage = currentPage;
+    }
+}
+
+#pragma mark //KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentPage"]) {
+        [self reload];
+    }
 }
 
 #pragma mark //Request Methods
@@ -122,7 +134,7 @@
 ///收银
 - (IBAction)payCashAction:(id)sender
 {
-    if ([[IPCPayOrderManager sharedManager] isCanPayOrder]) {
+    if ([[IPCPayOrderManager sharedManager] isCanPayOrder] && [self.cashVC isEndPayRecord]) {
         [self offerOrder:NO];
     }
 }
@@ -132,9 +144,8 @@
     if (![IPCPayOrderManager sharedManager].currentCustomerId) {
         [IPCCommonUI showError:@"请先选择客户信息!"];
     }else{
-        [self.pageView setCurrentPage:self.pageView.currentPage+1];
-        [self reloadBottomStatus];
-        [self.contentScrollView setContentOffset:CGPointMake(0, self.pageView.currentPage*self.contentScrollView.jk_height)];
+        NSInteger nextPage = _currentPage + 1;
+        [self setCurrentPage:nextPage];
     }
 }
 
@@ -160,38 +171,40 @@
 
 - (void)clearAllPayInfo
 {
-    [self.pageView setCurrentPage:0];
-    [self.contentScrollView setContentOffset:CGPointZero];
+    [self setCurrentPage:0];
     [[IPCPayOrderManager sharedManager] resetData];
-    [self.customerVC updateUI];
-    [self reloadBottomStatus];
 }
 
-#pragma mark //IPCPayorderScrollPageViewDelegate
-- (void)changePageIndex:(NSInteger)index
+
+- (IBAction)changePageIndex:(UIButton *)sender
 {
-    [self reloadBottomStatus];
-    [self.contentScrollView setContentOffset:CGPointMake(0, index*self.contentScrollView.jk_height)];
+    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+        [IPCCommonUI showError:@"请先选择客户信息!"];
+    }else{
+        [self setCurrentPage:sender.tag];
+    }
 }
 
-- (void)reloadBottomStatus
+#pragma mark //Reload Methods
+- (void)reload
 {
-    [[IPCTextFiledControl instance] resignTextField];
+    [self.leftButtonView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UIButton class]]) {
+            UIButton * button = (UIButton *)obj;
+            if (button.tag == _currentPage) {
+                [button setSelected:YES];
+            }else{
+                [button setSelected:NO];
+            }
+        }
+    }];
     
-    if (self.pageView.currentPage == 3) {
+    if (_currentPage == 3) {
         [self.nextStepButton setHidden:YES];
         [self.saveButton setHidden:NO];
     }else{
         [self.nextStepButton setHidden:NO];
         [self.saveButton setHidden:YES];
-    }
-    
-    if (self.pageView.currentPage == 1) {
-        [self.optometryVC reload];
-    }else if (self.pageView.currentPage == 2){
-        [self.offerOrderVC updateUI];
-    } else if (self.pageView.currentPage == 3){
-        [self.cashVC reload];
     }
 }
 

@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lYK-U5-8BF">
-                        <rect key="frame" x="28" y="29.5" width="80" height="20"/>
+                        <rect key="frame" x="18" y="29.5" width="80" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="WM5-vh-we4"/>
                             <constraint firstAttribute="width" constant="80" id="mKX-gN-jKZ"/>
@@ -30,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VuV-S8-QcK">
-                        <rect key="frame" x="128" y="29.5" width="90" height="20"/>
+                        <rect key="frame" x="118" y="29.5" width="90" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="E5P-Yf-3e9"/>
                             <constraint firstAttribute="height" constant="20" id="JXc-vs-iXt"/>
@@ -61,7 +61,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s63-3j-P7x">
-                        <rect key="frame" x="218" y="30.5" width="87" height="20"/>
+                        <rect key="frame" x="208" y="30.5" width="97" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="OYE-iK-zU3"/>
                         </constraints>
@@ -73,7 +73,7 @@
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="IV3-ZB-10d" secondAttribute="trailing" id="0nh-6O-zqU"/>
                     <constraint firstItem="s63-3j-P7x" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="17d-0s-RxZ"/>
-                    <constraint firstItem="lYK-U5-8BF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="1gh-WT-UTZ"/>
+                    <constraint firstItem="lYK-U5-8BF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="1gh-WT-UTZ"/>
                     <constraint firstItem="lYK-U5-8BF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="BTz-Bb-8ep"/>
                     <constraint firstItem="xIu-6E-BkU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="PeG-Ro-V0Z"/>
                     <constraint firstItem="IV3-ZB-10d" firstAttribute="leading" secondItem="xIu-6E-BkU" secondAttribute="trailing" id="Qzc-lB-5Ha"/>

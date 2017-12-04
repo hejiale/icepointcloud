@@ -12,7 +12,7 @@
 @interface IPCInsertNewOptometryView()<UITextFieldDelegate,UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView  * inputHeadView;
-@property (weak, nonatomic) IBOutlet UIView          * inputInfoView;
+@property (weak, nonatomic) IBOutlet UIView  * inputInfoView;
 @property (weak, nonatomic) IBOutlet UIView * inputMemoView;
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
 @property (weak, nonatomic) IBOutlet UITextField *employeeTextField;
@@ -32,19 +32,16 @@
 @property (weak, nonatomic) IBOutlet UITextField *rightDistanceTextField;
 @property (weak, nonatomic) IBOutlet UITextView *memoTextField;
 
-@property (copy, nonatomic) void(^CompleteBlock)();
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
 
 @end
 
 @implementation IPCInsertNewOptometryView
 
-- (instancetype)initWithFrame:(CGRect)frame Complete:(void(^)())complete
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.CompleteBlock = complete;
-        
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCInsertNewOptometryView" owner:self];
         [self addSubview:view];
         
@@ -99,11 +96,8 @@
                                                      SuccessBlock:^(id responseValue)
      {
          [IPCCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
+         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCCurrentCustomer sharedManager].currentOpometry.optometryID;
          [self removeFromSuperview];
-         
-         if (self.CompleteBlock) {
-             self.CompleteBlock();
-         }
      } FailureBlock:^(NSError *error) {
          
      }];
@@ -128,22 +122,22 @@
 
 #pragma mark //Clicked Events
 - (IBAction)rightInputAction:(id)sender {
-    self.insertOptometry.sphRight = self.insertOptometry.sphLeft;
-    self.insertOptometry.cylRight   = self.insertOptometry.cylLeft;
-    self.insertOptometry.axisRight = self.insertOptometry.axisLeft;
-    self.insertOptometry.addRight  = self.insertOptometry.addLeft;
-    self.insertOptometry.correctedVisionRight = self.insertOptometry.correctedVisionLeft;
-    self.insertOptometry.distanceRight = self.insertOptometry.distanceLeft;
-    [self updateInsertOptometry];
-}
-
-- (IBAction)leftInputAction:(id)sender {
     self.insertOptometry.sphLeft = self.insertOptometry.sphRight;
     self.insertOptometry.cylLeft   = self.insertOptometry.cylRight;
     self.insertOptometry.axisLeft = self.insertOptometry.axisRight;
     self.insertOptometry.addLeft  = self.insertOptometry.addRight;
     self.insertOptometry.correctedVisionLeft = self.insertOptometry.correctedVisionRight;
     self.insertOptometry.distanceLeft = self.insertOptometry.distanceRight;
+    [self updateInsertOptometry];
+}
+
+- (IBAction)leftInputAction:(id)sender {
+    self.insertOptometry.sphRight = self.insertOptometry.sphLeft;
+    self.insertOptometry.cylRight   = self.insertOptometry.cylLeft;
+    self.insertOptometry.axisRight = self.insertOptometry.axisLeft;
+    self.insertOptometry.addRight  = self.insertOptometry.addLeft;
+    self.insertOptometry.correctedVisionRight = self.insertOptometry.correctedVisionLeft;
+    self.insertOptometry.distanceRight = self.insertOptometry.distanceLeft;
     [self updateInsertOptometry];
 }
 
@@ -241,40 +235,40 @@
     
     switch (textField.tag) {
         case 0:
-            self.insertOptometry.sphLeft = textField.text;
-            break;
-        case 1:
             self.insertOptometry.sphRight = textField.text;
             break;
+        case 1:
+            self.insertOptometry.sphLeft = textField.text;
+            break;
         case 2:
-            self.insertOptometry.cylLeft =textField.text;
+            self.insertOptometry.cylRight =textField.text;
             break;
         case 3:
-            self.insertOptometry.cylRight = textField.text;
+            self.insertOptometry.cylLeft = textField.text;
             break;
         case 4:
-            self.insertOptometry.axisLeft =textField.text;
+            self.insertOptometry.axisRight =textField.text;
             break;
         case 5:
-            self.insertOptometry.axisRight = textField.text;
+            self.insertOptometry.axisLeft = textField.text;
             break;
         case 6:
-            self.insertOptometry.addLeft = textField.text;
-            break;
-        case 7:
             self.insertOptometry.addRight = textField.text;
             break;
-        case 8:
-            self.insertOptometry.correctedVisionLeft = textField.text;
+        case 7:
+            self.insertOptometry.addLeft = textField.text;
             break;
-        case 9:
+        case 8:
             self.insertOptometry.correctedVisionRight = textField.text;
             break;
+        case 9:
+            self.insertOptometry.correctedVisionLeft = textField.text;
+            break;
         case 10:
-            self.insertOptometry.distanceLeft = textField.text;
+            self.insertOptometry.distanceRight = textField.text;
             break;
         case 11:
-            self.insertOptometry.distanceRight = textField.text;
+            self.insertOptometry.distanceLeft = textField.text;
             break;
         default:
             break;

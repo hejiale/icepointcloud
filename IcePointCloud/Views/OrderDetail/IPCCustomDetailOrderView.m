@@ -96,7 +96,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (IBAction)dismissViewAction:(id)sender {
     [[IPCCustomerOrderDetail instance] clearData];
-    [[IPCPayOrderManager sharedManager] resetData];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     
      __weak typeof(self) weakSelf = self;

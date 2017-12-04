@@ -41,6 +41,8 @@
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCShowOptometryInfoView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
+        
+        [self updateOptometryInfo];
     }
     return self;
 }

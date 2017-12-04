@@ -121,12 +121,19 @@
 
 + (NSString *)formatNumber:(double)number Location:(NSInteger)location
 {
-    if (number != 0) {
+    if (number != 0 && !isnan(number) && !isinf(number)) {
         NSString * numberStr = [NSString stringWithFormat:@"%.9f",number];
         NSRange rang = [numberStr rangeOfString:@"."];
         return [numberStr substringToIndex:rang.location + location];
     }
     return @"0.00";
+}
+
++ (double)floorNumber:(double)number
+{
+    double floor = (number * 100)/100;
+    NSString * floorStr = [NSString stringWithFormat:@"%.2f",floor];
+    return  [floorStr doubleValue];
 }
 
 @end

@@ -13,22 +13,19 @@
 
 @interface IPCPayOrderOptometryViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *infoContentView;
 @property (strong, nonatomic) IPCShowOptometryInfoView * showOptometryView;
 
 @end
 
 @implementation IPCPayOrderOptometryViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    [self reload];
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        [[IPCPayOrderManager sharedManager] addObserver:self forKeyPath:@"currentOptometryId" options:NSKeyValueObservingOptionNew context:NULL];
+    }
+    return self;
 }
 
 #pragma mark //Set UI
@@ -36,7 +33,7 @@
 {
     if (!_showOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _showOptometryView = [[IPCShowOptometryInfoView alloc]initWithFrame:CGRectMake(20, 20, self.infoContentView.jk_width-40, self.infoContentView.jk_height-40) ChooseBlock:^{
+        _showOptometryView = [[IPCShowOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-10) ChooseBlock:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf pushToManagerOptometryViewController];
         }];
@@ -47,28 +44,24 @@
 
 - (void)loadShowOptometryView
 {
-    [self.infoContentView setHidden:NO];
-    [self.infoContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.infoContentView addSubview:self.showOptometryView];
+    [self.showOptometryView removeFromSuperview];
+    self.showOptometryView = nil;
+    [self.view addSubview:self.showOptometryView];
 }
 
 #pragma mark //Clicked Events
 - (void)reload
 {
-    if ([IPCCurrentCustomer sharedManager].currentOpometry) {
+    if ([[IPCPayOrderManager sharedManager].currentOptometryId integerValue] > 0) {
         [self loadShowOptometryView];
-        [self.showOptometryView updateOptometryInfo];
     }else{
-        [self.infoContentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-        [self.infoContentView setHidden:YES];
+        [self.showOptometryView removeFromSuperview];
     }
 }
 
 - (IBAction)editOptometryAction:(id)sender {
-    IPCInsertNewOptometryView * optometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:self.view.superview.superview.bounds Complete:^{
-        [self reload];
-    }];
-    [self.view.superview.superview addSubview:optometryView];
+    IPCInsertNewOptometryView * optometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds];
+    [[IPCCommonUI currentView] addSubview:optometryView];
 }
 
 
@@ -78,6 +71,13 @@
     [self.navigationController pushViewController:optometryVC animated:YES];
 }
 
+#pragma mark //KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentOptometryId"]) {
+        [self reload];
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

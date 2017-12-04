@@ -23,6 +23,7 @@
 @property (copy, nonatomic, readwrite) NSString * photo_url;
 @property (copy, nonatomic, readwrite) NSString * customerName;
 @property (copy, nonatomic, readwrite) NSString * customerID;
+@property (copy, nonatomic, readwrite) NSString * currentOptometryId;
 @property (copy, nonatomic, readwrite) NSString * customerPhone;
 @property (copy, nonatomic, readwrite) NSString * integral;
 @property (copy, nonatomic, readwrite) NSString * memberLevel;

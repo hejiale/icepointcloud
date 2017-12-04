@@ -27,7 +27,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self.glassesImgView addBorder:3 Width:0.5 Color:nil];
+
     [self.addButton setLargeEdgeWithTop:5 right:5 bottom:5 left:5];
     [self.reduceButton setLargeEdgeWithTop:5 right:5 bottom:5 left:5];
 }

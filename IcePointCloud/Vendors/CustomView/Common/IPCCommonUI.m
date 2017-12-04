@@ -158,4 +158,18 @@
     return nil;
 }
 
++ (UIView *)currentView
+{
+    UIViewController * rootNavigation = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootNavigation isKindOfClass:[UINavigationController class]]) {
+        UINavigationController * rootNav = (UINavigationController *)rootNavigation;
+        UIViewController * rootVC = rootNav.viewControllers[0];
+        if ([rootVC isKindOfClass:[IPCRootViewController class]]) {
+            IPCRootViewController * mainRootVC = (IPCRootViewController *)rootVC;
+            return mainRootVC.selectedViewController.view;
+        }
+    }
+    return nil;
+}
+
 @end

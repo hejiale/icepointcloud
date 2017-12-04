@@ -31,7 +31,7 @@
         [self.birthdayLabel setText:_currentCustomer.birthday];
         [self.emailLabel setText:_currentCustomer.email];
         [self.memoLabel setText:_currentCustomer.remark];
-        [self.genderLabel setText:[IPCCommon formatGender:_currentCustomer.contactorGengerString]];
+        [self.genderLabel setText:[IPCCommon formatGender:_currentCustomer.gender]];
         [self.handlersLabel setText:_currentCustomer.empName];
         [self.memberNumLabel setText:_currentCustomer.memberId];
         [self.memberLevlLabel setText:_currentCustomer.memberLevel];

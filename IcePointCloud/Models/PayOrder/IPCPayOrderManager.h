@@ -15,6 +15,8 @@
 + (IPCPayOrderManager *)sharedManager;
 
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;//当前客户Id
+@property (copy, nonatomic, readwrite) NSString * currentOptometryId;//当前客户验光单Id
+
 @property (nonatomic, assign, readwrite) BOOL    isPayOrderStatus;// 设置订单付款状态
 
 @property (nonatomic, assign, readwrite) double   payAmount;//合计金额

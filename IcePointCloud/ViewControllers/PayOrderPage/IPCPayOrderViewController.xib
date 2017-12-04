@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +14,8 @@
             <connections>
                 <outlet property="bottomView" destination="L70-zW-7W1" id="uT8-tP-stw"/>
                 <outlet property="cancelButton" destination="Cu8-sK-Lh2" id="5i9-1R-Gjk"/>
-                <outlet property="contentScrollView" destination="kgY-7F-fDB" id="6GV-Lh-lxw"/>
+                <outlet property="contentView" destination="dGa-FS-ijA" id="fyH-ve-Vc4"/>
+                <outlet property="leftButtonView" destination="tyA-uQ-qgb" id="yFV-aY-SfW"/>
                 <outlet property="nextStepButton" destination="GUo-wl-t5L" id="VM4-hz-sSf"/>
                 <outlet property="saveButton" destination="C46-IC-KRa" id="wZz-7c-FVD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -93,22 +95,91 @@
                         <constraint firstItem="sDP-1h-qRU" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="ydQ-dg-Ov3"/>
                     </constraints>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgY-7F-fDB">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wb3-c3-d8X">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="654"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyA-uQ-qgb">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="654"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EuY-Yz-15Q">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="163.5"/>
+                                    <state key="normal" image="icon_unpage_0"/>
+                                    <state key="selected" image="icon_page_0"/>
+                                    <connections>
+                                        <action selector="changePageIndex:" destination="-1" eventType="touchUpInside" id="KYc-jO-8iZ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvT-mK-IC0">
+                                    <rect key="frame" x="0.0" y="163.5" width="100" height="163.5"/>
+                                    <state key="normal" image="icon_unpage_1"/>
+                                    <state key="selected" image="icon_page_1"/>
+                                    <connections>
+                                        <action selector="changePageIndex:" destination="-1" eventType="touchUpInside" id="1xf-Kd-DJR"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Pn-X6-LRi">
+                                    <rect key="frame" x="0.0" y="327" width="100" height="163.5"/>
+                                    <state key="normal" image="icon_unpage_2"/>
+                                    <state key="selected" image="icon_page_2"/>
+                                    <connections>
+                                        <action selector="changePageIndex:" destination="-1" eventType="touchUpInside" id="NAR-4E-ZrO"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Of7-ds-7Bl">
+                                    <rect key="frame" x="0.0" y="490.5" width="100" height="163.5"/>
+                                    <state key="normal" image="icon_unpage_3"/>
+                                    <state key="selected" image="icon_page_3"/>
+                                    <connections>
+                                        <action selector="changePageIndex:" destination="-1" eventType="touchUpInside" id="5t8-y1-wYF"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="9Pn-X6-LRi" secondAttribute="bottom" multiplier="4/3" id="0ZW-gf-2Is"/>
+                                <constraint firstItem="9Pn-X6-LRi" firstAttribute="top" secondItem="fvT-mK-IC0" secondAttribute="bottom" id="KHo-cE-N7Y"/>
+                                <constraint firstAttribute="width" constant="100" id="NwO-af-MfG"/>
+                                <constraint firstItem="Of7-ds-7Bl" firstAttribute="leading" secondItem="tyA-uQ-qgb" secondAttribute="leading" id="P9c-Iq-sb9"/>
+                                <constraint firstAttribute="trailing" secondItem="EuY-Yz-15Q" secondAttribute="trailing" id="QIl-69-dia"/>
+                                <constraint firstItem="EuY-Yz-15Q" firstAttribute="leading" secondItem="tyA-uQ-qgb" secondAttribute="leading" id="Ulx-8d-LQh"/>
+                                <constraint firstItem="fvT-mK-IC0" firstAttribute="leading" secondItem="tyA-uQ-qgb" secondAttribute="leading" id="Unx-3x-6he"/>
+                                <constraint firstAttribute="bottom" secondItem="EuY-Yz-15Q" secondAttribute="bottom" multiplier="4" id="b0J-yn-c0m"/>
+                                <constraint firstItem="9Pn-X6-LRi" firstAttribute="leading" secondItem="tyA-uQ-qgb" secondAttribute="leading" id="hUQ-cg-tyD"/>
+                                <constraint firstItem="fvT-mK-IC0" firstAttribute="top" secondItem="EuY-Yz-15Q" secondAttribute="bottom" id="lha-nI-7jX"/>
+                                <constraint firstAttribute="bottom" secondItem="fvT-mK-IC0" secondAttribute="bottom" multiplier="2" id="mV6-EU-ksg"/>
+                                <constraint firstAttribute="trailing" secondItem="Of7-ds-7Bl" secondAttribute="trailing" id="ojO-7n-6Xf"/>
+                                <constraint firstAttribute="trailing" secondItem="9Pn-X6-LRi" secondAttribute="trailing" id="srR-Zl-kd3"/>
+                                <constraint firstItem="EuY-Yz-15Q" firstAttribute="top" secondItem="tyA-uQ-qgb" secondAttribute="top" id="tBp-0h-LYn"/>
+                                <constraint firstItem="Of7-ds-7Bl" firstAttribute="top" secondItem="9Pn-X6-LRi" secondAttribute="bottom" id="uc4-W8-nvD"/>
+                                <constraint firstAttribute="bottom" secondItem="Of7-ds-7Bl" secondAttribute="bottom" id="wmm-De-33M"/>
+                                <constraint firstAttribute="trailing" secondItem="fvT-mK-IC0" secondAttribute="trailing" id="zx6-01-f5j"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGa-FS-ijA">
+                            <rect key="frame" x="100" y="0.0" width="924" height="654"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="79L-zC-k4R"/>
-                    </connections>
-                </scrollView>
+                    <constraints>
+                        <constraint firstItem="dGa-FS-ijA" firstAttribute="leading" secondItem="tyA-uQ-qgb" secondAttribute="trailing" id="4tk-oP-X5p"/>
+                        <constraint firstAttribute="trailing" secondItem="dGa-FS-ijA" secondAttribute="trailing" id="IEA-3C-s5z"/>
+                        <constraint firstItem="dGa-FS-ijA" firstAttribute="top" secondItem="Wb3-c3-d8X" secondAttribute="top" id="NoI-M6-hL8"/>
+                        <constraint firstAttribute="bottom" secondItem="dGa-FS-ijA" secondAttribute="bottom" id="Rjk-1E-Bv5"/>
+                        <constraint firstAttribute="bottom" secondItem="tyA-uQ-qgb" secondAttribute="bottom" id="Vjc-Ex-vqH"/>
+                        <constraint firstItem="tyA-uQ-qgb" firstAttribute="leading" secondItem="Wb3-c3-d8X" secondAttribute="leading" id="k2w-el-Asj"/>
+                        <constraint firstItem="tyA-uQ-qgb" firstAttribute="top" secondItem="Wb3-c3-d8X" secondAttribute="top" id="uh2-XC-bPt"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="L70-zW-7W1" firstAttribute="top" secondItem="kgY-7F-fDB" secondAttribute="bottom" id="4jK-rQ-tsR"/>
-                <constraint firstAttribute="trailing" secondItem="kgY-7F-fDB" secondAttribute="trailing" id="Ave-bU-Gii"/>
+                <constraint firstItem="Wb3-c3-d8X" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2f6-wi-ZG0"/>
+                <constraint firstAttribute="trailing" secondItem="Wb3-c3-d8X" secondAttribute="trailing" id="Wyt-a1-tq6"/>
                 <constraint firstItem="L70-zW-7W1" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YTi-IB-nT2"/>
-                <constraint firstItem="kgY-7F-fDB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZAz-eb-MAP"/>
+                <constraint firstItem="Wb3-c3-d8X" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="eaj-VJ-CnR"/>
                 <constraint firstAttribute="bottom" secondItem="L70-zW-7W1" secondAttribute="bottom" id="ehx-hl-80J"/>
-                <constraint firstItem="kgY-7F-fDB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nAh-MO-zBI"/>
+                <constraint firstItem="L70-zW-7W1" firstAttribute="top" secondItem="Wb3-c3-d8X" secondAttribute="bottom" id="rXH-4O-NmY"/>
                 <constraint firstAttribute="trailing" secondItem="L70-zW-7W1" secondAttribute="trailing" id="wen-ta-5gO"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -121,6 +192,14 @@
         <image name="icon_AreCancelOrder" width="161" height="51"/>
         <image name="icon_cancelOrder" width="160" height="51"/>
         <image name="icon_nextStep" width="154" height="50"/>
+        <image name="icon_page_0" width="48" height="48"/>
+        <image name="icon_page_1" width="48" height="48"/>
+        <image name="icon_page_2" width="48" height="48"/>
+        <image name="icon_page_3" width="48" height="48"/>
         <image name="icon_payCash" width="158" height="51"/>
+        <image name="icon_unpage_0" width="48" height="48"/>
+        <image name="icon_unpage_1" width="48" height="48"/>
+        <image name="icon_unpage_2" width="48" height="48"/>
+        <image name="icon_unpage_3" width="48" height="48"/>
     </resources>
 </document>

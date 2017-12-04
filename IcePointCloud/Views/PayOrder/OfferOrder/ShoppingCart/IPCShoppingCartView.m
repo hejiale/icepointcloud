@@ -116,6 +116,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 #pragma mark //Clicked Events
 - (IBAction)onEditAction:(UIButton *)sender
 {
+    [[IPCTextFiledControl instance] clearPreTextField];
     isEditStatus = !sender.selected;
     [self updateBottomStatus:isEditStatus];
     [self updateCartUI:NO];

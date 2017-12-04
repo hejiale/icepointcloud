@@ -56,4 +56,6 @@
 
 + (NSString *)formatNumber:(double)number Location:(NSInteger)location;
 
++ (double)floorNumber:(double)number;
+
 @end

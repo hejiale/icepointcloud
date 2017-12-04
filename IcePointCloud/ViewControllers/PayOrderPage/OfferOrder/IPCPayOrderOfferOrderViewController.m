@@ -9,7 +9,6 @@
 #import "IPCPayOrderOfferOrderViewController.h"
 #import "IPCShoppingCartView.h"
 #import "IPCPayOrderOfferOrderInfoView.h"
-#import "IPCCustomKeyboard.h"
 
 @interface IPCPayOrderOfferOrderViewController ()
 
@@ -34,15 +33,21 @@
 {
     [super viewWillAppear:animated];
     
-    [self.shopCartView reload];
     [self updateUI];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[IPCTextFiledControl instance] clearPreTextField];
 }
 
 #pragma mark //Set UI
 - (IPCPayOrderOfferOrderInfoView *)offerInfoView{
     __weak typeof(self) weakSelf = self;
     if (!_offerInfoView) {
-        _offerInfoView = [[IPCPayOrderOfferOrderInfoView alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, 10, 428, 290)
+        _offerInfoView = [[IPCPayOrderOfferOrderInfoView alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, 10, 408, 290)
                                                                   EndEditing:^{
                                                                       __strong typeof(weakSelf) strongSelf = weakSelf;
                                                                       [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
@@ -70,7 +75,7 @@
 - (IPCCustomKeyboard *)keyboard
 {
     if (!_keyboard) {
-        _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, self.offerInfoView.jk_bottom+10, 428, 335)];
+        _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, self.offerInfoView.jk_bottom+10, 408, 335)];
     }
     return _keyboard;
 }

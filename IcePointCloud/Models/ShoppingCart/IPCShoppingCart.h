@@ -65,10 +65,10 @@
  */
 - (void)postChangedNotification;
 
+
+/**
+    修改商品单价
+ */
 - (void)updateAllCartUnitPrice;
-
-- (double)allGlassesJudgePrice;
-
-- (IPCShoppingCartItem *)lastJudgeCartItem;
 
 @end

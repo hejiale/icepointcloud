@@ -19,11 +19,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="944" height="654"/>
+            <rect key="frame" x="0.0" y="0.0" width="924" height="654"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zd-bh-1Tx">
-                    <rect key="frame" x="0.0" y="594" width="408" height="40"/>
+                    <rect key="frame" x="0.0" y="604" width="408" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="408" id="2Y6-K7-PdK"/>
@@ -37,10 +37,10 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma2-kN-X8G">
-                    <rect key="frame" x="0.0" y="10" width="408" height="624"/>
+                    <rect key="frame" x="0.0" y="10" width="408" height="634"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeQ-G2-T1X">
-                            <rect key="frame" x="151.5" y="249.5" width="105" height="125"/>
+                            <rect key="frame" x="151.5" y="254.5" width="105" height="125"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="125" id="eie-S3-Po2"/>
                                 <constraint firstAttribute="width" constant="105" id="gAt-hJ-8tt"/>
@@ -59,7 +59,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wk3-3g-g51">
-                    <rect key="frame" x="428" y="10" width="496" height="50"/>
+                    <rect key="frame" x="418" y="10" width="496" height="50"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="payOrder_searchCustomer" translatesAutoresizingMaskIntoConstraints="NO" id="HWQ-Mz-6jk">
                             <rect key="frame" x="0.0" y="5" width="40" height="40"/>
@@ -90,7 +90,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="apX-7c-Lcn">
-                    <rect key="frame" x="428" y="80" width="496" height="554"/>
+                    <rect key="frame" x="418" y="70" width="496" height="574"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6XQ-5I-URw">
                         <size key="itemSize" width="50" height="50"/>
@@ -106,18 +106,18 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="apX-7c-Lcn" firstAttribute="top" secondItem="Wk3-3g-g51" secondAttribute="bottom" constant="20" id="2o7-dC-Gtn"/>
-                <constraint firstAttribute="trailing" secondItem="apX-7c-Lcn" secondAttribute="trailing" constant="20" id="7Gg-j0-aXn"/>
-                <constraint firstAttribute="bottom" secondItem="2Zd-bh-1Tx" secondAttribute="bottom" constant="20" id="EbR-hz-1Hh"/>
-                <constraint firstAttribute="bottom" secondItem="Ma2-kN-X8G" secondAttribute="bottom" constant="20" id="FyQ-52-bLI"/>
-                <constraint firstAttribute="trailing" secondItem="Wk3-3g-g51" secondAttribute="trailing" constant="20" id="JQE-Af-cRw"/>
-                <constraint firstAttribute="bottom" secondItem="apX-7c-Lcn" secondAttribute="bottom" constant="20" id="JhH-5A-3Zg"/>
+                <constraint firstItem="apX-7c-Lcn" firstAttribute="top" secondItem="Wk3-3g-g51" secondAttribute="bottom" constant="10" id="2o7-dC-Gtn"/>
+                <constraint firstAttribute="trailing" secondItem="apX-7c-Lcn" secondAttribute="trailing" constant="10" id="7Gg-j0-aXn"/>
+                <constraint firstAttribute="bottom" secondItem="2Zd-bh-1Tx" secondAttribute="bottom" constant="10" id="EbR-hz-1Hh"/>
+                <constraint firstAttribute="bottom" secondItem="Ma2-kN-X8G" secondAttribute="bottom" constant="10" id="FyQ-52-bLI"/>
+                <constraint firstAttribute="trailing" secondItem="Wk3-3g-g51" secondAttribute="trailing" constant="10" id="JQE-Af-cRw"/>
+                <constraint firstAttribute="bottom" secondItem="apX-7c-Lcn" secondAttribute="bottom" constant="10" id="JhH-5A-3Zg"/>
                 <constraint firstItem="2Zd-bh-1Tx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LBf-to-CUx"/>
                 <constraint firstItem="Ma2-kN-X8G" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WTS-Kk-5MJ"/>
-                <constraint firstItem="Wk3-3g-g51" firstAttribute="leading" secondItem="Ma2-kN-X8G" secondAttribute="trailing" constant="20" id="eCV-A9-Lpf"/>
+                <constraint firstItem="Wk3-3g-g51" firstAttribute="leading" secondItem="Ma2-kN-X8G" secondAttribute="trailing" constant="10" id="eCV-A9-Lpf"/>
                 <constraint firstItem="Wk3-3g-g51" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="qNl-6R-XzD"/>
                 <constraint firstItem="Ma2-kN-X8G" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="sgd-Fh-g8j"/>
-                <constraint firstItem="apX-7c-Lcn" firstAttribute="leading" secondItem="Ma2-kN-X8G" secondAttribute="trailing" constant="20" id="umI-uN-5FU"/>
+                <constraint firstItem="apX-7c-Lcn" firstAttribute="leading" secondItem="Ma2-kN-X8G" secondAttribute="trailing" constant="10" id="umI-uN-5FU"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

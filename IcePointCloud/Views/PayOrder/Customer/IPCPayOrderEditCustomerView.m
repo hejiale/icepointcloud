@@ -63,8 +63,10 @@
     
     if ([[IPCCurrentCustomer sharedManager].currentCustomer.gender isEqualToString:@"MALE"]) {
         [self.maleButton setSelected:YES];
+        [self.femaleButton setSelected:NO];
     }else if ([[IPCCurrentCustomer sharedManager].currentCustomer.gender isEqualToString:@"FEMALE"]){
         [self.femaleButton setSelected:YES];
+        [self.maleButton setSelected:NO];
     }
 }
 

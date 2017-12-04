@@ -9,7 +9,6 @@
 #import "IPCPayOrderPayCashViewController.h"
 #import "IPCPayOrderEditPayCashRecordCell.h"
 #import "IPCPayOrderPayCashRecordCell.h"
-#import "IPCCustomKeyboard.h"
 
 static const NSString * recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
 static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
@@ -19,11 +18,7 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 @property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *payRecordTableView;
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
-@property (weak, nonatomic) IBOutlet UIButton *walletButton;
 @property (weak, nonatomic) IBOutlet UILabel *remainPayAmountLabel;
-
-
-
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 @property (nonatomic, strong) IPCPayRecord * insertRecord;
 
@@ -43,15 +38,23 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self reloadRemainAmount];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[IPCTextFiledControl instance] clearPreTextField];
 }
 
 #pragma mark //Set UI
 - (IPCCustomKeyboard *)keyboard
 {
-    if (!_keyboard) {
-        _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.payRecordTableView.jk_right+10, self.payTypeContentView.jk_bottom+10, 408, 367)];
-    }
+    if (!_keyboard)
+        _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.payRecordTableView.jk_right+10, self.payTypeContentView.jk_bottom+10, 408, 377)];
     return _keyboard;
 }
 
@@ -60,80 +63,23 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 {
     if ((sender.selected && self.insertRecord) || [[IPCPayOrderManager sharedManager] remainPayPrice] == 0)return;
     
-    if (![IPCPayOrderManager sharedManager].integralTrade && sender.tag == 4) {
+    if (![IPCPayOrderManager sharedManager].integralTrade && sender.tag == 5) {
         [IPCCommonUI showError:@"积分规则未配置"];
         return;
     }
     
-    if (sender.tag == 4 && [IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
+    if (sender.tag == 5 && [IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
-    if (sender.tag == 3 && [IPCCurrentCustomer sharedManager].currentCustomer.balance == 0) {
+    if (sender.tag == 4 && [IPCCurrentCustomer sharedManager].currentCustomer.balance == 0) {
         [IPCCommonUI showError:@"客户无可用储值余额"];
         return;
     }
     
-    [self clearAllSelected];
-    [sender setSelected:YES];
-    [self.payTypeNameLabel setText:[self payType:sender.tag]];
-    
-    self.insertRecord = [[IPCPayRecord alloc]init];
-    self.insertRecord.payTypeInfo = [self payType:sender.tag];
-    self.insertRecord.payDate = [NSDate date];
-    
+    [self clearAllSelectedAddition:sender.tag];
     [self.payRecordTableView reloadData];
-}
-
-- (void)clearAllSelected
-{
-    [self.payTypeContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            UIButton * button = (UIButton *)view;
-            [button setSelected:NO];
-        }
-    }];
-}
-
-- (NSString *)payType:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-            return @"现金";
-            break;
-        case 1:
-            return @"支付宝";
-            break;
-        case 2:
-            return @"微信";
-            break;
-        case 3:
-            return @"储值卡";
-            break;
-        case 4:
-            return @"积分";
-            break;
-        case 5:
-            return @"其他";
-            break;
-        default:
-            break;
-    }
-    return nil;
-}
-
-- (void)reload
-{
-    if ([IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0) {
-        self.insertRecord = [[IPCPayRecord alloc]init];
-        self.insertRecord.payTypeInfo = @"现金";
-        self.insertRecord.payDate = [NSDate date];
-        [self clearAllSelected];
-        [self.payTypeNameLabel setText:@"现金"];
-        [self.walletButton setSelected:YES];
-    }
-    [self reloadRemainAmount];
 }
 
 - (void)reloadRemainAmount
@@ -161,6 +107,7 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
             cell.delegate = self;
         }
         cell.payRecord = self.insertRecord;
+        
         [[cell rac_signalForSelector:@selector(cancelAddRecordAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             self.insertRecord = nil;
             [tableView reloadData];
@@ -183,18 +130,46 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 }
 
 #pragma mark //UITableViewDelegate
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
 
 #pragma mark //IPCPayOrderEditPayCashRecordCellDelegate
 - (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
 {
-    if (isInsert) {
-        self.insertRecord = nil;
-    }
+    if (isInsert)self.insertRecord = nil;
+    
     [self reloadRemainAmount];
+}
+
+#pragma mark //Common Methods
+- (void)clearAllSelectedAddition:(NSInteger)index
+{
+    [self.payTypeContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton * button = (UIButton *)view;
+            if (button.tag == index) {
+                [button setSelected:YES];
+            }else{
+                [button setSelected:NO];
+            }
+        }
+    }];
+    
+    [self.payTypeNameLabel setText:[[IPCAppManager sharedManager] payType:index]];
+    
+    self.insertRecord = [[IPCPayRecord alloc]init];
+    self.insertRecord.payTypeInfo = self.payTypeNameLabel.text;
+    self.insertRecord.payDate = [NSDate date];
+}
+
+- (BOOL)isEndPayRecord
+{
+    if (self.insertRecord) {
+        [IPCCommonUI showError:@"请确认完成添加收银记录!"];
+        return NO;
+    }
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {

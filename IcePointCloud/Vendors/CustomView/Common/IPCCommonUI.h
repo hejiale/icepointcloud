@@ -33,4 +33,6 @@
 
 + (UIView *)nearestAncestorForView:(UIView *)aView withClass:(Class)aClass;
 
++ (UIView *)currentView;
+
 @end

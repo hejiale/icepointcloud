@@ -10,6 +10,6 @@
 
 @interface IPCPayOrderPayCashViewController : UIViewController
 
-- (void)reload;
+- (BOOL)isEndPayRecord;
 
 @end

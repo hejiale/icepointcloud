@@ -36,6 +36,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self loadCollectionView];
     self.viewModel = [[IPCCustomerListViewModel alloc]init];
     [self loadData];
+    
+    [[IPCPayOrderManager sharedManager] addObserver:self forKeyPath:@"currentCustomerId" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 #pragma mark //Set UI
@@ -73,7 +75,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     __weak typeof(self) weakSelf = self;
     if (!_infoView) {
-        _infoView = [[IPCPayOrderCustomInfoView alloc]initWithFrame:CGRectMake(0, 0, self.customInfoContentView.jk_width, self.customInfoContentView.jk_height-70)];
+        _infoView = [[IPCPayOrderCustomInfoView alloc]initWithFrame:CGRectMake(0, 0, self.customInfoContentView.jk_width, self.customInfoContentView.jk_height-60)];
         [[_infoView rac_signalForSelector:@selector(editCustomerInfoAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf showEditCustomerView:YES];
@@ -84,10 +86,11 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)loadCustomerInfoView
 {
-    self.contentBottomConstraint.constant = 70;
+    self.contentBottomConstraint.constant = 60;
     [self.infoView updateCustomerInfo];
     [self.customInfoContentView addSubview:self.infoView];
     [self.customInfoContentView bringSubviewToFront:self.infoView];
+    [self.customerCollectionView reloadData];
 }
 
 #pragma mark //Refresh Methods
@@ -128,9 +131,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
          if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
              [strongSelf.refreshFooter noticeNoDataStatus];
          }else if (strongSelf.viewModel.status == IPCRefreshError){
-             if ([error code] == NSURLErrorCancelled) {
-                 
-             }else{
+             if ([error code] != NSURLErrorCancelled) {
                  [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
              }
          }
@@ -138,23 +139,27 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
      }];
 }
 
-- (void)queryCustomerDetailWithCustomerId:(NSString *)customerId
+- (void)queryCustomerDetail
 {
-    [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-    
     [IPCCommonUI show];
+    
     __weak typeof(self) weakSelf = self;
-    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
                                                         SuccessBlock:^(id responseValue)
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
+         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCCurrentCustomer sharedManager].currentOpometry.optometryID;
+         
          if ([IPCCurrentCustomer sharedManager].currentCustomer.discount) {
-             [IPCPayOrderManager sharedManager].customDiscount = (double)([IPCCurrentCustomer sharedManager].currentCustomer.discount*10);
+             [IPCPayOrderManager sharedManager].customDiscount = [IPCCurrentCustomer sharedManager].currentCustomer.discount * 10;
          }else{
              [IPCPayOrderManager sharedManager].customDiscount = 100;
          }
+         [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+         
          [strongSelf loadCustomerInfoView];
+         
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
@@ -188,20 +193,14 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)showEditCustomerView:(BOOL)isUpdate
 {
-    IPCPayOrderEditCustomerView * editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:self.view.superview.superview.bounds
+    IPCPayOrderEditCustomerView * editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
                                                                                               IsUpdate:isUpdate
                                                                                            UpdateBlock:^(NSString *customerId) {
-                                                                                               [self queryCustomerDetailWithCustomerId:customerId];
+                                                                                               [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+                                                                                               [self.refreshHeader beginRefreshing];
                                                                                            }];
-    [self.view.superview.superview addSubview:editCustomerView];
-    [self.view.superview.superview bringSubviewToFront:editCustomerView];
-}
-
-- (void)updateUI
-{
-    self.contentBottomConstraint.constant = 20;
-    [self.infoView removeFromSuperview];
-    [self loadData];
+    [[IPCCommonUI currentView] addSubview:editCustomerView];
+    [[IPCCommonUI currentView] bringSubviewToFront:editCustomerView];
 }
 
 #pragma mark //UICollectionViewDataSource
@@ -237,8 +236,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     if (self.viewModel.customerArray.count) {
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         if (customer) {
-            [self queryCustomerDetailWithCustomerId:customer.customerID];
-            [self.customerCollectionView reloadData];
+            [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
         }
     }
 }
@@ -254,6 +252,20 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     self.viewModel.searchWord = [textField.text jk_trimmingWhitespace];
     [self loadData];
+}
+
+#pragma mark //KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentCustomerId"]) {
+        if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+            self.contentBottomConstraint.constant = 20;
+            [self.infoView removeFromSuperview];
+            [self.customerCollectionView reloadData];
+        }else{
+            [self queryCustomerDetail];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {

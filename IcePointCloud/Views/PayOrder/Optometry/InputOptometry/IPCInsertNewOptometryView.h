@@ -10,6 +10,4 @@
 
 @interface IPCInsertNewOptometryView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame Complete:(void(^)())complete;
-
 @end
