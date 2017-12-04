@@ -129,7 +129,7 @@
         priceStr =  [str substringFromIndex:1];
     }
     
-    if (priceStr.length) {
+    if (priceStr.length && [IPCShoppingCart sharedCart].allGlassesCount > 0) {
         if ([textField isEqual:self.discountAmountTextField]) {
             if ([priceStr integerValue] >= 100) {
                 [IPCPayOrderManager sharedManager].discount  = 100;

@@ -39,6 +39,13 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 {
     [super viewWillAppear:animated];
     
+    ///无购物商品 收款记录
+    if ([IPCShoppingCart sharedCart].allGlassesCount > 0 && [IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0) {
+        [self clearAllSelectedAddition:0];
+    }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0){
+        [self resetAllSelectState];
+    }
+    
     [self reloadRemainAmount];
 }
 
@@ -161,6 +168,18 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     self.insertRecord = [[IPCPayRecord alloc]init];
     self.insertRecord.payTypeInfo = self.payTypeNameLabel.text;
     self.insertRecord.payDate = [NSDate date];
+}
+
+- (void)resetAllSelectState
+{
+    [self.payTypeContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([view isKindOfClass:[UIButton class]]) {
+            UIButton * button = (UIButton *)view;
+            [button setSelected:NO];
+        }
+    }];
+    [self.payTypeNameLabel setText:@""];
+    self.insertRecord = nil;
 }
 
 - (BOOL)isEndPayRecord

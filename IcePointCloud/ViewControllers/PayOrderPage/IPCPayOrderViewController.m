@@ -57,6 +57,7 @@
     [self setCurrentPage:0];
 }
 
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //Set Naviagtion Bar
