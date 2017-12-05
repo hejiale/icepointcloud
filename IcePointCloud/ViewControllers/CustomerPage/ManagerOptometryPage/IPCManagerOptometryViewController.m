@@ -69,12 +69,12 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 - (IPCInsertNewOptometryView *)editOptometryView{
     if (!_editOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _editOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:self.view.bounds CustomerId:self.customerId CompleteBlock:^(NSString * optometryId){
+        _editOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:self.view.bounds CustomerId:self.customerId CompleteBlock:^(IPCOptometryMode * optometry){
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.editOptometryView removeFromSuperview];
             strongSelf.editOptometryView = nil;
-            if (optometryId) {
-                [strongSelf setDefaultOptometryWithOptometryId:optometryId];
+            if (optometry) {
+                [strongSelf setDefaultOptometryWithOptometryId:optometry.optometryID];
             }
         }];
     }

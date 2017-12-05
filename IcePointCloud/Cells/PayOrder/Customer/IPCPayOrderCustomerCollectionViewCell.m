@@ -23,8 +23,8 @@
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
         [self.customerLevelLabel setText:_currentCustomer.memberLevel];
-        
-        if ([self.currentCustomer.customerID isEqualToString:[IPCPayOrderManager sharedManager].currentCustomerId])
+    
+        if ([_currentCustomer.customerID integerValue] == [[IPCPayOrderManager sharedManager].currentCustomerId integerValue])
         {
             [self.customerNameLabel setTextColor:COLOR_RGB_BLUE];
             [self.customerPhoneLabel setTextColor:COLOR_RGB_BLUE];

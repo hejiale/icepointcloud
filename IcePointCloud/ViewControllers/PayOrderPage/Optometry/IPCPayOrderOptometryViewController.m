@@ -20,13 +20,11 @@
 
 @implementation IPCPayOrderOptometryViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        [[IPCPayOrderManager sharedManager] addObserver:self forKeyPath:@"currentOptometryId" options:NSKeyValueObservingOptionNew context:NULL];
-    }
-    return self;
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    [self reload];
 }
 
 #pragma mark //Set UI
@@ -34,7 +32,7 @@
 {
     if (!_showOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _showOptometryView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-10) ChooseBlock:^{
+        _showOptometryView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-20) ChooseBlock:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf pushToManagerOptometryViewController];
         }];
@@ -63,11 +61,15 @@
 - (IBAction)editOptometryAction:(id)sender
 {
     __weak typeof(self) weakSelf = self;
-    self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds CustomerId:[IPCPayOrderManager sharedManager].currentCustomerId CompleteBlock:^(NSString * optometryId)
+    self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds CustomerId:[IPCPayOrderManager sharedManager].currentCustomerId CompleteBlock:^(IPCOptometryMode * optometry)
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.insertOptometryView removeFromSuperview];
         strongSelf.insertOptometryView = nil;
+        
+        [IPCPayOrderManager sharedManager].currentOptometryId = optometry.optometryID;
+        [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
+        [strongSelf reload];
     }];
     [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
 }
@@ -79,13 +81,6 @@
     [self.navigationController pushViewController:optometryVC animated:YES];
 }
 
-#pragma mark //KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentOptometryId"]) {
-        [self reload];
-    }
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

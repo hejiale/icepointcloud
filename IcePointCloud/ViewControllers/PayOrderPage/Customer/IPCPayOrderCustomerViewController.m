@@ -204,7 +204,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                  strongSelf.editCustomerView = nil;
                                  
                                  [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-                                 [strongSelf.refreshHeader beginRefreshing];
+                                 [strongSelf loadData];
                              }];
     [[IPCCommonUI currentView] addSubview:self.editCustomerView];
     [[IPCCommonUI currentView] bringSubviewToFront:self.editCustomerView];

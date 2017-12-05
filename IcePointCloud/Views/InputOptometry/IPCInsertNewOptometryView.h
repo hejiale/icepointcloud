@@ -10,6 +10,6 @@
 
 @interface IPCInsertNewOptometryView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame CustomerId:(NSString *)customerId CompleteBlock:(void(^)(NSString * optometryId))complete;
+- (instancetype)initWithFrame:(CGRect)frame CustomerId:(NSString *)customerId CompleteBlock:(void(^)(IPCOptometryMode * optometry))complete;
 
 @end

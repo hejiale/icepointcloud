@@ -105,29 +105,32 @@
 #pragma mark //Request Methods
 - (void)offerOrder:(BOOL)isPrototy
 {
-    __weak typeof(self) weakSelf = self;
     if (isPrototy) {
         [self.nextStepButton jk_showIndicator];
     }else{
         [self.saveButton jk_showIndicator];
     }
     
-    [self.viewMode saveProtyOrder:isPrototy Prototy:^
-    {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [IPCCommonUI showSuccess:@"挂单成功!"];
-        [strongSelf.nextStepButton jk_hideIndicator];
-        [strongSelf clearAllPayInfo];
+    [self.viewMode saveProtyOrder:isPrototy Prototy:^{
+        [self completePay];
     } PayCash:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [IPCCommonUI showSuccess:@"收银成功!"];
-        [strongSelf clearAllPayInfo];
-        [strongSelf.saveButton jk_hideIndicator];
+        [self completePay];
     } Error:^(IPCPayOrderError errorType) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.nextStepButton jk_hideIndicator];
-        [strongSelf.saveButton jk_hideIndicator];
+        [self failPay];
     }];
+}
+
+- (void)completePay
+{
+    [self.nextStepButton jk_hideIndicator];
+    [self.saveButton jk_hideIndicator];
+    [self clearAllPayInfo];
+}
+
+- (void)failPay
+{
+    [self.nextStepButton jk_hideIndicator];
+    [self.saveButton jk_hideIndicator];
 }
 
 #pragma mark //Clicked Events

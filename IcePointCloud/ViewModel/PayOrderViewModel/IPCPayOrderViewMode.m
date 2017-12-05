@@ -51,6 +51,8 @@
          if (!isProty) {
              [strongSelf offertOrderWithOrderId:responseValue[@"id"]];
          }else{
+             [IPCCommonUI showSuccess:@"挂单成功!"];
+             
              if (self.CompletePrototyBlock) {
                  self.CompletePrototyBlock();
              }
@@ -96,6 +98,7 @@
     __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager payCashOrderWithOrderNumber:orderNum SuccessBlock:^(id responseValue)
      {
+         [IPCCommonUI showSuccess:@"收银成功!"];
          __strong typeof(weakSelf) strongSelf = weakSelf;
          if (self.CompletePayCashBlock) {
              self.CompletePayCashBlock();

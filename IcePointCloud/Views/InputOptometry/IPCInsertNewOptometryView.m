@@ -35,13 +35,13 @@
 @property (weak, nonatomic) IBOutlet UITextView *memoTextField;
 
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
-@property (nonatomic, copy) void(^CompleteBlock)(NSString *);
+@property (nonatomic, copy) void(^CompleteBlock)(IPCOptometryMode *);
 
 @end
 
 @implementation IPCInsertNewOptometryView
 
-- (instancetype)initWithFrame:(CGRect)frame CustomerId:(NSString *)customerId CompleteBlock:(void (^)(NSString * optometryId))complete
+- (instancetype)initWithFrame:(CGRect)frame CustomerId:(NSString *)customerId CompleteBlock:(void (^)(IPCOptometryMode * optometry))complete
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -101,16 +101,8 @@
      {
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
          
-         if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
-             [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
-             [IPCPayOrderManager sharedManager].currentOptometryId = optometry.optometryID;
-             if (self.CompleteBlock) {
-                 self.CompleteBlock(nil);
-             }
-         }else{
-             if (self.CompleteBlock) {
-                 self.CompleteBlock(optometry.optometryID);
-             }
+         if (self.CompleteBlock) {
+             self.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
          if (self.CompleteBlock) {
