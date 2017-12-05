@@ -13,7 +13,6 @@
 @property (strong, nonatomic, readwrite) NSMutableArray<IPCCustomerOrderMode *> * orderList;
 
 @property (strong, nonatomic, readwrite) IPCDetailCustomer              * detailCustomer;
-@property (nonatomic, strong, readwrite) IPCCustomerAddressMode  * customerAddress;
 @property (nonatomic, strong, readwrite) IPCOptometryMode             * customerOpometry;
 
 @property (strong, nonatomic, readwrite)  NSString * customerId;

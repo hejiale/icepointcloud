@@ -14,7 +14,6 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.productContentView addSubview:self.pointImageView];
     [self.productContentView addSubview:self.suggestPriceLabel];
     [self.productContentView addSubview:self.productNameLabel];
     [self.productImageView addBorder:3 Width:0.5 Color:nil];
@@ -25,16 +24,10 @@
         make.right.equalTo(self.productContentView.mas_right).with.offset(-20);
     }];
     
-    [self.pointImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.productImageView.mas_right).with.offset(10);
         make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
-        make.width.mas_equalTo(10);
-        make.height.mas_equalTo(20);
-    }];
-    
-    [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.productImageView.mas_right).with.offset(32);
-        make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
+        make.right.equalTo(self.productContentView.mas_right).with.offset(-20);
         make.height.mas_equalTo(20);
     }];
 }
@@ -79,17 +72,6 @@
     return _productPriceLabel;
 }
 
-- (UIImageView *)pointImageView{
-    if (!_pointImageView) {
-        _pointImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-        [_pointImageView setImage:[UIImage imageNamed:@"icon_red_point"]];
-        [_pointImageView setBackgroundColor:[UIColor clearColor]];
-        _pointImageView.contentMode = UIViewContentModeScaleAspectFit;
-        [_pointImageView setHidden:YES];
-    }
-    return _pointImageView;
-}
-
 - (void)setGlasses:(IPCGlasses *)glasses{
     _glasses = glasses;
     
@@ -97,47 +79,8 @@
         [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];
-        
-        CGFloat  titleHeight = [self.productNameLabel.text boundingRectWithSize:CGSizeMake(self.productNameLabel.jk_width, 40) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:self.productNameLabel.font} context:nil].size.height;
-        self.productNameLabel.jk_height = titleHeight;
-        
-        if (glasses.integralExchange) {
-            [self.pointImageView setHidden:NO];
-            [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.productImageView.mas_right).with.offset(32);
-            }];
-            [self.suggestPriceLabel setText:[NSString stringWithFormat:@"%.f",glasses.exchangeIntegral]];
-        }else{
-            [self.pointImageView setHidden:YES];
-            [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.productImageView.mas_right).with.offset(10);
-            }];
-            [self.suggestPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.afterDiscountPrice]];
-        }
-        
-        CGFloat width = [self.suggestPriceLabel.text jk_widthWithFont:self.suggestPriceLabel.font constrainedToHeight:self.suggestPriceLabel.jk_height];
-        self.suggestPriceLabel.jk_width = width + 5;
-        
-        if ((_glasses.afterDiscountPrice < glasses.price && !_glasses.integralExchange) || _glasses.integralExchange)
-        {
-            [self.contentView addSubview:self.productPriceLabel];
-            
-            NSString * priceText = [NSString stringWithFormat:@"￥%.2f",glasses.price];
-            NSMutableAttributedString * aAttributedString = [[NSMutableAttributedString alloc] initWithString:priceText];
-            [aAttributedString addAttribute:NSStrikethroughStyleAttributeName
-                                      value:@(NSUnderlineStyleSingle|NSUnderlinePatternSolid)
-                                      range:NSMakeRange(0, priceText.length)];
-            [self.productPriceLabel setAttributedText:aAttributedString];
-            
-            width = [priceText jk_widthWithFont:self.productPriceLabel.font constrainedToHeight:20];
-            [self.productPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self.suggestPriceLabel.mas_right).with.offset(5);
-                make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
-                make.width.mas_equalTo(width);
-                make.height.mas_equalTo(20);
-            }];
-        }
-        
+        [self.suggestPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.afterDiscountPrice]];
+    
         if ([_glasses filterType] == IPCTopFilterTypeLens && _glasses.isBatch) {
             if (_glasses.sph.length && _glasses.cyl.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",_glasses.sph,_glasses.cyl]];

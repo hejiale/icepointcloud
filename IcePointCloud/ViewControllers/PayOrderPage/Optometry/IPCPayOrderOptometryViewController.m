@@ -8,12 +8,13 @@
 
 #import "IPCPayOrderOptometryViewController.h"
 #import "IPCManagerOptometryViewController.h"
-#import "IPCShowOptometryInfoView.h"
+#import "IPCPayOrderOptometryInfoView.h"
 #import "IPCInsertNewOptometryView.h"
 
 @interface IPCPayOrderOptometryViewController ()
 
-@property (strong, nonatomic) IPCShowOptometryInfoView * showOptometryView;
+@property (strong, nonatomic) IPCPayOrderOptometryInfoView * showOptometryView;
+@property (strong, nonatomic) IPCInsertNewOptometryView * insertOptometryView;
 
 @end
 
@@ -29,11 +30,11 @@
 }
 
 #pragma mark //Set UI
-- (IPCShowOptometryInfoView *)showOptometryView
+- (IPCPayOrderOptometryInfoView *)showOptometryView
 {
     if (!_showOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _showOptometryView = [[IPCShowOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-10) ChooseBlock:^{
+        _showOptometryView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-10) ChooseBlock:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf pushToManagerOptometryViewController];
         }];
@@ -59,9 +60,16 @@
     }
 }
 
-- (IBAction)editOptometryAction:(id)sender {
-    IPCInsertNewOptometryView * optometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds];
-    [[IPCCommonUI currentView] addSubview:optometryView];
+- (IBAction)editOptometryAction:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds CustomerId:[IPCPayOrderManager sharedManager].currentCustomerId CompleteBlock:^(NSString * optometryId)
+    {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.insertOptometryView removeFromSuperview];
+        strongSelf.insertOptometryView = nil;
+    }];
+    [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
 }
 
 

@@ -17,7 +17,6 @@
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *  products;
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * recordArray;
 @property (nonatomic, strong, readwrite) IPCCustomerOrderInfo               *  orderInfo;
-@property (nonatomic, strong, readwrite) IPCCustomerAddressMode         *  addressMode;
 @property (nonatomic, strong, readwrite) IPCOptometryMode                    *  optometryMode;
 
 - (void)parseResponseValue:(id)responseValue;

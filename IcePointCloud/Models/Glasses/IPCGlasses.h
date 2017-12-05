@@ -46,7 +46,6 @@
 @property (nonatomic, assign, readonly) NSInteger productCount;//The order quantity
 @property (nonatomic, copy, readonly) NSString * thumbnailURL;//OrderDetail Product Thumbnail url
 @property (nonatomic, assign, readonly) double    afterDiscountPrice;//折后价
-@property (nonatomic, assign, readonly) BOOL      integralExchange;//判断是否积分兑换
 @property (nonatomic, assign, readonly) double    exchangeIntegral;//兑换积分
 ///判断是否批量
 @property (nonatomic, assign, readonly) BOOL  isBatch;//Whether the batch

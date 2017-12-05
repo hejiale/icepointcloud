@@ -8,10 +8,10 @@
 
 #import "IPCCustomerListViewController.h"
 #import "IPCCustomerCollectionViewCell.h"
-#import "IPCInsertCustomerViewController.h"
 #import "IPCCustomerDetailViewController.h"
 #import "IPCSearchViewController.h"
 #import "IPCCustomerListViewModel.h"
+#import "IPCPayOrderEditCustomerView.h"
 
 static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentifier";
 
@@ -24,6 +24,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
+@property (strong, nonatomic) IPCPayOrderEditCustomerView * editCustomerView;
 
 @end
 
@@ -45,13 +46,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    //Refresh NavigationBar Status
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus || [IPCInsertCustomer instance].isInsertStatus) {
-        [self setNavigationTitle:@"客户"];
-        [self setNavigationBarStatus:NO];
-    }else{
-        [self setNavigationBarStatus:YES];
-    }
+    [self setNavigationBarHidden:YES];
     //According To NetWorkStatus To Reload Customer List
     if (isCancelRequest && self.viewModel.currentPage == 1) {
         [self loadData];
@@ -64,6 +59,11 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [super viewWillDisappear:animated];
     // Clear Refresh Animation
     [self stopRefresh];
+    ///remove cover
+    if ([self.editCustomerView superview]) {
+        [self.editCustomerView removeFromSuperview];
+        self.editCustomerView = nil;
+    }
 }
 
 - (NSMutableArray<NSString *> *)keywordHistory
@@ -105,6 +105,21 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     return _refreshFooter;
 }
 
+- (IPCPayOrderEditCustomerView *)editCustomerView
+{
+    if (!_editCustomerView) {
+        __weak typeof(self) weakSelf = self;
+        _editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:self.view.bounds
+                                                               DetailCustomer:nil
+                                                                  UpdateBlock:^(NSString *customerId)
+                             {
+                                 __strong typeof(weakSelf) strongSelf = weakSelf;
+                                 [strongSelf.editCustomerView removeFromSuperview];
+                                 strongSelf.editCustomerView = nil;
+                             }];
+    }
+    return _editCustomerView;
+}
 
 #pragma mark //UICollectionView Refresh Method
 - (void)beginRefresh
@@ -172,19 +187,20 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     }
 }
 
-
 #pragma mark //Clicked Events
-- (IBAction)insertNewCustomerAction:(id)sender {
-    IPCInsertCustomerViewController * insertCustomerVC = [[IPCInsertCustomerViewController alloc]initWithNibName:@"IPCInsertCustomerViewController" bundle:nil];
-    [self.navigationController pushViewController:insertCustomerVC animated:YES];
-}
-
 - (IBAction)searchCustomerAction:(id)sender{
     IPCSearchViewController * searchVC = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
     searchVC.searchDelegate = self;
     [searchVC showSearchCustomerViewWithSearchWord:self.viewModel.searchWord];
     [self presentViewController:searchVC animated:YES completion:nil];
 }
+
+- (IBAction)insertCustomerAction:(id)sender
+{
+    [self.view addSubview:self.editCustomerView];
+    [self.view bringSubviewToFront:self.editCustomerView];
+}
+
 
 #pragma mark //UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
@@ -219,15 +235,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         
         if (customer) {
-            if ([IPCInsertCustomer instance].isInsertStatus) {
-                [IPCInsertCustomer instance].introducerId = customer.customerID;
-                [IPCInsertCustomer instance].introducerName = customer.customerName;
-                [self.navigationController popViewControllerAnimated:YES];
-            }else{
-                IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
-                [detailVC setCustomer:customer];
-                [self.navigationController pushViewController:detailVC animated:YES];
-            }
+            IPCCustomerDetailViewController * detailVC = [[IPCCustomerDetailViewController alloc]initWithNibName:@"IPCCustomerDetailViewController" bundle:nil];
+            [detailVC setCustomer:customer];
+            [self.navigationController pushViewController:detailVC animated:YES];
         }
     }
 }

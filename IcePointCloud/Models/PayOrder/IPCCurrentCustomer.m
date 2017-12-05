@@ -27,11 +27,9 @@
     IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
     [IPCCurrentCustomer sharedManager].currentCustomer = detailCustomer;
     [IPCCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
-    [IPCCurrentCustomer sharedManager].currentAddress    = [IPCCustomerAddressMode mj_objectWithKeyValues:detailCustomer.addresses[0]];
 }
 
 - (void)clearData{
-    [IPCCurrentCustomer sharedManager].currentAddress  = nil;
     [IPCCurrentCustomer sharedManager].currentCustomer = nil;
     [IPCCurrentCustomer sharedManager].currentOpometry = nil;
 }

@@ -20,7 +20,7 @@
 @property (strong, nonatomic) UILabel * productPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
-@property (strong, nonatomic) UIImageView * pointImageView;
+
 @property (assign, nonatomic) id<IPCCustomerOrderDetailDelegate>delegate;
 
 

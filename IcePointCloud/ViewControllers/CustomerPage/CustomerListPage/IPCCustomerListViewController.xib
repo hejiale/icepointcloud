@@ -35,7 +35,7 @@
                     </connections>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XvY-2T-ih6">
-                    <rect key="frame" x="960" y="610" width="44" height="44"/>
+                    <rect key="frame" x="960" y="516" width="44" height="44"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="Ofw-GX-BtM"/>
@@ -46,15 +46,29 @@
                         <action selector="searchCustomerAction:" destination="-1" eventType="touchUpInside" id="s0n-n5-beC"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gTJ-ew-GeL">
+                    <rect key="frame" x="960" y="610" width="44" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="1gJ-eJ-Pj6"/>
+                        <constraint firstAttribute="width" constant="44" id="8Wt-h8-V9a"/>
+                    </constraints>
+                    <state key="normal" image="icon_addCustomer"/>
+                    <connections>
+                        <action selector="insertCustomerAction:" destination="-1" eventType="touchUpInside" id="op9-Md-gRG"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="kAD-05-wII" secondAttribute="trailing" id="5Pg-4w-Px9"/>
-                <constraint firstAttribute="bottom" secondItem="XvY-2T-ih6" secondAttribute="bottom" constant="50" id="IyK-xb-3cR"/>
                 <constraint firstAttribute="bottom" secondItem="kAD-05-wII" secondAttribute="bottom" id="NTF-cN-CnW"/>
                 <constraint firstItem="kAD-05-wII" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Pjg-SE-icX"/>
                 <constraint firstAttribute="trailing" secondItem="XvY-2T-ih6" secondAttribute="trailing" constant="20" id="X48-Gg-bQB"/>
+                <constraint firstAttribute="trailing" secondItem="gTJ-ew-GeL" secondAttribute="trailing" constant="20" id="biZ-YC-3Gi"/>
+                <constraint firstAttribute="bottom" secondItem="gTJ-ew-GeL" secondAttribute="bottom" constant="50" id="lLl-Li-olu"/>
                 <constraint firstItem="kAD-05-wII" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oQK-nn-zcN"/>
+                <constraint firstItem="gTJ-ew-GeL" firstAttribute="top" secondItem="XvY-2T-ih6" secondAttribute="bottom" constant="50" id="xqj-yg-lhb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
@@ -63,6 +77,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon_addCustomer" width="48" height="48"/>
         <image name="icon_search_customer" width="48" height="48"/>
     </resources>
 </document>

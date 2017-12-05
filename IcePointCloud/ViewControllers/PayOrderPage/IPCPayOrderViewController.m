@@ -11,7 +11,6 @@
 #import "IPCPayOrderOptometryViewController.h"
 #import "IPCPayOrderOfferOrderViewController.h"
 #import "IPCPayOrderPayCashViewController.h"
-#import "IPCPayorderScrollPageView.h"
 #import "IPCPayOrderViewMode.h"
 
 @interface IPCPayOrderViewController ()

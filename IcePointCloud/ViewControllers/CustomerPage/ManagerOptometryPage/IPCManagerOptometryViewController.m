@@ -8,7 +8,7 @@
 
 #import "IPCManagerOptometryViewController.h"
 #import "IPCManagerOptometryViewModel.h"
-#import "IPCEditOptometryView.h"
+#import "IPCInsertNewOptometryView.h"
 #import "IPCManagerOptometryCell.h"
 
 static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier";
@@ -16,7 +16,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 @interface IPCManagerOptometryViewController ()<UITableViewDelegate,UITableViewDataSource,IPCManagerOptometryCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *optometryTableView;
-@property (strong, nonatomic) IPCEditOptometryView * editOptometryView;
+@property (strong, nonatomic) IPCInsertNewOptometryView * editOptometryView;
 @property (strong, nonatomic) IPCManagerOptometryViewModel * managerViewModel;
 
 @end
@@ -33,7 +33,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     //Load TableView
     [self loadTableView];
     //Load Employee Data
-    [[IPCEmployeeeManager sharedManager] queryEmployee];
+    [[IPCCustomerManager sharedManager] queryEmployee];
     //Load Optometry Data
     [self loadOptometryData];
 }
@@ -66,18 +66,17 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 }
 
 
-- (IPCEditOptometryView *)editOptometryView{
+- (IPCInsertNewOptometryView *)editOptometryView{
     if (!_editOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _editOptometryView = [[IPCEditOptometryView alloc]initWithFrame:self.view.bounds
-                                                             CustomerID:self.managerViewModel.customerId
-                                                               Complete:^(NSString *optometryId) {
-                                                                   __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                   [_editOptometryView removeFromSuperview];
-                                                                   [strongSelf setDefaultOptometryWithOptometryId:optometryId];
-                                                               } Dismiss:^{
-                                                                   [_editOptometryView removeFromSuperview];
-                                                               }];
+        _editOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:self.view.bounds CustomerId:self.customerId CompleteBlock:^(NSString * optometryId){
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.editOptometryView removeFromSuperview];
+            strongSelf.editOptometryView = nil;
+            if (optometryId) {
+                [strongSelf setDefaultOptometryWithOptometryId:optometryId];
+            }
+        }];
     }
     return _editOptometryView;
 }

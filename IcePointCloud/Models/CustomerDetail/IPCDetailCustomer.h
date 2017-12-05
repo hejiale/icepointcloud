@@ -19,13 +19,9 @@
 @property (nonatomic, copy, readwrite) NSString * currentOptometryId;
 @property (nonatomic, copy, readwrite) NSString * email;
 @property (nonatomic, copy, readwrite) NSString * contactorGengerString;
-@property (nonatomic, copy, readwrite) NSString * customerAddress;
 @property (nonatomic, copy, readwrite) NSString * gender;
 @property (nonatomic, copy, readwrite) NSString * genderString;
 @property (nonatomic, copy, readwrite) NSString * customerName;
-@property (nonatomic, copy, readwrite) NSString * contactorAddress;
-@property (nonatomic, copy, readwrite) NSString * currentAddressId;
-@property (nonatomic, copy, readwrite) NSString * contactorPhone;
 @property (nonatomic, copy, readwrite) NSString * lastPhoneReturn;
 @property (nonatomic, copy, readwrite) NSString * memberLevel;
 @property (nonatomic, copy, readwrite) NSString * memberLevelId;
@@ -46,6 +42,5 @@
 @property (nonatomic, assign, readwrite) double  discount;
 @property (nonatomic, assign, readonly) BOOL  memberFlag;
 @property (nonatomic, copy, readwrite) NSArray<IPCOptometryMode *>  * optometrys;
-@property (nonatomic, copy, readwrite) NSArray<IPCCustomerAddressMode *>  * addresses;
 
 @end

@@ -25,7 +25,6 @@
 {
     [self.products removeAllObjects];
     [self.recordArray removeAllObjects];
-    self.addressMode = nil;
     self.optometryMode = nil;
     self.orderInfo = nil;
     
@@ -41,19 +40,13 @@
             self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
             self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
             self.optometryMode.isUpdateStatus = YES;
-            self.addressMode = [IPCCustomerAddressMode mj_objectWithKeyValues:responseValue[@"order"]];
         }
         
         self.orderInfo.totalPayAmount = 0;
         self.orderInfo.totalPointAmount = 0;
         
         [self.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (glass.integralExchange) {
-                self.orderInfo.totalPayAmount += glass.price * glass.productCount;
-                self.orderInfo.totalPointAmount += glass.price * glass.productCount;
-            }else{
-                self.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
-            }
+            self.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
         }];
         
         __block double totalPayTypePrice = 0;
@@ -86,7 +79,6 @@
     [self.products removeAllObjects];
     [self.recordArray removeAllObjects];
     self.orderInfo = nil;
-    self.addressMode = nil;
     self.optometryMode = nil;
 }
 

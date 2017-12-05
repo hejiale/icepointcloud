@@ -13,8 +13,8 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        [[IPCEmployeeeManager sharedManager] queryEmployee];
-        [[IPCEmployeeeManager sharedManager] queryMemberLevel];
+        [[IPCCustomerManager sharedManager] queryEmployee];
+        [[IPCCustomerManager sharedManager] queryMemberLevel];
     }
     return self;
 }
@@ -32,7 +32,6 @@
     _orderCurrentPage         = 1;
     _isLoadMoreOrder          = NO;
     self.detailCustomer        = nil;
-    self.customerAddress     = nil;
     self.customerOpometry  = nil;
     self.isLoadMoreOrder     = NO;
     self.customerId              = nil;
@@ -48,7 +47,6 @@
      {
          self.detailCustomer       = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
          self.customerOpometry = [IPCOptometryMode mj_objectWithKeyValues:self.detailCustomer.optometrys[0]];
-         self.customerAddress    = [IPCCustomerAddressMode mj_objectWithKeyValues:self.detailCustomer.addresses[0]];
          
          if (completeBlock)
              completeBlock();

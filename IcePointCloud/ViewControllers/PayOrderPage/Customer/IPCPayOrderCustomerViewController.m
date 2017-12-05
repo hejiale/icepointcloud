@@ -24,6 +24,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCPayOrderCustomInfoView * infoView;
+@property (nonatomic, strong) IPCPayOrderEditCustomerView * editCustomerView;
 
 @end
 
@@ -193,14 +194,20 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)showEditCustomerView:(BOOL)isUpdate
 {
-    IPCPayOrderEditCustomerView * editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
-                                                                                              IsUpdate:isUpdate
-                                                                                           UpdateBlock:^(NSString *customerId) {
-                                                                                               [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-                                                                                               [self.refreshHeader beginRefreshing];
-                                                                                           }];
-    [[IPCCommonUI currentView] addSubview:editCustomerView];
-    [[IPCCommonUI currentView] bringSubviewToFront:editCustomerView];
+    __weak typeof(self) weakSelf = self;
+    self.editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                               DetailCustomer:(isUpdate ? [IPCCurrentCustomer sharedManager].currentCustomer :  nil)
+                                                                  UpdateBlock:^(NSString *customerId)
+                             {
+                                 __strong typeof(weakSelf) strongSelf = weakSelf;
+                                 [strongSelf.editCustomerView removeFromSuperview];
+                                 strongSelf.editCustomerView = nil;
+                                 
+                                 [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+                                 [strongSelf.refreshHeader beginRefreshing];
+                             }];
+    [[IPCCommonUI currentView] addSubview:self.editCustomerView];
+    [[IPCCommonUI currentView] bringSubviewToFront:self.editCustomerView];
 }
 
 #pragma mark //UICollectionViewDataSource

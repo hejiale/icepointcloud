@@ -10,29 +10,26 @@
 #import "IPCCustomerOptometryCell.h"
 #import "IPCCustomerHistoryOrderCell.h"
 #import "IPCCustomerDetailCell.h"
-#import "IPCCustomerAddressCell.h"
 #import "IPCCustomTopCell.h"
 #import "IPCCustomerRefreshCell.h"
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
-#import "IPCUpdateCustomerView.h"
 #import "IPCManagerOptometryViewController.h"
-#import "IPCManagerAddressViewController.h"
+#import "IPCPayOrderEditCustomerView.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
 static NSString * const baseIdentifier        = @"UserBaseInfoCellIdentifier";
 static NSString * const optometryIdentifier = @"HistoryOptometryCellIdentifier";
 static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
-static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifier";
 
-@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource,IPCCustomerDetailViewDelegate>
+@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
+@property (strong, nonatomic) IPCPayOrderEditCustomerView * editCustomerView;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
-@property (strong, nonatomic) IPCUpdateCustomerView * updateCustomerView;
 
 @end
 
@@ -112,25 +109,28 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
                                                                  OrderNum:orderObject.orderCode
                                                                   Dismiss:^{
                                                                       __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                                      [strongSelf removerAllPopView:NO];
+                                                                      [strongSelf.detailOrderView removeFromSuperview];
+                                                                      strongSelf.detailOrderView = nil;
                                                                   }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
     [self.detailOrderView show];
 }
 
-
-- (void)loadUpdateCustomerView{
-    self.updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.contentView.bounds];
-    self.updateCustomerView.currentDetailCustomer = self.customerViewMode.detailCustomer;
-    self.updateCustomerView.delegate = self;
-    [self.contentView addSubview:self.updateCustomerView];
-    [self.contentView bringSubviewToFront:self.updateCustomerView];
-    
-    __weak typeof(self) weakSelf = self;
-    [[self.updateCustomerView rac_signalForSelector:@selector(removeCoverAction:)] subscribeNext:^(id x) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf removerAllPopView:NO];
-    }];
+- (void)loadEditCustomerView
+{
+    __weak typeof (self) weakSelf = self;
+    self.editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:self.view.bounds
+                                                               DetailCustomer:self.customerViewMode.detailCustomer
+                                                                  UpdateBlock:^(NSString *customerId)
+                             {
+                                 __strong typeof (weakSelf) strongSelf = weakSelf;
+                                 [strongSelf.editCustomerView removeFromSuperview];
+                                 strongSelf.editCustomerView = nil;
+                                 
+                                 [strongSelf requestCustomerDetailInfo];
+                             }];
+    [self.view addSubview:self.editCustomerView];
+    [self.view bringSubviewToFront:self.editCustomerView];
 }
 
 #pragma mark //ClickEvents
@@ -155,26 +155,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
     optometryVC.customerId = self.customerViewMode.detailCustomer.customerID;
     [self.navigationController pushViewController:optometryVC animated:YES];
-}
-
-- (void)pushToManagerAddressViewController{
-    IPCManagerAddressViewController * addressVC = [[IPCManagerAddressViewController alloc]initWithNibName:@"IPCManagerAddressViewController" bundle:nil];
-    addressVC.customerId = self.customerViewMode.detailCustomer.customerID;
-    [self.navigationController pushViewController:addressVC animated:YES];
-}
-
-
-/**
- *  Dismiss Cover
- */
-- (void)removerAllPopView:(BOOL)isLoad
-{
-    [self.updateCustomerView removeFromSuperview];
-    [self.detailOrderView removeFromSuperview];
- 
-    if (isLoad) {
-        [self requestCustomerDetailInfo];
-    }
 }
 
 #pragma mark //UITableViewDataSource
@@ -209,7 +189,7 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
             [cell setRightOperation:@"客户基本信息" ButtonTitle:nil ButtonImage:@"icon_edit"];
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-                [self loadUpdateCustomerView];
+                [self loadEditCustomerView];
             }];
             return cell;
         }else{
@@ -298,11 +278,6 @@ static NSString * const addressIdentifier   = @"CustomerAddressListCellIdentifie
             }
         }
     }
-}
-
-#pragma mark //IPCCustomerDetailViewDelegate
-- (void)dismissCoverSubViews{
-    [self removerAllPopView:YES];
 }
 
 

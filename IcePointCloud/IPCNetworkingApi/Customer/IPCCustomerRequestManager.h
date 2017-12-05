@@ -63,51 +63,27 @@
 
 
 
+
 /**
  SAVE CUSTOMER INFO
- 
+
  @param customName
  @param phone
  @param gender
- @param email
  @param birthday
- @param remark
- @param optometryList
- @param contactName
- @param contactGender
- @param contactPhone
- @param contactAddress
- @param employeeId
- @param employeeName
- @param customerType
  @param customerTypeId
- @param occupation
- @param memberLevel
- @param memberLevelId
- @param memberNum
+ @param photoId
+ @param age
+ @param customerId
  @param success
  @param failure
  */
 + (void)saveCustomerInfoWithCustomName:(NSString *)customName
                            CustomPhone:(NSString *)phone
                                 Gender:(NSString *)gender
-                                 Email:(NSString *)email
                               Birthday:(NSString *)birthday
-                                Remark:(NSString *)remark
-                         OptometryList:(NSArray *)optometryList
-                           ContactName:(NSString *)contactName
-                         ContactGender:(NSString *)contactGender
-                          ContactPhone:(NSString *)contactPhone
-                        ContactAddress:(NSString *)contactAddress
-                          CustomerType:(NSString *)customerType
                         CustomerTypeId:(NSString *)customerTypeId
-                            Occupation:(NSString *)occupation
-                           MemberLevel:(NSString *)memberLevel
-                         MemberLevelId:(NSString *)memberLevelId
-                             MemberNum:(NSString *)memberNum
                                PhotoId:(NSString *)photoId
-                          IntroducerId:(NSString *)introducerId
-                     IntroducerInteger:(NSString *)introducerInteger
                                    Age:(NSString *)age
                             CustomerId:(NSString *)customerId
                           SuccessBlock:(void (^)(id responseValue))success
@@ -154,39 +130,6 @@
                          FailureBlock:(void (^)(NSError * error))failure;
 
 
-/**
- *  UPDATE CUSTOMER ADDRESS
- *
- *  @param addressID
- *  @param customID
- *  @param contactName
- *  @param gender
- *  @param phone
- *  @param address
- *  @param success
- *  @param failure
- */
-+ (void)saveNewCustomerAddressWithAddressID:(NSString *)addressID
-                                   CustomID:(NSString *)customID
-                                ContactName:(NSString *)contactName
-                                     Gender:(NSString *)gender
-                                      Phone:(NSString *)phone
-                                    Address:(NSString *)address
-                               SuccessBlock:(void (^)(id responseValue))success
-                               FailureBlock:(void (^)(NSError * error))failure;
-
-/**
- *  QUERY CUSTOMER ADDRESS
- *
- *  @param customID
- *  @param page
- *  @param success
- *  @param failure
- */
-+ (void)queryCustomerAddressListWithCustomID:(NSString *)customID
-                                SuccessBlock:(void (^)(id responseValue))success
-                                FailureBlock:(void (^)(NSError * error))failure;
-
 
 /**
  *  QUERY ORDER DETAIL
@@ -198,41 +141,6 @@
 + (void)queryOrderDetailWithOrderID:(NSString *)orderNumber
                        SuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure;
-
-
-/**
- SELECT DEFAULT CUSTOMER
- 
- @param customID
- @param customName
- @param phone
- @param gender
- @param email
- @param birthday
- @param employeeId
- @param memberNum
- @param memberLevelId
- @param customerTypeId
- @param job
- @param remark
- @param success
- @param failure
- */
-+ (void)updateCustomerInfoWithCustomID:(NSString *)customID
-                          CustomerName:(NSString *)customName
-                           CustomPhone:(NSString *)phone
-                                Gender:(NSString *)gender
-                                 Email:(NSString *)email
-                              Birthday:(NSString *)birthday
-                             MemberNum:(NSString *)memberNum
-                         MemberLevelId:(NSString *)memberLevelId
-                        CustomerTypeId:(NSString *)customerTypeId
-                           MemberLevel:(NSString *)memberLevel
-                                   Job:(NSString *)job
-                                Remark:(NSString *)remark
-                               PhotoId:(NSString *)photoId
-                          SuccessBlock:(void (^)(id responseValue))success
-                          FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
@@ -249,19 +157,6 @@
                            FailureBlock:(void (^)(NSError * error))failure;
 
 
-
-/**
- 设置默认地址
- 
- @param customID
- @param defaultAddressID
- @param success
- @param failure
- */
-+ (void)setDefaultAddressWithCustomID:(NSString *)customID
-                     DefaultAddressID:(NSString *)defaultAddressID
-                         SuccessBlock:(void (^)(id responseValue))success
-                         FailureBlock:(void (^)(NSError * error))failure;
 
 /**
  MemberLevel
@@ -282,28 +177,5 @@
 + (void)getCustomerTypeSuccessBlock:(void (^)(id responseValue))success
                        FailureBlock:(void (^)(NSError * error))failure;
 
-
-/**
- Judge Customer Phone Is Exist
- 
- @param phone
- @param success
- @param failure
- */
-+ (void)judgePhoneIsExistWithPhone:(NSString *)phone
-                      SuccessBlock:(void (^)(id responseValue))success
-                      FailureBlock:(void (^)(NSError * error))failure;
-
-
-/**
- Judge Customer Name Is Exist
- 
- @param name
- @param success
- @param failure
- */
-+ (void)judgeCustomerNameIsExistWithName:(NSString *)name
-                            SuccessBlock:(void (^)(id))success
-                            FailureBlock:(void (^)(NSError *))failure;
 
 @end
