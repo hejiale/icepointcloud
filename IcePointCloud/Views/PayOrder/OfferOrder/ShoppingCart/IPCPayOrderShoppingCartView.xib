@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCShoppingCartView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderShoppingCartView">
             <connections>
                 <outlet property="cartBottomView" destination="E3E-SG-Act" id="Q98-Gc-oyl"/>
                 <outlet property="cartListTableView" destination="ys0-Lo-IuG" id="1v8-eD-wFa"/>

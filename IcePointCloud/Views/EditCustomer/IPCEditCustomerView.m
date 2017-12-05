@@ -6,9 +6,9 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCPayOrderEditCustomerView.h"
+#import "IPCEditCustomerView.h"
 
-@interface IPCPayOrderEditCustomerView()<UITextFieldDelegate,IPCDatePickViewControllerDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
+@interface IPCEditCustomerView()<UITextFieldDelegate,IPCDatePickViewControllerDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextField *customerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation IPCPayOrderEditCustomerView
+@implementation IPCEditCustomerView
 
 - (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)(NSString *))update
 {
@@ -38,7 +38,7 @@
         self.UpdateBlock = update;
         self.detailCustomer = customer;
         
-        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderEditCustomerView" owner:self];
+        UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditCustomerView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
         

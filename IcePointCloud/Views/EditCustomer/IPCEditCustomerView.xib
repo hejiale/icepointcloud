@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderEditCustomerView">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCEditCustomerView">
             <connections>
                 <outlet property="ageTextField" destination="XjD-yJ-Lyj" id="0Db-pb-oyg"/>
                 <outlet property="birthDayTextField" destination="EwE-GD-izC" id="FXo-7H-aBK"/>

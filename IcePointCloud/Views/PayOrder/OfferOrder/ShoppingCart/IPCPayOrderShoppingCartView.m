@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Doray. All rights reserved.
 //
 
-#import "IPCShoppingCartView.h"
+#import "IPCPayOrderShoppingCartView.h"
 #import "IPCCartViewMode.h"
 #import "IPCExpandShoppingCartCell.h"
 #import "IPCEditShoppingCartCell.h"
@@ -15,7 +15,7 @@
 static NSString * const kNewShoppingCartItemName = @"ExpandableShoppingCartCellIdentifier";
 static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartCellIdentifier";
 
-@interface IPCShoppingCartView ()<UITableViewDelegate,UITableViewDataSource,IPCEditShoppingCartCellDelegate,IPCExpandShoppingCartCellDelegate>
+@interface IPCPayOrderShoppingCartView ()<UITableViewDelegate,UITableViewDataSource,IPCEditShoppingCartCellDelegate,IPCExpandShoppingCartCellDelegate>
 {
     BOOL   isEditStatus;
 }
@@ -33,7 +33,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 @end
 
-@implementation IPCShoppingCartView
+@implementation IPCPayOrderShoppingCartView
 
 
 - (instancetype)initWithFrame:(CGRect)frame Complete:(void (^)())complete
@@ -42,7 +42,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     if (self) {
         self.CompleteBlock = complete;
         
-        UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCShoppingCartView" owner:self];
+        UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderShoppingCartView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
         

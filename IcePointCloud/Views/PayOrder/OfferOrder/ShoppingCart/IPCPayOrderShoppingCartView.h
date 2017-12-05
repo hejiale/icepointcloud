@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "IPCCustomKeyboard.h"
 
-@interface IPCShoppingCartView : UIView
+@interface IPCPayOrderShoppingCartView : UIView
 
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 

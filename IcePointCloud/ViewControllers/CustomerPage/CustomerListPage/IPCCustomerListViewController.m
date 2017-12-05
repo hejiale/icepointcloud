@@ -11,7 +11,7 @@
 #import "IPCCustomerDetailViewController.h"
 #import "IPCSearchViewController.h"
 #import "IPCCustomerListViewModel.h"
-#import "IPCPayOrderEditCustomerView.h"
+#import "IPCEditCustomerView.h"
 
 static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentifier";
 
@@ -24,7 +24,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
-@property (strong, nonatomic) IPCPayOrderEditCustomerView * editCustomerView;
+@property (strong, nonatomic) IPCEditCustomerView * editCustomerView;
 
 @end
 
@@ -105,11 +105,11 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     return _refreshFooter;
 }
 
-- (IPCPayOrderEditCustomerView *)editCustomerView
+- (IPCEditCustomerView *)editCustomerView
 {
     if (!_editCustomerView) {
         __weak typeof(self) weakSelf = self;
-        _editCustomerView = [[IPCPayOrderEditCustomerView alloc]initWithFrame:self.view.bounds
+        _editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
                                                                DetailCustomer:nil
                                                                   UpdateBlock:^(NSString *customerId)
                              {

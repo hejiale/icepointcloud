@@ -85,8 +85,8 @@
 		CB0F54271F988191003707F2 /* IPCCustomDetailOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53DA1F988191003707F2 /* IPCCustomDetailOrderView.m */; };
 		CB0F54281F988191003707F2 /* IPCCustomDetailOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53DB1F988191003707F2 /* IPCCustomDetailOrderView.xib */; };
 		CB0F54351F988191003707F2 /* IPCLibraryTypeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F21F988191003707F2 /* IPCLibraryTypeTableView.m */; };
-		CB0F54361F988191003707F2 /* IPCShoppingCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F51F988191003707F2 /* IPCShoppingCartView.m */; };
-		CB0F54371F988191003707F2 /* IPCShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53F61F988191003707F2 /* IPCShoppingCartView.xib */; };
+		CB0F54361F988191003707F2 /* IPCPayOrderShoppingCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F51F988191003707F2 /* IPCPayOrderShoppingCartView.m */; };
+		CB0F54371F988191003707F2 /* IPCPayOrderShoppingCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53F61F988191003707F2 /* IPCPayOrderShoppingCartView.xib */; };
 		CB0F54381F988191003707F2 /* IPCSideBarMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F91F988191003707F2 /* IPCSideBarMenuView.m */; };
 		CB0F54391F988191003707F2 /* IPCSideBarMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53FA1F988191003707F2 /* IPCSideBarMenuView.xib */; };
 		CB0F543A1F988191003707F2 /* IPCCompareItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53FD1F988191003707F2 /* IPCCompareItemView.m */; };
@@ -253,8 +253,8 @@
 		CB4B41481FC280DB0068E645 /* IPCPayOrderCustomInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4B41471FC280DB0068E645 /* IPCPayOrderCustomInfoView.xib */; };
 		CB4B414C1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4B414A1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.m */; };
 		CB4B414D1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4B414B1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.xib */; };
-		CB4B41521FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4B41511FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.m */; };
-		CB4B41541FC2A4FE0068E645 /* IPCPayOrderEditCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4B41531FC2A4FE0068E645 /* IPCPayOrderEditCustomerView.xib */; };
+		CB4B41521FC2A4EF0068E645 /* IPCEditCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4B41511FC2A4EF0068E645 /* IPCEditCustomerView.m */; };
+		CB4B41541FC2A4FE0068E645 /* IPCEditCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4B41531FC2A4FE0068E645 /* IPCEditCustomerView.xib */; };
 		CB4B41591FC2B77D0068E645 /* IPCPayOrderOfferOrderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4B41581FC2B77D0068E645 /* IPCPayOrderOfferOrderInfoView.xib */; };
 		CB4EF50A1FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4EF5091FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.m */; };
 		CB4EF50C1FCBB48100BD6250 /* IPCPayOrderOptometryInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4EF50B1FCBB48100BD6250 /* IPCPayOrderOptometryInfoView.xib */; };
@@ -431,9 +431,9 @@
 		CB0F53DB1F988191003707F2 /* IPCCustomDetailOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomDetailOrderView.xib; sourceTree = "<group>"; };
 		CB0F53F11F988191003707F2 /* IPCLibraryTypeTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCLibraryTypeTableView.h; sourceTree = "<group>"; };
 		CB0F53F21F988191003707F2 /* IPCLibraryTypeTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCLibraryTypeTableView.m; sourceTree = "<group>"; };
-		CB0F53F41F988191003707F2 /* IPCShoppingCartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCShoppingCartView.h; sourceTree = "<group>"; };
-		CB0F53F51F988191003707F2 /* IPCShoppingCartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCShoppingCartView.m; sourceTree = "<group>"; };
-		CB0F53F61F988191003707F2 /* IPCShoppingCartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCShoppingCartView.xib; sourceTree = "<group>"; };
+		CB0F53F41F988191003707F2 /* IPCPayOrderShoppingCartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderShoppingCartView.h; sourceTree = "<group>"; };
+		CB0F53F51F988191003707F2 /* IPCPayOrderShoppingCartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderShoppingCartView.m; sourceTree = "<group>"; };
+		CB0F53F61F988191003707F2 /* IPCPayOrderShoppingCartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCPayOrderShoppingCartView.xib; sourceTree = "<group>"; };
 		CB0F53F81F988191003707F2 /* IPCSideBarMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCSideBarMenuView.h; sourceTree = "<group>"; };
 		CB0F53F91F988191003707F2 /* IPCSideBarMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCSideBarMenuView.m; sourceTree = "<group>"; };
 		CB0F53FA1F988191003707F2 /* IPCSideBarMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCSideBarMenuView.xib; sourceTree = "<group>"; };
@@ -720,9 +720,9 @@
 		CB4B41491FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderCustomerCollectionViewCell.h; sourceTree = "<group>"; };
 		CB4B414A1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderCustomerCollectionViewCell.m; sourceTree = "<group>"; };
 		CB4B414B1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCPayOrderCustomerCollectionViewCell.xib; sourceTree = "<group>"; };
-		CB4B41501FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderEditCustomerView.h; sourceTree = "<group>"; };
-		CB4B41511FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderEditCustomerView.m; sourceTree = "<group>"; };
-		CB4B41531FC2A4FE0068E645 /* IPCPayOrderEditCustomerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCPayOrderEditCustomerView.xib; sourceTree = "<group>"; };
+		CB4B41501FC2A4EF0068E645 /* IPCEditCustomerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCEditCustomerView.h; sourceTree = "<group>"; };
+		CB4B41511FC2A4EF0068E645 /* IPCEditCustomerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCEditCustomerView.m; sourceTree = "<group>"; };
+		CB4B41531FC2A4FE0068E645 /* IPCEditCustomerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCEditCustomerView.xib; sourceTree = "<group>"; };
 		CB4B41581FC2B77D0068E645 /* IPCPayOrderOfferOrderInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCPayOrderOfferOrderInfoView.xib; sourceTree = "<group>"; };
 		CB4EF5081FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderOptometryInfoView.h; sourceTree = "<group>"; };
 		CB4EF5091FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderOptometryInfoView.m; sourceTree = "<group>"; };
@@ -943,17 +943,17 @@
 		9E981F1D197B779B00019E2F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				CB153F7D1FD6667A00B2C4AB /* EditCustomer */,
 				CB0F53B21F988191003707F2 /* BatchParameter */,
 				CB958F551FBAEEED00B882B7 /* CustomKeyboard */,
+				CB153F7D1FD6667A00B2C4AB /* EditCustomer */,
 				CB0F53B91F988191003707F2 /* Employee */,
 				CB0F53BD1F988191003707F2 /* FilterGlasses */,
 				CB0F53C51F988191003707F2 /* Guide */,
 				CBFFE9F01FBEC0A200937A8F /* InputOptometry */,
-				CB0F53C91F988191003707F2 /* ShowOptometry */,
 				CB0F53D51F988191003707F2 /* OrderDetail */,
 				CB0F53DC1F988191003707F2 /* PayOrder */,
 				CB0F53F01F988191003707F2 /* PhotoLibrary */,
+				CB0F53C91F988191003707F2 /* ShowOptometry */,
 				CB0F53F71F988191003707F2 /* SideBar */,
 				CB0F53FB1F988191003707F2 /* TakeGlasses */,
 				CB0F54041F988191003707F2 /* TryGlasses */,
@@ -1299,9 +1299,9 @@
 		CB0F53F31F988191003707F2 /* ShoppingCart */ = {
 			isa = PBXGroup;
 			children = (
-				CB0F53F41F988191003707F2 /* IPCShoppingCartView.h */,
-				CB0F53F51F988191003707F2 /* IPCShoppingCartView.m */,
-				CB0F53F61F988191003707F2 /* IPCShoppingCartView.xib */,
+				CB0F53F41F988191003707F2 /* IPCPayOrderShoppingCartView.h */,
+				CB0F53F51F988191003707F2 /* IPCPayOrderShoppingCartView.m */,
+				CB0F53F61F988191003707F2 /* IPCPayOrderShoppingCartView.xib */,
 			);
 			path = ShoppingCart;
 			sourceTree = "<group>";
@@ -1994,9 +1994,9 @@
 		CB153F7D1FD6667A00B2C4AB /* EditCustomer */ = {
 			isa = PBXGroup;
 			children = (
-				CB4B41501FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.h */,
-				CB4B41511FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.m */,
-				CB4B41531FC2A4FE0068E645 /* IPCPayOrderEditCustomerView.xib */,
+				CB4B41501FC2A4EF0068E645 /* IPCEditCustomerView.h */,
+				CB4B41511FC2A4EF0068E645 /* IPCEditCustomerView.m */,
+				CB4B41531FC2A4FE0068E645 /* IPCEditCustomerView.xib */,
 			);
 			path = EditCustomer;
 			sourceTree = "<group>";
@@ -2508,13 +2508,13 @@
 				CB0F54161F988191003707F2 /* IPCGlassParameterView.xib in Resources */,
 				CBFFE9D51FBE7F2200937A8F /* IPCPayOrderOptometryViewController.xib in Resources */,
 				CB0F552E1F98819C003707F2 /* IPCPersonQRCodeCell.xib in Resources */,
-				CB0F54371F988191003707F2 /* IPCShoppingCartView.xib in Resources */,
+				CB0F54371F988191003707F2 /* IPCPayOrderShoppingCartView.xib in Resources */,
 				CB0F55121F98819C003707F2 /* IPCOrderDetailPayRecordCell.xib in Resources */,
 				CB0F54F71F98819C003707F2 /* IPCChooseCategoryCell.xib in Resources */,
 				CB0F54EF1F98819C003707F2 /* IPCCustomerOptometryCell.xib in Resources */,
 				CB728AEC1FC8179800354E4C /* IPCInsertNewOptometryView.xib in Resources */,
 				CB4B41591FC2B77D0068E645 /* IPCPayOrderOfferOrderInfoView.xib in Resources */,
-				CB4B41541FC2A4FE0068E645 /* IPCPayOrderEditCustomerView.xib in Resources */,
+				CB4B41541FC2A4FE0068E645 /* IPCEditCustomerView.xib in Resources */,
 				CB0F543D1F988191003707F2 /* IPCSingleModeView.xib in Resources */,
 				CB0F54EB1F98819C003707F2 /* IPCCustomerDetailCell.xib in Resources */,
 				CB0F53841F9876AF003707F2 /* IPCSearchViewController.xib in Resources */,
@@ -2750,7 +2750,7 @@
 				CB0F53821F9876AF003707F2 /* IPCPresentModeViewController.m in Sources */,
 				CB0F55A31F98845A003707F2 /* IPCCustomerManager.m in Sources */,
 				CB0F565B1F988B05003707F2 /* IPCEditFilterSampleController.m in Sources */,
-				CB4B41521FC2A4EF0068E645 /* IPCPayOrderEditCustomerView.m in Sources */,
+				CB4B41521FC2A4EF0068E645 /* IPCEditCustomerView.m in Sources */,
 				CB0F54EA1F98819C003707F2 /* IPCCustomerDetailCell.m in Sources */,
 				CB0F55BB1F98845A003707F2 /* IPCShareManager.m in Sources */,
 				CB0F54171F988191003707F2 /* IPCEmployeListView.m in Sources */,
@@ -2772,7 +2772,7 @@
 				CBFFE9DE1FBE7F5200937A8F /* IPCPayOrderPayCashViewController.m in Sources */,
 				CB0F56461F988B05003707F2 /* UIViewController+Extend.m in Sources */,
 				9E03C2E51978D5D5007389D0 /* IPCAppDelegate.m in Sources */,
-				CB0F54361F988191003707F2 /* IPCShoppingCartView.m in Sources */,
+				CB0F54361F988191003707F2 /* IPCPayOrderShoppingCartView.m in Sources */,
 				CB0F564C1F988B05003707F2 /* IPCDynamicImageTextButton.m in Sources */,
 				CB0F55BE1F98845A003707F2 /* IPCMatchItem.m in Sources */,
 				CB0F55B81F98845A003707F2 /* IPCPhoto.m in Sources */,

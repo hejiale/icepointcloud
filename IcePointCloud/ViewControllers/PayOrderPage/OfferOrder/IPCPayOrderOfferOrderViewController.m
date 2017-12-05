@@ -7,12 +7,12 @@
 //
 
 #import "IPCPayOrderOfferOrderViewController.h"
-#import "IPCShoppingCartView.h"
+#import "IPCPayOrderShoppingCartView.h"
 #import "IPCPayOrderOfferOrderInfoView.h"
 
 @interface IPCPayOrderOfferOrderViewController ()
 
-@property (nonatomic, strong) IPCShoppingCartView * shopCartView ;
+@property (nonatomic, strong) IPCPayOrderShoppingCartView * shopCartView ;
 @property (nonatomic, strong) IPCPayOrderOfferOrderInfoView * offerInfoView;
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 
@@ -57,11 +57,11 @@
     return _offerInfoView;
 }
 
-- (IPCShoppingCartView *)shopCartView
+- (IPCPayOrderShoppingCartView *)shopCartView
 {
     __weak typeof(self) weakSelf = self;
     if (!_shopCartView) {
-        _shopCartView = [[IPCShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
+        _shopCartView = [[IPCPayOrderShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [[IPCPayOrderManager sharedManager] clearPayRecord];
             [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
