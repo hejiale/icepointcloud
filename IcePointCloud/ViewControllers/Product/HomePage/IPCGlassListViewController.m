@@ -9,18 +9,14 @@
 #import "IPCGlassListViewController.h"
 #import "IPCGlassDetailsViewController.h"
 #import "IPCGlasslistCollectionViewCell.h"
-#import "IPCProductViewMode.h"
 #import "IPCSearchViewController.h"
 
 static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCellIdentifier";
 
 @interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
-{
-    BOOL isCancelRequest;
-}
+
 @property (weak, nonatomic)   IBOutlet UICollectionView   *glassListCollectionView;
 @property (weak, nonatomic)   IBOutlet UIButton                *goTopButton;
-@property (strong, nonatomic) IPCProductViewMode          *glassListViewMode;
 
 @end
 
@@ -44,7 +40,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //According To NetWorkStatus To Reload Products
-    if (isCancelRequest && self.glassListViewMode.currentPage == 0) {
+    if (self.isCancelRequest && self.glassListViewMode.currentPage == 0) {
         [self beginFilterClass];
     }else{
         [self.glassListCollectionView reloadData];
@@ -85,7 +81,9 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
-    [self loadNormalProducts];
+    [self loadNormalProducts:^{
+        [self reload];
+    }];
 }
 
 - (void)loadMore
@@ -103,63 +101,10 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)beginFilterClass
 {
     self.glassListCollectionView.isBeginLoad = YES;
-    [self loadNormalProducts];
-    [self.glassListCollectionView reloadData];
-}
-
-#pragma mark //Load Glasses Data And Filter Data Request
-- (void)loadNormalProducts
-{
-    //Reset Glasses Data
-    [self.glassListViewMode resetData];
-    
-    __weak typeof (self) weakSelf = self;
-
-    dispatch_group_t group = dispatch_group_create();
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf loadGlassesListData:^{
-            dispatch_semaphore_signal(semaphore);
-        }];
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    });
-    
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.glassListViewMode filterGlassCategoryWithFilterSuccess:^(NSError *error) {
-            dispatch_semaphore_signal(semaphore);
-        }];
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    });
-    
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf reload];
-    });
-}
-
-
-- (void)loadGlassesListData:(void(^)())complete
-{
-    __weak typeof(self) weakSelf = self;
-    [self.glassListViewMode reloadGlassListDataWithComplete:^(NSError * error){
-        isCancelRequest = NO;
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
-            [strongSelf.refreshFooter noticeNoDataStatus];
-        }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
-            if ([error code] == NSURLErrorCancelled) {
-                isCancelRequest = YES;
-            }else{
-                [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
-            }
-        }
-        if (complete) {
-            complete();
-        }
+    [self loadNormalProducts:^{
+        [self reload];
     }];
+    [self.glassListCollectionView reloadData];
 }
 
 #pragma mark //Clicked Events

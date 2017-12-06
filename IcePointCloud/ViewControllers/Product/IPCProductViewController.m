@@ -25,6 +25,84 @@
     [self setNavigationBarStatus:YES];
 }
 
+#pragma mark //Request Data
+- (void)loadNormalProducts:(void(^)())complete
+{
+    //Reset Glasses Data
+    [self.glassListViewMode resetData];
+    
+    __weak typeof (self) weakSelf = self;
+    
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf loadGlassesListData:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf filterGlassesCategory:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        if (complete) {
+            complete();
+        }
+    });
+}
+
+
+- (void)loadGlassesListData:(void(^)())complete
+{
+    __weak typeof(self) weakSelf = self;
+    [self.glassListViewMode reloadGlassListDataWithComplete:^(NSError * error){
+        _isCancelRequest = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.glassListViewMode.status == IPCFooterRefresh_HasNoMoreData){
+            [strongSelf.refreshFooter noticeNoDataStatus];
+        }else if (strongSelf.glassListViewMode.status == IPCRefreshError){
+            if ([error code] == NSURLErrorCancelled) {
+                _isCancelRequest = YES;
+            }else{
+                [IPCCommonUI showError:@"搜索商品失败,请稍后重试!"];
+            }
+        }
+        if (complete) {
+            complete();
+        }
+    }];
+}
+
+- (void)filterGlassesCategory:(void(^)())complete
+{
+    __weak typeof(self) weakSelf = self;
+    [self.glassListViewMode filterGlassCategoryWithFilterSuccess:^(NSError *error) {
+        _isCancelRequest = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (error) {
+            if ([error code] == NSURLErrorCancelled) {
+                _isCancelRequest = YES;
+            }else{
+                [IPCCommonUI showError:@"获取商品分类数据失败,请稍后重试!"];
+            }
+        }
+        if (complete) {
+            complete();
+        }
+    }];
+}
+
+
+#pragma mark //Set UI
 - (IPCRefreshAnimationHeader *)refreshHeader{
     if (!_refreshHeader){
         _refreshHeader = [IPCRefreshAnimationHeader headerWithRefreshingTarget:self refreshingAction:@selector(beginRefresh)];

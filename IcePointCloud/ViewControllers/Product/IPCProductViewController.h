@@ -9,6 +9,7 @@
 #import "IPCRootNavigationViewController.h"
 #import "IPCGlassParameterView.h"
 #import "IPCEditBatchParameterView.h"
+#import "IPCProductViewMode.h"
 
 @interface IPCProductViewController : IPCRootNavigationViewController
 
@@ -16,6 +17,8 @@
 @property (strong, nonatomic) IPCEditBatchParameterView   *editParameterView;
 @property (nonatomic, strong) IPCRefreshAnimationHeader  *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter   *refreshFooter;
+@property (strong, nonatomic) IPCProductViewMode    *glassListViewMode;
+@property (assign, nonatomic) BOOL    isCancelRequest;
 
 - (void)reload;
 - (void)removeCover;
@@ -25,5 +28,7 @@
 - (void)showGlassesParameterView:(IPCGlasses *)glasses;
 - (void)editGlassesParemeterView:(IPCGlasses *)glasses;
 - (void)stopRefresh;
+- (void)loadNormalProducts:(void(^)())complete;
+- (void)loadGlassesListData:(void(^)())complete;
 
 @end
