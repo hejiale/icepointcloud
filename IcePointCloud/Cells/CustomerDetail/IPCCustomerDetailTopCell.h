@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface IPCCustomTopCell : UITableViewCell
+@interface IPCCustomerDetailTopCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel   * leftTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightLabel;

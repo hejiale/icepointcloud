@@ -30,6 +30,15 @@
     [self.mainContentView addSubview:self.inputPriceTextField];
 }
 
+- (IPCCustomTextField *)inputPriceTextField
+{
+    if (!_inputPriceTextField) {
+        _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-35, 260, 35)];
+        [_inputPriceTextField setDelegate:self];
+    }
+    return _inputPriceTextField;
+}
+
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem
 {
     _cartItem = cartItem;
@@ -52,21 +61,7 @@
     }
 }
 
-- (IPCCustomTextField *)inputPriceTextField
-{
-    if (!_inputPriceTextField) {
-        _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-35, 260, 35)];
-        [_inputPriceTextField setDelegate:self];
-    }
-    return _inputPriceTextField;
-}
-
 #pragma mark //UITextField Delegate
-- (void)textFieldBeginEditing:(IPCCustomTextField *)textField
-{
-   
-}
-
 - (void)textFieldPreEditing:(IPCCustomTextField *)textField
 {
     if ([self.delegate respondsToSelector:@selector(preEditing:)]) {

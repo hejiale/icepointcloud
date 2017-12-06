@@ -6,14 +6,14 @@
 //  Copyright © 2016年 Doray. All rights reserved.
 //
 
-#import "IPCCustomTopCell.h"
+#import "IPCCustomerDetailTopCell.h"
 
-@interface IPCCustomTopCell()
+@interface IPCCustomerDetailTopCell()
 
 
 @end
 
-@implementation IPCCustomTopCell
+@implementation IPCCustomerDetailTopCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

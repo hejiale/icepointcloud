@@ -55,7 +55,7 @@
 
 - (void)updateOptometryInfo
 {
-    IPCOptometryMode * optometry = [IPCCurrentCustomer sharedManager].currentOpometry;
+    IPCOptometryMode * optometry = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry;
     
     if (optometry) {
         [self.employeeNameLabel setText:optometry.employeeName];

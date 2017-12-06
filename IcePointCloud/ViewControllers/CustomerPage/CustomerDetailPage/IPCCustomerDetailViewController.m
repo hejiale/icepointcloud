@@ -10,7 +10,7 @@
 #import "IPCCustomerOptometryCell.h"
 #import "IPCCustomerHistoryOrderCell.h"
 #import "IPCCustomerDetailCell.h"
-#import "IPCCustomTopCell.h"
+#import "IPCCustomerDetailTopCell.h"
 #import "IPCCustomerRefreshCell.h"
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
@@ -183,7 +183,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
+            IPCCustomerDetailTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
@@ -204,7 +204,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
         }
     }else if(indexPath.section == 1){
         if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
+            IPCCustomerDetailTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
@@ -227,9 +227,9 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
         }
     }else{
         if (indexPath.row == 0) {
-            IPCCustomTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
+            IPCCustomerDetailTopCell * cell = [tableView dequeueReusableCellWithIdentifier:topTitleIdentifier];
             if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCCustomTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                cell = [[UINib nibWithNibName:@"IPCCustomerDetailTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setLeftTitle:@"历史订单信息"];
             return cell;

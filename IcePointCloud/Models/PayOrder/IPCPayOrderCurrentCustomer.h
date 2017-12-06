@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface IPCCurrentCustomer : NSObject
+@interface IPCPayOrderCurrentCustomer : NSObject
 
-+ (IPCCurrentCustomer *)sharedManager;
++ (IPCPayOrderCurrentCustomer *)sharedManager;
 
 @property (nonatomic, strong, readwrite) IPCDetailCustomer              * currentCustomer;
 @property (nonatomic, strong, readwrite) IPCOptometryMode             * currentOpometry;

@@ -22,8 +22,6 @@
                     [self.listArray addObject:optometry];
                 }];
             }
-            
-            self.totalCount = [responseValue[@"rowCount"]integerValue];
         }
     }
     return self;

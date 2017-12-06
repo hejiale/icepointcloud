@@ -15,6 +15,7 @@
 {
     //员工份额
     __block NSMutableArray * employeeList = [[NSMutableArray alloc]init];
+    
     NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
     [employeeResultDic setObject:@(100) forKey:@"achievement"];
     [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobID forKey:@"employeeId"];
@@ -24,11 +25,11 @@
     
     __block NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
     
-    if ([IPCCurrentCustomer sharedManager].currentCustomer) {
-        [parameters setObject:[IPCCurrentCustomer sharedManager].currentCustomer.customerID forKey:@"customerId"];
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer) {
+        [parameters setObject:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerID forKey:@"customerId"];
     }
-    if ([IPCCurrentCustomer sharedManager].currentOpometry) {
-        [parameters setObject:[IPCCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry) {
+        [parameters setObject:[IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
     }
 
     [parameters setObject:@"FOR_SALES" forKey:@"orderType"];

@@ -111,8 +111,8 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     }
 }
 
-- (void)pushToCartAction:(id)sender {
-    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+- (void)pushToCartAction:(id)sender
+{
     [IPCCommonUI pushToRootIndex:4];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }

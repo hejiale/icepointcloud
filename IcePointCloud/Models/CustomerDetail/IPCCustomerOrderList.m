@@ -12,10 +12,10 @@
 
 - (instancetype)initWithResponseValue:(id)responseValue{
     self = [super init];
-    if (self) {
-        if ([self.list count] > 0) {
-            [self.list removeAllObjects];
-        }
+    if (self)
+    {
+        if ([self.list count] > 0)[self.list removeAllObjects];
+        
         if ([responseValue isKindOfClass:[NSDictionary class]]) {
             if ([responseValue[@"resultList"] isKindOfClass:[NSArray class]]) {
                 [responseValue[@"resultList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

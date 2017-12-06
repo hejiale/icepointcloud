@@ -303,8 +303,8 @@
 - (double)customDiscount
 {
     if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        if ([IPCCurrentCustomer sharedManager].currentCustomer.discount) {
-            return  [IPCCurrentCustomer sharedManager].currentCustomer.discount*10;
+        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
+            return  [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount*10;
         }
     }
     return 100;

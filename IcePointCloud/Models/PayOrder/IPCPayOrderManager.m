@@ -79,6 +79,9 @@
     }else if ([[IPCPayOrderManager sharedManager] payTypeRecordArray].count == 0){
         [IPCCommonUI showError:@"收银记录为空!"];
         return NO;
+    }else if ([IPCPayOrderManager sharedManager].isInsertRecord){
+        [IPCCommonUI showError:@"请完成确认添加付款记录!"];
+        return NO;
     }
     return YES;
 }
@@ -92,7 +95,7 @@
 {
     [IPCPayOrderManager sharedManager].remark = nil;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [[IPCCurrentCustomer sharedManager] clearData];
+    [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [IPCPayOrderManager sharedManager].currentOptometryId = nil;
     [IPCPayOrderManager sharedManager].payAmount = 0;
@@ -100,6 +103,7 @@
     [IPCPayOrderManager sharedManager].discountAmount = 0;
     [IPCPayOrderManager sharedManager].employee = [IPCAppManager sharedManager].storeResult.employee;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [IPCPayOrderManager sharedManager].isInsertRecord = NO;
     [[IPCShoppingCart sharedCart] clear];
 }
 

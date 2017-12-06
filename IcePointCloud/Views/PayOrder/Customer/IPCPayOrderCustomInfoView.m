@@ -51,7 +51,7 @@
 
 - (void)updateCustomerInfo
 {
-    IPCDetailCustomer * customer = [IPCCurrentCustomer sharedManager].currentCustomer;
+    IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
     
     [self.customerNameLabel setText:customer.customerName];
     [self.ageLabel setText:customer.age];

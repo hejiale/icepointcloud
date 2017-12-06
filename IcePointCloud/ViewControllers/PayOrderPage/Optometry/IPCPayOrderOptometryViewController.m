@@ -68,7 +68,7 @@
         strongSelf.insertOptometryView = nil;
         
         [IPCPayOrderManager sharedManager].currentOptometryId = optometry.optometryID;
-        [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
+        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
         [strongSelf reload];
     }];
     [[IPCCommonUI currentView] addSubview:self.insertOptometryView];

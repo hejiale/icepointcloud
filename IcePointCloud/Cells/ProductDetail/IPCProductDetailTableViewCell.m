@@ -83,6 +83,7 @@
     }
 }
 
+#pragma mark //Clicked Events
 - (IBAction)addCartAction:(id)sender {
 }
 

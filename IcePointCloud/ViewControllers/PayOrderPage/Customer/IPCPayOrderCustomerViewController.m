@@ -33,11 +33,12 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    //Load CollectionView
     [self loadCollectionView];
+    //Init Data
     self.viewModel = [[IPCCustomerListViewModel alloc]init];
     [self loadData];
-    
+    //KVO
     [[IPCPayOrderManager sharedManager] addObserver:self forKeyPath:@"currentCustomerId" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
@@ -149,11 +150,11 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                                         SuccessBlock:^(id responseValue)
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
-         [[IPCCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
-         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCCurrentCustomer sharedManager].currentOpometry.optometryID;
+         [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
+         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
          
-         if ([IPCCurrentCustomer sharedManager].currentCustomer.discount) {
-             [IPCPayOrderManager sharedManager].customDiscount = [IPCCurrentCustomer sharedManager].currentCustomer.discount * 10;
+         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
+             [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
          }else{
              [IPCPayOrderManager sharedManager].customDiscount = 100;
          }
@@ -196,7 +197,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     __weak typeof(self) weakSelf = self;
     self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
-                                                               DetailCustomer:(isUpdate ? [IPCCurrentCustomer sharedManager].currentCustomer :  nil)
+                                                               DetailCustomer:(isUpdate ? [IPCPayOrderCurrentCustomer sharedManager].currentCustomer :  nil)
                                                                   UpdateBlock:^(NSString *customerId)
                              {
                                  __strong typeof(weakSelf) strongSelf = weakSelf;

@@ -45,10 +45,8 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0){
         [self resetAllSelectState];
     }
-    
     [self reloadRemainAmount];
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -75,12 +73,12 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
         return;
     }
     
-    if (sender.tag == 5 && [IPCCurrentCustomer sharedManager].currentCustomer.integral == 0) {
+    if (sender.tag == 5 && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
-    if (sender.tag == 4 && [IPCCurrentCustomer sharedManager].currentCustomer.balance == 0) {
+    if (sender.tag == 4 && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0) {
         [IPCCommonUI showError:@"客户无可用储值余额"];
         return;
     }
@@ -168,6 +166,8 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     self.insertRecord = [[IPCPayRecord alloc]init];
     self.insertRecord.payTypeInfo = self.payTypeNameLabel.text;
     self.insertRecord.payDate = [NSDate date];
+    
+    [IPCPayOrderManager sharedManager].isInsertRecord = YES;
 }
 
 - (void)resetAllSelectState
@@ -180,15 +180,7 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     }];
     [self.payTypeNameLabel setText:@""];
     self.insertRecord = nil;
-}
-
-- (BOOL)isEndPayRecord
-{
-    if (self.insertRecord) {
-        [IPCCommonUI showError:@"请确认完成添加收银记录!"];
-        return NO;
-    }
-    return YES;
+    [IPCPayOrderManager sharedManager].isInsertRecord = NO;
 }
 
 - (void)didReceiveMemoryWarning {

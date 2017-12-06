@@ -16,9 +16,16 @@
 @property (nonatomic, strong) NSMutableArray<NSString *> * lensSph;
 @property (nonatomic, strong) NSMutableArray<NSString *> * lensCyl;
 
-- (void)batchReadingDegrees:(CGFloat)start End:(CGFloat)end Step:(CGFloat)step;
+- (void)batchReadingDegrees:(CGFloat)start
+                        End:(CGFloat)end
+                       Step:(CGFloat)step;
 
-- (void)batchContactlensWithStartSph:(CGFloat)startSph EndSph:(CGFloat)endSph StepSph:(CGFloat)stepSph StartCyl:(CGFloat)startCyl EndCyl:(CGFloat)endCyl StepCyl:(CGFloat)stepCyl;
+- (void)batchContactlensWithStartSph:(CGFloat)startSph
+                              EndSph:(CGFloat)endSph
+                             StepSph:(CGFloat)stepSph
+                            StartCyl:(CGFloat)startCyl
+                              EndCyl:(CGFloat)endCyl
+                             StepCyl:(CGFloat)stepCyl;
 
 @end
 

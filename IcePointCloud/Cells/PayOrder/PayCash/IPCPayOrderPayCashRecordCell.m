@@ -38,7 +38,7 @@
     }
 }
 
-
+#pragma mark //Clicked Events
 - (IBAction)removePayRecordAction:(id)sender {
 }
 

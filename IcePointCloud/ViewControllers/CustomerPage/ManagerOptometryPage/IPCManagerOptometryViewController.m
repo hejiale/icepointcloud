@@ -149,10 +149,10 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
         IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
-        [IPCCurrentCustomer sharedManager].currentOpometry = nil;
-        [IPCCurrentCustomer sharedManager].currentOpometry = optometry;
+        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = nil;
+        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
         [IPCPayOrderManager sharedManager].currentOptometryId = optometry.optometryID;
         [self.navigationController popViewControllerAnimated:YES];
     }

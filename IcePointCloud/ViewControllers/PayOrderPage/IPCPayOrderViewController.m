@@ -42,20 +42,18 @@
     [self.bottomView addTopLine];
     [self.cancelButton addBorder:2 Width:0.5 Color:nil];
     [self.saveButton addBorder:2 Width:0 Color:nil];
-    
+    //Init Data
     self.viewMode = [[IPCPayOrderViewMode alloc]init];
-    
+    [self addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionNew context:NULL];
+    //Add Child ViewController
     _customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
     _optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
     _offerOrderVC = [[IPCPayOrderOfferOrderViewController alloc]initWithNibName:@"IPCPayOrderOfferOrderViewController" bundle:nil];
     _cashVC = [[IPCPayOrderPayCashViewController alloc]initWithNibName:@"IPCPayOrderPayCashViewController" bundle:nil];
     [self.viewControllers addObjectsFromArray:@[_customerVC,_optometryVC,_offerOrderVC,_cashVC]];
-    
-    [self addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionNew context:NULL];
-    
+    //Set Current Page
     [self setCurrentPage:0];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -67,16 +65,14 @@
 
 - (NSMutableArray<UIViewController *> *)viewControllers
 {
-    if (!_viewControllers) {
+    if (!_viewControllers)
         _viewControllers = [[NSMutableArray alloc]init];
-    }
     return _viewControllers;
 }
 
 - (void)setCurrentPage:(NSInteger)currentPage
 {
-    if (currentPage >= 0 && currentPage <= 3 && currentPage != _currentPage && currentPage != NSNotFound)
-    {
+    if (currentPage >= 0 && currentPage <= 3 && currentPage != _currentPage && currentPage != NSNotFound){
         [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         
         UIViewController * currentViewController = self.viewControllers[currentPage];
@@ -91,14 +87,6 @@
             [preViewController removeFromParentViewController];
         }
         _currentPage = currentPage;
-    }
-}
-
-#pragma mark //KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentPage"]) {
-        [self reload];
     }
 }
 
@@ -120,6 +108,7 @@
     }];
 }
 
+#pragma mark //Complete Pay Methods
 - (void)completePay
 {
     [self.nextStepButton jk_hideIndicator];
@@ -137,7 +126,7 @@
 ///收银
 - (IBAction)payCashAction:(id)sender
 {
-    if ([[IPCPayOrderManager sharedManager] isCanPayOrder] && [self.cashVC isEndPayRecord]) {
+    if ([[IPCPayOrderManager sharedManager] isCanPayOrder]) {
         [self offerOrder:NO];
     }
 }
@@ -172,13 +161,6 @@
     }];
 }
 
-- (void)clearAllPayInfo
-{
-    [self setCurrentPage:0];
-    [[IPCPayOrderManager sharedManager] resetData];
-}
-
-
 - (IBAction)changePageIndex:(UIButton *)sender
 {
     if (![IPCPayOrderManager sharedManager].currentCustomerId) {
@@ -189,6 +171,13 @@
 }
 
 #pragma mark //Reload Methods
+- (void)clearAllPayInfo
+{
+    [self setCurrentPage:0];
+    [[IPCPayOrderManager sharedManager] resetData];
+}
+
+
 - (void)reload
 {
     [self.leftButtonView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -208,6 +197,14 @@
     }else{
         [self.nextStepButton setHidden:NO];
         [self.saveButton setHidden:YES];
+    }
+}
+
+#pragma mark //KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentPage"]) {
+        [self reload];
     }
 }
 

@@ -10,6 +10,4 @@
 
 @interface IPCPayOrderPayCashViewController : UIViewController
 
-- (BOOL)isEndPayRecord;
-
 @end

@@ -12,7 +12,6 @@
 @interface IPCOptometryList : NSObject
 
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCOptometryMode *> * listArray;
-@property (nonatomic, assign, readwrite) NSInteger  totalCount;
 
 - (instancetype)initWithResponseValue:(id)responseValue;
 

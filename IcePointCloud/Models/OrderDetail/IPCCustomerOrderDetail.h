@@ -20,6 +20,7 @@
 @property (nonatomic, strong, readwrite) IPCOptometryMode                    *  optometryMode;
 
 - (void)parseResponseValue:(id)responseValue;
+
 - (void)clearData;
 
 @end
@@ -53,7 +54,7 @@
 @property (nonatomic, assign, readwrite) double   totalPayAmount;
 @property (nonatomic, assign, readwrite) double    totalPointAmount;
 @property (nonatomic, assign, readonly) double    deductionIntegral;
-@property (nonatomic, assign, readwrite) double        remainAmount;//订单详情中剩余付款金额
+@property (nonatomic, assign, readwrite) double    remainAmount;//订单详情中剩余付款金额
 @property (nonatomic, copy, readonly) NSString * auditResult;
 @property (nonatomic, copy, readonly) NSString * auditStatus;
 

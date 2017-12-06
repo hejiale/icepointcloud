@@ -33,11 +33,11 @@ extern NSString * const kIPCNotConnectInternetMessage;
 
 @interface IPCAppManager : NSObject
 
-@property (nonatomic, copy, readwrite)  NSString * companyName;
-@property (nonatomic, copy, readwrite) NSString * deviceToken;
-@property (nonatomic, strong)    IPCStoreResult * storeResult;
-@property (nonatomic, strong)    IPCWareHouseResult * wareHouse;
-@property (nonatomic, strong)    IPCWareHouse * currentWareHouse;
+@property (nonatomic, copy, readwrite)       NSString                   * companyName;
+@property (nonatomic, copy, readwrite)       NSString                   * deviceToken;
+@property (nonatomic, strong, readwrite)    IPCStoreResult          * storeResult;
+@property (nonatomic, strong, readwrite)    IPCWareHouseResult * wareHouse;
+@property (nonatomic, strong, readwrite)    IPCWareHouse           * currentWareHouse;
 
 + (IPCAppManager *)sharedManager;
 
@@ -95,12 +95,6 @@ extern NSString * const kIPCNotConnectInternetMessage;
  @param complete 
  */
 - (void)loadWareHouse:(void(^)(NSError * error))complete;
-
-
-/**
-  Clear All Data
- */
-- (void)clearData;
 
 
 @end
