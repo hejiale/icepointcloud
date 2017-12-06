@@ -200,9 +200,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         CGAffineTransform newTransform =  CGAffineTransformConcat(self.parameterContentView.transform,  CGAffineTransformInvert(self.parameterContentView.transform));
         [self.parameterContentView setTransform:newTransform];
         self.parameterContentView.alpha = 1.0;
-    } completion:^(BOOL finished) {
-        
-    }];
+    } completion:nil];
 }
 
 - (IBAction)completeAction:(id)sender {
@@ -294,6 +292,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                             Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                           Count:[self.lensNumLabel.text integerValue]];
     }
+    if (self.CompleteBlock) {
+        self.CompleteBlock();
+    }
 }
 
 
@@ -314,7 +315,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         if (finished) {
             [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [self removeFromSuperview];
-            if (self.CompleteBlock)self.CompleteBlock();
         }
     }];
 }

@@ -115,6 +115,7 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
         
         [[cell rac_signalForSelector:@selector(cancelAddRecordAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             self.insertRecord = nil;
+            [IPCPayOrderManager sharedManager].isInsertRecord = NO;
             [tableView reloadData];
         }];
         return cell;
@@ -142,7 +143,10 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 #pragma mark //IPCPayOrderEditPayCashRecordCellDelegate
 - (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
 {
-    if (isInsert)self.insertRecord = nil;
+    if (isInsert){
+        self.insertRecord = nil;
+        [IPCPayOrderManager sharedManager].isInsertRecord = NO;
+    }
     
     [self reloadRemainAmount];
 }

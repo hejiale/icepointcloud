@@ -38,10 +38,10 @@
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"
 
-#define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"//保存草稿
-#define PayOrderRequest_OfferOrder                    @"orderObjectAdmin.commitAuthOrders"//提交
-#define PayOrderRequest_AuthOrder                    @"orderObjectAdmin.confirmOrder"//审核订单
-#define PayOrderRequest_PayCashOrder               @"bizadmin.saveOrderPayInfo"//收银
+#define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"
+#define PayOrderRequest_OfferOrder                    @"orderObjectAdmin.commitAuthOrders"
+#define PayOrderRequest_AuthOrder                    @"orderObjectAdmin.confirmOrder"
+#define PayOrderRequest_PayCashOrder               @"bizadmin.saveOrderPayInfo"
 
 #define PayOrderRequest_EmployeeList                 @"employeeadmin.listEmployee"
 #define PayOrderRequest_Integral                          @"integralTradeAdmin.getSaleOrderDetailIntegralList"

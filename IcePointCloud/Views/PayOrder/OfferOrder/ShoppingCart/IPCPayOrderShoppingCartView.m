@@ -26,7 +26,6 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 @property (weak, nonatomic) IBOutlet UIView *cartBottomView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableBottom;
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
-@property (strong, nonatomic) UIView * coverView;
 @property (strong, nonatomic) IPCCartViewMode    *cartViewMode;
 @property (strong, nonatomic) IPCGlassParameterView * parameterView;
 @property (copy, nonatomic) void(^CompleteBlock)();
@@ -67,17 +66,9 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 }
 
 #pragma mark //Set UI
-- (UIView *)coverView{
-    if (!_coverView) {
-        _coverView = [[UIView alloc]initWithFrame:self.bounds];
-        [_coverView setBackgroundColor:[[UIColor blackColor]colorWithAlphaComponent:0.2]];
-    }
-    return _coverView;
-}
-
 - (void)commitUI{
     self.cartViewMode = [[IPCCartViewMode alloc]init];
-    [self updateCartUI:YES];
+    [self updateCartUI:NO];
 }
 
 - (void)updateBottomStatus:(BOOL)isShown
@@ -201,21 +192,15 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 }
 
 #pragma mark //IPCEditShoppingCartCellDelegate
-- (void)chooseParameter:(IPCEditShoppingCartCell *)cell{
-    [self addSubview:self.coverView];
-    
+- (void)chooseParameter:(IPCEditShoppingCartCell *)cell
+{
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
     
-    __weak typeof(self) weakSelf = self;
-    _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [_parameterView removeFromSuperview];
-        [strongSelf.coverView removeFromSuperview];
-    }];
+    _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[IPCCommonUI currentView].bounds  Complete:nil];
     _parameterView.cartItem = cartItem;
-    [[UIApplication sharedApplication].keyWindow addSubview:_parameterView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:_parameterView];
+    [[IPCCommonUI currentView] addSubview:_parameterView];
+    [[IPCCommonUI currentView] bringSubviewToFront:_parameterView];
     [_parameterView show];
 }
 
