@@ -21,8 +21,6 @@ NSString * const IPCCustomKeyboardClearNotification = @"IPCCustomKeyboardClearNo
 NSString * const IPCCustomKeyboardPreNotification = @"IPCCustomKeyboardPreNotification";
 NSString * const IPCCustomKeyboardNextNotification = @"IPCCustomKeyboardNextNotification";
 NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
-NSString * const IPCCustomKeyboardStringNotification  = @"IPCCustomKeyboardStringNotification";
-
 
 @interface IPCCustomKeyboard()
 

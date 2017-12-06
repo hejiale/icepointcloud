@@ -27,6 +27,7 @@
         if ([self.preTextField.delegate respondsToSelector:@selector(textFieldEndEditing:)]) {
             [self.preTextField.delegate textFieldEndEditing:self.preTextField];
         }
+        self.preTextField = nil;
     }
 }
 

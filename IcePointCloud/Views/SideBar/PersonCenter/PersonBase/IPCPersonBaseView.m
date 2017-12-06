@@ -65,7 +65,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (void)logoutRequest
 {
     [IPCUserRequestManager userLogoutWithSuccessBlock:^(id responseValue) {
-        [IPCCommonUI hiden];
         if (self.LogoutBlock)
             self.LogoutBlock();
     } FailureBlock:^(NSError *error) {
@@ -75,7 +74,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 
 #pragma mark //Clicked Events
 - (IBAction)logoutAction:(id)sender {
-    [IPCCommonUI show];
     [self logoutRequest];
 }
 

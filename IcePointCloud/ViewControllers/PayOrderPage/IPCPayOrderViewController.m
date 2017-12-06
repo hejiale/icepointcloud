@@ -44,7 +44,6 @@
     [self.saveButton addBorder:2 Width:0 Color:nil];
     //Init Data
     self.viewMode = [[IPCPayOrderViewMode alloc]init];
-    [self addObserver:self forKeyPath:@"currentPage" options:NSKeyValueObservingOptionNew context:NULL];
     //Add Child ViewController
     _customerVC = [[IPCPayOrderCustomerViewController alloc]initWithNibName:@"IPCPayOrderCustomerViewController" bundle:nil];
     _optometryVC = [[IPCPayOrderOptometryViewController alloc]initWithNibName:@"IPCPayOrderOptometryViewController" bundle:nil];
@@ -87,6 +86,7 @@
             [preViewController removeFromParentViewController];
         }
         _currentPage = currentPage;
+        [self reload];
     }
 }
 
@@ -173,8 +173,12 @@
 #pragma mark //Reload Methods
 - (void)clearAllPayInfo
 {
-    [self setCurrentPage:0];
     [[IPCPayOrderManager sharedManager] resetData];
+    
+    if (self.currentPage == 0) {
+         [self.customerVC updateUI];
+    }
+    [self setCurrentPage:0];
 }
 
 
@@ -200,13 +204,6 @@
     }
 }
 
-#pragma mark //KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"currentPage"]) {
-        [self reload];
-    }
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

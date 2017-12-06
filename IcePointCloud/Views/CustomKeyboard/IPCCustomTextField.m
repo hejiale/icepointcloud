@@ -128,7 +128,6 @@
     }
 }
 
-
 #pragma mark //注册监听键盘输入通知
 - (void)registerNotification
 {

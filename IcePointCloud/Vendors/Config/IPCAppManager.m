@@ -90,13 +90,12 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     ///Clear All Data & Clear HTTP Request
     [[IPCAppManager sharedManager] clearData];
     [[IPCTryMatch instance] clearData];
-    [[IPCPayOrderCurrentCustomer sharedManager] clearData];
-    [[IPCShoppingCart sharedCart] clear];
     [[IPCPayOrderManager sharedManager] resetData];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     
-    [[[UIApplication sharedApplication].keyWindow subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [[UIApplication sharedApplication].keyWindow setRootViewController:[[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil]];
+    
+    IPCLoginViewController * loginVc = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
+    [[[UIApplication sharedApplication] delegate].window setRootViewController:loginVc];
 }
 
 ///Load Search Customer Keywords In LocalDatabase

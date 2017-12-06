@@ -88,22 +88,23 @@
 
 - (void)clearPayRecord
 {
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [self.payTypeRecordArray removeAllObjects];
 }
 
 - (void)resetData
 {
     [IPCPayOrderManager sharedManager].remark = nil;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
-    [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [IPCPayOrderManager sharedManager].currentOptometryId = nil;
+    [IPCPayOrderManager sharedManager].integralTrade = nil;
+    [IPCPayOrderManager sharedManager].currentHouse = nil;
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;
     [IPCPayOrderManager sharedManager].discountAmount = 0;
     [IPCPayOrderManager sharedManager].employee = [IPCAppManager sharedManager].storeResult.employee;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
+    [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }
 

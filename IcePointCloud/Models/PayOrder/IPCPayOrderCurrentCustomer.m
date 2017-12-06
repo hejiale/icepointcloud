@@ -22,16 +22,16 @@
 
 - (void)loadCurrentCustomer:(id)responseValue
 {
-    [[IPCPayOrderCurrentCustomer sharedManager] clearData];
+    [self clearData];
     
     IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-    [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = detailCustomer;
-    [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
+    self.currentCustomer = detailCustomer;
+    self.currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
 }
 
 - (void)clearData{
-    [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = nil;
-    [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = nil;
+    self.currentCustomer = nil;
+    self.currentOpometry = nil;
 }
 
 

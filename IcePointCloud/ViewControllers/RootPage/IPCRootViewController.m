@@ -17,8 +17,6 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
-@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
-@property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 
 @end
 
@@ -30,11 +28,11 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     
-    _productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
-    _tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    _customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
-    _payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-    [self setViewControllers:@[_productVC,_customerInfoVC,_tryVC,_payOrderVC]];
+    self.productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
+    self.tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
+    IPCCustomerListViewController * customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
+    IPCPayOrderViewController * payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+    [self setViewControllers:@[self.productVC,customerInfoVC,self.tryVC,payOrderVC]];
     
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x)
