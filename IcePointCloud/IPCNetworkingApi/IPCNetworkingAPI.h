@@ -38,6 +38,7 @@
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"
 
+#define PayOrderRequest_ListPayType                  @"payTypeConfigAdmin.listPayType"
 #define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"
 #define PayOrderRequest_OfferOrder                    @"orderObjectAdmin.commitAuthOrders"
 #define PayOrderRequest_AuthOrder                    @"orderObjectAdmin.confirmOrder"

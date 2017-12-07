@@ -22,8 +22,12 @@
     if (_currentCustomer) {
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
-        [self.customerLevelLabel setText:_currentCustomer.memberLevel];
-    
+        if (_currentCustomer.memberLevel) {
+            [self.customerLevelLabel setText:_currentCustomer.memberLevel];
+        }else{
+            [self.customerLevelLabel setText:@"非会员"];
+        }
+        
         if ([_currentCustomer.customerID integerValue] == [[IPCPayOrderManager sharedManager].currentCustomerId integerValue])
         {
             [self.customerNameLabel setTextColor:COLOR_RGB_BLUE];

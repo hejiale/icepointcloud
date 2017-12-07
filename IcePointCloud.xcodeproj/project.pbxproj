@@ -238,6 +238,7 @@
 		CB15A1E11F9DBAAE00ABBF72 /* IPCWareHouseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */; };
 		CB15A1E21F9DBAAE00ABBF72 /* IPCWareHouseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */; };
 		CB15A1E41F9DEFD000ABBF72 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */; };
+		CB2CBEDE1FD8DF78003149F3 /* IPCPayOrderPayType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2CBEDD1FD8DF78003149F3 /* IPCPayOrderPayType.m */; };
 		CB3220391FA0648F004AE920 /* IPCStoreResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3220381FA0648F004AE920 /* IPCStoreResult.m */; };
 		CB32B95D1F9F122C002E006C /* IPCPersonBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B94A1F9F122C002E006C /* IPCPersonBaseView.m */; };
 		CB32B95E1F9F122C002E006C /* IPCPersonBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB32B94B1F9F122C002E006C /* IPCPersonBaseView.xib */; };
@@ -696,6 +697,8 @@
 		CB15A1DF1F9DBAAE00ABBF72 /* IPCWareHouseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCWareHouseCell.m; sourceTree = "<group>"; };
 		CB15A1E01F9DBAAE00ABBF72 /* IPCWareHouseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCWareHouseCell.xib; sourceTree = "<group>"; };
 		CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CB2CBEDC1FD8DF78003149F3 /* IPCPayOrderPayType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderPayType.h; sourceTree = "<group>"; };
+		CB2CBEDD1FD8DF78003149F3 /* IPCPayOrderPayType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderPayType.m; sourceTree = "<group>"; };
 		CB3220371FA0648F004AE920 /* IPCStoreResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCStoreResult.h; sourceTree = "<group>"; };
 		CB3220381FA0648F004AE920 /* IPCStoreResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCStoreResult.m; sourceTree = "<group>"; };
 		CB32B9491F9F122C002E006C /* IPCPersonBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPersonBaseView.h; sourceTree = "<group>"; };
@@ -1697,6 +1700,8 @@
 				CB0F557E1F98845A003707F2 /* IPCPayRecord.m */,
 				CBF0F5FE1FC69D3400647A42 /* IPCPayCashIntegralTrade.h */,
 				CBF0F5FF1FC69D3400647A42 /* IPCPayCashIntegralTrade.m */,
+				CB2CBEDC1FD8DF78003149F3 /* IPCPayOrderPayType.h */,
+				CB2CBEDD1FD8DF78003149F3 /* IPCPayOrderPayType.m */,
 			);
 			path = PayOrder;
 			sourceTree = "<group>";
@@ -2719,6 +2724,7 @@
 				CB0F56531F988B05003707F2 /* IPCSwitch.m in Sources */,
 				CB0F559E1F98845A003707F2 /* IPCBatchDegreeObject.m in Sources */,
 				CB0F54F61F98819C003707F2 /* IPCChooseCategoryCell.m in Sources */,
+				CB2CBEDE1FD8DF78003149F3 /* IPCPayOrderPayType.m in Sources */,
 				CB0F552B1F98819C003707F2 /* IPCPersonMenuCell.m in Sources */,
 				CB0F55321F98819C003707F2 /* LibraryTypeTableViewCell.m in Sources */,
 				CB0F54E41F98819C003707F2 /* IPCBatchParameterCell.m in Sources */,

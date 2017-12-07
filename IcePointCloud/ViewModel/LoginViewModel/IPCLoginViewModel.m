@@ -84,6 +84,7 @@
         //Query Responsity WareHouse
         [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
         [IPCAppManager sharedManager].storeResult.employee = [IPCEmployee mj_objectWithKeyValues:responseValue];
+        [[IPCPayOrderManager sharedManager] resetEmployee];
         //load wareHouse
         [strongSelf loadWareHouse];
     } FailureBlock:^(NSError *error) {

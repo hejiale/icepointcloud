@@ -13,7 +13,7 @@
 
 
 + (void)savePrototyOrderWithSuccessBlock:(void (^)(id responseValue))success
-                      FailureBlock:(void (^)(NSError * error))failure
+                            FailureBlock:(void (^)(NSError * error))failure
 {
     IPCPayOrderParameter * parameter = [[IPCPayOrderParameter alloc]init];
     
@@ -68,6 +68,12 @@
 + (void)queryIntegralRuleWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
     [self postRequest:nil RequestMethod:PayOrderRequest_IntegralRule CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)queryPayListTypeWithSuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError *error))failure
+{
+    [self postRequest:nil RequestMethod:PayOrderRequest_ListPayType CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

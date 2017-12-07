@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IPCPayRecord.h"
 #import "IPCPayCashIntegralTrade.h"
+#import "IPCPayOrderPayType.h"
 
 @interface IPCPayOrderManager : NSObject
 
@@ -35,6 +36,8 @@
 @property (nonatomic, strong, readwrite) IPCPayCashIntegralTrade * integralTrade;
 //付款记录方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;
+//支付方式
+@property (nonatomic, strong) NSMutableArray<IPCPayOrderPayType *> * payTypeList;
 //是否正在添加付款记录
 @property (nonatomic, assign, readwrite) BOOL  isInsertRecord;
 //剩余付款金额
@@ -49,6 +52,10 @@
 - (void)clearPayRecord;
 //清空支付信息  选择客户信息  清空商品列表
 - (void)resetData;
+//获取支付方式
+- (void)queryPayType;
+//初始化经办人
+- (void)resetEmployee;
 
 
 @end

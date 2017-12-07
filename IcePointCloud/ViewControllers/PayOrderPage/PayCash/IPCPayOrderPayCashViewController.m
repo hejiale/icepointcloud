@@ -46,6 +46,8 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
         [self resetAllSelectState];
     }
     [self reloadRemainAmount];
+    //获取支付方式
+//    [[IPCPayOrderManager sharedManager] queryPayType];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

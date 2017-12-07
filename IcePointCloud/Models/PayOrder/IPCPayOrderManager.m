@@ -24,8 +24,15 @@
 {
     self = [super init];
     if (self) {
-        self.employee = [[IPCEmployee alloc]init];
-        self.employee = [IPCAppManager sharedManager].storeResult.employee;
+        
+    }
+    return self;
+}
+
+- (NSMutableArray<IPCPayOrderPayType *> *)payTypeList
+{
+    if (!_payTypeList) {
+        _payTypeList = [[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -82,6 +89,9 @@
     }else if ([IPCPayOrderManager sharedManager].isInsertRecord){
         [IPCCommonUI showError:@"请完成确认添加付款记录!"];
         return NO;
+    }else if (![IPCPayOrderManager sharedManager].employee){
+        [IPCCommonUI showError:@"请选择经办人!"];
+        return NO;
     }
     return YES;
 }
@@ -89,6 +99,25 @@
 - (void)clearPayRecord
 {
     [self.payTypeRecordArray removeAllObjects];
+}
+
+- (void)queryPayType
+{
+    [self.payTypeList removeAllObjects];
+    
+    [IPCPayOrderRequestManager queryPayListTypeWithSuccessBlock:^(id responseValue)
+    {
+        IPCPayOrderPayType * payType = [IPCPayOrderPayType mj_objectWithKeyValues:responseValue];
+        [self.payTypeList addObject:payType];
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
+- (void)resetEmployee
+{
+    self.employee = [[IPCEmployee alloc]init];
+    self.employee = [IPCAppManager sharedManager].storeResult.employee;
 }
 
 - (void)resetData
@@ -102,7 +131,7 @@
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;
     [IPCPayOrderManager sharedManager].discountAmount = 0;
-    [IPCPayOrderManager sharedManager].employee = [IPCAppManager sharedManager].storeResult.employee;
+    [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];

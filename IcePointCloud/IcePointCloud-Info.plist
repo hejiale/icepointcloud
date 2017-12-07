@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>访问相册</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>访问相册</string>
 	<key>CFBundleAllowMixedLocalizations</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -38,7 +34,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>2.6.0</string>
+	<string>2.6.1</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
@@ -75,6 +71,10 @@
 	<string>访问麦克风</string>
 	<key>NSMotionUsageDescription</key>
 	<string>访问运动与健身</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>访问相册</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>访问相册</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

@@ -74,4 +74,14 @@
 + (void)queryIntegralRuleWithSuccessBlock:(void (^)(id responseValue))success
                              FailureBlock:(void (^)(NSError *error))failure;
 
+
+/**
+ Query Pay List Type
+
+ @param success
+ @param failure 
+ */
++ (void)queryPayListTypeWithSuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError *error))failure;
+
 @end
