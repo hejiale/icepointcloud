@@ -38,14 +38,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     //Init Data
     self.viewModel = [[IPCCustomerListViewModel alloc]init];
     [self loadData];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
-    [self updateUI];
+    [[IPCPayOrderManager sharedManager] ipc_addObserver:self ForKeyPath:@"currentCustomerId"];
 }
 
 #pragma mark //Set UI
@@ -211,7 +205,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                  strongSelf.editCustomerView = nil;
                                  
                                  [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-                                 [strongSelf updateUI];
                                  [strongSelf loadData];
                              }];
     [[IPCCommonUI currentView] addSubview:self.editCustomerView];
@@ -252,7 +245,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         if (customer) {
             [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
-            [self updateUI];
         }
     }
 }
@@ -278,6 +270,14 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         [self.customerCollectionView reloadData];
     }else{
         [self queryCustomerDetail];
+    }
+}
+
+#pragma mark //KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentCustomerId"]) {
+        [self updateUI];
     }
 }
 

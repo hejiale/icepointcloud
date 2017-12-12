@@ -283,6 +283,7 @@
 		CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */; };
 		CBAE6CE81FCBD2FF0024E448 /* IPCCustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE6CE71FCBD2FF0024E448 /* IPCCustomTextField.m */; };
 		CBAE6CEC1FCBF45B0024E448 /* IPCTextFiledControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE6CEB1FCBF45B0024E448 /* IPCTextFiledControl.m */; };
+		CBB64B301FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB64B2F1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m */; };
 		CBBB4CA91FB15982008D31F5 /* IPCLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */; };
 		CBF0F6001FC69D3400647A42 /* IPCPayCashIntegralTrade.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF0F5FF1FC69D3400647A42 /* IPCPayCashIntegralTrade.m */; };
 		CBF0F6031FC6BCA900647A42 /* IPCEmployee.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF0F6021FC6BCA900647A42 /* IPCEmployee.m */; };
@@ -778,6 +779,8 @@
 		CBAE6CE71FCBD2FF0024E448 /* IPCCustomTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomTextField.m; sourceTree = "<group>"; };
 		CBAE6CEA1FCBF45B0024E448 /* IPCTextFiledControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCTextFiledControl.h; sourceTree = "<group>"; };
 		CBAE6CEB1FCBF45B0024E448 /* IPCTextFiledControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCTextFiledControl.m; sourceTree = "<group>"; };
+		CBB64B2E1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+IPCObserver.h"; sourceTree = "<group>"; };
+		CBB64B2F1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+IPCObserver.m"; sourceTree = "<group>"; };
 		CBBB4CA71FB15982008D31F5 /* IPCLoginViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCLoginViewModel.h; sourceTree = "<group>"; };
 		CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCLoginViewModel.m; sourceTree = "<group>"; };
 		CBF0F5FE1FC69D3400647A42 /* IPCPayCashIntegralTrade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayCashIntegralTrade.h; sourceTree = "<group>"; };
@@ -1810,6 +1813,8 @@
 				CB0F55FB1F988B05003707F2 /* UIView+GestureRecognizerBlock.m */,
 				CB0F55FC1F988B05003707F2 /* UIViewController+Extend.h */,
 				CB0F55FD1F988B05003707F2 /* UIViewController+Extend.m */,
+				CBB64B2E1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.h */,
+				CBB64B2F1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2718,6 +2723,7 @@
 				CB0F563D1F988B05003707F2 /* UIButton+TouchArea.m in Sources */,
 				CB468F491FDE565600FCDAE4 /* IPCPriceStrategyView.m in Sources */,
 				CB0F54F41F98819C003707F2 /* IPCEmployeListCell.m in Sources */,
+				CBB64B301FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m in Sources */,
 				CB0F56541F988B05003707F2 /* IPCAlertController.m in Sources */,
 				CB0F54F21F98819C003707F2 /* IPCCustomerCollectionViewCell.m in Sources */,
 				CB0F56441F988B05003707F2 /* UIView+Border.m in Sources */,
