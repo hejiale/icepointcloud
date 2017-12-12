@@ -33,6 +33,8 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     [self.payRecordTableView setTableHeaderView:[[UIView alloc]init]];
     [self.payRecordTableView setTableFooterView:[[UIView alloc]init]];
     [self.view addSubview:self.keyboard];
+    
+    [[IPCPayOrderManager sharedManager] queryPayType];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -46,8 +48,6 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
         [self resetAllSelectState];
     }
     [self reloadRemainAmount];
-    //获取支付方式
-//    [[IPCPayOrderManager sharedManager] queryPayType];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

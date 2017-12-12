@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -61,7 +61,6 @@
                         <constraint firstItem="Cjf-IE-Suj" firstAttribute="top" secondItem="NuH-Ee-rw0" secondAttribute="top" id="BoO-27-vBE"/>
                         <constraint firstItem="NfX-9f-R0q" firstAttribute="top" secondItem="NuH-Ee-rw0" secondAttribute="top" id="CZb-Hn-AVk"/>
                         <constraint firstItem="NfX-9f-R0q" firstAttribute="leading" secondItem="NuH-Ee-rw0" secondAttribute="leading" id="UHG-js-X3j"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="hSK-CQ-c9D"/>
                         <constraint firstAttribute="bottom" secondItem="Cjf-IE-Suj" secondAttribute="bottom" id="tPr-GA-FSc"/>
                         <constraint firstAttribute="height" constant="64" id="yOd-20-yLZ"/>
                     </constraints>

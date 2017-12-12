@@ -14,6 +14,7 @@
                        Logout:(void(^)())logout
                   UpdateBlock:(void(^)())update
                   QRCodeBlock:(void(^)())qrcode
-               WareHouseBlock:(void(^)())wareHouse;
+               WareHouseBlock:(void(^)())wareHouse
+           PriceStrategyBlock:(void(^)())priceStrategy;
 
 @end

@@ -106,6 +106,20 @@
     }];
 }
 
+/*- (void)loadPriceStrategy
+{
+    __weak typeof (self) weakSelf = self;
+    [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        //Load Main View
+        if (!error) {
+            [strongSelf showMainRootViewController];
+        }else{
+            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+        }
+    }];
+}*/
+
 
 #pragma mark //Clicked Methods
 - (void)syncUserAccountHistory:(NSString *)userName

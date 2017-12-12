@@ -11,6 +11,7 @@
 #import "IPCUpdatePasswordView.h"
 #import "IPCQRCodeView.h"
 #import "IPCWarehouseView.h"
+#import "IPCPriceStrategyView.h"
 
 @interface IPCShowContentView()
 
@@ -56,17 +57,20 @@
                                                                           Logout:^{
                                                                               [[IPCAppManager sharedManager] logout];
                                                                           } UpdateBlock:^{
-                                                                              [self setSelectedIndex:3];
+                                                                              [self setSelectedIndex:4];
                                                                           } QRCodeBlock:^{
-                                                                              [self setSelectedIndex:2];
+                                                                              [self setSelectedIndex:3];
                                                                           } WareHouseBlock:^{
                                                                               [self setSelectedIndex:1];
+                                                                          } PriceStrategyBlock:^{
+                                                                              [self setSelectedIndex:2];
                                                                           }];
     IPCWarehouseView * houseView = [[IPCWarehouseView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
+    IPCPriceStrategyView * priceView = [[IPCPriceStrategyView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
     IPCQRCodeView * codeView       = [[IPCQRCodeView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
     IPCUpdatePasswordView * updateView = [[IPCUpdatePasswordView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
     
-    [self setViewArray:@[personBaseView,houseView,codeView,updateView]];
+    [self setViewArray:@[personBaseView,houseView,priceView,codeView,updateView]];
 }
 
 - (void)dismissContent:(void (^)())completeBlock

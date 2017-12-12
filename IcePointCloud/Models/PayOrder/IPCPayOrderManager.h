@@ -37,7 +37,7 @@
 //付款记录方式
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;
 //支付方式
-@property (nonatomic, strong) NSMutableArray<IPCPayOrderPayType *> * payTypeList;
+@property (nonatomic, strong) NSMutableArray<IPCPayOrderPayType *> * payTypeArray;
 //是否正在添加付款记录
 @property (nonatomic, assign, readwrite) BOOL  isInsertRecord;
 //剩余付款金额

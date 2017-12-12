@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *rightAddTextField;
 @property (weak, nonatomic) IBOutlet UITextField *rightCorrectionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *rightDistanceTextField;
+@property (weak, nonatomic) IBOutlet UITextField *comprehensiveDistanceTextField;
 @property (weak, nonatomic) IBOutlet UITextView *memoTextField;
 
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
@@ -81,22 +82,23 @@
 - (void)saveNewOptometry
 {
     [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:currentCustomerId
-                                                          SphLeft:self.insertOptometry.sphLeft
-                                                         SphRight:self.insertOptometry.sphRight
-                                                          CylLeft:self.insertOptometry.cylLeft
-                                                         CylRight:self.insertOptometry.cylRight
-                                                         AxisLeft:self.insertOptometry.axisLeft
-                                                        AxisRight:self.insertOptometry.axisRight
-                                                          AddLeft:self.insertOptometry.addLeft
-                                                         AddRight:self.insertOptometry.addRight
-                                              CorrectedVisionLeft:self.insertOptometry.correctedVisionLeft
-                                             CorrectedVisionRight:self.insertOptometry.correctedVisionRight
-                                                     DistanceLeft:self.insertOptometry.distanceLeft
-                                                    DistanceRight:self.insertOptometry.distanceRight
+                                                          SphLeft:self.leftSphTextField.text
+                                                         SphRight:self.rightSphTextField.text
+                                                          CylLeft:self.leftCylTextField.text
+                                                         CylRight:self.rightCylTextField.text
+                                                         AxisLeft:self.leftAxisTextField.text
+                                                        AxisRight:self.rightAxisTextField.text
+                                                          AddLeft:self.leftAddTextField.text
+                                                         AddRight:self.rightAddTextField.text
+                                              CorrectedVisionLeft:self.leftCorrectionTextField.text
+                                             CorrectedVisionRight:self.rightCorrectionTextField.text
+                                                     DistanceLeft:self.leftDistanceTextField.text
+                                                    DistanceRight:self.rightDistanceTextField.text
                                                           Purpose:self.insertOptometry.purpose
                                                        EmployeeId:self.insertOptometry.employeeId
-                                                     EmployeeName:self.insertOptometry.employeeName
-                                                           Remark:self.insertOptometry.remark
+                                                     EmployeeName:self.employeeTextField.text
+                                                    Comprehensive:self.comprehensiveDistanceTextField.text
+                                                           Remark:self.memoTextField.text
                                                      SuccessBlock:^(id responseValue)
      {
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
@@ -123,7 +125,7 @@
     if (!self.insertOptometry.purpose.length) {
         self.insertOptometry.purpose = @"FAR";
     }
-    if (!self.insertOptometry.employeeName.length){
+    if (!self.employeeTextField.text.length){
         [IPCCommonUI showError:@"请选择验光师"];
     }else{
         [self saveNewOptometry];
@@ -132,23 +134,21 @@
 
 #pragma mark //Clicked Events
 - (IBAction)rightInputAction:(id)sender {
-    self.insertOptometry.sphLeft = self.insertOptometry.sphRight;
-    self.insertOptometry.cylLeft   = self.insertOptometry.cylRight;
-    self.insertOptometry.axisLeft = self.insertOptometry.axisRight;
-    self.insertOptometry.addLeft  = self.insertOptometry.addRight;
-    self.insertOptometry.correctedVisionLeft = self.insertOptometry.correctedVisionRight;
-    self.insertOptometry.distanceLeft = self.insertOptometry.distanceRight;
-    [self updateInsertOptometry];
+    [self.rightSphTextField setText:self.leftSphTextField.text];
+    [self.rightCylTextField setText:self.leftCylTextField.text];
+    [self.rightAddTextField setText:self.leftAddTextField.text];
+    [self.rightAxisTextField setText:self.leftAxisTextField.text];
+    [self.rightDistanceTextField setText:self.leftDistanceTextField.text];
+    [self.rightCorrectionTextField setText:self.leftCorrectionTextField.text];
 }
 
 - (IBAction)leftInputAction:(id)sender {
-    self.insertOptometry.sphRight = self.insertOptometry.sphLeft;
-    self.insertOptometry.cylRight   = self.insertOptometry.cylLeft;
-    self.insertOptometry.axisRight = self.insertOptometry.axisLeft;
-    self.insertOptometry.addRight  = self.insertOptometry.addLeft;
-    self.insertOptometry.correctedVisionRight = self.insertOptometry.correctedVisionLeft;
-    self.insertOptometry.distanceRight = self.insertOptometry.distanceLeft;
-    [self updateInsertOptometry];
+    [self.leftSphTextField setText:self.rightSphTextField.text];
+    [self.leftCylTextField setText:self.rightCylTextField.text];
+    [self.leftAddTextField setText:self.rightAddTextField.text];
+    [self.leftAxisTextField setText:self.rightAxisTextField.text];
+    [self.leftDistanceTextField setText:self.rightDistanceTextField.text];
+    [self.leftCorrectionTextField setText:self.rightCorrectionTextField.text];
 }
 
 - (IBAction)farUseAction:(id)sender {
@@ -170,31 +170,10 @@
                                                                 DismissBlock:^(IPCEmployee *employee)
                                      {
                                          self.insertOptometry.employeeId = employee.jobID;
-                                         self.insertOptometry.employeeName = employee.name;
-                                         [self updateInsertOptometry];
+                                         [self.employeeTextField setText:employee.name];
                                      }];
     [[UIApplication sharedApplication].keyWindow addSubview:listView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:listView];
-}
-
-
-- (void)updateInsertOptometry
-{
-    [self.leftSphTextField setText:self.insertOptometry.sphLeft];
-    [self.leftCylTextField setText:self.insertOptometry.cylLeft];
-    [self.leftAddTextField setText:self.insertOptometry.addLeft];
-    [self.leftAxisTextField setText:self.insertOptometry.axisLeft];
-    [self.leftDistanceTextField setText:self.insertOptometry.distanceLeft];
-    [self.leftCorrectionTextField setText:self.insertOptometry.correctedVisionLeft];
-    
-    [self.rightSphTextField setText:self.insertOptometry.sphRight];
-    [self.rightCylTextField setText:self.insertOptometry.cylRight];
-    [self.rightAddTextField setText:self.insertOptometry.addRight];
-    [self.rightAxisTextField setText:self.insertOptometry.axisRight];
-    [self.rightDistanceTextField setText:self.insertOptometry.distanceRight];
-    [self.rightCorrectionTextField setText:self.insertOptometry.correctedVisionRight];
-    
-    [self.employeeTextField setText:self.insertOptometry.employeeName];
 }
 
 #pragma mark //UITextFieldDelegate
@@ -205,7 +184,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField.tag == 11) {
+    if (textField.tag == 12) {
         [textField resignFirstResponder];
     }else{
         UITextField * nextTextField = (UITextField *)[self viewWithTag:textField.tag+1];
@@ -227,8 +206,8 @@
                 }else{
                     [textField setText:@""];
                 }
-            }else if (textField.tag == 10 || textField.tag == 11){
-                [textField setText:[NSString stringWithFormat:@"%.2f mm",[str doubleValue]]];
+            }else if (textField.tag == 10 || textField.tag == 11 || textField.tag == 12){
+                [self updateOptometryDistance:textField Text:str];
             }else{
                 if (![str hasPrefix:@"-"]) {
                     [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
@@ -242,47 +221,6 @@
             [textField setText:@"+0.00"];
         }
     }
-    
-    switch (textField.tag) {
-        case 0:
-            self.insertOptometry.sphRight = textField.text;
-            break;
-        case 1:
-            self.insertOptometry.sphLeft = textField.text;
-            break;
-        case 2:
-            self.insertOptometry.cylRight =textField.text;
-            break;
-        case 3:
-            self.insertOptometry.cylLeft = textField.text;
-            break;
-        case 4:
-            self.insertOptometry.axisRight =textField.text;
-            break;
-        case 5:
-            self.insertOptometry.axisLeft = textField.text;
-            break;
-        case 6:
-            self.insertOptometry.addRight = textField.text;
-            break;
-        case 7:
-            self.insertOptometry.addLeft = textField.text;
-            break;
-        case 8:
-            self.insertOptometry.correctedVisionRight = textField.text;
-            break;
-        case 9:
-            self.insertOptometry.correctedVisionLeft = textField.text;
-            break;
-        case 10:
-            self.insertOptometry.distanceRight = textField.text;
-            break;
-        case 11:
-            self.insertOptometry.distanceLeft = textField.text;
-            break;
-        default:
-            break;
-    }
 }
 
 #pragma mark //UITextViewDelegate
@@ -295,9 +233,33 @@
     return YES;
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView
+///修改瞳距
+- (void)updateOptometryDistance:(UITextField *)textField Text:(NSString *)text
 {
-    self.insertOptometry.remark =  [textView.text jk_trimmingWhitespace];
+    if (textField.tag == 10 )
+    {
+        double leftDistance = 0;
+        if (self.insertOptometry.distanceLeft.length) {
+            leftDistance = [[self.leftDistanceTextField.text substringToIndex:self.leftDistanceTextField.text.length - 3] doubleValue];
+        }
+        
+        textField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]];
+        self.comprehensiveDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm", [text doubleValue] + leftDistance];
+        
+    }else if (textField.tag == 11){
+        double rightDistance = 0;
+        if (self.insertOptometry.distanceRight) {
+            rightDistance = [[self.rightDistanceTextField.text substringToIndex:self.rightDistanceTextField.text.length - 3] doubleValue];
+        }
+        
+        textField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]];
+        self.comprehensiveDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm", [text doubleValue] + rightDistance];
+    }else{
+        textField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]];
+        
+        self.leftDistanceTextField.text   = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]/2];
+        self.rightDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]/2];
+    }
 }
 
 

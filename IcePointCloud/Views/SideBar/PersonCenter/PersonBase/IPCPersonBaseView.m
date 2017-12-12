@@ -25,6 +25,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 @property (copy, nonatomic) void(^UpdateBlock)();
 @property (copy, nonatomic) void(^QRCodeBlock)();
 @property (copy, nonatomic) void(^WareHouseBlock)();
+@property (copy, nonatomic) void(^PriceStrategyBlock)();
 
 @end
 
@@ -35,6 +36,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                   UpdateBlock:(void(^)())update
                   QRCodeBlock:(void(^)())qrcode
                WareHouseBlock:(void(^)())wareHouse
+           PriceStrategyBlock:(void(^)())priceStrategy
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -45,6 +47,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         self.UpdateBlock  = update;
         self.QRCodeBlock  = qrcode;
         self.WareHouseBlock = wareHouse;
+        self.PriceStrategyBlock = priceStrategy;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:IPCChooseWareHouseNotification object:nil];
     }

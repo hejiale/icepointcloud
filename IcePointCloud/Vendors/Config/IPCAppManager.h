@@ -9,6 +9,7 @@
 
 #import "IPCStoreResult.h"
 #import "IPCWareHouseResult.h"
+#import "IPCPriceStrategyResult.h"
 #import "IPCCustomTextField.h"
 
 //The App for the first time login
@@ -30,6 +31,8 @@ extern NSString *const  IPCChooseWareHouseNotification;
 //Error Networking Status Message
 extern NSString * const kIPCErrorNetworkAlertMessage;
 extern NSString * const kIPCNotConnectInternetMessage;
+//Choose Price Strategy
+extern NSString * const kIPCChoosePriceStrategyNotification;
 
 @interface IPCAppManager : NSObject
 
@@ -38,6 +41,7 @@ extern NSString * const kIPCNotConnectInternetMessage;
 @property (nonatomic, strong, readwrite)    IPCStoreResult          * storeResult;
 @property (nonatomic, strong, readwrite)    IPCWareHouseResult * wareHouse;
 @property (nonatomic, strong, readwrite)    IPCWareHouse           * currentWareHouse;
+@property (nonatomic, strong, readwrite)    IPCPriceStrategyResult * priceStrategy;
 
 + (IPCAppManager *)sharedManager;
 
@@ -95,6 +99,14 @@ extern NSString * const kIPCNotConnectInternetMessage;
  @param complete 
  */
 - (void)loadWareHouse:(void(^)(NSError * error))complete;
+
+
+/**
+ * Load PriceStrategy
+
+ @param complete 
+ */
+- (void)queryPriceStrategy:(void (^)(NSError *))complete;
 
 
 @end

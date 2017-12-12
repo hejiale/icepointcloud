@@ -29,12 +29,12 @@
     return self;
 }
 
-- (NSMutableArray<IPCPayOrderPayType *> *)payTypeList
+- (NSMutableArray<IPCPayOrderPayType *> *)payTypeArray
 {
-    if (!_payTypeList) {
-        _payTypeList = [[NSMutableArray alloc]init];
+    if (!_payTypeArray) {
+        _payTypeArray = [[NSMutableArray alloc]init];
     }
-    return self;
+    return _payTypeArray;
 }
 
 
@@ -98,17 +98,18 @@
 
 - (void)clearPayRecord
 {
-    [self.payTypeRecordArray removeAllObjects];
+    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
 }
 
 - (void)queryPayType
 {
-    [self.payTypeList removeAllObjects];
+    [[IPCPayOrderManager sharedManager].payTypeArray removeAllObjects];
     
     [IPCPayOrderRequestManager queryPayListTypeWithSuccessBlock:^(id responseValue)
     {
         IPCPayOrderPayType * payType = [IPCPayOrderPayType mj_objectWithKeyValues:responseValue];
-        [self.payTypeList addObject:payType];
+        [[IPCPayOrderManager sharedManager].payTypeArray addObject:payType];
+        
     } FailureBlock:^(NSError *error) {
         
     }];
@@ -116,8 +117,8 @@
 
 - (void)resetEmployee
 {
-    self.employee = [[IPCEmployee alloc]init];
-    self.employee = [IPCAppManager sharedManager].storeResult.employee;
+    [IPCPayOrderManager sharedManager].employee = [[IPCEmployee alloc]init];
+    [IPCPayOrderManager sharedManager].employee = [IPCAppManager sharedManager].storeResult.employee;
 }
 
 - (void)resetData

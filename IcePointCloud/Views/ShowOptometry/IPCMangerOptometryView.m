@@ -34,24 +34,13 @@
         [obj removeFromSuperview];
     }];
     
-    if (optometry.isUpdateStatus) {
-        if (optometry && optometry.optometryEmployee.length) {
-            NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.optometryEmployee];
-            [self.employeeLabel subStringWithText:employeeStr BeginRang:4 Font:nil Color:[UIColor darkGrayColor]];
-        }
-        if (optometry && optometry.optometryInsertDate.length) {
-            NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.optometryInsertDate] IsTime:YES]];
-            [self.insertDateLabel subStringWithText:dateStr BeginRang:5 Font:nil Color:[UIColor darkGrayColor]];
-        }
-    }else{
-        if (optometry && optometry.employeeName.length) {
-            NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.employeeName];
-            [self.employeeLabel subStringWithText:employeeStr BeginRang:4  Font:nil Color:[UIColor darkGrayColor]];
-        }
-        if (optometry && optometry.insertDate.length) {
-            NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:YES]];
-            [self.insertDateLabel subStringWithText:dateStr BeginRang:5 Font:nil Color:[UIColor darkGrayColor]];
-        }
+    if (optometry && optometry.employeeName.length) {
+        NSString * employeeStr = [NSString stringWithFormat:@"验光师 %@",optometry.employeeName];
+        [self.employeeLabel subStringWithText:employeeStr BeginRang:4  Font:nil Color:[UIColor darkGrayColor]];
+    }
+    if (optometry && optometry.insertDate.length) {
+        NSString * dateStr = [NSString stringWithFormat:@"验光日期 %@",[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:YES]];
+        [self.insertDateLabel subStringWithText:dateStr BeginRang:5 Font:nil Color:[UIColor darkGrayColor]];
     }
     
     NSArray *lensItems = @[@"球镜/SPH", @"柱镜/CYL", @"轴位/AXIS", @"矫正视力/VA",@"瞳距/PD", @"下加光/ADD"];
@@ -83,7 +72,7 @@
                 [lensView addSubview:[self createLensView:CGRectMake(34 + 20 + (itemWidth + spaceWidth) * j, 0, itemWidth, lensView.jk_height) Label:lensItems[j] Value:[self optometryInfo:optometry][j + 1 + (i-1)*6] Tag:(j + 1 + (i-1)*6)]];
             }
         }else{
-            [lensView addSubview:[self createFunctionView:CGRectMake(34 + 20, 0, itemWidth, lensView.jk_height) Value:[self optometryInfo:optometry][0]]];
+            [lensView addSubview:[self createFunctionView:CGRectMake(34 + 20, 0, lensView.jk_width-100, lensView.jk_height) Function:[self optometryInfo:optometry][0] Comprehensive:[self optometryInfo:optometry][13]]];
         }
         [IPCCommonUI clearAutoCorrection:lensView];
     }
@@ -119,15 +108,35 @@
     return itemView;
 }
 
-- (UIView *)createFunctionView:(CGRect)rect Value:(NSString *)value
+- (UIView *)createFunctionView:(CGRect)rect Function:(NSString *)function Comprehensive:(NSString *)comprehensive
 {
     UIView *itemView = [[UIView alloc] initWithFrame:rect];
+
+    UILabel * lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, itemView.jk_height)];
+    lbl.textColor = [UIColor lightGrayColor];
+    lbl.text = @"用途";
+    lbl.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    lbl.backgroundColor = [UIColor clearColor];
+    [itemView addSubview:lbl];
     
-    UILabel * valueLabel = [[UILabel alloc] initWithFrame:itemView.bounds];
-    valueLabel.textColor = [UIColor darkGrayColor];
-    valueLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
-    [valueLabel setText:value];
-    [itemView addSubview:valueLabel];
+    UILabel * functionLabel = [[UILabel alloc] initWithFrame:CGRectMake(lbl.jk_right, 0, 60, itemView.jk_height)];
+    functionLabel.textColor = [UIColor darkGrayColor];
+    functionLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    [functionLabel setText:function];
+    [itemView addSubview:functionLabel];
+    
+    lbl = [[UILabel alloc] initWithFrame:CGRectMake(functionLabel.jk_right, 0, 60, itemView.jk_height)];
+    lbl.textColor = [UIColor lightGrayColor];
+    lbl.text = @"综合瞳距";
+    lbl.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    lbl.backgroundColor = [UIColor clearColor];
+    [itemView addSubview:lbl];
+    
+    UILabel * comprehensiveLabel = [[UILabel alloc] initWithFrame:CGRectMake(lbl.jk_right, 0, 150, itemView.jk_height)];
+    comprehensiveLabel.textColor = [UIColor darkGrayColor];
+    comprehensiveLabel.font = [UIFont systemFontOfSize:12 weight:UIFontWeightThin];
+    [comprehensiveLabel setText:comprehensive];
+    [itemView addSubview:comprehensiveLabel];
     
     return itemView;
 }
@@ -146,7 +155,8 @@
              optometry.axisLeft,
              optometry.correctedVisionLeft,
              optometry.distanceLeft,
-             optometry.addLeft,];
+             optometry.addLeft,
+             optometry.comprehensive];
 }
 
 

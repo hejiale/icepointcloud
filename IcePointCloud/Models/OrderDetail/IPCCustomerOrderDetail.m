@@ -39,7 +39,6 @@
         if ([responseValue[@"order"] isKindOfClass:[NSDictionary class]]) {
             self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
             self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
-            self.optometryMode.isUpdateStatus = YES;
         }
         
         self.orderInfo.totalPayAmount = 0;

@@ -17,6 +17,7 @@ NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingC
 NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCountKey";
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerkey";
 NSString *const  IPCChooseWareHouseNotification       = @"IPCChooseWareHouseNotification";
+NSString * const kIPCChoosePriceStrategyNotification   = @"IPCChoosePriceStrategyNotification";
 NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设备->设置->无线局域网选项";
 NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了，请检查当前网络环境!";
 
@@ -92,7 +93,6 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     [[IPCTryMatch instance] clearData];
     [[IPCPayOrderManager sharedManager] resetData];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
-    
     
     IPCLoginViewController * loginVc = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
     [[[UIApplication sharedApplication] delegate].window setRootViewController:loginVc];
@@ -232,6 +232,15 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
              complete(error);
          }
      }];
+}
+
+- (void)queryPriceStrategy:(void (^)(NSError *))complete
+{
+    [IPCGoodsRequestManager queryPriceStrategyWithSuccessBlock:^(id responseValue) {
+        
+    } FailureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (void)loadCurrentWareHouse

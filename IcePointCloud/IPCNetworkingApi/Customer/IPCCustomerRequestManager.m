@@ -35,6 +35,7 @@
                                    Purpose:(NSString *)purpose
                                 EmployeeId:(NSString *)employeeId
                               EmployeeName:(NSString *)employeeName
+                             Comprehensive:(NSString *)comprehensive
                                     Remark:(NSString *)remark
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure
@@ -55,6 +56,7 @@
                              @"purpose":purpose,
                              @"employeeId":employeeId,
                              @"employeeName":employeeName,
+                             @"comprehensive":comprehensive,
                              @"remark":(remark ? : @"")
                              };
     [self postRequest:params RequestMethod:CustomerRequest_SaveNewOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];

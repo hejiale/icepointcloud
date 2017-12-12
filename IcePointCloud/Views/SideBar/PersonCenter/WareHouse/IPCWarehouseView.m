@@ -7,7 +7,6 @@
 //
 
 #import "IPCWarehouseView.h"
-#import "IPCWareHouseCell.h"
 
 static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
 
@@ -52,12 +51,13 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    IPCWareHouseCell * cell = [tableView dequeueReusableCellWithIdentifier:wareHouseIdentifier];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:wareHouseIdentifier];
     if (!cell) {
-        cell = [[UINib nibWithNibName:@"IPCWareHouseCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:wareHouseIdentifier];
     }
     IPCWareHouse * house = [IPCAppManager sharedManager].wareHouse.wareHouseArray[indexPath.row];
-    [cell.wareHouseTitleLabel setText:house.wareHouseName];
+    [cell.textLabel setText:house.wareHouseName];
+    
     return cell;
 }
 

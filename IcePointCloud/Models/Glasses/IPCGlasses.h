@@ -20,6 +20,7 @@
 @property (nonatomic, copy, readonly) NSString * glassName;//name
 @property (nonatomic, copy, readonly) NSString * glassesID;// id
 @property (nonatomic, assign, readonly) double    price;//Recommended retail price
+@property (nonatomic, assign, readwrite) double   updatePrice;//选择规格后的价格
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 @property (nonatomic, copy, readonly) NSString * brand;//brand
 @property (nonatomic, copy, readonly) NSString * color;//color

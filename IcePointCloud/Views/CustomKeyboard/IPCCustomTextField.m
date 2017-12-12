@@ -60,12 +60,11 @@
         [self registerNotification];
         [self addBorder:0 Width:1 Color:COLOR_RGB_BLUE];
         [IPCTextFiledControl instance].preTextField = self;
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
     }else{
         [self removeNotification];
         [self addBorder:0 Width:0 Color:nil];
-        [self setText:@""];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
 }
 
 - (void)setText:(NSString *)text
@@ -90,7 +89,7 @@
 - (void)endEditingNotification:(NSNotification *)notification
 {
     [self setIsEditing:NO];
-    
+
     [self setText:notification.userInfo[IPCCustomKeyboardValue]];
     
     if (self.delegate) {
@@ -98,6 +97,8 @@
             [self.delegate textFieldEndEditing:self];
         }
     }
+    
+    [self setText:@""];
 }
 
 - (void)clearEdingingNotification:(NSNotification *)notification

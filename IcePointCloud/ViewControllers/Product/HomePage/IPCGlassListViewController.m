@@ -35,6 +35,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self beginFilterClass];
     //Choose WareHouse To Reload Products
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:IPCChooseWareHouseNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginFilterClass) name:kIPCChoosePriceStrategyNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

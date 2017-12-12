@@ -109,6 +109,7 @@
                                                   EndPrice:endPrice
                                                   IsTrying:isTrying
                                                    StoreId:storeId
+                                                StrategyId:@""
                                               SuccessBlock:^(id responseValue){
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
                                                   [strongSelf parseNormalGlassesData:responseValue];

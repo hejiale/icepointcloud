@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightAddLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightCorrectionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightDistanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *comprehensiveLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memoLabel;
 @property (nonatomic, copy) void(^ChooseOptometryBlock)();
 
@@ -74,7 +75,7 @@
         [self.rightAddLabel setText:optometry.addRight];
         [self.rightCorrectionLabel setText:optometry.correctedVisionRight];
         [self.rightDistanceLabel setText:optometry.distanceRight];
-        
+        [self.comprehensiveLabel setText:optometry.comprehensive];
         [self.memoLabel setText:optometry.remark];
     }
 }

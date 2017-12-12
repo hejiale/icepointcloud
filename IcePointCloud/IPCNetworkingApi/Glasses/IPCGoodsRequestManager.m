@@ -35,6 +35,7 @@
                               EndPrice:(double)endPrice
                               IsTrying:(BOOL)isTrying
                                StoreId:(NSString *)storeId
+                            StrategyId:(NSString *)strategyId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -49,7 +50,8 @@
                              @"startPrice":@(startPrice),
                              @"endPrice":endPrice > 0 ? @(endPrice) : @"",
                              @"isTryProduct": isTrying ? @"true":@"false",
-                             @"storeId":storeId ? : @""
+                             @"storeId":storeId ? : @"",
+                             @"priceStrategyId" : strategyId
                              };
     [self postRequest:@[searchType,params] RequestMethod:GoodsRequest_GoodsList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
@@ -67,6 +69,12 @@
                              @"hot":@"false",
                              @"limit": @(9),};
     [self postRequest:params RequestMethod:GoodsRequest_RecommdList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+}
+
++  (void)queryPriceStrategyWithSuccessBlock:(void (^)(id))success
+                                 FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:GoodsRequest_PriceStrategy CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

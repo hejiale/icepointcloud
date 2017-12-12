@@ -37,6 +37,7 @@
 #define GoodsRequest_FilterCategory                    @"bizadmin.getCategoryType"
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"
+#define GoodsRequest_PriceStrategy                     @"productAdmin.listPriceStrategyForListProduct"
 
 #define PayOrderRequest_ListPayType                  @"payTypeConfigAdmin.listPayType"
 #define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"

@@ -57,6 +57,7 @@
                                    Purpose:(NSString *)purpose
                                 EmployeeId:(NSString *)employeeId
                               EmployeeName:(NSString *)employeeName
+                             Comprehensive:(NSString *)comprehensive
                                     Remark:(NSString *)remark
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;

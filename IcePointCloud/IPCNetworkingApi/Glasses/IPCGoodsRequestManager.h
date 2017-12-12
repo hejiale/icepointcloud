@@ -46,22 +46,34 @@
                               EndPrice:(double)endPrice
                               IsTrying:(BOOL)isTrying
                                StoreId:(NSString *)storeId
+                            StrategyId:(NSString *)strategyId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
-  QUERY RECOMMD GLASSES
-
+ QUERY RECOMMD GLASSES
+ 
  @param classType
  @param style
  @param success
- @param failure 
+ @param failure
  */
 + (void)queryRecommdGlassesWithClassType:(NSString *)classType
                                    Style:(NSString *)style
                             SuccessBlock:(void (^)(id responseValue))success
                             FailureBlock:(void (^)(NSError * error))failure;
+
+
+
+/**
+ Query Product List Strategy
+ 
+ @param success
+ @param failure
+ */
++ (void)queryPriceStrategyWithSuccessBlock:(void (^)(id responseValue))success
+                              FailureBlock:(void (^)(NSError * error))failure;
 
 
 @end

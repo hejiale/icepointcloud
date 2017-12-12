@@ -39,8 +39,8 @@
 @property (nonatomic, copy, readwrite) NSString * employeeName;
 @property (nonatomic, copy, readwrite) NSString * optometryEmployee;
 @property (nonatomic, copy, readwrite) NSString * optometryInsertDate;
+@property (nonatomic, copy, readwrite) NSString * comprehensive;//综合瞳距
 @property (nonatomic, copy, readwrite) NSString * remark;
-@property (nonatomic, assign, readwrite) BOOL     isUpdateStatus;
 
 
 @end
