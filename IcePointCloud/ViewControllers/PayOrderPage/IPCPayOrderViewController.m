@@ -173,12 +173,8 @@
 #pragma mark //Reload Methods
 - (void)clearAllPayInfo
 {
-    [[IPCPayOrderManager sharedManager] resetData];
-    
-    if (self.currentPage == 0) {
-         [self.customerVC updateUI];
-    }
     [self setCurrentPage:0];
+    [[IPCPayOrderManager sharedManager] resetData];
 }
 
 

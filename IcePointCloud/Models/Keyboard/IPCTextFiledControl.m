@@ -24,6 +24,8 @@
 {
     if (self.preTextField) {
         [self.preTextField setIsEditing:NO];
+        [self.preTextField setText:@""];
+        
         if ([self.preTextField.delegate respondsToSelector:@selector(textFieldEndEditing:)]) {
             [self.preTextField.delegate textFieldEndEditing:self.preTextField];
         }

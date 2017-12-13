@@ -10,6 +10,4 @@
 
 @interface IPCPayOrderCustomerViewController : UIViewController
 
-- (void)updateUI;
-
 @end

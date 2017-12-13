@@ -262,22 +262,18 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self loadData];
 }
 
-- (void)updateUI
-{
-    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
-        self.contentBottomConstraint.constant = 20;
-        [self.infoView removeFromSuperview];
-        [self.customerCollectionView reloadData];
-    }else{
-        [self queryCustomerDetail];
-    }
-}
 
 #pragma mark //KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentCustomerId"]) {
-        [self updateUI];
+        if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+            self.contentBottomConstraint.constant = 20;
+            [self.infoView removeFromSuperview];
+            [self.customerCollectionView reloadData];
+        }else{
+            [self queryCustomerDetail];
+        }
     }
 }
 

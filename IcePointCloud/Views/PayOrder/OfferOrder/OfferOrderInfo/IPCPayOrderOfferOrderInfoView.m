@@ -146,7 +146,6 @@
                 [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
             }else{
                 [IPCPayOrderManager sharedManager].payAmount = [priceStr doubleValue];
-                [[IPCPayOrderManager sharedManager] clearPayRecord];
             }
             [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
             [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;

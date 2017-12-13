@@ -98,7 +98,7 @@
         }
     }
     
-    [self setText:@""];
+    [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
 }
 
 - (void)clearEdingingNotification:(NSNotification *)notification
