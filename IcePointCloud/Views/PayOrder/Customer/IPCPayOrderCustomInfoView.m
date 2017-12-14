@@ -58,9 +58,9 @@
     [self.phoneLabel setText:customer.customerPhone];
     [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
     [self.birthdayLabel setText:customer.birthday];
-    [self.memberIdentityLabel setText:(customer.memberFlag ? @"会员" : @"非会员")];
+    [self.memberIdentityLabel setText:(customer.memberLevel ? @"会员" : @"非会员")];
     
-    if (customer.memberFlag) {
+    if (customer.memberLevel) {
         [self showMemberInfoView];
         [self.pointLabel setText:[NSString stringWithFormat:@"%d",customer.integral]];
         [self.memberLevelLabel setText:customer.memberLevel];

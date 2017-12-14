@@ -136,4 +136,12 @@
     return  [floorStr doubleValue];
 }
 
++ (double)afterDouble:(NSString *)begin :(NSString *)end
+{
+    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: end];
+    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: begin];
+    NSDecimalNumber *after = [price2 decimalNumberBySubtracting:price1];
+    return [after doubleValue];
+}
+
 @end

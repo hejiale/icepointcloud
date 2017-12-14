@@ -54,13 +54,21 @@
 {
     BOOL isInsert = NO;
     
+    NSLog(@"---integral %d", [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral);
+    
+    NSString * remainPriceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
+    NSString * balanceStr = [NSString stringWithFormat:@"%f", [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance];
+    NSString * integralStr = [NSString stringWithFormat:@"%d", [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral];
+    
     if (textField.text.length) {
         if ([self.payRecord.payTypeInfo isEqualToString:@"积分"])
         {
             double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
-            if (pointPrice > [[IPCPayOrderManager sharedManager] remainPayPrice]) {
+            NSString * pointPriceStr = [NSString stringWithFormat:@"%f", pointPrice];
+            
+            if ([IPCCommon afterDouble:remainPriceStr : pointPriceStr] < 0) {
                 [IPCCommonUI showError:@"输入积分兑换金额大于剩余应付金额"];
-            }else if ([textField.text integerValue] > [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral){
+            }else if ([IPCCommon afterDouble:integralStr :textField.text] < 0){
                 [IPCCommonUI showError:@"输入积分大于客户积分"];
             } else if (pointPrice <= 0){
                 [IPCCommonUI showError:@"请输入有效积分"];
@@ -71,21 +79,21 @@
                 isInsert = YES;
             }
         }else if ([self.payRecord.payTypeInfo isEqualToString:@"储值卡"]){
-            if ([textField.text doubleValue] > [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance){
+            if ([IPCCommon afterDouble:balanceStr :textField.text] < 0){
                 [IPCCommonUI showError:@"输入金额大于客户储值余额"];
-            }else if ([textField.text doubleValue] <= [[IPCPayOrderManager sharedManager] remainPayPrice] && [textField.text doubleValue] > 0){
+            }else if ([IPCCommon afterDouble:remainPriceStr :textField.text] < 0){
+                [IPCCommonUI showError:@"输入有效付款金额"];
+            }else{
                 self.payRecord.payPrice = [textField.text doubleValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
                 isInsert = YES;
-            }else{
-                [IPCCommonUI showError:@"输入有效付款金额"];
             }
         }else{
-            if ([textField.text doubleValue] <= [[IPCPayOrderManager sharedManager] remainPayPrice] && [textField.text doubleValue] > 0) {
+            if ([IPCCommon afterDouble:remainPriceStr :textField.text] >= 0) {
                 self.payRecord.payPrice = [textField.text doubleValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
                 isInsert = YES;
-            }else{
+            } else{
                 [IPCCommonUI showError:@"输入有效付款金额"];
             }
         }
@@ -95,6 +103,8 @@
         [self.delegate reloadRecord:self IsInsert:isInsert];
     }
 }
+
+
 
 
 @end

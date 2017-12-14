@@ -38,15 +38,10 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     //Init Data
     self.viewModel = [[IPCCustomerListViewModel alloc]init];
     [self loadData];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
-    [self updateUI];
+    [[IPCPayOrderManager sharedManager] addObserver:self forKeyPath:@"currentCustomerId" options:NSKeyValueObservingOptionNew context:nil];
 }
+
 
 #pragma mark //Set UI
 - (void)loadCollectionView{
@@ -211,7 +206,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                  strongSelf.editCustomerView = nil;
                                  
                                  [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-                                 [strongSelf updateUI];
                                  [strongSelf loadData];
                              }];
     [[IPCCommonUI currentView] addSubview:self.editCustomerView];
@@ -252,7 +246,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         if (customer) {
             [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
-            [self updateUI];
         }
     }
 }
@@ -270,16 +263,24 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self loadData];
 }
 
-- (void)updateUI
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
-        self.contentBottomConstraint.constant = 20;
-        [self.infoView removeFromSuperview];
-        [self.customerCollectionView reloadData];
-    }else{
-        [self queryCustomerDetail];
+    if ([keyPath isEqualToString:@"currentCustomerId"]) {
+        if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+            self.contentBottomConstraint.constant = 20;
+            [self.infoView removeFromSuperview];
+            [self.customerCollectionView reloadData];
+        }else{
+            [self queryCustomerDetail];
+        }
     }
 }
+
+- (void)dealloc
+{
+    [[IPCPayOrderManager sharedManager] removeObserver:self forKeyPath:@"currentCustomerId"];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
