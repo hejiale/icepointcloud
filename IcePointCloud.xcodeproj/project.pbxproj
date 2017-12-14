@@ -280,6 +280,8 @@
 		CB728AEF1FC8184E00354E4C /* IPCInsertNewOptometryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB728AEE1FC8184E00354E4C /* IPCInsertNewOptometryView.m */; };
 		CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */; };
 		CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */; };
+		CBACAF941FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBACAF921FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m */; };
+		CBACAF951FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBACAF931FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.xib */; };
 		CBAE0AB71FE0D0BD0090F37F /* IPCEditParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE0AB61FE0D0BD0090F37F /* IPCEditParameterCell.m */; };
 		CBAE6CE81FCBD2FF0024E448 /* IPCCustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE6CE71FCBD2FF0024E448 /* IPCCustomTextField.m */; };
 		CBAE6CEC1FCBF45B0024E448 /* IPCTextFiledControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE6CEB1FCBF45B0024E448 /* IPCTextFiledControl.m */; };
@@ -773,6 +775,9 @@
 		CB958F561FBAEF3800B882B7 /* IPCCustomKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomKeyboard.h; sourceTree = "<group>"; };
 		CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomKeyboard.m; sourceTree = "<group>"; };
 		CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCCustomKeyboard.xib; sourceTree = "<group>"; };
+		CBACAF911FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayCashPayTypeViewCell.h; sourceTree = "<group>"; };
+		CBACAF921FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayCashPayTypeViewCell.m; sourceTree = "<group>"; };
+		CBACAF931FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCPayCashPayTypeViewCell.xib; sourceTree = "<group>"; };
 		CBAE0AB51FE0D0BC0090F37F /* IPCEditParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditParameterCell.h; sourceTree = "<group>"; };
 		CBAE0AB61FE0D0BD0090F37F /* IPCEditParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditParameterCell.m; sourceTree = "<group>"; };
 		CBAE6CE61FCBD2FF0024E448 /* IPCCustomTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomTextField.h; sourceTree = "<group>"; };
@@ -2252,6 +2257,9 @@
 				CB728AE31FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.h */,
 				CB728AE41FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.m */,
 				CB728AE51FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.xib */,
+				CBACAF911FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.h */,
+				CBACAF921FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m */,
+				CBACAF931FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.xib */,
 			);
 			path = PayCash;
 			sourceTree = "<group>";
@@ -2485,6 +2493,7 @@
 			files = (
 				CB0F54F31F98819C003707F2 /* IPCCustomerCollectionViewCell.xib in Resources */,
 				CB0F53381F9874D8003707F2 /* IPCGlassListViewController.xib in Resources */,
+				CBACAF951FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.xib in Resources */,
 				CB0F553D1F98819C003707F2 /* IPCTryGlassesListViewCell.xib in Resources */,
 				CB728AE71FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.xib in Resources */,
 				CB0F53771F9876AF003707F2 /* IPCManagerOptometryViewController.xib in Resources */,
@@ -2729,6 +2738,7 @@
 				CB0F54F21F98819C003707F2 /* IPCCustomerCollectionViewCell.m in Sources */,
 				CB0F56441F988B05003707F2 /* UIView+Border.m in Sources */,
 				CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */,
+				CBACAF941FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m in Sources */,
 				CB0F55BA1F98845A003707F2 /* IPCPhotoListModel.m in Sources */,
 				CB0F54411F988191003707F2 /* IPCShareChatView.m in Sources */,
 				CB0F565A1F988B05003707F2 /* IPCDefineCameraBaseComponent.m in Sources */,

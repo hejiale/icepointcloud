@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderPayCashViewController">
             <connections>
                 <outlet property="payRecordTableView" destination="DXf-QH-1uN" id="d15-WK-9Be"/>
+                <outlet property="payTypeCollectionView" destination="HhH-AV-zes" id="lzq-ch-x6g"/>
                 <outlet property="payTypeContentView" destination="Xol-Ft-6wm" id="FGw-h7-UtX"/>
                 <outlet property="payTypeNameLabel" destination="lpv-2T-kwA" id="w0t-eR-loc"/>
                 <outlet property="remainPayAmountLabel" destination="xZT-1q-EsG" id="GaH-Ax-R1O"/>
@@ -80,90 +81,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xol-Ft-6wm">
                     <rect key="frame" x="500" y="10" width="408" height="246"/>
                     <subviews>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G1Q-bg-HMI">
-                            <rect key="frame" x="104" y="60" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="95" id="DtD-QP-jcy"/>
-                                <constraint firstAttribute="height" constant="88" id="bad-nM-K54"/>
-                            </constraints>
-                            <state key="normal" image="icon_aliPay_unSelected"/>
-                            <state key="selected" image="icon_aliPay_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="Bnh-dV-4sI"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kTO-PH-Ioy">
-                            <rect key="frame" x="208" y="60" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="95" id="690-Ph-abt"/>
-                                <constraint firstAttribute="height" constant="88" id="nog-Jx-WMx"/>
-                            </constraints>
-                            <state key="normal" image="icon_weixin_unSelected"/>
-                            <state key="selected" image="icon_weixin_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="8CD-FW-sr0"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aaE-FH-Lz5">
-                            <rect key="frame" x="0.0" y="158" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="95" id="Osj-fv-mlV"/>
-                                <constraint firstAttribute="height" constant="88" id="flS-9N-rQx"/>
-                            </constraints>
-                            <state key="normal" image="icon_wallet_unSelected"/>
-                            <state key="selected" image="icon_wallet_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="11f-6o-huL"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2D-0k-Mta">
-                            <rect key="frame" x="104" y="158" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="95" id="Ave-uU-yP8"/>
-                                <constraint firstAttribute="height" constant="88" id="aDJ-Gj-DPA"/>
-                            </constraints>
-                            <state key="normal" image="icon_point_unSelected"/>
-                            <state key="selected" image="icon_point_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="CT1-hu-EDN"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GRp-of-AhN">
-                            <rect key="frame" x="208" y="158" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="88" id="hzI-8r-hXn"/>
-                                <constraint firstAttribute="width" constant="95" id="sf1-kr-dpr"/>
-                            </constraints>
-                            <state key="normal" image="icon_other_unSelected"/>
-                            <state key="selected" image="icon_other_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="JLV-mD-sH0"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jp3-Sx-edf">
-                            <rect key="frame" x="313" y="60" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="95" id="DCc-Tr-JnD"/>
-                                <constraint firstAttribute="height" constant="88" id="Wc1-mz-961"/>
-                            </constraints>
-                            <state key="normal" image="icon_card_unSelected"/>
-                            <state key="selected" image="icon_card_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="Mec-zu-zwb"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fl-WL-IxN">
-                            <rect key="frame" x="0.0" y="60" width="95" height="88"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="95" id="GrY-8q-UNh"/>
-                                <constraint firstAttribute="height" constant="88" id="jyE-Ye-rPE"/>
-                            </constraints>
-                            <state key="normal" image="icon_cash_unSelected"/>
-                            <state key="selected" image="icon_cash_selected"/>
-                            <connections>
-                                <action selector="payTypeAction:" destination="-1" eventType="touchUpInside" id="AoG-lh-sVT"/>
-                            </connections>
-                        </button>
                         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3jn-Hn-72e">
                             <rect key="frame" x="0.0" y="0.0" width="408" height="50"/>
                             <subviews>
@@ -197,28 +114,32 @@
                                 <constraint firstItem="PDF-5C-otQ" firstAttribute="leading" secondItem="3jn-Hn-72e" secondAttribute="leading" constant="20" id="qVF-N1-ipx"/>
                             </constraints>
                         </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HhH-AV-zes">
+                            <rect key="frame" x="0.0" y="55" width="408" height="191"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vG7-9O-jUo">
+                                <size key="itemSize" width="50" height="50"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="d3i-8f-FAl"/>
+                                <outlet property="delegate" destination="-1" id="2N8-q8-jra"/>
+                            </connections>
+                        </collectionView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="2fl-WL-IxN" firstAttribute="top" secondItem="3jn-Hn-72e" secondAttribute="bottom" constant="10" id="BFL-ks-PAP"/>
-                        <constraint firstItem="2fl-WL-IxN" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="BkB-mE-thz"/>
-                        <constraint firstItem="G1Q-bg-HMI" firstAttribute="leading" secondItem="2fl-WL-IxN" secondAttribute="trailing" constant="9" id="Bxf-5g-PeB"/>
-                        <constraint firstItem="aaE-FH-Lz5" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="C4D-VA-fwg"/>
-                        <constraint firstAttribute="bottom" secondItem="P2D-0k-Mta" secondAttribute="bottom" id="Cd3-z8-ZLm"/>
-                        <constraint firstAttribute="bottom" secondItem="GRp-of-AhN" secondAttribute="bottom" id="EMw-kp-f2A"/>
-                        <constraint firstAttribute="trailing" secondItem="jp3-Sx-edf" secondAttribute="trailing" id="KDW-01-nB3"/>
-                        <constraint firstAttribute="bottom" secondItem="aaE-FH-Lz5" secondAttribute="bottom" id="L9c-tF-plS"/>
                         <constraint firstItem="3jn-Hn-72e" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="Qq5-m6-uRw"/>
+                        <constraint firstItem="HhH-AV-zes" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="ZIL-dJ-MIT"/>
                         <constraint firstAttribute="trailing" secondItem="3jn-Hn-72e" secondAttribute="trailing" id="bfd-qE-ewC"/>
+                        <constraint firstAttribute="trailing" secondItem="HhH-AV-zes" secondAttribute="trailing" id="c2x-2R-fH8"/>
                         <constraint firstItem="3jn-Hn-72e" firstAttribute="top" secondItem="Xol-Ft-6wm" secondAttribute="top" id="c9B-ln-G0k"/>
-                        <constraint firstItem="GRp-of-AhN" firstAttribute="leading" secondItem="P2D-0k-Mta" secondAttribute="trailing" constant="9" id="g1J-X5-1Ap"/>
-                        <constraint firstItem="G1Q-bg-HMI" firstAttribute="centerY" secondItem="2fl-WL-IxN" secondAttribute="centerY" id="iDJ-P3-RdY"/>
-                        <constraint firstItem="jp3-Sx-edf" firstAttribute="centerY" secondItem="kTO-PH-Ioy" secondAttribute="centerY" id="k3v-eR-kY8"/>
-                        <constraint firstItem="P2D-0k-Mta" firstAttribute="leading" secondItem="aaE-FH-Lz5" secondAttribute="trailing" constant="9" id="uMz-1z-9rd"/>
+                        <constraint firstItem="HhH-AV-zes" firstAttribute="top" secondItem="3jn-Hn-72e" secondAttribute="bottom" constant="5" id="jTg-6b-tWc"/>
                         <constraint firstAttribute="width" constant="408" id="uTS-7N-FZD"/>
                         <constraint firstAttribute="height" constant="246" id="v1D-sS-WKi"/>
-                        <constraint firstItem="kTO-PH-Ioy" firstAttribute="leading" secondItem="G1Q-bg-HMI" secondAttribute="trailing" constant="9" id="vff-wF-AFW"/>
-                        <constraint firstItem="kTO-PH-Ioy" firstAttribute="centerY" secondItem="G1Q-bg-HMI" secondAttribute="centerY" id="yqW-s8-TOe"/>
+                        <constraint firstAttribute="bottom" secondItem="HhH-AV-zes" secondAttribute="bottom" id="ycA-7X-DbI"/>
                     </constraints>
                 </view>
             </subviews>
@@ -237,20 +158,4 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
     </objects>
-    <resources>
-        <image name="icon_aliPay_selected" width="95" height="88"/>
-        <image name="icon_aliPay_unSelected" width="95" height="88"/>
-        <image name="icon_card_selected" width="95" height="88"/>
-        <image name="icon_card_unSelected" width="95" height="88"/>
-        <image name="icon_cash_selected" width="95" height="88"/>
-        <image name="icon_cash_unSelected" width="95" height="88"/>
-        <image name="icon_other_selected" width="95" height="88"/>
-        <image name="icon_other_unSelected" width="95" height="88"/>
-        <image name="icon_point_selected" width="95" height="88"/>
-        <image name="icon_point_unSelected" width="95" height="88"/>
-        <image name="icon_wallet_selected" width="95" height="88"/>
-        <image name="icon_wallet_unSelected" width="95" height="88"/>
-        <image name="icon_weixin_selected" width="95" height="88"/>
-        <image name="icon_weixin_unSelected" width="95" height="88"/>
-    </resources>
 </document>

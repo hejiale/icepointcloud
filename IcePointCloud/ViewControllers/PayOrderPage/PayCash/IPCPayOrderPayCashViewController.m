@@ -9,16 +9,19 @@
 #import "IPCPayOrderPayCashViewController.h"
 #import "IPCPayOrderEditPayCashRecordCell.h"
 #import "IPCPayOrderPayCashRecordCell.h"
+#import "IPCPayCashPayTypeViewCell.h"
 
-static const NSString * recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
-static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
+static  NSString * const recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
+static  NSString * const editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
+static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifier";
 
-@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate>
+@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *payRecordTableView;
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
 @property (weak, nonatomic) IBOutlet UILabel *remainPayAmountLabel;
+@property (weak, nonatomic) IBOutlet UICollectionView *payTypeCollectionView;
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 @property (nonatomic, strong) IPCPayRecord * insertRecord;
 
@@ -33,6 +36,16 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     [self.payRecordTableView setTableHeaderView:[[UIView alloc]init]];
     [self.payRecordTableView setTableFooterView:[[UIView alloc]init]];
     [self.view addSubview:self.keyboard];
+    
+    __block CGFloat size = (self.payTypeContentView.jk_width - 10)/3;
+    
+    UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
+    [layout setItemSize:CGSizeMake(size, size)];
+    [layout setMinimumLineSpacing:5];
+    [layout setMinimumInteritemSpacing:5];
+    
+    [self.payTypeCollectionView setCollectionViewLayout:layout];
+    [self.payTypeCollectionView registerNib:[UINib nibWithNibName:@"IPCPayCashPayTypeViewCell" bundle:nil] forCellWithReuseIdentifier:payTypeIdentifier];
     
 //    [[IPCPayOrderManager sharedManager] queryPayType];
 }
@@ -141,6 +154,26 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 80;
 }
+
+#pragma mark //UICollectionViewDataSource
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return 8;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    IPCPayCashPayTypeViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:payTypeIdentifier forIndexPath:indexPath];
+    
+    return cell;
+}
+
+#pragma mark //UICollectionViewDelegate
 
 #pragma mark //IPCPayOrderEditPayCashRecordCellDelegate
 - (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
