@@ -156,7 +156,7 @@
              optometry.correctedVisionLeft,
              optometry.distanceLeft,
              optometry.addLeft,
-             optometry.comprehensive];
+             optometry.comprehensive ? : @""];
 }
 
 

@@ -19,7 +19,7 @@ extern NSString* const IPCUserNameKey;
 //Store all your login history record Key
 extern NSString *const IPCListLoginHistoryKey;
 //Keep records of commodity search key
-extern NSString *const IPCListSearchHistoryKey;
+extern NSString *const IPCSearchHistoryListKey;
 //Save search Key users
 extern NSString *const IPCSearchCustomerkey;
 //Inform the screening homepage search goods
@@ -33,6 +33,8 @@ extern NSString * const kIPCErrorNetworkAlertMessage;
 extern NSString * const kIPCNotConnectInternetMessage;
 //Choose Price Strategy
 extern NSString * const kIPCChoosePriceStrategyNotification;
+//Device UUID
+extern NSString * const kIPCDeviceLoginUUID;
 
 @interface IPCAppManager : NSObject
 

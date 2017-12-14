@@ -18,7 +18,10 @@ typedef NS_ENUM(NSInteger, IPCSearchType){
 @property (weak, nonatomic) IBOutlet UIView *topSearchView;
 @property (nonatomic, weak) IBOutlet UITextField *keywordTf;
 @property (nonatomic, weak) IBOutlet UITableView *searchTableView;
+@property (nonatomic, strong) UIView * leftTextFieldView;
+//@property (nonatomic, strong) NSMutableArray<NSArray *> * keywordHistory;
 @property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
+@property (nonatomic, strong) NSMutableArray<NSString *> * inputKeyArray;
 @property (assign, nonatomic) IPCSearchType  searchType;
 @property (nonatomic, copy) NSString * currentSearchword;
 
@@ -43,6 +46,8 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     }else{
         [self.keywordTf setPlaceholder:@"请输入搜索客户关键词..."];
     }
+    /*[self.keywordTf setLeftView:self.leftTextFieldView];
+    [self.keywordTf setLeftViewMode:UITextFieldViewModeAlways];*/
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -55,12 +60,71 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 }
 
 
+/*- (NSMutableArray<NSArray *> *)keywordHistory{
+    if (!_keywordHistory) {
+        _keywordHistory = [[NSMutableArray alloc]init];
+    }
+    return _keywordHistory;
+}*/
+
 - (NSMutableArray<NSString *> *)keywordHistory{
     if (!_keywordHistory) {
         _keywordHistory = [[NSMutableArray alloc]init];
     }
     return _keywordHistory;
 }
+
+/*- (NSMutableArray<NSString *> *)inputKeyArray
+{
+    if (!_inputKeyArray) {
+        _inputKeyArray = [[NSMutableArray alloc]init];
+    }
+    return _inputKeyArray;
+}*/
+
+#pragma mark //Set UI
+/*- (UIView *)leftTextFieldView
+{
+    if (!_leftTextFieldView) {
+        _leftTextFieldView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 30)];
+        [_leftTextFieldView setBackgroundColor:[UIColor clearColor]];
+    }
+    return _leftTextFieldView;
+}
+
+- (void)updateLeftTextViewUI
+{
+    __block CGFloat totalWidth = 0;
+    
+    [self.leftTextFieldView removeAllSubviews];
+    
+    [self.inputKeyArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        UIFont * font = [UIFont systemFontOfSize:13];
+        double textWidth = [obj jk_sizeWithFont:font constrainedToHeight:30].width;
+        double width = MAX(textWidth + 30, 40);
+        
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(totalWidth, 0, width, 30)];
+        [view setBackgroundColor:COLOR_RGB_BLUE];
+        [view addBorder:15 Width:0 Color:[UIColor clearColor]];
+        [self.leftTextFieldView addSubview:view];
+        
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, textWidth+5, 20)];
+        [label setFont:font];
+        [label setText:obj];
+        [label setTextColor:[UIColor whiteColor]];
+        [label setTextAlignment:NSTextAlignmentCenter];
+        [view addSubview:label];
+        
+        UIImageView * closeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(width-25, 5, 20, 20)];
+        [closeImageView setBackgroundColor:[UIColor clearColor]];
+        [closeImageView setImage:[UIImage imageNamed:@"icon_close"]];
+        [view addSubview:closeImageView];
+        
+        totalWidth += width + 5;
+    }];
+    
+    self.leftTextFieldView.jk_width = totalWidth;
+}*/
 
 #pragma mark //Clicked Events
 - (void)showSearchProductViewWithSearchWord:(NSString *)word
@@ -107,14 +171,19 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     NSString * searchText = self.keywordHistory[indexPath.row];
     [cell.seachTitleLabel setText:searchText];
     
+    /*NSArray * searchtextArray = self.keywordHistory[indexPath.row];
+    [cell.seachTitleLabel setText:[searchtextArray componentsJoinedByString:@" "]];*/
+    
     __weak typeof(self) weakSelf = self;
     [[cell rac_signalForSelector:@selector(deleteSearchValueAction:)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if ([strongSelf.keywordHistory containsObject:searchText]) {
-            [strongSelf.keywordHistory removeObject:searchText];
-            [strongSelf syncSearchHistory];
-            [tableView reloadData];
-        }
+        [strongSelf.keywordHistory removeObject:searchText];
+        [strongSelf syncSearchHistory:nil];
+        [tableView reloadData];
+        
+        /*[strongSelf.keywordHistory removeObjectAtIndex:indexPath.row];
+        [strongSelf syncSearchHistory];
+        [tableView reloadData];*/
     }];
     return cell;
 }
@@ -162,6 +231,11 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*[self.inputKeyArray removeAllObjects];
+    NSArray * searchText = self.keywordHistory[indexPath.row];
+    [self.inputKeyArray addObjectsFromArray:searchText];
+    [self updateLeftTextViewUI];*/
+    
     NSString * searchText = self.keywordHistory[indexPath.row];
     
     if (self.searchDelegate) {
@@ -173,11 +247,26 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 }
 
 #pragma mark //UITextFieldDelegate
+/*- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@" "]) {
+        NSString * str = [textField.text jk_trimmingWhitespace];
+        if (str.length) {
+            [self.inputKeyArray addObject: str];
+            [self updateLeftTextViewUI];
+        }
+        [textField setText:@""];
+        return NO;
+    }
+    return YES;
+}*/
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField endEditing:YES];
     
-    NSString *curKeyword = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *curKeyword = [textField.text jk_trimmingWhitespace];
+    /*[self.inputKeyArray addObject:curKeyword];*/
     [self syncSearchHistory:curKeyword];
     
     if (self.searchDelegate) {
@@ -191,15 +280,15 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 }
 
 #pragma mark //Store Or Clear History Methods
-- (void)syncSearchHistory{
-    [self syncSearchHistory:nil];
-}
-
-- (void)syncSearchHistory:(NSString *)keyWord
+- (void)syncSearchHistory:(NSString *)word
 {
-    if (keyWord.length && ![self.keywordHistory containsObject:keyWord]) {
-        [self.keywordHistory insertObject:keyWord atIndex:0];
+    if (word.length && ![self.keywordHistory containsObject:word]) {
+        [self.keywordHistory insertObject:self.keywordTf.text atIndex:0];
     }
+    
+    /*if (self.inputKeyArray.count && ![self isContain]) {
+        [self.keywordHistory insertObject:self.inputKeyArray atIndex:0];
+    }*/
     
     if ([self.keywordHistory.lastObject isKindOfClass:[NSNull class]]){
         [self.keywordHistory removeLastObject];
@@ -207,7 +296,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     
     NSData *historyData  = [NSKeyedArchiver archivedDataWithRootObject:self.keywordHistory];
     if (self.searchType == IPCSearchTypeProduct) {
-        [NSUserDefaults jk_setObject:historyData forKey:IPCListSearchHistoryKey];
+        [NSUserDefaults jk_setObject:historyData forKey:IPCSearchHistoryListKey];
     }else{
         [NSUserDefaults jk_setObject:historyData forKey:IPCSearchCustomerkey];
     }
@@ -216,11 +305,23 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 - (void)clearSearchHistory
 {
     if (self.searchType == IPCSearchTypeProduct) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCListSearchHistoryKey];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCSearchHistoryListKey];
     }else{
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCSearchCustomerkey];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+/*- (BOOL)isContain
+{
+    __block BOOL isContain = NO;
+    [self.keywordHistory enumerateObjectsUsingBlock:^(NSArray * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([[obj componentsJoinedByString:@" "] isEqualToString:[self.inputKeyArray componentsJoinedByString:@" "]]) {
+            isContain = YES;
+            *stop = YES;
+        }
+    }];
+    return isContain;
+}*/
 
 @end

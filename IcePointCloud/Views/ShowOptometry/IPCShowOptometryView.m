@@ -56,7 +56,7 @@
                                     optometry.correctedVisionLeft,
                                     optometry.distanceLeft,
                                     optometry.addLeft,
-                                    optometry.comprehensive];
+                                    optometry.comprehensive ? : @""];
         [self createUI:optometryInfo];
         
         if (optometry && optometry.optometryEmployee.length) {

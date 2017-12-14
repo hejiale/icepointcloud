@@ -12,12 +12,13 @@
 NSString *const IPCFirstLanuchKey                               = @"IPFirstLanucKey";
 NSString* const IPCUserNameKey                                 = @"UserNameKey";
 NSString *const IPCListLoginHistoryKey                        = @"IPCListLoginHistoryKey";
-NSString *const IPCListSearchHistoryKey                      = @"IPCListSearchHistoryKey";
+NSString *const IPCSearchHistoryListKey                      = @"IPCSearchHistoryListKey";
 NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingCartChanged";
 NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCountKey";
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerkey";
 NSString *const  IPCChooseWareHouseNotification       = @"IPCChooseWareHouseNotification";
 NSString * const kIPCChoosePriceStrategyNotification   = @"IPCChoosePriceStrategyNotification";
+NSString * const kIPCDeviceLoginUUID                          = @"IPCDeviceLoginUUID";
 NSString * const kIPCErrorNetworkAlertMessage           = @"请检查您的设备->设置->无线局域网选项";
 NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了，请检查当前网络环境!";
 
@@ -118,7 +119,7 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 {
     __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
     
-    NSData *historyData = [NSUserDefaults jk_dataForKey:IPCListSearchHistoryKey];
+    NSData *historyData = [NSUserDefaults jk_dataForKey:IPCSearchHistoryListKey];
     
     if ([historyData isKindOfClass:[NSData class]]) {
         keywordHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];

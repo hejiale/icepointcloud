@@ -34,7 +34,7 @@ static const NSString * editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdent
     [self.payRecordTableView setTableFooterView:[[UIView alloc]init]];
     [self.view addSubview:self.keyboard];
     
-    [[IPCPayOrderManager sharedManager] queryPayType];
+//    [[IPCPayOrderManager sharedManager] queryPayType];
 }
 
 - (void)viewWillAppear:(BOOL)animated

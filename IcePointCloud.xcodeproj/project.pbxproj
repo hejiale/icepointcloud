@@ -100,7 +100,6 @@
 		CB0F54421F988191003707F2 /* IPCShareChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F540A1F988191003707F2 /* IPCShareChatView.xib */; };
 		CB0F54E41F98819C003707F2 /* IPCBatchParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54481F98819B003707F2 /* IPCBatchParameterCell.m */; };
 		CB0F54E51F98819C003707F2 /* IPCBatchParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54491F98819B003707F2 /* IPCBatchParameterCell.xib */; };
-		CB0F54E61F98819C003707F2 /* IPCEditParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F544B1F98819B003707F2 /* IPCEditParameterCell.m */; };
 		CB0F54E71F98819C003707F2 /* IPCEditParameterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F544C1F98819B003707F2 /* IPCEditParameterCell.xib */; };
 		CB0F54EA1F98819C003707F2 /* IPCCustomerDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54521F98819B003707F2 /* IPCCustomerDetailCell.m */; };
 		CB0F54EB1F98819C003707F2 /* IPCCustomerDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54531F98819B003707F2 /* IPCCustomerDetailCell.xib */; };
@@ -281,6 +280,7 @@
 		CB728AEF1FC8184E00354E4C /* IPCInsertNewOptometryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB728AEE1FC8184E00354E4C /* IPCInsertNewOptometryView.m */; };
 		CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */; };
 		CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */; };
+		CBAE0AB71FE0D0BD0090F37F /* IPCEditParameterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE0AB61FE0D0BD0090F37F /* IPCEditParameterCell.m */; };
 		CBAE6CE81FCBD2FF0024E448 /* IPCCustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE6CE71FCBD2FF0024E448 /* IPCCustomTextField.m */; };
 		CBAE6CEC1FCBF45B0024E448 /* IPCTextFiledControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAE6CEB1FCBF45B0024E448 /* IPCTextFiledControl.m */; };
 		CBB64B301FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB64B2F1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m */; };
@@ -457,8 +457,6 @@
 		CB0F54471F98819B003707F2 /* IPCBatchParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCBatchParameterCell.h; sourceTree = "<group>"; };
 		CB0F54481F98819B003707F2 /* IPCBatchParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCBatchParameterCell.m; sourceTree = "<group>"; };
 		CB0F54491F98819B003707F2 /* IPCBatchParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCBatchParameterCell.xib; sourceTree = "<group>"; };
-		CB0F544A1F98819B003707F2 /* IPCEditParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditParameterCell.h; sourceTree = "<group>"; };
-		CB0F544B1F98819B003707F2 /* IPCEditParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditParameterCell.m; sourceTree = "<group>"; };
 		CB0F544C1F98819B003707F2 /* IPCEditParameterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCEditParameterCell.xib; sourceTree = "<group>"; };
 		CB0F54511F98819B003707F2 /* IPCCustomerDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomerDetailCell.h; sourceTree = "<group>"; };
 		CB0F54521F98819B003707F2 /* IPCCustomerDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomerDetailCell.m; sourceTree = "<group>"; };
@@ -775,6 +773,8 @@
 		CB958F561FBAEF3800B882B7 /* IPCCustomKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomKeyboard.h; sourceTree = "<group>"; };
 		CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomKeyboard.m; sourceTree = "<group>"; };
 		CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCCustomKeyboard.xib; sourceTree = "<group>"; };
+		CBAE0AB51FE0D0BC0090F37F /* IPCEditParameterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCEditParameterCell.h; sourceTree = "<group>"; };
+		CBAE0AB61FE0D0BD0090F37F /* IPCEditParameterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCEditParameterCell.m; sourceTree = "<group>"; };
 		CBAE6CE61FCBD2FF0024E448 /* IPCCustomTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomTextField.h; sourceTree = "<group>"; };
 		CBAE6CE71FCBD2FF0024E448 /* IPCCustomTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomTextField.m; sourceTree = "<group>"; };
 		CBAE6CEA1FCBF45B0024E448 /* IPCTextFiledControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCTextFiledControl.h; sourceTree = "<group>"; };
@@ -1383,8 +1383,8 @@
 				CB0F54471F98819B003707F2 /* IPCBatchParameterCell.h */,
 				CB0F54481F98819B003707F2 /* IPCBatchParameterCell.m */,
 				CB0F54491F98819B003707F2 /* IPCBatchParameterCell.xib */,
-				CB0F544A1F98819B003707F2 /* IPCEditParameterCell.h */,
-				CB0F544B1F98819B003707F2 /* IPCEditParameterCell.m */,
+				CBAE0AB51FE0D0BC0090F37F /* IPCEditParameterCell.h */,
+				CBAE0AB61FE0D0BD0090F37F /* IPCEditParameterCell.m */,
 				CB0F544C1F98819B003707F2 /* IPCEditParameterCell.xib */,
 			);
 			path = BatchParameter;
@@ -2679,6 +2679,7 @@
 				CB0F537A1F9876AF003707F2 /* IPCLoginHistoryViewController.m in Sources */,
 				CBFFE9D91FBE7F3D00937A8F /* IPCPayOrderOfferOrderViewController.m in Sources */,
 				CB0F53781F9876AF003707F2 /* IPCLanuchViewController.m in Sources */,
+				CBAE0AB71FE0D0BD0090F37F /* IPCEditParameterCell.m in Sources */,
 				CB0F55151F98819C003707F2 /* IPCOrderDetailProductPriceCell.m in Sources */,
 				CB64D22C1F99C96C00FBC5F2 /* IPCBatchRequestManager.m in Sources */,
 				CB0F54201F988191003707F2 /* IPCMangerOptometryView.m in Sources */,
@@ -2736,7 +2737,6 @@
 				CB0F54131F988191003707F2 /* IPCEditBatchParameterView.m in Sources */,
 				CB0F564F1F988B05003707F2 /* IPCSwipeView.m in Sources */,
 				CB0F551B1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.m in Sources */,
-				CB0F54E61F98819C003707F2 /* IPCEditParameterCell.m in Sources */,
 				CB0F55191F98819C003707F2 /* IPCOrderDetailTopCell.m in Sources */,
 				CB0F54151F988191003707F2 /* IPCGlassParameterView.m in Sources */,
 				CB0F55AD1F98845A003707F2 /* IPCCustomerTypeList.m in Sources */,

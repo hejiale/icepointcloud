@@ -10,9 +10,6 @@
 
 @interface IPCEditParameterCell()
 
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *degreeWidthConstraint;
-
 @property (copy, nonatomic) IPCShoppingCartItem * cartItem;
 @property (copy, nonatomic) void(^ReloadBlcok)();
 
@@ -38,13 +35,20 @@
     
     if (_cartItem) {        
         if ([_cartItem.glasses filterType] == IPCTopFilterTypeLens || [_cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) {
-            if (_cartItem.batchSph.length && _cartItem.bacthCyl.length)
-                [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH:  %@   柱镜/CYL:  %@",_cartItem.batchSph,_cartItem.bacthCyl]];
+            if (_cartItem.batchSph.length && _cartItem.bacthCyl.length){
+                NSString * text = [NSString stringWithFormat:@"球镜/SPH:  %@   柱镜/CYL:  %@",_cartItem.batchSph,_cartItem.bacthCyl];
+                CGFloat width = [text jk_widthWithFont:self.parameterLabel.font constrainedToHeight:20];
+                self.parameterWidth.constant = width;
+               [self.parameterLabel setText:text];
+            }
         }else if ([_cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass){
-            if (_cartItem.batchReadingDegree.length)
-                [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_cartItem.batchReadingDegree]];
+            if (_cartItem.batchReadingDegree.length){
+                NSString * text = [NSString stringWithFormat:@"度数: %@",_cartItem.batchReadingDegree];
+                CGFloat width = [text jk_widthWithFont:self.parameterLabel.font constrainedToHeight:20];
+                self.parameterWidth.constant = width;
+                [self.parameterLabel setText: text];
+            }
         }
-      
         [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.glassCount]stringValue]];
     }
 }

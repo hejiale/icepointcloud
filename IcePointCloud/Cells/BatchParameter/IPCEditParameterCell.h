@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addButton;
 @property (weak, nonatomic) IBOutlet UIButton *reduceButton;
 @property (weak, nonatomic) IBOutlet UILabel *cartNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *parameterWidth;
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;
 
