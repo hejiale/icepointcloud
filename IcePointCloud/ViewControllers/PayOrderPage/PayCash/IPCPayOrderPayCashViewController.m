@@ -37,7 +37,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [self.payRecordTableView setTableFooterView:[[UIView alloc]init]];
     [self.view addSubview:self.keyboard];
     
-    __block CGFloat size = (self.payTypeContentView.jk_width - 10)/3;
+    __block CGFloat size = (self.payTypeContentView.jk_width - 15)/4;
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
     [layout setItemSize:CGSizeMake(size, size)];
