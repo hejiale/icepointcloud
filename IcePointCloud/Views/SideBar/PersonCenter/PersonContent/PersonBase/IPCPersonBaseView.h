@@ -13,7 +13,6 @@
 - (instancetype)initWithFrame:(CGRect)frame
                        Logout:(void(^)())logout
                   UpdateBlock:(void(^)())update
-                  QRCodeBlock:(void(^)())qrcode
                WareHouseBlock:(void(^)())wareHouse
            PriceStrategyBlock:(void(^)())priceStrategy;
 

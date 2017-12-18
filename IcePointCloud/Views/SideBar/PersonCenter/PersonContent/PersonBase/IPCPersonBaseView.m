@@ -21,7 +21,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIButton *logouOutButton;
 @property (copy, nonatomic) void(^LogoutBlock)();
 @property (copy, nonatomic) void(^UpdateBlock)();
-@property (copy, nonatomic) void(^QRCodeBlock)();
 @property (copy, nonatomic) void(^WareHouseBlock)();
 @property (copy, nonatomic) void(^PriceStrategyBlock)();
 
@@ -32,7 +31,6 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 - (instancetype)initWithFrame:(CGRect)frame
                        Logout:(void(^)())logout
                   UpdateBlock:(void(^)())update
-                  QRCodeBlock:(void(^)())qrcode
                WareHouseBlock:(void(^)())wareHouse
            PriceStrategyBlock:(void(^)())priceStrategy
 {
@@ -43,11 +41,11 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         
         self.LogoutBlock  = logout;
         self.UpdateBlock  = update;
-        self.QRCodeBlock  = qrcode;
         self.WareHouseBlock = wareHouse;
         self.PriceStrategyBlock = priceStrategy;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:IPCChooseWareHouseNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:kIPCChoosePriceStrategyNotification object:nil];
     }
     return self;
 }

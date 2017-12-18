@@ -241,8 +241,6 @@
 		CB32B95E1F9F122C002E006C /* IPCPersonBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB32B94B1F9F122C002E006C /* IPCPersonBaseView.xib */; };
 		CB32B95F1F9F122C002E006C /* IPCPersonContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B94E1F9F122C002E006C /* IPCPersonContentView.m */; };
 		CB32B9601F9F122C002E006C /* IPCShowContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B9501F9F122C002E006C /* IPCShowContentView.m */; };
-		CB32B9611F9F122C002E006C /* IPCQRCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B9531F9F122C002E006C /* IPCQRCodeView.m */; };
-		CB32B9621F9F122C002E006C /* IPCQRCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB32B9541F9F122C002E006C /* IPCQRCodeView.xib */; };
 		CB32B9631F9F122C002E006C /* IPCUpdatePasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B9571F9F122C002E006C /* IPCUpdatePasswordView.m */; };
 		CB32B9641F9F122C002E006C /* IPCUpdatePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB32B9581F9F122C002E006C /* IPCUpdatePasswordView.xib */; };
 		CB32B9651F9F122C002E006C /* IPCWarehouseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B95B1F9F122C002E006C /* IPCWarehouseView.m */; };
@@ -708,9 +706,6 @@
 		CB32B94E1F9F122C002E006C /* IPCPersonContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPersonContentView.m; sourceTree = "<group>"; };
 		CB32B94F1F9F122C002E006C /* IPCShowContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCShowContentView.h; sourceTree = "<group>"; };
 		CB32B9501F9F122C002E006C /* IPCShowContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCShowContentView.m; sourceTree = "<group>"; };
-		CB32B9521F9F122C002E006C /* IPCQRCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCQRCodeView.h; sourceTree = "<group>"; };
-		CB32B9531F9F122C002E006C /* IPCQRCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCQRCodeView.m; sourceTree = "<group>"; };
-		CB32B9541F9F122C002E006C /* IPCQRCodeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCQRCodeView.xib; sourceTree = "<group>"; };
 		CB32B9561F9F122C002E006C /* IPCUpdatePasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCUpdatePasswordView.h; sourceTree = "<group>"; };
 		CB32B9571F9F122C002E006C /* IPCUpdatePasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCUpdatePasswordView.m; sourceTree = "<group>"; };
 		CB32B9581F9F122C002E006C /* IPCUpdatePasswordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCUpdatePasswordView.xib; sourceTree = "<group>"; };
@@ -2017,12 +2012,9 @@
 		CB32B9471F9F122C002E006C /* PersonCenter */ = {
 			isa = PBXGroup;
 			children = (
+				CB32B94F1F9F122C002E006C /* IPCShowContentView.h */,
+				CB32B9501F9F122C002E006C /* IPCShowContentView.m */,
 				CB32B94C1F9F122C002E006C /* PersonContent */,
-				CB32B9481F9F122C002E006C /* PersonBase */,
-				CB32B9511F9F122C002E006C /* QRCode */,
-				CB32B9551F9F122C002E006C /* UpdatePassword */,
-				CB32B9591F9F122C002E006C /* WareHouse */,
-				CB468F461FDE562700FCDAE4 /* PriceStrategy */,
 			);
 			path = PersonCenter;
 			sourceTree = "<group>";
@@ -2040,22 +2032,14 @@
 		CB32B94C1F9F122C002E006C /* PersonContent */ = {
 			isa = PBXGroup;
 			children = (
-				CB32B94F1F9F122C002E006C /* IPCShowContentView.h */,
-				CB32B9501F9F122C002E006C /* IPCShowContentView.m */,
 				CB32B94D1F9F122C002E006C /* IPCPersonContentView.h */,
 				CB32B94E1F9F122C002E006C /* IPCPersonContentView.m */,
+				CB32B9481F9F122C002E006C /* PersonBase */,
+				CB32B9551F9F122C002E006C /* UpdatePassword */,
+				CB32B9591F9F122C002E006C /* WareHouse */,
+				CB468F461FDE562700FCDAE4 /* PriceStrategy */,
 			);
 			path = PersonContent;
-			sourceTree = "<group>";
-		};
-		CB32B9511F9F122C002E006C /* QRCode */ = {
-			isa = PBXGroup;
-			children = (
-				CB32B9521F9F122C002E006C /* IPCQRCodeView.h */,
-				CB32B9531F9F122C002E006C /* IPCQRCodeView.m */,
-				CB32B9541F9F122C002E006C /* IPCQRCodeView.xib */,
-			);
-			path = QRCode;
 			sourceTree = "<group>";
 		};
 		CB32B9551F9F122C002E006C /* UpdatePassword */ = {
@@ -2578,7 +2562,6 @@
 				CB0F54181F988191003707F2 /* IPCEmployeListView.xib in Resources */,
 				CB0F55331F98819C003707F2 /* LibraryTypeTableViewCell.xib in Resources */,
 				CB0F54141F988191003707F2 /* IPCEditBatchParameterView.xib in Resources */,
-				CB32B9621F9F122C002E006C /* IPCQRCodeView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2872,7 +2855,6 @@
 				CB64D2491F99C9A600FBC5F2 /* IPCResponseManager.m in Sources */,
 				CB0F56561F988B05003707F2 /* IPCDatePickViewController.m in Sources */,
 				CB0F54F81F98819C003707F2 /* IPCFilterClassViewCell.m in Sources */,
-				CB32B9611F9F122C002E006C /* IPCQRCodeView.m in Sources */,
 				CB6BC6711FC2BEFE0096F3B0 /* IPCPayOrderOfferOrderInfoView.m in Sources */,
 				CB728AE61FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.m in Sources */,
 			);

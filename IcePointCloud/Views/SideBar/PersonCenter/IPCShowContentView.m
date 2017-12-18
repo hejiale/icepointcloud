@@ -9,7 +9,6 @@
 #import "IPCShowContentView.h"
 #import "IPCPersonBaseView.h"
 #import "IPCUpdatePasswordView.h"
-#import "IPCQRCodeView.h"
 #import "IPCWarehouseView.h"
 #import "IPCPriceStrategyView.h"
 
@@ -57,8 +56,6 @@
                                                                           Logout:^{
                                                                               [[IPCAppManager sharedManager] logout];
                                                                           } UpdateBlock:^{
-                                                                              [self setSelectedIndex:4];
-                                                                          } QRCodeBlock:^{
                                                                               [self setSelectedIndex:3];
                                                                           } WareHouseBlock:^{
                                                                               [self setSelectedIndex:1];
@@ -67,10 +64,9 @@
                                                                           }];
     IPCWarehouseView * houseView = [[IPCWarehouseView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
     IPCPriceStrategyView * priceView = [[IPCPriceStrategyView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
-    IPCQRCodeView * codeView       = [[IPCQRCodeView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
     IPCUpdatePasswordView * updateView = [[IPCUpdatePasswordView alloc]initWithFrame:CGRectMake(self.jk_width, 0, self.jk_width, self.jk_height)];
     
-    [self setViewArray:@[personBaseView,houseView,priceView,codeView,updateView]];
+    [self setViewArray:@[personBaseView,houseView,priceView,updateView]];
 }
 
 - (void)dismissContent:(void (^)())completeBlock
