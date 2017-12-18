@@ -56,6 +56,7 @@
         NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
         if ([obj.payTypeInfo isEqualToString:@"积分"]) {
             [dic setObject:@(obj.pointPrice) forKey:@"payAmount"];
+            [dic setObject:@(obj.integral) forKey:@"integral"];
         }else{
             [dic setObject:@(obj.payPrice) forKey:@"payAmount"];
         }
