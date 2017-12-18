@@ -58,4 +58,6 @@
 
 + (double)floorNumber:(double)number;
 
++ (double)afterDouble:(NSString *)begin :(NSString *)end;;
+
 @end
