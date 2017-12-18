@@ -17,13 +17,13 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 
 @interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *payRecordTableView;
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
 @property (weak, nonatomic) IBOutlet UILabel *remainPayAmountLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *payTypeCollectionView;
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 @property (nonatomic, strong) IPCPayRecord * insertRecord;
+@property (nonatomic, assign) NSInteger currentIndex;
 
 @end
 
@@ -37,29 +37,31 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [self.payRecordTableView setTableFooterView:[[UIView alloc]init]];
     [self.view addSubview:self.keyboard];
     
-    __block CGFloat size = (self.payTypeContentView.jk_width - 15)/4;
+    __block CGFloat width = (self.payTypeContentView.jk_width - 15)/4;
+    __block CGFloat height = (self.payTypeCollectionView.jk_height - 5)/2;
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
-    [layout setItemSize:CGSizeMake(size, size)];
+    [layout setItemSize:CGSizeMake(width, height)];
     [layout setMinimumLineSpacing:5];
     [layout setMinimumInteritemSpacing:5];
     
     [self.payTypeCollectionView setCollectionViewLayout:layout];
     [self.payTypeCollectionView registerNib:[UINib nibWithNibName:@"IPCPayCashPayTypeViewCell" bundle:nil] forCellWithReuseIdentifier:payTypeIdentifier];
     
-//    [[IPCPayOrderManager sharedManager] queryPayType];
+    [self addObserver:self forKeyPath:@"currentIndex" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     ///无购物商品 收款记录
     if ([IPCShoppingCart sharedCart].allGlassesCount > 0 && [IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0) {
-        [self clearAllSelectedAddition:0];
+        self.currentIndex = 0;
     }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0){
-        [self resetAllSelectState];
+        self.currentIndex = -1;
     }
+    
     [self reloadRemainAmount];
 }
 
@@ -79,29 +81,6 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 }
 
 #pragma mark // Clicked Events
-- (IBAction)payTypeAction:(UIButton *)sender
-{
-    if ((sender.selected && self.insertRecord) || [[IPCPayOrderManager sharedManager] remainPayPrice] == 0)return;
-    
-    if (![IPCPayOrderManager sharedManager].integralTrade && sender.tag == 5) {
-        [IPCCommonUI showError:@"积分规则未配置"];
-        return;
-    }
-    
-    if (sender.tag == 5 && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0) {
-        [IPCCommonUI showError:@"客户无可用积分"];
-        return;
-    }
-    
-    if (sender.tag == 4 && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0) {
-        [IPCCommonUI showError:@"客户无可用储值余额"];
-        return;
-    }
-    
-    [self clearAllSelectedAddition:sender.tag];
-    [self.payRecordTableView reloadData];
-}
-
 - (void)reloadRemainAmount
 {
     [self.remainPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderManager sharedManager] remainPayPrice]]];
@@ -163,17 +142,50 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 8;
+    return [IPCPayOrderManager sharedManager].payTypeArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     IPCPayCashPayTypeViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:payTypeIdentifier forIndexPath:indexPath];
+    IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[indexPath.row];
+    cell.payType = payType;
+    
+    if (self.currentIndex == indexPath.row) {
+        [cell updateBorder:YES];
+    }else{
+        [cell updateBorder:NO];
+    }
     
     return cell;
 }
 
 #pragma mark //UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[indexPath.row];
+    
+    if ([[IPCPayOrderManager sharedManager] remainPayPrice] == 0)return;
+    
+    if (![IPCPayOrderManager sharedManager].integralTrade && [payType.payType isEqualToString:@"积分"]) {
+        [IPCCommonUI showError:@"积分规则未配置"];
+        return;
+    }
+    
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
+        [IPCCommonUI showError:@"客户无可用积分"];
+        return;
+    }
+    
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
+        [IPCCommonUI showError:@"客户无可用储值余额"];
+        return;
+    }
+    
+    if (self.currentIndex != indexPath.row) {
+        self.currentIndex = indexPath.row;
+    }
+}
 
 #pragma mark //IPCPayOrderEditPayCashRecordCellDelegate
 - (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
@@ -186,40 +198,23 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [self reloadRemainAmount];
 }
 
-#pragma mark //Common Methods
-- (void)clearAllSelectedAddition:(NSInteger)index
+#pragma mark //KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    [self.payTypeContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            UIButton * button = (UIButton *)view;
-            if (button.tag == index) {
-                [button setSelected:YES];
-            }else{
-                [button setSelected:NO];
-            }
+    if ([keyPath isEqualToString:@"currentIndex"]) {
+        [self.payTypeCollectionView reloadData];
+        
+        if (self.currentIndex > -1) {
+            IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[self.currentIndex];
+            
+            self.insertRecord = [[IPCPayRecord alloc]init];
+            self.insertRecord.payDate = [NSDate date];
+            self.insertRecord.payTypeInfo = payType;
+        }else{
+            self.insertRecord = nil;
         }
-    }];
-    
-    [self.payTypeNameLabel setText:[[IPCAppManager sharedManager] payType:index]];
-    
-    self.insertRecord = [[IPCPayRecord alloc]init];
-    self.insertRecord.payTypeInfo = self.payTypeNameLabel.text;
-    self.insertRecord.payDate = [NSDate date];
-    
-    [IPCPayOrderManager sharedManager].isInsertRecord = YES;
-}
-
-- (void)resetAllSelectState
-{
-    [self.payTypeContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([view isKindOfClass:[UIButton class]]) {
-            UIButton * button = (UIButton *)view;
-            [button setSelected:NO];
-        }
-    }];
-    [self.payTypeNameLabel setText:@""];
-    self.insertRecord = nil;
-    [IPCPayOrderManager sharedManager].isInsertRecord = NO;
+        [self.payRecordTableView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

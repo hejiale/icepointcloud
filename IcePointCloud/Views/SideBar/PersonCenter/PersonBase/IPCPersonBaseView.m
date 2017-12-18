@@ -9,12 +9,10 @@
 #import "IPCPersonBaseView.h"
 #import "IPCPersonHeadCell.h"
 #import "IPCPersonTitleCell.h"
-#import "IPCPersonQRCodeCell.h"
 #import "IPCPersonMenuCell.h"
 
 static NSString * const headIdentifier  = @"PersonHeadCellIdentifier";
 static NSString * const titleIdentifier = @"PersonTitleCellIdentifier";
-static NSString * const QRCodeIdentifier= @"PersonQRCodeCellIdentifier";
 static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
 
 @interface IPCPersonBaseView()<UITableViewDataSource,UITableViewDelegate>
@@ -93,7 +91,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
     if (section == 0 || section == 3)
         return 1;
     else if (section == 1) {
-        return 3;
+        return 4;
     }
     return 2;
 }
@@ -116,6 +114,26 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
             [cell.companyNameLabel setText:[IPCAppManager sharedManager].storeResult.storeName];
             return cell;
         }else if (indexPath.row == 1) {
+            if ([IPCAppManager sharedManager].priceStrategy.strategyArray.count <= 1) {
+                IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
+                if (!cell) {
+                    cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                }
+                [cell.companyTitleLabel setText:@"价格策略"];
+                [cell.companyNameLabel setText:[IPCAppManager sharedManager].currentStrategy.strategyName];
+                
+                return cell;
+            }else{
+                IPCPersonMenuCell * cell = [tableView dequeueReusableCellWithIdentifier:menuIdentifier];
+                if (!cell) {
+                    cell = [[UINib nibWithNibName:@"IPCPersonMenuCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
+                }
+                [cell.menuTitleLabel setText:@"价格策略"];
+                [cell.menuValueTitle setText: [IPCAppManager sharedManager].currentStrategy.strategyName];
+                
+                return cell;
+            }
+        }else if (indexPath.row == 2) {
             if ([IPCAppManager sharedManager].storeResult.wareHouseId) {
                 IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
                 if (!cell) {
@@ -134,19 +152,13 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 
                 return cell;
             }
-        }else if (indexPath.row == 2) {
+        }else{
             IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
             if (!cell) {
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.companyTitleLabel setText:@"公司"];
             [cell.companyNameLabel setText:[IPCAppManager sharedManager].companyName];
-            return cell;
-        }else{
-            IPCPersonQRCodeCell * cell = [tableView dequeueReusableCellWithIdentifier:QRCodeIdentifier];
-            if (!cell) {
-                cell = [[UINib nibWithNibName:@"IPCPersonQRCodeCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
-            }
             return cell;
         }
     }else if(indexPath.section == 2){
@@ -203,16 +215,15 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 self.UpdateBlock();
         }
     }else if (indexPath.section == 1){
-        if (indexPath.row == 1 && ![IPCAppManager sharedManager].storeResult.wareHouseId) {
+        if (indexPath.row == 1 && [IPCAppManager sharedManager].priceStrategy.strategyArray.count  > 1) {
+            if (self.PriceStrategyBlock) {
+                self.PriceStrategyBlock();
+            }
+        }else  if (indexPath.row == 2 && ![IPCAppManager sharedManager].storeResult.wareHouseId) {
             if (self.WareHouseBlock) {
                 self.WareHouseBlock();
             }
-        }else
-            if (indexPath.row == 3) {
-                if (self.QRCodeBlock) {
-                    self.QRCodeBlock();
-                }
-            }
+        }
     }else if (indexPath.section == 3){
         dispatch_async(dispatch_get_main_queue(), ^{
             [[IPCNetworkCache sharedCache] removeAllHttpCache];

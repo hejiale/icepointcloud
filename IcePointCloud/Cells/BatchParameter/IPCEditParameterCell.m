@@ -50,6 +50,7 @@
             }
         }
         [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.glassCount]stringValue]];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.glasses.updatePrice]];
     }
 }
 

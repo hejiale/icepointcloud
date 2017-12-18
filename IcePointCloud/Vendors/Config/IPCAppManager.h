@@ -44,6 +44,8 @@ extern NSString * const kIPCDeviceLoginUUID;
 @property (nonatomic, strong, readwrite)    IPCWareHouseResult * wareHouse;
 @property (nonatomic, strong, readwrite)    IPCWareHouse           * currentWareHouse;
 @property (nonatomic, strong, readwrite)    IPCPriceStrategyResult * priceStrategy;
+@property (nonatomic, strong, readwrite)    IPCPriceStrategy        * currentStrategy;
+
 
 + (IPCAppManager *)sharedManager;
 

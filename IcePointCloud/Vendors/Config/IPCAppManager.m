@@ -238,9 +238,16 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 - (void)queryPriceStrategy:(void (^)(NSError *))complete
 {
     [IPCGoodsRequestManager queryPriceStrategyWithSuccessBlock:^(id responseValue) {
+        self.priceStrategy = [[IPCPriceStrategyResult alloc]initWithResponseValue:responseValue];
+        self.currentStrategy = self.priceStrategy.strategyArray[0];
         
+        if (complete) {
+            complete(nil);
+        }
     } FailureBlock:^(NSError *error) {
-        
+        if (complete) {
+            complete(error);
+        }
     }];
 }
 

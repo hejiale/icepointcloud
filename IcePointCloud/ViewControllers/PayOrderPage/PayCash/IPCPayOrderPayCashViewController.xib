@@ -14,7 +14,6 @@
                 <outlet property="payRecordTableView" destination="DXf-QH-1uN" id="d15-WK-9Be"/>
                 <outlet property="payTypeCollectionView" destination="HhH-AV-zes" id="lzq-ch-x6g"/>
                 <outlet property="payTypeContentView" destination="Xol-Ft-6wm" id="FGw-h7-UtX"/>
-                <outlet property="payTypeNameLabel" destination="lpv-2T-kwA" id="w0t-eR-loc"/>
                 <outlet property="remainPayAmountLabel" destination="xZT-1q-EsG" id="GaH-Ax-R1O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -94,21 +93,9 @@
                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lpv-2T-kwA">
-                                    <rect key="frame" x="85" y="15" width="80" height="20"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="2YD-AD-Lek"/>
-                                        <constraint firstAttribute="width" constant="80" id="XVs-st-jJi"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="lpv-2T-kwA" firstAttribute="leading" secondItem="PDF-5C-otQ" secondAttribute="trailing" id="3ZW-3V-QLf"/>
-                                <constraint firstItem="lpv-2T-kwA" firstAttribute="centerY" secondItem="3jn-Hn-72e" secondAttribute="centerY" id="ZKo-nr-GYJ"/>
                                 <constraint firstAttribute="height" constant="50" id="nFu-47-sui"/>
                                 <constraint firstItem="PDF-5C-otQ" firstAttribute="centerY" secondItem="3jn-Hn-72e" secondAttribute="centerY" id="nO1-DK-tuq"/>
                                 <constraint firstItem="PDF-5C-otQ" firstAttribute="leading" secondItem="3jn-Hn-72e" secondAttribute="leading" constant="20" id="qVF-N1-ipx"/>

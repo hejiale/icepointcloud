@@ -53,6 +53,7 @@
 #import "IPCTryMatch.h"
 #import "IPCWareHouse.h"
 #import "IPCTextFiledControl.h"
+#import "IPCBatchGlassesConfig.h"
 /**
  *  Category
  */

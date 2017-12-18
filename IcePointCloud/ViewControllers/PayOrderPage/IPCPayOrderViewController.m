@@ -52,6 +52,8 @@
     [self.viewControllers addObjectsFromArray:@[_customerVC,_optometryVC,_offerOrderVC,_cashVC]];
     //Set Current Page
     [self setCurrentPage:0];
+    //Query PayType
+    [[IPCPayOrderManager sharedManager] queryPayType];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

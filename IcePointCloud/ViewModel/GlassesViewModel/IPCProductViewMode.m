@@ -109,7 +109,7 @@
                                                   EndPrice:endPrice
                                                   IsTrying:isTrying
                                                    StoreId:storeId
-                                                StrategyId:@""
+                                                StrategyId: [IPCAppManager sharedManager].currentStrategy.strategyId ? : @""
                                               SuccessBlock:^(id responseValue){
                                                   __strong typeof (weakSelf) strongSelf = weakSelf;
                                                   [strongSelf parseNormalGlassesData:responseValue];

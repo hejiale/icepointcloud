@@ -10,4 +10,36 @@
 
 @implementation IPCPriceStrategyResult
 
+- (instancetype)initWithResponseValue:(id)responseValue
+{
+    self = [super init];
+    if (self) {
+        [self.strategyArray removeAllObjects];
+        
+        if ([responseValue isKindOfClass:[NSArray class]]) {
+            [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                IPCPriceStrategy * strategy = [IPCPriceStrategy mj_objectWithKeyValues:obj];
+                [self.strategyArray addObject:strategy];
+            }];
+        }
+    }
+    return self;
+}
+
+- (NSMutableArray<IPCPriceStrategy *> *)strategyArray
+{
+    if (!_strategyArray) {
+        _strategyArray = [[NSMutableArray alloc]init];
+    }
+    return _strategyArray;
+}
+
+@end
+
+@implementation IPCPriceStrategy
+
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"strategyId"    :  @"id"};
+}
+
 @end

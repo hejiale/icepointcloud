@@ -10,7 +10,9 @@
 
 @interface IPCPayOrderPayType : NSObject
 
-
+@property (nonatomic, copy) NSString *  companyId;
+@property (nonatomic, copy) NSString *  payType;
+@property (nonatomic, copy) NSString *  payTypeId;
 
 @end
 

@@ -47,7 +47,7 @@ static NSString * const strategyIdentifier = @"IPCPriceStrategyCellIdentifier";
 
 #pragma mark //UITabelViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 0;
+    return [IPCAppManager sharedManager].priceStrategy.strategyArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,7 +55,11 @@ static NSString * const strategyIdentifier = @"IPCPriceStrategyCellIdentifier";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:strategyIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:strategyIdentifier];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:14]];
+        [cell.textLabel setTextColor:[UIColor jk_colorWithHexString:@"#888888"]];
     }
+    IPCPriceStrategy * strategy = [IPCAppManager sharedManager].priceStrategy.strategyArray[indexPath.row];
+    [cell.textLabel setText:strategy.strategyName];
     
     return cell;
 }
@@ -66,6 +70,9 @@ static NSString * const strategyIdentifier = @"IPCPriceStrategyCellIdentifier";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        IPCPriceStrategy * strategy = [IPCAppManager sharedManager].priceStrategy.strategyArray[indexPath.row];
+        [IPCAppManager sharedManager].currentStrategy = strategy;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:kIPCChoosePriceStrategyNotification object:nil];
     });
     

@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "IPCPayOrderPayType.h"
 
 @interface IPCPayRecord : NSObject
 
-@property (nonatomic, copy) NSString * payTypeInfo;
+@property (nonatomic, strong) IPCPayOrderPayType * payTypeInfo;
 @property (nonatomic, assign) double   payPrice;
 @property (nonatomic, copy) NSDate * payDate;
 @property (nonatomic, assign) NSInteger  integral;

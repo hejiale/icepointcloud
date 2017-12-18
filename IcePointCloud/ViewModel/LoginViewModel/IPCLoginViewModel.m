@@ -87,7 +87,6 @@
         [[IPCPayOrderManager sharedManager] resetEmployee];
         //load wareHouse
         [strongSelf loadWareHouse];
-//        [strongSelf loadPriceStrategy];
     } FailureBlock:^(NSError *error) {
         [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
     }];
@@ -98,26 +97,21 @@
     __weak typeof (self) weakSelf = self;
     [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf loadPriceStrategy];
+    }];
+}
+
+- (void)loadPriceStrategy
+{
+    __weak typeof (self) weakSelf = self;
+    [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
         //Load Main View
         if (!error) {
             [strongSelf showMainRootViewController];
         }else{
             [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
         }
-    }];
-}
-
-- (void)loadPriceStrategy
-{
-//    __weak typeof (self) weakSelf = self;
-    [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
-//        __strong typeof (weakSelf) strongSelf = weakSelf;
-//        //Load Main View
-//        if (!error) {
-//            [strongSelf showMainRootViewController];
-//        }else{
-//            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
-//        }
     }];
 }
 

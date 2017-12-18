@@ -161,9 +161,11 @@
             item.batchSph = sph;
             item.bacthCyl = cyl;
             item.batchReadingDegree = readingDegree;
+            item.unitPrice = glasses.updatePrice * ([self customDiscount]/100);
+        }else{
+            item.unitPrice = glasses.price * ([self customDiscount]/100);
         }
         item.glasses = glasses;
-        item.unitPrice = glasses.price * ([self customDiscount]/100);
         item.glassCount   = count;
         item.selected = YES;
         [self.itemList addObject:item];

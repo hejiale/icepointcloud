@@ -21,6 +21,7 @@
 #define BatchRequest_ContactLensSpecification   @"batchAdmin.getBatchContactLensInventoryDetailsByContactLensIds"
 #define BatchRequest_AccessorySpecification       @"batchAdmin.getContactSolutionDetailsWithProdIdForPos"
 #define BatchRequest_LensConfig                         @"sphCylCfgAdmin.getAllConfig"
+#define BatchRequest_LensPrice                            @"productConfigAdmin.listOptics"
 
 #define CustomerRequest_OptometryList              @"customerAdmin.listOptometry"
 #define CustomerRequest_SaveNewOptometry      @"customerAdmin.saveOptometry"

@@ -8,6 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+@class IPCPriceStrategy;
 @interface IPCPriceStrategyResult : NSObject
+
+@property (nonatomic, strong) NSMutableArray<IPCPriceStrategy *> * strategyArray;
+
+- (instancetype)initWithResponseValue:(id)responseValue;
+
+@end
+
+@interface IPCPriceStrategy : NSObject
+
+@property (nonatomic, copy) NSString * belongedCompany;
+@property (nonatomic, copy) NSString * strategyName;
+@property (nonatomic, copy) NSString * strategyId;
 
 @end

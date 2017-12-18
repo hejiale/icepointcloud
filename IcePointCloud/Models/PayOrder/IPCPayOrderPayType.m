@@ -10,6 +10,8 @@
 
 @implementation IPCPayOrderPayType
 
-
++ (NSDictionary *)replacedKeyFromPropertyName{
+    return @{@"payTypeId"    : @"id"};
+}
 
 @end

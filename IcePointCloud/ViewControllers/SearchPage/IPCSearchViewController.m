@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, IPCSearchType){
 @property (nonatomic, strong) NSMutableArray<NSString *> * inputKeyArray;
 @property (assign, nonatomic) IPCSearchType  searchType;
 @property (nonatomic, copy) NSString * currentSearchword;
+@property (nonatomic, strong) UIButton *  clearButton;
 
 @end
 
@@ -46,7 +47,9 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
         [self.keywordTf setPlaceholder:@"请输入搜索客户关键词..."];
     }
     [self.keywordTf setLeftView:self.leftTextFieldView];
+    [self.keywordTf setRightView:self.clearButton];
     [self.keywordTf setLeftViewMode:UITextFieldViewModeAlways];
+    [self.keywordTf setRightViewMode:UITextFieldViewModeAlways];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -57,7 +60,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [self.keywordTf becomeFirstResponder];
     
     if (self.currentSearchword.length) {
-        [self.inputKeyArray addObjectsFromArray: [self.currentSearchword componentsSeparatedByString:@" "]];
+        [self.inputKeyArray addObjectsFromArray: [self.currentSearchword componentsSeparatedByString:@","]];
         [self updateLeftTextViewUI];
     }
 }
@@ -89,32 +92,50 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     return _leftTextFieldView;
 }
 
+- (UIButton *)clearButton
+{
+    if (!_clearButton) {
+        _clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_clearButton setFrame:CGRectMake(0, 0, 50, 50)];
+        [_clearButton setImage:[UIImage imageNamed:@"icon_searchClose"] forState:UIControlStateNormal];
+        [_clearButton addTarget:self action:@selector(clearInputAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _clearButton;
+}
+
 - (void)updateLeftTextViewUI
 {
     __block CGFloat totalWidth = 0;
     
     [self.leftTextFieldView removeAllSubviews];
     
+    __weak typeof(self) weakSelf = self;
     [self.inputKeyArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIFont * font = [UIFont systemFontOfSize:13];
-        double textWidth = [obj jk_sizeWithFont:font constrainedToHeight:30].width;
-        double width = MAX(textWidth + 30, 40);
+        double textWidth = [obj jk_sizeWithFont:font constrainedToHeight:20].width;
+        double width = MAX(textWidth + 45, 50);
         
-        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(totalWidth, 0, width, 30)];
-        [view setBackgroundColor:COLOR_RGB_BLUE];
-        [view addBorder:15 Width:0 Color:[UIColor clearColor]];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(totalWidth, 3, width, 24)];
+        [view addBorder:12 Width:1 Color:COLOR_RGB_BLUE];
         [self.leftTextFieldView addSubview:view];
+        [view jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+            [strongSelf.inputKeyArray removeObjectAtIndex:idx];
+            [strongSelf updateLeftTextViewUI];
+        }];
         
-        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, textWidth+5, 20)];
+        UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, textWidth, 20)];
         [label setFont:font];
         [label setText:obj];
-        [label setTextColor:[UIColor whiteColor]];
+        [label setTextColor:COLOR_RGB_BLUE];
         [label setTextAlignment:NSTextAlignmentCenter];
         [view addSubview:label];
         
-        UIImageView * closeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(width-25, 5, 20, 20)];
+        UIImageView * closeImageView = [[UIImageView alloc]initWithFrame:CGRectMake(width-25, 6, 12, 12)];
         [closeImageView setBackgroundColor:[UIColor clearColor]];
-        [closeImageView setImage:[UIImage imageNamed:@"icon_close"]];
+        [closeImageView setImage:[UIImage imageNamed:@"icon_small_close"]];
+        closeImageView.contentMode = UIViewContentModeScaleAspectFit;
         [view addSubview:closeImageView];
         
         totalWidth += width + 5;
@@ -143,6 +164,13 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 - (IBAction)onCancelBtnTapped:(id)sender{
     [self.keywordTf endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)clearInputAction:(id)sender
+{
+    [self.inputKeyArray removeAllObjects];
+    [self.keywordTf setText:@""];
+    [self updateLeftTextViewUI];
 }
 
 
@@ -222,14 +250,11 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.inputKeyArray removeAllObjects];
     NSArray * searchText = self.keywordHistory[indexPath.row];
-    [self.inputKeyArray addObjectsFromArray:searchText];
-    [self updateLeftTextViewUI];
     
     if (self.searchDelegate) {
         if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)])
-            [self.searchDelegate didSearchWithKeyword:[searchText componentsJoinedByString:@" "]];
+            [self.searchDelegate didSearchWithKeyword:[searchText componentsJoinedByString:@","]];
     }
     [self.keywordTf endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -257,12 +282,12 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     NSString *curKeyword = [textField.text jk_trimmingWhitespace];
     if (curKeyword.length) {
         [self.inputKeyArray addObject:curKeyword];
-        [self syncSearchHistory];
     }
+    [self syncSearchHistory];
     
     if (self.searchDelegate) {
         if ([self.searchDelegate respondsToSelector:@selector(didSearchWithKeyword:)]){
-            [self.searchDelegate didSearchWithKeyword:[self.inputKeyArray componentsJoinedByString:@" "]];
+            [self.searchDelegate didSearchWithKeyword:[self.inputKeyArray componentsJoinedByString:@","]];
         }
     }
     [self dismissViewControllerAnimated:YES completion:nil];

@@ -79,6 +79,24 @@
 
 
 
+/**
+ Query BatchLens Price
+
+ @param productId
+ @param type
+ @param degree 
+ @param sph
+ @param cyl
+ @param success
+ @param failure
+ */
++ (void)queryBatchLensPriceWithProductId:(NSString *)productId
+                                    Type:(NSString *)type
+                                  Degree:(NSString *)degree
+                                     Sph:(NSString *)sph
+                                     Cyl:(NSString *)cyl
+                            SuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError *error))failure;
 
 
 @end

@@ -134,6 +134,44 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
 }
 
+#pragma mark //Request Data
+- (void)querySuggestPrice
+{
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
+        [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
+                                                            Type:[self.glasses glassType]
+                                                          Degree:self.leftParameterLabel.text
+                                                             Sph:nil
+                                                             Cyl:nil
+                                                    SuccessBlock:^(id responseValue)
+         {
+             IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
+             if (self.cartItem) {
+                 self.cartItem.glasses.updatePrice = config.suggestPrice;
+             }else{
+                 self.glasses.updatePrice = config.suggestPrice;
+             }
+             [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
+         } FailureBlock: nil];
+    }else{
+        [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
+                                                            Type:[self.glasses glassType]
+                                                          Degree:nil
+                                                             Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
+                                                             Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
+                                                    SuccessBlock:^(id responseValue)
+         {
+             IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
+             if (self.cartItem) {
+                 self.cartItem.glasses.updatePrice = config.suggestPrice;
+             }else{
+                 self.glasses.updatePrice = config.suggestPrice;
+             }
+             [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
+         } FailureBlock: nil];
+    }
+}
+
 #pragma mark //Set UI
 - (void)showParameterView
 {
@@ -167,10 +205,12 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if (self.cartItem) {
         [self.normalLensStepperView setHidden:YES];
         self.normalLensHeight.constant -= 55;
+        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
+    }else{
+        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
     }
     [self.normalLensImageView setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.normalLensNameLabel setText:self.glasses.glassName];
-    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
 }
 
 - (void)loadCustomsizedLensView{
@@ -203,13 +243,14 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     } completion:nil];
 }
 
-- (IBAction)completeAction:(id)sender {
+- (IBAction)completeAction:(id)sender
+{
     if (self.cartItem) {
         [self updateCartParameter];
     }else{
         [self addLensToCart];
-        [self removeCover];
     }
+    [self removeCover];
 }
 
 - (IBAction)cancelAddAction:(id)sender {
@@ -363,7 +404,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         self.cartItem.batchSph = self.leftParameterLabel.text;
         self.cartItem.bacthCyl = self.rightParameterLabel.text;
     }
-    [self removeCover];
 }
 
 #pragma mark //Reload Lens Parameter View Status
@@ -374,7 +414,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     __weak typeof (self) weakSelf = self;
     
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum){
-        return  @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
+        return  @(leftParametr.length && rightParameter.length && [cartNum integerValue] > 0);
     }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (valid.boolValue) {
@@ -385,13 +425,22 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
             strongSelf.lensSureButton.alpha = 0.5;
         }
     }];
+    
+    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
+        return  @(leftParametr.length && rightParameter.length);
+    }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        if (valid.boolValue) {
+            [strongSelf querySuggestPrice];
+        }
+    }];
 }
 
 
 //Refresh the lens or relaxing increase or decrease in a shopping cart button state
 - (void)reloadLensCartStatus
 {
-    if (self.leftParameterLabel.text.length || self.rightParameterLabel.text.length)
+    if (self.leftParameterLabel.text.length && self.rightParameterLabel.text.length)
         self.lensPlusButton.enabled = YES;
     else
         self.lensPlusButton.enabled = NO;

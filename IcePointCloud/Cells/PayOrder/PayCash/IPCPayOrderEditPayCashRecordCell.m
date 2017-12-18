@@ -38,7 +38,7 @@
     _payRecord = payRecord;
     
     if (_payRecord) {
-        [self.payTypeLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payTypeInfo]];
+        [self.payTypeLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payTypeInfo.payType]];
         [self.dateLabel setText:[NSDate jk_stringWithDate:_payRecord.payDate format:@"yyyy-MM-dd"]];
         [self.payAmountTextField setText:@""];
         [self.payAmountTextField setIsEditing:YES];
@@ -55,7 +55,7 @@
     BOOL isInsert = NO;
     
     if (textField.text.length) {
-        if ([self.payRecord.payTypeInfo isEqualToString:@"积分"])
+        if ([self.payRecord.payTypeInfo.payType isEqualToString:@"积分"])
         {
             double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
             if (pointPrice > [[IPCPayOrderManager sharedManager] remainPayPrice]) {
@@ -70,7 +70,7 @@
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
                 isInsert = YES;
             }
-        }else if ([self.payRecord.payTypeInfo isEqualToString:@"储值卡"]){
+        }else if ([self.payRecord.payTypeInfo.payType isEqualToString:@"储值卡"]){
             if ([textField.text doubleValue] > [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance){
                 [IPCCommonUI showError:@"输入金额大于客户储值余额"];
             }else if ([textField.text doubleValue] <= [[IPCPayOrderManager sharedManager] remainPayPrice] && [textField.text doubleValue] > 0){

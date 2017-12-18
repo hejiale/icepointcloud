@@ -54,12 +54,15 @@
     __block NSMutableArray * array = [[NSMutableArray alloc]init];
     [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-        if ([obj.payTypeInfo isEqualToString:@"积分"]) {
+        if ([obj.payTypeInfo.payType isEqualToString:@"积分"]) {
             [dic setObject:@(obj.pointPrice) forKey:@"payAmount"];
+            [dic setObject:@(obj.integral) forKey:@"integral"];
         }else{
             [dic setObject:@(obj.payPrice) forKey:@"payAmount"];
         }
-        [dic setObject:obj.payTypeInfo forKey:@"payType"];
+        [dic setObject:obj.payTypeInfo.payType forKey:@"payType"];
+        [dic setObject:obj.payTypeInfo.payTypeId forKey:@"payTypeConfigId"];
+
         [array addObject:dic];
     }];
     return array;

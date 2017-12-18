@@ -10,4 +10,9 @@
 
 @interface IPCPayCashPayTypeViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
+@property (copy, nonatomic) IPCPayOrderPayType * payType;
+
+- (void)updateBorder:(BOOL)isUpdate;
+
 @end

@@ -54,6 +54,8 @@ static NSString * const wareHouseIdentifier = @"IPCWareHouseCellIdentifier";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:wareHouseIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:wareHouseIdentifier];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:14]];
+        [cell.textLabel setTextColor:[UIColor jk_colorWithHexString:@"#888888"]];
     }
     IPCWareHouse * house = [IPCAppManager sharedManager].wareHouse.wareHouseArray[indexPath.row];
     [cell.textLabel setText:house.wareHouseName];
