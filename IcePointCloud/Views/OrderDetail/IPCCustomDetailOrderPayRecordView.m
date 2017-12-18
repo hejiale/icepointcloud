@@ -10,7 +10,6 @@
 
 @interface IPCCustomDetailOrderPayRecordView()
 
-@property (weak, nonatomic) IBOutlet UIImageView *payTypeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
@@ -33,7 +32,6 @@
     _payType = payType;
     
     if (_payType) {
-        [self.payTypeImageView setImage:[[IPCAppManager sharedManager] payTypeImage:_payType.payTypeInfo]];
         [self.payTypeNameLabel setText:_payType.payTypeInfo];
         [self.payDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_payType.payDate] IsTime:YES]];
         [self.payPriceLabel setText:[NSString stringWithFormat:@"-￥%.2f",_payType.payPrice]];

@@ -82,20 +82,6 @@ extern NSString * const kIPCDeviceLoginUUID;
  */
 + (UIImage *)modelPhotoWithType:(IPCModelType)type usage:(IPCModelUsage)usage;
 
-/**
- *  PayTypeInfo Image Name
- */
-- (UIImage *)payTypeImage:(NSString *)payTypeInfo;
-
-
-/**
- Load PayType Image
-
- @param index
- @return 
- */
-- (NSString *)payType:(NSInteger)index;
-
 
 /**
  * Load WareHouse

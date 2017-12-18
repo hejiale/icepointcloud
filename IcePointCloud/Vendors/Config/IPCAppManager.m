@@ -168,54 +168,6 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     return nil;
 }
 
-- (UIImage *)payTypeImage:(NSString *)payTypeInfo
-{
-    NSString * imageName = nil;
-    
-    if ([payTypeInfo isEqualToString:@"现金"]){
-        imageName = @"cash";
-    }else if ([payTypeInfo isEqualToString:@"储值卡"]){
-        imageName = @"storeValue";
-    }else if ([payTypeInfo isEqualToString:@"支付宝"]){
-        imageName = @"zhifubao";
-    }else if ([payTypeInfo isEqualToString:@"微信"]){
-        imageName = @"wexin";
-    }else if ([payTypeInfo isEqualToString:@"积分"]){
-        imageName = @"point";
-    }
-    return [UIImage imageNamed:imageName];
-}
-
-- (NSString *)payType:(NSInteger)index
-{
-    switch (index) {
-        case 0:
-            return @"现金";
-            break;
-        case 1:
-            return @"支付宝";
-            break;
-        case 2:
-            return @"微信";
-            break;
-        case 3:
-            return @"刷卡";
-            break;
-        case 4:
-            return @"储值卡";
-            break;
-        case 5:
-            return @"积分";
-            break;
-        case 6:
-            return @"其他";
-            break;
-        default:
-            break;
-    }
-    return nil;
-}
-
 - (void)loadWareHouse:(void (^)(NSError *))complete
 {
     __weak typeof(self) weakSelf = self;
