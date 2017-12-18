@@ -268,7 +268,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
 - (void)loadMore
 {
-    self.glassListViewMode.currentPage += self.glassListViewMode.limit;
+    self.glassListViewMode.currentPage += 1;
     
     __weak typeof (self) weakSelf = self;
     [self loadGlassesListData:^{
@@ -293,7 +293,10 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     self.productTableView.isBeginLoad = NO;
     [self.productTableView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
-    [self stopRefresh];
+    
+    if (self.glassListViewMode.status ==IPCFooterRefresh_HasMoreData) {
+        [self stopRefresh];
+    }
 }
 
 #pragma mark //Request Data
@@ -646,7 +649,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (void)updateCurrentGlass{
     if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn)
     {
-        [self.tryGlassesView reload];;
+        [self.tryGlassesView reload];
         self.tableViewTopConstant.constant = (SCREEN_HEIGHT - 70)/4;
         [self.tryGlassesView setHidden:NO];
     }else{

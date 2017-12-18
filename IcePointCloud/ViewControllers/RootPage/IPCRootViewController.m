@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
+@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
+@property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 
 @end
 
@@ -30,9 +32,10 @@
     
     self.productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     self.tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    IPCCustomerListViewController * customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
-    IPCPayOrderViewController * payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
-    [self setViewControllers:@[self.productVC,customerInfoVC,self.tryVC,payOrderVC]];
+    self.customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
+    self.payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
+    
+    [self setViewControllers:@[self.productVC,self.customerInfoVC,self.tryVC,self.payOrderVC]];
     
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x)

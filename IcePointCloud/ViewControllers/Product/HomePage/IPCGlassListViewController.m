@@ -89,7 +89,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 
 - (void)loadMore
 {
-    self.glassListViewMode.currentPage += self.glassListViewMode.limit;
+    self.glassListViewMode.currentPage += 1;
     
     __weak typeof(self) weakSelf = self;
     [self loadGlassesListData:^{
@@ -166,7 +166,10 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     self.glassListCollectionView.isBeginLoad = NO;
     [self.glassListCollectionView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
-    [self stopRefresh];
+    
+    if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
+        [self stopRefresh];
+    }
 }
 
 //Remover All Cover

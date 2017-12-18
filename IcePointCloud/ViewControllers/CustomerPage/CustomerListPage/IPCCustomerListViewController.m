@@ -175,7 +175,10 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 {
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
-    [self stopRefresh];
+    
+    if (self.viewModel.status == IPCFooterRefresh_HasMoreData) {
+        [self stopRefresh];
+    }
 }
 
 - (void)stopRefresh{
