@@ -976,7 +976,6 @@
 		9EA3537A197AB815005960AD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CB468F421FDE26B500FCDAE4 /* PriceStrategy */,
 				CB0F55431F98845A003707F2 /* BatchParameter */,
 				CB0F55461F98845A003707F2 /* CustomerDetail */,
 				CB0F554B1F98845A003707F2 /* CustomerList */,
@@ -991,6 +990,7 @@
 				CB0F55781F98845A003707F2 /* PayOrder */,
 				CB0F55811F98845A003707F2 /* PersonCenter */,
 				CB0F55841F98845A003707F2 /* PhotoLibrary */,
+				CB468F421FDE26B500FCDAE4 /* PriceStrategy */,
 				CB0F558B1F98845A003707F2 /* ShareChat */,
 				CB0F558E1F98845A003707F2 /* ShoppingCart */,
 				CB0F55931F98845A003707F2 /* TakeGlasses */,

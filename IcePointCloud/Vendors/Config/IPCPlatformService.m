@@ -29,6 +29,7 @@
     [self enableSkin];
     [self enableKeyboard];
     [self bindWechat];
+    [self setUpBugtags];
 }
 
 /**
@@ -60,6 +61,13 @@
     [TuSDK initSdkWithAppKey:IPCTuSdkKey];
 }
 
+- (void)setUpBugtags
+{
+    [Bugtags startWithAppKey:IPCBugtagsKey invocationEvent:BTGInvocationEventNone];
+    [Bugtags setTrackingNetwork:YES];
+    [Bugtags sync:YES];
+    
+}
 
 /**
  *  Face Detector

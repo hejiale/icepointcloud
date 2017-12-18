@@ -20,6 +20,7 @@ pod 'MJRefresh'
 pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
 pod 'TuSDK'
+pod 'Bugtags'
 end
 
 target "IcePointCloudTests" do

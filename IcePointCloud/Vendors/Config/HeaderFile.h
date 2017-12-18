@@ -9,6 +9,7 @@
 #ifndef HeaderFile_h
 #define HeaderFile_h
 
+#import <Bugtags/Bugtags.h>
 /**
  *  General
  */
