@@ -131,9 +131,7 @@
 
 + (double)floorNumber:(double)number
 {
-    double floor = (number * 100)/100;
-    NSString * floorStr = [NSString stringWithFormat:@"%.2f",floor];
-    return  [floorStr doubleValue];
+    return [[IPCCommon formatNumber:number Location:3] doubleValue];
 }
 
 + (double)afterDouble:(NSString *)begin :(NSString *)end
