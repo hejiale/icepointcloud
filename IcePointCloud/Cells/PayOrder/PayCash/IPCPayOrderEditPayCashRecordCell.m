@@ -52,8 +52,6 @@
 #pragma mark //UITextFieldDelegate
 - (void)textFieldEndEditing:(IPCCustomTextField *)textField
 {
-    BOOL isInsert = NO;
-    
     NSString * remainPriceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
     NSString * balanceStr = [NSString stringWithFormat:@"%f", [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance];
     NSString * integralStr = [NSString stringWithFormat:@"%d", [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral];
@@ -74,7 +72,6 @@
                 self.payRecord.pointPrice = pointPrice;
                 self.payRecord.integral = [textField.text integerValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
-                isInsert = YES;
             }
         }else if ([self.payRecord.payOrderType.payType isEqualToString:@"储值卡"]){
             if ([IPCCommon afterDouble:balanceStr :textField.text] < 0){
@@ -84,21 +81,19 @@
             }else{
                 self.payRecord.payPrice = [textField.text doubleValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
-                isInsert = YES;
             }
         }else{
             if ([IPCCommon afterDouble:remainPriceStr :textField.text] >= 0) {
                 self.payRecord.payPrice = [textField.text doubleValue];
                 [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
-                isInsert = YES;
             } else{
                 [IPCCommonUI showError:@"输入有效付款金额"];
             }
         }
     }
     
-    if ([self.delegate respondsToSelector:@selector(reloadRecord:IsInsert:)]) {
-        [self.delegate reloadRecord:self IsInsert:isInsert];
+    if ([self.delegate respondsToSelector:@selector(reloadRecord:)]) {
+        [self.delegate reloadRecord:self];
     }
 }
 

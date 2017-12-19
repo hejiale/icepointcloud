@@ -17,14 +17,14 @@
 @property (weak, nonatomic) IBOutlet UIView *payAmountView;
 
 @property (strong, nonatomic)  IPCCustomTextField * payAmountTextField;
-@property (nonatomic, strong) IPCPayRecord * payRecord;
+@property (nonatomic, copy) IPCPayRecord * payRecord;
 @property (nonatomic, assign) id<IPCPayOrderEditPayCashRecordCellDelegate>delegate;
 
 @end
 
 @protocol IPCPayOrderEditPayCashRecordCellDelegate <NSObject>
 
-- (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
+- (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell;
 
 @end
 

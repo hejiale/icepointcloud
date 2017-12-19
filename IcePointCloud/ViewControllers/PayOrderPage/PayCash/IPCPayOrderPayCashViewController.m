@@ -55,14 +55,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 {
     [super viewWillAppear:animated];
 
-    ///无购物商品 收款记录
-    if ([IPCShoppingCart sharedCart].allGlassesCount > 0 && [IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0) {
-        self.currentIndex = 0;
-    }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0){
-        self.currentIndex = -1;
-    }
-    
-    [self reloadRemainAmount];
+    [self reloadPayStatus];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -84,7 +77,27 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 - (void)reloadRemainAmount
 {
     [self.remainPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderManager sharedManager] remainPayPrice]]];
-    [self.payRecordTableView reloadData];
+}
+
+- (void)reloadPayStatus
+{
+    ///无购物商品 收款记录
+    if ([IPCShoppingCart sharedCart].allGlassesCount > 0 && [IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0) {
+        self.currentIndex = 0;
+    }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0){
+        self.currentIndex = -1;
+    }
+    [self reloadRemainAmount];
+}
+
+- (void)resetPayTypeStatus
+{
+    if ([[IPCPayOrderManager sharedManager] remainPayPrice] > 0) {
+        self.currentIndex = 0;
+    }else{
+        self.currentIndex = -1;
+    }
+    [self reloadRemainAmount];
 }
 
 #pragma mark //UITableViewDataSoure
@@ -108,8 +121,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         cell.payRecord = self.insertRecord;
         
         [[cell rac_signalForSelector:@selector(cancelAddRecordAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            self.insertRecord = nil;
-            [IPCPayOrderManager sharedManager].isInsertRecord = NO;
+            self.currentIndex = -1;
             [tableView reloadData];
         }];
         return cell;
@@ -123,7 +135,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         
         [[cell rac_signalForSelector:@selector(removePayRecordAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             [[IPCPayOrderManager sharedManager].payTypeRecordArray removeObject:record];
-            [self reloadRemainAmount];
+            [self resetPayTypeStatus];
         }];
         return cell;
     }
@@ -188,14 +200,9 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 }
 
 #pragma mark //IPCPayOrderEditPayCashRecordCellDelegate
-- (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell IsInsert:(BOOL)isInsert;
+- (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell
 {
-    if (isInsert){
-        self.insertRecord = nil;
-        [IPCPayOrderManager sharedManager].isInsertRecord = NO;
-    }
-    
-    [self reloadRemainAmount];
+    [self resetPayTypeStatus];
 }
 
 #pragma mark //KVO
@@ -210,8 +217,11 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
             self.insertRecord = [[IPCPayRecord alloc]init];
             self.insertRecord.payDate = [NSDate date];
             self.insertRecord.payOrderType = payType;
+            
+            [IPCPayOrderManager sharedManager].isInsertRecord = YES;
         }else{
             self.insertRecord = nil;
+            [IPCPayOrderManager sharedManager].isInsertRecord = NO;
         }
         [self.payRecordTableView reloadData];
     }
