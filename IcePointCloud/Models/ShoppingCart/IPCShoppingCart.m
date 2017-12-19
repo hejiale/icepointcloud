@@ -338,7 +338,7 @@
             obj.unitPrice = price;
             total += [IPCCommon floorNumber:obj.unitPrice] * obj.glassCount;
         }else{
-            obj.unitPrice = (double)(([IPCPayOrderManager sharedManager].payAmount - total)/obj.glassCount);
+            obj.unitPrice = [IPCCommon floorNumber:(([IPCPayOrderManager sharedManager].payAmount - total)/obj.glassCount)];
         }
     }];
 }

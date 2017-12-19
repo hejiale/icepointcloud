@@ -16,5 +16,7 @@
 @property (nonatomic, copy) NSDate * payDate;
 @property (nonatomic, assign) NSInteger  integral;
 @property (nonatomic, assign) double   pointPrice;
+@property (nonatomic, copy) NSDate *   orderTime;
+@property (nonatomic, copy) NSString *  customerId;
 
 @end

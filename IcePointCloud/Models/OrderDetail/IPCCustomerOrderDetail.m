@@ -53,6 +53,8 @@
         if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCPayRecord * payType = [IPCPayRecord mj_objectWithKeyValues:obj];
+                payType.payTypeInfo = [[IPCPayOrderPayType alloc]init];
+                payType.payTypeInfo = obj[@"payTypeInfo"];
                 [self.recordArray addObject:payType];
                 totalPayTypePrice += payType.payPrice;
             }];
