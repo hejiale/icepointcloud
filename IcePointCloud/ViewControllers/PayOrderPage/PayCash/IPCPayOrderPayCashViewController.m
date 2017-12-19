@@ -209,7 +209,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
             
             self.insertRecord = [[IPCPayRecord alloc]init];
             self.insertRecord.payDate = [NSDate date];
-            self.insertRecord.payTypeInfo = payType;
+            self.insertRecord.payOrderType = payType;
         }else{
             self.insertRecord = nil;
         }

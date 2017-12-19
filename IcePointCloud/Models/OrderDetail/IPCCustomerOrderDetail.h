@@ -44,7 +44,7 @@
 @property (nonatomic, assign, readonly) double   totalBizPrice;
 @property (nonatomic, assign, readonly) double   afterDiscountPrice;
 @property (nonatomic, assign, readonly) double   afterIntegralDeductionPrice;
-@property (nonatomic, assign, readonly) NSInteger    integral;
+@property (nonatomic, assign, readonly) NSInteger    integralGiven;
 @property (nonatomic, assign, readonly) double   integralDeductionAmount;
 @property (nonatomic, assign, readonly) double   donationAmount;
 @property (nonatomic, assign, readonly) double   exchangeTotalIntegral;

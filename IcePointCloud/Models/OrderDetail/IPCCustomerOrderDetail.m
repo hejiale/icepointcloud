@@ -52,11 +52,11 @@
         
         if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                IPCPayRecord * payType = [IPCPayRecord mj_objectWithKeyValues:obj];
-                payType.payTypeInfo = [[IPCPayOrderPayType alloc]init];
-                payType.payTypeInfo = obj[@"payTypeInfo"];
-                [self.recordArray addObject:payType];
-                totalPayTypePrice += payType.payPrice;
+                IPCPayRecord * record = [IPCPayRecord mj_objectWithKeyValues:obj];
+                record.payOrderType = [[IPCPayOrderPayType alloc]init];
+                record.payOrderType.payType = obj[@"payTypeInfo"];
+                [self.recordArray addObject:record];
+                totalPayTypePrice += record.payPrice;
             }];
         }
         self.orderInfo.remainAmount = self.orderInfo.totalPrice - totalPayTypePrice;

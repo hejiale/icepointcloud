@@ -11,7 +11,7 @@
 
 @interface IPCPayRecord : NSObject
 
-@property (nonatomic, strong) IPCPayOrderPayType * payTypeInfo;
+@property (nonatomic, strong) IPCPayOrderPayType * payOrderType;
 @property (nonatomic, assign) double   payPrice;
 @property (nonatomic, copy) NSDate * payDate;
 @property (nonatomic, assign) NSInteger  integral;

@@ -25,11 +25,11 @@
     _payRecord = payRecord;
     
     if (_payRecord) {
-        [self.payTypeNameLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payTypeInfo.payType]];
+        [self.payTypeNameLabel setText:[NSString stringWithFormat:@"%@支付",_payRecord.payOrderType.payType]];
         
         [self.createDateLabel setText:[NSDate jk_stringWithDate:_payRecord.payDate format:@"yyyy-MM-dd"]];
         
-        if ([_payRecord.payTypeInfo.payType isEqualToString:@"积分"]) {
+        if ([_payRecord.payOrderType.payType isEqualToString:@"积分"]) {
             [self.payTypeAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_payRecord.pointPrice]];
             [self.pointLabel setText:[NSString stringWithFormat:@"%d积分",_payRecord.integral]];
         }else{

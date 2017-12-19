@@ -49,7 +49,7 @@
 {
     __block double totalPrice = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.payTypeInfo.payType isEqualToString:@"积分"]) {
+        if ([obj.payOrderType.payType isEqualToString:@"积分"]) {
             totalPrice += obj.pointPrice;
         }else{
             totalPrice += obj.payPrice;
