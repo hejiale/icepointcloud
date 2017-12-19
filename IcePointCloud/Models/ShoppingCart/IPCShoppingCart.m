@@ -333,12 +333,15 @@
     __block  double  total = 0;
 
     [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (idx != self.itemList.count - 1) {
-            double price = ((obj.glasses.price * [IPCPayOrderManager sharedManager].payAmount)/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]);
-            obj.unitPrice = price;
-            total += [IPCCommon floorNumber:obj.unitPrice] * obj.glassCount;
+        if (idx != self.itemList.count - 1)
+        {
+            double price = ((obj.glasses.price * [IPCPayOrderManager sharedManager].payAmount * obj.glassCount)/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]);
+            obj.totalUpdatePrice = [IPCCommon floorNumber:price];
+            obj.unitPrice = obj.totalUpdatePrice/obj.glassCount;
+            total += obj.unitPrice * obj.glassCount;
         }else{
-            obj.unitPrice = [IPCCommon floorNumber:(([IPCPayOrderManager sharedManager].payAmount - total)/obj.glassCount)];
+            obj.totalUpdatePrice = [IPCCommon floorNumber:[IPCPayOrderManager sharedManager].payAmount - total];
+            obj.unitPrice = [IPCCommon floorNumber:obj.totalUpdatePrice/obj.glassCount];
         }
     }];
 }

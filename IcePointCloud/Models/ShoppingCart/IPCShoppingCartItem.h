@@ -21,6 +21,7 @@
 @property (nonatomic, assign, readwrite) NSInteger    glassCount;
 @property (nonatomic, assign, readwrite) BOOL        selected;
 @property (nonatomic, assign, readwrite) double      unitPrice;//可修改单价
+@property (nonatomic, assign, readwrite) double      totalUpdatePrice;//可修改商品总价
 @property (nonatomic, copy, readwrite)   NSString   *remarks;//note
 
 /**

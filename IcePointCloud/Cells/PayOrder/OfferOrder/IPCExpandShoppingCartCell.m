@@ -92,6 +92,7 @@
     
     if (priceStr.length) {
         self.cartItem.unitPrice = [priceStr doubleValue];
+        self.cartItem.totalUpdatePrice = self.cartItem.unitPrice * self.cartItem.glassCount;
         
         [IPCPayOrderManager sharedManager].customDiscount = -1;
         [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];

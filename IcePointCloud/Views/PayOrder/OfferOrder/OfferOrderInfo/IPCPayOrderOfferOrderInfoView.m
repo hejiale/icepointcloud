@@ -129,7 +129,8 @@
         priceStr =  [str substringFromIndex:1];
     }
     
-    if (priceStr.length && [IPCShoppingCart sharedCart].allGlassesCount > 0) {
+    if (priceStr.length && [IPCShoppingCart sharedCart].allGlassesCount > 0)
+    {
         if ([textField isEqual:self.discountAmountTextField]) {
             if ([priceStr integerValue] >= 100) {
                 [IPCPayOrderManager sharedManager].discount  = 100;
@@ -138,8 +139,9 @@
             }else{
                 [IPCPayOrderManager sharedManager].discount = [priceStr doubleValue];
             }
-            [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * (1 - [IPCPayOrderManager sharedManager].discount/100);
-            [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].discountAmount;
+            ///重新计算金额
+            [IPCPayOrderManager sharedManager].payAmount = [IPCCommon floorNumber:[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * [IPCPayOrderManager sharedManager].discount];
+            [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
             [[IPCPayOrderManager sharedManager] clearPayRecord];
         }else{
             if ([priceStr doubleValue] >= [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]) {
@@ -147,6 +149,7 @@
             }else{
                 [IPCPayOrderManager sharedManager].payAmount = [priceStr doubleValue];
             }
+            ///重新计算金额
             [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
             [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
         }
