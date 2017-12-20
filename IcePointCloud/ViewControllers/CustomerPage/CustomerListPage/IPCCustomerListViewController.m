@@ -9,13 +9,13 @@
 #import "IPCCustomerListViewController.h"
 #import "IPCCustomerCollectionViewCell.h"
 #import "IPCCustomerDetailViewController.h"
-#import "IPCSearchViewController.h"
+#import "IPCSearchCustomerViewController.h"
 #import "IPCCustomerListViewModel.h"
 #import "IPCEditCustomerView.h"
 
 static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentifier";
 
-@interface IPCCustomerListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewControllerDelegate>
+@interface IPCCustomerListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,IPCSearchViewDelegate>
 {
     BOOL isCancelRequest;
 }
@@ -192,7 +192,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 #pragma mark //Clicked Events
 - (IBAction)searchCustomerAction:(id)sender{
-    IPCSearchViewController * searchVC = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    IPCSearchCustomerViewController * searchVC = [[IPCSearchCustomerViewController alloc]initWithNibName:@"IPCSearchCustomerViewController" bundle:nil];
     searchVC.searchDelegate = self;
     [searchVC showSearchCustomerViewWithSearchWord:self.viewModel.searchWord];
     [self presentViewController:searchVC animated:YES completion:nil];

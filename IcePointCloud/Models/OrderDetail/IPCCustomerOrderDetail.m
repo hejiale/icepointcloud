@@ -27,12 +27,14 @@
     [self.recordArray removeAllObjects];
     self.optometryMode = nil;
     self.orderInfo = nil;
+    __weak typeof(self) weakSelf = self;
     
     if ([responseValue isKindOfClass:[NSDictionary class]]) {
         if ([responseValue[@"detailList"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailList"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
                 IPCGlasses * glass = [IPCGlasses mj_objectWithKeyValues:obj];
-                [self.products addObject:glass];
+                [strongSelf.products addObject:glass];
             }];
         }
         
@@ -45,17 +47,20 @@
         self.orderInfo.totalPointAmount = 0;
         
         [self.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
-            self.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
         }];
         
         __block double totalPayTypePrice = 0;
         
+        
         if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
                 IPCPayRecord * record = [IPCPayRecord mj_objectWithKeyValues:obj];
                 record.payOrderType = [[IPCPayOrderPayType alloc]init];
                 record.payOrderType.payType = obj[@"payTypeInfo"];
-                [self.recordArray addObject:record];
+                [strongSelf.recordArray addObject:record];
                 totalPayTypePrice += record.payPrice;
             }];
         }

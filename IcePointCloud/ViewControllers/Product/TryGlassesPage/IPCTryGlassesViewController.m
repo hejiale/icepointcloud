@@ -8,7 +8,7 @@
 
 #import "IPCTryGlassesViewController.h"
 #import "IPCTryGlassesListViewCell.h"
-#import "IPCSearchViewController.h"
+#import "IPCSearchGlassesViewController.h"
 #import "IPCDefineCameraBaseComponent.h"
 #import "IPCPhotoPickerBaseComponent.h"
 #import "IPCSingleModeView.h"
@@ -23,7 +23,7 @@
 
 static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIdentifier";
 
-@interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewControllerDelegate,IPCTryGlassesCellDelegate,UIScrollViewDelegate>
+@interface IPCTryGlassesViewController ()<UITableViewDelegate,UITableViewDataSource,CompareItemViewDelegate,IPCSearchViewDelegate,IPCTryGlassesCellDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *productTableView;
 @property (nonatomic, weak) IBOutlet UIView *matchPanelView;
@@ -246,7 +246,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 }
 
 - (void)presentSearchViewController{
-    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    IPCSearchGlassesViewController * searchViewMode = [[IPCSearchGlassesViewController alloc]initWithNibName:@"IPCSearchGlassesViewController" bundle:nil];
     searchViewMode.searchDelegate = self;
     searchViewMode.filterType = self.glassListViewMode.currentType;
     [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];

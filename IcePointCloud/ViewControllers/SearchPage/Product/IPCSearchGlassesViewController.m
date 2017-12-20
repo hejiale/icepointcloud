@@ -6,14 +6,10 @@
 //  Copyright (c) 2015 Doray. All rights reserved.
 //
 
-#import "IPCSearchViewController.h"
+#import "IPCSearchGlassesViewController.h"
+#import "IPCSearchItemTableViewCell.h"
 
-typedef NS_ENUM(NSInteger, IPCSearchType){
-    IPCSearchTypeProduct,
-    IPCSearchTypeCustomer
-};
-
-@interface IPCSearchViewController ()
+@interface IPCSearchGlassesViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *topSearchView;
 @property (nonatomic, weak) IBOutlet UITextField *keywordTf;
@@ -21,13 +17,12 @@ typedef NS_ENUM(NSInteger, IPCSearchType){
 @property (nonatomic, strong) UIView * leftTextFieldView;
 @property (nonatomic, strong) NSMutableArray<NSArray *> * keywordHistory;
 @property (nonatomic, strong) NSMutableArray<NSString *> * inputKeyArray;
-@property (assign, nonatomic) IPCSearchType  searchType;
 @property (nonatomic, copy) NSString * currentSearchword;
 @property (nonatomic, strong) UIButton *  clearButton;
 
 @end
 
-@implementation IPCSearchViewController
+@implementation IPCSearchGlassesViewController
 
 static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
@@ -41,11 +36,8 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     self.searchTableView.emptyAlertTitle = @"暂无搜索历史!";
     self.searchTableView.emptyAlertImage = @"exception_search";
     //Set TextField PlaceHolder
-    if (self.searchType == IPCSearchTypeProduct) {
-        [self.keywordTf setPlaceholder:[NSString stringWithFormat:@"搜索%@类商品",[[IPCAppManager sharedManager] classTypeName:self.filterType]]];
-    }else{
-        [self.keywordTf setPlaceholder:@"请输入搜索客户关键词..."];
-    }
+    [self.keywordTf setPlaceholder:[NSString stringWithFormat:@"搜索%@类商品",[[IPCAppManager sharedManager] classTypeName:self.filterType]]];
+  
     [self.keywordTf setLeftView:self.leftTextFieldView];
     [self.keywordTf setRightView:self.clearButton];
     [self.keywordTf setLeftViewMode:UITextFieldViewModeAlways];
@@ -147,19 +139,11 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 #pragma mark //Clicked Events
 - (void)showSearchProductViewWithSearchWord:(NSString *)word
 {
-    self.searchType = IPCSearchTypeProduct;
     self.currentSearchword = word;
     [self.keywordHistory addObjectsFromArray:[IPCAppManager sharedManager].localProductsHistory];
     [self.searchTableView reloadData];
 }
 
-- (void)showSearchCustomerViewWithSearchWord:(NSString *)word
-{
-    self.searchType = IPCSearchTypeCustomer;
-    self.currentSearchword = word;
-    [self.keywordHistory addObjectsFromArray:[IPCAppManager sharedManager].localCustomerHistory];
-    [self.searchTableView reloadData];
-}
 
 - (IBAction)onCancelBtnTapped:(id)sender{
     [self.keywordTf endEditing:YES];
@@ -307,20 +291,12 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     }
     
     NSData *historyData  = [NSKeyedArchiver archivedDataWithRootObject:self.keywordHistory];
-    if (self.searchType == IPCSearchTypeProduct) {
-        [NSUserDefaults jk_setObject:historyData forKey:IPCSearchHistoryListKey];
-    }else{
-        [NSUserDefaults jk_setObject:historyData forKey:IPCSearchCustomerkey];
-    }
+    [NSUserDefaults jk_setObject:historyData forKey:IPCSearchHistoryListKey];
 }
 
 - (void)clearSearchHistory
 {
-    if (self.searchType == IPCSearchTypeProduct) {
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCSearchHistoryListKey];
-    }else{
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCSearchCustomerkey];
-    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:IPCSearchHistoryListKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

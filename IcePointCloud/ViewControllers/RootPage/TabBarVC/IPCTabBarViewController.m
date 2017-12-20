@@ -7,7 +7,7 @@
 //
 
 #import "IPCTabBarViewController.h"
-#import "IPCSearchViewController.h"
+#import "IPCSearchGlassesViewController.h"
 #import "UIView+Badge.h"
 
 #define NavigationBarHeight  64

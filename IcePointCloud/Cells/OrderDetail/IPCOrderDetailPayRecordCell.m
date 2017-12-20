@@ -19,14 +19,14 @@
     [super layoutSubviews];
 }
 
-- (void)setRecordList:(NSArray<IPCPayRecord *> *)recordList{
+- (void)setRecordList:(NSArray<IPCPayRecord *> *)recordList
+{
     _recordList = recordList;
-    
-    [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
+
     if (_recordList.count) {
-        [_recordList enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            IPCCustomDetailOrderPayRecordView * recordView  = [[IPCCustomDetailOrderPayRecordView alloc]initWithFrame:CGRectMake(28, 40*idx, self.jk_width-56, 40)];
+        [_recordList enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
+        {
+            IPCCustomDetailOrderPayRecordView * recordView  = [[IPCCustomDetailOrderPayRecordView alloc]initWithFrame:CGRectMake(28, 30*idx, self.jk_width-56, 30)];
             recordView.payType = obj;
             [self.contentView addSubview:recordView];
         }];

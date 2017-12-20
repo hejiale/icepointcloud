@@ -237,7 +237,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     }else if (indexPath.section == 3){
         return 120;
     }else if (indexPath.section == 4 && indexPath.row > 0){
-        return [IPCCustomerOrderDetail instance].recordArray.count * 40;
+        return [IPCCustomerOrderDetail instance].recordArray.count * 30;
     }else if (indexPath.section == 5){
         return 120;
     }

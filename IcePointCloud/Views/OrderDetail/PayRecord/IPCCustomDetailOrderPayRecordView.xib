@@ -22,9 +22,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JAg-aa-Y7H">
-                    <rect key="frame" x="0.0" y="14.5" width="60" height="20"/>
+                    <rect key="frame" x="0.0" y="14.5" width="55" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="60" id="1cR-Zx-x7R"/>
+                        <constraint firstAttribute="width" constant="55" id="1cR-Zx-x7R"/>
                         <constraint firstAttribute="height" constant="20" id="abh-e6-0aB"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
@@ -32,7 +32,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NIP-3U-quY">
-                    <rect key="frame" x="65" y="15" width="120" height="20"/>
+                    <rect key="frame" x="60" y="15" width="120" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="120" id="RaI-nD-xlI"/>
                         <constraint firstAttribute="height" constant="20" id="nzN-Wl-K8a"/>
@@ -42,10 +42,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tA2-WJ-N76">
-                    <rect key="frame" x="280" y="15" width="80" height="20"/>
+                    <rect key="frame" x="240" y="15" width="120" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="1PC-tW-PPg"/>
-                        <constraint firstAttribute="width" constant="80" id="GGZ-r7-cO1"/>
+                        <constraint firstAttribute="width" constant="120" id="GGZ-r7-cO1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

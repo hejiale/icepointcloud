@@ -9,11 +9,11 @@
 #import "IPCGlassListViewController.h"
 #import "IPCGlassDetailsViewController.h"
 #import "IPCGlasslistCollectionViewCell.h"
-#import "IPCSearchViewController.h"
+#import "IPCSearchGlassesViewController.h"
 
 static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCellIdentifier";
 
-@interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
+@interface IPCGlassListViewController ()<GlasslistCollectionViewCellDelegate,IPCSearchViewDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic)   IBOutlet UICollectionView   *glassListCollectionView;
 @property (weak, nonatomic)   IBOutlet UIButton                *goTopButton;
@@ -146,7 +146,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     
     [self removeCover];
     //Present To Search ViewController
-    IPCSearchViewController * searchViewMode = [[IPCSearchViewController alloc]initWithNibName:@"IPCSearchViewController" bundle:nil];
+    IPCSearchGlassesViewController * searchViewMode = [[IPCSearchGlassesViewController alloc]initWithNibName:@"IPCSearchGlassesViewController" bundle:nil];
     searchViewMode.searchDelegate = self;
     searchViewMode.filterType = self.glassListViewMode.currentType;
     [searchViewMode showSearchProductViewWithSearchWord:self.glassListViewMode.searchWord];

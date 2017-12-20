@@ -395,7 +395,11 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     __weak typeof (self) weakSelf = self;
     
-    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum){
+    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum)
+    {
+        if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
+            return @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
+        }
         return  @(leftParametr.length && rightParameter.length && [cartNum integerValue] > 0);
     }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
@@ -408,6 +412,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         }
     }];
     
+    ///查询批量规格价格
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
         return  @(leftParametr.length && rightParameter.length);
     }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
@@ -422,10 +427,17 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 //Refresh the lens or relaxing increase or decrease in a shopping cart button state
 - (void)reloadLensCartStatus
 {
-    if (self.leftParameterLabel.text.length && self.rightParameterLabel.text.length)
-        self.lensPlusButton.enabled = YES;
-    else
-        self.lensPlusButton.enabled = NO;
+    if ([self.glasses filterType] != IPCTopFilterTypeReadingGlass) {
+        if (self.leftParameterLabel.text.length && self.rightParameterLabel.text.length)
+            self.lensPlusButton.enabled = YES;
+        else
+            self.lensPlusButton.enabled = NO;
+    }else{
+        if (self.leftParameterLabel.text.length || self.rightParameterLabel.text.length)
+            self.lensPlusButton.enabled = YES;
+        else
+            self.lensPlusButton.enabled = NO;
+    }
 }
 
 #pragma mark //UITableViewDataSource
