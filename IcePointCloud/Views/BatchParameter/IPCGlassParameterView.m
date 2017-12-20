@@ -14,8 +14,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 @interface IPCGlassParameterView()<UITableViewDelegate,UITableViewDataSource>
 {
     BOOL           isLeft;
-    //Customsized Parameter
-    NSArray   *   customsizedArray;
     //CustomsizedLens Funcation
     NSMutableArray<NSString *> * customsizedLensFunArray;
 }
@@ -73,12 +71,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     self = [super initWithFrame:frame];
     if (self) {
         self.CompleteBlock = complete;
-        customsizedArray = @[@[@"1.601", @"1.670", @"1.740"],
-                             @[@"无", @"双光", @"内渐进", @"外渐进", @"防蓝光", @"抗疲劳", @"染色", @"变色", @"偏光"],
-                             @[@"单焦点", @"多焦点"],
-                             @[@"是", @"否"],
-                             @[@"0", @"+1", @"+2", @"+3", @"+4"],
-                             @[@"0", @"5", @"6", @"7", @"8", @"9"]];
         customsizedLensFunArray  = [[NSMutableArray alloc]init];
         
         UIView *mainView = [UIView jk_loadInstanceFromNibWithName:@"IPCGlassParameterView" owner:self];
@@ -105,11 +97,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.upsetView addBorder:5 Width:0.5 Color:nil];
     [self.moveHeartView addBorder:5 Width:0.5 Color:nil];
     [self.customsizedMemoView addBorder:5 Width:0.5 Color:nil];
-    
     [self.lensSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.customsizedSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.customsizedMemoView setPlaceholder:@"请输入商品备注信息..."];
-    
     [self.lensCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];
     [self.customsizedCancleButton addSignleCorner:UIRectCornerBottomRight Size:10];
 }
@@ -143,33 +133,31 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                           Degree:self.leftParameterLabel.text
                                                              Sph:nil
                                                              Cyl:nil
-                                                    SuccessBlock:^(id responseValue)
-         {
-             IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
-             if (self.cartItem) {
-                 self.cartItem.glasses.updatePrice = config.suggestPrice;
-             }else{
-                 self.glasses.updatePrice = config.suggestPrice;
-             }
-             [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
-         } FailureBlock: nil];
+                                                    SuccessBlock:^(id responseValue){
+                                                        [self reloadUIWithResponseValue:responseValue];
+                                                    } FailureBlock: nil];
     }else{
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
                                                           Degree:nil
                                                              Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                              Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
-                                                    SuccessBlock:^(id responseValue)
-         {
-             IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
-             if (self.cartItem) {
-                 self.cartItem.glasses.updatePrice = config.suggestPrice;
-             }else{
-                 self.glasses.updatePrice = config.suggestPrice;
-             }
-             [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
-         } FailureBlock: nil];
+                                                    SuccessBlock:^(id responseValue){
+                                                        [self reloadUIWithResponseValue:responseValue];
+                                                    } FailureBlock: nil];
     }
+}
+
+///Reload UI
+- (void)reloadUIWithResponseValue:(id)responseValue
+{
+    IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
+    if (self.cartItem) {
+        self.cartItem.glasses.updatePrice = config.suggestPrice;
+    }else{
+        self.glasses.updatePrice = config.suggestPrice;
+    }
+    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
 }
 
 #pragma mark //Set UI
@@ -313,21 +301,18 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 }
 
 #pragma mark //加入购物车
-- (void)addLensToCart{
-    if ([_glasses filterType] == IPCTopFilterTypeLens)
-    {
+- (void)addLensToCart
+{
+    if ([_glasses filterType] == IPCTopFilterTypeLens){
         [[IPCShoppingCart sharedCart] addLensWithGlasses:self.glasses
                                                      Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                      Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                    Count:[self.lensNumLabel.text integerValue]];
-    }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass)
-    {
+    }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:self.glasses
                                                   ReadingDegree:self.leftParameterLabel.text
                                                           Count:[self.lensNumLabel.text integerValue]];
-    }
-    else if([_glasses filterType] == IPCTopFilterTypeContactLenses)
-    {
+    }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
         [[IPCShoppingCart sharedCart] addContactLensWithGlasses:self.glasses
                                                             Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                             Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
@@ -337,7 +322,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         self.CompleteBlock();
     }
 }
-
 
 #pragma mark //移除参数选择列表   移除页面
 //According to specification data list
@@ -360,12 +344,10 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }];
 }
 
-
 #pragma mark //Query Shopping Cart Item
 - (IPCShoppingCartItem *)cartItemContactLens{
     return [[IPCShoppingCart sharedCart] contactLensForGlasses:self.glasses ContactDegree:self.leftParameterLabel.text];
 }
-
 
 #pragma mark //Show CartItem Parameter
 - (void)showCartItemParameter{
@@ -453,7 +435,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }else if ([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         return [[IPCBatchDegreeObject instance].readingDegrees count];
     }else{
-        NSArray * array = customsizedArray[self.customsizedType];
+        NSArray * array = [[IPCBatchDegreeObject instance] customsizedParameter][self.customsizedType];
         return array.count;
     }
     return 0;
@@ -469,7 +451,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         [cell.parameterLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
     }else{
-        NSArray * array = customsizedArray[self.customsizedType];
+        NSArray * array = [[IPCBatchDegreeObject instance] customsizedParameter][self.customsizedType];
         [cell.parameterLabel setText:array[indexPath.row]];
         [cell.selectImageView setHidden:YES];
         [customsizedLensFunArray enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -492,7 +474,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
         [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
     }else{
-        NSArray * array = customsizedArray[self.customsizedType];
+        NSArray * array = [[IPCBatchDegreeObject instance] customsizedParameter][self.customsizedType];
         switch (self.customsizedType) {
             case 0:
                 [self.refractionLabel setText:array[indexPath.row]];
@@ -522,8 +504,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                 break;
         }
     }
-    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses)
-    {
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses){
         [self reloadLensCartStatus];
     }
     [tableView removeFromSuperview];

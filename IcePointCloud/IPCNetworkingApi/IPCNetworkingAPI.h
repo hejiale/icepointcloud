@@ -48,8 +48,7 @@
 
 #define PayOrderRequest_EmployeeList                 @"employeeadmin.listEmployee"
 #define PayOrderRequest_Integral                          @"integralTradeAdmin.getSaleOrderDetailIntegralList"
-#define PayOrderRequest_IntegralRule                    @"integralTradeAdmin.getIntegralTradeObjectForCompany"
-
+#define PayOrderRequest_IntegralRule                   @"integralTradeAdmin.getIntegralTradeObjectForCompany"
 
 #define UserRequest_Login                                    @"bizadmin.login"
 #define UserRequest_LoginOut                              @"bizadmin.logout"

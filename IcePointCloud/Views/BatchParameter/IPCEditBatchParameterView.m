@@ -108,7 +108,4 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     return 45;
 }
 
-
-
-
 @end

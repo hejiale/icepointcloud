@@ -64,8 +64,6 @@
  *   Send the shopping cart number change notification
  */
 - (void)postChangedNotification;
-
-
 /**
     修改商品单价
  */

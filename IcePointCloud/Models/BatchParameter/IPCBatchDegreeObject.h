@@ -27,5 +27,7 @@
                               EndCyl:(CGFloat)endCyl
                              StepCyl:(CGFloat)stepCyl;
 
+- (NSArray *)customsizedParameter;
+
 @end
 

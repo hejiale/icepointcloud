@@ -14,7 +14,7 @@
     self = [super init];
     if (self)
     {
-        if ([self.list count] > 0)[self.list removeAllObjects];
+        [self.list removeAllObjects];
         
         if ([responseValue isKindOfClass:[NSDictionary class]]) {
             if ([responseValue[@"resultList"] isKindOfClass:[NSArray class]]) {
