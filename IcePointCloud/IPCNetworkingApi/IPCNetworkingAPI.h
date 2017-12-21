@@ -40,6 +40,9 @@
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"
 #define GoodsRequest_PriceStrategy                     @"productAdmin.listPriceStrategyForListProduct"
 
+#define PayOrderRequest_CompanyConfig            @"companyAdmin.getCompanyConfig"
+//#define PayOrderRequest_GetAuths                      @"bizadmin.getAuths"  获取全部权限
+#define PayOrderRequest_Outbound                     @"orderObjectAdmin.inventoryOutForSalesOrder"
 #define PayOrderRequest_ListPayType                  @"payTypeConfigAdmin.listPayType"
 #define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"
 #define PayOrderRequest_OfferOrder                    @"orderObjectAdmin.commitAuthOrders"

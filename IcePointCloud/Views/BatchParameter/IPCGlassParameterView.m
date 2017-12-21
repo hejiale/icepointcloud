@@ -130,16 +130,14 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
-                                                          Degree:self.leftParameterLabel.text
-                                                             Sph:nil
-                                                             Cyl:nil
+                                                             Sph:self.leftParameterLabel.text
+                                                             Cyl:@"0.00"
                                                     SuccessBlock:^(id responseValue){
                                                         [self reloadUIWithResponseValue:responseValue];
                                                     } FailureBlock: nil];
     }else{
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
-                                                          Degree:nil
                                                              Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                              Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                     SuccessBlock:^(id responseValue){
@@ -414,6 +412,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     ///查询批量规格价格
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
+        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
+            return @(leftParametr.length);
+        }
         return  @(leftParametr.length && rightParameter.length);
     }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
         __strong typeof (weakSelf) strongSelf = weakSelf;

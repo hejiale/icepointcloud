@@ -84,4 +84,27 @@
 + (void)queryPayListTypeWithSuccessBlock:(void (^)(id responseValue))success
                             FailureBlock:(void (^)(NSError *error))failure;
 
+
+/**
+ Get CompanyConfig
+
+ @param success
+ @param failure 
+ */
++ (void)getCompanyConfigWithSuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError *error))failure;
+
+
+
+/**
+ Get Auths
+
+ @param orderNum
+ @param success
+ @param failure 
+ */
++(void)getAuthsWithOrderNum:(NSString *)orderNum
+           WithSuccessBlock:(void (^)(id))success
+               FailureBlock:(void (^)(NSError *))failure;
+
 @end

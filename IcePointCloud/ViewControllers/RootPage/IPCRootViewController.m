@@ -47,6 +47,8 @@
             [strongSelf.tryVC onFilterProducts];
         }
     }];
+    ///Get Company Config
+    [[IPCAppManager sharedManager] getCompanyConfig];
 }
 
 #pragma mark //Clicked Events

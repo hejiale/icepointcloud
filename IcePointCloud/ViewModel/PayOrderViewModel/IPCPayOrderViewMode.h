@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, IPCPayOrderError)
     IPCPayOrderErrorSavePrototy = 0,
     IPCPayOrderErrorOfferOrder,
     IPCPayOrderErrorAuthOrder,
-    IPCPayOrderErrorPayCashOrder
+    IPCPayOrderErrorPayCashOrder,
+    IPCPayOrderErrorOutboundOrder
 };
 
 @interface IPCPayOrderViewMode : NSObject
@@ -23,6 +24,7 @@ typedef NS_ENUM(NSInteger, IPCPayOrderError)
 - (void)saveProtyOrder:(BOOL)isProty
                Prototy:(void(^)())prototy
                PayCash:(void(^)())payCash
+              Outbound:(void(^)())outbound
                  Error:(void(^)(IPCPayOrderError errorType))error;
 
 

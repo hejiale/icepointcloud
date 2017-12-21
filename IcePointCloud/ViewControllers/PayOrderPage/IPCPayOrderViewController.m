@@ -105,7 +105,9 @@
         [self completePay];
     } PayCash:^{
         [self completePay];
-    } Error:^(IPCPayOrderError errorType) {
+    } Outbound:^{
+        [self completePay];
+    }  Error:^(IPCPayOrderError errorType) {
         [self failPay];
     }];
 }

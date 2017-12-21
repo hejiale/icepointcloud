@@ -235,6 +235,7 @@
 		CB0F565C1F988B05003707F2 /* IPCPhotoPickerBaseComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56371F988B05003707F2 /* IPCPhotoPickerBaseComponent.m */; };
 		CB0F565D1F988B05003707F2 /* IPCPortraitNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */; };
 		CB15A1E41F9DEFD000ABBF72 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */; };
+		CB22B92C1FEB7B08008BDB6F /* IPCCompanyConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CB22B92B1FEB7B08008BDB6F /* IPCCompanyConfig.m */; };
 		CB2CBEDE1FD8DF78003149F3 /* IPCPayOrderPayType.m in Sources */ = {isa = PBXBuildFile; fileRef = CB2CBEDD1FD8DF78003149F3 /* IPCPayOrderPayType.m */; };
 		CB3220391FA0648F004AE920 /* IPCStoreResult.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3220381FA0648F004AE920 /* IPCStoreResult.m */; };
 		CB32B95D1F9F122C002E006C /* IPCPersonBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB32B94A1F9F122C002E006C /* IPCPersonBaseView.m */; };
@@ -697,6 +698,8 @@
 		CB0F56381F988B05003707F2 /* IPCPortraitNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPortraitNavigationViewController.h; sourceTree = "<group>"; };
 		CB0F56391F988B05003707F2 /* IPCPortraitNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPortraitNavigationViewController.m; sourceTree = "<group>"; };
 		CB15A1E31F9DEFD000ABBF72 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		CB22B92A1FEB7B08008BDB6F /* IPCCompanyConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCompanyConfig.h; sourceTree = "<group>"; };
+		CB22B92B1FEB7B08008BDB6F /* IPCCompanyConfig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCompanyConfig.m; sourceTree = "<group>"; };
 		CB2CBEDC1FD8DF78003149F3 /* IPCPayOrderPayType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderPayType.h; sourceTree = "<group>"; };
 		CB2CBEDD1FD8DF78003149F3 /* IPCPayOrderPayType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderPayType.m; sourceTree = "<group>"; };
 		CB3220371FA0648F004AE920 /* IPCStoreResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCStoreResult.h; sourceTree = "<group>"; };
@@ -1722,6 +1725,8 @@
 			children = (
 				CB3220371FA0648F004AE920 /* IPCStoreResult.h */,
 				CB3220381FA0648F004AE920 /* IPCStoreResult.m */,
+				CB22B92A1FEB7B08008BDB6F /* IPCCompanyConfig.h */,
+				CB22B92B1FEB7B08008BDB6F /* IPCCompanyConfig.m */,
 			);
 			path = PersonCenter;
 			sourceTree = "<group>";
@@ -2732,6 +2737,7 @@
 				CB64D2471F99C9A600FBC5F2 /* IPCHttpRequest.m in Sources */,
 				CB0F53831F9876AF003707F2 /* IPCSearchGlassesViewController.m in Sources */,
 				CB468F451FDE26F200FCDAE4 /* IPCPriceStrategyResult.m in Sources */,
+				CB22B92C1FEB7B08008BDB6F /* IPCCompanyConfig.m in Sources */,
 				CB0F543F1F988191003707F2 /* IPCCurrentTryGlassesView.m in Sources */,
 				CB64D2301F99C96C00FBC5F2 /* IPCUserRequestManager.m in Sources */,
 				CB0F55BF1F98845A003707F2 /* IPCTryMatch.m in Sources */,

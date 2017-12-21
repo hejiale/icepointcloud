@@ -92,7 +92,6 @@
  */
 + (void)queryBatchLensPriceWithProductId:(NSString *)productId
                                     Type:(NSString *)type
-                                  Degree:(NSString *)degree
                                      Sph:(NSString *)sph
                                      Cyl:(NSString *)cyl
                             SuccessBlock:(void (^)(id responseValue))success

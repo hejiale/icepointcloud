@@ -76,4 +76,14 @@
     [self postRequest:nil RequestMethod:PayOrderRequest_ListPayType CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)getCompanyConfigWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:PayOrderRequest_CompanyConfig CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++(void)getAuthsWithOrderNum:(NSString *)orderNum WithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:@{@"orderNumber" : orderNum} RequestMethod:PayOrderRequest_Outbound CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

@@ -215,6 +215,14 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     }
 }
 
+- (void)getCompanyConfig
+{
+    [IPCPayOrderRequestManager getCompanyConfigWithSuccessBlock:^(id responseValue)
+     {
+         self.companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
+     } FailureBlock:nil];
+}
+
 - (void)clearData
 {
     self.storeResult = nil;

@@ -47,10 +47,6 @@
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
     [self.usernameTf setText:[self.loginViewModel userName]];
-    
-    /*if (![NSUserDefaults jk_stringForKey:kIPCDeviceLoginUUID]) {
-        
-    }*/
 }
 
 #pragma mark //ClickEvents
