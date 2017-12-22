@@ -69,8 +69,10 @@
 
 
 - (void)clear{
-    [self.filterSourceDic removeAllObjects];self.filterSourceDic = nil;
-    self.currentEndPrice = 0;self.currentStartPirce = 0;
+    [self.filterSourceDic removeAllObjects];
+    self.filterSourceDic = nil;
+    self.currentStartPirce = 0;
+    self.currentEndPrice = 0;
 }
 
 

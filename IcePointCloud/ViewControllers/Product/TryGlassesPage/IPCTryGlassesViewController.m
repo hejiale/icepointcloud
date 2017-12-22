@@ -294,9 +294,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self.productTableView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
     
-    if (self.glassListViewMode.status ==IPCFooterRefresh_HasMoreData) {
-        [self stopRefresh];
-    }
+    [self stopRefresh];
 }
 
 #pragma mark //Request Data

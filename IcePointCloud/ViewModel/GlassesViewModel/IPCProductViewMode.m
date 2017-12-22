@@ -268,7 +268,7 @@
 }
 
 - (NSString *)startPrice{
-    return self.filterValue.currentStartPirce > 0? [[NSNumber numberWithDouble:self.filterValue.currentStartPirce] stringValue] : @"";
+    return self.filterValue.currentStartPirce > 0 ? [[NSNumber numberWithDouble:self.filterValue.currentStartPirce] stringValue] : @"";
 }
 
 - (NSString *)endPrice{

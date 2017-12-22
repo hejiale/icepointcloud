@@ -167,9 +167,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self.glassListCollectionView reloadData];
     [self.glassListViewMode.filterView setCoverStatus:YES];
     
-    if (self.glassListViewMode.status == IPCFooterRefresh_HasMoreData) {
-        [self stopRefresh];
-    }
+    [self stopRefresh];
 }
 
 //Remover All Cover

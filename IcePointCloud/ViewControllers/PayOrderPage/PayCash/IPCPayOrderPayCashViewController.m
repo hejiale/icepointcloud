@@ -82,9 +82,9 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 - (void)reloadPayStatus
 {
     ///无购物商品 收款记录
-    if ([IPCShoppingCart sharedCart].allGlassesCount > 0 && [IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0) {
+    if ([IPCShoppingCart sharedCart].allGlassesCount > 0 && [IPCPayOrderManager sharedManager].payTypeRecordArray.count == 0 && [[IPCPayOrderManager sharedManager] remainPayPrice] > 0) {
         self.currentIndex = 0;
-    }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0){
+    }else if ([IPCShoppingCart sharedCart].allGlassesCount == 0 || [[IPCPayOrderManager sharedManager] remainPayPrice] <= 0){
         self.currentIndex = -1;
     }
     [self reloadRemainAmount];

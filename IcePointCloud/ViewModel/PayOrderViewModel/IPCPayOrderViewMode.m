@@ -108,12 +108,8 @@
 
 - (void)outboundWithOrderNum:(NSString *)orderNum
 {
-    __weak typeof(self) weakSelf = self;
-    [IPCPayOrderRequestManager getAuthsWithOrderNum:orderNum WithSuccessBlock:^(id responseValue)
-     {
-         
-     } FailureBlock:^(NSError *error) {
-     }];
+    ///出库操作
+    [IPCPayOrderRequestManager getAuthsWithOrderNum:orderNum WithSuccessBlock:nil FailureBlock:nil];
 }
 
 - (void)payCashWithOrderNum:(NSString *)orderNum

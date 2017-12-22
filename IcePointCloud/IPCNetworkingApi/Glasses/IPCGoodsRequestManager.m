@@ -47,7 +47,7 @@
                              @"hot":@"false",
                              @"searchSupplier": @"true",
                              @"proAvailable":@"true",
-                             @"startPrice":@(startPrice),
+                             @"startPrice":startPrice > 0 ? @(startPrice) : @"",
                              @"endPrice":endPrice > 0 ? @(endPrice) : @"",
                              @"isTryProduct": isTrying ? @"true":@"false",
                              @"storeId":storeId ? : @"",

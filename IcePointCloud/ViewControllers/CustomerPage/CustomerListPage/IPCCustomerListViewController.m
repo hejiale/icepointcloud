@@ -176,9 +176,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
     
-    if (self.viewModel.status == IPCFooterRefresh_HasMoreData) {
-        [self stopRefresh];
-    }
+    [self stopRefresh];
 }
 
 - (void)stopRefresh{
@@ -248,7 +246,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 #pragma mark //IPCSearchViewControllerDelegate
 - (void)didSearchWithKeyword:(NSString *)keyword{
     self.viewModel.searchWord = keyword;
-    [self loadData];
+    [self.refreshHeader beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning{
