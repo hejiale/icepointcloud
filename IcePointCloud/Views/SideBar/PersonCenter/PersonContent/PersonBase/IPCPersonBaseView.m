@@ -45,7 +45,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
         self.PriceStrategyBlock = priceStrategy;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:IPCChooseWareHouseNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:kIPCChoosePriceStrategyNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload) name:IPCChoosePriceStrategyNotification object:nil];
     }
     return self;
 }

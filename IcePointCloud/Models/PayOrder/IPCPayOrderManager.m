@@ -67,10 +67,9 @@
 
 - (double)calculateDiscount
 {
-    if ([IPCPayOrderManager sharedManager].payAmount <= 0) {
-        return 100;
-    }
-    double discount = (double)[IPCPayOrderManager sharedManager].payAmount/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
+    if ([IPCPayOrderManager sharedManager].payAmount <= 0)return 100;
+    
+    double discount = [IPCPayOrderManager sharedManager].payAmount/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice];
     NSString * discountStr = [NSString stringWithFormat:@"%@",[IPCCommon formatNumber:discount Location:5]];
     return [discountStr doubleValue] * 100;
 }

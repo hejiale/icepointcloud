@@ -86,8 +86,7 @@
 {
     double price = 0;
     for (IPCShoppingCartItem *ci in self.itemList) {
-        double total = ci.totalPrice + price;
-        price = [IPCCommon floorNumber:total];
+        price += ci.totalPrice;
     }
     return price;
 }

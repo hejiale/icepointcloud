@@ -33,7 +33,7 @@ extern NSString *const  IPCChooseWareHouseNotification;
 extern NSString * const kIPCErrorNetworkAlertMessage;
 extern NSString * const kIPCNotConnectInternetMessage;
 //Choose Price Strategy
-extern NSString * const kIPCChoosePriceStrategyNotification;
+extern NSString * const IPCChoosePriceStrategyNotification;
 //Device UUID
 extern NSString * const kIPCDeviceLoginUUID;
 

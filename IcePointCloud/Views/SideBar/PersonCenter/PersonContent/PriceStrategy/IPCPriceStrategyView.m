@@ -73,7 +73,7 @@ static NSString * const strategyIdentifier = @"IPCPriceStrategyCellIdentifier";
         IPCPriceStrategy * strategy = [IPCAppManager sharedManager].priceStrategy.strategyArray[indexPath.row];
         [IPCAppManager sharedManager].currentStrategy = strategy;
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kIPCChoosePriceStrategyNotification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCChoosePriceStrategyNotification object:nil];
     });
     
     [self dismiss];
