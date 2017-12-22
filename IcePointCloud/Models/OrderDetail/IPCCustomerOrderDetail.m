@@ -45,14 +45,15 @@
         
         self.orderInfo.totalPayAmount = 0;
         self.orderInfo.totalPointAmount = 0;
+        self.orderInfo.totalSuggestAmount = 0;
         
         [self.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
+            strongSelf.orderInfo.totalSuggestAmount += glass.price * glass.productCount;
         }];
         
         __block double totalPayTypePrice = 0;
-        
         
         if ([responseValue[@"detailInfos"] isKindOfClass:[NSArray class]]) {
             [responseValue[@"detailInfos"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

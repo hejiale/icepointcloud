@@ -53,21 +53,29 @@
     {
         [params setObject:@(self.glassCount) forKey:@"glassCount"];
         [params setObject:@(self.glasses.price) forKey:@"glassPrice"];
+        if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
+            [params setObject:@(self.glasses.updatePrice) forKey:@"glassSuggestPrice"];
+        }else{
+            [params setObject:@(self.glasses.price) forKey:@"glassSuggestPrice"];
+        }
         [params setObject:[self.glasses glassId] forKey:@"glassId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
     {
         [params setObject:@(self.glassCount) forKey:@"lensCount"];
         [params setObject:@(self.glasses.price) forKey:@"lensPrice"];
+        [params setObject:@(self.glasses.updatePrice) forKey:@"lensSuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"lensId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory)
     {
         [params setObject:@(self.glassCount) forKey:@"accessoryCount"];
         [params setObject:@(self.glasses.price) forKey:@"accessoryPrice"];
+        [params setObject:@(self.glasses.price) forKey:@"accessorySuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"accessoryId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeOthers)
     {
         [params setObject:@(self.glassCount) forKey:@"othersProductCount"];
         [params setObject:@(self.glasses.price) forKey:@"othersProductPrice"];
+        [params setObject:@(self.glasses.price) forKey:@"othersProductSuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"othersProductId"];
     }
     

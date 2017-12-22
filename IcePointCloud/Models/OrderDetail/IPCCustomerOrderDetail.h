@@ -40,7 +40,6 @@
 @property (nonatomic, assign, readonly) double   beforeDiscountPrice;
 @property (nonatomic, assign, readonly) double   deposit;//Prepaid amount
 @property (nonatomic, assign, readonly) double   usebalanceAmount;
-@property (nonatomic, assign, readonly) double   totalSuggestPrice;
 @property (nonatomic, assign, readonly) double   totalBizPrice;
 @property (nonatomic, assign, readonly) double   afterDiscountPrice;
 @property (nonatomic, assign, readonly) double   afterIntegralDeductionPrice;
@@ -51,6 +50,7 @@
 @property (nonatomic, copy, readonly) NSString *  payType;
 @property (nonatomic, assign, readonly) double    payTypeAmount;
 @property (nonatomic, assign, readwrite) BOOL     isPackUpOptometry;
+@property (nonatomic, assign, readwrite) double   totalSuggestAmount;
 @property (nonatomic, assign, readwrite) double   totalPayAmount;
 @property (nonatomic, assign, readwrite) double    totalPointAmount;
 @property (nonatomic, assign, readonly) double    deductionIntegral;

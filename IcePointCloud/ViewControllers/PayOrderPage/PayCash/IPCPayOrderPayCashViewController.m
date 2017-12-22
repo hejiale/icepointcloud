@@ -92,10 +92,10 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 
 - (void)resetPayTypeStatus
 {
-    if ([[IPCPayOrderManager sharedManager] remainPayPrice] > 0) {
-        self.currentIndex = 0;
-    }else{
+    if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0) {
         self.currentIndex = -1;
+    }else{
+        self.currentIndex = 0;
     }
     [self reloadRemainAmount];
 }
@@ -177,7 +177,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 {
     IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[indexPath.row];
     
-    if ([[IPCPayOrderManager sharedManager] remainPayPrice] == 0)return;
+    if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0)return;
     
     if (![IPCPayOrderManager sharedManager].integralTrade && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"积分规则未配置"];

@@ -26,7 +26,7 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalSuggestPrice]];
+    [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalSuggestAmount]];
     //抵扣积分  兑换积分 定制商品
     if ([IPCCustomerOrderDetail instance].orderInfo.exchangeTotalIntegral > 0) {
         [self.usedPointLabel setText:[NSString stringWithFormat:@"使用积分%.f点",[IPCCustomerOrderDetail instance].orderInfo.exchangeTotalIntegral]];

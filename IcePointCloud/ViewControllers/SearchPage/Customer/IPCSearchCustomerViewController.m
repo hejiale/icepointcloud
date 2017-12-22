@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *topSearchView;
 @property (nonatomic, weak) IBOutlet UITextField *keywordTf;
 @property (nonatomic, weak) IBOutlet UITableView *searchTableView;
-@property (nonatomic, strong) NSMutableArray<NSArray *> * keywordHistory;
+@property (nonatomic, strong) NSMutableArray<NSString *> * keywordHistory;
 @property (nonatomic, copy) NSString * currentSearchword;
 
 @end
@@ -49,7 +49,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 }
 
 
-- (NSMutableArray<NSArray *> *)keywordHistory{
+- (NSMutableArray<NSString *> *)keywordHistory{
     if (!_keywordHistory) {
         _keywordHistory = [[NSMutableArray alloc]init];
     }

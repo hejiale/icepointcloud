@@ -113,12 +113,6 @@
      {
          
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         [IPCCommonUI showError:@"订单出库失败!"];
-         
-         if (strongSelf.ErrorPayBlock) {
-             strongSelf.ErrorPayBlock(IPCPayOrderErrorOutboundOrder);
-         }
      }];
 }
 

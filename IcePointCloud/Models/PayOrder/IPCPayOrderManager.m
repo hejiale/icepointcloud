@@ -59,7 +59,10 @@
 }
 
 - (double)remainPayPrice{
-    if ([IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice] < 0) {
+    NSString * payStr = [NSString stringWithFormat:@"%f", [IPCPayOrderManager sharedManager].payAmount];
+    NSString * totalStr  = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] payRecordTotalPrice]];
+    
+    if ([IPCCommon afterDouble:payStr :totalStr] <= 0) {
         return 0;
     }
     return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
