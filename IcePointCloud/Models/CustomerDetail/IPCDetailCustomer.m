@@ -13,7 +13,8 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"customerID": @"id",
              @"memberLevel":@"memberLevel.memberLevel",
-             @"discount":@"memberLevel.discount"
+             @"discount":@"memberLevel.discount",
+             @"customerType":@"customerType.customerType"
              };
 }
 

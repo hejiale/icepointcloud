@@ -59,6 +59,7 @@
             [self updateCustomerInfo];
         }else{
             [[IPCCustomerManager sharedManager] queryCustomerType];
+            [self.customStyleTextField setText: @"自然进店"];
         }
     }
     return self;
