@@ -161,8 +161,10 @@
             item.bacthCyl = cyl;
             item.batchReadingDegree = readingDegree;
             item.unitPrice = glasses.updatePrice * ([self customDiscount]/100);
+            item.prePrice = glasses.updatePrice;
         }else{
             item.unitPrice = glasses.price * ([self customDiscount]/100);
+            item.prePrice = glasses.price;
         }
         item.glasses = glasses;
         item.glassCount   = count;
@@ -334,7 +336,7 @@
     [self.itemList enumerateObjectsUsingBlock:^(IPCShoppingCartItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if (idx != self.itemList.count - 1)
         {
-            double price = ((obj.glasses.price * [IPCPayOrderManager sharedManager].payAmount * obj.glassCount)/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]);
+            double price = ((obj.prePrice * [IPCPayOrderManager sharedManager].payAmount * obj.glassCount)/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]);
             obj.totalUpdatePrice = [IPCCommon floorNumber:price];
             obj.unitPrice = obj.totalUpdatePrice/obj.glassCount;
             total += obj.unitPrice * obj.glassCount;

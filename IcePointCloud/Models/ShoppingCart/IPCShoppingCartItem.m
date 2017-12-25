@@ -28,7 +28,7 @@
 
 - (double)totalPrePrice
 {
-    return self.glasses.price * self.glassCount;
+    return self.prePrice * self.glassCount;
 }
 
 - (double)totalPrice

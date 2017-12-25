@@ -151,11 +151,12 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 {
     IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
     if (self.cartItem) {
-        self.cartItem.glasses.updatePrice = config.suggestPrice;
+        self.cartItem.unitPrice = config.suggestPrice;
+        self.cartItem.prePrice = config.suggestPrice;
     }else{
         self.glasses.updatePrice = config.suggestPrice;
     }
-    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
+    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f", config.suggestPrice]];
 }
 
 #pragma mark //Set UI
@@ -191,7 +192,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if (self.cartItem) {
         [self.normalLensStepperView setHidden:YES];
         self.normalLensHeight.constant -= 55;
-        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.updatePrice]];
+        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.cartItem.prePrice]];
     }else{
         [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
     }
@@ -301,21 +302,25 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 #pragma mark //加入购物车
 - (void)addLensToCart
 {
+    __block IPCGlasses * glass = self.glasses;
+    
     if ([_glasses filterType] == IPCTopFilterTypeLens){
-        [[IPCShoppingCart sharedCart] addLensWithGlasses:self.glasses
+        [[IPCShoppingCart sharedCart] addLensWithGlasses:glass
                                                      Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                      Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                    Count:[self.lensNumLabel.text integerValue]];
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:self.glasses
+        [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:glass
                                                   ReadingDegree:self.leftParameterLabel.text
                                                           Count:[self.lensNumLabel.text integerValue]];
     }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [[IPCShoppingCart sharedCart] addContactLensWithGlasses:self.glasses
+        [[IPCShoppingCart sharedCart] addContactLensWithGlasses:glass
                                                             Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                             Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                           Count:[self.lensNumLabel.text integerValue]];
     }
+    glass = nil;
+    
     if (self.CompleteBlock) {
         self.CompleteBlock();
     }
@@ -384,13 +389,22 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         self.cartItem.batchSph = self.leftParameterLabel.text;
         self.cartItem.bacthCyl = self.rightParameterLabel.text;
     }
+    if (self.CompleteBlock) {
+        self.CompleteBlock();
+    }
 }
 
 #pragma mark //Reload Lens Parameter View Status
 //Refresh Sure Button Status
-- (void)refreshSureButtonStatus{
-    if (self.cartItem)return;
+- (void)refreshSureButtonStatus
+{
+    ///查询批量规格价格
+    [self.leftParameterLabel ipc_addObserver:self ForKeyPath:@"text"];
+    [self.rightParameterLabel ipc_addObserver:self ForKeyPath:@"text"];
     
+    if (self.cartItem) {
+        return;
+    }
     __weak typeof (self) weakSelf = self;
     
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum)
@@ -409,19 +423,22 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
             strongSelf.lensSureButton.alpha = 0.5;
         }
     }];
-    
-    ///查询批量规格价格
-    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
-        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
-            return @(leftParametr.length);
+}
+
+///KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"text"]) {
+        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass) {
+            if (self.leftParameterLabel.text.length) {
+                [self querySuggestPrice];
+            }
+        }else{
+            if (self.leftParameterLabel.text.length && self.rightParameterLabel.text.length) {
+                [self querySuggestPrice];
+            }
         }
-        return  @(leftParametr.length && rightParameter.length);
-    }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        if (valid.boolValue) {
-            [strongSelf querySuggestPrice];
-        }
-    }];
+    }
 }
 
 

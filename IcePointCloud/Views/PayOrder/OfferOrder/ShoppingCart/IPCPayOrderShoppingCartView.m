@@ -197,7 +197,11 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
     
-    _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[IPCCommonUI currentView].bounds  Complete:nil];
+    __weak typeof(self) weakSelf = self;
+    _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[IPCCommonUI currentView].bounds  Complete:^{
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf updateCartUI:YES];
+    }];
     _parameterView.cartItem = cartItem;
     [[IPCCommonUI currentView] addSubview:_parameterView];
     [[IPCCommonUI currentView] bringSubviewToFront:_parameterView];
