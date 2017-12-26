@@ -49,9 +49,14 @@
     }];
     ///Get Company Config
     [[IPCAppManager sharedManager] getCompanyConfig];
+    
     ///清除之前版本搜索数据
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPCListSearchHistoryKey"];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPSearchCustomerkey"];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"IPCListSearchHistoryKey"]) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPCListSearchHistoryKey"];
+    }
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"IPSearchCustomerkey"]) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"IPSearchCustomerkey"];
+    }
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
