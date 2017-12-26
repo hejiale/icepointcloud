@@ -328,6 +328,10 @@
     return itemArray;
 }
 
+
+/**
+ 重计算所有商品单价
+ */
 - (void)updateAllCartUnitPrice
 {
     __block double lastAmount = 0;
@@ -338,8 +342,8 @@
         {
             double price = ((obj.prePrice * [IPCPayOrderManager sharedManager].payAmount * obj.glassCount)/[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]);
             obj.totalUpdatePrice = [IPCCommon floorNumber:price];
-            obj.unitPrice = obj.totalUpdatePrice/obj.glassCount;
-            total += obj.unitPrice * obj.glassCount;
+            obj.unitPrice = [IPCCommon floorNumber:obj.totalUpdatePrice/obj.glassCount];
+            total += obj.totalUpdatePrice;
         }else{
             obj.totalUpdatePrice = [IPCCommon floorNumber:[IPCPayOrderManager sharedManager].payAmount - total];
             obj.unitPrice = [IPCCommon floorNumber:obj.totalUpdatePrice/obj.glassCount];
