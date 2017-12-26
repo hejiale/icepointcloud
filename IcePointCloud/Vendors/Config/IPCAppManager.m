@@ -173,7 +173,7 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     
     if ([payTypeInfo isEqualToString:@"现金"]){
         imageName = @"cash";
-    }else if ([payTypeInfo isEqualToString:@"储值卡"]){
+    }else if ([payTypeInfo isEqualToString:@"储值余额"]){
         imageName = @"storeValue";
     }else if ([payTypeInfo isEqualToString:@"支付宝"]){
         imageName = @"zhifubao";
@@ -201,7 +201,7 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
             return @"刷卡";
             break;
         case 4:
-            return @"储值卡";
+            return @"储值余额";
             break;
         case 5:
             return @"积分";
