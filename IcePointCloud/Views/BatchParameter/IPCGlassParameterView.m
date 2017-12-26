@@ -398,15 +398,24 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 //Refresh Sure Button Status
 - (void)refreshSureButtonStatus
 {
+     __weak typeof (self) weakSelf = self;
     ///查询批量规格价格
-    [self.leftParameterLabel ipc_addObserver:self ForKeyPath:@"text"];
-    [self.rightParameterLabel ipc_addObserver:self ForKeyPath:@"text"];
+    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
+        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
+            return @(leftParametr.length);
+        }
+        return  @(leftParametr.length && rightParameter.length);
+    }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        if (valid.boolValue) {
+            [strongSelf querySuggestPrice];
+        }
+    }];
     
     if (self.cartItem) {
         return;
     }
-    __weak typeof (self) weakSelf = self;
-    
+   
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum)
     {
         if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
@@ -424,23 +433,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         }
     }];
 }
-
-///KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"text"]) {
-        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass) {
-            if (self.leftParameterLabel.text.length) {
-                [self querySuggestPrice];
-            }
-        }else{
-            if (self.leftParameterLabel.text.length && self.rightParameterLabel.text.length) {
-                [self querySuggestPrice];
-            }
-        }
-    }
-}
-
 
 //Refresh the lens or relaxing increase or decrease in a shopping cart button state
 - (void)reloadLensCartStatus
@@ -540,6 +532,5 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [tableView removeFromSuperview];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
-
 
 @end
