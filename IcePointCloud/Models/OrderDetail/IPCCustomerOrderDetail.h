@@ -37,23 +37,11 @@
 @property (nonatomic, copy, readonly) NSString *  finishTime;
 @property (nonatomic, copy, readonly) NSString *  dispatchTime;
 @property (nonatomic, copy, readonly) NSString *  remark;
-@property (nonatomic, assign, readonly) double   beforeDiscountPrice;
-@property (nonatomic, assign, readonly) double   deposit;//Prepaid amount
-@property (nonatomic, assign, readonly) double   usebalanceAmount;
-@property (nonatomic, assign, readonly) double   totalBizPrice;
-@property (nonatomic, assign, readonly) double   afterDiscountPrice;
-@property (nonatomic, assign, readonly) double   afterIntegralDeductionPrice;
 @property (nonatomic, assign, readonly) NSInteger    integralGiven;
-@property (nonatomic, assign, readonly) double   integralDeductionAmount;
-@property (nonatomic, assign, readonly) double   donationAmount;
-@property (nonatomic, assign, readonly) double   exchangeTotalIntegral;
-@property (nonatomic, copy, readonly) NSString *  payType;
-@property (nonatomic, assign, readonly) double    payTypeAmount;
+@property (nonatomic, assign, readwrite) double   totalDonationAmount;
 @property (nonatomic, assign, readwrite) BOOL     isPackUpOptometry;
 @property (nonatomic, assign, readwrite) double   totalSuggestAmount;
 @property (nonatomic, assign, readwrite) double   totalPayAmount;
-@property (nonatomic, assign, readwrite) double    totalPointAmount;
-@property (nonatomic, assign, readonly) double    deductionIntegral;
 @property (nonatomic, assign, readwrite) double    remainAmount;//订单详情中剩余付款金额
 @property (nonatomic, copy, readonly) NSString * auditResult;
 @property (nonatomic, copy, readonly) NSString * auditStatus;

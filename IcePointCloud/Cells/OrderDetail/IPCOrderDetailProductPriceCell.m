@@ -27,18 +27,7 @@
     [super layoutSubviews];
     
     [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalSuggestAmount]];
-    //抵扣积分  兑换积分 定制商品
-    if ([IPCCustomerOrderDetail instance].orderInfo.exchangeTotalIntegral > 0) {
-        [self.usedPointLabel setText:[NSString stringWithFormat:@"使用积分%.f点",[IPCCustomerOrderDetail instance].orderInfo.exchangeTotalIntegral]];
-        [self.usePointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalPointAmount]];
-    }else if ([IPCCustomerOrderDetail instance].orderInfo.deductionIntegral > 0){
-        [self.usedPointLabel setText:[NSString stringWithFormat:@"使用积分%.f点",[IPCCustomerOrderDetail instance].orderInfo.deductionIntegral]];
-        [self.usePointAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.integralDeductionAmount]];
-    }else{
-        [self.usedPointLabel setText:@"使用积分0点"];
-        [self.usePointAmountLabel setText:@"-￥0.00"];
-    }
-    [self.givingAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.donationAmount]];
+    [self.givingAmountLabel setText:[NSString stringWithFormat:@"-￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalDonationAmount]];
     [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalPrice]];
     
 }

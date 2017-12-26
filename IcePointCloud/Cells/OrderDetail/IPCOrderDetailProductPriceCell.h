@@ -11,10 +11,8 @@
 @interface IPCOrderDetailProductPriceCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *realTotalPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usePointAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *givingAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usedPointLabel;
 
 
 @end
