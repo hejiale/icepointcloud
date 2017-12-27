@@ -90,6 +90,8 @@
         self.cartItem.unitPrice = [priceStr doubleValue];
         self.cartItem.totalUpdatePrice = self.cartItem.unitPrice * self.cartItem.glassCount;
     }
+    
+    [[IPCShoppingCart sharedCart] postChangedNotification];
 
     if ([self.delegate respondsToSelector:@selector(endEditing:)]) {
         [self.delegate endEditing:self];

@@ -50,7 +50,6 @@
         _offerInfoView = [[IPCPayOrderOfferOrderInfoView alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, 10, 408, 290)
                                                                   EndEditing:^{
                                                                       __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                      [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
                                                                       [strongSelf.shopCartView reload];
                                                                   }];
     }
@@ -63,8 +62,6 @@
     if (!_shopCartView) {
         _shopCartView = [[IPCPayOrderShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
-            [[IPCPayOrderManager sharedManager] clearPayRecord];
             [strongSelf updateUI];
         }];
         _shopCartView.keyboard = self.keyboard;

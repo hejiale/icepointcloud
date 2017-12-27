@@ -93,6 +93,7 @@
 
 - (IBAction)onCheckBtnTapped:(id)sender{
     self.cartItem.selected = !self.cartItem.selected;
+    
     if (self.ReloadBlock) {
         self.ReloadBlock();
     }

@@ -295,11 +295,15 @@
 
 - (void)postChangedNotification
 {
+    [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
+    
+    if ([IPCPayOrderManager sharedManager].payAmount < [[IPCPayOrderManager sharedManager] payRecordTotalPrice]) {
+        [[IPCPayOrderManager sharedManager] clearPayRecord];
+    }
+    
     if (self.itemsCount == 0) {
         [IPCPayOrderManager sharedManager].customDiscount = [self customDiscount];
     }
-    
-    [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
     [[NSNotificationCenter defaultCenter] jk_postNotificationOnMainThreadName:IPCNotificationShoppingCartChanged object:nil];
 }
 

@@ -155,6 +155,8 @@
         [[IPCPayOrderManager sharedManager] clearPayRecord];
     }
     [self updateOrderInfo];
+    ///重新计算单价
+    [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
     
     if (self.EndEditingBlock) {
         self.EndEditingBlock();
