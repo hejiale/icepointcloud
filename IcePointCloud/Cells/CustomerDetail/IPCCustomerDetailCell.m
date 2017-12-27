@@ -29,27 +29,17 @@
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.phoneLabel setText:_currentCustomer.customerPhone];
         [self.birthdayLabel setText:_currentCustomer.birthday];
-        [self.emailLabel setText:_currentCustomer.email];
         [self.memoLabel setText:_currentCustomer.remark];
         [self.genderLabel setText:[IPCCommon formatGender:_currentCustomer.gender]];
-        [self.handlersLabel setText:_currentCustomer.empName];
-        [self.memberNumLabel setText:_currentCustomer.memberId];
         [self.memberLevlLabel setText:_currentCustomer.memberLevel];
-        [self.jobLabel setText:_currentCustomer.occupation];
-        [self.returnVisitDateLabel setText:_currentCustomer.lastPhoneReturn];
         [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.consumptionAmount]];
         [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.balance]];
-        [self.bookDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_currentCustomer.createDate] IsTime:NO]];
         [self.pointLabel setText:pointValue];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
-        
-        if ([_currentCustomer.customerType isEqualToString:@"转介绍"]) {
-            [self.introduceTitleLabel setHidden:NO];
-            [self.introduceValueLabel setHidden:NO];
-            [self.introduceValueLabel setText:_currentCustomer.introducerName];
-        }else{
-            [self.introduceTitleLabel setHidden:YES];
-            [self.introduceValueLabel setHidden:YES];
+        [self.growthLabel setText:_currentCustomer.membergrowth];
+        [self.ageLabel setText:_currentCustomer.age];
+        if (_currentCustomer.discount) {
+            [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", _currentCustomer.discount*10]];
         }
     }
 }
