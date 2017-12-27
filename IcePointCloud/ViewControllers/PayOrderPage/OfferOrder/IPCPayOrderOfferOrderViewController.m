@@ -64,6 +64,7 @@
         _shopCartView = [[IPCPayOrderShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
+            [[IPCPayOrderManager sharedManager] clearPayRecord];
             [strongSelf updateUI];
         }];
         _shopCartView.keyboard = self.keyboard;

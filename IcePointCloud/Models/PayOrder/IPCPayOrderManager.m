@@ -113,6 +113,7 @@
 - (void)clearPayRecord
 {
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [IPCPayOrderManager sharedManager].customDiscount = -1;
 }
 
 - (void)queryPayType

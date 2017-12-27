@@ -153,6 +153,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
          [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
          [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
          
+         [[IPCPayOrderManager sharedManager] clearPayRecord];
+         
          if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
              [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
          }else{
