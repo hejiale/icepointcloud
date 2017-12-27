@@ -36,6 +36,29 @@
     return [text isEqualToString:filtered];
 }
 
++ (NSString *)formatNumber:(double)number Location:(NSInteger)location
+{
+    if (number != 0 && !isnan(number) && !isinf(number)) {
+        NSString * numberStr = [NSString stringWithFormat:@"%.9f",number];
+        NSRange rang = [numberStr rangeOfString:@"."];
+        return [numberStr substringToIndex:rang.location + location];
+    }
+    return @"0.00";
+}
+
++ (double)floorNumber:(double)number
+{
+    return [[IPCCommon formatNumber:number Location:3] doubleValue];
+}
+
++ (double)afterDouble:(NSString *)begin :(NSString *)end
+{
+    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: end];
+    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: begin];
+    NSDecimalNumber *after = [price2 decimalNumberBySubtracting:price1];
+    return [after doubleValue];
+}
+
 
 + (NSString *)formatDate:(NSDate *)date IsTime:(BOOL)isTime
 {
@@ -119,27 +142,5 @@
     return NO;
 }
 
-+ (NSString *)formatNumber:(double)number Location:(NSInteger)location
-{
-    if (number != 0 && !isnan(number) && !isinf(number)) {
-        NSString * numberStr = [NSString stringWithFormat:@"%.9f",number];
-        NSRange rang = [numberStr rangeOfString:@"."];
-        return [numberStr substringToIndex:rang.location + location];
-    }
-    return @"0.00";
-}
-
-+ (double)floorNumber:(double)number
-{
-    return [[IPCCommon formatNumber:number Location:3] doubleValue];
-}
-
-+ (double)afterDouble:(NSString *)begin :(NSString *)end
-{
-    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: end];
-    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: begin];
-    NSDecimalNumber *after = [price2 decimalNumberBySubtracting:price1];
-    return [after doubleValue];
-}
 
 @end

@@ -11,8 +11,6 @@
 
 @interface IPCCommonUI : NSObject
 
-+ (nonnull UIVisualEffectView *)showBlurView:(CGRect)frame Target:(nullable id)target action:(nullable SEL)action;
-
 + (void)show;
 
 + (void)showInfo:(NSString *)message;

@@ -21,6 +21,12 @@
 
 + (BOOL)judgeIsFloatNumber:(NSString *)text;
 
++ (NSString *)formatNumber:(double)number Location:(NSInteger)location;
+
++ (double)floorNumber:(double)number;
+
++ (double)afterDouble:(NSString *)begin :(NSString *)end;
+
 
 /**
  The date format conversion
@@ -53,11 +59,5 @@
 
  */
 + (BOOL)checkTelNumber:(NSString*)telNumber;
-
-+ (NSString *)formatNumber:(double)number Location:(NSInteger)location;
-
-+ (double)floorNumber:(double)number;
-
-+ (double)afterDouble:(NSString *)begin :(NSString *)end;;
 
 @end

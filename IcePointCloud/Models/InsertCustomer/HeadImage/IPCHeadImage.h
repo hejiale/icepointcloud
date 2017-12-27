@@ -12,7 +12,4 @@
 
 + (NSInteger)genderArcdom;
 
-//---------------------------------根据性别 尺寸 标记来生成头像----------------------------------------//
-+ (NSString *)gender:(NSString *)gender Tag:(NSString *)tag;
-
 @end

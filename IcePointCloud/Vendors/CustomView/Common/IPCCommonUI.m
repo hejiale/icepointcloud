@@ -11,20 +11,6 @@
 
 @implementation IPCCommonUI
 
-#pragma mark //Gaussian blur
-+ (UIVisualEffectView *)showBlurView:(CGRect)frame Target:(nullable id)target action:(nullable SEL)action
-{
-    UIVisualEffectView *visualEfView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleDark]];
-    visualEfView.frame = frame;
-    visualEfView.alpha = 0.9;
-    [visualEfView setUserInteractionEnabled:YES];
-    
-    UITapGestureRecognizer * blurTap = [[UITapGestureRecognizer alloc]initWithTarget:target action:action];
-    [visualEfView addGestureRecognizer:blurTap];
-    
-    return visualEfView;
-}
-
 #pragma mark //Warning prompt box
 + (void)show
 {

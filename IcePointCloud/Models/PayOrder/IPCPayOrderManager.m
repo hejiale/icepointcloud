@@ -20,15 +20,6 @@
     return _client;
 }
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        
-    }
-    return self;
-}
-
 - (NSMutableArray<IPCPayOrderPayType *> *)payTypeArray
 {
     if (!_payTypeArray) {

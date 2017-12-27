@@ -9,6 +9,10 @@
 #import "IPCLoginViewModel.h"
 #import "IPCRootViewController.h"
 
+static NSString * const AccountErrorMessage = @"登录帐号不能为空!";
+static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
+static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入!";
+
 @implementation IPCLoginViewModel
 
 - (instancetype)init
@@ -42,14 +46,14 @@
     NSString * Tpassword = [password jk_trimmingWhitespace];
     
     if (!Tusername.length){
-        [IPCCommonUI showError:@"登录帐号不能为空"];
+        [IPCCommonUI showError:AccountErrorMessage];
         if (failed) {
             failed();
         }
         return;
     }
     if (!Tpassword.length) {
-        [IPCCommonUI showError:@"登录密码不能为空"];
+        [IPCCommonUI showError:PasswordErrorMessage];
         if (failed) {
             failed();
         }
@@ -71,7 +75,7 @@
         if (failed) {
             failed();
         }
-        [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+        [IPCCommonUI showError: LoginErrorMessage];
     }];
 }
 
@@ -126,7 +130,7 @@
 {
     [[IPCAppManager sharedManager] queryEmployeeAccount:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+            [IPCCommonUI showError: LoginErrorMessage];
         }else{
             if (complete) {
                 complete();
@@ -139,7 +143,7 @@
 {
     [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+            [IPCCommonUI showError: LoginErrorMessage];
         }else{
             if (complete) {
                 complete();
@@ -152,7 +156,7 @@
 {
     [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+            [IPCCommonUI showError: LoginErrorMessage];
         }else{
             if (complete) {
                 complete();
@@ -165,7 +169,7 @@
 {
     [[IPCAppManager sharedManager] getCompanyConfig:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+            [IPCCommonUI showError: LoginErrorMessage];
         }else{
             if (complete) {
                 complete();
