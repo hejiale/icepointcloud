@@ -7,7 +7,7 @@
 target_name="IcePointCloud.xcworkspace" # 有效值 ****.xcodeproj / ****.xcworkspace (cocoapods项目)
 project_name="IcePointCloud" # 工程名
 work_type="workspace" # 有效值 project / workspace (cocoapods项目)
-api_token="9469d6a9c492a262cc2e314ac4205b64" # fir token
+api_token="58fd52c6959d696707000043" # fir token
 
 
 sctipt_path=$(cd `dirname $0`; pwd)
