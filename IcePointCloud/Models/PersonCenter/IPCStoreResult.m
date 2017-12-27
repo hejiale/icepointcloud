@@ -15,7 +15,8 @@
              @"wareHouseName" : @"storeObject.repositoryStore.storeName",
              @"storeId"                : @"storeObject.repositoryStore.storeDirector.id",
              @"wareHouseId"       : @"storeObject.repositoryStore.id",
-             @"contacterPhone"   : @"storeObject.repositoryStore.storeDirector.contactMobilePhone"
+             @"contacterPhone"   : @"storeObject.repositoryStore.storeDirector.contactMobilePhone",
+             @"companyName"    : @"storeObject.repositoryStore.storeDirector.contactName"
              };
 }
 

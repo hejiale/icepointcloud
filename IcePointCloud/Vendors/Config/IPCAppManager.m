@@ -168,6 +168,24 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     return nil;
 }
 
+- (void)queryEmployeeAccount:(void(^)(NSError *))complete
+{
+    [IPCUserRequestManager queryEmployeeAccountWithSuccessBlock:^(id responseValue){
+        //Query Responsity WareHouse
+        [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
+        [IPCAppManager sharedManager].storeResult.employee = [IPCEmployee mj_objectWithKeyValues:responseValue];
+        [[IPCPayOrderManager sharedManager] resetEmployee];
+        
+        if (complete) {
+            complete(nil);
+        }
+    } FailureBlock:^(NSError *error) {
+        if (complete) {
+            complete(error);
+        }
+    }];
+}
+
 - (void)loadWareHouse:(void (^)(NSError *))complete
 {
     __weak typeof(self) weakSelf = self;
@@ -203,6 +221,22 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     }];
 }
 
+- (void)getCompanyConfig:(void (^)(NSError *))complete
+{
+    [IPCPayOrderRequestManager getCompanyConfigWithSuccessBlock:^(id responseValue)
+     {
+         self.companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
+         
+         if (complete) {
+             complete(nil);
+         }
+     } FailureBlock:^(NSError *error) {
+         if (complete) {
+             complete(error);
+         }
+     }];
+}
+
 - (void)loadCurrentWareHouse
 {
     if (self.storeResult.wareHouseId) {
@@ -215,20 +249,12 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     }
 }
 
-- (void)getCompanyConfig
-{
-    [IPCPayOrderRequestManager getCompanyConfigWithSuccessBlock:^(id responseValue)
-     {
-         self.companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
-     } FailureBlock:nil];
-}
 
 - (void)clearData
 {
     self.storeResult = nil;
     self.wareHouse = nil;
     self.currentWareHouse = nil;
-    self.companyName = nil;
     self.deviceToken = nil;
 }
 

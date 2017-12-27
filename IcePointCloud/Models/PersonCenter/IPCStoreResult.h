@@ -20,6 +20,7 @@
 @property (nonatomic, copy, readwrite) NSString *wareHouseId;
 @property (nonatomic, copy, readonly) NSString *wareHouseName;
 @property (nonatomic, copy, readwrite) NSString *companyId;
+@property (nonatomic, copy, readwrite) NSString *companyName;
 @property (nonatomic, copy, readwrite) NSString *sex;
 @property (nonatomic, strong, readwrite) IPCEmployee * employee;
 

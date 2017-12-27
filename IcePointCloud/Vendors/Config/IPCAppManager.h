@@ -39,7 +39,6 @@ extern NSString * const kIPCDeviceLoginUUID;
 
 @interface IPCAppManager : NSObject
 
-@property (nonatomic, copy, readwrite)       NSString                   * companyName;
 @property (nonatomic, copy, readwrite)       NSString                   * deviceToken;
 @property (nonatomic, strong, readwrite)    IPCStoreResult          * storeResult;
 @property (nonatomic, strong, readwrite)    IPCWareHouseResult * wareHouse;
@@ -85,6 +84,13 @@ extern NSString * const kIPCDeviceLoginUUID;
 
 
 /**
+ Query Employee Account
+
+ @param complete 
+ */
+- (void)queryEmployeeAccount:(void(^)(NSError *))complete;
+
+/**
  * Load WareHouse
 
  @param complete 
@@ -97,13 +103,13 @@ extern NSString * const kIPCDeviceLoginUUID;
 
  @param complete 
  */
-- (void)queryPriceStrategy:(void (^)(NSError *))complete;
+- (void)queryPriceStrategy:(void (^)(NSError *error))complete;
 
 
 /**
    Load Company Config
  */
-- (void)getCompanyConfig;
+- (void)getCompanyConfig:(void (^)(NSError *error))complete;
 
 
 @end

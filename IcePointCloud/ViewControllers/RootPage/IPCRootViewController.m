@@ -47,8 +47,6 @@
             [strongSelf.tryVC onFilterProducts];
         }
     }];
-    ///Get Company Config
-    [[IPCAppManager sharedManager] getCompanyConfig];
     
     ///清除之前版本搜索数据
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"IPCListSearchHistoryKey"]) {

@@ -54,14 +54,14 @@
     [self setCurrentPage:0];
     //Query PayType
     [[IPCPayOrderManager sharedManager] queryPayType];
+    //获取积分规则
+    [self.viewMode queryIntegralRule];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //Set Naviagtion Bar
     [self setNavigationBarStatus:YES];
-    //获取积分规则
-    [self.viewMode queryIntegralRule];
 }
 
 - (NSMutableArray<UIViewController *> *)viewControllers

@@ -156,7 +156,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.companyTitleLabel setText:@"公司"];
-            [cell.companyNameLabel setText:[IPCAppManager sharedManager].companyName];
+            [cell.companyNameLabel setText:[IPCAppManager sharedManager].storeResult.companyName];
             return cell;
         }
     }else if(indexPath.section == 2){

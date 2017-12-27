@@ -60,13 +60,12 @@
     
     [IPCUserRequestManager userLoginWithUserName:Tusername Password:Tpassword SuccessBlock:^(id responseValue){
         //query login info
-        __strong typeof (weakSelf) strongSelf = weakSelf;
         [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
-        [IPCAppManager sharedManager].companyName = responseValue[@"companyName"];
         //storeage account info
+        __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf syncUserAccountHistory:userName];
         //query responsity wareHouse
-        [strongSelf queryEmployeeAccount];
+        [strongSelf loadConfigData];
     } FailureBlock:^(NSError *error) {
         __strong typeof (weakSelf) strongSelf = weakSelf;
         if (failed) {
@@ -76,45 +75,104 @@
     }];
 }
 
-- (void)queryEmployeeAccount
+- (void)loadConfigData
 {
     __weak typeof (self) weakSelf = self;
-    [IPCUserRequestManager queryEmployeeAccountWithSuccessBlock:^(id responseValue){
+    
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        //Query Responsity WareHouse
-        [IPCAppManager sharedManager].storeResult = [IPCStoreResult mj_objectWithKeyValues:responseValue];
-        [IPCAppManager sharedManager].storeResult.employee = [IPCEmployee mj_objectWithKeyValues:responseValue];
-        [[IPCPayOrderManager sharedManager] resetEmployee];
-        //load wareHouse
-        [strongSelf loadWareHouse];
-    } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
-    }];
+        [strongSelf queryEmployeeAccount:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf loadWareHouse:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf loadPriceStrategy:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf loadCompanyConfig:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf showMainRootViewController];
+    });
 }
 
-- (void)loadWareHouse
+- (void)queryEmployeeAccount:(void(^)())complete
 {
-    __weak typeof (self) weakSelf = self;
-    [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf loadPriceStrategy];
-    }];
-}
-
-- (void)loadPriceStrategy
-{
-    __weak typeof (self) weakSelf = self;
-    [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        //Load Main View
-        if (!error) {
-            [strongSelf showMainRootViewController];
-        }else{
+    [[IPCAppManager sharedManager] queryEmployeeAccount:^(NSError *error) {
+        if (error) {
             [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+        }else{
+            if (complete) {
+                complete();
+            }
         }
     }];
 }
 
+- (void)loadWareHouse:(void(^)())complete
+{
+    [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
+        if (error) {
+            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+        }else{
+            if (complete) {
+                complete();
+            }
+        }
+    }];
+}
+
+- (void)loadPriceStrategy:(void(^)())complete
+{
+    [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
+        if (error) {
+            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+        }else{
+            if (complete) {
+                complete();
+            }
+        }
+    }];
+}
+
+- (void)loadCompanyConfig:(void(^)())complete
+{
+    [[IPCAppManager sharedManager] getCompanyConfig:^(NSError *error) {
+        if (error) {
+            [IPCCommonUI showError:@"用户登录失败,请重新输入!"];
+        }else{
+            if (complete) {
+                complete();
+            }
+        }
+    }];
+}
 
 #pragma mark //Clicked Methods
 - (void)syncUserAccountHistory:(NSString *)userName
