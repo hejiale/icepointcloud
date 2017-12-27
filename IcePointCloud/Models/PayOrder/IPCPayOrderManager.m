@@ -77,6 +77,18 @@
     return [discountStr doubleValue] * 100;
 }
 
+- (void)calculatePayAmount
+{
+    if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
+        [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * (double)([IPCPayOrderManager sharedManager].customDiscount/100);
+        [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
+        [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
+    }else{
+        [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
+        [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
+    }
+}
+
 - (BOOL)isCanPayOrder
 {
     if (![IPCPayOrderManager sharedManager].currentCustomerId) {
@@ -129,7 +141,7 @@
 - (void)resetData
 {
     [IPCPayOrderManager sharedManager].remark = nil;
-    [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+    [[IPCPayOrderManager sharedManager] clearPayRecord];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [IPCPayOrderManager sharedManager].currentOptometryId = nil;
     [IPCPayOrderManager sharedManager].integralTrade = nil;

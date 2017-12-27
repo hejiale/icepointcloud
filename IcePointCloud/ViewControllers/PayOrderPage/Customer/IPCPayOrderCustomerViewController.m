@@ -158,10 +158,9 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
          }else{
              [IPCPayOrderManager sharedManager].customDiscount = 100;
          }
-         [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
+         [[IPCPayOrderManager sharedManager] calculatePayAmount];
          
          [strongSelf loadCustomerInfoView];
-         
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {

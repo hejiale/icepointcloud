@@ -63,7 +63,6 @@
     if (!_shopCartView) {
         _shopCartView = [[IPCPayOrderShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [[IPCPayOrderManager sharedManager] clearPayRecord];
             [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
             [strongSelf updateUI];
         }];
@@ -72,26 +71,16 @@
     return _shopCartView;
 }
 
-- (IPCCustomKeyboard *)keyboard
-{
-    if (!_keyboard) {
+- (IPCCustomKeyboard *)keyboard{
+    if (!_keyboard)
         _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.shopCartView.jk_right+10, self.offerInfoView.jk_bottom+10, 408, 335)];
-    }
     return _keyboard;
 }
 
 #pragma mark //Clicked Events
 - (void)updateUI
 {
-    if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
-        [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] * (double)([IPCPayOrderManager sharedManager].customDiscount/100);
-        [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [IPCPayOrderManager sharedManager].payAmount;
-        [[IPCShoppingCart sharedCart] updateAllCartUnitPrice];
-    }else{
-        [IPCPayOrderManager sharedManager].discountAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrePrice] - [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
-        [IPCPayOrderManager sharedManager].discount = [[IPCPayOrderManager sharedManager] calculateDiscount];
-    }
-    
+    [[IPCPayOrderManager sharedManager] calculatePayAmount];
     [self.offerInfoView updateOrderInfo];
     [self.shopCartView reload];
 }

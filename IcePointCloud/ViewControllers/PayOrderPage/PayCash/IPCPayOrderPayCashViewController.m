@@ -49,6 +49,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [self.payTypeCollectionView registerNib:[UINib nibWithNibName:@"IPCPayCashPayTypeViewCell" bundle:nil] forCellWithReuseIdentifier:payTypeIdentifier];
     
     [self addObserver:self forKeyPath:@"currentIndex" options:NSKeyValueObservingOptionNew context:nil];
+    [[IPCPayOrderManager sharedManager] addObserver:self forKeyPath:@"payAmount" options:NSKeyValueObservingOptionNew context:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -224,7 +225,15 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
             [IPCPayOrderManager sharedManager].isInsertRecord = NO;
         }
         [self.payRecordTableView reloadData];
+    }else{
+        [[IPCPayOrderManager sharedManager] clearPayRecord];
     }
+}
+
+- (void)dealloc
+{
+    [self removeObserver:self forKeyPath:@"currentIndex"];
+    [[IPCPayOrderManager sharedManager] removeObserver:self forKeyPath:@"payAmount"];
 }
 
 - (void)didReceiveMemoryWarning {
