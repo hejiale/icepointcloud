@@ -14,7 +14,6 @@
 #define   IPC_ProductAPI_URL       @"https://dev.icepointcloud.com"
 #elif   BETA
 #define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
-//#define   IPC_ProductAPI_URL       @"https://dev.icepointcloud.com"
 #else
 #define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
 #endif

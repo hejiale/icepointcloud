@@ -40,7 +40,8 @@ static NSError *HTTPError(NSString *domain, int code) {
 
 - (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed
 {
-    DLog(@"%@",responseData)
+
+    DLog(@"%@", responseData);
     
     [self.lock lock];
     
