@@ -127,8 +127,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 #pragma mark //Request Data
 - (void)querySuggestPrice
 {
-    [IPCCommonUI show];
-    
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
@@ -163,7 +161,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if ([self.lensNumLabel.text isEqualToString:@"0"]) {
         [self.lensNumLabel setText:@"1"];
     }
-    [IPCCommonUI hiden];
 }
 
 #pragma mark //Set UI
