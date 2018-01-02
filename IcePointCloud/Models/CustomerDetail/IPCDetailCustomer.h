@@ -23,6 +23,7 @@
 @property (nonatomic, assign, readwrite) double   consumptionAmount;
 @property (nonatomic, assign, readwrite) double   balance;
 @property (nonatomic, copy, readwrite) NSString * customerType;
+@property (nonatomic, copy, readwrite) NSString * customerTypeId;
 @property (nonatomic, assign, readwrite) NSInteger   integral;
 @property (nonatomic, copy, readwrite) NSString * photo_url;
 @property (nonatomic, assign, readwrite) double  discount;

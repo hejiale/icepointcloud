@@ -20,10 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UILabel *customerStyleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *customStyleTextField;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *editHeightConstraint;
-
-
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
@@ -53,9 +49,6 @@
         [self.customStyleTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
         
         if (self.detailCustomer) {
-            [self.customerStyleLabel setHidden:YES];
-            [self.customStyleTextField setHidden:YES];
-            self.editHeightConstraint.constant = 450;
             [self updateCustomerInfo];
         }else{
             [[IPCCustomerManager sharedManager] queryCustomerType];
@@ -71,6 +64,7 @@
     [self.phoneTextField setText:self.detailCustomer.customerPhone];
     [self.ageTextField setText:self.detailCustomer.age];
     [self.birthDayTextField setText:self.detailCustomer.birthday];
+    [self.customStyleTextField setText:self.detailCustomer.customerType];
     
     if ([self.detailCustomer.gender isEqualToString:@"MALE"]) {
         [self.maleButton setSelected:YES];

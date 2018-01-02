@@ -18,7 +18,6 @@
                 <outlet property="customerNameTextField" destination="VEH-OU-Fdd" id="Yy9-ab-8qY"/>
                 <outlet property="customerStyleLabel" destination="3f6-Wm-c46" id="A39-vf-Xps"/>
                 <outlet property="editContentView" destination="xU1-a0-G6G" id="TTQ-uJ-aQo"/>
-                <outlet property="editHeightConstraint" destination="sT2-4W-HZO" id="KlS-Az-5H8"/>
                 <outlet property="femaleButton" destination="bqe-KO-bXa" id="37O-2J-8Xc"/>
                 <outlet property="maleButton" destination="anJ-gT-hEr" id="WrS-59-vuf"/>
                 <outlet property="phoneTextField" destination="P0T-75-g4B" id="udB-mS-zR0"/>
