@@ -30,7 +30,7 @@
 @property (nonatomic, copy, readonly) NSString *  customerId;
 @property (nonatomic, copy, readonly) NSString *  status;
 @property (nonatomic, copy, readonly) NSString *  orderCode;
-@property (nonatomic, assign, readwrite) double    totalPrice;
+//@property (nonatomic, assign, readwrite) double    totalPrice;
 @property (nonatomic, copy, readonly) NSString *  orderNumber;
 @property (nonatomic, copy, readonly) NSString *  orderTime;
 @property (nonatomic, copy, readonly) NSString *  operatorName;
@@ -40,9 +40,8 @@
 @property (nonatomic, assign, readonly) NSInteger    integralGiven;
 @property (nonatomic, assign, readwrite) double   totalDonationAmount;
 @property (nonatomic, assign, readwrite) BOOL     isPackUpOptometry;
-//@property (nonatomic, assign, readwrite) double   totalSuggestAmount;
-//@property (nonatomic, assign, readwrite) double   totalPayAmount;
-@property (nonatomic, assign, readonly)  double   totalSuggestPrice;
+@property (nonatomic, assign, readwrite) double   totalSuggestAmount;
+@property (nonatomic, assign, readwrite) double   totalPayAmount;
 @property (nonatomic, assign, readwrite) double    remainAmount;//订单详情中剩余付款金额
 @property (nonatomic, copy, readonly) NSString * auditResult;
 @property (nonatomic, copy, readonly) NSString * auditStatus;

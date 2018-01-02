@@ -26,9 +26,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalSuggestPrice]];
+    [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalSuggestAmount]];
     [self.givingAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalDonationAmount]];
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalPrice]];
+    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalPayAmount]];
     
 }
 
