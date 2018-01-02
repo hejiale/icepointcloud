@@ -40,8 +40,9 @@
 @property (nonatomic, assign, readonly) NSInteger    integralGiven;
 @property (nonatomic, assign, readwrite) double   totalDonationAmount;
 @property (nonatomic, assign, readwrite) BOOL     isPackUpOptometry;
-@property (nonatomic, assign, readwrite) double   totalSuggestAmount;
-@property (nonatomic, assign, readwrite) double   totalPayAmount;
+//@property (nonatomic, assign, readwrite) double   totalSuggestAmount;
+//@property (nonatomic, assign, readwrite) double   totalPayAmount;
+@property (nonatomic, assign, readonly)  double   totalSuggestPrice;
 @property (nonatomic, assign, readwrite) double    remainAmount;//订单详情中剩余付款金额
 @property (nonatomic, copy, readonly) NSString * auditResult;
 @property (nonatomic, copy, readonly) NSString * auditStatus;

@@ -43,17 +43,18 @@
             self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
         }
         
-        self.orderInfo.totalPayAmount = 0;
-        self.orderInfo.totalSuggestAmount = 0;
+//        self.orderInfo.totalPayAmount = 0;
+//        self.orderInfo.totalSuggestAmount = 0;
         self.orderInfo.totalDonationAmount = 0;
         
-        [self.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            strongSelf.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
-            strongSelf.orderInfo.totalSuggestAmount += glass.price * glass.productCount;
-        }];
+//        [self.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
+//            __strong typeof(weakSelf) strongSelf = weakSelf;
+//            strongSelf.orderInfo.totalPayAmount += glass.afterDiscountPrice * glass.productCount;
+//            strongSelf.orderInfo.totalSuggestAmount += glass.price * glass.productCount;
+//        }];
         
-        self.orderInfo.totalDonationAmount = self.orderInfo.totalSuggestAmount - self.orderInfo.totalPayAmount;
+//        self.orderInfo.totalDonationAmount = self.orderInfo.totalSuggestAmount - self.orderInfo.totalPayAmount;
+        self.orderInfo.totalDonationAmount = self.orderInfo.totalSuggestPrice - self.orderInfo.totalPrice;
         
         __block double totalPayTypePrice = 0;
         
