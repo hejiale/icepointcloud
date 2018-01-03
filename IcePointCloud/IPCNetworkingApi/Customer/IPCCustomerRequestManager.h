@@ -179,4 +179,36 @@
                        FailureBlock:(void (^)(NSError * error))failure;
 
 
+/**
+ Upgrade Member
+
+ @param customerId
+ @param memberGrowth
+ @param memberPhone
+ @param integral
+ @param balance
+ @param success
+ @param failure 
+ */
++ (void)upgradeMemberWithCustomerId:(NSString *)customerId
+                       MemberGrowth:(double)memberGrowth
+                        MemberPhone:(NSString *)memberPhone
+                           Integral:(NSInteger)integral
+                            Balance:(double)balance
+                       SuccessBlock:(void (^)(id responseValue))success
+                       FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ Validate Customer
+
+ @param code
+ @param success
+ @param failure
+ */
++ (void)validateCustomerWithCode:(NSString *)code
+                    SuccessBlock:(void (^)(id responseValue))success
+                    FailureBlock:(void (^)(NSError * error))failure;
+
+
 @end

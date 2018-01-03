@@ -34,6 +34,8 @@
 #define CustomerRequest_SetCurrentOptometry   @"customerAdmin.setCurrentOptometry"
 #define CustomerRequest_ListMemberLevel          @"customerConfigAdmin.listMemberLevel"
 #define CustomerRequest_ListCustomerType        @"customerConfigAdmin.listCustomerType"
+#define CustomerRequest_UpgradeMember          @"customerAdmin.customerUpdateToMember"
+#define CustomerRequest_ValidateCustomer        @"customerAdmin.validateCustomerQRcode"
 
 #define GoodsRequest_FilterCategory                    @"bizadmin.getCategoryType"
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"

@@ -141,4 +141,16 @@
     [self postRequest:nil RequestMethod:CustomerRequest_ListCustomerType CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)upgradeMemberWithCustomerId:(NSString *)customerId MemberGrowth:(double)memberGrowth MemberPhone:(NSString *)memberPhone Integral:(NSInteger)integral Balance:(double)balance SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    NSDictionary * paramter = @{@"id": customerId, @"membergrowth": @(memberGrowth), @"memberPhone": memberPhone,@"integral":@(integral),@"balance": @(balance)};
+    
+    [self postRequest:paramter RequestMethod:CustomerRequest_UpgradeMember CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)validateCustomerWithCode:(NSString *)code SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:code RequestMethod:CustomerRequest_ValidateCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end
