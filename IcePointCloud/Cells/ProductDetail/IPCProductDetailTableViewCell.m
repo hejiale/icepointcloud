@@ -37,7 +37,7 @@
         CGFloat height = [self.productNameLabel.text jk_sizeWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width].height;
         self.nameHeightConstraint.constant = height+5;
         
-        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.2f",_glasses.price]];
         
         __block CGFloat orignX = self.baseTitleLabel.jk_left;
         __block CGFloat orignY = self.baseTitleLabel.jk_bottom + 20 + height;

@@ -51,7 +51,7 @@
         }
 
         [self.cartNumLabel setText:[[NSNumber numberWithInteger:_cartItem.glassCount]stringValue]];
-        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f", _cartItem.prePrice]];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.2f", _cartItem.prePrice]];
     }
 }
 

@@ -66,7 +66,7 @@
             [self.productImageView setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         }
         
-        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.2f",_glasses.price]];
         [self.productNameLabel setText:_glasses.glassName];
         
         //Shopping cart whether to join the product

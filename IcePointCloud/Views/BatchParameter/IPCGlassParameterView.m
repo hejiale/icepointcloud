@@ -156,7 +156,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }else{
         self.glasses.updatePrice = config.suggestPrice;
     }
-    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f", config.suggestPrice]];
+    [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.2f", config.suggestPrice]];
     
     if ([self.lensNumLabel.text isEqualToString:@"0"]) {
         [self.lensNumLabel setText:@"1"];
@@ -196,9 +196,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if (self.cartItem) {
         [self.normalLensStepperView setHidden:YES];
         self.normalLensHeight.constant -= 55;
-        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.cartItem.prePrice]];
+        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",self.cartItem.prePrice]];
     }else{
-        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",self.glasses.price]];
     }
     [self.normalLensImageView setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.normalLensNameLabel setText:self.glasses.glassName];
@@ -213,7 +213,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }];
     [self. customsizedImageView  setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.customsizedNameLabel setText:self.glasses.glassName];
-    [self.customsizedPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+    [self.customsizedPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",self.glasses.price]];
 }
 
 - (void)showParameterTableView:(UITapGestureRecognizer *)sender InView:(UIView *)contentView

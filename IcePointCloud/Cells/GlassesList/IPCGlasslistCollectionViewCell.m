@@ -44,7 +44,7 @@
         
         [self.productImageView setImageWithURL:[NSURL URLWithString:glassImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
 
-        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.f",_glasses.price]];
+        [self.priceLabel setText:[NSString stringWithFormat:@"￥%.2f",_glasses.price]];
         [self.productNameLabel setSpaceWithText:_glasses.glassName LineSpace:10 WordSpace:0];
         //Get Name Text Height And Auto Fit
        CGFloat labelHeight = [self.productNameLabel.text jk_heightWithFont:self.productNameLabel.font constrainedToWidth:self.productNameLabel.jk_width];
