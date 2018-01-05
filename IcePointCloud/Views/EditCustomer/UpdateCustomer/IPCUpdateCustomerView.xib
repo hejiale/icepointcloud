@@ -6,11 +6,22 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCUpdateCustomerView">
+            <connections>
+                <outlet property="ageTextField" destination="tIo-Gp-Eoq" id="oE7-WR-efC"/>
+                <outlet property="birthdayTextField" destination="ns3-7M-Bz7" id="bcz-fL-rT3"/>
+                <outlet property="customerNameTextField" destination="jQt-sE-NJf" id="ztc-EI-28m"/>
+                <outlet property="customerTypeTextField" destination="0AV-OW-DL1" id="iRg-M1-ZMA"/>
+                <outlet property="editContentView" destination="RmU-LP-9WF" id="rAK-Nj-Dh4"/>
+                <outlet property="encryptedPhoneTextField" destination="70O-pZ-eOC" id="Pq9-hM-Tfc"/>
+                <outlet property="femaleButton" destination="BzE-sm-WkV" id="mjo-CF-SH1"/>
+                <outlet property="maleButton" destination="pIy-wa-hOm" id="6pi-IM-blq"/>
+                <outlet property="phoneTextFiel" destination="eml-Rb-KcH" id="0QN-yO-xvf"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
@@ -20,7 +31,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <color key="backgroundColor" white="0.0" alpha="0.2041416952" colorSpace="calibratedWhite"/>
                 </imageView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t8e-2p-x7F">
+                <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t8e-2p-x7F">
                     <rect key="frame" x="187" y="124" width="650" height="520"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客户基本信息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SQ8-rR-ys2">
@@ -73,7 +84,7 @@
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-LP-9WF">
+                        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RmU-LP-9WF">
                             <rect key="frame" x="20" y="60" width="610" height="395"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="＊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8J-L4-4PZ">
@@ -339,7 +350,6 @@
                         <constraint firstAttribute="width" constant="650" id="qZd-xc-Vvx"/>
                         <constraint firstAttribute="bottom" secondItem="F9a-0L-G4Z" secondAttribute="bottom" constant="15" id="waz-Ez-3RE"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="Oia-DL-XKc"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
