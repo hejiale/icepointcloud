@@ -20,12 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UILabel *customerStyleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *customStyleTextField;
-@property (weak, nonatomic) IBOutlet UISwitch *upgradeSwitch;
-@property (weak, nonatomic) IBOutlet UIView *upgradeMemberView;
-@property (weak, nonatomic) IBOutlet UITextField *encryptedPhoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *growthValueTextField;
-@property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
-@property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 

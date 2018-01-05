@@ -200,7 +200,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 - (void)showEditCustomerView:(BOOL)isUpdate
 {
     __weak typeof(self) weakSelf = self;
-    self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+    self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
                                                                DetailCustomer:(isUpdate ? [IPCPayOrderCurrentCustomer sharedManager].currentCustomer :  nil)
                                                                   UpdateBlock:^(NSString *customerId)
                              {
@@ -211,8 +211,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                  [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
                                  [strongSelf loadData];
                              }];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.editCustomerView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.editCustomerView];
+    [[IPCCommonUI currentView] addSubview:self.editCustomerView];
+    [[IPCCommonUI currentView] bringSubviewToFront:self.editCustomerView];
 }
 
 #pragma mark //UICollectionViewDataSource
