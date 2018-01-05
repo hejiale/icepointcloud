@@ -100,6 +100,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ReactiveObjC/ReactiveObjC.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYKit/YYKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ZRQRCodeViewController/ZRQRCodeViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ZYCornerRadius/ZYCornerRadius.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -114,6 +115,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ReactiveObjC/ReactiveObjC.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYKit/YYKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ZRQRCodeViewController/ZRQRCodeViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ZYCornerRadius/ZYCornerRadius.framework"
 fi
 if [[ "$CONFIGURATION" == "TestRelease" ]]; then
@@ -128,6 +130,7 @@ if [[ "$CONFIGURATION" == "TestRelease" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Masonry/Masonry.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ReactiveObjC/ReactiveObjC.framework"
   install_framework "$BUILT_PRODUCTS_DIR/YYKit/YYKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/ZRQRCodeViewController/ZRQRCodeViewController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ZYCornerRadius/ZYCornerRadius.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -40,6 +40,7 @@ PODS:
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
+  - ZRQRCodeViewController (3.1.5)
   - ZYCornerRadius (1.0.2)
 
 DEPENDENCIES:
@@ -57,6 +58,7 @@ DEPENDENCIES:
   - SNWeChatSDK
   - TuSDK
   - YYKit
+  - ZRQRCodeViewController
   - ZYCornerRadius
 
 SPEC CHECKSUMS:
@@ -74,8 +76,9 @@ SPEC CHECKSUMS:
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   TuSDK: 49efdde070ab75740187d53f919b7c99d230f1ce
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
+  ZRQRCodeViewController: 5bafe127c0b09a65b88db5b05b45ce72f2b3e5b0
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: f052988891aeae59677b35c6dcdd0b55a44fe929
+PODFILE CHECKSUM: e456ac5d3c3ad62a0909385281ff9b0e858b9afd
 
 COCOAPODS: 1.2.0

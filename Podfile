@@ -21,6 +21,7 @@ pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
 pod 'TuSDK'
 pod 'Bugtags'
+pod 'ZRQRCodeViewController'
 end
 
 target "IcePointCloudTests" do
