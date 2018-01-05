@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *growthValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeightConstraint;
+
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
@@ -51,6 +53,13 @@
             }
         }];
         
+        [self.upgradeMemberView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[UITextField class]]) {
+                UITextField * textFiedld = (UITextField *)obj;
+                [textFiedld addBottomLine];
+            }
+        }];
+        
         [self.birthDayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customStyleTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
         
@@ -60,6 +69,8 @@
             [[IPCCustomerManager sharedManager] queryCustomerType];
             [self.customStyleTextField setText: @"自然进店"];
         }
+        
+        self.contentHeightConstraint.constant = 520;
     }
     return self;
 }
@@ -136,6 +147,15 @@
 - (IBAction)selectFemaleAction:(id)sender {
     [self.maleButton setSelected:NO];
     [self.femaleButton setSelected:YES];
+}
+- (IBAction)switchMemberAction:(UISwitch *)sender {
+    if (sender.isOn) {
+        self.contentHeightConstraint.constant = 720;
+        [self.upgradeMemberView setHidden:NO];
+    }else{
+        self.contentHeightConstraint.constant = 520;
+        [self.upgradeMemberView setHidden:YES];
+    }
 }
 
 - (void)showDatePickerAction
