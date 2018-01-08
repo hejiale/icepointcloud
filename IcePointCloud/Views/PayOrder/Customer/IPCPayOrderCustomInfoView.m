@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIView *memberIdentifyView;
 @property (weak, nonatomic) IBOutlet UIView *memberRightView;
 @property (weak, nonatomic) IBOutlet UILabel *memberIdentityLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *customerNameWidth;
+@property (weak, nonatomic) IBOutlet UIButton *upgradeMemberButton;
 
 
 @end
@@ -49,9 +51,18 @@
     
 }
 
+- (IBAction)upgradeMemberAction:(id)sender
+{
+    
+}
+
+
 - (void)updateCustomerInfo
 {
     IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
+    
+    CGFloat width = [customer.customerName jk_sizeWithFont:self.customerNameLabel.font constrainedToHeight:self.customerNameLabel.jk_height].width;
+    self.customerNameWidth.constant = width;
     
     [self.customerNameLabel setText:customer.customerName];
     [self.ageLabel setText:customer.age];
@@ -75,6 +86,7 @@
 
 - (void)showMemberInfoView
 {
+    [self.upgradeMemberButton setHidden:YES];
     [self.memberRightView setHidden:NO];
     [self.memberIdentifyView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UILabel class]]) {
@@ -88,6 +100,7 @@
 
 - (void)hideMemberInfoView
 {
+    [self.upgradeMemberButton setHidden:NO];
     [self.memberRightView setHidden:YES];
     [self.memberIdentifyView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:[UILabel class]]) {

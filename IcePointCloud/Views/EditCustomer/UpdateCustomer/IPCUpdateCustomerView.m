@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *customerTypeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *encryptedPhoneTextField;
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
+@property (weak, nonatomic) IBOutlet UIButton *editPhoneButton;
+@property (weak, nonatomic) IBOutlet UIView *membePhoneView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
+
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
@@ -26,7 +30,7 @@
 
 @implementation IPCUpdateCustomerView
 
-- (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)(NSString *))update
+- (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)(NSString *customerId))update
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -41,7 +45,9 @@
         [self.editContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UITextField class]]) {
                 UITextField * textFiedld = (UITextField *)obj;
-                [textFiedld addBottomLine];
+                if (![textFiedld isEqual:self.encryptedPhoneTextField]) {
+                    [textFiedld addBottomLine];
+                }
             }
         }];
         
@@ -63,6 +69,7 @@
     [self.ageTextField setText:self.detailCustomer.age];
     [self.birthdayTextField setText:self.detailCustomer.birthday];
     [self.customerTypeTextField setText:self.detailCustomer.customerType];
+    [self.encryptedPhoneTextField setText:self.detailCustomer.memberPhone];
     
     if ([self.detailCustomer.gender isEqualToString:@"MALE"]) {
         [self.maleButton setSelected:YES];
@@ -70,6 +77,11 @@
     }else if ([self.detailCustomer.gender isEqualToString:@"FEMALE"]){
         [self.femaleButton setSelected:YES];
         [self.maleButton setSelected:NO];
+    }
+    
+    if (!self.detailCustomer.memberLevel) {
+        [self.membePhoneView setHidden:YES];
+        self.contentHeight.constant = 470;
     }
 }
 
@@ -111,9 +123,27 @@
     }
 }
 
+- (void)updateMemberPhoneRequest
+{
+    [IPCCustomerRequestManager updateMemberPhoneWithPhone:self.encryptedPhoneTextField.text
+                                               CustomerId:self.detailCustomer.customerID
+                                             SuccessBlock:^(id responseValue)
+    {
+        [self.editPhoneButton setSelected:NO];
+        [self.encryptedPhoneTextField jk_removeBottomBorder];
+        [self.encryptedPhoneTextField setEnabled:NO];
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark //Clicked Events
 - (IBAction)cancelAction:(id)sender {
     [self removeFromSuperview];
+    
+    if (self.UpdateBlock) {
+        self.UpdateBlock(nil);
+    }
 }
 
 - (IBAction)completeAction:(id)sender {
@@ -128,6 +158,18 @@
 - (IBAction)selectFemaleAction:(id)sender {
     [self.maleButton setSelected:NO];
     [self.femaleButton setSelected:YES];
+}
+
+- (IBAction)editPhoneAction:(UIButton *)sender {
+    
+    if (sender.selected) {
+        [self updateMemberPhoneRequest];
+    }else{
+        [sender setSelected:!sender.selected];
+        [self.encryptedPhoneTextField addBottomLine];
+        [self.encryptedPhoneTextField setEnabled:YES];
+        [self.encryptedPhoneTextField becomeFirstResponder];
+    }
 }
 
 - (void)showDatePickerAction

@@ -153,4 +153,9 @@
     [self postRequest:code RequestMethod:CustomerRequest_ValidateCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)updateMemberPhoneWithPhone:(NSString *)memberPhone CustomerId:(NSString *)customerId SuccessBlock:(void (^)(id responseValue))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:@{@"id": customerId, @"memberPhone":memberPhone} RequestMethod:CustomerRequest_UpdateMemberPhone CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

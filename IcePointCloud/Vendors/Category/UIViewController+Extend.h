@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIView *  coverView;
 
+- (void)setLeftBack:(BOOL)isPresent;
+
 - (void)setBackground;
 
 - (void)addCoverWithAlpha:(CGFloat)alpha Complete:(void (^)())completed;

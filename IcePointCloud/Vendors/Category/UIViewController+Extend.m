@@ -13,6 +13,25 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
 
 @implementation UIViewController (Extend)
 
+- (void)setLeftBack:(BOOL)isPresent
+{
+    UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton setFrame:CGRectMake(0, 0, 80, 40)];
+    [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
+    [backButton setAdjustsImageWhenHighlighted:NO];
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [[backButton rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        if (isPresent) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+    
+    UIBarButtonItem * backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = backItem;
+}
+
 - (void)setBackground{
     [self.view setBackgroundColor:[UIColor colorWithHexString:@"#F4F4F4"]];
 }
@@ -41,5 +60,6 @@ static char const *  coverViewIdentifier = "coverViewIdentifier";
 - (UIView *)coverView{
     return objc_getAssociatedObject(self, coverViewIdentifier);
 }
+
 
 @end

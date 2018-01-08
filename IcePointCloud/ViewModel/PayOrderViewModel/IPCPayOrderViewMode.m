@@ -109,7 +109,7 @@
 - (void)outboundWithOrderNum:(NSString *)orderNum
 {
     ///出库操作
-    [IPCPayOrderRequestManager getAuthsWithOrderNum:orderNum WithSuccessBlock:nil FailureBlock:nil];
+    [IPCPayOrderRequestManager outbound:orderNum SuccessBlock:nil FailureBlock:nil];
 }
 
 - (void)payCashWithOrderNum:(NSString *)orderNum

@@ -237,6 +237,16 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
      }];
 }
 
+- (void)getAuths:(void(^)(NSError *))complete
+{
+    [IPCPayOrderRequestManager getAuthWithSuccessBlock:^(id responseValue)
+    {
+        
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
 - (void)loadCurrentWareHouse
 {
     if (self.storeResult.wareHouseId) {

@@ -36,6 +36,7 @@
 #define CustomerRequest_ListCustomerType        @"customerConfigAdmin.listCustomerType"
 #define CustomerRequest_UpgradeMember          @"customerAdmin.customerUpdateToMember"
 #define CustomerRequest_ValidateCustomer        @"customerAdmin.validateCustomerQRcode"
+#define CustomerRequest_UpdateMemberPhone   @"customerAdmin.updateCustomerMemberPhone"
 
 #define GoodsRequest_FilterCategory                    @"bizadmin.getCategoryType"
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
@@ -43,7 +44,7 @@
 #define GoodsRequest_PriceStrategy                     @"productAdmin.listPriceStrategyForListProduct"
 
 #define PayOrderRequest_CompanyConfig            @"companyAdmin.getCompanyConfig"
-//#define PayOrderRequest_GetAuths                      @"bizadmin.getAuths"  获取全部权限
+#define PayOrderRequest_GetAuths                      @"bizadmin.getAuths" 
 #define PayOrderRequest_Outbound                     @"orderObjectAdmin.inventoryOutForSalesOrder"
 #define PayOrderRequest_ListPayType                  @"payTypeConfigAdmin.listPayType"
 #define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"

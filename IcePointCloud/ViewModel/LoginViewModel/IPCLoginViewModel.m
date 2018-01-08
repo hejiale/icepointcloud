@@ -120,6 +120,15 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf getAuth:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf showMainRootViewController];
@@ -168,6 +177,19 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 - (void)loadCompanyConfig:(void(^)())complete
 {
     [[IPCAppManager sharedManager] getCompanyConfig:^(NSError *error) {
+        if (error) {
+            [IPCCommonUI showError: LoginErrorMessage];
+        }else{
+            if (complete) {
+                complete();
+            }
+        }
+    }];
+}
+
+- (void)getAuth:(void(^)())complete
+{
+    [[IPCAppManager sharedManager] getAuths:^(NSError *error) {
         if (error) {
             [IPCCommonUI showError: LoginErrorMessage];
         }else{

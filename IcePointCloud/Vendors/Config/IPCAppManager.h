@@ -112,4 +112,12 @@ extern NSString * const kIPCDeviceLoginUUID;
 - (void)getCompanyConfig:(void (^)(NSError *error))complete;
 
 
+/**
+ Get Auth
+
+ @param complete 
+ */
+- (void)getAuths:(void(^)(NSError *))complete;
+
+
 @end

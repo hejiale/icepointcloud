@@ -31,7 +31,7 @@
 #import "YYKit.h"
 #import "JKCategories.h"
 #import "ReactiveObjC.h"
-#import "ZRQRCodeController.h"
+#import "MMScanViewController.h"
 //Head File
 #import "HeaderFile.h"
 

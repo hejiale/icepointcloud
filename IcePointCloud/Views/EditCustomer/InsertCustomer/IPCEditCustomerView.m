@@ -20,13 +20,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UILabel *customerStyleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *customStyleTextField;
-@property (weak, nonatomic) IBOutlet UISwitch *upgradeSwitch;
-@property (weak, nonatomic) IBOutlet UIView *upgradeMemberView;
-@property (weak, nonatomic) IBOutlet UITextField *encryptedPhoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *growthValueTextField;
-@property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
-@property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeightConstraint;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
 @end
@@ -50,20 +43,12 @@
             }
         }];
         
-        [self.upgradeMemberView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([obj isKindOfClass:[UITextField class]]) {
-                UITextField * textFiedld = (UITextField *)obj;
-                [textFiedld addBottomLine];
-            }
-        }];
-        
         [self.birthDayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customStyleTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
         
         [[IPCCustomerManager sharedManager] queryCustomerType];
         [self.customStyleTextField setText: @"自然进店"];
-        
-        self.contentHeightConstraint.constant = 520;
+    
     }
     return self;
 }
@@ -125,15 +110,6 @@
     [self.maleButton setSelected:NO];
     [self.femaleButton setSelected:YES];
 }
-- (IBAction)switchMemberAction:(UISwitch *)sender {
-    if (sender.isOn) {
-        self.contentHeightConstraint.constant = 720;
-        [self.upgradeMemberView setHidden:NO];
-    }else{
-        self.contentHeightConstraint.constant = 520;
-        [self.upgradeMemberView setHidden:YES];
-    }
-}
 
 - (void)showDatePickerAction
 {
@@ -153,7 +129,12 @@
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if (textField.tag == 2) {
+        [textField resignFirstResponder];
+    }else{
+        UITextField * nextTextField = (UITextField *)[self.editContentView viewWithTag:textField.tag+1];
+        [nextTextField becomeFirstResponder];
+    }
     return YES;
 }
 

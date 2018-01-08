@@ -12,6 +12,8 @@
 #import "IPCCustomerListViewModel.h"
 #import "IPCEditCustomerView.h"
 #import "IPCUpdateCustomerView.h"
+#import "IPCUpgradeMemberView.h"
+#import "IPCScanCodeViewController.h"
 
 static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionViewCellIdentifier";
 
@@ -20,6 +22,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (weak, nonatomic) IBOutlet UIView *customInfoContentView;
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentBottomConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *validationButton;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -27,6 +30,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (nonatomic, strong) IPCPayOrderCustomInfoView * infoView;
 @property (nonatomic, strong) IPCEditCustomerView * editCustomerView;
 @property (nonatomic, strong) IPCUpdateCustomerView * updateCustomerView;
+@property (nonatomic, strong) IPCUpgradeMemberView * upgradeMemberView;
+@property (nonatomic, strong) IPCPortraitNavigationViewController * cameraNav;
 
 @end
 
@@ -84,12 +89,17 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf showUpdateCustomerView];
         }];
+        [[_infoView rac_signalForSelector:@selector(upgradeMemberAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf showUpgradeMemberView];
+        }];
     }
     return _infoView;
 }
 
 - (void)loadCustomerInfoView
 {
+    [self.validationButton setSelected:([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel ? YES : NO)];
     self.contentBottomConstraint.constant = 60;
     [self.infoView updateCustomerInfo];
     [self.customInfoContentView addSubview:self.infoView];
@@ -173,6 +183,17 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
      }];
 }
 
+- (void)validationMemberRequest:(NSString *)code
+{
+    [IPCCustomerRequestManager validateCustomerWithCode:code
+                                           SuccessBlock:^(id responseValue)
+    {
+        
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark //Reload CollectionView
 - (void)reload
 {
@@ -199,10 +220,22 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self showEditCustomerView];
 }
 
+- (IBAction)validationMemberAction:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
+        [strongSelf validationMemberRequest:result];
+    }];
+    self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
+    [self presentViewController:self.cameraNav  animated:YES completion:nil];
+}
+
 - (void)showEditCustomerView
 {
     __weak typeof(self) weakSelf = self;
-    self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
+    self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
                                                           UpdateBlock:^(NSString *customerId)
                              {
                                  __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -212,8 +245,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                  [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
                                  [strongSelf loadData];
                              }];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.editCustomerView];
-    [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.editCustomerView];
+    [[IPCCommonUI currentView] addSubview:self.editCustomerView];
+    [[IPCCommonUI currentView] bringSubviewToFront:self.editCustomerView];
 }
 
 - (void)showUpdateCustomerView
@@ -227,11 +260,28 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                    [strongSelf.updateCustomerView removeFromSuperview];
                                    strongSelf.updateCustomerView = nil;
                                    
-                                   [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+                                   [strongSelf queryCustomerDetail];
                                    [strongSelf loadData];
                                }];
     [[IPCCommonUI currentView] addSubview:self.updateCustomerView];
     [[IPCCommonUI currentView] bringSubviewToFront:self.updateCustomerView];
+}
+
+- (void)showUpgradeMemberView
+{
+    __weak typeof(self) weakSelf = self;
+    self.upgradeMemberView = [[IPCUpgradeMemberView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                            UpdateBlock:^
+                              {
+                                  __strong typeof(weakSelf) strongSelf = weakSelf;
+                                  [strongSelf.upgradeMemberView removeFromSuperview];
+                                  strongSelf.upgradeMemberView = nil;
+                                  [IPCCommonUI showSuccess:@"客户升级会员成功!"];
+                                  [strongSelf performSelector:@selector(queryCustomerDetail) withObject:nil afterDelay:1.f];
+                                  [strongSelf performSelector:@selector(loadData) withObject:nil afterDelay:1.f];
+                              }];
+    [[IPCCommonUI currentView] addSubview:self.upgradeMemberView];
+    [[IPCCommonUI currentView] bringSubviewToFront:self.upgradeMemberView];
 }
 
 #pragma mark //UICollectionViewDataSource

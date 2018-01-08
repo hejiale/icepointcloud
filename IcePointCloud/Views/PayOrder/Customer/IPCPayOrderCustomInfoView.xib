@@ -15,6 +15,7 @@
                 <outlet property="balanceLabel" destination="eKv-4s-gtX" id="OJm-QA-tPS"/>
                 <outlet property="birthdayLabel" destination="Dwv-9h-jAw" id="TQ5-6v-MKN"/>
                 <outlet property="customerNameLabel" destination="JfJ-OO-5D2" id="9bF-mN-TB0"/>
+                <outlet property="customerNameWidth" destination="irn-BD-1Zz" id="5Fd-J9-hJH"/>
                 <outlet property="discountLabel" destination="UY2-yT-CZ3" id="8zc-Ef-GTp"/>
                 <outlet property="encryptedPhoneLabel" destination="jcp-qW-Eo4" id="tFf-77-x6i"/>
                 <outlet property="growthValueLabel" destination="4Ez-6D-DvA" id="x9W-gW-nsl"/>
@@ -25,6 +26,7 @@
                 <outlet property="phoneLabel" destination="iHy-4f-5aR" id="Y8x-IG-YmY"/>
                 <outlet property="pointLabel" destination="2Uk-B7-FLd" id="C2H-yU-H0H"/>
                 <outlet property="sexLabel" destination="jg0-Js-dlC" id="TcR-GL-AUk"/>
+                <outlet property="upgradeMemberButton" destination="Hr9-IW-DM7" id="O3G-pm-BsT"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -33,10 +35,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JfJ-OO-5D2">
-                    <rect key="frame" x="20" y="30" width="200" height="20"/>
+                    <rect key="frame" x="20" y="30" width="50" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="8CE-1U-wqb"/>
-                        <constraint firstAttribute="width" constant="200" id="irn-BD-1Zz"/>
+                        <constraint firstAttribute="width" constant="50" id="irn-BD-1Zz"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <color key="textColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -335,6 +337,26 @@
                         <constraint firstItem="UY2-yT-CZ3" firstAttribute="centerY" secondItem="aXG-iT-p71" secondAttribute="centerY" id="zKg-gh-r7M"/>
                     </constraints>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hr9-IW-DM7">
+                    <rect key="frame" x="80" y="27" width="100" height="26"/>
+                    <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="5kR-XG-gHy"/>
+                        <constraint firstAttribute="height" constant="26" id="tL5-IX-LtH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="点击升级为会员">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="13"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="upgradeMemberAction:" destination="-1" eventType="touchUpInside" id="ADi-ze-gxx"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -351,6 +373,7 @@
                 <constraint firstItem="QNg-98-Svb" firstAttribute="centerY" secondItem="jg0-Js-dlC" secondAttribute="centerY" id="MsN-e1-N8u"/>
                 <constraint firstItem="hfJ-8b-gTG" firstAttribute="leading" secondItem="iHy-4f-5aR" secondAttribute="trailing" constant="50" id="PbZ-kZ-7Xx"/>
                 <constraint firstItem="w1p-Ni-sQn" firstAttribute="top" secondItem="AmS-xy-5xq" secondAttribute="bottom" constant="40" id="Qsa-wb-Qba"/>
+                <constraint firstItem="Hr9-IW-DM7" firstAttribute="leading" secondItem="JfJ-OO-5D2" secondAttribute="trailing" constant="10" id="Vyn-8C-wEt"/>
                 <constraint firstItem="VxL-Xf-i0r" firstAttribute="top" secondItem="w1p-Ni-sQn" secondAttribute="bottom" constant="40" id="WES-Ae-s3N"/>
                 <constraint firstItem="iHy-4f-5aR" firstAttribute="centerY" secondItem="V0K-hb-zX6" secondAttribute="centerY" id="WT5-Yr-c3V"/>
                 <constraint firstAttribute="trailing" secondItem="Jh4-7M-G7h" secondAttribute="trailing" id="YmL-Uk-RlA"/>
@@ -367,6 +390,7 @@
                 <constraint firstItem="mTB-T6-fVO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="vMB-dH-uCU"/>
                 <constraint firstItem="V0K-hb-zX6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="wFg-U7-mMK"/>
                 <constraint firstItem="jg0-Js-dlC" firstAttribute="leading" secondItem="AmS-xy-5xq" secondAttribute="trailing" constant="10" id="xLh-Ul-LhK"/>
+                <constraint firstItem="Hr9-IW-DM7" firstAttribute="centerY" secondItem="JfJ-OO-5D2" secondAttribute="centerY" id="zdU-8H-V3f"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

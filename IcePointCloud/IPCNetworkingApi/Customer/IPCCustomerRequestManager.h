@@ -211,4 +211,17 @@
                     FailureBlock:(void (^)(NSError * error))failure;
 
 
+/**
+ Update Member Phone
+
+ @param memberPhone
+ @param success
+ @param failure 
+ */
++ (void)updateMemberPhoneWithPhone:(NSString *)memberPhone
+                        CustomerId:(NSString *)customerId
+                      SuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError *))failure;
+
+
 @end

@@ -25,6 +25,7 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.13)
   - MJRefresh (3.1.15.1)
+  - MMScan (0.0.3)
   - ReactiveObjC (3.0.0)
   - SNWeChatSDK (1.7.5)
   - TuSDK (2.9.0):
@@ -40,7 +41,6 @@ PODS:
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
-  - ZRQRCodeViewController (3.1.5)
   - ZYCornerRadius (1.0.2)
 
 DEPENDENCIES:
@@ -54,11 +54,11 @@ DEPENDENCIES:
   - MBProgressHUD
   - MJExtension
   - MJRefresh
+  - MMScan
   - ReactiveObjC
   - SNWeChatSDK
   - TuSDK
   - YYKit
-  - ZRQRCodeViewController
   - ZYCornerRadius
 
 SPEC CHECKSUMS:
@@ -72,13 +72,13 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  MMScan: 1ea75513de2b9dccd8b4a0b2ecbc4d8b019f5a33
   ReactiveObjC: ce79989e8684b9086b5f8d0c74bc7b81a8729c9e
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   TuSDK: 49efdde070ab75740187d53f919b7c99d230f1ce
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
-  ZRQRCodeViewController: 5bafe127c0b09a65b88db5b05b45ce72f2b3e5b0
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: e456ac5d3c3ad62a0909385281ff9b0e858b9afd
+PODFILE CHECKSUM: 79321309f254d80481e1c0153a08c91ab0b60f68
 
 COCOAPODS: 1.2.0

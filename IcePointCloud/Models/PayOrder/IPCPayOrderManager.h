@@ -40,6 +40,8 @@
 @property (nonatomic, strong) NSMutableArray<IPCPayOrderPayType *> * payTypeArray;
 //是否正在添加付款记录
 @property (nonatomic, assign, readwrite) BOOL  isInsertRecord;
+//是否会员验证通过
+@property (nonatomic, assign, readwrite) BOOL  isValiateMember;
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额
