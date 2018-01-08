@@ -256,6 +256,9 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     self.wareHouse = nil;
     self.currentWareHouse = nil;
     self.deviceToken = nil;
+    self.priceStrategy = nil;
+    self.currentStrategy = nil;
+    self.companyCofig = nil;
 }
 
 
