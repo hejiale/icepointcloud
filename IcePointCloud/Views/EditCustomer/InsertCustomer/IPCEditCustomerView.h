@@ -10,6 +10,6 @@
 
 @interface IPCEditCustomerView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)(NSString *))update;
+- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void (^)(NSString *))update;
 
 @end

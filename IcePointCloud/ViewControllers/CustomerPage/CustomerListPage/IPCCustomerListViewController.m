@@ -110,7 +110,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     if (!_editCustomerView) {
         __weak typeof(self) weakSelf = self;
         _editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
-                                                               DetailCustomer:nil
                                                                   UpdateBlock:^(NSString *customerId)
                              {
                                  __strong typeof(weakSelf) strongSelf = weakSelf;

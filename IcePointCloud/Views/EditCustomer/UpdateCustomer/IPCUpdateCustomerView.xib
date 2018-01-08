@@ -201,6 +201,9 @@
                                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="selected" image="common_btn_check_selected"/>
+                                    <connections>
+                                        <action selector="selectMaleAction:" destination="-1" eventType="touchUpInside" id="Cv0-5Z-otC"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BzE-sm-WkV">
                                     <rect key="frame" x="405" y="84" width="60" height="30"/>
@@ -214,6 +217,9 @@
                                         <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <state key="selected" image="common_btn_check_selected"/>
+                                    <connections>
+                                        <action selector="selectFemaleAction:" destination="-1" eventType="touchUpInside" id="yYW-LX-MLi"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="客户类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qf4-DM-eb7">
                                     <rect key="frame" x="20" y="290" width="75" height="20"/>
@@ -314,6 +320,9 @@
                             <state key="normal" title="取消">
                                 <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="UWJ-RN-wJ5"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9a-0L-G4Z">
                             <rect key="frame" x="345" y="470" width="120" height="35"/>
@@ -326,6 +335,9 @@
                             <state key="normal" title="提交">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="completeAction:" destination="-1" eventType="touchUpInside" id="5LQ-0J-wGY"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.94117647059999998" green="0.94901960780000005" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -352,7 +364,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="uS0-Hm-eFI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FHw-kU-D2d"/>
                 <constraint firstAttribute="bottom" secondItem="uS0-Hm-eFI" secondAttribute="bottom" id="Pzi-Nh-yzS"/>

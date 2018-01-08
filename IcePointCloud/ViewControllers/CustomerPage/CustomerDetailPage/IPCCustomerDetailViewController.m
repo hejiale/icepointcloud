@@ -15,7 +15,7 @@
 #import "IPCCustomDetailOrderView.h"
 #import "IPCCustomerDetailViewMode.h"
 #import "IPCManagerOptometryViewController.h"
-#import "IPCEditCustomerView.h"
+#import "IPCUpdateCustomerView.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
@@ -28,7 +28,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
-@property (strong, nonatomic) IPCEditCustomerView * editCustomerView;
+@property (strong, nonatomic) IPCUpdateCustomerView * editCustomerView;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
 
 @end
@@ -119,9 +119,9 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 - (void)loadEditCustomerView
 {
     __weak typeof (self) weakSelf = self;
-    self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
-                                                               DetailCustomer:self.customerViewMode.detailCustomer
-                                                                  UpdateBlock:^(NSString *customerId)
+    self.editCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds
+                                                         DetailCustomer:self.customerViewMode.detailCustomer
+                                                            UpdateBlock:^(NSString *customerId)
                              {
                                  __strong typeof (weakSelf) strongSelf = weakSelf;
                                  [strongSelf.editCustomerView removeFromSuperview];

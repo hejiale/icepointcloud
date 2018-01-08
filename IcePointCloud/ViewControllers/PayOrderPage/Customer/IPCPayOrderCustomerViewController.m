@@ -11,6 +11,7 @@
 #import "IPCPayOrderCustomerCollectionViewCell.h"
 #import "IPCCustomerListViewModel.h"
 #import "IPCEditCustomerView.h"
+#import "IPCUpdateCustomerView.h"
 
 static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionViewCellIdentifier";
 
@@ -25,6 +26,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCPayOrderCustomInfoView * infoView;
 @property (nonatomic, strong) IPCEditCustomerView * editCustomerView;
+@property (nonatomic, strong) IPCUpdateCustomerView * updateCustomerView;
 
 @end
 
@@ -80,7 +82,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         _infoView = [[IPCPayOrderCustomInfoView alloc]initWithFrame:CGRectMake(0, 0, self.customInfoContentView.jk_width, self.customInfoContentView.jk_height-60)];
         [[_infoView rac_signalForSelector:@selector(editCustomerInfoAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf showEditCustomerView:YES];
+            [strongSelf showUpdateCustomerView];
         }];
     }
     return _infoView;
@@ -194,15 +196,14 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 #pragma mark //Clicked Events
 - (IBAction)insertNewCustomerAction:(id)sender
 {
-    [self showEditCustomerView:NO];
+    [self showEditCustomerView];
 }
 
-- (void)showEditCustomerView:(BOOL)isUpdate
+- (void)showEditCustomerView
 {
     __weak typeof(self) weakSelf = self;
     self.editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
-                                                               DetailCustomer:(isUpdate ? [IPCPayOrderCurrentCustomer sharedManager].currentCustomer :  nil)
-                                                                  UpdateBlock:^(NSString *customerId)
+                                                          UpdateBlock:^(NSString *customerId)
                              {
                                  __strong typeof(weakSelf) strongSelf = weakSelf;
                                  [strongSelf.editCustomerView removeFromSuperview];
@@ -213,6 +214,24 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                              }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.editCustomerView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.editCustomerView];
+}
+
+- (void)showUpdateCustomerView
+{
+    __weak typeof(self) weakSelf = self;
+    self.updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                           DetailCustomer:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer
+                                                              UpdateBlock:^(NSString *customerId)
+                               {
+                                   __strong typeof(weakSelf) strongSelf = weakSelf;
+                                   [strongSelf.updateCustomerView removeFromSuperview];
+                                   strongSelf.updateCustomerView = nil;
+                                   
+                                   [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+                                   [strongSelf loadData];
+                               }];
+    [[IPCCommonUI currentView] addSubview:self.updateCustomerView];
+    [[IPCCommonUI currentView] bringSubviewToFront:self.updateCustomerView];
 }
 
 #pragma mark //UICollectionViewDataSource

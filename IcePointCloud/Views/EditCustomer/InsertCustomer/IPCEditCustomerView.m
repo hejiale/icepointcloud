@@ -27,20 +27,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeightConstraint;
-
-@property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
 @end
 
 @implementation IPCEditCustomerView
 
-- (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)(NSString *))update
+- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void (^)(NSString *))update
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.UpdateBlock = update;
-        self.detailCustomer = customer;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCEditCustomerView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -63,34 +60,14 @@
         [self.birthDayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customStyleTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
         
-        if (self.detailCustomer) {
-            [self updateCustomerInfo];
-        }else{
-            [[IPCCustomerManager sharedManager] queryCustomerType];
-            [self.customStyleTextField setText: @"自然进店"];
-        }
+        [[IPCCustomerManager sharedManager] queryCustomerType];
+        [self.customStyleTextField setText: @"自然进店"];
         
         self.contentHeightConstraint.constant = 520;
     }
     return self;
 }
 
-- (void)updateCustomerInfo
-{
-    [self.customerNameTextField setText:self.detailCustomer.customerName];
-    [self.phoneTextField setText:self.detailCustomer.customerPhone];
-    [self.ageTextField setText:self.detailCustomer.age];
-    [self.birthDayTextField setText:self.detailCustomer.birthday];
-    [self.customStyleTextField setText:self.detailCustomer.customerType];
-    
-    if ([self.detailCustomer.gender isEqualToString:@"MALE"]) {
-        [self.maleButton setSelected:YES];
-        [self.femaleButton setSelected:NO];
-    }else if ([self.detailCustomer.gender isEqualToString:@"FEMALE"]){
-        [self.femaleButton setSelected:YES];
-        [self.maleButton setSelected:NO];
-    }
-}
 
 #pragma mark //Request Methods
 - (void)saveCustomerRequest
@@ -112,7 +89,7 @@
                                                    CustomerTypeId:[[IPCCustomerManager sharedManager]  customerTypeId:self.customStyleTextField.text]
                                                           PhotoId:@([IPCHeadImage genderArcdom])
                                                               Age:self.ageTextField.text
-                                                       CustomerId:(self.detailCustomer.customerID ?  : @"")
+                                                       CustomerId:@""
                                                      SuccessBlock:^(id responseValue)
          {
              if (self.UpdateBlock) {
