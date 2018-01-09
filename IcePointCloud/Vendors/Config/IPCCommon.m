@@ -53,8 +53,8 @@
 
 + (double)afterDouble:(NSString *)begin :(NSString *)end
 {
-    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: end];
-    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: begin];
+    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: (end ? : @"0")];
+    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: (begin ? : @"0")];
     NSDecimalNumber *after = [price2 decimalNumberBySubtracting:price1];
     return [after doubleValue];
 }

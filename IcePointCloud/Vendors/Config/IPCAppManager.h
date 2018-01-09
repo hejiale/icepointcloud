@@ -12,6 +12,7 @@
 #import "IPCPriceStrategyResult.h"
 #import "IPCCustomTextField.h"
 #import "IPCCompanyConfig.h"
+#import "IPCAuthList.h"
 
 //The App for the first time login
 extern NSString *const IPCFirstLanuchKey;
@@ -46,6 +47,7 @@ extern NSString * const kIPCDeviceLoginUUID;
 @property (nonatomic, strong, readwrite)    IPCPriceStrategyResult * priceStrategy;
 @property (nonatomic, strong, readwrite)    IPCPriceStrategy        * currentStrategy;
 @property (nonatomic, strong, readwrite)    IPCCompanyConfig   * companyCofig;
+@property (nonatomic, strong, readwrite)    IPCAuthList               * authList;
 
 + (IPCAppManager *)sharedManager;
 

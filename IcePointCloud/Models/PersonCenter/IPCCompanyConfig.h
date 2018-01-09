@@ -15,7 +15,7 @@
 @property (nonatomic, assign, readonly) BOOL  autoInvOutAfterAudited;//自动出库判断
 @property (nonatomic, assign, readonly) BOOL  autoRemoveInventoryOut;
 @property (nonatomic, assign, readonly) BOOL  isCheckInventory;
-@property (nonatomic, assign, readonly) BOOL  isCheckMember;
+@property (nonatomic, assign, readonly) BOOL  isCheckMember;//验证会员
 @property (nonatomic, assign, readonly) BOOL  machiningConfiguration;
 @property (nonatomic, assign, readonly) BOOL  memberCodeKeyboard;
 @property (nonatomic, copy, readonly) NSString *  defaultPayTypeConfigId;//默认收款方式

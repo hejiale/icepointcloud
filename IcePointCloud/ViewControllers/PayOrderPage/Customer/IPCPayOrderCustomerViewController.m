@@ -23,6 +23,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *validationButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *insertButtonWidth;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -45,7 +46,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     //Init Data
     self.viewModel = [[IPCCustomerListViewModel alloc]init];
     [self loadData];
-    
+    //KVO
     [[IPCPayOrderManager sharedManager] ipc_addObserver:self ForKeyPath:@"currentCustomerId"];
 }
 
@@ -99,7 +100,13 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)loadCustomerInfoView
 {
-    [self.validationButton setSelected:([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel ? YES : NO)];
+    if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
+        self.insertButtonWidth.constant = 408;
+        [self.validationButton setHidden:YES];
+    }else{
+        self.insertButtonWidth.constant = 200;
+        [self.validationButton setHidden:NO];
+    }
     self.contentBottomConstraint.constant = 60;
     [self.infoView updateCustomerInfo];
     [self.customInfoContentView addSubview:self.infoView];
@@ -161,20 +168,15 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
                                                         SuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
          [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
-         
          [[IPCPayOrderManager sharedManager] clearPayRecord];
-         
-         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
-             [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
-         }else{
-             [IPCPayOrderManager sharedManager].customDiscount = 100;
-         }
+         [[IPCPayOrderManager sharedManager] resetCustomerDiscount];
          [[IPCPayOrderManager sharedManager] calculatePayAmount];
          
-         [strongSelf loadCustomerInfoView];
+         [self loadCustomerInfoView];
+         [self.validationButton setSelected:[IPCPayOrderManager sharedManager].isValiteMember];
+         
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
@@ -188,9 +190,10 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [IPCCustomerRequestManager validateCustomerWithCode:code
                                            SuccessBlock:^(id responseValue)
     {
-        
+        [IPCPayOrderManager sharedManager].currentCustomerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
+        [IPCPayOrderManager sharedManager].isValiteMember = YES;
     } FailureBlock:^(NSError *error) {
-        
+        [IPCCommonUI showError:@"会员验证码失效!"];
     }];
 }
 
@@ -316,6 +319,9 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     if (self.viewModel.customerArray.count) {
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
+        
+        if ([customer.customerID isEqualToString:[IPCPayOrderManager sharedManager].currentCustomerId])return;
+        
         if (customer) {
             [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
         }
@@ -339,7 +345,10 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 #pragma mark //KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"currentCustomerId"]) {
+    if ([keyPath isEqualToString:@"currentCustomerId"])
+    {
+        [IPCPayOrderManager sharedManager].isValiteMember = NO;
+        
         if (![IPCPayOrderManager sharedManager].currentCustomerId) {
             self.contentBottomConstraint.constant = 20;
             [self.infoView removeFromSuperview];

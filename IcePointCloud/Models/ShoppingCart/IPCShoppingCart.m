@@ -311,7 +311,10 @@
 {
     if ([IPCPayOrderManager sharedManager].currentCustomerId) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
-            return  [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount*10;
+            if (([IPCAppManager sharedManager].authList.forceVerifyMember || [IPCAppManager sharedManager].companyCofig.isCheckMember || [IPCPayOrderManager sharedManager].isValiteMember) && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel)
+            {
+                return  [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount*10;
+            }
         }
     }
     return 100;

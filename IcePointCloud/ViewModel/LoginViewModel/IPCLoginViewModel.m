@@ -125,7 +125,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
         __strong typeof (weakSelf) strongSelf = weakSelf;
         [strongSelf getAuth:^{
             dispatch_semaphore_signal(semaphore);
-        }];
+        }]; 
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     

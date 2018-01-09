@@ -241,9 +241,15 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 {
     [IPCPayOrderRequestManager getAuthWithSuccessBlock:^(id responseValue)
     {
+        self.authList = [IPCAuthList mj_objectWithKeyValues:responseValue];
         
+        if (complete) {
+            complete(nil);
+        }
     } FailureBlock:^(NSError *error) {
-        
+        if (complete) {
+            complete(error);
+        }
     }];
 }
 

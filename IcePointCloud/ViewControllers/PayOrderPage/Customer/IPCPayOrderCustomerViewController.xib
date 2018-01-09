@@ -14,6 +14,7 @@
                 <outlet property="contentBottomConstraint" destination="FyQ-52-bLI" id="NVE-6Z-9el"/>
                 <outlet property="customInfoContentView" destination="Ma2-kN-X8G" id="RRh-ak-g15"/>
                 <outlet property="customerCollectionView" destination="apX-7c-Lcn" id="KnP-U4-e0L"/>
+                <outlet property="insertButtonWidth" destination="2Y6-K7-PdK" id="PNW-Wo-6pJ"/>
                 <outlet property="validationButton" destination="lAc-F5-gmN" id="dE8-7Y-MMe"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -37,7 +38,7 @@
                         <action selector="insertNewCustomerAction:" destination="-1" eventType="touchUpInside" id="kQq-w9-3OR"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAc-F5-gmN">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAc-F5-gmN">
                     <rect key="frame" x="208" y="604" width="200" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

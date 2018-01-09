@@ -18,6 +18,8 @@
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;
 //当前客户验光单Id
 @property (nonatomic, copy, readwrite) NSString * currentOptometryId;
+//是否已验证过会员
+@property (nonatomic, assign, readwrite) BOOL    isValiteMember;
 //合计金额
 @property (nonatomic, assign, readwrite) double   payAmount;
 //折扣率
@@ -60,6 +62,8 @@
 - (void)queryPayType;
 //初始化经办人
 - (void)resetEmployee;
+//初始化选取客户折扣
+- (void)resetCustomerDiscount;
 
 
 @end
