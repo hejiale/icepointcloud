@@ -22,19 +22,16 @@
 - (void)queryCustomerList:(void(^)(NSError *error))complete
 {
     self.completeBlock = complete;
-    
-    __weak typeof(self) weakSelf = self;
+
     [IPCCustomerRequestManager queryCustomerListWithKeyword:self.searchWord ? : @""
                                                        Page:self.currentPage
                                                SuccessBlock:^(id responseValue)
      {
-         __strong typeof (weakSelf) strongSelf = weakSelf;
-         [strongSelf parseCustomerListData:responseValue];
+         [self parseCustomerListData:responseValue];
      } FailureBlock:^(NSError *error) {
-         __strong typeof (weakSelf) strongSelf = weakSelf;
-         strongSelf.status = IPCRefreshError;
-         if (strongSelf.completeBlock) {
-             strongSelf.completeBlock(error);
+         self.status = IPCRefreshError;
+         if (self.completeBlock) {
+             self.completeBlock(error);
          }
      }];
 }

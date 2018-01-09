@@ -71,12 +71,11 @@ typedef void(^DismissBlock)(IPCEmployee *);
          __strong typeof(weakSelf) strongSelf = weakSelf;
          IPCEmployeeList * employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
          [strongSelf.employeeArray addObjectsFromArray:employeList.employeArray];
-         strongSelf.employeTableView.isBeginLoad = NO;
-         [strongSelf.employeTableView reloadData];
+         self.employeTableView.isBeginLoad = NO;
+         [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         strongSelf.employeTableView.isBeginLoad = NO;
-         [strongSelf.employeTableView reloadData];
+         self.employeTableView.isBeginLoad = NO;
+         [self.employeTableView reloadData];
      }];
 }
 

@@ -67,10 +67,8 @@
 {
     [self.loginButton jk_showIndicator];
     
-    __weak typeof (self) weakSelf = self;
     [self.loginViewModel signinRequestWithUserName:self.usernameTf.text Password:self.passwordTf.text Failed:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.loginButton jk_hideIndicator];
+        [self.loginButton jk_hideIndicator];
     }];
 }
 

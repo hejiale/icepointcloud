@@ -121,12 +121,10 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 
 
 - (IBAction)onDeleteProductsAction:(id)sender {
-    __weak typeof (self) weakSelf = self;
     if ([self.cartViewMode isSelectCart]) {
         [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
-            __strong typeof (weakSelf) strongSelf = weakSelf;
             [[IPCShoppingCart sharedCart] removeSelectCartItem];
-            [strongSelf resetShoppingCartStatus];
+            [self resetShoppingCartStatus];
         }];
     }
 }
@@ -146,10 +144,8 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
         }
         IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
         if (cartItem) {
-            __weak typeof(self) weakSelf = self;
             [cell setCartItem:cartItem Reload:^{
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf resetShoppingCartStatus];
+                [self resetShoppingCartStatus];
             }];
         }
         return cell;
@@ -197,10 +193,8 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
     
-    __weak typeof(self) weakSelf = self;
     _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[IPCCommonUI currentView].bounds  Complete:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf updateCartUI:YES];
+        [self updateCartUI:YES];
     }];
     _parameterView.cartItem = cartItem;
     [[IPCCommonUI currentView] addSubview:_parameterView];

@@ -189,13 +189,11 @@ static NSString * const chooseIdentifier     = @"ChooseTypeCellIdentifier";
 
 
 - (IPCChooseCategoryView *)categoryView{
-    __weak typeof (self) weakSelf = self;
     if (!_categoryView) {
         _categoryView = [[IPCChooseCategoryView alloc]initWithFrame:self.rightView.bounds CategoryList:[[self.dataSource filterDataSourceResult] allCategoryName] FilterType:[self.dataSource filterType] Complete:^(IPCTopFilterType type)
                          {
-                             __strong typeof (weakSelf) strongSelf = weakSelf;
-                             if ([strongSelf.delegate respondsToSelector:@selector(filterGlassesWithClassType:)])
-                                 [strongSelf.delegate filterGlassesWithClassType:type];
+                             if ([self.delegate respondsToSelector:@selector(filterGlassesWithClassType:)])
+                                 [self.delegate filterGlassesWithClassType:type];
                          }];
     }
     return _categoryView;
@@ -235,11 +233,9 @@ static NSString * const chooseIdentifier     = @"ChooseTypeCellIdentifier";
     [bgView setBackgroundColor:COLOR_RGB_BLUE];
     [bgView.layer setCornerRadius:rect.size.height/2];
     
-    __weak typeof (self) weakSelf = self;
     [bgView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        if ([strongSelf.delegate respondsToSelector:@selector(deleteFilterSourceWithValue:)])
-            [strongSelf.delegate deleteFilterSourceWithValue:text];
+        if ([self.delegate respondsToSelector:@selector(deleteFilterSourceWithValue:)])
+            [self.delegate deleteFilterSourceWithValue:text];
     }];
     
     UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, rect.size.width - 30, rect.size.height)];

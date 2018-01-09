@@ -58,11 +58,9 @@
 
 - (IPCPayOrderShoppingCartView *)shopCartView
 {
-    __weak typeof(self) weakSelf = self;
     if (!_shopCartView) {
         _shopCartView = [[IPCPayOrderShoppingCartView alloc]initWithFrame:CGRectMake(0, 0, 490, self.view.jk_height) Complete:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf updateUI];
+            [self updateUI];
         }];
         _shopCartView.keyboard = self.keyboard;
     }

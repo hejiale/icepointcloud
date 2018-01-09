@@ -63,12 +63,10 @@ typedef void(^IPCAlertActionsConfig)(IPCAlertActionBlock actionBlock);
 - (IPCAlertActionsConfig)alertActionsConfig{
     return ^(IPCAlertActionBlock actionBlock){
         if (self.actionArray.count) {
-            __weak typeof (self) weakSelf = self;
             [self.actionArray enumerateObjectsUsingBlock:^(IPCAlertActionModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 UIAlertAction * alertAction = [UIAlertAction actionWithTitle:obj.title style:obj.style handler:^(UIAlertAction * _Nonnull action) {
-                    __strong typeof(weakSelf) strongSelf = weakSelf;
                     if (actionBlock) {
-                        actionBlock(idx, action, strongSelf);
+                        actionBlock(idx, action, self);
                     }
                 }];
                 [self addAction:alertAction];

@@ -117,18 +117,15 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Request Data
 - (void)queryOrderDetail
 {
-    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryOrderDetailWithOrderID:self.currentOrderNum
                                               SuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          [[IPCCustomerOrderDetail instance] parseResponseValue:responseValue];
-         strongSelf.orderDetailTableView.isBeginLoad = NO;
-         [strongSelf.orderDetailTableView reloadData];
+         self.orderDetailTableView.isBeginLoad = NO;
+         [self.orderDetailTableView reloadData];
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         strongSelf.orderDetailTableView.isBeginLoad = NO;
-         [strongSelf.orderDetailTableView reloadData];
+         self.orderDetailTableView.isBeginLoad = NO;
+         [self.orderDetailTableView reloadData];
      }];
 }
 

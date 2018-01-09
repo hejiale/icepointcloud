@@ -99,7 +99,6 @@
                            StoreId:(NSString *)storeId
 
 {
-    __weak typeof (self) weakSelf = self;
     [IPCGoodsRequestManager queryFilterGlassesListWithPage:page
                                                      Limit:limit
                                                 SearchWord:self.searchWord
@@ -111,13 +110,11 @@
                                                    StoreId:storeId
                                                 StrategyId: [IPCAppManager sharedManager].currentStrategy.strategyId ? : @""
                                               SuccessBlock:^(id responseValue){
-                                                  __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                  [strongSelf parseNormalGlassesData:responseValue];
+                                                  [self parseNormalGlassesData:responseValue];
                                               } FailureBlock:^(NSError *error) {
-                                                  __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                  strongSelf.status = IPCRefreshError;
-                                                  if (strongSelf.completeBlock) {
-                                                      strongSelf.completeBlock(error);
+                                                  self.status = IPCRefreshError;
+                                                  if (self.completeBlock) {
+                                                      self.completeBlock(error);
                                                   }
                                               }];
 }
@@ -132,15 +129,15 @@
                                           __strong typeof (weakSelf) strongSelf = weakSelf;
                                           strongSelf.filterDataSource = [[IPCFilterDataSourceResult alloc]init];
                                           [strongSelf.filterDataSource parseFilterData:responseValue IsTry:self.isTrying];
+                                          
                                           if (strongSelf.filterView)
                                               [strongSelf.filterView reloadFilterView];
                                           
-                                          if (strongSelf.filterSuccessBlock)
-                                              strongSelf.filterSuccessBlock(nil);
+                                          if (self.filterSuccessBlock)
+                                              self.filterSuccessBlock(nil);
                                       } FailureBlock:^(NSError *error) {
-                                          __strong typeof (weakSelf) strongSelf = weakSelf;
-                                          if (strongSelf.filterSuccessBlock)
-                                              strongSelf.filterSuccessBlock(error);
+                                          if (self.filterSuccessBlock)
+                                              self.filterSuccessBlock(error);
                                       }];
 }
 

@@ -111,10 +111,10 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
         
         UIView * view = [[UIView alloc]initWithFrame:CGRectMake(totalWidth, 3, width, 24)];
         [view addBorder:12 Width:1 Color:COLOR_RGB_BLUE];
-        [self.leftTextFieldView addSubview:view];
+        [strongSelf.leftTextFieldView addSubview:view];
         [view jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
             [strongSelf.inputKeyArray removeObjectAtIndex:idx];
-            [strongSelf updateLeftTextViewUI];
+            [self updateLeftTextViewUI];
         }];
         
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, textWidth, 20)];
@@ -185,7 +185,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [[cell rac_signalForSelector:@selector(deleteSearchValueAction:)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.keywordHistory removeObjectAtIndex:indexPath.row];
-        [strongSelf syncSearchHistory];
+        [self syncSearchHistory];
         [tableView reloadData];
     }];
     return cell;

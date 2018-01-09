@@ -402,7 +402,6 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 //Refresh Sure Button Status
 - (void)refreshSureButtonStatus
 {
-     __weak typeof (self) weakSelf = self;
     ///查询批量规格价格
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
         if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
@@ -410,9 +409,8 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         }
         return  @(leftParametr.length && rightParameter.length);
     }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
         if (valid.boolValue) {
-            [strongSelf querySuggestPrice];
+            [self querySuggestPrice];
         }
     }];
     
@@ -427,13 +425,12 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         }
         return  @(leftParametr.length && rightParameter.length && [cartNum integerValue] > 0);
     }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
         if (valid.boolValue) {
-            [strongSelf.lensSureButton setEnabled:YES];
-            strongSelf.lensSureButton.alpha = 1;
+            [self.lensSureButton setEnabled:YES];
+            self.lensSureButton.alpha = 1;
         }else{
-            [strongSelf.lensSureButton setEnabled:NO];
-            strongSelf.lensSureButton.alpha = 0.5;
+            [self.lensSureButton setEnabled:NO];
+            self.lensSureButton.alpha = 0.5;
         }
     }];
 }

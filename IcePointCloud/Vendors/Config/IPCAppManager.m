@@ -193,7 +193,7 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
-         [strongSelf loadCurrentWareHouse];
+         [self loadCurrentWareHouse];
          
          if (complete) {
              complete(nil);
@@ -271,7 +271,11 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     self.storeResult = nil;
     self.wareHouse = nil;
     self.currentWareHouse = nil;
+    self.priceStrategy = nil;
+    self.currentStrategy = nil;
     self.deviceToken = nil;
+    self.authList = nil;
+    self.companyCofig = nil;
 }
 
 

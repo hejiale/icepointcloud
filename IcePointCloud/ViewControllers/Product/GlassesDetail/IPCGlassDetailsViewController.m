@@ -97,10 +97,8 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 {
     if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses || [_glasses filterType] == IPCTopFilterTypeReadingGlass) && _glasses.isBatch)
     {
-        __weak typeof(self) weakSelf = self;
         self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf successAddCartMethod];
+            [self successAddCartMethod];
         }];
         self.parameterView.glasses = _glasses;
         [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -159,18 +157,14 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
         }
         cell.glasses = self.glasses;
         
-        __weak typeof(self) weakSelf = self;
         [[cell rac_signalForSelector:@selector(addCartAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf addToCartAction];
+            [self addToCartAction];
         }];
         [[cell rac_signalForSelector:@selector(tryGlassesAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf tryGlassesMethod];
+            [self tryGlassesMethod];
         }];
         [[cell rac_signalForSelector:@selector(showMoreAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.detailTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [self.detailTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }];
         return cell;
     }else{

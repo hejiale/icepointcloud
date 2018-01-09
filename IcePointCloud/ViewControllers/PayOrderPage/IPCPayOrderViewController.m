@@ -158,10 +158,8 @@
 
 - (IBAction)cancelAction:(id)sender
 {
-    __weak typeof(self) weakSelf = self;
     [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:self Done:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf clearAllPayInfo];
+        [self clearAllPayInfo];
     }];
 }
 

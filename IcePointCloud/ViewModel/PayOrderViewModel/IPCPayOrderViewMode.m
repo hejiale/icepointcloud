@@ -47,61 +47,50 @@
     self.CompleteOutboundBlock = outbound;
     self.ErrorPayBlock = error;
     
-    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager savePrototyOrderWithSuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          if (!isProty) {
-             [strongSelf offertOrderWithOrderId:responseValue[@"id"]];
+             [self offertOrderWithOrderId:responseValue[@"id"]];
          }else{
              [IPCCommonUI showSuccess:@"挂单成功!"];
              
-             if (strongSelf.CompletePrototyBlock) {
-                 strongSelf.CompletePrototyBlock();
+             if (self.CompletePrototyBlock) {
+                 self.CompletePrototyBlock();
              }
          }
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          [IPCCommonUI showError:@"保存草稿订单失败!"];
          
-         if (strongSelf.ErrorPayBlock) {
-             strongSelf.ErrorPayBlock(IPCPayOrderErrorSavePrototy);
+         if (self.ErrorPayBlock) {
+             self.ErrorPayBlock(IPCPayOrderErrorSavePrototy);
          }
      }];
 }
 
 - (void)offertOrderWithOrderId:(NSString *)orderId
 {
-    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager offerOrderWithOrderId:orderId SuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         [strongSelf authOrderWithOrderNum:responseValue[@"orderNumber"]];
+         [self authOrderWithOrderNum:responseValue[@"orderNumber"]];
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         
-         if (strongSelf.ErrorPayBlock) {
-             strongSelf.ErrorPayBlock(IPCPayOrderErrorOfferOrder);
+         if (self.ErrorPayBlock) {
+             self.ErrorPayBlock(IPCPayOrderErrorOfferOrder);
          }
      }];
 }
 
 - (void)authOrderWithOrderNum:(NSString *)orderNum
 {
-    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager authOrderWithOrderNum:orderNum SuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          if ([IPCAppManager sharedManager].companyCofig.autoInvOutAfterAudited) {
-             [strongSelf outboundWithOrderNum:responseValue[@"orderNumber"]];
+             [self outboundWithOrderNum:responseValue[@"orderNumber"]];
          }
-         [strongSelf payCashWithOrderNum:responseValue[@"orderNumber"]];
+         [self payCashWithOrderNum:responseValue[@"orderNumber"]];
          
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         
-         if (strongSelf.ErrorPayBlock) {
-             strongSelf.ErrorPayBlock(IPCPayOrderErrorAuthOrder);
+         if (self.ErrorPayBlock) {
+             self.ErrorPayBlock(IPCPayOrderErrorAuthOrder);
          }
      }];
 }
@@ -114,21 +103,18 @@
 
 - (void)payCashWithOrderNum:(NSString *)orderNum
 {
-    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager payCashOrderWithOrderNumber:orderNum SuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          [IPCCommonUI showSuccess:@"收银成功!"];
          
-         if (strongSelf.CompletePayCashBlock) {
-             strongSelf.CompletePayCashBlock();
+         if (self.CompletePayCashBlock) {
+             self.CompletePayCashBlock();
          }
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          [IPCCommonUI showError:@"订单收银失败!"];
          
-         if (strongSelf.ErrorPayBlock) {
-             strongSelf.ErrorPayBlock(IPCPayOrderErrorPayCashOrder);
+         if (self.ErrorPayBlock) {
+             self.ErrorPayBlock(IPCPayOrderErrorPayCashOrder);
          }
      }];
 }

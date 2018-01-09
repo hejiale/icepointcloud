@@ -89,11 +89,9 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     self.optometryTableView.isBeginLoad = YES;
     [self.optometryTableView reloadData];
 
-    __weak typeof(self) weakSelf = self;
     [self.managerViewModel queryCustomerOptometryList:^() {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.optometryTableView.isBeginLoad = NO;
-        [strongSelf.optometryTableView reloadData];
+        self.optometryTableView.isBeginLoad = NO;
+        [self.optometryTableView reloadData];
     }];
 }
 
@@ -101,11 +99,9 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 {
     [IPCCommonUI showInfo:@"正在设置默认验光单.."];
     
-    __weak typeof(self) weakSelf = self;
     [self.managerViewModel setCurrentOptometry:optometryId Complete:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
         [IPCCommonUI showSuccess:@"设置成功!"];
-        [strongSelf performSelector:@selector(loadOptometryData) withObject:nil afterDelay:1.f];
+        [self performSelector:@selector(loadOptometryData) withObject:nil afterDelay:1.f];
     }];
 }
 

@@ -23,7 +23,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentBottomConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *validationButton;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *insertButtonWidth;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -83,16 +82,13 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (IPCPayOrderCustomInfoView *)infoView
 {
-    __weak typeof(self) weakSelf = self;
     if (!_infoView) {
         _infoView = [[IPCPayOrderCustomInfoView alloc]initWithFrame:CGRectMake(0, 0, self.customInfoContentView.jk_width, self.customInfoContentView.jk_height-60)];
         [[_infoView rac_signalForSelector:@selector(editCustomerInfoAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf showUpdateCustomerView];
+            [self showUpdateCustomerView];
         }];
         [[_infoView rac_signalForSelector:@selector(upgradeMemberAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf showUpgradeMemberView];
+            [self showUpgradeMemberView];
         }];
     }
     return _infoView;
@@ -100,13 +96,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)loadCustomerInfoView
 {
-    if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
-        self.insertButtonWidth.constant = 408;
-        [self.validationButton setHidden:YES];
-    }else{
-        self.insertButtonWidth.constant = 200;
-        [self.validationButton setHidden:NO];
-    }
     self.contentBottomConstraint.constant = 60;
     [self.infoView updateCustomerInfo];
     [self.customInfoContentView addSubview:self.infoView];
@@ -164,7 +153,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     [IPCCommonUI show];
     
-    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
                                                         SuccessBlock:^(id responseValue)
      {
@@ -229,7 +217,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
-        [strongSelf validationMemberRequest:result];
+        [self validationMemberRequest:result];
     }];
     self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
     [self presentViewController:self.cameraNav  animated:YES completion:nil];
@@ -246,7 +234,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                  strongSelf.editCustomerView = nil;
                                  
                                  [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-                                 [strongSelf loadData];
+                                 [self loadData];
                              }];
     [[IPCCommonUI currentView] addSubview:self.editCustomerView];
     [[IPCCommonUI currentView] bringSubviewToFront:self.editCustomerView];
@@ -263,8 +251,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                    [strongSelf.updateCustomerView removeFromSuperview];
                                    strongSelf.updateCustomerView = nil;
                                    
-                                   [strongSelf queryCustomerDetail];
-                                   [strongSelf loadData];
+                                   [self queryCustomerDetail];
+                                   [self loadData];
                                }];
     [[IPCCommonUI currentView] addSubview:self.updateCustomerView];
     [[IPCCommonUI currentView] bringSubviewToFront:self.updateCustomerView];
@@ -280,8 +268,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                   [strongSelf.upgradeMemberView removeFromSuperview];
                                   strongSelf.upgradeMemberView = nil;
                                   [IPCCommonUI showSuccess:@"客户升级会员成功!"];
-                                  [strongSelf performSelector:@selector(queryCustomerDetail) withObject:nil afterDelay:1.f];
-                                  [strongSelf performSelector:@selector(loadData) withObject:nil afterDelay:1.f];
+                                  [self performSelector:@selector(queryCustomerDetail) withObject:nil afterDelay:1.f];
+                                  [self performSelector:@selector(loadData) withObject:nil afterDelay:1.f];
                               }];
     [[IPCCommonUI currentView] addSubview:self.upgradeMemberView];
     [[IPCCommonUI currentView] bringSubviewToFront:self.upgradeMemberView];

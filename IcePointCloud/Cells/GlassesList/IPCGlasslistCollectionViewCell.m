@@ -14,10 +14,8 @@
     [super awakeFromNib];
     // Initialization code
     
-    __weak typeof(self) weakSelf = self;
     [self.productImageView addTapActionWithDelegate:nil Block:^(UIGestureRecognizer *gestureRecoginzer) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf showDetailAction];
+        [self showDetailAction];
     }];
 }
 

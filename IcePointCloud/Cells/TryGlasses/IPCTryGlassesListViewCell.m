@@ -28,11 +28,9 @@
     [super awakeFromNib];
     // Initialization code
     
-    __weak typeof(self) weakSelf = self;
     [self.productImageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if ([strongSelf.delegate respondsToSelector:@selector(tryGlasses:)]) {
-            [strongSelf.delegate tryGlasses:self];
+        if ([self.delegate respondsToSelector:@selector(tryGlasses:)]) {
+            [self.delegate tryGlasses:self];
         }
     }];
 }

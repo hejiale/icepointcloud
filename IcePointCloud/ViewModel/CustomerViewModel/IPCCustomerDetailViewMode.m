@@ -41,7 +41,6 @@
 #pragma mark //Requst Method
 - (void)queryCustomerDetailInfo:(void(^)())completeBlock
 {
-    __weak typeof (self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:self.customerId
                                                         SuccessBlock:^(id responseValue)
      {
