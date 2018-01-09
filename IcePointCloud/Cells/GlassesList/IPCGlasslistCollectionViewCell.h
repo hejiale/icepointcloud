@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryLeft;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeight;
+@property (assign, nonatomic) NSInteger signal;
 
 @property (nonatomic, copy) IPCGlasses *glasses;
 @property (weak, nonatomic) id<GlasslistCollectionViewCellDelegate>delegate;
