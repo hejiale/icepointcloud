@@ -188,13 +188,10 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)loadWareHouse:(void (^)(NSError *))complete
 {
-    __weak typeof(self) weakSelf = self;
     [IPCUserRequestManager queryRepositoryWithSuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         strongSelf.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
-         [strongSelf loadCurrentWareHouse];
-         
+         [IPCAppManager sharedManager].wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
+ 
          if (complete) {
              complete(nil);
          }
@@ -208,8 +205,8 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 - (void)queryPriceStrategy:(void (^)(NSError *))complete
 {
     [IPCGoodsRequestManager queryPriceStrategyWithSuccessBlock:^(id responseValue) {
-        self.priceStrategy = [[IPCPriceStrategyResult alloc]initWithResponseValue:responseValue];
-        self.currentStrategy = self.priceStrategy.strategyArray[0];
+        [IPCAppManager sharedManager].priceStrategy = [[IPCPriceStrategyResult alloc]initWithResponseValue:responseValue];
+        [IPCAppManager sharedManager].currentStrategy = self.priceStrategy.strategyArray[0];
         
         if (complete) {
             complete(nil);
@@ -225,7 +222,7 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 {
     [IPCPayOrderRequestManager getCompanyConfigWithSuccessBlock:^(id responseValue)
      {
-         self.companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
+         [IPCAppManager sharedManager].companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
          
          if (complete) {
              complete(nil);
@@ -239,26 +236,26 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)loadCurrentWareHouse
 {
-    if (self.storeResult.wareHouseId) {
+    if ([IPCAppManager sharedManager].storeResult) {
         IPCWareHouse *  wareHouse = [[IPCWareHouse alloc]init];
-        wareHouse.wareHouseId       = self.storeResult.wareHouseId;
-        wareHouse.wareHouseName = self.storeResult.wareHouseName;
-        self.currentWareHouse = wareHouse;
+        wareHouse.wareHouseId       = [IPCAppManager sharedManager].storeResult.wareHouseId;
+        wareHouse.wareHouseName = [IPCAppManager sharedManager].storeResult.wareHouseName;
+        [IPCAppManager sharedManager].currentWareHouse = wareHouse;
     }else{
-        self.currentWareHouse = self.wareHouse.wareHouseArray[0];
+        [IPCAppManager sharedManager].currentWareHouse = [IPCAppManager sharedManager].wareHouse.wareHouseArray[0];
     }
 }
 
 
 - (void)clearData
 {
-    self.storeResult = nil;
-    self.wareHouse = nil;
-    self.currentWareHouse = nil;
-    self.deviceToken = nil;
-    self.priceStrategy = nil;
-    self.currentStrategy = nil;
-    self.companyCofig = nil;
+    [IPCAppManager sharedManager].storeResult = nil;
+    [IPCAppManager sharedManager].wareHouse = nil;
+    [IPCAppManager sharedManager].currentWareHouse = nil;
+    [IPCAppManager sharedManager].deviceToken = nil;
+    [IPCAppManager sharedManager].priceStrategy = nil;
+    [IPCAppManager sharedManager].currentStrategy = nil;
+    [IPCAppManager sharedManager].companyCofig = nil;
 }
 
 

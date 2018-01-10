@@ -13,8 +13,6 @@
 
 - (AFHTTPResponseSerializer *)responseSerializer
 {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
     AFJSONResponseSerializer *responseSerializer  = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingMutableContainers];
     responseSerializer.acceptableContentTypes      = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/plain", nil];
     responseSerializer.removesKeysWithNullValues = YES;
@@ -53,8 +51,6 @@
                  failure(error, task);
              }
          }];
-        
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };
     
     void(^progressCall)(NSProgress * _Nonnull uploadProgress) = ^(NSProgress * _Nonnull uploadProgress){
@@ -74,7 +70,6 @@
                 failure(error, task);
             }
         }
-        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     };
     
     if (requestType == IPCRequestTypeGET){

@@ -132,7 +132,7 @@ static NSString * const menuIdentifier  = @"PersonMenuCellIdentifier";
                 return cell;
             }
         }else if (indexPath.row == 2) {
-            if ([IPCAppManager sharedManager].storeResult.wareHouseId) {
+            if ([IPCAppManager sharedManager].storeResult) {
                 IPCPersonTitleCell * cell = [tableView dequeueReusableCellWithIdentifier:titleIdentifier];
                 if (!cell) {
                     cell = [[UINib nibWithNibName:@"IPCPersonTitleCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
