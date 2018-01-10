@@ -193,7 +193,6 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.wareHouse = [[IPCWareHouseResult alloc]initWithResponseValue:responseValue];
-         [self loadCurrentWareHouse];
          
          if (complete) {
              complete(nil);

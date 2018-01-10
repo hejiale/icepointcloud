@@ -121,5 +121,7 @@ extern NSString * const kIPCDeviceLoginUUID;
  */
 - (void)getAuths:(void(^)(NSError *))complete;
 
+- (void)loadCurrentWareHouse;
+
 
 @end

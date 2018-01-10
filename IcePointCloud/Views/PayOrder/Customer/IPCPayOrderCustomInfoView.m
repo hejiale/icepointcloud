@@ -106,6 +106,7 @@
         }
     }else{
         [self.memberValiteStatus setHidden:YES];
+        [self.forcedButton setHidden:YES];
     }
 }
 

@@ -123,6 +123,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [[IPCAppManager sharedManager] loadCurrentWareHouse];
         [self showMainRootViewController];
     });
 }

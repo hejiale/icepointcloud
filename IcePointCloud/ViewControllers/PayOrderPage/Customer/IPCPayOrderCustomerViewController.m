@@ -277,6 +277,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                   [strongSelf.upgradeMemberView removeFromSuperview];
                                   strongSelf.upgradeMemberView = nil;
                                   [IPCCommonUI showSuccess:@"客户升级会员成功!"];
+                                  [IPCPayOrderManager sharedManager].isValiateMember = YES;
                                   [self performSelector:@selector(queryCustomerDetail) withObject:nil afterDelay:1.f];
                                   [self performSelector:@selector(loadData) withObject:nil afterDelay:1.f];
                               }];

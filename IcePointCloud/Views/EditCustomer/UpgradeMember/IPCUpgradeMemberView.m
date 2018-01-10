@@ -54,7 +54,7 @@
                                                       self.UpdateBlock();
                                                   }
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:@"升级会员失败!"];
+        [IPCCommonUI showError:error.localizedDescription];
     }];
 }
 
