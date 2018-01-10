@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *memberIdentityLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *customerNameWidth;
 @property (weak, nonatomic) IBOutlet UIButton *upgradeMemberButton;
+@property (weak, nonatomic) IBOutlet UIButton *memberValiteStatus;
+@property (weak, nonatomic) IBOutlet UIButton *forcedButton;
 
 
 @end
@@ -39,11 +41,11 @@
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderCustomInfoView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
+        
+        [self.upgradeMemberButton addBorder:13 Width:1 Color:COLOR_RGB_BLUE];
     }
     return self;
 }
-
-
 
 #pragma mark //Clicked Events
 - (IBAction)editCustomerInfoAction:(id)sender
@@ -56,6 +58,10 @@
     
 }
 
+- (IBAction)forcedMemberAction:(id)sender
+{
+    
+}
 
 - (void)updateCustomerInfo
 {
@@ -81,6 +87,25 @@
         [self.balanceLabel setText:[NSString stringWithFormat:@"%.f",customer.balance]];
     }else{
         [self hideMemberInfoView];
+    }
+
+    if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
+        if ([IPCPayOrderManager sharedManager].isValiateMember){
+            [self.forcedButton setHidden:YES];
+            [self.memberValiteStatus setHidden:NO];
+            [self.memberValiteStatus setSelected:YES];
+        }else{
+            if ([IPCAppManager sharedManager].authList.forceVerifyMember) {
+                [self.forcedButton setHidden:NO];
+                [self.memberValiteStatus setHidden:YES];
+            }else{
+                [self.forcedButton setHidden:YES];
+                [self.memberValiteStatus setHidden:NO];
+                [self.memberValiteStatus setSelected:NO];
+            }
+        }
+    }else{
+        [self.memberValiteStatus setHidden:YES];
     }
 }
 

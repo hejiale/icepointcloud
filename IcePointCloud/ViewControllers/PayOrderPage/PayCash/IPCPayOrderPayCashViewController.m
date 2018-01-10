@@ -181,33 +181,33 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0)return;
     
-    if (![IPCPayOrderManager sharedManager].isValiteMember) {
-        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
-            [IPCCommonUI showError:@"请先验证会员"];
-            return;
-        }
-    }
-    
     if (![IPCPayOrderManager sharedManager].integralTrade && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"积分规则未配置"];
         return;
     }
     
+    if (![IPCPayOrderManager sharedManager].isValiateMember) {
+        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
+            [IPCCommonUI showError:@"请先验证会员"];
+            return;
+        }
+    }
+
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
-        [IPCCommonUI showError:@"客户无可用储值余额"];
-        return;
-    }
-    
-    if (![IPCPayOrderManager sharedManager].isValiteMember) {
+    if (![IPCPayOrderManager sharedManager].isValiateMember) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
+    }
+    
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
+        [IPCCommonUI showError:@"客户无可用储值余额"];
+        return;
     }
     
     if (self.currentIndex != indexPath.row) {

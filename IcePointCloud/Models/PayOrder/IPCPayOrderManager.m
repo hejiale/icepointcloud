@@ -133,17 +133,17 @@
 - (void)resetCustomerDiscount
 {
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
-        if (([IPCAppManager sharedManager].authList.forceVerifyMember || [IPCAppManager sharedManager].companyCofig.isCheckMember || [IPCPayOrderManager sharedManager].isValiteMember) && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel)
+        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
         {
-            [IPCPayOrderManager sharedManager].isValiteMember = YES;
+            [IPCPayOrderManager sharedManager].isValiateMember = YES;
             [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
         }else{
             [IPCPayOrderManager sharedManager].customDiscount = 100;
-            [IPCPayOrderManager sharedManager].isValiteMember = NO;
+            [IPCPayOrderManager sharedManager].isValiateMember = NO;
         }
     }else{
         [IPCPayOrderManager sharedManager].customDiscount = 100;
-        [IPCPayOrderManager sharedManager].isValiteMember = NO;
+        [IPCPayOrderManager sharedManager].isValiateMember = NO;
     }
 }
 
@@ -161,7 +161,7 @@
     [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
     [IPCPayOrderManager sharedManager].isValiateMember = NO;
-    [IPCPayOrderManager sharedManager].isValiteMember = NO;
+    [IPCPayOrderManager sharedManager].isValiateMember = NO;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }
