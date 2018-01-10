@@ -175,17 +175,17 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                            SuccessBlock:^(id responseValue)
     {
         [IPCPayOrderManager sharedManager].isValiateMember = YES;
-        [IPCCommonUI showSuccess:@"验证会员成功!"];
         
         NSString * customerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
         if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
             [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
         }else{
             [self reloadCustomerInfo];
+            [IPCCommonUI showSuccess:@"验证会员成功!"];
         }
     } FailureBlock:^(NSError *error) {
-        if ([IPCAppManager sharedManager].authList.forceVerifyMember) {
-            [IPCCommonUI showError:@"验证会员码失效!"];
+        if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
+            [IPCCommonUI showError:@"会员码失效!"];
         }else{
             [IPCCommonUI showError:@"验证会员失败!"];
         }

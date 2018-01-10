@@ -43,6 +43,7 @@
         [self addSubview:view];
         
         [self.upgradeMemberButton addBorder:13 Width:1 Color:COLOR_RGB_BLUE];
+        [self.forcedButton addBorder:13 Width:1 Color:COLOR_RGB_BLUE];
     }
     return self;
 }
