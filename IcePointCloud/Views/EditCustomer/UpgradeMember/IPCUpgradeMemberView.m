@@ -36,6 +36,10 @@
                 [textFiedld addBottomLine];
             }
         }];
+        
+        if ([IPCCommon checkTelNumber:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerPhone]) {
+            [self.encryptedPhoneTextField setText:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerPhone];
+        }
     }
     return self;
 }
@@ -43,7 +47,6 @@
 #pragma mark //Request Data
 - (void)upgradeMemberRequest
 {
-    
     [IPCCustomerRequestManager upgradeMemberWithCustomerId:[IPCPayOrderManager sharedManager].currentCustomerId
                                               MemberGrowth:[self.growthValueTextField.text doubleValue]
                                                MemberPhone:self.encryptedPhoneTextField.text

@@ -122,7 +122,7 @@
 
 +(BOOL)checkTelNumber:(NSString*)telNumber
 {
-    if (telNumber.length < 11){
+    if (telNumber.length < 11 ){
         return NO;
     }else{
         NSString *CM_NUM = @"^((13[4-9])|(147)|(15[0-2,7-9])|(178)|(18[2-4,7-8]))\\d{8}|(1705)\\d{7}$";
