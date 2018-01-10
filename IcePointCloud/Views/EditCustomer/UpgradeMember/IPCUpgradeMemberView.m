@@ -43,6 +43,7 @@
 #pragma mark //Request Data
 - (void)upgradeMemberRequest
 {
+    
     [IPCCustomerRequestManager upgradeMemberWithCustomerId:[IPCPayOrderManager sharedManager].currentCustomerId
                                               MemberGrowth:[self.growthValueTextField.text doubleValue]
                                                MemberPhone:self.encryptedPhoneTextField.text
