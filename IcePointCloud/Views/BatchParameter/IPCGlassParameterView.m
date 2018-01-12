@@ -212,17 +212,19 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 - (void)reloadUIWithResponseValue:(id)responseValue
 {
     IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
+    
     if (self.cartItem) {
-        self.cartItem.unitPrice = config.suggestPrice;
+        self.cartItem.unitPrice = config.suggestPrice * ([[IPCShoppingCart sharedCart] customDiscount] / 100);
         self.cartItem.prePrice = config.suggestPrice;
     }else{
         self.glasses.updatePrice = config.suggestPrice;
+        
+        if ([self.lensNumLabel.text isEqualToString:@"0"]) {
+            [self.lensNumLabel setText:@"1"];
+        }
     }
     [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f", config.suggestPrice]];
-    
-    if ([self.lensNumLabel.text isEqualToString:@"0"]) {
-        [self.lensNumLabel setText:@"1"];
-    }
+    [self reloadLensCartStatus];
 }
 
 #pragma mark //Set UI
@@ -254,15 +256,13 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     {
         if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem) {
             [self loadOptometryLensView];
-            [self refreshConfigPrice];
         }else{
             [self loadBatchNormalLensView];
         }
     }else if ([_glasses filterType] == IPCTopFilterTypeCustomized){
         [self loadCustomsizedLensView];
     }
-    [self refreshSureButtonStatus];
-    
+
     CGAffineTransform transform = CGAffineTransformScale(self.parameterContentView.transform, 0.3, 0.3);
     [self.parameterContentView setTransform:transform];
 }
@@ -284,6 +284,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
     [self.normalLensImageView setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.normalLensNameLabel setText:self.glasses.glassName];
+    
+    [self refreshConfigPrice];
+    [self refreshSureButtonStatus];
 }
 
 - (void)loadOptometryLensView{
@@ -297,6 +300,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.optometryLensImageView  setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.optometryLensNameLabel setText:self.glasses.glassName];
     [self.optometryLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+    
+    [self refreshConfigPrice];
+    [self refreshSureButtonStatus];
 }
 
 - (void)loadCustomsizedLensView{
@@ -309,6 +315,8 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self. customsizedImageView  setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.customsizedNameLabel setText:self.glasses.glassName];
     [self.customsizedPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+    
+    [self refreshSureButtonStatus];
 }
 
 - (void)showParameterTableView:(UITapGestureRecognizer *)sender InView:(UIView *)contentView
@@ -613,6 +621,8 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 //Refresh Sure Button Status
 - (void)refreshSureButtonStatus
 {
+    if (self.cartItem)return;
+    
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum)
        {
            if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {

@@ -69,4 +69,12 @@
  */
 - (void)updateAllCartUnitPrice;
 
+
+/**
+ 客户折扣
+
+ @return 
+ */
+- (double)customDiscount;
+
 @end
