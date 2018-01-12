@@ -95,12 +95,8 @@
 - (IBAction)addCartAction:(id)sender {
     if (([self.glasses filterType] == IPCTopFilterTypeContactLenses || [self.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeLens) && self.glasses.isBatch)
     {
-        if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry) {
-            [self addBatchGlassesToCart];
-        }else{
-            if ([self.delegate respondsToSelector:@selector(chooseParameter:)]) {
-                [self.delegate chooseParameter:self];
-            }
+        if ([self.delegate respondsToSelector:@selector(chooseParameter:)]) {
+            [self.delegate chooseParameter:self];
         }
     }else{
         [self addCartAnimation];
@@ -149,116 +145,6 @@
 - (void)resetBuyStatus{
     [self.reduceButton setHidden:YES];
     [self.cartNumLabel setHidden:YES];
-}
-
-///按照已选客户验光单 新增镜片
-- (void)addBatchGlassesToCart
-{
-    IPCOptometryMode * optometry = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry;
-    
-    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
-        dispatch_group_t group = dispatch_group_create();
-        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-            [self querySuggestPriceWithSph:optometry.sphLeft.length ? optometry.sphLeft : @"0.00" Cyl:nil Complete:^{
-                dispatch_semaphore_signal(semaphore);
-            }];
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        });
-        
-        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-            [self querySuggestPriceWithSph:optometry.sphRight.length ? optometry.sphRight : @"0.00" Cyl:nil Complete:^{
-                dispatch_semaphore_signal(semaphore);
-            }];
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        });
-        
-        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-            [self reload];
-        });
-    }else{
-        dispatch_group_t group = dispatch_group_create();
-        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-            [self querySuggestPriceWithSph:optometry.sphLeft.length ? optometry.sphLeft : @"0.00" Cyl:optometry.cylLeft.length ? optometry.cylLeft : @"0.00" Complete:^{
-                dispatch_semaphore_signal(semaphore);
-            }];
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        });
-        
-        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-            [self querySuggestPriceWithSph:optometry.sphRight.length ? optometry.sphRight : @"0.00" Cyl:optometry.cylRight.length ? optometry.cylRight : @"0.00" Complete:^{
-                dispatch_semaphore_signal(semaphore);
-            }];
-            dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-        });
-        
-        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-            [self reload];
-        });
-    }
-}
-
-- (void)querySuggestPriceWithSph:(NSString *)sph Cyl:(NSString *)cyl Complete:(void(^)())complete
-{
-    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
-        [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
-                                                            Type:[self.glasses glassType]
-                                                             Sph:sph
-                                                             Cyl:@"0.00"
-                                                    SuccessBlock:^(id responseValue){
-                                                        [self reloadPrice:responseValue];
-                                                        [self addLensToCartWithSph:sph Cyl:nil Complete:complete];
-                                                    } FailureBlock: nil];
-    }else{
-        [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
-                                                            Type:[self.glasses glassType]
-                                                             Sph:sph
-                                                             Cyl:cyl
-                                                    SuccessBlock:^(id responseValue){
-                                                        [self reloadPrice:responseValue];
-                                                        [self addLensToCartWithSph:sph Cyl:cyl Complete:complete];
-                                                    } FailureBlock: nil];
-    }
-}
-
-- (void)reloadPrice:(id)responseValue
-{
-    IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
-    self.glasses.updatePrice = config.suggestPrice;
-}
-
-- (void)addLensToCartWithSph:(NSString *)sph Cyl:(NSString *)cyl Complete:(void(^)())complete
-{
-    if ([_glasses filterType] == IPCTopFilterTypeLens){
-        [[IPCShoppingCart sharedCart] addLensWithGlasses:_glasses
-                                                     Sph:sph
-                                                     Cyl:cyl
-                                                   Count:1];
-    }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:_glasses
-                                                  ReadingDegree:sph
-                                                          Count:1];
-    }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
-        [[IPCShoppingCart sharedCart] addContactLensWithGlasses:_glasses
-                                                            Sph:sph
-                                                            Cyl:cyl
-                                                          Count:1];
-    }
-    if (complete) {
-        complete();
-    }
-}
-
-- (void)reload
-{
-    if ([self.delegate respondsToSelector:@selector(reloadProductList:)]) {
-        [self.delegate reloadProductList:self];
-    }
-    if ([self.delegate respondsToSelector:@selector(addShoppingCartAnimation:)])
-        [self.delegate addShoppingCartAnimation:self];
 }
 
 @end

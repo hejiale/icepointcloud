@@ -13,7 +13,10 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 
 @interface IPCGlassParameterView()<UITableViewDelegate,UITableViewDataSource>
 {
-    BOOL           isLeft;
+    BOOL           isLeft;//判断sph cyl
+    BOOL           isOptometryLeft;//判断左眼 右眼
+    double         leftOptometryPrice;//左眼光度价格
+    double         rightOptometryPrice;//右眼光度价格
     //CustomsizedLens Funcation
     NSMutableArray<NSString *> * customsizedLensFunArray;
 }
@@ -37,6 +40,26 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 @property (weak, nonatomic) IBOutlet UIButton *lensSureButton;
 @property (weak, nonatomic) IBOutlet UIButton *lensCancelButton;
 @property (weak, nonatomic) IBOutlet UIView *normalLensStepperView;
+@property (weak, nonatomic) IBOutlet UIButton *normalSelectButton;
+//Customer Optometry
+@property (strong, nonatomic) IBOutlet UIView *optometryLensView;
+@property (weak, nonatomic) IBOutlet UIImageView *optometryLensImageView;
+@property (weak, nonatomic) IBOutlet UILabel *optometryLensNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *optometryLensPriceLabel;
+@property (weak, nonatomic) IBOutlet UIView *leftOptometryLensView;
+@property (weak, nonatomic) IBOutlet UIView *leftOptometryCylView;
+@property (weak, nonatomic) IBOutlet UIView *rightOptometryLensView;
+@property (weak, nonatomic) IBOutlet UIView *rightOptometryCylView;
+@property (weak, nonatomic) IBOutlet UILabel *leftOptometryTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightOptometryTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftOptometrySphLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightOptometrySphLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftOptometryCylLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightOptometryCylLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftOptometryNumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightOptometryNumLabel;
+@property (weak, nonatomic) IBOutlet UIButton *optometrySureButton;
+@property (weak, nonatomic) IBOutlet UIButton *optometryCancelButton;
 //Parameter TableView
 @property (strong, nonatomic) IBOutlet UITableView *parameterTableView;
 //Customsized Lens
@@ -86,10 +109,16 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     [self.normalLensView addBorder:10 Width:0 Color:nil];
     [self.customsizedParameterView addBorder:10 Width:0 Color:nil];
+    [self.optometryLensView addBorder:10 Width:0 Color:nil];
     [self.leftParameterView addBorder:5 Width:0.5 Color:nil];
     [self.rightParameterView addBorder:5 Width:0.5 Color:nil];
+    [self.leftOptometryLensView addBorder:5 Width:0.5 Color:nil];
+    [self.rightOptometryLensView addBorder:5 Width:0.5 Color:nil];
+    [self.leftOptometryCylView addBorder:5 Width:0.5 Color:nil];
+    [self.rightOptometryCylView addBorder:5 Width:0.5 Color:nil];
     [self.normalLensImageView addBorder:5 Width:0.5 Color:nil];
     [self.customsizedImageView addBorder:5 Width:0.5 Color:nil];
+    [self.optometryLensImageView addBorder:5 Width:0.5 Color:nil];
     [self.refractionView addBorder:5 Width:0.5 Color:nil];
     [self.lensStyleView addBorder:5 Width:0.5 Color:nil];
     [self.lensFunctionView addBorder:5 Width:0.5 Color:nil];
@@ -98,9 +127,11 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     [self.moveHeartView addBorder:5 Width:0.5 Color:nil];
     [self.customsizedMemoView addBorder:5 Width:0.5 Color:nil];
     [self.lensSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
+    [self.optometrySureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.customsizedSureButton addSignleCorner:UIRectCornerBottomLeft Size:10];
     [self.customsizedMemoView setPlaceholder:@"请输入商品备注信息..."];
     [self.lensCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];
+    [self.optometryCancelButton addSignleCorner:UIRectCornerBottomRight Size:10];
     [self.customsizedCancleButton addSignleCorner:UIRectCornerBottomRight Size:10];
 }
 
@@ -146,6 +177,37 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
 }
 
+- (void)queryOptometryLensSuggestPriceWithSph:(NSString *)sph Cyl:(NSString *)cyl IsLeft:(BOOL)isLeft
+{
+    if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
+        [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
+                                                            Type:[self.glasses glassType]
+                                                             Sph:sph
+                                                             Cyl:@"0.00"
+                                                    SuccessBlock:^(id responseValue){
+                                                        IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
+                                                        if (isLeft) {
+                                                            leftOptometryPrice = config.suggestPrice;
+                                                        }else{
+                                                            rightOptometryPrice = config.suggestPrice;
+                                                        }
+                                                    } FailureBlock: nil];
+    }else{
+        [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
+                                                            Type:[self.glasses glassType]
+                                                             Sph:sph
+                                                             Cyl:cyl
+                                                    SuccessBlock:^(id responseValue){
+                                                        IPCBatchGlassesConfig * config = [[IPCBatchGlassesConfig alloc] initWithResponseValue:responseValue];
+                                                        if (isLeft) {
+                                                            leftOptometryPrice = config.suggestPrice;
+                                                        }else{
+                                                            rightOptometryPrice = config.suggestPrice;
+                                                        }
+                                                    } FailureBlock: nil];
+    }
+}
+
 ///Reload UI
 - (void)reloadUIWithResponseValue:(id)responseValue
 {
@@ -168,14 +230,34 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 {
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [self.leftTitleLabel setText:@"度数"];
+        [self.leftOptometryTitleLabel setText:@"度数"];
+        [self.rightOptometryTitleLabel setText:@"度数"];
     }else if([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses){
         [self.leftTitleLabel setText:@"球镜/SPH"];
+        [self.leftOptometryTitleLabel setText:@"球镜/SPH"];
+        [self.rightOptometryTitleLabel setText:@"球镜/SPH"];
         [self.rightParameterView setHidden:NO];
+        [self.rightOptometryCylView setHidden:NO];
+        [self.leftOptometryCylView setHidden:NO];
+    }
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem) {
+        [self.normalSelectButton setHidden:NO];
+        IPCOptometryMode * optometry = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry;
+        
+        [self.leftOptometrySphLabel setText: optometry.sphLeft.length ? optometry.sphLeft : @"0.00"];
+        [self.leftOptometryCylLabel setText:optometry.cylLeft.length ? optometry.cylLeft : @"0.00"];
+        [self.rightOptometrySphLabel setText:optometry.sphRight.length ? optometry.sphRight : @"0.00"];
+        [self.rightOptometryCylLabel setText:optometry.cylRight.length ? optometry.cylRight : @"0.00"];
     }
     
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses)
     {
-        [self loadBatchNormalLensView];
+        if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem) {
+            [self loadOptometryLensView];
+            [self refreshConfigPrice];
+        }else{
+            [self loadBatchNormalLensView];
+        }
     }else if ([_glasses filterType] == IPCTopFilterTypeCustomized){
         [self loadCustomsizedLensView];
     }
@@ -202,6 +284,19 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
     [self.normalLensImageView setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.normalLensNameLabel setText:self.glasses.glassName];
+}
+
+- (void)loadOptometryLensView{
+    [self addSubview:self.optometryLensView];
+    self.parameterContentView = self.optometryLensView;
+    
+    [self.optometryLensView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(self.mas_centerX).with.offset(0);
+        make.centerY.equalTo(self.mas_centerY).with.offset(0);
+    }];
+    [self.optometryLensImageView  setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
+    [self.optometryLensNameLabel setText:self.glasses.glassName];
+    [self.optometryLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
 }
 
 - (void)loadCustomsizedLensView{
@@ -239,7 +334,11 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if (self.cartItem) {
         [self updateCartParameter];
     }else{
-        [self addLensToCart];
+        if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+            [self addOptometryLensToCart];
+        }else{
+            [self addLensToCart];
+        }
     }
     [self removeCover];
 }
@@ -253,6 +352,17 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self.parameterTableView removeFromSuperview];
     }else{
         [self removeCover];
+    }
+}
+
+- (IBAction)selectOptometryAction:(UIButton *)sender
+{
+    if (sender.selected) {
+        [self.optometryLensView removeFromSuperview];
+        [self loadBatchNormalLensView];
+    }else{
+        [self.normalLensView removeFromSuperview];
+        [self loadOptometryLensView];
     }
 }
 
@@ -280,27 +390,72 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
 }
 
+//Optometry Lens Selection Specifications
+- (IBAction)optometryLensParameterSelectAction:(UITapGestureRecognizer *)sender
+{
+    if ( [self.parameterTableView superview]){
+        [self.parameterTableView removeFromSuperview];
+    }else{
+        isLeft =  [[sender view] isEqual:self.leftOptometryLensView] || [[sender view] isEqual:self.rightOptometryLensView] ?  YES:  NO;
+        isOptometryLeft = [[sender view] isEqual:self.leftOptometryLensView] || [[sender view] isEqual:self.leftOptometryCylView]  ? YES:  NO;
+        [self showParameterTableView:sender InView:self.optometryLensView];
+    }
+}
+
+
 #pragma mark //购物车处理
 //Increase or decrease in the shopping cart
-- (IBAction)minusTapAction:(id)sender {
+- (IBAction)minusTapAction:(UIButton *)sender {
     NSInteger cartCount = 0;
-    cartCount = [self.lensNumLabel.text integerValue];
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+        if (sender.tag == 1) {
+            cartCount = [self.leftOptometryNumLabel.text integerValue];
+        }else{
+            cartCount = [self.rightOptometryNumLabel.text integerValue];
+        }
+    }else{
+        cartCount = [self.lensNumLabel.text integerValue];
+    }
     cartCount--;
+    
     if (cartCount <= 0) {
         cartCount = 0;
     }
-    [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
-    
-    [self reloadLensCartStatus];
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+        if (sender.tag == 1) {
+            [self.leftOptometryNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
+        }else{
+            [self.rightOptometryNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
+        }
+    }else{
+        [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
+        [self reloadLensCartStatus];
+    }
 }
 
-- (IBAction)plusTapAction:(id)sender {
+- (IBAction)plusTapAction:(UIButton *)sender {
     NSInteger cartCount = 0;
-    cartCount = [self.lensNumLabel.text integerValue];
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+        if (sender.tag == 1) {
+            cartCount = [self.leftOptometryNumLabel.text integerValue];
+        }else{
+            cartCount = [self.rightOptometryNumLabel.text integerValue];
+        }
+    }else{
+        cartCount = [self.lensNumLabel.text integerValue];
+    }
     cartCount++;
-    [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
     
-    [self reloadLensCartStatus];
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+        if (sender.tag == 1) {
+            [self.leftOptometryNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
+        }else{
+            [self.rightOptometryNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
+        }
+    }else{
+        [self.lensNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
+        [self reloadLensCartStatus];
+    }
 }
 
 #pragma mark //加入购物车
@@ -322,6 +477,49 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                             Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                             Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                           Count:[self.lensNumLabel.text integerValue]];
+    }
+    glass = nil;
+    
+    if (self.CompleteBlock) {
+        self.CompleteBlock();
+    }
+}
+
+- (void)addOptometryLensToCart
+{
+    __block IPCGlasses * glass = self.glasses;
+    
+    if ([_glasses filterType] == IPCTopFilterTypeLens){
+        glass.updatePrice = leftOptometryPrice;
+        [[IPCShoppingCart sharedCart] addLensWithGlasses:glass
+                                                     Sph:self.leftOptometrySphLabel.text.length ? self.leftOptometrySphLabel.text : @"0.00"
+                                                     Cyl:self.leftOptometryCylLabel.text.length ? self.leftOptometryCylLabel.text : @"0.00"
+                                                   Count:[self.leftOptometryNumLabel.text integerValue]];
+        glass.updatePrice = rightOptometryPrice;
+        [[IPCShoppingCart sharedCart] addLensWithGlasses:glass
+                                                     Sph:self.rightOptometrySphLabel.text.length ? self.rightOptometrySphLabel.text : @"0.00"
+                                                     Cyl:self.rightOptometryCylLabel.text.length ? self.rightOptometryCylLabel.text : @"0.00"
+                                                   Count:[self.rightOptometryNumLabel.text integerValue]];
+    }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
+        glass.updatePrice = leftOptometryPrice;
+        [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:glass
+                                                  ReadingDegree:self.leftOptometrySphLabel.text
+                                                          Count:[self.leftOptometryNumLabel.text integerValue]];
+        glass.updatePrice = rightOptometryPrice;
+        [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:glass
+                                                  ReadingDegree:self.rightOptometrySphLabel.text
+                                                          Count:[self.rightOptometryNumLabel.text integerValue]];
+    }else if([_glasses filterType] == IPCTopFilterTypeContactLenses){
+        glass.updatePrice = leftOptometryPrice;
+        [[IPCShoppingCart sharedCart] addContactLensWithGlasses:glass
+                                                            Sph:self.leftOptometrySphLabel.text.length ? self.leftOptometrySphLabel.text : @"0.00"
+                                                            Cyl:self.leftOptometryCylLabel.text.length ? self.leftOptometryCylLabel.text : @"0.00"
+                                                          Count:[self.leftOptometryNumLabel.text integerValue]];
+        glass.updatePrice = rightOptometryPrice;
+        [[IPCShoppingCart sharedCart] addContactLensWithGlasses:glass
+                                                            Sph:self.rightOptometrySphLabel.text.length ? self.rightOptometrySphLabel.text : @"0.00"
+                                                            Cyl:self.rightOptometryCylLabel.text.length ? self.rightOptometryCylLabel.text : @"0.00"
+                                                          Count:[self.rightOptometryNumLabel.text integerValue]];
     }
     glass = nil;
     
@@ -399,40 +597,50 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 }
 
 #pragma mark //Reload Lens Parameter View Status
+- (void)refreshConfigPrice
+{
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview] && !self.cartItem){
+        ///查询已选验光单批量价格
+        [self queryOptometryLensSuggestPriceWithSph:self.leftOptometrySphLabel.text Cyl:self.leftOptometryCylLabel.text IsLeft:YES];
+        [self queryOptometryLensSuggestPriceWithSph:self.rightOptometrySphLabel.text Cyl:self.rightOptometryCylLabel.text IsLeft:NO];
+    }else{
+        ///查询批量规格价格
+        [self querySuggestPrice];
+    }
+}
+
+
 //Refresh Sure Button Status
 - (void)refreshSureButtonStatus
 {
-    ///查询批量规格价格
-    [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter){
-        if ([self.cartItem.glasses filterType] == IPCTopFilterTypeReadingGlass || [self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
-            return @(leftParametr.length);
-        }
-        return  @(leftParametr.length && rightParameter.length);
-    }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-        if (valid.boolValue) {
-            [self querySuggestPrice];
-        }
-    }];
-    
-    if (self.cartItem) {
-        return;
-    }
-   
     [[[RACSignal combineLatest:@[RACObserve(self, self.leftParameterLabel.text),RACObserve(self, self.rightParameterLabel.text),RACObserve(self, self.lensNumLabel.text)] reduce:^id(NSString *leftParametr,NSString *rightParameter,NSString *cartNum)
-    {
-        if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
-            return @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
-        }
-        return  @(leftParametr.length && rightParameter.length && [cartNum integerValue] > 0);
-    }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
-        if (valid.boolValue) {
-            [self.lensSureButton setEnabled:YES];
-            self.lensSureButton.alpha = 1;
-        }else{
-            [self.lensSureButton setEnabled:NO];
-            self.lensSureButton.alpha = 0.5;
-        }
-    }];
+       {
+           if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
+               return @((leftParametr.length || rightParameter.length) && [cartNum integerValue] > 0);
+           }
+           return  @(leftParametr.length && rightParameter.length && [cartNum integerValue] > 0);
+       }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+           if (valid.boolValue) {
+               [self.lensSureButton setEnabled:YES];
+               self.lensSureButton.alpha = 1;
+           }else{
+               [self.lensSureButton setEnabled:NO];
+               self.lensSureButton.alpha = 0.5;
+           }
+       }];
+    
+    [[[RACSignal combineLatest:@[RACObserve(self, self.leftOptometrySphLabel.text),RACObserve(self, self.leftOptometryCylLabel.text),RACObserve(self, self.rightOptometrySphLabel.text),RACObserve(self, self.rightOptometryCylLabel.text),RACObserve(self, self.leftOptometryNumLabel.text),RACObserve(self, self.rightOptometryNumLabel.text)] reduce:^id(NSString *leftSph,NSString *rightSph,NSString *leftCyl,NSString *rightCyl,NSString *leftcartNum,NSString *rightcartNum)
+       {
+           return  @(leftSph.length && rightSph.length && leftCyl.length && rightCyl.length &&[leftcartNum integerValue] > 0 && [rightcartNum integerValue] > 0);
+       }]distinctUntilChanged] subscribeNext:^(NSNumber *valid) {
+           if (valid.boolValue) {
+               [self.optometrySureButton setEnabled:YES];
+               self.optometrySureButton.alpha = 1;
+           }else{
+               [self.optometrySureButton setEnabled:NO];
+               self.optometrySureButton.alpha = 0.5;
+           }
+       }];
 }
 
 //Refresh the lens or relaxing increase or decrease in a shopping cart button state
@@ -487,15 +695,40 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 }
 
 #pragma mark //UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     if ([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses) {
         if (isLeft) {
-            [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].lensSph[indexPath.row]];
+            if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+                if (isOptometryLeft) {
+                    [self.leftOptometrySphLabel setText:[IPCBatchDegreeObject instance].lensSph[indexPath.row]];
+                }else{
+                    [self.rightOptometrySphLabel setText:[IPCBatchDegreeObject instance].lensSph[indexPath.row]];
+                }
+            }else{
+                [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].lensSph[indexPath.row]];
+            }
         }else{
-            [self.rightParameterLabel setText:[IPCBatchDegreeObject instance].lensCyl[indexPath.row]];
+            if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+                if (isOptometryLeft) {
+                    [self.leftOptometryCylLabel setText:[IPCBatchDegreeObject instance].lensCyl[indexPath.row]];
+                }else{
+                    [self.rightOptometryCylLabel setText:[IPCBatchDegreeObject instance].lensCyl[indexPath.row]];
+                }
+            }else{
+                [self.rightParameterLabel setText:[IPCBatchDegreeObject instance].lensCyl[indexPath.row]];
+            }
         }
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
+        if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+            if (isOptometryLeft) {
+                [self.leftOptometrySphLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
+            }else{
+                [self.rightOptometrySphLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
+            }
+        }else{
+            [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
+        }
     }else{
         NSArray * array = [[IPCBatchDegreeObject instance] customsizedParameter][self.customsizedType];
         switch (self.customsizedType) {
@@ -529,6 +762,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses){
         [self reloadLensCartStatus];
+        [self refreshConfigPrice];
     }
     [tableView removeFromSuperview];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];

@@ -54,7 +54,7 @@
         [params setObject:@(self.glassCount) forKey:@"glassCount"];
         [params setObject:@(self.glasses.price) forKey:@"glassPrice"];
         if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
-            [params setObject:@(self.glasses.updatePrice) forKey:@"glassSuggestPrice"];
+            [params setObject:@(self.prePrice) forKey:@"glassSuggestPrice"];
         }else{
             [params setObject:@(self.glasses.price) forKey:@"glassSuggestPrice"];
         }
@@ -63,7 +63,7 @@
     {
         [params setObject:@(self.glassCount) forKey:@"lensCount"];
         [params setObject:@(self.glasses.price) forKey:@"lensPrice"];
-        [params setObject:@(self.glasses.updatePrice) forKey:@"lensSuggestPrice"];
+        [params setObject:@(self.prePrice) forKey:@"lensSuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"lensId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory)
     {
