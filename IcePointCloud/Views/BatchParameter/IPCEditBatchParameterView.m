@@ -94,11 +94,10 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
     if (!cell) {
         cell = [[UINib nibWithNibName:@"IPCEditParameterCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
-    __weak typeof (self) weakSelf = self;
+
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] batchParameterList:self.currentGlass][indexPath.row];
     [cell setCartItem:cartItem Reload:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.parameterTableView reloadData];
+        [self.parameterTableView reloadData];
     }];
     return cell;
 }

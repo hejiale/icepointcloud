@@ -125,10 +125,11 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     [self.signleModeView setFrame:self.matchPanelView.bounds];
     [self.matchPanelView addSubview:self.signleModeView];
     
+    __weak typeof(self) weakSelf = self;
     [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
         IPCCompareItemView * compareView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
         [compareView resetGlassView];
-        [self updateCurrentGlass];
+        [weakSelf updateCurrentGlass];
     }];
 }
 
@@ -146,7 +147,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
             item.originalCenter = item.center;
             item.parentSingleModeView = strongSelf.signleModeView;
             item.tag = idx;
-            item.delegate = self;
+            item.delegate = strongSelf;
             item.matchItem = [IPCTryMatch instance].matchItems[idx];
             [item updateModelPhoto];
             [self.compareBgView addSubview:item];
@@ -177,6 +178,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         __block CGFloat width = (self.recommdBgView.jk_width-20)/3;
         __block CGFloat height = self.recommdBgView.jk_height;
         
+        __weak typeof(self) weakSelf = self;
         [self.glassListViewMode.recommdGlassesList enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
             UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake((width+5)*idx+5, 0, width, height)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -186,7 +188,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
             [imageView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
                 [[IPCTryMatch instance] currentMatchItem].glass = glass;
-                [self reload];
+                [weakSelf reload];
             }];
             [self.recommdScrollView addSubview:imageView];
         }];
@@ -200,11 +202,12 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (IPCCurrentTryGlassesView *)tryGlassesView
 {
     if (!_tryGlassesView) {
+        __weak typeof(self) weakSelf = self;
         _tryGlassesView = [[IPCCurrentTryGlassesView alloc]initWithFrame:CGRectMake(0, 0, self.productTableView.jk_width, (SCREEN_HEIGHT-70)/4)
                                                          ChooseParameter:^{
-                                                             [self showGlassesParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
+                                                             [weakSelf showGlassesParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
                                                          } EditParameter:^{
-                                                             [self editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
+                                                             [weakSelf editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
                                                          } Reload:^{
                                                              [_tryGlassesView reload];
                                                              [self.productTableView reloadData];
@@ -254,8 +257,10 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
+    
+    __weak typeof(self) weakSelf = self;
     [self loadNormalProducts:^{
-        [self reloadTableView];
+        [weakSelf reloadTableView];
     }];
 }
 
@@ -263,8 +268,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     self.glassListViewMode.currentPage += 1;
     
+    __weak typeof(self) weakSelf = self;
     [self loadGlassesListData:^{
-        [self reloadTableView];
+        [weakSelf reloadTableView];
     }];
 }
 
@@ -272,8 +278,10 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (void)beginFilterClass
 {
     self.productTableView.isBeginLoad = YES;
+    
+    __weak typeof(self) weakSelf = self;
     [self loadNormalProducts:^{
-        [self reloadTableView];
+        [weakSelf reloadTableView];
     }];
     [self.productTableView reloadData];
 }
@@ -292,8 +300,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 - (void)queryRecommdGlasses
 {
     if ([[IPCTryMatch instance] currentMatchItem].glass && !self.compareSwitch.isOn) {
+        __weak typeof(self) weakSelf = self;
         [self.glassListViewMode queryRecommdGlasses:[[IPCTryMatch instance] currentMatchItem].glass Complete:^{
-            [self updateRecommdUI];
+            [weakSelf updateRecommdUI];
         }];
     }
 }
@@ -334,8 +343,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     if ([self.coverView superview]) {
         [self removeCover];
     }else{
+        __weak typeof(self) weakSelf = self;
         [self addCoverWithAlpha:0 Complete:^{
-            [self removeCover];
+            [weakSelf removeCover];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.coverView].origin.x-50;
         [self.photoDeleteConfirmView setFrame:CGRectMake(x, self.topOperationBar.jk_bottom, 135, 70)];
@@ -366,8 +376,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     if ([self.coverView superview]) {
         [self removeCover];
     }else{
+        __weak typeof(self) weakSelf = self;
         [self addCoverWithAlpha:0 Complete:^{
-            [self removeCover];
+            [weakSelf removeCover];
         }];
         CGFloat x = [self.topOperationBar convertRect:sender.frame toView:self.coverView].origin.x - self.modelsPicker.jk_width + 75;
         self.modelsPicker.layer.anchorPoint = CGPointMake(0.9, 0);
@@ -421,16 +432,17 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 //Share Tryglass Image
 - (IBAction)onShareBtnTapped:(UIButton *)sender
 {
+    __weak typeof(self) weakSelf = self;
     [self addCoverWithAlpha:0.2 Complete:^{
-        [self removeCover];
+        [weakSelf removeCover];
     }];
     _shareButtonView = [[IPCShareChatView alloc]initWithFrame:CGRectMake(0, 0, self.coverView.jk_width,80 )
                                                          Chat:^{
-                                                             [self onShareToWechat:WXSceneSession];
+                                                             [weakSelf onShareToWechat:WXSceneSession];
                                                          } Line:^{
-                                                             [self onShareToWechat:WXSceneTimeline];
+                                                             [weakSelf onShareToWechat:WXSceneTimeline];
                                                          } Favorite:^{
-                                                             [self onShareToWechat:WXSceneFavorite];
+                                                             [weakSelf onShareToWechat:WXSceneFavorite];
                                                          }];
     [self.coverView addSubview:_shareButtonView];
     [self.coverView bringSubviewToFront:_shareButtonView];
@@ -464,8 +476,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     [self removeCover];
 
+    __weak typeof(self) weakSelf = self;
     IPCDefineCameraBaseComponent * baseComponent = [[IPCDefineCameraBaseComponent alloc]initWithResultImage:^(UIImage *image) {
-        [self outPutCameraImage:image];
+        [weakSelf outPutCameraImage:image];
         self.photoDeleteBtn.enabled = YES;
     }];
     [baseComponent showSampleWithController:self];
@@ -476,8 +489,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     [self removeCover];
 
+    __weak typeof(self) weakSelf = self;
     IPCPhotoPickerBaseComponent * pickVC = [[IPCPhotoPickerBaseComponent alloc]initWithResultImage:^(UIImage *image) {
-        [self outPutCameraImage:image];
+        [weakSelf outPutCameraImage:image];
         self.photoDeleteBtn.enabled = YES;
     }];
     [pickVC showSampleWithController:self];
@@ -492,12 +506,12 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     self.offlineFaceDetector = [[IPCOfflineFaceDetector alloc]init];
     //Face recognition eye position
     self.faceRecognition = [[IPCOnlineFaceDetector alloc]initWithFaceFrame:^(CGPoint position, CGSize size) {
-        [self updateModelFace:position Size:size];
+        [weakSelf updateModelFace:position Size:size];
     } Error:^(IFlySpeechError *error) {
         if (error) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
             [strongSelf.offlineFaceDetector offLineDecectorFace:image Face:^(CGPoint position,CGSize sizer) {
-                [self updateModelFace:position Size:sizer];
+                [weakSelf updateModelFace:position Size:sizer];
             } ErrorBlock:^(NSError *error) {
                 [IPCCommonUI showError:@"未检测到人脸轮廓"];
             }];
@@ -538,15 +552,15 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
+        __weak typeof(self) weakSelf = self;
         [self addCoverWithAlpha:0.2 Complete:^{
-            [self removeCover];
+            [weakSelf removeCover];
         }];
         
-        __weak typeof (self) weakSelf = self;
         [self.glassListViewMode showFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [self removeCover];
-            [self beginFilterClass];
+            [weakSelf removeCover];
+            [weakSelf beginFilterClass];
             [strongSelf.glassListViewMode queryBatchDegree];
         } ReloadUnClose:^{
             [self beginFilterClass];

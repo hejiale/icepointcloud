@@ -13,7 +13,7 @@
 
 @interface IPCExpandShoppingCartCell : UITableViewCell
 
-@property (nonatomic, strong) IPCShoppingCartItem * cartItem;
+@property (nonatomic, copy) IPCShoppingCartItem * cartItem;
 
 @property (strong, nonatomic)  IPCCustomTextField * inputPriceTextField;
 

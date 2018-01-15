@@ -15,6 +15,10 @@
 @property (nonatomic, strong) NSMutableArray<NSString *> * readingDegrees;
 @property (nonatomic, strong) NSMutableArray<NSString *> * lensSph;
 @property (nonatomic, strong) NSMutableArray<NSString *> * lensCyl;
+@property (nonatomic, copy) NSString * currentDegree;
+@property (nonatomic, copy) NSString * currentSph;
+@property (nonatomic, copy) NSString * currentCyl;
+
 
 - (void)batchReadingDegrees:(CGFloat)start
                         End:(CGFloat)end

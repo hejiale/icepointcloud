@@ -43,13 +43,15 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
         [view addLeftLine];
         [view addTopLine];
         
+        __weak typeof(self) weakSelf = self;
         [view.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UIButton class]]) {
+                __strong typeof(weakSelf) strongSelf = weakSelf;
                 UIButton * button = (UIButton *)obj;
                 [button addBottomLine];
                 [button addRightLine];
                 [button setBackgroundImage:[UIImage jk_imageWithColor:[UIColor jk_colorWithHexString:@"#999999"]] forState:UIControlStateHighlighted];
-                [self.buttons addObject:button];
+                [strongSelf.buttons addObject:button];
             }
         }];
         

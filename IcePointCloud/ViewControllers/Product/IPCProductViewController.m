@@ -31,10 +31,11 @@
     //Reset Glasses Data
     [self.glassListViewMode resetData];
     
+    __weak typeof(self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self loadGlassesListData:^{
+        [weakSelf loadGlassesListData:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -42,7 +43,7 @@
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self filterGlassesCategory:^{
+        [weakSelf filterGlassesCategory:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -135,8 +136,9 @@
 //Show Choose Glasses Batch Paremeter View
 - (void)showGlassesParameterView:(IPCGlasses *)glasses
 {
+    __weak typeof(self) weakSelf = self;
     self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
-        [self reload];
+        [weakSelf reload];
     }];
     self.parameterView.glasses = glasses;
     [[UIApplication sharedApplication].keyWindow addSubview:self.parameterView];
@@ -146,8 +148,9 @@
 //Show Edit Batch Paremeter View
 - (void)editGlassesParemeterView:(IPCGlasses *)glasses
 {
+    __weak typeof(self) weakSelf = self;
     self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:glasses Dismiss:^{
-        [self reload];
+        [weakSelf reload];
     }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
     [self.editParameterView show];

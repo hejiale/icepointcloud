@@ -41,11 +41,13 @@
 #pragma mark //Requst Method
 - (void)queryCustomerDetailInfo:(void(^)())completeBlock
 {
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:self.customerId
                                                         SuccessBlock:^(id responseValue)
      {
-         self.detailCustomer       = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-         self.customerOpometry = [IPCOptometryMode mj_objectWithKeyValues:self.detailCustomer.optometrys[0]];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         strongSelf.detailCustomer       = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
+         strongSelf.customerOpometry = [IPCOptometryMode mj_objectWithKeyValues:self.detailCustomer.optometrys[0]];
          
          if (completeBlock)
              completeBlock();

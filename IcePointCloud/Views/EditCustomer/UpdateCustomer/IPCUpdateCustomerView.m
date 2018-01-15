@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *customerTypeTextField;
 @property (weak, nonatomic) IBOutlet UITextField *encryptedPhoneTextField;
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
-@property (weak, nonatomic) IBOutlet UIButton *editPhoneButton;
 @property (weak, nonatomic) IBOutlet UIView *membePhoneView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 
@@ -45,11 +44,10 @@
         [self.editContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UITextField class]]) {
                 UITextField * textFiedld = (UITextField *)obj;
-                if (![textFiedld isEqual:self.encryptedPhoneTextField]) {
-                    [textFiedld addBottomLine];
-                }
+                [textFiedld addBottomLine];
             }
         }];
+        [self.encryptedPhoneTextField addBottomLine];
         
         [self.birthdayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customerTypeTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
@@ -108,6 +106,8 @@
                                                        CustomerId:self.detailCustomer.customerID
                                                      SuccessBlock:^(id responseValue)
          {
+             [self removeFromSuperview];
+             
              if (self.UpdateBlock) {
                  self.UpdateBlock(responseValue[@"id"]);
              }
@@ -116,6 +116,8 @@
              if ([error code] != NSURLErrorCancelled) {
                  [IPCCommonUI showError:@"保存客户信息失败!"];
              }
+             [self removeFromSuperview];
+             
              if (self.UpdateBlock) {
                  self.UpdateBlock(nil);
              }
@@ -125,29 +127,28 @@
 
 - (void)updateMemberPhoneRequest
 {
-    [IPCCustomerRequestManager updateMemberPhoneWithPhone:self.encryptedPhoneTextField.text
-                                               CustomerId:self.detailCustomer.customerID
-                                             SuccessBlock:^(id responseValue)
-    {
-        [self.editPhoneButton setSelected:NO];
-        [self.encryptedPhoneTextField jk_removeBottomBorder];
-        [self.encryptedPhoneTextField setEnabled:NO];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
+    if (![self.encryptedPhoneTextField.text isEqualToString:self.detailCustomer.memberPhone]) {
+        [IPCCustomerRequestManager updateMemberPhoneWithPhone:self.encryptedPhoneTextField.text
+                                                   CustomerId:self.detailCustomer.customerID
+                                                 SuccessBlock:nil
+                                                 FailureBlock:^(NSError *error) {
+             if ([error code] != NSURLErrorCancelled) {
+                 [IPCCommonUI showError:@"修改密保手机号失败!"];
+             }
+         }];
+    }
 }
 
 #pragma mark //Clicked Events
 - (IBAction)cancelAction:(id)sender {
     [self removeFromSuperview];
-    
-    if (self.UpdateBlock) {
-        self.UpdateBlock(nil);
-    }
 }
 
 - (IBAction)completeAction:(id)sender {
     [self saveCustomerRequest];
+    if (self.detailCustomer.memberLevel) {
+        [self updateMemberPhoneRequest];
+    }
 }
 
 - (IBAction)selectMaleAction:(id)sender {
@@ -160,17 +161,6 @@
     [self.femaleButton setSelected:YES];
 }
 
-- (IBAction)editPhoneAction:(UIButton *)sender {
-    
-    if (sender.selected) {
-        [self updateMemberPhoneRequest];
-    }else{
-        [sender setSelected:!sender.selected];
-        [self.encryptedPhoneTextField addBottomLine];
-        [self.encryptedPhoneTextField setEnabled:YES];
-        [self.encryptedPhoneTextField becomeFirstResponder];
-    }
-}
 
 - (void)showDatePickerAction
 {

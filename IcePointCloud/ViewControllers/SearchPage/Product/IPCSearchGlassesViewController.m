@@ -114,7 +114,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
         [strongSelf.leftTextFieldView addSubview:view];
         [view jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
             [strongSelf.inputKeyArray removeObjectAtIndex:idx];
-            [self updateLeftTextViewUI];
+            [weakSelf updateLeftTextViewUI];
         }];
         
         UILabel * label = [[UILabel alloc]initWithFrame:CGRectMake(10, 2, textWidth, 20)];
@@ -185,7 +185,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [[cell rac_signalForSelector:@selector(deleteSearchValueAction:)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.keywordHistory removeObjectAtIndex:indexPath.row];
-        [self syncSearchHistory];
+        [weakSelf syncSearchHistory];
         [tableView reloadData];
     }];
     return cell;
@@ -310,6 +310,11 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
         }
     }];
     return isContain;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 @end

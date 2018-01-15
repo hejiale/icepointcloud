@@ -23,15 +23,17 @@
 {
     self.completeBlock = complete;
 
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerListWithKeyword:self.searchWord ? : @""
                                                        Page:self.currentPage
                                                SuccessBlock:^(id responseValue)
      {
-         [self parseCustomerListData:responseValue];
+         [weakSelf parseCustomerListData:responseValue];
      } FailureBlock:^(NSError *error) {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
          self.status = IPCRefreshError;
-         if (self.completeBlock) {
-             self.completeBlock(error);
+         if (strongSelf.completeBlock) {
+             strongSelf.completeBlock(error);
          }
      }];
 }

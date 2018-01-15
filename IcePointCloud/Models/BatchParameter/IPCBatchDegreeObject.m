@@ -52,10 +52,19 @@
     
     while (startDegree < end) {
         startDegree += step;
-        if (startDegree != 0) {
+        if (startDegree > 0) {
             [self.readingDegrees addObject:[NSString stringWithFormat:@"+%.2f",startDegree]];
+        }else{
+            [self.readingDegrees addObject:[NSString stringWithFormat:@"%.2f",startDegree]];
         }
+        
     }
+    if ([self.readingDegrees containsObject:@"0.00"]) {
+        self.currentDegree = @"0.00";
+    }else{
+        self.currentDegree = self.readingDegrees[0];
+    }
+    
 }
 
 - (void)batchContactlensWithStartSph:(CGFloat)startSph
@@ -72,14 +81,35 @@
     
     while (start < endSph) {
         start += stepSph;
-        [self.lensSph addObject:[NSString stringWithFormat:@"%.2f",start]];
+        if (start > 0) {
+            [self.lensSph addObject:[NSString stringWithFormat:@"+%.2f",start]];
+        }else{
+            [self.lensSph addObject:[NSString stringWithFormat:@"%.2f",start]];
+        }
+        
+    }
+    if (![self.lensSph containsObject:@"0.00"]) {
+        self.currentSph = self.lensSph[0];
+    }else{
+        self.currentSph = @"0.00";
     }
     
     start = startCyl - stepCyl;
     
     while (start < endCyl) {
         start += stepCyl;
-        [self.lensCyl addObject:[NSString stringWithFormat:@"%.2f",start]];
+        if (start > 0) {
+            [self.lensCyl addObject:[NSString stringWithFormat:@"+%.2f",start]];
+        }else{
+            [self.lensCyl addObject:[NSString stringWithFormat:@"%.2f",start]];
+        }
+        
+    }
+    
+    if (![self.lensCyl containsObject:@"0.00"]) {
+        self.currentCyl = self.lensCyl[0];
+    }else{
+        self.currentCyl = @"0.00";
     }
 }
 

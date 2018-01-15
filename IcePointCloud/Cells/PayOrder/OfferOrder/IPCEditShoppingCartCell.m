@@ -41,23 +41,26 @@
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload
 {
     _cartItem = cartItem;
-    self.ReloadBlock = reload;
     
-    [self.checkBtn setSelected:_cartItem.selected];
-    
-    IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
-    if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
-    
-    self.glassesNameLbl.text = _cartItem.glasses.glassName;
-    [self.cartCountLabel setText:[NSString stringWithFormat:@"%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]]];
-    
-    if (self.cartItem.glasses.isBatch || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
-    {
-        [self.glassesNameLbl setText:@"参数设置"];
-        [self.arrowImage setHidden:NO];
-    }else{
-        [self.arrowImage setHidden:YES];
-        [self.glassesNameLbl setText:self.cartItem.glasses.glassName];
+    if (_cartItem) {
+        self.ReloadBlock = reload;
+        
+        [self.checkBtn setSelected:_cartItem.selected];
+        
+        IPCGlassesImage *gi = [_cartItem.glasses imageWithType:IPCGlassesImageTypeThumb];
+        if (gi)[self.glassesImgView setImageWithURL:[NSURL URLWithString:gi.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
+        
+        self.glassesNameLbl.text = _cartItem.glasses.glassName;
+        [self.cartCountLabel setText:[NSString stringWithFormat:@"%ld", (long)[[IPCShoppingCart sharedCart]itemsCount:self.cartItem]]];
+        
+        if (self.cartItem.glasses.isBatch || [self.cartItem.glasses filterType] == IPCTopFilterTypeCustomized)
+        {
+            [self.glassesNameLbl setText:@"参数设置"];
+            [self.arrowImage setHidden:NO];
+        }else{
+            [self.arrowImage setHidden:YES];
+            [self.glassesNameLbl setText:self.cartItem.glasses.glassName];
+        }
     }
 }
 
@@ -67,7 +70,7 @@
         __weak typeof(self) weakSelf = self;
         [IPCCommonUI showAlert:@"温馨提示" Message:@"确认要删除该商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            [[IPCShoppingCart sharedCart] reduceItem:strongSelf.cartItem];
+            [[IPCShoppingCart sharedCart] reduceItem:_cartItem];
             
             if (strongSelf.ReloadBlock) {
                 strongSelf.ReloadBlock();
@@ -98,7 +101,6 @@
         self.ReloadBlock();
     }
 }
-
 
 
 - (IBAction)onChooseParameterAction:(id)sender {

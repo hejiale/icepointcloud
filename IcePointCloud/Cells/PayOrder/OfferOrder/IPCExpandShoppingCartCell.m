@@ -56,6 +56,8 @@
             [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",self.cartItem.batchReadingDegree]];
         }else if (([self.cartItem.glasses filterType] == IPCTopFilterTypeLens || [self.cartItem.glasses filterType] == IPCTopFilterTypeContactLenses) && self.cartItem.glasses.isBatch){
             [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",self.cartItem.batchSph,self.cartItem.bacthCyl]];
+        }else{
+            [self.parameterLabel setText:@""];
         }
 
         [self.inputPriceTextField setText:[NSString stringWithFormat:@"￥%@",[IPCCommon formatNumber: _cartItem.unitPrice Location:3]]];
@@ -89,9 +91,10 @@
     if (priceStr.length) {
         self.cartItem.unitPrice = [priceStr doubleValue];
         self.cartItem.totalUpdatePrice = self.cartItem.unitPrice * self.cartItem.glassCount;
+        
+        [IPCPayOrderManager sharedManager].customDiscount = -1;
+        [[IPCShoppingCart sharedCart] postChangedNotification];
     }
-    
-    [[IPCShoppingCart sharedCart] postChangedNotification];
 
     if ([self.delegate respondsToSelector:@selector(endEditing:)]) {
         [self.delegate endEditing:self];

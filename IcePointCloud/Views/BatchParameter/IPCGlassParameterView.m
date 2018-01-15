@@ -158,13 +158,14 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 #pragma mark //Request Data
 - (void)querySuggestPrice
 {
+    __weak typeof(self) weakSelf = self;
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
                                                              Sph:self.leftParameterLabel.text
                                                              Cyl:@"0.00"
                                                     SuccessBlock:^(id responseValue){
-                                                        [self reloadUIWithResponseValue:responseValue];
+                                                        [weakSelf reloadUIWithResponseValue:responseValue];
                                                     } FailureBlock: nil];
     }else{
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
@@ -172,7 +173,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                              Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                              Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                     SuccessBlock:^(id responseValue){
-                                                        [self reloadUIWithResponseValue:responseValue];
+                                                        [weakSelf reloadUIWithResponseValue:responseValue];
                                                     } FailureBlock: nil];
     }
 }
@@ -234,6 +235,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self.leftTitleLabel setText:@"度数"];
         [self.leftOptometryTitleLabel setText:@"度数"];
         [self.rightOptometryTitleLabel setText:@"度数"];
+        [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].currentDegree];
     }else if([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses){
         [self.leftTitleLabel setText:@"球镜/SPH"];
         [self.leftOptometryTitleLabel setText:@"球镜/SPH"];
@@ -241,8 +243,10 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self.rightParameterView setHidden:NO];
         [self.rightOptometryCylView setHidden:NO];
         [self.leftOptometryCylView setHidden:NO];
+        [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].currentSph];
+        [self.rightParameterLabel setText:[IPCBatchDegreeObject instance].currentCyl];
     }
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem) {
+    if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem && [_glasses filterType] != IPCTopFilterTypeReadingGlass) {
         [self.normalSelectButton setHidden:NO];
         IPCOptometryMode * optometry = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry;
         
@@ -254,7 +258,8 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses)
     {
-        if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem) {
+        if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem && [_glasses filterType] != IPCTopFilterTypeReadingGlass)
+        {
             [self loadOptometryLensView];
         }else{
             [self loadBatchNormalLensView];

@@ -108,14 +108,8 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (IPCEditCustomerView *)editCustomerView
 {
     if (!_editCustomerView) {
-        __weak typeof(self) weakSelf = self;
         _editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
-                                                                  UpdateBlock:^(NSString *customerId)
-                             {
-                                 __strong typeof(weakSelf) strongSelf = weakSelf;
-                                 [strongSelf.editCustomerView removeFromSuperview];
-                                 strongSelf.editCustomerView = nil;
-                             }];
+                                                                  UpdateBlock:nil];
     }
     return _editCustomerView;
 }

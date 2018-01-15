@@ -32,8 +32,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 @property (strong, nonatomic) IBOutlet UIView *orderDetailBgView;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic)  IBOutlet UITableView *orderDetailTableView;
-
-@property (copy,  nonatomic) void(^DismissBlock)();
 @property (nonatomic, copy) NSString * currentOrderNum;
 
 @end
@@ -42,15 +40,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (instancetype)initWithFrame:(CGRect)frame
                      OrderNum:(NSString *)orderNum
-                      Dismiss:(void (^)())dismiss
 {
     self = [super initWithFrame:frame];
     if (self) {
         UIView * view  = [UIView jk_loadInstanceFromNibWithName:@"IPCCustomDetailOrderView" owner:self];
         [view setFrame:frame];
         [self addSubview: view];
-        
-        self.DismissBlock = dismiss;
+
         self.currentOrderNum = orderNum;
     }
     return self;
@@ -69,11 +65,9 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     //Load OrderDetail View
     [self addSubview:self.orderDetailBgView];
     
-    __weak typeof(self) weakSelf = self;
     [self.orderDetailBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        make.left.mas_equalTo(strongSelf.mas_right).offset(-strongSelf.orderDetailBgView.jk_width);
-        make.top.mas_equalTo(strongSelf.mas_top).offset(0);
+        make.left.mas_equalTo(self.mas_right).offset(-self.orderDetailBgView.jk_width);
+        make.top.mas_equalTo(self.mas_top).offset(0);
     }];
     //Load Data
     [self queryOrderDetail];
@@ -83,12 +77,10 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Clicked Events
 - (void)show
 {
-     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        CGRect frame = strongSelf.orderDetailBgView.frame;
-        frame.origin.x -= strongSelf.orderDetailBgView.jk_width;
-        strongSelf.orderDetailBgView.frame = frame;
+        CGRect frame = self.orderDetailBgView.frame;
+        frame.origin.x -= self.orderDetailBgView.jk_width;
+        self.orderDetailBgView.frame = frame;
     } completion:^(BOOL finished) {
         
     }];
@@ -98,18 +90,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
     [[IPCCustomerOrderDetail instance] clearData];
     [[IPCHttpRequest sharedClient] cancelAllRequest];
     
-     __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        CGRect frame = strongSelf.orderDetailBgView.frame;
-        frame.origin.x += strongSelf.orderDetailBgView.jk_width;
-        strongSelf.orderDetailBgView.frame = frame;
+        CGRect frame = self.orderDetailBgView.frame;
+        frame.origin.x += self.orderDetailBgView.jk_width;
+        self.orderDetailBgView.frame = frame;
     } completion:^(BOOL finished) {
         if (finished) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            if (strongSelf.DismissBlock) {
-                strongSelf.DismissBlock();
-            }
+            [self removeFromSuperview];
         }
     }];
 }

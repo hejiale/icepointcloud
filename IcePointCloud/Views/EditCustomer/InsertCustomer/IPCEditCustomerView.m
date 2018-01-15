@@ -77,6 +77,7 @@
                                                        CustomerId:@""
                                                      SuccessBlock:^(id responseValue)
          {
+             [self removeFromSuperview];
              if (self.UpdateBlock) {
                  self.UpdateBlock(responseValue[@"id"]);
              }
@@ -85,6 +86,7 @@
              if ([error code] != NSURLErrorCancelled) {
                  [IPCCommonUI showError:@"保存客户信息失败!"];
              }
+             [self removeFromSuperview];
              if (self.UpdateBlock) {
                  self.UpdateBlock(nil);
              }

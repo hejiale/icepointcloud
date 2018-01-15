@@ -22,10 +22,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Zd-bh-1Tx">
-                    <rect key="frame" x="0.0" y="604" width="200" height="40"/>
+                    <rect key="frame" x="0.0" y="604" width="408" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="2Y6-K7-PdK"/>
+                        <constraint firstAttribute="width" constant="408" id="2Y6-K7-PdK"/>
                         <constraint firstAttribute="height" constant="40" id="Jt0-vJ-2jS"/>
                     </constraints>
                     <state key="normal" title="新 增">
@@ -35,8 +35,8 @@
                         <action selector="insertNewCustomerAction:" destination="-1" eventType="touchUpInside" id="kQq-w9-3OR"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAc-F5-gmN">
-                    <rect key="frame" x="208" y="604" width="200" height="40"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAc-F5-gmN">
+                    <rect key="frame" x="416" y="604" width="200" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Qzo-Ir-YEY"/>

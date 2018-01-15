@@ -70,11 +70,8 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     if (!_editOptometryView) {
         __weak typeof(self) weakSelf = self;
         _editOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:self.view.bounds CustomerId:self.customerId CompleteBlock:^(IPCOptometryMode * optometry){
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.editOptometryView removeFromSuperview];
-            strongSelf.editOptometryView = nil;
             if (optometry) {
-                [strongSelf setDefaultOptometryWithOptometryId:optometry.optometryID];
+                [weakSelf setDefaultOptometryWithOptometryId:optometry.optometryID];
             }
         }];
     }
@@ -99,9 +96,10 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 {
     [IPCCommonUI showInfo:@"正在设置默认验光单.."];
     
+    __weak typeof(self) weakSelf = self;
     [self.managerViewModel setCurrentOptometry:optometryId Complete:^{
         [IPCCommonUI showSuccess:@"设置成功!"];
-        [self performSelector:@selector(loadOptometryData) withObject:nil afterDelay:1.f];
+        [weakSelf performSelector:@selector(loadOptometryData) withObject:nil afterDelay:1.f];
     }];
 }
 

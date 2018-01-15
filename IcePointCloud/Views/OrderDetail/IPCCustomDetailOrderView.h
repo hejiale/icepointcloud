@@ -11,8 +11,7 @@
 @interface IPCCustomDetailOrderView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame
-                     OrderNum:(NSString *)orderNum
-                      Dismiss:(void(^)())dismiss;
+                     OrderNum:(NSString *)orderNum;
 
 - (void)show;
 

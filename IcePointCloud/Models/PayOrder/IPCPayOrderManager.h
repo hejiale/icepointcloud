@@ -30,8 +30,6 @@
 @property (nonatomic, strong, readwrite) IPCEmployee * employee;
 //订单备注
 @property (nonatomic, copy, readwrite) NSString * remark;
-//当前店铺
-@property (nonatomic, strong, readwrite) IPCWareHouse * currentHouse;
 //积分规则
 @property (nonatomic, strong, readwrite) IPCPayCashIntegralTrade * integralTrade;
 //付款记录方式
@@ -41,7 +39,7 @@
 //是否正在添加付款记录
 @property (nonatomic, assign, readwrite) BOOL  isInsertRecord;
 //是否会员验证通过
-@property (nonatomic, assign, readwrite) BOOL  isValiateMember;
+/*@property (nonatomic, assign, readwrite) BOOL  isValiateMember;*/
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额

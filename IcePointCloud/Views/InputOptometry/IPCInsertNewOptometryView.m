@@ -102,11 +102,14 @@
                                                      SuccessBlock:^(id responseValue)
      {
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
+         [self removeFromSuperview];
          
          if (self.CompleteBlock) {
              self.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
+         [self removeFromSuperview];
+         
          if (self.CompleteBlock) {
              self.CompleteBlock(nil);
          }
@@ -115,6 +118,8 @@
 
 #pragma mark //Clicked Events
 - (IBAction)cancelAction:(id)sender {
+    [self removeFromSuperview];
+    
     if (self.CompleteBlock) {
         self.CompleteBlock(nil);
     }
@@ -134,21 +139,23 @@
 
 #pragma mark //Clicked Events
 - (IBAction)rightInputAction:(id)sender {
-    [self.rightSphTextField setText:self.leftSphTextField.text];
-    [self.rightCylTextField setText:self.leftCylTextField.text];
-    [self.rightAddTextField setText:self.leftAddTextField.text];
-    [self.rightAxisTextField setText:self.leftAxisTextField.text];
-    [self.rightDistanceTextField setText:self.leftDistanceTextField.text];
-    [self.rightCorrectionTextField setText:self.leftCorrectionTextField.text];
-}
-
-- (IBAction)leftInputAction:(id)sender {
     [self.leftSphTextField setText:self.rightSphTextField.text];
     [self.leftCylTextField setText:self.rightCylTextField.text];
     [self.leftAddTextField setText:self.rightAddTextField.text];
     [self.leftAxisTextField setText:self.rightAxisTextField.text];
     [self.leftDistanceTextField setText:self.rightDistanceTextField.text];
     [self.leftCorrectionTextField setText:self.rightCorrectionTextField.text];
+    [self updateTotalDistance];
+}
+
+- (IBAction)leftInputAction:(id)sender {
+    [self.rightSphTextField setText:self.leftSphTextField.text];
+    [self.rightCylTextField setText:self.leftCylTextField.text];
+    [self.rightAddTextField setText:self.leftAddTextField.text];
+    [self.rightAxisTextField setText:self.leftAxisTextField.text];
+    [self.rightDistanceTextField setText:self.leftDistanceTextField.text];
+    [self.rightCorrectionTextField setText:self.leftCorrectionTextField.text];
+    [self updateTotalDistance];
 }
 
 - (IBAction)farUseAction:(id)sender {
@@ -166,10 +173,12 @@
 
 - (void)selectEmployeeAction
 {
+    __weak typeof(self) weakSelf = self;
     IPCEmployeListView * listView = [[IPCEmployeListView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
                                                                 DismissBlock:^(IPCEmployee *employee)
                                      {
-                                         self.insertOptometry.employeeId = employee.jobID;
+                                         __strong typeof(weakSelf) strongSelf = weakSelf;
+                                         strongSelf.insertOptometry.employeeId = employee.jobID;
                                          [self.employeeTextField setText:employee.name];
                                      }];
     [[UIApplication sharedApplication].keyWindow addSubview:listView];
@@ -184,7 +193,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField.tag == 12) {
+    if (textField.tag == 11 || textField.tag == 12) {
         [textField resignFirstResponder];
     }else{
         UITextField * nextTextField = (UITextField *)[self viewWithTag:textField.tag+1];
@@ -198,15 +207,15 @@
     NSString * str = [textField.text jk_trimmingWhitespace];
     
     if (str.length > 0) {
-        if (textField.tag != 8 && textField.tag != 9) {
-            if (textField.tag == 4 || textField.tag == 5)
+        if (textField.tag != 4 && textField.tag != 10) {
+            if (textField.tag == 2 || textField.tag == 9)
             {
                 if ([str doubleValue] >= 0 && [str doubleValue] <= 180) {
                     [textField setText:[NSString stringWithFormat:@"%.f",[str doubleValue]]];
                 }else{
                     [textField setText:@""];
                 }
-            }else if (textField.tag == 10 || textField.tag == 11 || textField.tag == 12){
+            }else if (textField.tag == 5 || textField.tag == 11 || textField.tag == 12){
                 [self updateOptometryDistance:textField Text:str];
             }else{
                 if (![str hasPrefix:@"-"]) {
@@ -217,7 +226,7 @@
             }
         }
     }else{
-        if (textField.tag < 4) {
+        if (textField.tag == 0 || textField.tag == 1 || textField.tag == 6 || textField.tag == 7) {
             [textField setText:@"+0.00"];
         }
     }
@@ -236,10 +245,11 @@
 ///修改瞳距
 - (void)updateOptometryDistance:(UITextField *)textField Text:(NSString *)text
 {
-    if (textField.tag == 10 )
+    if (textField.tag == 5 )
     {
         double leftDistance = 0;
-        if (self.insertOptometry.distanceLeft.length) {
+        
+        if (self.leftDistanceTextField.text.length) {
             leftDistance = [[self.leftDistanceTextField.text substringToIndex:self.leftDistanceTextField.text.length - 3] doubleValue];
         }
         
@@ -248,7 +258,8 @@
         
     }else if (textField.tag == 11){
         double rightDistance = 0;
-        if (self.insertOptometry.distanceRight) {
+        
+        if (self.rightDistanceTextField.text.length) {
             rightDistance = [[self.rightDistanceTextField.text substringToIndex:self.rightDistanceTextField.text.length - 3] doubleValue];
         }
         
@@ -262,5 +273,21 @@
     }
 }
 
+- (void)updateTotalDistance
+{
+    double leftDistance = 0;
+    
+    if (self.leftDistanceTextField.text.length) {
+        leftDistance = [[self.leftDistanceTextField.text substringToIndex:self.leftDistanceTextField.text.length - 3] doubleValue];
+    }
+    
+    double rightDistance = 0;
+    
+    if (self.rightDistanceTextField.text.length) {
+        rightDistance = [[self.rightDistanceTextField.text substringToIndex:self.rightDistanceTextField.text.length - 3] doubleValue];
+    }
+    
+    self.comprehensiveDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm", leftDistance + rightDistance];
+}
 
 @end

@@ -60,18 +60,15 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
         return;
     }
     
-    __weak typeof (self) weakSelf = self;
-    
+    __weak typeof(self) weakSelf = self;
     [IPCUserRequestManager userLoginWithUserName:Tusername Password:Tpassword SuccessBlock:^(id responseValue){
         //query login info
         [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
         //storeage account info
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf syncUserAccountHistory:userName];
+        [weakSelf syncUserAccountHistory:userName];
         //query responsity wareHouse
-        [strongSelf loadConfigData];
+        [weakSelf loadConfigData];
     } FailureBlock:^(NSError *error) {
-        __strong typeof (weakSelf) strongSelf = weakSelf;
         if (failed) {
             failed();
         }
@@ -81,10 +78,11 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 
 - (void)loadConfigData
 {
+    __weak typeof(self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self queryEmployeeAccount:^{
+        [weakSelf queryEmployeeAccount:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -92,7 +90,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self loadWareHouse:^{
+        [weakSelf loadWareHouse:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -100,7 +98,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self loadPriceStrategy:^{
+        [weakSelf loadPriceStrategy:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -108,7 +106,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self loadCompanyConfig:^{
+        [weakSelf loadCompanyConfig:^{
             dispatch_semaphore_signal(semaphore);
         }];
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -116,7 +114,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
     
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-        [self getAuth:^{
+        [weakSelf getAuth:^{
             dispatch_semaphore_signal(semaphore);
         }]; 
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
@@ -124,7 +122,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [[IPCAppManager sharedManager] loadCurrentWareHouse];
-        [self showMainRootViewController];
+        [weakSelf showMainRootViewController];
     });
 }
 

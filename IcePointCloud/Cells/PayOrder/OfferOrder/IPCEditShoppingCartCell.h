@@ -12,7 +12,7 @@
 @protocol IPCEditShoppingCartCellDelegate;
 @interface IPCEditShoppingCartCell : UITableViewCell
 
-@property (nonatomic, strong) IPCShoppingCartItem * cartItem;
+@property (nonatomic, copy) IPCShoppingCartItem * cartItem;
 @property (nonatomic, assign) id<IPCEditShoppingCartCellDelegate>delegate;
 
 - (void)setCartItem:(IPCShoppingCartItem *)cartItem Reload:(void(^)())reload;

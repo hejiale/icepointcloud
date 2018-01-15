@@ -31,8 +31,9 @@
 - (IPCPayOrderOptometryInfoView *)showOptometryView
 {
     if (!_showOptometryView) {
+        __weak typeof(self) weakSelf = self;
         _showOptometryView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-20) ChooseBlock:^{
-            [self pushToManagerOptometryViewController];
+            [weakSelf pushToManagerOptometryViewController];
         }];
     }
     return _showOptometryView;
@@ -61,13 +62,9 @@
     __weak typeof(self) weakSelf = self;
     self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds CustomerId:[IPCPayOrderManager sharedManager].currentCustomerId CompleteBlock:^(IPCOptometryMode * optometry)
     {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [strongSelf.insertOptometryView removeFromSuperview];
-        strongSelf.insertOptometryView = nil;
-        
         [IPCPayOrderManager sharedManager].currentOptometryId = optometry.optometryID;
         [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
-        [strongSelf reload];
+        [weakSelf reload];
     }];
     [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
 }

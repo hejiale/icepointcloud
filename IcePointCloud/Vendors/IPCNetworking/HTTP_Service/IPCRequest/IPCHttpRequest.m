@@ -11,7 +11,6 @@
 @interface IPCHttpRequest()
 
 @property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *> * taskArray;
-@property (nonatomic, strong) NSLock * lock;
 
 @end
 
@@ -30,8 +29,6 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.lock = [[NSLock alloc]init];
-        self.lock.name = @"com.request.networking.lock";
     }
     return self;
 }
@@ -101,11 +98,13 @@
 
 - (void)cancelAllRequest
 {
-    [self.lock lock];
-    [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj cancel];
-    }];
-    [self.lock unlock];
+    if (self.taskArray) {
+        [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj) {
+                [obj cancel];
+            }
+        }];
+    }
 }
 
 

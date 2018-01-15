@@ -49,13 +49,9 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     self.detailTableView.estimatedSectionHeaderHeight = 0;
     // Init ViewModel
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    //Request Customer Detail Info
     [self requestCustomerDetailInfo];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -103,30 +99,20 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 {
     [self.view endEditing:YES];
     
-    __weak typeof (self) weakSelf = self;
     self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
-                                                                 OrderNum:orderObject.orderCode
-                                                                  Dismiss:^{
-                                                                      __strong typeof (weakSelf) strongSelf = weakSelf;
-                                                                      [strongSelf.detailOrderView removeFromSuperview];
-                                                                      strongSelf.detailOrderView = nil;
-                                                                  }];
+                                                                 OrderNum:orderObject.orderCode];
     [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
     [self.detailOrderView show];
 }
 
 - (void)loadEditCustomerView
 {
-    __weak typeof (self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     self.editCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds
                                                          DetailCustomer:self.customerViewMode.detailCustomer
                                                             UpdateBlock:^(NSString *customerId)
                              {
-                                 __strong typeof (weakSelf) strongSelf = weakSelf;
-                                 [strongSelf.editCustomerView removeFromSuperview];
-                                 strongSelf.editCustomerView = nil;
-                                 
-                                 [strongSelf requestCustomerDetailInfo];
+                                 [weakSelf requestCustomerDetailInfo];
                              }];
     [self.view addSubview:self.editCustomerView];
     [self.view bringSubviewToFront:self.editCustomerView];
@@ -138,11 +124,10 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
  */
 - (void)loadMoreOrderData{
     [IPCCommonUI show];
-    __weak typeof (self) weakSelf = self;
+
     self.customerViewMode.orderCurrentPage++;
     [self.customerViewMode queryHistotyOrderList:^{
-        __strong typeof (weakSelf) strongSelf = weakSelf;
-        [strongSelf.detailTableView reloadData];
+        [self.detailTableView reloadData];
         [IPCCommonUI hiden];
     }];
 }
@@ -187,8 +172,9 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
                 cell = [[UINib nibWithNibName:@"IPCCustomerDetailTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"客户基本信息" ButtonTitle:nil ButtonImage:@"icon_edit"];
+            __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-                [self loadEditCustomerView];
+                [weakSelf loadEditCustomerView];
             }];
             return cell;
         }else{
@@ -210,8 +196,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
             [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_manager"];
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
-                __strong typeof(weakSelf) strongSelf = weakSelf;
-                [strongSelf pushToManagerOptometryViewController];
+                [weakSelf pushToManagerOptometryViewController];
             }];
             return cell;
         }else{

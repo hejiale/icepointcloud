@@ -53,6 +53,7 @@
                                                   Integral:[self.pointValueTextField.text integerValue]
                                                    Balance:[self.storeValueTextField.text doubleValue]
                                               SuccessBlock:^(id responseValue) {
+                                                  [self removeFromSuperview];
                                                   if (self.UpdateBlock) {
                                                       self.UpdateBlock();
                                                   }

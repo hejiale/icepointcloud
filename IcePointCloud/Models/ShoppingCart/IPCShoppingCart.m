@@ -311,10 +311,11 @@
 {
     if ([IPCPayOrderManager sharedManager].currentCustomerId) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
-            if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
+            return  [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount*10;
+            /*if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
             {
                 return  [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount*10;
-            }
+            }*/
         }
     }
     return 100;

@@ -135,9 +135,10 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         IPCPayRecord * record = [IPCPayOrderManager sharedManager].payTypeRecordArray[indexPath.row];
         cell.payRecord = record;
         
+        __weak typeof(self) weakSelf = self;
         [[cell rac_signalForSelector:@selector(removePayRecordAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             [[IPCPayOrderManager sharedManager].payTypeRecordArray removeObject:record];
-            [self resetPayTypeStatus];
+            [weakSelf resetPayTypeStatus];
         }];
         return cell;
     }
@@ -186,24 +187,24 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         return;
     }
     
-    if (![IPCPayOrderManager sharedManager].isValiateMember) {
+    /*if (![IPCPayOrderManager sharedManager].isValiateMember) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
-    }
+    }*/
 
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
-    if (![IPCPayOrderManager sharedManager].isValiateMember) {
+    /*if (![IPCPayOrderManager sharedManager].isValiateMember) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
-    }
+    }*/
     
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
         [IPCCommonUI showError:@"客户无可用储值余额"];

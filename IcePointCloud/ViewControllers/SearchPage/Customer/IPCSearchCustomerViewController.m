@@ -97,7 +97,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [[cell rac_signalForSelector:@selector(deleteSearchValueAction:)] subscribeNext:^(id x) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.keywordHistory removeObjectAtIndex:indexPath.row];
-        [self syncSearchHistory:nil];
+        [weakSelf syncSearchHistory:nil];
         [tableView reloadData];
     }];
     return cell;

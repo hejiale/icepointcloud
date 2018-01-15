@@ -1,4 +1,4 @@
-//
+ //
 //  IPCPayOrderManager.m
 //  IcePointCloud
 //
@@ -113,7 +113,7 @@
     
     [IPCPayOrderRequestManager queryPayListTypeWithSuccessBlock:^(id responseValue)
     {
-        if ([responseValue isKindOfClass:[NSArray class]]) {
+        if ([responseValue isKindOfClass:[NSArray class]] && responseValue) {
             [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCPayOrderPayType * payType = [IPCPayOrderPayType mj_objectWithKeyValues:obj];
                 [[IPCPayOrderManager sharedManager].payTypeArray addObject:payType];
@@ -133,17 +133,19 @@
 - (void)resetCustomerDiscount
 {
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
-        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
+        [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
+        
+        /*if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
         {
             [IPCPayOrderManager sharedManager].isValiateMember = YES;
             [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
         }else{
             [IPCPayOrderManager sharedManager].customDiscount = 100;
             [IPCPayOrderManager sharedManager].isValiateMember = NO;
-        }
+        }*/
     }else{
         [IPCPayOrderManager sharedManager].customDiscount = 100;
-        [IPCPayOrderManager sharedManager].isValiateMember = NO;
+        /*[IPCPayOrderManager sharedManager].isValiateMember = NO;*/
     }
 }
 
@@ -153,15 +155,13 @@
     [[IPCPayOrderManager sharedManager] clearPayRecord];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
     [IPCPayOrderManager sharedManager].currentOptometryId = nil;
-    [IPCPayOrderManager sharedManager].integralTrade = nil;
-    [IPCPayOrderManager sharedManager].currentHouse = nil;
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;
     [IPCPayOrderManager sharedManager].discountAmount = 0;
     [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
-    [IPCPayOrderManager sharedManager].isValiateMember = NO;
-    [IPCPayOrderManager sharedManager].isValiateMember = NO;
+    /*[IPCPayOrderManager sharedManager].isValiateMember = NO;
+    [IPCPayOrderManager sharedManager].isValiateMember = NO;*/
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }

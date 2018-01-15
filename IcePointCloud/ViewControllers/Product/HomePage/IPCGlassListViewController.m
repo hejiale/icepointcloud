@@ -82,8 +82,10 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
         [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
+    
+    __weak typeof(self) weakSelf = self;
     [self loadNormalProducts:^{
-        [self reload];
+        [weakSelf reload];
     }];
 }
 
@@ -91,8 +93,9 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 {
     self.glassListViewMode.currentPage += 1;
     
+    __weak typeof(self) weakSelf = self;
     [self loadGlassesListData:^{
-        [self reload];
+        [weakSelf reload];
     }];
 }
 
@@ -100,8 +103,10 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 - (void)beginFilterClass
 {
     self.glassListCollectionView.isBeginLoad = YES;
+    
+    __weak typeof(self) weakSelf = self;
     [self loadNormalProducts:^{
-        [self reload];
+        [weakSelf reload];
     }];
     [self.glassListCollectionView reloadData];
 }
@@ -121,18 +126,18 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     if ([self.glassListViewMode.filterView superview]) {
         [self removeCover];
     }else{
+        __weak typeof(self) weakSelf = self;
         [self addCoverWithAlpha:0.2 Complete:^{
-            [self removeCover];
+            [weakSelf removeCover];
         }];
         
-        __weak typeof (self) weakSelf = self;
         [self.glassListViewMode showFilterCategory:self InView:self.coverView ReloadClose:^{
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            [self removeCover];
-            [self beginFilterClass];
+            [weakSelf removeCover];
+            [weakSelf beginFilterClass];
             [strongSelf.glassListViewMode queryBatchDegree];
         } ReloadUnClose:^{
-            [self beginFilterClass];
+            [weakSelf beginFilterClass];
         }];
     }
 }

@@ -222,7 +222,7 @@
                                         <outlet property="delegate" destination="-1" id="CGD-Ej-ciy"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LWS-EW-knu">
+                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LWS-EW-knu">
                                     <rect key="frame" x="120" y="99" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="jtJ-TU-MQq"/>
@@ -235,7 +235,7 @@
                                         <outlet property="delegate" destination="-1" id="s2O-Ie-9fZ"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aqa-fR-86e">
+                                <textField opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aqa-fR-86e">
                                     <rect key="frame" x="120" y="149" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="Ces-3K-Nwa"/>
@@ -248,7 +248,7 @@
                                         <outlet property="delegate" destination="-1" id="HdW-T9-kDO"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-r7-s43">
+                                <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-r7-s43">
                                     <rect key="frame" x="120" y="199" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="G5Q-od-nkW"/>
@@ -261,7 +261,7 @@
                                         <outlet property="delegate" destination="-1" id="Rp7-i2-FRx"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-Lj-BC3">
+                                <textField opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NjJ-Lj-BC3">
                                     <rect key="frame" x="120" y="249" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="0Wi-mv-12F"/>
@@ -274,7 +274,7 @@
                                         <outlet property="delegate" destination="-1" id="wVJ-wI-UYu"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M3I-14-WN5">
+                                <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M3I-14-WN5">
                                     <rect key="frame" x="120" y="299" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="4jO-PE-ebv"/>
@@ -354,7 +354,7 @@
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62h-bv-OSJ">
+                                <textField opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="62h-bv-OSJ">
                                     <rect key="frame" x="612" y="49" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="DIH-dT-yVk"/>
@@ -367,7 +367,7 @@
                                         <outlet property="delegate" destination="-1" id="mRk-oa-nTH"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lWJ-SH-OOu">
+                                <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lWJ-SH-OOu">
                                     <rect key="frame" x="612" y="99" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="6K8-HS-fdg"/>
@@ -380,7 +380,7 @@
                                         <outlet property="delegate" destination="-1" id="tAJ-qh-nlF"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5lj-ZF-zrV">
+                                <textField opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5lj-ZF-zrV">
                                     <rect key="frame" x="612" y="149" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="dpm-wt-tob"/>
@@ -393,7 +393,7 @@
                                         <outlet property="delegate" destination="-1" id="9Pt-2A-iNP"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1aZ-Ai-BWe">
+                                <textField opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1aZ-Ai-BWe">
                                     <rect key="frame" x="612" y="199" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Qcn-7Y-T3T"/>
@@ -406,7 +406,7 @@
                                         <outlet property="delegate" destination="-1" id="KAK-7C-kRB"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SMD-l2-6pX">
+                                <textField opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SMD-l2-6pX">
                                     <rect key="frame" x="612" y="249" width="280" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="280" id="gSS-sL-dip"/>
@@ -427,7 +427,7 @@
                                     </constraints>
                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="c4Z-EL-nQL"/>
                                     </connections>
