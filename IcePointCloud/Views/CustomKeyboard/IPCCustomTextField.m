@@ -36,7 +36,7 @@
 - (UILabel *)textLabel
 {
     if (!_textLabel) {
-        _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 0, self.jk_width-10, self.jk_height)];
+        _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.jk_width-5, self.jk_height)];
         [_textLabel setTextColor:[UIColor redColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
         [_textLabel setFont:[UIFont systemFontOfSize:15]];
