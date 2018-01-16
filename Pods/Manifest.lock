@@ -14,9 +14,9 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - Bugtags (2.4.2):
-    - Bugtags/Core (= 2.4.2)
-  - Bugtags/Core (2.4.2)
+  - Bugtags (3.0.0):
+    - Bugtags/Core (= 3.0.0)
+  - Bugtags/Core (3.0.0)
   - GPUImage (0.1.7)
   - IQKeyboardManager (5.0.6)
   - JKCategories (1.6)
@@ -63,7 +63,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  Bugtags: 03318eafb02ec71e6c65c48c3a2b0ef34ed45eee
+  Bugtags: 2e399c903265b2ea59ad8271931b04d1cf939dfd
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   IQKeyboardManager: 077b7f691dfa9d69db9cff66f2bed68ebfc02d9b
   JKCategories: dab1bd3f7500836c5066d09052b85c12a963db12

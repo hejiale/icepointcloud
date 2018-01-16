@@ -33,7 +33,7 @@
         IPCLanuchViewController *lanuchVC = [[IPCLanuchViewController alloc]initWithNibName:@"IPCLanuchViewController" bundle:nil];
         [self.window setRootViewController:lanuchVC];
     }
-    
+
     [self.window makeKeyAndVisible];
     return YES;
 }

@@ -259,6 +259,7 @@
 		CB4B41591FC2B77D0068E645 /* IPCPayOrderOfferOrderInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4B41581FC2B77D0068E645 /* IPCPayOrderOfferOrderInfoView.xib */; };
 		CB4EF50A1FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4EF5091FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.m */; };
 		CB4EF50C1FCBB48100BD6250 /* IPCPayOrderOptometryInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB4EF50B1FCBB48100BD6250 /* IPCPayOrderOptometryInfoView.xib */; };
+		CB53F6E6200D9DAF00CED670 /* UncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CB53F6E5200D9DAF00CED670 /* UncaughtExceptionHandler.m */; };
 		CB550A4A2003322300365CD1 /* IPCUpgradeMemberView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB550A492003322300365CD1 /* IPCUpgradeMemberView.m */; };
 		CB550A4C2003322F00365CD1 /* IPCUpgradeMemberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB550A4B2003322F00365CD1 /* IPCUpgradeMemberView.xib */; };
 		CB550A5320036DFC00365CD1 /* IPCScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB550A5120036DFC00365CD1 /* IPCScanCodeViewController.m */; };
@@ -743,6 +744,8 @@
 		CB4EF5081FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderOptometryInfoView.h; sourceTree = "<group>"; };
 		CB4EF5091FCBB46D00BD6250 /* IPCPayOrderOptometryInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderOptometryInfoView.m; sourceTree = "<group>"; };
 		CB4EF50B1FCBB48100BD6250 /* IPCPayOrderOptometryInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCPayOrderOptometryInfoView.xib; sourceTree = "<group>"; };
+		CB53F6E4200D9DAF00CED670 /* UncaughtExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UncaughtExceptionHandler.h; sourceTree = "<group>"; };
+		CB53F6E5200D9DAF00CED670 /* UncaughtExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UncaughtExceptionHandler.m; sourceTree = "<group>"; };
 		CB550A482003322300365CD1 /* IPCUpgradeMemberView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCUpgradeMemberView.h; sourceTree = "<group>"; };
 		CB550A492003322300365CD1 /* IPCUpgradeMemberView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCUpgradeMemberView.m; sourceTree = "<group>"; };
 		CB550A4B2003322F00365CD1 /* IPCUpgradeMemberView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCUpgradeMemberView.xib; sourceTree = "<group>"; };
@@ -1862,6 +1865,8 @@
 				CB0F56051F988B05003707F2 /* IPCCommon.m */,
 				CB0F56071F988B05003707F2 /* IPCPlatformService.h */,
 				CB0F56081F988B05003707F2 /* IPCPlatformService.m */,
+				CB53F6E4200D9DAF00CED670 /* UncaughtExceptionHandler.h */,
+				CB53F6E5200D9DAF00CED670 /* UncaughtExceptionHandler.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -2933,6 +2938,7 @@
 				CB32B9601F9F122C002E006C /* IPCShowContentView.m in Sources */,
 				CB0F56451F988B05003707F2 /* UIView+GestureRecognizerBlock.m in Sources */,
 				CB0F56471F988B05003707F2 /* IPCAppManager.m in Sources */,
+				CB53F6E6200D9DAF00CED670 /* UncaughtExceptionHandler.m in Sources */,
 				CB0F564A1F988B05003707F2 /* IPCPlatformService.m in Sources */,
 				CB0F564D1F988B05003707F2 /* IPCStaticImageTextButton.m in Sources */,
 				CB0F54381F988191003707F2 /* IPCSideBarMenuView.m in Sources */,

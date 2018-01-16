@@ -8,6 +8,7 @@
 
 #import "IPCPlatformService.h"
 #import "IPCCheckVersion.h"
+#import "UncaughtExceptionHandler.h"
 
 @implementation IPCPlatformService
 
@@ -30,6 +31,7 @@
     [self enableKeyboard];
     [self bindWechat];
     [self setUpBugtags];
+    [self sendExpection];
 }
 
 /**
@@ -134,6 +136,17 @@
             [IPCCommonUI showError:@"取消分享!"];
         }
     }
+}
+
+- (void)sendExpection
+{
+    InstallUncaughtExceptionHandler().showAlert(NO).logFileHandle(^(NSString *path) {
+        //处理完成后调用（如果不调用则程序不会退出）主要是为了处理耗时操作
+        ExceptionHandlerFinishNotify();
+    }).showExceptionInfor(NO).didClick(^(NSString *ExceptionMessage){
+        //将崩溃信息上传到服务器，该字符串为：异常信息
+        [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason:ExceptionMessage userInfo:nil]];
+    }).message(nil).title(nil);
 }
 
 @end
