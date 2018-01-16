@@ -53,7 +53,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self setNavigationBarStatus:NO];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
+//    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 -(void) viewDidDisappear:(BOOL)animated

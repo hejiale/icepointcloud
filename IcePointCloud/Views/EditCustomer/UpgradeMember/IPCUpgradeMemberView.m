@@ -15,17 +15,19 @@
 @property (weak, nonatomic) IBOutlet UITextField *growthValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
+@property (strong, nonatomic) IPCDetailCustomer * customer;
 @property (copy, nonatomic) void(^UpdateBlock)();
 
 @end
 
 @implementation IPCUpgradeMemberView
 
-- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void (^)())update
+- (instancetype)initWithFrame:(CGRect)frame Customer:(IPCDetailCustomer *)customer  UpdateBlock:(void (^)())update
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.UpdateBlock = update;
+        self.customer = customer;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCUpgradeMemberView" owner:self];
         [self addSubview:view];
@@ -37,8 +39,8 @@
             }
         }];
         
-        if ([IPCCommon checkTelNumber:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerPhone]) {
-            [self.encryptedPhoneTextField setText:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerPhone];
+        if ([IPCCommon checkTelNumber:self.customer.customerPhone]) {
+            [self.encryptedPhoneTextField setText:self.customer.customerPhone];
         }
     }
     return self;
@@ -47,7 +49,7 @@
 #pragma mark //Request Data
 - (void)upgradeMemberRequest
 {
-    [IPCCustomerRequestManager upgradeMemberWithCustomerId:[IPCPayOrderManager sharedManager].currentCustomerId
+    [IPCCustomerRequestManager upgradeMemberWithCustomerId:self.customer.customerID
                                               MemberGrowth:[self.growthValueTextField.text doubleValue]
                                                MemberPhone:self.encryptedPhoneTextField.text
                                                   Integral:[self.pointValueTextField.text integerValue]

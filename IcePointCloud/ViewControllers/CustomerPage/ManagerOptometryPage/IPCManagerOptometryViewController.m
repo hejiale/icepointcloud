@@ -41,7 +41,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     //Cancel Request
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 

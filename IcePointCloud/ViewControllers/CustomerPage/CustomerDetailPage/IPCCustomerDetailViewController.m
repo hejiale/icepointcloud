@@ -16,6 +16,7 @@
 #import "IPCCustomerDetailViewMode.h"
 #import "IPCManagerOptometryViewController.h"
 #import "IPCUpdateCustomerView.h"
+#import "IPCUpgradeMemberView.h"
 
 static NSString * const topTitleIdentifier    = @"UserBaseTopTitleCellIdentifier";
 static NSString * const footLoadIdentifier  = @"UserBaseFootCellIdentifier";
@@ -30,6 +31,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 @property (strong, nonatomic) IPCCustomerDetailViewMode * customerViewMode;
 @property (strong, nonatomic) IPCUpdateCustomerView * editCustomerView;
 @property (strong, nonatomic) IPCCustomDetailOrderView  *  detailOrderView;
+@property (nonatomic, strong) IPCUpgradeMemberView * upgradeMemberView;
 
 @end
 
@@ -61,7 +63,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     //Stop Other Request
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    //    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 #pragma mark //Request Data
@@ -123,13 +125,27 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     [self.view bringSubviewToFront:self.editCustomerView];
 }
 
+- (void)showUpgradeMemberView
+{
+    __weak typeof(self) weakSelf = self;
+    self.upgradeMemberView = [[IPCUpgradeMemberView alloc]initWithFrame:self.view.bounds
+                                                               Customer:self.customerViewMode.detailCustomer
+                                                            UpdateBlock:^
+                              {
+                                  [IPCCommonUI showSuccess:@"客户升级会员成功!"];
+                                  [weakSelf requestCustomerDetailInfo];
+                              }];
+    [self.view addSubview:self.upgradeMemberView];
+    [self.view bringSubviewToFront:self.upgradeMemberView];
+}
+
 #pragma mark //ClickEvents
 /**
  *  Load More
  */
 - (void)loadMoreOrderData{
     [IPCCommonUI show];
-
+    
     self.customerViewMode.orderCurrentPage++;
     [self.customerViewMode queryHistotyOrderList:^{
         [self.detailTableView reloadData];
@@ -190,6 +206,10 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
             if (self.customerViewMode.detailCustomer) {
                 cell.currentCustomer = self.customerViewMode.detailCustomer;
             }
+            __weak typeof(self) weakSelf = self;
+            [[cell rac_signalForSelector:@selector(upgradeMemberAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+                [weakSelf showUpgradeMemberView];
+            }];
             return cell;
         }
     }else if(indexPath.section == 1){

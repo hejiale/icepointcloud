@@ -10,6 +10,6 @@
 
 @interface IPCUpgradeMemberView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void (^)())update;
+- (instancetype)initWithFrame:(CGRect)frame Customer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)())update;
 
 @end
