@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderCustomerViewController">
             <connections>
+                <outlet property="bottomConstraint" destination="glQ-DC-bhF" id="wmX-0l-zlt"/>
                 <outlet property="customInfoContentView" destination="Ma2-kN-X8G" id="RRh-ak-g15"/>
                 <outlet property="customerCollectionView" destination="apX-7c-Lcn" id="KnP-U4-e0L"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -35,32 +36,11 @@
                         <action selector="insertNewCustomerAction:" destination="-1" eventType="touchUpInside" id="kQq-w9-3OR"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAc-F5-gmN">
-                    <rect key="frame" x="416" y="604" width="200" height="40"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Qzo-Ir-YEY"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ben-Bf-8Px"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="cXb-Dj-xOD"/>
-                        <constraint firstAttribute="width" constant="200" id="fDp-XN-hH7"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="扫码验证">
-                        <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <state key="selected">
-                        <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="validationMemberAction:" destination="-1" eventType="touchUpInside" id="Aq1-2x-DAx"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ma2-kN-X8G">
-                    <rect key="frame" x="0.0" y="10" width="408" height="584"/>
+                    <rect key="frame" x="0.0" y="10" width="408" height="634"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeQ-G2-T1X">
-                            <rect key="frame" x="151.5" y="229.5" width="105" height="125"/>
+                            <rect key="frame" x="151.5" y="254.5" width="105" height="125"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="125" id="eie-S3-Po2"/>
                                 <constraint firstAttribute="width" constant="105" id="gAt-hJ-8tt"/>
@@ -128,16 +108,14 @@
             <constraints>
                 <constraint firstItem="apX-7c-Lcn" firstAttribute="top" secondItem="Wk3-3g-g51" secondAttribute="bottom" constant="10" id="2o7-dC-Gtn"/>
                 <constraint firstAttribute="trailing" secondItem="apX-7c-Lcn" secondAttribute="trailing" constant="10" id="7Gg-j0-aXn"/>
-                <constraint firstAttribute="bottom" secondItem="lAc-F5-gmN" secondAttribute="bottom" constant="10" id="9Uo-dM-T0S"/>
                 <constraint firstAttribute="bottom" secondItem="2Zd-bh-1Tx" secondAttribute="bottom" constant="10" id="EbR-hz-1Hh"/>
                 <constraint firstAttribute="trailing" secondItem="Wk3-3g-g51" secondAttribute="trailing" constant="10" id="JQE-Af-cRw"/>
                 <constraint firstAttribute="bottom" secondItem="apX-7c-Lcn" secondAttribute="bottom" constant="10" id="JhH-5A-3Zg"/>
                 <constraint firstItem="2Zd-bh-1Tx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="LBf-to-CUx"/>
                 <constraint firstItem="Ma2-kN-X8G" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WTS-Kk-5MJ"/>
                 <constraint firstItem="Wk3-3g-g51" firstAttribute="leading" secondItem="Ma2-kN-X8G" secondAttribute="trailing" constant="10" id="eCV-A9-Lpf"/>
-                <constraint firstItem="2Zd-bh-1Tx" firstAttribute="top" secondItem="Ma2-kN-X8G" secondAttribute="bottom" constant="10" id="eq9-h3-w3z"/>
+                <constraint firstAttribute="bottom" secondItem="Ma2-kN-X8G" secondAttribute="bottom" constant="10" id="glQ-DC-bhF"/>
                 <constraint firstItem="Wk3-3g-g51" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="qNl-6R-XzD"/>
-                <constraint firstItem="lAc-F5-gmN" firstAttribute="leading" secondItem="2Zd-bh-1Tx" secondAttribute="trailing" constant="8" id="rQP-4c-gr5"/>
                 <constraint firstItem="Ma2-kN-X8G" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="sgd-Fh-g8j"/>
                 <constraint firstItem="apX-7c-Lcn" firstAttribute="leading" secondItem="Ma2-kN-X8G" secondAttribute="trailing" constant="10" id="umI-uN-5FU"/>
             </constraints>

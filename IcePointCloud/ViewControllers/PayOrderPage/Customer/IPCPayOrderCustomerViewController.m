@@ -21,6 +21,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 @property (weak, nonatomic) IBOutlet UIView *customInfoContentView;
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -99,6 +100,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)loadCustomerInfoView
 {
+    self.bottomConstraint.constant = 60;
     [self.infoView updateCustomerInfo];
     [self.customInfoContentView addSubview:self.infoView];
     [self.customInfoContentView bringSubviewToFront:self.infoView];
@@ -222,17 +224,17 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self showEditCustomerView];
 }
 
-- (IBAction)validationMemberAction:(id)sender
+/*- (IBAction)validationMemberAction:(id)sender
 {
-    /*__weak typeof(self) weakSelf = self;
+    __weak typeof(self) weakSelf = self;
     IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
         [self validationMemberRequest:result];
     }];
     self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
-    [self presentViewController:self.cameraNav  animated:YES completion:nil];*/
-}
+    [self presentViewController:self.cameraNav  animated:YES completion:nil];
+}*/
 
 - (void)showEditCustomerView
 {
@@ -349,6 +351,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         if (![IPCPayOrderManager sharedManager].currentCustomerId) {
             [self.infoView removeFromSuperview];
             [self.customerCollectionView reloadData];
+            self.bottomConstraint.constant = 10;
             /*[IPCPayOrderManager sharedManager].isValiateMember = NO;*/
         }else{
             [self queryCustomerDetail];
