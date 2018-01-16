@@ -65,7 +65,7 @@
         }
     }else{
         __weak typeof(self) weakSelf = self;
-        NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request
+        __block NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request
                                                                                   ImageData:imageData
                                                                                   ImageName:imageName
                                                                                 RequestType:requestType
@@ -98,9 +98,9 @@
 
 - (void)cancelAllRequest
 {
-    if (self.taskArray) {
+    if (self.taskArray && [self.taskArray isKindOfClass:[NSArray class]]) {
         [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj) {
+            if (obj && [obj isKindOfClass:[NSURLSessionDataTask class]]) {
                 [obj cancel];
             }
         }];

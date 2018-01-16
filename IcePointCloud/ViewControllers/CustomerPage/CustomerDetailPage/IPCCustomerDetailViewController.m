@@ -49,9 +49,14 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     self.detailTableView.estimatedSectionHeaderHeight = 0;
     // Init ViewModel
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
-    [self requestCustomerDetailInfo];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    //刷新
+    [self requestCustomerDetailInfo];
+}
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
