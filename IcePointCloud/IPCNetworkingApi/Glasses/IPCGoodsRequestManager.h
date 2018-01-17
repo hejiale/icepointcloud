@@ -47,6 +47,7 @@
                               IsTrying:(BOOL)isTrying
                                StoreId:(NSString *)storeId
                             StrategyId:(NSString *)strategyId
+                                  Code:(NSString *)code
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 

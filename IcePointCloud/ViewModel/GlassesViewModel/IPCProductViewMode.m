@@ -109,6 +109,7 @@
                                                   IsTrying:isTrying
                                                    StoreId:storeId
                                                 StrategyId: [IPCAppManager sharedManager].currentStrategy.strategyId ? : @""
+                                                      Code:@""
                                               SuccessBlock:^(id responseValue){
                                                   [self parseNormalGlassesData:responseValue];
                                               } FailureBlock:^(NSError *error) {

@@ -36,6 +36,7 @@
                               IsTrying:(BOOL)isTrying
                                StoreId:(NSString *)storeId
                             StrategyId:(NSString *)strategyId
+                                  Code:(NSString *)code
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -51,7 +52,8 @@
                              @"endPrice":endPrice > 0 ? @(endPrice) : @"",
                              @"isTryProduct": isTrying ? @"true":@"false",
                              @"storeId":storeId ? : @"",
-                             @"priceStrategyId" : strategyId
+                             @"priceStrategyId" : strategyId,
+                             @"code": code
                              };
     [self postRequest:@[searchType,params] RequestMethod:GoodsRequest_GoodsList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
