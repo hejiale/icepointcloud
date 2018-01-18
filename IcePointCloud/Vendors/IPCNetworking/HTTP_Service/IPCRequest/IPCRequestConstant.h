@@ -19,6 +19,8 @@
 #define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
 #endif
 #define   IPC_ProductAPI_Port       @"/gateway/api/jsonrpc.jsp"
+///未验证会员登录返回错误
+#define   IPAD_NOT_ACTIVATE      30196
 
 /**
  *  Network Request Methods
