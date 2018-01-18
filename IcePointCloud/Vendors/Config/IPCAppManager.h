@@ -123,5 +123,7 @@ extern NSString * const kIPCDeviceLoginUUID;
 
 - (void)loadCurrentWareHouse;
 
+- (void)pushToRootViewController;
+
 
 @end

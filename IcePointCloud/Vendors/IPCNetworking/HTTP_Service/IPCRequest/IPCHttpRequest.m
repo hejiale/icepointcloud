@@ -98,12 +98,14 @@
 
 - (void)cancelAllRequest
 {
-    if (self.taskArray && [self.taskArray isKindOfClass:[NSArray class]]) {
-        [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj && [obj isKindOfClass:[NSURLSessionDataTask class]]) {
-                [obj cancel];
-            }
-        }];
+    @synchronized(self) {
+        if (self.taskArray && [self.taskArray isKindOfClass:[NSArray class]]) {
+            [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (obj && [obj isKindOfClass:[NSURLSessionDataTask class]]) {
+                    [obj cancel];
+                }
+            }];
+        }
     }
 }
 

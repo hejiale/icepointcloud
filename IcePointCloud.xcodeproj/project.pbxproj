@@ -293,6 +293,8 @@
 		CBB64B301FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = CBB64B2F1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m */; };
 		CBBB4CA91FB15982008D31F5 /* IPCLoginViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */; };
 		CBC0054E1FE7634F00EAFF6D /* IPCPayOrderCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC0054C1FE7634E00EAFF6D /* IPCPayOrderCustomerViewController.m */; };
+		CBDD736020102E1C00089D24 /* IPCLoginActivationCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBDD735E20102E1C00089D24 /* IPCLoginActivationCodeViewController.m */; };
+		CBDD736120102E1C00089D24 /* IPCLoginActivationCodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CBDD735F20102E1C00089D24 /* IPCLoginActivationCodeViewController.xib */; };
 		CBF0F6001FC69D3400647A42 /* IPCPayCashIntegralTrade.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF0F5FF1FC69D3400647A42 /* IPCPayCashIntegralTrade.m */; };
 		CBF0F6031FC6BCA900647A42 /* IPCEmployee.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF0F6021FC6BCA900647A42 /* IPCEmployee.m */; };
 		CBF0FED81FEA5FC100F2E13F /* IPCSearchCustomerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBF0FED61FEA5FC100F2E13F /* IPCSearchCustomerViewController.m */; };
@@ -809,6 +811,9 @@
 		CBBB4CA81FB15982008D31F5 /* IPCLoginViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCLoginViewModel.m; sourceTree = "<group>"; };
 		CBC0054C1FE7634E00EAFF6D /* IPCPayOrderCustomerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderCustomerViewController.m; sourceTree = "<group>"; };
 		CBC0054D1FE7634F00EAFF6D /* IPCPayOrderCustomerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderCustomerViewController.h; sourceTree = "<group>"; };
+		CBDD735D20102E1C00089D24 /* IPCLoginActivationCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCLoginActivationCodeViewController.h; sourceTree = "<group>"; };
+		CBDD735E20102E1C00089D24 /* IPCLoginActivationCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCLoginActivationCodeViewController.m; sourceTree = "<group>"; };
+		CBDD735F20102E1C00089D24 /* IPCLoginActivationCodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCLoginActivationCodeViewController.xib; sourceTree = "<group>"; };
 		CBF0F5FE1FC69D3400647A42 /* IPCPayCashIntegralTrade.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayCashIntegralTrade.h; sourceTree = "<group>"; };
 		CBF0F5FF1FC69D3400647A42 /* IPCPayCashIntegralTrade.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayCashIntegralTrade.m; sourceTree = "<group>"; };
 		CBF0F6011FC6BCA900647A42 /* IPCEmployee.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCEmployee.h; sourceTree = "<group>"; };
@@ -1155,6 +1160,9 @@
 				CB0F535D1F9876AF003707F2 /* IPCLoginViewController.h */,
 				CB0F535E1F9876AF003707F2 /* IPCLoginViewController.m */,
 				CB0F535F1F9876AF003707F2 /* IPCLoginViewController.xib */,
+				CBDD735D20102E1C00089D24 /* IPCLoginActivationCodeViewController.h */,
+				CBDD735E20102E1C00089D24 /* IPCLoginActivationCodeViewController.m */,
+				CBDD735F20102E1C00089D24 /* IPCLoginActivationCodeViewController.xib */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -2624,6 +2632,7 @@
 				CB0F56571F988B05003707F2 /* IPCDatePickViewController.xib in Resources */,
 				CB0F54E71F98819C003707F2 /* IPCEditParameterCell.xib in Resources */,
 				CB0F54281F988191003707F2 /* IPCCustomDetailOrderView.xib in Resources */,
+				CBDD736120102E1C00089D24 /* IPCLoginActivationCodeViewController.xib in Resources */,
 				CBF0FED91FEA5FC100F2E13F /* IPCSearchCustomerViewController.xib in Resources */,
 				CB0F55351F98819C003707F2 /* IPCProductDetailTableViewCell.xib in Resources */,
 				CB0F54391F988191003707F2 /* IPCSideBarMenuView.xib in Resources */,
@@ -2939,6 +2948,7 @@
 				CB0F56451F988B05003707F2 /* UIView+GestureRecognizerBlock.m in Sources */,
 				CB0F56471F988B05003707F2 /* IPCAppManager.m in Sources */,
 				CB53F6E6200D9DAF00CED670 /* UncaughtExceptionHandler.m in Sources */,
+				CBDD736020102E1C00089D24 /* IPCLoginActivationCodeViewController.m in Sources */,
 				CB0F564A1F988B05003707F2 /* IPCPlatformService.m in Sources */,
 				CB0F564D1F988B05003707F2 /* IPCStaticImageTextButton.m in Sources */,
 				CB0F54381F988191003707F2 /* IPCSideBarMenuView.m in Sources */,

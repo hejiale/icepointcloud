@@ -7,7 +7,6 @@
 //
 
 #import "IPCAppDelegate.h"
-#import "IPCLoginViewController.h"
 #import "IPCLanuchViewController.h"
 #import "IPCPlatformService.h"
 
@@ -27,8 +26,7 @@
      *Initialize the RootController
      */
     if ([NSUserDefaults jk_boolForKey:IPCFirstLanuchKey]) {
-        IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
-        [self.window setRootViewController:loginVC];
+        [[IPCAppManager sharedManager] pushToRootViewController];
     }else{
         IPCLanuchViewController *lanuchVC = [[IPCLanuchViewController alloc]initWithNibName:@"IPCLanuchViewController" bundle:nil];
         [self.window setRootViewController:lanuchVC];

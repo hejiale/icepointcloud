@@ -8,7 +8,7 @@
 
 #import "IPCLanuchViewController.h"
 #import "IPCGuideConstant.h"
-#import "IPCLoginViewController.h"
+#import "IPCLoginActivationCodeViewController.h"
 
 @interface IPCLanuchViewController ()
 
@@ -38,7 +38,7 @@
                                                                    self.view.transform = CGAffineTransformScale(self.view.transform, 1.5, 1.5);
                                                                    self.view.alpha = 0;
                                                                }completion:^(BOOL finished) {
-                                                                   IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
+                                                                   IPCLoginActivationCodeViewController *loginVC = [[IPCLoginActivationCodeViewController alloc]initWithNibName:@"IPCLoginActivationCodeViewController" bundle:nil];
                                                                    [[UIApplication sharedApplication].keyWindow setRootViewController:loginVC];
                                                                }];
                                                                

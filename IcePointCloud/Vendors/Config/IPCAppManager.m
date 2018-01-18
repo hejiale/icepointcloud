@@ -8,6 +8,7 @@
 
 #import "IPCAppManager.h"
 #import "IPCLoginViewController.h"
+#import "IPCLoginActivationCodeViewController.h"
 
 NSString *const IPCFirstLanuchKey                               = @"IPFirstLanucKey";
 NSString* const IPCUserNameKey                                 = @"UserNameKey";
@@ -261,6 +262,17 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
         self.currentWareHouse = wareHouse;
     }else{
         self.currentWareHouse = self.wareHouse.wareHouseArray[0];
+    }
+}
+
+- (void)pushToRootViewController
+{
+    if ([[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]) {
+        IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
+        [[[UIApplication sharedApplication] delegate].window  setRootViewController:loginVC];
+    }else{
+        IPCLoginActivationCodeViewController * activationVC = [[IPCLoginActivationCodeViewController alloc]initWithNibName:@"IPCLoginActivationCodeViewController" bundle:nil];
+        [[[UIApplication sharedApplication] delegate].window  setRootViewController:activationVC];
     }
 }
 
