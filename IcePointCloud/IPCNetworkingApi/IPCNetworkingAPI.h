@@ -61,6 +61,8 @@
 #define UserRequest_UpdatePassword                   @"bizadmin.updateUserPassword"
 #define UserRequest_WareHouseList                      @"bizadmin.listStoreOrRepositoryByCompanyId"
 #define UserRequest_EmployeeAccount                  @"employeeadmin.getEmployeeObjectFromAccount"
+#define UserRequest_VerifyActivationCode             @"padMessageAdmin.activateIPAD"
+#define UserRequest_GetAppMessage                    @"padMessageAdmin.listPadMessages"
 
 
 #endif /* IPCNetworkingAPI_h */

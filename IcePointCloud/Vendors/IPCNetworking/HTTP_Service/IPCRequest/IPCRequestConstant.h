@@ -21,6 +21,9 @@
 #define   IPC_ProductAPI_Port       @"/gateway/api/jsonrpc.jsp"
 ///未验证会员登录返回错误
 #define   IPAD_NOT_ACTIVATE      30196
+///假帐号登录验证激活码登录
+#define   LOGINACCOUNT             @"wwwwww"
+#define   PASSWORD                     @"123456"
 
 /**
  *  Network Request Methods

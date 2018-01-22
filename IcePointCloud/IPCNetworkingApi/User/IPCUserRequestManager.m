@@ -18,7 +18,9 @@
     NSDictionary *params = @{@"account"     : userName,
                              @"password"  : password,
                              @"deviceType": @"IOS",
-                             @"deviceID"    : [[[UIDevice currentDevice] identifierForVendor] UUIDString]};
+                             @"deviceID"    : [[[UIDevice currentDevice] identifierForVendor] UUIDString],
+                             @"isPadLogin" : @"true"
+                             };
     [self  postRequest:params RequestMethod:UserRequest_Login CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
@@ -50,5 +52,15 @@
     [self postRequest:nil RequestMethod:UserRequest_EmployeeAccount CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)verifyActivationCode:(NSString *)code SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:@{@"verificationCode":code, @"padUUID": @""} RequestMethod:UserRequest_VerifyActivationCode CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)getAppMessageWithSuccessBlock:(void (^)(id responseValue))success
+                         FailureBlock:(void (^)(NSError * error))failure
+{
+    [self postRequest:nil RequestMethod:UserRequest_GetAppMessage CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
 
 @end

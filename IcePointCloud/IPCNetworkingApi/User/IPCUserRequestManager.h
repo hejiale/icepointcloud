@@ -66,4 +66,26 @@
 + (void)queryEmployeeAccountWithSuccessBlock:(void (^)(id responseValue))success
                                 FailureBlock:(void (^)(NSError * error))failure;
 
+
+/**
+ Verify the activation code
+
+ @param code
+ @param success
+ @param failure 
+ */
++ (void)verifyActivationCode:(NSString *)code
+                SuccessBlock:(void (^)(id responseValue))success
+                FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ Get App Message
+
+ @param success
+ @param failure 
+ */
++ (void)getAppMessageWithSuccessBlock:(void (^)(id responseValue))success
+                         FailureBlock:(void (^)(NSError * error))failure;
+
 @end
