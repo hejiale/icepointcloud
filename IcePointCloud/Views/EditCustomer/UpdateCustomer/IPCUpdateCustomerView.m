@@ -114,7 +114,7 @@
              [IPCCommonUI showSuccess:@"保存客户信息成功!"];
          } FailureBlock:^(NSError *error) {
              if ([error code] != NSURLErrorCancelled) {
-                 [IPCCommonUI showError:@"保存客户信息失败!"];
+                 [IPCCommonUI showError:error.domain];
              }
              [self removeFromSuperview];
              
@@ -133,7 +133,7 @@
                                                  SuccessBlock:nil
                                                  FailureBlock:^(NSError *error) {
              if ([error code] != NSURLErrorCancelled) {
-                 [IPCCommonUI showError:@"修改密保手机号失败!"];
+                 [IPCCommonUI showError:error.domain];
              }
          }];
     }

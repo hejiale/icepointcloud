@@ -94,9 +94,7 @@
 
 #pragma mark //Request Methods
 - (void)offerOrder:(BOOL)isPrototy
-{
-    [IPCCommonUI show];
-    
+{    
     if (isPrototy) {
         [self.nextStepButton jk_showIndicator];
     }else{
@@ -121,14 +119,12 @@
     [self.nextStepButton jk_hideIndicator];
     [self.saveButton jk_hideIndicator];
     [self clearAllPayInfo];
-    [IPCCommonUI hiden];
 }
 
 - (void)failPay
 {
     [self.nextStepButton jk_hideIndicator];
     [self.saveButton jk_hideIndicator];
-    [IPCCommonUI hiden];
 }
 
 #pragma mark //Clicked Events

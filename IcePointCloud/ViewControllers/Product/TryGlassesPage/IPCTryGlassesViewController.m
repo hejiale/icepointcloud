@@ -254,7 +254,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
+//        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     
@@ -584,7 +584,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
 - (void)switchToCompareMode
 {
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
+//    [[IPCHttpRequest sharedClient] cancelAllRequest];
     [self updateCompareBorder];
     [self setRecommdStatus:YES];
     

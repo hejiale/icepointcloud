@@ -55,7 +55,7 @@
          if (completeBlock)
              completeBlock();
          if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"查询客户信息失败!"];
+             [IPCCommonUI showError:error.domain];
          }
      }];
 }
@@ -81,7 +81,7 @@
                                                     if (completeBlock)
                                                         completeBlock();
                                                     if ([error code] != NSURLErrorCancelled) {
-                                                        [IPCCommonUI showError:@"查询客户历史订单信息失败!"];
+                                                        [IPCCommonUI showError:error.domain];
                                                     }
                                                 }];
 }

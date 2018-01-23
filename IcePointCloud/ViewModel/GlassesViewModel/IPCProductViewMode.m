@@ -112,6 +112,8 @@
                                               SuccessBlock:^(id responseValue){
                                                   [self parseNormalGlassesData:responseValue];
                                               } FailureBlock:^(NSError *error) {
+                                                  [IPCCommonUI showError:error.domain];
+                                                  
                                                   self.status = IPCRefreshError;
                                                   if (self.completeBlock) {
                                                       self.completeBlock(error);
@@ -136,6 +138,8 @@
                                           if (self.filterSuccessBlock)
                                               self.filterSuccessBlock(nil);
                                       } FailureBlock:^(NSError *error) {
+                                          [IPCCommonUI showError:error.domain];
+                                          
                                           if (self.filterSuccessBlock)
                                               self.filterSuccessBlock(error);
                                       }];
@@ -156,6 +160,7 @@
              }
          }
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
      }];
 }
 
@@ -177,6 +182,7 @@
              }
          }
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
      }];
 }
 
@@ -194,6 +200,8 @@
              complete();
          }
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
+         
          if (complete) {
              complete();
          }

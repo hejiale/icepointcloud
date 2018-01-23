@@ -166,7 +166,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                              Cyl:@"0.00"
                                                     SuccessBlock:^(id responseValue){
                                                         [weakSelf reloadUIWithResponseValue:responseValue];
-                                                    } FailureBlock: nil];
+                                                    } FailureBlock:^(NSError *error) {
+                                                        [IPCCommonUI showError:error.domain];
+                                                    }];
     }else{
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
@@ -174,7 +176,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                              Cyl:self.rightParameterLabel.text.length ? self.rightParameterLabel.text : @"0.00"
                                                     SuccessBlock:^(id responseValue){
                                                         [weakSelf reloadUIWithResponseValue:responseValue];
-                                                    } FailureBlock: nil];
+                                                    } FailureBlock:^(NSError *error) {
+                                                        [IPCCommonUI showError:error.domain];
+                                                    }];
     }
 }
 
@@ -192,7 +196,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                         }else{
                                                             rightOptometryPrice = config.suggestPrice;
                                                         }
-                                                    } FailureBlock: nil];
+                                                    } FailureBlock:^(NSError *error) {
+                                                        [IPCCommonUI showError:error.domain];
+                                                    }];
     }else{
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
@@ -205,7 +211,9 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                                                         }else{
                                                             rightOptometryPrice = config.suggestPrice;
                                                         }
-                                                    } FailureBlock: nil];
+                                                    } FailureBlock:^(NSError *error) {
+                                                        [IPCCommonUI showError:error.domain];
+                                                    }];
     }
 }
 

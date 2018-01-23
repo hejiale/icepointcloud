@@ -74,6 +74,7 @@ typedef void(^DismissBlock)(IPCEmployee *);
          self.employeTableView.isBeginLoad = NO;
          [self.employeTableView reloadData];
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
          self.employeTableView.isBeginLoad = NO;
          [self.employeTableView reloadData];
      }];

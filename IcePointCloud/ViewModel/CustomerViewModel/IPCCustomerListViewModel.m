@@ -30,6 +30,8 @@
      {
          [weakSelf parseCustomerListData:responseValue];
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
+         
          __strong typeof(weakSelf) strongSelf = weakSelf;
          self.status = IPCRefreshError;
          if (strongSelf.completeBlock) {

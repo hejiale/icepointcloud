@@ -108,6 +108,7 @@
              self.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
          [self removeFromSuperview];
          
          if (self.CompleteBlock) {

@@ -120,7 +120,7 @@
             }];
         }
     } FailureBlock:^(NSError *error) {
-        
+        [IPCCommonUI showError:error.domain];
     }];
 }
 
@@ -133,19 +133,17 @@
 - (void)resetCustomerDiscount
 {
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount) {
-        [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
-        
-        /*if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
+        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
         {
             [IPCPayOrderManager sharedManager].isValiateMember = YES;
             [IPCPayOrderManager sharedManager].customDiscount = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount * 10;
         }else{
             [IPCPayOrderManager sharedManager].customDiscount = 100;
             [IPCPayOrderManager sharedManager].isValiateMember = NO;
-        }*/
+        }
     }else{
         [IPCPayOrderManager sharedManager].customDiscount = 100;
-        /*[IPCPayOrderManager sharedManager].isValiateMember = NO;*/
+        [IPCPayOrderManager sharedManager].isValiateMember = NO;
     }
 }
 
@@ -160,8 +158,7 @@
     [IPCPayOrderManager sharedManager].discountAmount = 0;
     [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
-    /*[IPCPayOrderManager sharedManager].isValiateMember = NO;
-    [IPCPayOrderManager sharedManager].isValiateMember = NO;*/
+    [IPCPayOrderManager sharedManager].isValiateMember = NO;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }

@@ -84,7 +84,7 @@
              [IPCCommonUI showSuccess:@"保存客户信息成功!"];
          } FailureBlock:^(NSError *error) {
              if ([error code] != NSURLErrorCancelled) {
-                 [IPCCommonUI showError:@"保存客户信息失败!"];
+                 [IPCCommonUI showError:error.domain];
              }
              [self removeFromSuperview];
              if (self.UpdateBlock) {
