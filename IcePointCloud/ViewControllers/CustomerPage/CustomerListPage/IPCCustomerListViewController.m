@@ -122,7 +122,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
+//        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     [self.viewModel resetData];

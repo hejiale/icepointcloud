@@ -33,6 +33,7 @@
     [IPCPayOrderRequestManager queryIntegralRuleWithSuccessBlock:^(id responseValue){
         [IPCPayOrderManager sharedManager].integralTrade = [IPCPayCashIntegralTrade mj_objectWithKeyValues:responseValue];
     } FailureBlock:^(NSError *error) {
+        [IPCCommonUI showError:error.domain];
     }];
 }
 
@@ -66,7 +67,7 @@
          }
      } FailureBlock:^(NSError *error) {
          __strong typeof(weakSelf) strongSelf = weakSelf;
-         [IPCCommonUI showError:@"保存草稿订单失败!"];
+         [IPCCommonUI showError:error.domain];
          
          if (strongSelf.ErrorPayBlock) {
              strongSelf.ErrorPayBlock(IPCPayOrderErrorSavePrototy);
@@ -86,6 +87,7 @@
                  }
              }
          } FailureBlock:^(NSError *error) {
+             [IPCCommonUI showError:error.domain];
              __strong typeof(weakSelf) strongSelf = weakSelf;
              if (strongSelf.ErrorPayBlock) {
                  strongSelf.ErrorPayBlock(IPCPayOrderErrorOfferOrder);
@@ -109,6 +111,7 @@
                  }
              }
          } FailureBlock:^(NSError *error) {
+             [IPCCommonUI showError:error.domain];
              __strong typeof(weakSelf) strongSelf = weakSelf;
              if (strongSelf.ErrorPayBlock) {
                  strongSelf.ErrorPayBlock(IPCPayOrderErrorAuthOrder);
@@ -138,7 +141,8 @@
                  strongSelf.CompletePayCashBlock();
              }
          } FailureBlock:^(NSError *error) {
-             [IPCCommonUI showError:@"订单收银失败!"];
+             [IPCCommonUI showError:error.domain];
+             
              __strong typeof(weakSelf) strongSelf = weakSelf;
              
              if (strongSelf.ErrorPayBlock) {

@@ -40,7 +40,7 @@
                                                          if (completeBlock)
                                                              completeBlock();
                                                          if ([error code] != NSURLErrorCancelled) {
-                                                             [IPCCommonUI showError:@"查询客户验光单信息失败!"];
+                                                             [IPCCommonUI showError:error.domain];
                                                          }
                                                          
                                                      }];
@@ -60,7 +60,7 @@
                                                       }
                                                   } FailureBlock:^(NSError *error) {
                                                       if ([error code] !=NSURLErrorCancelled) {
-                                                          [IPCCommonUI showError:@"设置默认验光单失败!"];
+                                                          [IPCCommonUI showError:error.domain];
                                                       }else{
                                                           [IPCCommonUI hiden];
                                                       }

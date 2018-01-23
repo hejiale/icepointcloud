@@ -60,7 +60,7 @@
                                                       self.UpdateBlock();
                                                   }
     } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:error.localizedDescription];
+        [IPCCommonUI showError:error.domain];
     }];
 }
 

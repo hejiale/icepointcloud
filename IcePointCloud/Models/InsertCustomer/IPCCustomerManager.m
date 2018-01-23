@@ -92,7 +92,7 @@
          self.employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"查询员工信息失败 ！"];
+             [IPCCommonUI showError:error.domain];
          }
      }];
 }
@@ -103,7 +103,7 @@
         self.memberLevelList = [[IPCMemberLevelList alloc]initWithResponseValue:responseValue];
     } FailureBlock:^(NSError *error) {
         if ([error code] != NSURLErrorCancelled) {
-            [IPCCommonUI showError:@"查询会员等级信息失败 ！"];
+            [IPCCommonUI showError:error.domain];
         }
     }];
 }
@@ -114,7 +114,7 @@
         self.customerTypeList = [[IPCCustomerTypeList alloc]initWithResponseValue:responseValue];
     } FailureBlock:^(NSError *error) {
         if ([error code] != NSURLErrorCancelled) {
-            [IPCCommonUI showError:@"查询客户类型信息失败 ！"];
+            [IPCCommonUI showError:error.domain];
         }
     }];
 }

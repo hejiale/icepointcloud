@@ -67,7 +67,7 @@
                  [self performSelector:@selector(dismiss) withObject:nil afterDelay:1.f];
              } FailureBlock:^(NSError *error) {
                  if ([error code] != NSURLErrorCancelled) {
-                     [IPCCommonUI showError:@"修改用户密码失败!"];
+                     [IPCCommonUI showError:error.domain];
                  }
              }];
         }else{

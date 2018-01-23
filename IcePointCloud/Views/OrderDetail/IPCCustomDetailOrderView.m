@@ -111,6 +111,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
          self.orderDetailTableView.isBeginLoad = NO;
          [self.orderDetailTableView reloadData];
      } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
          self.orderDetailTableView.isBeginLoad = NO;
          [self.orderDetailTableView reloadData];
      }];

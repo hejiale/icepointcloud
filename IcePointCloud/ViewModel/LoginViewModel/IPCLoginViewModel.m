@@ -11,7 +11,6 @@
 
 static NSString * const AccountErrorMessage = @"登录帐号不能为空!";
 static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
-static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入!";
 
 @implementation IPCLoginViewModel
 
@@ -72,7 +71,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
         if (failed) {
             failed();
         }
-        [IPCCommonUI showError: LoginErrorMessage];
+        [IPCCommonUI showError:error.domain];
     }];
 }
 
@@ -130,7 +129,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 {
     [[IPCAppManager sharedManager] queryEmployeeAccount:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError: LoginErrorMessage];
+            [IPCCommonUI showError:error.domain];
         }else{
             if (complete) {
                 complete();
@@ -143,7 +142,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 {
     [[IPCAppManager sharedManager] loadWareHouse:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError: LoginErrorMessage];
+            [IPCCommonUI showError:error.domain];
         }else{
             if (complete) {
                 complete();
@@ -156,7 +155,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 {
     [[IPCAppManager sharedManager] queryPriceStrategy:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError: LoginErrorMessage];
+            [IPCCommonUI showError:error.domain];
         }else{
             if (complete) {
                 complete();
@@ -169,7 +168,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 {
     [[IPCAppManager sharedManager] getCompanyConfig:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError: LoginErrorMessage];
+            [IPCCommonUI showError:error.domain];
         }else{
             if (complete) {
                 complete();
@@ -182,7 +181,7 @@ static NSString * const LoginErrorMessage = @"用户登录失败,请重新输入
 {
     [[IPCAppManager sharedManager] getAuths:^(NSError *error) {
         if (error) {
-            [IPCCommonUI showError: LoginErrorMessage];
+            [IPCCommonUI showError:error.domain];
         }else{
             if (complete) {
                 complete();

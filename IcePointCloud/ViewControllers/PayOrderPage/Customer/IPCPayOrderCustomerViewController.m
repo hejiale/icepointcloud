@@ -22,6 +22,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (weak, nonatomic) IBOutlet UIView *customInfoContentView;
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *insertWidthConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *scanButton;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -46,6 +48,11 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self loadData];
     //KVO
     [[IPCPayOrderManager sharedManager] ipc_addObserver:self ForKeyPath:@"currentCustomerId"];
+    
+    if (![IPCAppManager sharedManager].companyCofig.isCheckMember) {
+        self.insertWidthConstraint.constant = 200;
+        [self.scanButton setHidden:NO];
+    }
 }
 
 #pragma mark //Set UI
@@ -91,7 +98,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
             [weakSelf showUpgradeMemberView];
         }];
         [[_infoView rac_signalForSelector:@selector(forcedMemberAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            /*[IPCPayOrderManager sharedManager].isValiateMember = YES;*/
+            [IPCPayOrderManager sharedManager].isValiateMember = YES;
             [weakSelf reloadCustomerInfo];
         }];
     }
@@ -113,7 +120,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-        [[IPCHttpRequest sharedClient] cancelAllRequest];
+//        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     [self.viewModel resetData];
@@ -168,35 +175,35 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:@"查询客户信息失败!"];
+             [IPCCommonUI showError:error.domain];
          }
      }];
 }
 
-/*- (void)validationMemberRequest:(NSString *)code
- {
- [IPCCustomerRequestManager validateCustomerWithCode:code
- SuccessBlock:^(id responseValue)
- {
- [IPCPayOrderManager sharedManager].isValiateMember = YES;
- 
- NSString * customerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
- if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
- [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
- }else{
- [self reloadCustomerInfo];
- [IPCCommonUI showSuccess:@"验证会员成功!"];
- }
- } FailureBlock:^(NSError *error) {
- if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
- [IPCCommonUI showError:@"会员码失效!"];
- }else{
- [IPCCommonUI showError:@"验证会员失败!"];
- }
- [self reloadCustomerInfo];
- [IPCPayOrderManager sharedManager].isValiateMember = NO;
- }];
- }*/
+- (void)validationMemberRequest:(NSString *)code
+{
+    [IPCCustomerRequestManager validateCustomerWithCode:code
+                                           SuccessBlock:^(id responseValue)
+     {
+         [IPCPayOrderManager sharedManager].isValiateMember = YES;
+         
+         NSString * customerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
+         if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
+             [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+         }else{
+             [self reloadCustomerInfo];
+             [IPCCommonUI showSuccess:@"验证会员成功!"];
+         }
+     } FailureBlock:^(NSError *error) {
+         if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
+             [IPCCommonUI showError:@"会员码失效!"];
+         }else{
+             [IPCCommonUI showError:@"验证会员失败!"];
+         }
+         [self reloadCustomerInfo];
+         [IPCPayOrderManager sharedManager].isValiateMember = NO;
+     }];
+}
 
 #pragma mark //Reload CollectionView
 - (void)reload
@@ -224,17 +231,17 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self showEditCustomerView];
 }
 
-/*- (IBAction)validationMemberAction:(id)sender
- {
- __weak typeof(self) weakSelf = self;
- IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
- __strong typeof(weakSelf) strongSelf = weakSelf;
- [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
- [self validationMemberRequest:result];
- }];
- self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
- [self presentViewController:self.cameraNav  animated:YES completion:nil];
- }*/
+- (IBAction)validationMemberAction:(id)sender
+{
+    __weak typeof(self) weakSelf = self;
+    IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
+        [self validationMemberRequest:result];
+    }];
+    self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
+    [self presentViewController:self.cameraNav  animated:YES completion:nil];
+}
 
 - (void)showEditCustomerView
 {
@@ -271,7 +278,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
                                                             UpdateBlock:^
                               {
                                   [IPCCommonUI showSuccess:@"客户升级会员成功!"];
-                                  //                                  [IPCPayOrderManager sharedManager].isValiateMember = YES;
+                                  [IPCPayOrderManager sharedManager].isValiateMember = YES;
                                   [weakSelf performSelector:@selector(queryCustomerDetail) withObject:nil afterDelay:1.f];
                                   [weakSelf performSelector:@selector(loadData) withObject:nil afterDelay:1.f];
                               }];
@@ -324,7 +331,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         if ([customer.customerID isEqualToString:[IPCPayOrderManager sharedManager].currentCustomerId])return;
         
         if (customer) {
-            /*[IPCPayOrderManager sharedManager].isValiateMember = NO;*/
+            [IPCPayOrderManager sharedManager].isValiateMember = NO;
             [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
         }
     }
@@ -353,7 +360,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
             [self.infoView removeFromSuperview];
             [self.customerCollectionView reloadData];
             self.bottomConstraint.constant = 10;
-            /*[IPCPayOrderManager sharedManager].isValiateMember = NO;*/
+            [IPCPayOrderManager sharedManager].isValiateMember = NO;
         }else{
             [self queryCustomerDetail];
         }

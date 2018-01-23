@@ -187,24 +187,24 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         return;
     }
     
-    /*if (![IPCPayOrderManager sharedManager].isValiateMember) {
+    if (![IPCPayOrderManager sharedManager].isValiateMember) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
-    }*/
+    }
 
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
-    /*if (![IPCPayOrderManager sharedManager].isValiateMember) {
+    if (![IPCPayOrderManager sharedManager].isValiateMember) {
         if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
-    }*/
+    }
     
     if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
         [IPCCommonUI showError:@"客户无可用储值余额"];

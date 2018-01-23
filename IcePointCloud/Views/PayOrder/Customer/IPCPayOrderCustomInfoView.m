@@ -90,7 +90,7 @@
         [self hideMemberInfoView];
     }
 
-    /*if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
+    if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
         if ([IPCPayOrderManager sharedManager].isValiateMember){
             [self.forcedButton setHidden:YES];
             [self.memberValiteStatus setHidden:NO];
@@ -108,7 +108,7 @@
     }else{
         [self.memberValiteStatus setHidden:YES];
         [self.forcedButton setHidden:YES];
-    }*/
+    }
 }
 
 - (void)showMemberInfoView
