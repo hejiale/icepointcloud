@@ -147,7 +147,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     if (!_typeButton) {
         _typeButton = [[IPCDynamicImageTextButton alloc]initWithFrame:self.typeView.bounds];
         [_typeButton setImage:[UIImage imageNamed:@"icon_down_arrow"] forState:UIControlStateNormal];
-        [_typeButton setImage:[UIImage imageNamed:@"icon_up_arrow"] forState:UIControlStateSelected];
         [_typeButton setTitleColor:COLOR_RGB_BLUE];
         [_typeButton setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightThin]];
         [_typeButton setButtonAlignment:IPCCustomButtonAlignmentLeft];
@@ -176,15 +175,17 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
 - (IBAction)selectProductNameAction:(id)sender {
     [IPCAppManager sharedManager].isSelectProductCode = NO;
-    [self reloadSearchType];
-    [self.searchTableView reloadData];
-    [self.coverView removeFromSuperview];
-    [self clearInputText];
+    [self chooseSearchType];
 }
 
 
 - (IBAction)selectProductCodeAction:(id)sender {
     [IPCAppManager sharedManager].isSelectProductCode = YES;
+    [self chooseSearchType];
+}
+
+- (void)chooseSearchType
+{
     [self reloadSearchType];
     [self.searchTableView reloadData];
     [self.coverView removeFromSuperview];
@@ -200,8 +201,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 
 - (void)selectSearchTypeAction:(UIButton *)sender
 {
-    [sender setSelected:!sender.selected];
-    
     if ([self.coverView superview]) {
         [self.coverView removeFromSuperview];
     }else{
