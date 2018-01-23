@@ -60,11 +60,6 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     [self requestCustomerDetailInfo];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    //Stop Other Request
-    //    [[IPCHttpRequest sharedClient] cancelAllRequest];
-}
 
 #pragma mark //Request Data
 - (void)requestCustomerDetailInfo

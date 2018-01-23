@@ -99,9 +99,17 @@
                            StoreId:(NSString *)storeId
 
 {
+    __block NSString * searchWord = @"";
+    __block NSString * searchCode = @"";
+    
+    if ([IPCAppManager sharedManager].isSelectProductCode) {
+        searchCode = self.searchWord;
+    }else{
+        searchWord = self.searchWord;
+    }
     [IPCGoodsRequestManager queryFilterGlassesListWithPage:page
                                                      Limit:limit
-                                                SearchWord:self.searchWord
+                                                SearchWord:searchWord
                                                  ClassType:classType
                                                 SearchType:searchType
                                                 StartPrice:startPrice
@@ -109,7 +117,7 @@
                                                   IsTrying:isTrying
                                                    StoreId:storeId
                                                 StrategyId: [IPCAppManager sharedManager].currentStrategy.strategyId ? : @""
-                                                      Code:@""
+                                                      Code:searchCode
                                               SuccessBlock:^(id responseValue){
                                                   [self parseNormalGlassesData:responseValue];
                                               } FailureBlock:^(NSError *error) {

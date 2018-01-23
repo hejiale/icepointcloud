@@ -88,7 +88,6 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 
 - (IBAction)dismissViewAction:(id)sender {
     [[IPCCustomerOrderDetail instance] clearData];
-//    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         CGRect frame = self.orderDetailBgView.frame;

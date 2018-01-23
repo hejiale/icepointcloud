@@ -79,7 +79,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-//        [[IPCHttpRequest sharedClient] cancelAllRequest];
+        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     

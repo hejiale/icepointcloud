@@ -14,6 +14,7 @@ NSString *const IPCFirstLanuchKey                               = @"IPFirstLanuc
 NSString* const IPCUserNameKey                                 = @"UserNameKey";
 NSString *const IPCListLoginHistoryKey                        = @"IPCListLoginHistoryKey";
 NSString *const IPCSearchHistoryListKey                      = @"IPCSearchGlassesHistoryListKey";
+NSString *const IPCSearchHistoryCodeKey                   = @"IPCSearchHistoryCodeKey";
 NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingCartChanged";
 NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCountKey";
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerHistoryListkey";
@@ -121,6 +122,20 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
     
     NSData *historyData = [NSUserDefaults jk_dataForKey:IPCSearchHistoryListKey];
+    
+    if ([historyData isKindOfClass:[NSData class]]) {
+        keywordHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
+    } else {
+        keywordHistory = [[NSArray alloc]init];
+    }
+    return keywordHistory;
+}
+
+- (NSArray *)localProductsHistoryWithCode
+{
+    __block NSArray * keywordHistory = [[NSMutableArray alloc]init];
+    
+    NSData *historyData = [NSUserDefaults jk_dataForKey:IPCSearchHistoryCodeKey];
     
     if ([historyData isKindOfClass:[NSData class]]) {
         keywordHistory = [NSKeyedUnarchiver unarchiveObjectWithData:historyData];
@@ -267,13 +282,13 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)pushToRootViewController
 {
-    if ([[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]) {
+    /*if ([[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]) {*/
         IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
         [[[UIApplication sharedApplication] delegate].window  setRootViewController:loginVC];
-    }else{
+    /*}else{
         IPCLoginActivationCodeViewController * activationVC = [[IPCLoginActivationCodeViewController alloc]initWithNibName:@"IPCLoginActivationCodeViewController" bundle:nil];
         [[[UIApplication sharedApplication] delegate].window  setRootViewController:activationVC];
-    }
+    }*/
 }
 
 

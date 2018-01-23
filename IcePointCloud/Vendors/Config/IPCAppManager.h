@@ -22,6 +22,7 @@ extern NSString* const IPCUserNameKey;
 extern NSString *const IPCListLoginHistoryKey;
 //Keep records of commodity search key
 extern NSString *const IPCSearchHistoryListKey;
+extern NSString *const IPCSearchHistoryCodeKey;
 //Save search Key users
 extern NSString *const IPCSearchCustomerkey;
 //Inform the screening homepage search goods
@@ -41,6 +42,7 @@ extern NSString * const kIPCDeviceLoginUUID;
 @interface IPCAppManager : NSObject
 
 @property (nonatomic, copy, readwrite)       NSString                   * deviceToken;
+@property (nonatomic, assign, readwrite)    BOOL                           isSelectProductCode;//是否选择搜索商品编码（默认商品名）
 @property (nonatomic, strong, readwrite)    IPCStoreResult          * storeResult;
 @property (nonatomic, strong, readwrite)    IPCWareHouseResult * wareHouse;
 @property (nonatomic, strong, readwrite)    IPCWareHouse           * currentWareHouse;
@@ -48,6 +50,7 @@ extern NSString * const kIPCDeviceLoginUUID;
 @property (nonatomic, strong, readwrite)    IPCPriceStrategy        * currentStrategy;
 @property (nonatomic, strong, readwrite)    IPCCompanyConfig   * companyCofig;
 @property (nonatomic, strong, readwrite)    IPCAuthList               * authList;
+
 
 + (IPCAppManager *)sharedManager;
 
@@ -72,6 +75,8 @@ extern NSString * const kIPCDeviceLoginUUID;
  *  For local search records
  */
 - (NSArray *)localProductsHistory;
+
+- (NSArray *)localProductsHistoryWithCode;
 
 
 /**

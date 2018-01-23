@@ -39,7 +39,6 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
-//    [[IPCHttpRequest sharedClient] cancelAllRequest];
     //Set TextField FirstResponder
     [self.keywordTf becomeFirstResponder];
     
