@@ -24,13 +24,36 @@
     [self setBackground];
 }
 
+#pragma mark //Request Data
+- (void)userLogin
+{
+    __weak typeof(self) weakSelf = self;
+    [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
+        [weakSelf valityActiveCode];
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+- (void)valityActiveCode
+{
+    [IPCUserRequestManager verifyActivationCode:self.codeTextField.text SuccessBlock:^(id responseValue)
+    {
+        [IPCCommonUI showSuccess:@"设备激活成功!"];
+        
+        [[LUKeychainAccess standardKeychainAccess] setObject:[[UIDevice currentDevice] identifierForVendor].UUIDString forKey:kIPCDeviceLoginUUID];
+
+        IPCLoginViewController * loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
+        [[[UIApplication sharedApplication] delegate].window setRootViewController:loginVC];
+
+    } FailureBlock:^(NSError *error) {
+        [IPCCommonUI showError:error.domain];
+    }];
+}
+
 #pragma mark //Clicked Events
 - (IBAction)activationCodeAction:(id)sender
 {
-    [[LUKeychainAccess standardKeychainAccess] setObject:[[UIDevice currentDevice] identifierForVendor].UUIDString forKey:kIPCDeviceLoginUUID];
-    
-    IPCLoginViewController * loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
-    [[[UIApplication sharedApplication] delegate].window setRootViewController:loginVC];
+    [self userLogin];
 }
 
 #pragma mark //UITextField Delegate

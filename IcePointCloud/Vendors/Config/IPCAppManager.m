@@ -282,13 +282,13 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)pushToRootViewController
 {
-    /*if ([[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]) {*/
+    if ([[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]) {
         IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
         [[[UIApplication sharedApplication] delegate].window  setRootViewController:loginVC];
-    /*}else{
+    }else{
         IPCLoginActivationCodeViewController * activationVC = [[IPCLoginActivationCodeViewController alloc]initWithNibName:@"IPCLoginActivationCodeViewController" bundle:nil];
         [[[UIApplication sharedApplication] delegate].window  setRootViewController:activationVC];
-    }*/
+    }
 }
 
 

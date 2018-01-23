@@ -54,7 +54,7 @@
 
 + (void)verifyActivationCode:(NSString *)code SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:@{@"verificationCode":code, @"padUUID": @""} RequestMethod:UserRequest_VerifyActivationCode CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"verificationCode":code, @"padUUID": [[UIDevice currentDevice] identifierForVendor].UUIDString} RequestMethod:UserRequest_VerifyActivationCode CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)getAppMessageWithSuccessBlock:(void (^)(id responseValue))success
