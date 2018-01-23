@@ -41,6 +41,8 @@ extern NSString * const kIPCDeviceLoginUUID;
 
 @interface IPCAppManager : NSObject
 
+@property (nonatomic, copy, readwrite)       NSString                   * userName;
+@property (nonatomic, copy, readwrite)       NSString                   * password;
 @property (nonatomic, copy, readwrite)       NSString                   * deviceToken;
 @property (nonatomic, assign, readwrite)    BOOL                           isSelectProductCode;//是否选择搜索商品编码（默认商品名）
 @property (nonatomic, strong, readwrite)    IPCStoreResult          * storeResult;

@@ -104,19 +104,20 @@
             </constraints>
         </view>
         <view contentMode="scaleToFill" id="raW-l7-Tgh" userLabel="PhotoDeleteConfirmView">
-            <rect key="frame" x="0.0" y="0.0" width="113" height="114"/>
+            <rect key="frame" x="0.0" y="0.0" width="113" height="118"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_searchType" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-05-vJj">
-                    <rect key="frame" x="0.0" y="0.0" width="113" height="114"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_searchType" translatesAutoresizingMaskIntoConstraints="NO" id="zC3-05-vJj">
+                    <rect key="frame" x="0.0" y="0.0" width="113" height="118"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yuO-Oi-wkn">
-                    <rect key="frame" x="0.0" y="5" width="113" height="55"/>
+                    <rect key="frame" x="0.0" y="10" width="113" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="tz8-7x-4Tc"/>
+                        <constraint firstAttribute="height" constant="50" id="tz8-7x-4Tc"/>
                     </constraints>
                     <state key="normal" title="商品名称">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="selectProductNameAction:" destination="-1" eventType="touchUpInside" id="YRr-fw-3cr"/>
@@ -124,18 +125,18 @@
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Den-SL-qcJ">
                     <rect key="frame" x="8" y="60" width="97" height="1"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="xDb-6m-kfr"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N0g-hm-aS7">
-                    <rect key="frame" x="0.0" y="61" width="113" height="55"/>
+                    <rect key="frame" x="0.0" y="61" width="113" height="50"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="55" id="D7U-aa-80b"/>
+                        <constraint firstAttribute="height" constant="50" id="D7U-aa-80b"/>
                     </constraints>
                     <state key="normal" title="商品编码">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="selectProductCodeAction:" destination="-1" eventType="touchUpInside" id="4xT-9M-wod"/>
@@ -155,19 +156,19 @@
                 <constraint firstAttribute="trailing" secondItem="N0g-hm-aS7" secondAttribute="trailing" id="d3o-0s-6Hi"/>
                 <constraint firstItem="Den-SL-qcJ" firstAttribute="top" secondItem="yuO-Oi-wkn" secondAttribute="bottom" id="dIo-bu-HqP"/>
                 <constraint firstAttribute="trailing" secondItem="yuO-Oi-wkn" secondAttribute="trailing" id="ewO-AK-but"/>
-                <constraint firstItem="yuO-Oi-wkn" firstAttribute="top" secondItem="raW-l7-Tgh" secondAttribute="top" constant="5" id="sju-0U-hvd"/>
+                <constraint firstItem="yuO-Oi-wkn" firstAttribute="top" secondItem="raW-l7-Tgh" secondAttribute="top" constant="10" id="sju-0U-hvd"/>
                 <constraint firstAttribute="bottom" secondItem="zC3-05-vJj" secondAttribute="bottom" id="xL5-XS-tsQ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="9.5" y="-419"/>
+            <point key="canvasLocation" x="45" y="-469"/>
         </view>
     </objects>
     <resources>
         <image name="icon_back" width="22" height="22"/>
-        <image name="icon_searchType" width="226" height="228"/>
+        <image name="icon_searchType" width="262" height="275"/>
         <image name="list_searchbar_bg" width="902" height="37"/>
     </resources>
 </document>

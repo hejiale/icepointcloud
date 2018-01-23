@@ -210,8 +210,8 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.coverView removeFromSuperview];
         }];
-        CGFloat x = [self.typeView convertRect:sender.frame toView:self.coverView].origin.x - 20;
-        [self.selectTypePopverView setFrame:CGRectMake(x, self.topSearchView.jk_bottom, 105, 114)];
+        CGFloat x = [self.typeView convertRect:sender.frame toView:self.coverView].origin.x - 30;
+        [self.selectTypePopverView setFrame:CGRectMake(x, self.topSearchView.jk_bottom, 113, 118)];
         [self.coverView addSubview:self.selectTypePopverView];
     }
 }

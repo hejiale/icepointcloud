@@ -32,8 +32,9 @@
                                   ProgressBlock:(void (^)(NSProgress *))progress
                                    FailureBlock:(void (^)(NSError * error, NSURLSessionDataTask * _Nonnull task))failure
 {
+    NSString * user =  [NSString stringWithFormat:@"%@#%@", [IPCAppManager sharedManager].userName, [IPCAppManager sharedManager].password];
     NSString * method = [request.requestMethod stringByAppendingString:[request.requestParameter JSONString]];
-    NSString * userIdInfo = [method stringByAppendingString:([IPCAppManager sharedManager].storeResult.storeId ? : @"")];
+    NSString * userIdInfo = [NSString stringWithFormat:@"%@#%@#", user, method];
     
     NSURLSessionDataTask * urlSessionDataTask = nil;
     
