@@ -8,25 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSInteger, IPCPayOrderError)
-{
-    IPCPayOrderErrorSavePrototy = 0,
-    IPCPayOrderErrorOfferOrder,
-    IPCPayOrderErrorAuthOrder,
-    IPCPayOrderErrorPayCashOrder,
-    IPCPayOrderErrorOutboundOrder
-};
-
 @interface IPCPayOrderViewMode : NSObject
 
 - (void)queryIntegralRule;
 
-- (void)saveProtyOrder:(BOOL)isProty
-               Prototy:(void(^)())prototy
-               PayCash:(void(^)())payCash
-              Outbound:(void(^)())outbound
-                 Error:(void(^)(IPCPayOrderError errorType))error;
-
+- (void)payOrderWithCurrentStatus:(NSString *)currentStatus EndStatus:(NSString *)endStatus Complete:(void(^)(NSError * error))complete;
 
 @end
 

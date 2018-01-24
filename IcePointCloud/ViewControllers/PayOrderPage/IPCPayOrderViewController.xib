@@ -13,10 +13,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderViewController">
             <connections>
                 <outlet property="bottomView" destination="L70-zW-7W1" id="uT8-tP-stw"/>
-                <outlet property="cancelButton" destination="Cu8-sK-Lh2" id="5i9-1R-Gjk"/>
                 <outlet property="contentView" destination="dGa-FS-ijA" id="fyH-ve-Vc4"/>
                 <outlet property="leftButtonView" destination="tyA-uQ-qgb" id="yFV-aY-SfW"/>
                 <outlet property="nextStepButton" destination="GUo-wl-t5L" id="VM4-hz-sSf"/>
+                <outlet property="offerOrderButton" destination="NHa-ip-Zwk" id="gdy-mD-lLZ"/>
                 <outlet property="saveButton" destination="C46-IC-KRa" id="wZz-7c-FVD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -76,14 +76,29 @@
                                 <action selector="payCashAction:" destination="-1" eventType="touchUpInside" id="asc-uy-qsk"/>
                             </connections>
                         </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHa-ip-Zwk">
+                            <rect key="frame" x="869" y="0.0" width="155" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="155" id="l9p-VM-te7"/>
+                            </constraints>
+                            <state key="normal" image="icon_offerOrder">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="offerOrderAction:" destination="-1" eventType="touchUpInside" id="GhC-jo-Ga3"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="GUo-wl-t5L" firstAttribute="leading" secondItem="Cu8-sK-Lh2" secondAttribute="trailing" id="1cn-qe-izo"/>
                         <constraint firstItem="GUo-wl-t5L" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="2NT-AU-ogr"/>
+                        <constraint firstAttribute="trailing" secondItem="NHa-ip-Zwk" secondAttribute="trailing" id="3k2-In-vf4"/>
                         <constraint firstItem="Cu8-sK-Lh2" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="8is-YG-Lk8"/>
                         <constraint firstAttribute="bottom" secondItem="Cu8-sK-Lh2" secondAttribute="bottom" id="BzC-aD-0JO"/>
                         <constraint firstItem="C46-IC-KRa" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="FE9-hZ-1YA"/>
+                        <constraint firstAttribute="bottom" secondItem="NHa-ip-Zwk" secondAttribute="bottom" id="Ic3-O9-ZK4"/>
                         <constraint firstAttribute="bottom" secondItem="GUo-wl-t5L" secondAttribute="bottom" id="Pxv-QL-aMn"/>
                         <constraint firstAttribute="bottom" secondItem="sDP-1h-qRU" secondAttribute="bottom" id="VdP-av-VBN"/>
                         <constraint firstAttribute="trailing" secondItem="C46-IC-KRa" secondAttribute="trailing" id="ZDR-ai-Qkj"/>
@@ -91,6 +106,7 @@
                         <constraint firstItem="GUo-wl-t5L" firstAttribute="centerY" secondItem="L70-zW-7W1" secondAttribute="centerY" id="oil-9C-ckh"/>
                         <constraint firstAttribute="height" constant="50" id="smf-Gz-G9X"/>
                         <constraint firstAttribute="trailing" secondItem="GUo-wl-t5L" secondAttribute="trailing" id="uCb-kZ-APA"/>
+                        <constraint firstItem="NHa-ip-Zwk" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="uMO-Mq-xVF"/>
                         <constraint firstAttribute="bottom" secondItem="C46-IC-KRa" secondAttribute="bottom" id="wEi-ma-TGg"/>
                         <constraint firstItem="sDP-1h-qRU" firstAttribute="top" secondItem="L70-zW-7W1" secondAttribute="top" id="ydQ-dg-Ov3"/>
                     </constraints>
@@ -192,6 +208,7 @@
         <image name="icon_AreCancelOrder" width="161" height="51"/>
         <image name="icon_cancelOrder" width="160" height="51"/>
         <image name="icon_nextStep" width="154" height="50"/>
+        <image name="icon_offerOrder" width="158" height="51"/>
         <image name="icon_page_0" width="48" height="48"/>
         <image name="icon_page_1" width="48" height="48"/>
         <image name="icon_page_2" width="48" height="48"/>

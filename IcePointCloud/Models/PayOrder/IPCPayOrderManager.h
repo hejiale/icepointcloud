@@ -40,6 +40,8 @@
 @property (nonatomic, assign, readwrite) BOOL  isInsertRecord;
 //是否会员验证通过
 @property (nonatomic, assign, readwrite) BOOL  isValiateMember;
+//是否超额打折
+@property (nonatomic, assign, readwrite) BOOL  isExtraDiscount;
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额

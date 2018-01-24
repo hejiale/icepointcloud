@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextStepButton;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *offerOrderButton;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (strong, nonatomic) IPCPayOrderCustomerViewController * customerVC;
 @property (strong, nonatomic) IPCPayOrderOptometryViewController * optometryVC;
@@ -40,8 +40,6 @@
     _currentPage = NSNotFound;
     //Set UI
     [self.bottomView addTopLine];
-    [self.cancelButton addBorder:2 Width:0.5 Color:nil];
-    [self.saveButton addBorder:2 Width:0 Color:nil];
     //Init Data
     self.viewMode = [[IPCPayOrderViewMode alloc]init];
     //Add Child ViewController
@@ -93,46 +91,33 @@
 }
 
 #pragma mark //Request Methods
-- (void)offerOrder:(BOOL)isPrototy
-{    
-    if (isPrototy) {
-        [self.nextStepButton jk_showIndicator];
-    }else{
-        [self.saveButton jk_showIndicator];
-    }
+- (void)offerOrder:(NSString *)currentStatus EndStatus:(NSString *)endStatus Complete:(void(^)())complete
+{
+    [IPCCommonUI show];
     
     __weak typeof(self) weakSelf = self;
-    [self.viewMode saveProtyOrder:isPrototy Prototy:^{
-        [weakSelf completePay];
-    } PayCash:^{
-        [weakSelf completePay];
-    } Outbound:^{
-        [weakSelf completePay];
-    }  Error:^(IPCPayOrderError errorType) {
-        [weakSelf failPay];
+    [self.viewMode payOrderWithCurrentStatus:currentStatus EndStatus:endStatus Complete:^(NSError * error){
+        if (!error) {
+            [weakSelf clearAllPayInfo];
+            
+            if (complete) {
+                complete();
+            }
+        }else{
+            [IPCCommonUI showError:error.domain];
+        }
     }];
 }
 
-#pragma mark //Complete Pay Methods
-- (void)completePay
-{
-    [self.nextStepButton jk_hideIndicator];
-    [self.saveButton jk_hideIndicator];
-    [self clearAllPayInfo];
-}
-
-- (void)failPay
-{
-    [self.nextStepButton jk_hideIndicator];
-    [self.saveButton jk_hideIndicator];
-}
 
 #pragma mark //Clicked Events
 ///收银
 - (IBAction)payCashAction:(id)sender
 {
     if ([[IPCPayOrderManager sharedManager] isCanPayOrder]) {
-        [self offerOrder:NO];
+        [self offerOrder:@"NULL" EndStatus:@"AUDITED" Complete:^{
+            [IPCCommonUI showSuccess:@"订单收银成功！"];
+        }];
     }
 }
 
@@ -147,11 +132,13 @@
 }
 
 
+///挂单
 - (IBAction)areCancelOrderAction:(id)sender
 {
-    //挂单
     if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
-        [self offerOrder:YES];
+        [self offerOrder:@"NULL" EndStatus:@"PROTOTYPE" Complete:^{
+            [IPCCommonUI showSuccess:@"订单保存成功！"];
+        }];
     }else{
         [IPCCommonUI showError:@"购物列表为空"];
     }
@@ -173,6 +160,18 @@
         [self setCurrentPage:sender.tag];
     }
 }
+
+
+- (IBAction)offerOrderAction:(id)sender {
+    if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
+        [self offerOrder:@"NULL" EndStatus:@"UN_AUDITED" Complete:^{
+            [IPCCommonUI showSuccess:@"订单提交成功！"];
+        }];
+    }else{
+        [IPCCommonUI showError:@"购物列表为空"];
+    }
+}
+
 
 #pragma mark //Reload Methods
 - (void)clearAllPayInfo
@@ -197,10 +196,28 @@
     
     if (_currentPage == 3) {
         [self.nextStepButton setHidden:YES];
-        [self.saveButton setHidden:NO];
+        
+        double payDiscount = 0;
+        
+        if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
+            payDiscount = (double)[IPCPayOrderManager sharedManager].customDiscount/100;
+        }else{
+            payDiscount = (double)[IPCPayOrderManager sharedManager].discount/100;
+        }
+        double employeeDiscount = (double)[IPCPayOrderManager sharedManager].employee.discount/100;
+        double customerDiscount = (double)[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount/10;
+        
+        if (payDiscount < MIN(employeeDiscount > 0 ? employeeDiscount : 1, customerDiscount > 0 ? customerDiscount : 1) && [IPCAppManager sharedManager].companyCofig.autoAuditedSalesOrder){
+            [self.offerOrderButton setHidden:NO];
+            [IPCPayOrderManager sharedManager].isExtraDiscount = YES;
+        }else{
+            [self.saveButton setHidden:NO];
+            [IPCPayOrderManager sharedManager].isExtraDiscount = NO;
+        }
     }else{
         [self.nextStepButton setHidden:NO];
         [self.saveButton setHidden:YES];
+        [self.offerOrderButton setHidden:YES];
     }
 }
 

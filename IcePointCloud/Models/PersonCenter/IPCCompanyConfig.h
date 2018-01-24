@@ -10,7 +10,7 @@
 
 @interface IPCCompanyConfig : NSObject
 
-@property (nonatomic, assign, readonly) BOOL  autoAuditedSalesOrder;
+@property (nonatomic, assign, readonly) BOOL  autoAuditedSalesOrder;//判断是否能够超额打折  true需要判断超额打折
 @property (nonatomic, assign, readonly) BOOL  autoDeployForWorkSheet;
 @property (nonatomic, assign, readonly) BOOL  autoInvOutAfterAudited;//自动出库判断
 @property (nonatomic, assign, readonly) BOOL  autoRemoveInventoryOut;
