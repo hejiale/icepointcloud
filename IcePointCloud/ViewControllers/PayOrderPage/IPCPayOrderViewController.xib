@@ -12,7 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderViewController">
             <connections>
+                <outlet property="areCancelButton" destination="Cu8-sK-Lh2" id="a1h-29-5ez"/>
                 <outlet property="bottomView" destination="L70-zW-7W1" id="uT8-tP-stw"/>
+                <outlet property="cancelButton" destination="sDP-1h-qRU" id="pfO-g9-9mJ"/>
                 <outlet property="contentView" destination="dGa-FS-ijA" id="fyH-ve-Vc4"/>
                 <outlet property="leftButtonView" destination="tyA-uQ-qgb" id="yFV-aY-SfW"/>
                 <outlet property="nextStepButton" destination="GUo-wl-t5L" id="VM4-hz-sSf"/>
@@ -47,9 +49,10 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="sh6-Cj-tlV"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                            <state key="normal" image="icon_AreCancelOrder">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <inset key="titleEdgeInsets" minX="11" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="挂单" image="icon_AreCancelOrder">
+                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="areCancelOrderAction:" destination="-1" eventType="touchUpInside" id="3ke-oh-sWi"/>
@@ -61,7 +64,10 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="fh1-Fc-U4y"/>
                             </constraints>
-                            <state key="normal" image="icon_cancelOrder"/>
+                            <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="取消" image="icon_cancelOrder">
+                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="cancelAction:" destination="-1" eventType="touchUpInside" id="Raw-p2-rhT"/>
                             </connections>
@@ -205,8 +211,8 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_AreCancelOrder" width="161" height="51"/>
-        <image name="icon_cancelOrder" width="160" height="51"/>
+        <image name="icon_AreCancelOrder" width="22" height="22"/>
+        <image name="icon_cancelOrder" width="23" height="23"/>
         <image name="icon_nextStep" width="154" height="50"/>
         <image name="icon_offerOrder" width="158" height="51"/>
         <image name="icon_page_0" width="48" height="48"/>

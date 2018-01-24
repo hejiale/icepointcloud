@@ -17,6 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *leftButtonView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *areCancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextStepButton;
 @property (weak, nonatomic) IBOutlet UIButton *offerOrderButton;
@@ -39,6 +41,8 @@
     self.title = @"提交订单";
     _currentPage = NSNotFound;
     //Set UI
+    [self.cancelButton addBorder:0 Width:1 Color:nil];
+    [self.areCancelButton addBorder:0 Width:1 Color:nil];
     [self.bottomView addTopLine];
     //Init Data
     self.viewMode = [[IPCPayOrderViewMode alloc]init];
