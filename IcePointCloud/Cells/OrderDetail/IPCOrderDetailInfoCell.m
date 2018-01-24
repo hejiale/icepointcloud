@@ -26,7 +26,7 @@
     
     [self.orderCodeLabel setText:[IPCCustomerOrderDetail instance].orderInfo.orderNumber];
     [self.createDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:[IPCCustomerOrderDetail instance].orderInfo.orderTime]  IsTime:YES]];
-    [self.operationLabel setText:[IPCCustomerOrderDetail instance].orderInfo.operatorName];
+    [self.operationLabel setText:[IPCCustomerOrderDetail instance].orderInfo.employee.name];
     NSString * remark = [NSString stringWithFormat:@"本次消费产生积分%d",[IPCCustomerOrderDetail instance].orderInfo.integralGiven];
     [self.pointLabel subStringWithText:remark BeginRang:8 Font:self.pointLabel.font Color:COLOR_RGB_RED];
 }

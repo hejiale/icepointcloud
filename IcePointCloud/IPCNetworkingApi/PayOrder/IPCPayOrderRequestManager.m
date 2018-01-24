@@ -66,7 +66,7 @@
     NSDictionary * responseParameter = @{@"pageNo":@(1),
                                          @"maxPageSize":@(10000),
                                          @"keyWord":keyword,
-                                         @"isOnJob":@"false",
+                                         @"isOnJob":@"true",
                                          @"storeId" : [IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @""
                                          };
     [self postRequest:responseParameter RequestMethod:PayOrderRequest_EmployeeList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];

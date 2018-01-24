@@ -45,6 +45,7 @@
 @property (nonatomic, assign, readwrite) double    remainAmount;//订单详情中剩余付款金额
 @property (nonatomic, copy, readonly) NSString * auditResult;
 @property (nonatomic, copy, readonly) NSString * auditStatus;
+@property (nonatomic, strong, readwrite) IPCEmployee * employee;
 
 - (NSString *)orderStatus;
 

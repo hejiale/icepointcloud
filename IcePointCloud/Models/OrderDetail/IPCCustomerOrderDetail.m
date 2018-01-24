@@ -43,6 +43,14 @@
             self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
         }
         
+        if ([responseValue[@"employeeAchievements"] isKindOfClass:[NSArray class]]) {
+            [responseValue[@"employeeAchievements"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                if ([obj isKindOfClass:[NSDictionary class]]) {
+                    self.orderInfo.employee = [IPCEmployee mj_objectWithKeyValues:obj[@"employee"]];
+                }
+            }];
+        }
+        
         self.orderInfo.totalPayAmount = 0;
         self.orderInfo.totalSuggestAmount = 0;
         self.orderInfo.totalDonationAmount = 0;
