@@ -17,12 +17,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
-    ///App重装 删除钥匙串UUID
-    if (![[[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID] isEqualToString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]])
-    {
-        [[LUKeychainAccess standardKeychainAccess] deleteObjectForKey:kIPCDeviceLoginUUID];
-    }
-    
     /*
      *Initialize the configuration
      */

@@ -63,6 +63,7 @@
 #define UserRequest_EmployeeAccount                  @"employeeadmin.getEmployeeObjectFromAccount"
 #define UserRequest_VerifyActivationCode             @"padMessageAdmin.activateIPAD"
 #define UserRequest_GetAppMessage                    @"padMessageAdmin.listPadMessages"
+#define UserRequest_DeleteUUID                           @"padMessageAdmin.deletePadUUID"
 
 
 #endif /* IPCNetworkingAPI_h */

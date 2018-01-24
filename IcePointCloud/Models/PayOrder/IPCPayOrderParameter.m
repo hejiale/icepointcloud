@@ -44,6 +44,7 @@
     [formDic setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];
     [formDic setObject:[IPCPayOrderManager sharedManager].isExtraDiscount ? @"true" : @"false" forKey:@"isExcessDiscount"];
     [formDic setObject:[self productListParamter] forKey:@"detailList"];
+    [formDic setObject:[IPCCommon formatDate:[NSDate date] IsTime:YES] forKey:@"takingMirrorTime"];
     
     [parameters setObject:formDic forKey:@"form"];
     [parameters setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];

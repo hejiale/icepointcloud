@@ -63,4 +63,10 @@
     [self postRequest:nil RequestMethod:UserRequest_GetAppMessage CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
+
++ (void)deletePadUUIDWithUUID:(NSString *)uuid SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:uuid RequestMethod:UserRequest_DeleteUUID CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

@@ -59,7 +59,7 @@
 
 /**
  QUERY Employee Account
-
+ 
  @param success
  @param failure
  */
@@ -69,7 +69,7 @@
 
 /**
  Verify the activation code
-
+ 
  @param code
  @param success
  @param failure 
@@ -81,11 +81,23 @@
 
 /**
  Get App Message
-
+ 
  @param success
- @param failure 
+ @param failure
  */
 + (void)getAppMessageWithSuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ Delete UUID
+ 
+ @param uuid
+ @param success
+ @param failure
+ */
++ (void)deletePadUUIDWithUUID:(NSString *)uuid
+                 SuccessBlock:(void (^)(id responseValue))success
+                 FailureBlock:(void (^)(NSError * error))failure;
 
 @end
