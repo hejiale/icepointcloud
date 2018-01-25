@@ -24,6 +24,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *insertWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *scanButton;
+@property (strong, nonatomic) IBOutlet UIView *selectMemberCardView;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -101,17 +102,29 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
             [IPCPayOrderManager sharedManager].isValiateMember = YES;
             [weakSelf reloadCustomerInfo];
         }];
+        [[_infoView rac_signalForSelector:@selector(selectMemberCardAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+            [weakSelf loadSelectMemberCoverView];
+        }];
     }
     return _infoView;
 }
 
 - (void)loadCustomerInfoView
 {
+    if (self.infoView) {
+        [self.infoView removeFromSuperview];
+        self.infoView = nil;
+    }
     self.bottomConstraint.constant = 60;
     [self.infoView updateCustomerInfo];
     [self.customInfoContentView addSubview:self.infoView];
     [self.customInfoContentView bringSubviewToFront:self.infoView];
     [self.customerCollectionView reloadData];
+}
+
+- (void)loadSelectMemberCoverView
+{
+    [[IPCCommonUI currentView] addSubview:self.selectMemberCardView];
 }
 
 #pragma mark //Refresh Methods
@@ -243,6 +256,20 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self presentViewController:self.cameraNav  animated:YES completion:nil];
 }
 
+
+- (IBAction)dismissMemberCardViewAction:(id)sender {
+    [self.selectMemberCardView removeFromSuperview];
+}
+
+- (IBAction)selectMemberCardAction:(id)sender {
+    [self.selectMemberCardView removeFromSuperview];
+}
+
+- (IBAction)selectFamilyCardAction:(id)sender {
+    [self.selectMemberCardView removeFromSuperview];
+}
+
+
 - (void)showEditCustomerView
 {
     __weak typeof(self) weakSelf = self;
@@ -294,6 +321,8 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     
     [self loadCustomerInfoView];
 }
+
+
 
 #pragma mark //UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{

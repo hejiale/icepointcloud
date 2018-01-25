@@ -16,6 +16,7 @@
                 <outlet property="customerCollectionView" destination="apX-7c-Lcn" id="KnP-U4-e0L"/>
                 <outlet property="insertWidthConstraint" destination="2Y6-K7-PdK" id="0Sh-Di-EI2"/>
                 <outlet property="scanButton" destination="LfE-0p-ttO" id="0LD-XQ-VJt"/>
+                <outlet property="selectMemberCardView" destination="XhJ-ip-ffb" id="7mB-Ua-LaW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -141,6 +142,70 @@
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
         </view>
+        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XhJ-ip-ffb">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B5r-Fx-uzp">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="704"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.2041416952" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="0yp-kl-gD2" appends="YES" id="O6t-rw-R0d"/>
+                    </connections>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FXB-ds-TAR">
+                    <rect key="frame" x="392" y="292" width="240" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Mb-hN-MiP">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="xq9-OG-KN1"/>
+                            </constraints>
+                            <connections>
+                                <action selector="selectMemberCardAction:" destination="-1" eventType="touchUpInside" id="Gup-VU-qqe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIR-Z5-P7b">
+                            <rect key="frame" x="0.0" y="60" width="240" height="60"/>
+                            <connections>
+                                <action selector="selectFamilyCardAction:" destination="-1" eventType="touchUpInside" id="GHc-RM-2gn"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="240" id="6ut-Ct-Ayd"/>
+                        <constraint firstAttribute="bottom" secondItem="GIR-Z5-P7b" secondAttribute="bottom" id="7W6-jf-qc1"/>
+                        <constraint firstAttribute="trailing" secondItem="GIR-Z5-P7b" secondAttribute="trailing" id="DIu-lO-Xak"/>
+                        <constraint firstItem="GIR-Z5-P7b" firstAttribute="leading" secondItem="FXB-ds-TAR" secondAttribute="leading" id="NSK-UD-u3Z"/>
+                        <constraint firstItem="GIR-Z5-P7b" firstAttribute="top" secondItem="0Mb-hN-MiP" secondAttribute="bottom" id="QIu-Cb-Aak"/>
+                        <constraint firstItem="0Mb-hN-MiP" firstAttribute="top" secondItem="FXB-ds-TAR" secondAttribute="top" id="RK0-c8-rTO"/>
+                        <constraint firstAttribute="height" constant="120" id="f3H-Nz-x9q"/>
+                        <constraint firstAttribute="trailing" secondItem="0Mb-hN-MiP" secondAttribute="trailing" id="mLg-AU-aYh"/>
+                        <constraint firstItem="0Mb-hN-MiP" firstAttribute="leading" secondItem="FXB-ds-TAR" secondAttribute="leading" id="r9B-ua-WEA"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="B5r-Fx-uzp" secondAttribute="bottom" id="D7H-Dg-8G4"/>
+                <constraint firstItem="B5r-Fx-uzp" firstAttribute="leading" secondItem="XhJ-ip-ffb" secondAttribute="leading" id="RR7-Vi-0Zt"/>
+                <constraint firstItem="FXB-ds-TAR" firstAttribute="centerX" secondItem="XhJ-ip-ffb" secondAttribute="centerX" id="Uen-us-hPp"/>
+                <constraint firstItem="FXB-ds-TAR" firstAttribute="centerY" secondItem="XhJ-ip-ffb" secondAttribute="centerY" id="dfu-6l-LEy"/>
+                <constraint firstItem="B5r-Fx-uzp" firstAttribute="top" secondItem="XhJ-ip-ffb" secondAttribute="top" id="rWJ-ug-K2d"/>
+                <constraint firstAttribute="trailing" secondItem="B5r-Fx-uzp" secondAttribute="trailing" id="zH2-jZ-vfp"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="398" y="875"/>
+        </view>
+        <tapGestureRecognizer id="0yp-kl-gD2">
+            <connections>
+                <action selector="dismissMemberCardViewAction:" destination="-1" id="PSH-AM-jX0"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="icon_alert_selectCustomer" width="91" height="125"/>

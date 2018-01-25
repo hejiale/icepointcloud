@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *upgradeMemberButton;
 @property (weak, nonatomic) IBOutlet UIButton *memberValiteStatus;
 @property (weak, nonatomic) IBOutlet UIButton *forcedButton;
+@property (weak, nonatomic) IBOutlet UILabel *totalPayLabel;
 
 
 @end
@@ -64,6 +65,10 @@
     
 }
 
+
+- (IBAction)selectMemberCardAction:(id)sender {
+}
+
 - (void)updateCustomerInfo
 {
     IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
@@ -77,9 +82,10 @@
     [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
     [self.birthdayLabel setText:customer.birthday];
     [self.memberIdentityLabel setText:(customer.memberLevel ? @"会员" : @"非会员")];
+    [self.totalPayLabel setText:[NSString stringWithFormat:@"%.2f", customer.consumptionAmount]];
     
     if (customer.memberLevel) {
-        [self showMemberInfoView];
+        [self.upgradeMemberButton setHidden:YES];
         [self.pointLabel setText:[NSString stringWithFormat:@"%d",customer.integral]];
         [self.memberLevelLabel setText:customer.memberLevel];
         [self.growthValueLabel setText:customer.membergrowth];
@@ -87,7 +93,7 @@
         [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%",customer.discount*10]];
         [self.balanceLabel setText:[NSString stringWithFormat:@"%.2f",customer.balance]];
     }else{
-        [self hideMemberInfoView];
+        [self.upgradeMemberButton setHidden:NO];
     }
 
     if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
@@ -110,34 +116,5 @@
         [self.forcedButton setHidden:YES];
     }
 }
-
-- (void)showMemberInfoView
-{
-    [self.upgradeMemberButton setHidden:YES];
-    [self.memberRightView setHidden:NO];
-    [self.memberIdentifyView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UILabel class]]) {
-            UILabel * label = (UILabel *)obj;
-            if (label.tag > 0) {
-                [label setHidden:NO];
-            }
-        }
-    }];
-}
-
-- (void)hideMemberInfoView
-{
-    [self.upgradeMemberButton setHidden:NO];
-    [self.memberRightView setHidden:YES];
-    [self.memberIdentifyView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UILabel class]]) {
-            UILabel * label = (UILabel *)obj;
-            if (label.tag > 0) {
-                [label setHidden:YES];
-            }
-        }
-    }];
-}
-
 
 @end
