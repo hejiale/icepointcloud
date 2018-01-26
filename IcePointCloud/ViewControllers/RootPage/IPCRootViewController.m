@@ -41,9 +41,9 @@
     [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x)
      {
         __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (self.selectedIndex == 1) {
+        if (weakSelf.selectedIndex == 1) {
             [strongSelf.productVC onFilterProducts];
-        }else if (self.selectedIndex == 3){
+        }else if (weakSelf.selectedIndex == 3){
             [strongSelf.tryVC onFilterProducts];
         }
     }];

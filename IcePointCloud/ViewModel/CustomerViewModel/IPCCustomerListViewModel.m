@@ -40,6 +40,56 @@
      }];
 }
 
+- (void)queryCustomerDetail:(void(^)())complete
+{
+    [IPCCommonUI show];
+    
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
+                                                        SuccessBlock:^(id responseValue)
+     {
+         [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
+         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
+         if (complete) {
+             complete();
+         }
+         
+         [IPCCommonUI hiden];
+     } FailureBlock:^(NSError *error) {
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:error.domain];
+         }
+     }];
+}
+
+- (void)validationMemberRequest:(NSString *)code Complete:(void(^)())complete
+{
+    [IPCCustomerRequestManager validateCustomerWithCode:code
+                                           SuccessBlock:^(id responseValue)
+     {
+         [IPCPayOrderManager sharedManager].isValiateMember = YES;
+         
+         NSString * customerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
+         if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
+             [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
+         }else{
+             if (complete) {
+                 complete();
+             }
+             [IPCCommonUI showSuccess:@"验证会员成功!"];
+         }
+     } FailureBlock:^(NSError *error) {
+         if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
+             [IPCCommonUI showError:@"会员码失效!"];
+         }else{
+             [IPCCommonUI showError:@"验证会员失败!"];
+         }
+         if (complete) {
+             complete();
+         }
+         [IPCPayOrderManager sharedManager].isValiateMember = NO;
+     }];
+}
+
 #pragma mark //Parse Normal Glass Data
 - (void)parseCustomerListData:(id)response
 {

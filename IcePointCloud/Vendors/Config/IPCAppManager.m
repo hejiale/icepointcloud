@@ -222,9 +222,11 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)queryPriceStrategy:(void (^)(NSError *))complete
 {
+    __weak typeof(self) weakSelf = self;
     [IPCGoodsRequestManager queryPriceStrategyWithSuccessBlock:^(id responseValue) {
-        self.priceStrategy = [[IPCPriceStrategyResult alloc]initWithResponseValue:responseValue];
-        self.currentStrategy = self.priceStrategy.strategyArray[0];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.priceStrategy = [[IPCPriceStrategyResult alloc]initWithResponseValue:responseValue];
+        strongSelf.currentStrategy = strongSelf.priceStrategy.strategyArray[0];
         
         if (complete) {
             complete(nil);
@@ -238,9 +240,11 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)getCompanyConfig:(void (^)(NSError *))complete
 {
+    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager getCompanyConfigWithSuccessBlock:^(id responseValue)
      {
-         self.companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         strongSelf.companyCofig = [IPCCompanyConfig mj_objectWithKeyValues:responseValue];
          
          if (complete) {
              complete(nil);
@@ -254,9 +258,11 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
 
 - (void)getAuths:(void(^)(NSError *))complete
 {
+    __weak typeof(self) weakSelf = self;
     [IPCPayOrderRequestManager getAuthWithSuccessBlock:^(id responseValue)
     {
-        self.authList = [IPCAuthList mj_objectWithKeyValues:responseValue];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.authList = [IPCAuthList mj_objectWithKeyValues:responseValue];
         
         if (complete) {
             complete(nil);

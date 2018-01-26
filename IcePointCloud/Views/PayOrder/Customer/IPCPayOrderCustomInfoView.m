@@ -65,10 +65,6 @@
     
 }
 
-
-- (IBAction)selectMemberCardAction:(id)sender {
-}
-
 - (void)updateCustomerInfo
 {
     IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;

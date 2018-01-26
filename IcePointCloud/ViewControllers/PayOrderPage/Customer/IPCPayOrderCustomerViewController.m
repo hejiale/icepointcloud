@@ -24,7 +24,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *insertWidthConstraint;
 @property (weak, nonatomic) IBOutlet UIButton *scanButton;
-@property (strong, nonatomic) IBOutlet UIView *selectMemberCardView;
 
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
@@ -102,9 +101,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
             [IPCPayOrderManager sharedManager].isValiateMember = YES;
             [weakSelf reloadCustomerInfo];
         }];
-        [[_infoView rac_signalForSelector:@selector(selectMemberCardAction:)] subscribeNext:^(RACTuple * _Nullable x) {
-            [weakSelf loadSelectMemberCoverView];
-        }];
     }
     return _infoView;
 }
@@ -120,11 +116,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     [self.customInfoContentView addSubview:self.infoView];
     [self.customInfoContentView bringSubviewToFront:self.infoView];
     [self.customerCollectionView reloadData];
-}
-
-- (void)loadSelectMemberCoverView
-{
-    [[IPCCommonUI currentView] addSubview:self.selectMemberCardView];
 }
 
 #pragma mark //Refresh Methods
@@ -175,47 +166,18 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)queryCustomerDetail
 {
-    [IPCCommonUI show];
-    
     __weak typeof(self) weakSelf = self;
-    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
-                                                        SuccessBlock:^(id responseValue)
-     {
-         [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
-         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
-         [weakSelf reloadCustomerInfo];
-         
-         [IPCCommonUI hiden];
-     } FailureBlock:^(NSError *error) {
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:error.domain];
-         }
-     }];
+    [self.viewModel queryCustomerDetail:^{
+        [weakSelf reloadCustomerInfo];
+    }];
 }
 
 - (void)validationMemberRequest:(NSString *)code
 {
-    [IPCCustomerRequestManager validateCustomerWithCode:code
-                                           SuccessBlock:^(id responseValue)
-     {
-         [IPCPayOrderManager sharedManager].isValiateMember = YES;
-         
-         NSString * customerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
-         if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
-             [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-         }else{
-             [self reloadCustomerInfo];
-             [IPCCommonUI showSuccess:@"验证会员成功!"];
-         }
-     } FailureBlock:^(NSError *error) {
-         if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
-             [IPCCommonUI showError:@"会员码失效!"];
-         }else{
-             [IPCCommonUI showError:@"验证会员失败!"];
-         }
-         [self reloadCustomerInfo];
-         [IPCPayOrderManager sharedManager].isValiateMember = NO;
-     }];
+    __weak typeof(self) weakSelf = self;
+    [self.viewModel validationMemberRequest:code Complete:^{
+        [weakSelf reloadCustomerInfo];
+    }];
 }
 
 #pragma mark //Reload CollectionView
@@ -250,25 +212,11 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
-        [self validationMemberRequest:result];
+        [weakSelf validationMemberRequest:result];
     }];
     self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
     [self presentViewController:self.cameraNav  animated:YES completion:nil];
 }
-
-
-- (IBAction)dismissMemberCardViewAction:(id)sender {
-    [self.selectMemberCardView removeFromSuperview];
-}
-
-- (IBAction)selectMemberCardAction:(id)sender {
-    [self.selectMemberCardView removeFromSuperview];
-}
-
-- (IBAction)selectFamilyCardAction:(id)sender {
-    [self.selectMemberCardView removeFromSuperview];
-}
-
 
 - (void)showEditCustomerView
 {

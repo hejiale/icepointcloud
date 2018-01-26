@@ -29,6 +29,23 @@ typedef void(^CompleteBlock)(NSError *error);
 
 
 /**
+ Query Customer Detail
+
+ @param complete 
+ */
+- (void)queryCustomerDetail:(void(^)())complete;
+
+
+/**
+ Validation Member
+
+ @param code
+ @param complete 
+ */
+- (void)validationMemberRequest:(NSString *)code Complete:(void(^)())complete;
+
+
+/**
   Clear All Data
  */
 - (void)resetData;

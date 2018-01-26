@@ -225,22 +225,6 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZqV-vN-e0X">
-                            <rect key="frame" x="240" y="-1.5" width="80" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="UcV-fe-NOJ"/>
-                                <constraint firstAttribute="width" constant="80" id="goL-90-LE8"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <inset key="titleEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <inset key="imageEdgeInsets" minX="55" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            <state key="normal" title="会员卡" image="icon_replace">
-                                <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="selectMemberCardAction:" destination="-1" eventType="touchUpInside" id="DBh-g2-GAQ"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -249,12 +233,10 @@
                         <constraint firstItem="hpY-TD-5Yr" firstAttribute="leading" secondItem="w1p-Ni-sQn" secondAttribute="leading" constant="20" id="76t-2a-bZ4"/>
                         <constraint firstItem="Rco-hO-of2" firstAttribute="leading" secondItem="9BD-Tm-fU4" secondAttribute="trailing" constant="10" id="Bcw-Eu-PaH"/>
                         <constraint firstItem="nsy-zi-uNb" firstAttribute="leading" secondItem="w1p-Ni-sQn" secondAttribute="leading" constant="20" id="JW6-MM-dY8"/>
-                        <constraint firstItem="ZqV-vN-e0X" firstAttribute="centerY" secondItem="nsy-zi-uNb" secondAttribute="centerY" id="KUj-fX-MLX"/>
                         <constraint firstItem="jVE-SB-LCp" firstAttribute="leading" secondItem="w1p-Ni-sQn" secondAttribute="leading" constant="20" id="On0-FK-Nga"/>
                         <constraint firstAttribute="trailing" secondItem="Rco-hO-of2" secondAttribute="trailing" id="TVV-eL-J44"/>
                         <constraint firstAttribute="trailing" secondItem="4Ez-6D-DvA" secondAttribute="trailing" id="U2Z-Wi-iro"/>
                         <constraint firstItem="nsy-zi-uNb" firstAttribute="top" secondItem="w1p-Ni-sQn" secondAttribute="top" id="Vft-Rg-if6"/>
-                        <constraint firstItem="ZqV-vN-e0X" firstAttribute="leading" secondItem="Gv2-m1-nDq" secondAttribute="leading" id="Xhu-Oy-PPM"/>
                         <constraint firstItem="Gv2-m1-nDq" firstAttribute="centerY" secondItem="epH-aA-Kpg" secondAttribute="centerY" id="Y8n-ea-CHr"/>
                         <constraint firstItem="epH-aA-Kpg" firstAttribute="leading" secondItem="jVE-SB-LCp" secondAttribute="trailing" constant="10" id="YWp-do-Vpu"/>
                         <constraint firstItem="Gv2-m1-nDq" firstAttribute="leading" secondItem="epH-aA-Kpg" secondAttribute="trailing" constant="50" id="Z08-Fd-B6c"/>
@@ -461,7 +443,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_replace" width="22" height="19"/>
         <image name="icon_update_customer" width="22" height="22"/>
         <image name="tag_memberRight" width="94" height="27"/>
     </resources>

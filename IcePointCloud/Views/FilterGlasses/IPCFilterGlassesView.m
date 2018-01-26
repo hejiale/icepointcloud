@@ -190,11 +190,10 @@ static NSString * const chooseIdentifier     = @"ChooseTypeCellIdentifier";
 
 - (IPCChooseCategoryView *)categoryView{
     if (!_categoryView) {
-        __weak typeof(self) weakSelf = self;
         _categoryView = [[IPCChooseCategoryView alloc]initWithFrame:self.rightView.bounds CategoryList:[[self.dataSource filterDataSourceResult] allCategoryName] FilterType:[self.dataSource filterType] Complete:^(IPCTopFilterType type)
                          {
-                             if ([weakSelf.delegate respondsToSelector:@selector(filterGlassesWithClassType:)])
-                                 [weakSelf.delegate filterGlassesWithClassType:type];
+                             if ([self.delegate respondsToSelector:@selector(filterGlassesWithClassType:)])
+                                 [self.delegate filterGlassesWithClassType:type];
                          }];
     }
     return _categoryView;
