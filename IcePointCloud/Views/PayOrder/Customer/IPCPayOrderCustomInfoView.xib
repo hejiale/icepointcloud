@@ -87,7 +87,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTB-T6-fVO">
-                    <rect key="frame" x="348" y="20" width="60" height="30"/>
+                    <rect key="frame" x="348" y="50" width="60" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="x8Z-ye-8fu"/>
                         <constraint firstAttribute="height" constant="30" id="xo9-OB-vyf"/>
@@ -433,7 +433,7 @@
                 <constraint firstItem="hfJ-8b-gTG" firstAttribute="centerY" secondItem="iHy-4f-5aR" secondAttribute="centerY" id="ruX-DH-6Sz"/>
                 <constraint firstItem="Dwv-9h-jAw" firstAttribute="centerY" secondItem="hfJ-8b-gTG" secondAttribute="centerY" id="tta-6Y-dzB"/>
                 <constraint firstItem="QNg-98-Svb" firstAttribute="leading" secondItem="jg0-Js-dlC" secondAttribute="trailing" constant="50" id="upT-3W-YpJ"/>
-                <constraint firstItem="mTB-T6-fVO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="vMB-dH-uCU"/>
+                <constraint firstItem="mTB-T6-fVO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="vMB-dH-uCU"/>
                 <constraint firstItem="V0K-hb-zX6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="wFg-U7-mMK"/>
                 <constraint firstItem="jg0-Js-dlC" firstAttribute="leading" secondItem="AmS-xy-5xq" secondAttribute="trailing" constant="10" id="xLh-Ul-LhK"/>
             </constraints>
