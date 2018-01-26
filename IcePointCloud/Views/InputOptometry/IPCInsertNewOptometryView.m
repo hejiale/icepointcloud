@@ -190,6 +190,11 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (![IPCCommon judgeIsNumber:string])
         return NO;
+    if (textField.tag != 0 && textField.tag != 1 && textField.tag != 3 && textField.tag != 6 && textField.tag != 7 && textField.tag != 9) {
+        if (![IPCCommon judgeIsFloatNumber:string]) {
+            return NO;
+        }
+    }
     return YES;
 }
 
@@ -209,7 +214,7 @@
     
     if (str.length > 0) {
         if (textField.tag != 4 && textField.tag != 10) {
-            if (textField.tag == 2 || textField.tag == 9)
+            if (textField.tag == 2 || textField.tag == 8)
             {
                 if ([str doubleValue] >= 0 && [str doubleValue] <= 180) {
                     [textField setText:[NSString stringWithFormat:@"%.f",[str doubleValue]]];
