@@ -57,6 +57,16 @@
                            FailureBlock:(void (^)(NSError * error))failure;
 
 
+
+/**
+ Query Store
+
+ @param success 
+ @param failure
+ */
++ (void)queryAllStoreWithSuccessBlock:(void (^)(id responseValue))success
+                         FailureBlock:(void (^)(NSError * error))failure;
+
 /**
  QUERY Employee Account
  

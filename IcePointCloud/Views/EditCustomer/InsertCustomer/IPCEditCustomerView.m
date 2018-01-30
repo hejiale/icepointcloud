@@ -9,7 +9,9 @@
 #import "IPCEditCustomerView.h"
 
 @interface IPCEditCustomerView()<UITextFieldDelegate,IPCDatePickViewControllerDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
-
+{
+    NSString * selectStoreId;
+}
 @property (weak, nonatomic) IBOutlet UITextField *customerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *ageTextField;
@@ -20,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UILabel *customerStyleLabel;
 @property (weak, nonatomic) IBOutlet UITextField *customStyleTextField;
+@property (weak, nonatomic) IBOutlet UITextField *storeTextField;
+
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
 @end
@@ -45,9 +49,13 @@
         
         [self.birthDayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customStyleTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
+        [self.storeTextField setRightButton:self Action:@selector(selectStoreAction) OnView:self.editContentView];
         
         [[IPCCustomerManager sharedManager] queryCustomerType];
+        [[IPCCustomerManager sharedManager] queryStore];
         [self.customStyleTextField setText: @"自然进店"];
+        [self.storeTextField setText:[IPCAppManager sharedManager].storeResult.storeName];
+        selectStoreId = [IPCAppManager sharedManager].storeResult.storeId;
     
     }
     return self;
@@ -128,6 +136,15 @@
     [parameterTableVC showWithPosition:CGPointMake(self.customStyleTextField.jk_width/2, self.customStyleTextField.jk_height) Size:CGSizeMake(200, 150) Owner:self.customStyleTextField Direction:UIPopoverArrowDirectionUp];
 }
 
+- (void)selectStoreAction
+{
+    IPCParameterTableViewController * parameterTableVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
+    [parameterTableVC setDataSource:self];
+    [parameterTableVC setDelegate:self];
+    [parameterTableVC.view setTag:100];
+    [parameterTableVC showWithPosition:CGPointMake(self.storeTextField.jk_width/2, self.storeTextField.jk_height) Size:CGSizeMake(200, 150) Owner:self.storeTextField Direction:UIPopoverArrowDirectionUp];
+}
+
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -160,13 +177,21 @@
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView
 {
-    return [IPCCustomerManager sharedManager].customerTypeNameArray;
+    if (tableView.view.tag == 100) {
+        return [[IPCCustomerManager sharedManager] storeNameArray];
+    }
+    return [[IPCCustomerManager sharedManager] customerTypeNameArray];
 }
 
 #pragma mark //IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
-    [self.customStyleTextField setText:parameter];
+    if (tableView.view.tag == 100) {
+        [self.storeTextField setText:parameter];
+        selectStoreId = [[IPCCustomerManager sharedManager] storeId:parameter];
+    }else{
+        [self.customStyleTextField setText:parameter];
+    }
 }
 
 @end

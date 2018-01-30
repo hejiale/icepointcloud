@@ -40,6 +40,16 @@
     return customerTypeNameArray;
 }
 
+- (NSArray *)storeNameArray{
+    NSMutableArray * storeNameArray = [[NSMutableArray alloc]init];
+    
+    [self.storeList.storeArray enumerateObjectsUsingBlock:^(IPCStore * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [storeNameArray addObject:obj.storeName];
+    }];
+    [storeNameArray insertObject:@"无门店" atIndex:0];
+    return storeNameArray;
+}
+
 - (NSArray *)memberLevelNameArray{
     NSMutableArray * memberLevelNameArray = [[NSMutableArray alloc]init];
     
@@ -79,6 +89,15 @@
     return memberLevelId;
 }
 
+- (NSString *)storeId:(NSString *)storeName{
+    __block NSString * storeId = @"";
+    [[IPCCustomerManager sharedManager].storeList.storeArray enumerateObjectsUsingBlock:^(IPCStore * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.storeName isEqualToString:storeName]) {
+            storeId = obj.storeId;
+        }
+    }];
+    return storeId;
+}
 
 #pragma mark //Request Data
 - (void)queryEmployee
@@ -89,12 +108,12 @@
 - (void)queryEmploye:(NSString *)keyWord
 {
     [IPCPayOrderRequestManager queryEmployeWithKeyword:keyWord SuccessBlock:^(id responseValue){
-         self.employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
-     } FailureBlock:^(NSError *error) {
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:error.domain];
-         }
-     }];
+        self.employeList = [[IPCEmployeeList alloc] initWithResponseObject:responseValue];
+    } FailureBlock:^(NSError *error) {
+        if ([error code] != NSURLErrorCancelled) {
+            [IPCCommonUI showError:error.domain];
+        }
+    }];
 }
 
 - (void)queryMemberLevel
@@ -117,6 +136,18 @@
             [IPCCommonUI showError:error.domain];
         }
     }];
+}
+
+- (void)queryStore
+{
+    [IPCUserRequestManager queryAllStoreWithSuccessBlock:^(id responseValue)
+     {
+         self.storeList = [[IPCStoreList alloc]initWithResponseObject:responseValue];
+     } FailureBlock:^(NSError *error) {
+         if ([error code] != NSURLErrorCancelled) {
+             [IPCCommonUI showError:error.domain];
+         }
+     }];
 }
 
 @end

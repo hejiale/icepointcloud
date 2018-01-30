@@ -283,6 +283,8 @@
 		CB728AE71FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB728AE51FC7FEC900354E4C /* IPCPayOrderEditPayCashRecordCell.xib */; };
 		CB728AEC1FC8179800354E4C /* IPCInsertNewOptometryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB728AEB1FC8179800354E4C /* IPCInsertNewOptometryView.xib */; };
 		CB728AEF1FC8184E00354E4C /* IPCInsertNewOptometryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB728AEE1FC8184E00354E4C /* IPCInsertNewOptometryView.m */; };
+		CB88A9C220204C7800460EB3 /* IPCStoreList.m in Sources */ = {isa = PBXBuildFile; fileRef = CB88A9C120204C7800460EB3 /* IPCStoreList.m */; };
+		CB88A9C520204C8A00460EB3 /* IPCStore.m in Sources */ = {isa = PBXBuildFile; fileRef = CB88A9C420204C8A00460EB3 /* IPCStore.m */; };
 		CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */; };
 		CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */; };
 		CBACAF941FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBACAF921FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m */; };
@@ -793,6 +795,10 @@
 		CB728AEB1FC8179800354E4C /* IPCInsertNewOptometryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCInsertNewOptometryView.xib; sourceTree = "<group>"; };
 		CB728AED1FC8184D00354E4C /* IPCInsertNewOptometryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCInsertNewOptometryView.h; sourceTree = "<group>"; };
 		CB728AEE1FC8184E00354E4C /* IPCInsertNewOptometryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCInsertNewOptometryView.m; sourceTree = "<group>"; };
+		CB88A9C020204C7800460EB3 /* IPCStoreList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCStoreList.h; sourceTree = "<group>"; };
+		CB88A9C120204C7800460EB3 /* IPCStoreList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCStoreList.m; sourceTree = "<group>"; };
+		CB88A9C320204C8A00460EB3 /* IPCStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCStore.h; sourceTree = "<group>"; };
+		CB88A9C420204C8A00460EB3 /* IPCStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCStore.m; sourceTree = "<group>"; };
 		CB958F561FBAEF3800B882B7 /* IPCCustomKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomKeyboard.h; sourceTree = "<group>"; };
 		CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomKeyboard.m; sourceTree = "<group>"; };
 		CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCCustomKeyboard.xib; sourceTree = "<group>"; };
@@ -1705,6 +1711,7 @@
 				CB153F7C1FD64A6900B2C4AB /* HeadImage */,
 				CB153F7B1FD64A4B00B2C4AB /* InsertType */,
 				CB0F554E1F98845A003707F2 /* Employee */,
+				CB88A9BF20204C5F00460EB3 /* Store */,
 			);
 			path = InsertCustomer;
 			sourceTree = "<group>";
@@ -2326,6 +2333,17 @@
 			path = OfferOrder;
 			sourceTree = "<group>";
 		};
+		CB88A9BF20204C5F00460EB3 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				CB88A9C020204C7800460EB3 /* IPCStoreList.h */,
+				CB88A9C120204C7800460EB3 /* IPCStoreList.m */,
+				CB88A9C320204C8A00460EB3 /* IPCStore.h */,
+				CB88A9C420204C8A00460EB3 /* IPCStore.m */,
+			);
+			path = Store;
+			sourceTree = "<group>";
+		};
 		CB958F551FBAEEED00B882B7 /* CustomKeyboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -2817,6 +2835,7 @@
 				CB0F55BF1F98845A003707F2 /* IPCTryMatch.m in Sources */,
 				CB0F543C1F988191003707F2 /* IPCSingleModeView.m in Sources */,
 				CB0F53351F9874D8003707F2 /* IPCGlassDetailsViewController.m in Sources */,
+				CB88A9C520204C8A00460EB3 /* IPCStore.m in Sources */,
 				CB32B9631F9F122C002E006C /* IPCUpdatePasswordView.m in Sources */,
 				CB0F54351F988191003707F2 /* IPCLibraryTypeTableView.m in Sources */,
 				CB0F55091F98819C003707F2 /* IPCManagerOptometryCell.m in Sources */,
@@ -2942,6 +2961,7 @@
 				CB4B414C1FC29D460068E645 /* IPCPayOrderCustomerCollectionViewCell.m in Sources */,
 				CB0F56431F988B05003707F2 /* UIView+Badge.m in Sources */,
 				CB0F55A01F98845A003707F2 /* IPCDetailCustomer.m in Sources */,
+				CB88A9C220204C7800460EB3 /* IPCStoreList.m in Sources */,
 				CB0F533E1F987523003707F2 /* IPCTryGlassesViewController.m in Sources */,
 				CB64D22F1F99C96C00FBC5F2 /* IPCPayOrderRequestManager.m in Sources */,
 				CB32B9601F9F122C002E006C /* IPCShowContentView.m in Sources */,
