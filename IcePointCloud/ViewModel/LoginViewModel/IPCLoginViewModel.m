@@ -44,6 +44,9 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     NSString * Tusername = [userName jk_trimmingWhitespace];
     NSString * Tpassword = [password jk_trimmingWhitespace];
     
+    [IPCAppManager sharedManager].userName = Tusername;
+    [IPCAppManager sharedManager].password = Tpassword;
+    
     if (!Tusername.length){
         [IPCCommonUI showError:AccountErrorMessage];
         if (failed) {
