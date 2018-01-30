@@ -78,7 +78,7 @@
     [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
     [self.birthdayLabel setText:customer.birthday];
     [self.memberIdentityLabel setText:(customer.memberLevel ? @"会员" : @"非会员")];
-    [self.totalPayLabel setText:[NSString stringWithFormat:@"%.2f", customer.consumptionAmount]];
+    [self.totalPayLabel setText:[NSString stringWithFormat:@"￥%.2f", customer.consumptionAmount]];
     
     if (customer.memberLevel) {
         [self.upgradeMemberButton setHidden:YES];
@@ -87,7 +87,7 @@
         [self.growthValueLabel setText:customer.membergrowth];
         [self.encryptedPhoneLabel setText:customer.memberPhone];
         [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%",customer.discount*10]];
-        [self.balanceLabel setText:[NSString stringWithFormat:@"%.2f",customer.balance]];
+        [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f",customer.balance]];
     }else{
         [self.upgradeMemberButton setHidden:NO];
     }
