@@ -56,7 +56,7 @@
         [self.customStyleTextField setText: @"自然进店"];
         [self.storeTextField setText:[IPCAppManager sharedManager].storeResult.storeName];
         selectStoreId = [IPCAppManager sharedManager].storeResult.storeId;
-    
+        
     }
     return self;
 }
@@ -83,6 +83,7 @@
                                                           PhotoId:@([IPCHeadImage genderArcdom])
                                                               Age:self.ageTextField.text
                                                        CustomerId:@""
+                                                          StoreId:selectStoreId ? : @""
                                                      SuccessBlock:^(id responseValue)
          {
              [self removeFromSuperview];

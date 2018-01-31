@@ -10,6 +10,7 @@
 #import "IPCPayOrderEditPayCashRecordCell.h"
 #import "IPCPayOrderPayCashRecordCell.h"
 #import "IPCPayCashPayTypeViewCell.h"
+#import "IPCPayCashCustomerListView.h"
 
 static  NSString * const recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
 static  NSString * const editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
@@ -21,6 +22,11 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
 @property (weak, nonatomic) IBOutlet UILabel *remainPayAmountLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *payTypeCollectionView;
+@property (weak, nonatomic) IBOutlet UILabel *introduceTitleLabel;
+@property (weak, nonatomic) IBOutlet UIButton *introducerButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceButtonWidth;
+@property (strong, nonatomic)  IPCPayCashCustomerListView *selectCustomerCoverView;
+
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 @property (nonatomic, strong) IPCPayRecord * insertRecord;
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -56,6 +62,10 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [self addObserver:self forKeyPath:@"currentIndex" options:NSKeyValueObservingOptionNew context:nil];
     
     [self reloadPayStatus];
+    
+    [self getIntegralCanIntroduceStatus];
+    
+    [self reloadIntroducer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -75,7 +85,52 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     return _keyboard;
 }
 
+- (IPCPayCashCustomerListView *)selectCustomerCoverView{
+    if (!_selectCustomerCoverView) {
+        __weak typeof(self) weakSelf = self;
+        _selectCustomerCoverView = [[IPCPayCashCustomerListView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                                           Complete:^(IPCCustomerMode *customer)
+        {
+            [IPCPayOrderManager sharedManager].introducer = customer;
+            [weakSelf reloadIntroducer];
+        }];
+    }
+    return _selectCustomerCoverView;
+}
+
+- (void)reloadIntroducer
+{
+    if ([IPCPayOrderManager sharedManager].introducer) {
+        [self.introducerButton setTitle:[IPCPayOrderManager sharedManager].introducer.customerName forState:UIControlStateNormal];
+    }else{
+        [self.introducerButton setTitle:@"请选择" forState:UIControlStateNormal];
+    }
+    
+    CGFloat width = [self.introducerButton.titleLabel.text jk_sizeWithFont:self.introducerButton.titleLabel.font constrainedToHeight:self.introducerButton.jk_height].width;
+    self.introduceButtonWidth.constant = MAX(width, 70);
+}
+
+#pragma mark //Request Data
+- (void)getIntegralCanIntroduceStatus
+{
+    [IPCPayOrderRequestManager getIntegralCanIntroduceStatusWithSuccessBlock:^(id responseValue) {
+        [self.introducerButton setHidden:![responseValue boolValue]];
+        [self.introduceTitleLabel setHidden:![responseValue boolValue]];
+    } FailureBlock:^(NSError *error) {
+        [IPCCommonUI showError:error.domain];
+    }];
+}
+
 #pragma mark // Clicked Events
+- (IBAction)selectIntroducerAction:(id)sender
+{
+    if (self.selectCustomerCoverView) {
+        self.selectCustomerCoverView = nil;
+    }
+    [[IPCCommonUI currentView] addSubview:self.selectCustomerCoverView];
+}
+
+
 - (void)reloadRemainAmount
 {
     [self.remainPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderManager sharedManager] remainPayPrice]]];
@@ -188,25 +243,25 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     }
     
     if (![IPCPayOrderManager sharedManager].isValiateMember) {
-        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
+        if ([[IPCPayOrderCurrentCustomer sharedManager].currentCustomer userIntegral] > 0 && [payType.payType isEqualToString:@"积分"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
     }
 
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
+    if ([[IPCPayOrderCurrentCustomer sharedManager].currentCustomer userIntegral] == 0 && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
     if (![IPCPayOrderManager sharedManager].isValiateMember) {
-        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
+        if ([[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useBalance] > 0 && [payType.payType isEqualToString:@"储值卡"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
     }
     
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
+    if ([[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useBalance] == 0 && [payType.payType isEqualToString:@"储值卡"]) {
         [IPCCommonUI showError:@"客户无可用储值余额"];
         return;
     }
@@ -243,6 +298,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         [self.payRecordTableView reloadData];
     }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

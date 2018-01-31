@@ -36,7 +36,8 @@
         
         if (_currentCustomer.memberLevel) {
             [self.memberLevlLabel setHidden:NO];
-            [self.memberLevlLabel setText:_currentCustomer.memberLevel];
+            [self.memberLevlLabel setText:_currentCustomer.memberLevel.memberLevel];
+            [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", _currentCustomer.memberLevel.discount*10]];
         }else{
             [self.upgradeMemberButton setHidden:NO];
         }
@@ -47,9 +48,6 @@
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.growthLabel setText:_currentCustomer.membergrowth];
         [self.ageLabel setText:_currentCustomer.age];
-        if (_currentCustomer.discount) {
-            [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", _currentCustomer.discount*10]];
-        }
     }
 }
 

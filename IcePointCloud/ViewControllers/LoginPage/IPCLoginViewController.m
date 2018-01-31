@@ -49,6 +49,13 @@
     [self.usernameTf setText:[self.loginViewModel userName]];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.loginViewModel testLogin];
+}
+
 #pragma mark //ClickEvents
 - (IBAction)loginAction:(id)sender {
     [self.view endEditing:YES];

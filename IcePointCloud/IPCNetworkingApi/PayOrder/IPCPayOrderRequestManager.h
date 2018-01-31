@@ -124,6 +124,8 @@
                    FailureBlock:(void (^)(NSError *error))failure;
 
 
++ (void)getIntegralCanIntroduceStatusWithSuccessBlock:(void (^)(id responseValue))success
+                                         FailureBlock:(void (^)(NSError *error))failure;
 
 
 @end

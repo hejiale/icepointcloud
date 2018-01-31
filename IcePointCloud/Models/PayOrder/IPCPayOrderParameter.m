@@ -29,6 +29,16 @@
     NSMutableDictionary * formDic = [[NSMutableDictionary alloc]init];
     [formDic setObject:@"FOR_SALES" forKey:@"orderType"];
     [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"customerId"];
+    //转介绍人
+    if ([IPCPayOrderManager sharedManager].introducer) {
+        [formDic setObject:[IPCPayOrderManager sharedManager].introducer.customerID forKey:@"introducerId"];
+    }
+    //家庭组客户id
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.mainMemberLevel) {
+        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.mainMemberLevel.customerId forKey:@"memberCutomerId"];
+    }else{
+        [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"memberCutomerId"];
+    }
     [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
     [formDic setObject:employeeList forKey:@"employeeAchievements"];
     if ([IPCPayOrderManager sharedManager].currentOptometryId) {

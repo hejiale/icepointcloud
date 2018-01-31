@@ -98,4 +98,10 @@
     [self postRequest:nil RequestMethod:PayOrderRequest_GetAuths CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)getIntegralCanIntroduceStatusWithSuccessBlock:(void (^)(id responseValue))success
+                                         FailureBlock:(void (^)(NSError *error))failure
+{
+    [self postRequest:nil RequestMethod:PayOrderRequest_IntegralCanIntroduce CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

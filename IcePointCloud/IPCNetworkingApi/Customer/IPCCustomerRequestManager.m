@@ -71,6 +71,7 @@
                                PhotoId:(NSString *)photoId
                                    Age:(NSString *)age
                             CustomerId:(NSString *)customerId
+                               StoreId:(NSString *)storeId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure
 {
@@ -82,7 +83,9 @@
                              @"photoIdForPos":photoId,
                              @"age":(age ? : @""),
                              @"id":customerId,
-                             @"isPos":@"true"};
+                             @"isPos":@"true",
+                             @"createStore": storeId
+                             };
     [self postRequest:params RequestMethod:CustomerRequest_SaveNewCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 

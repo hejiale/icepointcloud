@@ -16,4 +16,6 @@
 
 - (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password Failed:(void(^)())failed;
 
+- (void)testLogin;
+
 @end

@@ -104,6 +104,7 @@
                                                           PhotoId:@([IPCHeadImage genderArcdom])
                                                               Age:self.ageTextField.text
                                                        CustomerId:self.detailCustomer.customerID
+                                                          StoreId:self.detailCustomer.createStore ? : @""
                                                      SuccessBlock:^(id responseValue)
          {
              [self removeFromSuperview];
@@ -132,10 +133,10 @@
                                                    CustomerId:self.detailCustomer.customerID
                                                  SuccessBlock:nil
                                                  FailureBlock:^(NSError *error) {
-             if ([error code] != NSURLErrorCancelled) {
-                 [IPCCommonUI showError:error.domain];
-             }
-         }];
+                                                     if ([error code] != NSURLErrorCancelled) {
+                                                         [IPCCommonUI showError:error.domain];
+                                                     }
+                                                 }];
     }
 }
 

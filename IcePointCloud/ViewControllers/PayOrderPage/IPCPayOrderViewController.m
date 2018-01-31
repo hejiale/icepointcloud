@@ -209,7 +209,7 @@
             payDiscount = (double)[IPCPayOrderManager sharedManager].discount/100;
         }
         double employeeDiscount = (double)[IPCPayOrderManager sharedManager].employee.discount/100;
-        double customerDiscount = (double)[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.discount/10;
+        double customerDiscount = [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
         
         if (payDiscount < MIN(employeeDiscount > 0 ? employeeDiscount : 1, customerDiscount > 0 ? customerDiscount : 1) && [IPCAppManager sharedManager].companyCofig.autoAuditedSalesOrder){
             [self.offerOrderButton setHidden:NO];

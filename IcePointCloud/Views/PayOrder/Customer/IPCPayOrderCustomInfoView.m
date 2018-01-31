@@ -82,15 +82,16 @@
     
     if (customer.memberLevel) {
         [self.upgradeMemberButton setHidden:YES];
-        [self.pointLabel setText:[NSString stringWithFormat:@"%d",customer.integral]];
-        [self.memberLevelLabel setText:customer.memberLevel];
-        [self.growthValueLabel setText:customer.membergrowth];
-        [self.encryptedPhoneLabel setText:customer.memberPhone];
-        [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%",customer.discount*10]];
-        [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f",customer.balance]];
     }else{
         [self.upgradeMemberButton setHidden:NO];
     }
+    
+    [self.pointLabel setText:[NSString stringWithFormat:@"%.f", [customer userIntegral]]];
+    [self.memberLevelLabel setText:[customer useMemberLevel]];
+    [self.growthValueLabel setText:[customer useMemberGrowth]];
+    [self.encryptedPhoneLabel setText:[customer useMemberPhone]];
+    [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", [customer useDiscount]]];
+    [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f", [customer useBalance]]];
 
     if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
         if ([IPCPayOrderManager sharedManager].isValiateMember){

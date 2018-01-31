@@ -193,6 +193,24 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     }];
 }
 
+- (void)testLogin{
+    __weak typeof(self) weakSelf = self;
+    [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
+        [weakSelf queryAppMessage];
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
+- (void)queryAppMessage
+{
+    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue) {
+        
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark //Clicked Methods
 - (void)syncUserAccountHistory:(NSString *)userName
 {

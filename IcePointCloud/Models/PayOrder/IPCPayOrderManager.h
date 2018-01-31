@@ -42,6 +42,8 @@
 @property (nonatomic, assign, readwrite) BOOL  isValiateMember;
 //是否超额打折
 @property (nonatomic, assign, readwrite) BOOL  isExtraDiscount;
+//选择介绍人
+@property (nonatomic, strong, readwrite) IPCCustomerMode * introducer;
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额

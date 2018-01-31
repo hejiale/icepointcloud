@@ -67,7 +67,7 @@
 
 /**
  SAVE CUSTOMER INFO
-
+ 
  @param customName
  @param phone
  @param gender
@@ -87,6 +87,7 @@
                                PhotoId:(NSString *)photoId
                                    Age:(NSString *)age
                             CustomerId:(NSString *)customerId
+                               StoreId:(NSString *)storeId
                           SuccessBlock:(void (^)(id responseValue))success
                           FailureBlock:(void (^)(NSError * error))failure;
 
@@ -181,14 +182,14 @@
 
 /**
  Upgrade Member
-
+ 
  @param customerId
  @param memberGrowth
  @param memberPhone
  @param integral
  @param balance
  @param success
- @param failure 
+ @param failure
  */
 + (void)upgradeMemberWithCustomerId:(NSString *)customerId
                        MemberGrowth:(double)memberGrowth
@@ -201,7 +202,7 @@
 
 /**
  Validate Customer
-
+ 
  @param code
  @param success
  @param failure
@@ -213,10 +214,10 @@
 
 /**
  Update Member Phone
-
+ 
  @param memberPhone
  @param success
- @param failure 
+ @param failure
  */
 + (void)updateMemberPhoneWithPhone:(NSString *)memberPhone
                         CustomerId:(NSString *)customerId
