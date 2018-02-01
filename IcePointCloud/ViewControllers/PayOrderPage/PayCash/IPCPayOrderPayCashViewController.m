@@ -25,6 +25,9 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 @property (weak, nonatomic) IBOutlet UILabel *introduceTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *introducerButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceButtonWidth;
+
+
+
 @property (strong, nonatomic)  IPCPayCashCustomerListView *selectCustomerCoverView;
 
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;

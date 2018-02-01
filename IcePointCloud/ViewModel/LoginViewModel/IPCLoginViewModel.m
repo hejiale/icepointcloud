@@ -193,6 +193,7 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     }];
 }
 
+
 - (void)testLogin{
     __weak typeof(self) weakSelf = self;
     [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
@@ -204,8 +205,16 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
 
 - (void)queryAppMessage
 {
-    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue) {
-        
+    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue)
+    {
+        if ([responseValue isKindOfClass:[NSArray class]]) {
+            NSString * newVersion = responseValue[1][@"content"];
+            NSString * updateContent = responseValue[2][@"content"];
+            
+            if([[self jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
+                [IPCCommonUI showAlert:@"有新版本更新" Message:updateContent];
+            }
+        }
     } FailureBlock:^(NSError *error) {
         
     }];

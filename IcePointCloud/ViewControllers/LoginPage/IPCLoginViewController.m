@@ -47,14 +47,10 @@
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
     [self.usernameTf setText:[self.loginViewModel userName]];
+    ///延时获取更新版本内容
+    [self.loginViewModel performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    [self.loginViewModel testLogin];
-}
 
 #pragma mark //ClickEvents
 - (IBAction)loginAction:(id)sender {

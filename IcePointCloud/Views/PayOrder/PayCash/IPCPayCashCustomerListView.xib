@@ -58,9 +58,9 @@
                             </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKU-JI-Qv6">
-                            <rect key="frame" x="330" y="20" width="70" height="20"/>
+                            <rect key="frame" x="330" y="15" width="70" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="20" id="Gpe-wo-Ozh"/>
+                                <constraint firstAttribute="height" constant="25" id="Gpe-wo-Ozh"/>
                                 <constraint firstAttribute="width" constant="70" id="U5o-xM-5hU"/>
                             </constraints>
                             <state key="normal" image="icon_back"/>
@@ -72,7 +72,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="zDN-Vz-gYf" firstAttribute="leading" secondItem="hCa-cD-kmq" secondAttribute="leading" constant="20" id="3yT-Bc-dch"/>
-                        <constraint firstItem="zKU-JI-Qv6" firstAttribute="top" secondItem="hCa-cD-kmq" secondAttribute="top" constant="20" id="Fxs-9d-waa"/>
+                        <constraint firstItem="zKU-JI-Qv6" firstAttribute="top" secondItem="hCa-cD-kmq" secondAttribute="top" constant="15" id="Fxs-9d-waa"/>
                         <constraint firstAttribute="width" constant="400" id="Hkd-M2-CDY"/>
                         <constraint firstItem="ZWn-yL-mYh" firstAttribute="leading" secondItem="hCa-cD-kmq" secondAttribute="leading" constant="20" id="IRb-Zn-Da8"/>
                         <constraint firstAttribute="trailing" secondItem="zKU-JI-Qv6" secondAttribute="trailing" id="Ief-v4-4Kn"/>

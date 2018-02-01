@@ -67,6 +67,7 @@ static NSString * const customerListCellIdentifier = @"IPCPayCashCustomerListCel
 #pragma mark //Request Data
 - (void)loadCustomerList
 {
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerListWithKeyword:keyword ? : @""
                                                        Page:currentPage
                                                SuccessBlock:^(id responseValue)
@@ -77,9 +78,9 @@ static NSString * const customerListCellIdentifier = @"IPCPayCashCustomerListCel
                 [self.customerList addObject:obj];
             }
         }];
-        [self reload];
+        [weakSelf reload];
     } FailureBlock:^(NSError *error) {
-        [self reload];
+        [weakSelf reload];
     }];
 }
 

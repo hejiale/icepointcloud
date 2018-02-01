@@ -18,6 +18,7 @@
 @property (nonatomic, copy, readwrite) NSString * age;
 @property (nonatomic, copy, readwrite) NSString * customerPhone;
 @property (nonatomic, copy, readwrite) NSString * createStore;
+@property (nonatomic, copy, readwrite) NSString * createStoreName;
 @property (nonatomic, copy, readwrite) NSString * gender;
 @property (nonatomic, copy, readwrite) NSString * customerName;
 @property (nonatomic, strong, readwrite) IPCMainMemberLevel * mainMemberLevel;

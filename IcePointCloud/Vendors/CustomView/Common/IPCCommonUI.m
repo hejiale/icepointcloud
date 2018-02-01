@@ -87,9 +87,8 @@
 
 + (void)showAlert:(NSString *)alertTitle Message:(NSString *)alertMesg
 {
-    [[UIApplication sharedApplication].keyWindow.rootViewController showAlertWithTitle:alertTitle Message:alertMesg Process:^(IPCAlertController *alertController) {
-        alertController.addCancelTitle(@"返回");
-    } ActionBlock:nil];
+    UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:alertTitle message:alertMesg delegate:nil cancelButtonTitle:@"返回" otherButtonTitles: nil];
+    [alertView show];
 }
 
 + (void)showAlert:(NSString *)title Message:(NSString *)message Owner:(id)owner Done:(void(^)())done

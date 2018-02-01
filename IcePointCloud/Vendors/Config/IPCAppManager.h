@@ -25,7 +25,6 @@ extern NSString *const IPCSearchHistoryListKey;
 extern NSString *const IPCSearchHistoryCodeKey;
 //Save search Key users
 extern NSString *const IPCSearchCustomerkey;
-//Inform the screening homepage search goods
 //Shopping cart change notification
 extern NSString *const IPCNotificationShoppingCartChanged;
 extern NSString *const IPCShoppingCartCountKey;
@@ -128,8 +127,17 @@ extern NSString * const kIPCDeviceLoginUUID;
  */
 - (void)getAuths:(void(^)(NSError *))complete;
 
+
+/**
+ Query WareHouse
+ */
 - (void)loadCurrentWareHouse;
 
+
+
+/**
+ 跳转根控制器
+ */
 - (void)pushToRootViewController;
 
 

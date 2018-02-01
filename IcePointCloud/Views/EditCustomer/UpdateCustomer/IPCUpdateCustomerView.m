@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
 @property (weak, nonatomic) IBOutlet UIView *membePhoneView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
+@property (weak, nonatomic) IBOutlet UITextField *storeTextField;
 
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
@@ -51,10 +52,9 @@
         
         [self.birthdayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customerTypeTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
+        [self.storeTextField setRightButton:self Action:@selector(selectStoreAction) OnView:self.editContentView];
         
-        [[IPCCustomerManager sharedManager] queryCustomerType];
-        [self.customerTypeTextField setText: @"自然进店"];
-        
+        ///更新客户显示信息
         [self updateCustomerInfo];
     }
     return self;
@@ -68,6 +68,11 @@
     [self.birthdayTextField setText:self.detailCustomer.birthday];
     [self.customerTypeTextField setText:self.detailCustomer.customerType];
     [self.encryptedPhoneTextField setText:self.detailCustomer.memberPhone];
+    if (self.detailCustomer.createStoreName.length) {
+        [self.storeTextField setText:self.detailCustomer.createStoreName];
+    }else{
+        [self.storeTextField setText:[IPCAppManager sharedManager].storeResult.storeName];
+    }
     
     if ([self.detailCustomer.gender isEqualToString:@"MALE"]) {
         [self.maleButton setSelected:YES];
@@ -79,7 +84,7 @@
     
     if (!self.detailCustomer.memberLevel) {
         [self.membePhoneView setHidden:YES];
-        self.contentHeight.constant = 470;
+        self.contentHeight.constant = 520;
     }
 }
 
@@ -104,7 +109,7 @@
                                                           PhotoId:@([IPCHeadImage genderArcdom])
                                                               Age:self.ageTextField.text
                                                        CustomerId:self.detailCustomer.customerID
-                                                          StoreId:self.detailCustomer.createStore ? : @""
+                                                          StoreId:[[IPCCustomerManager sharedManager] storeId:self.storeTextField.text]
                                                      SuccessBlock:^(id responseValue)
          {
              [self removeFromSuperview];
@@ -178,6 +183,15 @@
     [parameterTableVC showWithPosition:CGPointMake(self.customerTypeTextField.jk_width/2, self.customerTypeTextField.jk_height) Size:CGSizeMake(200, 150) Owner:self.customerTypeTextField Direction:UIPopoverArrowDirectionUp];
 }
 
+- (void)selectStoreAction
+{
+    IPCParameterTableViewController * parameterTableVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
+    [parameterTableVC setDataSource:self];
+    [parameterTableVC setDelegate:self];
+    [parameterTableVC.view setTag:100];
+    [parameterTableVC showWithPosition:CGPointMake(self.storeTextField.jk_width/2, self.storeTextField.jk_height) Size:CGSizeMake(200, 150) Owner:self.storeTextField Direction:UIPopoverArrowDirectionUp];
+}
+
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -205,13 +219,20 @@
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView
 {
+    if (tableView.view.tag == 100) {
+        return [[IPCCustomerManager sharedManager] storeNameArray];
+    }
     return [IPCCustomerManager sharedManager].customerTypeNameArray;
 }
 
 #pragma mark //IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
-    [self.customerTypeTextField setText:parameter];
+    if (tableView.view.tag == 100) {
+        [self.storeTextField setText:parameter];
+    }else{
+        [self.customerTypeTextField setText:parameter];
+    }
 }
 
 

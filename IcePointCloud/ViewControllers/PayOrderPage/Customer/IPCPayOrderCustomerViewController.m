@@ -53,6 +53,9 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         self.insertWidthConstraint.constant = 200;
         [self.scanButton setHidden:NO];
     }
+    ///获取客户类别和门店
+    [[IPCCustomerManager sharedManager] queryCustomerType];
+    [[IPCCustomerManager sharedManager] queryStore];
 }
 
 #pragma mark //Set UI

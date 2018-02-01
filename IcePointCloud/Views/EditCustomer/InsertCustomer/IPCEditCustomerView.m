@@ -9,9 +9,7 @@
 #import "IPCEditCustomerView.h"
 
 @interface IPCEditCustomerView()<UITextFieldDelegate,IPCDatePickViewControllerDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
-{
-    NSString * selectStoreId;
-}
+
 @property (weak, nonatomic) IBOutlet UITextField *customerNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *ageTextField;
@@ -51,12 +49,8 @@
         [self.customStyleTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
         [self.storeTextField setRightButton:self Action:@selector(selectStoreAction) OnView:self.editContentView];
         
-        [[IPCCustomerManager sharedManager] queryCustomerType];
-        [[IPCCustomerManager sharedManager] queryStore];
         [self.customStyleTextField setText: @"自然进店"];
         [self.storeTextField setText:[IPCAppManager sharedManager].storeResult.storeName];
-        selectStoreId = [IPCAppManager sharedManager].storeResult.storeId;
-        
     }
     return self;
 }
@@ -83,7 +77,7 @@
                                                           PhotoId:@([IPCHeadImage genderArcdom])
                                                               Age:self.ageTextField.text
                                                        CustomerId:@""
-                                                          StoreId:selectStoreId ? : @""
+                                                          StoreId:[[IPCCustomerManager sharedManager] storeId:self.storeTextField.text]
                                                      SuccessBlock:^(id responseValue)
          {
              [self removeFromSuperview];
@@ -189,7 +183,6 @@
 {
     if (tableView.view.tag == 100) {
         [self.storeTextField setText:parameter];
-        selectStoreId = [[IPCCustomerManager sharedManager] storeId:parameter];
     }else{
         [self.customStyleTextField setText:parameter];
     }

@@ -45,9 +45,7 @@
     
     [self.discountView addBottomLine];
     [self.payAmountView addBottomLine];
-    
     [self.memoTextView addBorder:0 Width:1 Color:nil];
-    
     [self.discountView addSubview:self.discountAmountTextField];
     [self.payAmountView addSubview:self.payAmountTextField];
 }
