@@ -37,13 +37,14 @@
 
 -(void)getAppStoreVersion:(void(^)(IPCVersionModel * model))versionInfo
 {
+    __weak typeof(self) weakSelf = self;
     [self sendVersionRequestSuccess:^(NSDictionary *responseDict){
         if([responseDict[@"resultCount"] integerValue]==1){
             NSArray *resultArray = responseDict[@"results"];
             NSDictionary *result = resultArray.firstObject;
             IPCVersionModel  * appInfo = [IPCVersionModel mj_objectWithKeyValues:result];
             
-            if([[self jk_version] compare:appInfo.version options:NSNumericSearch]==NSOrderedAscending){
+            if([[weakSelf jk_version] compare:appInfo.version options:NSNumericSearch]==NSOrderedAscending){
                 if (versionInfo) {
                     versionInfo(appInfo);
                 }

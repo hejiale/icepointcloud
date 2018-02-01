@@ -17,6 +17,8 @@
 @property (nonatomic, weak) IBOutlet UITextField *usernameTf;
 @property (nonatomic, weak) IBOutlet UITextField *passwordTf;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
+@property (strong, nonatomic) IBOutlet UIView *valityCodeCoverView;
+@property (weak, nonatomic) IBOutlet UITextField *codeTextField;
 @property (nonatomic, strong) IPCLoginViewModel * loginViewModel;
 
 @end
@@ -47,8 +49,13 @@
         [self.usernameTf setRightView:self Action:@selector(chooseLoginUserAction:)];
     }
     [self.usernameTf setText:[self.loginViewModel userName]];
-    ///延时获取更新版本内容
-    [self.loginViewModel performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
+}
+
+#pragma mark //Set UI
+- (void)loadValityCodeView
+{
+    [self.valityCodeCoverView setFrame:self.view.bounds];
+    [self.view addSubview:self.valityCodeCoverView];
 }
 
 
@@ -56,6 +63,14 @@
 - (IBAction)loginAction:(id)sender {
     [self.view endEditing:YES];
     [self userLoginMethod];
+}
+
+- (IBAction)valityAction:(id)sender {
+    [self.loginViewModel valityActiveCode:self.codeTextField.text];
+}
+
+- (IBAction)backValityCodeAction:(id)sender {
+    [self.valityCodeCoverView removeFromSuperview];
 }
 
 - (void)chooseLoginUserAction:(UIButton *)sender{
@@ -70,9 +85,16 @@
 {
     [self.loginButton jk_showIndicator];
     
-    [self.loginViewModel signinRequestWithUserName:self.usernameTf.text Password:self.passwordTf.text Failed:^{
-        [self.loginButton jk_hideIndicator];
-    }];
+    __weak typeof(self) weakSelf = self;
+    [self.loginViewModel signinRequestWithUserName:self.usernameTf.text
+                                          Password:self.passwordTf.text
+                                        NeedVality:^
+    {
+         [weakSelf loadValityCodeView];
+         [self.loginButton jk_hideIndicator];
+     }  Failed:^{
+         [self.loginButton jk_hideIndicator];
+     }];
 }
 
 #pragma mark //UITextFieldDelegate
@@ -80,9 +102,11 @@
 {
     if (textField == self.usernameTf) {
         [self.passwordTf becomeFirstResponder];
-    }else{
+    }else if(textField == self.passwordTf){
         [textField resignFirstResponder];
         [self userLoginMethod];
+    }else{
+        [textField resignFirstResponder];
     }
     return YES;
 }

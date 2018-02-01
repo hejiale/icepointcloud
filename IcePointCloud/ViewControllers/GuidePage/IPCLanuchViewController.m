@@ -8,7 +8,7 @@
 
 #import "IPCLanuchViewController.h"
 #import "IPCGuideConstant.h"
-#import "IPCLoginActivationCodeViewController.h"
+#import "IPCLoginViewController.h"
 
 @interface IPCLanuchViewController ()
 
@@ -39,24 +39,25 @@
                                                                    self.view.transform = CGAffineTransformScale(self.view.transform, 1.5, 1.5);
                                                                    self.view.alpha = 0;
                                                                }completion:^(BOOL finished) {
-                                                                   [weakSelf checkPadUUID];
-                                                                   
-                                                                   IPCLoginActivationCodeViewController *loginVC = [[IPCLoginActivationCodeViewController alloc]initWithNibName:@"IPCLoginActivationCodeViewController" bundle:nil];
-                                                                   [[UIApplication sharedApplication].keyWindow setRootViewController:loginVC];
+                                                                   if ([weakSelf isShouldDeleteUUID]) {
+                                                                       [weakSelf userLogin];
+                                                                   }else{
+                                                                       [weakSelf pushToLoginVC];
+                                                                   }
                                                                }];
-                                                               
                                                            }];
     
 }
 
 ///App重装 删除本地钥匙串和服务端UUID
-- (void)checkPadUUID
+- (BOOL)isShouldDeleteUUID
 {
     if ([[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]) {
         if (![[[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID] isEqualToString:[[[UIDevice currentDevice] identifierForVendor] UUIDString]]){
-            [self userLogin];
+            return YES;
         }
     }
+    return NO;
 }
 
 - (void)userLogin
@@ -71,12 +72,21 @@
 
 - (void)deleteUUID
 {
+    __weak typeof(self) weakSelf = self;
+    
     [IPCUserRequestManager deletePadUUIDWithUUID:[[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]
-                                    SuccessBlock:^(id responseValue){
-                                        [[LUKeychainAccess standardKeychainAccess] deleteObjectForKey:kIPCDeviceLoginUUID];
-                                    } FailureBlock:nil];
+                                    SuccessBlock:^(id responseValue)
+     {
+         [weakSelf pushToLoginVC];
+         [[LUKeychainAccess standardKeychainAccess] deleteObjectForKey:kIPCDeviceLoginUUID];
+     } FailureBlock:nil];
 }
 
+- (void)pushToLoginVC
+{
+    IPCLoginViewController *loginVC = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
+    [[UIApplication sharedApplication].keyWindow setRootViewController:loginVC];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -38,7 +38,43 @@
  *  Check Version
  */
 - (void)checkVersion{
-    [[IPCCheckVersion shardManger] checkVersion];
+    //    [[IPCCheckVersion shardManger] checkVersion];
+    
+    ///延时获取更新版本内容
+    [self performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
+}
+
+- (void)testLogin{
+    __weak typeof(self) weakSelf = self;
+    [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
+        [weakSelf queryAppMessage];
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
+- (void)queryAppMessage
+{
+    __weak typeof(self) weakSelf = self;
+    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue)
+     {
+         if ([responseValue isKindOfClass:[NSArray class]]) {
+             NSString * title = responseValue[0][@"content"];
+             NSString * newVersion = responseValue[1][@"content"];
+             NSString * updateContent = responseValue[2][@"content"];
+             
+             if([[weakSelf jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
+                 [IPCCommonUI showAlert:title
+                                Message:updateContent
+                                  Owner:[UIApplication sharedApplication].keyWindow.rootViewController
+                                   Done:^{
+                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/8hzd"]];
+                                   }];
+             }
+         }
+     } FailureBlock:^(NSError *error) {
+         
+     }];
 }
 
 /**

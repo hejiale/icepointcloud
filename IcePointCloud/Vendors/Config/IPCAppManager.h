@@ -135,10 +135,4 @@ extern NSString * const kIPCDeviceLoginUUID;
 
 
 
-/**
- 跳转根控制器
- */
-- (void)pushToRootViewController;
-
-
 @end

@@ -20,5 +20,6 @@
 @property (nonatomic, assign, readonly) BOOL  memberCodeKeyboard;
 @property (nonatomic, copy, readonly) NSString *  defaultPayTypeConfigId;//默认收款方式
 @property (nonatomic, copy, readonly) NSString *  takingMirrorTimeConfig;
+@property (nonatomic, assign, readonly) BOOL  isOpenPad;//是否开启设备激活权限
 
 @end

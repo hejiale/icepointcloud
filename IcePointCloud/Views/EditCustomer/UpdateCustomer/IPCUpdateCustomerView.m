@@ -23,6 +23,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 @property (weak, nonatomic) IBOutlet UITextField *storeTextField;
 
+
+
+
+
+
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 

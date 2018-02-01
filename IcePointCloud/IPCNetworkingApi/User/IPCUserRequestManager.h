@@ -110,4 +110,14 @@
                  SuccessBlock:(void (^)(id responseValue))success
                  FailureBlock:(void (^)(NSError * error))failure;
 
+
+/**
+ Query OpenPad Config
+
+ @param success
+ @param failure 
+ */
++ (void)getOpenPadConfigWithSuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError * error))failure;
+
 @end

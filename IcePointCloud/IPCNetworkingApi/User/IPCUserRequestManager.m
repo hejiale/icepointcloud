@@ -75,4 +75,9 @@
     [self postRequest:uuid RequestMethod:UserRequest_DeleteUUID CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)getOpenPadConfigWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:UserRequest_OpenPadConfig CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

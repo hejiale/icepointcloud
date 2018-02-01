@@ -65,6 +65,7 @@
 #define UserRequest_VerifyActivationCode             @"padMessageAdmin.activateIPAD"
 #define UserRequest_GetAppMessage                    @"padMessageAdmin.listPadMessages"
 #define UserRequest_DeleteUUID                           @"padMessageAdmin.deletePadUUID"
+#define UserRequest_OpenPadConfig                     @"companyAdmin.getIsOpenPadConfig"
 
 
 #endif /* IPCNetworkingAPI_h */

@@ -28,12 +28,23 @@
  @param password
  @param failed 
  */
-- (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password Failed:(void(^)())failed;
+- (void)signinRequestWithUserName:(NSString *)userName
+                         Password:(NSString *)password
+                       NeedVality:(void(^)())need
+                           Failed:(void(^)())failed;
 
 
 /**
- 假登录用户  获取版本更新信息
+ 获取公司相关信息
  */
-- (void)testLogin;
+- (void)loadConfigData;
 
+
+/**
+  激活设备登录
+
+ @param code
+ @param complete 
+ */
+- (void)valityActiveCode:(NSString *)code;
 @end

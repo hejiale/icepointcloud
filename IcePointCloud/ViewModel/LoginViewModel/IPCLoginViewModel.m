@@ -39,7 +39,7 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
 }
 
 #pragma mark //Request Methods
-- (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password Failed:(void(^)())failed
+- (void)signinRequestWithUserName:(NSString *)userName Password:(NSString *)password NeedVality:(void (^)())need Failed:(void (^)())failed
 {
     NSString * Tusername = [userName jk_trimmingWhitespace];
     NSString * Tpassword = [password jk_trimmingWhitespace];
@@ -62,19 +62,35 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
         return;
     }
     
+    NSString * localUUID = [[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID];
+    
     __weak typeof(self) weakSelf = self;
     [IPCUserRequestManager userLoginWithUserName:Tusername Password:Tpassword SuccessBlock:^(id responseValue){
         //query login info
         [IPCAppManager sharedManager].deviceToken = responseValue[@"mobileToken"];
         //storeage account info
         [weakSelf syncUserAccountHistory:userName];
-        //query responsity wareHouse
-        [weakSelf loadConfigData];
+        //query company openPad Config
+        [weakSelf getOpenPadConfig:^(BOOL isOpen) {
+            if (isOpen && !localUUID.length) {
+                if (need) {
+                    need();
+                }
+            }else{
+                [weakSelf loadConfigData];
+            }
+        }];
     } FailureBlock:^(NSError *error) {
-        if (failed) {
-            failed();
+        if (error.code == IPAD_NOT_ACTIVATE) {
+            if (need) {
+                need();
+            }
+        }else{
+            if (failed) {
+                failed();
+            }
+            [IPCCommonUI showError:error.domain];
         }
-        [IPCCommonUI showError:error.domain];
     }];
 }
 
@@ -193,27 +209,27 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     }];
 }
 
-
-- (void)testLogin{
+- (void)valityActiveCode:(NSString *)code
+{
     __weak typeof(self) weakSelf = self;
-    [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
-        [weakSelf queryAppMessage];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
+    [IPCUserRequestManager verifyActivationCode:code SuccessBlock:^(id responseValue)
+     {
+         [IPCCommonUI showSuccess:@"设备激活成功!"];
+         
+         [[LUKeychainAccess standardKeychainAccess] setObject:[[UIDevice currentDevice] identifierForVendor].UUIDString forKey:kIPCDeviceLoginUUID];
+         
+         [weakSelf loadConfigData];
+ 
+     } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
+     }];
 }
 
-- (void)queryAppMessage
+- (void)getOpenPadConfig:(void(^)(BOOL isOpen))complete
 {
-    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue)
-    {
-        if ([responseValue isKindOfClass:[NSArray class]]) {
-            NSString * newVersion = responseValue[1][@"content"];
-            NSString * updateContent = responseValue[2][@"content"];
-            
-            if([[self jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
-                [IPCCommonUI showAlert:@"有新版本更新" Message:updateContent];
-            }
+    [IPCUserRequestManager getOpenPadConfigWithSuccessBlock:^(id responseValue) {
+        if (complete) {
+            complete([responseValue boolValue]);
         }
     } FailureBlock:^(NSError *error) {
         
