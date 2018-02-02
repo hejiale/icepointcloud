@@ -35,6 +35,7 @@
     if (!_inputPriceTextField) {
         _inputPriceTextField = [[IPCCustomTextField alloc]initWithFrame:CGRectMake(self.glassesImgView.jk_right+10, self.glassesImgView.jk_bottom-30, 260, 30)];
         [_inputPriceTextField setDelegate:self];
+        _inputPriceTextField.leftSpace = 5;
     }
     return _inputPriceTextField;
 }

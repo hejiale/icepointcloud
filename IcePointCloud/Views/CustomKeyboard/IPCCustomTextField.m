@@ -20,35 +20,30 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self addSubview:self.textLabel];
-        
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(beginEditAction)];
         [self addGestureRecognizer:tap];
-    
-        self.backgroundNormalColor = [UIColor clearColor];
-        self.backgroundEditingColor = [[UIColor jk_colorWithHexString:@"#4D9FD8"] colorWithAlphaComponent:0.2];
-        self.textAlignment = NSTextAlignmentLeft;
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self addSubview:self.textLabel];
 }
 
 #pragma mark //Set UI
 - (UILabel *)textLabel
 {
     if (!_textLabel) {
-        _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.jk_width-5, self.jk_height)];
+        _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(self.leftSpace, 0, self.jk_width-self.leftSpace-self.rightSpace, self.jk_height)];
         [_textLabel setTextColor:[UIColor redColor]];
         [_textLabel setBackgroundColor:[UIColor clearColor]];
         [_textLabel setFont:[UIFont systemFontOfSize:15]];
+        [_textLabel setTextAlignment:self.textAlignment];
     }
     return _textLabel;
-}
-
-- (void)setTextAlignment:(NSTextAlignment)textAlignment
-{
-    _textAlignment = textAlignment;
-    
-    [self.textLabel setTextAlignment:textAlignment];
 }
 
 

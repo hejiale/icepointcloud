@@ -14,13 +14,13 @@
 
 @property(nonatomic,copy)   NSString   * text;
 
-@property(nonatomic, strong) UIColor * backgroundNormalColor;
-
-@property(nonatomic, strong) UIColor * backgroundEditingColor;
-
 @property(nonatomic, assign) BOOL isEditing;
 
 @property(nonatomic, assign) NSTextAlignment textAlignment;
+
+@property(nonatomic, assign) CGFloat  leftSpace;
+
+@property(nonatomic, assign) CGFloat  rightSpace;
 
 @property(nonatomic, assign) id<IPCCustomTextFieldDelegate>delegate;
 

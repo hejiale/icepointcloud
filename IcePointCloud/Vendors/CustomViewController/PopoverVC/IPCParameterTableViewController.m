@@ -50,8 +50,8 @@ static NSString * const parameterIdentifier = @"ParameterIdentifier";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:parameterIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:parameterIdentifier];
-        [cell.textLabel setFont:[UIFont systemFontOfSize:12 weight:UIFontWeightThin]];
-        [cell.textLabel setTextColor:[UIColor lightGrayColor]];
+        [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
+        [cell.textLabel setTextColor:[UIColor colorWithHexString:@"#333333"]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     if ([self.dataSource respondsToSelector:@selector(parameterDataInTableView:)]) {

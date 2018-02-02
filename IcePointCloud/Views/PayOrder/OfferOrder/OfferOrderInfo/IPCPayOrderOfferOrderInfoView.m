@@ -55,6 +55,7 @@
     if (!_discountAmountTextField) {
         _discountAmountTextField = [[IPCCustomTextField alloc]initWithFrame:self.discountView.bounds];
         [_discountAmountTextField setDelegate:self];
+        _discountAmountTextField.rightSpace = 5;
         _discountAmountTextField.textAlignment = NSTextAlignmentRight;
     }
     return _discountAmountTextField;

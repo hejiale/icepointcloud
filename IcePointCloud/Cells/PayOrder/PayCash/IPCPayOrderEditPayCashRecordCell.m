@@ -29,6 +29,7 @@
     if (!_payAmountTextField) {
         _payAmountTextField = [[IPCCustomTextField alloc]initWithFrame:self.payAmountView.bounds];
         [_payAmountTextField setDelegate:self];
+        _payAmountTextField.rightSpace = 5;
         _payAmountTextField.textAlignment = NSTextAlignmentRight;
     }
     return _payAmountTextField;
