@@ -41,6 +41,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     self.viewModel = [[IPCCustomerListViewModel alloc]init];
     // Load Data
     [self loadData];
+    ///获取客户类别和门店
+    [[IPCCustomerManager sharedManager] queryCustomerType];
+    [[IPCCustomerManager sharedManager] queryStore];
 }
 
 - (void)viewWillAppear:(BOOL)animated

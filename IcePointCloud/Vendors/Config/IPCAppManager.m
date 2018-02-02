@@ -15,7 +15,6 @@ NSString *const IPCListLoginHistoryKey                        = @"IPCListLoginHi
 NSString *const IPCSearchHistoryListKey                      = @"IPCSearchGlassesHistoryListKey";
 NSString *const IPCSearchHistoryCodeKey                   = @"IPCSearchHistoryCodeKey";
 NSString *const IPCNotificationShoppingCartChanged  = @"IPCNotificationShoppingCartChanged";
-NSString *const IPCShoppingCartCountKey                   = @"IPCShoppingCartCountKey";
 NSString *const IPCSearchCustomerkey                        = @"IPSearchCustomerHistoryListkey";
 NSString *const  IPCChooseWareHouseNotification       = @"IPCChooseWareHouseNotification";
 NSString * const IPCChoosePriceStrategyNotification   = @"IPCChoosePriceStrategyNotification";

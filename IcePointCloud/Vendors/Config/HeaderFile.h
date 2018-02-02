@@ -27,6 +27,7 @@
 #import "IPCAlertController.h"
 #import "IPCPersonContentView.h"
 #import "IPCCustomKeyboard.h"
+#import "IPCCustomAlertView.h"
 /**
  *  ViewController
  */

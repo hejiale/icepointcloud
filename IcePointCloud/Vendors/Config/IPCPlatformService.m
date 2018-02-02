@@ -41,7 +41,7 @@
     //    [[IPCCheckVersion shardManger] checkVersion];
     
     ///延时获取更新版本内容
-    [self performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
+    [self performSelector:@selector(testLogin) withObject:nil afterDelay:.5f];
 }
 
 - (void)testLogin{
@@ -64,12 +64,10 @@
              NSString * updateContent = responseValue[2][@"content"];
              
              if([[weakSelf jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
-                 [IPCCommonUI showAlert:title
-                                Message:updateContent
-                                  Owner:[UIApplication sharedApplication].keyWindow.rootViewController
-                                   Done:^{
-                                       [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/8hzd"]];
-                                   }];
+                 
+                 [IPCCustomAlertView showWithTitle:title Message:updateContent CancelTitle:@"返回" SureTitle:@"更新" Done:^{
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/8hzd"]];
+                 } Cancel:nil];
              }
          }
      } FailureBlock:^(NSError *error) {

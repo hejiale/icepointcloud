@@ -563,7 +563,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
             [weakSelf beginFilterClass];
             [strongSelf.glassListViewMode queryBatchDegree];
         } ReloadUnClose:^{
-            [self beginFilterClass];
+            [weakSelf beginFilterClass];
         }];
     }
 }

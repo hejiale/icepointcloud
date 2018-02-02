@@ -27,7 +27,6 @@ extern NSString *const IPCSearchHistoryCodeKey;
 extern NSString *const IPCSearchCustomerkey;
 //Shopping cart change notification
 extern NSString *const IPCNotificationShoppingCartChanged;
-extern NSString *const IPCShoppingCartCountKey;
 //Choose WareHouse notification
 extern NSString *const  IPCChooseWareHouseNotification;
 //Error Networking Status Message
