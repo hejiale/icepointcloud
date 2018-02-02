@@ -59,9 +59,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.contentView addBorder:5 Width:0 Color:nil];
-    [self.cancelButton addSignleCorner:UIRectCornerBottomLeft Size:5];
-    [self.sureButton addSignleCorner:UIRectCornerBottomRight Size:5];
+    [self.contentView addBorder:8 Width:0 Color:nil];
+    [self.cancelButton addSignleCorner:UIRectCornerBottomLeft Size:8];
+    [self.sureButton addSignleCorner:UIRectCornerBottomRight Size:8];
 }
 
 - (void)setTitle:(NSString *)title{
