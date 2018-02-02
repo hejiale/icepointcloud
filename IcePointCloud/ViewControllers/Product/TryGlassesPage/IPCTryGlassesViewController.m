@@ -127,7 +127,8 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     
     __weak typeof(self) weakSelf = self;
     [[self.signleModeView rac_signalForSelector:@selector(deleteModel)] subscribeNext:^(id x) {
-        IPCCompareItemView * compareView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        IPCCompareItemView * compareView = strongSelf.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
         [compareView resetGlassView];
         [weakSelf updateCurrentGlass];
     }];
@@ -139,7 +140,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         __weak typeof (self) weakSelf = self;
         [[IPCTryMatch instance].matchItems enumerateObjectsUsingBlock:^(IPCMatchItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             __strong typeof (weakSelf) strongSelf = weakSelf;
-            IPCCompareItemView *item = [UIView jk_loadInstanceFromNibWithName:@"IPCCompareItemView" owner:self];
+            IPCCompareItemView *item = [UIView jk_loadInstanceFromNibWithName:@"IPCCompareItemView" owner:strongSelf];
             CGRect frame = item.frame;
             if (idx == 1 || idx == 3) frame.origin.x = frame.size.width;
             if (idx == 2 || idx == 3) frame.origin.y = frame.size.height;
@@ -150,7 +151,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
             item.delegate = strongSelf;
             item.matchItem = [IPCTryMatch instance].matchItems[idx];
             [item updateModelPhoto];
-            [self.compareBgView addSubview:item];
+            [strongSelf.compareBgView addSubview:item];
         }];
         return YES;
     }
@@ -209,8 +210,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
                                                          } EditParameter:^{
                                                              [weakSelf editGlassParameterView:[[IPCTryMatch instance] currentMatchItem].glass];
                                                          } Reload:^{
+                                                             __strong typeof(weakSelf) strongSelf = weakSelf;
                                                              [_tryGlassesView reload];
-                                                             [self.productTableView reloadData];
+                                                             [strongSelf.productTableView reloadData];
                                                          }];
         [_tryGlassesView setHidden:YES];
         [_tryGlassesView setDefaultGlasses];
@@ -222,7 +224,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     __weak typeof(self) weakSelf = self;
     self.editParameterView = [[IPCEditBatchParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Glasses:glass Dismiss:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [self.productTableView reloadData];
+        [strongSelf.productTableView reloadData];
         [strongSelf.tryGlassesView reload];;
     }];
     [[UIApplication sharedApplication].keyWindow addSubview:self.editParameterView];
@@ -233,7 +235,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     __weak typeof(self) weakSelf = self;
     self.parameterView = [[IPCGlassParameterView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds  Complete:^{
         __strong typeof (weakSelf) strongSelf = weakSelf;
-        [self.productTableView reloadData];
+        [strongSelf.productTableView reloadData];
         [strongSelf.tryGlassesView reload];;
     }];
     self.parameterView.glasses = glass;
@@ -478,8 +480,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
     __weak typeof(self) weakSelf = self;
     IPCDefineCameraBaseComponent * baseComponent = [[IPCDefineCameraBaseComponent alloc]initWithResultImage:^(UIImage *image) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         [weakSelf outPutCameraImage:image];
-        self.photoDeleteBtn.enabled = YES;
+        strongSelf.photoDeleteBtn.enabled = YES;
     }];
     [baseComponent showSampleWithController:self];
 }
@@ -491,8 +494,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
     __weak typeof(self) weakSelf = self;
     IPCPhotoPickerBaseComponent * pickVC = [[IPCPhotoPickerBaseComponent alloc]initWithResultImage:^(UIImage *image) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         [weakSelf outPutCameraImage:image];
-        self.photoDeleteBtn.enabled = YES;
+        strongSelf.photoDeleteBtn.enabled = YES;
     }];
     [pickVC showSampleWithController:self];
 }

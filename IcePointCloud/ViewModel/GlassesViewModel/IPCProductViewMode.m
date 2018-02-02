@@ -144,13 +144,15 @@
                                           if (strongSelf.filterView)
                                               [strongSelf.filterView reloadFilterView];
                                           
-                                          if (self.filterSuccessBlock)
-                                              self.filterSuccessBlock(nil);
+                                          if (strongSelf.filterSuccessBlock)
+                                              strongSelf.filterSuccessBlock(nil);
                                       } FailureBlock:^(NSError *error) {
+                                          __strong typeof (weakSelf) strongSelf = weakSelf;
+                                          
                                           [IPCCommonUI showError:error.domain];
                                           
-                                          if (self.filterSuccessBlock)
-                                              self.filterSuccessBlock(error);
+                                          if (strongSelf.filterSuccessBlock)
+                                              strongSelf.filterSuccessBlock(error);
                                       }];
 }
 

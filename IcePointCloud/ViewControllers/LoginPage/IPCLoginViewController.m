@@ -90,10 +90,12 @@
                                           Password:self.passwordTf.text
                                         NeedVality:^
     {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
          [weakSelf loadValityCodeView];
-         [self.loginButton jk_hideIndicator];
+         [strongSelf.loginButton jk_hideIndicator];
      }  Failed:^{
-         [self.loginButton jk_hideIndicator];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         [strongSelf.loginButton jk_hideIndicator];
      }];
 }
 

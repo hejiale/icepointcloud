@@ -90,8 +90,9 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        self.detailTableView.isBeginLoad = NO;
-        [self.detailTableView reloadData];
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        strongSelf.detailTableView.isBeginLoad = NO;
+        [strongSelf.detailTableView reloadData];
     });
 }
 

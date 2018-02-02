@@ -47,7 +47,7 @@
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.detailCustomer       = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-         strongSelf.customerOpometry = [IPCOptometryMode mj_objectWithKeyValues:self.detailCustomer.optometrys[0]];
+         strongSelf.customerOpometry = [IPCOptometryMode mj_objectWithKeyValues:strongSelf.detailCustomer.optometrys[0]];
          
          if (completeBlock)
              completeBlock();

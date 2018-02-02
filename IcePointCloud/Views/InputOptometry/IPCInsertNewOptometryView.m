@@ -81,6 +81,7 @@
 #pragma mark //Request Methods
 - (void)saveNewOptometry
 {
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:currentCustomerId
                                                           SphLeft:self.leftSphTextField.text
                                                          SphRight:self.rightSphTextField.text
@@ -101,18 +102,21 @@
                                                            Remark:self.memoTextField.text
                                                      SuccessBlock:^(id responseValue)
      {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
-         [self removeFromSuperview];
+         [weakSelf removeFromSuperview];
          
-         if (self.CompleteBlock) {
-             self.CompleteBlock(optometry);
+         if (strongSelf.CompleteBlock) {
+             strongSelf.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showError:error.domain];
-         [self removeFromSuperview];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
          
-         if (self.CompleteBlock) {
-             self.CompleteBlock(nil);
+         [IPCCommonUI showError:error.domain];
+         [weakSelf removeFromSuperview];
+         
+         if (strongSelf.CompleteBlock) {
+             strongSelf.CompleteBlock(nil);
          }
      }];
 }
@@ -180,7 +184,7 @@
                                      {
                                          __strong typeof(weakSelf) strongSelf = weakSelf;
                                          strongSelf.insertOptometry.employeeId = employee.jobID;
-                                         [self.employeeTextField setText:employee.name];
+                                         [strongSelf.employeeTextField setText:employee.name];
                                      }];
     [[UIApplication sharedApplication].keyWindow addSubview:listView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:listView];
