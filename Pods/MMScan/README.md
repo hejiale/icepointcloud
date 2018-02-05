@@ -1,4 +1,5 @@
 
+
 ## MMScan
 
 
@@ -10,9 +11,9 @@
 
 ### Introduction
 
-`MMScan `是一个简单的二维码以及条码扫描工具，使用`Objective-C`语言开发,有一套自定义的扫描动画以及界面，还包括生成二维码以及条码【一行代码搞定】
+`MMScan`是一个简单的二维码以及条码扫描工具，使用`Objective-C`语言开发,有一套自定义的扫描动画以及界面，还包括生成二维码以及条码【一行代码搞定】
 
-MMActionSheet is an simple QRCode and barcode scanning tool,Contains a separate set of interfaces and a single call, as well as the generation of QRCode code and bar code, a line of code can run.
+`MMScan ` is an simple QRCode and barcode scanning tool,Contains a separate set of interfaces and a single call, as well as the generation of QRCode code and bar code, a line of code can run.
 
 ### Rquirements
 
@@ -24,6 +25,8 @@ MMActionSheet is an simple QRCode and barcode scanning tool,Contains a separate 
 
 
 #### Install with  Cocoapods
+
+记得更新你的pod-master,命令`pod repo update master`
 
 * `pod 'MMScan', '~> 0.0'`
 * `#import <MMScan/MMScanViewController.h> `  in you code
@@ -74,7 +77,6 @@ MMScanViewController *scanVc = [[MMScanViewController alloc] initWithQrType:MMSc
         NSLog(@"error: %@",error);
     } else {
         NSLog(@"扫描结果：%@",result);
-        [self showInfo:result];
     }
 }];
 [self.navigationController pushViewController:scanVc animated:YES];
@@ -118,3 +120,28 @@ You are welcome to fork and submit pull requests.
 ### License
 
 MMScan is open-sourced software licensed under the MIT license.
+
+### Update log
+
+
+> *v0.0.4* [2017.12.21]
+
+<hr/>
+
+1. 添加闪光灯小按钮 [#1](https://github.com/MinMao-Hub/MMScan/issues/1)
+
+2. 底部toolBar适配iPhone X【只在模拟器测试过】
+
+
+<hr/>
+
+> *v0.0.5* [2017.12.21]
+
+<hr/>
+
+* 闪光灯小按钮问题处理【扫一扫底部工具栏切换时，闪光灯会关闭，需要重置小按钮的选中状态】
+
+
+<hr/>
+
+

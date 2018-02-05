@@ -41,7 +41,7 @@
     //    [[IPCCheckVersion shardManger] checkVersion];
     
     ///延时获取更新版本内容
-    [self performSelector:@selector(testLogin) withObject:nil afterDelay:.5f];
+//    [self performSelector:@selector(testLogin) withObject:nil afterDelay:.5f];
 }
 
 - (void)testLogin{
