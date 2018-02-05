@@ -228,7 +228,7 @@
             }else if (textField.tag == 5 || textField.tag == 11 || textField.tag == 12){
                 [self updateOptometryDistance:textField Text:str];
             }else{
-                if (![str hasPrefix:@"-"]) {
+                if (![str hasPrefix:@"-"] && ![str hasPrefix:@"+"] && [str doubleValue] > 0) {
                     [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
                 }else{
                     [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
