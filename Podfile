@@ -19,10 +19,10 @@ pod 'ReactiveObjC'
 pod 'MJRefresh'
 pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
-pod 'TuSDK'
 pod 'Bugtags'
 pod 'MMScan'
 pod 'LUKeychainAccess'
+pod 'TuSDK'
 end
 
 target "IcePointCloudTests" do
