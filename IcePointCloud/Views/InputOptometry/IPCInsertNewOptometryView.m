@@ -198,6 +198,12 @@
         if (![IPCCommon judgeIsFloatNumber:string]) {
             return NO;
         }
+    }else if(textField.tag == 0 || textField.tag == 1 || textField.tag == 3 || textField.tag == 6 || textField.tag == 7 || textField.tag == 9){
+        if ([textField.text containsString:@"-"] || [textField.text containsString:@"+"]) {
+            if ([string isEqualToString:@"-"] || [string isEqualToString:@"+"]) {
+                return NO;
+            }
+        }
     }
     return YES;
 }
@@ -216,7 +222,7 @@
 {
     NSString * str = [textField.text jk_trimmingWhitespace];
     
-    if (str.length > 0) {
+    if ([self isZero:str] > 0) {
         if (textField.tag != 4 && textField.tag != 10) {
             if (textField.tag == 2 || textField.tag == 8)
             {
@@ -228,18 +234,29 @@
             }else if (textField.tag == 5 || textField.tag == 11 || textField.tag == 12){
                 [self updateOptometryDistance:textField Text:str];
             }else{
-                if (![str hasPrefix:@"-"] && ![str hasPrefix:@"+"] && [str doubleValue] > 0) {
-                    [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
+                if ([str hasPrefix:@"-"]) {
+                    [textField setText:[NSString stringWithFormat:@"-%.2f",[self isZero:str]]];
                 }else{
-                    [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
+                    [textField setText:[NSString stringWithFormat:@"+%.2f",[self isZero:str]]];
                 }
             }
         }
     }else{
-        if (textField.tag == 0 || textField.tag == 1 || textField.tag == 6 || textField.tag == 7) {
-            [textField setText:@"+0.00"];
+        if (textField.tag == 0 || textField.tag == 1 || textField.tag == 3 || textField.tag == 6 || textField.tag == 7 || textField.tag == 9) {
+            [textField setText:@"0.00"];
         }
     }
+}
+
+- (double)isZero:(NSString *)str
+{
+    if (str.length) {
+        if ([str hasPrefix:@"-"] || [str hasPrefix:@"+"]) {
+            return [[str substringFromIndex:1] doubleValue];
+        }
+        return [str doubleValue];
+    }
+    return 0;
 }
 
 #pragma mark //UITextViewDelegate
