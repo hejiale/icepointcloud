@@ -13,10 +13,15 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{
              @"wareHouseName" : @"storeObject.repositoryStore.storeName",
-             @"storeId"                : @"storeObject.repositoryStore.storeDirector.id",
+             @"employeeId"                : @"storeObject.repositoryStore.storeDirector.id",
              @"wareHouseId"       : @"storeObject.repositoryStore.id",
              @"contacterPhone"   : @"storeObject.repositoryStore.storeDirector.contactMobilePhone",
-             @"companyName"    : @"storeObject.repositoryStore.storeDirector.contactName"
+             @"employeeName"    : @"storeObject.repositoryStore.storeDirector.contactName",
+             @"storeName"          : @"storeObject.storeName",
+             @"storePhone"         : @"storeObject.storePhone",
+             @"sex"                     : @"storeObject.repositoryStore.storeDirector.role.gender",
+             @"companyName"    : @"storeObject.belongedCompany.name",
+             @"storeId"                : @"storeObject.id"
              };
 }
 

@@ -45,16 +45,16 @@
 
 #define PayOrderRequest_CompanyConfig            @"companyAdmin.getCompanyConfig"
 #define PayOrderRequest_GetAuths                      @"bizadmin.getAuths" 
-#define PayOrderRequest_Outbound                     @"orderObjectAdmin.inventoryOutForSalesOrder"
+//#define PayOrderRequest_Outbound                     @"orderObjectAdmin.inventoryOutForSalesOrder"
 #define PayOrderRequest_ListPayType                  @"payTypeConfigAdmin.listPayType"
-#define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"
-#define PayOrderRequest_OfferOrder                    @"orderObjectAdmin.commitAuthOrders"
-#define PayOrderRequest_AuthOrder                    @"orderObjectAdmin.confirmOrder"
-#define PayOrderRequest_PayCashOrder               @"bizadmin.saveOrderPayInfo"
-
+//#define PayOrderRequest_SavePrototyOrder          @"orderObjectAdmin.savePrototypeOrders"
+//#define PayOrderRequest_OfferOrder                    @"orderObjectAdmin.commitAuthOrders"
+//#define PayOrderRequest_AuthOrder                    @"orderObjectAdmin.confirmOrder"
+//#define PayOrderRequest_PayCashOrder               @"bizadmin.saveOrderPayInfo"
 #define PayOrderRequest_EmployeeList                 @"employeeadmin.listEmployee"
 #define PayOrderRequest_Integral                          @"integralTradeAdmin.getSaleOrderDetailIntegralList"
 #define PayOrderRequest_IntegralRule                   @"integralTradeAdmin.getIntegralTradeObjectForCompany"
+#define PayOrderRequest_PayOrderWithStatus        @"orderObjectAdmin.updateOrderForStatus"
 
 #define UserRequest_Login                                    @"bizadmin.login"
 #define UserRequest_LoginOut                              @"bizadmin.logout"

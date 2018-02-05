@@ -224,16 +224,16 @@
             }else if (textField.tag == 5 || textField.tag == 11 || textField.tag == 12){
                 [self updateOptometryDistance:textField Text:str];
             }else{
-                if (![str hasPrefix:@"-"]) {
+                if (![str hasPrefix:@"-"] && [str doubleValue] > 0 && ![str hasPrefix:@"+"]) {
                     [textField setText:[NSString stringWithFormat:@"+%.2f",[str doubleValue]]];
                 }else{
-                    [textField setText:[NSString stringWithFormat:@"%.2f",[str doubleValue]]];
+                    [textField setText:str];
                 }
             }
         }
     }else{
         if (textField.tag == 0 || textField.tag == 1 || textField.tag == 6 || textField.tag == 7) {
-            [textField setText:@"+0.00"];
+            [textField setText:@"0.00"];
         }
     }
 }

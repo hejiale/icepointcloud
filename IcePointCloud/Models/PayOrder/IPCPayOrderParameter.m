@@ -11,10 +11,12 @@
 @implementation IPCPayOrderParameter
 
 
-- (NSDictionary *)prototyOrderParameter
+- (NSDictionary *)orderParameterWithCurrentStatus:(NSString *)currentStatus EndStatus:(NSString *)endStatus
 {
-    //员工份额
-    __block NSMutableArray * employeeList = [[NSMutableArray alloc]init];
+    __block NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
+    
+    ///员工份额
+    NSMutableArray * employeeList = [[NSMutableArray alloc]init];
     
     NSMutableDictionary * employeeResultDic = [[NSMutableDictionary alloc]init];
     [employeeResultDic setObject:@(100) forKey:@"achievement"];
@@ -23,28 +25,34 @@
     [employeeResultDic setObject:[IPCPayOrderManager sharedManager].employee.jobNumber ? : @"" forKey:@"jobNumber"];
     [employeeList addObject:employeeResultDic];
     
-    __block NSMutableDictionary * parameters = [[NSMutableDictionary alloc]init];
-    
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer) {
-        [parameters setObject:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerID forKey:@"customerId"];
+    ///表单数据
+    NSMutableDictionary * formDic = [[NSMutableDictionary alloc]init];
+    [formDic setObject:@"FOR_SALES" forKey:@"orderType"];
+    [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"customerId"];
+    //转介绍人
+    [formDic setObject:@"" forKey:@"introducerId"];
+    //家庭组客户id
+    [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"memberCutomerId"];
+    [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
+    [formDic setObject:employeeList forKey:@"employeeAchievements"];
+    if ([IPCPayOrderManager sharedManager].currentOptometryId) {
+        [formDic setObject:[IPCPayOrderManager sharedManager].currentOptometryId forKey:@"optometryId"];
     }
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry) {
-        [parameters setObject:[IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
-    }
-
-    [parameters setObject:@"FOR_SALES" forKey:@"orderType"];
-    [parameters setObject:[self productListParamter] forKey:@"detailList"];
-
-    if (employeeList.count) {
-        [parameters setObject:employeeList forKey:@"employeeAchievements"];
-    }
+    [formDic setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
+    [formDic setObject:[NSString stringWithFormat:@"%f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];
+    [formDic setObject:[NSString stringWithFormat:@"%f",[IPCPayOrderManager sharedManager].payAmount] forKey:@"orderFinalPrice"];
+    [formDic setObject:[NSString stringWithFormat:@"%f",[IPCPayOrderManager sharedManager].discountAmount] forKey:@"donationAmount"];
+    [formDic setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];
+    [formDic setObject:@"false" forKey:@"isExcessDiscount"];
+    [formDic setObject:[self productListParamter] forKey:@"detailList"];
     
-    [parameters setObject:[NSString stringWithFormat:@"%f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];
-    [parameters setObject:[NSString stringWithFormat:@"%f",[IPCPayOrderManager sharedManager].payAmount] forKey:@"orderFinalPrice"];
-    [parameters setObject:[NSString stringWithFormat:@"%f",[IPCPayOrderManager sharedManager].discountAmount] forKey:@"donationAmount"];
-    
-    [parameters setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
-    [parameters setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId ? : @"" forKey:@"repository"];
+    [parameters setObject:formDic forKey:@"form"];
+    [parameters setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];
+    [parameters setObject:currentStatus forKey:@"currentlyStatus"];
+    [parameters setObject:endStatus forKey:@"toStatus"];
+    [parameters setObject:[self payTypeInfos] forKey:@"orderPayInfos"];
+    [parameters setObject:@"FOR_SALES" forKey:@"type"];
+    [parameters setObject:@"SALES" forKey:@"salesType"];
     
     return parameters;
 }
@@ -62,7 +70,7 @@
         }
         [dic setObject:obj.payOrderType.payType forKey:@"payType"];
         [dic setObject:obj.payOrderType.payTypeId forKey:@"payTypeConfigId"];
-
+        
         [array addObject:dic];
     }];
     return array;
@@ -78,5 +86,4 @@
     }
     return itemParams;
 }
-
 @end

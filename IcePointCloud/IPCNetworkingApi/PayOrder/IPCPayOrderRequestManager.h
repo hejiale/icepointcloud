@@ -10,14 +10,19 @@
 
 @interface IPCPayOrderRequestManager : IPCRequest
 
++ (void)payOrderWithCurrentStatus:(NSString *)currentStatus
+                        EndStatus:(NSString *)endStatus
+                     SuccessBlock:(void (^)(id responseValue))success
+                     FailureBlock:(void (^)(NSError * error))failure;
+
 /**
  *  CONFIRM PAY ORDER
  
  *  @param success
  *  @param failure
  */
-+ (void)savePrototyOrderWithSuccessBlock:(void (^)(id responseValue))success
-                            FailureBlock:(void (^)(NSError * error))failure;
+//+ (void)savePrototyOrderWithSuccessBlock:(void (^)(id responseValue))success
+//                            FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
@@ -26,9 +31,9 @@
  @param success
  @param failure
  */
-+ (void)offerOrderWithOrderId:(NSString *)orderId
-                 SuccessBlock:(void (^)(id responseValue))success
-                 FailureBlock:(void (^)(NSError * error))failure;
+//+ (void)offerOrderWithOrderId:(NSString *)orderId
+//                 SuccessBlock:(void (^)(id responseValue))success
+//                 FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
@@ -38,9 +43,9 @@
  @param success
  @param failure
  */
-+ (void)authOrderWithOrderNum:(NSString *)orderNum
-                 SuccessBlock:(void (^)(id responseValue))success
-                 FailureBlock:(void (^)(NSError * error))failure;
+//+ (void)authOrderWithOrderNum:(NSString *)orderNum
+//                 SuccessBlock:(void (^)(id responseValue))success
+//                 FailureBlock:(void (^)(NSError * error))failure;
 
 
 /**
@@ -49,9 +54,9 @@
  @param success
  @param failure
  */
-+ (void)payCashOrderWithOrderNumber:(NSString *)orderNum
-                       SuccessBlock:(void (^)(id responseValue))success
-                       FailureBlock:(void (^)(NSError *error))failure;
+//+ (void)payCashOrderWithOrderNumber:(NSString *)orderNum
+//                       SuccessBlock:(void (^)(id responseValue))success
+//                       FailureBlock:(void (^)(NSError *error))failure;
 
 /**
  *  QUERY EMPLOYE
@@ -103,9 +108,9 @@
  @param success
  @param failure
  */
-+(void)outbound:(NSString *)orderNum
-   SuccessBlock:(void (^)(id))success
-   FailureBlock:(void (^)(NSError *))failure;
+//+(void)outbound:(NSString *)orderNum
+//   SuccessBlock:(void (^)(id))success
+//   FailureBlock:(void (^)(NSError *))failure;
 
 
 /**
