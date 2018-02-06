@@ -92,7 +92,7 @@
     [self.encryptedPhoneLabel setText:[customer useMemberPhone]];
     [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", [customer useDiscount]]];
     [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f", [customer useBalance]]];
-
+ 
     if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
         if ([IPCPayOrderManager sharedManager].isValiateMember){
             [self.forcedButton setHidden:YES];
@@ -100,8 +100,13 @@
             [self.memberValiteStatus setSelected:YES];
         }else{
             if ([IPCAppManager sharedManager].authList.forceVerifyMember) {
-                [self.forcedButton setHidden:NO];
-                [self.memberValiteStatus setHidden:YES];
+                if (!customer.mainMemberLevel) {
+                    [self.forcedButton setHidden:NO];
+                    [self.memberValiteStatus setHidden:YES];
+                }else{
+                    [self.forcedButton setHidden:YES];
+                    [self.memberValiteStatus setHidden:YES];
+                }
             }else{
                 [self.forcedButton setHidden:YES];
                 [self.memberValiteStatus setHidden:NO];
