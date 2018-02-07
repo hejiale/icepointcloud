@@ -16,7 +16,7 @@ static  NSString * const recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
 static  NSString * const editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
 static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifier";
 
-@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *payRecordTableView;
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
@@ -25,9 +25,8 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 @property (weak, nonatomic) IBOutlet UILabel *introduceTitleLabel;
 @property (weak, nonatomic) IBOutlet UIButton *introducerButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceButtonWidth;
-
-
-
+@property (weak, nonatomic) IBOutlet UIView *scrollContentView;
+@property (strong, nonatomic) UIImageView * scrollLineImageView;
 @property (strong, nonatomic)  IPCPayCashCustomerListView *selectCustomerCoverView;
 
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
@@ -56,12 +55,16 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     [self.payTypeCollectionView setCollectionViewLayout:layout];
     [self.payTypeCollectionView registerNib:[UINib nibWithNibName:@"IPCPayCashPayTypeViewCell" bundle:nil] forCellWithReuseIdentifier:payTypeIdentifier];
+    
+    if ([IPCPayOrderManager sharedManager].payTypeArray.count > 8) {
+        [self.scrollContentView addSubview:self.scrollLineImageView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     [self addObserver:self forKeyPath:@"currentIndex" options:NSKeyValueObservingOptionNew context:nil];
     
     [self reloadPayStatus];
@@ -88,15 +91,23 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     return _keyboard;
 }
 
+- (UIImageView *)scrollLineImageView{
+    if (!_scrollLineImageView) {
+        _scrollLineImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.scrollContentView.jk_right-2, 0, 2, self.scrollContentView.jk_height*2/3)];
+        [_scrollLineImageView setBackgroundColor:[UIColor colorWithHexString:@"#999999"]];
+    }
+    return _scrollLineImageView;
+}
+
 - (IPCPayCashCustomerListView *)selectCustomerCoverView{
     if (!_selectCustomerCoverView) {
         __weak typeof(self) weakSelf = self;
         _selectCustomerCoverView = [[IPCPayCashCustomerListView alloc]initWithFrame:[IPCCommonUI currentView].bounds
                                                                            Complete:^(IPCCustomerMode *customer)
-        {
-            [IPCPayOrderManager sharedManager].introducer = customer;
-            [weakSelf reloadIntroducer];
-        }];
+                                    {
+                                        [IPCPayOrderManager sharedManager].introducer = customer;
+                                        [weakSelf reloadIntroducer];
+                                    }];
     }
     return _selectCustomerCoverView;
 }
@@ -251,7 +262,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
             return;
         }
     }
-
+    
     if ([[IPCPayOrderCurrentCustomer sharedManager].currentCustomer userIntegral] == 0 && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
@@ -300,6 +311,20 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         }
         [self.payRecordTableView reloadData];
     }
+}
+
+#pragma mark //UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.payTypeCollectionView]) {
+        CGPoint offset = scrollView.contentOffset;
+        CGFloat offsetY = offset.y*(scrollView.jk_height-self.scrollLineImageView.jk_height)/(scrollView.contentSize.height-scrollView.jk_height);
+        
+        CGRect frame= self.scrollLineImageView.frame;
+        frame.origin.y= MAX(offsetY, 0);
+        self.scrollLineImageView.frame = frame;
+    }
+    
 }
 
 
