@@ -254,7 +254,6 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 {
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-//        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     

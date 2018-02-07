@@ -239,10 +239,7 @@
 
 #pragma mark //Clicked Events
 - (void)menuTapAction:(UIButton *)sender
-{
-    /****Remove All Request****/
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
-   
+{   
     [self setSelectedIndex:sender.tag];
 }
 

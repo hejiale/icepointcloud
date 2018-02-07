@@ -141,22 +141,27 @@
     return itemView;
 }
 
+
 - (NSArray *)optometryInfo:(IPCOptometryMode *)optometry
 {
-    return @[[IPCCommon formatPurpose:optometry.purpose],
-             optometry.sphRight,
-             optometry.cylRight,
-             optometry.axisRight,
-             optometry.correctedVisionRight,
-             optometry.distanceRight,
-             optometry.addRight,
-             optometry.sphLeft,
-             optometry.cylLeft,
-             optometry.axisLeft,
-             optometry.correctedVisionLeft,
-             optometry.distanceLeft,
-             optometry.addLeft,
-             optometry.comprehensive ? : @""];
+    NSArray * optometrys = nil;
+    if (optometry) {
+        optometrys = @[[IPCCommon formatPurpose:optometry.purpose],
+                       optometry.sphRight,
+                       optometry.cylRight,
+                       optometry.axisRight,
+                       optometry.correctedVisionRight,
+                       optometry.distanceRight,
+                       optometry.addRight,
+                       optometry.sphLeft,
+                       optometry.cylLeft,
+                       optometry.axisLeft,
+                       optometry.correctedVisionLeft,
+                       optometry.distanceLeft,
+                       optometry.addLeft,
+                       optometry.comprehensive ? : @""];
+    }
+    return optometrys;
 }
 
 

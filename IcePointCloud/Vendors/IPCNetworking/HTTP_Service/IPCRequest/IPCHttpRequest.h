@@ -12,9 +12,6 @@
 
 @interface IPCHttpRequest : NSObject
 
-
-+ (IPCHttpRequest *)sharedClient;
-
 /**
  CALL REQUEST
 
@@ -27,7 +24,7 @@
  @param progress 
  @param failure
  */
-- (void)callRequestWithParams:(IPCRequestParameter *)request
++ (void)callRequestWithParams:(IPCRequestParameter *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
                   RequestType:(IPCRequestMethod)requestType
@@ -35,11 +32,5 @@
                  SuccessBlock:(void (^)(id responseValue))success
                 ProgressBlock:(void (^)(NSProgress *))progress
                  FailureBlock:(void (^)(NSError * error))failure;
-
-/**
- *  CANCEL REQUEST
- */
-- (void)cancelAllRequest;
-
 
 @end

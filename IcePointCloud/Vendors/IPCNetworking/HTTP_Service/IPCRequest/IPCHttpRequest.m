@@ -8,40 +8,11 @@
 
 #import "IPCHttpRequest.h"
 
-@interface IPCHttpRequest()
-
-@property (nonatomic, strong) NSMutableArray<NSURLSessionDataTask *> * taskArray;
-
-@end
-
 @implementation IPCHttpRequest
 
 
-+ (IPCHttpRequest *)sharedClient{
-    static dispatch_once_t token;
-    static IPCHttpRequest *_client;
-    dispatch_once(&token, ^{
-        _client = [[self alloc] init];
-    });
-    return _client;
-}
-
-- (instancetype)init{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
-
-- (NSMutableArray<NSURLSessionDataTask *> *)taskArray{
-    if (!_taskArray) {
-        _taskArray = [[NSMutableArray alloc]init];
-    }
-    return _taskArray;
-}
-
 #pragma mark //AFNetworking Request Method
-- (void)callRequestWithParams:(IPCRequestParameter *)request
++ (void)callRequestWithParams:(IPCRequestParameter *)request
                     ImageData:(NSData *)imageData
                     ImageName:(NSString *)imageName
                   RequestType:(IPCRequestMethod)requestType
@@ -66,44 +37,25 @@
     }else{
         __weak typeof(self) weakSelf = self;
         __block NSURLSessionDataTask * task = [[AFHTTPSessionManager manager] sendRequestWithParams:request
-                                                                                  ImageData:imageData
-                                                                                  ImageName:imageName
-                                                                                RequestType:requestType
-                                                                                CacheEnable:cacheEnable
-                                                                               SuccessBlock:^(id responseValue, NSURLSessionDataTask * _Nonnull task)
-                                       {
-                                           __strong typeof(weakSelf) strongSelf = weakSelf;
-                                           [strongSelf.taskArray removeObject:task];
-                                           
-                                           if (success) {
-                                               success(responseValue);
-                                           }
-                                       } ProgressBlock:^(NSProgress *uploadProgress) {
-                                           if (progress) {
-                                               progress(uploadProgress);
-                                           }
-                                       } FailureBlock:^(NSError *error, NSURLSessionDataTask * _Nonnull task) {
-                                           __strong typeof(weakSelf) strongSelf = weakSelf;
-                                           [strongSelf.taskArray removeObject:task];
-                                           
-                                           if (failure) {
-                                               failure(error);
-                                           }
-                                       }];
-        [self.taskArray addObject:task];
+                                                                                          ImageData:imageData
+                                                                                          ImageName:imageName
+                                                                                        RequestType:requestType
+                                                                                        CacheEnable:cacheEnable
+                                                                                       SuccessBlock:^(id responseValue, NSURLSessionDataTask * _Nonnull task)
+                                               {
+                                                   if (success) {
+                                                       success(responseValue);
+                                                   }
+                                               } ProgressBlock:^(NSProgress *uploadProgress) {
+                                                   if (progress) {
+                                                       progress(uploadProgress);
+                                                   }
+                                               } FailureBlock:^(NSError *error, NSURLSessionDataTask * _Nonnull task) {
+                                                   if (failure) {
+                                                       failure(error);
+                                                   }
+                                               }];
         [task resume];
-    }
-}
-
-
-- (void)cancelAllRequest
-{
-    if (self.taskArray && [self.taskArray isKindOfClass:[NSArray class]]) {
-        [self.taskArray enumerateObjectsUsingBlock:^(NSURLSessionDataTask * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj && [obj isKindOfClass:[NSURLSessionDataTask class]]) {
-                [obj cancel];
-            }
-        }];
     }
 }
 

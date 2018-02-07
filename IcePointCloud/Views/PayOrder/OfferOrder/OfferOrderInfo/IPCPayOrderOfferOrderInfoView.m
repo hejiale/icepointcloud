@@ -75,11 +75,13 @@
 #pragma mark //Clicked Events
 - (IBAction)selectEmployeeAction:(id)sender
 {
+    __weak typeof(self) weakSelf = self;
     IPCEmployeListView * listView = [[IPCEmployeListView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
                                                                 DismissBlock:^(IPCEmployee *employee)
                                      {
+                                         __strong typeof(weakSelf) strongSelf = weakSelf;
                                          [IPCPayOrderManager sharedManager].employee = employee;
-                                         [self.employeeNameLabel setText:employee.name];
+                                         [strongSelf.employeeNameLabel setText:employee.name];
                                      }];
     [[UIApplication sharedApplication].keyWindow addSubview:listView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:listView];

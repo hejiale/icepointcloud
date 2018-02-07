@@ -93,7 +93,6 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
     [[IPCAppManager sharedManager] clearData];
     [[IPCTryMatch instance] clearData];
     [[IPCPayOrderManager sharedManager] resetData];
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
     
     IPCLoginViewController * loginVc = [[IPCLoginViewController alloc]initWithNibName:@"IPCLoginViewController" bundle:nil];
     [[[UIApplication sharedApplication] delegate].window setRootViewController:loginVc];

@@ -120,7 +120,6 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-//        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     [self.viewModel resetData];
@@ -182,6 +181,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 
 - (void)validationMemberRequest:(NSString *)code
 {
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager validateCustomerWithCode:code
                                            SuccessBlock:^(id responseValue)
      {
@@ -191,7 +191,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
          if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
              [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
          }else{
-             [self reloadCustomerInfo];
+             [weakSelf reloadCustomerInfo];
              [IPCCommonUI showSuccess:@"验证会员成功!"];
          }
      } FailureBlock:^(NSError *error) {
@@ -200,7 +200,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
          }else{
              [IPCCommonUI showError:@"验证会员失败!"];
          }
-         [self reloadCustomerInfo];
+         [weakSelf reloadCustomerInfo];
          [IPCPayOrderManager sharedManager].isValiateMember = NO;
      }];
 }
