@@ -108,9 +108,11 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (IPCEditCustomerView *)editCustomerView
 {
     if (!_editCustomerView) {
+        __weak typeof(self) weakSelf = self;
         _editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
                                                           UpdateBlock:^(NSString *customerId) {
-                                                              [self.refreshHeader beginRefreshing];
+                                                              __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                              [strongSelf.refreshHeader beginRefreshing];
                                                           }];
     }
     return _editCustomerView;
@@ -122,7 +124,6 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     //Stop Footer Refresh Method
     if (self.refreshFooter.isRefreshing) {
         [self.refreshFooter endRefreshing];
-//        [[IPCHttpRequest sharedClient] cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
     [self.viewModel resetData];

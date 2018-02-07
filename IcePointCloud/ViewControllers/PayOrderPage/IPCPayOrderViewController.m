@@ -62,6 +62,14 @@
     [super viewWillAppear:animated];
     //Set Naviagtion Bar
     [self setNavigationBarStatus:YES];
+    //设置下单状态
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //取消下单状态
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
 }
 
 - (NSMutableArray<UIViewController *> *)viewControllers

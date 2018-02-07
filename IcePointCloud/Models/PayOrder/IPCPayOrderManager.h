@@ -14,6 +14,8 @@
 @interface IPCPayOrderManager : NSObject
 
 + (IPCPayOrderManager *)sharedManager;
+//是否下单状态
+@property (nonatomic, assign, readwrite) BOOL   isPayOrderStatus;
 //当前客户Id
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;
 //当前客户验光单Id

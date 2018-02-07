@@ -62,8 +62,6 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    //Stop Other Request
-    //    [[IPCHttpRequest sharedClient] cancelAllRequest];
 }
 
 #pragma mark //Request Data
@@ -95,8 +93,9 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     });
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-        self.detailTableView.isBeginLoad = NO;
-        [self.detailTableView reloadData];
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        strongSelf.detailTableView.isBeginLoad = NO;
+        [strongSelf.detailTableView reloadData];
     });
 }
 
@@ -146,9 +145,11 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 - (void)loadMoreOrderData{
     [IPCCommonUI show];
     
+    __weak typeof(self) weakSelf = self;
     self.customerViewMode.orderCurrentPage++;
     [self.customerViewMode queryHistotyOrderList:^{
-        [self.detailTableView reloadData];
+        __strong typeof (weakSelf) strongSelf = weakSelf;
+        [strongSelf.detailTableView reloadData];
         [IPCCommonUI hiden];
     }];
 }

@@ -49,15 +49,18 @@
 #pragma mark //Request Data
 - (void)upgradeMemberRequest
 {
+    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager upgradeMemberWithCustomerId:self.customer.customerID
                                               MemberGrowth:[self.growthValueTextField.text doubleValue]
                                                MemberPhone:self.encryptedPhoneTextField.text
                                                   Integral:[self.pointValueTextField.text integerValue]
                                                    Balance:[self.storeValueTextField.text doubleValue]
                                               SuccessBlock:^(id responseValue) {
-                                                  [self removeFromSuperview];
-                                                  if (self.UpdateBlock) {
-                                                      self.UpdateBlock();
+                                                  __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                  [weakSelf removeFromSuperview];
+                                                  
+                                                  if (strongSelf.UpdateBlock) {
+                                                      strongSelf.UpdateBlock();
                                                   }
     } FailureBlock:^(NSError *error) {
         [IPCCommonUI showError:error.domain];

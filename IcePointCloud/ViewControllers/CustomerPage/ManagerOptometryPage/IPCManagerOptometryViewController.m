@@ -85,9 +85,11 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     self.optometryTableView.isBeginLoad = YES;
     [self.optometryTableView reloadData];
 
+    __weak typeof(self) weakSelf = self;
     [self.managerViewModel queryCustomerOptometryList:^() {
-        self.optometryTableView.isBeginLoad = NO;
-        [self.optometryTableView reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.optometryTableView.isBeginLoad = NO;
+        [strongSelf.optometryTableView reloadData];
     }];
 }
 
@@ -142,7 +144,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+    if ([IPCPayOrderManager sharedManager].isPayOrderStatus) {
         IPCOptometryMode * optometry = self.managerViewModel.optometryList[indexPath.row];
         [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = nil;
         [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;

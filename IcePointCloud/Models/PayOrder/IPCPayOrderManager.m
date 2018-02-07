@@ -159,6 +159,7 @@
     [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
     [IPCPayOrderManager sharedManager].isValiateMember = NO;
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }

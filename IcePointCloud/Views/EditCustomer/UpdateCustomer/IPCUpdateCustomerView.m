@@ -96,6 +96,7 @@
             gender = @"FEMALE";
         }
         
+        __weak typeof(self) weakSelf = self;
         [IPCCustomerRequestManager saveCustomerInfoWithCustomName:self.customerNameTextField.text
                                                       CustomPhone:self.phoneTextFiel.text
                                                            Gender:gender
@@ -106,20 +107,22 @@
                                                        CustomerId:self.detailCustomer.customerID
                                                      SuccessBlock:^(id responseValue)
          {
-             [self removeFromSuperview];
+             __strong typeof(weakSelf) strongSelf = weakSelf;
+             [weakSelf removeFromSuperview];
              
-             if (self.UpdateBlock) {
-                 self.UpdateBlock(responseValue[@"id"]);
+             if (strongSelf.UpdateBlock) {
+                 strongSelf.UpdateBlock(responseValue[@"id"]);
              }
              [IPCCommonUI showSuccess:@"保存客户信息成功!"];
          } FailureBlock:^(NSError *error) {
              if ([error code] != NSURLErrorCancelled) {
                  [IPCCommonUI showError:error.domain];
              }
-             [self removeFromSuperview];
+             [weakSelf removeFromSuperview];
              
-             if (self.UpdateBlock) {
-                 self.UpdateBlock(nil);
+             __strong typeof(weakSelf) strongSelf = weakSelf;
+             if (strongSelf.UpdateBlock) {
+                 strongSelf.UpdateBlock(nil);
              }
          }];
     }
