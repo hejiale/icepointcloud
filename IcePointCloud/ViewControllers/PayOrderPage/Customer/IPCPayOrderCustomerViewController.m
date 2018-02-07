@@ -237,7 +237,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error) {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
-        [self validationMemberRequest:result];
+        [weakSelf validationMemberRequest:result];
     }];
     self.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
     [self presentViewController:self.cameraNav  animated:YES completion:nil];

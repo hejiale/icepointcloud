@@ -180,6 +180,9 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 {
     IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[indexPath.row];
     
+    if (!payType)return;
+    
+    
     if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0)return;
     
     if (![IPCPayOrderManager sharedManager].integralTrade && [payType.payType isEqualToString:@"积分"]) {
@@ -230,6 +233,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         
         if (self.currentIndex > -1) {
             IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[self.currentIndex];
+            if (!payType)return;
             
             self.insertRecord = [[IPCPayRecord alloc]init];
             self.insertRecord.payDate = [NSDate date];

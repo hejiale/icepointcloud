@@ -161,7 +161,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
                  [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
              }
          }
-         [strongSelf reload];
+         [weakSelf reload];
      }];
 }
 
