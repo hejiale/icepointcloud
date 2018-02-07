@@ -15,6 +15,7 @@
                 <outlet property="payTypeCollectionView" destination="HhH-AV-zes" id="lzq-ch-x6g"/>
                 <outlet property="payTypeContentView" destination="Xol-Ft-6wm" id="FGw-h7-UtX"/>
                 <outlet property="remainPayAmountLabel" destination="xZT-1q-EsG" id="GaH-Ax-R1O"/>
+                <outlet property="scrollContentView" destination="c1Z-tL-HkX" id="to1-Sc-H1u"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -101,32 +102,44 @@
                                 <constraint firstItem="PDF-5C-otQ" firstAttribute="leading" secondItem="3jn-Hn-72e" secondAttribute="leading" constant="20" id="qVF-N1-ipx"/>
                             </constraints>
                         </view>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HhH-AV-zes">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1Z-tL-HkX">
                             <rect key="frame" x="0.0" y="60" width="408" height="186"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HhH-AV-zes">
+                                    <rect key="frame" x="0.0" y="0.0" width="408" height="186"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vG7-9O-jUo">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="d3i-8f-FAl"/>
+                                        <outlet property="delegate" destination="-1" id="2N8-q8-jra"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vG7-9O-jUo">
-                                <size key="itemSize" width="50" height="50"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="d3i-8f-FAl"/>
-                                <outlet property="delegate" destination="-1" id="2N8-q8-jra"/>
-                            </connections>
-                        </collectionView>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="HhH-AV-zes" secondAttribute="bottom" id="VrS-r3-PSB"/>
+                                <constraint firstAttribute="trailing" secondItem="HhH-AV-zes" secondAttribute="trailing" id="aoV-Pj-gEP"/>
+                                <constraint firstItem="HhH-AV-zes" firstAttribute="leading" secondItem="c1Z-tL-HkX" secondAttribute="leading" id="qrk-W3-CEK"/>
+                                <constraint firstItem="HhH-AV-zes" firstAttribute="top" secondItem="c1Z-tL-HkX" secondAttribute="top" id="yfQ-fb-MkY"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="c1Z-tL-HkX" firstAttribute="top" secondItem="3jn-Hn-72e" secondAttribute="bottom" constant="10" id="GvR-dH-cIS"/>
                         <constraint firstItem="3jn-Hn-72e" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="Qq5-m6-uRw"/>
-                        <constraint firstItem="HhH-AV-zes" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="ZIL-dJ-MIT"/>
+                        <constraint firstAttribute="bottom" secondItem="c1Z-tL-HkX" secondAttribute="bottom" id="axr-y8-oeu"/>
                         <constraint firstAttribute="trailing" secondItem="3jn-Hn-72e" secondAttribute="trailing" id="bfd-qE-ewC"/>
-                        <constraint firstAttribute="trailing" secondItem="HhH-AV-zes" secondAttribute="trailing" id="c2x-2R-fH8"/>
                         <constraint firstItem="3jn-Hn-72e" firstAttribute="top" secondItem="Xol-Ft-6wm" secondAttribute="top" id="c9B-ln-G0k"/>
-                        <constraint firstItem="HhH-AV-zes" firstAttribute="top" secondItem="3jn-Hn-72e" secondAttribute="bottom" constant="10" id="jTg-6b-tWc"/>
+                        <constraint firstItem="c1Z-tL-HkX" firstAttribute="leading" secondItem="Xol-Ft-6wm" secondAttribute="leading" id="hJR-KJ-LzC"/>
+                        <constraint firstAttribute="trailing" secondItem="c1Z-tL-HkX" secondAttribute="trailing" id="skC-xS-fIb"/>
                         <constraint firstAttribute="width" constant="408" id="uTS-7N-FZD"/>
                         <constraint firstAttribute="height" constant="246" id="v1D-sS-WKi"/>
-                        <constraint firstAttribute="bottom" secondItem="HhH-AV-zes" secondAttribute="bottom" id="ycA-7X-DbI"/>
                     </constraints>
                 </view>
             </subviews>

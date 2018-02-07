@@ -15,12 +15,14 @@ static  NSString * const recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
 static  NSString * const editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
 static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifier";
 
-@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
+@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *payRecordTableView;
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
 @property (weak, nonatomic) IBOutlet UILabel *remainPayAmountLabel;
 @property (weak, nonatomic) IBOutlet UICollectionView *payTypeCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *scrollContentView;
+@property (strong, nonatomic) UIImageView * scrollLineImageView;
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 @property (nonatomic, strong) IPCPayRecord * insertRecord;
 @property (nonatomic, assign) NSInteger currentIndex;
@@ -47,6 +49,10 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     [self.payTypeCollectionView setCollectionViewLayout:layout];
     [self.payTypeCollectionView registerNib:[UINib nibWithNibName:@"IPCPayCashPayTypeViewCell" bundle:nil] forCellWithReuseIdentifier:payTypeIdentifier];
+    
+    if ([IPCPayOrderManager sharedManager].payTypeArray.count > 8) {
+        [self.scrollContentView addSubview:self.scrollLineImageView];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -73,6 +79,14 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     if (!_keyboard)
         _keyboard = [[IPCCustomKeyboard alloc]initWithFrame:CGRectMake(self.payRecordTableView.jk_right+10, self.payTypeContentView.jk_bottom+10, 408, 377)];
     return _keyboard;
+}
+
+- (UIImageView *)scrollLineImageView{
+    if (!_scrollLineImageView) {
+        _scrollLineImageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.scrollContentView.jk_right-2, 0, 2, self.scrollContentView.jk_height*2/3)];
+        [_scrollLineImageView setBackgroundColor:[UIColor colorWithHexString:@"#999999"]];
+    }
+    return _scrollLineImageView;
 }
 
 #pragma mark // Clicked Events
@@ -245,6 +259,19 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
             [IPCPayOrderManager sharedManager].isInsertRecord = NO;
         }
         [self.payRecordTableView reloadData];
+    }
+}
+
+#pragma mark //UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if ([scrollView isEqual:self.payTypeCollectionView]) {
+        CGPoint offset = scrollView.contentOffset;
+        CGFloat offsetY = offset.y*(scrollView.jk_height-self.scrollLineImageView.jk_height)/(scrollView.contentSize.height-scrollView.jk_height);
+  
+        CGRect frame= self.scrollLineImageView.frame;
+        frame.origin.y= MAX(offsetY, 0);
+        self.scrollLineImageView.frame = frame;
     }
 }
 
