@@ -77,8 +77,8 @@
     [IPCUserRequestManager deletePadUUIDWithUUID:[[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]
                                     SuccessBlock:^(id responseValue)
      {
-         [weakSelf pushToLoginVC];
          [[LUKeychainAccess standardKeychainAccess] deleteObjectForKey:kIPCDeviceLoginUUID];
+         [weakSelf pushToLoginVC];
      } FailureBlock:nil];
 }
 

@@ -55,7 +55,7 @@
 {
     NSString * remainPriceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
     NSString * balanceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useBalance]];
-    NSString * integralStr = [NSString stringWithFormat:@"%d", [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer userIntegral]];
+    NSString * integralStr = [NSString stringWithFormat:@"%.f", [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer userIntegral]];
     
     if (textField.text.length) {
         if ([self.payRecord.payOrderType.payType isEqualToString:@"积分"])

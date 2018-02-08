@@ -77,7 +77,7 @@
     [self.phoneLabel setText:customer.customerPhone];
     [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
     [self.birthdayLabel setText:customer.birthday];
-    [self.memberIdentityLabel setText:(customer.memberLevel ? @"会员" : @"非会员")];
+    [self.memberIdentityLabel setText:((customer.memberLevel || customer.mainMemberLevel) ? @"会员" : @"非会员")];
     [self.totalPayLabel setText:[NSString stringWithFormat:@"￥%.2f", customer.consumptionAmount]];
     
     if (customer.memberLevel) {
@@ -100,13 +100,8 @@
             [self.memberValiteStatus setSelected:YES];
         }else{
             if ([IPCAppManager sharedManager].authList.forceVerifyMember) {
-                if (!customer.mainMemberLevel) {
-                    [self.forcedButton setHidden:NO];
-                    [self.memberValiteStatus setHidden:YES];
-                }else{
-                    [self.forcedButton setHidden:YES];
-                    [self.memberValiteStatus setHidden:YES];
-                }
+                [self.forcedButton setHidden:NO];
+                [self.memberValiteStatus setHidden:YES];
             }else{
                 [self.forcedButton setHidden:YES];
                 [self.memberValiteStatus setHidden:NO];

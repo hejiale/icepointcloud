@@ -137,8 +137,14 @@
         [IPCPayOrderManager sharedManager].isValiateMember = YES;
         [IPCPayOrderManager sharedManager].customDiscount = [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
     }else{
-        [IPCPayOrderManager sharedManager].customDiscount = 100;
-        [IPCPayOrderManager sharedManager].isValiateMember = NO;
+        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.mainMemberLevel && ![IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel)
+        {
+            [IPCPayOrderManager sharedManager].isValiateMember = YES;
+            [IPCPayOrderManager sharedManager].customDiscount = [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
+        }else{
+            [IPCPayOrderManager sharedManager].customDiscount = 100;
+            [IPCPayOrderManager sharedManager].isValiateMember = NO;
+        }
     }
 }
 

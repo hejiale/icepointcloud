@@ -235,6 +235,12 @@
             [self.delegate tabBarController:self didSelectIndex:selectedIndex];
         }
     }
+    
+    if (selectedIndex == 4) {
+        [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+    }else{
+        [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+    }
 }
 
 #pragma mark //Clicked Events

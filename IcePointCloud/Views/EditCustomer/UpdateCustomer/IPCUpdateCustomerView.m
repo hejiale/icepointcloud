@@ -76,7 +76,7 @@
     if (self.detailCustomer.createStoreName.length) {
         [self.storeTextField setText:self.detailCustomer.createStoreName];
     }else{
-        [self.storeTextField setText:[IPCAppManager sharedManager].storeResult.storeName];
+        [self.storeTextField setText:@"无门店"];
     }
     
     if ([self.detailCustomer.gender isEqualToString:@"MALE"]) {
