@@ -36,8 +36,9 @@
                                                            InView:self.view
                                                            Finish:^{
                                                                [UIView animateWithDuration:1.3 animations:^{
-                                                                   self.view.transform = CGAffineTransformScale(self.view.transform, 1.5, 1.5);
-                                                                   self.view.alpha = 0;
+                                                                   __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                                   strongSelf.view.transform = CGAffineTransformScale(strongSelf.view.transform, 1.5, 1.5);
+                                                                   strongSelf.view.alpha = 0;
                                                                }completion:^(BOOL finished) {
                                                                    if ([weakSelf isShouldDeleteUUID]) {
                                                                        [weakSelf userLogin];

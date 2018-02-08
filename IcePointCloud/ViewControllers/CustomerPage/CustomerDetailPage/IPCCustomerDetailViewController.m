@@ -289,7 +289,16 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.customerViewMode = nil;
+        self.upgradeMemberView = nil;
+        self.editCustomerView = nil;
+        self.detailOrderView = nil;
+    }
 }
+
 
 
 

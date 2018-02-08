@@ -464,9 +464,17 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     return isContain;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.keywordHistory = nil;
+        self.inputKeyArray = nil;
+        self.historyCodeArray = nil;
+    }
 }
+
 
 @end

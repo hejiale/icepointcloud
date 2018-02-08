@@ -163,7 +163,14 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.editOptometryView = nil;
+        self.managerViewModel = nil;
+    }
 }
+
 
 
 @end

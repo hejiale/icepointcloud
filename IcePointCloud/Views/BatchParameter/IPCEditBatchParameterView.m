@@ -71,15 +71,18 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
 }
 
 - (void)removeCover{
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.3, 0.3);
-        [self.editParameterView setTransform:transform];
-        self.editParameterView.alpha = 0;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGAffineTransform transform = CGAffineTransformScale(strongSelf.editParameterView.transform, 0.3, 0.3);
+        [strongSelf.editParameterView setTransform:transform];
+        strongSelf.editParameterView.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self removeFromSuperview];
-            if (self.DismissBlock)self.DismissBlock();
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [weakSelf removeFromSuperview];
+            if (strongSelf.DismissBlock)strongSelf.DismissBlock();
         }
     }];
 }

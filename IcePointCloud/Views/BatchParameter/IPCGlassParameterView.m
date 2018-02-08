@@ -558,14 +558,17 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 
 //Remove page
 - (void)removeCover{
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        CGAffineTransform transform = CGAffineTransformScale(self.parameterContentView.transform, 0.3, 0.3);
-        [self.parameterContentView setTransform:transform];
-        self.parameterContentView.alpha = 0;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGAffineTransform transform = CGAffineTransformScale(strongSelf.parameterContentView.transform, 0.3, 0.3);
+        [strongSelf.parameterContentView setTransform:transform];
+        strongSelf.parameterContentView.alpha = 0;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [self removeFromSuperview];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+            [weakSelf removeFromSuperview];
         }
     }];
 }

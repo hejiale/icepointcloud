@@ -46,22 +46,26 @@ static NSString * const typeIdentifier = @"LibraryTypeTableViewCellIdentifier";
 
 
 - (void)show{
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f animations:^{
-        CGRect rect = self.frame;
-        rect.origin.y -= self.jk_height;
-        self.frame = rect;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect rect = strongSelf.frame;
+        rect.origin.y -= strongSelf.jk_height;
+        strongSelf.frame = rect;
     }];
 }
 
 
 - (void)dismiss{
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f animations:^{
-        CGRect rect = self.frame;
-        rect.origin.y += self.jk_height;
-        self.frame = rect;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect rect = strongSelf.frame;
+        rect.origin.y += strongSelf.jk_height;
+        strongSelf.frame = rect;
     } completion:^(BOOL finished) {
         if (finished) {
-            [self removeFromSuperview];
+            [weakSelf removeFromSuperview];
         }
     }];
 }

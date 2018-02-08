@@ -195,5 +195,16 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.keywordHistory = nil;
+    }
+}
+
+
 
 @end

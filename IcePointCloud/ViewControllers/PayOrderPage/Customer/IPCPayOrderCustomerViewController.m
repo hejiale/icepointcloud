@@ -131,6 +131,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
     }
     [self.refreshFooter resetDataStatus];
     [self.viewModel resetData];
+    
     [self loadCustomerList];
 }
 
@@ -188,13 +189,11 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 {
     self.customerCollectionView.isBeginLoad = NO;
     [self.customerCollectionView reloadData];
-    
-    if (self.viewModel.status == IPCFooterRefresh_HasMoreData) {
-        [self stopRefresh];
-    }
+    [self stopRefresh];
 }
 
-- (void)stopRefresh{
+- (void)stopRefresh
+{
     if (self.refreshHeader.isRefreshing) {
         [self.refreshHeader endRefreshing];
     }
@@ -350,6 +349,16 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.infoView = nil;
+        self.editCustomerView = nil;
+        self.upgradeMemberView = nil;
+        self.updateCustomerView = nil;
+        self.cameraNav = nil;
+        self.viewModel = nil;
+    }
 }
 
 

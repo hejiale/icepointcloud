@@ -259,21 +259,23 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
 #pragma mark - Animation
 - (void)animateToDestination:(CGPoint)centerPoint withDuration:(CGFloat)duration IsOn:(BOOL)on
 {
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:duration
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         self.thumbView.center = centerPoint;
+                         __strong typeof(weakSelf) strongSelf = weakSelf;
+                         strongSelf.thumbView.center = centerPoint;
                          
                          if (on){
-                             [self.onBackgroundView setAlpha:1.0];
+                             [strongSelf.onBackgroundView setAlpha:1.0];
                          }else{
-                             [self.onBackgroundView setAlpha:0.0];
+                             [strongSelf.onBackgroundView setAlpha:0.0];
                          }
                      }
                      completion:^(BOOL finished) {
                          if (finished){
-                             [self updateSwitch:on];
+                             [weakSelf updateSwitch:on];
                          }
                      }];
     
@@ -281,10 +283,11 @@ static const CGFloat kSwitchBorderWidth = 1.75f;
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
+                         __strong typeof(weakSelf) strongSelf = weakSelf;
                          if (on){
-                             [self.offBackgroundView setAlpha:0.0];
+                             [strongSelf.offBackgroundView setAlpha:0.0];
                          }else{
-                             [self.offBackgroundView setAlpha:1.0];
+                             [strongSelf.offBackgroundView setAlpha:1.0];
                          }
                      }
                      completion:^(BOOL finished) {

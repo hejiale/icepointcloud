@@ -210,10 +210,11 @@
     [self.session stopRunning];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:str preferredStyle:UIAlertControllerStyleAlert];
     
-    
+    __weak typeof(self) weakSelf = self;
     UIAlertAction *action1 = ({
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.session startRunning];
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.session startRunning];
         }];
         action;
     });
@@ -244,6 +245,16 @@
         [self showError:@"图片中未识别到二维码"];
     }
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+    }
+}
+
 
 
 @end

@@ -331,7 +331,15 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.insertRecord = nil;
+        self.selectCustomerCoverView = nil;
+        self.keyboard = nil;
+    }
 }
+
 
 
 @end

@@ -102,17 +102,20 @@ static NSString * const chooseIdentifier     = @"ChooseTypeCellIdentifier";
     [self addSubview:self.rightView];
     [self sendSubviewToBack:self.rightView];
     
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.8f animations:^{
-        CGRect frame    = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame          = frame;
-        self.leftBgView.alpha = 1;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect frame    = strongSelf.frame;
+        frame.origin.x += strongSelf.jk_width;
+        strongSelf.frame          = frame;
+        strongSelf.leftBgView.alpha = 1;
     } completion:^(BOOL finished) {
         if (finished) {
             [UIView animateWithDuration:0.1f animations:^{
-                CGRect   rect  = self.rightView.frame;
-                rect.origin.x += self.leftBgView.jk_width;
-                self.rightView.frame = rect;
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                CGRect   rect  = strongSelf.rightView.frame;
+                rect.origin.x += strongSelf.leftBgView.jk_width;
+                strongSelf.rightView.frame = rect;
             } completion:nil];
         }
     }];

@@ -13,29 +13,35 @@
 
 - (void)show
 {
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x -= self.jk_width;
-        self.frame = frame;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect frame = strongSelf.frame;
+        frame.origin.x -= strongSelf.jk_width;
+        strongSelf.frame = frame;
     } completion:nil];
 }
 
 - (void)dismiss
 {
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect frame = strongSelf.frame;
+        frame.origin.x += strongSelf.jk_width;
+        strongSelf.frame = frame;
     } completion:nil];
 }
 
 
 - (void)dismiss:(void(^)())finishedBlock
 {
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f animations:^{
-        CGRect frame = self.frame;
-        frame.origin.x += self.jk_width;
-        self.frame = frame;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        CGRect frame = strongSelf.frame;
+        frame.origin.x += strongSelf.jk_width;
+        strongSelf.frame = frame;
     } completion:^(BOOL finished) {
         if (finished) {
             if (finishedBlock) {

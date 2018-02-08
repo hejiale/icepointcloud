@@ -72,10 +72,11 @@ static NSString * const customerListCellIdentifier = @"IPCPayCashCustomerListCel
                                                        Page:currentPage
                                                SuccessBlock:^(id responseValue)
     {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
         IPCCustomerList * customerlist = [[IPCCustomerList alloc]initWithResponseValue:responseValue];
         [customerlist.list enumerateObjectsUsingBlock:^(IPCCustomerMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.memberLevel) {
-                [self.customerList addObject:obj];
+                [strongSelf.customerList addObject:obj];
             }
         }];
         [weakSelf reload];

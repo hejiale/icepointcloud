@@ -55,23 +55,26 @@
     
     CGRect parentFrame = self.superview.frame;
     
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:.2 delay:.2 options:0 animations:^{
-        self.transform = CGAffineTransformScale(self.transform, 2.0, 2.0);
-        self.center = CGPointMake(parentFrame.size.width / 2, parentFrame.size.height / 2);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.transform = CGAffineTransformScale(strongSelf.transform, 2.0, 2.0);
+        strongSelf.center = CGPointMake(parentFrame.size.width / 2, parentFrame.size.height / 2);
     } completion:^(BOOL finished) {
         if (finished) {
-            self.parentSingleModeView.alpha = 0;
-            self.parentSingleModeView.transform = CGAffineTransformIdentity;
-            self.parentSingleModeView.hidden = NO;
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf.parentSingleModeView.alpha = 0;
+            strongSelf.parentSingleModeView.transform = CGAffineTransformIdentity;
+            strongSelf.parentSingleModeView.hidden = NO;
             
             [IPCTryMatch instance].activeMatchItemIndex = self.tag;
             
-            if (self.delegate && [self.delegate respondsToSelector:@selector(didAnimateToSingleMode:)])
-                [self.delegate didAnimateToSingleMode:self];
+            if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(didAnimateToSingleMode:)])
+                [strongSelf.delegate didAnimateToSingleMode:strongSelf];
             
             [UIView animateWithDuration:.3 animations:^{
-                self.alpha = 0;
-                self.parentSingleModeView.alpha = 1;
+                strongSelf.alpha = 0;
+                strongSelf.parentSingleModeView.alpha = 1;
             } completion:^(BOOL finished) {
             }];
         }

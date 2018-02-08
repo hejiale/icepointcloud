@@ -247,9 +247,18 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
     [self.refreshHeader beginRefreshing];
 }
 
-- (void)didReceiveMemoryWarning{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.viewModel = nil;
+        self.editCustomerView = nil;
+        self.keywordHistory = nil;
+    }
 }
+
 
 
 @end

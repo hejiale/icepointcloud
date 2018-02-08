@@ -181,6 +181,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         
         __weak typeof(self) weakSelf = self;
         [self.glassListViewMode.recommdGlassesList enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
             UIImageView * imageView = [[UIImageView alloc]initWithFrame:CGRectMake((width+5)*idx+5, 0, width, height)];
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             IPCGlassesImage * glassImage = [glass imageWithType:IPCGlassesImageTypeThumb];
@@ -191,7 +192,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
                 [[IPCTryMatch instance] currentMatchItem].glass = glass;
                 [weakSelf reload];
             }];
-            [self.recommdScrollView addSubview:imageView];
+            [strongSelf.recommdScrollView addSubview:imageView];
         }];
         [self.recommdScrollView setContentOffset:CGPointZero];
         [self.recommdScrollView setContentSize:CGSizeMake(self.glassListViewMode.recommdGlassesList.count * (width+5), 0)];
@@ -390,11 +391,13 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
         [self.coverView addSubview:self.modelsPicker];
         
         [UIView animateWithDuration:0.3f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.modelsPicker.alpha = 1.f;
-            self.modelsPicker.transform = CGAffineTransformMakeScale(1.f, 1.f);
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            strongSelf.modelsPicker.alpha = 1.f;
+            strongSelf.modelsPicker.transform = CGAffineTransformMakeScale(1.f, 1.f);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.1f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.modelsPicker.transform = CGAffineTransformIdentity;
+                __strong typeof(weakSelf) strongSelf = weakSelf;
+                strongSelf.modelsPicker.transform = CGAffineTransformIdentity;
             } completion:nil];
         }];
     }
@@ -601,21 +604,24 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     self.signleModeView.layer.anchorPoint = [[IPCTryMatch instance] singleModeViewAnchorPoint];
     self.signleModeView.frame = frame;
     
+    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:.2 delay:0 options:0 animations:^{
-        self.signleModeView.transform = CGAffineTransformScale(self.signleModeView.transform, 0.5, 0.5);
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.signleModeView.transform = CGAffineTransformScale(self.signleModeView.transform, 0.5, 0.5);
     } completion:^(BOOL finished) {
         if (finished) {
-            [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            [strongSelf.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 obj.alpha = 0;
                 obj.hidden = NO;
             }];
             
             [UIView animateWithDuration:0.2f animations:^{
-                self.signleModeView.alpha = 0;
-                self.signleModeView.hidden = YES;
+                strongSelf.signleModeView.alpha = 0;
+                strongSelf.signleModeView.hidden = YES;
             }];
             
-            [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [strongSelf.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
                     obj.alpha = 1;
                 } completion:nil];
@@ -792,10 +798,15 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     }
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    if (self.isViewLoaded && !self.view.window){
+        self.view = nil;
+        self.glassListViewMode = nil;
+    }
 }
+
 
 @end
