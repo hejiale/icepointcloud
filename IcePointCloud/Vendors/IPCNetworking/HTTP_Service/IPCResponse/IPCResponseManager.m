@@ -14,36 +14,14 @@ static NSError *HTTPError(NSString *domain, int code) {
     return [NSError errorWithDomain:domain code:code userInfo:nil];
 }
 
-@interface IPCResponseManager()
-
-@property (nonatomic, strong) NSLock * lock;
-
-@end
 
 @implementation IPCResponseManager
 
-+ (IPCResponseManager *)manager
-{
-    return [[self alloc]init];
-}
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        self.lock = [[NSLock alloc]init];
-        self.lock.name = @"com.response.value.lock";
-    }
-    return self;
-}
-
-
-- (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed
++ (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed
 {
 
     DLog(@"%@", responseData);
-    
-    [self.lock lock];
     
     if (responseData && ![responseData isKindOfClass:[NSNull class]]) {
         if ([responseData isKindOfClass:[NSDictionary class]]){
@@ -61,7 +39,7 @@ static NSError *HTTPError(NSString *domain, int code) {
             }else if ([[responseData allKeys] containsObject:kIPCNetworkError]){
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (failed) {
-                        failed([self parseErrorResponse:responseData]);
+                        failed([IPCResponseManager parseErrorResponse:responseData]);
                     }
                 });
             }
@@ -81,11 +59,10 @@ static NSError *HTTPError(NSString *domain, int code) {
             complete(nil);
         }
     }
-    [self.lock unlock];
 }
 
 
-- (NSError *)parseErrorResponse:(id)responseValue
++ (NSError *)parseErrorResponse:(id)responseValue
 {
     if (responseValue) {
         IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];

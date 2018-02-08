@@ -18,7 +18,7 @@
        FailureBlock:(void (^)(NSError *error))failure
 {
     IPCRequestParameter * request = [[IPCRequestParameter alloc]initWithRequestMethod:requestMethod Parameter:parameters];
-    [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypePOST CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
+    [IPCHttpRequest  callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypePOST CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
 }
 
 
@@ -30,7 +30,7 @@
       FailureBlock:(void (^)(NSError *error))failure
 {
     IPCRequestParameter * request = [[IPCRequestParameter alloc]initWithRequestMethod:requestMethod Parameter:parameters];
-    [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypeGET CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
+    [IPCHttpRequest callRequestWithParams:request ImageData:nil ImageName:nil RequestType:IPCRequestTypeGET CacheEnable:cacheEnable SuccessBlock:success ProgressBlock:nil FailureBlock:failure];
 }
 
 
@@ -44,7 +44,7 @@
                     FailureBlock:(void (^)(NSError *error))failure
 {
     IPCRequestParameter * request = [[IPCRequestParameter alloc]initWithRequestMethod:requestMethod Parameter:parameters];
-    [[IPCHttpRequest sharedClient] callRequestWithParams:request ImageData:imageData ImageName:imageName RequestType:IPCRequestTypePOST CacheEnable: IPCRequestCacheDisEnable SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
+    [IPCHttpRequest callRequestWithParams:request ImageData:imageData ImageName:imageName RequestType:IPCRequestTypePOST CacheEnable: IPCRequestCacheDisEnable SuccessBlock:success ProgressBlock:uploadProgress FailureBlock:failure];
 }
 
 @end

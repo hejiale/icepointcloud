@@ -156,6 +156,7 @@
     [IPCPayOrderManager sharedManager].isValiateMember = NO;
     [IPCPayOrderManager sharedManager].isExtraDiscount = NO;
     [IPCPayOrderManager sharedManager].introducer = nil;
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }

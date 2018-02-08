@@ -241,7 +241,7 @@
 - (void)menuTapAction:(UIButton *)sender
 {
     /****Remove All Request****/
-    [[IPCHttpRequest sharedClient] cancelAllRequest];
+    [IPCHttpRequest  cancelAllRequest];
    
     [self setSelectedIndex:sender.tag];
 }

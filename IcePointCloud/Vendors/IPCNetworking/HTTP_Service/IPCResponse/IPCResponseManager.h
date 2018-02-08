@@ -12,9 +12,6 @@
 @interface IPCResponseManager : NSObject
 
 
-+ (IPCResponseManager *)manager;
-
-
 /**
  Parse Response Data
 
@@ -22,6 +19,6 @@
  @param complete
  @param failed 
  */
-- (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed;
++ (void)parseResponseData:(id)responseData Complete:(void (^)(id responseValue))complete Failed:(void(^)(NSError * _Nonnull error))failed;
 
 @end

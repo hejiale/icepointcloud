@@ -42,7 +42,7 @@
     
     void(^successCall)(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) = ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {        
-        [[IPCResponseManager manager] parseResponseData:responseObject Complete:^(id responseValue)
+        [IPCResponseManager parseResponseData:responseObject Complete:^(id responseValue)
          {
              if (cacheEnable == IPCRequestCacheEnable) {
                  [[IPCNetworkCache sharedCache] setHttpCache:responseValue RequestMethod:request.requestMethod parameters:request.parameters];

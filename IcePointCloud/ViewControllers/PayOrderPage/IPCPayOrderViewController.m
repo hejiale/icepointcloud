@@ -64,6 +64,14 @@
     [super viewWillAppear:animated];
     //Set Naviagtion Bar
     [self setNavigationBarStatus:YES];
+    
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
 }
 
 - (NSMutableArray<UIViewController *> *)viewControllers
