@@ -33,6 +33,7 @@
 #import "ReactiveObjC.h"
 #import "MMScanViewController.h"
 #import "LUKeychainAccess.h"
+#import "AvoidCrash.h"
 //Head File
 #import "HeaderFile.h"
 

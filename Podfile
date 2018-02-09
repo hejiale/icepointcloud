@@ -23,6 +23,7 @@ pod 'Bugtags'
 pod 'MMScan'
 pod 'LUKeychainAccess'
 pod 'TuSDK'
+pod 'AvoidCrash'
 end
 
 target "IcePointCloudTests" do

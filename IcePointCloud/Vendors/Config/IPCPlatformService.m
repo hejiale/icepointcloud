@@ -32,6 +32,7 @@
     [self bindWechat];
     [self setUpBugtags];
     [self sendExpection];
+    [self avoidCrash];
 }
 
 /**
@@ -41,7 +42,7 @@
     //    [[IPCCheckVersion shardManger] checkVersion];
     
     ///延时获取更新版本内容
-//    [self performSelector:@selector(testLogin) withObject:nil afterDelay:.5f];
+    [self performSelector:@selector(testLogin) withObject:nil afterDelay:.5f];
 }
 
 - (void)testLogin{
@@ -181,6 +182,26 @@
         //将崩溃信息上传到服务器，该字符串为：异常信息
         [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason:ExceptionMessage userInfo:nil]];
     }).message(nil).title(nil);
+}
+
+- (void)avoidCrash
+{
+    [AvoidCrash makeAllEffective];
+    
+    NSArray *noneSelClassStrings = @[
+                                     @"NSString"
+                                     ];
+    [AvoidCrash setupNoneSelClassStringsArr:noneSelClassStrings];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
+}
+
+- (void)dealwithCrashMessage:(NSNotification *)note
+{
+    NSString * user =  [NSString stringWithFormat:@"%@#%@", [IPCAppManager sharedManager].userName, [IPCAppManager sharedManager].password];
+    NSString * exception = [NSString stringWithFormat:@"%@#%@", user, note.userInfo];
+    
+    [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason: exception userInfo:nil]];
 }
 
 @end
