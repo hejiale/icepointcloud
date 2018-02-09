@@ -15,7 +15,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentWidth;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 
 @property (copy, nonatomic) NSString * title;
@@ -78,9 +77,9 @@
     if (_message.length) {
         [self.contentTextView setText:_message];
         
-        CGFloat height = [_message jk_sizeWithFont:self.contentTextView.font constrainedToWidth:self.contentWidth.constant].height;
-        CGFloat maxHeight = MAX(height, 105);
-        self.contentHeight.constant += maxHeight - 105;
+        CGFloat height = [_message jk_sizeWithFont:self.contentTextView.font constrainedToWidth:self.contentTextView.jk_width].height;
+        CGFloat maxHeight = MAX(height, 115);
+        self.contentHeight.constant += maxHeight - 115;
     }
 }
 

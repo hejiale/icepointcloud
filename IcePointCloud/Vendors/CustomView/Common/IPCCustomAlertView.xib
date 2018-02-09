@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,6 @@
                 <outlet property="contentHeight" destination="UsE-vI-3hl" id="RT4-Kn-NeF"/>
                 <outlet property="contentTextView" destination="S2g-6r-rpq" id="nN1-dP-YgC"/>
                 <outlet property="contentView" destination="Msh-cM-igr" id="V85-ny-Ha4"/>
-                <outlet property="contentWidth" destination="3jw-Yc-E1O" id="4Jb-cY-g1I"/>
                 <outlet property="sureButton" destination="4Rz-2Z-JzN" id="AOr-BG-KUb"/>
                 <outlet property="titleLabel" destination="zgo-6F-8MV" id="gTD-1P-38h"/>
             </connections>
@@ -32,7 +31,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.2041416952" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Msh-cM-igr">
-                    <rect key="frame" x="352" y="284" width="320" height="200"/>
+                    <rect key="frame" x="352" y="279" width="320" height="210"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgo-6F-8MV">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
@@ -44,7 +43,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8qt-hm-uwo">
-                            <rect key="frame" x="0.0" y="160" width="160" height="40"/>
+                            <rect key="frame" x="0.0" y="170" width="160" height="40"/>
                             <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="dxX-lz-Aaz"/>
@@ -57,7 +56,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Rz-2Z-JzN">
-                            <rect key="frame" x="160" y="160" width="160" height="40"/>
+                            <rect key="frame" x="160" y="170" width="160" height="40"/>
                             <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="MOa-ui-GxG"/>
@@ -70,8 +69,8 @@
                             </connections>
                         </button>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2g-6r-rpq">
-                            <rect key="frame" x="5" y="55" width="310" height="105"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="5" y="55" width="310" height="115"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -92,7 +91,7 @@
                         <constraint firstItem="S2g-6r-rpq" firstAttribute="leading" secondItem="Msh-cM-igr" secondAttribute="leading" constant="5" id="FoJ-eS-g6U"/>
                         <constraint firstItem="8qt-hm-uwo" firstAttribute="leading" secondItem="Msh-cM-igr" secondAttribute="leading" id="Frc-z1-U9e"/>
                         <constraint firstItem="Akp-cR-bmH" firstAttribute="leading" secondItem="Msh-cM-igr" secondAttribute="leading" constant="5" id="TDs-VY-Bkq"/>
-                        <constraint firstAttribute="height" constant="200" id="UsE-vI-3hl"/>
+                        <constraint firstAttribute="height" constant="210" id="UsE-vI-3hl"/>
                         <constraint firstItem="8qt-hm-uwo" firstAttribute="top" secondItem="S2g-6r-rpq" secondAttribute="bottom" id="Y6s-lk-Ger"/>
                         <constraint firstAttribute="trailing" secondItem="Akp-cR-bmH" secondAttribute="trailing" constant="5" id="acu-1W-29M"/>
                         <constraint firstAttribute="trailing" secondItem="S2g-6r-rpq" secondAttribute="trailing" constant="5" id="c9E-XT-fP3"/>
