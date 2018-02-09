@@ -226,6 +226,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
     
     if (self.isViewLoaded && !self.view.window){
         self.view = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

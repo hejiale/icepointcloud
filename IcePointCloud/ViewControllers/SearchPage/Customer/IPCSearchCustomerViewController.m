@@ -202,6 +202,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
     if (self.isViewLoaded && !self.view.window){
         self.view = nil;
         self.keywordHistory = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

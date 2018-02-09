@@ -84,6 +84,7 @@
         self.view = nil;
         self.showOptometryView = nil;
         self.insertOptometryView = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

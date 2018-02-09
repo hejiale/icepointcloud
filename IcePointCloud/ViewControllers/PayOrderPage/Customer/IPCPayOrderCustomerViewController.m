@@ -358,6 +358,7 @@ static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionView
         self.updateCustomerView = nil;
         self.cameraNav = nil;
         self.viewModel = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

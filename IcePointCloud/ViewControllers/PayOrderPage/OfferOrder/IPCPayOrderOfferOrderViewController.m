@@ -91,6 +91,7 @@
         self.shopCartView = nil;
         self.offerInfoView = nil;
         self.keyboard = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

@@ -473,6 +473,7 @@ static NSString *const kSearchItemCellName      = @"SearchItemCellIdentifier";
         self.keywordHistory = nil;
         self.inputKeyArray = nil;
         self.historyCodeArray = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

@@ -337,6 +337,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         self.insertRecord = nil;
         self.selectCustomerCoverView = nil;
         self.keyboard = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

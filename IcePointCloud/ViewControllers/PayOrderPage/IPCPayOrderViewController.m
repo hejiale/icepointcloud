@@ -240,6 +240,7 @@
         self.offerOrderVC = nil;
         self.cashVC = nil;
         self.viewMode = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

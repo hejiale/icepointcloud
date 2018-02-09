@@ -269,6 +269,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     if (self.isViewLoaded && !self.view.window){
         self.view = nil;
         self.glassListViewMode = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

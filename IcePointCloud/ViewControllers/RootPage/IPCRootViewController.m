@@ -90,6 +90,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    self.view = nil;
+    self.productVC = nil;
+    self.tryVC = nil;
+    self.customerInfoVC = nil;
+    self.payOrderVC = nil;
 }
 
 

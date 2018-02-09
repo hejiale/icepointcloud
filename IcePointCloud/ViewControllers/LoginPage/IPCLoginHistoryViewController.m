@@ -85,6 +85,9 @@ static NSString * const historyIdentifier = @"HistoryCellIdentifier";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    self.loginHistory = nil;
+    self.view = nil;
 }
 
 

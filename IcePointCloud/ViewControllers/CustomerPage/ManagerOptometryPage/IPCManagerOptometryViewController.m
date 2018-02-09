@@ -168,6 +168,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         self.view = nil;
         self.editOptometryView = nil;
         self.managerViewModel = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

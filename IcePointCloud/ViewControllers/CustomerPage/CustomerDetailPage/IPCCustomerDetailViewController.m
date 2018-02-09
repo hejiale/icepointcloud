@@ -296,6 +296,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
         self.upgradeMemberView = nil;
         self.editCustomerView = nil;
         self.detailOrderView = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

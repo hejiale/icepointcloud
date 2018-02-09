@@ -256,6 +256,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
         self.viewModel = nil;
         self.editCustomerView = nil;
         self.keywordHistory = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

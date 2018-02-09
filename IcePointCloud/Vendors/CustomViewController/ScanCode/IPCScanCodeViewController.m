@@ -252,6 +252,7 @@
     
     if (self.isViewLoaded && !self.view.window){
         self.view = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 

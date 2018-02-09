@@ -805,6 +805,9 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     if (self.isViewLoaded && !self.view.window){
         self.view = nil;
         self.glassListViewMode = nil;
+        self.faceRecognition = nil;
+        self.offlineFaceDetector = nil;
+        [IPCHttpRequest cancelAllRequest];
     }
 }
 
