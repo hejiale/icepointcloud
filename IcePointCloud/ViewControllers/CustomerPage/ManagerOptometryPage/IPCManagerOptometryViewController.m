@@ -40,9 +40,11 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    //Cancel Request
+    
+    self.managerViewModel = nil;
+    self.view = nil;
+    self.editOptometryView = nil;
 }
-
 
 - (void)setCustomerId:(NSString *)customerId
 {
@@ -50,7 +52,7 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     
     if (_customerId) {
         self.managerViewModel = [[IPCManagerOptometryViewModel alloc]init];
-        self.managerViewModel.customerId = _customerId;
+        self.managerViewModel.customerId = customerId;
     }
 }
 
@@ -85,9 +87,11 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     self.optometryTableView.isBeginLoad = YES;
     [self.optometryTableView reloadData];
 
+    __weak typeof(self) weakSelf = self;
     [self.managerViewModel queryCustomerOptometryList:^() {
-        self.optometryTableView.isBeginLoad = NO;
-        [self.optometryTableView reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        strongSelf.optometryTableView.isBeginLoad = NO;
+        [strongSelf.optometryTableView reloadData];
     }];
 }
 
@@ -171,7 +175,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
         [IPCHttpRequest cancelAllRequest];
     }
 }
-
 
 
 @end

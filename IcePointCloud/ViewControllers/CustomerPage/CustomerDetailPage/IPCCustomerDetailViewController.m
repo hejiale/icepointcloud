@@ -141,10 +141,12 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
  */
 - (void)loadMoreOrderData{
     [IPCCommonUI show];
-    
     self.customerViewMode.orderCurrentPage++;
+    
+    __weak typeof(self) weakSelf = self;
     [self.customerViewMode queryHistotyOrderList:^{
-        [self.detailTableView reloadData];
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        [strongSelf.detailTableView reloadData];
         [IPCCommonUI hiden];
     }];
 }
@@ -215,6 +217,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
                 cell = [[UINib nibWithNibName:@"IPCCustomerDetailTopCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell setRightOperation:@"验光单" ButtonTitle:nil ButtonImage:@"icon_manager"];
+            
             __weak typeof(self) weakSelf = self;
             [[cell rac_signalForSelector:@selector(rightButtonAction:)] subscribeNext:^(id x) {
                 [weakSelf pushToManagerOptometryViewController];

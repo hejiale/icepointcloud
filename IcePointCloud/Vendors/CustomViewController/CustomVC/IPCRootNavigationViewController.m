@@ -48,16 +48,6 @@
     
     if (!isHiden) {
         [self setLeftBack:NO];
-//        UIButton * backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [backButton setFrame:CGRectMake(0, 0, 80, 40)];
-//        [backButton setImage:[UIImage imageNamed:@"icon_back"] forState:UIControlStateNormal];
-//        [backButton setAdjustsImageWhenHighlighted:NO];
-//        backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-//        [backButton addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
-//
-//        UIBarButtonItem * backItem = [[UIBarButtonItem alloc]initWithCustomView:backButton];
-//        self.navigationItem.leftBarButtonItem = backItem;
-        
         [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"icon_navigationBar"] forBarMetrics:UIBarMetricsDefault];
     }
 }
@@ -112,7 +102,6 @@
         self.view = nil;
     }
 }
-
 
 
 @end
