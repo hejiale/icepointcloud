@@ -69,7 +69,12 @@
 {
     IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
     
+    CGFloat maxWidth = self.jk_width - 220;
+    
     CGFloat width = [customer.customerName jk_sizeWithFont:self.customerNameLabel.font constrainedToHeight:self.customerNameLabel.jk_height].width;
+    
+    if (width > maxWidth)width = maxWidth;
+    
     self.customerNameWidth.constant = width;
     
     [self.customerNameLabel setText:customer.customerName];

@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payTypeAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointWidth;
+
+
 @property (nonatomic, copy) IPCPayRecord * payRecord;
 
 

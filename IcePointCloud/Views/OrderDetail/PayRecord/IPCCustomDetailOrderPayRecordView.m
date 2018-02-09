@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *payTypeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *payTypeWidth;
 
 @end
 
@@ -32,6 +33,9 @@
     _payType = payType;
     
     if (_payType) {
+        CGFloat width = [_payType.payOrderType.payType jk_sizeWithFont:self.payTypeNameLabel.font constrainedToHeight:self.payTypeNameLabel.jk_height].width;
+        self.payTypeWidth.constant = width;
+        
         [self.payTypeNameLabel setText:_payType.payOrderType.payType];
         [self.payDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_payType.payDate] IsTime:YES]];
         [self.payPriceLabel setText:[NSString stringWithFormat:@"-￥%.2f",_payType.payPrice]];

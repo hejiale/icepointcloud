@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,12 +15,12 @@
         <tableViewCell contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" indentationWidth="10" reuseIdentifier="IPCPayOrderEditPayCashRecordCellIdentifier" id="KGk-i7-Jjw" customClass="IPCPayOrderEditPayCashRecordCell">
             <rect key="frame" x="0.0" y="0.0" width="460" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="460" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pJG-Pr-QBg">
-                        <rect key="frame" x="18" y="30" width="80" height="20"/>
+                        <rect key="frame" x="30" y="30" width="80" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="Kdd-TX-ZWW"/>
                             <constraint firstAttribute="height" constant="20" id="nCa-bb-EfV"/>
@@ -30,17 +30,16 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Chb-mK-GGK">
-                        <rect key="frame" x="118" y="30" width="100" height="20"/>
+                        <rect key="frame" x="120" y="30" width="140" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="7bM-49-qad"/>
-                            <constraint firstAttribute="width" constant="100" id="ABx-aA-e57"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOw-Ms-Wto">
-                        <rect key="frame" x="392" y="8" width="60" height="63.5"/>
+                        <rect key="frame" x="380" y="11" width="60" height="58"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="ecA-26-A4l"/>
@@ -51,7 +50,7 @@
                         </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3G-RO-mhN">
-                        <rect key="frame" x="272" y="24" width="120" height="30"/>
+                        <rect key="frame" x="260" y="24" width="120" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="120" id="7g5-ap-H3L"/>
@@ -62,7 +61,7 @@
                 <constraints>
                     <constraint firstItem="Chb-mK-GGK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2VZ-er-WE2"/>
                     <constraint firstAttribute="trailingMargin" secondItem="sOw-Ms-Wto" secondAttribute="trailing" id="3gL-PQ-Er6"/>
-                    <constraint firstItem="Chb-mK-GGK" firstAttribute="leading" secondItem="pJG-Pr-QBg" secondAttribute="trailing" constant="20" id="AVr-SH-zoW"/>
+                    <constraint firstItem="Chb-mK-GGK" firstAttribute="leading" secondItem="pJG-Pr-QBg" secondAttribute="trailing" constant="10" id="AVr-SH-zoW"/>
                     <constraint firstItem="sOw-Ms-Wto" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="HHH-D1-3mB"/>
                     <constraint firstItem="B3G-RO-mhN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HLB-wn-ZTB"/>
                     <constraint firstItem="pJG-Pr-QBg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LKI-HC-rTJ"/>
@@ -70,6 +69,7 @@
                     <constraint firstAttribute="bottomMargin" secondItem="sOw-Ms-Wto" secondAttribute="bottom" id="Wme-mu-GsC"/>
                     <constraint firstItem="sOw-Ms-Wto" firstAttribute="leading" secondItem="B3G-RO-mhN" secondAttribute="trailing" id="s8s-AX-501"/>
                     <constraint firstItem="pJG-Pr-QBg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="sNc-dJ-LqV"/>
+                    <constraint firstItem="B3G-RO-mhN" firstAttribute="leading" secondItem="Chb-mK-GGK" secondAttribute="trailing" id="wwc-Jv-bvH"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
