@@ -91,12 +91,12 @@
     [alertView show];
 }
 
-+ (void)showAlert:(NSString *)title Message:(NSString *)message Owner:(id)owner Done:(void(^)())done
++ (void)showAlert:(NSString *)title Message:(NSString *)message Owner:(id)owner DoneTitle:(NSString *)doneTitle CancelTitle:(NSString *)cancelTitle Done:(void(^)())done
 {
     if (owner && [owner isKindOfClass:[UIViewController class]]) {
         [owner showAlertWithTitle:title Message:message Process:^(IPCAlertController *alertController) {
-            alertController.addCancelTitle(@"返回");
-            alertController.addDestructiveTitle(@"确定");
+            alertController.addCancelTitle(cancelTitle);
+            alertController.addDestructiveTitle(doneTitle);
         } ActionBlock:^(NSInteger buttonIndex, UIAlertAction *action, IPCAlertController *alertSelf) {
             if (buttonIndex == 1) {
                 if (done) {

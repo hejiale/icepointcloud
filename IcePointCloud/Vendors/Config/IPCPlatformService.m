@@ -42,7 +42,7 @@
     //    [[IPCCheckVersion shardManger] checkVersion];
     
     ///延时获取更新版本内容
-    [self performSelector:@selector(testLogin) withObject:nil afterDelay:.5f];
+    [self performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
 }
 
 - (void)testLogin{
@@ -67,7 +67,7 @@
              if([[weakSelf jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
                  
                  [IPCCustomAlertView showWithTitle:title Message:updateContent CancelTitle:@"返回" SureTitle:@"更新" Done:^{
-                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/8hzd"]];
+                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/icepointCloud"]];
                  } Cancel:nil];
              }
          }

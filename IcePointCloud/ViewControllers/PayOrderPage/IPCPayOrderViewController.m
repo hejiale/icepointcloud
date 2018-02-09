@@ -21,8 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *areCancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 @property (weak, nonatomic) IBOutlet UIButton *nextStepButton;
-@property (weak, nonatomic) IBOutlet UIButton *offerOrderButton;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *areCancelButtonWidth;
 @property (strong, nonatomic) IPCPayOrderCustomerViewController * customerVC;
 @property (strong, nonatomic) IPCPayOrderOptometryViewController * optometryVC;
 @property (strong, nonatomic) IPCPayOrderOfferOrderViewController * offerOrderVC;
@@ -120,6 +120,8 @@
 - (IBAction)payCashAction:(id)sender
 {
     if ([[IPCPayOrderManager sharedManager] isCanPayOrder]) {
+        [IPCPayOrderManager sharedManager].isPayCash = YES;
+        
         [self offerOrder:@"NULL" EndStatus:@"AUDITED" Complete:^{
             [IPCCommonUI showSuccess:@"订单收银成功！"];
         }];
@@ -132,7 +134,11 @@
         [IPCCommonUI showError:@"请先选择客户信息!"];
     }else{
         NSInteger nextPage = _currentPage + 1;
-        [self setCurrentPage:nextPage];
+        if (nextPage == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
+            [self offerOrderAction];
+        }else{
+            [self setCurrentPage:nextPage];
+        }
     }
 }
 
@@ -152,7 +158,7 @@
 - (IBAction)cancelAction:(id)sender
 {
     __weak typeof(self) weakSelf = self;
-    [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:self Done:^{
+    [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:self DoneTitle:@"确定" CancelTitle:@"返回" Done:^{
         [weakSelf clearAllPayInfo];
     }];
 }
@@ -162,19 +168,27 @@
     if (![IPCPayOrderManager sharedManager].currentCustomerId) {
         [IPCCommonUI showError:@"请先选择客户信息!"];
     }else{
-        [self setCurrentPage:sender.tag];
+        if (sender.tag == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
+            [self offerOrderAction];
+        }else{
+            [self setCurrentPage:sender.tag];
+        }
     }
 }
 
-
-- (IBAction)offerOrderAction:(id)sender {
-    if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
-        [self offerOrder:@"NULL" EndStatus:@"UN_AUDITED" Complete:^{
-            [IPCCommonUI showSuccess:@"订单提交成功！"];
-        }];
-    }else{
-        [IPCCommonUI showError:@"购物列表为空"];
-    }
+///超额打折提交订单
+- (void)offerOrderAction
+{
+    __weak typeof(self) weakSelf = self;
+    [IPCCommonUI showAlert:@"温馨提示" Message:@"该订单超额打折，请先提交订单！" Owner:self  DoneTitle:@"提交" CancelTitle:@"取消" Done:^{
+        if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
+            [weakSelf offerOrder:@"NULL" EndStatus:@"UN_AUDITED" Complete:^{
+                [IPCCommonUI showSuccess:@"订单提交成功！"];
+            }];
+        }else{
+            [IPCCommonUI showError:@"购物列表为空"];
+        }
+    }];
 }
 
 
@@ -201,32 +215,16 @@
     
     if (_currentPage == 3) {
         [self.nextStepButton setHidden:YES];
-        
-        double payDiscount = 0;
-        
-        if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
-            payDiscount = (double)[IPCPayOrderManager sharedManager].customDiscount/100;
-        }else{
-            payDiscount = (double)[IPCPayOrderManager sharedManager].discount/100;
-        }
-        double employeeDiscount = (double)[IPCPayOrderManager sharedManager].employee.discount/100;
-        double customerDiscount = (double)[[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount]/100;
-        
-        if (payDiscount < MIN(employeeDiscount > 0 ? employeeDiscount : 1, customerDiscount > 0 ? customerDiscount : 1) && [IPCAppManager sharedManager].companyCofig.autoAuditedSalesOrder)
-        {
-            [self.offerOrderButton setHidden:NO];
-            [IPCPayOrderManager sharedManager].isExtraDiscount = YES;
-        }else{
-            [self.saveButton setHidden:NO];
-            [IPCPayOrderManager sharedManager].isExtraDiscount = NO;
-        }
+        [self.saveButton setHidden:NO];
+        self.areCancelButtonWidth.constant = 0;
+        [self.areCancelButton setHidden:YES];
     }else{
         [self.nextStepButton setHidden:NO];
         [self.saveButton setHidden:YES];
-        [self.offerOrderButton setHidden:YES];
+        self.areCancelButtonWidth.constant = 150;
+        [self.areCancelButton setHidden:NO];
     }
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

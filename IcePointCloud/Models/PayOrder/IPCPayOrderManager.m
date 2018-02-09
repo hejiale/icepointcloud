@@ -148,6 +148,26 @@
     }
 }
 
+- (BOOL)extraDiscount
+{
+    double payDiscount = 0;
+    BOOL   isExtraDiscount = NO;
+    
+    if ([IPCPayOrderManager sharedManager].customDiscount > -1) {
+        payDiscount = (double)[IPCPayOrderManager sharedManager].customDiscount/100;
+    }else{
+        payDiscount = (double)[IPCPayOrderManager sharedManager].discount/100;
+    }
+    double employeeDiscount = (double)[IPCPayOrderManager sharedManager].employee.discount/100;
+    double customerDiscount = (double)[[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount]/100;
+    
+    if (payDiscount < MIN(employeeDiscount > 0 ? employeeDiscount : 1, customerDiscount > 0 ? customerDiscount : 1) && [IPCAppManager sharedManager].companyCofig.autoAuditedSalesOrder)
+    {
+        isExtraDiscount = YES;
+    }
+    return isExtraDiscount;
+}
+
 - (void)resetData
 {
     [IPCPayOrderManager sharedManager].remark = nil;
@@ -160,7 +180,7 @@
     [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
     [IPCPayOrderManager sharedManager].isValiateMember = NO;
-    [IPCPayOrderManager sharedManager].isExtraDiscount = NO;
+    [IPCPayOrderManager sharedManager].isPayCash = NO;
     [IPCPayOrderManager sharedManager].introducer = nil;
     [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];

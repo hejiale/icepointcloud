@@ -123,7 +123,7 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
 - (IBAction)onDeleteProductsAction:(id)sender {
     if ([self.cartViewMode isSelectCart]) {
         __weak typeof(self) weakSelf = self;
-        [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController Done:^{
+        [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要删除所选商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController DoneTitle:@"确定" CancelTitle:@"返回" Done:^{
             [[IPCShoppingCart sharedCart] removeSelectCartItem];
             [weakSelf resetShoppingCartStatus];
         }];
