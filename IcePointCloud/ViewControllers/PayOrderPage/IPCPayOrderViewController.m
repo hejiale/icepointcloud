@@ -13,7 +13,9 @@
 #import "IPCPayOrderPayCashViewController.h"
 #import "IPCPayOrderViewMode.h"
 
-@interface IPCPayOrderViewController ()
+@interface IPCPayOrderViewController (){
+    pthread_mutex_t _lock;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *leftButtonView;
 @property (weak, nonatomic) IBOutlet UIView *contentView;
@@ -29,7 +31,7 @@
 @property (strong, nonatomic) IPCPayOrderPayCashViewController * cashVC;
 @property (strong, nonatomic) IPCPayOrderViewMode * viewMode;
 @property (strong, nonatomic) NSMutableArray<UIViewController *> * viewControllers;
-@property (assign, nonatomic) NSInteger currentPage;
+@property (assign, nonatomic) NSUInteger currentPage;
 
 @end
 
@@ -58,6 +60,8 @@
     [[IPCPayOrderManager sharedManager] queryPayType];
     //获取积分规则
     [self.viewMode queryIntegralRule];
+    
+    pthread_mutex_init(&_lock, NULL);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -74,7 +78,7 @@
     return _viewControllers;
 }
 
-- (void)setCurrentPage:(NSInteger)currentPage
+- (void)setCurrentPage:(NSUInteger)currentPage
 {
     if (currentPage >= 0 && currentPage <= 3 && currentPage != _currentPage && currentPage != NSNotFound){
         [self.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -98,6 +102,8 @@
 #pragma mark //Request Methods
 - (void)offerOrder:(NSString *)currentStatus EndStatus:(NSString *)endStatus Complete:(void(^)())complete
 {
+    pthread_mutex_lock(&_lock);
+    
     [IPCCommonUI show];
     
     __weak typeof(self) weakSelf = self;
@@ -111,6 +117,7 @@
         }else{
             [IPCCommonUI showError:error.domain];
         }
+        pthread_mutex_unlock(&_lock);
     }];
 }
 
@@ -133,7 +140,7 @@
     if (![IPCPayOrderManager sharedManager].currentCustomerId) {
         [IPCCommonUI showError:@"请先选择客户信息!"];
     }else{
-        NSInteger nextPage = _currentPage + 1;
+        NSUInteger nextPage = _currentPage + 1;
         if (nextPage == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
             [self offerOrderAction];
         }else{

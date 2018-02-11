@@ -24,7 +24,9 @@ static NSString * const baseIdentifier        = @"UserBaseInfoCellIdentifier";
 static NSString * const optometryIdentifier = @"HistoryOptometryCellIdentifier";
 static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 
-@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface IPCCustomerDetailViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    pthread_mutex_t _lock;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
@@ -51,6 +53,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     self.detailTableView.estimatedSectionHeaderHeight = 0;
     // Init ViewModel
     self.customerViewMode = [[IPCCustomerDetailViewMode alloc]init];
+    pthread_mutex_init(&_lock, NULL);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -64,6 +67,8 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 #pragma mark //Request Data
 - (void)requestCustomerDetailInfo
 {
+    pthread_mutex_lock(&_lock);
+    
     [self.customerViewMode resetData];
     self.detailTableView.isBeginLoad = YES;
     [self.detailTableView reloadData];
@@ -93,6 +98,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
         __strong typeof (weakSelf) strongSelf = weakSelf;
         strongSelf.detailTableView.isBeginLoad = NO;
         [strongSelf.detailTableView reloadData];
+        pthread_mutex_unlock(&_lock);
     });
 }
 

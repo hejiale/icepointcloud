@@ -9,6 +9,9 @@
 #import "IPCProductViewController.h"
 
 @interface IPCProductViewController ()
+{
+    pthread_mutex_t _lock;
+}
 
 @end
 
@@ -17,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    pthread_mutex_init(&_lock, NULL);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -28,6 +33,8 @@
 #pragma mark //Request Data
 - (void)loadNormalProducts:(void(^)())complete
 {
+    pthread_mutex_lock(&_lock);
+    
     //Reset Glasses Data
     [self.glassListViewMode resetData];
     
@@ -53,6 +60,8 @@
         if (complete) {
             complete();
         }
+        
+        pthread_mutex_unlock(&_lock);
     });
 }
 

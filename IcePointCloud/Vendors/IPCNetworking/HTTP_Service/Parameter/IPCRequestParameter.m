@@ -22,8 +22,9 @@
 
 
 @interface IPCRequestParameter()
-
-@property (nonatomic, strong) NSLock * lock;
+{
+    pthread_mutex_t _lock;
+}
 
 @end
 
@@ -34,8 +35,7 @@
 {
     self = [super init];
     if (self) {
-        self.lock = [[NSLock alloc]init];
-        self.lock.name = @"com.request.parameter.lock";
+        pthread_mutex_init(&_lock, NULL);
         
         self.requestMethod    = requestMethod;
         self.parameters          = parameter;
@@ -47,7 +47,7 @@
 
 - (void)buildRequestParameters
 {
-    [self.lock lock];
+    pthread_mutex_lock(&_lock);
     
     NSMutableDictionary *query = [NSMutableDictionary dictionaryWithDictionary:@{kAPIParamFormatKey: kAPIParamFormatValue,
                                                                                                                                 kAPIParamMethodKey: self.requestMethod,
@@ -67,7 +67,7 @@
                               kAPIParamDeviceToken:[IPCAppManager sharedManager].deviceToken ?  : @""};
     self.requestParameter = requestParameter;
     
-    [self.lock unlock];
+    pthread_mutex_unlock(&_lock);
 }
 
 
