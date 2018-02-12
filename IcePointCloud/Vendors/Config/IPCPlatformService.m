@@ -33,6 +33,7 @@
     [self setUpBugtags];
     [self sendExpection];
     [self avoidCrash];
+    [self setUpBugly];
 }
 
 /**
@@ -103,7 +104,17 @@
     [Bugtags startWithAppKey:IPCBugtagsKey invocationEvent:BTGInvocationEventNone];
     [Bugtags setTrackingNetwork:YES];
     [Bugtags sync:YES];
+}
     
+    
+- (void)setUpBugly
+{
+    BuglyConfig * config = [[BuglyConfig alloc]init];
+    config.blockMonitorEnable = YES;
+    config.unexpectedTerminatingDetectionEnable = YES;
+    config.reportLogLevel = BuglyLogLevelWarn;
+    
+    [Bugly startWithAppId:@"026c927c44" config:config];
 }
 
 /**
@@ -181,6 +192,7 @@
     }).showExceptionInfor(NO).didClick(^(NSString *ExceptionMessage){
         //将崩溃信息上传到服务器，该字符串为：异常信息
         [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason:ExceptionMessage userInfo:nil]];
+        [Bugly reportError:[NSError errorWithDomain:@"程序闪退" code:9998 userInfo:@{NSLocalizedDescriptionKey: ExceptionMessage}]];
     }).message(nil).title(nil);
 }
 
@@ -202,6 +214,8 @@
     NSString * exception = [NSString stringWithFormat:@"%@#%@", user, note.userInfo];
     
     [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason: exception userInfo:nil]];
+    [Bugly reportError:[NSError errorWithDomain:@"程序闪退" code:9998 userInfo:@{NSLocalizedDescriptionKey: exception}]];
 }
+
 
 @end

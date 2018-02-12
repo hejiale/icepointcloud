@@ -32,6 +32,12 @@ desc "Provision, build and upload to App Store"
     build
     upload
   end
+desc "Provision, build and upload to FIR" 
+  lane :to_firim do
+  sigh(adhoc: true)
+  build
+  # firim(firim_api_token: "58fd52c6959d696707000043")
+end
 error do |lane, exception|
     # This block is called, if there was an error running a specific lane.
   end

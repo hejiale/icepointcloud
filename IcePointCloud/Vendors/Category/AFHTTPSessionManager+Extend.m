@@ -52,6 +52,7 @@
              }
          } Failed:^(NSError * _Nonnull error) {
              [Bugtags sendException:[NSException exceptionWithName:@"后台请求出错" reason:[userIdInfo stringByAppendingString:error.localizedDescription] userInfo:nil]];
+             [Bugly reportError:[NSError errorWithDomain:@"后台请求出错" code:9998 userInfo:@{NSLocalizedDescriptionKey: [userIdInfo stringByAppendingString:error.localizedDescription]}]];
              
              if (failure){
                  failure(error, task);
@@ -73,6 +74,7 @@
             [IPCCommonUI showError:kIPCNotConnectInternetMessage];
         }else{
             [Bugtags sendException:[NSException exceptionWithName:@"网络请求出错" reason:[userIdInfo stringByAppendingString:error.localizedDescription] userInfo:nil]];
+            [Bugly reportError:[NSError errorWithDomain:@"网络请求出错" code:9998 userInfo:@{NSLocalizedDescriptionKey: [userIdInfo stringByAppendingString:error.localizedDescription]}]];
             
             if (failure){
                 failure(error, task);
