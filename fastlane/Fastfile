@@ -1,0 +1,38 @@
+
+default_platform(:ios)
+
+platform :ios do
+# 当前任务的描述
+  desc "Creating a code signing certificate and provisioning profile"
+  # 任务名称
+  lane :provision do
+    # 创建 ITC 中的 App 信息
+    produce(
+      app_name: 'IcePointCloud',
+      language: 'zh-Hans',
+      app_version: ‘2.7.2’,
+      sku: 'com.IcePointCloud.Pos'
+    )
+    # 使用证书创建私钥及签名
+    cert
+    # 每次运行时创建新的配置文件
+    sigh(force: true)
+  end
+ desc "Create ipa"
+   lane :build do
+    gym
+  end
+ desc "Upload to App Store"
+   lane :upload do
+    deliver
+   end
+desc "Provision, build and upload to App Store"
+  lane :do_everything do
+    provision
+    build
+    upload
+  end
+error do |lane, exception|
+    # This block is called, if there was an error running a specific lane.
+  end
+end

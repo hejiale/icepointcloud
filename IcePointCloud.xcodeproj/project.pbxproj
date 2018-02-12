@@ -3176,6 +3176,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiang Peng (TGKENRB3QX)";
+				CURRENT_PROJECT_VERSION = "";
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3213,6 +3214,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 2;
+				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3229,6 +3231,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai DoRay Network Technology Co., Ltd (TV2UGXUC6A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai DoRay Network Technology Co., Ltd (TV2UGXUC6A)";
+				CURRENT_PROJECT_VERSION = "";
 				CustomAppBundleld = com.IcePointCloud.Pos;
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
 				ENABLE_BITCODE = NO;
@@ -3267,6 +3270,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = IcePointCloudProduct;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 2;
+				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -3403,6 +3407,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai DoRay Network Technology Co., Ltd (TV2UGXUC6A)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai DoRay Network Technology Co., Ltd (TV2UGXUC6A)";
+				CURRENT_PROJECT_VERSION = "";
 				DEVELOPMENT_TEAM = TV2UGXUC6A;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3441,6 +3446,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = IcePointCloudHoc;
 				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = 2;
+				VERSIONING_SYSTEM = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = TestRelease;

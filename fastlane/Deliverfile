@@ -1,0 +1,150 @@
+# The Deliverfile allows you to store various iTunes Connect metadata
+# For more information, check out the docs
+# https://docs.fastlane.tools/actions/deliver/
+
+############################# 基本信息 ####################################
+
+
+# 1 app_identifier
+app_identifier "com.IcePointCloud.Pos"
+
+# 2 用户名,Apple ID电子邮件地址
+username “doraydeveloper@icepointcloud.com”  
+
+
+# 3 copyright 
+copyright "#{Time.now.year} 3code"
+
+# 4 支持语言
+supportedLanguages = {
+  "cmn-Hans" => "zh-Hans"
+}
+
+# 5 app 名称
+name({
+'zh-Hans' => “冰点云”
+})
+
+# 6 本地化
+description({
+  'zh-Hans' => "一款专为眼镜销售打造，能够使门店实现移动售卖管理一体化的APP，让售卖效率得到显著的提高。
+核心功能：商品库存云端化，客户信息精准化，新颖试戴趣味化，订单结算自动化，管理在线统一化。
+
+独特亮点：
+1.   精准销售：创建顾客个人档案，快速定位
+2.   全线眼镜供挑选：产品数据网络化，无现货销售，无须积压库存
+3.   人脸识别，虚拟试戴：多副眼镜试戴对比，新颖有趣的购买体验
+4.   热销产品早知道：基于大数据提供热销产品，流行趋势快人一步
+5.   云平台在线管理：自动结算，实时更新，多门店实现统一在线管理，业务报表实时统计
+
+感谢您使用冰点云APP，愿我们可以为您做得更多。
+上海都睿网络科技有限公司"
+})
+
+
+
+# AppStore 信息设置
+# 也可以使用 txt 文本的形式
+
+###################################  类别配置 ###################################
+
+# 类别列表设置参见 https://github.com/fastlane/fastlane/blob/master/deliver/Reference.md
+# 设置 App 的类别.这里可以设置一个主要类别,一个次要类别.
+
+# 主要类别 
+  primary_category "MZGenre.Apps.Shopping"
+
+# 主要类别第一个子类别,游戏会有
+  primary_first_sub_category ""
+# 主要类别第二个子类别,游戏会有
+  primary_second_sub_category ""
+
+# 要设置的次要类别 无
+  secondary_category   “MZGenre.Lifestyle”
+# 设置的次要第一个子类别 无
+  secondary_first_sub_category  “”
+# 设置的次要第二个子类别 无
+  secondary_second_sub_category “”
+
+
+
+################################## 关键字\描述等信息 ###################################
+
+# 1 设置 app 检索关键字
+keywords(
+  "zh-Hans" => "冰点云,冰点,云,icepointcloud,icepoint,doray,都睿,眼镜,销售,嗨冰点云,试戴,saas,零售,验光,客户信息,大数据,线上线下,供应链管理,无现货,工业4.0,POS"
+)
+
+# 2 网址设置
+support_url({
+  'zh-Hans' => "https://icepointcloud.com/"
+})
+marketing_url({
+  'zh-Hans' => ""
+})
+privacy_url({
+  'zh-Hans' => ""
+})
+
+# 3 版本描述
+release_notes({
+  'zh-Hans' => "1、重构下单页面UI和下单流程，更快更便捷体验
+2、优化App性能，修复已知Bug"
+})
+
+# 4 app 描述
+description({
+  'zh-Hans' => "一款专为眼镜销售打造，能够使门店实现移动售卖管理一体化的APP，让售卖效率得到显著的提高。
+核心功能：商品库存云端化，客户信息精准化，新颖试戴趣味化，订单结算自动化，管理在线统一化。
+
+独特亮点：
+1.   精准销售：创建顾客个人档案，快速定位
+2.   全线眼镜供挑选：产品数据网络化，无现货销售，无须积压库存
+3.   人脸识别，虚拟试戴：多副眼镜试戴对比，新颖有趣的购买体验
+4.   热销产品早知道：基于大数据提供热销产品，流行趋势快人一步
+5.   云平台在线管理：自动结算，实时更新，多门店实现统一在线管理，业务报表实时统计
+
+感谢您使用冰点云APP，愿我们可以为您做得更多。
+上海都睿网络科技有限公司"
+})
+
+
+
+
+################################## 分级 ########################################
+
+app_rating_config_path "./fastlane/metadata/itunes_rating_config.json"
+
+
+################################# 提交信息等 #########################################
+
+# 1 提交审核信息:加密, idfa 等
+submission_information({    
+    export_compliance_encryption_updated: false,
+    export_compliance_uses_encryption: false,
+    content_rights_contains_third_party_content: false,
+    add_id_info_uses_idfa: false
+})
+
+# 2 应用审核小组的联系信息 app 审核信息
+app_review_information(
+  first_name: "Peng",
+  last_name: "Jiang",
+  phone_number: "+86-15800425470",
+  email_address: "doraydeveloper@icepointcloud.com",
+  demo_user: "boya@163.com",
+  demo_password: “123456”,
+  notes: ""
+)
+
+####################################### 其他信息 ###################################
+
+# 1 自动发布 app: false,则需要手动发布
+automatic_release true
+
+# 2 价格
+price_tier 0
+
+# 3 图标
+app_icon './fastlane/metadata/app_icon.jpg’
+
