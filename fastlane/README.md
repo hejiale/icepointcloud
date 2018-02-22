@@ -36,6 +36,11 @@ Upload to App Store
 fastlane ios do_everything
 ```
 Provision, build and upload to App Store
+### ios release
+```
+fastlane ios release
+```
+
 ### ios to_firim
 ```
 fastlane ios to_firim

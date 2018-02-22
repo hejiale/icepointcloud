@@ -32,6 +32,11 @@ desc "Provision, build and upload to App Store"
     build
     upload
   end
+lane :release do
+  build_app(scheme: "IcePointCloud",
+            workspace: "IcePointCloud.xcworkspace",
+            include_bitcode: true)
+end
 desc "Provision, build and upload to FIR" 
   lane :to_firim do
   sigh(adhoc: true)
