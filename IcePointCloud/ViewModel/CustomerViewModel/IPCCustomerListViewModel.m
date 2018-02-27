@@ -33,26 +33,33 @@
          [IPCCommonUI showError:error.domain];
          
          __strong typeof(weakSelf) strongSelf = weakSelf;
-         self.status = IPCRefreshError;
+         strongSelf.status = IPCRefreshError;
          if (strongSelf.completeBlock) {
              strongSelf.completeBlock(error);
          }
      }];
 }
 
-- (void)queryCustomerDetail:(void(^)())complete
+- (void)queryCustomerDetailWithStatus:(BOOL)isChoose Complete:(void(^)(IPCDetailCustomer * customer))complete
 {
     [IPCCommonUI show];
     
     [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
                                                         SuccessBlock:^(id responseValue)
      {
-         [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:responseValue];
-         [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
-         if (complete) {
-             complete();
-         }
+         IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
          
+         if (!isChoose) {
+             [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:detailCustomer];
+             [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
+             if (complete) {
+                 complete(nil);
+             }
+         }else{
+             if (complete) {
+                 complete(detailCustomer);
+             }
+         }
          [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
          if ([error code] != NSURLErrorCancelled) {
