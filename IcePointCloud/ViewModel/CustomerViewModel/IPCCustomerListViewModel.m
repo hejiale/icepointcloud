@@ -40,11 +40,11 @@
      }];
 }
 
-- (void)queryCustomerDetailWithStatus:(BOOL)isChoose Complete:(void(^)(IPCDetailCustomer * customer))complete
+- (void)queryCustomerDetailWithStatus:(BOOL)isChoose CustomerId:(NSString *)customerId Complete:(void(^)(IPCDetailCustomer * customer))complete
 {
     [IPCCommonUI show];
     
-    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[IPCPayOrderManager sharedManager].currentCustomerId
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
                                                         SuccessBlock:^(id responseValue)
      {
          IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];

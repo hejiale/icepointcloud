@@ -124,10 +124,11 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
      }];
 }
 
-- (void)queryCustomerDetail
+- (void)queryCustomerDetail:(NSString *)customerId
 {
     __weak typeof(self) weakSelf = self;
     [self.viewModel queryCustomerDetailWithStatus:chooseStatus
+                                       CustomerId:customerId
                                          Complete:^(IPCDetailCustomer * customer)
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -192,12 +193,15 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         if ([customer.customerID isEqualToString:[IPCPayOrderManager sharedManager].currentCustomerId])return;
         
         if (customer) {
-            [IPCPayOrderManager sharedManager].isValiateMember = NO;
-            [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
-            [self queryCustomerDetail];
+            if (!chooseStatus) {
+                [IPCPayOrderManager sharedManager].isValiateMember = NO;
+                [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
+            }
+            [self queryCustomerDetail:customer.customerID];
         }
     }
 }
+
 
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

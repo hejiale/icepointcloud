@@ -19,6 +19,7 @@
 #import "IPCUpgradeMemberView.h"
 #import "IPCScanCodeViewController.h"
 #import "IPCPayOrderCustomerListView.h"
+#import "IPCPayOrderMemberChooseCustomerView.h"
 
 @interface IPCPayOrderCustomerViewController ()
 
@@ -37,6 +38,7 @@
 @property (nonatomic, strong) IPCUpgradeMemberView * upgradeMemberView;
 @property (nonatomic, strong) IPCPortraitNavigationViewController * cameraNav;
 @property (nonatomic, strong) IPCPayOrderCustomerListView * customerListView;
+@property (nonatomic, strong) IPCPayOrderMemberChooseCustomerView * chooseCustomerView;
 
 @end
 
@@ -100,7 +102,11 @@
 
 - (IPCPayOrderMemberNoneCustomerView *)memberNoneCustomerView{
     if (!_memberNoneCustomerView) {
+        __weak typeof(self) weakSelf = self;
         _memberNoneCustomerView = [[IPCPayOrderMemberNoneCustomerView alloc]initWithFrame:self.customInfoContentView.bounds];
+        [[_memberNoneCustomerView rac_signalForSelector:@selector(bindCustomerAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+            [weakSelf loadMemberChooseCustomerView];
+        }];
     }
     return _memberNoneCustomerView;
 }
@@ -113,6 +119,13 @@
         }];
     }
     return _customerListView;
+}
+
+- (IPCPayOrderMemberChooseCustomerView *)chooseCustomerView{
+    if (!_chooseCustomerView) {
+        _chooseCustomerView = [[IPCPayOrderMemberChooseCustomerView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    }
+    return _chooseCustomerView;
 }
 
 - (void)loadCustomerInfoView
@@ -129,11 +142,15 @@
         [self.memberAlertView removeFromSuperview];
         self.memberAlertView = nil;
     }
+    if (self.memberNoneCustomerView) {
+        [self.memberNoneCustomerView removeFromSuperview];
+        self.memberNoneCustomerView = nil;
+    }
     if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        [self.infoView updateCustomerInfo];
+        [self.infoView updateCustomerInfo:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer];
         [self.customInfoContentView addSubview:self.infoView];
     }else{
-        [self.customInfoContentView addSubview:self.customerAlertView];
+        [self.customInfoContentView addSubview:self.memberNoneCustomerView];
         [self.memberCardContentView addSubview:self.memberAlertView];
     }
 }
@@ -154,6 +171,14 @@
     }else{
         [self.memberCardContentView addSubview:self.customerUpgradeMemberView];
     }
+}
+
+- (void)loadMemberChooseCustomerView
+{
+    if (self.chooseCustomerView) {
+        self.chooseCustomerView = nil;
+    }
+    [[UIApplication sharedApplication].keyWindow addSubview:self.chooseCustomerView];
 }
 
 

@@ -33,7 +33,7 @@ typedef void(^CompleteBlock)(NSError *error);
 
  @param complete 
  */
-- (void)queryCustomerDetailWithStatus:(BOOL)isChoose Complete:(void(^)(IPCDetailCustomer * customer))complete;
+- (void)queryCustomerDetailWithStatus:(BOOL)isChoose CustomerId:(NSString *)customerId Complete:(void(^)(IPCDetailCustomer * customer))complete;
 
 
 /**

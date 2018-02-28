@@ -32,10 +32,8 @@
     return self;
 }
 
-- (void)updateCustomerInfo
+- (void)updateCustomerInfo:(IPCDetailCustomer *)customer
 {
-    IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
-    
     if (customer) {
         [self.customerNameLabel setText:customer.customerName];
         [self.ageLabel setText:customer.age];

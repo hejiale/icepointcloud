@@ -18,13 +18,13 @@
 
 - (double)useDiscount
 {
-    if (self.mainMemberLevel) {
-        if (self.mainMemberLevel.discount > 0) {
-            return self.mainMemberLevel.discount*10;
-        }else{
-            return 100;
-        }
-    }
+//    if (self.mainMemberLevel) {
+//        if (self.mainMemberLevel.discount > 0) {
+//            return self.mainMemberLevel.discount*10;
+//        }else{
+//            return 100;
+//        }
+//    }
     if (self.memberLevel) {
         if (self.memberLevel.discount > 0) {
             return self.memberLevel.discount*10;
@@ -38,9 +38,9 @@
 
 - (double)useBalance
 {
-    if (self.mainMemberLevel) {
-        return self.mainMemberLevel.balance;
-    }
+//    if (self.mainMemberLevel) {
+//        return self.mainMemberLevel.balance;
+//    }
     if (self.balance) {
         return self.balance;
     }
@@ -49,9 +49,9 @@
 
 - (double)userIntegral
 {
-    if (self.mainMemberLevel) {
-        return self.mainMemberLevel.customerIntegral;
-    }
+//    if (self.mainMemberLevel) {
+//        return self.mainMemberLevel.customerIntegral;
+//    }
     if (self.memberLevel) {
         return self.integral;
     }
@@ -60,9 +60,9 @@
 
 - (NSString *)useMemberLevel
 {
-    if (self.mainMemberLevel) {
-        return self.mainMemberLevel.memberLevel;
-    }
+//    if (self.mainMemberLevel) {
+//        return self.mainMemberLevel.memberLevel;
+//    }
     if (self.memberLevel) {
         return self.memberLevel.memberLevel;
     }
@@ -71,17 +71,17 @@
 
 - (NSString *)useMemberPhone
 {
-    if (self.mainMemberLevel) {
-        return self.mainMemberLevel.memberPhone;
-    }
+//    if (self.mainMemberLevel) {
+//        return self.mainMemberLevel.memberPhone;
+//    }
     return self.memberPhone;
 }
 
 - (NSString *)useMemberGrowth
 {
-    if (self.mainMemberLevel) {
-        return self.mainMemberLevel.membergrowth;
-    }
+//    if (self.mainMemberLevel) {
+//        return self.mainMemberLevel.membergrowth;
+//    }
     return self.membergrowth;
 }
 

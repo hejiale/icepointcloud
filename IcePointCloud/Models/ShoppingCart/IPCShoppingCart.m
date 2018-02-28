@@ -310,7 +310,7 @@
 - (double)customDiscount
 {
     if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel || [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.mainMemberLevel)) || [IPCPayOrderManager sharedManager].isValiateMember)
+        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
         {
             return  [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
         }

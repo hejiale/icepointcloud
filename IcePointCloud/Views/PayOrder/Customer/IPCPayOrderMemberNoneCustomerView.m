@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *createCustomerButton;
 @property (weak, nonatomic) IBOutlet UIButton *createTouristsButton;
+@property (weak, nonatomic) IBOutlet UIButton *bindCustomerButton;
 
 
 @end
@@ -28,8 +29,19 @@
         
         [self.createCustomerButton addBorder:18 Width:1 Color:COLOR_RGB_BLUE];
         [self.createTouristsButton addBorder:18 Width:1 Color:COLOR_RGB_BLUE];
+        [self.bindCustomerButton addBorder:18 Width:1 Color:COLOR_RGB_BLUE];
     }
     return self;
+}
+
+#pragma mark //Clicked Events
+- (IBAction)createCustomerAction:(id)sender {
+}
+
+- (IBAction)createWithVistorAction:(id)sender {
+}
+
+- (IBAction)bindCustomerAction:(id)sender {
 }
 
 @end

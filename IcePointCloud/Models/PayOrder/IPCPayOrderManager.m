@@ -132,19 +132,13 @@
 
 - (void)resetCustomerDiscount
 {
-    if (([IPCAppManager sharedManager].companyCofig.isCheckMember && ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel || [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.mainMemberLevel)) || [IPCPayOrderManager sharedManager].isValiateMember)
+    if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
     {
         [IPCPayOrderManager sharedManager].isValiateMember = YES;
         [IPCPayOrderManager sharedManager].customDiscount = [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
     }else{
-        if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.mainMemberLevel && ![IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel)
-        {
-            [IPCPayOrderManager sharedManager].isValiateMember = YES;
-            [IPCPayOrderManager sharedManager].customDiscount = [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
-        }else{
-            [IPCPayOrderManager sharedManager].customDiscount = 100;
-            [IPCPayOrderManager sharedManager].isValiateMember = NO;
-        }
+        [IPCPayOrderManager sharedManager].customDiscount = 100;
+        [IPCPayOrderManager sharedManager].isValiateMember = NO;
     }
 }
 

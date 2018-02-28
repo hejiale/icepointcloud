@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderMemberNoneCustomerView">
             <connections>
+                <outlet property="bindCustomerButton" destination="wN0-eO-PHi" id="1Bn-q6-hKo"/>
                 <outlet property="createCustomerButton" destination="XDx-hj-Cbo" id="Z9u-1c-wG4"/>
                 <outlet property="createTouristsButton" destination="LRL-KV-SWY" id="J6e-nP-ULD"/>
             </connections>
@@ -29,9 +30,12 @@
                     <state key="normal" title="创建新的客户档案">
                         <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="createCustomerAction:" destination="-1" eventType="touchUpInside" id="dJf-ou-r6Q"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LRL-KV-SWY">
-                    <rect key="frame" x="124" y="136" width="160" height="36"/>
+                    <rect key="frame" x="124" y="116" width="160" height="36"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="160" id="25G-59-6Xa"/>
                         <constraint firstAttribute="height" constant="36" id="ieW-P8-wgi"/>
@@ -39,6 +43,22 @@
                     <state key="normal" title="使用游客身份">
                         <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="createWithVistorAction:" destination="-1" eventType="touchUpInside" id="k5Y-0d-AbL"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wN0-eO-PHi">
+                    <rect key="frame" x="124" y="182" width="160" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="160" id="mJm-Di-P8F"/>
+                        <constraint firstAttribute="height" constant="36" id="rG4-oM-reK"/>
+                    </constraints>
+                    <state key="normal" title="绑定已有客户档案">
+                        <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="bindCustomerAction:" destination="-1" eventType="touchUpInside" id="O6e-6I-cf2"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,7 +66,9 @@
                 <constraint firstItem="XDx-hj-Cbo" firstAttribute="top" secondItem="ST6-jj-Pgh" secondAttribute="top" constant="50" id="0GD-Fp-6Qm"/>
                 <constraint firstItem="LRL-KV-SWY" firstAttribute="centerX" secondItem="ST6-jj-Pgh" secondAttribute="centerX" id="3Ds-az-Wck"/>
                 <constraint firstItem="XDx-hj-Cbo" firstAttribute="centerX" secondItem="ST6-jj-Pgh" secondAttribute="centerX" id="KW4-4t-xMG"/>
-                <constraint firstItem="LRL-KV-SWY" firstAttribute="top" secondItem="XDx-hj-Cbo" secondAttribute="bottom" constant="50" id="yGf-7N-0FQ"/>
+                <constraint firstItem="wN0-eO-PHi" firstAttribute="top" secondItem="LRL-KV-SWY" secondAttribute="bottom" constant="30" id="RgU-2W-l5A"/>
+                <constraint firstItem="wN0-eO-PHi" firstAttribute="centerX" secondItem="ST6-jj-Pgh" secondAttribute="centerX" id="pgC-CZ-5Zg"/>
+                <constraint firstItem="LRL-KV-SWY" firstAttribute="top" secondItem="XDx-hj-Cbo" secondAttribute="bottom" constant="30" id="yGf-7N-0FQ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
