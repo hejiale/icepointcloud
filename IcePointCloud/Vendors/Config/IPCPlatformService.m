@@ -9,6 +9,9 @@
 #import "IPCPlatformService.h"
 #import "IPCCheckVersion.h"
 #import "UncaughtExceptionHandler.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 @implementation IPCPlatformService
 
@@ -31,9 +34,10 @@
     [self enableKeyboard];
     [self bindWechat];
     [self setUpBugtags];
-    [self sendExpection];
+    /*[self sendExpection];*/
     [self avoidCrash];
     [self setUpBugly];
+    [self setUpCrashlytics];
 }
 
 /**
@@ -184,7 +188,7 @@
     }
 }
 
-- (void)sendExpection
+/*- (void)sendExpection
 {
     InstallUncaughtExceptionHandler().showAlert(NO).logFileHandle(^(NSString *path) {
         //处理完成后调用（如果不调用则程序不会退出）主要是为了处理耗时操作
@@ -194,7 +198,7 @@
         [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason:ExceptionMessage userInfo:nil]];
         [Bugly reportError:[NSError errorWithDomain:@"程序闪退" code:9998 userInfo:@{NSLocalizedDescriptionKey: ExceptionMessage}]];
     }).message(nil).title(nil);
-}
+}*/
 
 - (void)avoidCrash
 {
@@ -215,6 +219,12 @@
     
     [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason: exception userInfo:nil]];
     [Bugly reportError:[NSError errorWithDomain:@"程序闪退" code:9998 userInfo:@{NSLocalizedDescriptionKey: exception}]];
+}
+
+- (void)setUpCrashlytics
+{
+    [Fabric with:@[[Crashlytics class]]];
+    [Crashlytics sharedInstance].debugMode = YES;
 }
 
 

@@ -270,7 +270,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row > 0) {
-        return 275;
+        return 305;
     }else if (indexPath.section == 1 && indexPath.row > 0){
         return 150;
     }else if (indexPath.section == 2 && indexPath.row > 0){

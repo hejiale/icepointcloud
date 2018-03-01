@@ -30,7 +30,6 @@
 @property (nonatomic, copy, readwrite) NSString * customerType;
 @property (nonatomic, copy, readwrite) NSString * customerTypeId;
 @property (nonatomic, assign, readwrite) NSInteger   integral;
-@property (nonatomic, copy, readwrite) NSString * photo_url;
 @property (nonatomic, copy, readwrite) NSString * memberCustomerId;
 
 @property (nonatomic, copy, readwrite) NSArray<IPCOptometryMode *>  * optometrys;

@@ -17,7 +17,6 @@ pod 'JKCategories'
 pod 'YYKit'
 pod 'ReactiveObjC'
 pod 'MJRefresh'
-pod 'ZYCornerRadius'
 pod 'MBProgressHUD'
 pod 'Bugtags'
 pod 'MMScan'
@@ -25,6 +24,8 @@ pod 'LUKeychainAccess'
 pod 'TuSDK'
 pod 'AvoidCrash'
 pod 'Bugly'
+pod 'Fabric'
+pod 'Crashlytics'
 end
 
 target "IcePointCloudTests" do

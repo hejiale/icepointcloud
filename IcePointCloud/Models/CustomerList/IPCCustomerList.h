@@ -20,7 +20,6 @@
 
 @interface IPCCustomerMode : NSObject
 
-@property (copy, nonatomic, readwrite) NSString * photo_url;
 @property (copy, nonatomic, readwrite) NSString * customerName;
 @property (copy, nonatomic, readwrite) NSString * customerID;
 @property (copy, nonatomic, readwrite) NSString * currentOptometryId;

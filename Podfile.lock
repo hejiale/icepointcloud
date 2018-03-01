@@ -19,6 +19,9 @@ PODS:
   - Bugtags (3.0.1):
     - Bugtags/Core (= 3.0.1)
   - Bugtags/Core (3.0.1)
+  - Crashlytics (3.9.3):
+    - Fabric (~> 1.7.2)
+  - Fabric (1.7.2)
   - GPUImage (0.1.7)
   - IQKeyboardManager (5.0.7)
   - JKCategories (1.6)
@@ -44,13 +47,14 @@ PODS:
   - YYKit (1.0.9):
     - YYKit/no-arc (= 1.0.9)
   - YYKit/no-arc (1.0.9)
-  - ZYCornerRadius (1.0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - AvoidCrash
   - Bugly
   - Bugtags
+  - Crashlytics
+  - Fabric
   - GPUImage
   - IQKeyboardManager
   - JKCategories
@@ -65,13 +69,14 @@ DEPENDENCIES:
   - SNWeChatSDK
   - TuSDK
   - YYKit
-  - ZYCornerRadius
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
   AvoidCrash: 1fb7e2fa4b982c069b748266371654e4054683b1
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   Bugtags: 3115fa971bc3901828bb204c62cd1523173dbc97
+  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   JKCategories: dab1bd3f7500836c5066d09052b85c12a963db12
@@ -86,8 +91,7 @@ SPEC CHECKSUMS:
   SNWeChatSDK: a96a90b699e2884af2bfb0e279178e0615ff25b8
   TuSDK: 77235cb94f940698cf6a5900715155c8c29bdb7b
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
-  ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 3ab168e0957ed849f0ef4860af5b15e04de9a338
+PODFILE CHECKSUM: 68f74fc8ef23a231a83e09b0cc8af27ff140ec7f
 
 COCOAPODS: 1.4.0

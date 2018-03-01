@@ -23,11 +23,6 @@
     
     if (_currentCustomer)
     {
-        NSString * pointValue = [NSString stringWithFormat:@"%d积分",_currentCustomer.integral];
-        CGFloat width = [pointValue jk_sizeWithFont:self.pointLabel.font constrainedToHeight:self.pointLabel.jk_height].width;
-        self.pointWidth.constant = width + 25;
-    
-        [self.headImageView setImageURL:[NSURL URLWithString:_currentCustomer.photo_url]];
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.phoneLabel setText:_currentCustomer.customerPhone];
         [self.birthdayLabel setText:_currentCustomer.birthday];
@@ -44,7 +39,7 @@
         
         [self.totalPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.consumptionAmount]];
         [self.storeValueLabel setText:[NSString stringWithFormat:@"￥%.2f",_currentCustomer.balance]];
-        [self.pointLabel setText:pointValue];
+        [self.pointLabel setText:[NSString stringWithFormat:@"%d",_currentCustomer.integral]];
         [self.customerCategoryLabel setText:_currentCustomer.customerType];
         [self.growthLabel setText:_currentCustomer.membergrowth];
         [self.ageLabel setText:_currentCustomer.age];

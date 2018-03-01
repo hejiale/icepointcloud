@@ -12,7 +12,6 @@
 
 
 @property (weak, nonatomic) IBOutlet UIView *mainView;
-@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *genderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
@@ -23,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalPayAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storeValueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointWidth;
 @property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *growthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;

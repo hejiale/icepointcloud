@@ -25,7 +25,6 @@
 #import "IQKeyboardManager.h"
 #import "IQTextView.h"
 #import "MJExtension.h"
-#import "UIImageView+CornerRadius.h"
 #import <TuSDKGeeV1/TuSDKGeeV1.h>
 #import "iflyMSC/IFlyFaceSDK.h"
 #import "YYKit.h"

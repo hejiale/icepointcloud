@@ -27,7 +27,6 @@ static NSString * const  customerListIdentifier = @"IPCPayOrderMemberCustomerLis
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
         
-        
         [self.customerListTableView setTableHeaderView:[[UIView alloc]init]];
         [self.customerListTableView setTableFooterView:[[UIView alloc]init]];
     }
