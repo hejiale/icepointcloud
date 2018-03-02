@@ -17,18 +17,25 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 @interface IPCPayOrderCustomerListView()<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate>
 {
     BOOL  chooseStatus;
+    BOOL  isSelectMember;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *customerCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *searchTypeView;
+@property (weak, nonatomic) IBOutlet UIView *rightButtonView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
-@property (nonatomic, copy) void(^DetailBlock)(IPCDetailCustomer * customer);
+@property (nonatomic, strong) IPCDynamicImageTextButton * typeButton;
+@property (nonatomic, copy) void(^DetailBlock)(IPCDetailCustomer * customer, BOOL isMemberReload);
+
 
 @end
 
 @implementation IPCPayOrderCustomerListView
 
-- (instancetype)initWithFrame:(CGRect)frame  IsChooseStatus:(BOOL)isChoose Detail:(void(^)(IPCDetailCustomer * customer))detail
+- (instancetype)initWithFrame:(CGRect)frame  IsChooseStatus:(BOOL)isChoose Detail:(void(^)(IPCDetailCustomer * customer, BOOL isMemberReload))detail
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -39,6 +46,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         chooseStatus = isChoose;
         self.DetailBlock = detail;
         [self loadCollectionView];
+        [self.rightButtonView addSubview:self.typeButton];
         self.viewModel = [[IPCCustomerListViewModel alloc]init];
         [self loadData];
     }
@@ -77,6 +85,19 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     return _refreshFooter;
 }
 
+- (IPCDynamicImageTextButton *)typeButton{
+    if (!_typeButton) {
+        _typeButton = [[IPCDynamicImageTextButton alloc]initWithFrame:self.rightButtonView.bounds];
+        [_typeButton setImage:[UIImage imageNamed:@"icon_down_arrow"] forState:UIControlStateNormal];
+        [_typeButton setTitleColor:COLOR_RGB_BLUE];
+        [_typeButton setTitle:@"客户"];
+        [_typeButton setFont:[UIFont systemFontOfSize:15 weight:UIFontWeightThin]];
+        [_typeButton setButtonAlignment:IPCCustomButtonAlignmentLeft];
+        [_typeButton addTarget:self action:@selector(selectSearchTypeAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _typeButton;
+}
+
 #pragma mark //Refresh Methods
 - (void)beginRefresh
 {
@@ -87,14 +108,21 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     }
     [self.refreshFooter resetDataStatus];
     [self.viewModel resetData];
-    
-    [self loadCustomerList];
+    if (isSelectMember) {
+        [self loadMemberList];
+    }else{
+        [self loadCustomerList];
+    }
 }
 
 - (void)loadMore
 {
     self.viewModel.currentPage++;
-    [self loadCustomerList];
+    if (isSelectMember) {
+        [self loadMemberList];
+    }else{
+        [self loadCustomerList];
+    }
 }
 
 #pragma mark //Load Data
@@ -102,7 +130,11 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 {
     [self.viewModel resetData];
     self.customerCollectionView.isBeginLoad = YES;
-    [self loadCustomerList];
+    if (isSelectMember) {
+        [self loadMemberList];
+    }else{
+        [self loadCustomerList];
+    }
     [self.customerCollectionView reloadData];
 }
 
@@ -124,6 +156,22 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
      }];
 }
 
+- (void)loadMemberList
+{
+    __weak typeof(self) weakSelf = self;
+    [self.viewModel queryMemberList:^(NSError *error) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
+            [strongSelf.refreshFooter noticeNoDataStatus];
+        }else if (strongSelf.viewModel.status == IPCRefreshError){
+            if ([error code] != NSURLErrorCancelled) {
+                [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
+            }
+        }
+        [weakSelf reload];
+    }];
+}
+
 - (void)queryCustomerDetail:(NSString *)customerId
 {
     __weak typeof(self) weakSelf = self;
@@ -133,7 +181,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
      {
          __strong typeof(weakSelf) strongSelf = weakSelf;
          if (strongSelf.DetailBlock) {
-             strongSelf.DetailBlock(customer);
+             strongSelf.DetailBlock(customer,NO);
          }
          [weakSelf reload];
      }];
@@ -157,19 +205,54 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     }
 }
 
+#pragma mark //Clicked Events
+- (IBAction)searchWithCustomerAction:(id)sender {
+    isSelectMember = NO;
+    [self.searchTypeView setHidden:YES];
+    [self.typeButton setTitle:@"客户"];
+    [self loadData];
+}
+
+
+- (IBAction)searchWithMemberAction:(id)sender {
+    isSelectMember = YES;
+    [self.searchTypeView setHidden:YES];
+    [self.typeButton setTitle:@"会员"];
+    [self loadData];
+}
+
+- (void)selectSearchTypeAction:(id)sender{
+    if (self.searchTypeView.isHidden) {
+        [self.searchTypeView setHidden:NO];
+    }else{
+        [self.searchTypeView setHidden:YES];
+    }
+}
+
 #pragma mark //UICollectionViewDataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
     return self.viewModel.customerArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    IPCPayOrderCustomerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:customerIdentifier forIndexPath:indexPath];
-    
-    if (self.viewModel && self.viewModel.customerArray.count) {
-        IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
-        cell.currentCustomer = customer;
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (isSelectMember) {
+        IPCPayOrderMemberCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:memberIdentifier forIndexPath:indexPath];
+        
+        if (self.viewModel && self.viewModel.customerArray.count) {
+            IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
+            cell.currentCustomer = customer;
+        }
+        return cell;
+    }else{
+        IPCPayOrderCustomerCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:customerIdentifier forIndexPath:indexPath];
+        
+        if (self.viewModel && self.viewModel.customerArray.count) {
+            IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
+            cell.currentCustomer = customer;
+        }
+        return cell;
     }
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -190,14 +273,31 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     if (self.viewModel.customerArray.count) {
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         
-        if ([customer.customerID isEqualToString:[IPCPayOrderManager sharedManager].currentCustomerId])return;
-        
-        if (customer) {
-            if (!chooseStatus) {
-                [IPCPayOrderManager sharedManager].isValiateMember = NO;
-                [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
+        if (isSelectMember) {
+            if ([customer.memberCustomerId isEqualToString:[IPCPayOrderManager sharedManager].currentMemberCustomerId])return;
+            
+            if (customer) {
+                [IPCPayOrderManager sharedManager].currentCustomerId = nil;
+                [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+                [IPCPayOrderManager sharedManager].currentMemberCustomerId = customer.memberCustomerId;
+                [collectionView reloadData];
+                
+                if (self.DetailBlock) {
+                    self.DetailBlock(nil, YES);
+                }
             }
-            [self queryCustomerDetail:customer.customerID];
+        }else{
+            if ([customer.customerID isEqualToString:[IPCPayOrderManager sharedManager].currentCustomerId])return;
+            
+            if (customer) {
+                if (!chooseStatus) {
+                    [IPCPayOrderManager sharedManager].currentMemberCustomerId = nil;
+                    [IPCPayOrderManager sharedManager].currentBindCustomerId = nil;
+                    [IPCPayOrderManager sharedManager].isValiateMember = NO;
+                    [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
+                }
+                [self queryCustomerDetail:customer.customerID];
+            }
         }
     }
 }

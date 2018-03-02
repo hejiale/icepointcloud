@@ -12,6 +12,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderCustomerListView">
             <connections>
                 <outlet property="customerCollectionView" destination="8Xo-8P-lEs" id="6SX-An-55s"/>
+                <outlet property="rightButtonView" destination="gwe-E5-EsN" id="CaW-Rk-UqX"/>
+                <outlet property="searchTextField" destination="JWy-gr-0gI" id="Dyj-0M-kTg"/>
+                <outlet property="searchTypeView" destination="Hiw-d7-fzv" id="xmg-4B-CcR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -30,7 +33,7 @@
                             </constraints>
                         </imageView>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入搜索关键词" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="JWy-gr-0gI">
-                            <rect key="frame" x="45" y="0.0" width="330" height="50"/>
+                            <rect key="frame" x="45" y="0.0" width="250" height="50"/>
                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="search"/>
@@ -38,16 +41,24 @@
                                 <outlet property="delegate" destination="-1" id="Yrk-6R-ctj"/>
                             </connections>
                         </textField>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwe-E5-EsN">
+                            <rect key="frame" x="295" y="0.0" width="80" height="50"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="JWy-gr-0gI" secondAttribute="bottom" id="EBi-fC-wNe"/>
                         <constraint firstItem="JWy-gr-0gI" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="top" id="Jnw-ge-iUA"/>
+                        <constraint firstAttribute="trailing" secondItem="gwe-E5-EsN" secondAttribute="trailing" id="OQ1-xg-dSx"/>
                         <constraint firstItem="JWy-gr-0gI" firstAttribute="leading" secondItem="xcc-rU-bfd" secondAttribute="trailing" constant="5" id="PgO-DM-Ihd"/>
+                        <constraint firstItem="gwe-E5-EsN" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="top" id="T4N-xR-ZAi"/>
                         <constraint firstItem="xcc-rU-bfd" firstAttribute="centerY" secondItem="7r7-yq-yva" secondAttribute="centerY" id="V3p-fJ-2rD"/>
+                        <constraint firstItem="gwe-E5-EsN" firstAttribute="leading" secondItem="JWy-gr-0gI" secondAttribute="trailing" id="WOR-ER-dgs"/>
                         <constraint firstItem="xcc-rU-bfd" firstAttribute="leading" secondItem="7r7-yq-yva" secondAttribute="leading" id="cXd-Hr-1a9"/>
+                        <constraint firstAttribute="bottom" secondItem="gwe-E5-EsN" secondAttribute="bottom" id="cep-bd-6XM"/>
                         <constraint firstAttribute="height" constant="50" id="qVb-Sb-6Nu"/>
-                        <constraint firstAttribute="trailing" secondItem="JWy-gr-0gI" secondAttribute="trailing" id="un1-Va-bFp"/>
+                        <constraint firstAttribute="trailing" secondItem="JWy-gr-0gI" secondAttribute="trailing" constant="80" id="un1-Va-bFp"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-8P-lEs">
@@ -64,6 +75,64 @@
                         <outlet property="delegate" destination="-1" id="VAO-wh-gRD"/>
                     </connections>
                 </collectionView>
+                <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hiw-d7-fzv">
+                    <rect key="frame" x="255" y="50" width="120" height="120"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_searchType" translatesAutoresizingMaskIntoConstraints="NO" id="Gsz-eH-paI">
+                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8t6-8O-KcU">
+                            <rect key="frame" x="0.0" y="10" width="120" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="HfI-Vj-ToE"/>
+                            </constraints>
+                            <state key="normal" title="客户名">
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="searchWithCustomerAction:" destination="-1" eventType="touchUpInside" id="fwv-zn-V3P"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rtv-uD-bKS">
+                            <rect key="frame" x="8" y="60" width="104" height="1"/>
+                            <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="aFY-oj-862"/>
+                            </constraints>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gkx-HG-TFf">
+                            <rect key="frame" x="0.0" y="61" width="120" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="pTO-iQ-NgX"/>
+                            </constraints>
+                            <state key="normal" title="会员名">
+                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="searchWithMemberAction:" destination="-1" eventType="touchUpInside" id="mQ3-Hs-UBz"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Gsz-eH-paI" firstAttribute="leading" secondItem="Hiw-d7-fzv" secondAttribute="leading" id="1VK-T7-Fhu"/>
+                        <constraint firstAttribute="width" constant="120" id="4AF-LU-hqf"/>
+                        <constraint firstItem="8t6-8O-KcU" firstAttribute="top" secondItem="Hiw-d7-fzv" secondAttribute="top" constant="10" id="6jP-oE-u6g"/>
+                        <constraint firstAttribute="trailing" secondItem="rtv-uD-bKS" secondAttribute="trailing" constant="8" id="DW2-vo-MDj"/>
+                        <constraint firstItem="rtv-uD-bKS" firstAttribute="leading" secondItem="Hiw-d7-fzv" secondAttribute="leading" constant="8" id="MBl-Pw-CfO"/>
+                        <constraint firstItem="Gkx-HG-TFf" firstAttribute="top" secondItem="rtv-uD-bKS" secondAttribute="bottom" id="OGv-46-5Fs"/>
+                        <constraint firstItem="Gsz-eH-paI" firstAttribute="top" secondItem="Hiw-d7-fzv" secondAttribute="top" id="ORk-lv-biP"/>
+                        <constraint firstAttribute="trailing" secondItem="Gsz-eH-paI" secondAttribute="trailing" id="Y2o-LG-geK"/>
+                        <constraint firstAttribute="trailing" secondItem="8t6-8O-KcU" secondAttribute="trailing" id="d7M-9L-mbF"/>
+                        <constraint firstItem="Gkx-HG-TFf" firstAttribute="leading" secondItem="Hiw-d7-fzv" secondAttribute="leading" id="dZr-zb-Qan"/>
+                        <constraint firstAttribute="bottom" secondItem="Gsz-eH-paI" secondAttribute="bottom" id="eY7-hf-cru"/>
+                        <constraint firstItem="8t6-8O-KcU" firstAttribute="leading" secondItem="Hiw-d7-fzv" secondAttribute="leading" id="rFj-32-7EV"/>
+                        <constraint firstItem="rtv-uD-bKS" firstAttribute="top" secondItem="8t6-8O-KcU" secondAttribute="bottom" id="uOC-wI-cKX"/>
+                        <constraint firstAttribute="trailing" secondItem="Gkx-HG-TFf" secondAttribute="trailing" id="w93-HL-xFa"/>
+                        <constraint firstAttribute="height" constant="120" id="yZw-pn-zjj"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
@@ -74,14 +143,17 @@
                 <constraint firstItem="7r7-yq-yva" firstAttribute="top" secondItem="KPu-Lh-PxF" secondAttribute="top" id="Vzm-kr-q2o"/>
                 <constraint firstItem="7r7-yq-yva" firstAttribute="leading" secondItem="KPu-Lh-PxF" secondAttribute="leading" id="XPc-a1-5Fz"/>
                 <constraint firstItem="8Xo-8P-lEs" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="bottom" constant="10" id="aPU-5Q-7w3"/>
+                <constraint firstItem="Hiw-d7-fzv" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="bottom" id="adI-lN-xPN"/>
+                <constraint firstAttribute="trailing" secondItem="Hiw-d7-fzv" secondAttribute="trailing" id="tr8-d5-WN7"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-154" y="148"/>
+            <point key="canvasLocation" x="-154.5" y="147.5"/>
         </view>
     </objects>
     <resources>
+        <image name="icon_searchType" width="262" height="275"/>
         <image name="payOrder_searchCustomer" width="50" height="50"/>
     </resources>
 </document>

@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *encryptedPhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *memberLevelLabel;
+@property (copy, nonatomic) IPCCustomerMode * currentCustomer;
 
 @end

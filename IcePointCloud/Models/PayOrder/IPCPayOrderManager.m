@@ -167,6 +167,8 @@
     [IPCPayOrderManager sharedManager].remark = nil;
     [[IPCPayOrderManager sharedManager] clearPayRecord];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
+    [IPCPayOrderManager sharedManager].currentBindCustomerId = nil;
+    [IPCPayOrderManager sharedManager].currentMemberCustomerId = nil;
     [IPCPayOrderManager sharedManager].currentOptometryId = nil;
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;

@@ -31,6 +31,7 @@
 - (void)clearData{
     self.currentCustomer = nil;
     self.currentOpometry = nil;
+    self.currentMember = nil;
 }
 
 

@@ -38,6 +38,11 @@
 #define CustomerRequest_ValidateCustomer        @"customerAdmin.validateCustomerQRcode"
 #define CustomerRequest_UpdateMemberPhone   @"customerAdmin.updateCustomerMemberPhone"
 
+///会员体系
+#define CustomerRequest_MemberList                  @"customerAdmin.listCustomerMemberAccount"
+#define CustomerRequest_BindCustomer               @"customerAdmin.customerUpdateToMember"
+#define CustomerRequest_MemberCustomerDetail @"customerAdmin.listCustomerProfilesForCustomerMember"
+
 #define GoodsRequest_FilterCategory                    @"bizadmin.getCategoryType"
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"

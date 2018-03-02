@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong, readwrite) IPCDetailCustomer              * currentCustomer;
 @property (nonatomic, strong, readwrite) IPCOptometryMode             * currentOpometry;
+@property (nonatomic, strong, readwrite) IPCCustomerMode              *  currentMember;
 
 - (void)loadCurrentCustomer:(IPCDetailCustomer *)detailCustomer;
 

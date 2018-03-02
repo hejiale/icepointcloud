@@ -37,6 +37,14 @@ typedef void(^CompleteBlock)(NSError *error);
 
 
 /**
+ Query Bind Member CustomerList
+
+ @param complete 
+ */
+- (void)queryBindMemberCustomer:(void(^)(NSArray * customerList, NSError *error))complete;
+
+
+/**
  Validation Member
 
  @param code
@@ -49,5 +57,8 @@ typedef void(^CompleteBlock)(NSError *error);
   Clear All Data
  */
 - (void)resetData;
+
+
+- (void)queryMemberList:(void(^)(NSError *error))complete;
 
 @end

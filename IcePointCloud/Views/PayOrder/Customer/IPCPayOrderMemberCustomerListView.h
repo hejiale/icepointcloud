@@ -10,4 +10,8 @@
 
 @interface IPCPayOrderMemberCustomerListView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame Select:(void(^)(NSString *customerId))select;
+
+- (void)reloadCustomerListView:(NSArray<IPCCustomerMode *> *)customerList;
+
 @end

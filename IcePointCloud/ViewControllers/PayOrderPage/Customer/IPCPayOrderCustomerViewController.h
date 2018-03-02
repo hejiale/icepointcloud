@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderCustomerViewController : UIViewController
 
+- (void)resetCustomerView;
+
 @end

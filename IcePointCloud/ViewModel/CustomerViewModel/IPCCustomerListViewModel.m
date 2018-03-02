@@ -22,7 +22,7 @@
 - (void)queryCustomerList:(void(^)(NSError *error))complete
 {
     self.completeBlock = complete;
-
+    
     __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryCustomerListWithKeyword:self.searchWord ? : @""
                                                        Page:self.currentPage
@@ -94,6 +94,50 @@
              complete();
          }
          [IPCPayOrderManager sharedManager].isValiateMember = NO;
+     }];
+}
+
+- (void)queryMemberList:(void(^)(NSError *error))complete
+{
+    self.completeBlock = complete;
+    
+    __weak typeof(self) weakSelf = self;
+    [IPCCustomerRequestManager queryMemberListWithKeyword:self.searchWord ? :@""
+                                                     Page:self.currentPage
+                                             SuccessBlock:^(id responseValue)
+     {
+         [weakSelf parseCustomerListData:responseValue];
+     } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
+         
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         strongSelf.status = IPCRefreshError;
+         if (strongSelf.completeBlock) {
+             strongSelf.completeBlock(error);
+         }
+     }];
+}
+
+- (void)queryBindMemberCustomer:(void(^)(NSArray * customerList, NSError *error))complete
+{
+    [IPCCustomerRequestManager queryBindMemberCustomerWithMemberCustomerId:[IPCPayOrderManager sharedManager].currentMemberCustomerId
+                                                                SuccessBlock:^(id responseValue)
+     {
+         NSMutableArray * array = [[NSMutableArray alloc]init];
+         
+         if ([responseValue isKindOfClass:[NSArray class]]) {
+             [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                 IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:obj];
+                 [array addObject:customer];
+             }];
+             if (complete) {
+                 complete(array, nil);
+             }
+         }
+     } FailureBlock:^(NSError *error) {
+         if (complete) {
+             complete(nil, error);
+         }
      }];
 }
 

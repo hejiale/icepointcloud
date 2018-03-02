@@ -19,6 +19,10 @@
 @property (nonatomic, assign, readwrite) BOOL   isPayOrderStatus;
 //当前客户Id
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;
+//会员卡绑定客户id
+@property (nonatomic, copy, readwrite) NSString * currentBindCustomerId;
+//当前会员卡id
+@property (nonatomic, copy, readwrite) NSString * currentMemberCustomerId;
 //当前客户验光单Id
 @property (nonatomic, copy, readwrite) NSString * currentOptometryId;
 //合计金额

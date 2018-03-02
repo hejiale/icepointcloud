@@ -137,15 +137,11 @@
 
 - (IBAction)nextStepAction:(id)sender
 {
-    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
-        [IPCCommonUI showError:@"请先选择客户信息!"];
+    NSUInteger nextPage = _currentPage + 1;
+    if (nextPage == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
+        [self offerOrderAction];
     }else{
-        NSUInteger nextPage = _currentPage + 1;
-        if (nextPage == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
-            [self offerOrderAction];
-        }else{
-            [self setCurrentPage:nextPage];
-        }
+        [self setCurrentPage:nextPage];
     }
 }
 
@@ -172,14 +168,10 @@
 
 - (IBAction)changePageIndex:(UIButton *)sender
 {
-    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
-        [IPCCommonUI showError:@"请先选择客户信息!"];
+    if (sender.tag == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
+        [self offerOrderAction];
     }else{
-        if (sender.tag == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
-            [self offerOrderAction];
-        }else{
-            [self setCurrentPage:sender.tag];
-        }
+        [self setCurrentPage:sender.tag];
     }
 }
 
@@ -204,6 +196,7 @@
 {
     [self setCurrentPage:0];
     [[IPCPayOrderManager sharedManager] resetData];
+    [self.customerVC resetCustomerView];
 }
 
 

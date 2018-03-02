@@ -38,6 +38,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="9VE-et-oID" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="GIt-d2-gBI"/>
                 <constraint firstItem="9VE-et-oID" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="N6c-GF-KL8"/>

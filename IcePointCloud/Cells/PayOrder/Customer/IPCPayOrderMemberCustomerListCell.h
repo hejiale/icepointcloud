@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderMemberCustomerListCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
+
 @end

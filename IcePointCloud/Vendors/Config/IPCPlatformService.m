@@ -224,7 +224,7 @@
 - (void)setUpCrashlytics
 {
     [Fabric with:@[[Crashlytics class]]];
-    [Crashlytics sharedInstance].debugMode = YES;
+//    [Crashlytics sharedInstance].debugMode = YES;
 }
 
 

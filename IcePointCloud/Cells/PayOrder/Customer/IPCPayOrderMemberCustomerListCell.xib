@@ -17,7 +17,26 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n1O-r0-CgJ">
+                        <rect key="frame" x="20" y="0.0" width="300" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="n1O-r0-CgJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="X5I-nW-phv"/>
+                    <constraint firstAttribute="trailing" secondItem="n1O-r0-CgJ" secondAttribute="trailing" id="XYN-Fh-Lgu"/>
+                    <constraint firstAttribute="bottom" secondItem="n1O-r0-CgJ" secondAttribute="bottom" id="ZpI-8n-MEg"/>
+                    <constraint firstItem="n1O-r0-CgJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="k8k-23-Clj"/>
+                </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="customerNameLabel" destination="n1O-r0-CgJ" id="0WM-lc-S3G"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

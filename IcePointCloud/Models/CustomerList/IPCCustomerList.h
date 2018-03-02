@@ -24,8 +24,13 @@
 @property (copy, nonatomic, readwrite) NSString * customerID;
 @property (copy, nonatomic, readwrite) NSString * currentOptometryId;
 @property (copy, nonatomic, readwrite) NSString * customerPhone;
-@property (copy, nonatomic, readwrite) NSString * integral;
+@property (assign, nonatomic, readwrite) double   integral;
 @property (copy, nonatomic, readwrite) NSString * memberLevel;
+@property (copy, nonatomic, readwrite) NSString * memberCustomerId;
+@property (copy, nonatomic, readwrite) NSString * memberPhone;
+@property (assign, nonatomic, readwrite) double   balance;
+@property (copy, nonatomic, readwrite) NSString *   membergrowth;
+@property (assign, nonatomic, readwrite) double      discount;
 
 
 @end

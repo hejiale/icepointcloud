@@ -225,4 +225,44 @@
                       FailureBlock:(void (^)(NSError *))failure;
 
 
+/**
+ Query MemberList
+
+ @param keyword
+ @param page
+ @param success
+ @param failure
+ */
++ (void)queryMemberListWithKeyword:(NSString *)keyword
+                              Page:(NSInteger )page
+                   SuccessBlock:(void (^)(id responseValue))success
+                   FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ Bind Member
+
+ @param customerId
+ @param memberCustomerId
+ @param success
+ @param failure
+ */
++ (void)bindMemberWithCustomerId:(NSString *)customerId
+                MemberCustomerId:(NSString *)memberCustomerId
+                    SuccessBlock:(void (^)(id responseValue))success
+                    FailureBlock:(void (^)(NSError * error))failure;
+
+
+/**
+ Query Member Detail
+
+ @param memberCustomerId
+ @param success
+ @param failure
+ */
++ (void)queryBindMemberCustomerWithMemberCustomerId:(NSString *)memberCustomerId
+                                         SuccessBlock:(void (^)(id responseValue))success
+                                         FailureBlock:(void (^)(NSError * error))failure;
+
+
 @end

@@ -36,7 +36,7 @@
 }
 
 
-- (void)updateCustomerInfo
+- (void)updateMemberInfo
 {
     IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
     
@@ -46,6 +46,18 @@
     [self.encryptedPhoneLabel setText:[customer useMemberPhone]];
     [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", [customer useDiscount]]];
     [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f", [customer useBalance]]];
+}
+
+- (void)updateMemberCardInfo
+{
+    IPCCustomerMode * customer = [IPCPayOrderCurrentCustomer sharedManager].currentMember;
+    
+    [self.pointLabel setText:[NSString stringWithFormat:@"%.f", customer.integral]];
+    [self.memberLevelLabel setText:customer.memberLevel];
+    [self.growthValueLabel setText:customer.membergrowth];
+    [self.encryptedPhoneLabel setText:customer.memberPhone];
+    [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", customer.discount]];
+    [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f", customer.balance]];
 }
 
 
