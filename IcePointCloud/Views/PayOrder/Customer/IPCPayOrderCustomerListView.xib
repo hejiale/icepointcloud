@@ -11,8 +11,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderCustomerListView">
             <connections>
+                <outlet property="collectionViewBottom" destination="7wS-F1-q7j" id="NCr-z2-LtR"/>
                 <outlet property="customerCollectionView" destination="8Xo-8P-lEs" id="6SX-An-55s"/>
+                <outlet property="insertButton" destination="IVb-Bi-NGz" id="LeY-HV-7Mp"/>
                 <outlet property="rightButtonView" destination="gwe-E5-EsN" id="CaW-Rk-UqX"/>
+                <outlet property="rightButtonViewWidth" destination="0C3-4A-TLa" id="KoV-zr-zBR"/>
                 <outlet property="searchTextField" destination="JWy-gr-0gI" id="Dyj-0M-kTg"/>
                 <outlet property="searchTypeView" destination="Hiw-d7-fzv" id="xmg-4B-CcR"/>
             </connections>
@@ -44,11 +47,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwe-E5-EsN">
                             <rect key="frame" x="295" y="0.0" width="80" height="50"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="0C3-4A-TLa"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="JWy-gr-0gI" secondAttribute="bottom" id="EBi-fC-wNe"/>
+                        <constraint firstItem="gwe-E5-EsN" firstAttribute="leading" secondItem="JWy-gr-0gI" secondAttribute="trailing" id="Ep4-9J-nyP"/>
                         <constraint firstItem="JWy-gr-0gI" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="top" id="Jnw-ge-iUA"/>
                         <constraint firstAttribute="trailing" secondItem="gwe-E5-EsN" secondAttribute="trailing" id="OQ1-xg-dSx"/>
                         <constraint firstItem="JWy-gr-0gI" firstAttribute="leading" secondItem="xcc-rU-bfd" secondAttribute="trailing" constant="5" id="PgO-DM-Ihd"/>
@@ -58,9 +65,23 @@
                         <constraint firstItem="xcc-rU-bfd" firstAttribute="leading" secondItem="7r7-yq-yva" secondAttribute="leading" id="cXd-Hr-1a9"/>
                         <constraint firstAttribute="bottom" secondItem="gwe-E5-EsN" secondAttribute="bottom" id="cep-bd-6XM"/>
                         <constraint firstAttribute="height" constant="50" id="qVb-Sb-6Nu"/>
-                        <constraint firstAttribute="trailing" secondItem="JWy-gr-0gI" secondAttribute="trailing" constant="80" id="un1-Va-bFp"/>
                     </constraints>
                 </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVb-Bi-NGz">
+                    <rect key="frame" x="77" y="617" width="220" height="50"/>
+                    <color key="backgroundColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="3kr-Ho-dGQ"/>
+                        <constraint firstAttribute="height" constant="50" id="UVP-uI-ga3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="新增客户">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="insertCustomerAction:" destination="-1" eventType="touchUpInside" id="v4D-sY-GrF"/>
+                    </connections>
+                </button>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8Xo-8P-lEs">
                     <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -136,6 +157,7 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="IVb-Bi-NGz" firstAttribute="centerX" secondItem="KPu-Lh-PxF" secondAttribute="centerX" id="715-4B-f9B"/>
                 <constraint firstAttribute="bottom" secondItem="8Xo-8P-lEs" secondAttribute="bottom" id="7wS-F1-q7j"/>
                 <constraint firstAttribute="trailing" secondItem="7r7-yq-yva" secondAttribute="trailing" id="KCR-1P-QC2"/>
                 <constraint firstAttribute="trailing" secondItem="8Xo-8P-lEs" secondAttribute="trailing" id="NcW-3H-09d"/>
@@ -144,6 +166,7 @@
                 <constraint firstItem="7r7-yq-yva" firstAttribute="leading" secondItem="KPu-Lh-PxF" secondAttribute="leading" id="XPc-a1-5Fz"/>
                 <constraint firstItem="8Xo-8P-lEs" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="bottom" constant="10" id="aPU-5Q-7w3"/>
                 <constraint firstItem="Hiw-d7-fzv" firstAttribute="top" secondItem="7r7-yq-yva" secondAttribute="bottom" id="adI-lN-xPN"/>
+                <constraint firstAttribute="bottom" secondItem="IVb-Bi-NGz" secondAttribute="bottom" id="cR6-6v-xOy"/>
                 <constraint firstAttribute="trailing" secondItem="Hiw-d7-fzv" secondAttribute="trailing" id="tr8-d5-WN7"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>

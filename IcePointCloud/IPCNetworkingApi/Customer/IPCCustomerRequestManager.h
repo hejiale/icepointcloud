@@ -265,4 +265,14 @@
                                          FailureBlock:(void (^)(NSError * error))failure;
 
 
+/**
+ Get Visitor Customer
+
+ @param success
+ @param failure 
+ */
++ (void)getVisitorCustomerWithSuccessBlock:(void (^)(id responseValue))success
+                              FailureBlock:(void (^)(NSError * error))failure;
+
+
 @end

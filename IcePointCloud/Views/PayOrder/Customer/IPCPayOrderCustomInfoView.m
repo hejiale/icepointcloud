@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *birthdayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPayLabel;
+@property (weak, nonatomic) IBOutlet UILabel *customerTypeLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameWidth;
 
 @end
 
@@ -36,11 +38,15 @@
 {
     if (customer) {
         [self.customerNameLabel setText:customer.customerName];
-        [self.ageLabel setText:customer.age];
+        [self.ageLabel setText:customer.age ? [NSString stringWithFormat:@"%@岁",customer.age] : @"0岁"];
         [self.phoneLabel setText:customer.customerPhone];
         [self.sexLabel setText:[IPCCommon formatGender:customer.gender]];
         [self.birthdayLabel setText:customer.birthday];
         [self.totalPayLabel setText:[NSString stringWithFormat:@"￥%.2f", customer.consumptionAmount]];
+        [self.customerTypeLabel setText:customer.customerType];
+        
+        CGFloat width = [customer.customerName jk_sizeWithFont:self.customerNameLabel.font constrainedToHeight:self.customerNameLabel.jk_height].width;
+        self.nameWidth.constant = MIN(160, MAX(width, 70));
     }
 }
 

@@ -17,17 +17,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *maleButton;
 @property (weak, nonatomic) IBOutlet UIButton *femaleButton;
 @property (weak, nonatomic) IBOutlet UITextField *customerTypeTextField;
-@property (weak, nonatomic) IBOutlet UITextField *encryptedPhoneTextField;
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
-@property (weak, nonatomic) IBOutlet UIView *membePhoneView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
 @property (weak, nonatomic) IBOutlet UITextField *storeTextField;
-
-
-
-
-
-
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
 @property (copy, nonatomic) void(^UpdateBlock)(NSString *);
 
@@ -53,7 +44,6 @@
                 [textFiedld addBottomLine];
             }
         }];
-        [self.encryptedPhoneTextField addBottomLine];
         
         [self.birthdayTextField setRightButton:self Action:@selector(showDatePickerAction) OnView:self.editContentView];
         [self.customerTypeTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
@@ -72,7 +62,7 @@
     [self.ageTextField setText:self.detailCustomer.age];
     [self.birthdayTextField setText:self.detailCustomer.birthday];
     [self.customerTypeTextField setText:self.detailCustomer.customerType];
-    [self.encryptedPhoneTextField setText:self.detailCustomer.memberPhone];
+
     if (self.detailCustomer.createStoreName.length) {
         [self.storeTextField setText:self.detailCustomer.createStoreName];
     }else{
@@ -85,11 +75,6 @@
     }else if ([self.detailCustomer.gender isEqualToString:@"FEMALE"]){
         [self.femaleButton setSelected:YES];
         [self.maleButton setSelected:NO];
-    }
-    
-    if (!self.detailCustomer.memberLevel) {
-        [self.membePhoneView setHidden:YES];
-        self.contentHeight.constant = 520;
     }
 }
 
@@ -136,19 +121,6 @@
     }
 }
 
-- (void)updateMemberPhoneRequest
-{
-    if (![self.encryptedPhoneTextField.text isEqualToString:self.detailCustomer.memberPhone]) {
-        [IPCCustomerRequestManager updateMemberPhoneWithPhone:self.encryptedPhoneTextField.text
-                                                   CustomerId:self.detailCustomer.customerID
-                                                 SuccessBlock:nil
-                                                 FailureBlock:^(NSError *error) {
-                                                     if ([error code] != NSURLErrorCancelled) {
-                                                         [IPCCommonUI showError:error.domain];
-                                                     }
-                                                 }];
-    }
-}
 
 #pragma mark //Clicked Events
 - (IBAction)cancelAction:(id)sender {
@@ -157,9 +129,6 @@
 
 - (IBAction)completeAction:(id)sender {
     [self saveCustomerRequest];
-    if (self.detailCustomer.memberLevel) {
-        [self updateMemberPhoneRequest];
-    }
 }
 
 - (IBAction)selectMaleAction:(id)sender {

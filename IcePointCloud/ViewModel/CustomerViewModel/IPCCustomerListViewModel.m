@@ -51,6 +51,7 @@
          
          if (!isChoose) {
              [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:detailCustomer];
+             [IPCPayOrderManager sharedManager].currentCustomerId = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerID;
              [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
              if (complete) {
                  complete(nil);

@@ -10,8 +10,13 @@
 
 @interface IPCPayOrderCustomerListView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame IsChooseStatus:(BOOL)isChoose Detail:(void(^)(IPCDetailCustomer * customer, BOOL isMemberReload))detail;
+- (instancetype)initWithFrame:(CGRect)frame
+               IsChooseStatus:(BOOL)isChoose
+                       Detail:(void(^)(IPCDetailCustomer * customer, BOOL isMemberReload))detail
+                   SelectType:(void(^)(BOOL isSelectMemeber))isMember;
 
 - (void)reload;
+
+- (void)loadData;
 
 @end

@@ -23,19 +23,21 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 @property (weak, nonatomic) IBOutlet UIView *searchTypeView;
 @property (weak, nonatomic) IBOutlet UIView *rightButtonView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
-
+@property (weak, nonatomic) IBOutlet UIButton *insertButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewBottom;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightButtonViewWidth;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
 @property (nonatomic, strong) IPCRefreshAnimationFooter    *refreshFooter;
 @property (nonatomic, strong) IPCCustomerListViewModel    * viewModel;
 @property (nonatomic, strong) IPCDynamicImageTextButton * typeButton;
 @property (nonatomic, copy) void(^DetailBlock)(IPCDetailCustomer * customer, BOOL isMemberReload);
-
+@property (nonatomic, copy) void(^IsSelectMemberBlock)(BOOL isMember);
 
 @end
 
 @implementation IPCPayOrderCustomerListView
 
-- (instancetype)initWithFrame:(CGRect)frame  IsChooseStatus:(BOOL)isChoose Detail:(void(^)(IPCDetailCustomer * customer, BOOL isMemberReload))detail
+- (instancetype)initWithFrame:(CGRect)frame  IsChooseStatus:(BOOL)isChoose Detail:(void(^)(IPCDetailCustomer * customer, BOOL isMemberReload))detail SelectType:(void(^)(BOOL isSelectMemeber))isMember
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -45,8 +47,16 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         
         chooseStatus = isChoose;
         self.DetailBlock = detail;
+        self.IsSelectMemberBlock = isMember;
+        
         [self loadCollectionView];
-        [self.rightButtonView addSubview:self.typeButton];
+        if (!chooseStatus) {
+            [self reloadCollectionViewUI];
+            [self.rightButtonView addSubview:self.typeButton];
+        }else{
+            self.rightButtonViewWidth.constant = 0;
+        }
+        
         self.viewModel = [[IPCCustomerListViewModel alloc]init];
         [self loadData];
     }
@@ -55,13 +65,21 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 
 #pragma mark //Set UI
 - (void)loadCollectionView{
-    CGFloat itemWidth = (self.jk_width-10)/3;
-    CGFloat itemHeight = (self.jk_height-30-60)/7;
+    CGFloat itemWidth = 0;
+    CGFloat itemHeight = 0;
+    
+    if (chooseStatus) {
+        itemWidth = (self.jk_width-10)/2;
+        itemHeight = (self.jk_height-40-60)/5;
+    }else{
+        itemWidth = (self.jk_width-20)/3;
+        itemHeight = (self.jk_height-60-60)/7;
+    }
     
     UICollectionViewFlowLayout * layout = [[UICollectionViewFlowLayout alloc]init];
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    layout.minimumInteritemSpacing = 5;
-    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = 10;
+    layout.minimumLineSpacing = 10;
     
     [_customerCollectionView setCollectionViewLayout:layout];
     _customerCollectionView.emptyAlertImage = @"exception_search";
@@ -210,6 +228,10 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     isSelectMember = NO;
     [self.searchTypeView setHidden:YES];
     [self.typeButton setTitle:@"客户"];
+    if (self.IsSelectMemberBlock) {
+        self.IsSelectMemberBlock(NO);
+    }
+    [self reloadCollectionViewUI];
     [self loadData];
 }
 
@@ -218,7 +240,27 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     isSelectMember = YES;
     [self.searchTypeView setHidden:YES];
     [self.typeButton setTitle:@"会员"];
+    if (self.IsSelectMemberBlock) {
+        self.IsSelectMemberBlock(YES);
+    }
+    [self reloadCollectionViewUI];
     [self loadData];
+}
+
+
+- (IBAction)insertCustomerAction:(id)sender {
+}
+
+- (void)reloadCollectionViewUI
+{
+    if (isSelectMember) {
+        self.collectionViewBottom.constant = 0;
+        [self.insertButton setHidden:YES];
+    }else{
+        CGFloat itemHeight = (self.jk_height-30-60)/7;
+        self.collectionViewBottom.constant = itemHeight + 5;
+        [self.insertButton setHidden:NO];
+    }
 }
 
 - (void)selectSearchTypeAction:(id)sender{

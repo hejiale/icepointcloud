@@ -22,7 +22,4 @@
 }
 
 
-- (IBAction)insertAction:(id)sender {
-}
-
 @end

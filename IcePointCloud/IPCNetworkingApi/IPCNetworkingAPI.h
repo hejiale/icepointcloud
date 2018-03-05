@@ -42,6 +42,7 @@
 #define CustomerRequest_MemberList                  @"customerAdmin.listCustomerMemberAccount"
 #define CustomerRequest_BindCustomer               @"customerAdmin.customerUpdateToMember"
 #define CustomerRequest_MemberCustomerDetail @"customerAdmin.listCustomerProfilesForCustomerMember"
+#define CustomerRequest_GetVisitorCustomer       @"customerAdmin.getVisitorCustomer"
 
 #define GoodsRequest_FilterCategory                    @"bizadmin.getCategoryType"
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"

@@ -29,6 +29,7 @@
 @property (copy, nonatomic, readwrite) NSString * memberCustomerId;
 @property (copy, nonatomic, readwrite) NSString * memberPhone;
 @property (assign, nonatomic, readwrite) double   balance;
+@property (copy, nonatomic, readwrite) NSString * gender;
 @property (copy, nonatomic, readwrite) NSString *   membergrowth;
 @property (assign, nonatomic, readwrite) double      discount;
 

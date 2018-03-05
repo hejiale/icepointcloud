@@ -15,8 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *discountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *encryptedPhoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *growthValueLabel;
+@property (weak, nonatomic) IBOutlet UIView *memberLevelView;
 @property (weak, nonatomic) IBOutlet UILabel *memberLevelLabel;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *memberLevelWidth;
 
 @end
 
@@ -35,10 +36,19 @@
     return self;
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    [self.memberLevelView addBorder:3 Width:0 Color:nil];
+}
+
 
 - (void)updateMemberInfo
 {
     IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
+    
+    CGFloat width = [[customer useMemberLevel] jk_sizeWithFont:self.memberLevelLabel.font constrainedToHeight:self.memberLevelLabel.jk_height].width;
+    self.memberLevelWidth.constant = width + 10;
     
     [self.pointLabel setText:[NSString stringWithFormat:@"%.f", [customer userIntegral]]];
     [self.memberLevelLabel setText:[customer useMemberLevel]];
@@ -51,6 +61,9 @@
 - (void)updateMemberCardInfo
 {
     IPCCustomerMode * customer = [IPCPayOrderCurrentCustomer sharedManager].currentMember;
+    
+    CGFloat width = [customer.memberLevel jk_sizeWithFont:self.memberLevelLabel.font constrainedToHeight:self.memberLevelLabel.jk_height].width;
+    self.memberLevelWidth.constant = width + 10;
     
     [self.pointLabel setText:[NSString stringWithFormat:@"%.f", customer.integral]];
     [self.memberLevelLabel setText:customer.memberLevel];

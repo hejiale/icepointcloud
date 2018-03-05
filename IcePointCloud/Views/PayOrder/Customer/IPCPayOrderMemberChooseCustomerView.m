@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *leftContentView;
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *sureButton;
 @property (strong, nonatomic) IPCPayOrderCustomerListView * customListView;
 @property (strong, nonatomic) IPCPayOrderCustomInfoView * customerInfoView;
 @property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
@@ -33,6 +35,8 @@
     
         self.BindSuccessBlock = success;
         [self.rightContentView addSubview:self.customListView];
+        [self.cancelButton addBorder:3 Width:1 Color:COLOR_RGB_BLUE];
+        [self.sureButton addBorder:3 Width:0 Color:nil];
     }
     return self;
 }
@@ -46,7 +50,7 @@
             __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.detailCustomer = customer;
             [weakSelf loadCustomerInfoView:customer];
-        }];
+        } SelectType:nil];
     }
     return _customListView;
 }

@@ -53,7 +53,7 @@ static NSString * const  customerListIdentifier = @"IPCPayOrderMemberCustomerLis
         cell = [[UINib nibWithNibName:@"IPCPayOrderMemberCustomerListCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
     }
     IPCCustomerMode * customer = self.customerList[indexPath.row];
-    [cell.customerNameLabel setText:customer.customerName];
+    cell.customerMode = customer;
     
     return cell;
 }

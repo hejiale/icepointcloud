@@ -15,22 +15,30 @@
             <rect key="frame" x="0.0" y="0.0" width="408" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O0-GL-I9V">
-                    <rect key="frame" x="159.5" y="72.5" width="90" height="125"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择客户" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbv-3h-mFk">
+                    <rect key="frame" x="144" y="185" width="120" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="90" id="TVz-Rb-QoX"/>
-                        <constraint firstAttribute="height" constant="125" id="s4u-nT-X6g"/>
+                        <constraint firstAttribute="width" constant="120" id="KEd-tx-iet"/>
+                        <constraint firstAttribute="height" constant="20" id="YbL-YA-wkZ"/>
                     </constraints>
-                    <state key="normal" image="icon_alert_selectCustomer"/>
-                    <connections>
-                        <action selector="insertAction:" destination="-1" eventType="touchUpInside" id="Z9c-gi-To7"/>
-                    </connections>
-                </button>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <color key="textColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_alert_selectCustomer" translatesAutoresizingMaskIntoConstraints="NO" id="fvH-gj-d1c">
+                    <rect key="frame" x="154" y="85" width="100" height="100"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="52J-Hw-cVa"/>
+                        <constraint firstAttribute="height" constant="100" id="iQY-Ko-PcZ"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="1O0-GL-I9V" firstAttribute="centerX" secondItem="h1M-zu-P74" secondAttribute="centerX" id="RkD-0Y-HWu"/>
-                <constraint firstItem="1O0-GL-I9V" firstAttribute="centerY" secondItem="h1M-zu-P74" secondAttribute="centerY" id="SH2-tU-ZCb"/>
+                <constraint firstItem="rbv-3h-mFk" firstAttribute="top" secondItem="fvH-gj-d1c" secondAttribute="bottom" id="9hs-Dx-2H0"/>
+                <constraint firstItem="fvH-gj-d1c" firstAttribute="centerX" secondItem="h1M-zu-P74" secondAttribute="centerX" id="NCV-5k-Qzy"/>
+                <constraint firstItem="fvH-gj-d1c" firstAttribute="centerY" secondItem="h1M-zu-P74" secondAttribute="centerY" id="OIH-5r-or5"/>
+                <constraint firstItem="rbv-3h-mFk" firstAttribute="centerX" secondItem="h1M-zu-P74" secondAttribute="centerX" id="bKa-Ll-HNJ"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -39,6 +47,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_alert_selectCustomer" width="91" height="125"/>
+        <image name="icon_alert_selectCustomer" width="100" height="100"/>
     </resources>
 </document>

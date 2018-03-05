@@ -176,4 +176,9 @@
     [self postRequest:@{@"memberCustomerId":memberCustomerId} RequestMethod:CustomerRequest_MemberCustomerDetail CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)getVisitorCustomerWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:CustomerRequest_GetVisitorCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

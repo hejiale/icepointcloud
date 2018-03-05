@@ -21,4 +21,14 @@
     // Configure the view for the selected state
 }
 
+- (void)setCustomerMode:(IPCCustomerMode *)customerMode{
+    _customerMode = customerMode;
+    
+    if (_customerMode) {
+        [self.customerNameLabel setText:_customerMode.customerName];
+        [self.sexLabel setText:[IPCCommon formatGender:_customerMode.gender]];
+        [self.phoneLabel setText:_customerMode.customerPhone];
+    }
+}
+
 @end
