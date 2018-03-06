@@ -53,9 +53,10 @@
 #pragma mark //UITextFieldDelegate
 - (void)textFieldEndEditing:(IPCCustomTextField *)textField
 {
+    IPCCustomerMode * customer = [[IPCPayOrderManager sharedManager] currentCustomer];
     NSString * remainPriceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
-    NSString * balanceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useBalance]];
-    NSString * integralStr = [NSString stringWithFormat:@"%.f", [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer userIntegral]];
+    NSString * balanceStr = [NSString stringWithFormat:@"%f", customer.balance];
+    NSString * integralStr = [NSString stringWithFormat:@"%.f", customer.integral];
     
     if (textField.text.length) {
         if ([self.payRecord.payOrderType.payType isEqualToString:@"积分"])

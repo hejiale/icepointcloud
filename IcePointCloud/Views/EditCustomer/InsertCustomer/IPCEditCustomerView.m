@@ -22,13 +22,13 @@
 @property (weak, nonatomic) IBOutlet UITextField *customStyleTextField;
 @property (weak, nonatomic) IBOutlet UITextField *storeTextField;
 
-@property (copy, nonatomic) void(^UpdateBlock)(NSString *);
+@property (copy, nonatomic) void(^UpdateBlock)(IPCCustomerMode * customer);
 
 @end
 
 @implementation IPCEditCustomerView
 
-- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void (^)(NSString *))update
+- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void (^)(IPCCustomerMode * customer))update
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -80,10 +80,11 @@
                                                           StoreId:[[IPCCustomerManager sharedManager] storeId:self.storeTextField.text]
                                                      SuccessBlock:^(id responseValue)
          {
-             [self removeFromSuperview];
+             IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
              if (self.UpdateBlock) {
-                 self.UpdateBlock(responseValue[@"id"]);
+                 self.UpdateBlock(customer);
              }
+             [self removeFromSuperview];
              [IPCCommonUI showSuccess:@"保存客户信息成功!"];
          } FailureBlock:^(NSError *error) {
              if ([error code] != NSURLErrorCancelled) {

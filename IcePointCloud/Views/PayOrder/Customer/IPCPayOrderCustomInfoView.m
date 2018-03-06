@@ -34,7 +34,7 @@
     return self;
 }
 
-- (void)updateCustomerInfo:(IPCDetailCustomer *)customer
+- (void)updateCustomerInfo:(IPCCustomerMode *)customer
 {
     if (customer) {
         [self.customerNameLabel setText:customer.customerName];

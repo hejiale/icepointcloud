@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface IPCPayOrderCustomerMemberInfoView : UIView
+//
+//- (void)updateMemberInfo;
 
-- (void)updateMemberInfo;
-
-- (void)updateMemberCardInfo;
+- (void)updateMemberCardInfo:(IPCCustomerMode *)customer;
 
 @end

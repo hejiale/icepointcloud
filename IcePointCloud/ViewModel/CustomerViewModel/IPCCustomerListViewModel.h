@@ -29,14 +29,6 @@ typedef void(^CompleteBlock)(NSError *error);
 
 
 /**
- Query Customer Detail
-
- @param complete 
- */
-- (void)queryCustomerDetailWithStatus:(BOOL)isChoose CustomerId:(NSString *)customerId Complete:(void(^)(IPCDetailCustomer * customer))complete;
-
-
-/**
  Query Bind Member CustomerList
 
  @param complete 
@@ -50,7 +42,7 @@ typedef void(^CompleteBlock)(NSError *error);
  @param code
  @param complete 
  */
-- (void)validationMemberRequest:(NSString *)code Complete:(void(^)())complete;
+- (void)validationMemberRequest:(NSString *)code Complete:(void(^)(IPCCustomerMode * customer))complete;
 
 
 /**
@@ -59,6 +51,25 @@ typedef void(^CompleteBlock)(NSError *error);
 - (void)resetData;
 
 
+/**
+ Query Member List
+
+ @param complete
+ */
 - (void)queryMemberList:(void(^)(NSError *error))complete;
+
+
+/**
+ Query Visitor Customer
+
+ @param complete 
+ */
+- (void)queryVisitorCustomer:(void(^)())complete;
+
+
+/**
+ 查询选中客户验光单
+ */
+- (void)queryCustomerOptometry;
 
 @end

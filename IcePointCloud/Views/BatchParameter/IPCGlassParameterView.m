@@ -254,7 +254,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].currentSph];
         [self.rightParameterLabel setText:[IPCBatchDegreeObject instance].currentCyl];
     }
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem && [_glasses filterType] != IPCTopFilterTypeReadingGlass) {
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && !self.cartItem && [_glasses filterType] != IPCTopFilterTypeReadingGlass) {
         [self.normalSelectButton setHidden:NO];
         IPCOptometryMode * optometry = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry;
         
@@ -266,7 +266,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass || [_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses)
     {
-        if ([IPCPayOrderManager sharedManager].currentOptometryId && !self.cartItem && [_glasses filterType] != IPCTopFilterTypeReadingGlass)
+        if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && !self.cartItem && [_glasses filterType] != IPCTopFilterTypeReadingGlass)
         {
             [self loadOptometryLensView];
         }else{
@@ -355,7 +355,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if (self.cartItem) {
         [self updateCartParameter];
     }else{
-        if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+        if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
             [self addOptometryLensToCart];
         }else{
             [self addLensToCart];
@@ -428,7 +428,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 //Increase or decrease in the shopping cart
 - (IBAction)minusTapAction:(UIButton *)sender {
     NSInteger cartCount = 0;
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
         if (sender.tag == 1) {
             cartCount = [self.leftOptometryNumLabel.text integerValue];
         }else{
@@ -442,7 +442,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if (cartCount <= 0) {
         cartCount = 0;
     }
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
         if (sender.tag == 1) {
             [self.leftOptometryNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
         }else{
@@ -456,7 +456,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 
 - (IBAction)plusTapAction:(UIButton *)sender {
     NSInteger cartCount = 0;
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
         if (sender.tag == 1) {
             cartCount = [self.leftOptometryNumLabel.text integerValue];
         }else{
@@ -467,7 +467,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }
     cartCount++;
     
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
         if (sender.tag == 1) {
             [self.leftOptometryNumLabel setText:[NSString stringWithFormat:@"%ld",cartCount]];
         }else{
@@ -623,7 +623,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 #pragma mark //Reload Lens Parameter View Status
 - (void)refreshConfigPrice
 {
-    if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview] && !self.cartItem){
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview] && !self.cartItem){
         ///查询已选验光单批量价格
         [self queryOptometryLensSuggestPriceWithSph:self.leftOptometrySphLabel.text Cyl:self.leftOptometryCylLabel.text IsLeft:YES];
         [self queryOptometryLensSuggestPriceWithSph:self.rightOptometrySphLabel.text Cyl:self.rightOptometryCylLabel.text IsLeft:NO];
@@ -725,7 +725,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
 {
     if ([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses) {
         if (isLeft) {
-            if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+            if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
                 if (isOptometryLeft) {
                     [self.leftOptometrySphLabel setText:[IPCBatchDegreeObject instance].lensSph[indexPath.row]];
                 }else{
@@ -735,7 +735,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
                 [self.leftParameterLabel setText:[IPCBatchDegreeObject instance].lensSph[indexPath.row]];
             }
         }else{
-            if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+            if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
                 if (isOptometryLeft) {
                     [self.leftOptometryCylLabel setText:[IPCBatchDegreeObject instance].lensCyl[indexPath.row]];
                 }else{
@@ -746,7 +746,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
             }
         }
     }else if([_glasses filterType] == IPCTopFilterTypeReadingGlass){
-        if ([IPCPayOrderManager sharedManager].currentOptometryId && [self.optometryLensView superview]) {
+        if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID && [self.optometryLensView superview]) {
             if (isOptometryLeft) {
                 [self.leftOptometrySphLabel setText:[IPCBatchDegreeObject instance].readingDegrees[indexPath.row]];
             }else{

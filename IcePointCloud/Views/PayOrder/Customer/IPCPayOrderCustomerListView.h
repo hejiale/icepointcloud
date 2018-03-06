@@ -12,11 +12,13 @@
 
 - (instancetype)initWithFrame:(CGRect)frame
                IsChooseStatus:(BOOL)isChoose
-                       Detail:(void(^)(IPCDetailCustomer * customer, BOOL isMemberReload))detail
+                       Detail:(void(^)(IPCCustomerMode * customer, BOOL isMemberReload))detail
                    SelectType:(void(^)(BOOL isSelectMemeber))isMember;
 
 - (void)reload;
 
 - (void)loadData;
+
+- (void)changeToMemberStatus;
 
 @end

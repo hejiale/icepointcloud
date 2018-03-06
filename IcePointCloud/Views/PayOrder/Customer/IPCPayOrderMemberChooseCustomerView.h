@@ -10,6 +10,6 @@
 
 @interface IPCPayOrderMemberChooseCustomerView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame BindSuccess:(void(^)(NSString *customerId))success;
+- (instancetype)initWithFrame:(CGRect)frame BindSuccess:(void(^)(IPCCustomerMode *customer))success;
 
 @end

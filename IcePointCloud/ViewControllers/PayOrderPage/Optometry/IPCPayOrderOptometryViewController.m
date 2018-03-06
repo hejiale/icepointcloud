@@ -47,10 +47,12 @@
     [self.view addSubview:self.showOptometryView];
 }
 
+
 #pragma mark //Clicked Events
 - (void)reload
 {
-    if ([[IPCPayOrderManager sharedManager].currentOptometryId integerValue] > 0) {
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry)
+    {
         [self loadShowOptometryView];
     }else{
         [self.showOptometryView removeFromSuperview];
@@ -59,20 +61,25 @@
 
 - (IBAction)editOptometryAction:(id)sender
 {
-    __weak typeof(self) weakSelf = self;
-    self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds CustomerId:[IPCPayOrderManager sharedManager].currentCustomerId CompleteBlock:^(IPCOptometryMode * optometry)
-    {
-        [IPCPayOrderManager sharedManager].currentOptometryId = optometry.optometryID;
-        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
-        [weakSelf reload];
-    }];
-    [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
+    if ([[IPCPayOrderManager sharedManager] customerId]) {
+        __weak typeof(self) weakSelf = self;
+        self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                                        CustomerId:[[IPCPayOrderManager sharedManager] customerId]
+                                                                     CompleteBlock:^(IPCOptometryMode * optometry)
+                                    {
+                                        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
+                                        [weakSelf reload];
+                                    }];
+        [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
+    }else{
+        [IPCCommonUI showError:@"请先选择客户"];
+    }
 }
 
 
 - (void)pushToManagerOptometryViewController{
     IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
-    optometryVC.customerId = [IPCPayOrderManager sharedManager].currentCustomerId;
+    optometryVC.customerId = [[IPCPayOrderManager sharedManager] customerId];
     [self.navigationController pushViewController:optometryVC animated:YES];
 }
 
@@ -87,8 +94,6 @@
         [IPCHttpRequest cancelAllRequest];
     }
 }
-
-
 
 
 @end

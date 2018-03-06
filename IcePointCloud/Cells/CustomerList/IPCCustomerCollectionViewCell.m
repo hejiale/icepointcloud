@@ -24,7 +24,7 @@
         NSString * pointText = @"0积分";
         
         if (_currentCustomer.integral) {
-            pointText = [NSString stringWithFormat:@"%@积分",_currentCustomer.integral];
+            pointText = [NSString stringWithFormat:@"%.f积分",_currentCustomer.integral];
         }
     
         [self.customerNameLabel setText:_currentCustomer.customerName];

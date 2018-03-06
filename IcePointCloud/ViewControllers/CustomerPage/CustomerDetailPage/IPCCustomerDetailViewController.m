@@ -119,7 +119,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     __weak typeof(self) weakSelf = self;
     self.editCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:self.view.bounds
                                                          DetailCustomer:self.customerViewMode.detailCustomer
-                                                            UpdateBlock:^(NSString *customerId)
+                                                            UpdateBlock:^(IPCCustomerMode *customer)
                              {
                                  [weakSelf requestCustomerDetailInfo];
                              }];
@@ -132,7 +132,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     __weak typeof(self) weakSelf = self;
     self.upgradeMemberView = [[IPCUpgradeMemberView alloc]initWithFrame:self.view.bounds
                                                                Customer:self.customerViewMode.detailCustomer
-                                                            UpdateBlock:^
+                                                            UpdateBlock:^(IPCCustomerMode *customer)
                               {
                                   [IPCCommonUI showSuccess:@"客户升级会员成功!"];
                                   [weakSelf requestCustomerDetailInfo];

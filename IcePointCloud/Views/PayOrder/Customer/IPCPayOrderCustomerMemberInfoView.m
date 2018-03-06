@@ -42,26 +42,8 @@
     [self.memberLevelView addBorder:3 Width:0 Color:nil];
 }
 
-
-- (void)updateMemberInfo
+- (void)updateMemberCardInfo:(IPCCustomerMode *)customer
 {
-    IPCDetailCustomer * customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
-    
-    CGFloat width = [[customer useMemberLevel] jk_sizeWithFont:self.memberLevelLabel.font constrainedToHeight:self.memberLevelLabel.jk_height].width;
-    self.memberLevelWidth.constant = width + 10;
-    
-    [self.pointLabel setText:[NSString stringWithFormat:@"%.f", [customer userIntegral]]];
-    [self.memberLevelLabel setText:[customer useMemberLevel]];
-    [self.growthValueLabel setText:[customer useMemberGrowth]];
-    [self.encryptedPhoneLabel setText:[customer useMemberPhone]];
-    [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", [customer useDiscount]]];
-    [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f", [customer useBalance]]];
-}
-
-- (void)updateMemberCardInfo
-{
-    IPCCustomerMode * customer = [IPCPayOrderCurrentCustomer sharedManager].currentMember;
-    
     CGFloat width = [customer.memberLevel jk_sizeWithFont:self.memberLevelLabel.font constrainedToHeight:self.memberLevelLabel.jk_height].width;
     self.memberLevelWidth.constant = width + 10;
     
@@ -69,7 +51,7 @@
     [self.memberLevelLabel setText:customer.memberLevel];
     [self.growthValueLabel setText:customer.membergrowth];
     [self.encryptedPhoneLabel setText:customer.memberPhone];
-    [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", customer.discount]];
+    [self.discountLabel setText:[NSString stringWithFormat:@"%.f%%%", [customer useDiscount]]];
     [self.balanceLabel setText:[NSString stringWithFormat:@"￥%.2f", customer.balance]];
 }
 

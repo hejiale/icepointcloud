@@ -26,8 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *growthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
 @property (weak, nonatomic) IBOutlet UIButton *upgradeMemberButton;
-
-
 @property (copy, nonatomic) IPCDetailCustomer * currentCustomer;
 
 

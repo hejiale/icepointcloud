@@ -40,51 +40,20 @@
      }];
 }
 
-- (void)queryCustomerDetailWithStatus:(BOOL)isChoose CustomerId:(NSString *)customerId Complete:(void(^)(IPCDetailCustomer * customer))complete
-{
-    [IPCCommonUI show];
-    
-    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:customerId
-                                                        SuccessBlock:^(id responseValue)
-     {
-         IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-         
-         if (!isChoose) {
-             [[IPCPayOrderCurrentCustomer sharedManager] loadCurrentCustomer:detailCustomer];
-             [IPCPayOrderManager sharedManager].currentCustomerId = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerID;
-             [IPCPayOrderManager sharedManager].currentOptometryId = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID;
-             if (complete) {
-                 complete(nil);
-             }
-         }else{
-             if (complete) {
-                 complete(detailCustomer);
-             }
-         }
-         [IPCCommonUI hiden];
-     } FailureBlock:^(NSError *error) {
-         if ([error code] != NSURLErrorCancelled) {
-             [IPCCommonUI showError:error.domain];
-         }
-     }];
-}
-
-- (void)validationMemberRequest:(NSString *)code Complete:(void(^)())complete
+- (void)validationMemberRequest:(NSString *)code Complete:(void(^)(IPCCustomerMode * customer))complete
 {
     [IPCCustomerRequestManager validateCustomerWithCode:code
                                            SuccessBlock:^(id responseValue)
      {
          [IPCPayOrderManager sharedManager].isValiateMember = YES;
-         
-         NSString * customerId = [NSString stringWithFormat:@"%d", [responseValue[@"id"] integerValue]];
-         if (![[IPCPayOrderManager sharedManager].currentCustomerId isEqualToString:customerId]) {
-             [IPCPayOrderManager sharedManager].currentCustomerId = customerId;
-         }else{
+         if ([responseValue isKindOfClass:[NSArray class]]) {
+             id responseData = responseValue[0];
+             IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseData];
              if (complete) {
-                 complete();
+                 complete(customer);
              }
-             [IPCCommonUI showSuccess:@"验证会员成功!"];
          }
+         [IPCCommonUI showSuccess:@"验证会员成功!"];
      } FailureBlock:^(NSError *error) {
          if ([IPCAppManager sharedManager].companyCofig.isCheckMember) {
              [IPCCommonUI showError:@"会员码失效!"];
@@ -92,7 +61,7 @@
              [IPCCommonUI showError:@"验证会员失败!"];
          }
          if (complete) {
-             complete();
+             complete(nil);
          }
          [IPCPayOrderManager sharedManager].isValiateMember = NO;
      }];
@@ -140,6 +109,31 @@
              complete(nil, error);
          }
      }];
+}
+
+- (void)queryVisitorCustomer:(void(^)())complete
+{
+    [IPCCustomerRequestManager getVisitorCustomerWithSuccessBlock:^(id responseValue)
+    {
+        IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
+        [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+        
+        if (complete) {
+            complete();
+        }
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
+- (void)queryCustomerOptometry
+{
+    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[[IPCPayOrderManager sharedManager] customerId]
+                                                        SuccessBlock:^(id responseValue)
+     {
+         IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
+         [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
+     } FailureBlock:nil];
 }
 
 #pragma mark //Parse Normal Glass Data

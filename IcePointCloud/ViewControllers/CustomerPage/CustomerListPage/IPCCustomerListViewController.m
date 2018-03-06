@@ -112,7 +112,7 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 {
     if (!_editCustomerView) {
         _editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
-                                                          UpdateBlock:^(NSString *customerId) {
+                                                          UpdateBlock:^(IPCCustomerMode * customer) {
                                                               [self.refreshHeader beginRefreshing];
                                                           }];
     }

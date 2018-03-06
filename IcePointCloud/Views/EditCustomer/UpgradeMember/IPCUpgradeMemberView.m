@@ -15,14 +15,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *growthValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
-@property (strong, nonatomic) IPCDetailCustomer * customer;
-@property (copy, nonatomic) void(^UpdateBlock)();
+@property (strong, nonatomic) IPCCustomerMode * customer;
+@property (copy, nonatomic) void(^UpdateBlock)(IPCCustomerMode *customer);
 
 @end
 
 @implementation IPCUpgradeMemberView
 
-- (instancetype)initWithFrame:(CGRect)frame Customer:(IPCDetailCustomer *)customer  UpdateBlock:(void (^)())update
+- (instancetype)initWithFrame:(CGRect)frame Customer:(IPCCustomerMode *)customer  UpdateBlock:(void (^)(IPCCustomerMode *customer))update
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,14 +54,16 @@
                                                MemberPhone:self.encryptedPhoneTextField.text
                                                   Integral:[self.pointValueTextField.text integerValue]
                                                    Balance:[self.storeValueTextField.text doubleValue]
-                                              SuccessBlock:^(id responseValue) {
-                                                  [self removeFromSuperview];
-                                                  if (self.UpdateBlock) {
-                                                      self.UpdateBlock();
-                                                  }
-    } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:error.domain];
-    }];
+                                              SuccessBlock:^(id responseValue)
+     {
+         IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
+         if (self.UpdateBlock) {
+             self.UpdateBlock(customer);
+         }
+         [self removeFromSuperview];
+     } FailureBlock:^(NSError *error) {
+         [IPCCommonUI showError:error.domain];
+     }];
 }
 
 #pragma mark //Clicked Events

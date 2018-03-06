@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *customerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerLevelLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerPhoneLabel;
+@property (copy, nonatomic) NSString * selectCustomerId;
 @property (copy, nonatomic) IPCCustomerMode * currentCustomer;
 
 @end

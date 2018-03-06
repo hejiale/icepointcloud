@@ -28,20 +28,28 @@
     ///表单数据
     NSMutableDictionary * formDic = [[NSMutableDictionary alloc]init];
     [formDic setObject:@"FOR_SALES" forKey:@"orderType"];
-    [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"customerId"];
+    
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"customerId"];
+    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
+        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentMember.customerID forKey:@"customerId"];
+    }
+    
     //转介绍人
     if ([IPCPayOrderManager sharedManager].introducer) {
         [formDic setObject:[IPCPayOrderManager sharedManager].introducer.customerID forKey:@"introducerId"];
     }
     //会员卡id
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberCustomerId) {
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
         [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberCustomerId forKey:@"memberCutomerId"];
+    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
+        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentMember.memberCustomerId forKey:@"memberCutomerId"];
     }
     
     [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
     [formDic setObject:employeeList forKey:@"employeeAchievements"];
-    if ([IPCPayOrderManager sharedManager].currentOptometryId) {
-        [formDic setObject:[IPCPayOrderManager sharedManager].currentOptometryId forKey:@"optometryId"];
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry) {
+        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
     }
     
     [formDic setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];

@@ -82,7 +82,7 @@
 
 - (BOOL)isCanPayOrder
 {
-    if (![IPCPayOrderManager sharedManager].currentCustomerId) {
+    if (![[IPCPayOrderManager sharedManager] customerId]) {
         [IPCCommonUI showError:@"请选择客户!"];
         return NO;
     }else if ([[IPCShoppingCart sharedCart] allGlassesCount] == 0){
@@ -132,10 +132,10 @@
 
 - (void)resetCustomerDiscount
 {
-    if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
+    if (([IPCAppManager sharedManager].companyCofig.isCheckMember && ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel || [IPCPayOrderCurrentCustomer sharedManager].currentMember.memberLevel)) || [IPCPayOrderManager sharedManager].isValiateMember)
     {
         [IPCPayOrderManager sharedManager].isValiateMember = YES;
-        [IPCPayOrderManager sharedManager].customDiscount = [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
+        [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
     }else{
         [IPCPayOrderManager sharedManager].customDiscount = 100;
         [IPCPayOrderManager sharedManager].isValiateMember = NO;
@@ -162,14 +162,34 @@
     return isExtraDiscount;
 }
 
+- (NSString *)customerId
+{
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        return [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerID;
+    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
+        return [IPCPayOrderCurrentCustomer sharedManager].currentMember.customerID;
+    }
+    return @"";
+}
+
+- (IPCCustomerMode *)currentCustomer
+{
+    IPCCustomerMode * customer = nil;
+    
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
+    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
+        customer = [IPCPayOrderCurrentCustomer sharedManager].currentMember;
+    }
+    return customer;
+}
+
 - (void)resetData
 {
     [IPCPayOrderManager sharedManager].remark = nil;
     [[IPCPayOrderManager sharedManager] clearPayRecord];
     [IPCPayOrderManager sharedManager].currentCustomerId = nil;
-    [IPCPayOrderManager sharedManager].currentBindCustomerId = nil;
     [IPCPayOrderManager sharedManager].currentMemberCustomerId = nil;
-    [IPCPayOrderManager sharedManager].currentOptometryId = nil;
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;
     [IPCPayOrderManager sharedManager].discountAmount = 0;

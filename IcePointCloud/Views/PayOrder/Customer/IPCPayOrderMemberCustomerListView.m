@@ -15,13 +15,13 @@ static NSString * const  customerListIdentifier = @"IPCPayOrderMemberCustomerLis
 
 @property (weak, nonatomic) IBOutlet UITableView *customerListTableView;
 @property (copy, nonatomic) NSArray<IPCCustomerMode *> * customerList;
-@property (copy, nonatomic) void(^SelectCustomerBlock)(NSString *customerId);
+@property (copy, nonatomic) void(^SelectCustomerBlock)(IPCCustomerMode *customer);
 
 @end
 
 @implementation IPCPayOrderMemberCustomerListView
 
-- (instancetype)initWithFrame:(CGRect)frame Select:(void(^)(NSString *customerId))select
+- (instancetype)initWithFrame:(CGRect)frame Select:(void(^)(IPCCustomerMode *customer))select
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -63,7 +63,7 @@ static NSString * const  customerListIdentifier = @"IPCPayOrderMemberCustomerLis
 {
     IPCCustomerMode * customer = self.customerList[indexPath.row];
     if (self.SelectCustomerBlock) {
-        self.SelectCustomerBlock(customer.customerID);
+        self.SelectCustomerBlock(customer);
     }
 }
 

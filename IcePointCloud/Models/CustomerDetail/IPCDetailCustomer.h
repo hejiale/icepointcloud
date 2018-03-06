@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import "IPCMainMemberLevel.h"
 #import "IPCSubMemberLevel.h"
 
 @interface IPCDetailCustomer : NSObject
@@ -21,7 +20,6 @@
 @property (nonatomic, copy, readwrite) NSString * createStoreName;
 @property (nonatomic, copy, readwrite) NSString * gender;
 @property (nonatomic, copy, readwrite) NSString * customerName;
-//@property (nonatomic, strong, readwrite) IPCMainMemberLevel * mainMemberLevel;
 @property (nonatomic, strong, readwrite) IPCSubMemberLevel *  memberLevel;
 @property (nonatomic, copy, readwrite) NSString * membergrowth;
 @property (nonatomic, copy, readwrite) NSString * memberPhone;
@@ -31,19 +29,6 @@
 @property (nonatomic, copy, readwrite) NSString * customerTypeId;
 @property (nonatomic, assign, readwrite) NSInteger   integral;
 @property (nonatomic, copy, readwrite) NSString * memberCustomerId;
-
 @property (nonatomic, copy, readwrite) NSArray<IPCOptometryMode *>  * optometrys;
-
-- (double)useDiscount;
-
-- (double)useBalance;
-
-- (double)userIntegral;
-
-- (NSString *)useMemberLevel;
-
-- (NSString *)useMemberPhone;
-
-- (NSString *)useMemberGrowth;
 
 @end

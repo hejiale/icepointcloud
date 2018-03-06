@@ -41,7 +41,23 @@
 @implementation IPCCustomerMode
 
 + (NSDictionary *)replacedKeyFromPropertyName{
-    return @{@"customerID": @"id", @"memberLevel": @"memberLevel.memberLevel"};
+    return @{@"customerID": @"id",
+             @"memberLevel": @"memberLevel.memberLevel",
+             @"customerType" : @"customerType.customerType",
+             @"discount" : @"memberLevel.discount"
+             };
+}
+
+- (double)useDiscount
+{
+    if (self.discount) {
+        if (self.discount > 0) {
+            return self.discount*10;
+        }else{
+            return 100;
+        }
+    }
+    return 100;
 }
 
 @end

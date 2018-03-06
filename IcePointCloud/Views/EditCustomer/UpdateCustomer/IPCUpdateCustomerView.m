@@ -19,20 +19,20 @@
 @property (weak, nonatomic) IBOutlet UITextField *customerTypeTextField;
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
 @property (weak, nonatomic) IBOutlet UITextField *storeTextField;
-@property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
-@property (copy, nonatomic) void(^UpdateBlock)(NSString *);
+@property (strong, nonatomic) IPCCustomerMode * customer;
+@property (copy, nonatomic) void(^UpdateBlock)(IPCCustomerMode * customer);
 
 @end
 
 @implementation IPCUpdateCustomerView
 
-- (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCDetailCustomer *)customer UpdateBlock:(void (^)(NSString *customerId))update
+- (instancetype)initWithFrame:(CGRect)frame DetailCustomer:(IPCCustomerMode*)customer UpdateBlock:(void (^)(IPCCustomerMode * customer))update
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         self.UpdateBlock = update;
-        self.detailCustomer = customer;
+        self.customer = customer;
         
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCUpdateCustomerView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
@@ -49,7 +49,7 @@
         [self.customerTypeTextField setRightButton:self Action:@selector(selectCustomTypeAction) OnView:self.editContentView];
         [self.storeTextField setRightButton:self Action:@selector(selectStoreAction) OnView:self.editContentView];
         
-        ///更新客户显示信息
+        //更新客户显示信息
         [self updateCustomerInfo];
     }
     return self;
@@ -57,22 +57,22 @@
 
 - (void)updateCustomerInfo
 {
-    [self.customerNameTextField setText:self.detailCustomer.customerName];
-    [self.phoneTextFiel setText:self.detailCustomer.customerPhone];
-    [self.ageTextField setText:self.detailCustomer.age];
-    [self.birthdayTextField setText:self.detailCustomer.birthday];
-    [self.customerTypeTextField setText:self.detailCustomer.customerType];
+    [self.customerNameTextField setText:self.customer.customerName];
+    [self.phoneTextFiel setText:self.customer.customerPhone];
+    [self.ageTextField setText:self.customer.age];
+    [self.birthdayTextField setText:self.customer.birthday];
+    [self.customerTypeTextField setText:self.customer.customerType];
 
-    if (self.detailCustomer.createStoreName.length) {
-        [self.storeTextField setText:self.detailCustomer.createStoreName];
+    if (self.customer.createStoreName.length) {
+        [self.storeTextField setText:self.customer.createStoreName];
     }else{
         [self.storeTextField setText:@"无门店"];
     }
     
-    if ([self.detailCustomer.gender isEqualToString:@"MALE"]) {
+    if ([self.customer.gender isEqualToString:@"MALE"]) {
         [self.maleButton setSelected:YES];
         [self.femaleButton setSelected:NO];
-    }else if ([self.detailCustomer.gender isEqualToString:@"FEMALE"]){
+    }else if ([self.customer.gender isEqualToString:@"FEMALE"]){
         [self.femaleButton setSelected:YES];
         [self.maleButton setSelected:NO];
     }
@@ -98,15 +98,16 @@
                                                    CustomerTypeId:[[IPCCustomerManager sharedManager]  customerTypeId:self.customerTypeTextField.text]
                                                           PhotoId:@([IPCHeadImage genderArcdom])
                                                               Age:self.ageTextField.text
-                                                       CustomerId:self.detailCustomer.customerID
+                                                       CustomerId:self.customer.customerID
                                                           StoreId:[[IPCCustomerManager sharedManager] storeId:self.storeTextField.text]
                                                      SuccessBlock:^(id responseValue)
          {
-             [self removeFromSuperview];
+             IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
              
              if (self.UpdateBlock) {
-                 self.UpdateBlock(responseValue[@"id"]);
+                 self.UpdateBlock(customer);
              }
+             [self removeFromSuperview];
              [IPCCommonUI showSuccess:@"保存客户信息成功!"];
          } FailureBlock:^(NSError *error) {
              if ([error code] != NSURLErrorCancelled) {

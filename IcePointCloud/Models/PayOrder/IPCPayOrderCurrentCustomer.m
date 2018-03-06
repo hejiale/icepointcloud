@@ -20,14 +20,6 @@
     return _client;
 }
 
-- (void)loadCurrentCustomer:(IPCDetailCustomer *)detailCustomer
-{
-    [self clearData];
-    
-    self.currentCustomer = detailCustomer;
-    self.currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
-}
-
 - (void)clearData{
     self.currentCustomer = nil;
     self.currentOpometry = nil;

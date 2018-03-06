@@ -10,6 +10,6 @@
 
 @interface IPCPayOrderCustomInfoView : UIView
 
-- (void)updateCustomerInfo:(IPCDetailCustomer *)customer;
+- (void)updateCustomerInfo:(IPCCustomerMode *)customer;
 
 @end

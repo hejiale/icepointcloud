@@ -17,14 +17,10 @@
 
 //是否下单状态
 @property (nonatomic, assign, readwrite) BOOL   isPayOrderStatus;
-//当前客户Id
+//当前选中客户Id
 @property (nonatomic, copy, readwrite) NSString * currentCustomerId;
-//会员卡绑定客户id
-@property (nonatomic, copy, readwrite) NSString * currentBindCustomerId;
-//当前会员卡id
+//当前选中会员卡id
 @property (nonatomic, copy, readwrite) NSString * currentMemberCustomerId;
-//当前客户验光单Id
-@property (nonatomic, copy, readwrite) NSString * currentOptometryId;
 //合计金额
 @property (nonatomic, assign, readwrite) double   payAmount;
 //折扣率
@@ -51,6 +47,8 @@
 @property (nonatomic, assign, readwrite) BOOL  isValiateMember;
 //选择介绍人
 @property (nonatomic, strong, readwrite) IPCCustomerMode * introducer;
+//游客信息
+@property (nonatomic, strong, readwrite) IPCCustomerMode * visitorCustomer;
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额
@@ -73,6 +71,10 @@
 - (void)resetCustomerDiscount;
 //超额打折判断
 - (BOOL)extraDiscount;
+//判断当前选中客户id(客户选项或会员选项)
+- (NSString *)customerId;
+//当前选择客户(客户选项或会员选项)
+- (IPCCustomerMode *)currentCustomer;
 
 
 @end

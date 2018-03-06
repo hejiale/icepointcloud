@@ -18,14 +18,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
 @property (strong, nonatomic) IPCPayOrderCustomerListView * customListView;
 @property (strong, nonatomic) IPCPayOrderCustomInfoView * customerInfoView;
-@property (strong, nonatomic) IPCDetailCustomer * detailCustomer;
-@property (copy, nonatomic) void(^BindSuccessBlock)(NSString *customerId);
+@property (strong, nonatomic) IPCCustomerMode * customer;
+@property (copy, nonatomic) void(^BindSuccessBlock)(IPCCustomerMode *customer);
 
 @end
 
 @implementation IPCPayOrderMemberChooseCustomerView
 
-- (instancetype)initWithFrame:(CGRect)frame BindSuccess:(void(^)(NSString *customerId))success
+- (instancetype)initWithFrame:(CGRect)frame BindSuccess:(void(^)(IPCCustomerMode *customer))success
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -45,10 +45,10 @@
 - (IPCPayOrderCustomerListView *)customListView{
     if (!_customListView) {
         __weak typeof(self) weakSelf = self;
-        _customListView = [[IPCPayOrderCustomerListView alloc]initWithFrame:self.rightContentView.bounds IsChooseStatus:YES Detail:^(IPCDetailCustomer *customer, BOOL isMemberReload)
+        _customListView = [[IPCPayOrderCustomerListView alloc]initWithFrame:self.rightContentView.bounds IsChooseStatus:YES Detail:^(IPCCustomerMode *customer, BOOL isMemberReload)
         {
             __strong typeof(weakSelf) strongSelf = weakSelf;
-            strongSelf.detailCustomer = customer;
+            strongSelf.customer = customer;
             [weakSelf loadCustomerInfoView:customer];
         } SelectType:nil];
     }
@@ -66,11 +66,13 @@
 - (void)bindMember
 {
     __weak typeof(self) weakSelf = self;
-    [IPCCustomerRequestManager bindMemberWithCustomerId:self.detailCustomer.customerID MemberCustomerId:[IPCPayOrderManager sharedManager].currentMemberCustomerId SuccessBlock:^(id responseValue)
+    [IPCCustomerRequestManager bindMemberWithCustomerId:self.customer.customerID
+                                       MemberCustomerId:[IPCPayOrderManager sharedManager].currentMemberCustomerId
+                                           SuccessBlock:^(id responseValue)
     {
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (strongSelf.BindSuccessBlock) {
-            strongSelf.BindSuccessBlock(strongSelf.detailCustomer.customerID);
+            strongSelf.BindSuccessBlock(strongSelf.customer);
         }
         [self removeFromSuperview];
     } FailureBlock:^(NSError *error) {
@@ -88,7 +90,7 @@
     [self bindMember];
 }
 
-- (void)loadCustomerInfoView:(IPCDetailCustomer *)customer
+- (void)loadCustomerInfoView:(IPCCustomerMode *)customer
 {
     if (self.customerInfoView) {
         [self.customerInfoView removeFromSuperview];

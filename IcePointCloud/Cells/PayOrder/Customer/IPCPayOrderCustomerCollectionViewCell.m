@@ -15,6 +15,11 @@
     // Initialization code
 }
 
+- (void)setSelectCustomerId:(NSString *)selectCustomerId
+{
+    _selectCustomerId = selectCustomerId;
+}
+
 - (void)setCurrentCustomer:(IPCCustomerMode *)currentCustomer
 {
     _currentCustomer = currentCustomer;
@@ -28,7 +33,7 @@
             [self.customerLevelLabel setText:@"非会员"];
         }
         
-        if ([_currentCustomer.customerID integerValue] == [[IPCPayOrderManager sharedManager].currentCustomerId integerValue])
+        if ([_currentCustomer.customerID integerValue] == [self.selectCustomerId integerValue])
         {
             [self.customerNameLabel setTextColor:COLOR_RGB_BLUE];
             [self.customerPhoneLabel setTextColor:COLOR_RGB_BLUE];
