@@ -39,6 +39,7 @@
 @property (nonatomic, copy, readwrite) NSString * birthday;
 @property (nonatomic, copy, readwrite) NSString * createStoreName;
 @property (nonatomic, copy, readwrite) NSString * remark;
+@property (nonatomic, assign, readwrite) BOOL      isVisitor;
 
 - (double)useDiscount;
 

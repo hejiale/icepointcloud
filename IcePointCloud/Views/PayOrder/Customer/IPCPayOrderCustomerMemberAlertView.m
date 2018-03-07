@@ -21,4 +21,11 @@
     return self;
 }
 
+- (void)updateUI:(BOOL)isHiden
+{
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj setHidden:!isHiden];
+    }];
+}
+
 @end

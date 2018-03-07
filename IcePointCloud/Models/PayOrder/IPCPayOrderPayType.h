@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString *  companyId;
 @property (nonatomic, copy) NSString *  payType;
 @property (nonatomic, copy) NSString *  payTypeId;
+@property (nonatomic, assign) BOOL      configStatus;//是否禁用
 
 @end
 

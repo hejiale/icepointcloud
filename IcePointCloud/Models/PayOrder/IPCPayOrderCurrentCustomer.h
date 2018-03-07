@@ -14,7 +14,8 @@
 
 @property (nonatomic, strong, readwrite) IPCCustomerMode      * currentCustomer;//选中客户信息
 @property (nonatomic, strong, readwrite) IPCOptometryMode     * currentOpometry;
-@property (nonatomic, strong, readwrite) IPCCustomerMode      *  currentMember;//选中的会员卡中的客户信息
+@property (nonatomic, strong, readwrite) IPCCustomerMode      *  currentMember;//选中的会员卡
+@property (nonatomic, strong, readwrite) IPCCustomerMode      *  currentMemberCustomer;//选中的会员卡所选择的客户
 
 - (void)clearData;
 

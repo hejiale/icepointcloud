@@ -30,22 +30,29 @@
     self = [super initWithFrame:frame];
     if (self) {
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderMemberChooseCustomerView" owner:self];
-        [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
     
         self.BindSuccessBlock = success;
-        [self.rightContentView addSubview:self.customListView];
-        [self.cancelButton addBorder:3 Width:1 Color:COLOR_RGB_BLUE];
-        [self.sureButton addBorder:3 Width:0 Color:nil];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.rightContentView addSubview:self.customListView];
+    [self.cancelButton addBorder:3 Width:1 Color:COLOR_RGB_BLUE];
+    [self.sureButton addBorder:3 Width:0 Color:nil];
 }
 
 #pragma mark //Set UI
 - (IPCPayOrderCustomerListView *)customListView{
     if (!_customListView) {
         __weak typeof(self) weakSelf = self;
-        _customListView = [[IPCPayOrderCustomerListView alloc]initWithFrame:self.rightContentView.bounds IsChooseStatus:YES Detail:^(IPCCustomerMode *customer, BOOL isMemberReload)
+        _customListView = [[IPCPayOrderCustomerListView alloc]initWithFrame:self.rightContentView.bounds
+                                                             IsChooseStatus:YES
+                                                                     Detail:^(IPCCustomerMode *customer, BOOL isMemberReload)
         {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.customer = customer;

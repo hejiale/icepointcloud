@@ -111,9 +111,11 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (IPCEditCustomerView *)editCustomerView
 {
     if (!_editCustomerView) {
+        __weak typeof(self) weakSelf = self;
         _editCustomerView = [[IPCEditCustomerView alloc]initWithFrame:self.view.bounds
                                                           UpdateBlock:^(IPCCustomerMode * customer) {
-                                                              [self.refreshHeader beginRefreshing];
+                                                              __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                              [strongSelf.refreshHeader beginRefreshing];
                                                           }];
     }
     return _editCustomerView;
@@ -150,21 +152,20 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 - (void)loadCustomerList
 {
     __weak typeof(self) weakSelf = self;
-    [self.viewModel queryCustomerList:^(NSError *error)
-     {
-         isCancelRequest = NO;
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
-             [strongSelf.refreshFooter noticeNoDataStatus];
-         }else if (strongSelf.viewModel.status == IPCRefreshError){
-             if ([error code] == NSURLErrorCancelled) {
-                 isCancelRequest = YES;
-             }else{
-                 [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
-             }
-         }
-         [weakSelf reload];
-     }];
+    [self.viewModel queryCustomerListWithIsChooseStatus:NO Complete:^(NSError *error) {
+        isCancelRequest = NO;
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
+            [strongSelf.refreshFooter noticeNoDataStatus];
+        }else if (strongSelf.viewModel.status == IPCRefreshError){
+            if ([error code] == NSURLErrorCancelled) {
+                isCancelRequest = YES;
+            }else{
+                [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
+            }
+        }
+        [weakSelf reload];
+    }];
 }
 
 #pragma mark //Reload CollectionView
@@ -195,6 +196,9 @@ static NSString * const customerIdentifier = @"CustomerCollectionViewCellIdentif
 
 - (IBAction)insertCustomerAction:(id)sender
 {
+    if (self.editCustomerView) {
+        self.editCustomerView = nil;
+    }
     [self.view addSubview:self.editCustomerView];
     [self.view bringSubviewToFront:self.editCustomerView];
 }

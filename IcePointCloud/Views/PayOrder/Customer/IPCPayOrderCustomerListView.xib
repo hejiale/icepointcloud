@@ -108,7 +108,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="HfI-Vj-ToE"/>
                             </constraints>
-                            <state key="normal" title="客户名">
+                            <state key="normal" title="客户">
                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -127,7 +127,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="pTO-iQ-NgX"/>
                             </constraints>
-                            <state key="normal" title="会员名">
+                            <state key="normal" title="会员">
                                 <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>

@@ -116,7 +116,9 @@
         if ([responseValue isKindOfClass:[NSArray class]] && responseValue) {
             [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCPayOrderPayType * payType = [IPCPayOrderPayType mj_objectWithKeyValues:obj];
-                [[IPCPayOrderManager sharedManager].payTypeArray addObject:payType];
+                if (payType.configStatus) {
+                    [[IPCPayOrderManager sharedManager].payTypeArray addObject:payType];
+                }
             }];
         }
     } FailureBlock:^(NSError *error) {
@@ -132,13 +134,15 @@
 
 - (void)resetCustomerDiscount
 {
-    if (([IPCAppManager sharedManager].companyCofig.isCheckMember && ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel || [IPCPayOrderCurrentCustomer sharedManager].currentMember.memberLevel)) || [IPCPayOrderManager sharedManager].isValiateMember)
+    if (([IPCAppManager sharedManager].companyCofig.isCheckMember && ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel || [IPCPayOrderCurrentCustomer sharedManager].currentMember)) || [IPCPayOrderManager sharedManager].isValiateMember)
     {
+        [IPCPayOrderManager sharedManager].memberCheckType = @"NON";
         [IPCPayOrderManager sharedManager].isValiateMember = YES;
         [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
     }else{
         [IPCPayOrderManager sharedManager].customDiscount = 100;
         [IPCPayOrderManager sharedManager].isValiateMember = NO;
+        [IPCPayOrderManager sharedManager].memberCheckType = @"NULL";
     }
 }
 
@@ -153,7 +157,7 @@
         payDiscount = (double)[IPCPayOrderManager sharedManager].discount/100;
     }
     double employeeDiscount = (double)[IPCPayOrderManager sharedManager].employee.discount/100;
-    double customerDiscount = (double)[[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount]/100;
+    double customerDiscount = (double)[[IPCShoppingCart sharedCart] customDiscount]/100;
     
     if (payDiscount < MIN(employeeDiscount > 0 ? employeeDiscount : 1, customerDiscount > 0 ? customerDiscount : 1) && [IPCAppManager sharedManager].companyCofig.autoAuditedSalesOrder)
     {
@@ -167,12 +171,24 @@
     if ([IPCPayOrderManager sharedManager].currentCustomerId) {
         return [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.customerID;
     }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
-        return [IPCPayOrderCurrentCustomer sharedManager].currentMember.customerID;
+        return [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer.customerID;
     }
-    return @"";
+    return nil;
 }
 
 - (IPCCustomerMode *)currentCustomer
+{
+    IPCCustomerMode * customer = nil;
+    
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
+    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
+        customer = [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer;
+    }
+    return customer;
+}
+
+- (IPCCustomerMode *)currentMemberCard
 {
     IPCCustomerMode * customer = nil;
     

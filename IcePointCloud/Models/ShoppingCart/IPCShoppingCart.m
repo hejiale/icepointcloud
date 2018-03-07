@@ -315,7 +315,7 @@
             return  [[IPCPayOrderCurrentCustomer sharedManager].currentCustomer useDiscount];
         }
     }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
-        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentMember.memberLevel) || [IPCPayOrderManager sharedManager].isValiateMember)
+        if (([IPCAppManager sharedManager].companyCofig.isCheckMember && [IPCPayOrderCurrentCustomer sharedManager].currentMember) || [IPCPayOrderManager sharedManager].isValiateMember)
         {
             return  [[IPCPayOrderCurrentCustomer sharedManager].currentMember useDiscount];
         }

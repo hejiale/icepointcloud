@@ -19,7 +19,7 @@
 }
 
 #pragma mark //Request Data
-- (void)queryCustomerList:(void(^)(NSError *error))complete
+- (void)queryCustomerListWithIsChooseStatus:(BOOL)isChooseStatus Complete:(void(^)(NSError *error))complete
 {
     self.completeBlock = complete;
     
@@ -28,7 +28,7 @@
                                                        Page:self.currentPage
                                                SuccessBlock:^(id responseValue)
      {
-         [weakSelf parseCustomerListData:responseValue];
+         [weakSelf parseCustomerListData:responseValue IsChoose:isChooseStatus];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
          
@@ -46,6 +46,8 @@
                                            SuccessBlock:^(id responseValue)
      {
          [IPCPayOrderManager sharedManager].isValiateMember = YES;
+         [IPCPayOrderManager sharedManager].memberCheckType = @"CODE";
+         
          if ([responseValue isKindOfClass:[NSArray class]]) {
              id responseData = responseValue[0];
              IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseData];
@@ -60,10 +62,6 @@
          }else{
              [IPCCommonUI showError:@"验证会员失败!"];
          }
-         if (complete) {
-             complete(nil);
-         }
-         [IPCPayOrderManager sharedManager].isValiateMember = NO;
      }];
 }
 
@@ -76,7 +74,7 @@
                                                      Page:self.currentPage
                                              SuccessBlock:^(id responseValue)
      {
-         [weakSelf parseCustomerListData:responseValue];
+         [weakSelf parseCustomerListData:responseValue IsChoose:NO];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
          
@@ -116,7 +114,7 @@
     [IPCCustomerRequestManager getVisitorCustomerWithSuccessBlock:^(id responseValue)
     {
         IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
-        [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+        [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = customer;
         
         if (complete) {
             complete();
@@ -128,22 +126,34 @@
 
 - (void)queryCustomerOptometry
 {
-    [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[[IPCPayOrderManager sharedManager] customerId]
-                                                        SuccessBlock:^(id responseValue)
-     {
-         IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
-         [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
-     } FailureBlock:nil];
+    if ([[IPCPayOrderManager sharedManager] customerId])
+    {
+        [IPCCustomerRequestManager queryCustomerDetailInfoWithCustomerID:[[IPCPayOrderManager sharedManager] customerId]
+                                                            SuccessBlock:^(id responseValue)
+         {
+             IPCDetailCustomer * detailCustomer = [IPCDetailCustomer mj_objectWithKeyValues:responseValue];
+             [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = [IPCOptometryMode mj_objectWithKeyValues:detailCustomer.optometrys[0]];
+         } FailureBlock:nil];
+    }
 }
 
 #pragma mark //Parse Normal Glass Data
-- (void)parseCustomerListData:(id)response
+- (void)parseCustomerListData:(id)response IsChoose:(BOOL)isChoose
 {
     IPCCustomerList * result = [[IPCCustomerList alloc]initWithResponseValue:response];
     
     if (result) {
         if (result.list.count){
-            [self.customerArray addObjectsFromArray:result.list];
+            if (isChoose) {
+                [result.list enumerateObjectsUsingBlock:^(IPCCustomerMode * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (!obj.memberLevel) {
+                        [self.customerArray addObject:obj];
+                    }
+                }];
+            }else{
+                [self.customerArray addObjectsFromArray:result.list];
+            }
+            
             
             if (self.customerArray.count < result.totalCount) {
                 self.status = IPCFooterRefresh_HasMoreData;

@@ -10,4 +10,6 @@
 
 @interface IPCPayOrderCustomerAlertView : UIView
 
+- (void)updateUI:(BOOL)isHiden;
+
 @end

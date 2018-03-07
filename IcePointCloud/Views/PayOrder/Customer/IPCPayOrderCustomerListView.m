@@ -49,19 +49,23 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         chooseStatus = isChoose;
         self.DetailBlock = detail;
         self.IsSelectMemberBlock = isMember;
-        
-        [self loadCollectionView];
-        if (!chooseStatus) {
-            [self reloadCollectionViewUI];
-            [self.rightButtonView addSubview:self.typeButton];
-        }else{
-            self.rightButtonViewWidth.constant = 0;
-        }
-        
-        self.viewModel = [[IPCCustomerListViewModel alloc]init];
-        [self loadData];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self loadCollectionView];
+    if (!chooseStatus) {
+        [self reloadCollectionViewUI];
+        [self.rightButtonView addSubview:self.typeButton];
+    }else{
+        self.rightButtonViewWidth.constant = 0;
+    }
+    self.viewModel = [[IPCCustomerListViewModel alloc]init];
+    [self loadData];
 }
 
 #pragma mark //Set UI
@@ -149,6 +153,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 {
     [self.viewModel resetData];
     self.customerCollectionView.isBeginLoad = YES;
+    
     if (isSelectMember) {
         [self loadMemberList];
     }else{
@@ -161,18 +166,17 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 - (void)loadCustomerList
 {
     __weak typeof(self) weakSelf = self;
-    [self.viewModel queryCustomerList:^(NSError *error)
-     {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
-             [strongSelf.refreshFooter noticeNoDataStatus];
-         }else if (strongSelf.viewModel.status == IPCRefreshError){
-             if ([error code] != NSURLErrorCancelled) {
-                 [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
-             }
-         }
-         [weakSelf reload];
-     }];
+    [self.viewModel queryCustomerListWithIsChooseStatus:chooseStatus Complete:^(NSError *error) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        if (strongSelf.viewModel.status == IPCFooterRefresh_HasNoMoreData) {
+            [strongSelf.refreshFooter noticeNoDataStatus];
+        }else if (strongSelf.viewModel.status == IPCRefreshError){
+            if ([error code] != NSURLErrorCancelled) {
+                [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
+            }
+        }
+        [weakSelf reload];
+    }];
 }
 
 - (void)loadMemberList
@@ -184,7 +188,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
             [strongSelf.refreshFooter noticeNoDataStatus];
         }else if (strongSelf.viewModel.status == IPCRefreshError){
             if ([error code] != NSURLErrorCancelled) {
-                [IPCCommonUI showError:@"查询客户失败,请稍后重试!"];
+                [IPCCommonUI showError:@"查询会员失败,请稍后重试!"];
             }
         }
         [weakSelf reload];
@@ -257,6 +261,14 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     }
 }
 
+- (void)changeToCustomerStatus
+{
+    isSelectMember = NO;
+    [self.typeButton setTitle:@"客户"];
+    [self reloadCollectionViewUI];
+    [self loadData];
+}
+
 - (void)changeToMemberStatus
 {
     isSelectMember = YES;
@@ -314,6 +326,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     if (self.viewModel.customerArray.count) {
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         [IPCPayOrderManager sharedManager].isValiateMember = NO;
+        [IPCPayOrderManager sharedManager].memberCheckType = @"NULL";
         
         if (isSelectMember) {
             if ([customer.memberCustomerId isEqualToString:[IPCPayOrderManager sharedManager].currentMemberCustomerId])return;
@@ -321,9 +334,12 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
             if (customer) {
                 [IPCPayOrderManager sharedManager].currentCustomerId = nil;
                 [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = nil;
+                [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = nil;
                 
                 [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
                 [IPCPayOrderManager sharedManager].currentMemberCustomerId = customer.memberCustomerId;
+                
+                [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
             }
         }else{
             if (!chooseStatus) {
@@ -333,17 +349,18 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
             if (customer) {
                 if (!chooseStatus) {
                     [IPCPayOrderCurrentCustomer sharedManager].currentMember = nil;
+                    [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = nil;
                     [IPCPayOrderManager sharedManager].currentMemberCustomerId = nil;
                     
                     [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
                     [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = customer;
+                    [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
                 }else{
                     currentSelectCustomer = customer.customerID;
                 }
             }
         }
-        [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
-        
+    
         if (self.DetailBlock) {
             self.DetailBlock(customer, isSelectMember);
         }

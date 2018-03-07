@@ -25,7 +25,7 @@ typedef void(^CompleteBlock)(NSError *error);
 /**
   Load Customer List Data
  */
-- (void)queryCustomerList:(void(^)(NSError *error))complete;
+- (void)queryCustomerListWithIsChooseStatus:(BOOL)isChooseStatus Complete:(void(^)(NSError *error))complete;
 
 
 /**

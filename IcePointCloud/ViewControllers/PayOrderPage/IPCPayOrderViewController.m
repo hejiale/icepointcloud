@@ -68,6 +68,8 @@
     [super viewWillAppear:animated];
     //Set Naviagtion Bar
     [self setNavigationBarStatus:YES];
+    
+    [[IPCPayOrderManager sharedManager] calculatePayAmount];
 }
 
 

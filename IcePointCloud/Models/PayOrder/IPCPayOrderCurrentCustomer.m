@@ -24,6 +24,7 @@
     self.currentCustomer = nil;
     self.currentOpometry = nil;
     self.currentMember = nil;
+    self.currentMemberCustomer = nil;
 }
 
 

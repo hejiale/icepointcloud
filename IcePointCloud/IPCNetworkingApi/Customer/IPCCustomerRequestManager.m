@@ -163,7 +163,7 @@
 
 + (void)queryMemberListWithKeyword:(NSString *)keyword Page:(NSInteger )page SuccessBlock:(void (^)(id responseValue))success FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"keyword":keyword,@"pageNo":@(page),@"maxPageSize":@(30)} RequestMethod:CustomerRequest_MemberList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"memberPhone":keyword,@"pageNo":@(page),@"maxPageSize":@(30)} RequestMethod:CustomerRequest_MemberList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)bindMemberWithCustomerId:(NSString *)customerId MemberCustomerId:(NSString *)memberCustomerId SuccessBlock:(void (^)(id responseValue))success FailureBlock:(void (^)(NSError * error))failure

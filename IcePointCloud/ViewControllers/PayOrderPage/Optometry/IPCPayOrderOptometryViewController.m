@@ -61,16 +61,21 @@
 
 - (IBAction)editOptometryAction:(id)sender
 {
-    if ([[IPCPayOrderManager sharedManager] customerId]) {
-        __weak typeof(self) weakSelf = self;
-        self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds
-                                                                        CustomerId:[[IPCPayOrderManager sharedManager] customerId]
-                                                                     CompleteBlock:^(IPCOptometryMode * optometry)
-                                    {
-                                        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
-                                        [weakSelf reload];
-                                    }];
-        [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
+    if ([[IPCPayOrderManager sharedManager] customerId])
+    {
+        if ([[IPCPayOrderManager sharedManager] currentCustomer].isVisitor) {
+            [IPCCommonUI showError:@"游客身份不能创建验光单"];
+        }else{
+            __weak typeof(self) weakSelf = self;
+            self.insertOptometryView = [[IPCInsertNewOptometryView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                                            CustomerId:[[IPCPayOrderManager sharedManager] customerId]
+                                                                         CompleteBlock:^(IPCOptometryMode * optometry)
+                                        {
+                                            [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
+                                            [weakSelf reload];
+                                        }];
+            [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
+        }
     }else{
         [IPCCommonUI showError:@"请先选择客户"];
     }

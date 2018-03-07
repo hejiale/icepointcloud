@@ -126,7 +126,9 @@
 - (IPCPayOrderCustomerListView *)customerListView{
     if (!_customerListView) {
         __weak typeof(self) weakSelf = self;
-        _customerListView = [[IPCPayOrderCustomerListView alloc]initWithFrame:self.rightContentView.bounds  IsChooseStatus:NO Detail:^(IPCCustomerMode* customer, BOOL isMemberReload)
+        _customerListView = [[IPCPayOrderCustomerListView alloc]initWithFrame:self.rightContentView.bounds
+                                                               IsChooseStatus:NO
+                                                                       Detail:^(IPCCustomerMode* customer, BOOL isMemberReload)
                              {
                                  if (isMemberReload) {
                                      [weakSelf loadCustomerMemberInfoView:YES];
@@ -136,6 +138,10 @@
                                  }
                              } SelectType:^(BOOL isSelectMemeber) {
                                  isSelectMemberStatus = isSelectMemeber;
+                                 if (![IPCPayOrderManager sharedManager].customerId && ![IPCPayOrderManager sharedManager].currentMemberCustomerId) {
+                                     [weakSelf loadCustomerInfoView:nil];
+                                     [weakSelf loadCustomerMemberInfoView:NO];
+                                 }
                              }];
         [[_customerListView rac_signalForSelector:@selector(insertCustomerAction:)]subscribeNext:^(RACTuple * _Nullable x) {
             [weakSelf showEditCustomerView:NO];
@@ -149,7 +155,7 @@
         __weak typeof(self) weakSelf = self;
         _chooseCustomerView = [[IPCPayOrderMemberChooseCustomerView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds BindSuccess:^(IPCCustomerMode *customer)
                                {
-                                   [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+                                   [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = customer;
                                    [weakSelf loadCustomerInfoView:customer];
                                }];
     }
@@ -162,9 +168,8 @@
         _memberCustomerListView = [[IPCPayOrderMemberCustomerListView alloc]initWithFrame:self.customInfoContentView.bounds Select:^(IPCCustomerMode *customer)
                                    {
                                        __strong typeof(weakSelf) strongSelf = weakSelf;
-                                       [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+                                       [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = customer;
                                        [weakSelf loadCustomerInfoView:customer];
-                                       [strongSelf.viewModel queryCustomerOptometry];
                                    }];
     }
     return _memberCustomerListView;
@@ -182,8 +187,15 @@
     }else{
         [self.editButton setHidden:YES];
         [self.customInfoContentView addSubview:self.customerAlertView];
+        if (![IPCPayOrderManager sharedManager].currentCustomerId && ![IPCPayOrderManager sharedManager].currentMemberCustomerId) {
+            [self.customerAlertView updateUI:isSelectMemberStatus];
+        }
     }
     [self resetCustomerData];
+    
+    if (!customer.isVisitor) {
+        [self.viewModel queryCustomerOptometry];
+    }
 }
 
 - (void)loadCustomerMemberInfoView:(BOOL)isChoose
@@ -192,13 +204,10 @@
     
     if ([IPCPayOrderManager sharedManager].currentCustomerId || [IPCPayOrderManager sharedManager].currentMemberCustomerId)
     {
-        IPCCustomerMode * customer = nil;
         if (isChoose) {
-            customer = [IPCPayOrderCurrentCustomer sharedManager].currentMember;
             [self.memberInfoView updateMemberCardInfo:[IPCPayOrderCurrentCustomer sharedManager].currentMember];
             [self.memberCardContentView addSubview:self.memberInfoView];
         }else{
-            customer = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer;
             if ([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel) {
                 [self.memberInfoView updateMemberCardInfo:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer];
                 [self.memberCardContentView addSubview:self.memberInfoView];
@@ -206,7 +215,8 @@
                 [self.memberCardContentView addSubview:self.customerUpgradeMemberView];
             }
         }
-        if (customer.memberLevel && ![IPCAppManager sharedManager].companyCofig.isCheckMember) {
+        if (([IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberLevel || [IPCPayOrderCurrentCustomer sharedManager].currentMember) && ![IPCAppManager sharedManager].companyCofig.isCheckMember)
+        {
             if (![IPCPayOrderManager sharedManager].isValiateMember){
                 if ([IPCAppManager sharedManager].authList.forceVerifyMember) {
                     [self.unCheckMemberLabel setHidden:NO];
@@ -218,6 +228,9 @@
         }
     }else{
         [self.memberCardContentView addSubview:self.memberAlertView];
+        if (![IPCPayOrderManager sharedManager].currentCustomerId && ![IPCPayOrderManager sharedManager].currentMemberCustomerId) {
+            [self.memberAlertView updateUI:isSelectMemberStatus];
+        }
     }
 }
 
@@ -242,9 +255,8 @@
             [self.customInfoContentView addSubview:self.memberCustomerListView];
         }else{
             IPCCustomerMode * customer = customerList[0];
-            [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+            [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = customer;
             [self loadCustomerInfoView:customer];
-            [self.viewModel queryCustomerOptometry];
         }
     }else{
         [self.customInfoContentView addSubview:self.memberNoneCustomerView];
@@ -274,21 +286,25 @@
 {
     __weak typeof(self) weakSelf = self;
     [self.viewModel validationMemberRequest:code Complete:^(IPCCustomerMode * customer)
-    {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        isSelectMemberStatus = YES;
-        [strongSelf.customerListView changeToMemberStatus];
-    
-        [IPCPayOrderManager sharedManager].currentCustomerId = nil;
-        [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = nil;
-        
-        [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
-        [IPCPayOrderManager sharedManager].currentMemberCustomerId = customer.memberCustomerId;
-        [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
-        
-        [weakSelf loadCustomerMemberInfoView:YES];
-        [weakSelf queryMemberBindCustomer];
-    }];
+     {
+         if (customer) {
+             __strong typeof(weakSelf) strongSelf = weakSelf;
+             ///切换至会员列表状态
+             isSelectMemberStatus = YES;
+             [strongSelf.customerListView changeToMemberStatus];
+             
+             [IPCPayOrderManager sharedManager].currentCustomerId = nil;
+             [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = nil;
+             [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = nil;
+             
+             [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+             [IPCPayOrderManager sharedManager].currentMemberCustomerId = customer.memberCustomerId;
+             [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
+             
+             [weakSelf loadCustomerMemberInfoView:YES];
+             [weakSelf queryMemberBindCustomer];
+         }
+     }];
 }
 
 - (void)queryMemberBindCustomer
@@ -304,7 +320,7 @@
     __weak typeof(self) weakSelf = self;
     [self.viewModel queryVisitorCustomer:^ {
         [weakSelf clearCustomerInfoView];
-        [weakSelf loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentMember];
+        [weakSelf loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer];
     }];
 }
 
@@ -315,9 +331,9 @@
                                        MemberCustomerId:[IPCPayOrderManager sharedManager].currentMemberCustomerId
                                            SuccessBlock:^(id responseValue)
      {
-         [IPCPayOrderCurrentCustomer sharedManager].currentMember = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
+         [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
          [weakSelf clearCustomerInfoView];
-         [weakSelf loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentMember];
+         [weakSelf loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
      }];
@@ -361,12 +377,12 @@
 {
     __weak typeof(self) weakSelf = self;
     self.updateCustomerView = [[IPCUpdateCustomerView alloc]initWithFrame:[IPCCommonUI currentView].bounds
-                                                           DetailCustomer:isSelectMemberStatus ? [IPCPayOrderCurrentCustomer sharedManager].currentMember : [IPCPayOrderCurrentCustomer sharedManager].currentCustomer
+                                                           DetailCustomer:isSelectMemberStatus ? [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer : [IPCPayOrderCurrentCustomer sharedManager].currentCustomer
                                                               UpdateBlock:^(IPCCustomerMode * customer)
                                {
                                    __strong typeof(weakSelf) strongSelf = weakSelf;
                                    if (isSelectMemberStatus) {
-                                       [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
+                                       [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = customer;
                                    }else{
                                        [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = customer;
                                    }
@@ -395,9 +411,10 @@
     [[IPCCommonUI currentView] bringSubviewToFront:self.upgradeMemberView];
 }
 
-
+///强制验证通过
 - (IBAction)compulsoryVerificationAction:(id)sender {
     [IPCPayOrderManager sharedManager].isValiateMember = YES;
+    [IPCPayOrderManager sharedManager].memberCheckType = @"COMPEL";
     [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
     [self loadCustomerMemberInfoView:isSelectMemberStatus];
 }
@@ -406,7 +423,6 @@
 {
     [self loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer];
     [self loadCustomerMemberInfoView:NO];
-    [self.viewModel queryCustomerOptometry];
 }
 
 - (void)resetCustomerData
@@ -418,9 +434,10 @@
 
 - (void)resetCustomerView
 {
+    isSelectMemberStatus = NO;
     [self loadCustomerInfoView:nil];
     [self loadCustomerMemberInfoView:NO];
-    [self.customerListView loadData];
+    [self.customerListView changeToCustomerStatus];
     [self.editButton setHidden:YES];
     [IPCPayOrderManager sharedManager].isValiateMember = NO;
 }

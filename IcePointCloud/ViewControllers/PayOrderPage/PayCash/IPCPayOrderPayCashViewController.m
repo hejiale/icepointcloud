@@ -247,7 +247,14 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 #pragma mark //UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    IPCCustomerMode * member = [[IPCPayOrderManager sharedManager] currentMemberCard];
     IPCCustomerMode * customer = [[IPCPayOrderManager sharedManager] currentCustomer];
+    
+    if (!customer) {
+        [IPCCommonUI showError:@"请先选择客户或会员卡!"];
+        return;
+    }
+    
     IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[indexPath.row];
     
     if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0)return;
@@ -258,25 +265,25 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     }
     
     if (![IPCPayOrderManager sharedManager].isValiateMember) {
-        if (customer.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
+        if (member.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
     }
     
-    if (customer.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
+    if (member.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
         [IPCCommonUI showError:@"客户无可用积分"];
         return;
     }
     
     if (![IPCPayOrderManager sharedManager].isValiateMember) {
-        if (customer.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
+        if (member.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
             [IPCCommonUI showError:@"请先验证会员"];
             return;
         }
     }
     
-    if (customer.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
+    if (member.balance == 0 && [payType.payType isEqualToString:@"储值卡"]) {
         [IPCCommonUI showError:@"客户无可用储值余额"];
         return;
     }
@@ -325,7 +332,6 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         frame.origin.y= MAX(offsetY, 0);
         self.scrollLineImageView.frame = frame;
     }
-    
 }
 
 

@@ -49,6 +49,8 @@
 @property (nonatomic, strong, readwrite) IPCCustomerMode * introducer;
 //游客信息
 @property (nonatomic, strong, readwrite) IPCCustomerMode * visitorCustomer;
+//验证方式 (NULL("空"), CODE("扫码验证"), COMPEL("强制验证"), NON("免验证"))
+@property (nonatomic, copy, readwrite) NSString * memberCheckType;
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额
@@ -75,6 +77,7 @@
 - (NSString *)customerId;
 //当前选择客户(客户选项或会员选项)
 - (IPCCustomerMode *)currentCustomer;
-
+//当前选择会员卡(客户选项或会员选项)
+- (IPCCustomerMode *)currentMemberCard;
 
 @end

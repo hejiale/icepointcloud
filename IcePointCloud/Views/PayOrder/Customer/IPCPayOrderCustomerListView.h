@@ -19,6 +19,8 @@
 
 - (void)loadData;
 
+- (void)changeToCustomerStatus;
+
 - (void)changeToMemberStatus;
 
 @end

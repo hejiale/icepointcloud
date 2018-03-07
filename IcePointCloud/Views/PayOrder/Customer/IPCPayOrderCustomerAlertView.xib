@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPCPayOrderCustomerAlertView"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h1M-zu-P74">
+        <view hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="h1M-zu-P74">
             <rect key="frame" x="0.0" y="0.0" width="408" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>

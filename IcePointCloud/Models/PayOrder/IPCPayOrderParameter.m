@@ -29,28 +29,28 @@
     NSMutableDictionary * formDic = [[NSMutableDictionary alloc]init];
     [formDic setObject:@"FOR_SALES" forKey:@"orderType"];
     
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        [formDic setObject:[IPCPayOrderManager sharedManager].currentCustomerId forKey:@"customerId"];
-    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
-        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentMember.customerID forKey:@"customerId"];
-    }
+    //选择客户
+    [formDic setObject:[[IPCPayOrderManager sharedManager] currentCustomer].customerID forKey:@"customerId"];
     
     //转介绍人
     if ([IPCPayOrderManager sharedManager].introducer) {
         [formDic setObject:[IPCPayOrderManager sharedManager].introducer.customerID forKey:@"introducerId"];
     }
     //会员卡id
-    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
-        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberCustomerId forKey:@"memberCutomerId"];
-    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
-        [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentMember.memberCustomerId forKey:@"memberCutomerId"];
-    }
+    [formDic setObject:[[IPCPayOrderManager sharedManager] currentCustomer].memberCustomerId forKey:@"memberCutomerId"];
     
     [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
     [formDic setObject:employeeList forKey:@"employeeAchievements"];
     if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry) {
         [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
     }
+    
+    //验证方式
+//    if ([IPCPayOrderManager sharedManager].isValiateMember) {
+//        [formDic setObject:[IPCPayOrderManager sharedManager].memberCheckType forKey:@"memberCheckType"];
+//    }else{
+//        [formDic setObject:@"NULL" forKey:@"memberCheckType;"];
+//    }
     
     [formDic setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
     [formDic setObject:[NSString stringWithFormat:@"%f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];
