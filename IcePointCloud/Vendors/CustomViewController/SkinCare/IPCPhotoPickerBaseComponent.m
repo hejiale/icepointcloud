@@ -35,11 +35,9 @@
 {
     if (!controller) return;
     
-    __weak typeof(self) weakSelf = self;
     IPCPhotoPickerViewController * photoVC = [[IPCPhotoPickerViewController alloc] initWithCompleteImage:^(UIImage *image) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.ResultImageBlock) {
-            strongSelf.ResultImageBlock(image);
+        if (self.ResultImageBlock) {
+            self.ResultImageBlock(image);
         }
     }];
     IPCPortraitNavigationViewController * photoNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:photoVC];

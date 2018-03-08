@@ -604,24 +604,21 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
     self.signleModeView.layer.anchorPoint = [[IPCTryMatch instance] singleModeViewAnchorPoint];
     self.signleModeView.frame = frame;
     
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:.2 delay:0 options:0 animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.signleModeView.transform = CGAffineTransformScale(self.signleModeView.transform, 0.5, 0.5);
+        self.signleModeView.transform = CGAffineTransformScale(self.signleModeView.transform, 0.5, 0.5);
     } completion:^(BOOL finished) {
         if (finished) {
-            __strong typeof(weakSelf) strongSelf = weakSelf;
-            [strongSelf.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 obj.alpha = 0;
                 obj.hidden = NO;
             }];
             
             [UIView animateWithDuration:0.2f animations:^{
-                strongSelf.signleModeView.alpha = 0;
-                strongSelf.signleModeView.hidden = YES;
+                self.signleModeView.alpha = 0;
+                self.signleModeView.hidden = YES;
             }];
             
-            [strongSelf.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.compareBgView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [UIView animateWithDuration:.2 delay:.1 * idx options:0 animations:^{
                     obj.alpha = 1;
                 } completion:nil];

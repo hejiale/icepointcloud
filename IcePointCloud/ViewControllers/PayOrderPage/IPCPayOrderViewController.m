@@ -141,7 +141,11 @@
 {
     NSUInteger nextPage = _currentPage + 1;
     if (nextPage == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
-        [self offerOrderAction];
+        if ([[IPCPayOrderManager sharedManager] currentCustomer]) {
+            [self offerOrderAction];
+        }else{
+            [IPCCommonUI showError:@"请先选择客户"];
+        }
     }else{
         [self setCurrentPage:nextPage];
     }
@@ -152,9 +156,13 @@
 - (IBAction)areCancelOrderAction:(id)sender
 {
     if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
-        [self offerOrder:@"NULL" EndStatus:@"PROTOTYPE" Complete:^{
-            [IPCCommonUI showSuccess:@"订单保存成功！"];
-        }];
+        if ([[IPCPayOrderManager sharedManager] currentCustomer]) {
+            [self offerOrder:@"NULL" EndStatus:@"PROTOTYPE" Complete:^{
+                [IPCCommonUI showSuccess:@"订单保存成功！"];
+            }];
+        }else{
+            [IPCCommonUI showError:@"请先选择客户"];
+        }
     }else{
         [IPCCommonUI showError:@"购物列表为空"];
     }

@@ -45,7 +45,6 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     // Do any additional setup after loading the view from its nib.
     //Set Up NavigationBar
     [self setNavigationTitle:@"个人信息"];
-    [self setNavigationBarStatus:NO];
     //Set Up TableView
     [self.detailTableView setTableHeaderView:[[UIView alloc]init]];
     [self.detailTableView setTableFooterView:[[UIView alloc]init]];
@@ -61,6 +60,7 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     [super viewWillAppear:animated];
     //刷新
     [self requestCustomerDetailInfo];
+    [self setNavigationBarStatus:NO];
 }
 
 

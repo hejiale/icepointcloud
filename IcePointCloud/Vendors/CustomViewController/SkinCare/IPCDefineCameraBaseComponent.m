@@ -38,11 +38,9 @@
 {
     if (!controller) return;
     
-    __weak typeof(self) weakSelf = self;
     IPCDefineCameraViewController * cameraVC = [[IPCDefineCameraViewController alloc]initWithImageBlock:^(UIImage *image) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.ResultImageBlock) {
-            strongSelf.ResultImageBlock(image);
+        if (self.ResultImageBlock) {
+            self.ResultImageBlock(image);
         }
     }];
     IPCPortraitNavigationViewController * cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:cameraVC];
@@ -318,15 +316,13 @@
     _preview.alpha = 0;
     _preview.hidden = NO;
     
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.32 animations:^{
         _preview.alpha = 1;
     } completion:^(BOOL finished) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.OutImageBlock) {
-            strongSelf.OutImageBlock(sourceImage);
+        if (self.OutImageBlock) {
+            self.OutImageBlock(sourceImage);
         }
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
 }
 

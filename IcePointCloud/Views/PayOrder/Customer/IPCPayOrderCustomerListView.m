@@ -327,6 +327,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         IPCCustomerMode * customer = self.viewModel.customerArray[indexPath.row];
         [IPCPayOrderManager sharedManager].isValiateMember = NO;
         [IPCPayOrderManager sharedManager].memberCheckType = @"NULL";
+        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = nil;
         
         if (isSelectMember) {
             if ([customer.memberCustomerId isEqualToString:[IPCPayOrderManager sharedManager].currentMemberCustomerId])return;

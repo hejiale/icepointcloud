@@ -37,7 +37,7 @@
         [formDic setObject:[IPCPayOrderManager sharedManager].introducer.customerID forKey:@"introducerId"];
     }
     //会员卡id
-    [formDic setObject:[[IPCPayOrderManager sharedManager] currentCustomer].memberCustomerId forKey:@"memberCutomerId"];
+    [formDic setObject:[[IPCPayOrderManager sharedManager] currentMemberCard].memberCustomerId forKey:@"memberCutomerId"];
     
     [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
     [formDic setObject:employeeList forKey:@"employeeAchievements"];
@@ -46,11 +46,11 @@
     }
     
     //验证方式
-//    if ([IPCPayOrderManager sharedManager].isValiateMember) {
-//        [formDic setObject:[IPCPayOrderManager sharedManager].memberCheckType forKey:@"memberCheckType"];
-//    }else{
-//        [formDic setObject:@"NULL" forKey:@"memberCheckType;"];
-//    }
+    if ([IPCPayOrderManager sharedManager].isValiateMember) {
+        [formDic setObject:[IPCPayOrderManager sharedManager].memberCheckType forKey:@"memberCheckType"];
+    }else{
+        [formDic setObject:@"NULL" forKey:@"memberCheckType;"];
+    }
     
     [formDic setObject:[IPCPayOrderManager sharedManager].remark ? : @"" forKey:@"orderRemark"];
     [formDic setObject:[NSString stringWithFormat:@"%f",[[IPCShoppingCart sharedCart] allGlassesTotalPrePrice]] forKey:@"suggestPriceTotal"];

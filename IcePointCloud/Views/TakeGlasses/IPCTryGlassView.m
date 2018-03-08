@@ -87,7 +87,7 @@
 //Update the model picture
 - (void)updateModelPhoto
 {
-//    [self resetGlassView];
+    [self resetGlassView];
 }
 - (void)updateItem
 {
@@ -96,9 +96,9 @@
 
 - (void)resetGlassView
 {
-//    self.glassesView.transform = CGAffineTransformIdentity;
-//    self.glassImageView.transform = CGAffineTransformIdentity;
-//    [self.glassImageView setImage:nil];
+    self.glassesView.transform = CGAffineTransformIdentity;
+    self.glassImageView.transform = CGAffineTransformIdentity;
+    [self.glassImageView setImage:nil];
 }
 /**
  *  Updated photo like glasses

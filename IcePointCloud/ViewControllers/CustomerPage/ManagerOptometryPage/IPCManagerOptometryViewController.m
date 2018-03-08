@@ -27,7 +27,6 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     //Set Up NavigationBar
-    [self setNavigationBarStatus:NO];
     [self setNavigationTitle:@"验光单"];
     [self setRightItem:@"icon_insert_btn" Selection:@selector(insertNewOptometryAction)];
     //Load TableView
@@ -36,6 +35,13 @@ static NSString * const managerIdentifier = @"IPCManagerOptometryCellIdentifier"
     [[IPCCustomerManager sharedManager] queryEmployee];
     //Load Optometry Data
     [self loadOptometryData];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self setNavigationBarStatus:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
