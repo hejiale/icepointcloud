@@ -35,11 +35,9 @@
 {
     if (!controller) return;
     
-    __weak typeof(self) weakSelf = self;
     IPCPhotoPickerViewController * photoVC = [[IPCPhotoPickerViewController alloc] initWithCompleteImage:^(UIImage *image) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.ResultImageBlock) {
-            strongSelf.ResultImageBlock(image);
+        if (self.ResultImageBlock) {
+            self.ResultImageBlock(image);
         }
     }];
     IPCPortraitNavigationViewController * photoNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:photoVC];
@@ -260,15 +258,13 @@
     if ([self.photoArray count]) {
         IPCPhotoPickerCell * cell = (IPCPhotoPickerCell *)[collectionView cellForItemAtIndexPath:indexPath];
         
-        __weak typeof(self) weakSelf = self;
         IPCEditFilterSampleController * sampleVC = [[IPCEditFilterSampleController alloc]initWithResultImage:^(UIImage *image)
                                                     {
-                                                        __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                        if (strongSelf.CompleteImageBlock) {
-                                                            strongSelf.CompleteImageBlock(image);
+                                                        if (self.CompleteImageBlock) {
+                                                            self.CompleteImageBlock(image);
                                                         }
                                                         
-                                                        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                                                        [self dismissViewControllerAnimated:YES completion:nil];
                                                     }];
         if (cell.photo) {
             [sampleVC showImage:cell.photo.image];
