@@ -82,7 +82,9 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
             __strong typeof(weakSelf) strongSelf = weakSelf;
             [strongSelf.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [weakSelf removeFromSuperview];
-            if (strongSelf.DismissBlock)strongSelf.DismissBlock();
+            
+            if (self.DismissBlock)
+                self.DismissBlock();
         }
     }];
 }

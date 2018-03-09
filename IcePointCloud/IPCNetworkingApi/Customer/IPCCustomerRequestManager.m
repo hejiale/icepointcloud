@@ -153,7 +153,7 @@
 
 + (void)validateCustomerWithCode:(NSString *)code SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:code RequestMethod:CustomerRequest_ValidateCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"QRcode" : code} RequestMethod:CustomerRequest_ValidateCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)updateMemberPhoneWithPhone:(NSString *)memberPhone CustomerId:(NSString *)customerId SuccessBlock:(void (^)(id responseValue))success FailureBlock:(void (^)(NSError *))failure

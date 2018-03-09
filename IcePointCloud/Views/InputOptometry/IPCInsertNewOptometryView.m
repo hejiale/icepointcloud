@@ -102,21 +102,18 @@
                                                            Remark:self.memoTextField.text
                                                      SuccessBlock:^(id responseValue)
      {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
          [weakSelf removeFromSuperview];
          
-         if (strongSelf.CompleteBlock) {
-             strongSelf.CompleteBlock(optometry);
+         if (self.CompleteBlock) {
+             self.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         
          [IPCCommonUI showError:error.domain];
          [weakSelf removeFromSuperview];
          
-         if (strongSelf.CompleteBlock) {
-             strongSelf.CompleteBlock(nil);
+         if (self.CompleteBlock) {
+             self.CompleteBlock(nil);
          }
      }];
 }

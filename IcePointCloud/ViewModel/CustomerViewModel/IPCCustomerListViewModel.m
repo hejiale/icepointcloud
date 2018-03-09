@@ -34,8 +34,9 @@
          
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.status = IPCRefreshError;
-         if (strongSelf.completeBlock) {
-             strongSelf.completeBlock(error);
+         
+         if (self.completeBlock) {
+             self.completeBlock(error);
          }
      }];
 }
@@ -80,8 +81,9 @@
          
          __strong typeof(weakSelf) strongSelf = weakSelf;
          strongSelf.status = IPCRefreshError;
-         if (strongSelf.completeBlock) {
-             strongSelf.completeBlock(error);
+         
+         if (self.completeBlock) {
+             self.completeBlock(error);
          }
      }];
 }

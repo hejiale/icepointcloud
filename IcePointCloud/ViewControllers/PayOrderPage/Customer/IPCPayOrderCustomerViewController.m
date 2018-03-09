@@ -82,7 +82,6 @@
 
 - (IPCPayOrderCustomerAlertView *)customerAlertView{
     if (!_customerAlertView) {
-        __weak typeof(self) weakSelf = self;
         _customerAlertView = [[IPCPayOrderCustomerAlertView alloc]initWithFrame:self.customInfoContentView.bounds];
     }
     return _customerAlertView;
@@ -296,6 +295,7 @@
              [IPCPayOrderManager sharedManager].currentCustomerId = nil;
              [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = nil;
              [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = nil;
+             [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = nil;
              
              [IPCPayOrderCurrentCustomer sharedManager].currentMember = customer;
              [IPCPayOrderManager sharedManager].currentMemberCustomerId = customer.memberCustomerId;
@@ -404,6 +404,7 @@
                                   __strong typeof(weakSelf) strongSelf = weakSelf;
                                   [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
                                   [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = customer;
+                                  [weakSelf loadCustomerInfoView:customer];
                                   [weakSelf loadCustomerMemberInfoView:NO];
                                   [strongSelf.customerListView loadData];
                               }];

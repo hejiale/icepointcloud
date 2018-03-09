@@ -261,9 +261,8 @@
         __weak typeof(self) weakSelf = self;
         IPCEditFilterSampleController * sampleVC = [[IPCEditFilterSampleController alloc]initWithResultImage:^(UIImage *image)
                                                     {
-                                                        __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                        if (strongSelf.CompleteImageBlock) {
-                                                            strongSelf.CompleteImageBlock(image);
+                                                        if (self.CompleteImageBlock) {
+                                                            self.CompleteImageBlock(image);
                                                         }
                                                         
                                                         [weakSelf dismissViewControllerAnimated:YES completion:nil];

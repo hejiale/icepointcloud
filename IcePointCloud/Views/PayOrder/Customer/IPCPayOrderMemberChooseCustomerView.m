@@ -77,11 +77,10 @@
                                        MemberCustomerId:[IPCPayOrderManager sharedManager].currentMemberCustomerId
                                            SuccessBlock:^(id responseValue)
     {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        if (strongSelf.BindSuccessBlock) {
-            strongSelf.BindSuccessBlock(strongSelf.customer);
+        if (self.BindSuccessBlock) {
+            self.BindSuccessBlock(self.customer);
         }
-        [self removeFromSuperview];
+        [weakSelf removeFromSuperview];
     } FailureBlock:^(NSError *error) {
         [IPCCommonUI showError:error.domain];
     }];
