@@ -258,14 +258,13 @@
     if ([self.photoArray count]) {
         IPCPhotoPickerCell * cell = (IPCPhotoPickerCell *)[collectionView cellForItemAtIndexPath:indexPath];
         
-        __weak typeof(self) weakSelf = self;
         IPCEditFilterSampleController * sampleVC = [[IPCEditFilterSampleController alloc]initWithResultImage:^(UIImage *image)
                                                     {
                                                         if (self.CompleteImageBlock) {
                                                             self.CompleteImageBlock(image);
                                                         }
                                                         
-                                                        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+                                                        [self dismissViewControllerAnimated:YES completion:nil];
                                                     }];
         if (cell.photo) {
             [sampleVC showImage:cell.photo.image];

@@ -95,10 +95,8 @@
 
 - (void)openMenu
 {
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5 animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.contentView.center = CGPointMake(strongSelf.contentView.center.x - strongSelf.buttonView.jk_width, strongSelf.contentView.center.y);
+        self.contentView.center = CGPointMake(self.contentView.center.x - self.buttonView.jk_width, self.contentView.center.y);
     }completion:^(BOOL finished) {
         
     }];
@@ -107,10 +105,8 @@
 
 - (void)closeMenu
 {
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5 animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        strongSelf.contentView.center = CGPointMake(strongSelf.centerX, strongSelf.contentView.centerY);
+        self.contentView.center = CGPointMake(self.centerX, self.contentView.centerY);
     }completion:^(BOOL finished) {
         
     }];

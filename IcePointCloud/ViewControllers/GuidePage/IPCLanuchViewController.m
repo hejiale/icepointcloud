@@ -31,19 +31,17 @@
     [images addObject:[UIImage imageNamed:@"lanuch_2"]];
     [images addObject:[UIImage imageNamed:@"lanuch_3"]];
     
-    __weak typeof(self) weakSelf = self;
     [[IPCGuideViewManager sharedInstance] showGuideViewWithImages:images
                                                            InView:self.view
                                                            Finish:^{
                                                                [UIView animateWithDuration:1.3 animations:^{
-                                                                   __strong typeof(weakSelf) strongSelf = weakSelf;
-                                                                   strongSelf.view.transform = CGAffineTransformScale(strongSelf.view.transform, 1.5, 1.5);
-                                                                   strongSelf.view.alpha = 0;
+                                                                   self.view.transform = CGAffineTransformScale(self.view.transform, 1.5, 1.5);
+                                                                   self.view.alpha = 0;
                                                                }completion:^(BOOL finished) {
-                                                                   if ([weakSelf isShouldDeleteUUID]) {
-                                                                       [weakSelf userLogin];
+                                                                   if ([self isShouldDeleteUUID]) {
+                                                                       [self userLogin];
                                                                    }else{
-                                                                       [weakSelf pushToLoginVC];
+                                                                       [self pushToLoginVC];
                                                                    }
                                                                }];
                                                            }];
@@ -63,23 +61,20 @@
 
 - (void)userLogin
 {
-    __weak typeof(self) weakSelf = self;
     [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT
                                         Password:PASSWORD
                                     SuccessBlock:^(id responseValue) {
-                                        [weakSelf deleteUUID];
+                                        [self deleteUUID];
                                     } FailureBlock:nil];
 }
 
 - (void)deleteUUID
 {
-    __weak typeof(self) weakSelf = self;
-    
     [IPCUserRequestManager deletePadUUIDWithUUID:[[LUKeychainAccess standardKeychainAccess] objectForKey:kIPCDeviceLoginUUID]
                                     SuccessBlock:^(id responseValue)
      {
          [[LUKeychainAccess standardKeychainAccess] deleteObjectForKey:kIPCDeviceLoginUUID];
-         [weakSelf pushToLoginVC];
+         [self pushToLoginVC];
      } FailureBlock:nil];
 }
 

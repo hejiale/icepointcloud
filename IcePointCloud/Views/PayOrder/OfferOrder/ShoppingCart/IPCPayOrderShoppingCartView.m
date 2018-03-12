@@ -195,9 +195,8 @@ static NSString * const kEditShoppingCartCellIdentifier = @"IPCEditShoppingCartC
     NSIndexPath * indexPath = [self.cartListTableView indexPathForCell:cell];
     IPCShoppingCartItem * cartItem = [[IPCShoppingCart sharedCart] itemAtIndex:indexPath.row] ;
     
-    __weak typeof(self) weakSelf = self;
     _parameterView = [[IPCGlassParameterView alloc]initWithFrame:[IPCCommonUI currentView].bounds  Complete:^{
-        [weakSelf updateCartUI:YES];
+        [self updateCartUI:YES];
     }];
     _parameterView.cartItem = cartItem;
     [[IPCCommonUI currentView] addSubview:_parameterView];

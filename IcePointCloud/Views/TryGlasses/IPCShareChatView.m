@@ -48,14 +48,11 @@
 
 - (void)show
 {
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        CGRect frame = strongSelf.shareButtonView.frame;
-        frame.origin.y += strongSelf.jk_height;
-        strongSelf.shareButtonView.frame = frame;
-        
-        strongSelf.shareButtonView.alpha = 1;
+        CGRect frame = self.shareButtonView.frame;
+        frame.origin.y += self.jk_height;
+        self.shareButtonView.frame = frame;
+        self.shareButtonView.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];

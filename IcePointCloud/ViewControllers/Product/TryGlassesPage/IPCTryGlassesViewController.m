@@ -584,8 +584,7 @@ static NSString * const glassListCellIdentifier = @"IPCTryGlassesListViewCellIde
 
 //Try switching to wear glasses a single or more patterns
 - (void)switchToSingleMode
-{
-    IPCCompareItemView *targetItemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
+{    IPCCompareItemView *targetItemView = self.compareBgView.subviews[[IPCTryMatch instance].activeMatchItemIndex];
     [targetItemView amplificationLargeModelView];
 }
 

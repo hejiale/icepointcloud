@@ -77,12 +77,10 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //Clicked Events
 - (void)show
 {
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        CGRect frame = strongSelf.orderDetailBgView.frame;
-        frame.origin.x -= strongSelf.orderDetailBgView.jk_width;
-        strongSelf.orderDetailBgView.frame = frame;
+        CGRect frame = self.orderDetailBgView.frame;
+        frame.origin.x -= self.orderDetailBgView.jk_width;
+        self.orderDetailBgView.frame = frame;
     } completion:^(BOOL finished) {
         
     }];
@@ -91,15 +89,13 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 - (IBAction)dismissViewAction:(id)sender {
     [[IPCCustomerOrderDetail instance] clearData];
     
-    __weak typeof(self) weakSelf = self;
     [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        CGRect frame = strongSelf.orderDetailBgView.frame;
-        frame.origin.x += strongSelf.orderDetailBgView.jk_width;
-        strongSelf.orderDetailBgView.frame = frame;
+        CGRect frame = self.orderDetailBgView.frame;
+        frame.origin.x += self.orderDetailBgView.jk_width;
+        self.orderDetailBgView.frame = frame;
     } completion:^(BOOL finished) {
         if (finished) {
-            [weakSelf removeFromSuperview];
+            [self removeFromSuperview];
         }
     }];
 }

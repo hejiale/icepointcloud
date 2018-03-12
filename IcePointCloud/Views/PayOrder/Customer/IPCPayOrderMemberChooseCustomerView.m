@@ -80,7 +80,7 @@
         if (self.BindSuccessBlock) {
             self.BindSuccessBlock(self.customer);
         }
-        [weakSelf removeFromSuperview];
+        [self removeFromSuperview];
     } FailureBlock:^(NSError *error) {
         [IPCCommonUI showError:error.domain];
     }];

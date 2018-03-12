@@ -81,7 +81,6 @@
 #pragma mark //Request Methods
 - (void)saveNewOptometry
 {
-    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:currentCustomerId
                                                           SphLeft:self.leftSphTextField.text
                                                          SphRight:self.rightSphTextField.text
@@ -103,14 +102,14 @@
                                                      SuccessBlock:^(id responseValue)
      {
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
-         [weakSelf removeFromSuperview];
+         [self removeFromSuperview];
          
          if (self.CompleteBlock) {
              self.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
-         [weakSelf removeFromSuperview];
+         [self removeFromSuperview];
          
          if (self.CompleteBlock) {
              self.CompleteBlock(nil);

@@ -11,6 +11,8 @@
 #import "IPCPayOrderCustomerCollectionViewCell.h"
 #import "IPCPayOrderMemberCollectionViewCell.h"
 
+static NSString * const searchCustomerPlaceHolder = @"请输入客户搜索关键词";
+static NSString * const searchMemberPlaceHolder = @"请输入会员搜索密保手机号";
 static NSString * const customerIdentifier = @"IPCPayOrderCustomerCollectionViewCellIdentifier";
 static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCellIdentifier";
 
@@ -49,6 +51,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         chooseStatus = isChoose;
         self.DetailBlock = detail;
         self.IsSelectMemberBlock = isMember;
+        [self.searchTextField setPlaceholder:searchCustomerPlaceHolder];
     }
     return self;
 }
@@ -214,27 +217,25 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 }
 
 #pragma mark //Clicked Events
-- (IBAction)searchWithCustomerAction:(id)sender {
-    isSelectMember = NO;
+- (IBAction)searchWithCustomerAction:(id)sender
+{
     [self.searchTypeView setHidden:YES];
-    [self.typeButton setTitle:@"客户"];
+    
     if (self.IsSelectMemberBlock) {
         self.IsSelectMemberBlock(NO);
     }
-    [self reloadCollectionViewUI];
-    [self loadData];
+    [self changeToCustomerStatus];
 }
 
 
-- (IBAction)searchWithMemberAction:(id)sender {
-    isSelectMember = YES;
+- (IBAction)searchWithMemberAction:(id)sender
+{
     [self.searchTypeView setHidden:YES];
-    [self.typeButton setTitle:@"会员"];
+    
     if (self.IsSelectMemberBlock) {
         self.IsSelectMemberBlock(YES);
     }
-    [self reloadCollectionViewUI];
-    [self loadData];
+    [self changeToMemberStatus];
 }
 
 
@@ -265,6 +266,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 {
     isSelectMember = NO;
     [self.typeButton setTitle:@"客户"];
+    [self.searchTextField setPlaceholder:searchCustomerPlaceHolder];
     [self reloadCollectionViewUI];
     [self loadData];
 }
@@ -273,6 +275,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 {
     isSelectMember = YES;
     [self.typeButton setTitle:@"会员"];
+    [self.searchTextField setPlaceholder:searchMemberPlaceHolder];
     [self reloadCollectionViewUI];
     [self loadData];
 }

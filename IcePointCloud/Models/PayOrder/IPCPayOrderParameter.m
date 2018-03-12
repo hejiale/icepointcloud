@@ -38,6 +38,9 @@
     }
     //会员卡id
     [formDic setObject:[[IPCPayOrderManager sharedManager] currentMemberCard].memberCustomerId forKey:@"memberCutomerId"];
+    if ([[IPCPayOrderManager sharedManager] currentMemberCard].memberPhone) {
+        [formDic setObject:[[IPCPayOrderManager sharedManager] currentMemberCard].memberPhone forKey:@"memberPhone"];
+    }
     
     [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
     [formDic setObject:employeeList forKey:@"employeeAchievements"];
