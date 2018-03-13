@@ -70,17 +70,15 @@
 {
     self.completeBlock = complete;
     
-    __weak typeof(self) weakSelf = self;
     [IPCCustomerRequestManager queryMemberListWithKeyword:self.searchWord ? :@""
                                                      Page:self.currentPage
                                              SuccessBlock:^(id responseValue)
      {
-         [weakSelf parseCustomerListData:responseValue IsChoose:NO];
+         [self parseCustomerListData:responseValue IsChoose:NO];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
          
-         __strong typeof(weakSelf) strongSelf = weakSelf;
-         strongSelf.status = IPCRefreshError;
+         self.status = IPCRefreshError;
          
          if (self.completeBlock) {
              self.completeBlock(error);
