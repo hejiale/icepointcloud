@@ -249,7 +249,6 @@
     
     if (customerList.count) {
         if (customerList.count > 1) {
-            [self clearCustomerInfoView];
             [self.memberCustomerListView reloadCustomerListView:customerList];
             [self.customInfoContentView addSubview:self.memberCustomerListView];
         }else{
@@ -319,7 +318,6 @@
 {
     __weak typeof(self) weakSelf = self;
     [self.viewModel queryVisitorCustomer:^ {
-        [weakSelf clearCustomerInfoView];
         [weakSelf loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer];
     }];
 }
@@ -332,7 +330,6 @@
                                            SuccessBlock:^(id responseValue)
      {
          [IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
-         [weakSelf clearCustomerInfoView];
          [weakSelf loadCustomerInfoView:[IPCPayOrderCurrentCustomer sharedManager].currentMemberCustomer];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
