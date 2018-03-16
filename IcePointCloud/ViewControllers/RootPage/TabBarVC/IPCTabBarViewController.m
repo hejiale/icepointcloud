@@ -1,4 +1,4 @@
-//
+ //
 //  RootMenuViewController.m
 //  IcePointCloud
 //
@@ -23,7 +23,9 @@
 @property (strong, nonatomic)  UIView   * menusView;
 @property (strong, nonatomic)  UIImageView *logoImageView;
 @property (strong, nonatomic)  UIButton * filterButton;
+@property (strong, nonatomic)  UIButton * scanButton;
 @property (strong, nonatomic)  UILabel  * titleLabel;
+
 
 @end
 
@@ -51,6 +53,7 @@
     [self.menuBarView addSubview:self.menusView];
     [self.menuBarView addSubview:self.logoImageView];
     [self.menuBarView addSubview:self.filterButton];
+    [self.menuBarView addSubview:self.scanButton];
     [self.menuBarView addSubview:self.titleLabel];
     
     [self.menuBarView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -88,6 +91,12 @@
         make.top.equalTo(self.menuBarView.mas_top).with.offset(25);
         make.width.mas_equalTo(38);
         make.height.mas_equalTo(38);
+    }];
+    [self.scanButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.filterButton.mas_right).with.offset(5);
+        make.top.equalTo(self.menuBarView.mas_top).with.offset(25);
+        make.width.mas_equalTo(32);
+        make.height.mas_equalTo(32);
     }];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.menuBarView.mas_centerX);
@@ -149,13 +158,22 @@
         _filterButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [_filterButton setBackgroundColor:[UIColor clearColor]];
         [_filterButton setImage:[UIImage imageNamed:@"list_btn_filter"] forState:UIControlStateNormal];
-        [_filterButton setFrame:CGRectZero];
         _filterButton.adjustsImageWhenHighlighted = NO;
         [_filterButton addTarget:self action:@selector(filterProductAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _filterButton;
 }
 
+- (UIButton *)scanButton{
+    if (!_scanButton) {
+        _scanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_scanButton setBackgroundColor:[UIColor clearColor]];
+        [_scanButton setImage:[UIImage imageNamed:@"icon_scanCode"] forState:UIControlStateNormal];
+        _scanButton.adjustsImageWhenHighlighted = NO;
+        [_scanButton addTarget:self action:@selector(scanProductAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _scanButton;
+}
 
 - (UILabel *)titleLabel{
     if (!_titleLabel) {
@@ -294,6 +312,10 @@
 }
 
 - (void)filterProductAction
+{
+}
+
+- (void)scanProductAction
 {
 }
 

@@ -11,6 +11,7 @@
 #import "IPCGlassListViewController.h"
 #import "IPCPayOrderViewController.h"
 #import "IPCCustomerListViewController.h"
+#import "IPCScanCodeViewController.h"
 #import "IPCSideBarMenuView.h"
 
 @interface IPCRootViewController ()<IPCRootMenuViewControllerDelegate>
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
 @property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
 @property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
+@property (nonatomic, strong) IPCPortraitNavigationViewController * cameraNav;
 
 @end
 
@@ -46,6 +48,20 @@
         }else if (weakSelf.selectedIndex == 3){
             [strongSelf.tryVC onFilterProducts];
         }
+    }];
+    
+    [[self rac_signalForSelector:@selector(scanProductAction)] subscribeNext:^(RACTuple * _Nullable x)
+    {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        IPCScanCodeViewController *scanVc = [[IPCScanCodeViewController alloc] initWithFinish:^(NSString *result, NSError *error)
+        {
+            [strongSelf.cameraNav dismissViewControllerAnimated:YES completion:nil];
+            
+            [IPCAppManager sharedManager].isSelectProductCode = YES;
+            [strongSelf.productVC searchProductWithCode:result];
+        }];
+        strongSelf.cameraNav = [[IPCPortraitNavigationViewController alloc]initWithRootViewController:scanVc];
+        [weakSelf presentViewController:strongSelf.cameraNav animated:YES completion:nil];
     }];
     
     ///清除之前版本搜索数据

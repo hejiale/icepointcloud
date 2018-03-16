@@ -77,4 +77,16 @@
                               FailureBlock:(void (^)(NSError * error))failure;
 
 
+/**
+ Search With Code
+
+ @param code \
+ @param success
+ @param failure 
+ */
++ (void)searchProductWithCode:(NSString *)code
+                 SuccessBlock:(void (^)(id responseValue))success
+                 FailureBlock:(void (^)(NSError * error))failure;
+
+
 @end

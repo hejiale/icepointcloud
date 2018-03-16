@@ -123,23 +123,18 @@
 #pragma mark //Clicked Events
 - (void)reload
 {
-    
 }
 
 - (void)removeCover
 {
-    
 }
 
 - (void)onFilterProducts
 {
-    
-
 }
 
 - (void)onSearchProducts
 {
-    
 }
 
 //Show Choose Glasses Batch Paremeter View

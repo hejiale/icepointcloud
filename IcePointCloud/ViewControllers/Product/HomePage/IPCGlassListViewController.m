@@ -154,6 +154,10 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self presentViewController:searchViewMode animated:YES completion:nil];
 }
 
+- (void)searchProductWithCode:(NSString *)code
+{
+
+}
 
 - (IBAction)onGoTopAction:(id)sender {
     [self.goTopButton setHidden:YES];

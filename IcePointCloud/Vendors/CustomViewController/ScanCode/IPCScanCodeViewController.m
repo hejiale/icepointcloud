@@ -80,7 +80,7 @@
         if ([self.session canAddOutput:self.output]) [self.session addOutput:self.output];
         
         //设置扫码支持的编码格式【默认二维码】
-        self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+        [self.output setMetadataObjectTypes:@[AVMetadataObjectTypeQRCode,AVMetadataObjectTypeEAN13Code, AVMetadataObjectTypeEAN8Code, AVMetadataObjectTypeCode128Code]];
         //设置扫描聚焦区域
         self.output.rectOfInterest = _scanRect;
         
@@ -93,7 +93,6 @@
 
 - (void)initScanType
 {
-    self.output.metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
     self.title = @"二维码";
     _scanRect = CGRectFromString([self scanRectWithScale:1][0]);
     self.output.rectOfInterest = _scanRect;

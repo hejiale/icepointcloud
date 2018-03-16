@@ -10,4 +10,6 @@
 
 @interface IPCGlassListViewController : IPCProductViewController
 
+- (void)searchProductWithCode:(NSString *)code;
+
 @end

@@ -48,6 +48,7 @@
 #define GoodsRequest_GoodsList                          @"bizadmin.filterTryGlasses"
 #define GoodsRequest_RecommdList                     @"productAdmin.searchTryGlasses"
 #define GoodsRequest_PriceStrategy                     @"productAdmin.listPriceStrategyForListProduct"
+#define GoodsRequest_SearchProductWithCode     @"productAdmin.searchProduct"
 
 #define PayOrderRequest_CompanyConfig            @"companyAdmin.getCompanyConfig"
 #define PayOrderRequest_GetAuths                      @"bizadmin.getAuths" 

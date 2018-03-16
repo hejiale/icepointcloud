@@ -69,6 +69,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
  */
 - (void)queryRecommdGlasses:(IPCGlasses *)glass Complete:(void(^)())complete;
 
+
 /**
  Clear Data
  */
