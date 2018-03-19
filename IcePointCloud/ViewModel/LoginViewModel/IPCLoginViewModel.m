@@ -150,6 +150,14 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
         dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     });
     
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+        [weakSelf getProductConfig:^{
+            dispatch_semaphore_signal(semaphore);
+        }];
+        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    });
+    
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [[IPCAppManager sharedManager] loadCurrentWareHouse];
         [weakSelf showMainRootViewController];
@@ -244,6 +252,30 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     [IPCUserRequestManager getOpenPadConfigWithSuccessBlock:^(id responseValue) {
         if (complete) {
             complete([responseValue boolValue]);
+        }
+    } FailureBlock:^(NSError *error) {
+        
+    }];
+}
+
+- (void)getProductConfig:(void(^)())complete
+{
+    [IPCCustomerRequestManager getProductConfigWithSuccessBlock:^(id responseValue)
+    {
+        __block NSInteger rang = 0;
+        if ([responseValue isKindOfClass:[NSDictionary class]]) {
+            if ([responseValue[@"values"] isKindOfClass:[NSArray class]]) {
+                [responseValue[@"values"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if (idx < 2) {
+                        rang += [obj[@"figure"] integerValue];
+                    }
+                }];
+            }
+        }
+        [IPCAppManager sharedManager].interceptionDigits = rang;
+        
+        if (complete) {
+            complete();
         }
     } FailureBlock:^(NSError *error) {
         

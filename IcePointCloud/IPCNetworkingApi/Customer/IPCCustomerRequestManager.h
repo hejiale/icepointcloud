@@ -275,4 +275,14 @@
                               FailureBlock:(void (^)(NSError * error))failure;
 
 
+/**
+ Get Product Config
+
+ @param success
+ @param failure 
+ */
++ (void)getProductConfigWithSuccessBlock:(void (^)(id responseValue))success
+                            FailureBlock:(void (^)(NSError * error))failure;
+
+
 @end

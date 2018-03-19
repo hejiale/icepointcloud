@@ -38,7 +38,7 @@ static NSString * const parameterIdentifier = @"EditParameterCellIdentifier";
         
         [self.glassImageView setImageWithURL:[NSURL URLWithString:glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         [self.glassNameLabel setText:glasses.glassName];
-        [self.glassPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.price]];
+        [self.glassPriceLabel setText:[NSString stringWithFormat:@"￥%.f",glasses.suggestPrice]];
     
         if (glasses){
             CGAffineTransform transform = CGAffineTransformScale(self.editParameterView.transform, 0.2, 0.2);

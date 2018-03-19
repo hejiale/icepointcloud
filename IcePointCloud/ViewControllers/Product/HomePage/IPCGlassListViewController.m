@@ -107,6 +107,7 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     __weak typeof(self) weakSelf = self;
     [self loadNormalProducts:^{
         [weakSelf reload];
+        [weakSelf addScanCodeProductToCart];
     }];
     [self.glassListCollectionView reloadData];
 }
@@ -156,7 +157,19 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
 
 - (void)searchProductWithCode:(NSString *)code
 {
+    __weak typeof(self) weakSelf = self;
+    [self.glassListViewMode searchProductWithScanCode:code Complete:^
+    {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
 
+        NSString * productCode = [code substringToIndex:[IPCAppManager sharedManager].interceptionDigits];
+        
+        [IPCAppManager sharedManager].isSelectProductCode = YES;
+        strongSelf.glassListViewMode.searchWord = productCode;
+        [weakSelf beginFilterClass];
+        
+        strongSelf.glassListViewMode.isSearchWithCode = YES;
+    }];
 }
 
 - (IBAction)onGoTopAction:(id)sender {
@@ -173,6 +186,21 @@ static NSString * const glassListCellIdentifier = @"IPCGlasslistCollectionViewCe
     [self.glassListViewMode.filterView setCoverStatus:YES];
     
     [self stopRefresh];
+}
+
+- (void)addScanCodeProductToCart
+{
+    __weak typeof(self) weakSelf = self;
+    
+    if (self.glassListViewMode.isSearchWithCode && self.glassListViewMode.glassesList.count) {
+        [self.glassListViewMode.glassesList enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.isBatch) {
+                [weakSelf showGlassesParameterView:obj];
+            }else{
+                [[IPCShoppingCart sharedCart] plusGlass:obj];
+            }
+        }];
+    }
 }
 
 //Remover All Cover

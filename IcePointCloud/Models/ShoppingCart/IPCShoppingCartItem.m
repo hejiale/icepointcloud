@@ -52,30 +52,30 @@
     if ([self.glasses filterType] == IPCTopFIlterTypeFrames || [self.glasses filterType] == IPCTopFilterTypeSunGlasses || [self.glasses filterType] == IPCTopFilterTypeCustomized || [self.glasses filterType] == IPCTopFilterTypeReadingGlass)
     {
         [params setObject:@(self.glassCount) forKey:@"glassCount"];
-        [params setObject:@(self.glasses.price) forKey:@"glassPrice"];
+        [params setObject:@(self.glasses.suggestPrice) forKey:@"glassPrice"];
         if ([self.glasses filterType] == IPCTopFilterTypeReadingGlass) {
             [params setObject:@(self.prePrice) forKey:@"glassSuggestPrice"];
         }else{
-            [params setObject:@(self.glasses.price) forKey:@"glassSuggestPrice"];
+            [params setObject:@(self.glasses.suggestPrice) forKey:@"glassSuggestPrice"];
         }
         [params setObject:[self.glasses glassId] forKey:@"glassId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeLens || [self.glasses filterType] == IPCTopFilterTypeContactLenses)
     {
         [params setObject:@(self.glassCount) forKey:@"lensCount"];
-        [params setObject:@(self.glasses.price) forKey:@"lensPrice"];
+        [params setObject:@(self.glasses.suggestPrice) forKey:@"lensPrice"];
         [params setObject:@(self.prePrice) forKey:@"lensSuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"lensId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeAccessory)
     {
         [params setObject:@(self.glassCount) forKey:@"accessoryCount"];
-        [params setObject:@(self.glasses.price) forKey:@"accessoryPrice"];
-        [params setObject:@(self.glasses.price) forKey:@"accessorySuggestPrice"];
+        [params setObject:@(self.glasses.suggestPrice) forKey:@"accessoryPrice"];
+        [params setObject:@(self.glasses.suggestPrice) forKey:@"accessorySuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"accessoryId"];
     }else if ([self.glasses filterType] == IPCTopFilterTypeOthers)
     {
         [params setObject:@(self.glassCount) forKey:@"othersProductCount"];
-        [params setObject:@(self.glasses.price) forKey:@"othersProductPrice"];
-        [params setObject:@(self.glasses.price) forKey:@"othersProductSuggestPrice"];
+        [params setObject:@(self.glasses.suggestPrice) forKey:@"othersProductPrice"];
+        [params setObject:@(self.glasses.suggestPrice) forKey:@"othersProductSuggestPrice"];
         [params setObject:[self.glasses glassId] forKey:@"othersProductId"];
     }
     

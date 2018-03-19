@@ -7,6 +7,7 @@
 //
 
 #import "IPCProductViewMode.h"
+#import "IPCOrderGlasses.h"
 
 @interface IPCProductViewMode()<IPCFilterGlassesViewDataSource,IPCFilterGlassesViewDelegate>
 
@@ -44,6 +45,7 @@
     self.currentPage = 0;
     [self.glassesList removeAllObjects];
     self.glassesList = nil;
+    self.isSearchWithCode = NO;
 }
 
 
@@ -217,6 +219,24 @@
              complete();
          }
      }];
+}
+
+- (void)searchProductWithScanCode:(NSString *)scanCode  Complete:(void(^)())complete
+{
+    [IPCGoodsRequestManager searchProductWithCode:scanCode SuccessBlock:^(id responseValue)
+    {
+        if ([responseValue isKindOfClass:[NSArray class]]) {
+            id glass = responseValue[0];
+            self.currentType = [IPCGlasses filterType:glass[@"prodType"]];
+        }
+        if (complete) {
+            complete();
+        }
+    } FailureBlock:^(NSError *error) {
+        if (complete) {
+            complete();
+        }
+    }];
 }
 
 

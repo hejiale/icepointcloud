@@ -162,7 +162,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     if ([_glasses filterType] == IPCTopFilterTypeReadingGlass) {
         [IPCBatchRequestManager queryBatchLensPriceWithProductId:[self.glasses glassId]
                                                             Type:[self.glasses glassType]
-                                                             Sph:self.leftParameterLabel.text
+                                                             Sph:self.leftParameterLabel.text.length ? self.leftParameterLabel.text : @"0.00"
                                                              Cyl:@"0.00"
                                                     SuccessBlock:^(id responseValue){
                                                         [weakSelf reloadUIWithResponseValue:responseValue];
@@ -293,7 +293,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
         self.normalLensHeight.constant -= 55;
         [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.cartItem.prePrice]];
     }else{
-        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+        [self.normalLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.suggestPrice]];
     }
     [self.normalLensImageView setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.normalLensNameLabel setText:self.glasses.glassName];
@@ -312,7 +312,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }];
     [self.optometryLensImageView  setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.optometryLensNameLabel setText:self.glasses.glassName];
-    [self.optometryLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+    [self.optometryLensPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.suggestPrice]];
     
     [self refreshConfigPrice];
     [self refreshSureButtonStatus];
@@ -327,7 +327,7 @@ static NSString * const identifier = @"ChooseBatchParameterCellIdentifier";
     }];
     [self. customsizedImageView  setImageWithURL:[NSURL URLWithString:self.glasses.thumbImage.imageURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
     [self.customsizedNameLabel setText:self.glasses.glassName];
-    [self.customsizedPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.price]];
+    [self.customsizedPriceLabel setText:[NSString stringWithFormat:@"￥%.f",self.glasses.suggestPrice]];
     
     [self refreshSureButtonStatus];
 }

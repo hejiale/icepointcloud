@@ -8,35 +8,33 @@
 
 #import "IPCInsertNewOptometryView.h"
 #import "IPCEmployeListView.h"
+#import "IPCOptometryKeyboardView.h"
+#import "IPCOptometryTextField.h"
 
-@interface IPCInsertNewOptometryView()<UITextFieldDelegate,UITextViewDelegate>
+@interface IPCInsertNewOptometryView()<IPCOptometryKeyboardViewDelegate,UITextFieldDelegate>
 {
-    NSString * currentCustomerId;
+    BOOL         isRight;
+    NSInteger   optometryIndex;
 }
+
+@property (weak, nonatomic) IBOutlet UIScrollView *optometryScrollView;
+@property (weak, nonatomic) IBOutlet UIView *optometryScrollContentView;
+@property (weak, nonatomic) IBOutlet UIView *keyBoardView;
 @property (weak, nonatomic) IBOutlet UIView  * inputHeadView;
 @property (weak, nonatomic) IBOutlet UIView  * inputInfoView;
-@property (weak, nonatomic) IBOutlet UIView * inputMemoView;
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
 @property (weak, nonatomic) IBOutlet UITextField *employeeTextField;
 @property (weak, nonatomic) IBOutlet UIButton *farButton;
 @property (weak, nonatomic) IBOutlet UIButton *nearButton;
-@property (weak, nonatomic) IBOutlet UITextField *leftSphTextField;
-@property (weak, nonatomic) IBOutlet UITextField *leftCylTextField;
-@property (weak, nonatomic) IBOutlet UITextField *leftAxisTextField;
-@property (weak, nonatomic) IBOutlet UITextField *leftAddTextField;
-@property (weak, nonatomic) IBOutlet UITextField *leftCorrectionTextField;
-@property (weak, nonatomic) IBOutlet UITextField *leftDistanceTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rightSphTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rightCylTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rightAxisTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rightAddTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rightCorrectionTextField;
-@property (weak, nonatomic) IBOutlet UITextField *rightDistanceTextField;
-@property (weak, nonatomic) IBOutlet UITextField *comprehensiveDistanceTextField;
-@property (weak, nonatomic) IBOutlet UITextView *memoTextField;
-
+@property (weak, nonatomic) IBOutlet UILabel *keyboardTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *keyboardValueLabel;
+@property (weak, nonatomic) IBOutlet UITextField *memoTextField;
+@property (nonatomic, strong) IPCOptometryKeyboardView * keyboard;
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
 @property (nonatomic, copy) void(^CompleteBlock)(IPCOptometryMode *);
+@property (nonatomic, copy) NSString  * customerId;
+@property (nonatomic, strong) NSMutableArray<IPCOptometryTextField *> * allTextFields;
+
 
 @end
 
@@ -49,8 +47,9 @@
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCInsertNewOptometryView" owner:self];
         [self addSubview:view];
         
+        isRight = YES;
         self.CompleteBlock = complete;
-        currentCustomerId = customerId;
+        self.customerId = customerId;
         self.insertOptometry = [[IPCOptometryMode alloc]init];
     }
     return self;
@@ -60,59 +59,79 @@
 {
     [super layoutSubviews];
     
-    [self.inputInfoView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UITextField class]]) {
-            UITextField * textField = (UITextField *)obj;
+    __weak typeof(self) weakSelf = self;
+    [self.optometryScrollContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[IPCOptometryTextField class]]) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            IPCOptometryTextField * textField = (IPCOptometryTextField *)obj;
             [textField addBottomLine];
+            [textField setPlaceHolderText:@"请输入"];
+            [strongSelf.allTextFields addObject:textField];
+            
+            UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:strongSelf action:@selector(tapTextFieldAction:)];
+            [textField addGestureRecognizer:tap];
         }
     }];
     
-    [self.inputHeadView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj isKindOfClass:[UITextField class]]) {
-            UITextField * textField = (UITextField *)obj;
-            [textField addBottomLine];
-        }
-    }];
-    
-    [self.memoTextField addBorder:0 Width:1 Color:nil];
     [self.employeeTextField setRightButton:self Action:@selector(selectEmployeeAction) OnView:self.inputHeadView];
+    [self.keyBoardView addSubview:self.keyboard];
+}
+
+- (NSMutableArray<IPCOptometryTextField *> *)allTextFields
+{
+    if (!_allTextFields) {
+        _allTextFields = [[NSMutableArray alloc]init];
+    }
+    return _allTextFields;
+}
+
+#pragma mark //Set UI
+- (IPCOptometryKeyboardView *)keyboard
+{
+    if (!_keyboard) {
+        _keyboard = [[IPCOptometryKeyboardView alloc]initWithFrame:self.keyBoardView.bounds];
+        _keyboard.delegate = self;
+    }
+    return _keyboard;
 }
 
 #pragma mark //Request Methods
 - (void)saveNewOptometry
 {
-    [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:currentCustomerId
-                                                          SphLeft:self.leftSphTextField.text
-                                                         SphRight:self.rightSphTextField.text
-                                                          CylLeft:self.leftCylTextField.text
-                                                         CylRight:self.rightCylTextField.text
-                                                         AxisLeft:self.leftAxisTextField.text
-                                                        AxisRight:self.rightAxisTextField.text
-                                                          AddLeft:self.leftAddTextField.text
-                                                         AddRight:self.rightAddTextField.text
-                                              CorrectedVisionLeft:self.leftCorrectionTextField.text
-                                             CorrectedVisionRight:self.rightCorrectionTextField.text
-                                                     DistanceLeft:self.leftDistanceTextField.text
-                                                    DistanceRight:self.rightDistanceTextField.text
+    __weak typeof(self) weakSelf = self;
+    [IPCCustomerRequestManager storeUserOptometryInfoWithCustomID:self.customerId
+                                                          SphLeft:self.insertOptometry.sphLeft
+                                                         SphRight:self.insertOptometry.sphRight
+                                                          CylLeft:self.insertOptometry.cylLeft
+                                                         CylRight:self.insertOptometry.cylRight
+                                                         AxisLeft:self.insertOptometry.axisLeft
+                                                        AxisRight:self.insertOptometry.axisRight
+                                                          AddLeft:self.insertOptometry.addLeft
+                                                         AddRight:self.insertOptometry.addRight
+                                              CorrectedVisionLeft:self.insertOptometry.correctedVisionLeft
+                                             CorrectedVisionRight:self.insertOptometry.correctedVisionRight
+                                                     DistanceLeft:self.insertOptometry.distanceLeft
+                                                    DistanceRight:self.insertOptometry.distanceRight
                                                           Purpose:self.insertOptometry.purpose
                                                        EmployeeId:self.insertOptometry.employeeId
                                                      EmployeeName:self.employeeTextField.text
-                                                    Comprehensive:self.comprehensiveDistanceTextField.text
+                                                    Comprehensive:self.insertOptometry.comprehensive
                                                            Remark:self.memoTextField.text
                                                      SuccessBlock:^(id responseValue)
      {
+         __strong typeof(weakSelf) strongSelf = weakSelf;
          IPCOptometryMode * optometry = [IPCOptometryMode mj_objectWithKeyValues:responseValue];
-         [self removeFromSuperview];
+         [weakSelf removeFromSuperview];
          
-         if (self.CompleteBlock) {
-             self.CompleteBlock(optometry);
+         if (strongSelf.CompleteBlock) {
+             strongSelf.CompleteBlock(optometry);
          }
      } FailureBlock:^(NSError *error) {
-         [IPCCommonUI showError:error.domain];
-         [self removeFromSuperview];
+         __strong typeof(weakSelf) strongSelf = weakSelf;
+         [weakSelf removeFromSuperview];
          
-         if (self.CompleteBlock) {
-             self.CompleteBlock(nil);
+         if (strongSelf.CompleteBlock) {
+             strongSelf.CompleteBlock(nil);
          }
      }];
 }
@@ -120,10 +139,6 @@
 #pragma mark //Clicked Events
 - (IBAction)cancelAction:(id)sender {
     [self removeFromSuperview];
-    
-    if (self.CompleteBlock) {
-        self.CompleteBlock(nil);
-    }
 }
 
 
@@ -139,25 +154,78 @@
 }
 
 #pragma mark //Clicked Events
-- (IBAction)rightInputAction:(id)sender {
-    [self.leftSphTextField setText:self.rightSphTextField.text];
-    [self.leftCylTextField setText:self.rightCylTextField.text];
-    [self.leftAddTextField setText:self.rightAddTextField.text];
-    [self.leftAxisTextField setText:self.rightAxisTextField.text];
-    [self.leftDistanceTextField setText:self.rightDistanceTextField.text];
-    [self.leftCorrectionTextField setText:self.rightCorrectionTextField.text];
-    [self updateTotalDistance];
+- (IBAction)leftOrRightChangeAction:(UISegmentedControl *)sender {
+    isRight = (sender.selectedSegmentIndex == 0 ? YES : NO);
+    [self endEditing];
+    [self reloadInfo];
 }
 
-- (IBAction)leftInputAction:(id)sender {
-    [self.rightSphTextField setText:self.leftSphTextField.text];
-    [self.rightCylTextField setText:self.leftCylTextField.text];
-    [self.rightAddTextField setText:self.leftAddTextField.text];
-    [self.rightAxisTextField setText:self.leftAxisTextField.text];
-    [self.rightDistanceTextField setText:self.leftDistanceTextField.text];
-    [self.rightCorrectionTextField setText:self.leftCorrectionTextField.text];
-    [self updateTotalDistance];
+- (void)reloadInfo
+{
+    if (isRight) {
+        [[self textField:0] setText:self.insertOptometry.sphRight];
+        [[self textField:1] setText:self.insertOptometry.cylRight];
+        [[self textField:2] setText:self.insertOptometry.axisRight];
+        [[self textField:3] setText:self.insertOptometry.addRight];
+        [[self textField:4] setText:self.insertOptometry.correctedVisionRight];
+        [[self textField:5] setText:self.insertOptometry.distanceRight];
+    }else{
+        [[self textField:0] setText:self.insertOptometry.sphLeft];
+        [[self textField:1] setText:self.insertOptometry.cylLeft];
+        [[self textField:2] setText:self.insertOptometry.axisLeft];
+        [[self textField:3] setText:self.insertOptometry.addLeft];
+        [[self textField:4] setText:self.insertOptometry.correctedVisionLeft];
+        [[self textField:5] setText:self.insertOptometry.distanceLeft];
+    }
 }
+
+- (void)tapTextFieldAction:(UITapGestureRecognizer *)sender
+{
+    optometryIndex = [sender.view tag];
+    
+    [self.allTextFields enumerateObjectsUsingBlock:^(IPCOptometryTextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.tag == [sender view].tag) {
+            [obj addBorder:0 Width:1 Color:COLOR_RGB_BLUE];
+        }else{
+            [obj addBorder:0 Width:0 Color:nil];
+        }
+    }];
+    [self reloadKeyboardUI:[sender view].tag];
+    [self.keyboardValueLabel setText:[self currentTextField].text];
+    self.keyboard.isEdit = YES;
+    [self.keyboard inputValue:[self currentTextField].text];
+    [self.keyboard setIndex:optometryIndex];
+}
+
+- (void)reloadKeyboardUI:(NSInteger)tag
+{
+    [self.optometryScrollContentView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[UILabel class]]) {
+            UILabel * label = (UILabel *)obj;
+            if (label.tag == tag) {
+                [self.keyboardTitleLabel setText:label.text];
+            }
+        }
+    }];
+}
+
+- (IPCOptometryTextField *)currentTextField
+{
+    return [self textField:optometryIndex];
+}
+
+- (IPCOptometryTextField *)textField:(NSInteger)index
+{
+    __block IPCOptometryTextField * textField = nil;
+    
+    [self.allTextFields enumerateObjectsUsingBlock:^(IPCOptometryTextField * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.tag == index) {
+            textField = obj;
+        }
+    }];
+    return textField;
+}
+
 
 - (IBAction)farUseAction:(id)sender {
     [self.farButton setSelected:YES];
@@ -176,141 +244,153 @@
 {
     __weak typeof(self) weakSelf = self;
     IPCEmployeListView * listView = [[IPCEmployeListView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
-                                                                DismissBlock:^(IPCEmployee *employee)
-                                     {
-                                         __strong typeof(weakSelf) strongSelf = weakSelf;
-                                         strongSelf.insertOptometry.employeeId = employee.jobID;
-                                         [strongSelf.employeeTextField setText:employee.name];
-                                     }];
+                                                                              DismissBlock:^(IPCEmployee *employee)
+                                            {
+                                                __strong typeof(weakSelf) strongSelf = weakSelf;
+                                                strongSelf.insertOptometry.employeeId = employee.jobID;
+                                                [strongSelf.employeeTextField setText:employee.name];
+                                            }];
     [[UIApplication sharedApplication].keyWindow addSubview:listView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:listView];
 }
 
-#pragma mark //UITextFieldDelegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (![IPCCommon judgeIsNumber:string])
-        return NO;
-    if (textField.tag != 0 && textField.tag != 1 && textField.tag != 3 && textField.tag != 6 && textField.tag != 7 && textField.tag != 9) {
-        if (![IPCCommon judgeIsFloatNumber:string]) {
-            return NO;
-        }
-    }else if(textField.tag == 0 || textField.tag == 1 || textField.tag == 3 || textField.tag == 6 || textField.tag == 7 || textField.tag == 9){
-        if ([textField.text containsString:@"-"] || [textField.text containsString:@"+"]) {
-            if ([string isEqualToString:@"-"] || [string isEqualToString:@"+"]) {
-                return NO;
-            }
-        }
-    }
-    return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField.tag == 11 || textField.tag == 12) {
-        [textField resignFirstResponder];
-    }else{
-        UITextField * nextTextField = (UITextField *)[self viewWithTag:textField.tag+1];
-        [nextTextField becomeFirstResponder];
-    }
-    return YES;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
+#pragma mark //IPCOptometryKeyboardViewDelegate
+- (void)keyboardChangeEditing:(NSString *)text Keyboard:(IPCOptometryKeyboardView *)keyboard
 {
-    NSString * str = [textField.text jk_trimmingWhitespace];
+    [self.keyboardValueLabel setText:text];
+    [[self currentTextField] setText:text];
     
-    if ([self isZero:str] > 0) {
-        if (textField.tag != 4 && textField.tag != 10) {
-            if (textField.tag == 2 || textField.tag == 8)
-            {
-                if ([str doubleValue] >= 0 && [str doubleValue] <= 180) {
-                    [textField setText:[NSString stringWithFormat:@"%.f",[str doubleValue]]];
-                }else{
-                    [textField setText:@""];
-                }
-            }else if (textField.tag == 5 || textField.tag == 11 || textField.tag == 12){
-                [self updateOptometryDistance:textField Text:str];
+    switch (optometryIndex) {
+        case 0:
+            if (isRight) {
+                self.insertOptometry.sphRight = text;
             }else{
-                if ([str hasPrefix:@"-"]) {
-                    [textField setText:[NSString stringWithFormat:@"-%.2f",[self isZero:str]]];
-                }else{
-                    [textField setText:[NSString stringWithFormat:@"+%.2f",[self isZero:str]]];
-                }
+                self.insertOptometry.sphLeft = text;
             }
-        }
-    }else{
-        if (textField.tag == 0 || textField.tag == 1 || textField.tag == 3 || textField.tag == 6 || textField.tag == 7 || textField.tag == 9) {
-            [textField setText:@"0.00"];
-        }
+            break;
+        case 1:
+            if (isRight) {
+                self.insertOptometry.cylRight = text;
+            }else{
+                self.insertOptometry.cylLeft = text;
+            }
+            break;
+        case 2:
+            if (isRight) {
+                self.insertOptometry.axisRight = text;
+            }else{
+                self.insertOptometry.axisLeft = text;
+            }
+            break;
+        case 3:
+            if (isRight) {
+                self.insertOptometry.addRight = text;
+            }else{
+                self.insertOptometry.addLeft = text;
+            }
+            break;
+        case 4:
+            if (isRight) {
+                self.insertOptometry.correctedVisionRight = text;
+            }else{
+                self.insertOptometry.correctedVisionLeft = text;
+            }
+            break;
+        case 5:
+            if (isRight) {
+                self.insertOptometry.distanceRight = text;
+            }else{
+                self.insertOptometry.distanceLeft = text;
+            }
+            [self updateOptometryDistance];
+            break;
+        case 12:
+            self.insertOptometry.comprehensive = text;
+            [self updateOptometryDistance];
+            break;
+        default:
+            break;
     }
 }
 
-- (double)isZero:(NSString *)str
+- (void)keyboardEndEditing:(NSString *)text Keyboard:(IPCOptometryKeyboardView *)keyboard
 {
-    if (str.length) {
-        if ([str hasPrefix:@"-"] || [str hasPrefix:@"+"]) {
-            return [[str substringFromIndex:1] doubleValue];
-        }
-        return [str doubleValue];
-    }
-    return 0;
+    [self endEditing];
+}
+
+- (void)endEditing
+{
+    [self.keyboardTitleLabel setText:@""];
+    [self.keyboardValueLabel setText:@""];
+    [self.keyboard clearString];
+    self.keyboard.isEdit = NO;
+    [[self currentTextField] addBorder:0 Width:0 Color:nil];
 }
 
 #pragma mark //UITextViewDelegate
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+/////修改瞳距
+- (void)updateOptometryDistance
 {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
+    double leftDistance = 0;
+    double rightDistance = 0;
+    
+    if (optometryIndex == 5){
+        if (isRight) {
+            if (self.insertOptometry.distanceLeft.length) {
+                leftDistance = [[self.insertOptometry.distanceLeft substringToIndex:self.insertOptometry.distanceLeft.length - 2] doubleValue];
+            }
+            if ([self currentTextField].text.length) {
+                rightDistance = [[[self currentTextField].text substringToIndex:[self currentTextField].text.length - 2] doubleValue];
+            }else{
+                rightDistance = 0;
+            }
+        }else{
+            if (self.insertOptometry.distanceRight.length) {
+                rightDistance = [[self.insertOptometry.distanceRight substringToIndex:self.insertOptometry.distanceRight.length - 2] doubleValue];
+            }
+            if ([self currentTextField].text.length) {
+                leftDistance = [[[self currentTextField].text substringToIndex:[self currentTextField].text.length - 2] doubleValue];
+            }else{
+                leftDistance = 0;
+            }
+        }
+        if (rightDistance + leftDistance == 0) {
+            [self textField:12].text = @"";
+        }else{
+            [self textField:12].text = [NSString stringWithFormat:@"%.2fmm", rightDistance + leftDistance];
+        }
+        self.insertOptometry.comprehensive = [self textField:6].text;
+    }else if(optometryIndex == 12)
+    {
+        double comprehensive = 0;
+        
+        if ([self currentTextField].text.length) {
+            comprehensive = [[[self currentTextField].text substringToIndex:[self currentTextField].text.length -2 ]doubleValue];
+        }
+        
+        if (comprehensive > 0) {
+            self.insertOptometry.distanceLeft   = [NSString stringWithFormat:@"%.2fmm", comprehensive/2];
+            self.insertOptometry.distanceRight = [NSString stringWithFormat:@"%.2fmm", comprehensive/2];
+        }else{
+            self.insertOptometry.distanceLeft   = @"";
+            self.insertOptometry.distanceRight = @"";
+        }
     }
+    [self reloadInfo];
+}
+
+#pragma mark //UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [self endEditing];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField endEditing:YES];
     return YES;
 }
 
-///修改瞳距
-- (void)updateOptometryDistance:(UITextField *)textField Text:(NSString *)text
-{
-    if (textField.tag == 5 )
-    {
-        double leftDistance = 0;
-        
-        if (self.leftDistanceTextField.text.length) {
-            leftDistance = [[self.leftDistanceTextField.text substringToIndex:self.leftDistanceTextField.text.length - 3] doubleValue];
-        }
-        
-        textField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]];
-        self.comprehensiveDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm", [text doubleValue] + leftDistance];
-        
-    }else if (textField.tag == 11){
-        double rightDistance = 0;
-        
-        if (self.rightDistanceTextField.text.length) {
-            rightDistance = [[self.rightDistanceTextField.text substringToIndex:self.rightDistanceTextField.text.length - 3] doubleValue];
-        }
-        
-        textField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]];
-        self.comprehensiveDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm", [text doubleValue] + rightDistance];
-    }else{
-        textField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]];
-        
-        self.leftDistanceTextField.text   = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]/2];
-        self.rightDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm",[text doubleValue]/2];
-    }
-}
 
-- (void)updateTotalDistance
-{
-    double leftDistance = 0;
-    
-    if (self.leftDistanceTextField.text.length) {
-        leftDistance = [[self.leftDistanceTextField.text substringToIndex:self.leftDistanceTextField.text.length - 3] doubleValue];
-    }
-    
-    double rightDistance = 0;
-    
-    if (self.rightDistanceTextField.text.length) {
-        rightDistance = [[self.rightDistanceTextField.text substringToIndex:self.rightDistanceTextField.text.length - 3] doubleValue];
-    }
-    
-    self.comprehensiveDistanceTextField.text = [NSString stringWithFormat:@"%.2f mm", leftDistance + rightDistance];
-}
 
 @end

@@ -81,7 +81,7 @@
 
 + (void)searchProductWithCode:(NSString *)code SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    [self postRequest:@{@"prodCode":code, @"storeId":[IPCAppManager sharedManager].currentStrategy.strategyId ? : @"", @"orderType": @"FOR_SALES"} RequestMethod:GoodsRequest_SearchProductWithCode CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"prodCode":code, @"storeId":[IPCAppManager sharedManager].currentStrategy.strategyId ? : @"", @"orderType": @"FOR_SALES",@"isNeedPhoto":@"true"} RequestMethod:GoodsRequest_SearchProductWithCode CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

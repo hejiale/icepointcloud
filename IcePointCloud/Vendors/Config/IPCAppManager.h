@@ -50,6 +50,7 @@ extern NSString * const kIPCDeviceLoginUUID;
 @property (nonatomic, strong, readwrite)    IPCPriceStrategy        * currentStrategy;
 @property (nonatomic, strong, readwrite)    IPCCompanyConfig   * companyCofig;
 @property (nonatomic, strong, readwrite)    IPCAuthList               * authList;
+@property (nonatomic, assign, readwrite)    NSInteger                    interceptionDigits;//截取商品编码位数
 
 
 + (IPCAppManager *)sharedManager;

@@ -17,9 +17,9 @@
 @property (nonatomic, strong, readwrite) IPCGlassesImage *frontialTryOnImage;
 @property (nonatomic, strong, readwrite) IPCGlassesImage *thumbImage;
 ///商品参数
-@property (nonatomic, copy, readonly) NSString * glassName;//name
-@property (nonatomic, copy, readonly) NSString * glassesID;// id
-@property (nonatomic, assign, readonly) double    price;//Recommended retail price
+@property (nonatomic, copy, readwrite) NSString * glassName;//name
+@property (nonatomic, copy, readwrite) NSString * glassesID;// id
+@property (nonatomic, assign, readwrite) double    suggestPrice;//Recommended retail price
 @property (nonatomic, assign, readwrite) double   updatePrice;//选择规格后的价格
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 @property (nonatomic, copy, readonly) NSString * brand;//brand
@@ -55,6 +55,7 @@
 ///库存
 @property (nonatomic, assign, readonly) NSInteger  stock;//inventory
 
++ (IPCTopFilterType)filterType:(NSString *)typeName;
 - (IPCGlassesImage *)imageWithType:(IPCGlassesImageType)type;
 - (IPCTopFilterType)filterType;
 - (NSString *)glassType;

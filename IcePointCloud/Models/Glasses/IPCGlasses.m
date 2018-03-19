@@ -64,6 +64,26 @@
     return IPCTopFilterTypeOthers;
 }
 
++ (IPCTopFilterType)filterType:(NSString *)typeName
+{
+    if ([typeName isEqualToString:@"FRAMES"]) {
+        return IPCTopFIlterTypeFrames;
+    }else if ([typeName isEqualToString:@"SUNGLASSES"]){
+        return IPCTopFilterTypeSunGlasses;
+    }else if ([typeName isEqualToString:@"CUSTOMIZED"]){
+        return IPCTopFilterTypeCustomized;
+    }else if ([typeName isEqualToString:@"READING_GLASSES"]){
+        return IPCTopFilterTypeReadingGlass;
+    }else if ([typeName isEqualToString:@"LENS"]){
+        return IPCTopFilterTypeLens;
+    }else if ([typeName isEqualToString:@"CONTACT_LENSES"]){
+        return IPCTopFilterTypeContactLenses;
+    }else if ([typeName isEqualToString:@"ACCESSORY"]){
+        return IPCTopFilterTypeAccessory;
+    }
+    return IPCTopFilterTypeOthers;
+}
+
 - (NSString *)glassType
 {
     NSRange range = [self.glassesID rangeOfString:@"-"];
@@ -80,7 +100,6 @@
 + (NSDictionary *)replacedKeyFromPropertyName{
     return @{@"glassName"           : @"name",
              @"glassesID"                  : @"id",
-             @"price"                        : @"suggestPrice",
              @"border"                     : @"frame",
              @"detailLinkURl"           : @"desc",
              @"stock"                       : @"inventoryStock",

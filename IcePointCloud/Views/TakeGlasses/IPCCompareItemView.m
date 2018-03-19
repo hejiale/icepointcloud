@@ -155,7 +155,7 @@
         
         if (glasses) {
             self.glassesNameLbl.text = glasses.glassName;
-            self.glassesPriceLbl.text = [NSString stringWithFormat:@"￥%.f", glasses.price];
+            self.glassesPriceLbl.text = [NSString stringWithFormat:@"￥%.f", glasses.suggestPrice];
         }else{
             [self.glassesNameLbl setText:@""];[self.glassesPriceLbl setText:@""];
         }

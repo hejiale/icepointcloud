@@ -276,9 +276,16 @@
         if (_selectedIndex == 1 || _selectedIndex == 3) {
             [self.filterButton setHidden:NO];
             [self.logoImageView setHidden:NO];
+            
+            if (_selectedIndex == 1) {
+                [self.scanButton setHidden:NO];
+            }else{
+                [self.scanButton setHidden:YES];
+            }
         }else{
             [self.logoImageView setHidden:YES];
             [self.filterButton setHidden:YES];
+            [self.scanButton setHidden:YES];
         }
         
         if(_selectedIndex == 2 || _selectedIndex == 4){

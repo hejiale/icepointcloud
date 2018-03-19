@@ -37,6 +37,7 @@
 #define CustomerRequest_UpgradeMember          @"customerAdmin.customerUpdateToMember"
 #define CustomerRequest_ValidateCustomer        @"customerAdmin.validateCustomerQRcode"
 #define CustomerRequest_UpdateMemberPhone   @"customerAdmin.updateCustomerMemberPhone"
+#define CustomerRequest_ProductConfig              @"productConfigAdmin.getProductConfig"
 
 ///会员体系
 #define CustomerRequest_MemberList                  @"customerAdmin.listCustomerMemberAccount"

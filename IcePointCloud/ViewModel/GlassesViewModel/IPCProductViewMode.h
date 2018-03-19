@@ -35,6 +35,7 @@ typedef void(^ReloadFilterUnCloseBlock)();
 @property (nonatomic, assign) NSInteger   currentPage;
 @property (nonatomic, assign) NSInteger   limit;
 @property (nonatomic, assign) BOOL         isTrying;
+@property (nonatomic, assign) BOOL         isSearchWithCode;
 //Current Glasses Type
 @property (nonatomic, assign) IPCTopFilterType   currentType;
 //Refresh Data Status
@@ -68,6 +69,14 @@ typedef void(^ReloadFilterUnCloseBlock)();
  Get Try Recommd Glasses Data
  */
 - (void)queryRecommdGlasses:(IPCGlasses *)glass Complete:(void(^)())complete;
+
+
+/**
+ Search With Scan Code
+
+ @param scanCode
+ */
+- (void)searchProductWithScanCode:(NSString *)scanCode  Complete:(void(^)())complete;
 
 
 /**

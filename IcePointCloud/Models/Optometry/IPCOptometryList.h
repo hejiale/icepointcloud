@@ -32,6 +32,17 @@
 @property (nonatomic, copy, readwrite) NSString * distanceRight;//pd
 @property (nonatomic, copy, readwrite) NSString * correctedVisionLeft;
 @property (nonatomic, copy, readwrite) NSString * correctedVisionRight;
+@property (nonatomic, copy, readwrite) NSString * basalInLeft;//基底内
+@property (nonatomic, copy, readwrite) NSString * basalInRight;//基底内
+@property (nonatomic, copy, readwrite) NSString * basalOutLeft;//基底外
+@property (nonatomic, copy, readwrite) NSString * basalOutRight;//基底外
+@property (nonatomic, copy, readwrite) NSString * basalUpLeft;//基底上
+@property (nonatomic, copy, readwrite) NSString * basalUpRight;//基底上
+@property (nonatomic, copy, readwrite) NSString * basalDownLeft;//基底下
+@property (nonatomic, copy, readwrite) NSString * basalDownRight;//基底下
+@property (nonatomic, copy, readwrite) NSString * prismLeft;//棱镜
+@property (nonatomic, copy, readwrite) NSString * prismRight;//棱镜
+@property (nonatomic, copy, readwrite) NSString * originalMirrorPD;//原镜瞳距
 @property (nonatomic, copy, readwrite) NSString * refraction;//The refractive index
 @property (nonatomic, copy, readwrite) NSString * insertDate;//insert time
 @property (nonatomic, copy, readwrite) NSString * purpose;

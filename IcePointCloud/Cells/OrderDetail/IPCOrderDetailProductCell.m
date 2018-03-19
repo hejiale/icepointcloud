@@ -90,7 +90,7 @@
         [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];
-        [self.productPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.price]];
+        [self.productPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.suggestPrice]];
         [self.suggestPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.afterDiscountPrice]];
     
         if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses) && _glasses.isBatch) {

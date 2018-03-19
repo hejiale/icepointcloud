@@ -47,4 +47,11 @@
  @param complete 
  */
 - (void)valityActiveCode:(NSString *)code;
+
+
+/**
+  Get Product Config
+ */
+- (void)getProductConfig:(void(^)())complete;
+
 @end

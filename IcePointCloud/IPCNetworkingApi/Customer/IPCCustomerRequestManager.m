@@ -181,4 +181,9 @@
     [self postRequest:nil RequestMethod:CustomerRequest_GetVisitorCustomer CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)getProductConfigWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
+{
+    [self postRequest:nil RequestMethod:CustomerRequest_ProductConfig CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

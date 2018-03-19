@@ -58,7 +58,7 @@
         [self.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull glass, NSUInteger idx, BOOL * _Nonnull stop) {
             __strong typeof(weakSelf) strongSelf = weakSelf;
             strongSelf.orderInfo.totalPayAmount += glass.totalPrice;
-            strongSelf.orderInfo.totalSuggestAmount += glass.price * glass.productCount;
+            strongSelf.orderInfo.totalSuggestAmount += glass.suggestPrice * glass.productCount;
         }];
         
         self.orderInfo.totalDonationAmount = self.orderInfo.totalSuggestAmount - self.orderInfo.totalPayAmount;

@@ -163,8 +163,8 @@
             item.unitPrice = glasses.updatePrice * ([self customDiscount]/100);
             item.prePrice = glasses.updatePrice;
         }else{
-            item.unitPrice = glasses.price * ([self customDiscount]/100);
-            item.prePrice = glasses.price;
+            item.unitPrice = glasses.suggestPrice * ([self customDiscount]/100);
+            item.prePrice = glasses.suggestPrice;
         }
         item.glasses = glasses;
         item.glassCount   = count;
