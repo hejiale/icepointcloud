@@ -49,6 +49,8 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
             return @"READING_GLASSES";
         case IPCTopFilterTypeContactLenses:
             return @"CONTACT_LENSES";
+        case IPCTopFilterTypeSolution:
+            return @"SOLUTION";
         case IPCTopFilterTypeAccessory:
             return @"ACCESSORY";
         case IPCTopFilterTypeOthers:
@@ -78,6 +80,8 @@ NSString * const kIPCNotConnectInternetMessage         = @"连接服务出错了
             return @"隐形眼镜";
         case IPCTopFilterTypeAccessory:
             return @"配件";
+        case IPCTopFilterTypeSolution:
+            return @"护理液";
         case IPCTopFilterTypeOthers:
             return @"其它";
         default:

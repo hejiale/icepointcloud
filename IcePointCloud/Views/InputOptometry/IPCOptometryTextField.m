@@ -73,4 +73,8 @@
     }
 }
 
+- (void)endEditing{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"IPCOptometryPreTextFieldEndEditingNotification" object:nil];
+}
+
 @end

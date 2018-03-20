@@ -79,6 +79,13 @@
     
     if (sender.tag <= PointKeboardType)
     {
+        if (self.index == 5 || self.index == 12) {
+            if ([self.appendString containsString:@"mm"]) {
+                NSRange rang = [self.appendString rangeOfString:@"mm"];
+                [self.appendString deleteCharactersInRange:NSMakeRange(rang.location, 2)];
+            }
+        }
+        
         NSInteger suffixLength = 0;
         NSString * suffixString = nil;
         
@@ -86,6 +93,10 @@
             NSRange rang = [self.appendString rangeOfString:@"."];
             suffixString = [self.appendString substringFromIndex:rang.location+1];
             suffixLength = suffixString.length;
+            
+            if (suffixLength == 2) {
+                return;
+            }
         }
         
         NSString * number = sender.titleLabel.text;
@@ -103,12 +114,8 @@
             }
         }
         [self.appendString appendString:number];
-        
+    
         if (self.index == 5 || self.index == 12) {
-            if ([self.appendString containsString:@"mm"]) {
-                NSRange rang = [self.appendString rangeOfString:@"mm"];
-                [self.appendString deleteCharactersInRange:NSMakeRange(rang.location, 2)];
-            }
             [self.appendString appendString:@"mm"];
         }
         
@@ -144,14 +151,24 @@
                     NSRange rang = [self.appendString rangeOfString:@"mm"];
                     [self.appendString deleteCharactersInRange:NSMakeRange(rang.location, 2)];
                 }
-                
-                [self.appendString deleteCharactersInRange:NSMakeRange(self.appendString.length-1, 1)];
-                
+            }
+            
+            [self.appendString deleteCharactersInRange:NSMakeRange(self.appendString.length-1, 1)];
+            
+            ///若最后一个字符是"." "+" "-" 去除
+            if (self.appendString.length) {
+                NSString * lastCharacter = [self.appendString substringFromIndex:self.appendString.length - 1];
+                if ([lastCharacter isEqualToString:@"."]) {
+                    [self.appendString deleteCharactersInRange:NSMakeRange(self.appendString.length-1, 1)];
+                }else if ([lastCharacter isEqualToString:@"+"] || [lastCharacter isEqualToString:@"-"]){
+                    [self clearString];
+                }
+            }
+            
+            if (self.index == 5 || self.index == 12) {
                 if (self.appendString.length) {
                     [self.appendString appendString:@"mm"];
                 }
-            }else{
-                [self.appendString deleteCharactersInRange:NSMakeRange(self.appendString.length-1, 1)];
             }
         }else{
             [self clearString];

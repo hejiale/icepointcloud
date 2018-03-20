@@ -93,6 +93,10 @@ typedef NS_ENUM(NSInteger, IPCTopFilterType) {
      */
     IPCTopFilterTypeAccessory,
     /**
+     *  SOLUTION
+     */
+    IPCTopFilterTypeSolution,
+    /**
      *  OTHERS
      */
     IPCTopFilterTypeOthers,

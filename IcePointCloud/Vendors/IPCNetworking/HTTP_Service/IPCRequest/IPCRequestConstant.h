@@ -11,11 +11,11 @@
 
 #ifdef DEBUG
 //#define   IPC_ProductAPI_URL       @"http://192.168.1.143:8080/pos"
-//#define   IPC_ProductAPI_URL       @"https://dev.icepointcloud.com"
-#define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
-#elif   BETA
-//#define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
 #define   IPC_ProductAPI_URL       @"https://dev.icepointcloud.com"
+//#define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
+#elif   BETA
+#define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
+//#define   IPC_ProductAPI_URL       @"https://dev.icepointcloud.com"
 #else
 #define   IPC_ProductAPI_URL       @"https://icepointcloud.com"
 #endif

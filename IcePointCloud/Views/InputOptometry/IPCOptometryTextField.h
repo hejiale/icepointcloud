@@ -13,4 +13,6 @@
 @property (nonatomic, copy) NSString * placeHolderText;
 @property (nonatomic, copy) NSString * text;
 
+- (void)endEditing;
+
 @end

@@ -58,6 +58,8 @@
         return IPCTopFilterTypeLens;
     }else if ([typeName isEqualToString:@"CONTACT_LENSES"]){
         return IPCTopFilterTypeContactLenses;
+    }else if ([typeName isEqualToString:@"SOLUTION"]){
+        return IPCTopFilterTypeSolution;
     }else if ([typeName isEqualToString:@"ACCESSORY"]){
         return IPCTopFilterTypeAccessory;
     }
@@ -78,6 +80,8 @@
         return IPCTopFilterTypeLens;
     }else if ([typeName isEqualToString:@"CONTACT_LENSES"]){
         return IPCTopFilterTypeContactLenses;
+    }else if ([typeName isEqualToString:@"SOLUTION"]){
+        return IPCTopFilterTypeSolution;
     }else if ([typeName isEqualToString:@"ACCESSORY"]){
         return IPCTopFilterTypeAccessory;
     }
