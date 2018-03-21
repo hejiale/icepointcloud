@@ -17,29 +17,25 @@
     [self.productContentView addSubview:self.productPriceLabel];
     [self.productContentView addSubview:self.suggestPriceLabel];
     [self.productContentView addSubview:self.productNameLabel];
-    [self.productImageView addBorder:3 Width:0.5 Color:nil];
     
     [self.productPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.productImageView.mas_top).with.offset(0);
+        make.top.equalTo(self.productContentView.mas_top).with.offset(20);
         make.right.equalTo(self.productContentView.mas_right).with.offset(-20);
         make.width.mas_equalTo(60);
         make.height.mas_equalTo(20);
     }];
     
     [self.productNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.productImageView.mas_right).with.offset(10);
-        make.top.equalTo(self.productImageView.mas_top).with.offset(0);
+        make.left.equalTo(self.productContentView.mas_left).with.offset(20);
+        make.top.equalTo(self.productContentView.mas_top).with.offset(20);
         make.right.equalTo(self.productPriceLabel.mas_left).with.offset(0);
     }];
     
     [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.productImageView.mas_right).with.offset(10);
-        make.bottom.equalTo(self.productImageView.mas_bottom).with.offset(0);
+        make.bottom.equalTo(self.productContentView.mas_bottom).with.offset(-15);
         make.right.equalTo(self.countLabel.mas_left).with.offset(0);
         make.height.mas_equalTo(20);
     }];
-    
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -87,7 +83,6 @@
     _glasses = glasses;
     
     if (_glasses) {
-        [self.productImageView setImageWithURL:[NSURL URLWithString:_glasses.thumbnailURL] placeholder:[UIImage imageNamed:@"default_placeHolder"]];
         [self.productNameLabel setText:_glasses.glassName];
         [self.countLabel setText:[NSString stringWithFormat:@"x %ld",(long)_glasses.productCount]];
         [self.productPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",glasses.suggestPrice]];

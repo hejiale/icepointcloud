@@ -21,6 +21,7 @@
 #import "IPCScanCodeViewController.h"
 #import "IPCPayOrderCustomerListView.h"
 #import "IPCPayOrderMemberChooseCustomerView.h"
+#import "IPCPayOrderOrderListContentView.h"
 
 @interface IPCPayOrderCustomerViewController ()
 {
@@ -46,6 +47,7 @@
 @property (nonatomic, strong) IPCPayOrderCustomerListView * customerListView;
 @property (nonatomic, strong) IPCPayOrderMemberChooseCustomerView * chooseCustomerView;
 @property (nonatomic, strong) IPCPayOrderMemberCustomerListView * memberCustomerListView;
+@property (nonatomic, strong) IPCPayOrderOrderListContentView * customerOrderListView;
 
 @end
 
@@ -69,6 +71,12 @@
 {
     if (!_infoView) {
         _infoView = [[IPCPayOrderCustomInfoView alloc]initWithFrame:self.customInfoContentView.bounds];
+        [[_infoView rac_signalForSelector:@selector(searchCustomerOrderList)] subscribeNext:^(RACTuple * _Nullable x) {
+            if (self.customerOrderListView) {
+                self.customerOrderListView = nil;
+            }
+            [[IPCCommonUI currentView] addSubview:self.customerOrderListView];
+        }];
     }
     return _infoView;
 }
@@ -173,6 +181,14 @@
     }
     return _memberCustomerListView;
 }
+
+- (IPCPayOrderOrderListContentView *)customerOrderListView{
+    if (!_customerOrderListView) {
+        _customerOrderListView = [[IPCPayOrderOrderListContentView alloc]initWithFrame:[IPCCommonUI currentView].bounds];
+    }
+    return _customerOrderListView;
+}
+
 
 #pragma mark //Load UI
 - (void)loadCustomerInfoView:(IPCCustomerMode *)customer

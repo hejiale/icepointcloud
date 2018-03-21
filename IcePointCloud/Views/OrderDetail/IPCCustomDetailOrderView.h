@@ -13,6 +13,4 @@
 - (instancetype)initWithFrame:(CGRect)frame
                      OrderNum:(NSString *)orderNum;
 
-- (void)show;
-
 @end

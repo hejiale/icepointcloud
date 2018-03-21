@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalPayLabel;
 @property (weak, nonatomic) IBOutlet UILabel *customerTypeLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *nameWidth;
+@property (weak, nonatomic) IBOutlet UIView *searchOrderContentView;
+
 
 @end
 
@@ -32,6 +34,17 @@
         [self addSubview:view];
     }
     return self;
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.searchOrderContentView jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer) {
+        [weakSelf searchCustomerOrderList];
+    }];
 }
 
 - (void)updateCustomerInfo:(IPCCustomerMode *)customer
@@ -49,5 +62,11 @@
         self.nameWidth.constant = MIN(160, MAX(width, 70));
     }
 }
+
+- (void)searchCustomerOrderList
+{
+    
+}
+
 
 @end

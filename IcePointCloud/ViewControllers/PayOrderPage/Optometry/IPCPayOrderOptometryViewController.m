@@ -7,12 +7,13 @@
 //
 
 #import "IPCPayOrderOptometryViewController.h"
-#import "IPCManagerOptometryViewController.h"
+#import "IPCPayOrderTopOptometryView.h"
 #import "IPCPayOrderOptometryInfoView.h"
 #import "IPCInsertNewOptometryView.h"
 
 @interface IPCPayOrderOptometryViewController ()
 
+@property (strong, nonatomic) IPCPayOrderTopOptometryView * topOptometryView;
 @property (strong, nonatomic) IPCPayOrderOptometryInfoView * showOptometryView;
 @property (strong, nonatomic) IPCInsertNewOptometryView * insertOptometryView;
 
@@ -28,13 +29,19 @@
 }
 
 #pragma mark //Set UI
+- (IPCPayOrderTopOptometryView *)topOptometryView
+{
+    if (!_topOptometryView) {
+        _topOptometryView = [[IPCPayOrderTopOptometryView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, 82)];
+    }
+    return _topOptometryView;
+}
+
 - (IPCPayOrderOptometryInfoView *)showOptometryView
 {
     if (!_showOptometryView) {
         __weak typeof(self) weakSelf = self;
-        _showOptometryView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, self.view.jk_height-20) ChooseBlock:^{
-            [weakSelf pushToManagerOptometryViewController];
-        }];
+        _showOptometryView = [[IPCPayOrderOptometryInfoView alloc]initWithFrame:CGRectMake(0, self.topOptometryView.jk_bottom+10, self.view.jk_width-10, self.view.jk_height-20 - self.topOptometryView.jk_bottom)];
     }
     return _showOptometryView;
 }
@@ -42,20 +49,25 @@
 
 - (void)loadShowOptometryView
 {
-    [self.showOptometryView removeFromSuperview];
-    self.showOptometryView = nil;
     [self.view addSubview:self.showOptometryView];
+    [self.view addSubview:self.topOptometryView];
 }
 
+- (void)clearAllSubView
+{
+    [self.showOptometryView removeFromSuperview];
+    self.showOptometryView = nil;
+    [self.topOptometryView removeFromSuperview];
+    self.topOptometryView = nil;
+}
 
 #pragma mark //Clicked Events
 - (void)reload
 {
-    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry)
-    {
+    [self clearAllSubView];
+    
+    if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry){
         [self loadShowOptometryView];
-    }else{
-        [self.showOptometryView removeFromSuperview];
     }
 }
 
@@ -81,12 +93,6 @@
     }
 }
 
-
-- (void)pushToManagerOptometryViewController{
-    IPCManagerOptometryViewController * optometryVC = [[IPCManagerOptometryViewController alloc]initWithNibName:@"IPCManagerOptometryViewController" bundle:nil];
-    optometryVC.customerId = [[IPCPayOrderManager sharedManager] customerId];
-    [self.navigationController pushViewController:optometryVC animated:YES];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

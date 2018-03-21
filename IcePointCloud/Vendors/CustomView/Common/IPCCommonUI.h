@@ -33,4 +33,6 @@
 
 + (UIView *)currentView;
 
++ (UIView *)rootView;
+
 @end

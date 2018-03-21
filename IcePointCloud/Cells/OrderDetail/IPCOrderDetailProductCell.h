@@ -14,7 +14,6 @@
 @property (nonatomic, copy) IPCGlasses * glasses;
 
 @property (weak, nonatomic) IBOutlet UIView *productContentView;
-@property (weak, nonatomic) IBOutlet UIImageView *productImageView;
 @property (strong, nonatomic)  UILabel *productNameLabel;
 @property (strong, nonatomic) UILabel * suggestPriceLabel;
 @property (strong, nonatomic) UILabel * productPriceLabel;

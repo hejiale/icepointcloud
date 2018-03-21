@@ -111,7 +111,6 @@ static NSString * const orderIdentifier       = @"HistoryOrderCellIdentifier";
     self.detailOrderView = [[IPCCustomDetailOrderView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
                                                                  OrderNum:orderObject.orderCode];
     [[UIApplication sharedApplication].keyWindow addSubview:self.detailOrderView];
-    [self.detailOrderView show];
 }
 
 - (void)loadEditCustomerView

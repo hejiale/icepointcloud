@@ -10,8 +10,6 @@
 
 @interface IPCPayOrderOptometryInfoView()
 
-@property (weak, nonatomic) IBOutlet UILabel *employeeNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *functionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leftSphLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leftCylLabel;
 @property (weak, nonatomic) IBOutlet UILabel *leftAxisLabel;
@@ -25,43 +23,36 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightCorrectionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightDistanceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *comprehensiveLabel;
-@property (weak, nonatomic) IBOutlet UILabel *memoLabel;
-@property (nonatomic, copy) void(^ChooseOptometryBlock)();
 
 @end
 
 
 @implementation IPCPayOrderOptometryInfoView
 
-- (instancetype)initWithFrame:(CGRect)frame ChooseBlock:(void(^)())choose
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.ChooseOptometryBlock = choose;
-        
         UIView * view = [UIView jk_loadInstanceFromNibWithName:@"IPCPayOrderOptometryInfoView" owner:self];
         [view setFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         [self addSubview:view];
-        
-        [self updateOptometryInfo];
     }
     return self;
 }
 
-- (IBAction)selectOptometryAction:(id)sender {
-    if (self.ChooseOptometryBlock) {
-        self.ChooseOptometryBlock();
-    }
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self updateOptometryInfo];
 }
 
 - (void)updateOptometryInfo
 {
     IPCOptometryMode * optometry = [IPCPayOrderCurrentCustomer sharedManager].currentOpometry;
     
-    if (optometry) {
-        [self.employeeNameLabel setText:optometry.employeeName];
-        [self.functionLabel setText:[IPCCommon formatPurpose:optometry.purpose]];
-        
+    if (optometry)
+    {
         [self.leftSphLabel setText:optometry.sphLeft];
         [self.leftCylLabel setText:optometry.cylLeft];
         [self.leftAxisLabel setText:optometry.axisLeft];
@@ -76,7 +67,6 @@
         [self.rightCorrectionLabel setText:optometry.correctedVisionRight];
         [self.rightDistanceLabel setText:optometry.distanceRight];
         [self.comprehensiveLabel setText:optometry.comprehensive];
-        [self.memoLabel setText:optometry.remark];
     }
 }
 

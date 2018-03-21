@@ -358,10 +358,7 @@
     NSRange rang = [[self currentTextField].text rangeOfString:@"mm"];
     NSString * number = [[self currentTextField].text substringToIndex:rang.location];
     
-    if ([IPCCommon judgeIsIntNumber:number]) {
-        return [NSString stringWithFormat:@"%.2fmm", [number doubleValue]];
-    }
-    return [self currentTextField].text;
+    return [NSString stringWithFormat:@"%.2fmm", [number doubleValue]];
 }
 
 - (void)endEditing
