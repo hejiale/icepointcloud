@@ -14,7 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *purposeView;
 @property (weak, nonatomic) IBOutlet UILabel *purposeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *memoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createDateLabl;
 @property (weak, nonatomic) IBOutlet UILabel *employeeLabel;
 
@@ -54,8 +53,7 @@
     
     if (_optometry) {
         [self updateStatus];
-        
-        [self.memoLabel setText:_optometry.remark];
+    
         [self.createDateLabl setText:[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:NO]];
         [self.employeeLabel setText:_optometry.employeeName];
     }
@@ -65,13 +63,11 @@
 {
     if (![_optometry.optometryID isEqualToString:[IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID]) {
         [self addBorder:5 Width:1 Color: DefaultColor];
-        [self.memoLabel setTextColor:DefaultColor];
         [self.createDateLabl setTextColor:DefaultColor];
         [self.employeeLabel setTextColor:DefaultColor];
         [self.purposeView setBackgroundColor:DefaultColor];
     }else{
         [self addBorder:5 Width:1 Color:COLOR_RGB_BLUE];
-        [self.memoLabel setTextColor:COLOR_RGB_BLUE];
         [self.createDateLabl setTextColor:COLOR_RGB_BLUE];
         [self.employeeLabel setTextColor:COLOR_RGB_BLUE];
         [self.purposeView setBackgroundColor:COLOR_RGB_BLUE];

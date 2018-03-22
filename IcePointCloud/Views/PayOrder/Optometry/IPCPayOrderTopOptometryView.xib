@@ -27,25 +27,42 @@
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_right_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="vIF-lW-L0t">
-                    <rect key="frame" x="781" y="30" width="13" height="22"/>
+                    <rect key="frame" x="701" y="30" width="13" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="13" id="Wbr-Oh-7iL"/>
                         <constraint firstAttribute="height" constant="22" id="mbw-Br-fxB"/>
                     </constraints>
                 </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZHl-B5-oig">
-                    <rect key="frame" x="43" y="5" width="728" height="72"/>
+                    <rect key="frame" x="43" y="5" width="648" height="72"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8o8-ee-4N9">
+                    <rect key="frame" x="714" y="0.0" width="100" height="82"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="7v2-cF-Mvx"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="新增" image="icon_insert_btn">
+                        <color key="titleColor" red="0.38823529410000002" green="0.62745098040000002" blue="0.83137254900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="insertOptometryAction:" destination="-1" eventType="touchUpInside" id="v2R-LY-uJO"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="vUW-9o-dhg" firstAttribute="leading" secondItem="klj-1m-Fcp" secondAttribute="leading" constant="20" id="2Xh-6a-Z6O"/>
                 <constraint firstItem="ZHl-B5-oig" firstAttribute="top" secondItem="klj-1m-Fcp" secondAttribute="top" constant="5" id="4d6-8K-ICx"/>
+                <constraint firstItem="8o8-ee-4N9" firstAttribute="top" secondItem="klj-1m-Fcp" secondAttribute="top" id="CSS-Gl-J95"/>
                 <constraint firstItem="vIF-lW-L0t" firstAttribute="centerY" secondItem="klj-1m-Fcp" secondAttribute="centerY" id="DDY-V0-bXa"/>
+                <constraint firstItem="8o8-ee-4N9" firstAttribute="centerY" secondItem="klj-1m-Fcp" secondAttribute="centerY" id="Dix-mm-eYj"/>
                 <constraint firstAttribute="bottom" secondItem="ZHl-B5-oig" secondAttribute="bottom" constant="5" id="EEF-fi-WYf"/>
                 <constraint firstItem="vIF-lW-L0t" firstAttribute="leading" secondItem="ZHl-B5-oig" secondAttribute="trailing" constant="10" id="HuU-Hi-m3H"/>
-                <constraint firstAttribute="trailing" secondItem="vIF-lW-L0t" secondAttribute="trailing" constant="20" id="Lrn-vp-xSU"/>
+                <constraint firstAttribute="trailing" secondItem="8o8-ee-4N9" secondAttribute="trailing" id="SlN-V3-4RR"/>
+                <constraint firstItem="8o8-ee-4N9" firstAttribute="leading" secondItem="vIF-lW-L0t" secondAttribute="trailing" id="Y9I-MD-1lT"/>
+                <constraint firstAttribute="bottom" secondItem="8o8-ee-4N9" secondAttribute="bottom" id="Ycc-VY-oHw"/>
                 <constraint firstItem="vUW-9o-dhg" firstAttribute="centerY" secondItem="klj-1m-Fcp" secondAttribute="centerY" id="cVg-Zj-Zzr"/>
                 <constraint firstItem="ZHl-B5-oig" firstAttribute="leading" secondItem="vUW-9o-dhg" secondAttribute="trailing" constant="10" id="tE4-QE-1Sn"/>
             </constraints>
@@ -55,6 +72,7 @@
         </view>
     </objects>
     <resources>
+        <image name="icon_insert_btn" width="16" height="16"/>
         <image name="icon_left_arrow" width="13" height="22"/>
         <image name="icon_right_arrow" width="13" height="22"/>
     </resources>

@@ -12,16 +12,13 @@
 @class IPCCustomerOrderInfo;
 @interface IPCCustomerOrderDetail : NSObject
 
-+ (IPCCustomerOrderDetail *)instance;
-
-@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *> *  products;
+@property (nonatomic, strong, readwrite) NSMutableArray<IPCGlasses *>     *  products;
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * recordArray;
-@property (nonatomic, strong, readwrite) IPCCustomerOrderInfo               *  orderInfo;
-@property (nonatomic, strong, readwrite) IPCOptometryMode                    *  optometryMode;
+@property (nonatomic, strong, readwrite) IPCCustomerOrderInfo                   *  orderInfo;
+@property (nonatomic, strong, readwrite) IPCCustomerMode                          *   customerMode;
+@property (nonatomic, strong, readwrite) IPCOptometryMode                        *  optometryMode;
 
 - (void)parseResponseValue:(id)responseValue;
-
-- (void)clearData;
 
 @end
 

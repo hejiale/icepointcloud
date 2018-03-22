@@ -27,7 +27,7 @@
     _optometry = optometry;
     
     if (_optometry) {
-        [self.optometryView createUIWithOptometry:_optometry];
+//        [self.optometryView createUIWithOptometry:_optometry];
     }
 }
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,17 +20,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uz-Ra-VJ5">
-                        <rect key="frame" x="28" y="15" width="80" height="20"/>
+                        <rect key="frame" x="40" y="15" width="80" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="YaZ-g1-UwY"/>
                             <constraint firstAttribute="width" constant="80" id="y7R-mk-Tin"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IBb-iK-KYe">
-                        <rect key="frame" x="372" y="16" width="80" height="20"/>
+                        <rect key="frame" x="360" y="15" width="80" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="bGI-OF-o9u"/>
                             <constraint firstAttribute="width" constant="80" id="jit-zp-5eo"/>
@@ -40,12 +40,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余应收" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="so9-kO-w6L">
-                        <rect key="frame" x="312" y="15" width="60" height="20"/>
+                        <rect key="frame" x="300" y="15" width="60" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="JaZ-Er-VbP"/>
                             <constraint firstAttribute="width" constant="60" id="jrC-xf-0FH"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -54,9 +54,9 @@
                     <constraint firstItem="so9-kO-w6L" firstAttribute="baseline" secondItem="1uz-Ra-VJ5" secondAttribute="baseline" id="821-wb-5P0"/>
                     <constraint firstItem="IBb-iK-KYe" firstAttribute="leading" secondItem="so9-kO-w6L" secondAttribute="trailing" id="Lxp-4R-9Td"/>
                     <constraint firstItem="1uz-Ra-VJ5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="afH-X2-wdZ"/>
+                    <constraint firstItem="IBb-iK-KYe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="duf-RM-APG"/>
                     <constraint firstItem="1uz-Ra-VJ5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="pnU-Qt-aKJ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="IBb-iK-KYe" secondAttribute="trailing" constant="20" id="rb3-bh-WwZ"/>
-                    <constraint firstItem="IBb-iK-KYe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="8" id="sI0-t9-UPB"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

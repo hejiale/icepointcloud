@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *realTotalPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *givingAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPriceLabel;
+@property (copy, nonatomic) IPCCustomerOrderInfo * orderInfo;
 
 
 @end

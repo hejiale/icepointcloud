@@ -82,7 +82,6 @@
 		CB0F54231F988191003707F2 /* IPCShowOptometryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53D31F988191003707F2 /* IPCShowOptometryView.m */; };
 		CB0F54241F988191003707F2 /* IPCShowOptometryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53D41F988191003707F2 /* IPCShowOptometryView.xib */; };
 		CB0F54251F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53D71F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m */; };
-		CB0F54261F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53D81F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib */; };
 		CB0F54271F988191003707F2 /* IPCCustomDetailOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53DA1F988191003707F2 /* IPCCustomDetailOrderView.m */; };
 		CB0F54281F988191003707F2 /* IPCCustomDetailOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F53DB1F988191003707F2 /* IPCCustomDetailOrderView.xib */; };
 		CB0F54351F988191003707F2 /* IPCLibraryTypeTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F53F21F988191003707F2 /* IPCLibraryTypeTableView.m */; };
@@ -141,8 +140,6 @@
 		CB0F55161F98819C003707F2 /* IPCOrderDetailProductPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F549D1F98819B003707F2 /* IPCOrderDetailProductPriceCell.xib */; };
 		CB0F55171F98819C003707F2 /* IPCOrderDetailSectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F549F1F98819B003707F2 /* IPCOrderDetailSectionCell.m */; };
 		CB0F55181F98819C003707F2 /* IPCOrderDetailSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54A01F98819B003707F2 /* IPCOrderDetailSectionCell.xib */; };
-		CB0F55191F98819C003707F2 /* IPCOrderDetailTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54A21F98819B003707F2 /* IPCOrderDetailTopCell.m */; };
-		CB0F551A1F98819C003707F2 /* IPCOrderDetailTopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54A31F98819B003707F2 /* IPCOrderDetailTopCell.xib */; };
 		CB0F551B1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54A51F98819B003707F2 /* IPCOrderDetailTopOptometryCell.m */; };
 		CB0F551C1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB0F54A61F98819B003707F2 /* IPCOrderDetailTopOptometryCell.xib */; };
 		CB0F55291F98819C003707F2 /* IPCPersonHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB0F54BC1F98819B003707F2 /* IPCPersonHeadCell.m */; };
@@ -488,7 +485,6 @@
 		CB0F53D41F988191003707F2 /* IPCShowOptometryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCShowOptometryView.xib; sourceTree = "<group>"; };
 		CB0F53D61F988191003707F2 /* IPCCustomDetailOrderPayRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomDetailOrderPayRecordView.h; sourceTree = "<group>"; };
 		CB0F53D71F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomDetailOrderPayRecordView.m; sourceTree = "<group>"; };
-		CB0F53D81F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomDetailOrderPayRecordView.xib; sourceTree = "<group>"; };
 		CB0F53D91F988191003707F2 /* IPCCustomDetailOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCCustomDetailOrderView.h; sourceTree = "<group>"; };
 		CB0F53DA1F988191003707F2 /* IPCCustomDetailOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCCustomDetailOrderView.m; sourceTree = "<group>"; };
 		CB0F53DB1F988191003707F2 /* IPCCustomDetailOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCCustomDetailOrderView.xib; sourceTree = "<group>"; };
@@ -577,9 +573,6 @@
 		CB0F549E1F98819B003707F2 /* IPCOrderDetailSectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailSectionCell.h; sourceTree = "<group>"; };
 		CB0F549F1F98819B003707F2 /* IPCOrderDetailSectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailSectionCell.m; sourceTree = "<group>"; };
 		CB0F54A01F98819B003707F2 /* IPCOrderDetailSectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailSectionCell.xib; sourceTree = "<group>"; };
-		CB0F54A11F98819B003707F2 /* IPCOrderDetailTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailTopCell.h; sourceTree = "<group>"; };
-		CB0F54A21F98819B003707F2 /* IPCOrderDetailTopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailTopCell.m; sourceTree = "<group>"; };
-		CB0F54A31F98819B003707F2 /* IPCOrderDetailTopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailTopCell.xib; sourceTree = "<group>"; };
 		CB0F54A41F98819B003707F2 /* IPCOrderDetailTopOptometryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPCOrderDetailTopOptometryCell.h; sourceTree = "<group>"; };
 		CB0F54A51F98819B003707F2 /* IPCOrderDetailTopOptometryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IPCOrderDetailTopOptometryCell.m; sourceTree = "<group>"; };
 		CB0F54A61F98819B003707F2 /* IPCOrderDetailTopOptometryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPCOrderDetailTopOptometryCell.xib; sourceTree = "<group>"; };
@@ -1657,9 +1650,6 @@
 				CB0F549E1F98819B003707F2 /* IPCOrderDetailSectionCell.h */,
 				CB0F549F1F98819B003707F2 /* IPCOrderDetailSectionCell.m */,
 				CB0F54A01F98819B003707F2 /* IPCOrderDetailSectionCell.xib */,
-				CB0F54A11F98819B003707F2 /* IPCOrderDetailTopCell.h */,
-				CB0F54A21F98819B003707F2 /* IPCOrderDetailTopCell.m */,
-				CB0F54A31F98819B003707F2 /* IPCOrderDetailTopCell.xib */,
 				CB0F54A41F98819B003707F2 /* IPCOrderDetailTopOptometryCell.h */,
 				CB0F54A51F98819B003707F2 /* IPCOrderDetailTopOptometryCell.m */,
 				CB0F54A61F98819B003707F2 /* IPCOrderDetailTopOptometryCell.xib */,
@@ -2545,7 +2535,6 @@
 			children = (
 				CB0F53D61F988191003707F2 /* IPCCustomDetailOrderPayRecordView.h */,
 				CB0F53D71F988191003707F2 /* IPCCustomDetailOrderPayRecordView.m */,
-				CB0F53D81F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib */,
 			);
 			path = PayRecord;
 			sourceTree = "<group>";
@@ -2878,7 +2867,6 @@
 				CB0F55351F98819C003707F2 /* IPCProductDetailTableViewCell.xib in Resources */,
 				CB0F54391F988191003707F2 /* IPCSideBarMenuView.xib in Resources */,
 				CB0F55371F98819C003707F2 /* IPCSearchItemTableViewCell.xib in Resources */,
-				CB0F551A1F98819C003707F2 /* IPCOrderDetailTopCell.xib in Resources */,
 				CBF9357D1FCFE8E800D844AB /* TuSDK.bundle in Resources */,
 				CB0F54161F988191003707F2 /* IPCGlassParameterView.xib in Resources */,
 				CBFFE9D51FBE7F2200937A8F /* IPCPayOrderOptometryViewController.xib in Resources */,
@@ -2903,7 +2891,6 @@
 				9E03C2ED1978D5D5007389D0 /* Images.xcassets in Resources */,
 				CB0F541B1F988191003707F2 /* IPCFilterGlassesView.xib in Resources */,
 				CBB921E42045389A0028BAA2 /* IPCPayOrderCustomerListView.xib in Resources */,
-				CB0F54261F988191003707F2 /* IPCCustomDetailOrderPayRecordView.xib in Resources */,
 				CB0F55301F98819C003707F2 /* IPCPersonTitleCell.xib in Resources */,
 				CB0F54F11F98819C003707F2 /* IPCCustomerRefreshCell.xib in Resources */,
 				CB890DC620469578003931EB /* IPCPayOrderMemberCustomerListView.xib in Resources */,
@@ -3164,7 +3151,6 @@
 				CB0F54131F988191003707F2 /* IPCEditBatchParameterView.m in Sources */,
 				CB0F564F1F988B05003707F2 /* IPCSwipeView.m in Sources */,
 				CB0F551B1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.m in Sources */,
-				CB0F55191F98819C003707F2 /* IPCOrderDetailTopCell.m in Sources */,
 				CB0F54151F988191003707F2 /* IPCGlassParameterView.m in Sources */,
 				CB0F55AD1F98845A003707F2 /* IPCCustomerTypeList.m in Sources */,
 				CB0F53801F9876AF003707F2 /* IPCRootViewController.m in Sources */,

@@ -25,18 +25,18 @@
                             <constraint firstAttribute="width" constant="80" id="4gc-9v-3DJ"/>
                             <constraint firstAttribute="height" constant="20" id="BRh-as-fS5"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品金额总计" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wr2-fI-0ZL">
-                        <rect key="frame" x="40" y="36" width="80" height="20"/>
+                        <rect key="frame" x="40" y="36" width="100" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="80" id="kgS-it-fdW"/>
+                            <constraint firstAttribute="width" constant="100" id="kgS-it-fdW"/>
                             <constraint firstAttribute="height" constant="20" id="xMh-Yo-g2f"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
-                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tio-u4-UEj">
@@ -45,7 +45,7 @@
                             <constraint firstAttribute="height" constant="20" id="9zB-Dl-koD"/>
                             <constraint firstAttribute="width" constant="80" id="pvT-73-1xa"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -55,7 +55,7 @@
                             <constraint firstAttribute="height" constant="20" id="4Oi-6K-zhS"/>
                             <constraint firstAttribute="width" constant="80" id="7s5-SD-Agm"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -65,7 +65,7 @@
                             <constraint firstAttribute="width" constant="80" id="GFc-KC-VRg"/>
                             <constraint firstAttribute="height" constant="20" id="mHy-QT-L73"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -75,7 +75,7 @@
                             <constraint firstAttribute="height" constant="20" id="7ST-ds-1hB"/>
                             <constraint firstAttribute="width" constant="60" id="Lho-VV-7b6"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>

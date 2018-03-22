@@ -42,7 +42,7 @@
         make.top.equalTo(self.mas_top).with.offset(0);
         make.right.equalTo(self.mas_right).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.width.mas_equalTo(480);
+        make.width.mas_equalTo(400);
     }];
 }
 
@@ -50,7 +50,7 @@
 - (IPCOrderDetailView *)orderDetailView
 {
     if (!_orderDetailView) {
-        _orderDetailView = [[IPCOrderDetailView alloc]init];
+        _orderDetailView = [[IPCOrderDetailView alloc]initWithOrderDetail:nil];
         [_orderDetailView setOrderNum:_orderNum];
     }
     return _orderDetailView;
@@ -60,7 +60,6 @@
 #pragma mark //Clicked Events
 - (IBAction)dismissViewAction:(id)sender
 {
-    [[IPCCustomerOrderDetail instance] clearData];
     [self removeFromSuperview];
 }
 

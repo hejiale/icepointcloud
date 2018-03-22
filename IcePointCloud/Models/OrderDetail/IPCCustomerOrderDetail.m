@@ -10,23 +10,8 @@
 
 @implementation IPCCustomerOrderDetail
 
-+ (IPCCustomerOrderDetail *)instance
-{
-    static dispatch_once_t token;
-    static IPCCustomerOrderDetail *_client;
-    dispatch_once(&token, ^{
-        _client = [[self alloc] init];
-    });
-    return _client;
-}
-
-
 - (void)parseResponseValue:(id)responseValue
 {
-    [self.products removeAllObjects];
-    [self.recordArray removeAllObjects];
-    self.optometryMode = nil;
-    self.orderInfo = nil;
     __weak typeof(self) weakSelf = self;
     
     if ([responseValue isKindOfClass:[NSDictionary class]]) {
@@ -40,6 +25,7 @@
         
         if ([responseValue[@"order"] isKindOfClass:[NSDictionary class]]) {
             self.orderInfo = [IPCCustomerOrderInfo mj_objectWithKeyValues:responseValue[@"order"]];
+            self.customerMode  = [IPCCustomerMode mj_objectWithKeyValues:responseValue[@"order"]];
             self.optometryMode = [IPCOptometryMode mj_objectWithKeyValues:responseValue[@"order"]];
         }
         
@@ -91,14 +77,6 @@
     }
     return _recordArray;
 }
-
-- (void)clearData{
-    [self.products removeAllObjects];
-    [self.recordArray removeAllObjects];
-    self.orderInfo = nil;
-    self.optometryMode = nil;
-}
-
 
 @end
 

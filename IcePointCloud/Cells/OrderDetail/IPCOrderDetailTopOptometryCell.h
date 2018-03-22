@@ -12,6 +12,7 @@
 @interface IPCOrderDetailTopOptometryCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIButton *packUpButton;
+@property (strong, nonatomic) IPCCustomerOrderInfo * orderInfo;
 @property (assign, nonatomic) id<IPCCustomerOrderDetailDelegate>delegate;
 
 @end

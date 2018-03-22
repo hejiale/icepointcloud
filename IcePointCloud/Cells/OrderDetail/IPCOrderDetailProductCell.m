@@ -21,7 +21,7 @@
     [self.productPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.productContentView.mas_top).with.offset(20);
         make.right.equalTo(self.productContentView.mas_right).with.offset(-20);
-        make.width.mas_equalTo(60);
+        make.width.mas_equalTo(100);
         make.height.mas_equalTo(20);
     }];
     
@@ -33,7 +33,7 @@
     
     [self.suggestPriceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.productContentView.mas_bottom).with.offset(-15);
-        make.right.equalTo(self.countLabel.mas_left).with.offset(0);
+        make.left.equalTo(self.productContentView.mas_left).with.offset(20);
         make.height.mas_equalTo(20);
     }];
 }
@@ -49,7 +49,7 @@
     if (!_productNameLabel) {
         _productNameLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_productNameLabel setBackgroundColor:[UIColor clearColor]];
-        [_productNameLabel setFont:[UIFont systemFontOfSize:13 weight:UIFontWeightThin]];
+        [_productNameLabel setFont:[UIFont systemFontOfSize:15]];
         [_productNameLabel setTextColor:[UIColor darkGrayColor]];
         _productNameLabel.lineBreakMode = NSLineBreakByCharWrapping;
         _productNameLabel.numberOfLines = 2;
@@ -63,7 +63,7 @@
         _suggestPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_suggestPriceLabel setBackgroundColor:[UIColor clearColor]];
         [_suggestPriceLabel setTextColor:COLOR_RGB_RED];
-        [_suggestPriceLabel setFont:[UIFont systemFontOfSize:14]];
+        [_suggestPriceLabel setFont:[UIFont systemFontOfSize:15]];
     }
     return _suggestPriceLabel;
 }
@@ -72,7 +72,7 @@
     if (!_productPriceLabel) {
         _productPriceLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         [_productPriceLabel setBackgroundColor:[UIColor clearColor]];
-        [_productPriceLabel setFont:[UIFont systemFontOfSize:13]];
+        [_productPriceLabel setFont:[UIFont systemFontOfSize:15]];
         [_productPriceLabel setTextColor:[UIColor lightGrayColor]];
         [_productPriceLabel setTextAlignment:NSTextAlignmentRight];
     }

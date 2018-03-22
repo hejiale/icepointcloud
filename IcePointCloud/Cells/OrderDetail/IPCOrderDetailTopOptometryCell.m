@@ -24,14 +24,24 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    [self.packUpButton setSelected:[IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry];
+    
+}
+
+- (void)setOrderInfo:(IPCCustomerOrderInfo *)orderInfo
+{
+    _orderInfo = orderInfo;
+    
+    if (_orderInfo) {
+        [self.packUpButton setSelected:_orderInfo.isPackUpOptometry];
+    }
 }
 
 
-- (IBAction)packUpAction:(UIButton *)sender {
+- (IBAction)packUpAction:(UIButton *)sender
+{
     [sender setSelected:!sender.selected];
     
-   [IPCCustomerOrderDetail instance].orderInfo.isPackUpOptometry = sender.selected;
+    self.orderInfo.isPackUpOptometry = sender.selected;
     
     if (self.delegate) {
         if ([self.delegate respondsToSelector:@selector(reloadOrderDetailTableView)]) {

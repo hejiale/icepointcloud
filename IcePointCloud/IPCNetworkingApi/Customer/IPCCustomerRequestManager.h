@@ -58,6 +58,13 @@
                                 EmployeeId:(NSString *)employeeId
                               EmployeeName:(NSString *)employeeName
                              Comprehensive:(NSString *)comprehensive
+                               DistanceAFM:(NSString *)distanceAFM
+                        DistanceHeightLeft:(NSString *)distanceHeightLeft
+                       DistanceHeightRight:(NSString *)distanceHeightRight
+                            GlassPrismLeft:(NSString *)glassPrismLeft
+                           GlassPrismRight:(NSString *)glassPrismRight
+                           BaseGlassesLeft:(NSString *)baseGlassesLeft
+                          BaseGlassesRight:(NSString *)baseGlassesRight
                                     Remark:(NSString *)remark
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure;

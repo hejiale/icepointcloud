@@ -26,11 +26,8 @@
     
     if (_customerOrder) {
         [self.orderCodeLabel setText:_customerOrder.orderCode];
-        
         [self.orderPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",_customerOrder.orderPrice]];
-        
         [self.orderDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_customerOrder.orderDate] IsTime:YES]];
-        
         [self.orderStatusLabel setText:[_customerOrder orderStatus]];
     }
 }

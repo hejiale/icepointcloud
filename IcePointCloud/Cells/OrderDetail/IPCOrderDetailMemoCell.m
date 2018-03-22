@@ -23,8 +23,6 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
-    
-    [self.memoLabel setText:[IPCCustomerOrderDetail instance].orderInfo.remark];
 }
 
 @end

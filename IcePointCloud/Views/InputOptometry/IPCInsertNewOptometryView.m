@@ -11,7 +11,7 @@
 #import "IPCOptometryKeyboardView.h"
 #import "IPCOptometryTextField.h"
 
-@interface IPCInsertNewOptometryView()<IPCOptometryKeyboardViewDelegate,UITextFieldDelegate>
+@interface IPCInsertNewOptometryView()<IPCOptometryKeyboardViewDelegate,UITextFieldDelegate,IPCParameterTableViewDelegate,IPCParameterTableViewDataSource>
 {
     BOOL         isRight;
     NSInteger   optometryIndex;
@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *nearButton;
 @property (weak, nonatomic) IBOutlet UILabel *keyboardTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *keyboardValueLabel;
+@property (weak, nonatomic) IBOutlet UITextField *basalTextField;
 @property (weak, nonatomic) IBOutlet UITextField *memoTextField;
 @property (nonatomic, strong) IPCOptometryKeyboardView * keyboard;
 @property (nonatomic, strong) IPCOptometryMode * insertOptometry;///新建验光单
@@ -76,7 +77,9 @@
         }
     }];
     
+    [self.basalTextField addBottomLine];
     [self.employeeTextField setRightButton:self Action:@selector(selectEmployeeAction) OnView:self.inputHeadView];
+    [self.basalTextField setRightButton:self Action:@selector(selectBasalTypeAction) OnView:self.optometryScrollContentView];
     [self.keyBoardView addSubview:self.keyboard];
 }
 
@@ -150,6 +153,13 @@
                                                        EmployeeId:self.insertOptometry.employeeId
                                                      EmployeeName:self.employeeTextField.text
                                                     Comprehensive:self.insertOptometry.comprehensive
+                                                      DistanceAFM:self.insertOptometry.distanceAFM
+                                               DistanceHeightLeft:self.insertOptometry.distanceHeightLeft
+                                              DistanceHeightRight:self.insertOptometry.distanceHeightRight
+                                                   GlassPrismLeft:self.insertOptometry.glassPrismLeft
+                                                  GlassPrismRight:self.insertOptometry.glassPrismRight
+                                                  BaseGlassesLeft:self.insertOptometry.baseGlassesLeft
+                                                 BaseGlassesRight:self.insertOptometry.baseGlassesRight
                                                            Remark:self.memoTextField.text
                                                      SuccessBlock:^(id responseValue)
      {
@@ -205,15 +215,20 @@
         [[self textField:2] setText:self.insertOptometry.axisRight];
         [[self textField:3] setText:self.insertOptometry.addRight];
         [[self textField:4] setText:self.insertOptometry.correctedVisionRight];
-        [[self textField:5] setText:self.insertOptometry.distanceRight];
+        [[self textField:5] setText:self.insertOptometry.distanceHeightRight];
+        [[self textField:6] setText:self.insertOptometry.glassPrismRight];
+        [[self textField:9] setText:self.insertOptometry.distanceRight];
     }else{
         [[self textField:0] setText:self.insertOptometry.sphLeft];
         [[self textField:1] setText:self.insertOptometry.cylLeft];
         [[self textField:2] setText:self.insertOptometry.axisLeft];
         [[self textField:3] setText:self.insertOptometry.addLeft];
         [[self textField:4] setText:self.insertOptometry.correctedVisionLeft];
-        [[self textField:5] setText:self.insertOptometry.distanceLeft];
+        [[self textField:5] setText:self.insertOptometry.distanceHeightLeft];
+        [[self textField:6] setText:self.insertOptometry.glassPrismLeft];
+        [[self textField:9] setText:self.insertOptometry.distanceLeft];
     }
+    [[self textField:8] setText:self.insertOptometry.distanceAFM];
 }
 
 - (void)tapTextFieldAction:(UITapGestureRecognizer *)sender
@@ -262,6 +277,14 @@
                                      }];
     [[UIApplication sharedApplication].keyWindow addSubview:listView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:listView];
+}
+
+- (void)selectBasalTypeAction
+{
+    IPCParameterTableViewController * parameterTableVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
+    [parameterTableVC setDataSource:self];
+    [parameterTableVC setDelegate:self];
+    [parameterTableVC showWithPosition:CGPointMake(self.basalTextField.jk_width/2, self.basalTextField.jk_height) Size:CGSizeMake(100, 150) Owner:self.basalTextField Direction:UIPopoverArrowDirectionUp];
 }
 
 #pragma mark //IPCOptometryKeyboardViewDelegate
@@ -319,13 +342,30 @@
             break;
         case 5:
             if (isRight) {
+                self.insertOptometry.distanceHeightRight = [self appendPdSuffix];
+            }else{
+                self.insertOptometry.distanceHeightLeft = [self appendPdSuffix];
+            }
+            break;
+        case 6:
+            if (isRight) {
+                self.insertOptometry.glassPrismRight = [self appendSuffix];
+            }else{
+                self.insertOptometry.glassPrismLeft = [self appendSuffix];
+            }
+            break;
+        case 8:
+            self.insertOptometry.distanceAFM = [self appendPdSuffix];
+            break;
+        case 9:
+            if (isRight) {
                 self.insertOptometry.distanceRight = [self appendPdSuffix];
             }else{
                 self.insertOptometry.distanceLeft = [self appendPdSuffix];
             }
             [self updateOptometryDistance];
             break;
-        case 12:
+        case 10:
             self.insertOptometry.comprehensive = [self appendPdSuffix];
             [self updateOptometryDistance];
             break;
@@ -377,7 +417,7 @@
     double leftDistance = 0;
     double rightDistance = 0;
     
-    if (optometryIndex == 5){
+    if (optometryIndex == 9){
         if (isRight) {
             if (self.insertOptometry.distanceLeft.length) {
                 leftDistance = [[self.insertOptometry.distanceLeft substringToIndex:self.insertOptometry.distanceLeft.length - 2] doubleValue];
@@ -398,12 +438,12 @@
             }
         }
         if (rightDistance + leftDistance == 0) {
-            [self textField:12].text = @"";
+            [self textField:10].text = @"";
         }else{
-            [self textField:12].text = [NSString stringWithFormat:@"%.2fmm", rightDistance + leftDistance];
+            [self textField:10].text = [NSString stringWithFormat:@"%.2fmm", rightDistance + leftDistance];
         }
         self.insertOptometry.comprehensive = [self textField:12].text;
-    }else if(optometryIndex == 12)
+    }else if(optometryIndex == 10)
     {
         double comprehensive = 0;
         
@@ -420,9 +460,9 @@
         }
         
         if (isRight) {
-            [[self textField:5] setText:self.insertOptometry.distanceRight];
+            [[self textField:9] setText:self.insertOptometry.distanceRight];
         }else{
-            [[self textField:5] setText:self.insertOptometry.distanceLeft];
+            [[self textField:9] setText:self.insertOptometry.distanceLeft];
         }
     }
 }
@@ -445,6 +485,18 @@
     [self inputOptometryInfo];
     [self reloadInfo];
     [self endEditing];
+}
+
+#pragma mark //IPCParameterTableViewDataSource
+- (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView
+{
+    return @[@"内",@"外",@"上",@"下"];
+}
+
+#pragma mark //IPCParameterTableViewDelegate
+- (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
+{
+    [self.basalTextField setText:parameter];
 }
 
 

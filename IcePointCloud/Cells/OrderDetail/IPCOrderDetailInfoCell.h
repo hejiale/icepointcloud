@@ -14,5 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *createDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *operationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pointLabel;
+@property (copy, nonatomic) IPCCustomerOrderInfo * orderInfo;
 
 @end

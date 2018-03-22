@@ -200,6 +200,32 @@
     return customer;
 }
 
+/*- (void)getProtyOrder:(IPCCustomerOrderDetail *)orderInfo
+{
+    [[IPCPayOrderManager sharedManager] resetData];
+//    self.selectedOrder = orderInfo;
+    
+    ///重新加入购物车
+    [orderInfo.products enumerateObjectsUsingBlock:^(IPCGlasses * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.isBatch ) {
+            if ([obj filterType] == IPCTopFilterTypeLens) {
+                [[IPCShoppingCart sharedCart] addLensWithGlasses:obj Sph:obj.sph Cyl:obj.cyl Count:obj.productCount];
+            }else if ([obj filterType] == IPCTopFilterTypeContactLenses){
+                [[IPCShoppingCart sharedCart] addContactLensWithGlasses:obj Sph:obj.sph Cyl:obj.cyl Count:obj.productCount];
+            } else{
+                [[IPCShoppingCart sharedCart] addReadingLensWithGlasses:obj ReadingDegree:obj.batchDegree Count:obj.productCount];
+            }
+        }else{
+            [[IPCShoppingCart sharedCart] plusGlass:obj];
+        }
+    }];
+    
+    [IPCPayOrderManager sharedManager].currentCustomerId = orderInfo.orderInfo.customerId;
+    [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = orderInfo.customerMode;
+    [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = orderInfo.optometryMode;
+    [IPCPayOrderManager sharedManager].employee = orderInfo.orderInfo.employee;
+}*/
+
 - (void)resetData
 {
     [IPCPayOrderManager sharedManager].remark = nil;

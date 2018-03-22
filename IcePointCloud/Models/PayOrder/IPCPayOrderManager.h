@@ -79,5 +79,7 @@
 - (IPCCustomerMode *)currentCustomer;
 //当前选择会员卡(客户选项或会员选项)
 - (IPCCustomerMode *)currentMemberCard;
+// 提取挂单
+/*- (void)getProtyOrder:(IPCCustomerOrderDetail *)orderInfo;*/
 
 @end

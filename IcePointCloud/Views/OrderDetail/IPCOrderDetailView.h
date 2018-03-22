@@ -10,6 +10,10 @@
 
 @interface IPCOrderDetailView : UIView
 
+- (instancetype)initWithOrderDetail:(void(^)(IPCCustomerOrderDetail * orderDetail))detail;
+
 @property (nonatomic, copy) NSString * orderNum;
 
 @end
+
+

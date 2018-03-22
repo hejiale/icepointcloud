@@ -36,6 +36,13 @@
                                 EmployeeId:(NSString *)employeeId
                               EmployeeName:(NSString *)employeeName
                              Comprehensive:(NSString *)comprehensive
+                               DistanceAFM:(NSString *)distanceAFM
+                        DistanceHeightLeft:(NSString *)distanceHeightLeft
+                       DistanceHeightRight:(NSString *)distanceHeightRight
+                            GlassPrismLeft:(NSString *)glassPrismLeft
+                           GlassPrismRight:(NSString *)glassPrismRight
+                           BaseGlassesLeft:(NSString *)baseGlassesLeft
+                          BaseGlassesRight:(NSString *)baseGlassesRight
                                     Remark:(NSString *)remark
                               SuccessBlock:(void (^)(id responseValue))success
                               FailureBlock:(void (^)(NSError * error))failure
@@ -57,6 +64,13 @@
                              @"employeeId":employeeId,
                              @"employeeName":employeeName,
                              @"comprehensive":comprehensive,
+                             @"distanceAFM":distanceAFM,
+                             @"distanceHeightLeft":distanceHeightLeft,
+                             @"distanceHeightRight":distanceHeightRight,
+                             @"glassPrismLeft":glassPrismLeft,
+                             @"glassPrismRight":glassPrismRight,
+                             @"baseGlassesLeft":baseGlassesLeft,
+                             @"baseGlassesRight":baseGlassesRight,
                              @"remark":(remark ? : @"")
                              };
     [self postRequest:params RequestMethod:CustomerRequest_SaveNewOptometry CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];

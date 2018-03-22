@@ -54,8 +54,16 @@
         self.sphLeft = @"";
         self.sphRight = @"";
         self.purpose = @"";
+        self.distanceAFM = @"";
+        self.distanceHeightLeft = @"";
+        self.distanceHeightRight = @"";
+        self.glassPrismLeft = @"";
+        self.glassPrismRight = @"";
+        self.baseGlassesRight = @"";
+        self.baseGlassesLeft = @"";
         self.employeeName = @"";
         self.employeeId = @"";
+        self.comprehensive = @"";
     }
     return self;
 }

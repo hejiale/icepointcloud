@@ -154,15 +154,16 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 #pragma mark //Load Data
 - (void)loadData
 {
-    [self.viewModel resetData];
-    self.customerCollectionView.isBeginLoad = YES;
-    
-    if (isSelectMember) {
-        [self loadMemberList];
-    }else{
-        [self loadCustomerList];
-    }
-    [self.customerCollectionView reloadData];
+    [self.refreshHeader beginRefreshing];
+//    [self.viewModel resetData];
+//    self.customerCollectionView.isBeginLoad = YES;
+//
+//    if (isSelectMember) {
+//        [self loadMemberList];
+//    }else{
+//        [self loadCustomerList];
+//    }
+//    [self.customerCollectionView reloadData];
 }
 
 #pragma mark //Request Data

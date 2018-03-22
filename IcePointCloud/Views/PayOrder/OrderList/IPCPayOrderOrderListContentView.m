@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
 @property (strong, nonatomic) IPCPayOrderOrderListView * orderListView;
 @property (strong, nonatomic) IPCOrderDetailView * orderDetailView;
+@property (strong, nonatomic) IPCCustomerOrderDetail * currentOrderDetail;
 
 @end
 
@@ -55,7 +56,9 @@
 
 - (IPCOrderDetailView *)orderDetailView{
     if (!_orderDetailView) {
-        _orderDetailView = [[IPCOrderDetailView alloc]init];
+        _orderDetailView = [[IPCOrderDetailView alloc]initWithOrderDetail:^(IPCCustomerOrderDetail *orderDetail) {
+            self.currentOrderDetail = orderDetail;
+        }];
     }
     return _orderDetailView;
 }
@@ -79,10 +82,6 @@
 
 
 - (IBAction)dismissAction:(id)sender {
-    [self removeFromSuperview];
-}
-
-- (IBAction)payCashAction:(id)sender {
     [self removeFromSuperview];
 }
 

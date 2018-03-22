@@ -23,13 +23,16 @@
 }
 
 
-- (void)layoutSubviews{
-    [super layoutSubviews];
+- (void)setOrderInfo:(IPCCustomerOrderInfo *)orderInfo{
+    _orderInfo = orderInfo;
     
-    [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalSuggestAmount]];
-    [self.givingAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalDonationAmount]];
-    [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",[IPCCustomerOrderDetail instance].orderInfo.totalPayAmount]];
-    
+    if (_orderInfo) {
+        [self.realTotalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",_orderInfo.totalSuggestAmount]];
+        [self.givingAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",_orderInfo.totalDonationAmount]];
+        [self.totalPriceLabel setText:[NSString stringWithFormat:@"￥%.2f",_orderInfo.totalPayAmount]];
+    }
 }
+
+
 
 @end

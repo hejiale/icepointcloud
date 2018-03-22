@@ -79,7 +79,7 @@
     
     if (sender.tag <= PointKeboardType)
     {
-        if (self.index == 5 || self.index == 12) {
+        if (self.index == 5 || self.index == 8 || self.index == 9 || self.index == 10) {
             if ([self.appendString containsString:@"mm"]) {
                 NSRange rang = [self.appendString rangeOfString:@"mm"];
                 [self.appendString deleteCharactersInRange:NSMakeRange(rang.location, 2)];
@@ -115,7 +115,7 @@
         }
         [self.appendString appendString:number];
     
-        if (self.index == 5 || self.index == 12) {
+        if (self.index == 5 || self.index == 8 || self.index == 9 || self.index == 10) {
             [self.appendString appendString:@"mm"];
         }
         
@@ -146,7 +146,7 @@
         }
     } else if (sender.tag == ClearKeyboardType){
         if (self.appendString.length) {
-            if (self.index == 5 || self.index == 12) {
+            if (self.index == 5 || self.index == 8 || self.index == 9 || self.index == 10) {
                 if ([self.appendString containsString:@"mm"]) {
                     NSRange rang = [self.appendString rangeOfString:@"mm"];
                     [self.appendString deleteCharactersInRange:NSMakeRange(rang.location, 2)];
@@ -165,7 +165,7 @@
                 }
             }
             
-            if (self.index == 5 || self.index == 12) {
+            if (self.index == 5 || self.index == 8 || self.index == 9 || self.index == 10) {
                 if (self.appendString.length) {
                     [self.appendString appendString:@"mm"];
                 }

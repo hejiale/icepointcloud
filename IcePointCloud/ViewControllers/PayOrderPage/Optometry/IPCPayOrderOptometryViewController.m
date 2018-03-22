@@ -33,6 +33,9 @@
 {
     if (!_topOptometryView) {
         _topOptometryView = [[IPCPayOrderTopOptometryView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, 82)];
+        [[_topOptometryView rac_signalForSelector:@selector(insertOptometryAction:)] subscribeNext:^(RACTuple * _Nullable x) {
+            [self loadCreateOptometryView];
+        }];
     }
     return _topOptometryView;
 }
@@ -72,6 +75,11 @@
 }
 
 - (IBAction)editOptometryAction:(id)sender
+{
+    [self loadCreateOptometryView];
+}
+
+- (void)loadCreateOptometryView
 {
     if ([[IPCPayOrderManager sharedManager] customerId])
     {

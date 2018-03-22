@@ -22,6 +22,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *rightAddLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightCorrectionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightDistanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightBasalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftBasalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *glassPrismLeftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *glassPrismRightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceHeightRightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceHeightLeftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceAFMLabel;
 @property (weak, nonatomic) IBOutlet UILabel *comprehensiveLabel;
 
 @end
@@ -59,6 +66,9 @@
         [self.leftAddLabel setText:optometry.addLeft];
         [self.leftCorrectionLabel setText:optometry.correctedVisionLeft];
         [self.leftDistanceLabel setText:optometry.distanceLeft];
+        [self.leftBasalLabel setText:optometry.baseGlassesLeft];
+        [self.distanceHeightLeftLabel setText:optometry.distanceHeightLeft];
+        [self.glassPrismLeftLabel setText:optometry.glassPrismLeft];
         
         [self.rightSphLabel setText:optometry.sphRight];
         [self.rightCylLabel setText:optometry.cylRight];
@@ -66,8 +76,16 @@
         [self.rightAddLabel setText:optometry.addRight];
         [self.rightCorrectionLabel setText:optometry.correctedVisionRight];
         [self.rightDistanceLabel setText:optometry.distanceRight];
+        [self.rightBasalLabel setText:optometry.baseGlassesRight];
+        [self.distanceHeightRightLabel setText:optometry.distanceHeightRight];
+        [self.glassPrismRightLabel setText:optometry.glassPrismRight];
+        
+        [self.distanceAFMLabel setText:optometry.distanceAFM];
         [self.comprehensiveLabel setText:optometry.comprehensive];
     }
 }
+
+
+
 
 @end
