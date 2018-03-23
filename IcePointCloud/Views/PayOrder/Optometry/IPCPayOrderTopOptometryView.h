@@ -10,5 +10,7 @@
 
 @interface IPCPayOrderTopOptometryView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void(^)())update DefaultBlock:(void(^)(NSString *optometryId))defaultBlock;
+
 
 @end

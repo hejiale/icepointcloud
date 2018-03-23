@@ -233,9 +233,7 @@
             complete();
         }
     } FailureBlock:^(NSError *error) {
-        if (complete) {
-            complete();
-        }
+        [IPCCommonUI showError:@"未扫描到任何商品!"];
     }];
 }
 

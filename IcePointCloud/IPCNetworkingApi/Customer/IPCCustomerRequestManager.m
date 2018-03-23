@@ -126,7 +126,7 @@
                          SuccessBlock:(void (^)(id responseValue))success
                          FailureBlock:(void (^)(NSError * error))failure
 {
-    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(5),@"customerId":customID} RequestMethod:CustomerRequest_CustomerOrderList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
+    [self postRequest:@{@"pageNo":@(page),@"maxPageSize":@(20),@"customerId":customID} RequestMethod:CustomerRequest_CustomerOrderList CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
 + (void)queryOrderDetailWithOrderID:(NSString *)orderNumber

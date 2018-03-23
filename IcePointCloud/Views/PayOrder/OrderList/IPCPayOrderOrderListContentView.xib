@@ -36,7 +36,7 @@
                                         <constraint firstAttribute="width" constant="80" id="Ddo-Fc-JLS"/>
                                         <constraint firstAttribute="height" constant="25" id="bmW-Pw-4qf"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -46,7 +46,7 @@
                                         <constraint firstAttribute="width" constant="170" id="EVC-he-CVq"/>
                                         <constraint firstAttribute="height" constant="25" id="MDb-jL-0km"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -56,7 +56,7 @@
                                         <constraint firstAttribute="height" constant="25" id="2WY-CM-ynH"/>
                                         <constraint firstAttribute="width" constant="100" id="MPb-qO-mPS"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -65,12 +65,12 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="IN0-BU-TQu"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpN-cb-AHu">
-                                    <rect key="frame" x="0.0" y="45" width="573" height="495"/>
+                                    <rect key="frame" x="0.0" y="55" width="573" height="485"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKX-iA-LdS">
@@ -96,7 +96,7 @@
                                 <constraint firstItem="Kbl-kL-i8v" firstAttribute="top" secondItem="x89-GI-ZW0" secondAttribute="top" constant="20" id="Cyg-qD-oS1"/>
                                 <constraint firstAttribute="trailing" secondItem="Lsf-AZ-SPC" secondAttribute="trailing" id="Gjj-Oa-u9a"/>
                                 <constraint firstItem="Lsf-AZ-SPC" firstAttribute="top" secondItem="x89-GI-ZW0" secondAttribute="top" constant="20" id="MKG-eo-DfO"/>
-                                <constraint firstItem="SpN-cb-AHu" firstAttribute="top" secondItem="Lsf-AZ-SPC" secondAttribute="bottom" id="cEl-0X-LIV"/>
+                                <constraint firstItem="SpN-cb-AHu" firstAttribute="top" secondItem="Lsf-AZ-SPC" secondAttribute="bottom" constant="10" id="cEl-0X-LIV"/>
                                 <constraint firstItem="B1Y-KG-SBt" firstAttribute="top" secondItem="x89-GI-ZW0" secondAttribute="top" constant="20" id="i4d-c5-48R"/>
                                 <constraint firstItem="42p-Xa-2dT" firstAttribute="top" secondItem="x89-GI-ZW0" secondAttribute="top" constant="20" id="jS0-7k-UYf"/>
                                 <constraint firstAttribute="width" constant="573" id="pkz-Ol-7vV"/>

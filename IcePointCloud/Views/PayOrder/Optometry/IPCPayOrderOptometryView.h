@@ -10,6 +10,10 @@
 
 @interface IPCPayOrderOptometryView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame UpdateBlock:(void(^)())update;
+
 @property (copy, nonatomic) IPCOptometryMode * optometry;
+
+- (void)updateStatus;
 
 @end

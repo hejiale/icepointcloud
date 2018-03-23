@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *distanceHeightLeftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *distanceAFMLabel;
 @property (weak, nonatomic) IBOutlet UILabel *comprehensiveLabel;
+@property (weak, nonatomic) IBOutlet UILabel *memoLabel;
 
 @end
 
@@ -66,7 +67,7 @@
         [self.leftAddLabel setText:optometry.addLeft];
         [self.leftCorrectionLabel setText:optometry.correctedVisionLeft];
         [self.leftDistanceLabel setText:optometry.distanceLeft];
-        [self.leftBasalLabel setText:optometry.baseGlassesLeft];
+        [self.leftBasalLabel setText:[IPCCommon formatBasal:optometry.baseGlassesLeft]];
         [self.distanceHeightLeftLabel setText:optometry.distanceHeightLeft];
         [self.glassPrismLeftLabel setText:optometry.glassPrismLeft];
         
@@ -76,12 +77,14 @@
         [self.rightAddLabel setText:optometry.addRight];
         [self.rightCorrectionLabel setText:optometry.correctedVisionRight];
         [self.rightDistanceLabel setText:optometry.distanceRight];
-        [self.rightBasalLabel setText:optometry.baseGlassesRight];
+        [self.rightBasalLabel setText:[IPCCommon formatBasal:optometry.baseGlassesRight]];
         [self.distanceHeightRightLabel setText:optometry.distanceHeightRight];
         [self.glassPrismRightLabel setText:optometry.glassPrismRight];
         
         [self.distanceAFMLabel setText:optometry.distanceAFM];
         [self.comprehensiveLabel setText:optometry.comprehensive];
+        
+        [self.memoLabel setText:optometry.remark];
     }
 }
 

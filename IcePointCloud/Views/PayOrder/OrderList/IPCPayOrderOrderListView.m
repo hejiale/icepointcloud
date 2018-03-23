@@ -14,6 +14,7 @@ static NSString * const orderListCellIdentifier = @"IPCPayOrderOrderListViewCell
 @interface IPCPayOrderOrderListView()<UITableViewDelegate,UITableViewDataSource>
 {
     NSInteger currentPage;
+    NSString * currentOrderNum;
 }
 @property (weak, nonatomic) IBOutlet UITableView *orderListTableView;
 @property (nonatomic, strong) IPCRefreshAnimationHeader   *refreshHeader;
@@ -117,12 +118,13 @@ static NSString * const orderListCellIdentifier = @"IPCPayOrderOrderListViewCell
     }
     IPCCustomerOrderMode * orderMode = self.orderList[indexPath.row];
     cell.customerOrder = orderMode;
+    cell.orderNum = currentOrderNum;
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 65;
+    return 60;
 }
 
 #pragma mark //UITableViewDelegate
@@ -130,10 +132,13 @@ static NSString * const orderListCellIdentifier = @"IPCPayOrderOrderListViewCell
 {
     if (self.orderList.count) {
         IPCCustomerOrderMode * orderMode = self.orderList[indexPath.row];
+        currentOrderNum = orderMode.orderCode;
+        
         if (orderMode) {
             if (self.CompleteBlock) {
                 self.CompleteBlock(orderMode.orderCode);
             }
+            [tableView reloadData];
         }
     }
 }

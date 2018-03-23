@@ -32,4 +32,21 @@
     }
 }
 
+- (void)setOrderNum:(NSString *)orderNum
+{
+    _orderNum = orderNum;
+    
+    if (_orderNum) {
+        if ([_orderNum isEqualToString:_customerOrder.orderCode]) {
+            [self.orderCodeLabel setTextColor:[UIColor whiteColor]];
+            [self.orderPriceLabel setTextColor:[UIColor whiteColor]];
+            [self.orderDateLabel setTextColor:[UIColor whiteColor]];
+            [self.orderStatusLabel setTextColor:[UIColor whiteColor]];
+            [self.contentView setBackgroundColor:COLOR_RGB_BLUE];
+        }else{
+            
+        }
+    }
+}
+
 @end

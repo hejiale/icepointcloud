@@ -10,6 +10,7 @@
 
 @interface IPCShowOptometryView : UIView
 
-- (void)createUIWithOptometry:(IPCOptometryMode *)optometry;
+@property (nonatomic, copy) IPCOptometryMode * optometryMode;
+
 
 @end

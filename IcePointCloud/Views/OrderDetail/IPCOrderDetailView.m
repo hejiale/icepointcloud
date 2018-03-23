@@ -224,6 +224,8 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         if (!cell) {
             cell = [[UINib nibWithNibName:@"IPCOrderDetailMemoCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
         }
+        [cell.memoLabel setText:self.orderDetail.orderInfo.remark];
+        
         return cell;
     }
 }
@@ -231,7 +233,7 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
 #pragma mark //UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0 && indexPath.row > 0){
-        return 450;
+        return 460;
     }else if (indexPath.section == 1){
         if (self.orderDetail.products.count) {
             return 115;

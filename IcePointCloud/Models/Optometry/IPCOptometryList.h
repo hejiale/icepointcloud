@@ -48,6 +48,7 @@
 @property (nonatomic, copy, readwrite) NSString * optometryInsertDate;
 @property (nonatomic, copy, readwrite) NSString * comprehensive;//综合瞳距
 @property (nonatomic, copy, readwrite) NSString * remark;
+@property (nonatomic, assign, readwrite) BOOL      ifDefault;
 
 
 @end

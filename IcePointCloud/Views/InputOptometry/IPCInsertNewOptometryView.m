@@ -217,6 +217,7 @@
         [[self textField:4] setText:self.insertOptometry.correctedVisionRight];
         [[self textField:5] setText:self.insertOptometry.distanceHeightRight];
         [[self textField:6] setText:self.insertOptometry.glassPrismRight];
+        [self.basalTextField setText:[IPCCommon formatBasal:self.insertOptometry.baseGlassesRight]];
         [[self textField:9] setText:self.insertOptometry.distanceRight];
     }else{
         [[self textField:0] setText:self.insertOptometry.sphLeft];
@@ -226,6 +227,7 @@
         [[self textField:4] setText:self.insertOptometry.correctedVisionLeft];
         [[self textField:5] setText:self.insertOptometry.distanceHeightLeft];
         [[self textField:6] setText:self.insertOptometry.glassPrismLeft];
+        [self.basalTextField setText:[IPCCommon formatBasal:self.insertOptometry.baseGlassesLeft]];
         [[self textField:9] setText:self.insertOptometry.distanceLeft];
     }
     [[self textField:8] setText:self.insertOptometry.distanceAFM];
@@ -267,6 +269,9 @@
 
 - (void)selectEmployeeAction
 {
+    [self endEditing];
+    [self reloadInfo];
+    
     __weak typeof(self) weakSelf = self;
     IPCEmployeListView * listView = [[IPCEmployeListView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds
                                                                 DismissBlock:^(IPCEmployee *employee)
@@ -281,6 +286,9 @@
 
 - (void)selectBasalTypeAction
 {
+    [self endEditing];
+    [self reloadInfo];
+    
     IPCParameterTableViewController * parameterTableVC = [[IPCParameterTableViewController alloc]initWithNibName:@"IPCParameterTableViewController" bundle:nil];
     [parameterTableVC setDataSource:self];
     [parameterTableVC setDelegate:self];
@@ -442,7 +450,7 @@
         }else{
             [self textField:10].text = [NSString stringWithFormat:@"%.2fmm", rightDistance + leftDistance];
         }
-        self.insertOptometry.comprehensive = [self textField:12].text;
+        self.insertOptometry.comprehensive = [self textField:10].text;
     }else if(optometryIndex == 10)
     {
         double comprehensive = 0;
@@ -496,7 +504,12 @@
 #pragma mark //IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
-    [self.basalTextField setText:parameter];
+    if (isRight) {
+        self.insertOptometry.baseGlassesRight = [IPCCommon basal:parameter];
+    }else{
+        self.insertOptometry.baseGlassesLeft = [IPCCommon basal:parameter];
+    }
+    [self reloadInfo];
 }
 
 

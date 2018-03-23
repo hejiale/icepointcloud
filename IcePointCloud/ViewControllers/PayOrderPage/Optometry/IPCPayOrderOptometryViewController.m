@@ -32,7 +32,15 @@
 - (IPCPayOrderTopOptometryView *)topOptometryView
 {
     if (!_topOptometryView) {
-        _topOptometryView = [[IPCPayOrderTopOptometryView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, 82)];
+        _topOptometryView = [[IPCPayOrderTopOptometryView alloc]initWithFrame:CGRectMake(0, 10, self.view.jk_width-10, 82) UpdateBlock:^
+        {
+            [self.showOptometryView removeFromSuperview];
+            self.showOptometryView = nil;
+            [self.view addSubview:self.showOptometryView];
+        } DefaultBlock:^(NSString *optometryId){
+            [IPCCommonUI showInfo:@"正在设置默认验光单..."];
+            [self setDefaultOptometry:optometryId];
+        }];
         [[_topOptometryView rac_signalForSelector:@selector(insertOptometryAction:)] subscribeNext:^(RACTuple * _Nullable x) {
             [self loadCreateOptometryView];
         }];
@@ -92,7 +100,7 @@
                                                                          CompleteBlock:^(IPCOptometryMode * optometry)
                                         {
                                             [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = optometry;
-                                            [weakSelf reload];
+                                            [weakSelf setDefaultOptometry:optometry.optometryID];
                                         }];
             [[IPCCommonUI currentView] addSubview:self.insertOptometryView];
         }
@@ -101,6 +109,19 @@
     }
 }
 
+#pragma mark //Request Data
+- (void)setDefaultOptometry:(NSString *)optometrtId
+{
+    [IPCCustomerRequestManager setDefaultOptometryWithCustomID:[[IPCPayOrderManager sharedManager]customerId]
+                                            DefaultOptometryID:optometrtId
+                                                  SuccessBlock:^(id responseValue)
+     {
+         [self reload];
+         [IPCCommonUI hiden];
+     } FailureBlock:^(NSError *error) {
+         
+     }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

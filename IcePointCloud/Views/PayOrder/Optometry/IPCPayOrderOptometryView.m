@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *purposeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createDateLabl;
 @property (weak, nonatomic) IBOutlet UILabel *employeeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *defaultButton;
 
 @end
 
@@ -37,14 +38,6 @@
     [super layoutSubviews];
     
     [self.purposeView addBorder:self.purposeView.jk_height/2 Width:0 Color:nil];
-    
-    __weak typeof(self) weakSelf = self;
-    [self jk_addTapActionWithBlock:^(UIGestureRecognizer *gestureRecoginzer)
-     {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        [IPCPayOrderCurrentCustomer sharedManager].currentOpometry = _optometry;
-        [weakSelf updateStatus];
-    }];
 }
 
 - (void)setOptometry:(IPCOptometryMode *)optometry
@@ -56,6 +49,7 @@
     
         [self.createDateLabl setText:[IPCCommon formatDate:[IPCCommon dateFromString:optometry.insertDate] IsTime:NO]];
         [self.employeeLabel setText:_optometry.employeeName];
+        [self.purposeLabel setText:[IPCCommon formatPurpose:_optometry.purpose]];
     }
 }
 
@@ -66,12 +60,29 @@
         [self.createDateLabl setTextColor:DefaultColor];
         [self.employeeLabel setTextColor:DefaultColor];
         [self.purposeView setBackgroundColor:DefaultColor];
+        
+        if (_optometry.ifDefault) {
+            [self.defaultButton setTitleColor:DefaultColor forState:UIControlStateSelected];
+        }else{
+            [self.defaultButton setTitleColor:DefaultColor forState:UIControlStateNormal];
+        }
     }else{
         [self addBorder:5 Width:1 Color:COLOR_RGB_BLUE];
         [self.createDateLabl setTextColor:COLOR_RGB_BLUE];
         [self.employeeLabel setTextColor:COLOR_RGB_BLUE];
         [self.purposeView setBackgroundColor:COLOR_RGB_BLUE];
+        
+        if (_optometry.ifDefault) {
+            [self.defaultButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateSelected];
+        }else{
+            [self.defaultButton setTitleColor:COLOR_RGB_BLUE forState:UIControlStateNormal];
+        }
     }
+    [self.defaultButton setSelected:_optometry.ifDefault];
+}
+
+
+- (IBAction)setDefaultAction:(id)sender {
 }
 
 

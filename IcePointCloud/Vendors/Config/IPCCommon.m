@@ -119,6 +119,36 @@
     return purpose;
 }
 
++ (NSString *)formatBasal:(NSString *)basal{
+    NSString * basalString = @"";
+    
+    if ([basal isEqualToString:@"BI"]) {
+        basalString = @"内";
+    }else if ([basal isEqualToString:@"BO"]){
+        basalString = @"外";
+    }else if ([basal isEqualToString:@"BU"]){
+        basalString = @"上";
+    }else if ([basal isEqualToString:@"BD"]){
+        basalString = @"下";
+    }
+    return basalString;
+}
+
++ (NSString *)basal:(NSString *)text{
+    NSString * basal = @"";
+    
+    if ([text isEqualToString:@"内"]) {
+        basal = @"BI";
+    }else if ([text isEqualToString:@"外"]){
+        basal = @"BO";
+    }else if ([text isEqualToString:@"上"]){
+        basal = @"BU";
+    }else if ([text isEqualToString:@"下"]){
+        basal = @"BD";
+    }
+    return basal;
+}
+
 
 +(BOOL)checkTelNumber:(NSString*)telNumber
 {

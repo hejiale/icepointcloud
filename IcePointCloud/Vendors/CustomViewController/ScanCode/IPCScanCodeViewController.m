@@ -64,6 +64,13 @@
     if ([self isAvailableCamera]) {
         //初始化摄像设备
         self.device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        //开启闪光灯
+        /*if ([self.device hasTorch] && [self.device hasFlash]){
+            [self.device lockForConfiguration:nil];
+            [self.device setTorchMode:AVCaptureTorchModeOn];
+            [self.device setFlashMode:AVCaptureFlashModeOn];
+            [self.device unlockForConfiguration];
+        }*/
         //初始化摄像输入流
         self.input = [AVCaptureDeviceInput deviceInputWithDevice:self.device error:nil];
         //初始化摄像输出流

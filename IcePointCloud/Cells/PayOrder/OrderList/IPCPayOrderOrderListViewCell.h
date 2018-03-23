@@ -15,6 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderStatusLabel;
 @property (copy, nonatomic) IPCCustomerOrderMode * customerOrder;
-
+@property (copy, nonatomic)  NSString * orderNum;
 
 @end
