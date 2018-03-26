@@ -45,14 +45,6 @@
 + (NSString *)purpose:(NSString *)text;
 
 /**
- Format Basal
- 
- */
-+ (NSString *)formatBasal:(NSString *)basal;
-
-+ (NSString *)basal:(NSString *)text;
-
-/**
  The optometry customer gender transformation
 
  */

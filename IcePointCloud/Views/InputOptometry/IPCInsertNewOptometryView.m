@@ -78,9 +78,12 @@
     }];
     
     [self.basalTextField addBottomLine];
+    [self.basalTextField setLeftSpace:5];
     [self.employeeTextField setRightButton:self Action:@selector(selectEmployeeAction) OnView:self.inputHeadView];
     [self.basalTextField setRightButton:self Action:@selector(selectBasalTypeAction) OnView:self.optometryScrollContentView];
     [self.keyBoardView addSubview:self.keyboard];
+    
+    [self reloadInfo];
 }
 
 - (NSMutableArray<IPCOptometryTextField *> *)allTextFields
@@ -217,7 +220,7 @@
         [[self textField:4] setText:self.insertOptometry.correctedVisionRight];
         [[self textField:5] setText:self.insertOptometry.distanceHeightRight];
         [[self textField:6] setText:self.insertOptometry.glassPrismRight];
-        [self.basalTextField setText:[IPCCommon formatBasal:self.insertOptometry.baseGlassesRight]];
+        [self.basalTextField setText:self.insertOptometry.baseGlassesRight];
         [[self textField:9] setText:self.insertOptometry.distanceRight];
     }else{
         [[self textField:0] setText:self.insertOptometry.sphLeft];
@@ -227,7 +230,7 @@
         [[self textField:4] setText:self.insertOptometry.correctedVisionLeft];
         [[self textField:5] setText:self.insertOptometry.distanceHeightLeft];
         [[self textField:6] setText:self.insertOptometry.glassPrismLeft];
-        [self.basalTextField setText:[IPCCommon formatBasal:self.insertOptometry.baseGlassesLeft]];
+        [self.basalTextField setText:self.insertOptometry.baseGlassesLeft];
         [[self textField:9] setText:self.insertOptometry.distanceLeft];
     }
     [[self textField:8] setText:self.insertOptometry.distanceAFM];
@@ -315,16 +318,16 @@
     switch (optometryIndex) {
         case 0:
             if (isRight) {
-                self.insertOptometry.sphRight = [self appendSuffix];
+                self.insertOptometry.sphRight = [self appendPositiveSuffix];
             }else{
-                self.insertOptometry.sphLeft = [self appendSuffix];
+                self.insertOptometry.sphLeft = [self appendPositiveSuffix];
             }
             break;
         case 1:
             if (isRight) {
-                self.insertOptometry.cylRight = [self appendSuffix];
+                self.insertOptometry.cylRight = [self appendPositiveSuffix];
             }else{
-                self.insertOptometry.cylLeft = [self appendSuffix];
+                self.insertOptometry.cylLeft = [self appendPositiveSuffix];
             }
             break;
         case 2:
@@ -336,9 +339,9 @@
             break;
         case 3:
             if (isRight) {
-                self.insertOptometry.addRight = [self appendSuffix];
+                self.insertOptometry.addRight = [self appendPositiveSuffix];
             }else{
-                self.insertOptometry.addLeft = [self appendSuffix];
+                self.insertOptometry.addLeft = [self appendPositiveSuffix];
             }
             break;
         case 4:
@@ -383,17 +386,31 @@
 }
 
 ///添加后缀 ".00"
-- (NSString *)appendSuffix
+- (NSString *)appendPositiveSuffix
 {
     if (![self currentTextField].text.length) {
         return @"";
     }
     if ([[self currentTextField].text containsString:@"+"] || [[self currentTextField].text containsString:@"-"]) {
         NSString * number = [[self currentTextField].text substringFromIndex:1];
+        if ([number doubleValue] == 0) {
+            return @"0.00";
+        }
         if ([IPCCommon judgeIsIntNumber:number]) {
             return [NSString stringWithFormat:@"%@%.2f", [[self currentTextField].text substringWithRange:NSMakeRange(0, 1)], [number doubleValue]];
         }
         return [self currentTextField].text;
+    }
+    if ([[self currentTextField].text doubleValue] == 0) {
+        return @"0.00";
+    }
+    return [NSString stringWithFormat:@"+%.2f", [[self currentTextField].text doubleValue]];
+}
+
+- (NSString *)appendSuffix
+{
+    if (![self currentTextField].text.length) {
+        return @"";
     }
     return [NSString stringWithFormat:@"%.2f", [[self currentTextField].text doubleValue]];
 }
@@ -498,16 +515,16 @@
 #pragma mark //IPCParameterTableViewDataSource
 - (nonnull NSArray *)parameterDataInTableView:(IPCParameterTableViewController *)tableView
 {
-    return @[@"内",@"外",@"上",@"下"];
+    return @[@"BI",@"BO",@"BU",@"BD"];
 }
 
 #pragma mark //IPCParameterTableViewDelegate
 - (void)didSelectParameter:(NSString *)parameter InTableView:(IPCParameterTableViewController *)tableView
 {
     if (isRight) {
-        self.insertOptometry.baseGlassesRight = [IPCCommon basal:parameter];
+        self.insertOptometry.baseGlassesRight = parameter;
     }else{
-        self.insertOptometry.baseGlassesLeft = [IPCCommon basal:parameter];
+        self.insertOptometry.baseGlassesLeft = parameter;
     }
     [self reloadInfo];
 }

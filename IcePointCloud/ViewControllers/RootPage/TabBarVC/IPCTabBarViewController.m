@@ -84,7 +84,7 @@
         make.right.equalTo(self.menuBarView.mas_right).with.offset(0);
         make.top.equalTo(self.menuBarView.mas_top).with.offset(0);
         make.bottom.equalTo(self.menuBarView.mas_bottom).with.offset(0);
-        make.width.mas_equalTo((MenuItemWidth * 6));
+        make.width.mas_equalTo((MenuItemWidth * 5));
     }];
     [self.filterButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.menuBarView.mas_left).with.offset(5);
@@ -187,10 +187,10 @@
 }
 
 - (void)setMenuButtons{
-    for (NSInteger i = 0; i < 6; i ++) {
+    for (NSInteger i = 0; i < 5; i ++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setBackgroundColor:[UIColor clearColor]];
-        if (i < 5) {
+        if (i < 4) {
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_normal_%ld",(long)i]] forState:UIControlStateNormal];
             [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"icon_selected_%ld",(long)i]] forState:UIControlStateSelected];
         }else{
@@ -226,7 +226,7 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    if (selectedIndex != _selectedIndex && selectedIndex > 0 && selectedIndex < 5) {
+    if (selectedIndex != _selectedIndex && selectedIndex > 0 && selectedIndex < 4) {
         UIViewController * selectedViewController = [self.viewControllers objectAtIndex:selectedIndex -1];
         [self addChildViewController:selectedViewController];
         
@@ -235,7 +235,7 @@
         [self.contentView bringSubviewToFront:selectedViewController.view];
         [selectedViewController didMoveToParentViewController:self];
         
-        if (_selectedIndex != NSNotFound && _selectedIndex < 5)
+        if (_selectedIndex != NSNotFound && _selectedIndex < 4)
         {
             UIViewController *previousViewController = [self.viewControllers objectAtIndex:_selectedIndex-1];
             [previousViewController.view removeFromSuperview];
@@ -254,7 +254,7 @@
         }
     }
     
-    if (selectedIndex == 4) {
+    if (selectedIndex == 3) {
         [IPCPayOrderManager sharedManager].isPayOrderStatus = YES;
     }else{
         [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
@@ -272,8 +272,8 @@
 
 - (void)updateTopView
 {
-    if (_selectedIndex < 5 && _selectedIndex > 0) {
-        if (_selectedIndex == 1 || _selectedIndex == 3) {
+    if (_selectedIndex < 4 && _selectedIndex > 0) {
+        if (_selectedIndex == 1 || _selectedIndex == 2) {
             [self.filterButton setHidden:NO];
             [self.logoImageView setHidden:NO];
             
@@ -288,7 +288,7 @@
             [self.scanButton setHidden:YES];
         }
         
-        if(_selectedIndex == 2 || _selectedIndex == 4){
+        if(_selectedIndex == 1 || _selectedIndex == 3){
             UIViewController * viewController = (UIViewController *)[self.viewControllers objectAtIndex:_selectedIndex-1];
             [self.titleLabel setText:viewController.title];
         }else{
@@ -304,7 +304,7 @@
 
 - (void)updateSidebar
 {
-    if (_selectedIndex < 5 && _selectedIndex > 0) {
+    if (_selectedIndex < 4 && _selectedIndex > 0) {
         [self.menusView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if ([obj isKindOfClass:[UIButton class]]) {
                 UIButton * button = (UIButton *)obj;
@@ -328,7 +328,7 @@
 
 #pragma mark //Notification
 - (void)reloadCartBadge{
-    UIButton * button = (UIButton *)self.menusView.subviews[4];
+    UIButton * button = (UIButton *)self.menusView.subviews[3];
     [button createBadgeText:[NSString stringWithFormat:@"%d",[[IPCShoppingCart sharedCart] allGlassesCount]]];
 }
 

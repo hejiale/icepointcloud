@@ -201,7 +201,12 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
                 cell = [[UINib nibWithNibName:@"IPCOrderDetailSectionCell" bundle:nil]instantiateWithOwner:nil options:nil][0];
             }
             [cell.sectionTitleLabel setText:@"收款记录"];
-            [cell.sectionValueLabel setText:[NSString stringWithFormat:@"￥%.2f", self.orderDetail.orderInfo.remainAmount]];
+            NSString * amountText = [NSString stringWithFormat:@"￥%.2f", self.orderDetail.orderInfo.remainAmount];
+            [cell.sectionValueLabel setText:amountText];
+            
+            CGFloat width = [amountText jk_sizeWithFont:cell.sectionValueLabel.font constrainedToHeight:cell.sectionValueLabel.jk_height].width;
+            cell.valueWithConstraint.constant = width;
+            
             return cell;
         }else{
             IPCOrderDetailPayRecordCell * cell = [tableView dequeueReusableCellWithIdentifier:payRecordIdentifier];

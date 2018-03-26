@@ -41,18 +41,18 @@
 - (instancetype)init{
     self = [super init];
     if (self) {
-        self.cylRight = @"";
+        self.cylRight = @"0.00";
         self.axisRight = @"";
         self.addRight =@"";
         self.distanceLeft = @"";
         self.distanceRight = @"";
-        self.cylLeft =@"";
+        self.cylLeft =@"0.00";
         self.axisLeft = @"";
         self.addLeft = @"";
         self.correctedVisionRight = @"";
         self.correctedVisionLeft = @"";
-        self.sphLeft = @"";
-        self.sphRight = @"";
+        self.sphLeft = @"0.00";
+        self.sphRight = @"0.00";
         self.purpose = @"";
         self.distanceAFM = @"";
         self.distanceHeightLeft = @"";

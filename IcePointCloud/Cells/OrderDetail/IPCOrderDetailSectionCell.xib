@@ -40,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余应收" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="so9-kO-w6L">
-                        <rect key="frame" x="320" y="15" width="60" height="20"/>
+                        <rect key="frame" x="310" y="15" width="60" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="JaZ-Er-VbP"/>
                             <constraint firstAttribute="width" constant="60" id="jrC-xf-0FH"/>
@@ -52,7 +52,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="so9-kO-w6L" firstAttribute="baseline" secondItem="1uz-Ra-VJ5" secondAttribute="baseline" id="821-wb-5P0"/>
-                    <constraint firstItem="IBb-iK-KYe" firstAttribute="leading" secondItem="so9-kO-w6L" secondAttribute="trailing" id="Lxp-4R-9Td"/>
+                    <constraint firstItem="IBb-iK-KYe" firstAttribute="leading" secondItem="so9-kO-w6L" secondAttribute="trailing" constant="10" id="Lxp-4R-9Td"/>
                     <constraint firstItem="1uz-Ra-VJ5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="afH-X2-wdZ"/>
                     <constraint firstItem="IBb-iK-KYe" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="duf-RM-APG"/>
                     <constraint firstItem="1uz-Ra-VJ5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="20" id="pnU-Qt-aKJ"/>
@@ -62,6 +62,7 @@
             <connections>
                 <outlet property="sectionTitleLabel" destination="1uz-Ra-VJ5" id="bkZ-qu-rXF"/>
                 <outlet property="sectionValueLabel" destination="IBb-iK-KYe" id="ehu-td-dkZ"/>
+                <outlet property="valueWithConstraint" destination="jit-zp-5eo" id="yuF-yj-wEM"/>
             </connections>
         </tableViewCell>
     </objects>

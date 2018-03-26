@@ -67,7 +67,7 @@
         [self.leftAddLabel setText:optometry.addLeft];
         [self.leftCorrectionLabel setText:optometry.correctedVisionLeft];
         [self.leftDistanceLabel setText:optometry.distanceLeft];
-        [self.leftBasalLabel setText:[IPCCommon formatBasal:optometry.baseGlassesLeft]];
+        [self.leftBasalLabel setText:optometry.baseGlassesLeft];
         [self.distanceHeightLeftLabel setText:optometry.distanceHeightLeft];
         [self.glassPrismLeftLabel setText:optometry.glassPrismLeft];
         
@@ -77,7 +77,7 @@
         [self.rightAddLabel setText:optometry.addRight];
         [self.rightCorrectionLabel setText:optometry.correctedVisionRight];
         [self.rightDistanceLabel setText:optometry.distanceRight];
-        [self.rightBasalLabel setText:[IPCCommon formatBasal:optometry.baseGlassesRight]];
+        [self.rightBasalLabel setText:optometry.baseGlassesRight];
         [self.distanceHeightRightLabel setText:optometry.distanceHeightRight];
         [self.glassPrismRightLabel setText:optometry.glassPrismRight];
         

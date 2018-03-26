@@ -10,7 +10,7 @@
 #import "IPCTryGlassesViewController.h"
 #import "IPCGlassListViewController.h"
 #import "IPCPayOrderViewController.h"
-#import "IPCCustomerListViewController.h"
+//#import "IPCCustomerListViewController.h"
 #import "IPCScanCodeViewController.h"
 #import "IPCSideBarMenuView.h"
 
@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
-@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
+//@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
 @property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 @property (nonatomic, strong) IPCPortraitNavigationViewController * cameraNav;
 
@@ -34,10 +34,10 @@
     
     self.productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     self.tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-    self.customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
+//    self.customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
     self.payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
     
-    [self setViewControllers:@[self.productVC,self.customerInfoVC,self.tryVC,self.payOrderVC]];
+    [self setViewControllers:@[self.productVC,self.tryVC,self.payOrderVC]];
     
     __weak typeof(self) weakSelf = self;
     [[self rac_signalForSelector:@selector(filterProductAction)] subscribeNext:^(RACTuple * _Nullable x)
@@ -95,10 +95,10 @@
     if (index == 0) {
         if (self.selectedIndex == 1) {
             [self.productVC onSearchProducts];
-        }else if (self.selectedIndex == 3){
+        }else if (self.selectedIndex == 2){
             [self.tryVC onSearchProducts];
         }
-    }else if (index == 5){
+    }else if (index == 4){
         [self showSideBarView];
     }
 }
@@ -110,7 +110,7 @@
     self.view = nil;
     self.productVC = nil;
     self.tryVC = nil;
-    self.customerInfoVC = nil;
+//    self.customerInfoVC = nil;
     self.payOrderVC = nil;
 }
 

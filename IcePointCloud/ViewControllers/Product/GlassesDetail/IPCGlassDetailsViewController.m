@@ -111,7 +111,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
 
 - (void)pushToCartAction:(id)sender
 {
-    [IPCCommonUI pushToRootIndex:4];
+    [IPCCommonUI pushToRootIndex:3];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
@@ -125,7 +125,7 @@ static NSString * const webViewIdentifier = @"UIWebViewCellIdentifier";
         [[IPCTryMatch instance] initMatchItems];
     }
     [[IPCTryMatch instance] currentMatchItem].glass = self.glasses;
-    [IPCCommonUI pushToRootIndex:3];
+    [IPCCommonUI pushToRootIndex:2];
     [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
