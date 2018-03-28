@@ -24,7 +24,7 @@
     _recordList = recordList;
 
     if (_recordList.count) {
-        __block CGFloat originY = 30;
+        __block CGFloat originY = 40;
         
         [_recordList enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop)
         {

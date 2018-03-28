@@ -133,7 +133,9 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         [IPCHttpRequest  cancelAllRequest];
     }
     [self.refreshFooter resetDataStatus];
+    
     [self.viewModel resetData];
+    
     if (isSelectMember) {
         [self loadMemberList];
     }else{
@@ -144,6 +146,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 - (void)loadMore
 {
     self.viewModel.currentPage++;
+    
     if (isSelectMember) {
         [self loadMemberList];
     }else{
@@ -155,15 +158,6 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 - (void)loadData
 {
     [self.refreshHeader beginRefreshing];
-//    [self.viewModel resetData];
-//    self.customerCollectionView.isBeginLoad = YES;
-//
-//    if (isSelectMember) {
-//        [self loadMemberList];
-//    }else{
-//        [self loadCustomerList];
-//    }
-//    [self.customerCollectionView reloadData];
 }
 
 #pragma mark //Request Data

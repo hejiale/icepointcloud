@@ -68,7 +68,7 @@
 - (IBAction)onMinusAction:(id)sender {
     if (self.cartItem.glassCount == 1)
     {
-        [IPCCommonUI showAlert:@"温馨提示" Message:@"确认要删除该商品吗?" Owner:[UIApplication sharedApplication].keyWindow.rootViewController DoneTitle:@"确定" CancelTitle:@"取消" Done:^
+        [IPCCommonUI showAlert:@"温馨提示" Message:@"确认要删除该商品吗?" DoneTitle:@"确定" CancelTitle:@"取消" Done:^
         {
             [[IPCShoppingCart sharedCart] reduceItem:_cartItem];
             

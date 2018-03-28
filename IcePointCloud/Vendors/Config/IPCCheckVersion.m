@@ -27,7 +27,7 @@
 {
     [self getAppStoreVersion:^(IPCVersionModel *model) {
         if (model) {
-            [IPCCommonUI showAlert:@"有新版本更新" Message:model.releaseNotes Owner:[[UIApplication sharedApplication] keyWindow].rootViewController DoneTitle:@"更新" CancelTitle:@"取消" Done:^{
+            [IPCCommonUI showAlert:@"有新版本更新" Message:model.releaseNotes DoneTitle:@"更新" CancelTitle:@"取消" Done:^{
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.trackViewUrl]];
             }];
         }

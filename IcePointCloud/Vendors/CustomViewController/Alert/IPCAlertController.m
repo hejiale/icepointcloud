@@ -117,6 +117,11 @@ typedef void(^IPCAlertActionsConfig)(IPCAlertActionBlock actionBlock);
     };
 }
 
+- (BOOL)shouldAutorotate
+{
+    return YES;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

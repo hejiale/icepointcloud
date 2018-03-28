@@ -241,12 +241,29 @@ static NSString * const payRecordIdentifier  = @"IPCOrderDetailPayRecordCellIden
         return 460;
     }else if (indexPath.section == 1){
         if (self.orderDetail.products.count) {
-            return 115;
+            IPCGlasses * glass = self.orderDetail.products[indexPath.row];
+            
+            if (glass) {
+                if (([glass filterType] == IPCTopFilterTypeLens || [glass filterType] == IPCTopFilterTypeContactLenses) && glass.isBatch) {
+                    if (glass.sph.length && glass.cyl.length)
+                        return 115;
+                    else
+                        return 100;
+                }else if ([glass filterType] == IPCTopFilterTypeReadingGlass && glass.isBatch){
+                    if (glass.batchDegree.length)
+                        return 115;
+                    else
+                        return 100;
+                }else{
+                    return 100;
+                }
+            }
         }
+        return 0;
     }else if (indexPath.section == 2){
         return 90;
     }else if (indexPath.section == 3 && indexPath.row > 0){
-        return self.orderDetail.recordArray.count * 30;
+        return self.orderDetail.recordArray.count * 40;
     }else if (indexPath.section == 4){
         return 120;
     }

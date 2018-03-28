@@ -26,7 +26,7 @@
             [self.memberLevelLabel setText:_currentCustomer.memberLevel];
         }
         
-        if ([_currentCustomer.memberCustomerId integerValue] == [[IPCPayOrderManager sharedManager].currentMemberCustomerId integerValue])
+        if ([_currentCustomer.memberCustomerId integerValue] == [[IPCPayOrderManager sharedManager].currentMemberCustomerId integerValue] && [_currentCustomer.memberCustomerId integerValue] > 0)
         {
             [self.encryptedPhoneLabel setTextColor:COLOR_RGB_BLUE];
             [self.memberLevelLabel setTextColor:COLOR_RGB_BLUE];

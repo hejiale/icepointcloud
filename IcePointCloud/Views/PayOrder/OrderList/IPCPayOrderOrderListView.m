@@ -47,6 +47,8 @@ static NSString * const orderListCellIdentifier = @"IPCPayOrderOrderListViewCell
     self.orderListTableView.mj_footer = self.refreshFooter;
     [self.orderListTableView setTableHeaderView:[[UIView alloc]init]];
     [self.orderListTableView setTableFooterView:[[UIView alloc]init]];
+    self.orderListTableView.emptyAlertImage = @"exception_search";
+    self.orderListTableView.emptyAlertTitle = @"未查询到任何订单信息!";
     [self.refreshHeader beginRefreshing];
 }
 

@@ -19,6 +19,8 @@
 @property (strong, nonatomic) UILabel * productPriceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UILabel *parameterLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *parameterHeightConstraint;
+
 
 @property (assign, nonatomic) id<IPCCustomerOrderDetailDelegate>delegate;
 

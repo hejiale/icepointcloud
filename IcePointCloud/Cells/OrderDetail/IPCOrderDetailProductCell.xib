@@ -63,6 +63,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="countLabel" destination="B5t-Ga-nk8" id="E79-BA-fyL"/>
+                <outlet property="parameterHeightConstraint" destination="s6E-4W-SO3" id="5D4-CX-JOd"/>
                 <outlet property="parameterLabel" destination="yQ2-to-6Th" id="me4-2h-EwF"/>
                 <outlet property="productContentView" destination="W09-WB-702" id="x8R-9t-O8K"/>
             </connections>

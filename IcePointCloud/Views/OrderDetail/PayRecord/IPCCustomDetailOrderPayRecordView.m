@@ -30,7 +30,6 @@
         make.left.equalTo(self.mas_left).with.offset(0);
         make.top.equalTo(self.mas_top).with.offset(0);
         make.bottom.equalTo(self.mas_bottom).with.offset(0);
-        make.width.mas_equalTo(80);
     }];
     
     [self.payDateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -85,6 +84,11 @@
     _payType = payType;
     
     if (_payType) {
+        CGFloat typeWidth = [_payType.payOrderType.payType jk_sizeWithFont:self.payTypeNameLabel.font constrainedToHeight:self.payTypeNameLabel.jk_height].width;
+        [self.payTypeNameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.mas_equalTo(typeWidth+10);
+        }];
+        
         [self.payTypeNameLabel setText:_payType.payOrderType.payType];
         [self.payDateLabel setText:[IPCCommon formatDate:[IPCCommon dateFromString:_payType.payDate] IsTime:YES]];
         [self.payPriceLabel setText:[NSString stringWithFormat:@"-￥%.2f",_payType.payPrice]];

@@ -15,6 +15,7 @@
     // Initialization code
 }
 
+
 - (void)setSelectCustomerId:(NSString *)selectCustomerId
 {
     _selectCustomerId = selectCustomerId;
@@ -27,13 +28,14 @@
     if (_currentCustomer) {
         [self.customerNameLabel setText:_currentCustomer.customerName];
         [self.customerPhoneLabel setText:_currentCustomer.customerPhone];
+        
         if (_currentCustomer.memberLevel) {
             [self.customerLevelLabel setText:_currentCustomer.memberLevel];
         }else{
             [self.customerLevelLabel setText:@"非会员"];
         }
         
-        if ([_currentCustomer.customerID integerValue] == [self.selectCustomerId integerValue])
+        if ([_currentCustomer.customerID integerValue] == [self.selectCustomerId integerValue] && [_currentCustomer.customerID integerValue] > 0)
         {
             [self.customerNameLabel setTextColor:COLOR_RGB_BLUE];
             [self.customerPhoneLabel setTextColor:COLOR_RGB_BLUE];

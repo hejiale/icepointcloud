@@ -91,20 +91,21 @@
     [alertView show];
 }
 
-+ (void)showAlert:(NSString *)title Message:(NSString *)message Owner:(id)owner DoneTitle:(NSString *)doneTitle CancelTitle:(NSString *)cancelTitle Done:(void(^)())done
++ (void)showAlert:(NSString *)title Message:(NSString *)message DoneTitle:(NSString *)doneTitle CancelTitle:(NSString *)cancelTitle Done:(void(^)())done
 {
-    if (owner && [owner isKindOfClass:[UIViewController class]]) {
-        [owner showAlertWithTitle:title Message:message Process:^(IPCAlertController *alertController) {
-            alertController.addCancelTitle(cancelTitle);
-            alertController.addDestructiveTitle(doneTitle);
-        } ActionBlock:^(NSInteger buttonIndex, UIAlertAction *action, IPCAlertController *alertSelf) {
-            if (buttonIndex == 1) {
-                if (done) {
-                    done();
-                }
-            }
-        }];
-    }
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:doneTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (done) {
+            done();
+        }
+    }]];
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alertController animated:YES completion:nil];
 }
 
 

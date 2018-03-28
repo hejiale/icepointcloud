@@ -91,9 +91,15 @@
         if (([_glasses filterType] == IPCTopFilterTypeLens || [_glasses filterType] == IPCTopFilterTypeContactLenses) && _glasses.isBatch) {
             if (_glasses.sph.length && _glasses.cyl.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"球镜/SPH: %@  柱镜/CYL: %@",_glasses.sph,_glasses.cyl]];
+            else
+                self.parameterHeightConstraint.constant = 0;
         }else if ([_glasses filterType] == IPCTopFilterTypeReadingGlass && _glasses.isBatch){
             if (_glasses.batchDegree.length)
                 [self.parameterLabel setText:[NSString stringWithFormat:@"度数: %@",_glasses.batchDegree]];
+            else
+                self.parameterHeightConstraint.constant = 0;
+        }else{
+            self.parameterHeightConstraint.constant = 0;
         }
     }
 }

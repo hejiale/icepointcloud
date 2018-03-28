@@ -171,7 +171,7 @@
 - (IBAction)cancelAction:(id)sender
 {
     __weak typeof(self) weakSelf = self;
-    [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" Owner:self DoneTitle:@"确定" CancelTitle:@"返回" Done:^{
+    [IPCCommonUI showAlert:@"温馨提示" Message:@"您确定要取消该订单并清空购物列表及客户信息吗?" DoneTitle:@"确定" CancelTitle:@"返回" Done:^{
         [weakSelf clearAllPayInfo];
     }];
 }
@@ -189,7 +189,7 @@
 - (void)offerOrderAction
 {
     __weak typeof(self) weakSelf = self;
-    [IPCCommonUI showAlert:@"温馨提示" Message:@"该订单超额打折，请先提交订单！" Owner:self  DoneTitle:@"提交" CancelTitle:@"取消" Done:^{
+    [IPCCommonUI showAlert:@"温馨提示" Message:@"该订单超额打折，请先提交订单！" DoneTitle:@"提交" CancelTitle:@"取消" Done:^{
         if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
             [weakSelf offerOrder:@"NULL" EndStatus:@"UN_AUDITED" Complete:^{
                 [IPCCommonUI showSuccess:@"订单提交成功！"];
