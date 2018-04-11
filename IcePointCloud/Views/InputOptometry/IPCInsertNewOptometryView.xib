@@ -272,8 +272,8 @@
                                                         <constraint firstAttribute="height" constant="30" id="u2f-GB-qGc"/>
                                                     </constraints>
                                                 </view>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mgs-FB-BLg">
-                                                    <rect key="frame" x="130" y="350" width="220" height="30"/>
+                                                <textField opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请选择" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mgs-FB-BLg">
+                                                    <rect key="frame" x="125" y="350" width="225" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="rQr-Ws-w59"/>
                                                     </constraints>
@@ -307,6 +307,7 @@
                                                 <constraint firstItem="dZG-0h-Dyb" firstAttribute="centerY" secondItem="hKl-cz-xhy" secondAttribute="centerY" id="3Hk-zb-C6n"/>
                                                 <constraint firstItem="CUc-SC-R28" firstAttribute="leading" secondItem="PAO-bl-r1t" secondAttribute="trailing" constant="20" id="3KE-sx-E8N"/>
                                                 <constraint firstAttribute="trailing" secondItem="Mgs-FB-BLg" secondAttribute="trailing" id="5gg-pI-IH4"/>
+                                                <constraint firstItem="Mgs-FB-BLg" firstAttribute="leading" secondItem="yFp-EI-ZbX" secondAttribute="trailing" constant="15" id="6RP-Ft-GCo"/>
                                                 <constraint firstItem="i9f-A2-7nl" firstAttribute="leading" secondItem="Sj9-R0-WDQ" secondAttribute="trailing" constant="20" id="6mo-mB-1aC"/>
                                                 <constraint firstAttribute="trailing" secondItem="xCI-Oh-cbA" secondAttribute="trailing" id="6wI-M8-fAA"/>
                                                 <constraint firstItem="1ea-Di-ox1" firstAttribute="leading" secondItem="7yJ-J0-Ion" secondAttribute="trailing" constant="20" id="8UO-Tz-RkG"/>
@@ -334,7 +335,6 @@
                                                 <constraint firstItem="PAO-bl-r1t" firstAttribute="leading" secondItem="8Dr-Fe-IgV" secondAttribute="leading" constant="10" id="ahS-2k-Y3h"/>
                                                 <constraint firstAttribute="trailing" secondItem="CUc-SC-R28" secondAttribute="trailing" id="bYd-Bx-Mvg"/>
                                                 <constraint firstItem="aRL-Uh-WCF" firstAttribute="centerY" secondItem="ilg-oN-xqv" secondAttribute="centerY" id="btU-mf-OVQ"/>
-                                                <constraint firstItem="Mgs-FB-BLg" firstAttribute="leading" secondItem="yFp-EI-ZbX" secondAttribute="trailing" constant="20" id="cwO-36-Mp4"/>
                                                 <constraint firstAttribute="height" constant="530" id="eSv-p0-7Qo"/>
                                                 <constraint firstItem="Mgs-FB-BLg" firstAttribute="centerY" secondItem="yFp-EI-ZbX" secondAttribute="centerY" id="fv2-fg-nqb"/>
                                                 <constraint firstItem="CUc-SC-R28" firstAttribute="centerY" secondItem="PAO-bl-r1t" secondAttribute="centerY" id="h82-YU-XrM"/>

@@ -213,8 +213,16 @@
 - (void)reloadInfo
 {
     if (isRight) {
-        [[self textField:0] setText:self.insertOptometry.sphRight];
-        [[self textField:1] setText:self.insertOptometry.cylRight];
+        if (![self.insertOptometry.sphRight isEqualToString:@"0.00"]) {
+            [[self textField:0] setText:self.insertOptometry.sphRight];
+        }else{
+            [[self textField:0] setText:@""];
+        }
+        if (![self.insertOptometry.cylRight isEqualToString:@"0.00"]) {
+            [[self textField:1] setText:self.insertOptometry.cylRight];
+        }else{
+            [[self textField:1] setText:@""];
+        }
         [[self textField:2] setText:self.insertOptometry.axisRight];
         [[self textField:3] setText:self.insertOptometry.addRight];
         [[self textField:4] setText:self.insertOptometry.correctedVisionRight];
@@ -223,8 +231,16 @@
         [self.basalTextField setText:self.insertOptometry.baseGlassesRight];
         [[self textField:9] setText:self.insertOptometry.distanceRight];
     }else{
-        [[self textField:0] setText:self.insertOptometry.sphLeft];
-        [[self textField:1] setText:self.insertOptometry.cylLeft];
+        if (![self.insertOptometry.sphLeft isEqualToString:@"0.00"]) {
+            [[self textField:0] setText:self.insertOptometry.sphLeft];
+        }else{
+            [[self textField:0] setText:@""];
+        }
+        if (![self.insertOptometry.cylLeft isEqualToString:@"0.00"]) {
+            [[self textField:1] setText:self.insertOptometry.cylLeft];
+        }else{
+            [[self textField:1] setText:@""];
+        }
         [[self textField:2] setText:self.insertOptometry.axisLeft];
         [[self textField:3] setText:self.insertOptometry.addLeft];
         [[self textField:4] setText:self.insertOptometry.correctedVisionLeft];
