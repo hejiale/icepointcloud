@@ -10,7 +10,6 @@
 #import "IPCTryGlassesViewController.h"
 #import "IPCGlassListViewController.h"
 #import "IPCPayOrderViewController.h"
-//#import "IPCCustomerListViewController.h"
 #import "IPCScanCodeViewController.h"
 #import "IPCSideBarMenuView.h"
 
@@ -18,7 +17,6 @@
 
 @property (nonatomic, strong) IPCGlassListViewController * productVC;
 @property (nonatomic, strong) IPCTryGlassesViewController *tryVC;
-//@property (nonatomic, strong) IPCCustomerListViewController * customerInfoVC;
 @property (nonatomic, strong) IPCPayOrderViewController * payOrderVC;
 @property (nonatomic, strong) IPCPortraitNavigationViewController * cameraNav;
 
@@ -34,7 +32,6 @@
     
     self.productVC         =  [[IPCGlassListViewController alloc]initWithNibName:@"IPCGlassListViewController" bundle:nil];
     self.tryVC                 =  [[IPCTryGlassesViewController alloc] initWithNibName:@"IPCTryGlassesViewController" bundle:nil];
-//    self.customerInfoVC =  [[IPCCustomerListViewController alloc]initWithNibName:@"IPCCustomerListViewController" bundle:nil];
     self.payOrderVC       =  [[IPCPayOrderViewController alloc]initWithNibName:@"IPCPayOrderViewController" bundle:nil];
     
     [self setViewControllers:@[self.productVC,self.tryVC,self.payOrderVC]];
@@ -45,7 +42,7 @@
         __strong typeof(weakSelf) strongSelf = weakSelf;
         if (weakSelf.selectedIndex == 1) {
             [strongSelf.productVC onFilterProducts];
-        }else if (weakSelf.selectedIndex == 3){
+        }else if (weakSelf.selectedIndex == 2){
             [strongSelf.tryVC onFilterProducts];
         }
     }];

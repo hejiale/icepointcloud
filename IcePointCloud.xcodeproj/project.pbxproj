@@ -306,6 +306,7 @@
 		CB890DC620469578003931EB /* IPCPayOrderMemberCustomerListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB890DC520469578003931EB /* IPCPayOrderMemberCustomerListView.xib */; };
 		CB890DCA2046A11B003931EB /* IPCPayOrderMemberCustomerListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CB890DC82046A11B003931EB /* IPCPayOrderMemberCustomerListCell.m */; };
 		CB890DCB2046A11B003931EB /* IPCPayOrderMemberCustomerListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB890DC92046A11B003931EB /* IPCPayOrderMemberCustomerListCell.xib */; };
+		CB8BD03A208466F50041AF87 /* UIAlertController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8BD039208466F50041AF87 /* UIAlertController+Extend.m */; };
 		CB958F581FBAEF3800B882B7 /* IPCCustomKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */; };
 		CB958F5C1FBAEFC300B882B7 /* IPCCustomKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */; };
 		CBACAF941FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CBACAF921FE26ACF00C19B59 /* IPCPayCashPayTypeViewCell.m */; };
@@ -874,6 +875,8 @@
 		CB890DC72046A11B003931EB /* IPCPayOrderMemberCustomerListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCPayOrderMemberCustomerListCell.h; sourceTree = "<group>"; };
 		CB890DC82046A11B003931EB /* IPCPayOrderMemberCustomerListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCPayOrderMemberCustomerListCell.m; sourceTree = "<group>"; };
 		CB890DC92046A11B003931EB /* IPCPayOrderMemberCustomerListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCPayOrderMemberCustomerListCell.xib; sourceTree = "<group>"; };
+		CB8BD038208466F50041AF87 /* UIAlertController+Extend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+Extend.h"; sourceTree = "<group>"; };
+		CB8BD039208466F50041AF87 /* UIAlertController+Extend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Extend.m"; sourceTree = "<group>"; };
 		CB958F561FBAEF3800B882B7 /* IPCCustomKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPCCustomKeyboard.h; sourceTree = "<group>"; };
 		CB958F571FBAEF3800B882B7 /* IPCCustomKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPCCustomKeyboard.m; sourceTree = "<group>"; };
 		CB958F5B1FBAEFC300B882B7 /* IPCCustomKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IPCCustomKeyboard.xib; sourceTree = "<group>"; };
@@ -1970,6 +1973,8 @@
 				CB0F55FD1F988B05003707F2 /* UIViewController+Extend.m */,
 				CBB64B2E1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.h */,
 				CBB64B2F1FDFD4ED00C5C8E0 /* NSObject+IPCObserver.m */,
+				CB8BD038208466F50041AF87 /* UIAlertController+Extend.h */,
+				CB8BD039208466F50041AF87 /* UIAlertController+Extend.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3152,6 +3157,7 @@
 				CB0F564F1F988B05003707F2 /* IPCSwipeView.m in Sources */,
 				CB0F551B1F98819C003707F2 /* IPCOrderDetailTopOptometryCell.m in Sources */,
 				CB0F54151F988191003707F2 /* IPCGlassParameterView.m in Sources */,
+				CB8BD03A208466F50041AF87 /* UIAlertController+Extend.m in Sources */,
 				CB0F55AD1F98845A003707F2 /* IPCCustomerTypeList.m in Sources */,
 				CB0F53801F9876AF003707F2 /* IPCRootViewController.m in Sources */,
 				CB550A4A2003322300365CD1 /* IPCUpgradeMemberView.m in Sources */,
@@ -3464,7 +3470,10 @@
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "af25e21e-2654-4be7-917a-4fb134d5981c";
@@ -3521,7 +3530,10 @@
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c0cb27e8-971c-42b1-a589-c27a3ed36d89";
@@ -3697,7 +3709,10 @@
 				INFOPLIST_FILE = "IcePointCloud/IcePointCloud-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.IcePointCloud.Pos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "b071a554-83af-45cf-81d0-bdc5e2c4beee";

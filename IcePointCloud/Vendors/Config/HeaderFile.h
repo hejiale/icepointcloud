@@ -71,5 +71,6 @@
 #import "UILabel+Extend.h"
 #import "UIButton+TouchArea.h"
 #import "NSObject+IPCObserver.h"
+#import "UIAlertController+Extend.h"
 
 #endif /* HeaderFile_h */
