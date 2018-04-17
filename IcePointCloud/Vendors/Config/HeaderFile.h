@@ -9,7 +9,6 @@
 #ifndef HeaderFile_h
 #define HeaderFile_h
 
-#import <Bugtags/Bugtags.h>
 /**
  *  General
  */
@@ -67,7 +66,7 @@
 #import "UIView+GestureRecognizerBlock.h"
 #import "UITextField+Extend.h"
 #import "NSDictionary+DeleteNull.h"
-#import   "AFHTTPSessionManager+Extend.h"
+#import  "AFHTTPSessionManager+Extend.h"
 #import "UILabel+Extend.h"
 #import "UIButton+TouchArea.h"
 #import "NSObject+IPCObserver.h"

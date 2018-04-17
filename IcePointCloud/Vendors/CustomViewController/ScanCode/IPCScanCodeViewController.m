@@ -215,7 +215,7 @@
 {
     [self.session stopRunning];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:str preferredStyle:UIAlertControllerStyleAlert];
-    
+
     __weak typeof(self) weakSelf = self;
     UIAlertAction *action1 = ({
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -224,9 +224,9 @@
         }];
         action;
     });
-    
+
     [alert addAction:action1];
-    
+
     [self presentViewController:alert animated:YES completion:NULL];
 }
 
@@ -248,7 +248,7 @@
             finish(scanResult);
         }
     } else {
-        [self showError:@"图片中未识别到二维码"];
+//        [self showError:@"图片中未识别到二维码"];
     }
 }
 

@@ -2951,14 +2951,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-IcePointCloud/Pods-IcePointCloud-resources.sh",
-				"${PODS_ROOT}/Bugtags/Bugtags.bundle",
 				"${PODS_ROOT}/TuSDK/Localization/Base.lproj",
 				"${PODS_ROOT}/TuSDK/Localization/En.lproj",
 				"${PODS_ROOT}/TuSDK/Localization/zh-Hant.lproj",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Bugtags.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Base.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/En.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/zh-Hant.lproj",

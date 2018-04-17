@@ -10,4 +10,6 @@
 
 @interface UIAlertController (Extend)
 
+- (BOOL)shouldAutorotate;
+
 @end

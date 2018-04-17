@@ -33,7 +33,6 @@
     [self enableSkin];
     [self enableKeyboard];
     [self bindWechat];
-    [self setUpBugtags];
     /*[self sendExpection];*/
     [self avoidCrash];
     [self setUpBugly];
@@ -103,14 +102,7 @@
     [TuSDK initSdkWithAppKey:IPCTuSdkKey];
 }
 
-- (void)setUpBugtags
-{
-    [Bugtags startWithAppKey:IPCBugtagsKey invocationEvent:BTGInvocationEventNone];
-    [Bugtags setTrackingNetwork:YES];
-    [Bugtags sync:YES];
-}
-    
-    
+
 - (void)setUpBugly
 {
     BuglyConfig * config = [[BuglyConfig alloc]init];
@@ -217,10 +209,13 @@
     NSString * user =  [NSString stringWithFormat:@"%@#%@", [IPCAppManager sharedManager].userName, [IPCAppManager sharedManager].password];
     NSString * exception = [NSString stringWithFormat:@"%@#%@", user, note.userInfo];
     
-    [Bugtags sendException:[NSException exceptionWithName:@"程序闪退" reason: exception userInfo:nil]];
     [Bugly reportError:[NSError errorWithDomain:@"程序闪退" code:9998 userInfo:@{NSLocalizedDescriptionKey: exception}]];
 }
 
+
+/**
+ 测试用
+ */
 - (void)setUpCrashlytics
 {
     [Fabric with:@[[Crashlytics class]]];

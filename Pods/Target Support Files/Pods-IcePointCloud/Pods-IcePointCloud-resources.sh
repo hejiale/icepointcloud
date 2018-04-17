@@ -84,19 +84,16 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_ROOT}/Bugtags/Bugtags.bundle"
   install_resource "${PODS_ROOT}/TuSDK/Localization/Base.lproj"
   install_resource "${PODS_ROOT}/TuSDK/Localization/En.lproj"
   install_resource "${PODS_ROOT}/TuSDK/Localization/zh-Hant.lproj"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_ROOT}/Bugtags/Bugtags.bundle"
   install_resource "${PODS_ROOT}/TuSDK/Localization/Base.lproj"
   install_resource "${PODS_ROOT}/TuSDK/Localization/En.lproj"
   install_resource "${PODS_ROOT}/TuSDK/Localization/zh-Hant.lproj"
 fi
 if [[ "$CONFIGURATION" == "TestRelease" ]]; then
-  install_resource "${PODS_ROOT}/Bugtags/Bugtags.bundle"
   install_resource "${PODS_ROOT}/TuSDK/Localization/Base.lproj"
   install_resource "${PODS_ROOT}/TuSDK/Localization/En.lproj"
   install_resource "${PODS_ROOT}/TuSDK/Localization/zh-Hant.lproj"

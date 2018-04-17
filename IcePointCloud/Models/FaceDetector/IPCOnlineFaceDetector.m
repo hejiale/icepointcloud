@@ -51,7 +51,7 @@
  */
 - (void) onData:(NSData* )data{
     NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    if (result.length) {
+    if (result.length && result) {
         self.resultStings=[self.resultStings stringByAppendingString:result];
     }
 }
