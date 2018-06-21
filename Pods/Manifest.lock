@@ -14,7 +14,6 @@ PODS:
   - AFNetworking/Serialization (3.2.0)
   - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
-  - AvoidCrash (2.5.1)
   - Bugly (2.5.0)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
@@ -47,7 +46,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
-  - AvoidCrash
   - Bugly
   - Crashlytics
   - Fabric
@@ -68,7 +66,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
-  AvoidCrash: 1fb7e2fa4b982c069b748266371654e4054683b1
   Bugly: 3ca9f255c01025582df26f9222893b383c7e4b4e
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
@@ -87,6 +84,6 @@ SPEC CHECKSUMS:
   TuSDK: 77235cb94f940698cf6a5900715155c8c29bdb7b
   YYKit: 7cda43304a8dc3696c449041e2cb3107b4e236e7
 
-PODFILE CHECKSUM: 00ac7781436d43d2f31a45ee5c420a2532d2abe1
+PODFILE CHECKSUM: 7b6cfe621ec33ded86b5876fd96fbf82e16c4ef1
 
 COCOAPODS: 1.4.0

@@ -33,15 +33,11 @@
 {
     [super viewWillAppear:animated];
     
+    [[IPCTextFiledControl instance] clearPreTextField];
+    
     [self updateUI];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[IPCTextFiledControl instance] clearPreTextField];
-}
 
 #pragma mark //Set UI
 - (IPCPayOrderOfferOrderInfoView *)offerInfoView{

@@ -13,7 +13,7 @@
 #define FLOATNUMBERS         @"0123456789."
 #define SecondFormatter      @"yyyy-MM-dd'T'HH:mm:ssZZZZZ"
 #define TimeFormatter          @"yyyy-MM-dd HH:mm"
-#define DateFormatter           @"yyyy-MM-dd"
+#define DateFormatter           @"yyyy/MM/dd"
 
 @implementation IPCCommon
 
@@ -53,8 +53,8 @@
 
 + (double)afterDouble:(NSString *)begin :(NSString *)end
 {
-    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: (end ? : @"0")];
-    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: (begin ? : @"0")];
+    NSDecimalNumber*price1 = [NSDecimalNumber decimalNumberWithString: (end.length > 0 ?  end : @"0")];
+    NSDecimalNumber*price2 = [NSDecimalNumber decimalNumberWithString: (begin.length > 0  ?  begin : @"0")];
     NSDecimalNumber *after = [price2 decimalNumberBySubtracting:price1];
     return [after doubleValue];
 }

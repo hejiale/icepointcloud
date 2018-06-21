@@ -16,5 +16,6 @@
 - (void)addRightLine;
 - (void)addBorder:(CGFloat)corner Width:(CGFloat)width Color:(UIColor *)color;
 - (void)addSignleCorner:(UIRectCorner)corner Size:(CGFloat)size;
+- (void)addSignleCorner:(UIRectCorner)corner Size:(CGFloat)size Color:(UIColor *)color;
 
 @end

@@ -15,6 +15,7 @@
 #define SureKeyboardType    104
 
 NSString * const IPCCustomKeyboardBeginNotification  =  @"IPCCustomKeyboardBeginNotification";
+NSString * const IPCCustomKeyboardEndNotification  =  @"IPCCustomKeyboardEndNotification";
 NSString * const IPCCustomKeyboardChangeNotification = @"IPCCustomKeyboardChangeNotification";
 NSString * const IPCCustomKeyboardDoneNotification = @"IPCCustomKeyboardDoneNotification";
 NSString * const IPCCustomKeyboardClearNotification = @"IPCCustomKeyboardClearNotification";
@@ -55,8 +56,8 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
             }
         }];
         
-        self.appendString = [[NSMutableString alloc]init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEdit) name:IPCCustomKeyboardBeginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginEdit:) name:IPCCustomKeyboardBeginNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(EndEdit) name:IPCCustomKeyboardEndNotification object:nil];
     }
     return self;
 }
@@ -68,7 +69,13 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
     return _buttons;
 }
 
-- (void)beginEdit
+- (void)beginEdit:(NSNotification *)notification
+{
+    self.appendString = [[NSMutableString alloc]init];
+    [self.appendString appendString:notification.userInfo[@"text"]];
+}
+
+- (void)EndEdit
 {
     self.appendString = [[NSMutableString alloc]init];
 }

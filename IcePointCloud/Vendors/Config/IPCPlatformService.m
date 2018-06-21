@@ -34,7 +34,6 @@
     [self enableKeyboard];
     [self bindWechat];
     /*[self sendExpection];*/
-    [self avoidCrash];
     [self setUpBugly];
     [self setUpCrashlytics];
 }
@@ -192,17 +191,17 @@
     }).message(nil).title(nil);
 }*/
 
-- (void)avoidCrash
-{
-    [AvoidCrash makeAllEffective];
-    
-    NSArray *noneSelClassStrings = @[
-                                     @"NSString"
-                                     ];
-    [AvoidCrash setupNoneSelClassStringsArr:noneSelClassStrings];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
-}
+//- (void)avoidCrash
+//{
+//    [AvoidCrash makeAllEffective];
+//
+//    NSArray *noneSelClassStrings = @[
+//                                     @"NSString"
+//                                     ];
+//    [AvoidCrash setupNoneSelClassStringsArr:noneSelClassStrings];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dealwithCrashMessage:) name:AvoidCrashNotification object:nil];
+//}
 
 - (void)dealwithCrashMessage:(NSNotification *)note
 {

@@ -11,12 +11,13 @@
 #import "IPCPayOrderPayCashRecordCell.h"
 #import "IPCPayCashPayTypeViewCell.h"
 #import "IPCPayCashCustomerListView.h"
+#import "IPCPayCashMemberCardView.h"
 
 static  NSString * const recordCell = @"IPCPayOrderPayCashRecordCellIdentifier";
 static  NSString * const editRecordCell = @"IPCPayOrderEditPayCashRecordCellIdentifier";
 static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifier";
 
-@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate>
+@interface IPCPayOrderPayCashViewController ()<UITableViewDelegate,UITableViewDataSource,IPCPayOrderEditPayCashRecordCellDelegate,UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,IPCCustomTextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *payRecordTableView;
 @property (weak, nonatomic) IBOutlet UIView *payTypeContentView;
@@ -26,11 +27,21 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 @property (weak, nonatomic) IBOutlet UIButton *introducerButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *introduceButtonWidth;
 @property (weak, nonatomic) IBOutlet UIView *scrollContentView;
-@property (strong, nonatomic) UIImageView * scrollLineImageView;
-@property (strong, nonatomic)  IPCPayCashCustomerListView *selectCustomerCoverView;
+@property (weak, nonatomic) IBOutlet UIButton *couponTitleButton;
+@property (weak, nonatomic) IBOutlet UILabel *couponDeductionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *payRecordLabel;
+@property (weak, nonatomic) IBOutlet UIView *inputPointView;
+@property (weak, nonatomic) IBOutlet UILabel *usePointLabel;
+@property (weak, nonatomic) IBOutlet UIView *usePointView;
+@property (weak, nonatomic) IBOutlet UILabel *pointAmountLabel;
 
+@property (strong, nonatomic) UIImageView * scrollLineImageView;
+@property (strong, nonatomic) IPCPayCashCustomerListView *selectCustomerCoverView;
+@property (strong, nonatomic) IPCPayCashMemberCardView * memberCardView;
 @property (nonatomic, strong) IPCCustomKeyboard * keyboard;
 @property (nonatomic, strong) IPCPayRecord * insertRecord;
+@property (nonatomic, strong) IPCPayCashAllCoupon * allCoupon;
+@property (nonatomic, strong) IPCCustomTextField * inputPointTextField;
 @property (nonatomic, assign) NSInteger currentIndex;
 
 @end
@@ -67,11 +78,15 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     [self addObserver:self forKeyPath:@"currentIndex" options:NSKeyValueObservingOptionNew context:nil];
     
+    [[IPCTextFiledControl instance] clearPreTextField];
+    
     [self reloadPayStatus];
     
-    [self getIntegralCanIntroduceStatus];
-    
-    [self reloadIntroducer];
+    if ([IPCPayOrderManager sharedManager].isChooseOther) {
+        //查询卡券信息
+        [self queryCouponList];
+        [IPCPayOrderManager sharedManager].isChooseOther = NO;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -79,8 +94,6 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [super viewWillDisappear:animated];
     
     [self removeObserver:self forKeyPath:@"currentIndex"];
-    
-    [[IPCTextFiledControl instance] clearPreTextField];
 }
 
 #pragma mark //Set UI
@@ -112,6 +125,34 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     return _selectCustomerCoverView;
 }
 
+- (IPCPayCashMemberCardView *)memberCardView{
+    if (!_memberCardView) {
+        _memberCardView = [[IPCPayCashMemberCardView alloc]initWithFrame:[IPCCommonUI currentView].bounds
+                                                                  Coupon:self.allCoupon
+                                                                Complete:^{
+                                                                    [self reloadPayStatus];
+                                                                    
+                                                                    if ([IPCPayOrderManager sharedManager].couponAmount > 0) {
+                                                                        [self.couponTitleButton setTitle:[NSString stringWithFormat:@"￥%.f", [IPCPayOrderManager sharedManager].couponAmount] forState:UIControlStateNormal];
+                                                                    }else{
+                                                                        [self.couponTitleButton setTitle:[NSString stringWithFormat:@"%d张可用",self.allCoupon.canUseCouponCount ] forState:UIControlStateNormal];
+                                                                    }
+                                                                    
+                                                                }];
+    }
+    return _memberCardView;
+}
+
+- (IPCCustomTextField *)inputPointTextField
+{
+    if (!_inputPointTextField) {
+        _inputPointTextField = [[IPCCustomTextField alloc]initWithFrame:self.inputPointView.bounds];
+        [_inputPointTextField setDelegate:self];
+        _inputPointTextField.leftSpace = 5;
+    }
+    return _inputPointTextField;
+}
+
 - (void)reloadIntroducer
 {
     if ([IPCPayOrderManager sharedManager].introducer) {
@@ -125,14 +166,23 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 }
 
 #pragma mark //Request Data
-- (void)getIntegralCanIntroduceStatus
+- (void)queryCouponList
 {
-    [IPCPayOrderRequestManager getIntegralCanIntroduceStatusWithSuccessBlock:^(id responseValue) {
-        [self.introducerButton setHidden:![responseValue boolValue]];
-        [self.introduceTitleLabel setHidden:![responseValue boolValue]];
-    } FailureBlock:^(NSError *error) {
-        [IPCCommonUI showError:error.domain];
-    }];
+    if ([[[IPCPayOrderManager sharedManager] currentMemberId] integerValue] > 0) {
+        [IPCPayOrderRequestManager getCouponListWithMemberId:[[IPCPayOrderManager sharedManager] currentMemberId]
+                                                       Price:[[IPCPayOrderManager sharedManager] remainPayPrice]
+                                                SuccessBlock:^(id responseValue)
+         {
+             self.allCoupon = [[IPCPayCashAllCoupon alloc]initWithResponseValue:responseValue];
+             [self.couponTitleButton setTitle:[NSString stringWithFormat:@"%d张可用",self.allCoupon.canUseCouponCount ] forState:UIControlStateNormal];
+             
+         } FailureBlock:^(NSError *error) {
+             
+         }];
+    }else{
+        self.allCoupon = nil;
+        [self.couponTitleButton setTitle:@"无可用卡券" forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark // Clicked Events
@@ -145,10 +195,23 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 }
 
 
-- (void)reloadRemainAmount
-{
-    [self.remainPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderManager sharedManager] remainPayPrice]]];
+- (IBAction)useCouponAction:(id)sender {
+    if (self.memberCardView) {
+        self.memberCardView = nil;
+    }
+    [[IPCCommonUI currentView] addSubview:self.memberCardView];
 }
+
+
+- (IBAction)editPointAction:(id)sender {
+    [self editPointStatus:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"IPCPayCashChangeEditStatus" object:nil];
+}
+
+- (IBAction)chooseCouponAction:(UIButton *)sender {
+    [sender setSelected:!sender.selected];
+}
+
 
 - (void)reloadPayStatus
 {
@@ -170,6 +233,16 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     }
     [self reloadRemainAmount];
 }
+
+- (void)reloadRemainAmount
+{
+    [self.remainPayAmountLabel setText:[NSString stringWithFormat:@"￥%.2f",[[IPCPayOrderManager sharedManager] remainPayPrice]]];
+    [self.couponDeductionLabel setText:[NSString stringWithFormat:@"本次抵扣:￥%.2f",[[IPCPayOrderManager sharedManager] totalCouponPointPrice]]];
+    [self.payRecordLabel setText:[NSString stringWithFormat:@"本次收款:￥%.2f",[[IPCPayOrderManager sharedManager] payRecordTotalPrice]]];
+    [self.pointAmountLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].pointRecord.pointPrice]];
+    [self.usePointLabel setText:[NSString stringWithFormat:@"%d", [IPCPayOrderManager sharedManager].pointRecord.integral]];
+}
+
 
 #pragma mark //UITableViewDataSoure
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -290,6 +363,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     if (self.currentIndex != indexPath.row) {
         self.currentIndex = indexPath.row;
+        [self.payRecordTableView scrollViewToBottom:YES];
     }
 }
 
@@ -297,15 +371,16 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 - (void)reloadRecord:(IPCPayOrderEditPayCashRecordCell *)cell
 {
     [self resetPayTypeStatus];
+    [self.payRecordTableView scrollViewToBottom:YES];
 }
 
 #pragma mark //KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"currentIndex"]) {
-        [self.payTypeCollectionView reloadData];
-        
         if (self.currentIndex > -1) {
+            [self hidenEditPointStatus];
+            
             IPCPayOrderPayType * payType = [IPCPayOrderManager sharedManager].payTypeArray[self.currentIndex];
             
             self.insertRecord = [[IPCPayRecord alloc]init];
@@ -318,6 +393,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
             [IPCPayOrderManager sharedManager].isInsertRecord = NO;
         }
         [self.payRecordTableView reloadData];
+        [self.payTypeCollectionView reloadData];
     }
 }
 
@@ -332,6 +408,69 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         frame.origin.y= MAX(offsetY, 0);
         self.scrollLineImageView.frame = frame;
     }
+}
+
+#pragma mark //UITextFieldDelegate
+- (void)textFieldEndEditing:(IPCCustomTextField *)textField
+{
+    if (!self.view.superview) {
+        return;
+    }
+    IPCCustomerMode * customer = [[IPCPayOrderManager sharedManager] currentMemberCard];
+    NSString * remainPriceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] remainPayPrice]];
+    NSString * balanceStr = [NSString stringWithFormat:@"%f", customer.balance];
+    NSString * integralStr = [NSString stringWithFormat:@"%.f", customer.integral];
+    
+    double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
+    NSString * pointPriceStr = [NSString stringWithFormat:@"%f", pointPrice];
+    
+    if ([IPCCommon afterDouble:remainPriceStr : pointPriceStr] < 0) {
+        [IPCCommonUI showError:@"输入积分兑换金额大于剩余应付金额"];
+    }else if ([IPCCommon afterDouble:integralStr :textField.text] < 0){
+        [IPCCommonUI showError:@"输入积分大于客户积分"];
+    }else{
+        IPCPayRecord * payRecord = [[IPCPayRecord alloc]init];
+        payRecord.pointPrice = pointPrice;
+        payRecord.integral = [textField.text integerValue];
+        [IPCPayOrderManager sharedManager].pointRecord = payRecord;
+    }
+    [self editPointStatus:NO];
+    [self reloadRemainAmount];
+}
+
+- (void)editPointStatus:(BOOL)isShow
+{
+    [self.usePointView setHidden:isShow];
+    [self.inputPointView setHidden:!isShow];
+    
+    if (isShow) {
+        [self.inputPointView addSubview:self.inputPointTextField];
+        [self.inputPointTextField setIsEditing:YES];
+        
+        if ([IPCPayOrderManager sharedManager].pointRecord.integral > 0) {
+            [self.inputPointTextField setText:[NSString stringWithFormat:@"%d",[IPCPayOrderManager sharedManager].pointRecord.integral]];
+        }else{
+            [self.inputPointTextField setText:@""];
+        }
+        
+        self.currentIndex = -1;
+    }else{
+        [self.inputPointTextField removeFromSuperview];
+        self.inputPointTextField = nil;
+        
+        [self.pointAmountLabel setText:[NSString stringWithFormat:@"￥%.2f", [IPCPayOrderManager sharedManager].pointRecord.pointPrice]];
+        [self.usePointLabel setText:[NSString stringWithFormat:@"%d", [IPCPayOrderManager sharedManager].pointRecord.integral]];
+    }
+    
+    [self.payRecordTableView reloadData];
+}
+
+- (void)hidenEditPointStatus
+{
+    [self.usePointView setHidden:NO];
+    [self.inputPointView setHidden:YES];
+    [self.inputPointTextField removeFromSuperview];
+    self.inputPointTextField = nil;
 }
 
 

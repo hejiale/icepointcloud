@@ -10,6 +10,7 @@
 #import "IPCPayRecord.h"
 #import "IPCPayCashIntegralTrade.h"
 #import "IPCPayOrderPayType.h"
+#import "IPCPayOrderCoupon.h"
 
 @interface IPCPayOrderManager : NSObject
 
@@ -29,6 +30,8 @@
 @property (nonatomic, assign, readwrite) double   customDiscount;
 //优惠金额
 @property (nonatomic, assign, readwrite) double   discountAmount;
+//卡券抵扣金额
+@property (nonatomic, assign, readwrite) double   couponAmount;
 //经办人
 @property (nonatomic, strong, readwrite) IPCEmployee * employee;
 //订单备注
@@ -39,22 +42,36 @@
 @property (nonatomic, strong, readwrite) NSMutableArray<IPCPayRecord *> * payTypeRecordArray;
 //支付方式
 @property (nonatomic, strong) NSMutableArray<IPCPayOrderPayType *> * payTypeArray;
+//卡券抵扣方式
+@property (nonatomic, strong) IPCPayOrderPayType  * couponPayType;
+//积分抵扣方式
+@property (nonatomic, strong) IPCPayOrderPayType  * pointPayType;
 //是否正在添加付款记录
 @property (nonatomic, assign, readwrite) BOOL  isInsertRecord;
 //是否收银
 @property (nonatomic, assign, readwrite) BOOL  isPayCash;
+//是否选择不同客户或会员
+@property (nonatomic, assign, readwrite) BOOL  isChooseOther;
 //是否会员验证通过
 @property (nonatomic, assign, readwrite) BOOL  isValiateMember;
+//积分
+@property (nonatomic, strong) IPCPayRecord * pointRecord;
 //选择介绍人
 @property (nonatomic, strong, readwrite) IPCCustomerMode * introducer;
 //游客信息
 @property (nonatomic, strong, readwrite) IPCCustomerMode * visitorCustomer;
 //验证方式 (NULL("空"), CODE("扫码验证"), COMPEL("强制验证"), NON("免验证"))
 @property (nonatomic, copy, readwrite) NSString * memberCheckType;
+//已选择卡券
+@property (nonatomic, strong, readwrite) IPCPayOrderCoupon * coupon;
 //重新计算应收合计
 - (void)calculatePayAmount;
 //剩余付款金额
 - (double)remainPayPrice;
+//不包括卡券剩余付款金额
+- (double)remainNoneCouponPayPrice;
+//积分卡券抵扣金额
+- (double)totalCouponPointPrice;
 //已付款金额总计
 - (double)payRecordTotalPrice;
 //计算优惠折扣
@@ -79,6 +96,8 @@
 - (IPCCustomerMode *)currentCustomer;
 //当前选择会员卡(客户选项或会员选项)
 - (IPCCustomerMode *)currentMemberCard;
+//当前选择memberId
+- (NSString *)currentMemberId;
 // 提取挂单
 /*- (void)getProtyOrder:(IPCCustomerOrderDetail *)orderInfo;*/
 

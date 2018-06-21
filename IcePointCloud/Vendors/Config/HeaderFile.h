@@ -55,6 +55,8 @@
 #import "IPCWareHouse.h"
 #import "IPCTextFiledControl.h"
 #import "IPCBatchGlassesConfig.h"
+#import "IPCPayCashAllCoupon.h"
+
 /**
  *  Category
  */
@@ -71,5 +73,6 @@
 #import "UIButton+TouchArea.h"
 #import "NSObject+IPCObserver.h"
 #import "UIAlertController+Extend.h"
+#import "UITableView+Extend.h"
 
 #endif /* HeaderFile_h */

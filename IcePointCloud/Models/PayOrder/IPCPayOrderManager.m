@@ -20,6 +20,7 @@
     return _client;
 }
 
+
 - (NSMutableArray<IPCPayOrderPayType *> *)payTypeArray
 {
     if (!_payTypeArray) {
@@ -38,15 +39,29 @@
 
 - (double)payRecordTotalPrice
 {
+    //不包括卡券和积分后的付款记录金额
     __block double totalPrice = 0;
     [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if ([obj.payOrderType.payType isEqualToString:@"积分"]) {
-            totalPrice += obj.pointPrice;
-        }else{
-            totalPrice += obj.payPrice;
-        }
+        totalPrice += obj.payPrice;
     }];
     return totalPrice;
+}
+
+//积分卡券抵扣金额
+- (double)totalCouponPointPrice
+{
+    return [IPCPayOrderManager sharedManager].couponAmount + [IPCPayOrderManager sharedManager].pointRecord.pointPrice;
+}
+
+//不包括卡券后的付款记录金额
+- (double)remainNoneCouponPayPrice{
+    NSString * payStr = [NSString stringWithFormat:@"%f", [IPCPayOrderManager sharedManager].payAmount];
+    NSString * totalStr  = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] payRecordTotalPrice]];
+    
+    if ([IPCCommon afterDouble:payStr : totalStr] <= 0) {
+        return 0;
+    }
+    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice] -  [IPCPayOrderManager sharedManager].couponAmount;
 }
 
 - (double)remainPayPrice{
@@ -56,7 +71,7 @@
     if ([IPCCommon afterDouble:payStr : totalStr] <= 0) {
         return 0;
     }
-    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice];
+    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice] - [[IPCPayOrderManager sharedManager] totalCouponPointPrice];
 }
 
 - (double)calculateDiscount
@@ -105,6 +120,9 @@
 {
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [IPCPayOrderManager sharedManager].customDiscount = -1;
+    [IPCPayOrderManager sharedManager].couponAmount = 0;
+    [IPCPayOrderManager sharedManager].coupon = nil;
+    [IPCPayOrderManager sharedManager].pointRecord = nil;
 }
 
 - (void)queryPayType
@@ -117,7 +135,13 @@
             [responseValue enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 IPCPayOrderPayType * payType = [IPCPayOrderPayType mj_objectWithKeyValues:obj];
                 if (payType.configStatus) {
-                    [[IPCPayOrderManager sharedManager].payTypeArray addObject:payType];
+                    if ([payType.payType isEqualToString:@"积分"]) {
+                        [IPCPayOrderManager sharedManager].pointPayType = payType;
+                    }else if ([payType.payType isEqualToString:@"卡券"]){
+                        [IPCPayOrderManager sharedManager].couponPayType = payType;
+                    }else{
+                        [[IPCPayOrderManager sharedManager].payTypeArray addObject:payType];
+                    }
                 }
             }];
         }
@@ -200,6 +224,20 @@
     return customer;
 }
 
+- (NSString *)currentMemberId
+{
+    NSString * memberId = @"";
+    
+    if ([IPCPayOrderManager sharedManager].currentCustomerId) {
+        memberId = [IPCPayOrderCurrentCustomer sharedManager].currentCustomer.memberCustomerId;
+    }else if ([IPCPayOrderManager sharedManager].currentMemberCustomerId){
+        memberId = [IPCPayOrderCurrentCustomer sharedManager].currentMember.memberCustomerId;
+    }
+    return memberId;
+}
+
+
+
 /*- (void)getProtyOrder:(IPCCustomerOrderDetail *)orderInfo
 {
     [[IPCPayOrderManager sharedManager] resetData];
@@ -235,12 +273,15 @@
     [IPCPayOrderManager sharedManager].payAmount = 0;
     [IPCPayOrderManager sharedManager].discount = 0;
     [IPCPayOrderManager sharedManager].discountAmount = 0;
+    [IPCPayOrderManager sharedManager].couponAmount = 0;
+    [IPCPayOrderManager sharedManager].pointRecord = nil;
     [[IPCPayOrderManager sharedManager] resetEmployee];
     [IPCPayOrderManager sharedManager].isInsertRecord = NO;
     [IPCPayOrderManager sharedManager].isValiateMember = NO;
     [IPCPayOrderManager sharedManager].isPayCash = NO;
     [IPCPayOrderManager sharedManager].introducer = nil;
     [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+    [IPCPayOrderManager sharedManager].coupon = nil;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];
 }

@@ -32,7 +32,6 @@
 #import "ReactiveObjC.h"
 #import "MMScanViewController.h"
 #import "LUKeychainAccess.h"
-#import "AvoidCrash.h"
 #import <Bugly/Bugly.h>
 //Head File
 #import "HeaderFile.h"

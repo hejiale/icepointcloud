@@ -16,6 +16,8 @@
     
     [self.payAmountView addBottomLine];
     [self.payAmountView addSubview:self.payAmountTextField];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeEditStatus) name:@"IPCPayCashChangeEditStatus" object:nil];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -46,6 +48,10 @@
     }
 }
 
+- (void)changeEditStatus{
+    [self.payAmountTextField setIsEditing:NO];
+}
+
 #pragma mark //Clicked Events
 - (IBAction)cancelAddRecordAction:(id)sender {
 }
@@ -59,23 +65,7 @@
     NSString * integralStr = [NSString stringWithFormat:@"%.f", customer.integral];
     
     if (textField.text.length) {
-        if ([self.payRecord.payOrderType.payType isEqualToString:@"积分"])
-        {
-            double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
-            NSString * pointPriceStr = [NSString stringWithFormat:@"%f", pointPrice];
-            
-            if ([IPCCommon afterDouble:remainPriceStr : pointPriceStr] < 0) {
-                [IPCCommonUI showError:@"输入积分兑换金额大于剩余应付金额"];
-            }else if ([IPCCommon afterDouble:integralStr :textField.text] < 0){
-                [IPCCommonUI showError:@"输入积分大于客户积分"];
-            } else if (pointPrice <= 0){
-                [IPCCommonUI showError:@"请输入有效积分"];
-            }else{
-                self.payRecord.pointPrice = pointPrice;
-                self.payRecord.integral = [textField.text integerValue];
-                [[IPCPayOrderManager sharedManager].payTypeRecordArray addObject:self.payRecord];
-            }
-        }else if ([self.payRecord.payOrderType.payType isEqualToString:@"储值卡"]){
+        if ([self.payRecord.payOrderType.payType isEqualToString:@"储值卡"]){
             if ([IPCCommon afterDouble:balanceStr :textField.text] < 0){
                 [IPCCommonUI showError:@"输入金额大于客户储值余额"];
             }else if ([IPCCommon afterDouble:remainPriceStr :textField.text] < 0){

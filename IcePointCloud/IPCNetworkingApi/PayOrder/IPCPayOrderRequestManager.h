@@ -128,4 +128,19 @@
                                          FailureBlock:(void (^)(NSError *error))failure;
 
 
+
+/**
+ Query Coupon List
+
+ @param memberId
+ @param price
+ @param success
+ @param failure     
+ */
++ (void)getCouponListWithMemberId:(NSString *)memberId
+                            Price:(double)price
+                     SuccessBlock:(void (^)(id responseValue))success
+                     FailureBlock:(void (^)(NSError *error))failure;
+
+
 @end

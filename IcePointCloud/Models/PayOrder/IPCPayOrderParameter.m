@@ -62,6 +62,24 @@
     [formDic setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];
     [formDic setObject:[[IPCPayOrderManager sharedManager] extraDiscount] ? @"true" : @"false" forKey:@"isExcessDiscount"];
     [formDic setObject:[self productListParamter] forKey:@"detailList"];
+    [formDic setObject:@"false" forKey:@"isCustomized"];
+    [formDic setObject:@{@"id": @"",
+                         @"sphRight": @"",
+                         @"cylRight": @"",
+                         @"sphLeft": @"",
+                         @"cylLeft": @"",
+                         @"lensColor": @"",
+                         @"lensDiameter": @"",
+                         @"lensThickness": @"",
+                         @"film": @"",
+                         @"adds": @"",
+                         @"passageway": @"",
+                         @"glassPrism": @"",
+                         @"linearEccentricity": @"",
+                         @"baseBending": @"",
+                         @"remark": @""} forKey:@"customizedParames"];
+    [formDic setObject:@"FOR_SALES" forKey:@"type"];
+    [formDic setObject:@"SALES" forKey:@"salesType"];
     
     [parameters setObject:formDic forKey:@"form"];
     [parameters setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];

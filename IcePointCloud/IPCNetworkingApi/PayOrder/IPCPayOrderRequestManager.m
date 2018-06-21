@@ -88,11 +88,6 @@
     [self postRequest:nil RequestMethod:PayOrderRequest_CompanyConfig CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
-//+(void)outbound:(NSString *)orderNum SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
-//{
-//    [self postRequest:@{@"orderNumber" : orderNum} RequestMethod:PayOrderRequest_Outbound CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
-//}
-
 + (void)getAuthWithSuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
     [self postRequest:nil RequestMethod:PayOrderRequest_GetAuths CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
@@ -102,6 +97,17 @@
                                          FailureBlock:(void (^)(NSError *error))failure
 {
     [self postRequest:nil RequestMethod:PayOrderRequest_IntegralCanIntroduce CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
++ (void)getCouponListWithMemberId:(NSString *)memberId
+                            Price:(double)price
+                     SuccessBlock:(void (^)(id responseValue))success
+                     FailureBlock:(void (^)(NSError *error))failure
+{
+    [self postRequest:@{@"cashCouponSceneType":@"OFFLINE_RETAIL",
+                        @"memberCustomerId":memberId,
+                        @"totalPrice":@(price)}
+        RequestMethod:PayOrderRequest_CouponList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
 @end

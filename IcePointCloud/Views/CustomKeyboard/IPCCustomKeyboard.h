@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 extern NSString * const IPCCustomKeyboardBeginNotification;
+extern NSString * const IPCCustomKeyboardEndNotification;
 extern NSString * const IPCCustomKeyboardChangeNotification;
 extern NSString * const IPCCustomKeyboardDoneNotification;
 extern NSString * const IPCCustomKeyboardClearNotification;

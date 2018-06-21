@@ -64,6 +64,7 @@
 #define PayOrderRequest_IntegralRule                   @"integralTradeAdmin.getIntegralTradeObjectForCompany"
 #define PayOrderRequest_PayOrderWithStatus        @"orderObjectAdmin.updateOrderForStatus"
 #define PayOrderRequest_IntegralCanIntroduce     @"integralRewardAdmin.getCompanyIntegralRewardStatus"
+#define PayOrderRequest_CouponList                   @"coupon.getCashCouponForCustomerMember"
 
 #define UserRequest_Login                                    @"bizadmin.login"
 #define UserRequest_LoginOut                              @"bizadmin.logout"
