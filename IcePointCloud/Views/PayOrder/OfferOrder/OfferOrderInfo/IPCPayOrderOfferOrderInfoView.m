@@ -117,6 +117,7 @@
     if ([textField isEqual:self.discountAmountTextField]) {
         [self.payAmountTextField becomFirstResponder];
     }
+    
 }
 
 - (void)textFieldEndEditing:(IPCCustomTextField *)textField

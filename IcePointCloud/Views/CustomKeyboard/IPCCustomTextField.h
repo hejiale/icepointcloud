@@ -22,6 +22,8 @@
 
 @property(nonatomic, assign) CGFloat  rightSpace;
 
+@property(nonatomic, assign) BOOL  isPoint;
+
 @property(nonatomic, assign) id<IPCCustomTextFieldDelegate>delegate;
 
 - (void)becomFirstResponder;

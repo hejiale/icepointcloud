@@ -99,17 +99,28 @@
     __block NSMutableArray * array = [[NSMutableArray alloc]init];
     [[IPCPayOrderManager sharedManager].payTypeRecordArray enumerateObjectsUsingBlock:^(IPCPayRecord * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-        if ([obj.payOrderType.payType isEqualToString:@"积分"]) {
-            [dic setObject:@(obj.pointPrice) forKey:@"payAmount"];
-            [dic setObject:@(obj.integral) forKey:@"integral"];
-        }else{
-            [dic setObject:@(obj.payPrice) forKey:@"payAmount"];
-        }
+        [dic setObject:@(obj.payPrice) forKey:@"payAmount"];
         [dic setObject:obj.payOrderType.payType forKey:@"payType"];
         [dic setObject:obj.payOrderType.payTypeId forKey:@"payTypeConfigId"];
 
         [array addObject:dic];
     }];
+    if ([IPCPayOrderManager sharedManager].coupon) {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+         [dic setObject:[IPCPayOrderManager sharedManager].couponPayType.payType forKey:@"payType"];
+         [dic setObject:[IPCPayOrderManager sharedManager].couponPayType.payTypeId forKey:@"payTypeConfigId"];
+        [dic setObject:@([IPCPayOrderManager sharedManager].couponAmount) forKey:@"payAmount"];
+        [dic setObject:[IPCPayOrderManager sharedManager].coupon.couponId forKey:@"cashCouponId"];
+        [array addObject:dic];
+    }
+    if ([IPCPayOrderManager sharedManager].pointRecord) {
+        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+        [dic setObject:[IPCPayOrderManager sharedManager].pointPayType.payType forKey:@"payType"];
+        [dic setObject:[IPCPayOrderManager sharedManager].pointPayType.payTypeId forKey:@"payTypeConfigId"];
+        [dic setObject:@([IPCPayOrderManager sharedManager].pointRecord.pointPrice) forKey:@"payAmount"];
+        [dic setObject:@([IPCPayOrderManager sharedManager].pointRecord.integral) forKey:@"integral"];
+        [array addObject:dic];
+    }
     return array;
 }
 

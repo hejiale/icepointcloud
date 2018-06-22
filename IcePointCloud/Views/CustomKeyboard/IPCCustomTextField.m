@@ -55,6 +55,7 @@
         [self registerNotification];
         [self addBorder:0 Width:1 Color:COLOR_RGB_BLUE];
         [IPCTextFiledControl instance].preTextField = self;
+        [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil];
     }else{
         [self removeNotification];
         [self addBorder:0 Width:0 Color:nil];
@@ -66,8 +67,6 @@
     _text = text;
     
    [self.textLabel setText:text];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:IPCCustomKeyboardBeginNotification object:nil userInfo:@{@"text":text}];
 }
 
 - (void)beginEditAction

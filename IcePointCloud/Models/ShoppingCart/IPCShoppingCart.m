@@ -297,7 +297,8 @@
 {
     [IPCPayOrderManager sharedManager].payAmount = [[IPCShoppingCart sharedCart] allGlassesTotalPrice];
     
-    if ([IPCPayOrderManager sharedManager].payAmount < [[IPCPayOrderManager sharedManager] payRecordTotalPrice]) {
+    if ([IPCPayOrderManager sharedManager].payAmount < ([[IPCPayOrderManager sharedManager] payRecordTotalPrice] + [[IPCPayOrderManager sharedManager] totalCouponPointPrice]))
+    {
         [[IPCPayOrderManager sharedManager] clearPayRecord];
     }
     

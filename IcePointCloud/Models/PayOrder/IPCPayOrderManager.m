@@ -56,6 +56,17 @@
 //不包括卡券后的付款记录金额
 - (double)remainNoneCouponPayPrice{
     NSString * payStr = [NSString stringWithFormat:@"%f", [IPCPayOrderManager sharedManager].payAmount];
+    NSString * totalStr  = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] payRecordTotalPrice] + [IPCPayOrderManager sharedManager].pointRecord.pointPrice];
+    
+    if ([IPCCommon afterDouble:payStr : totalStr] <= 0) {
+        return 0;
+    }
+    return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice] -  [IPCPayOrderManager sharedManager].pointRecord.pointPrice;
+}
+
+//不包括积分后的付款记录金额
+- (double)remainNonePointPayPrice{
+    NSString * payStr = [NSString stringWithFormat:@"%f", [IPCPayOrderManager sharedManager].payAmount];
     NSString * totalStr  = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] payRecordTotalPrice]];
     
     if ([IPCCommon afterDouble:payStr : totalStr] <= 0) {
@@ -64,9 +75,11 @@
     return [IPCPayOrderManager sharedManager].payAmount - [[IPCPayOrderManager sharedManager] payRecordTotalPrice] -  [IPCPayOrderManager sharedManager].couponAmount;
 }
 
+
+
 - (double)remainPayPrice{
     NSString * payStr = [NSString stringWithFormat:@"%f", [IPCPayOrderManager sharedManager].payAmount];
-    NSString * totalStr  = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] payRecordTotalPrice]];
+    NSString * totalStr  = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] payRecordTotalPrice] + [[IPCPayOrderManager sharedManager] totalCouponPointPrice]];
     
     if ([IPCCommon afterDouble:payStr : totalStr] <= 0) {
         return 0;
@@ -103,10 +116,12 @@
     }else if ([[IPCShoppingCart sharedCart] allGlassesCount] == 0){
         [IPCCommonUI showError:@"购物列表为空!"];
         return NO;
-    }else if ([[IPCPayOrderManager sharedManager] payTypeRecordArray].count == 0){
-        [IPCCommonUI showError:@"收银记录为空!"];
-        return NO;
-    }else if ([IPCPayOrderManager sharedManager].isInsertRecord){
+    }
+//    else if ([[IPCPayOrderManager sharedManager] payTypeRecordArray].count == 0){
+//        [IPCCommonUI showError:@"收银记录为空!"];
+//        return NO;
+//    }
+    else if ([IPCPayOrderManager sharedManager].isInsertRecord){
         [IPCCommonUI showError:@"请完成确认添加付款记录!"];
         return NO;
     }else if (![IPCPayOrderManager sharedManager].employee){

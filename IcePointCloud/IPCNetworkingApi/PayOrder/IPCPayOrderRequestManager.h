@@ -143,4 +143,21 @@
                      FailureBlock:(void (^)(NSError *error))failure;
 
 
+
+/**
+ Scan Coupon Code
+
+ @param memberId
+ @param price
+ @param code
+ @param success
+ @param failure 
+ */
++ (void)scanCouponCodeWithMemberId:(NSString *)memberId
+                             Price:(double)price
+                              Code:(NSString *)code
+                      SuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError *error))failure;
+
+
 @end

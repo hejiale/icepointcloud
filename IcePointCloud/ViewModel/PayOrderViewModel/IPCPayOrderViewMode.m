@@ -8,6 +8,10 @@
 
 #import "IPCPayOrderViewMode.h"
 
+static NSError *HTTPError(NSString *domain, int code) {
+    return [NSError errorWithDomain:domain code:code userInfo:nil];
+}
+
 @implementation IPCPayOrderViewMode
 
 - (instancetype)init{
@@ -34,8 +38,14 @@
                                                EndStatus:endStatus
                                             SuccessBlock:^(id responseValue)
     {
-        if (complete) {
-            complete(nil);
+        if (responseValue[@"errorMsg"]) {
+            if (complete) {
+                complete(HTTPError(responseValue[@"errorMsg"], 200));
+            }
+        }else{
+            if (complete) {
+                complete(nil);
+            }
         }
     } FailureBlock:^(NSError *error) {
         if (complete) {

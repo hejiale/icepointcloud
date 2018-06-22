@@ -70,6 +70,8 @@
 - (double)remainPayPrice;
 //不包括卡券剩余付款金额
 - (double)remainNoneCouponPayPrice;
+//不包括积分后的付款记录金额
+- (double)remainNonePointPayPrice;
 //积分卡券抵扣金额
 - (double)totalCouponPointPrice;
 //已付款金额总计

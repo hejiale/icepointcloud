@@ -110,4 +110,18 @@
         RequestMethod:PayOrderRequest_CouponList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 
++ (void)scanCouponCodeWithMemberId:(NSString *)memberId
+                             Price:(double)price
+                              Code:(NSString *)code
+                      SuccessBlock:(void (^)(id responseValue))success
+                      FailureBlock:(void (^)(NSError *error))failure
+{
+    [self postRequest:@{@"cashCouponSceneType":@"OFFLINE_RETAIL",
+                        @"memberCustomerId":memberId,
+                        @"totalPrice":@(price),
+                        @"cashCouponCode":code
+                        }
+        RequestMethod:PayOrderRequest_ScanCoupon CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
+}
+
 @end

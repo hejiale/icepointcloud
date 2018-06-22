@@ -102,7 +102,7 @@
 }
 
 #pragma mark //Request Methods
-- (void)offerOrder:(NSString *)currentStatus EndStatus:(NSString *)endStatus Complete:(void(^)())complete
+- (void)offerOrder:(NSString *)currentStatus EndStatus:(NSString *)endStatus Complete:(void(^)(BOOL isShowError))complete
 {
     pthread_mutex_lock(&_lock);
     
@@ -114,10 +114,20 @@
             [weakSelf clearAllPayInfo];
             
             if (complete) {
-                complete();
+                complete(NO);
             }
         }else{
-            [IPCCommonUI showError:error.domain];
+            if (error.code == 200) {
+                [IPCCommonUI showError:error.domain];
+                
+                [weakSelf clearAllPayInfo];
+                
+                if (complete) {
+                    complete(YES);
+                }
+            }else{
+                [IPCCommonUI showError:error.domain];
+            }
         }
         pthread_mutex_unlock(&_lock);
     }];
@@ -131,8 +141,10 @@
     if ([[IPCPayOrderManager sharedManager] isCanPayOrder]) {
         [IPCPayOrderManager sharedManager].isPayCash = YES;
         
-        [self offerOrder:@"NULL" EndStatus:@"AUDITED" Complete:^{
-            [IPCCommonUI showSuccess:@"订单收银成功！"];
+        [self offerOrder:@"NULL" EndStatus:@"AUDITED" Complete:^(BOOL isShowError){
+            if (!isShowError) {
+                [IPCCommonUI showSuccess:@"订单收银成功！"];
+            }
         }];
     }
 }
@@ -157,8 +169,10 @@
 {
     if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
         if ([[IPCPayOrderManager sharedManager] currentCustomer]) {
-            [self offerOrder:@"NULL" EndStatus:@"PROTOTYPE" Complete:^{
-                [IPCCommonUI showSuccess:@"订单保存成功！"];
+            [self offerOrder:@"NULL" EndStatus:@"PROTOTYPE" Complete:^(BOOL isShowError){
+                if (!isShowError) {
+                    [IPCCommonUI showSuccess:@"订单保存成功！"];
+                }
             }];
         }else{
             [IPCCommonUI showError:@"请先选择客户"];
@@ -180,7 +194,11 @@
 {
     if (sender.tag == 3 && [[IPCPayOrderManager sharedManager] extraDiscount]) {
         [self offerOrderAction];
-    }else{
+    }else if (sender.tag == 3 && ![[IPCPayOrderManager sharedManager] customerId]){
+        [IPCCommonUI showError:@"请先选择客户！"];
+    }else if (sender.tag == 3 && [[IPCShoppingCart sharedCart] allGlassesCount] == 0){
+        [IPCCommonUI showError:@"请先选择商品！"];
+    } else{
         [self setCurrentPage:sender.tag];
     }
 }
@@ -191,8 +209,10 @@
     __weak typeof(self) weakSelf = self;
     [IPCCommonUI showAlert:@"温馨提示" Message:@"该订单超额打折，请先提交订单！" DoneTitle:@"提交" CancelTitle:@"取消" Done:^{
         if ([[IPCShoppingCart sharedCart] allGlassesCount] > 0 ) {
-            [weakSelf offerOrder:@"NULL" EndStatus:@"UN_AUDITED" Complete:^{
-                [IPCCommonUI showSuccess:@"订单提交成功！"];
+            [weakSelf offerOrder:@"NULL" EndStatus:@"UN_AUDITED" Complete:^(BOOL isShowError){
+                if (!isShowError) {
+                    [IPCCommonUI showSuccess:@"订单提交成功！"];
+                }
             }];
         }else{
             [IPCCommonUI showError:@"购物列表为空"];

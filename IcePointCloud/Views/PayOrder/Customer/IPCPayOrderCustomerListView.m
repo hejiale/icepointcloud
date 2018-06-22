@@ -352,13 +352,14 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
                     
                     [IPCPayOrderManager sharedManager].currentCustomerId = customer.customerID;
                     [IPCPayOrderCurrentCustomer sharedManager].currentCustomer = customer;
-                    [IPCPayOrderManager sharedManager].isChooseOther = YES;
                     [IPCPayOrderManager sharedManager].customDiscount = [[IPCShoppingCart sharedCart] customDiscount];
                 }else{
                     currentSelectCustomer = customer.customerID;
                 }
             }
         }
+        
+        [IPCPayOrderManager sharedManager].isChooseOther = YES;
         
         if (self.DetailBlock) {
             self.DetailBlock(customer, isSelectMember);

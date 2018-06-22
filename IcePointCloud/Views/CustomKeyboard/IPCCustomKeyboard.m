@@ -72,7 +72,7 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
 - (void)beginEdit:(NSNotification *)notification
 {
     self.appendString = [[NSMutableString alloc]init];
-    [self.appendString appendString:notification.userInfo[@"text"]];
+//    [self.appendString appendString:notification.userInfo[@"text"]];
 }
 
 - (void)EndEdit
