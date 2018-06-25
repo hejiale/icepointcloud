@@ -69,7 +69,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     [self reloadPayStatus];
     
-    [self getIntegralCanIntroduceStatus];
+//    [self getIntegralCanIntroduceStatus];
     
     [self reloadIntroducer];
 }
