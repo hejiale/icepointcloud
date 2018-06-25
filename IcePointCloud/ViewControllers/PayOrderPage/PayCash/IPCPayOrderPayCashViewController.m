@@ -486,19 +486,21 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     }
     IPCCustomerMode * customer = [[IPCPayOrderManager sharedManager] currentMemberCard];
     NSString * remainPriceStr = [NSString stringWithFormat:@"%f", [[IPCPayOrderManager sharedManager] remainNonePointPayPrice]];
-    NSString * balanceStr = [NSString stringWithFormat:@"%f", customer.balance];
-    NSString * integralStr = [NSString stringWithFormat:@"%.f", customer.integral];
-    
+
     double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
-    NSString * pointPriceStr = [NSString stringWithFormat:@"%f", pointPrice];
+
+    NSInteger maxPoint = ceil(([[IPCPayOrderManager sharedManager] remainNonePointPayPrice] * [IPCPayOrderManager sharedManager].integralTrade.integral) / [IPCPayOrderManager sharedManager].integralTrade.money);
     
-    if ([IPCCommon afterDouble:remainPriceStr : pointPriceStr] < 0) {
-        [IPCCommonUI showError:@"输入积分兑换金额大于剩余应付金额"];
-    }else if ([IPCCommon afterDouble:integralStr :textField.text] < 0){
-        [IPCCommonUI showError:@"输入积分大于客户积分"];
+
+    if ([textField.text integerValue] > maxPoint){
+        [IPCCommonUI showError:@"输入积分大于可使用积分"];
     }else{
         IPCPayRecord * payRecord = [[IPCPayRecord alloc]init];
-        payRecord.pointPrice = pointPrice;
+        if (pointPrice > [[IPCPayOrderManager sharedManager] remainNonePointPayPrice]) {
+            payRecord.pointPrice = [[IPCPayOrderManager sharedManager] remainNonePointPayPrice];
+        }else{
+            payRecord.pointPrice = pointPrice;
+        }
         payRecord.integral = [textField.text integerValue];
         [IPCPayOrderManager sharedManager].pointRecord = payRecord;
     }
