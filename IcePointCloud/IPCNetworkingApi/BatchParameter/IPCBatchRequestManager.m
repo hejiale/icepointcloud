@@ -57,16 +57,23 @@
     [self postRequest:@{@"configurationType":glassType} RequestMethod:BatchRequest_LensConfig CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 
+static NSString * extracted() {
+    return BatchRequest_LensPrice;
+}
+
 + (void)queryBatchLensPriceWithProductId:(NSString *)productId Type:(NSString *)type Sph:(NSString *)sph Cyl:(NSString *)cyl SuccessBlock:(void (^)(id))success FailureBlock:(void (^)(NSError *))failure
 {
-    NSMutableDictionary * parameter = [[NSMutableDictionary alloc]init];
-    NSMutableDictionary * batchDic = [[NSMutableDictionary alloc]init];
-    [batchDic setObject:productId forKey:@"prodId"];
-    [batchDic setObject:type forKey:@"type"];
-    [batchDic setObject:@"true" forKey:@"isBatch"];
-    [batchDic setObject:@[@{@"sph" : sph, @"cyl" : cyl}] forKey:@"opticsBeans"];
-    [parameter setObject:batchDic forKey:@"req"];
-    
+    NSDictionary * parameter = @{@"req":
+                                     @{
+                                         @"prodId": productId,
+                                         @"type":type,
+                                         @"isBatch":@"true",
+                                         @"opticsBeans": @[
+                                                 @{@"sph" : sph,
+                                                   @"cyl" : cyl}
+                                                 ]
+                                         }
+                                 };
     [self postRequest:parameter RequestMethod:BatchRequest_LensPrice CacheEnable:IPCRequestCacheEnable SuccessBlock:success FailureBlock:failure];
 }
 

@@ -18,7 +18,7 @@
     NSDictionary *params = @{@"account"     : userName,
                              @"password"  : password,
                              @"deviceType": @"IOS",
-                             @"deviceID"    : [[[UIDevice currentDevice] identifierForVendor] UUIDString],
+//                             @"deviceID"    : [[[UIDevice currentDevice] identifierForVendor] UUIDString],
                              @"isPadLogin" : @"true"
                              };
     [self  postRequest:params RequestMethod:UserRequest_Login CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];

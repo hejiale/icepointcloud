@@ -65,6 +65,7 @@
     
     NSDictionary * requestParameter = @{kAPIQueryKey: [query JSONString],
                               kAPIParamDeviceToken:[IPCAppManager sharedManager].deviceToken ?  : @""};
+
     self.requestParameter = requestParameter;
     
     pthread_mutex_unlock(&_lock);
