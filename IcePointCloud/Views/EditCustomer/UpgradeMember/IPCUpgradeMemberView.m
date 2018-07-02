@@ -13,8 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIView *editContentView;
 @property (weak, nonatomic) IBOutlet UITextField *encryptedPhoneTextField;
 @property (weak, nonatomic) IBOutlet UITextField *growthValueTextField;
-@property (weak, nonatomic) IBOutlet UITextField *pointValueTextField;
-@property (weak, nonatomic) IBOutlet UITextField *storeValueTextField;
 @property (strong, nonatomic) IPCCustomerMode * customer;
 @property (copy, nonatomic) void(^UpdateBlock)(IPCCustomerMode *customer);
 
@@ -52,8 +50,8 @@
     [IPCCustomerRequestManager upgradeMemberWithCustomerId:self.customer.customerID
                                               MemberGrowth:[self.growthValueTextField.text doubleValue]
                                                MemberPhone:self.encryptedPhoneTextField.text
-                                                  Integral:[self.pointValueTextField.text integerValue]
-                                                   Balance:[self.storeValueTextField.text doubleValue]
+                                                  Integral:0
+                                                   Balance:0
                                               SuccessBlock:^(id responseValue)
      {
          IPCCustomerMode * customer = [IPCCustomerMode mj_objectWithKeyValues:responseValue];
@@ -78,7 +76,7 @@
 #pragma mark //UITextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField.tag == 13) {
+    if (textField.tag == 11) {
         [textField resignFirstResponder];
     }else{
         UITextField * nextField = (UITextField *)[self.editContentView viewWithTag:textField.tag+1];
