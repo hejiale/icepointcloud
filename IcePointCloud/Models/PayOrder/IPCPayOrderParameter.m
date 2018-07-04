@@ -30,20 +30,27 @@
     [formDic setObject:@"FOR_SALES" forKey:@"orderType"];
     
     //选择客户
-    [formDic setObject:[[IPCPayOrderManager sharedManager] currentCustomer].customerID forKey:@"customerId"];
+    if ([[IPCPayOrderManager sharedManager] currentCustomer].customerID) {
+        [formDic setObject:[[IPCPayOrderManager sharedManager] currentCustomer].customerID forKey:@"customerId"];
+    }
     
     //转介绍人
     if ([IPCPayOrderManager sharedManager].introducer) {
         [formDic setObject:[IPCPayOrderManager sharedManager].introducer.customerID forKey:@"introducerId"];
     }
     //会员卡id
-    [formDic setObject:[[IPCPayOrderManager sharedManager] currentMemberCard].memberCustomerId forKey:@"memberCutomerId"];
+    if ([[IPCPayOrderManager sharedManager] currentMemberCard].memberCustomerId) {
+        [formDic setObject:[[IPCPayOrderManager sharedManager] currentMemberCard].memberCustomerId forKey:@"memberCutomerId"];
+    }
+    
     if ([[IPCPayOrderManager sharedManager] currentMemberCard].memberPhone) {
         [formDic setObject:[[IPCPayOrderManager sharedManager] currentMemberCard].memberPhone forKey:@"memberPhone"];
     }
     
     [formDic setObject:[IPCAppManager sharedManager].currentWareHouse.wareHouseId forKey:@"repository"];
     [formDic setObject:employeeList forKey:@"employeeAchievements"];
+    
+    //验光单
     if ([IPCPayOrderCurrentCustomer sharedManager].currentOpometry) {
         [formDic setObject:[IPCPayOrderCurrentCustomer sharedManager].currentOpometry.optometryID forKey:@"optometryId"];
     }
@@ -62,6 +69,7 @@
     [formDic setObject:[IPCPayOrderManager sharedManager].isValiateMember ? @"true" : @"false" forKey:@"isCheckMember"];
     [formDic setObject:[[IPCPayOrderManager sharedManager] extraDiscount] ? @"true" : @"false" forKey:@"isExcessDiscount"];
     [formDic setObject:[self productListParamter] forKey:@"detailList"];
+    //定制 参数
     [formDic setObject:@"false" forKey:@"isCustomized"];
     [formDic setObject:@{@"id": @"",
                          @"sphRight": @"",

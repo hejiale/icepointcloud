@@ -489,9 +489,12 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 
     double pointPrice =  ([textField.text doubleValue] * [IPCPayOrderManager sharedManager].integralTrade.money)/[IPCPayOrderManager sharedManager].integralTrade.integral;
 
-    NSInteger maxPoint = ceil(([[IPCPayOrderManager sharedManager] remainNonePointPayPrice] * [IPCPayOrderManager sharedManager].integralTrade.integral) / [IPCPayOrderManager sharedManager].integralTrade.money);
+    NSInteger maxPoint = 0;
     
-
+    if (customer.integral > 0) {
+        maxPoint = ceil(([[IPCPayOrderManager sharedManager] remainNonePointPayPrice] * [IPCPayOrderManager sharedManager].integralTrade.integral) / [IPCPayOrderManager sharedManager].integralTrade.money);
+    }
+    
     if ([textField.text integerValue] > maxPoint){
         [IPCCommonUI showError:@"输入积分大于可使用积分"];
     }else{
