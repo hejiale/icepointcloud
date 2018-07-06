@@ -70,7 +70,7 @@ static NSError *HTTPError(NSString *domain, int code) {
         
         if (errorMessage){
             if (errorMessage.message) {
-                return HTTPError(errorMessage.message, NSURLErrorDomain);
+                return HTTPError(errorMessage.message, errorMessage.code);
             }
         }
     }

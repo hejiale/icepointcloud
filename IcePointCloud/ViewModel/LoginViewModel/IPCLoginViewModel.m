@@ -12,12 +12,6 @@
 static NSString * const AccountErrorMessage = @"登录帐号不能为空!";
 static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
 
-@interface IPCLoginViewModel(){
-    pthread_mutex_t _lock;
-}
-
-@end
-
 @implementation IPCLoginViewModel
 
 - (instancetype)init
@@ -25,8 +19,6 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     self = [super init];
     if (self) {
         [self.loginHistory addObjectsFromArray:[IPCAppManager sharedManager].loginAccountHistory];
-        
-        pthread_mutex_init(&_lock, NULL);
     }
     return self;
 }
@@ -106,8 +98,6 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
 
 - (void)loadConfigData
 {
-    pthread_mutex_lock(&_lock);
-    
     __weak typeof(self) weakSelf = self;
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -161,8 +151,6 @@ static NSString * const PasswordErrorMessage = @"登录密码不能为空!";
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         [[IPCAppManager sharedManager] loadCurrentWareHouse];
         [weakSelf showMainRootViewController];
-        
-        pthread_mutex_unlock(&_lock);
     });
 }
 

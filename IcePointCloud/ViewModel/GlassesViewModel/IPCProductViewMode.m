@@ -126,6 +126,7 @@
                                                   [IPCCommonUI showError:error.domain];
                                                   
                                                   self.status = IPCRefreshError;
+                                                  
                                                   if (self.completeBlock) {
                                                       self.completeBlock(error);
                                                   }
