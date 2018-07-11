@@ -137,12 +137,15 @@
                                                                IsChooseStatus:NO
                                                                        Detail:^(IPCCustomerMode* customer, BOOL isMemberReload)
                              {
+                                 [IPCCommonUI show];
+                                 
                                  if (isMemberReload) {
                                      [weakSelf loadCustomerMemberInfoView:YES];
                                      [weakSelf queryMemberBindCustomer];
                                  }else{
                                      [weakSelf reloadCustomerInfo];
                                  }
+                                 [IPCCommonUI hiden];
                              } SelectType:^(BOOL isSelectMemeber) {
                                  isSelectMemberStatus = isSelectMemeber;
                                  if (![IPCPayOrderManager sharedManager].customerId && ![IPCPayOrderManager sharedManager].currentMemberCustomerId) {
@@ -197,7 +200,7 @@
     
     if (customer) {
         [self.editButton setHidden:NO];
-        [self.infoView updateCustomerInfo: customer];
+        [self.infoView updateCustomerInfo: customer isShowOrder:YES];
         [self.customInfoContentView addSubview:self.infoView];
     }else{
         [self.editButton setHidden:YES];

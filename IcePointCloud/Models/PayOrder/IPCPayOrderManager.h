@@ -52,6 +52,8 @@
 @property (nonatomic, assign, readwrite) BOOL  isPayCash;
 //是否选择不同客户或会员
 @property (nonatomic, assign, readwrite) BOOL  isChooseOther;
+//是否重新加载验光单
+@property (nonatomic, assign, readwrite) BOOL  isShouldLoadOptometry;
 //是否会员验证通过
 @property (nonatomic, assign, readwrite) BOOL  isValiateMember;
 //积分

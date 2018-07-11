@@ -360,6 +360,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
         }
         
         [IPCPayOrderManager sharedManager].isChooseOther = YES;
+        [IPCPayOrderManager sharedManager].isShouldLoadOptometry = YES;
         
         if (self.DetailBlock) {
             self.DetailBlock(customer, isSelectMember);

@@ -102,7 +102,7 @@
         [self.customerInfoView removeFromSuperview];
         self.customerInfoView = nil;
     }
-    [self.customerInfoView updateCustomerInfo:customer];
+    [self.customerInfoView updateCustomerInfo:customer isShowOrder:NO];
     [self.leftContentView addSubview:self.customerInfoView];
 }
 

@@ -27,6 +27,7 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
 
 @property (nonatomic, strong) NSMutableArray<UIButton *> * buttons;
 @property (nonatomic, strong) NSMutableString * appendString;
+@property (nonatomic, assign) BOOL  isEditing;
 
 
 @end
@@ -72,15 +73,19 @@ NSString * const IPCCustomKeyboardValue   =  @"IPCCustomKeyboardValue";
 - (void)beginEdit:(NSNotification *)notification
 {
     self.appendString = [[NSMutableString alloc]init];
-//    [self.appendString appendString:notification.userInfo[@"text"]];
+    self.isEditing = YES;
 }
 
 - (void)EndEdit
 {
     self.appendString = [[NSMutableString alloc]init];
+    self.isEditing = NO;
 }
 
-- (IBAction)numberTapAction:(UIButton *)sender {
+- (IBAction)numberTapAction:(UIButton *)sender
+{
+    if (!self.isEditing || !self.appendString)return;
+    
     if (sender.tag <= PointKeboardType)
     {
         NSInteger suffixLength = 0;

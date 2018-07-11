@@ -25,7 +25,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self reload];
+    if ([IPCPayOrderManager sharedManager].isShouldLoadOptometry) {
+        [self reload];
+        [IPCPayOrderManager sharedManager].isShouldLoadOptometry = NO;
+    }
 }
 
 #pragma mark //Set UI

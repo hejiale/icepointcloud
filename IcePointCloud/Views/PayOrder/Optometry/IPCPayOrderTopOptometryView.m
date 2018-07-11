@@ -48,6 +48,8 @@
 {
     __weak typeof(self) weakSelf = self;
     
+    [IPCCommonUI show];
+    
     [IPCCustomerRequestManager queryUserOptometryListWithCustomID:[[IPCPayOrderManager sharedManager]customerId]
                                                      SuccessBlock:^(id responseValue)
      {
@@ -55,6 +57,8 @@
          
          strongSelf.optometryList = [[IPCOptometryList alloc]initWithResponseValue:responseValue];
          [weakSelf loadOptometryScrollView];
+         
+         [IPCCommonUI hiden];
      } FailureBlock:^(NSError *error) {
          
      }];

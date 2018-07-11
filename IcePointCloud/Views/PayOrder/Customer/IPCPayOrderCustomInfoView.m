@@ -47,7 +47,7 @@
     }];
 }
 
-- (void)updateCustomerInfo:(IPCCustomerMode *)customer
+- (void)updateCustomerInfo:(IPCCustomerMode *)customer isShowOrder:(BOOL)isShow
 {
     if (customer) {
         [self.customerNameLabel setText:customer.customerName];
@@ -60,6 +60,10 @@
         
         CGFloat width = [customer.customerName jk_sizeWithFont:self.customerNameLabel.font constrainedToHeight:self.customerNameLabel.jk_height].width;
         self.nameWidth.constant = MIN(160, MAX(width, 70));
+        
+        if (!isShow) {
+            [self.searchOrderContentView setHidden:YES];
+        }
     }
 }
 
