@@ -96,15 +96,26 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         [IPCPayOrderManager sharedManager].isChooseOther = NO;
     }
     //刷新不同状态显示积分或卡券页面
-    if (![IPCPayOrderManager sharedManager].pointPayType) {
+    //已验证会员
+    //积分
+    if (![IPCPayOrderManager sharedManager].pointPayType || ![self judgePointStatus]) {
         self.pointHeightConstraint.constant = 0;
         self.editPointTopConstraint.constant = 0;
         [self.editPointView setHidden:YES];
+    }else{
+        self.pointHeightConstraint.constant = 50;
+        self.editPointTopConstraint.constant = 10;
+        [self.editPointView setHidden:NO];
     }
-    if (![IPCPayOrderManager sharedManager].couponPayType) {
+    //卡券
+    if (![IPCPayOrderManager sharedManager].couponPayType || ![IPCPayOrderManager sharedManager].isValiateMember) {
         self.couponHeightConstraint.constant = 0;
         self.editCouponTopConstraint.constant = 0;
         [self.editCouponView setHidden:YES];
+    }else{
+        self.couponHeightConstraint.constant = 50;
+        self.editCouponTopConstraint.constant = 10;
+        [self.editCouponView setHidden:NO];
     }
 }
 
@@ -400,23 +411,6 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     
     if ([[IPCPayOrderManager sharedManager] remainPayPrice] <= 0)return;
     
-    if (![IPCPayOrderManager sharedManager].integralTrade && [payType.payType isEqualToString:@"积分"]) {
-        [IPCCommonUI showError:@"积分规则未配置"];
-        return;
-    }
-    
-    if (![IPCPayOrderManager sharedManager].isValiateMember) {
-        if (member.integral > 0 && [payType.payType isEqualToString:@"积分"]) {
-            [IPCCommonUI showError:@"请先验证会员"];
-            return;
-        }
-    }
-    
-    if (member.integral == 0 && [payType.payType isEqualToString:@"积分"]) {
-        [IPCCommonUI showError:@"客户无可用积分"];
-        return;
-    }
-    
     if (![IPCPayOrderManager sharedManager].isValiateMember) {
         if (member.balance > 0 && [payType.payType isEqualToString:@"储值卡"]) {
             [IPCCommonUI showError:@"请先验证会员"];
@@ -555,6 +549,20 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         [itemParams addObject:@{@"prodId": [item.glasses glassId], @"productType":[item.glasses glassType],@"brand":item.glasses.brandId ? : @"",@"productPrice": @(item.unitPrice)}];
     }
     return itemParams;
+}
+
+- (BOOL)judgePointStatus
+{
+    IPCCustomerMode * member = [[IPCPayOrderManager sharedManager] currentMemberCard];
+    
+    if (![IPCPayOrderManager sharedManager].integralTrade)
+        return NO;
+    if (![IPCPayOrderManager sharedManager].isValiateMember)
+        if (member.integral > 0 )
+            return NO;
+    if (member.integral == 0)
+        return NO;
+    return YES;
 }
 
 
