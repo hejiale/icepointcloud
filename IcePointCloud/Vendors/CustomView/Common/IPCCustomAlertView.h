@@ -10,6 +10,6 @@
 
 @interface IPCCustomAlertView : UIView
 
-+ (void)showWithTitle:(NSString *)title Message:(NSString *)message CancelTitle:(NSString *)cancelTitle SureTitle:(NSString *)sureTitle Done:(void(^)())done Cancel:(void(^)())cancel;
++ (void)showWithTitle:(NSString *)title Message:(NSString *)message SureTitle:(NSString *)sureTitle Done:(void(^)())done;
 
 @end

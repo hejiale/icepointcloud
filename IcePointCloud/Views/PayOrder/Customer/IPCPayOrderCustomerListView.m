@@ -128,10 +128,10 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
 - (void)beginRefresh
 {
     //Stop Footer Refresh Method
-    if (self.refreshFooter.isRefreshing) {
-        [self.refreshFooter endRefreshing];
-        [IPCHttpRequest  cancelAllRequest];
-    }
+//    if (self.refreshFooter.isRefreshing) {
+//        [self.refreshFooter endRefreshing];
+//        [IPCHttpRequest  cancelAllRequest];
+//    }
     [self.refreshFooter resetDataStatus];
     
     [self.viewModel resetData];
@@ -311,7 +311,7 @@ static NSString * const memberIdentifier = @"IPCPayOrderMemberCollectionViewCell
     //Prereload Data
     if (self.viewModel.status == IPCFooterRefresh_HasMoreData) {
         if (!self.refreshFooter.isRefreshing) {
-            if (indexPath.row == self.viewModel.customerArray.count -10) {
+            if (indexPath.row == self.viewModel.customerArray.count -1) {
                 [self.refreshFooter beginRefreshing];
             }
         }

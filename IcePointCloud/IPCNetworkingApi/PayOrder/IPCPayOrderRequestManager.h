@@ -131,14 +131,15 @@
 
 /**
  Query Coupon List
-
+ 
  @param memberId
  @param price
  @param success
- @param failure     
+ @param failure
  */
 + (void)getCouponListWithMemberId:(NSString *)memberId
                             Price:(double)price
+                         Products:(NSArray *)products
                      SuccessBlock:(void (^)(id responseValue))success
                      FailureBlock:(void (^)(NSError *error))failure;
 
@@ -146,12 +147,12 @@
 
 /**
  Scan Coupon Code
-
+ 
  @param memberId
  @param price
  @param code
  @param success
- @param failure 
+ @param failure
  */
 + (void)scanCouponCodeWithMemberId:(NSString *)memberId
                              Price:(double)price

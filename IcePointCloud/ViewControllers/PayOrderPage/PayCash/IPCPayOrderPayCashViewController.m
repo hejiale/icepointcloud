@@ -41,7 +41,6 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *couponHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *pointHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editPointTopConstraint;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *editCouponTopConstraint;
 @property (nonatomic, strong) IPCPortraitNavigationViewController * cameraNav;
 @property (strong, nonatomic) UIImageView * scrollLineImageView;
@@ -186,6 +185,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
         
         [IPCPayOrderRequestManager getCouponListWithMemberId:[[IPCPayOrderManager sharedManager] currentMemberId]
                                                        Price:[[IPCPayOrderManager sharedManager] remainPayPrice]
+                                                    Products:[self productListParamter]
                                                 SuccessBlock:^(id responseValue)
          {
              self.allCoupon = [[IPCPayCashAllCoupon alloc]initWithResponseValue:responseValue];
@@ -208,7 +208,7 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
                                              SuccessBlock:^(id responseValue)
      {
          IPCPayOrderCoupon * coupon = [IPCPayOrderCoupon mj_objectWithKeyValues:responseValue];
-         [IPCPayOrderManager sharedManager].coupon = coupon;
+         [IPCPayOrderManager sharedManager].coupon  = coupon;
          [self refreshCouponAmount];
      } FailureBlock:^(NSError *error) {
          [IPCCommonUI showError:error.domain];
@@ -544,6 +544,17 @@ static  NSString * const payTypeIdentifier = @"IPCPayCashPayTypeViewCellIdentifi
     [self.inputPointView setHidden:YES];
     [self.inputPointTextField removeFromSuperview];
     self.inputPointTextField = nil;
+}
+
+- (NSArray *)productListParamter
+{
+    __block NSMutableArray * itemParams = [[NSMutableArray alloc]init];
+    
+    for (int i = 0; i < [[IPCShoppingCart sharedCart] itemsCount]; i++) {
+        IPCShoppingCartItem * item = [[IPCShoppingCart sharedCart] itemAtIndex:i];
+        [itemParams addObject:@{@"prodId": [item.glasses glassId], @"productType":[item.glasses glassType],@"brand":item.glasses.brandId ? : @"",@"productPrice": @(item.unitPrice)}];
+    }
+    return itemParams;
 }
 
 

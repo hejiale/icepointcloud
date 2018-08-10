@@ -38,9 +38,17 @@ static NSError *HTTPError(NSString *domain, int code) {
                 }
             }else if ([[responseData allKeys] containsObject:kIPCNetworkError]){
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if (failed) {
-                        failed([IPCResponseManager parseErrorResponse:responseData]);
+                    IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseData[kIPCNetworkError]];
+                    if (errorMessage.code == 601) {
+                        [IPCCustomAlertView showWithTitle:errorMessage.data[@"TITLE"] Message:errorMessage.data[@"HINT_CONTENT"]  SureTitle:@"更新" Done:^{
+                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/icepointCloud"]];
+                        }];
+                    }else{
+                        if (failed) {
+                            failed([IPCResponseManager parseErrorResponse:errorMessage]);
+                        }
                     }
+
                 });
             }
         }else if ([responseData isKindOfClass:[NSArray class]] || [responseData isKindOfClass:[NSString class]]){
@@ -62,16 +70,13 @@ static NSError *HTTPError(NSString *domain, int code) {
 }
 
 
-+ (NSError *)parseErrorResponse:(id)responseValue
++ (NSError *)parseErrorResponse:(IPCError *)errorMessage
 {
-    if (responseValue) {
-        IPCError * errorMessage = [IPCError mj_objectWithKeyValues:responseValue[kIPCNetworkError]];
+    if (errorMessage) {
         DLog(@"%@",errorMessage.message);
         
-        if (errorMessage){
-            if (errorMessage.message) {
-                return HTTPError(errorMessage.message, errorMessage.code);
-            }
+        if (errorMessage.message) {
+            return HTTPError(errorMessage.message, errorMessage.code);
         }
     }
     return nil;

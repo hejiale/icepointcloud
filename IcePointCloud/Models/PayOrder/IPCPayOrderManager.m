@@ -37,6 +37,13 @@
     return _payTypeRecordArray;
 }
 
+//- (NSMutableArray<IPCPayOrderCoupon *> *)coupons{
+//    if (!_coupons) {
+//        _coupons = [[NSMutableArray alloc]init];
+//    }
+//    return _coupons;
+//}
+
 - (double)payRecordTotalPrice
 {
     //不包括卡券和积分后的付款记录金额
@@ -136,6 +143,7 @@
     [[IPCPayOrderManager sharedManager].payTypeRecordArray removeAllObjects];
     [IPCPayOrderManager sharedManager].customDiscount = -1;
     [IPCPayOrderManager sharedManager].couponAmount = 0;
+//    [IPCPayOrderManager sharedManager].coupons = nil;
     [IPCPayOrderManager sharedManager].coupon = nil;
     [IPCPayOrderManager sharedManager].pointRecord = nil;
 }
@@ -296,6 +304,7 @@
     [IPCPayOrderManager sharedManager].isPayCash = NO;
     [IPCPayOrderManager sharedManager].introducer = nil;
     [IPCPayOrderManager sharedManager].isPayOrderStatus = NO;
+//    [IPCPayOrderManager sharedManager].coupons = nil;
     [IPCPayOrderManager sharedManager].coupon = nil;
     [[IPCPayOrderCurrentCustomer sharedManager] clearData];
     [[IPCShoppingCart sharedCart] clear];

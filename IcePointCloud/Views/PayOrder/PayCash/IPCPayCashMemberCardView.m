@@ -18,6 +18,7 @@ static NSString * const couponCellIdentifier = @"IPCPayOrderCouponCellIdentifier
 @property (weak, nonatomic) IBOutlet UITableView *memberCardListView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (strong, nonatomic) IPCPayCashAllCoupon * coupon;
+//@property (strong, nonatomic) NSMutableArray<IPCPayOrderCoupon *> * currentCoupons;
 @property (strong, nonatomic) IPCPayOrderCoupon * currentCoupon;
 @property (copy, nonatomic) void(^CompleteBlock)();
 
@@ -84,6 +85,59 @@ static NSString * const couponCellIdentifier = @"IPCPayOrderCouponCellIdentifier
     [self.allUseButton setSelected:YES];
     [self.memberCardListView reloadData];
 }
+
+//- (void)matchCoupon:(IPCPayOrderCoupon *)coupon
+//{
+//    [self.coupon.canUseCouponList enumerateObjectsUsingBlock:^(IPCPayOrderCoupon * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if (obj.scopeType == coupon.scopeType) {
+//            if ([obj.scopeType isEqualToString:@"PRODUCT"]) {
+//                if (coupon.scopeBeans[@"prodId"] == obj.scopeBeans[@"prodId"]) {
+//                    obj.isMatch = NO;
+//                }
+//            }else if ([obj.scopeType isEqualToString:@"BRAND_PROTYPE"]){
+//                if ([obj.scopeBeans isKindOfClass:[NSArray class]]) {
+//                    [obj.scopeBeans enumerateObjectsUsingBlock:^(id  _Nonnull brandType, NSUInteger idx, BOOL * _Nonnull stop) {
+//                        if ([coupon.scopeBeans isKindOfClass:[NSArray class]]) {
+//                            [coupon.scopeBeans enumerateObjectsUsingBlock:^(id  _Nonnull sBrandType, NSUInteger idx, BOOL * _Nonnull stop) {
+//                                if (brandType[@"brand"] = sBrandType[@"brand"]) {
+//                                    if ([brandType[@"prodTypes"] isKindOfClass:[NSArray class]]) {
+//                                        [brandType[@"prodTypes"] enumerateObjectsUsingBlock:^(id  _Nonnull proType, NSUInteger idx, BOOL * _Nonnull stop) {
+//                                            if ([sBrandType[@"prodTypes"] isKindOfClass:[NSArray class]]) {
+//                                                [sBrandType[@"prodTypes"] enumerateObjectsUsingBlock:^(id  _Nonnull sProType, NSUInteger idx, BOOL * _Nonnull stop) {
+//                                                    if ([proType isEqualToString:sProType]) {
+//                                                        if (!obj.isSelected) {
+//                                                            obj.isMatch = NO;
+//                                                        }
+//                                                    }
+//                                                }];
+//                                            }
+//                                        }];
+//                                    }
+//                                }
+//                            }];
+//                        }
+//                    }];
+//                }
+//            }else if ([obj.scopeType isEqualToString:@"PROTYPE"]){
+//                if ([obj.scopeBeans isKindOfClass:[NSArray class]]) {
+//                    [obj.scopeBeans enumerateObjectsUsingBlock:^(id  _Nonnull proType, NSUInteger idx, BOOL * _Nonnull stop) {
+//                        if ([coupon.scopeBeans isKindOfClass:[NSArray class]]) {
+//                            [coupon.scopeBeans enumerateObjectsUsingBlock:^(id  _Nonnull sProType, NSUInteger idx, BOOL * _Nonnull stop) {
+//                                if ([sProType[@"productType"] isEqualToString:proType[@"productType"]]) {
+//                                    obj.isMatch = NO;
+//                                }
+//                            }];
+//                        }
+//                    }];
+//                }
+//            }else if ([obj.scopeType isEqualToString:@""]){
+//
+//            }
+//        }
+//    }];
+//    coupon.isMatch = YES;
+//    [self.memberCardListView reloadData];
+//}
 
 #pragma mark //UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

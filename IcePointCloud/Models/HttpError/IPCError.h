@@ -13,5 +13,6 @@
 @property (nonatomic, assign) NSInteger code;
 @property (nonatomic, copy)   NSString *message;
 @property (nonatomic, copy)   NSString *trace;
+@property (nonatomic, strong)   id   data;
 
 @end

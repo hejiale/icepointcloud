@@ -22,6 +22,14 @@
 @property (nonatomic, assign) BOOL isUsable;
 @property (nonatomic, assign) BOOL sceneStatus;
 @property (nonatomic, copy) NSString * launchScene;
-
+@property (nonatomic, copy) NSString * scopeType;
+@property (nonatomic, copy) id   scopeBeans;
+@property (nonatomic, assign) BOOL  isMatch;//是否适用卡券
+@property (nonatomic, assign) BOOL  isSelected;
+@property (nonatomic, assign) double couponAmount;//卡券真实价格
 
 @end
+
+
+
+

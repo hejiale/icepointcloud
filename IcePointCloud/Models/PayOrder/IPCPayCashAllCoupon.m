@@ -31,6 +31,7 @@
                 
                 [responseValue[@"matchConditionCashCoupon"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     IPCPayOrderCoupon * coupon = [IPCPayOrderCoupon mj_objectWithKeyValues: obj];
+                    coupon.isMatch  = YES;
                     [self.canUseCouponList addObject:coupon];
                 }];
             }

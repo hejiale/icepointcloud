@@ -12,7 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIButton *sureButton;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeight;
@@ -30,15 +29,15 @@
 @implementation IPCCustomAlertView
 
 
-+ (void)showWithTitle:(NSString *)title Message:(NSString *)message CancelTitle:(NSString *)cancelTitle SureTitle:(NSString *)sureTitle Done:(void(^)())done Cancel:(void(^)())cancel
++ (void)showWithTitle:(NSString *)title Message:(NSString *)message SureTitle:(NSString *)sureTitle Done:(void(^)())done
 {
-    IPCCustomAlertView * alertView = [[IPCCustomAlertView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Title:title Message:message CancelTitle:cancelTitle SureTitle:sureTitle Done:done Cancel:cancel];
+    IPCCustomAlertView * alertView = [[IPCCustomAlertView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds Title:title Message:message SureTitle:sureTitle Done:done];
     [[UIApplication sharedApplication].keyWindow addSubview:alertView];
     [[UIApplication sharedApplication].keyWindow bringSubviewToFront:alertView];
 }
 
 
-- (instancetype)initWithFrame:(CGRect)frame Title:(NSString *)title Message:(NSString *)message CancelTitle:(NSString *)cancelTitle SureTitle:(NSString *)sureTitle Done:(void(^)())done Cancel:(void(^)())cancel
+- (instancetype)initWithFrame:(CGRect)frame Title:(NSString *)title Message:(NSString *)message SureTitle:(NSString *)sureTitle Done:(void(^)())done
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -47,10 +46,8 @@
         
         self.title = title;
         self.message = message;
-        self.cancelTitle = cancelTitle;
         self.doneTitle = sureTitle;
         self.DoneBlock = done;
-        self.CancleBlock = cancel;
     }
     return self;
 }
@@ -59,7 +56,6 @@
     [super layoutSubviews];
     
     [self.contentView addBorder:8 Width:0 Color:nil];
-    [self.cancelButton addSignleCorner:UIRectCornerBottomLeft Size:8];
     [self.sureButton addSignleCorner:UIRectCornerBottomRight Size:8];
 }
 
@@ -83,14 +79,6 @@
     }
 }
 
-- (void)setCancelTitle:(NSString *)cancelTitle{
-    _cancelTitle = cancelTitle;
-    
-    if (_cancelTitle.length) {
-        [self.cancelButton setTitle:_cancelTitle forState:UIControlStateNormal];
-    }
-}
-
 - (void)setDoneTitle:(NSString *)doneTitle{
     _doneTitle = doneTitle;
     
@@ -100,19 +88,10 @@
 }
 
 
-- (IBAction)cancleAction:(id)sender {
-    if (self.CancleBlock) {
-        self.CancleBlock();
-    }
-    [self removeFromSuperview];
-}
-
-
 - (IBAction)doneAction:(id)sender {
     if (self.DoneBlock) {
         self.DoneBlock();
     }
-    [self removeFromSuperview];
 }
 
 @end

@@ -113,14 +113,14 @@
 
         [array addObject:dic];
     }];
-    if ([IPCPayOrderManager sharedManager].coupon) {
-        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
-         [dic setObject:[IPCPayOrderManager sharedManager].couponPayType.payType forKey:@"payType"];
-         [dic setObject:[IPCPayOrderManager sharedManager].couponPayType.payTypeId forKey:@"payTypeConfigId"];
-        [dic setObject:@([IPCPayOrderManager sharedManager].couponAmount) forKey:@"payAmount"];
-        [dic setObject:[IPCPayOrderManager sharedManager].coupon.couponId forKey:@"cashCouponId"];
-        [array addObject:dic];
-    }
+//    if ([IPCPayOrderManager sharedManager].coupon) {
+//        NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
+//         [dic setObject:[IPCPayOrderManager sharedManager].couponPayType.payType forKey:@"payType"];
+//         [dic setObject:[IPCPayOrderManager sharedManager].couponPayType.payTypeId forKey:@"payTypeConfigId"];
+//        [dic setObject:@([IPCPayOrderManager sharedManager].couponAmount) forKey:@"payAmount"];
+//        [dic setObject:[IPCPayOrderManager sharedManager].coupon.couponId forKey:@"cashCouponId"];
+//        [array addObject:dic];
+//    }
     if ([IPCPayOrderManager sharedManager].pointRecord) {
         NSMutableDictionary * dic = [[NSMutableDictionary alloc]init];
         [dic setObject:[IPCPayOrderManager sharedManager].pointPayType.payType forKey:@"payType"];

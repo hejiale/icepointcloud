@@ -64,7 +64,8 @@
 @property (nonatomic, strong, readwrite) IPCCustomerMode * visitorCustomer;
 //验证方式 (NULL("空"), CODE("扫码验证"), COMPEL("强制验证"), NON("免验证"))
 @property (nonatomic, copy, readwrite) NSString * memberCheckType;
-//已选择卡券
+//已选择卡券(多选)
+//@property (nonatomic, strong, readwrite) NSMutableArray<IPCPayOrderCoupon *> * coupons;
 @property (nonatomic, strong, readwrite) IPCPayOrderCoupon * coupon;
 //重新计算应收合计
 - (void)calculatePayAmount;

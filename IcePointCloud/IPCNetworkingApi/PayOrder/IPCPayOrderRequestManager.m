@@ -101,12 +101,15 @@
 
 + (void)getCouponListWithMemberId:(NSString *)memberId
                             Price:(double)price
+                         Products:(NSArray *)products
                      SuccessBlock:(void (^)(id responseValue))success
                      FailureBlock:(void (^)(NSError *error))failure
 {
     [self postRequest:@{@"cashCouponSceneType":@"OFFLINE_RETAIL",
                         @"memberCustomerId":memberId,
-                        @"totalPrice":@(price)}
+                        @"totalPrice":@(price),
+                        @"products":products
+                        }
         RequestMethod:PayOrderRequest_CouponList CacheEnable:IPCRequestCacheDisEnable SuccessBlock:success FailureBlock:failure];
 }
 

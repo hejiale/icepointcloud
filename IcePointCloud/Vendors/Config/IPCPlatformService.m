@@ -28,12 +28,10 @@
 - (void)setUp
 {
     [self checkNetwork];
-    [self checkVersion];
     [self enableFace];
     [self enableSkin];
     [self enableKeyboard];
     [self bindWechat];
-    /*[self sendExpection];*/
     [self setUpBugly];
     [self setUpCrashlytics];
 }
@@ -45,39 +43,39 @@
     //    [[IPCCheckVersion shardManger] checkVersion];
     
     ///延时获取更新版本内容
-    [self performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
+//    [self performSelector:@selector(testLogin) withObject:nil afterDelay:1.f];
 }
 
-- (void)testLogin{
-    __weak typeof(self) weakSelf = self;
-    [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
-        [weakSelf queryAppMessage];
-    } FailureBlock:^(NSError *error) {
-        
-    }];
-}
+//- (void)testLogin{
+//    __weak typeof(self) weakSelf = self;
+//    [IPCUserRequestManager userLoginWithUserName:LOGINACCOUNT Password:PASSWORD SuccessBlock:^(id responseValue) {
+//        [weakSelf queryAppMessage];
+//    } FailureBlock:^(NSError *error) {
+//
+//    }];
+//}
 
-- (void)queryAppMessage
-{
-    __weak typeof(self) weakSelf = self;
-    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue)
-     {
-         if ([responseValue isKindOfClass:[NSArray class]]) {
-             NSString * title = responseValue[0][@"content"];
-             NSString * newVersion = responseValue[1][@"content"];
-             NSString * updateContent = responseValue[2][@"content"];
-             
-             if([[weakSelf jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
-                 
-                 [IPCCustomAlertView showWithTitle:title Message:updateContent CancelTitle:@"返回" SureTitle:@"更新" Done:^{
-                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/icepointCloud"]];
-                 } Cancel:nil];
-             }
-         }
-     } FailureBlock:^(NSError *error) {
-         
-     }];
-}
+//- (void)queryAppMessage
+//{
+//    __weak typeof(self) weakSelf = self;
+//    [IPCUserRequestManager getAppMessageWithSuccessBlock:^(id responseValue)
+//     {
+//         if ([responseValue isKindOfClass:[NSArray class]]) {
+//             NSString * title = responseValue[0][@"content"];
+//             NSString * newVersion = responseValue[1][@"content"];
+//             NSString * updateContent = responseValue[2][@"content"];
+//
+//             if([[weakSelf jk_version] compare:newVersion options:NSNumericSearch]==NSOrderedAscending){
+//
+//                 [IPCCustomAlertView showWithTitle:title Message:updateContent CancelTitle:@"返回" SureTitle:@"更新" Done:^{
+//                     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://fir.im/icepointCloud"]];
+//                 } Cancel:nil];
+//             }
+//         }
+//     } FailureBlock:^(NSError *error) {
+//
+//     }];
+//}
 
 /**
  *  Add the keyboard to track

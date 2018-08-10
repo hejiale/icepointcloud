@@ -19,6 +19,7 @@
 #define    kAPIParamOSTypeValue         @"ios"
 #define    kAPIParamFormatValue          @"2.0"
 #define    kAPIParamDeviceToken          @"access_token"
+#define    kAPIParamVersion                 @"padVersion"
 
 
 @interface IPCRequestParameter()
@@ -47,6 +48,7 @@
 
 - (void)buildRequestParameters
 {
+    
     pthread_mutex_lock(&_lock);
     
     NSMutableDictionary *query = [NSMutableDictionary dictionaryWithDictionary:@{kAPIParamFormatKey: kAPIParamFormatValue,
@@ -61,10 +63,13 @@
     }else{
         [query setObject:@[] forKey:kAPIInnerParamsKey];
     }
-    DLog(@"%@",query);
     
     NSDictionary * requestParameter = @{kAPIQueryKey: [query JSONString],
-                              kAPIParamDeviceToken:[IPCAppManager sharedManager].deviceToken ?  : @""};
+                              kAPIParamDeviceToken:[IPCAppManager sharedManager].deviceToken ?  : @"",
+                                        kAPIParamVersion: [self jk_version]
+                                        };
+    DLog(@"%@",requestParameter);
+    
     self.requestParameter = requestParameter;
     
     pthread_mutex_unlock(&_lock);

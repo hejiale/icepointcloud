@@ -237,11 +237,9 @@
         {
             if (![IPCPayOrderManager sharedManager].isValiateMember){
                 if ([IPCAppManager sharedManager].authList.forceVerifyMember) {
-                    [self.unCheckMemberLabel setHidden:NO];
                     [self.compulsoryVerifityView setHidden:NO];
-                }else{
-                    [self.unCheckMemberLabel setHidden:NO];
                 }
+                [self.unCheckMemberLabel setHidden:NO];
             }
         }
     }else{

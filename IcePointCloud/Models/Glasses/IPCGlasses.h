@@ -23,6 +23,7 @@
 @property (nonatomic, assign, readwrite) double   updatePrice;//选择规格后的价格
 @property (nonatomic, copy, readonly) NSString * detailLinkURl;//Details about the link
 @property (nonatomic, copy, readonly) NSString * brand;//brand
+@property (nonatomic, copy, readonly) NSString * brandId;
 @property (nonatomic, copy, readonly) NSString * color;//color
 @property (nonatomic, copy, readonly) NSString * style;//style
 @property (nonatomic, copy, readonly) NSString * frameColor;//Frame color
